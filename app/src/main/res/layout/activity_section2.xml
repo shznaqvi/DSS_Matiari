@@ -1,0 +1,634 @@
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="form"
+            type="edu.aku.hassannaqvi.dss_matiari.models.Form" />
+
+        <variable
+            name="callback"
+            type="edu.aku.hassannaqvi.dss_matiari.ui.sections.Section2Activity" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/app_bg_gray"
+        android:orientation="vertical">
+
+        <!-- CUSTOM TOOLBAR -->
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="?attr/colorPrimary"
+            android:minHeight="?attr/actionBarSize"
+            android:theme="@style/ToolbarTheme"
+            app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+            app:titleTextAppearance="@style/Toolbar.TitleText" />
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:id="@+id/GrpName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <View
+                    android:layout_width="110dp"
+                    android:layout_height="110dp"
+                    android:background="@drawable/bottom" />
+
+                <!-- title02  Title   -->
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/fldGrpCVtitle02"
+                    style="@style/cardView">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical" />
+                </androidx.cardview.widget.CardView>
+
+                <!-- tsf201  Input   -->
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/fldGrpCVtsf201"
+                    style="@style/cardView">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/bottom"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                style="@style/quesNum"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:text="@string/Q_tsf201" />
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:text="@string/tsf201" />
+                        </LinearLayout>
+
+                        <io.blackbox_vision.datetimepickeredittext.view.DatePickerEditText
+                            android:id="@+id/tsf201"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:hint="YYYY-MM-DD"
+                            android:inputType="number"
+                            android:onTextChanged="@{callback::setAgeInDays}"
+                            app:dateFormat="yyyy-MM-dd"
+                            app:maxDate="CR_DATE"
+                            app:minDate="CR_DATE"
+                            app:theme="@style/MyDatePickerDialogTheme" />
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+
+                <!-- tsf202  Input-Numeric   -->
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/fldGrpCVtsf202"
+                    style="@style/cardView">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/bottom"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                style="@style/quesNum"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:text="@string/Q_tsf202" />
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:text="@string/tsf202" />
+                        </LinearLayout>
+
+                        <com.edittextpicker.aliazaz.EditTextPicker
+                            android:id="@+id/tsf202"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="@string/tsf202"
+                            android:inputType="number"
+                            android:maxLength="2"
+                            android:onTextChanged="@{callback::ZScoreOnTextChanged}"
+                            app:maxValue="59"
+                            app:minValue="0"
+                            app:type="range" />
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+
+                <!-- tsf203  Input-Numeric   -->
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/fldGrpCVtsf203"
+                    style="@style/cardView">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/bottom"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                style="@style/quesNum"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:text="@string/Q_tsf203" />
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:text="@string/tsf203" />
+                        </LinearLayout>
+
+                        <com.edittextpicker.aliazaz.EditTextPicker
+                            android:id="@+id/tsf203"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="####"
+                            android:inputType="number"
+                            android:maxLength="4"
+                            android:onTextChanged="@{callback::ZScoreOnTextChanged}"
+                            app:mask="####"
+                            app:maxValue="5500"
+                            app:minValue="1500"
+                            app:type="range" />
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+                <!-- tsf205  Radio   -->
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/fldGrpCVtsf205"
+                    style="@style/cardView">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/bottom"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                style="@style/quesNum"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:text="@string/Q_tsf205" />
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:text="@string/tsf205" />
+                        </LinearLayout>
+
+                        <RadioGroup
+                            android:id="@+id/tsf205"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:onCheckedChanged="@{callback::ZScoreOnCheckChanged}"
+                            android:orientation="horizontal">
+
+                            <RadioButton
+                                android:id="@+id/tsf20501"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="@string/tsf20501" />
+
+                            <RadioButton
+                                android:id="@+id/tsf20502"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="@string/tsf20502" />
+                        </RadioGroup>
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+                <!-- tsf204  Input-Numeric   -->
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/fldGrpCVtsf204"
+                    style="@style/cardView">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/bottom"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                style="@style/quesNum"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:text="@string/Q_tsf204" />
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:text="@string/tsf204" />
+                        </LinearLayout>
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <com.edittextpicker.aliazaz.EditTextPicker
+                                android:id="@+id/tsf204"
+                                style="@style/textInput"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:hint="@string/tsf204"
+                                android:inputType="number"
+                                android:maxLength="9"
+                                app:mask="#.######"
+                                app:maxValue="6.0"
+                                app:minValue="-6.0"
+                                app:type="range" />
+
+                            <ImageButton
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:layout_alignParentEnd="true"
+                                android:elevation="1dp"
+                                android:onClick="@{callback::CheckZScore}"
+                                android:src="@drawable/ic_calculate" />
+
+                        </RelativeLayout>
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+
+
+                <!-- tsf206  Title   -->
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/fldGrpCVtsf206"
+                    style="@style/cardView">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/bottom"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                style="@style/quesNum"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:text="@string/Q_tsf206" />
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:text="@string/tsf206" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="12dp"
+                            android:layout_marginEnd="12dp"
+                            android:orientation="horizontal">
+
+                            <CheckBox
+                                android:id="@+id/tsf206c1Check"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent" />
+
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    style="@style/sub_labels"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:text="@string/tsf206c1" />
+
+                                <EditText
+                                    android:id="@+id/tsf206c1"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:hint="@string/tsf206c1"
+                                    android:tag='@{tsf206c1Check.checked ?"tsf206c1Check":-1}'
+                                    android:text='@{tsf206c1Check.checked ?null:""}'
+                                    android:visibility="@{tsf206c1Check.checked?View.VISIBLE:View.GONE}" />
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="2dp"
+                                android:orientation="vertical"
+                                android:visibility="@{tsf206c1Check.checked?View.VISIBLE:View.GONE}">
+
+                                <TextView
+                                    style="@style/sub_labels"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="@string/tsf206d1" />
+
+                                <com.edittextpicker.aliazaz.EditTextPicker
+                                    android:id="@+id/tsf206d1"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:hint="@string/tsf206d1"
+                                    android:inputType="number"
+                                    android:text='@{tsf206c1Check.checked ?null:""}'
+                                    app:maxValue="7"
+                                    app:minValue="1"
+                                    app:type="range" />
+
+
+                            </LinearLayout>
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="12dp"
+                            android:layout_marginEnd="12dp"
+                            android:orientation="horizontal">
+
+                            <CheckBox
+                                android:id="@+id/tsf206c2Check"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:tag="-1" />
+
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    style="@style/sub_labels"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:text="@string/tsf206c2" />
+
+                                <EditText
+                                    android:id="@+id/tsf206c2"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:hint="@string/tsf206c2"
+                                    android:tag='@{tsf206c2Check.checked ?"tsf206c2Check":-1}'
+                                    android:text='@{tsf206c2Check.checked ?null:""}'
+                                    android:visibility="@{tsf206c2Check.checked?View.VISIBLE:View.GONE}" />
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="2dp"
+                                android:orientation="vertical"
+
+                                android:visibility="@{tsf206c2Check.checked?View.VISIBLE:View.GONE}">
+
+                                <TextView
+                                    style="@style/sub_labels"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="@string/tsf206d1" />
+
+                                <com.edittextpicker.aliazaz.EditTextPicker
+                                    android:id="@+id/tsf206d2"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:hint="@string/tsf206d1"
+                                    android:inputType="number"
+                                    android:text='@{tsf206c2Check.checked ?null:""}'
+                                    app:maxValue="7"
+                                    app:minValue="1"
+
+                                    app:type="range" />
+
+
+                            </LinearLayout>
+                        </LinearLayout>
+
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="12dp"
+                            android:layout_marginEnd="12dp"
+                            android:orientation="horizontal">
+
+                            <CheckBox
+                                android:id="@+id/tsf206c3Check"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:tag="-1"
+
+                                />
+
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    style="@style/sub_labels"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:text="@string/tsf206c3" />
+
+                                <EditText
+                                    android:id="@+id/tsf206c3"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:hint="@string/tsf206c1"
+                                    android:tag='@{tsf206c3Check.checked ?"tsf206c3Check":-1}'
+                                    android:text='@{tsf206c3Check.checked ?null:""}'
+
+                                    android:visibility="@{tsf206c3Check.checked?View.VISIBLE:View.GONE}" />
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="2dp"
+                                android:orientation="vertical"
+
+                                android:visibility="@{tsf206c3Check.checked?View.VISIBLE:View.GONE}">
+
+                                <TextView
+                                    style="@style/sub_labels"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="@string/tsf206d1" />
+
+                                <com.edittextpicker.aliazaz.EditTextPicker
+                                    android:id="@+id/tsf206d3"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:hint="@string/tsf206d1"
+                                    android:inputType="number"
+                                    android:text='@{tsf206c3Check.checked ?null:""}'
+                                    app:maxValue="7"
+                                    app:minValue="1"
+                                    app:type="range" />
+
+
+                            </LinearLayout>
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="12dp"
+                            android:layout_marginEnd="12dp"
+                            android:orientation="horizontal">
+
+                            <CheckBox
+                                android:id="@+id/tsf206c4Check"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:tag="-1"
+
+                                />
+
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    style="@style/sub_labels"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:text="@string/tsf206c4" />
+
+                                <EditText
+                                    android:id="@+id/tsf206c4"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:hint="@string/tsf206c1"
+                                    android:tag='@{tsf206c4Check.checked ?"tsf206c4Check":-1}'
+                                    android:text='@{tsf206c4Check.checked ?null:""}'
+
+                                    android:visibility="@{tsf206c4Check.checked?View.VISIBLE:View.GONE}" />
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="2dp"
+                                android:orientation="vertical"
+                                android:visibility="@{tsf206c4Check.checked?View.VISIBLE:View.GONE}">
+
+                                <TextView
+                                    style="@style/sub_labels"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="@string/tsf206d1" />
+
+                                <com.edittextpicker.aliazaz.EditTextPicker
+                                    android:id="@+id/tsf206d4"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:hint="@string/tsf206d1"
+                                    android:inputType="number"
+                                    android:text='@{tsf206c4Check.checked ?null:""}'
+                                    app:maxValue="7"
+                                    app:minValue="1"
+                                    app:type="range" />
+
+
+                            </LinearLayout>
+                        </LinearLayout>
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView><!--EndButton LinearLayout-->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    android:layout_marginTop="24dp"
+                    android:orientation="horizontal"
+                    android:padding="24dp">
+
+                    <Button
+                        android:id="@+id/btn_End"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background="@android:color/transparent"
+                        android:onClick="btnEnd"
+                        android:text="Cancel"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+
+                    <Button
+                        android:id="@+id/btn_Continue"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background="@drawable/capsule"
+                        android:backgroundTint="@color/colorAccent"
+                        android:backgroundTintMode="src_atop"
+                        android:onClick="btnContinue"
+                        android:text="Save"
+                        android:textColor="@color/white"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+            </LinearLayout>
+        </ScrollView>
+    </LinearLayout>
+
+</layout>
