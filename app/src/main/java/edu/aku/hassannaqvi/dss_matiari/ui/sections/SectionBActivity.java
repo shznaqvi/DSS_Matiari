@@ -49,6 +49,40 @@ public class SectionBActivity extends AppCompatActivity {
     }
 
     private void saveDraft() {
+
+        form.setRb_uc(bi.rbUc.getText().toString());
+
+        form.setRb_vil(bi.rbVil.getText().toString());
+
+        form.setRb_hno(bi.rbHno.getText().toString());
+
+        form.setRb_sid(bi.rbSid.getText().toString());
+
+        form.setRb_ufn(bi.rbUfn.getText().toString());
+
+        form.setRb01(bi.rb01.getText().toString());
+
+        form.setRb02(bi.rb02.getText().toString());
+
+        form.setRb03(bi.rb03.getText().toString());
+
+        form.setRb04(bi.rb04.getText().toString());
+
+        form.setRb05(bi.rb05.getText().toString());
+
+        form.setRb06(bi.rb0602.isChecked() ? "02"
+                : bi.rb0603.isChecked() ? "03"
+                : "-1");
+
+        form.setRb07(bi.rb0701.isChecked() ? "01"
+                : bi.rb0702.isChecked() ? "02"
+                : "-1");
+
+        form.setRb08(bi.rb08.getText().toString());
+
+        form.setRb09(bi.rb09.getText().toString());
+
+        form.setS2(form.s2toString());
     }
 
     private boolean updateDB() {

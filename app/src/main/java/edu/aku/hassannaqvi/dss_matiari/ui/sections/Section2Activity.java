@@ -19,8 +19,6 @@ import edu.aku.hassannaqvi.dss_matiari.database.DatabaseHelper;
 import edu.aku.hassannaqvi.dss_matiari.databinding.ActivitySection2Binding;
 import edu.aku.hassannaqvi.dss_matiari.ui.EndingActivity;
 
-import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.form;
-
 public class Section2Activity extends AppCompatActivity {
     private static final String TAG = "Section2Activity";
     ActivitySection2Binding bi;
@@ -117,7 +115,7 @@ public class Section2Activity extends AppCompatActivity {
 
         // Don't forget to popuate Section variable with JSON String...
         // it will be used in UpdateDB()
-        form.setS2(form.s2toString());
+//        form.setS2(form.s2toString());
 
 
     }
