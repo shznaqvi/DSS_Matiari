@@ -12,10 +12,7 @@ import androidx.databinding.DataBindingUtil;
 
 import com.validatorcrawler.aliazaz.Validator;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Locale;
 
 import edu.aku.hassannaqvi.dss_matiari.R;
 import edu.aku.hassannaqvi.dss_matiari.contracts.TableContracts.FormsTable;
@@ -26,8 +23,6 @@ import edu.aku.hassannaqvi.dss_matiari.databinding.ActivitySection2Binding;
 import edu.aku.hassannaqvi.dss_matiari.ui.EndingActivity;
 
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.form;
-import static edu.aku.hassannaqvi.dss_matiari.utils.DateUtilsKt.dobDiffInDays;
-import static edu.aku.hassannaqvi.dss_matiari.utils.DateUtilsKt.getCalDate;
 
 public class Section2Activity extends AppCompatActivity {
     private static final String TAG = "Section2Activity";
@@ -46,10 +41,10 @@ public class Section2Activity extends AppCompatActivity {
         db = MainApp.appInfo.dbHelper;
 
         Calendar cal = Calendar.getInstance();
-        try {
+        /*try {
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
 
-            cal.setTime(sdf.parse(form.getTsf106()));// all done
+//            cal.setTime(sdf.parse(form.getTsf106()));// all done
             //  Date calDate = cal.getTime();
             cal.add(Calendar.DAY_OF_YEAR, -59);
 
@@ -60,7 +55,7 @@ public class Section2Activity extends AppCompatActivity {
             bi.tsf201.setMinDate(todate);
         } catch (ParseException e) {
             e.printStackTrace();
-        }
+        }*/
 
 
         //   cal.getTime();
@@ -102,7 +97,7 @@ public class Section2Activity extends AppCompatActivity {
         //MainApp.form = new Form();
 
 
-        form.setTsf201(bi.tsf201.getText().toString());
+        /*form.setTsf201(bi.tsf201.getText().toString());
 
         form.setTsf202(bi.tsf202.getText().toString());
 
@@ -121,7 +116,7 @@ public class Section2Activity extends AppCompatActivity {
         form.setTsf206c3(bi.tsf206c3.getText().toString());
         form.setTsf206d3(bi.tsf206d3.getText().toString());
         form.setTsf206c4(bi.tsf206c4.getText().toString());
-        form.setTsf206d4(bi.tsf206d4.getText().toString());
+        form.setTsf206d4(bi.tsf206d4.getText().toString());*/
 
         // Don't forget to popuate Section variable with JSON String...
         // it will be used in UpdateDB()
@@ -186,7 +181,7 @@ public class Section2Activity extends AppCompatActivity {
 
     public void setAgeInDays(CharSequence s, int start, int before, int count) {
 
-        if (!bi.tsf201.getText().toString().equals("")) {
+/*        if (!bi.tsf201.getText().toString().equals("")) {
             // For testing only
             // form = new Form();
             if (form.getTsf106().equals("")) {
@@ -200,7 +195,7 @@ public class Section2Activity extends AppCompatActivity {
                     getCalDate(form.getTsf106())
             );
             bi.tsf202.setText(String.valueOf(ageindayss));
-        }
+        }*/
 
     }
 }

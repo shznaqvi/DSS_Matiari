@@ -95,7 +95,7 @@ public class Section1Activity extends AppCompatActivity {
         form.setDeviceId(MainApp.deviceid);
         form.setAppver(MainApp.versionName + "." + MainApp.versionCode);
 
-        form.setTsf101(bi.tsf101.getText().toString());
+        /*form.setTsf101(bi.tsf101.getText().toString());
         form.setTsf102(bi.tsf102.getText().toString());
         form.setTsf103(bi.tsf103.getText().toString());
         form.setTsf104(bi.tsf104.getText().toString());
@@ -116,7 +116,7 @@ public class Section1Activity extends AppCompatActivity {
                 : bi.tsf11102.isChecked() ? "2"
                 : bi.tsf11103.isChecked() ? "3"
                 : "-1");
-        form.setTsf112(bi.tsf112.getText().toString());
+        form.setTsf112(bi.tsf112.getText().toString());*/
 
         // Don't forget to popuate Section variable with JSON String...it will be used in UpdateDB()
         form.setS1(form.s1toString());

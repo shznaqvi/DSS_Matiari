@@ -4,14 +4,12 @@ import android.database.Cursor;
 import android.util.Log;
 
 import androidx.databinding.BaseObservable;
-import androidx.databinding.Bindable;
 import androidx.databinding.PropertyChangeRegistry;
 
 import org.apache.commons.lang3.StringUtils;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import edu.aku.hassannaqvi.dss_matiari.BR;
 import edu.aku.hassannaqvi.dss_matiari.contracts.TableContracts.FormsTable;
 import edu.aku.hassannaqvi.dss_matiari.core.MainApp;
 
@@ -19,76 +17,46 @@ public class Form extends BaseObservable {
 
     private final String TAG = "Form";
     private final transient PropertyChangeRegistry propertyChangeRegistry = new PropertyChangeRegistry();
-    public String tsf101 = "";
-    public String tsf102 = "";
-    public String tsf103 = "";
-    public String tsf104 = "";
-    public String tsf105 = "";
-    public String tsf10596x = "";
-    public String tsf106 = "";
-    public String tsf107 = "";
-    public String tsf108 = "";
-    public String tsf109 = "";
-    public String tsf110 = "";
-    public String tsf111 = "";
-    public String tsf112 = "";
-    // public String tsf20503= "";
-    public String tsf201 = "";
-    public String tsf202 = "";
-    public String tsf203 = "";
-    public String tsf204 = "";
-    public String tsf205 = "";
-    public String tsf206c1 = "";
-    public String tsf206d1 = "";
-    public String tsf206c2 = "";
-    public String tsf206d2 = "";
-    public String tsf206c3 = "";
-    public String tsf206d3 = "";
-    public String tsf206c4 = "";
-    public String tsf206d4 = "";
-    public String tsf301 = "";
-    public String tsf302 = "";
-    public String tsf303 = "";
-    public String tsf304 = "";
-    public String tsf305 = "";
-    public String tsf306 = "";
-    public String tsf307 = "";
-    public String tsf308 = "";
-    public String tsf309 = "";
-    public String tsf310 = "";
-    public String tsf311 = "";
-    public String tsf312 = "";
-    public String tsf313 = "";
-    public String tsf314 = "";
-    public String tsf315 = "";
-    public String tsf316 = "";
-    public String tsf317 = "";
-    public String tsf318 = "";
-    public String tsf319 = "";
-    public String tsf320 = "";
-    public String tsf321 = "";
-    public String tsf322 = "";
-    public String tsf323 = "";
-    public String tsf401 = "";
-    public String tsf40101 = "";
-    public String tsf40102 = "";
-    public String tsf40103 = "";
-    public String tsf40104 = "";
-    public String tsf402 = "";
-    public String tsf40201 = "";
-    public String tsf40202 = "";
-    public String tsf40203 = "";
-    public String tsf40204 = "";
-    public String tsf40205 = "";
-    public String tsf40206 = "";
-    public String tsf40207 = "";
-    public String tsf40208 = "";
-    public String tsf40209 = "";
-    public String tsf40298 = "";
-    public String tsf40298x = "";
-    public String tsf501 = "";
-    public String tsf502 = "";
-    public String tsf503 = "";
+
+    public String ra01 = "";
+    public String ra02 = "";
+    public String ra04 = "";
+    public String ra03 = "";
+    public String ra05 = "";
+    public String ra07 = "";
+    public String ra06 = "";
+    public String ra08 = "";
+    public String ra09 = "";
+    public String ra10 = "";
+    public String ra11 = "";
+    public String ra11x = "";
+    public String ra12 = "";
+    public String ra1296x = "";
+    public String ra13 = "";
+    public String ra13x = "";
+    public String ra14 = "";
+    public String ra15 = "";
+    public String ra16 = "";
+    public String ra17_a = "";
+    public String ra17_b = "";
+    public String ra17_c = "";
+    public String ra17_d = "";
+    public String ra18 = "";
+    public String rb_uc = "";
+    public String rb_vil = "";
+    public String rb_hno = "";
+    public String rb_sid = "";
+    public String rb_ufn = "";
+    public String rb01 = "";
+    public String rb02 = "";
+    public String rb03 = "";
+    public String rb04 = "";
+    public String rb05 = "";
+    public String rb06 = "";
+    public String rb07 = "";
+    public String rb08 = "";
+    public String rb09 = "";
+
     // APP VARIABLES
     private String projectName = MainApp.PROJECT_NAME;
     // APP VARIABLES
@@ -120,709 +88,310 @@ public class Form extends BaseObservable {
 
     }
 
-    @Bindable
-    public String getTsf101() {
-        return tsf101;
+    public String getRa01() {
+        return ra01;
     }
 
-    public void setTsf101(String tsf101) {
-        this.tsf101 = tsf101;
-        this.assessNo = tsf101;
-        notifyPropertyChanged(BR.tsf101);
+    public void setRa01(String ra01) {
+        this.ra01 = ra01;
     }
 
-    @Bindable
-    public String getTsf102() {
-        return tsf102;
+    public String getRa02() {
+        return ra02;
     }
 
-    public void setTsf102(String tsf102) {
-        this.tsf102 = tsf102;
-        this.mrNo = tsf102;  // Set MR NO
-        notifyPropertyChanged(BR.tsf102);
+    public void setRa02(String ra02) {
+        this.ra02 = ra02;
     }
 
-    @Bindable
-    public String getTsf103() {
-        return tsf103;
+    public String getRa04() {
+        return ra04;
     }
 
-    public void setTsf103(String tsf103) {
-        this.tsf103 = tsf103;
-        notifyPropertyChanged(BR.tsf103);
+    public void setRa04(String ra04) {
+        this.ra04 = ra04;
     }
 
-    @Bindable
-    public String getTsf104() {
-        return tsf104;
+    public String getRa03() {
+        return ra03;
     }
 
-    public void setTsf104(String tsf104) {
-        this.tsf104 = tsf104;
-        this.infantName = tsf104; // Set Infant Name
-        notifyPropertyChanged(BR.tsf104);
+    public void setRa03(String ra03) {
+        this.ra03 = ra03;
     }
 
-    @Bindable
-    public String getTsf105() {
-        return tsf105;
+    public String getRa05() {
+        return ra05;
     }
 
-    public void setTsf105(String tsf105) {
-        this.tsf105 = tsf105;
-        notifyPropertyChanged(BR.tsf105);
+    public void setRa05(String ra05) {
+        this.ra05 = ra05;
     }
 
-    @Bindable
-    public String getTsf10596x() {
-        return tsf10596x;
+    public String getRa07() {
+        return ra07;
     }
 
-    public void setTsf10596x(String tsf10596x) {
-        this.tsf10596x = tsf10596x;
-        notifyPropertyChanged(BR.tsf10596x);
+    public void setRa07(String ra07) {
+        this.ra07 = ra07;
     }
 
-    @Bindable
-    public String getTsf106() {
-        return tsf106;
+    public String getRa06() {
+        return ra06;
     }
 
-    public void setTsf106(String tsf106) {
-        this.tsf106 = tsf106;
-        notifyPropertyChanged(BR.tsf106);
+    public void setRa06(String ra06) {
+        this.ra06 = ra06;
     }
 
-    @Bindable
-    public String getTsf107() {
-        return tsf107;
+    public String getRa08() {
+        return ra08;
     }
 
-    public void setTsf107(String tsf107) {
-        this.tsf107 = tsf107;
-        notifyPropertyChanged(BR.tsf107);
+    public void setRa08(String ra08) {
+        this.ra08 = ra08;
     }
 
-    @Bindable
-    public String getTsf108() {
-        return tsf108;
+    public String getRa09() {
+        return ra09;
     }
 
-    public void setTsf108(String tsf108) {
-        this.tsf108 = tsf108;
-        notifyPropertyChanged(BR.tsf108);
+    public void setRa09(String ra09) {
+        this.ra09 = ra09;
     }
 
-    @Bindable
-    public String getTsf109() {
-        return tsf109;
+    public String getRa10() {
+        return ra10;
     }
 
-    public void setTsf109(String tsf109) {
-        this.tsf109 = tsf109;
-        notifyPropertyChanged(BR.tsf109);
+    public void setRa10(String ra10) {
+        this.ra10 = ra10;
     }
 
-    @Bindable
-    public String getTsf110() {
-        return tsf110;
+    public String getRa11() {
+        return ra11;
     }
 
-    public void setTsf110(String tsf110) {
-        this.tsf110 = tsf110;
-        notifyPropertyChanged(BR.tsf110);
+    public void setRa11(String ra11) {
+        this.ra11 = ra11;
     }
 
-    @Bindable
-    public String getTsf111() {
-        return tsf111;
+    public String getRa11x() {
+        return ra11x;
     }
 
-    public void setTsf111(String tsf111) {
-        this.tsf111 = tsf111;
-        notifyPropertyChanged(BR.tsf111);
+    public void setRa11x(String ra11x) {
+        this.ra11x = ra11x;
     }
 
-    @Bindable
-    public String getTsf112() {
-        return tsf112;
+    public String getRa12() {
+        return ra12;
     }
 
-    public void setTsf112(String tsf112) {
-        this.tsf112 = tsf112;
-        notifyPropertyChanged(BR.tsf112);
+    public void setRa12(String ra12) {
+        this.ra12 = ra12;
     }
 
-/*    @Bindable
-    public String getTsf20503() {
-        return tsf20503;
+    public String getRa1296x() {
+        return ra1296x;
     }
 
-    public void setTsf20503(String tsf20503) {
-        this.tsf20503 = tsf20503;
-        notifyPropertyChanged(BR.tsf20503);
-    }*/
-
-    @Bindable
-    public String getTsf201() {
-        return tsf201;
-    }
-
-    public void setTsf201(String tsf201) {
-        this.tsf201 = tsf201;
-        notifyPropertyChanged(BR.tsf201);
-    }
-
-    @Bindable
-    public String getTsf202() {
-        return tsf202;
-    }
-
-    public void setTsf202(String tsf202) {
-        this.tsf202 = tsf202;
-        notifyPropertyChanged(BR.tsf202);
-    }
-
-    @Bindable
-    public String getTsf203() {
-        return tsf203;
-    }
-
-    public void setTsf203(String tsf203) {
-        this.tsf203 = tsf203;
-        notifyPropertyChanged(BR.tsf203);
-    }
-
-    @Bindable
-    public String getTsf204() {
-        return tsf204;
-    }
-
-    public void setTsf204(String tsf204) {
-        this.tsf204 = tsf204;
-        notifyPropertyChanged(BR.tsf204);
-    }
-
-    @Bindable
-    public String getTsf205() {
-        return tsf205;
-    }
-
-    public void setTsf205(String tsf205) {
-        this.tsf205 = tsf205;
-        notifyPropertyChanged(BR.tsf205);
-    }
-
-    @Bindable
-    public String getTsf206c1() {
-        return tsf206c1;
-    }
-
-    public void setTsf206c1(String tsf206c1) {
-        this.tsf206c1 = tsf206c1;
-        notifyPropertyChanged(BR.tsf206c1);
-    }
-
-    @Bindable
-    public String getTsf206d1() {
-        return tsf206d1;
-    }
-
-    public void setTsf206d1(String tsf206d1) {
-        this.tsf206d1 = tsf206d1;
-        notifyPropertyChanged(BR.tsf206d1);
-    }
-
-    @Bindable
-    public String getTsf206c2() {
-        return tsf206c2;
-    }
-
-    public void setTsf206c2(String tsf206c2) {
-        this.tsf206c2 = tsf206c2;
-        notifyPropertyChanged(BR.tsf206c2);
-    }
-
-    @Bindable
-    public String getTsf206d2() {
-        return tsf206d2;
-    }
-
-    public void setTsf206d2(String tsf206d2) {
-        this.tsf206d2 = tsf206d2;
-        notifyPropertyChanged(BR.tsf206d2);
-    }
-
-    @Bindable
-    public String getTsf206c3() {
-        return tsf206c3;
-    }
-
-    public void setTsf206c3(String tsf206c3) {
-        this.tsf206c3 = tsf206c3;
-        notifyPropertyChanged(BR.tsf206c3);
-    }
-
-    @Bindable
-    public String getTsf206d3() {
-        return tsf206d3;
-    }
-
-    public void setTsf206d3(String tsf206d3) {
-        this.tsf206d3 = tsf206d3;
-        notifyPropertyChanged(BR.tsf206d3);
-    }
-
-    @Bindable
-    public String getTsf206c4() {
-        return tsf206c4;
-    }
-
-    public void setTsf206c4(String tsf206c4) {
-        this.tsf206c4 = tsf206c4;
-        notifyPropertyChanged(BR.tsf206c4);
-    }
-
-    @Bindable
-    public String getTsf206d4() {
-        return tsf206d4;
-    }
-
-    public void setTsf206d4(String tsf206d4) {
-        this.tsf206d4 = tsf206d4;
-        notifyPropertyChanged(BR.tsf206d4);
-    }
-
-    @Bindable
-    public String getTsf301() {
-        return tsf301;
-    }
-
-    public void setTsf301(String tsf301) {
-        this.tsf301 = tsf301;
-        //   Log.d(TAG, "setTsf301: "+Integer.valueOf(tsf301));
-        notifyPropertyChanged(BR.tsf301);
-    }
-
-    @Bindable
-    public String getTsf302() {
-        return tsf302;
-    }
-
-    public void setTsf302(String tsf302) {
-        this.tsf302 = tsf302;
-        notifyPropertyChanged(BR.tsf302);
-    }
-
-    @Bindable
-    public String getTsf303() {
-        return tsf303;
-    }
-
-    public void setTsf303(String tsf303) {
-        this.tsf303 = tsf303;
-        notifyPropertyChanged(BR.tsf303);
+    public void setRa1296x(String ra1296x) {
+        this.ra1296x = ra1296x;
     }
 
-    @Bindable
-    public String getTsf304() {
-        return tsf304;
+    public String getRa13() {
+        return ra13;
     }
 
-    public void setTsf304(String tsf304) {
-        this.tsf304 = tsf304;
-        notifyPropertyChanged(BR.tsf304);
+    public void setRa13(String ra13) {
+        this.ra13 = ra13;
     }
 
-    @Bindable
-    public String getTsf305() {
-        return tsf305;
+    public String getRa13x() {
+        return ra13x;
     }
 
-    public void setTsf305(String tsf305) {
-        this.tsf305 = tsf305;
-        notifyPropertyChanged(BR.tsf305);
+    public void setRa13x(String ra13x) {
+        this.ra13x = ra13x;
     }
 
-    @Bindable
-    public String getTsf306() {
-        return tsf306;
+    public String getRa14() {
+        return ra14;
     }
 
-    public void setTsf306(String tsf306) {
-        this.tsf306 = tsf306;
-        notifyPropertyChanged(BR.tsf306);
+    public void setRa14(String ra14) {
+        this.ra14 = ra14;
     }
 
-    @Bindable
-    public String getTsf307() {
-        return tsf307;
+    public String getRa15() {
+        return ra15;
     }
 
-    public void setTsf307(String tsf307) {
-        this.tsf307 = tsf307;
-        notifyPropertyChanged(BR.tsf307);
+    public void setRa15(String ra15) {
+        this.ra15 = ra15;
     }
 
-    @Bindable
-    public String getTsf308() {
-        return tsf308;
+    public String getRa16() {
+        return ra16;
     }
 
-    public void setTsf308(String tsf308) {
-        this.tsf308 = tsf308;
-        notifyPropertyChanged(BR.tsf308);
+    public void setRa16(String ra16) {
+        this.ra16 = ra16;
     }
 
-    @Bindable
-    public String getTsf309() {
-        return tsf309;
+    public String getRa17_a() {
+        return ra17_a;
     }
 
-    public void setTsf309(String tsf309) {
-        this.tsf309 = tsf309;
-        notifyPropertyChanged(BR.tsf309);
+    public void setRa17_a(String ra17_a) {
+        this.ra17_a = ra17_a;
     }
 
-    @Bindable
-    public String getTsf310() {
-        return tsf310;
+    public String getRa17_b() {
+        return ra17_b;
     }
 
-    public void setTsf310(String tsf310) {
-        this.tsf310 = tsf310;
-        notifyPropertyChanged(BR.tsf310);
+    public void setRa17_b(String ra17_b) {
+        this.ra17_b = ra17_b;
     }
 
-    @Bindable
-    public String getTsf311() {
-        return tsf311;
+    public String getRa17_c() {
+        return ra17_c;
     }
 
-    public void setTsf311(String tsf311) {
-        this.tsf311 = tsf311;
-        notifyPropertyChanged(BR.tsf311);
+    public void setRa17_c(String ra17_c) {
+        this.ra17_c = ra17_c;
     }
 
-    @Bindable
-    public String getTsf312() {
-        return tsf312;
+    public String getRa17_d() {
+        return ra17_d;
     }
 
-    public void setTsf312(String tsf312) {
-        this.tsf312 = tsf312;
-        notifyPropertyChanged(BR.tsf312);
+    public void setRa17_d(String ra17_d) {
+        this.ra17_d = ra17_d;
     }
 
-    @Bindable
-    public String getTsf313() {
-        return tsf313;
+    public String getRa18() {
+        return ra18;
     }
 
-    public void setTsf313(String tsf313) {
-        this.tsf313 = tsf313;
-        notifyPropertyChanged(BR.tsf313);
+    public void setRa18(String ra18) {
+        this.ra18 = ra18;
     }
 
-    @Bindable
-    public String getTsf314() {
-        return tsf314;
+    public String getRb_uc() {
+        return rb_uc;
     }
 
-    public void setTsf314(String tsf314) {
-        this.tsf314 = tsf314;
-        notifyPropertyChanged(BR.tsf314);
+    public void setRb_uc(String rb_uc) {
+        this.rb_uc = rb_uc;
     }
 
-    @Bindable
-    public String getTsf315() {
-        return tsf315;
+    public String getRb_vil() {
+        return rb_vil;
     }
 
-    public void setTsf315(String tsf315) {
-        this.tsf315 = tsf315;
-        notifyPropertyChanged(BR.tsf315);
+    public void setRb_vil(String rb_vil) {
+        this.rb_vil = rb_vil;
     }
 
-    @Bindable
-    public String getTsf316() {
-        return tsf316;
+    public String getRb_hno() {
+        return rb_hno;
     }
 
-    public void setTsf316(String tsf316) {
-        this.tsf316 = tsf316;
-        notifyPropertyChanged(BR.tsf316);
+    public void setRb_hno(String rb_hno) {
+        this.rb_hno = rb_hno;
     }
 
-    @Bindable
-    public String getTsf317() {
-        return tsf317;
+    public String getRb_sid() {
+        return rb_sid;
     }
 
-    public void setTsf317(String tsf317) {
-        this.tsf317 = tsf317;
-        notifyPropertyChanged(BR.tsf317);
+    public void setRb_sid(String rb_sid) {
+        this.rb_sid = rb_sid;
     }
 
-    @Bindable
-    public String getTsf318() {
-        return tsf318;
+    public String getRb_ufn() {
+        return rb_ufn;
     }
 
-    public void setTsf318(String tsf318) {
-        this.tsf318 = tsf318;
-        notifyPropertyChanged(BR.tsf318);
+    public void setRb_ufn(String rb_ufn) {
+        this.rb_ufn = rb_ufn;
     }
 
-    @Bindable
-    public String getTsf319() {
-        return tsf319;
+    public String getRb01() {
+        return rb01;
     }
 
-    public void setTsf319(String tsf319) {
-        this.tsf319 = tsf319;
-        notifyPropertyChanged(BR.tsf319);
+    public void setRb01(String rb01) {
+        this.rb01 = rb01;
     }
 
-    @Bindable
-    public String getTsf320() {
-        return tsf320;
+    public String getRb02() {
+        return rb02;
     }
 
-    public void setTsf320(String tsf320) {
-        this.tsf320 = tsf320;
-        notifyPropertyChanged(BR.tsf320);
+    public void setRb02(String rb02) {
+        this.rb02 = rb02;
     }
 
-    @Bindable
-    public String getTsf321() {
-        return tsf321;
+    public String getRb03() {
+        return rb03;
     }
 
-    public void setTsf321(String tsf321) {
-        this.tsf321 = tsf321;
-        notifyPropertyChanged(BR.tsf321);
+    public void setRb03(String rb03) {
+        this.rb03 = rb03;
     }
 
-    @Bindable
-    public String getTsf322() {
-        return tsf322;
+    public String getRb04() {
+        return rb04;
     }
 
-    public void setTsf322(String tsf322) {
-        this.tsf322 = tsf322;
-        notifyPropertyChanged(BR.tsf322);
+    public void setRb04(String rb04) {
+        this.rb04 = rb04;
     }
 
-    @Bindable
-    public String getTsf323() {
-        return tsf323;
+    public String getRb05() {
+        return rb05;
     }
 
-    public void setTsf323(String tsf323) {
-        this.tsf323 = tsf323;
-        notifyPropertyChanged(BR.tsf323);
+    public void setRb05(String rb05) {
+        this.rb05 = rb05;
     }
 
-    @Bindable
-    public String getTsf401() {
-        return tsf401;
+    public String getRb06() {
+        return rb06;
     }
 
-    public void setTsf401(String tsf401) {
-        this.tsf401 = tsf401;
-        notifyPropertyChanged(BR.tsf401);
+    public void setRb06(String rb06) {
+        this.rb06 = rb06;
     }
 
-    @Bindable
-    public String getTsf40101() {
-        return tsf40101;
+    public String getRb07() {
+        return rb07;
     }
 
-    public void setTsf40101(String tsf40101) {
-        this.tsf40101 = tsf40101;
-        notifyPropertyChanged(BR.tsf40101);
+    public void setRb07(String rb07) {
+        this.rb07 = rb07;
     }
 
-    @Bindable
-    public String getTsf40102() {
-        return tsf40102;
+    public String getRb08() {
+        return rb08;
     }
 
-    public void setTsf40102(String tsf40102) {
-        this.tsf40102 = tsf40102;
-        notifyPropertyChanged(BR.tsf40102);
+    public void setRb08(String rb08) {
+        this.rb08 = rb08;
     }
 
-    @Bindable
-    public String getTsf40103() {
-        return tsf40103;
+    public String getRb09() {
+        return rb09;
     }
 
-    public void setTsf40103(String tsf40103) {
-        this.tsf40103 = tsf40103;
-        notifyPropertyChanged(BR.tsf40103);
+    public void setRb09(String rb09) {
+        this.rb09 = rb09;
     }
 
-    @Bindable
-    public String getTsf40104() {
-        return tsf40104;
-    }
-
-    public void setTsf40104(String tsf40104) {
-        this.tsf40104 = tsf40104;
-        notifyPropertyChanged(BR.tsf40104);
-    }
-
-    @Bindable
-    public String getTsf402() {
-        return tsf402;
-    }
-
-    public void setTsf402(String tsf402) {
-        this.tsf402 = tsf402;
-        notifyPropertyChanged(BR.tsf402);
-    }
-
-    @Bindable
-    public String getTsf40201() {
-        return tsf40201;
-    }
-
-    public void setTsf40201(String tsf40201) {
-        this.tsf40201 = tsf40201;
-        notifyPropertyChanged(BR.tsf40201);
-    }
-
-    @Bindable
-    public String getTsf40202() {
-        return tsf40202;
-    }
-
-    public void setTsf40202(String tsf40202) {
-        this.tsf40202 = tsf40202;
-        notifyPropertyChanged(BR.tsf40202);
-    }
-
-    @Bindable
-    public String getTsf40203() {
-        return tsf40203;
-    }
-
-    public void setTsf40203(String tsf40203) {
-        this.tsf40203 = tsf40203;
-        notifyPropertyChanged(BR.tsf40203);
-    }
-
-    @Bindable
-    public String getTsf40204() {
-        return tsf40204;
-    }
-
-    public void setTsf40204(String tsf40204) {
-        this.tsf40204 = tsf40204;
-        notifyPropertyChanged(BR.tsf40204);
-    }
-
-    @Bindable
-    public String getTsf40205() {
-        return tsf40205;
-    }
-
-    public void setTsf40205(String tsf40205) {
-        this.tsf40205 = tsf40205;
-        notifyPropertyChanged(BR.tsf40205);
-    }
-
-    @Bindable
-    public String getTsf40206() {
-        return tsf40206;
-    }
-
-    public void setTsf40206(String tsf40206) {
-        this.tsf40206 = tsf40206;
-        notifyPropertyChanged(BR.tsf40206);
-    }
-
-    @Bindable
-    public String getTsf40207() {
-        return tsf40207;
-    }
-
-    public void setTsf40207(String tsf40207) {
-        this.tsf40207 = tsf40207;
-        notifyPropertyChanged(BR.tsf40207);
-    }
-
-    @Bindable
-    public String getTsf40208() {
-        return tsf40208;
-    }
-
-    public void setTsf40208(String tsf40208) {
-        this.tsf40208 = tsf40208;
-        notifyPropertyChanged(BR.tsf40208);
-    }
-
-    @Bindable
-    public String getTsf40209() {
-        return tsf40209;
-    }
-
-    public void setTsf40209(String tsf40209) {
-        this.tsf40209 = tsf40209;
-        notifyPropertyChanged(BR.tsf40209);
-    }
-
-    @Bindable
-    public String getTsf40298() {
-        return tsf40298;
-    }
-
-    public void setTsf40298(String tsf40298) {
-        this.tsf40298 = tsf40298;
-        notifyPropertyChanged(BR.tsf40298);
-    }
-
-    @Bindable
-    public String getTsf40298x() {
-        return tsf40298x;
-    }
-
-    public void setTsf40298x(String tsf40298x) {
-        this.tsf40298x = tsf40298x;
-        notifyPropertyChanged(BR.tsf40298x);
-    }
-
-    @Bindable
-    public String getTsf501() {
-        return tsf501;
-    }
-
-    public void setTsf501(String tsf501) {
-        this.tsf501 = tsf501;
-        notifyPropertyChanged(BR.tsf501);
-    }
-
-    @Bindable
-    public String getTsf502() {
-        return tsf502;
-    }
-
-    public void setTsf502(String tsf502) {
-        this.tsf502 = tsf502;
-        notifyPropertyChanged(BR.tsf502);
-    }
-
-    @Bindable
-    public String getTsf503() {
-        return tsf503;
-    }
-
-    public void setTsf503(String tsf503) {
-        this.tsf503 = tsf503;
-        notifyPropertyChanged(BR.tsf503);
-    }
 /*
     private synchronized void notifyChange(int propertyId) {
         if (propertyChangeRegistry == null) {
@@ -1032,7 +601,6 @@ public class Form extends BaseObservable {
         this.mrNo = cursor.getString(cursor.getColumnIndex(FormsTable.COLUMN_MR_NUMBER));
         this.assessNo = cursor.getString(cursor.getColumnIndex(FormsTable.COLUMN_ASSESMENT_NO));
         this.infantName = cursor.getString(cursor.getColumnIndex(FormsTable.COLUMN_INFANT_NAME));
-        this.tsf305 = cursor.getString(cursor.getColumnIndex(FormsTable.COLUMN_TSF305));
         this.deviceId = cursor.getString(cursor.getColumnIndex(FormsTable.COLUMN_DEVICEID));
         this.deviceTag = cursor.getString(cursor.getColumnIndex(FormsTable.COLUMN_DEVICETAGID));
         this.appver = cursor.getString(cursor.getColumnIndex(FormsTable.COLUMN_APPVERSION));
@@ -1042,9 +610,9 @@ public class Form extends BaseObservable {
 
         s1Hydrate(cursor.getString(cursor.getColumnIndex(FormsTable.COLUMN_S1)));
         s2Hydrate(cursor.getString(cursor.getColumnIndex(FormsTable.COLUMN_S2)));
-        s3Hydrate(cursor.getString(cursor.getColumnIndex(FormsTable.COLUMN_S3)));
+/*        s3Hydrate(cursor.getString(cursor.getColumnIndex(FormsTable.COLUMN_S3)));
         s4Hydrate(cursor.getString(cursor.getColumnIndex(FormsTable.COLUMN_S4)));
-        s5Hydrate(cursor.getString(cursor.getColumnIndex(FormsTable.COLUMN_S5)));
+        s5Hydrate(cursor.getString(cursor.getColumnIndex(FormsTable.COLUMN_S5)));*/
 
         return this;
     }
@@ -1056,19 +624,30 @@ public class Form extends BaseObservable {
             try {
                 JSONObject json = null;
                 json = new JSONObject(string);
-                this.tsf101 = json.getString("tsf101");
-                this.tsf102 = json.getString("tsf102");
-                this.tsf103 = json.getString("tsf103");
-                this.tsf104 = json.getString("tsf104");
-                this.tsf105 = json.getString("tsf105");
-                this.tsf10596x = json.getString("tsf10596x");
-                this.tsf106 = json.getString("tsf106");
-                this.tsf107 = json.getString("tsf107");
-                this.tsf108 = json.getString("tsf108");
-                this.tsf109 = json.getString("tsf109");
-                this.tsf110 = json.getString("tsf110");
-                this.tsf111 = json.getString("tsf111");
-                this.tsf112 = json.getString("tsf112");
+                this.ra01 = json.getString("ra01");
+                this.ra02 = json.getString("ra02");
+                this.ra04 = json.getString("ra04");
+                this.ra03 = json.getString("ra03");
+                this.ra05 = json.getString("ra05");
+                this.ra07 = json.getString("ra07");
+                this.ra06 = json.getString("ra06");
+                this.ra08 = json.getString("ra08");
+                this.ra09 = json.getString("ra09");
+                this.ra10 = json.getString("ra10");
+                this.ra11 = json.getString("ra11");
+                this.ra11x = json.getString("ra11x");
+                this.ra12 = json.getString("ra12");
+                this.ra1296x = json.getString("ra1296x");
+                this.ra13 = json.getString("ra13");
+                this.ra13x = json.getString("ra13x");
+                this.ra14 = json.getString("ra14");
+                this.ra15 = json.getString("ra15");
+                this.ra16 = json.getString("ra16");
+                this.ra17_a = json.getString("ra17_a");
+                this.ra17_b = json.getString("ra17_b");
+                this.ra17_c = json.getString("ra17_c");
+                this.ra17_d = json.getString("ra17_d");
+                this.ra18 = json.getString("ra18");
 
             } catch (JSONException e) {
                 e.printStackTrace();
@@ -1084,20 +663,20 @@ public class Form extends BaseObservable {
                 JSONObject json = null;
                 json = new JSONObject(string);
 
-                //   this.tsf20503 = json.getString("tsf20503");
-                this.tsf201 = json.getString("tsf201");
-                this.tsf202 = json.getString("tsf202");
-                this.tsf203 = json.getString("tsf203");
-                this.tsf204 = json.getString("tsf204");
-                this.tsf205 = json.getString("tsf205");
-                this.tsf206c1 = json.getString("tsf206c1");
-                this.tsf206d1 = json.getString("tsf206d1");
-                this.tsf206c2 = json.getString("tsf206c2");
-                this.tsf206d2 = json.getString("tsf206d2");
-                this.tsf206c3 = json.getString("tsf206c3");
-                this.tsf206d3 = json.getString("tsf206d3");
-                this.tsf206c4 = json.getString("tsf206c4");
-                this.tsf206d4 = json.getString("tsf206d4");
+                this.rb_uc = json.getString("rb_uc");
+                this.rb_vil = json.getString("rb_vil");
+                this.rb_hno = json.getString("rb_hno");
+                this.rb_sid = json.getString("rb_sid");
+                this.rb_ufn = json.getString("rb_ufn");
+                this.rb01 = json.getString("rb01");
+                this.rb02 = json.getString("rb02");
+                this.rb03 = json.getString("rb03");
+                this.rb04 = json.getString("rb04");
+                this.rb05 = json.getString("rb05");
+                this.rb06 = json.getString("rb06");
+                this.rb07 = json.getString("rb07");
+                this.rb08 = json.getString("rb08");
+                this.rb09 = json.getString("rb09");
 
             } catch (JSONException e) {
                 e.printStackTrace();
@@ -1106,7 +685,7 @@ public class Form extends BaseObservable {
     }
 
 
-    public void s3Hydrate(String string) {
+/*    public void s3Hydrate(String string) {
 
         if (string != null) {
 
@@ -1189,26 +768,36 @@ public class Form extends BaseObservable {
                 e.printStackTrace();
             }
         }
-    }
+    }*/
 
     public String s1toString() {
         JSONObject json = new JSONObject();
 
         try {
-            json.put("tsf101", tsf101)
-                    .put("tsf102", tsf102)
-                    .put("tsf103", tsf103)
-                    .put("tsf104", tsf104)
-                    .put("tsf105", tsf105)
-                    .put("tsf10596x", tsf10596x)
-                    .put("tsf106", tsf106)
-                    .put("tsf107", tsf107)
-                    .put("tsf108", tsf108)
-                    .put("tsf109", tsf109)
-                    .put("tsf110", tsf110)
-                    .put("tsf111", tsf111)
-                    .put("tsf112", tsf112);
-
+            json.put("ra01", ra01)
+                    .put("ra02", ra02)
+                    .put("ra04", ra04)
+                    .put("ra03", ra03)
+                    .put("ra05", ra05)
+                    .put("ra07", ra07)
+                    .put("ra06", ra06)
+                    .put("ra08", ra08)
+                    .put("ra09", ra09)
+                    .put("ra10", ra10)
+                    .put("ra11", ra11)
+                    .put("ra11x", ra11x)
+                    .put("ra12", ra12)
+                    .put("ra1296x", ra1296x)
+                    .put("ra13", ra13)
+                    .put("ra13x", ra13x)
+                    .put("ra14", ra14)
+                    .put("ra15", ra15)
+                    .put("ra16", ra16)
+                    .put("ra17_a", ra17_a)
+                    .put("ra17_b", ra17_b)
+                    .put("ra17_c", ra17_c)
+                    .put("ra17_d", ra17_d)
+                    .put("ra18", ra18);
         } catch (JSONException e) {
             e.printStackTrace();
             return "\"error\":, \"" + e.getMessage() + "\"";
@@ -1220,22 +809,20 @@ public class Form extends BaseObservable {
         JSONObject json = new JSONObject();
 
         try {
-            json
-                    //           .put("tsf20503", tsf20503)
-                    .put("tsf201", tsf201)
-                    .put("tsf202", tsf202)
-                    .put("tsf203", tsf203)
-                    .put("tsf204", tsf204)
-                    .put("tsf205", tsf205)
-                    .put("tsf206c1", tsf206c1)
-                    .put("tsf206d1", tsf206d1)
-                    .put("tsf206c2", tsf206c2)
-                    .put("tsf206d2", tsf206d2)
-                    .put("tsf206c3", tsf206c3)
-                    .put("tsf206d3", tsf206d3)
-                    .put("tsf206c4", tsf206c4)
-                    .put("tsf206d4", tsf206d4);
-
+            json.put("rb_uc", rb_uc)
+                    .put("rb_vil", rb_vil)
+                    .put("rb_hno", rb_hno)
+                    .put("rb_sid", rb_sid)
+                    .put("rb_ufn", rb_ufn)
+                    .put("rb01", rb01)
+                    .put("rb02", rb02)
+                    .put("rb03", rb03)
+                    .put("rb04", rb04)
+                    .put("rb05", rb05)
+                    .put("rb06", rb06)
+                    .put("rb07", rb07)
+                    .put("rb08", rb08)
+                    .put("rb09", rb09);
 
         } catch (JSONException e) {
             e.printStackTrace();
@@ -1244,7 +831,7 @@ public class Form extends BaseObservable {
         return json.toString();
     }
 
-    public String s3toString() {
+/*    public String s3toString() {
         JSONObject json = new JSONObject();
 
         try {
@@ -1323,7 +910,7 @@ public class Form extends BaseObservable {
             return "\"error\":, \"" + e.getMessage() + "\"";
         }
         return json.toString();
-    }
+    }*/
 
     public JSONObject toJSONObject() {
 
@@ -1338,7 +925,7 @@ public class Form extends BaseObservable {
             json.put(FormsTable.COLUMN_MR_NUMBER, this.mrNo);
             json.put(FormsTable.COLUMN_ASSESMENT_NO, this.assessNo);
             json.put(FormsTable.COLUMN_INFANT_NAME, this.infantName);
-            json.put(FormsTable.COLUMN_TSF305, this.tsf305);
+//            json.put(FormsTable.COLUMN_TSF305, this.tsf305);
             json.put(FormsTable.COLUMN_DEVICEID, this.deviceId);
             json.put(FormsTable.COLUMN_DEVICETAGID, this.deviceTag);
             json.put(FormsTable.COLUMN_ISTATUS, this.iStatus);
@@ -1348,9 +935,9 @@ public class Form extends BaseObservable {
             json.put(FormsTable.COLUMN_S1, new JSONObject(s1toString()));
             //Log.d(TAG, "toJSONObject: "+new JSONObject(s2toString()));
             json.put(FormsTable.COLUMN_S2, new JSONObject(s2toString()));
-            json.put(FormsTable.COLUMN_S3, new JSONObject(s3toString()));
+            /*json.put(FormsTable.COLUMN_S3, new JSONObject(s3toString()));
             json.put(FormsTable.COLUMN_S4, new JSONObject(s4toString()));
-            json.put(FormsTable.COLUMN_S5, new JSONObject(s5toString()));
+            json.put(FormsTable.COLUMN_S5, new JSONObject(s5toString()));*/
 
 
             return json;

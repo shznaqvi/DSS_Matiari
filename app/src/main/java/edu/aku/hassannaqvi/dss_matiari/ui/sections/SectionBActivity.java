@@ -17,6 +17,8 @@ import edu.aku.hassannaqvi.dss_matiari.database.DatabaseHelper;
 import edu.aku.hassannaqvi.dss_matiari.databinding.ActivitySectionBBinding;
 import edu.aku.hassannaqvi.dss_matiari.ui.EndingActivity;
 
+import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.form;
+
 public class SectionBActivity extends AppCompatActivity {
 
     private static final String TAG = "SectionBActivity";
@@ -39,10 +41,10 @@ public class SectionBActivity extends AppCompatActivity {
         if (!formValidation()) return;
         saveDraft();
         if (updateDB()) {
-            Toast.makeText(this, "Patient Added.", Toast.LENGTH_SHORT).show();
             finish();
-           /* Intent i = new Intent(this, Section3Activity.class);
-            startActivity(i);*/
+            startActivity(new Intent(this, EndingActivity.class).putExtra("complete", true));
+        } else {
+            Toast.makeText(this, "Failed to Update Database!", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -50,18 +52,15 @@ public class SectionBActivity extends AppCompatActivity {
     }
 
     private boolean updateDB() {
-        // THIS FUNCTION IS NOT SAME AS INSERTNEWRECORD() in FIRST SECTION
-        db = MainApp.appInfo.dbHelper;
-        long updCount = db.updatesFormColumn(TableContracts.FormsTable.COLUMN_S2, MainApp.form.getS2());
-
-        // Chech if Form inserted into the database
-        if (updCount != -1) {
-
+        db = MainApp.appInfo.getDbHelper();
+        long updcount = db.addForm(form);
+        form.setId(String.valueOf(updcount));
+        if (updcount > 0) {
+            form.setUid(form.getDeviceId() + form.getId());
+            db.updatesFormColumn(TableContracts.FormsTable.COLUMN_UID, form.getUid());
             return true;
         } else {
-
-            // Error message in case when new record in not inserted (check logcat for error messages)
-            Toast.makeText(this, "SORRY! Failed to update DB", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Updating Database... ERROR!", Toast.LENGTH_SHORT).show();
             return false;
         }
     }
