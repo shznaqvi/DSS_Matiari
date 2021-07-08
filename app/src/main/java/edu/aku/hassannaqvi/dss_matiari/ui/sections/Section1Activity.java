@@ -2,14 +2,11 @@ package edu.aku.hassannaqvi.dss_matiari.ui.sections;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
-
-import com.validatorcrawler.aliazaz.Validator;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -49,7 +46,7 @@ public class Section1Activity extends AppCompatActivity {
         // Enables Always-on
     }
 
-    public void btnContinue(View view) {
+/*    public void btnContinue(View view) {
         if (!formValidation()) return;
         saveDraft();
         if ((insertNewRecord())) {
@@ -58,7 +55,7 @@ public class Section1Activity extends AppCompatActivity {
             Intent i = new Intent(this, Section2Activity.class);
             startActivity(i);
         }
-    }
+    }*/
 
     public void btnEnd(View view) {
         //saveDraft();
@@ -72,7 +69,7 @@ public class Section1Activity extends AppCompatActivity {
 
     }
 
-    private boolean formValidation() {
+/*    private boolean formValidation() {
         Log.d(TAG, "formValidation: " + db.getFormByAssessNo(bi.tsf101.getText().toString(), " (1,9) "));
         if (!Validator.emptyCheckingContainer(this, bi.GrpName)) {
             return false;
@@ -82,7 +79,7 @@ public class Section1Activity extends AppCompatActivity {
             return false;
         } else return true;
 
-    }
+    }*/
 
 
     private void saveDraft() {

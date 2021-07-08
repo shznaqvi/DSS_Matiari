@@ -43,7 +43,8 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
-                <!-- title01  Title   -->
+                title01 Title
+
                 <androidx.cardview.widget.CardView
                     android:id="@+id/fldGrpCVtitle01"
                     style="@style/cardView">
@@ -57,7 +58,7 @@
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
 
-                <!-- tsf101  Input   -->
+                <!-- tsf101  Input
                 <androidx.cardview.widget.CardView
                     android:id="@+id/fldGrpCVtsf101"
                     style="@style/cardView">
@@ -97,7 +98,7 @@
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
 
-                <!-- tsf102  Input   -->
+                &lt;!&ndash; tsf102  Input   &ndash;&gt;
                 <androidx.cardview.widget.CardView
                     android:id="@+id/fldGrpCVtsf102"
                     style="@style/cardView">
@@ -140,7 +141,7 @@
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
 
-                <!-- tsf103  Input   -->
+                &lt;!&ndash; tsf103  Input   &ndash;&gt;
                 <androidx.cardview.widget.CardView
                     android:id="@+id/fldGrpCVtsf103"
                     style="@style/cardView"
@@ -178,7 +179,7 @@
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
 
-                <!-- tsf104  Input   -->
+                &lt;!&ndash; tsf104  Input   &ndash;&gt;
                 <androidx.cardview.widget.CardView
                     android:id="@+id/fldGrpCVtsf104"
                     style="@style/cardView">
@@ -215,7 +216,7 @@
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
 
-                <!-- tsf105  Radio   -->
+                &lt;!&ndash; tsf105  Radio   &ndash;&gt;
                 <androidx.cardview.widget.CardView
                     android:id="@+id/fldGrpCVtsf105"
                     style="@style/cardView">
@@ -285,7 +286,7 @@
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
 
-                <!-- tsf106  Input   -->
+                &lt;!&ndash; tsf106  Input   &ndash;&gt;
                 <androidx.cardview.widget.CardView
                     android:id="@+id/fldGrpCVtsf106"
                     style="@style/cardView">
@@ -328,7 +329,7 @@
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
 
-                <!-- tsf107  Input   -->
+                &lt;!&ndash; tsf107  Input   &ndash;&gt;
                 <androidx.cardview.widget.CardView
                     android:id="@+id/fldGrpCVtsf107"
                     style="@style/cardView">
@@ -370,7 +371,7 @@
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
 
-                <!-- tsf108  Input   -->
+                &lt;!&ndash; tsf108  Input   &ndash;&gt;
                 <androidx.cardview.widget.CardView
                     android:id="@+id/fldGrpCVtsf108"
                     style="@style/cardView">
@@ -407,7 +408,7 @@
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
 
-                <!-- tsf109  Radio   -->
+                &lt;!&ndash; tsf109  Radio   &ndash;&gt;
                 <androidx.cardview.widget.CardView
                     android:id="@+id/fldGrpCVtsf109"
                     style="@style/cardView">
@@ -459,7 +460,7 @@
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
 
-                <!-- tsf110  Input   -->
+                &lt;!&ndash; tsf110  Input   &ndash;&gt;
                 <androidx.cardview.widget.CardView
                     android:id="@+id/fldGrpCVtsf110"
                     style="@style/cardView">
@@ -496,7 +497,7 @@
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
 
-                <!-- tsf11  Radio   -->
+                &lt;!&ndash; tsf11  Radio   &ndash;&gt;
                 <androidx.cardview.widget.CardView
                     android:id="@+id/fldGrpCVtsf111"
                     style="@style/cardView">
@@ -555,7 +556,7 @@
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
 
-                <!-- tsf112  Input   -->
+                &lt;!&ndash; tsf112  Input   &ndash;&gt;
                 <androidx.cardview.widget.CardView
                     android:id="@+id/fldGrpCVtsf112"
                     style="@style/cardView">
@@ -593,7 +594,9 @@
                             android:minLines="5"
                             android:padding="12dp" />
                     </LinearLayout>
-                </androidx.cardview.widget.CardView><!--EndButton LinearLayout-->
+                </androidx.cardview.widget.CardView>-->
+
+                <!--EndButton LinearLayout-->
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

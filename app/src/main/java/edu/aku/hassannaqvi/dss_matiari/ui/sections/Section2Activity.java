@@ -2,9 +2,7 @@ package edu.aku.hassannaqvi.dss_matiari.ui.sections;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
-import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -17,7 +15,6 @@ import java.util.Calendar;
 import edu.aku.hassannaqvi.dss_matiari.R;
 import edu.aku.hassannaqvi.dss_matiari.contracts.TableContracts.FormsTable;
 import edu.aku.hassannaqvi.dss_matiari.core.MainApp;
-import edu.aku.hassannaqvi.dss_matiari.core.ZScore;
 import edu.aku.hassannaqvi.dss_matiari.database.DatabaseHelper;
 import edu.aku.hassannaqvi.dss_matiari.databinding.ActivitySection2Binding;
 import edu.aku.hassannaqvi.dss_matiari.ui.EndingActivity;
@@ -142,17 +139,17 @@ public class Section2Activity extends AppCompatActivity {
             return false;
         }
     }
-
+/*
     public void CheckZScore(View view) {
         if (Validator.emptyRadioButton(this, bi.tsf205, bi.tsf20501)
                 && Validator.emptyTextBox(this, bi.tsf202)
                 && Validator.emptyTextBox(this, bi.tsf203)
 
         ) {
-           /* int ageinmonths = Integer.parseInt(bi.cs1502.getText().toString()) + (Integer.parseInt(bi.cs1501.getText().toString())*12);
+           *//* int ageinmonths = Integer.parseInt(bi.cs1502.getText().toString()) + (Integer.parseInt(bi.cs1501.getText().toString())*12);
             Log.d("TAG", "CheckZScore: "+ ageinmonths);
             int ageindays = (int) Math.floor(ageinmonths * DAYS_IN_A_MONTH);
-            Log.d("TAG", "CheckZScore: "+ ageindays);*/
+            Log.d("TAG", "CheckZScore: "+ ageindays);*//*
 
             int gender = bi.tsf20501.isChecked() ? 1 : bi.tsf20502.isChecked() ? 2 : 0;
 
@@ -181,7 +178,7 @@ public class Section2Activity extends AppCompatActivity {
 
     public void setAgeInDays(CharSequence s, int start, int before, int count) {
 
-/*        if (!bi.tsf201.getText().toString().equals("")) {
+*//*        if (!bi.tsf201.getText().toString().equals("")) {
             // For testing only
             // form = new Form();
             if (form.getTsf106().equals("")) {
@@ -195,7 +192,7 @@ public class Section2Activity extends AppCompatActivity {
                     getCalDate(form.getTsf106())
             );
             bi.tsf202.setText(String.valueOf(ageindayss));
-        }*/
+        }*//*
 
-    }
+    }*/
 }

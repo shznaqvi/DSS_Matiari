@@ -33,7 +33,6 @@ import static edu.aku.hassannaqvi.dss_matiari.database.CreateTable.DATABASE_VERS
 import static edu.aku.hassannaqvi.dss_matiari.database.CreateTable.SQL_CREATE_FORMS;
 import static edu.aku.hassannaqvi.dss_matiari.database.CreateTable.SQL_CREATE_USERS;
 import static edu.aku.hassannaqvi.dss_matiari.database.CreateTable.SQL_CREATE_VERSIONAPP;
-import static edu.aku.hassannaqvi.dss_matiari.database.CreateTable.SQL_CREATE_ZSTANDARD;
 
 
 
@@ -56,7 +55,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL(SQL_CREATE_USERS);
         db.execSQL(SQL_CREATE_FORMS);
         db.execSQL(SQL_CREATE_VERSIONAPP);
-        db.execSQL(SQL_CREATE_ZSTANDARD);
+//        db.execSQL(SQL_CREATE_ZSTANDARD);
 
     }
 
@@ -86,7 +85,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         values.put(FormsTable.COLUMN_ASSESMENT_NO, form.getAssessNo());
         values.put(FormsTable.COLUMN_MR_NUMBER, form.getMrNo());
         values.put(FormsTable.COLUMN_INFANT_NAME, form.getInfantName());
-        values.put(FormsTable.COLUMN_TSF305, form.getTsf305());
+//        values.put(FormsTable.COLUMN_TSF305, form.getTsf305());
         values.put(FormsTable.COLUMN_S1, form.getS1());
         values.put(FormsTable.COLUMN_S2, form.getS2());
         values.put(FormsTable.COLUMN_S3, form.getS3());
