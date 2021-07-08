@@ -69,30 +69,45 @@
 
                         </LinearLayout>
 
+
                         <RadioGroup
-                            android:id="@+id/istatus"
+                            android:id="@+id/ra11"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content">
 
-
                             <RadioButton
-                                android:id="@+id/istatusa"
+                                android:id="@+id/ra11a"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:text="@string/istatusa" />
+                                android:text="@string/ra11a" />
 
                             <RadioButton
-                                android:id="@+id/istatusb"
+                                android:id="@+id/ra11b"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:text="@string/istatusb" />
+                                android:text="@string/ra11b" />
 
                             <RadioButton
-                                android:id="@+id/istatusc"
+                                android:id="@+id/ra11c"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:text="@string/istatusc" />
+                                android:text="@string/ra11c" />
 
+                            <RadioButton
+                                android:id="@+id/ra11d"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="@string/ra11d" />
+
+                            <EditText
+                                android:id="@+id/ra11x"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:digits="AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz0123456789,. "
+                                android:hint="@string/ra11"
+                                android:tag="ra11"
+                                android:text='@{ra11d.checked ? ra11x.getText().toString() : ""}'
+                                android:visibility='@{ra11d.checked? View.VISIBLE : View.GONE}' />
                         </RadioGroup>
 
                     </LinearLayout>

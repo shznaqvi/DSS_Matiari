@@ -9,7 +9,7 @@
             type="edu.aku.hassannaqvi.dssmwsr.models.Form" />-->
         <variable
             name="callback"
-            type="edu.aku.hassannaqvi.dss_matiari.ui.sections.SectionAActivity" />
+            type="edu.aku.hassannaqvi.dss_matiari.ui.sections.IdentificationActivity" />
     </data>
 
     <ScrollView
@@ -22,194 +22,7 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <!-- ra01  Input   -->
-            <androidx.cardview.widget.CardView
-                android:id="@+id/fldGrpCVra01"
-                style="@style/cardView">
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:background="@drawable/bottom"
-                        android:orientation="horizontal">
-
-                        <TextView
-                            style="@style/quesNum"
-                            android:layout_width="wrap_content"
-                            android:layout_height="match_parent"
-                            android:text="@string/Q_ra01" />
-
-                        <TextView
-                            android:layout_width="0dp"
-                            android:layout_height="match_parent"
-                            android:layout_weight="1"
-                            android:text="@string/ra01" />
-                    </LinearLayout>
-
-                    <io.blackbox_vision.datetimepickeredittext.view.DatePickerEditText
-                        android:id="@+id/ra01"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="center"
-                        android:hint="YYYY-MM-DD"
-                        app:dateFormat="yyyy-MM-dd"
-                        app:maxDate="CR_DATE"
-                        app:minDate="CR_DATE" />
-                </LinearLayout>
-            </androidx.cardview.widget.CardView>
-<!--
-            &lt;!&ndash; ra02  Input   &ndash;&gt;
-            <androidx.cardview.widget.CardView
-                android:id="@+id/fldGrpCVra02"
-                style="@style/cardView">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:background="@drawable/bottom"
-                        android:orientation="horizontal">
-
-                        <TextView
-                            style="@style/quesNum"
-                            android:layout_width="wrap_content"
-                            android:layout_height="match_parent"
-                            android:text="@string/Q_ra02" />
-
-                        <TextView
-                            android:layout_width="0dp"
-                            android:layout_height="match_parent"
-                            android:layout_weight="1"
-                            android:text="@string/ra02" />
-                    </LinearLayout>
-
-                    <EditText
-                        android:id="@+id/ra02"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="@string/ra02" />
-                </LinearLayout>
-            </androidx.cardview.widget.CardView>
-
-            &lt;!&ndash; ra04  Input   &ndash;&gt;
-            <androidx.cardview.widget.CardView
-                android:id="@+id/fldGrpCVra04"
-                style="@style/cardView">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:background="@drawable/bottom"
-                        android:orientation="horizontal">
-
-                        <TextView
-                            style="@style/quesNum"
-                            android:layout_width="wrap_content"
-                            android:layout_height="match_parent"
-                            android:text="@string/Q_ra04" />
-
-                        <TextView
-                            android:layout_width="0dp"
-                            android:layout_height="match_parent"
-                            android:layout_weight="1"
-                            android:text="@string/ra04" />
-                    </LinearLayout>
-
-                    <EditText
-                        android:id="@+id/ra04"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="@string/ra04" />
-                </LinearLayout>
-            </androidx.cardview.widget.CardView>
-
-            &lt;!&ndash; ra03  Input   &ndash;&gt;
-            <androidx.cardview.widget.CardView
-                android:id="@+id/fldGrpCVra03"
-                style="@style/cardView">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:background="@drawable/bottom"
-                        android:orientation="horizontal">
-
-                        <TextView
-                            style="@style/quesNum"
-                            android:layout_width="wrap_content"
-                            android:layout_height="match_parent"
-                            android:text="@string/Q_ra03" />
-
-                        <TextView
-                            android:layout_width="0dp"
-                            android:layout_height="match_parent"
-                            android:layout_weight="1"
-                            android:text="@string/ra03" />
-                    </LinearLayout>
-
-                    <EditText
-                        android:id="@+id/ra03"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="@string/ra03" />
-                </LinearLayout>
-            </androidx.cardview.widget.CardView>
-
-            &lt;!&ndash; ra05  Input   &ndash;&gt;
-            <androidx.cardview.widget.CardView
-                android:id="@+id/fldGrpCVra05"
-                style="@style/cardView">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:background="@drawable/bottom"
-                        android:orientation="horizontal">
-
-                        <TextView
-                            style="@style/quesNum"
-                            android:layout_width="wrap_content"
-                            android:layout_height="match_parent"
-                            android:text="@string/Q_ra05" />
-
-                        <TextView
-                            android:layout_width="0dp"
-                            android:layout_height="match_parent"
-                            android:layout_weight="1"
-                            android:text="@string/ra05" />
-                    </LinearLayout>
-
-                    <EditText
-                        android:id="@+id/ra05"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="@string/ra05" />
-                </LinearLayout>
-            </androidx.cardview.widget.CardView>-->
             <!-- ra07  Input-Numeric   -->
             <androidx.cardview.widget.CardView
                 android:id="@+id/fldGrpCVra07"
@@ -474,8 +287,8 @@
             <!-- ra12  Radio   -->
             <androidx.cardview.widget.CardView
                 android:id="@+id/fldGrpCVra12"
-                android:visibility="gone"
-                style="@style/cardView">
+                style="@style/cardView"
+                android:visibility="gone">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -546,8 +359,8 @@
             <!-- ra13  Radio   -->
             <androidx.cardview.widget.CardView
                 android:id="@+id/fldGrpCVra13"
-                android:visibility="gone"
-                style="@style/cardView">
+                style="@style/cardView"
+                android:visibility="gone">
 
                 <LinearLayout
                     android:layout_width="match_parent"
