@@ -908,7 +908,7 @@
                     </LinearLayout>
 
                     <com.edittextpicker.aliazaz.EditTextPicker
-                        android:id="@+id/a17_c"
+                        android:id="@+id/ra17_c"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="@string/a17_c"
