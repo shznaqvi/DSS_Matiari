@@ -47,7 +47,6 @@ import javax.crypto.Cipher;
 import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
 
-import edu.aku.hassannaqvi.dss_matiari.MainActivity;
 import edu.aku.hassannaqvi.dss_matiari.R;
 import edu.aku.hassannaqvi.dss_matiari.core.AppInfo;
 import edu.aku.hassannaqvi.dss_matiari.core.MainApp;

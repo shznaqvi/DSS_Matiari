@@ -15,7 +15,6 @@ import edu.aku.hassannaqvi.dss_matiari.contracts.TableContracts;
 import edu.aku.hassannaqvi.dss_matiari.core.MainApp;
 import edu.aku.hassannaqvi.dss_matiari.database.DatabaseHelper;
 import edu.aku.hassannaqvi.dss_matiari.databinding.ActivityEndingBinding;
-import edu.aku.hassannaqvi.dss_matiari.ui.sections.Section1Activity;
 
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.form;
 
@@ -64,7 +63,7 @@ public class EndingActivity extends AppCompatActivity {
 
             cleanupProcess();
             finish();
-            Intent i = new Intent(this, Section1Activity.class);
+            Intent i = new Intent(this, MainApp.class);
             startActivity(i);
             Toast.makeText(this, "Entry Complete", Toast.LENGTH_SHORT).show();
 

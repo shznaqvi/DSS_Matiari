@@ -83,7 +83,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         values.put(FormsTable.COLUMN_USERNAME, form.getUserName());
         values.put(FormsTable.COLUMN_SYSDATE, form.getSysDate());
         values.put(FormsTable.COLUMN_ASSESMENT_NO, form.getAssessNo());
-        values.put(FormsTable.COLUMN_MR_NUMBER, form.getMrNo());
+        values.put(FormsTable.COLUMN_HDSSID, form.getHdssId());
         values.put(FormsTable.COLUMN_INFANT_NAME, form.getInfantName());
 //        values.put(FormsTable.COLUMN_TSF305, form.getTsf305());
         values.put(FormsTable.COLUMN_S1, form.getS1());
@@ -282,7 +282,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
 
     public int updatesFormColumn(String column, String value) {
-        SQLiteDatabase db = this.getReadableDatabase();
+        SQLiteDatabase db = this.getWritableDatabase();
 
         ContentValues values = new ContentValues();
         values.put(column, value);
@@ -588,5 +588,45 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             db.close();
         }
         return insertCount;
+    }
+
+    public Form getFormByHDSSID(String hdssid) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor c = null;
+        String[] columns = null;
+
+        String whereClause;
+        whereClause = FormsTable.COLUMN_HDSSID + "=?";
+
+        String[] whereArgs = {hdssid};
+
+        String groupBy = null;
+        String having = null;
+
+        String orderBy = FormsTable.COLUMN_ID + " ASC";
+
+        Form form = null;
+        try {
+            c = db.query(
+                    FormsTable.TABLE_NAME,  // The table to query
+                    columns,                   // The columns to return
+                    whereClause,               // The columns for the WHERE clause
+                    whereArgs,                 // The values for the WHERE clause
+                    groupBy,                   // don't group the rows
+                    having,                    // don't filter by row groups
+                    orderBy                    // The sort order
+            );
+            while (c.moveToNext()) {
+                form = new Form().Hydrate(c);
+            }
+        } finally {
+            if (c != null) {
+                c.close();
+            }
+            if (db != null) {
+                db.close();
+            }
+        }
+        return form;
     }
 }

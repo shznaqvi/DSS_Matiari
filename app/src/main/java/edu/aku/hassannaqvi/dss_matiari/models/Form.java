@@ -4,59 +4,61 @@ import android.database.Cursor;
 import android.util.Log;
 
 import androidx.databinding.BaseObservable;
+import androidx.databinding.Bindable;
+import androidx.databinding.Observable;
 import androidx.databinding.PropertyChangeRegistry;
 
 import org.apache.commons.lang3.StringUtils;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import edu.aku.hassannaqvi.dss_matiari.BR;
 import edu.aku.hassannaqvi.dss_matiari.contracts.TableContracts.FormsTable;
 import edu.aku.hassannaqvi.dss_matiari.core.MainApp;
 
-public class Form extends BaseObservable {
+public class Form extends BaseObservable implements Observable {
 
     private final String TAG = "Form";
-    private final transient PropertyChangeRegistry propertyChangeRegistry = new PropertyChangeRegistry();
-
-    public String ra01 = "";
-    public String ra02 = "";
-    public String ra04 = "";
-    public String ra03 = "";
-    public String ra05 = "";
-    public String ra07 = "";
-    public String ra06 = "";
-    public String ra08 = "";
-    public String ra09 = "";
-    public String ra10 = "";
-    public String ra11 = "";
-    public String ra11x = "";
-    public String ra12 = "";
-    public String ra1296x = "";
-    public String ra13 = "";
-    public String ra13x = "";
-    public String ra14 = "";
-    public String ra15 = "";
-    public String ra16 = "";
-    public String ra17_a = "";
-    public String ra17_b = "";
-    public String ra17_c = "";
-    public String ra17_d = "";
-    public String ra18 = "";
-    public String rb_uc = "";
-    public String rb_vil = "";
-    public String rb_hno = "";
-    public String rb_sid = "";
-    public String rb_ufn = "";
-    public String rb01 = "";
-    public String rb02 = "";
-    public String rb03 = "";
-    public String rb04 = "";
-    public String rb05 = "";
-    public String rb06 = "";
-    public String rb07 = "";
-    public String rb08 = "";
-    public String rb09 = "";
-
+    private String ra01 = "";
+    private String ra02 = "";
+    private String ra04 = "";
+    private String ra03 = "";
+    private String ra05 = "";
+    private String ra07 = "";
+    private String ra06 = "";
+    private String ra08 = "";
+    private String ra09 = "";
+    private String ra10 = "";
+    private String ra11 = "";
+    private String ra11x = "";
+    private String ra12 = "";
+    private String ra1296x = "";
+    private String ra13 = "";
+    private String ra13x = "";
+    private String ra14 = "";
+    private String ra15 = "";
+    private String ra16 = "";
+    private String ra17_a = "";
+    private String ra17_b = "";
+    private String ra17_c = "";
+    private String ra17_d = "";
+    private String ra18 = "";
+    private String rb_uc = "";
+    private String rb_vil = "";
+    private String rb_hno = "";
+    private String rb_sid = "";
+    private String rb_ufn = "";
+    private String rb01 = "";
+    private String rb02 = "";
+    private String rb03 = "";
+    private String rb04 = "";
+    private String rb05 = "";
+    private String rb06 = "";
+    private String rb07 = "";
+    private String rb08 = "";
+    private String rb09 = "";
+    private transient PropertyChangeRegistry propertyChangeRegistry = new PropertyChangeRegistry();
+    private boolean exist = false;
     // APP VARIABLES
     private String projectName = MainApp.PROJECT_NAME;
     // APP VARIABLES
@@ -65,7 +67,7 @@ public class Form extends BaseObservable {
     private String userName = StringUtils.EMPTY;
     private String sysDate = StringUtils.EMPTY;
     private String assessNo = StringUtils.EMPTY;
-    private String mrNo = StringUtils.EMPTY;
+    private String hdssId = StringUtils.EMPTY;
     private String infantName = StringUtils.EMPTY;
 
     private String deviceId = StringUtils.EMPTY;
@@ -88,309 +90,6 @@ public class Form extends BaseObservable {
 
     }
 
-    public String getRa01() {
-        return ra01;
-    }
-
-    public void setRa01(String ra01) {
-        this.ra01 = ra01;
-    }
-
-    public String getRa02() {
-        return ra02;
-    }
-
-    public void setRa02(String ra02) {
-        this.ra02 = ra02;
-    }
-
-    public String getRa04() {
-        return ra04;
-    }
-
-    public void setRa04(String ra04) {
-        this.ra04 = ra04;
-    }
-
-    public String getRa03() {
-        return ra03;
-    }
-
-    public void setRa03(String ra03) {
-        this.ra03 = ra03;
-    }
-
-    public String getRa05() {
-        return ra05;
-    }
-
-    public void setRa05(String ra05) {
-        this.ra05 = ra05;
-    }
-
-    public String getRa07() {
-        return ra07;
-    }
-
-    public void setRa07(String ra07) {
-        this.ra07 = ra07;
-    }
-
-    public String getRa06() {
-        return ra06;
-    }
-
-    public void setRa06(String ra06) {
-        this.ra06 = ra06;
-    }
-
-    public String getRa08() {
-        return ra08;
-    }
-
-    public void setRa08(String ra08) {
-        this.ra08 = ra08;
-    }
-
-    public String getRa09() {
-        return ra09;
-    }
-
-    public void setRa09(String ra09) {
-        this.ra09 = ra09;
-    }
-
-    public String getRa10() {
-        return ra10;
-    }
-
-    public void setRa10(String ra10) {
-        this.ra10 = ra10;
-    }
-
-    public String getRa11() {
-        return ra11;
-    }
-
-    public void setRa11(String ra11) {
-        this.ra11 = ra11;
-    }
-
-    public String getRa11x() {
-        return ra11x;
-    }
-
-    public void setRa11x(String ra11x) {
-        this.ra11x = ra11x;
-    }
-
-    public String getRa12() {
-        return ra12;
-    }
-
-    public void setRa12(String ra12) {
-        this.ra12 = ra12;
-    }
-
-    public String getRa1296x() {
-        return ra1296x;
-    }
-
-    public void setRa1296x(String ra1296x) {
-        this.ra1296x = ra1296x;
-    }
-
-    public String getRa13() {
-        return ra13;
-    }
-
-    public void setRa13(String ra13) {
-        this.ra13 = ra13;
-    }
-
-    public String getRa13x() {
-        return ra13x;
-    }
-
-    public void setRa13x(String ra13x) {
-        this.ra13x = ra13x;
-    }
-
-    public String getRa14() {
-        return ra14;
-    }
-
-    public void setRa14(String ra14) {
-        this.ra14 = ra14;
-    }
-
-    public String getRa15() {
-        return ra15;
-    }
-
-    public void setRa15(String ra15) {
-        this.ra15 = ra15;
-    }
-
-    public String getRa16() {
-        return ra16;
-    }
-
-    public void setRa16(String ra16) {
-        this.ra16 = ra16;
-    }
-
-    public String getRa17_a() {
-        return ra17_a;
-    }
-
-    public void setRa17_a(String ra17_a) {
-        this.ra17_a = ra17_a;
-    }
-
-    public String getRa17_b() {
-        return ra17_b;
-    }
-
-    public void setRa17_b(String ra17_b) {
-        this.ra17_b = ra17_b;
-    }
-
-    public String getRa17_c() {
-        return ra17_c;
-    }
-
-    public void setRa17_c(String ra17_c) {
-        this.ra17_c = ra17_c;
-    }
-
-    public String getRa17_d() {
-        return ra17_d;
-    }
-
-    public void setRa17_d(String ra17_d) {
-        this.ra17_d = ra17_d;
-    }
-
-    public String getRa18() {
-        return ra18;
-    }
-
-    public void setRa18(String ra18) {
-        this.ra18 = ra18;
-    }
-
-    public String getRb_uc() {
-        return rb_uc;
-    }
-
-    public void setRb_uc(String rb_uc) {
-        this.rb_uc = rb_uc;
-    }
-
-    public String getRb_vil() {
-        return rb_vil;
-    }
-
-    public void setRb_vil(String rb_vil) {
-        this.rb_vil = rb_vil;
-    }
-
-    public String getRb_hno() {
-        return rb_hno;
-    }
-
-    public void setRb_hno(String rb_hno) {
-        this.rb_hno = rb_hno;
-    }
-
-    public String getRb_sid() {
-        return rb_sid;
-    }
-
-    public void setRb_sid(String rb_sid) {
-        this.rb_sid = rb_sid;
-    }
-
-    public String getRb_ufn() {
-        return rb_ufn;
-    }
-
-    public void setRb_ufn(String rb_ufn) {
-        this.rb_ufn = rb_ufn;
-    }
-
-    public String getRb01() {
-        return rb01;
-    }
-
-    public void setRb01(String rb01) {
-        this.rb01 = rb01;
-    }
-
-    public String getRb02() {
-        return rb02;
-    }
-
-    public void setRb02(String rb02) {
-        this.rb02 = rb02;
-    }
-
-    public String getRb03() {
-        return rb03;
-    }
-
-    public void setRb03(String rb03) {
-        this.rb03 = rb03;
-    }
-
-    public String getRb04() {
-        return rb04;
-    }
-
-    public void setRb04(String rb04) {
-        this.rb04 = rb04;
-    }
-
-    public String getRb05() {
-        return rb05;
-    }
-
-    public void setRb05(String rb05) {
-        this.rb05 = rb05;
-    }
-
-    public String getRb06() {
-        return rb06;
-    }
-
-    public void setRb06(String rb06) {
-        this.rb06 = rb06;
-    }
-
-    public String getRb07() {
-        return rb07;
-    }
-
-    public void setRb07(String rb07) {
-        this.rb07 = rb07;
-    }
-
-    public String getRb08() {
-        return rb08;
-    }
-
-    public void setRb08(String rb08) {
-        this.rb08 = rb08;
-    }
-
-    public String getRb09() {
-        return rb09;
-    }
-
-    public void setRb09(String rb09) {
-        this.rb09 = rb09;
-    }
 
 /*
     private synchronized void notifyChange(int propertyId) {
@@ -464,12 +163,12 @@ public class Form extends BaseObservable {
         this.sysDate = sysDate;
     }
 
-    public String getMrNo() {
-        return mrNo;
+    public String getHdssId() {
+        return hdssId;
     }
 
-    public void setMrNo(String mrNo) {
-        this.mrNo = mrNo;
+    public void setHdssId(String hdssId) {
+        this.hdssId = hdssId;
     }
 
     public String getAssessNo() {
@@ -552,6 +251,13 @@ public class Form extends BaseObservable {
         this.syncDate = syncDate;
     }
 
+    public boolean isExist() {
+        return exist;
+    }
+
+    public void setExist(boolean exist) {
+        this.exist = exist;
+    }
 
     public String getS1() {
         return s1;
@@ -593,12 +299,418 @@ public class Form extends BaseObservable {
         this.s5 = s5;
     }
 
+
+    @Bindable
+    public String getRa01() {
+        return ra01;
+    }
+
+    public void setRa01(String ra01) {
+        this.ra01 = ra01;
+        notifyChange(BR.ra01);
+    }
+
+    @Bindable
+    public String getRa02() {
+        return ra02;
+    }
+
+    public void setRa02(String ra02) {
+        this.ra02 = ra02;
+        notifyChange(BR.ra02);
+    }
+
+    @Bindable
+    public String getRa04() {
+        return ra04;
+    }
+
+    public void setRa04(String ra04) {
+        this.ra04 = ra04;
+        notifyChange(BR.ra04);
+    }
+
+    @Bindable
+    public String getRa03() {
+        return ra03;
+    }
+
+    public void setRa03(String ra03) {
+        this.ra03 = ra03;
+        notifyChange(BR.ra03);
+    }
+
+    @Bindable
+    public String getRa05() {
+        return ra05;
+    }
+
+    public void setRa05(String ra05) {
+        this.ra05 = ra05;
+        notifyChange(BR.ra05);
+    }
+
+    @Bindable
+    public String getRa07() {
+        return ra07;
+    }
+
+    public void setRa07(String ra07) {
+        this.ra07 = ra07;
+        notifyChange(BR.ra07);
+    }
+
+    @Bindable
+    public String getRa06() {
+        return ra06;
+    }
+
+    public void setRa06(String ra06) {
+        this.ra06 = ra06;
+        notifyChange(BR.ra06);
+    }
+
+    @Bindable
+    public String getRa08() {
+        return ra08;
+    }
+
+    public void setRa08(String ra08) {
+        this.ra08 = ra08;
+        notifyChange(BR.ra08);
+    }
+
+    @Bindable
+    public String getRa09() {
+        return ra09;
+    }
+
+    public void setRa09(String ra09) {
+        this.ra09 = ra09;
+        notifyChange(BR.ra09);
+    }
+
+    @Bindable
+    public String getRa10() {
+        return ra10;
+    }
+
+    public void setRa10(String ra10) {
+        this.ra10 = ra10;
+        notifyChange(BR.ra10);
+    }
+
+    @Bindable
+    public String getRa11() {
+        return ra11;
+    }
+
+    public void setRa11(String ra11) {
+        this.ra11 = ra11;
+        notifyChange(BR.ra11);
+    }
+
+    @Bindable
+    public String getRa11x() {
+        return ra11x;
+    }
+
+    public void setRa11x(String ra11x) {
+        this.ra11x = ra11x;
+        notifyChange(BR.ra11x);
+    }
+
+    @Bindable
+    public String getRa12() {
+        return ra12;
+    }
+
+    public void setRa12(String ra12) {
+        this.ra12 = ra12;
+        notifyChange(BR.ra12);
+    }
+
+    @Bindable
+    public String getRa1296x() {
+        return ra1296x;
+    }
+
+    public void setRa1296x(String ra1296x) {
+        this.ra1296x = ra1296x;
+        notifyChange(BR.ra1296x);
+    }
+
+    @Bindable
+    public String getRa13() {
+        return ra13;
+    }
+
+    public void setRa13(String ra13) {
+        this.ra13 = ra13;
+        notifyChange(BR.ra13);
+    }
+
+    @Bindable
+    public String getRa13x() {
+        return ra13x;
+    }
+
+    public void setRa13x(String ra13x) {
+        this.ra13x = ra13x;
+        notifyChange(BR.ra13x);
+    }
+
+    @Bindable
+    public String getRa14() {
+        return ra14;
+    }
+
+    public void setRa14(String ra14) {
+        this.ra14 = ra14;
+        notifyChange(BR.ra14);
+    }
+
+    @Bindable
+    public String getRa15() {
+        return ra15;
+    }
+
+    public void setRa15(String ra15) {
+        this.ra15 = ra15;
+        notifyChange(BR.ra15);
+    }
+
+    @Bindable
+    public String getRa16() {
+        return ra16;
+    }
+
+    public void setRa16(String ra16) {
+        this.ra16 = ra16;
+        notifyChange(BR.ra16);
+    }
+
+    @Bindable
+    public String getRa17_a() {
+        return ra17_a;
+    }
+
+    public void setRa17_a(String ra17_a) {
+        this.ra17_a = ra17_a;
+        notifyChange(BR.ra17_a);
+    }
+
+    @Bindable
+    public String getRa17_b() {
+        return ra17_b;
+    }
+
+    public void setRa17_b(String ra17_b) {
+        this.ra17_b = ra17_b;
+        notifyChange(BR.ra17_b);
+    }
+
+    @Bindable
+    public String getRa17_c() {
+        return ra17_c;
+    }
+
+    public void setRa17_c(String ra17_c) {
+        this.ra17_c = ra17_c;
+        notifyChange(BR.ra17_c);
+    }
+
+    @Bindable
+    public String getRa17_d() {
+        return ra17_d;
+    }
+
+    public void setRa17_d(String ra17_d) {
+        this.ra17_d = ra17_d;
+        notifyChange(BR.ra17_d);
+    }
+
+    @Bindable
+    public String getRa18() {
+        return ra18;
+    }
+
+    public void setRa18(String ra18) {
+        this.ra18 = ra18;
+        notifyChange(BR.ra18);
+    }
+
+    @Bindable
+    public String getRb_uc() {
+        return rb_uc;
+    }
+
+    public void setRb_uc(String rb_uc) {
+        this.rb_uc = rb_uc;
+        notifyChange(BR.rb_uc);
+    }
+
+    @Bindable
+    public String getRb_vil() {
+        return rb_vil;
+    }
+
+    public void setRb_vil(String rb_vil) {
+        this.rb_vil = rb_vil;
+        notifyChange(BR.rb_vil);
+    }
+
+    @Bindable
+    public String getRb_hno() {
+        return rb_hno;
+    }
+
+    public void setRb_hno(String rb_hno) {
+        this.rb_hno = rb_hno;
+        notifyChange(BR.rb_hno);
+    }
+
+    @Bindable
+    public String getRb_sid() {
+        return rb_sid;
+    }
+
+    public void setRb_sid(String rb_sid) {
+        this.rb_sid = rb_sid;
+        notifyChange(BR.rb_sid);
+    }
+
+    @Bindable
+    public String getRb_ufn() {
+        return rb_ufn;
+    }
+
+    public void setRb_ufn(String rb_ufn) {
+        this.rb_ufn = rb_ufn;
+        notifyChange(BR.rb_ufn);
+    }
+
+    @Bindable
+    public String getRb01() {
+        return rb01;
+    }
+
+    public void setRb01(String rb01) {
+        this.rb01 = rb01;
+        notifyChange(BR.rb01);
+    }
+
+    @Bindable
+    public String getRb02() {
+        return rb02;
+    }
+
+    public void setRb02(String rb02) {
+        this.rb02 = rb02;
+        notifyChange(BR.rb02);
+    }
+
+    @Bindable
+    public String getRb03() {
+        return rb03;
+    }
+
+    public void setRb03(String rb03) {
+        this.rb03 = rb03;
+        notifyChange(BR.rb03);
+    }
+
+    @Bindable
+    public String getRb04() {
+        return rb04;
+    }
+
+    public void setRb04(String rb04) {
+        this.rb04 = rb04;
+        notifyChange(BR.rb04);
+    }
+
+    @Bindable
+    public String getRb05() {
+        return rb05;
+    }
+
+    public void setRb05(String rb05) {
+        this.rb05 = rb05;
+        notifyChange(BR.rb05);
+    }
+
+    @Bindable
+    public String getRb06() {
+        return rb06;
+    }
+
+    public void setRb06(String rb06) {
+        this.rb06 = rb06;
+        Log.d(TAG, "setRb06: " + this.rb06);
+        notifyChange(BR.rb06);
+    }
+
+    @Bindable
+    public String getRb07() {
+        return rb07;
+    }
+
+    public void setRb07(String rb07) {
+        this.rb07 = rb07;
+        Log.d(TAG, "setRb07: " + this.rb07);
+        notifyChange(BR.rb07);
+    }
+
+    @Bindable
+    public String getRb08() {
+        return rb08;
+    }
+
+    public void setRb08(String rb08) {
+        this.rb08 = rb08;
+        notifyChange(BR.rb08);
+    }
+
+    @Bindable
+    public String getRb09() {
+        return rb09;
+    }
+
+    public void setRb09(String rb09) {
+        this.rb09 = rb09;
+        notifyChange(BR.rb09);
+    }
+
+    private synchronized void notifyChange(int propertyId) {
+        if (propertyChangeRegistry == null) {
+            propertyChangeRegistry = new PropertyChangeRegistry();
+        }
+        propertyChangeRegistry.notifyChange(this, propertyId);
+    }
+
+    @Override
+    public synchronized void addOnPropertyChangedCallback(OnPropertyChangedCallback callback) {
+        if (propertyChangeRegistry == null) {
+            propertyChangeRegistry = new PropertyChangeRegistry();
+        }
+        propertyChangeRegistry.add(callback);
+
+    }
+
+    @Override
+    public synchronized void removeOnPropertyChangedCallback(OnPropertyChangedCallback callback) {
+        if (propertyChangeRegistry != null) {
+            propertyChangeRegistry.remove(callback);
+        }
+    }
+
     public Form Hydrate(Cursor cursor) {
         this.id = cursor.getString(cursor.getColumnIndex(FormsTable.COLUMN_ID));
         this.uid = cursor.getString(cursor.getColumnIndex(FormsTable.COLUMN_UID));
         this.userName = cursor.getString(cursor.getColumnIndex(FormsTable.COLUMN_USERNAME));
         this.sysDate = cursor.getString(cursor.getColumnIndex(FormsTable.COLUMN_SYSDATE));
-        this.mrNo = cursor.getString(cursor.getColumnIndex(FormsTable.COLUMN_MR_NUMBER));
+        this.hdssId = cursor.getString(cursor.getColumnIndex(FormsTable.COLUMN_HDSSID));
         this.assessNo = cursor.getString(cursor.getColumnIndex(FormsTable.COLUMN_ASSESMENT_NO));
         this.infantName = cursor.getString(cursor.getColumnIndex(FormsTable.COLUMN_INFANT_NAME));
         this.deviceId = cursor.getString(cursor.getColumnIndex(FormsTable.COLUMN_DEVICEID));
@@ -826,6 +938,7 @@ public class Form extends BaseObservable {
 
         } catch (JSONException e) {
             e.printStackTrace();
+            Log.d(TAG, "s2toString: " + e.getMessage());
             return "\"error\":, \"" + e.getMessage() + "\"";
         }
         return json.toString();
@@ -921,8 +1034,8 @@ public class Form extends BaseObservable {
             json.put(FormsTable.COLUMN_UID, this.uid);
             json.put(FormsTable.COLUMN_USERNAME, this.userName);
             json.put(FormsTable.COLUMN_SYSDATE, this.sysDate);
-            json.put(FormsTable.COLUMN_ASSESMENT_NO, this.mrNo);
-            json.put(FormsTable.COLUMN_MR_NUMBER, this.mrNo);
+            json.put(FormsTable.COLUMN_ASSESMENT_NO, this.hdssId);
+            json.put(FormsTable.COLUMN_HDSSID, this.hdssId);
             json.put(FormsTable.COLUMN_ASSESMENT_NO, this.assessNo);
             json.put(FormsTable.COLUMN_INFANT_NAME, this.infantName);
 //            json.put(FormsTable.COLUMN_TSF305, this.tsf305);
@@ -947,4 +1060,6 @@ public class Form extends BaseObservable {
             return null;
         }
     }
+
+
 }

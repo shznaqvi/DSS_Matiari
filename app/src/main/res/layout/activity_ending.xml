@@ -17,19 +17,23 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@drawable/app_bg_gray"
         android:orientation="vertical">
 
 
         <!-- CUSTOM TOOLBAR -->
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
+            style="@null"
             android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:layoutDirection="ltr"
-            android:textAlignment="center"
-            app:layout_scrollFlags="scroll|enterAlways"
-            app:popupTheme="@style/AppTheme.PopupOverlay"
-            app:titleTextColor="@color/black" />
+            android:layout_height="wrap_content"
+            android:background="@color/colorPrimary"
+            android:minHeight="?attr/actionBarSize"
+            android:theme="@style/ToolbarTheme"
+            app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+            app:subtitleTextAppearance="@style/Toolbar.SubtitleText"
+            app:title="@string/istatus"
+            app:titleTextAppearance="@style/Toolbar.TitleText" />
 
         <ScrollView
             android:layout_width="match_parent"
@@ -61,7 +65,6 @@
                             android:orientation="horizontal">
 
                             <TextView
-                                style="@style/quesNum"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:text="@string/istatus" />
@@ -71,43 +74,43 @@
 
 
                         <RadioGroup
-                            android:id="@+id/ra11"
+                            android:id="@+id/istatus"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content">
 
                             <RadioButton
-                                android:id="@+id/ra11a"
+                                android:id="@+id/istatusa"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:text="@string/ra11a" />
 
                             <RadioButton
-                                android:id="@+id/ra11b"
+                                android:id="@+id/istatusb"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:text="@string/ra11b" />
 
                             <RadioButton
-                                android:id="@+id/ra11c"
+                                android:id="@+id/istatusc"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:text="@string/ra11c" />
 
                             <RadioButton
-                                android:id="@+id/ra11d"
+                                android:id="@+id/istatusd"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:text="@string/ra11d" />
 
                             <EditText
-                                android:id="@+id/ra11x"
+                                android:id="@+id/istatusdx"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:digits="AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz0123456789,. "
                                 android:hint="@string/ra11"
                                 android:tag="ra11"
-                                android:text='@{ra11d.checked ? ra11x.getText().toString() : ""}'
-                                android:visibility='@{ra11d.checked? View.VISIBLE : View.GONE}' />
+                                android:text='@{istatusd.checked ? istatusdx.getText().toString() : ""}'
+                                android:visibility='@{istatusd.checked? View.VISIBLE : View.GONE}' />
                         </RadioGroup>
 
                     </LinearLayout>

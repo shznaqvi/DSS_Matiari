@@ -158,10 +158,11 @@
     <string name="hello_world">Hello Square World!</string>
     <string name="tsf40298">Don\'t Know</string>
     <string name="hold_child">Please hold child <b>%1$s</b> in waiting area and check temperature after 30 minutes.</string>
-    <string name="istatusb">Incomplete</string>
-    <string name="istatusa">Complete</string>
-    <string name="istatusc">On-Hold</string>
-    <string name="istatus">Interview Status</string>
+    <string name="istatus">Household Visit Status</string>
+    <string name="istatusa">Completed</string>
+    <string name="istatusb">Locked / no eligible respondent </string>
+    <string name="istatusc">Refused </string>
+    <string name="istatusd">Other (specify)</string>
     <string name="btnDownload">Download Data</string>
 
     <!--Z-Score-->

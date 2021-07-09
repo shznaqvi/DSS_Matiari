@@ -14,13 +14,12 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
-import edu.aku.hassannaqvi.dss_matiari.MainActivity;
 import edu.aku.hassannaqvi.dss_matiari.R;
 import edu.aku.hassannaqvi.dss_matiari.contracts.TableContracts;
 import edu.aku.hassannaqvi.dss_matiari.core.MainApp;
 import edu.aku.hassannaqvi.dss_matiari.database.DatabaseHelper;
 import edu.aku.hassannaqvi.dss_matiari.databinding.ActivitySectionABinding;
-import edu.aku.hassannaqvi.dss_matiari.models.Form;
+import edu.aku.hassannaqvi.dss_matiari.ui.MainActivity;
 
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.form;
 
@@ -35,6 +34,7 @@ public class SectionAActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         bi = DataBindingUtil.setContentView(this, R.layout.activity_section_a);
         bi.setCallback(this);
+        bi.setForm(form);
 
         setTitle(R.string.sectionA_mainheading);
         setImmersive(true);
@@ -44,6 +44,7 @@ public class SectionAActivity extends AppCompatActivity {
 
     public void btnContinue(View view) {
         if (!formValidation()) return;
+        if (!insertNewRecord()) return;
         saveDraft();
         if (updateDB()) {
             finish();
@@ -53,9 +54,24 @@ public class SectionAActivity extends AppCompatActivity {
         }
     }
 
+    private boolean insertNewRecord() {
+        if (MainApp.form.isExist()) return true;
+        db = MainApp.appInfo.getDbHelper();
+        long rowId = db.addForm(form);
+        form.setId(String.valueOf(rowId));
+        if (rowId > 0) {
+            form.setUid(form.getDeviceId() + form.getId());
+            db.updatesFormColumn(TableContracts.FormsTable.COLUMN_UID, form.getUid());
+            return true;
+        } else {
+            Toast.makeText(this, "Updating Database... ERROR!", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+    }
+
     private boolean updateDB() {
         DatabaseHelper db = MainApp.appInfo.getDbHelper();
-        int updcount = db.updatesFormColumn(TableContracts.FormsTable.COLUMN_S2, form.s2toString());
+        int updcount = db.updatesFormColumn(TableContracts.FormsTable.COLUMN_S1, form.s1toString());
         if (updcount == 1) {
             return true;
         } else {
@@ -66,7 +82,7 @@ public class SectionAActivity extends AppCompatActivity {
 
     private void saveDraft() {
 
-        MainApp.form = new Form();
+        //  MainApp.form = new Form();
 
         form.setUserName(MainApp.user.getUserName());
         form.setSysDate(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.ENGLISH).format(new Date().getTime()));
@@ -77,7 +93,7 @@ public class SectionAActivity extends AppCompatActivity {
 
         form.setRa01(bi.ra01.getText().toString());
 
-        form.setRa02(bi.ra02.getText().toString());
+    /*    form.setRa02(bi.ra02.getText().toString());
 
         form.setRa04(bi.ra04.getText().toString());
 
@@ -116,6 +132,7 @@ public class SectionAActivity extends AppCompatActivity {
                 : "-1");
 
         form.setRa13x(bi.ra13x.getText().toString());
+*/
         form.setRa14(bi.ra14.getText().toString());
 
         form.setRa15(bi.ra15.getText().toString());
@@ -158,4 +175,6 @@ public class SectionAActivity extends AppCompatActivity {
         finish();
         startActivity(new Intent(this, MainActivity.class));
     }
+
+
 }

@@ -2,6 +2,7 @@ package edu.aku.hassannaqvi.dss_matiari.ui.sections;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -30,7 +31,9 @@ public class SectionBActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         bi = DataBindingUtil.setContentView(this, R.layout.activity_section_b);
         bi.setCallback(this);
-
+        bi.setForm(form);
+        Log.d(TAG, "onCreate: 6 " + form.getRb06());
+        Log.d(TAG, "onCreate: 7 " + form.getRb07());
         setTitle(R.string.sectionB_mainheading);
         setImmersive(true);
 
@@ -50,7 +53,7 @@ public class SectionBActivity extends AppCompatActivity {
 
     private void saveDraft() {
 
-        form.setRb_uc(bi.rbUc.getText().toString());
+/*        form.setRb_uc(bi.rbUc.getText().toString());
 
         form.setRb_vil(bi.rbVil.getText().toString());
 
@@ -58,7 +61,7 @@ public class SectionBActivity extends AppCompatActivity {
 
         form.setRb_sid(bi.rbSid.getText().toString());
 
-        form.setRb_ufn(bi.rbUfn.getText().toString());
+        form.setRb_ufn(bi.rbUfn.getText().toString());*/
 
         form.setRb01(bi.rb01.getText().toString());
 
@@ -70,12 +73,12 @@ public class SectionBActivity extends AppCompatActivity {
 
         form.setRb05(bi.rb05.getText().toString());
 
-        form.setRb06(bi.rb0602.isChecked() ? "02"
-                : bi.rb0603.isChecked() ? "03"
+        form.setRb06(bi.rb0602.isChecked() ? "2"
+                : bi.rb0603.isChecked() ? "3"
                 : "-1");
 
-        form.setRb07(bi.rb0701.isChecked() ? "01"
-                : bi.rb0702.isChecked() ? "02"
+        form.setRb07(bi.rb0701.isChecked() ? "1"
+                : bi.rb0702.isChecked() ? "2"
                 : "-1");
 
         form.setRb08(bi.rb08.getText().toString());
@@ -86,12 +89,8 @@ public class SectionBActivity extends AppCompatActivity {
     }
 
     private boolean updateDB() {
-        db = MainApp.appInfo.getDbHelper();
-        long updcount = db.addForm(form);
-        form.setId(String.valueOf(updcount));
-        if (updcount > 0) {
-            form.setUid(form.getDeviceId() + form.getId());
-            db.updatesFormColumn(TableContracts.FormsTable.COLUMN_UID, form.getUid());
+        int updcount = db.updatesFormColumn(TableContracts.FormsTable.COLUMN_S2, form.s2toString());
+        if (updcount == 1) {
             return true;
         } else {
             Toast.makeText(this, "Updating Database... ERROR!", Toast.LENGTH_SHORT).show();

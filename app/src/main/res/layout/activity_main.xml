@@ -8,7 +8,7 @@
 
         <variable
             name="callback"
-            type="edu.aku.hassannaqvi.dss_matiari.MainActivity" />
+            type="edu.aku.hassannaqvi.dss_matiari.ui.MainActivity" />
     </data>
 
     <LinearLayout
@@ -271,7 +271,7 @@
                         android:orientation="horizontal">
 
                         <TextView
-                            android:id="@+id/sec1"
+                            android:id="@+id/ident"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_margin="4dp"
@@ -280,12 +280,12 @@
                             android:onClick="sectionPress"
                             android:padding="8dp"
                             android:shadowRadius="8"
-                            android:text="Section 1"
+                            android:text="Identification"
                             android:textColor="@color/colorAccentLight"
                             android:textSize="14sp" />
 
                         <TextView
-                            android:id="@+id/sec2"
+                            android:id="@+id/seca"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_margin="4dp"
@@ -294,13 +294,12 @@
                             android:onClick="sectionPress"
                             android:padding="8dp"
                             android:shadowRadius="8"
-                            android:text="Section 2"
+                            android:text="Section A"
                             android:textColor="@color/colorAccentLight"
                             android:textSize="14sp" />
 
                         <TextView
-                            android:visibility="gone"
-                            android:id="@+id/sec3"
+                            android:id="@+id/secb"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_margin="4dp"
@@ -309,7 +308,7 @@
                             android:onClick="sectionPress"
                             android:padding="8dp"
                             android:shadowRadius="8"
-                            android:text="Section 3"
+                            android:text="Section B"
                             android:textColor="@color/colorAccentLight"
                             android:textSize="14sp" />
                     </LinearLayout>

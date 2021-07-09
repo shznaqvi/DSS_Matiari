@@ -17,9 +17,18 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".ui.sections.IdentificationActivity"></activity>
-        <activity android:name=".ui.sections.SectionBActivity" />
-        <activity android:name=".ui.sections.SectionAActivity" />
+        <activity
+            android:name=".ui.sections.IdentificationActivity"
+            android:theme="@style/AppThemeEnglish1"
+            android:windowSoftInputMode="adjustResize|stateHidden" />
+        <activity
+            android:name=".ui.sections.SectionBActivity"
+            android:theme="@style/AppThemeEnglish1"
+            android:windowSoftInputMode="adjustResize|stateHidden" />
+        <activity
+            android:name=".ui.sections.SectionAActivity"
+            android:theme="@style/AppThemeEnglish1"
+            android:windowSoftInputMode="adjustResize|stateHidden" />
         <activity
             android:name=".ui.sections.Section2Activity"
             android:theme="@style/AppThemeEnglish1"
@@ -39,7 +48,7 @@
         </activity>
         <activity android:name=".ui.SyncActivity" />
         <activity
-            android:name=".MainActivity"
+            android:name=".ui.MainActivity"
             android:windowSoftInputMode="adjustResize|stateHidden" />
         <activity
             android:name=".ui.EndingActivity"

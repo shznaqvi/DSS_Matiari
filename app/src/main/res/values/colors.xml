@@ -17,7 +17,7 @@
     <!-- Standard App Colors -->
     <color name="grayDark">#5e5e5e</color>
     <color name="grayDark1">#696969</color>
-    <color name="grayLight">#efefff</color>
+    <color name="grayLight">#efefef</color>
     <color name="greenLight">#d600ef00</color>
     <color name="redLight">#d6ef0000</color>
     <color name="gray">#898989</color>
