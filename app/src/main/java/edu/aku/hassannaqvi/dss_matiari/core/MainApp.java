@@ -15,6 +15,7 @@ import java.util.List;
 import edu.aku.hassannaqvi.dss_matiari.BuildConfig;
 import edu.aku.hassannaqvi.dss_matiari.R;
 import edu.aku.hassannaqvi.dss_matiari.models.Form;
+import edu.aku.hassannaqvi.dss_matiari.models.MWRA;
 import edu.aku.hassannaqvi.dss_matiari.models.Users;
 
 
@@ -34,6 +35,7 @@ public class MainApp extends Application {
     public static File sdDir;
     public static String[] downloadData;
     public static Form form;
+    public static MWRA mwra;
     public static String DeviceURL = "devices.php";
     public static AppInfo appInfo;
     public static Users user;

@@ -34,6 +34,27 @@ object CreateTable {
             + " );"
             )
 
+    const val SQL_CREATE_MWRA = ("CREATE TABLE "
+            + MWRATable.TABLE_NAME + "("
+            + MWRATable.COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
+            + MWRATable.COLUMN_PROJECT_NAME + " TEXT,"
+            + MWRATable.COLUMN_UID + " TEXT,"
+            + MWRATable.COLUMN_UUID + " TEXT,"
+            + MWRATable.COLUMN_USERNAME + " TEXT,"
+            + MWRATable.COLUMN_SYSDATE + " TEXT,"
+            + MWRATable.COLUMN_ISTATUS + " TEXT,"
+            + MWRATable.COLUMN_DEVICEID + " TEXT,"
+            + MWRATable.COLUMN_DEVICETAGID + " TEXT,"
+            + MWRATable.COLUMN_SYNCED + " TEXT,"
+            + MWRATable.COLUMN_SYNCED_DATE + " TEXT,"
+            + MWRATable.COLUMN_APPVERSION + " TEXT,"
+            + MWRATable.COLUMN_ASSESMENT_NO + " TEXT,"
+            + MWRATable.COLUMN_HDSSID + " TEXT,"
+            + MWRATable.COLUMN_S1 + " TEXT,"
+            + MWRATable.COLUMN_S2 + " TEXT"
+            + " );"
+            )
+
 
     const val SQL_CREATE_USERS = ("CREATE TABLE " + UsersTable.TABLE_NAME + "("
             + UsersTable.COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
