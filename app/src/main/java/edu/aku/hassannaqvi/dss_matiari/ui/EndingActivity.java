@@ -63,7 +63,7 @@ public class EndingActivity extends AppCompatActivity {
 
             cleanupProcess();
             finish();
-            Intent i = new Intent(this, MainApp.class);
+            Intent i = new Intent(this, MainActivity.class);
             startActivity(i);
             Toast.makeText(this, "Entry Complete", Toast.LENGTH_SHORT).show();
 
