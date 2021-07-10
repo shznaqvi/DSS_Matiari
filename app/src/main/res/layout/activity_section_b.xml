@@ -121,8 +121,8 @@
                         <EditText
                             android:id="@+id/rb02"
                             android:layout_width="match_parent"
-
                             android:layout_height="wrap_content"
+                            android:digits="abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ"
                             android:hint="@string/rb02"
                             android:text="@={form.rb02}" />
                     </LinearLayout>
@@ -160,8 +160,8 @@
                         <EditText
                             android:id="@+id/rb03"
                             android:layout_width="match_parent"
-
                             android:layout_height="wrap_content"
+                            android:digits="abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ"
                             android:hint="@string/rb03"
                             android:text="@={form.rb03}" />
                     </LinearLayout>
@@ -239,12 +239,17 @@
                                 android:text="@string/rb05" />
                         </LinearLayout>
 
-                        <EditText
+                        <com.edittextpicker.aliazaz.EditTextPicker
                             android:id="@+id/rb05"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:hint="@string/rb05"
-                            android:text="@={form.rb05}" />
+                            android:gravity="center"
+                            android:hint="##"
+                            android:inputType="number"
+                            android:text="@={form.rb05}"
+                            app:maxValue="49"
+                            app:minValue="15"
+                            app:type="range" />
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
 
@@ -383,12 +388,14 @@
                                 android:text="@string/rb08" />
                         </LinearLayout>
 
-                        <EditText
+                        <io.blackbox_vision.datetimepickeredittext.view.DatePickerEditText
                             android:id="@+id/rb08"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:hint="@string/rb08"
-                            android:text="@={form.rb08}" />
+                            android:gravity="center"
+                            android:hint="YYYY-MM-DD"
+                            android:text="@={form.rb08}"
+                            app:dateFormat="yyyy-MM-dd" />
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
 
