@@ -270,6 +270,7 @@
                             android:id="@+id/ra14"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:digits="abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ"
                             android:hint="@string/ra14"
                             android:text="@={form.ra14}" />
                     </LinearLayout>
@@ -308,6 +309,7 @@
                             android:id="@+id/ra15"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:digits="abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ"
                             android:hint="@string/ra15"
                             android:text="@={form.ra15}" />
                     </LinearLayout>
@@ -380,12 +382,18 @@
                                 android:text="@string/ra17_a" />
                         </LinearLayout>
 
-                        <EditText
+                        <com.edittextpicker.aliazaz.EditTextPicker
                             android:id="@+id/ra17_a"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:hint="@string/ra17_a"
-                            android:text="@={form.ra17_a}" />
+                            android:gravity="center"
+                            android:hint="##"
+                            android:inputType="number"
+                            android:maxLength="2"
+                            android:text="@={form.ra17_a}"
+                            app:maxValue="20"
+                            app:minValue="0"
+                            app:type="range" />
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
 
@@ -422,7 +430,8 @@
                             android:id="@+id/ra17_b"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:hint="@string/ra17_b"
+                            android:gravity="center"
+                            android:hint="##"
                             android:inputType="number"
                             android:maxLength="2"
                             android:text="@={form.ra17_b}"
@@ -465,11 +474,11 @@
                             android:id="@+id/ra17_c"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:hint="@string/a17_c"
+                            android:gravity="center"
+                            android:hint="##"
                             android:inputType="number"
                             android:maxLength="2"
                             android:text="@={form.ra17_c}"
-
                             app:maxValue="20"
                             app:minValue="0"
                             app:type="range" />
@@ -509,7 +518,8 @@
                             android:id="@+id/ra17_d"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:hint="@string/ra17_d"
+                            android:gravity="center"
+                            android:hint="##"
                             android:inputType="number"
                             android:maxLength="2"
                             android:text="@={form.ra17_d}"
@@ -552,12 +562,12 @@
                             android:id="@+id/ra18"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:hint="@string/ra18"
+                            android:gravity="center"
+                            android:hint="##"
                             android:inputType="number"
                             android:text="@={form.ra18}"
                             app:maxValue="9"
                             app:minValue="0"
-
                             app:type="range" />
                     </LinearLayout>
                 </androidx.cardview.widget.CardView><!--EndButton LinearLayout-->
