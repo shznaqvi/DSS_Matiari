@@ -246,6 +246,7 @@
                             android:gravity="center"
                             android:hint="##"
                             android:inputType="number"
+                            android:maxLength="2"
                             android:text="@={form.rb05}"
                             app:maxValue="49"
                             app:minValue="15"
