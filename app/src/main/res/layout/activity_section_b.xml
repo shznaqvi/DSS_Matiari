@@ -6,8 +6,8 @@
         <import type="android.view.View" />
 
         <variable
-            name="form"
-            type="edu.aku.hassannaqvi.dss_matiari.models.Form" />
+            name="mwra"
+            type="edu.aku.hassannaqvi.dss_matiari.models.MWRA" />
 
         <variable
             name="callback"
@@ -63,26 +63,30 @@
                             android:orientation="horizontal">
 
                             <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:text="@string/rb01" />
+
+                            <TextView
                                 style="@style/quesNum"
                                 android:layout_width="wrap_content"
                                 android:layout_height="match_parent"
                                 android:text="@string/Q_rb01" />
 
-                            <TextView
-                                android:layout_width="0dp"
-                                android:layout_height="match_parent"
-                                android:layout_weight="1"
-                                android:text="@string/rb01" />
+
                         </LinearLayout>
 
                         <com.edittextpicker.aliazaz.EditTextPicker
                             android:id="@+id/rb01"
                             android:layout_width="match_parent"
+                            android:enabled="false"
                             android:layout_height="wrap_content"
                             android:hint="@string/rb01"
                             android:inputType="number"
+                            android:gravity="center_vertical|center_horizontal"
                             android:maxLength="2"
-                            android:text="@={form.rb01}"
+                            android:text="@={mwra.rb01}"
                             app:maxValue="10"
                             app:minValue="1"
                             app:type="range" />
@@ -106,16 +110,18 @@
                             android:orientation="horizontal">
 
                             <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:text="@string/rb02" />
+
+                            <TextView
                                 style="@style/quesNum"
                                 android:layout_width="wrap_content"
                                 android:layout_height="match_parent"
                                 android:text="@string/Q_rb02" />
 
-                            <TextView
-                                android:layout_width="0dp"
-                                android:layout_height="match_parent"
-                                android:layout_weight="1"
-                                android:text="@string/rb02" />
+
                         </LinearLayout>
 
                         <EditText
@@ -124,7 +130,7 @@
                             android:layout_height="wrap_content"
                             android:digits="abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ"
                             android:hint="@string/rb02"
-                            android:text="@={form.rb02}" />
+                            android:text="@={mwra.rb02}" />
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
 
@@ -145,16 +151,18 @@
                             android:orientation="horizontal">
 
                             <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:text="@string/rb03" />
+
+                            <TextView
                                 style="@style/quesNum"
                                 android:layout_width="wrap_content"
                                 android:layout_height="match_parent"
                                 android:text="@string/Q_rb03" />
 
-                            <TextView
-                                android:layout_width="0dp"
-                                android:layout_height="match_parent"
-                                android:layout_weight="1"
-                                android:text="@string/rb03" />
+
                         </LinearLayout>
 
                         <EditText
@@ -163,7 +171,7 @@
                             android:layout_height="wrap_content"
                             android:digits="abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ"
                             android:hint="@string/rb03"
-                            android:text="@={form.rb03}" />
+                            android:text="@={mwra.rb03}" />
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
 
@@ -184,16 +192,18 @@
                             android:orientation="horizontal">
 
                             <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:text="@string/rb04" />
+
+                            <TextView
                                 style="@style/quesNum"
                                 android:layout_width="wrap_content"
                                 android:layout_height="match_parent"
                                 android:text="@string/Q_rb04" />
 
-                            <TextView
-                                android:layout_width="0dp"
-                                android:layout_height="match_parent"
-                                android:layout_weight="1"
-                                android:text="@string/rb04" />
+
                         </LinearLayout>
 
                         <io.blackbox_vision.datetimepickeredittext.view.DatePickerEditText
@@ -204,7 +214,7 @@
                             android:layout_marginBottom="0dp"
                             android:gravity="center"
                             android:hint="YYYY-MM-DD"
-                            android:text="@={form.rb04}"
+                            android:text="@={mwra.rb04}"
 
                             app:dateFormat="yyyy-MM-dd" />
                     </LinearLayout>
@@ -227,16 +237,17 @@
                             android:orientation="horizontal">
 
                             <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:text="@string/rb05" />
+
+                            <TextView
                                 style="@style/quesNum"
                                 android:layout_width="wrap_content"
                                 android:layout_height="match_parent"
                                 android:text="@string/Q_rb05" />
 
-                            <TextView
-                                android:layout_width="0dp"
-                                android:layout_height="match_parent"
-                                android:layout_weight="1"
-                                android:text="@string/rb05" />
                         </LinearLayout>
 
                         <com.edittextpicker.aliazaz.EditTextPicker
@@ -247,7 +258,7 @@
                             android:hint="##"
                             android:inputType="number"
                             android:maxLength="2"
-                            android:text="@={form.rb05}"
+                            android:text="@={mwra.rb05}"
                             app:maxValue="49"
                             app:minValue="15"
                             app:type="range" />
@@ -271,16 +282,18 @@
                             android:orientation="horizontal">
 
                             <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:text="@string/rb06" />
+
+                            <TextView
                                 style="@style/quesNum"
                                 android:layout_width="wrap_content"
                                 android:layout_height="match_parent"
                                 android:text="@string/Q_rb06" />
 
-                            <TextView
-                                android:layout_width="0dp"
-                                android:layout_height="match_parent"
-                                android:layout_weight="1"
-                                android:text="@string/rb06" />
+
                         </LinearLayout>
 
                         <RadioGroup
@@ -292,16 +305,16 @@
                                 android:id="@+id/rb0602"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:checked='@{form.rb06.equals("2")?true:false}'
-                                android:onClick='@{()->form.setRb06("2")}'
+                                android:checked='@{mwra.rb06.equals("2")?true:false}'
+                                android:onClick='@{()->mwra.setRb06("2")}'
                                 android:text="@string/rb0602" />
 
                             <RadioButton
                                 android:id="@+id/rb0603"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:checked='@{form.rb06.equals("3")?true:false}'
-                                android:onClick='@{()->form.setRb06("3")}'
+                                android:checked='@{mwra.rb06.equals("3")?true:false}'
+                                android:onClick='@{()->mwra.setRb06("3")}'
                                 android:text="@string/rb0603" />
                         </RadioGroup>
                     </LinearLayout>
@@ -324,16 +337,18 @@
                             android:orientation="horizontal">
 
                             <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:text="@string/rb07" />
+
+                            <TextView
                                 style="@style/quesNum"
                                 android:layout_width="wrap_content"
                                 android:layout_height="match_parent"
                                 android:text="@string/Q_rb07" />
 
-                            <TextView
-                                android:layout_width="0dp"
-                                android:layout_height="match_parent"
-                                android:layout_weight="1"
-                                android:text="@string/rb07" />
+
                         </LinearLayout>
 
                         <RadioGroup
@@ -345,16 +360,16 @@
                                 android:id="@+id/rb0701"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:checked='@{form.getRb07().equals("1")}'
-                                android:onClick='@{()->form.setRb07("1")}'
+                                android:checked='@{mwra.getRb07().equals("1")}'
+                                android:onClick='@{()->mwra.setRb07("1")}'
                                 android:text="@string/rb0701" />
 
                             <RadioButton
                                 android:id="@+id/rb0702"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:checked='@{form.getRb07().equals("2")}'
-                                android:onClick='@{()->form.setRb07("2")}'
+                                android:checked='@{mwra.getRb07().equals("2")}'
+                                android:onClick='@{()->mwra.setRb07("2")}'
                                 android:text="@string/rb0702" />
                         </RadioGroup>
                     </LinearLayout>
@@ -377,16 +392,18 @@
                             android:orientation="horizontal">
 
                             <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:text="@string/rb08" />
+
+                            <TextView
                                 style="@style/quesNum"
                                 android:layout_width="wrap_content"
                                 android:layout_height="match_parent"
                                 android:text="@string/Q_rb08" />
 
-                            <TextView
-                                android:layout_width="0dp"
-                                android:layout_height="match_parent"
-                                android:layout_weight="1"
-                                android:text="@string/rb08" />
+
                         </LinearLayout>
 
                         <io.blackbox_vision.datetimepickeredittext.view.DatePickerEditText
@@ -395,7 +412,7 @@
                             android:layout_height="wrap_content"
                             android:gravity="center"
                             android:hint="YYYY-MM-DD"
-                            android:text="@={form.rb08}"
+                            android:text="@={mwra.rb08}"
                             app:dateFormat="yyyy-MM-dd" />
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
@@ -417,16 +434,18 @@
                             android:orientation="horizontal">
 
                             <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:text="@string/rb09" />
+
+                            <TextView
                                 style="@style/quesNum"
                                 android:layout_width="wrap_content"
                                 android:layout_height="match_parent"
                                 android:text="@string/Q_rb09" />
 
-                            <TextView
-                                android:layout_width="0dp"
-                                android:layout_height="match_parent"
-                                android:layout_weight="1"
-                                android:text="@string/rb09" />
+
                         </LinearLayout>
 
                         <io.blackbox_vision.datetimepickeredittext.view.DatePickerEditText
@@ -435,7 +454,7 @@
                             android:layout_height="wrap_content"
                             android:gravity="center"
                             android:hint="YYYY-MM-DD"
-                            android:text="@={form.rb09}"
+                            android:text="@={mwra.rb09}"
                             app:dateFormat="yyyy-MM-dd" />
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
@@ -444,8 +463,8 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="end"
-                    android:layout_marginTop="24dp"
+                    android:layout_margin="24dp"
+                    android:gravity="end"
                     android:orientation="horizontal">
 
                     <Button
@@ -453,7 +472,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="12dp"
-                        android:background="@color/redOverlay"
+                        android:background="@color/gray"
                         android:onClick="btnEnd"
                         android:text="Cancel"
                         android:textColor="@color/white" />
@@ -463,10 +482,10 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="12dp"
-                        android:background="@color/greenLight"
+                        android:background="@color/colorAccent"
                         android:onClick="btnContinue"
                         android:text="Save"
-                        android:textColor="@color/white" />
+                        android:textColor="@color/black" />
                 </LinearLayout>
             </LinearLayout>
         </ScrollView>

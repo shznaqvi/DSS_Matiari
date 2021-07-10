@@ -12,6 +12,8 @@ import org.apache.commons.lang3.StringUtils;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.time.LocalDate;
+
 import edu.aku.hassannaqvi.dss_matiari.BR;
 import edu.aku.hassannaqvi.dss_matiari.contracts.TableContracts.MWRATable;
 import edu.aku.hassannaqvi.dss_matiari.core.MainApp;
@@ -20,7 +22,11 @@ public class MWRA extends BaseObservable implements Observable {
 
     private final String TAG = "MWRA";
     private transient PropertyChangeRegistry propertyChangeRegistry = new PropertyChangeRegistry();
+
+    //Not saving in DB
+    private final LocalDate localDate = null;
     private boolean exist = false;
+    private boolean expanded;
 
     // APP VARIABLES
     private String projectName = MainApp.PROJECT_NAME;
@@ -519,4 +525,13 @@ public class MWRA extends BaseObservable implements Observable {
     }
 
 
+    @Bindable
+    public boolean isExpanded() {
+        return expanded;
+    }
+
+    public void setExpanded(boolean expanded) {
+        this.expanded = expanded;
+        notifyChange(BR.expanded);
+    }
 }

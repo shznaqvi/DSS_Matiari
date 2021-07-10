@@ -50,6 +50,12 @@ public class MainApp extends Application {
     public static long TWO_MINUTES = 1000 * 60 * 2;
     public static boolean permissionCheck = false;
     public static int idType = 0;
+    public static List<MWRA> mwraList;
+    public static String hdssid;
+    public static int mwraCount = 0;
+    public static boolean fmComplete;
+    public static int selectedFemale;
+    public static int mwraCountComplete = 0;
 
     public static void hideSystemUI(View decorView) {
         // Enables regular immersive mode.

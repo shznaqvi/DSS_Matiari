@@ -62,16 +62,17 @@
                             android:orientation="horizontal">
 
                             <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:text="@string/ra01" />
+
+                            <TextView
                                 style="@style/quesNum"
                                 android:layout_width="wrap_content"
                                 android:layout_height="match_parent"
                                 android:text="@string/Q_ra01" />
 
-                            <TextView
-                                android:layout_width="0dp"
-                                android:layout_height="match_parent"
-                                android:layout_weight="1"
-                                android:text="@string/ra01" />
                         </LinearLayout>
 
                         <io.blackbox_vision.datetimepickeredittext.view.DatePickerEditText
@@ -254,16 +255,18 @@
                             android:orientation="horizontal">
 
                             <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:text="@string/ra14" />
+
+                            <TextView
                                 style="@style/quesNum"
                                 android:layout_width="wrap_content"
                                 android:layout_height="match_parent"
                                 android:text="@string/Q_ra14" />
 
-                            <TextView
-                                android:layout_width="0dp"
-                                android:layout_height="match_parent"
-                                android:layout_weight="1"
-                                android:text="@string/ra14" />
+
                         </LinearLayout>
 
                         <EditText
@@ -293,16 +296,18 @@
                             android:orientation="horizontal">
 
                             <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:text="@string/ra15" />
+
+                            <TextView
                                 style="@style/quesNum"
                                 android:layout_width="wrap_content"
                                 android:layout_height="match_parent"
                                 android:text="@string/Q_ra15" />
 
-                            <TextView
-                                android:layout_width="0dp"
-                                android:layout_height="match_parent"
-                                android:layout_weight="1"
-                                android:text="@string/ra15" />
+
                         </LinearLayout>
 
                         <EditText
@@ -332,16 +337,17 @@
                             android:orientation="horizontal">
 
                             <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:text="@string/ra16" />
+
+                            <TextView
                                 style="@style/quesNum"
                                 android:layout_width="wrap_content"
                                 android:layout_height="match_parent"
                                 android:text="@string/Q_ra16" />
 
-                            <TextView
-                                android:layout_width="0dp"
-                                android:layout_height="match_parent"
-                                android:layout_weight="1"
-                                android:text="@string/ra16" />
                         </LinearLayout>
 
                         <EditText
@@ -370,16 +376,18 @@
                             android:orientation="horizontal">
 
                             <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:text="@string/ra17_a" />
+
+                            <TextView
                                 style="@style/quesNum"
                                 android:layout_width="wrap_content"
                                 android:layout_height="match_parent"
                                 android:text="@string/Q_ra17_a" />
 
-                            <TextView
-                                android:layout_width="0dp"
-                                android:layout_height="match_parent"
-                                android:layout_weight="1"
-                                android:text="@string/ra17_a" />
+
                         </LinearLayout>
 
                         <com.edittextpicker.aliazaz.EditTextPicker
@@ -414,16 +422,18 @@
                             android:orientation="horizontal">
 
                             <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:text="@string/ra17_b" />
+
+                            <TextView
                                 style="@style/quesNum"
                                 android:layout_width="wrap_content"
                                 android:layout_height="match_parent"
                                 android:text="@string/Q_ra17_b" />
 
-                            <TextView
-                                android:layout_width="0dp"
-                                android:layout_height="match_parent"
-                                android:layout_weight="1"
-                                android:text="@string/ra17_b" />
+
                         </LinearLayout>
 
                         <com.edittextpicker.aliazaz.EditTextPicker
@@ -458,16 +468,18 @@
                             android:orientation="horizontal">
 
                             <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:text="@string/a17_c" />
+
+                            <TextView
                                 style="@style/quesNum"
                                 android:layout_width="wrap_content"
                                 android:layout_height="match_parent"
                                 android:text="@string/Q_a17_c" />
 
-                            <TextView
-                                android:layout_width="0dp"
-                                android:layout_height="match_parent"
-                                android:layout_weight="1"
-                                android:text="@string/a17_c" />
+
                         </LinearLayout>
 
                         <com.edittextpicker.aliazaz.EditTextPicker
@@ -502,16 +514,18 @@
                             android:orientation="horizontal">
 
                             <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:text="@string/ra17_d" />
+
+                            <TextView
                                 style="@style/quesNum"
                                 android:layout_width="wrap_content"
                                 android:layout_height="match_parent"
                                 android:text="@string/Q_ra17_d" />
 
-                            <TextView
-                                android:layout_width="0dp"
-                                android:layout_height="match_parent"
-                                android:layout_weight="1"
-                                android:text="@string/ra17_d" />
+
                         </LinearLayout>
 
                         <com.edittextpicker.aliazaz.EditTextPicker
@@ -546,16 +560,18 @@
                             android:orientation="horizontal">
 
                             <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:text="@string/ra18" />
+
+                            <TextView
                                 style="@style/quesNum"
                                 android:layout_width="wrap_content"
                                 android:layout_height="match_parent"
                                 android:text="@string/Q_ra18" />
 
-                            <TextView
-                                android:layout_width="0dp"
-                                android:layout_height="match_parent"
-                                android:layout_weight="1"
-                                android:text="@string/ra18" />
+
                         </LinearLayout>
 
                         <com.edittextpicker.aliazaz.EditTextPicker

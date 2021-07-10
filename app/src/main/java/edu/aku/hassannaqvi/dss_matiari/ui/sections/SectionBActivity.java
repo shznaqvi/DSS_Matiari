@@ -1,6 +1,6 @@
 package edu.aku.hassannaqvi.dss_matiari.ui.sections;
 
-import android.content.Intent;
+import android.app.Activity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -16,9 +16,10 @@ import edu.aku.hassannaqvi.dss_matiari.contracts.TableContracts;
 import edu.aku.hassannaqvi.dss_matiari.core.MainApp;
 import edu.aku.hassannaqvi.dss_matiari.database.DatabaseHelper;
 import edu.aku.hassannaqvi.dss_matiari.databinding.ActivitySectionBBinding;
-import edu.aku.hassannaqvi.dss_matiari.ui.EndingActivity;
 
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.form;
+import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.mwra;
+import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.mwraCount;
 
 public class SectionBActivity extends AppCompatActivity {
 
@@ -31,9 +32,13 @@ public class SectionBActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         bi = DataBindingUtil.setContentView(this, R.layout.activity_section_b);
         bi.setCallback(this);
-        bi.setForm(form);
+        bi.setMwra(mwra);
+
+        mwra.setRb01(String.valueOf(mwraCount + 1));
+
         Log.d(TAG, "onCreate: 6 " + form.getRb06());
         Log.d(TAG, "onCreate: 7 " + form.getRb07());
+
         setTitle(R.string.sectionB_mainheading);
         setImmersive(true);
 
@@ -43,9 +48,10 @@ public class SectionBActivity extends AppCompatActivity {
     public void btnContinue(View view) {
         if (!formValidation()) return;
         saveDraft();
-        if (updateDB()) {
+        if (MainApp.mwra.getUid().equals("") ? insertNewRecord() : updateDB()) {
+            setResult(RESULT_OK);
             finish();
-            startActivity(new Intent(this, EndingActivity.class).putExtra("complete", true));
+            //  startActivity(new Intent(this, EndingActivity.class).putExtra("complete", true));
         } else {
             Toast.makeText(this, "Failed to Update Database!", Toast.LENGTH_SHORT).show();
         }
@@ -53,39 +59,58 @@ public class SectionBActivity extends AppCompatActivity {
 
     private void saveDraft() {
 
-/*        form.setRb_uc(bi.rbUc.getText().toString());
+        //mwra = new MWRA();
 
-        form.setRb_vil(bi.rbVil.getText().toString());
+        MainApp.mwra.setUserName(MainApp.user.getUserName());
+        MainApp.mwra.setSysDate(form.getSysDate());
+        MainApp.mwra.setDeviceId(MainApp.deviceid);
+        MainApp.mwra.setHdssId(form.getHdssId());
+        MainApp.mwra.setAppver(MainApp.versionName + "." + MainApp.versionCode);
 
-        form.setRb_hno(bi.rbHno.getText().toString());
 
-        form.setRb_sid(bi.rbSid.getText().toString());
-
-        form.setRb_ufn(bi.rbUfn.getText().toString());*/
-
-        form.setRb01(bi.rb01.getText().toString());
-
-        form.setRb02(bi.rb02.getText().toString());
-
-        form.setRb03(bi.rb03.getText().toString());
-
-        form.setRb04(bi.rb04.getText().toString());
-
-        form.setRb05(bi.rb05.getText().toString());
-
-        form.setRb06(bi.rb0602.isChecked() ? "2"
+        mwra.setRb01(bi.rb01.getText().toString());
+        mwra.setRb02(bi.rb02.getText().toString());
+        mwra.setRb03(bi.rb03.getText().toString());
+        mwra.setRb04(bi.rb04.getText().toString());
+        mwra.setRb05(bi.rb05.getText().toString());
+        mwra.setRb06(bi.rb0602.isChecked() ? "2"
                 : bi.rb0603.isChecked() ? "3"
                 : "-1");
-
-        form.setRb07(bi.rb0701.isChecked() ? "1"
+        mwra.setRb07(bi.rb0701.isChecked() ? "1"
                 : bi.rb0702.isChecked() ? "2"
                 : "-1");
+        mwra.setRb08(bi.rb08.getText().toString());
+        mwra.setRb09(bi.rb09.getText().toString());
+        mwra.setS2(mwra.s2toString());
+    }
 
-        form.setRb08(bi.rb08.getText().toString());
+/*    private boolean insertNewRecord() {
+        if (MainApp.form.isExist()) return true;
+        db = MainApp.appInfo.getDbHelper();
+        long rowId = db.addForm(form);
+        form.setId(String.valueOf(rowId));
+        if (rowId > 0) {
+            form.setUid(form.getDeviceId() + form.getId());
+            db.updatesFormColumn(TableContracts.FormsTable.COLUMN_UID, form.getUid());
+            return true;
+        } else {
+            Toast.makeText(this, "Updating Database... ERROR!", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+    }*/
 
-        form.setRb09(bi.rb09.getText().toString());
-
-        form.setS2(form.s2toString());
+    private boolean insertNewRecord() {
+        db = MainApp.appInfo.getDbHelper();
+        long rowId = db.addMWRA(mwra);
+        mwra.setId(String.valueOf(rowId));
+        if (rowId > 0) {
+            mwra.setUid(mwra.getDeviceId() + mwra.getId());
+            db.updatesMWRAColumn(TableContracts.MWRATable.COLUMN_UID, mwra.getUid());
+            return true;
+        } else {
+            Toast.makeText(this, "Updating Database... ERROR!", Toast.LENGTH_SHORT).show();
+            return false;
+        }
     }
 
     private boolean updateDB() {
@@ -99,14 +124,17 @@ public class SectionBActivity extends AppCompatActivity {
     }
 
     public void btnEnd(View view) {
-        saveDraft();
+        setResult(Activity.RESULT_CANCELED);
+        finish();
+        /*saveDraft();
         if (updateDB()) {
+
             Toast.makeText(this, "Patient information not recorded.", Toast.LENGTH_SHORT).show();
             finish();
-            Intent i = new Intent(this, EndingActivity.class);
+        *//*    Intent i = new Intent(this, EndingActivity.class);
             i.putExtra("complete", false);
-            startActivity(i);
-        }
+            startActivity(i);*//*
+        }*/
 
     }
 

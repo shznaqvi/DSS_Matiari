@@ -46,7 +46,15 @@
                 android:orientation="vertical"
                 android:paddingTop="8dp"
                 android:radius="8dp">
-
+<TextView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/lightPink"
+    android:gravity="center"
+    android:text="ONLY FOR TESTING"
+    android:textAppearance="@style/TextAppearance.AppCompat.Title"
+    android:textColor="@color/redDark"
+    android:textSize="24sp" />
                 <ImageView
                     android:layout_width="180dp"
                     android:layout_height="180dp"

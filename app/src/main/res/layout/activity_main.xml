@@ -7,6 +7,10 @@
         <import type="android.view.View" />
 
         <variable
+            name="mainapp"
+            type="edu.aku.hassannaqvi.dss_matiari.core.MainApp" />
+
+        <variable
             name="callback"
             type="edu.aku.hassannaqvi.dss_matiari.ui.MainActivity" />
     </data>
@@ -62,6 +66,7 @@
                     android:layout_gravity="start"
                     android:layout_margin="4dp"
                     android:padding="4dp"
+                    android:textSize="16sp"
                     android:textAppearance="@style/MaterialAlertDialog.MaterialComponents.Title.Panel"
                     android:textColor="@color/colorPrimary" />
 
@@ -99,7 +104,7 @@
                                 android:drawablePadding="12dp"
                                 android:gravity="center_vertical"
                                 android:minWidth="460dp"
-                                android:text="@string/open_surveillance_form"
+                                android:text="@string/open_mwra_registration_form"
                                 android:textColor="@color/colorPrimary"
                                 android:textSize="16dp" />
 
@@ -108,7 +113,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="36dp"
                                 android:gravity="center_horizontal|center_vertical"
-                                android:text="Open to enter new surveillance form"
+                                android:text="Open to enter new registration form"
                                 android:textColor="@color/gray"
                                 android:textSize="14sp" />
                         </LinearLayout>
@@ -124,251 +129,256 @@
 
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
+                <!--
+                         <androidx.cardview.widget.CardView
+                             android:layout_width="match_parent"
+                             android:layout_height="wrap_content"
+                             android:layout_marginStart="24dp"
+                             android:layout_marginTop="24dp"
+                             android:layout_marginEnd="24dp"
+                             android:padding="12dp"
+                  pp:cardCornerRadius="24dp"
 
-                <androidx.cardview.widget.CardView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="24dp"
-                    android:layout_marginTop="24dp"
-                    android:layout_marginEnd="24dp"
-                    android:padding="12dp"
-                    app:cardCornerRadius="24dp"
-
-                    >
-
-                    <LinearLayout
-                        android:id="@+id/openOnHold"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:onClick="sectionPress"
-                        android:orientation="horizontal">
-
-                        <LinearLayout
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_margin="12dp"
-                            android:layout_weight="1"
-                            android:orientation="vertical">
-
-                            <TextView
-                                android:id="@+id/btnOnHold"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:background="@color/white"
-                                android:drawableStart="@drawable/onhold_forms"
-                                android:drawablePadding="12dp"
-                                android:gravity="center_vertical"
-                                android:minWidth="460dp"
-                                android:text="@string/open_onhold_form"
-                                android:textColor="@color/colorPrimary"
-                                android:textSize="16dp" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginStart="36dp"
-                                android:gravity="center_horizontal|center_vertical"
-                                android:text="Update temperature of the On-Hold forms"
-                                android:textColor="@color/gray"
-                                android:textSize="14sp" />
-                        </LinearLayout>
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_margin="12dp"
-                            android:background="@drawable/ic_item_right_arrow"
-                            android:gravity="center_horizontal|center_vertical"
-                            android:textColor="@color/colorAccent"
-                            android:textSize="24dp" />
-
-                    </LinearLayout>
-                </androidx.cardview.widget.CardView>
-
-                <androidx.cardview.widget.CardView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="24dp"
-                    android:layout_marginTop="24dp"
-                    android:layout_marginEnd="24dp"
-                    android:padding="12dp"
-                    app:cardCornerRadius="24dp"
-
-                    >
+                             >
 
                     <LinearLayout
-                        android:id="@+id/openFollowup"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:onClick="sectionPress"
-                        android:orientation="horizontal">
+                                 android:id="@+id/openOnHold"
+                                 android:layout_width="match_parent"
+                                 android:layout_height="wrap_content"
+                                 android:onClick="sectionPress"
+                                 android:orientation="horizontal">
 
-                        <LinearLayout
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_margin="12dp"
-                            android:layout_weight="1"
-                            android:orientation="vertical">
+                                 <LinearLayout
+                                     android:layout_width="0dp"
+                                     android:layout_height="wrap_content"
+                                     android:layout_margin="12dp"
+                                     android:layout_weight="1"
+                                     android:orientation="vertical">
 
-                            <TextView
-                                android:id="@+id/btnfollowup"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:background="@color/white"
-                                android:drawableStart="@drawable/ic_followup_24"
-                                android:drawablePadding="12dp"
-                                android:gravity="center_vertical"
-                                android:minWidth="460dp"
-                                android:text="@string/open_followup_form"
-                                android:textColor="@color/colorPrimary"
-                                android:textSize="16dp" />
+                                     <TextView
+                                         android:id="@+id/btnOnHold"
+                                         android:layout_width="match_parent"
+                                         android:layout_height="wrap_content"
+                                         android:background="@color/white"
+                                         android:drawableStart="@drawable/onhold_forms"
+                                         android:drawablePadding="12dp"
+                                         android:gravity="center_vertical"
+                                         android:minWidth="460dp"
+                                         android:text="@string/open_onhold_form"
+                                         android:textColor="@color/colorPrimary"
+                                         android:textSize="16dp" />
 
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginStart="36dp"
-                                android:gravity="center_horizontal|center_vertical"
-                                android:text="Open to enter follow-up forms"
-                                android:textColor="@color/gray"
-                                android:textSize="14sp" />
-                        </LinearLayout>
+                                     <TextView
+                                         android:layout_width="wrap_content"
+                                         android:layout_height="wrap_content"
+                                         android:layout_marginStart="36dp"
+                                         android:gravity="center_horizontal|center_vertical"
+                                         android:text="Update temperature of the On-Hold forms"
+                                         android:textColor="@color/gray"
+                                         android:textSize="14sp" />
+                                 </LinearLayout>
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_margin="12dp"
-                            android:background="@drawable/ic_item_right_arrow"
-                            android:gravity="center_horizontal|center_vertical"
-                            android:textColor="@color/colorAccent"
-                            android:textSize="24dp" />
+                                 <TextView
+                                     android:layout_width="wrap_content"
+                                     android:layout_height="wrap_content"
+                                     android:layout_margin="12dp"
+                                     android:background="@drawable/ic_item_right_arrow"
+                                     android:gravity="center_horizontal|center_vertical"
+                                     android:textColor="@color/colorAccent"
+                                     android:textSize="24dp" />
 
-                    </LinearLayout>
-                </androidx.cardview.widget.CardView>
+                             </LinearLayout>
+                         </androidx.cardview.widget.CardView>
 
-                <LinearLayout
-                    android:id="@+id/adminView"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="12dp"
-                    android:background="@color/grayLight"
-                    android:orientation="vertical"
-                    android:padding="12dp">
+                         <androidx.cardview.widget.CardView
+                             android:layout_width="match_parent"
+                             android:layout_height="wrap_content"
+                             android:layout_marginStart="24dp"
+                             android:layout_marginTop="24dp"
+                             android:layout_marginEnd="24dp"
+                             android:padding="12dp"
+                             app:cardCornerRadius="24dp"
 
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:background="@color/colorAccentLightOverlay"
-                        android:padding="8dp"
-                        android:text="ADMIN OPTIONS"
-                        android:textColor="@color/black"
-                        android:textStyle="bold" />
+                             >
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="12dp"
-                        android:gravity="center_horizontal"
-                        android:orientation="horizontal">
+                             <LinearLayout
+                                 android:id="@+id/openFollowup"
+                                 android:layout_width="match_parent"
+                                 android:layout_height="wrap_content"
+                                 android:onClick="sectionPress"
+                                 android:orientation="horizontal">
 
-                        <TextView
-                            android:id="@+id/ident"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_margin="4dp"
-                            android:background="@color/colorPrimaryLight"
-                            android:elevation="1dp"
-                            android:onClick="sectionPress"
-                            android:padding="8dp"
-                            android:shadowRadius="8"
-                            android:text="Identification"
-                            android:textColor="@color/colorAccentLight"
-                            android:textSize="14sp" />
+                                 <LinearLayout
+                                     android:layout_width="0dp"
+                                     android:layout_height="wrap_content"
+                                     android:layout_margin="12dp"
+                                     android:layout_weight="1"
+                                     android:orientation="vertical">
 
-                        <TextView
-                            android:id="@+id/seca"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_margin="4dp"
-                            android:background="@color/colorPrimaryLight"
-                            android:elevation="1dp"
-                            android:onClick="sectionPress"
-                            android:padding="8dp"
-                            android:shadowRadius="8"
-                            android:text="Section A"
-                            android:textColor="@color/colorAccentLight"
-                            android:textSize="14sp" />
+                                     <TextView
+                                         android:id="@+id/btnfollowup"
+                                         android:layout_width="match_parent"
+                                         android:layout_height="wrap_content"
+                                         android:background="@color/white"
+                                         android:drawableStart="@drawable/ic_followup_24"
+                                         android:drawablePadding="12dp"
+                                         android:gravity="center_vertical"
+                                         android:minWidth="460dp"
+                                         android:text="@string/open_followup_form"
+                                         android:textColor="@color/colorPrimary"
+                                         android:textSize="16dp" />
 
-                        <TextView
-                            android:id="@+id/secb"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_margin="4dp"
-                            android:background="@color/colorPrimaryLight"
-                            android:elevation="1dp"
-                            android:onClick="sectionPress"
-                            android:padding="8dp"
-                            android:shadowRadius="8"
-                            android:text="Section B"
-                            android:textColor="@color/colorAccentLight"
-                            android:textSize="14sp" />
-                    </LinearLayout>
+                                     <TextView
+                                         android:layout_width="wrap_content"
+                                         android:layout_height="wrap_content"
+                                         android:layout_marginStart="36dp"
+                                         android:gravity="center_horizontal|center_vertical"
+                                         android:text="Open to enter follow-up forms"
+                                         android:textColor="@color/gray"
+                                         android:textSize="14sp" />
+                                 </LinearLayout>
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="center_horizontal"
-                        android:orientation="horizontal">
+                                 <TextView
+                                     android:layout_width="wrap_content"
+                                     android:layout_height="wrap_content"
+                                     android:layout_margin="12dp"
+                                     android:background="@drawable/ic_item_right_arrow"
+                                     android:gravity="center_horizontal|center_vertical"
+                                     android:textColor="@color/colorAccent"
+                                     android:textSize="24dp" />
 
-                        <TextView
-                            android:visibility="gone"
-                            android:id="@+id/sec4"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_margin="4dp"
-                            android:background="@color/colorPrimaryLight"
-                            android:elevation="1dp"
-                            android:onClick="sectionPress"
-                            android:padding="8dp"
-                            android:shadowRadius="8"
-                            android:text="Section 4"
-                            android:textColor="@color/colorAccentLight"
-                            android:textSize="14sp" />
+                             </LinearLayout>
+                         </androidx.cardview.widget.CardView>
+         -->
 
-                        <TextView
-                            android:visibility="gone"
-                            android:id="@+id/sec5"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_margin="4dp"
-                            android:background="@color/colorPrimaryLight"
-                            android:elevation="1dp"
-                            android:onClick="sectionPress"
-                            android:padding="8dp"
-                            android:shadowRadius="8"
-                            android:text="Section 5"
-                            android:textColor="@color/colorAccentLight"
-                            android:textSize="14sp" />
-
-                        <TextView
-                            android:visibility="gone"
-                            android:id="@+id/onhold"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_margin="4dp"
-                            android:background="@color/colorPrimaryLight"
-                            android:elevation="1dp"
-                            android:onClick="sectionPress"
-                            android:padding="8dp"
-                            android:shadowRadius="8"
-                            android:text="OnHold's List"
-                            android:textColor="@color/colorAccentLight"
-                            android:textSize="14sp" />
-
-
-                    </LinearLayout>
-                </LinearLayout>
             </LinearLayout>
 
+            <LinearLayout
+                android:id="@+id/adminView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_margin="12dp"
+                android:layout_marginBottom="24dp"
+                android:background="@color/grayLight"
+                android:elevation="2dp"
+                android:orientation="vertical"
+                android:padding="12dp"
+                android:visibility="@{mainapp.admin?View.VISIBLE:View.GONE}">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/colorAccentLight"
+                    android:padding="8dp"
+                    android:text="OPTIONS (only for admin)"
+                    android:textColor="@color/grayDark"
+                    android:textStyle="bold" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:gravity="center_horizontal"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/ident"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="4dp"
+                        android:background="@color/colorPrimaryLight"
+                        android:elevation="1dp"
+                        android:onClick="sectionPress"
+                        android:padding="8dp"
+                        android:shadowRadius="8"
+                        android:text="Identification"
+                        android:textColor="@color/colorAccentLight"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:id="@+id/seca"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="4dp"
+                        android:background="@color/colorPrimaryLight"
+                        android:elevation="1dp"
+                        android:onClick="sectionPress"
+                        android:padding="8dp"
+                        android:shadowRadius="8"
+                        android:text="Section A"
+                        android:textColor="@color/colorAccentLight"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:id="@+id/secb"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="4dp"
+                        android:background="@color/colorPrimaryLight"
+                        android:elevation="1dp"
+                        android:onClick="sectionPress"
+                        android:padding="8dp"
+                        android:shadowRadius="8"
+                        android:text="Section B"
+                        android:textColor="@color/colorAccentLight"
+                        android:textSize="14sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/sec4"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="4dp"
+                        android:background="@color/colorPrimaryLight"
+                        android:elevation="1dp"
+                        android:onClick="sectionPress"
+                        android:padding="8dp"
+                        android:shadowRadius="8"
+                        android:text="Section 4"
+                        android:textColor="@color/colorAccentLight"
+                        android:textSize="14sp"
+                        android:visibility="gone" />
+
+                    <TextView
+                        android:id="@+id/sec5"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="4dp"
+                        android:background="@color/colorPrimaryLight"
+                        android:elevation="1dp"
+                        android:onClick="sectionPress"
+                        android:padding="8dp"
+                        android:shadowRadius="8"
+                        android:text="Section 5"
+                        android:textColor="@color/colorAccentLight"
+                        android:textSize="14sp"
+                        android:visibility="gone" />
+
+                    <TextView
+                        android:id="@+id/onhold"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="4dp"
+                        android:background="@color/colorPrimaryLight"
+                        android:elevation="1dp"
+                        android:onClick="sectionPress"
+                        android:padding="8dp"
+                        android:shadowRadius="8"
+                        android:text="OnHold's List"
+                        android:textColor="@color/colorAccentLight"
+                        android:textSize="14sp"
+                        android:visibility="gone" />
+
+
+                </LinearLayout>
+            </LinearLayout>
 
             <TextView
                 android:layout_width="match_parent"

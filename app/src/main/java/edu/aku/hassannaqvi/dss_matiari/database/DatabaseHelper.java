@@ -730,4 +730,46 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         }
         return form;
     }
+
+    public List<MWRA> getMWRABYHDSSID(String hdssid) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor c = null;
+        String[] columns = null;
+
+        String whereClause;
+        whereClause = MWRATable.COLUMN_HDSSID + "=?";
+
+        String[] whereArgs = {hdssid};
+
+        String groupBy = null;
+        String having = null;
+
+        String orderBy = MWRATable.COLUMN_ID + " ASC";
+
+        ArrayList<MWRA> mwraByHH = new ArrayList<>();
+        try {
+            c = db.query(
+                    MWRATable.TABLE_NAME,  // The table to query
+                    columns,                   // The columns to return
+                    whereClause,               // The columns for the WHERE clause
+                    whereArgs,                 // The values for the WHERE clause
+                    groupBy,                   // don't group the rows
+                    having,                    // don't filter by row groups
+                    orderBy                    // The sort order
+            );
+            while (c.moveToNext()) {
+                MWRA mwra = new MWRA().Hydrate(c);
+
+                mwraByHH.add(mwra);
+            }
+        } finally {
+            if (c != null) {
+                c.close();
+            }
+            if (db != null) {
+                db.close();
+            }
+        }
+        return mwraByHH;
+    }
 }

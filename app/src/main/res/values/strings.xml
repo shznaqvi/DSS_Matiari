@@ -7,6 +7,7 @@
     <string name="section5_mainheading"> Section 5: Diagnosis and outcome</string>
 
     <string name="open_surveillance_form">OPEN SURVEILLANCE FORM</string>
+    <string name="open_mwra_registration_form">OPEN MWRA REGISTRATION FORM</string>
     <string name="open_onhold_form">UPDATE ONHOLD FORM</string>
     <string name="open_followup_form">OPEN FOLLOW-UP FORM</string>
 

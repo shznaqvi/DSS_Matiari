@@ -27,7 +27,7 @@ public class MainActivity extends AppCompatActivity {
         bi = DataBindingUtil.setContentView(this, R.layout.activity_main);
         bi.setCallback(this);
         bi.adminView.setVisibility(MainApp.admin ? View.VISIBLE : View.GONE);
-        bi.username.setText("Welcome, " + MainApp.user.getFullname() + "!");
+        bi.username.setText("Welcome, " + MainApp.user.getFullname() + (MainApp.admin ? " (Admin)" : "") + "!");
     }
 
     public void sectionPress(View view) {

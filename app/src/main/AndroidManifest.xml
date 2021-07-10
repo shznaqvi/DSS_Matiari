@@ -17,6 +17,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
+        <activity android:name=".ui.MwraActivity"></activity>
         <activity
             android:name=".ui.sections.IdentificationActivity"
             android:theme="@style/AppThemeEnglish1"

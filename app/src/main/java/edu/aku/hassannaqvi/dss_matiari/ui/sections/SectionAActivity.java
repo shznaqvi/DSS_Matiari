@@ -20,6 +20,7 @@ import edu.aku.hassannaqvi.dss_matiari.core.MainApp;
 import edu.aku.hassannaqvi.dss_matiari.database.DatabaseHelper;
 import edu.aku.hassannaqvi.dss_matiari.databinding.ActivitySectionABinding;
 import edu.aku.hassannaqvi.dss_matiari.ui.MainActivity;
+import edu.aku.hassannaqvi.dss_matiari.ui.MwraActivity;
 
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.form;
 
@@ -48,7 +49,7 @@ public class SectionAActivity extends AppCompatActivity {
         saveDraft();
         if (updateDB()) {
             finish();
-            startActivity(new Intent(this, SectionBActivity.class).putExtra("complete", true));
+            startActivity(new Intent(this, MwraActivity.class).putExtra("complete", true));
         } else {
             Toast.makeText(this, "Failed to Update Database!", Toast.LENGTH_SHORT).show();
         }

@@ -20,6 +20,7 @@ import edu.aku.hassannaqvi.dss_matiari.databinding.ActivityIdentificationBinding
 import edu.aku.hassannaqvi.dss_matiari.models.Form;
 import edu.aku.hassannaqvi.dss_matiari.ui.EndingActivity;
 
+import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.hdssid;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.idType;
 
 public class IdentificationActivity extends AppCompatActivity {
@@ -27,7 +28,6 @@ public class IdentificationActivity extends AppCompatActivity {
     ActivityIdentificationBinding bi;
     private Intent openIntent;
     private DatabaseHelper db;
-    private String hdssid;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -109,6 +109,12 @@ public class IdentificationActivity extends AppCompatActivity {
         MainApp.form.setDeviceId(MainApp.deviceid);
         MainApp.form.setHdssId(hdssid);
         MainApp.form.setAppver(MainApp.versionName + "." + MainApp.versionCode);
+
+        MainApp.form.setRa06(bi.ra07.getText().toString());
+        MainApp.form.setRa07(bi.ra06.getText().toString());
+        MainApp.form.setRa08(bi.ra08.getText().toString());
+        MainApp.form.setRa09(bi.ra09.getText().toString());
+        MainApp.form.setRa10(bi.ra10.getText().toString());
 
     }
 
