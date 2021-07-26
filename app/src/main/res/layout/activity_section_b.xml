@@ -215,7 +215,7 @@
                             android:gravity="center"
                             android:hint="YYYY-MM-DD"
                             android:text="@={mwra.rb04}"
-
+                            app:maxDate="CR_DATE"
                             app:dateFormat="yyyy-MM-dd" />
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
@@ -378,6 +378,7 @@
                 <!-- rb08  Input   -->
                 <androidx.cardview.widget.CardView
                     android:id="@+id/fldGrpCVrb08"
+                    android:visibility='@{mwra.Rb07.equals("1")? View.VISIBLE : View.GONE}'
                     style="@style/cardView">
 
                     <LinearLayout
@@ -420,6 +421,7 @@
                 <!-- rb09  Input   -->
                 <androidx.cardview.widget.CardView
                     android:id="@+id/fldGrpCVrb09"
+                    android:visibility='@{mwra.Rb07.equals("1")? View.VISIBLE : View.GONE}'
                     style="@style/cardView">
 
                     <LinearLayout

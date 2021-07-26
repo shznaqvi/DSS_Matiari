@@ -37,7 +37,7 @@ fun ageInYears(day: Int, month: Int, year: Int, minYear: Int): String {
     if (today[Calendar.DAY_OF_YEAR] < dob[Calendar.DAY_OF_YEAR]) {
         age--
     }
-    val ageInt = age
+    val ageInt = if (age < 0) 0 else age
     return Integer.toString(ageInt)
 }
 

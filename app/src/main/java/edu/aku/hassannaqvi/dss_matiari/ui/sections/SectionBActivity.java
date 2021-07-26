@@ -2,6 +2,8 @@ package edu.aku.hassannaqvi.dss_matiari.ui.sections;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
@@ -16,6 +18,7 @@ import edu.aku.hassannaqvi.dss_matiari.contracts.TableContracts;
 import edu.aku.hassannaqvi.dss_matiari.core.MainApp;
 import edu.aku.hassannaqvi.dss_matiari.database.DatabaseHelper;
 import edu.aku.hassannaqvi.dss_matiari.databinding.ActivitySectionBBinding;
+import edu.aku.hassannaqvi.dss_matiari.utils.DateUtilsKt;
 
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.form;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.mwra;
@@ -33,6 +36,7 @@ public class SectionBActivity extends AppCompatActivity {
         bi = DataBindingUtil.setContentView(this, R.layout.activity_section_b);
         bi.setCallback(this);
         bi.setMwra(mwra);
+        setListener();
 
         mwra.setRb01(String.valueOf(mwraCount + 1));
 
@@ -43,6 +47,35 @@ public class SectionBActivity extends AppCompatActivity {
         setImmersive(true);
 
         db = MainApp.appInfo.dbHelper;
+    }
+
+    private void setListener() {
+        bi.rb04.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if (!mwra.getRb04().equalsIgnoreCase("")) {
+                    String[] arrStr = mwra.getRb04().split("-");
+                    int day, month, year;
+                    year = arrStr.length > 0 ? Integer.valueOf(arrStr[0]) : 0;
+                    month = arrStr.length > 1 ? Integer.valueOf(arrStr[1]) : 0;
+                    day = arrStr.length > 2 ? Integer.valueOf(arrStr[2]) : 0;
+                    if (year == 0 || month == 0 || day ==0) {
+                        return;
+                    }
+                    bi.rb05.setText(DateUtilsKt.ageInYears(day, month ,year ,year));
+                }
+            }
+        });
     }
 
     public void btnContinue(View view) {
