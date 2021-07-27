@@ -64,15 +64,24 @@ public class SectionBActivity extends AppCompatActivity {
             @Override
             public void afterTextChanged(Editable s) {
                 if (!mwra.getRb04().equalsIgnoreCase("")) {
+//                    String[] arrStr = mwra.getRb04().split("-");
+//                    int day, month, year;
+//                    year = arrStr.length > 0 ? Integer.valueOf(arrStr[0]) : 0;
+//                    month = arrStr.length > 1 ? Integer.valueOf(arrStr[1]) : 0;
+//                    day = arrStr.length > 2 ? Integer.valueOf(arrStr[2]) : 0;
+//                    if (year == 0 || month == 0 || day ==0) {
+//                        return;
+//                    }
+//                    bi.rb05.setText(DateUtilsKt.ageInYears(day, month ,year ,year));
                     String[] arrStr = mwra.getRb04().split("-");
-                    int day, month, year;
-                    year = arrStr.length > 0 ? Integer.valueOf(arrStr[0]) : 0;
-                    month = arrStr.length > 1 ? Integer.valueOf(arrStr[1]) : 0;
-                    day = arrStr.length > 2 ? Integer.valueOf(arrStr[2]) : 0;
-                    if (year == 0 || month == 0 || day ==0) {
+                    String day, month, year;
+                    year = arrStr.length > 0 ? arrStr[0] : "0";
+                    month = arrStr.length > 1 ? arrStr[1] : "0";
+                    day = arrStr.length > 2 ? arrStr[2] : "0";
+                    if (year.equalsIgnoreCase("0") || month.equalsIgnoreCase("0") || day.equalsIgnoreCase("0")) {
                         return;
                     }
-                    bi.rb05.setText(DateUtilsKt.ageInYears(day, month ,year ,year));
+                    bi.rb05.setText(DateUtilsKt.getAge(year, month, day, false));
                 }
             }
         });

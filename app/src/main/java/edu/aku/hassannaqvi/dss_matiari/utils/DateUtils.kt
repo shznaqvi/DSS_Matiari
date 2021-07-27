@@ -1,5 +1,6 @@
 package edu.aku.hassannaqvi.dss_matiari.utils
 
+import android.text.TextUtils
 import android.util.Log
 import java.text.ParseException
 import java.text.SimpleDateFormat
@@ -228,4 +229,49 @@ fun getYearsAndMonthsBack(format: String, month: Int, year: Int): String {
     cal.add(Calendar.YEAR, year)
     cal.add(Calendar.MONTH, month)
     return SimpleDateFormat(format, Locale.ENGLISH).format(cal.time)
+}
+
+fun getAge(yearText: String, monthText: String, dayText: String, isMonth: Boolean): String? {
+    var year: Int = 0
+    var month: Int = 0
+    var day: Int = 0
+    try {
+        year = Integer.valueOf(if (!TextUtils.isEmpty(yearText)) yearText else "0")
+        month = Integer.valueOf(if (!TextUtils.isEmpty(monthText)) monthText else "0")
+        day = Integer.valueOf(if (!TextUtils.isEmpty(dayText)) dayText else "0")
+    } catch (e: Exception) {
+        return ""
+    }
+    if (month == 0 || year == 0 || yearText.length < 4) {
+        return ""
+    }
+    val dob: Calendar = Calendar.getInstance()
+    val today: Calendar = Calendar.getInstance()
+    dob.set(year, (month-1), day)
+//            var age: Int = today.get(Calendar.YEAR) - dob.get(Calendar.YEAR)
+//            if (today.get(Calendar.DAY_OF_YEAR) < dob.get(Calendar.DAY_OF_YEAR)) {
+//                age--
+//            }
+//            if (isMonth) {
+//                age = age * 12
+//            }
+    val diff: Long = today.getTime().time - dob.getTime().time
+    val seconds = diff / 1000
+    val minutes = seconds / 60
+    val hours = minutes / 60
+    val days = hours / 24
+    val months = days / 30.4167
+    var age: Int = (days / 365).toInt()
+    if (isMonth) {
+        if (months > 12) {
+            age = (months % 12).toInt()
+        } else {
+            age = 0
+        }
+    }
+    if(age <= 0) {
+        return "0"
+    } else {
+        return age.toString()
+    }
 }
