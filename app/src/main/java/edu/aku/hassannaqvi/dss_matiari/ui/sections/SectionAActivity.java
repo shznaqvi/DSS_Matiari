@@ -144,7 +144,7 @@ public class SectionAActivity extends AppCompatActivity {
 
         form.setRa17_b(bi.ra17B.getText().toString());
 
-        form.setRa17_c(bi.ra17B.getText().toString());
+        form.setRa17_c(bi.ra17C.getText().toString());
 
         form.setRa17_d(bi.ra17D.getText().toString());
 

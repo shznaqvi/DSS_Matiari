@@ -44,7 +44,8 @@ public class SectionBActivity extends AppCompatActivity {
         bi.setMwra(mwra);
         setListener();
 
-        mwra.setRb01(String.valueOf(mwraCount + 1));
+        if (mwra.getRb01().equals(""))
+            mwra.setRb01(String.valueOf(mwraCount + 1));
 
         Log.d(TAG, "onCreate: 6 " + form.getRb06());
         Log.d(TAG, "onCreate: 7 " + form.getRb07());
@@ -53,6 +54,8 @@ public class SectionBActivity extends AppCompatActivity {
         setImmersive(true);
 
         db = MainApp.appInfo.dbHelper;
+
+
     }
 
     private void setListener() {
@@ -190,9 +193,8 @@ public class SectionBActivity extends AppCompatActivity {
         if (!Validator.emptyCheckingContainer(this, bi.GrpName)) return false;
         if (!compareTwoDate(bi.rb08, 2,
                 "LMP should be within 2 months back from DOV")) return false;
-        if (!compareTwoDate(bi.rb09, 9,
-                "EDD should be within 9 months back from DOV")) return false;
-        return true;
+        return compareTwoDate(bi.rb09, 9,
+                "EDD should be within 9 months back from DOV");
     }
 
     private boolean compareTwoDate(EditText et, int month, String msg) {

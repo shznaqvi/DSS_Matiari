@@ -299,21 +299,24 @@
                         <RadioGroup
                             android:id="@+id/rb06"
                             android:layout_width="match_parent"
+                            android:orientation="horizontal"
                             android:layout_height="wrap_content">
 
                             <RadioButton
                                 android:id="@+id/rb0602"
-                                android:layout_width="match_parent"
+                                android:layout_width="0dp"
+                                android:layout_weight="1"
                                 android:layout_height="wrap_content"
-                                android:checked='@{mwra.rb06.equals("2")?true:false}'
+                                android:checked='@{mwra.rb06.equals("2")}'
                                 android:onClick='@{()->mwra.setRb06("2")}'
                                 android:text="@string/rb0602" />
 
                             <RadioButton
                                 android:id="@+id/rb0603"
-                                android:layout_width="match_parent"
+                                android:layout_width="0dp"
+                                android:layout_weight="1"
                                 android:layout_height="wrap_content"
-                                android:checked='@{mwra.rb06.equals("3")?true:false}'
+                                android:checked='@{mwra.rb06.equals("3")}'
                                 android:onClick='@{()->mwra.setRb06("3")}'
                                 android:text="@string/rb0603" />
                         </RadioGroup>
@@ -354,11 +357,13 @@
                         <RadioGroup
                             android:id="@+id/rb07"
                             android:layout_width="match_parent"
+                            android:orientation="horizontal"
                             android:layout_height="wrap_content">
 
                             <RadioButton
                                 android:id="@+id/rb0701"
-                                android:layout_width="match_parent"
+                                android:layout_width="0dp"
+                                android:layout_weight="1"
                                 android:layout_height="wrap_content"
                                 android:checked='@{mwra.getRb07().equals("1")}'
                                 android:onClick='@{()->mwra.setRb07("1")}'
@@ -366,7 +371,8 @@
 
                             <RadioButton
                                 android:id="@+id/rb0702"
-                                android:layout_width="match_parent"
+                                android:layout_width="0dp"
+                                android:layout_weight="1"
                                 android:layout_height="wrap_content"
                                 android:checked='@{mwra.getRb07().equals("2")}'
                                 android:onClick='@{()->mwra.setRb07("2")}'

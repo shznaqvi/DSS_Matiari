@@ -43,6 +43,7 @@ import java.util.concurrent.TimeUnit;
 import edu.aku.hassannaqvi.dss_matiari.R;
 import edu.aku.hassannaqvi.dss_matiari.adapters.SyncListAdapter;
 import edu.aku.hassannaqvi.dss_matiari.contracts.TableContracts.FormsTable;
+import edu.aku.hassannaqvi.dss_matiari.contracts.TableContracts.TableVillage;
 import edu.aku.hassannaqvi.dss_matiari.contracts.TableContracts.UsersTable;
 import edu.aku.hassannaqvi.dss_matiari.contracts.TableContracts.VersionTable;
 import edu.aku.hassannaqvi.dss_matiari.core.MainApp;
@@ -160,6 +161,7 @@ public class SyncActivity extends AppCompatActivity {
 
                     downloadTables.add(new SyncModel(UsersTable.TABLE_NAME));
                     downloadTables.add(new SyncModel(VersionTable.TABLE_NAME));
+                    downloadTables.add(new SyncModel(TableVillage.TABLE_NAME));
                 } else {
                     // Set tables to DOWNLOAD
                     downloadTables.add(new SyncModel(UsersTable.TABLE_NAME));
@@ -246,6 +248,10 @@ public class SyncActivity extends AppCompatActivity {
                                     case VersionTable.TABLE_NAME:
                                         insertCount = db.syncVersionApp(new JSONObject(result));
                                         if (insertCount == 1) jsonArray.put("1");
+                                        break;
+                                    case TableVillage.TABLE_NAME:
+                                        jsonArray = new JSONArray(result);
+                                        insertCount = db.syncVillage(jsonArray);
                                         break;
                           /*          case Camps.TableCamp.TABLE_NAME:
                                         jsonArray = new JSONArray(result);

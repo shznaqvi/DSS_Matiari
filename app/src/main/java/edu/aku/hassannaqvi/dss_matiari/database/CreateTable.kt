@@ -71,6 +71,15 @@ object CreateTable {
             + VersionTable.COLUMN_PATH_NAME + " TEXT "
             + ");"
             )
+
+    const val SQL_CREATE_VILLAGES = ("CREATE TABLE " + TableVillage.TABLE_NAME + "("
+            + TableVillage._ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
+            + TableVillage.COLUMN_UCNAME + " TEXT,"
+            + TableVillage.COLUMN_VILLAGE_NAME + " TEXT,"
+            + TableVillage.COLUMN_VILLAGE_CODE + " TEXT,"
+            + TableVillage.COLUMN_UC_CODE + " TEXT" + " );")
+
+
     const val SQL_CREATE_ZSTANDARD = "CREATE TABLE " + ZScoreTable.TABLE_NAME + " (" +
             ZScoreTable._ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
             ZScoreTable.COLUMN_SEX + " TEXT, " +

@@ -14,12 +14,14 @@ import org.json.JSONObject;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
 import edu.aku.hassannaqvi.dss_matiari.contracts.TableContracts.FormsTable;
 import edu.aku.hassannaqvi.dss_matiari.contracts.TableContracts.MWRATable;
+import edu.aku.hassannaqvi.dss_matiari.contracts.TableContracts.TableVillage;
 import edu.aku.hassannaqvi.dss_matiari.contracts.TableContracts.UsersTable;
 import edu.aku.hassannaqvi.dss_matiari.contracts.TableContracts.VersionTable;
 import edu.aku.hassannaqvi.dss_matiari.contracts.TableContracts.ZScoreTable;
@@ -28,6 +30,7 @@ import edu.aku.hassannaqvi.dss_matiari.models.Form;
 import edu.aku.hassannaqvi.dss_matiari.models.MWRA;
 import edu.aku.hassannaqvi.dss_matiari.models.Users;
 import edu.aku.hassannaqvi.dss_matiari.models.VersionApp;
+import edu.aku.hassannaqvi.dss_matiari.models.Villages;
 import edu.aku.hassannaqvi.dss_matiari.models.ZStandard;
 
 import static edu.aku.hassannaqvi.dss_matiari.database.CreateTable.DATABASE_NAME;
@@ -36,6 +39,7 @@ import static edu.aku.hassannaqvi.dss_matiari.database.CreateTable.SQL_CREATE_FO
 import static edu.aku.hassannaqvi.dss_matiari.database.CreateTable.SQL_CREATE_MWRA;
 import static edu.aku.hassannaqvi.dss_matiari.database.CreateTable.SQL_CREATE_USERS;
 import static edu.aku.hassannaqvi.dss_matiari.database.CreateTable.SQL_CREATE_VERSIONAPP;
+import static edu.aku.hassannaqvi.dss_matiari.database.CreateTable.SQL_CREATE_VILLAGES;
 
 
 
@@ -59,6 +63,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL(SQL_CREATE_FORMS);
         db.execSQL(SQL_CREATE_MWRA);
         db.execSQL(SQL_CREATE_VERSIONAPP);
+        db.execSQL(SQL_CREATE_VILLAGES);
+
 //        db.execSQL(SQL_CREATE_ZSTANDARD);
 
     }
@@ -433,6 +439,122 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return insertCount;
     }
 
+    public int syncVillage(JSONArray villageList) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.delete(TableVillage.TABLE_NAME, null, null);
+        int insertCount = 0;
+        try {
+            for (int i = 0; i < villageList.length(); i++) {
+
+                JSONObject jsonObjectVil = villageList.getJSONObject(i);
+
+                Villages village = new Villages();
+                village.Sync(jsonObjectVil);
+                ContentValues values = new ContentValues();
+
+                values.put(TableVillage.COLUMN_UCNAME, village.getUcname());
+                values.put(TableVillage.COLUMN_VILLAGE_NAME, village.getVillagename());
+                values.put(TableVillage.COLUMN_VILLAGE_CODE, village.getVillagecode());
+                values.put(TableVillage.COLUMN_UC_CODE, village.getUccode());
+                long rowID = db.insert(TableVillage.TABLE_NAME, null, values);
+                if (rowID != -1) insertCount++;
+            }
+
+        } catch (Exception e) {
+            Log.d(TAG, "syncVillage(e): " + e);
+            db.close();
+        } finally {
+            db.close();
+        }
+        return insertCount;
+    }
+
+    public Collection<Villages> getVillage() {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor c = null;
+        String[] columns = {
+                TableVillage.COLUMN_UCNAME,
+                TableVillage.COLUMN_VILLAGE_NAME,
+                TableVillage.COLUMN_VILLAGE_CODE,
+                TableVillage.COLUMN_UC_CODE
+        };
+
+        String whereClause = null;
+        String[] whereArgs = null;
+        String groupBy = null;
+        String having = null;
+
+        String orderBy =
+                TableVillage.COLUMN_UCNAME + " ASC";
+
+        Collection<Villages> allVil = new ArrayList<Villages>();
+        try {
+            c = db.query(
+                    TableVillage.TABLE_NAME,  // The table to query
+                    columns,                   // The columns to return
+                    whereClause,               // The columns for the WHERE clause
+                    whereArgs,                 // The values for the WHERE clause
+                    groupBy,                   // don't group the rows
+                    having,                    // don't filter by row groups
+                    orderBy                    // The sort order
+            );
+            while (c.moveToNext()) {
+                Villages vil = new Villages();
+                allVil.add(vil.HydrateUc(c));
+            }
+        } finally {
+            if (c != null) {
+                c.close();
+            }
+            if (db != null) {
+                db.close();
+            }
+        }
+        return allVil;
+    }
+
+    public Collection<Villages> getVillageUc() {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor c = null;
+        String[] columns = {
+                "DISTINCT " + TableVillage.COLUMN_UCNAME,
+                TableVillage.COLUMN_VILLAGE_CODE,
+                TableVillage.COLUMN_UC_CODE,
+        };
+
+        String whereClause = null;
+        String[] whereArgs = null;
+        String groupBy = TableVillage.COLUMN_UCNAME;
+        String having = null;
+
+        String orderBy =
+                TableVillage.COLUMN_UCNAME + " ASC";
+
+        Collection<Villages> allVil = new ArrayList<Villages>();
+        try {
+            c = db.query(
+                    TableVillage.TABLE_NAME,  // The table to query
+                    columns,                   // The columns to return
+                    whereClause,               // The columns for the WHERE clause
+                    whereArgs,                 // The values for the WHERE clause
+                    groupBy,                   // don't group the rows
+                    having,                    // don't filter by row groups
+                    orderBy                    // The sort order
+            );
+            while (c.moveToNext()) {
+                Villages vil = new Villages();
+                allVil.add(vil.HydrateUc(c));
+            }
+        } finally {
+            if (c != null) {
+                c.close();
+            }
+            if (db != null) {
+                db.close();
+            }
+        }
+        return allVil;
+    }
 
     //get UnSyncedTables
     public JSONArray getUnsyncedForms() {
@@ -606,6 +728,49 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             alc.set(1, Cursor2);
             return alc;
         }
+    }
+
+
+    public Collection<Villages> getVillageByUc(String ucCode) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor c = null;
+        String[] columns = {
+                TableVillage.COLUMN_VILLAGE_NAME,
+                TableVillage.COLUMN_VILLAGE_CODE
+        };
+
+        String whereClause = TableVillage.COLUMN_UC_CODE + "=?";
+        String[] whereArgs = new String[]{ucCode};
+        String groupBy = null;
+        String having = null;
+
+        String orderBy =
+                TableVillage.COLUMN_VILLAGE_NAME + " ASC";
+
+        Collection<Villages> allVil = new ArrayList<Villages>();
+        try {
+            c = db.query(
+                    TableVillage.TABLE_NAME,  // The table to query
+                    columns,                   // The columns to return
+                    whereClause,               // The columns for the WHERE clause
+                    whereArgs,                 // The values for the WHERE clause
+                    groupBy,                   // don't group the rows
+                    having,                    // don't filter by row groups
+                    orderBy                    // The sort order
+            );
+            while (c.moveToNext()) {
+                Villages vil = new Villages();
+                allVil.add(vil.HydrateVil(c));
+            }
+        } finally {
+            if (c != null) {
+                c.close();
+            }
+            if (db != null) {
+                db.close();
+            }
+        }
+        return allVil;
     }
 
     public List<String> getLMS(int age, int gender, String catA, String catB) {

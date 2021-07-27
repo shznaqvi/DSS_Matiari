@@ -86,10 +86,11 @@
     <string name="ra14">Name of Head of Household </string>
     <string name="ra15">Name of Respondent </string>
     <string name="ra16">Unique Family Number</string>
-    <string name="ra17_a">Family Members 0 to 04 Years</string>
-    <string name="ra17_b">Family Members   05 to 14 Years</string>
-    <string name="a17_c">Family Members   15 to 49 Years </string>
-    <string name="ra17_d">Family Members   &gt;49 Years</string>
+    <string name="ra17">Family Members</string>
+    <string name="ra17_a">0 to 04 Years</string>
+    <string name="ra17_b">05 to 14 Years</string>
+    <string name="a17_c">15 to 49 Years </string>
+    <string name="ra17_d">&gt;49 Years</string>
     <string name="ra18">No. of Married Women</string>
     <string name="rb_uc">Union council </string>
     <string name="rb_vil">Village </string>
@@ -133,6 +134,7 @@
     <string name='Q_ra14'>ra14</string>
     <string name='Q_ra15'>ra15</string>
     <string name='Q_ra16'>ra16</string>
+    <string name='Q_ra17'>ra17</string>
     <string name='Q_ra17_a'>ra17_a</string>
     <string name='Q_ra17_b'>ra17_b</string>
     <string name='Q_ra17_d'>ra17_d</string>
