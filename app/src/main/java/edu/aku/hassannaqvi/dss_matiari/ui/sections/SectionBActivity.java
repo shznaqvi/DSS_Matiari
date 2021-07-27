@@ -6,12 +6,18 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 
 import com.validatorcrawler.aliazaz.Validator;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 
 import edu.aku.hassannaqvi.dss_matiari.R;
 import edu.aku.hassannaqvi.dss_matiari.contracts.TableContracts;
@@ -181,6 +187,33 @@ public class SectionBActivity extends AppCompatActivity {
     }
 
     private boolean formValidation() {
-        return Validator.emptyCheckingContainer(this, bi.GrpName);
+        if (!Validator.emptyCheckingContainer(this, bi.GrpName)) return false;
+        if (!compareTwoDate(bi.rb08, 2,
+                "LMP should be within 2 months back from DOV")) return false;
+        if (!compareTwoDate(bi.rb09, 9,
+                "EDD should be within 9 months back from DOV")) return false;
+        return true;
+    }
+
+    private boolean compareTwoDate(EditText et, int month, String msg) {
+        try {
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+            Date dateDOV = sdf.parse(form.getRa01());
+            Calendar calendarDOV1 = Calendar.getInstance();
+            Calendar calendarDOV2 = Calendar.getInstance();
+            calendarDOV1.setTime(dateDOV);
+            calendarDOV2.setTime(dateDOV);
+            calendarDOV2.add(Calendar.MONTH, month);
+            Date dateTwo = sdf.parse(et.getText().toString().trim());
+            if (dateTwo.before(calendarDOV1.getTime()) || dateTwo.after(calendarDOV2.getTime())) {
+                Validator.emptyCustomTextBox(this, et, msg);
+                return false;
+            } else {
+                return true;
+            }
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return true;
     }
 }
