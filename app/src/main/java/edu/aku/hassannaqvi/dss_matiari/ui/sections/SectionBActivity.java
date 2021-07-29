@@ -55,6 +55,14 @@ public class SectionBActivity extends AppCompatActivity {
         setImmersive(true);
 
         db = MainApp.appInfo.dbHelper;
+
+        // To set min max range of date fields
+        setDateRanges();
+
+
+    }
+
+    private void setDateRanges() {
         try {
             Calendar cal = Calendar.getInstance();
 
@@ -62,6 +70,19 @@ public class SectionBActivity extends AppCompatActivity {
             cal.setTime(sdf.parse(form.getRa01()));// all done
 
             sdf = new SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH);
+
+            // Set MinDob date to 50 years back from DOV
+            cal.add(Calendar.YEAR, -50);
+            String minDob = sdf.format(cal.getTime());
+            cal.add(Calendar.MONTH, +50); // Calender reset to DOV
+            Log.d(TAG, "onCreate: " + minDob);
+
+            // Set maxDob date to 50 years back from DOV
+            cal.add(Calendar.YEAR, -14);
+            String maxDob = sdf.format(cal.getTime());
+            cal.add(Calendar.MONTH, +14); // Calender reset to DOV
+            Log.d(TAG, "onCreate: " + maxDob);
+
 
             // Set MinLMP date to 2 months back from DOV
             cal.add(Calendar.MONTH, -2);
@@ -77,11 +98,15 @@ public class SectionBActivity extends AppCompatActivity {
             String minEDD = sdf.format(cal.getTime());
             Log.d(TAG, "onCreate: " + minEDD);
 
-
             // Set MaxEDD to 9 months from DOV
             cal.add(Calendar.MONTH, +9);
             String maxEDD = sdf.format(cal.getTime());
+            cal.add(Calendar.MONTH, -9);
             Log.d(TAG, "onCreate: " + maxLMP);
+
+            // DOB
+            bi.rb08.setMaxDate(maxDob);
+            bi.rb08.setMinDate(minDob);
 
             // LMP
             bi.rb08.setMaxDate(maxLMP);
@@ -95,12 +120,6 @@ public class SectionBActivity extends AppCompatActivity {
         } catch (ParseException e) {
             e.printStackTrace();
         }
-
-        //   cal.getTime();
-
-        // bi.rb08.setMaxDate(new SimpleDateFormat("dd/MM/yyyy").format(c.getTimeInMillis() - (MainApp.MILLISECONDS_IN_DAY) * 29));
-
-
     }
 
     private void setListener() {
