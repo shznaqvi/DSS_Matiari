@@ -18,6 +18,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Locale;
 
 import edu.aku.hassannaqvi.dss_matiari.R;
 import edu.aku.hassannaqvi.dss_matiari.contracts.TableContracts;
@@ -54,6 +55,50 @@ public class SectionBActivity extends AppCompatActivity {
         setImmersive(true);
 
         db = MainApp.appInfo.dbHelper;
+        try {
+            Calendar cal = Calendar.getInstance();
+
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
+            cal.setTime(sdf.parse(form.getRa01()));// all done
+
+            sdf = new SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH);
+
+            // Set MinLMP date to 2 months back from DOV
+            cal.add(Calendar.MONTH, -2);
+            String minLMP = sdf.format(cal.getTime());
+            cal.add(Calendar.MONTH, +2); // Calender reset to DOV
+            Log.d(TAG, "onCreate: " + minLMP);
+
+            // Set MaxLMP same as DOV
+            String maxLMP = sdf.format(cal.getTime());
+            Log.d(TAG, "onCreate: " + maxLMP);
+
+            // Set MinEDD same as DOV
+            String minEDD = sdf.format(cal.getTime());
+            Log.d(TAG, "onCreate: " + minEDD);
+
+
+            // Set MaxEDD to 9 months from DOV
+            cal.add(Calendar.MONTH, +9);
+            String maxEDD = sdf.format(cal.getTime());
+            Log.d(TAG, "onCreate: " + maxLMP);
+
+            // LMP
+            bi.rb08.setMaxDate(maxLMP);
+            bi.rb08.setMinDate(minLMP);
+
+            // EDD
+            bi.rb09.setMaxDate(maxEDD);
+            bi.rb09.setMinDate(minEDD);
+
+
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        //   cal.getTime();
+
+        // bi.rb08.setMaxDate(new SimpleDateFormat("dd/MM/yyyy").format(c.getTimeInMillis() - (MainApp.MILLISECONDS_IN_DAY) * 29));
 
 
     }

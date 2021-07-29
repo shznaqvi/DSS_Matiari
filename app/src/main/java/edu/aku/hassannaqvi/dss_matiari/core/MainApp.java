@@ -32,6 +32,19 @@ public class MainApp extends Application {
     public static final String _SERVER_GET_URL = "getData.php";
     public static final String _PHOTO_UPLOAD_URL = _HOST_URL + "uploads.php";
     public static final String _UPDATE_URL = MainApp._IP + "/dss_matiari/app/";
+
+    public static final Integer MONTHS_LIMIT = 11;
+    public static final Integer DAYS_LIMIT = 29;
+    private static final long MINIMUM_DISTANCE_CHANGE_FOR_UPDATES = 1; // in Meters
+    private static final long MINIMUM_TIME_BETWEEN_UPDATES = 1000; // in Milliseconds
+    private static final int TWENTY_MINUTES = 1000 * 60 * 20;
+    private static final int TWO_MINUTES = 1000 * 60 * 2;
+    private static final long MILLIS_IN_SECOND = 1000;
+    private static final long SECONDS_IN_MINUTE = 60;
+    private static final long MINUTES_IN_HOUR = 60;
+    private static final long HOURS_IN_DAY = 24;
+    public static final long MILLISECONDS_IN_DAY = MILLIS_IN_SECOND * SECONDS_IN_MINUTE * MINUTES_IN_HOUR * HOURS_IN_DAY;
+
     public static File sdDir;
     public static String[] downloadData;
     public static Form form;
@@ -47,7 +60,7 @@ public class MainApp extends Application {
     public static int versionCode = BuildConfig.VERSION_CODE;
     public static String versionName = BuildConfig.VERSION_NAME;
     public static int MY_PERMISSIONS_REQUEST_READ_PHONE_STATE = 2;
-    public static long TWO_MINUTES = 1000 * 60 * 2;
+    //    public static long TWO_MINUTES = 1000 * 60 * 2;
     public static boolean permissionCheck = false;
     public static int idType = 0;
     public static List<MWRA> mwraList;

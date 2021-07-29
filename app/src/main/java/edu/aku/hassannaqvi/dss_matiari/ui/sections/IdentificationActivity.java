@@ -88,11 +88,19 @@ public class IdentificationActivity extends AppCompatActivity {
 
         ucNames.add("...");
         ucCodes.add("...");
+
         for (Villages u : uc) {
             ucNames.add(u.getUcname());
             ucCodes.add(u.getUccode());
         }
-
+        if (MainApp.user.getUserName().contains("test") || MainApp.user.getUserName().contains("dmu")) {
+            ucNames.add("Test UC 9");
+            ucNames.add("Test UC 8");
+            ucNames.add("Test UC 7");
+            ucCodes.add("9");
+            ucCodes.add("8");
+            ucCodes.add("7");
+        }
         // Apply the adapter to the spinner
         bi.ra06.setAdapter(new ArrayAdapter(IdentificationActivity.this, R.layout.custom_spinner, ucNames));
 
@@ -118,11 +126,20 @@ public class IdentificationActivity extends AppCompatActivity {
                 villageCodes = new ArrayList<>();
                 villageNames.add("...");
                 villageCodes.add("...");
+
                 for (Villages v : village) {
                     villageNames.add(v.getVillagename());
                     villageCodes.add(v.getVillagecode());
                 }
+                if (MainApp.user.getUserName().contains("test") || MainApp.user.getUserName().contains("dmu")) {
 
+                    villageNames.add("Test Village 1");
+                    villageNames.add("Test Village 2");
+                    villageNames.add("Test Village 3");
+                    villageCodes.add("001");
+                    villageCodes.add("002");
+                    villageCodes.add("003");
+                }
                 // Apply the adapter to the spinner
                 bi.ra07.setAdapter(new ArrayAdapter(IdentificationActivity.this, R.layout.custom_spinner, villageNames));
 
