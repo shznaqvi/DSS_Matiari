@@ -90,9 +90,9 @@ public class SectionAActivity extends AppCompatActivity {
         form.setDeviceId(MainApp.deviceid);
         form.setAppver(MainApp.versionName + "." + MainApp.versionCode);
 
-        form.setS1(form.s1toString());
+        //form.setS1(form.s1toString());
 
-        form.setRa01(bi.ra01.getText().toString());
+        //  form.setRa01(bi.ra01.getText().toString());
 
     /*    form.setRa02(bi.ra02.getText().toString());
 

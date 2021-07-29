@@ -90,7 +90,6 @@ public class MwraActivity extends AppCompatActivity {
         MainApp.mwraList = new ArrayList<>();
         Log.d(TAG, "onCreate: mwralist " + mwraList.size());
         MainApp.mwraList = db.getMWRABYHDSSID(hdssid);
-        mwraCount = Math.round(MainApp.mwraList.size());
 
         fmAdapter = new MembersAdapter(this, MainApp.mwraList);
         bi.rvMembers.setAdapter(fmAdapter);
@@ -103,7 +102,6 @@ public class MwraActivity extends AppCompatActivity {
             public void onClick(View view) {
                 if (!MainApp.form.getiStatus().equals("1")) {
                     //     Toast.makeText(MwraActivity.this, "Opening Mwra Form", Toast.LENGTH_LONG).show();
-
                     addFemale();
                 } else {
                     Toast.makeText(MwraActivity.this, "This form has been locked. You cannot add new members to locked forms", Toast.LENGTH_LONG).show();
@@ -118,13 +116,17 @@ public class MwraActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         Toast.makeText(this, "Activity Resumed!", Toast.LENGTH_SHORT).show();
+        mwraCount = Math.round(MainApp.mwraList.size());
 
         MainApp.mwra = new MWRA();
         if (MainApp.mwraList.size() > 0) {
             //MainApp.fm.get(Integer.parseInt(String.valueOf(MainApp.selectedFemale))).setStatus("1");
             fmAdapter.notifyItemChanged(Integer.parseInt(String.valueOf(selectedFemale)));
         }
+
+
         checkCompleteFm();
+
         // bi.fab.setClickable(!MainApp.form.getiStatus().equals("1"));
       /* bi.completedmember.setText(mwraList.size()+ " MWRAs added");
         bi.totalmember.setText(MainApp.mwraTotal+ " M completed");*/
@@ -135,6 +137,7 @@ public class MwraActivity extends AppCompatActivity {
         int compCount = mwraList.size();
 
         MainApp.mwraCountComplete = compCount;
+        bi.btnContinue.setVisibility(mwraCount > 0 ? View.VISIBLE : View.GONE);
         //   bi.btnContinue.setVisibility(compCount == mwraCount && !form.getiStatus().equals("1")? View.VISIBLE : View.GONE);
      /*   bi.btnContinue.setVisibility(compCount >= mwraCount ? View.VISIBLE : View.GONE);
         bi.btnContinue.setEnabled(bi.btnContinue.getVisibility()==View.VISIBLE);*/

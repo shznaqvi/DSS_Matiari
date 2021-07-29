@@ -19,13 +19,13 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
+import java.util.concurrent.TimeUnit;
 
 import edu.aku.hassannaqvi.dss_matiari.R;
 import edu.aku.hassannaqvi.dss_matiari.contracts.TableContracts;
 import edu.aku.hassannaqvi.dss_matiari.core.MainApp;
 import edu.aku.hassannaqvi.dss_matiari.database.DatabaseHelper;
 import edu.aku.hassannaqvi.dss_matiari.databinding.ActivitySectionBBinding;
-import edu.aku.hassannaqvi.dss_matiari.utils.DateUtilsKt;
 
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.form;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.mwra;
@@ -127,6 +127,28 @@ public class SectionBActivity extends AppCompatActivity {
 //                        return;
 //                    }
 //                    bi.rb05.setText(DateUtilsKt.ageInYears(day, month ,year ,year));
+                    try {
+                        Calendar cur = Calendar.getInstance(); // DOV
+                        Calendar cal = Calendar.getInstance(); // DOB
+                        //cur.getTimeInMillis();
+
+                        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
+
+                        cur.setTime(sdf.parse(form.getRa01())); // DOV
+                        cal.setTime(sdf.parse(mwra.getRb04())); // DOB
+
+
+                        long yearsinMillisec = cur.getTimeInMillis() - cal.getTimeInMillis();
+                        String ageInYears = String.valueOf(TimeUnit.MILLISECONDS.toDays(yearsinMillisec) / 365);
+
+                        bi.rb05.setText(ageInYears);
+
+                    } catch (ParseException e) {
+                        e.printStackTrace();
+                    }
+
+
+/*
                     String[] arrStr = mwra.getRb04().split("-");
                     String day, month, year;
                     year = arrStr.length > 0 ? arrStr[0] : "0";
@@ -136,6 +158,7 @@ public class SectionBActivity extends AppCompatActivity {
                         return;
                     }
                     bi.rb05.setText(DateUtilsKt.getAge(year, month, day, false));
+*/
                 }
             }
         });
@@ -235,11 +258,13 @@ public class SectionBActivity extends AppCompatActivity {
     }
 
     private boolean formValidation() {
-        if (!Validator.emptyCheckingContainer(this, bi.GrpName)) return false;
-        if (!compareTwoDate(bi.rb08, 2,
+        return Validator.emptyCheckingContainer(this, bi.GrpName);
+       /*
+       if (!compareTwoDate(bi.rb08, 2,
                 "LMP should be within 2 months back from DOV")) return false;
         return compareTwoDate(bi.rb09, 9,
                 "EDD should be within 9 months back from DOV");
+                */
     }
 
     private boolean compareTwoDate(EditText et, int month, String msg) {

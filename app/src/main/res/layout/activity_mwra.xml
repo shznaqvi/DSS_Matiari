@@ -176,6 +176,7 @@
                     android:background="@drawable/button_shape_green"
                     android:drawableTint="#00ea00"
                     android:onClick="btnContinue"
+                    android:visibility="invisible"
                     android:text="Save"
                     android:textColor="@color/white" />
 
