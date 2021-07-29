@@ -105,8 +105,8 @@ public class SectionBActivity extends AppCompatActivity {
             Log.d(TAG, "onCreate: " + maxLMP);
 
             // DOB
-            bi.rb08.setMaxDate(maxDob);
-            bi.rb08.setMinDate(minDob);
+            bi.rb04.setMaxDate(maxDob);
+            bi.rb04.setMinDate(minDob);
 
             // LMP
             bi.rb08.setMaxDate(maxLMP);
