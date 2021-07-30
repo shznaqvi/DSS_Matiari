@@ -74,13 +74,13 @@ public class SectionBActivity extends AppCompatActivity {
             // Set MinDob date to 50 years back from DOV
             cal.add(Calendar.YEAR, -50);
             String minDob = sdf.format(cal.getTime());
-            cal.add(Calendar.MONTH, +50); // Calender reset to DOV
+            cal.add(Calendar.YEAR, +50); // Calender reset to DOV
             Log.d(TAG, "onCreate: " + minDob);
 
             // Set maxDob date to 50 years back from DOV
             cal.add(Calendar.YEAR, -14);
             String maxDob = sdf.format(cal.getTime());
-            cal.add(Calendar.MONTH, +14); // Calender reset to DOV
+            cal.add(Calendar.YEAR, +14); // Calender reset to DOV
             Log.d(TAG, "onCreate: " + maxDob);
 
 
