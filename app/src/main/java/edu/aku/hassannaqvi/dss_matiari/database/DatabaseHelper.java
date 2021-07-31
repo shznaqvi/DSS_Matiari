@@ -10,14 +10,13 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
-import java.util.Locale;
 
 import edu.aku.hassannaqvi.dss_matiari.contracts.TableContracts.FormsTable;
 import edu.aku.hassannaqvi.dss_matiari.contracts.TableContracts.MWRATable;
@@ -79,32 +78,23 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
 
     //Addition in DB
-    public Long addForm(Form form) {
+    public Long addForm(Form form) throws JSONException {
 
         // Gets the data repository in write mode
         SQLiteDatabase db = this.getWritableDatabase();
 
-// Create a new map of values, where column names are the keys
+        // Create a new map of values, where column names are the keys
         ContentValues values = new ContentValues();
         values.put(FormsTable.COLUMN_PROJECT_NAME, form.getProjectName());
         values.put(FormsTable.COLUMN_UID, form.getUid());
         values.put(FormsTable.COLUMN_USERNAME, form.getUserName());
         values.put(FormsTable.COLUMN_SYSDATE, form.getSysDate());
-        values.put(FormsTable.COLUMN_ASSESMENT_NO, form.getAssessNo());
         values.put(FormsTable.COLUMN_HDSSID, form.getHdssId());
-        values.put(FormsTable.COLUMN_INFANT_NAME, form.getInfantName());
-//        values.put(FormsTable.COLUMN_TSF305, form.getTsf305());
-        values.put(FormsTable.COLUMN_S1, form.getS1());
-        values.put(FormsTable.COLUMN_S2, form.getS2());
-        values.put(FormsTable.COLUMN_S3, form.getS3());
-        values.put(FormsTable.COLUMN_S4, form.getS4());
-        values.put(FormsTable.COLUMN_S5, form.getS5());
         values.put(FormsTable.COLUMN_ISTATUS, form.getiStatus());
-
         values.put(FormsTable.COLUMN_DEVICETAGID, form.getDeviceTag());
         values.put(FormsTable.COLUMN_DEVICEID, form.getDeviceId());
         values.put(FormsTable.COLUMN_APPVERSION, form.getAppver());
-
+        values.put(FormsTable.COLUMN_SA, form.sAtoString());
 
         // Insert the new row, returning the primary key value of the new row
         long newRowId;
@@ -115,7 +105,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return newRowId;
     }
 
-    public Long addMWRA(MWRA mwra) {
+    public Long addMWRA(MWRA mwra) throws JSONException {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put(MWRATable.COLUMN_PROJECT_NAME, mwra.getProjectName());
@@ -123,12 +113,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         values.put(MWRATable.COLUMN_UUID, mwra.getUid());
         values.put(MWRATable.COLUMN_USERNAME, mwra.getUserName());
         values.put(MWRATable.COLUMN_SYSDATE, mwra.getSysDate());
-        values.put(MWRATable.COLUMN_ASSESMENT_NO, mwra.getAssessNo());
         values.put(MWRATable.COLUMN_HDSSID, mwra.getHdssId());
-        values.put(MWRATable.COLUMN_S1, mwra.getS1());
-        values.put(MWRATable.COLUMN_S2, mwra.getS2());
+        values.put(MWRATable.COLUMN_SB, mwra.sBtoString());
         values.put(MWRATable.COLUMN_ISTATUS, mwra.getiStatus());
-
         values.put(MWRATable.COLUMN_DEVICETAGID, mwra.getDeviceTag());
         values.put(MWRATable.COLUMN_DEVICEID, mwra.getDeviceId());
         values.put(MWRATable.COLUMN_APPVERSION, mwra.getAppver());
@@ -237,7 +224,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
 
     // istatus examples: (1) or (1,9) or (1,3,5)
-    public Form getFormByAssessNo(String assesNo, String istatus) {
+  /*  public Form getFormByAssessNo(String assesNo, String istatus) throws JSONException {
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor c = null;
         String[] columns = null;
@@ -277,7 +264,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         }
         return allFC;
     }
-
+*/
     public ArrayList<Cursor> getDatabaseManagerData(String Query) {
         //get writable database
         SQLiteDatabase sqlDB = this.getWritableDatabase();
@@ -346,11 +333,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
 
-    public int updateTemp(String assessNo, String temp) {
+  /*  public int updateTemp(String assessNo, String temp) {
         SQLiteDatabase db = this.getReadableDatabase();
 
         ContentValues values = new ContentValues();
-        values.put(FormsTable.COLUMN_TSF305, temp);
         values.put(FormsTable.COLUMN_SYSDATE, new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.ENGLISH).format(new Date().getTime()) + "-Updated");
         values.put(FormsTable.COLUMN_ISTATUS, "1");
         values.put(FormsTable.COLUMN_SYNCED, (byte[]) null);
@@ -364,7 +350,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 values,
                 selection,
                 selectionArgs);
-    }
+    }*/
 
     public int updateEnding() {
         SQLiteDatabase db = this.getReadableDatabase();
@@ -557,7 +543,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
     //get UnSyncedTables
-    public JSONArray getUnsyncedForms() {
+    public JSONArray getUnsyncedForms() throws JSONException {
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor c = null;
         String[] columns = null;
@@ -607,7 +593,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return allForms;
     }
 
-    public JSONArray getUnsyncedMWRA() {
+    public JSONArray getUnsyncedMWRA() throws JSONException {
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor c = null;
         String[] columns = null;
@@ -856,7 +842,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return insertCount;
     }
 
-    public Form getFormByHDSSID(String hdssid) {
+    public Form getFormByHDSSID(String hdssid) throws JSONException {
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor c = null;
         String[] columns = null;
@@ -896,7 +882,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return form;
     }
 
-    public List<MWRA> getMWRABYHDSSID(String hdssid) {
+    public List<MWRA> getMWRABYHDSSID(String hdssid) throws JSONException {
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor c = null;
         String[] columns = null;

@@ -81,6 +81,7 @@ public class DataUpWorkerALL extends Worker {
     @Override
     public Result doWork() {
         if (uploadData.length() == 0) {
+            Log.d(TAG, "doWork (uploadData.length): " + uploadData.length());
             data = new Data.Builder()
                     .putString("error", "No new records to upload")
                     .putInt("position", this.position)

@@ -22,15 +22,9 @@ object CreateTable {
             + FormsTable.COLUMN_SYNCED + " TEXT,"
             + FormsTable.COLUMN_SYNCED_DATE + " TEXT,"
             + FormsTable.COLUMN_APPVERSION + " TEXT,"
-            + FormsTable.COLUMN_ASSESMENT_NO + " TEXT,"
             + FormsTable.COLUMN_HDSSID + " TEXT,"
-            + FormsTable.COLUMN_INFANT_NAME + " TEXT,"
-            + FormsTable.COLUMN_TSF305 + " TEXT,"
-            + FormsTable.COLUMN_S1 + " TEXT,"
-            + FormsTable.COLUMN_S2 + " TEXT,"
-            + FormsTable.COLUMN_S3 + " TEXT,"
-            + FormsTable.COLUMN_S4 + " TEXT,"
-            + FormsTable.COLUMN_S5 + " TEXT"
+            + FormsTable.COLUMN_SA + " TEXT"
+
             + " );"
             )
 
@@ -48,10 +42,8 @@ object CreateTable {
             + MWRATable.COLUMN_SYNCED + " TEXT,"
             + MWRATable.COLUMN_SYNCED_DATE + " TEXT,"
             + MWRATable.COLUMN_APPVERSION + " TEXT,"
-            + MWRATable.COLUMN_ASSESMENT_NO + " TEXT,"
             + MWRATable.COLUMN_HDSSID + " TEXT,"
-            + MWRATable.COLUMN_S1 + " TEXT,"
-            + MWRATable.COLUMN_S2 + " TEXT"
+            + MWRATable.COLUMN_SB + " TEXT"
             + " );"
             )
 

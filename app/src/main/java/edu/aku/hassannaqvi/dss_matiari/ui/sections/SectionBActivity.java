@@ -14,6 +14,8 @@ import androidx.databinding.DataBindingUtil;
 
 import com.validatorcrawler.aliazaz.Validator;
 
+import org.json.JSONException;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -47,9 +49,6 @@ public class SectionBActivity extends AppCompatActivity {
 
         if (mwra.getRb01().equals(""))
             mwra.setRb01(String.valueOf(mwraCount + 1));
-
-        Log.d(TAG, "onCreate: 6 " + form.getRb06());
-        Log.d(TAG, "onCreate: 7 " + form.getRb07());
 
         setTitle(R.string.sectionB_mainheading);
         setImmersive(true);
@@ -136,7 +135,7 @@ public class SectionBActivity extends AppCompatActivity {
 
             @Override
             public void afterTextChanged(Editable s) {
-                if (!mwra.getRb04().equalsIgnoreCase("")) {
+                if (!mwra.getRb04().equalsIgnoreCase("") && !mwra.getRb04().equals("98")) {
 //                    String[] arrStr = mwra.getRb04().split("-");
 //                    int day, month, year;
 //                    year = arrStr.length > 0 ? Integer.valueOf(arrStr[0]) : 0;
@@ -199,6 +198,7 @@ public class SectionBActivity extends AppCompatActivity {
 
         //mwra = new MWRA();
 
+        MainApp.mwra.setUuid(form.getUid());
         MainApp.mwra.setUserName(MainApp.user.getUserName());
         MainApp.mwra.setSysDate(form.getSysDate());
         MainApp.mwra.setDeviceId(MainApp.deviceid);
@@ -219,7 +219,7 @@ public class SectionBActivity extends AppCompatActivity {
                 : "-1");
         mwra.setRb08(bi.rb08.getText().toString());
         mwra.setRb09(bi.rb09.getText().toString());
-        mwra.setS2(mwra.s2toString());
+
     }
 
 /*    private boolean insertNewRecord() {
@@ -239,7 +239,15 @@ public class SectionBActivity extends AppCompatActivity {
 
     private boolean insertNewRecord() {
         db = MainApp.appInfo.getDbHelper();
-        long rowId = db.addMWRA(mwra);
+        long rowId = 0;
+        try {
+            rowId = db.addMWRA(mwra);
+        } catch (JSONException e) {
+            e.printStackTrace();
+            Toast.makeText(this, "JSONException: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+            Log.d(TAG, "insertNewRecord (JSONException): " + e.getMessage());
+            return false;
+        }
         mwra.setId(String.valueOf(rowId));
         if (rowId > 0) {
             mwra.setUid(mwra.getDeviceId() + mwra.getId());
@@ -252,7 +260,15 @@ public class SectionBActivity extends AppCompatActivity {
     }
 
     private boolean updateDB() {
-        int updcount = db.updatesFormColumn(TableContracts.FormsTable.COLUMN_S2, form.s2toString());
+        int updcount = 0;
+        try {
+            updcount = db.updatesMWRAColumn(TableContracts.MWRATable.COLUMN_SB, mwra.sBtoString());
+        } catch (JSONException e) {
+            e.printStackTrace();
+            Toast.makeText(this, "JSONException: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+            Log.d(TAG, "updateDB (JSONException): " + e.getMessage());
+            return false;
+        }
         if (updcount == 1) {
             return true;
         } else {

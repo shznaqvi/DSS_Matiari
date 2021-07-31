@@ -80,11 +80,11 @@
                         <com.edittextpicker.aliazaz.EditTextPicker
                             android:id="@+id/rb01"
                             android:layout_width="match_parent"
-                            android:enabled="false"
                             android:layout_height="wrap_content"
+                            android:enabled="false"
+                            android:gravity="center_vertical|center_horizontal"
                             android:hint="@string/rb01"
                             android:inputType="number"
-                            android:gravity="center_vertical|center_horizontal"
                             android:maxLength="2"
                             android:text="@={mwra.rb01}"
                             app:maxValue="10"
@@ -206,17 +206,34 @@
 
                         </LinearLayout>
 
-                        <io.blackbox_vision.datetimepickeredittext.view.DatePickerEditText
-                            android:id="@+id/rb04"
-                            style="@style/textInput"
+                        <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginBottom="0dp"
-                            android:gravity="center"
-                            android:hint="YYYY-MM-DD"
-                            android:text="@={mwra.rb04}"
-                            app:maxDate="CR_DATE"
-                            app:dateFormat="yyyy-MM-dd" />
+                            android:orientation="horizontal">
+
+                            <io.blackbox_vision.datetimepickeredittext.view.DatePickerEditText
+                                android:id="@+id/rb04"
+                                style="@style/textInput"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="0dp"
+                                android:layout_weight="1"
+                                android:enabled="@{!mwra.rb04.equals(`98`)}"
+                                android:gravity="center"
+                                android:hint="YYYY-MM-DD"
+                                android:text="@={mwra.rb04}"
+                                app:dateFormat="yyyy-MM-dd"
+                                app:maxDate="CR_DATE" />
+
+                            <CheckBox
+                                android:id="@+id/rb04check"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:checked='@{mwra.rb04.equals("98")}'
+                                android:onClick="@{()->mwra.setRb04(mwra.rb04.equals(`98`)?``:`98`)}"
+                                android:tag="-1"
+                                android:text="@string/dkn" />
+                        </LinearLayout>
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
 
@@ -258,6 +275,7 @@
                             android:hint="##"
                             android:inputType="number"
                             android:maxLength="2"
+                            android:enabled="@{mwra.rb04.equals(`98`)}"
                             android:text="@={mwra.rb05}"
                             app:maxValue="49"
                             app:minValue="15"
@@ -299,14 +317,14 @@
                         <RadioGroup
                             android:id="@+id/rb06"
                             android:layout_width="match_parent"
-                            android:orientation="horizontal"
-                            android:layout_height="wrap_content">
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
 
                             <RadioButton
                                 android:id="@+id/rb0602"
                                 android:layout_width="0dp"
-                                android:layout_weight="1"
                                 android:layout_height="wrap_content"
+                                android:layout_weight="1"
                                 android:checked='@{mwra.rb06.equals("2")}'
                                 android:onClick='@{()->mwra.setRb06("2")}'
                                 android:text="@string/rb0602" />
@@ -314,8 +332,8 @@
                             <RadioButton
                                 android:id="@+id/rb0603"
                                 android:layout_width="0dp"
-                                android:layout_weight="1"
                                 android:layout_height="wrap_content"
+                                android:layout_weight="1"
                                 android:checked='@{mwra.rb06.equals("3")}'
                                 android:onClick='@{()->mwra.setRb06("3")}'
                                 android:text="@string/rb0603" />
@@ -357,14 +375,14 @@
                         <RadioGroup
                             android:id="@+id/rb07"
                             android:layout_width="match_parent"
-                            android:orientation="horizontal"
-                            android:layout_height="wrap_content">
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
 
                             <RadioButton
                                 android:id="@+id/rb0701"
                                 android:layout_width="0dp"
-                                android:layout_weight="1"
                                 android:layout_height="wrap_content"
+                                android:layout_weight="1"
                                 android:checked='@{mwra.getRb07().equals("1")}'
                                 android:onClick='@{()->mwra.setRb07("1")}'
                                 android:text="@string/rb0701" />
@@ -372,8 +390,8 @@
                             <RadioButton
                                 android:id="@+id/rb0702"
                                 android:layout_width="0dp"
-                                android:layout_weight="1"
                                 android:layout_height="wrap_content"
+                                android:layout_weight="1"
                                 android:checked='@{mwra.getRb07().equals("2")}'
                                 android:onClick='@{()->mwra.setRb07("2")}'
                                 android:text="@string/rb0702" />
@@ -384,8 +402,8 @@
                 <!-- rb08  Input   -->
                 <androidx.cardview.widget.CardView
                     android:id="@+id/fldGrpCVrb08"
-                    android:visibility='@{mwra.Rb07.equals("1")? View.VISIBLE : View.GONE}'
-                    style="@style/cardView">
+                    style="@style/cardView"
+                    android:visibility='@{mwra.Rb07.equals("1")? View.VISIBLE : View.GONE}'>
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -427,8 +445,8 @@
                 <!-- rb09  Input   -->
                 <androidx.cardview.widget.CardView
                     android:id="@+id/fldGrpCVrb09"
-                    android:visibility='@{mwra.Rb07.equals("1")? View.VISIBLE : View.GONE}'
-                    style="@style/cardView">
+                    style="@style/cardView"
+                    android:visibility='@{mwra.Rb07.equals("1")? View.VISIBLE : View.GONE}'>
 
                     <LinearLayout
                         android:layout_width="match_parent"

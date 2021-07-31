@@ -2,6 +2,7 @@ package edu.aku.hassannaqvi.dss_matiari.ui.sections;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -9,6 +10,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 
 import com.validatorcrawler.aliazaz.Validator;
+
+import org.json.JSONException;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -58,7 +61,14 @@ public class SectionAActivity extends AppCompatActivity {
     private boolean insertNewRecord() {
         if (MainApp.form.isExist()) return true;
         db = MainApp.appInfo.getDbHelper();
-        long rowId = db.addForm(form);
+        long rowId = 0;
+        try {
+            rowId = db.addForm(form);
+        } catch (JSONException e) {
+            e.printStackTrace();
+
+            return false;
+        }
         form.setId(String.valueOf(rowId));
         if (rowId > 0) {
             form.setUid(form.getDeviceId() + form.getId());
@@ -72,7 +82,15 @@ public class SectionAActivity extends AppCompatActivity {
 
     private boolean updateDB() {
         DatabaseHelper db = MainApp.appInfo.getDbHelper();
-        int updcount = db.updatesFormColumn(TableContracts.FormsTable.COLUMN_S1, form.s1toString());
+        int updcount = 0;
+        try {
+            updcount = db.updatesFormColumn(TableContracts.FormsTable.COLUMN_SA, form.sAtoString());
+        } catch (JSONException e) {
+            e.printStackTrace();
+            Toast.makeText(this, "JSONException: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+            Log.d(TAG, "ProcessStart (JSONException): " + e.getMessage());
+            return false;
+        }
         if (updcount == 1) {
             return true;
         } else {
@@ -90,50 +108,6 @@ public class SectionAActivity extends AppCompatActivity {
         form.setDeviceId(MainApp.deviceid);
         form.setAppver(MainApp.versionName + "." + MainApp.versionCode);
 
-        //form.setS1(form.s1toString());
-
-        //  form.setRa01(bi.ra01.getText().toString());
-
-    /*    form.setRa02(bi.ra02.getText().toString());
-
-        form.setRa04(bi.ra04.getText().toString());
-
-        form.setRa04(bi.ra03.getText().toString());
-
-        form.setRa05(bi.ra05.getText().toString());
-
-        form.setRa06(bi.ra07.getText().toString());
-
-        form.setRa07(bi.ra06.getText().toString());
-
-        form.setRa08(bi.ra08.getText().toString());
-
-        form.setRa09(bi.ra09.getText().toString());
-
-        form.setRa10(bi.ra10.getText().toString());
-
-        form.setRa11(bi.ra11a.isChecked() ? "01"
-                : bi.ra11b.isChecked() ? "02"
-                : bi.ra11c.isChecked() ? "03"
-                : bi.ra11d.isChecked() ? "96"
-                : "-1");
-
-        form.setRa11x(bi.ra11x.getText().toString());
-        form.setRa12(bi.ra1201.isChecked() ? "01"
-                : bi.ra1202.isChecked() ? "02"
-                : bi.ra1203.isChecked() ? "03"
-                : bi.ra1296.isChecked() ? "96"
-                : "-1");
-
-        form.setRa1296x(bi.ra1296x.getText().toString());
-        form.setRa13(bi.ra13a.isChecked() ? "01"
-                : bi.ra13b.isChecked() ? "02"
-                : bi.ra13c.isChecked() ? "03"
-                : bi.ra13d.isChecked() ? "96"
-                : "-1");
-
-        form.setRa13x(bi.ra13x.getText().toString());
-*/
         form.setRa14(bi.ra14.getText().toString());
 
         form.setRa15(bi.ra15.getText().toString());
@@ -150,7 +124,6 @@ public class SectionAActivity extends AppCompatActivity {
 
         form.setRa18(bi.ra18.getText().toString());
 
-        form.setS1(form.s1toString());
 
     }
 

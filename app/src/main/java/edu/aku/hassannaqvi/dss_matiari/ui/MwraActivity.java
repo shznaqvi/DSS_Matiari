@@ -17,6 +17,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import org.json.JSONException;
+
 import java.util.ArrayList;
 
 import edu.aku.hassannaqvi.dss_matiari.R;
@@ -89,7 +91,13 @@ public class MwraActivity extends AppCompatActivity {
         db = MainApp.appInfo.dbHelper;
         MainApp.mwraList = new ArrayList<>();
         Log.d(TAG, "onCreate: mwralist " + mwraList.size());
-        MainApp.mwraList = db.getMWRABYHDSSID(hdssid);
+        try {
+            MainApp.mwraList = db.getMWRABYHDSSID(hdssid);
+        } catch (JSONException e) {
+            e.printStackTrace();
+            Toast.makeText(this, "JSONException: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+            Log.d(TAG, "onCreate (JSONException): " + e.getMessage());
+        }
 
         fmAdapter = new MembersAdapter(this, MainApp.mwraList);
         bi.rvMembers.setAdapter(fmAdapter);

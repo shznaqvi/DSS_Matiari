@@ -2,15 +2,19 @@ package edu.aku.hassannaqvi.dss_matiari.ui.sections;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 import androidx.databinding.DataBindingUtil;
 
 import com.validatorcrawler.aliazaz.Validator;
+
+import org.json.JSONException;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -31,6 +35,7 @@ import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.idType;
 
 public class IdentificationActivity extends AppCompatActivity {
 
+    private static final String TAG = "IdentificationActivity";
     ActivityIdentificationBinding bi;
     private Intent openIntent;
     private DatabaseHelper db;
@@ -292,7 +297,13 @@ public class IdentificationActivity extends AppCompatActivity {
         switch (idType) {
             case 1:
                 MainApp.form = new Form();
-                MainApp.form = db.getFormByHDSSID(hdssid);
+                try {
+                    MainApp.form = db.getFormByHDSSID(hdssid);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    Toast.makeText(this, "JSONException: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                    Log.d(TAG, "ProcessStart (JSONException): " + e.getMessage());
+                }
                 return MainApp.form != null;
 
             //TODO: Antro & Samples will be multiple. Different logic will be required
