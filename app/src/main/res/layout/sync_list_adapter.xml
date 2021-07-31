@@ -42,14 +42,12 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_margin="12dp"
                 android:orientation="vertical">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="12dp"
-
-                    android:layout_marginEnd="12dp"
                     android:orientation="horizontal">
 
                     <TextView
@@ -65,7 +63,7 @@
                         android:id="@+id/pb"
                         style="@android:style/Widget.ProgressBar.Small"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
+                        android:layout_height="match_parent" />
                 </LinearLayout>
 
                 <TextView
@@ -80,7 +78,8 @@
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="2dp"
-                    android:layout_margin="12dp"
+                    android:layout_marginStart="12dp"
+                    android:layout_marginEnd="12dp"
                     android:background="#7f7f7f7f" />
 
                 <TextView
@@ -89,11 +88,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="12dp"
-                    android:layout_marginLeft="17.50dp"
-                    android:layout_marginRight="17.50dp"
-                    android:layout_marginBottom="17.50dp"
-                    android:layout_weight="1"
-                    tools:text="Results:    " />
+
+                    tools:text="message here" />
             </LinearLayout>
         </LinearLayout>
     </androidx.cardview.widget.CardView>
