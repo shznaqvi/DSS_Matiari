@@ -59,8 +59,7 @@ public class SectionAActivity extends AppCompatActivity {
     }
 
     private boolean insertNewRecord() {
-        if (MainApp.form.isExist()) return true;
-        db = MainApp.appInfo.getDbHelper();
+        if (!MainApp.form.getUid().equals("")) return true;
         long rowId = 0;
         try {
             rowId = db.addForm(form);

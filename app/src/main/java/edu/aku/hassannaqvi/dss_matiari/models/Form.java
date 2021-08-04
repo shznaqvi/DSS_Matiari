@@ -30,10 +30,10 @@ public class Form extends BaseObservable implements Observable {
     private String ra10 = "";
     private String ra11 = "";
     private String ra11x = "";
-/*    private String ra12 = "";
-    private String ra1296x = "";
-    private String ra13 = "";
-    private String ra13x = "";*/
+    /*    private String ra12 = "";
+        private String ra1296x = "";
+        private String ra13 = "";
+        private String ra13x = "";*/
     private String ra14 = "";
     private String ra15 = "";
     private String ra16 = "";
@@ -53,6 +53,10 @@ public class Form extends BaseObservable implements Observable {
     private String userName = StringUtils.EMPTY;
     private String sysDate = StringUtils.EMPTY;
     private String hdssId = StringUtils.EMPTY;
+    private String ucCode = StringUtils.EMPTY;
+    private String villageCode = StringUtils.EMPTY;
+    private String hhNo = StringUtils.EMPTY;
+    private String structureNo = StringUtils.EMPTY;
 
 
     private String deviceId = StringUtils.EMPTY;
@@ -151,6 +155,38 @@ public class Form extends BaseObservable implements Observable {
 
     public void setHdssId(String hdssId) {
         this.hdssId = hdssId;
+    }
+
+    public String getUcCode() {
+        return ucCode;
+    }
+
+    public void setUcCode(String ucCode) {
+        this.ucCode = ucCode;
+    }
+
+    public String getVillageCode() {
+        return villageCode;
+    }
+
+    public void setVillageCode(String villageCode) {
+        this.villageCode = villageCode;
+    }
+
+    public String getHhNo() {
+        return hhNo;
+    }
+
+    public void setHhNo(String hhNo) {
+        this.hhNo = hhNo;
+    }
+
+    public String getStructureNo() {
+        return structureNo;
+    }
+
+    public void setStructureNo(String structureNo) {
+        this.structureNo = structureNo;
     }
 
     public String getDeviceId() {
@@ -291,6 +327,7 @@ public class Form extends BaseObservable implements Observable {
 
     public void setRa07(String ra07) {
         this.ra07 = ra07;
+        this.villageCode = ra07;
         notifyChange(BR.ra07);
     }
 
@@ -301,6 +338,7 @@ public class Form extends BaseObservable implements Observable {
 
     public void setRa06(String ra06) {
         this.ra06 = ra06;
+        this.ucCode = ra06;
         notifyChange(BR.ra06);
     }
 
@@ -311,6 +349,7 @@ public class Form extends BaseObservable implements Observable {
 
     public void setRa08(String ra08) {
         this.ra08 = ra08;
+        this.hhNo = ra08;
         notifyChange(BR.ra08);
     }
 
@@ -321,6 +360,7 @@ public class Form extends BaseObservable implements Observable {
 
     public void setRa09(String ra09) {
         this.ra09 = ra09;
+        this.structureNo = ra09;
         notifyChange(BR.ra09);
     }
 
@@ -505,6 +545,10 @@ public class Form extends BaseObservable implements Observable {
         this.userName = cursor.getString(cursor.getColumnIndex(FormsTable.COLUMN_USERNAME));
         this.sysDate = cursor.getString(cursor.getColumnIndex(FormsTable.COLUMN_SYSDATE));
         this.hdssId = cursor.getString(cursor.getColumnIndex(FormsTable.COLUMN_HDSSID));
+        this.ucCode = cursor.getString(cursor.getColumnIndex(FormsTable.COLUMN_UC_CODE));
+        this.villageCode = cursor.getString(cursor.getColumnIndex(FormsTable.COLUMN_VILLAGE_CODE));
+        this.hhNo = cursor.getString(cursor.getColumnIndex(FormsTable.COLUMN_HOUSEHOLD_NO));
+        this.structureNo = cursor.getString(cursor.getColumnIndex(FormsTable.COLUMN_STRUCTURE_NO));
 
         this.deviceId = cursor.getString(cursor.getColumnIndex(FormsTable.COLUMN_DEVICEID));
         this.deviceTag = cursor.getString(cursor.getColumnIndex(FormsTable.COLUMN_DEVICETAGID));
@@ -530,25 +574,25 @@ public class Form extends BaseObservable implements Observable {
             this.ra04 = json.getString("ra04");
             this.ra03 = json.getString("ra03");
             this.ra05 = json.getString("ra05");
-                this.ra07 = json.getString("ra07");
-                this.ra06 = json.getString("ra06");
-                this.ra08 = json.getString("ra08");
-                this.ra09 = json.getString("ra09");
-                this.ra10 = json.getString("ra10");
-                this.ra11 = json.getString("ra11");
-                this.ra11x = json.getString("ra11x");
+            this.ra07 = json.getString("ra07");
+            this.ra06 = json.getString("ra06");
+            this.ra08 = json.getString("ra08");
+            this.ra09 = json.getString("ra09");
+            this.ra10 = json.getString("ra10");
+            this.ra11 = json.getString("ra11");
+            this.ra11x = json.getString("ra11x");
           /*      this.ra12 = json.getString("ra12");
                 this.ra1296x = json.getString("ra1296x");
                 this.ra13 = json.getString("ra13");
                 this.ra13x = json.getString("ra13x");*/
-                this.ra14 = json.getString("ra14");
-                this.ra15 = json.getString("ra15");
-                this.ra16 = json.getString("ra16");
-                this.ra17_a = json.getString("ra17_a");
-                this.ra17_b = json.getString("ra17_b");
-                this.ra17_c = json.getString("ra17_c");
-                this.ra17_d = json.getString("ra17_d");
-                this.ra18 = json.getString("ra18");
+            this.ra14 = json.getString("ra14");
+            this.ra15 = json.getString("ra15");
+            this.ra16 = json.getString("ra16");
+            this.ra17_a = json.getString("ra17_a");
+            this.ra17_b = json.getString("ra17_b");
+            this.ra17_c = json.getString("ra17_c");
+            this.ra17_d = json.getString("ra17_d");
+            this.ra18 = json.getString("ra18");
 
 
         }
@@ -566,22 +610,22 @@ public class Form extends BaseObservable implements Observable {
                 .put("ra07", ra07)
                 .put("ra06", ra06)
                 .put("ra08", ra08)
-                    .put("ra09", ra09)
-                    .put("ra10", ra10)
-                    .put("ra11", ra11)
-                    .put("ra11x", ra11x)
+                .put("ra09", ra09)
+                .put("ra10", ra10)
+                .put("ra11", ra11)
+                .put("ra11x", ra11x)
                 /*    .put("ra12", ra12)
                     .put("ra1296x", ra1296x)
                     .put("ra13", ra13)
                     .put("ra13x", ra13x)*/
-                    .put("ra14", ra14)
-                    .put("ra15", ra15)
-                    .put("ra16", ra16)
-                    .put("ra17_a", ra17_a)
-                    .put("ra17_b", ra17_b)
-                    .put("ra17_c", ra17_c)
-                    .put("ra17_d", ra17_d)
-                    .put("ra18", ra18);
+                .put("ra14", ra14)
+                .put("ra15", ra15)
+                .put("ra16", ra16)
+                .put("ra17_a", ra17_a)
+                .put("ra17_b", ra17_b)
+                .put("ra17_c", ra17_c)
+                .put("ra17_d", ra17_d)
+                .put("ra18", ra18);
 
         return json.toString();
     }
@@ -597,14 +641,18 @@ public class Form extends BaseObservable implements Observable {
         json.put(FormsTable.COLUMN_USERNAME, this.userName);
         json.put(FormsTable.COLUMN_SYSDATE, this.sysDate);
         json.put(FormsTable.COLUMN_HDSSID, this.hdssId);
+        json.put(FormsTable.COLUMN_UC_CODE, this.ucCode);
+        json.put(FormsTable.COLUMN_VILLAGE_CODE, this.villageCode);
+        json.put(FormsTable.COLUMN_HOUSEHOLD_NO, this.hhNo);
+        json.put(FormsTable.COLUMN_STRUCTURE_NO, this.structureNo);
         json.put(FormsTable.COLUMN_DEVICEID, this.deviceId);
-            json.put(FormsTable.COLUMN_DEVICETAGID, this.deviceTag);
-            json.put(FormsTable.COLUMN_ISTATUS, this.iStatus);
-            //  json.put(FormsTable.COLUMN_SYNCED, this.synced);
-            //  json.put(FormsTable.COLUMN_SYNCED_DATE, this.syncDate);
+        json.put(FormsTable.COLUMN_DEVICETAGID, this.deviceTag);
+        json.put(FormsTable.COLUMN_ISTATUS, this.iStatus);
+        //  json.put(FormsTable.COLUMN_SYNCED, this.synced);
+        //  json.put(FormsTable.COLUMN_SYNCED_DATE, this.syncDate);
 
         json.put(FormsTable.COLUMN_SA, new JSONObject(sAtoString()));
-            //Log.d(TAG, "toJSONObject: "+new JSONObject(s2toString()));
+        //Log.d(TAG, "toJSONObject: "+new JSONObject(s2toString()));
 
 
         return json;

@@ -23,8 +23,11 @@ object CreateTable {
             + FormsTable.COLUMN_SYNCED_DATE + " TEXT,"
             + FormsTable.COLUMN_APPVERSION + " TEXT,"
             + FormsTable.COLUMN_HDSSID + " TEXT,"
+            + FormsTable.COLUMN_UC_CODE + " TEXT,"
+            + FormsTable.COLUMN_VILLAGE_CODE + " TEXT,"
+            + FormsTable.COLUMN_HOUSEHOLD_NO + " TEXT,"
+            + FormsTable.COLUMN_STRUCTURE_NO + " TEXT,"
             + FormsTable.COLUMN_SA + " TEXT"
-
             + " );"
             )
 

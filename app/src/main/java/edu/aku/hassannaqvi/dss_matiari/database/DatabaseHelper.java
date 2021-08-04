@@ -90,6 +90,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         values.put(FormsTable.COLUMN_USERNAME, form.getUserName());
         values.put(FormsTable.COLUMN_SYSDATE, form.getSysDate());
         values.put(FormsTable.COLUMN_HDSSID, form.getHdssId());
+        values.put(FormsTable.COLUMN_UC_CODE, form.getUcCode());
+        values.put(FormsTable.COLUMN_VILLAGE_CODE, form.getVillageCode());
+        values.put(FormsTable.COLUMN_HOUSEHOLD_NO, form.getHhNo());
+        values.put(FormsTable.COLUMN_STRUCTURE_NO, form.getStructureNo());
         values.put(FormsTable.COLUMN_ISTATUS, form.getiStatus());
         values.put(FormsTable.COLUMN_DEVICETAGID, form.getDeviceTag());
         values.put(FormsTable.COLUMN_DEVICEID, form.getDeviceId());
@@ -922,5 +926,22 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             }
         }
         return mwraByHH;
+    }
+
+    public int getMaxHHNo(String vCode) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor c = db.rawQuery(
+                "SELECT " +
+                        "MAX(" + FormsTable.COLUMN_HOUSEHOLD_NO + ") AS " + FormsTable.COLUMN_HOUSEHOLD_NO +
+                        " FROM " + FormsTable.TABLE_NAME +
+                        " WHERE " + FormsTable.COLUMN_VILLAGE_CODE + "=? " +
+                        " GROUP BY " + FormsTable.COLUMN_VILLAGE_CODE
+                ,
+                new String[]{vCode});
+        float maxHHno = 0;
+        while (c.moveToNext()) {
+            maxHHno = c.getFloat(c.getColumnIndex(FormsTable.COLUMN_HOUSEHOLD_NO));
+        }
+        return Math.round(maxHHno);
     }
 }

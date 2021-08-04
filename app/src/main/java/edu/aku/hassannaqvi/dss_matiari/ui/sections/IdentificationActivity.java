@@ -163,17 +163,25 @@ public class IdentificationActivity extends AppCompatActivity {
                 bi.ra08.setText(null);
                 bi.ra09.setText(null);
                 bi.ra10.setText(null);
+                if (position != 0) {
+                    String vCode = villageCodes.get(bi.ra07.getSelectedItemPosition());
 
-                bi.btnContinue.setBackgroundTintList(ContextCompat.getColorStateList(IdentificationActivity.this, R.color.colorAccent));
-                bi.btnContinue.setEnabled(true);
+                    int maxHHno = db.getMaxHHNo(vCode) + 1;
+                    bi.btnContinue.setBackgroundTintList(ContextCompat.getColorStateList(IdentificationActivity.this, R.color.colorAccent));
+                    bi.btnContinue.setEnabled(true);
            /*     bi.checkHousehold.setBackgroundTintList(ContextCompat.getColorStateList(IdentificationActivity.this, R.color.colorAccent));
                 bi.checkHousehold.setEnabled(true);*/
-                bi.ra08.setEnabled(false);
-                bi.ra09.setEnabled(false);
-                if (position == 0) return;
-                bi.ra08.setEnabled(true);
-                bi.ra09.setEnabled(true);
-                bi.ra10.setEnabled(true);
+                    bi.ra08.setEnabled(false);
+                    //bi.ra09.setEnabled(false);
+                    bi.ra09.setText(String.valueOf(maxHHno));
+                    if (position == 0) return;
+                    bi.ra08.setEnabled(true);
+                    bi.ra09.setEnabled(true);
+                    bi.ra10.setEnabled(true);
+
+                }
+
+
             }
 
             @Override
@@ -319,5 +327,17 @@ public class IdentificationActivity extends AppCompatActivity {
                 return false;
 
         }
+    }
+
+    public void getHouseNo(View view) {
+
+
+        String vCode = villageCodes.get(bi.ra07.getSelectedItemPosition());
+
+        int maxHHno = db.getMaxHHNo(vCode) + 1;
+
+        bi.ra09.setText(String.valueOf(maxHHno));
+
+
     }
 }

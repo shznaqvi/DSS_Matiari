@@ -13,6 +13,10 @@ public class TableContracts {
         public static final String COLUMN_USERNAME = "username";
         public static final String COLUMN_SYSDATE = "sysdate";
         public static final String COLUMN_HDSSID = "hdssid";
+        public static final String COLUMN_UC_CODE = "ucCode";
+        public static final String COLUMN_VILLAGE_CODE = "villageCode";
+        public static final String COLUMN_HOUSEHOLD_NO = "hhNo";
+        public static final String COLUMN_STRUCTURE_NO = "structureNo";
         public static final String COLUMN_SA = "s1";
 
 
