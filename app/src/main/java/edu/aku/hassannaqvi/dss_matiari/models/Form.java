@@ -349,7 +349,7 @@ public class Form extends BaseObservable implements Observable {
 
     public void setRa08(String ra08) {
         this.ra08 = ra08;
-        this.hhNo = ra08;
+
         notifyChange(BR.ra08);
     }
 
@@ -360,7 +360,7 @@ public class Form extends BaseObservable implements Observable {
 
     public void setRa09(String ra09) {
         this.ra09 = ra09;
-        this.structureNo = ra09;
+        this.hhNo = ra09;
         notifyChange(BR.ra09);
     }
 
@@ -371,6 +371,7 @@ public class Form extends BaseObservable implements Observable {
 
     public void setRa10(String ra10) {
         this.ra10 = ra10;
+        this.structureNo = ra10;
         notifyChange(BR.ra10);
     }
 

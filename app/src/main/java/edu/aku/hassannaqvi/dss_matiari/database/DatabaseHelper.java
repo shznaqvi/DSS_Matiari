@@ -942,6 +942,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         while (c.moveToNext()) {
             maxHHno = c.getFloat(c.getColumnIndex(FormsTable.COLUMN_HOUSEHOLD_NO));
         }
+        Log.d(TAG, "getMaxHHNo: " + maxHHno);
         return Math.round(maxHHno);
     }
 }
