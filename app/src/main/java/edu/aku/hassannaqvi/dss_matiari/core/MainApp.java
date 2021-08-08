@@ -69,7 +69,12 @@ public class MainApp extends Application {
     public static int mwraCount = 0;
     public static boolean fmComplete;
     public static int selectedFemale;
+    public static int selectedHousehold;
     public static int mwraCountComplete = 0;
+    public static List<Form> householdList;
+    public static Form household;
+    public static int householdCount = 0;
+    public static int householdCountComplete = 0;
 
     public static void hideSystemUI(View decorView) {
         // Enables regular immersive mode.

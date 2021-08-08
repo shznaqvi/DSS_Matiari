@@ -23,7 +23,7 @@ import edu.aku.hassannaqvi.dss_matiari.core.MainApp;
 import edu.aku.hassannaqvi.dss_matiari.database.DatabaseHelper;
 import edu.aku.hassannaqvi.dss_matiari.databinding.ActivitySectionABinding;
 import edu.aku.hassannaqvi.dss_matiari.ui.MainActivity;
-import edu.aku.hassannaqvi.dss_matiari.ui.MwraActivity;
+import edu.aku.hassannaqvi.dss_matiari.ui.lists.MwraActivity;
 
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.form;
 

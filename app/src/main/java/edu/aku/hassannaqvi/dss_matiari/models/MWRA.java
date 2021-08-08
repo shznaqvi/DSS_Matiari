@@ -38,6 +38,10 @@ public class MWRA extends BaseObservable implements Observable {
     private String userName = StringUtils.EMPTY;
     private String sysDate = StringUtils.EMPTY;
     private String hdssId = StringUtils.EMPTY;
+    private String ucCode = StringUtils.EMPTY;
+    private String villageCode = StringUtils.EMPTY;
+    private String hhNo = StringUtils.EMPTY;
+    private String structureNo = StringUtils.EMPTY;
 
     private String deviceId = StringUtils.EMPTY;
     private String deviceTag = StringUtils.EMPTY;
@@ -122,6 +126,38 @@ public class MWRA extends BaseObservable implements Observable {
 
     public void setHdssId(String hdssId) {
         this.hdssId = hdssId;
+    }
+
+    public String getUcCode() {
+        return ucCode;
+    }
+
+    public void setUcCode(String ucCode) {
+        this.ucCode = ucCode;
+    }
+
+    public String getVillageCode() {
+        return villageCode;
+    }
+
+    public void setVillageCode(String villageCode) {
+        this.villageCode = villageCode;
+    }
+
+    public String getHhNo() {
+        return hhNo;
+    }
+
+    public void setHhNo(String hhNo) {
+        this.hhNo = hhNo;
+    }
+
+    public String getStructureNo() {
+        return structureNo;
+    }
+
+    public void setStructureNo(String structureNo) {
+        this.structureNo = structureNo;
     }
 
     public String getDeviceId() {
@@ -321,6 +357,10 @@ public class MWRA extends BaseObservable implements Observable {
         this.userName = cursor.getString(cursor.getColumnIndex(MWRATable.COLUMN_USERNAME));
         this.sysDate = cursor.getString(cursor.getColumnIndex(MWRATable.COLUMN_SYSDATE));
         this.hdssId = cursor.getString(cursor.getColumnIndex(MWRATable.COLUMN_HDSSID));
+        this.ucCode = cursor.getString(cursor.getColumnIndex(MWRATable.COLUMN_UC_CODE));
+        this.villageCode = cursor.getString(cursor.getColumnIndex(MWRATable.COLUMN_VILLAGE_CODE));
+        this.structureNo = cursor.getString(cursor.getColumnIndex(MWRATable.COLUMN_STRUCTURE_NO));
+        this.hhNo = cursor.getString(cursor.getColumnIndex(MWRATable.COLUMN_HOUSEHOLD_NO));
         this.deviceId = cursor.getString(cursor.getColumnIndex(MWRATable.COLUMN_DEVICEID));
         this.deviceTag = cursor.getString(cursor.getColumnIndex(MWRATable.COLUMN_DEVICETAGID));
         this.appver = cursor.getString(cursor.getColumnIndex(MWRATable.COLUMN_APPVERSION));
@@ -382,14 +422,18 @@ public class MWRA extends BaseObservable implements Observable {
         json.put(MWRATable.COLUMN_USERNAME, this.userName);
         json.put(MWRATable.COLUMN_SYSDATE, this.sysDate);
         json.put(MWRATable.COLUMN_HDSSID, this.hdssId);
-            json.put(MWRATable.COLUMN_DEVICEID, this.deviceId);
-            json.put(MWRATable.COLUMN_DEVICETAGID, this.deviceTag);
-            json.put(MWRATable.COLUMN_ISTATUS, this.iStatus);
-            //  json.put(MWRATable.COLUMN_SYNCED, this.synced);
-            //  json.put(MWRATable.COLUMN_SYNCED_DATE, this.syncDate);
+        json.put(MWRATable.COLUMN_UC_CODE, this.ucCode);
+        json.put(MWRATable.COLUMN_VILLAGE_CODE, this.villageCode);
+        json.put(MWRATable.COLUMN_STRUCTURE_NO, this.structureNo);
+        json.put(MWRATable.COLUMN_HOUSEHOLD_NO, this.hhNo);
+        json.put(MWRATable.COLUMN_DEVICEID, this.deviceId);
+        json.put(MWRATable.COLUMN_DEVICETAGID, this.deviceTag);
+        json.put(MWRATable.COLUMN_ISTATUS, this.iStatus);
+        //  json.put(MWRATable.COLUMN_SYNCED, this.synced);
+        //  json.put(MWRATable.COLUMN_SYNCED_DATE, this.syncDate);
 
         json.put(MWRATable.COLUMN_SB, new JSONObject(sBtoString()));
-            return json;
+        return json;
 
     }
 

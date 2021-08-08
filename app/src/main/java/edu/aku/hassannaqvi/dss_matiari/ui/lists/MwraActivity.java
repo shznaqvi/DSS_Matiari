@@ -1,4 +1,4 @@
-package edu.aku.hassannaqvi.dss_matiari.ui;
+package edu.aku.hassannaqvi.dss_matiari.ui.lists;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -22,14 +22,13 @@ import org.json.JSONException;
 import java.util.ArrayList;
 
 import edu.aku.hassannaqvi.dss_matiari.R;
-import edu.aku.hassannaqvi.dss_matiari.adapters.MembersAdapter;
+import edu.aku.hassannaqvi.dss_matiari.adapters.MwraAdapter;
 import edu.aku.hassannaqvi.dss_matiari.core.MainApp;
 import edu.aku.hassannaqvi.dss_matiari.database.DatabaseHelper;
 import edu.aku.hassannaqvi.dss_matiari.databinding.ActivityMwraBinding;
 import edu.aku.hassannaqvi.dss_matiari.models.MWRA;
 import edu.aku.hassannaqvi.dss_matiari.ui.sections.SectionBActivity;
 
-import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.hdssid;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.mwra;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.mwraCount;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.mwraList;
@@ -41,7 +40,7 @@ public class MwraActivity extends AppCompatActivity {
     private static final String TAG = "MwraActivity";
     ActivityMwraBinding bi;
     DatabaseHelper db;
-    private MembersAdapter fmAdapter;
+    private MwraAdapter fmAdapter;
     ActivityResultLauncher<Intent> MemberInfoLauncher = registerForActivityResult(
             new ActivityResultContracts.StartActivityForResult(),
             new ActivityResultCallback<ActivityResult>() {
@@ -92,14 +91,14 @@ public class MwraActivity extends AppCompatActivity {
         MainApp.mwraList = new ArrayList<>();
         Log.d(TAG, "onCreate: mwralist " + mwraList.size());
         try {
-            MainApp.mwraList = db.getMWRABYHDSSID(hdssid);
+            MainApp.mwraList = db.getAllMWRAByHH(MainApp.form.getVillageCode(), MainApp.form.getStructureNo(), MainApp.form.getHhNo());
         } catch (JSONException e) {
             e.printStackTrace();
             Toast.makeText(this, "JSONException: " + e.getMessage(), Toast.LENGTH_SHORT).show();
             Log.d(TAG, "onCreate (JSONException): " + e.getMessage());
         }
 
-        fmAdapter = new MembersAdapter(this, MainApp.mwraList);
+        fmAdapter = new MwraAdapter(this, MainApp.mwraList);
         bi.rvMembers.setAdapter(fmAdapter);
         bi.rvMembers.setLayoutManager(new LinearLayoutManager(this));
 
@@ -162,16 +161,17 @@ public class MwraActivity extends AppCompatActivity {
     }
 
     public void btnContinue(View view) {
-
+        setResult(RESULT_OK);
         finish();
-        startActivity(new Intent(this, EndingActivity.class).putExtra("complete", true));
+        //startActivity(new Intent(this, EndingActivity.class).putExtra("complete", true));
 
     }
 
     public void BtnEnd(View view) {
 
+        setResult(RESULT_OK);
         finish();
-        startActivity(new Intent(this, MainActivity.class));
+        //startActivity(new Intent(this, MainActivity.class));
         /*   } else {
                Toast.makeText(this, "Failed to Update Database!", Toast.LENGTH_SHORT).show()
            }*/

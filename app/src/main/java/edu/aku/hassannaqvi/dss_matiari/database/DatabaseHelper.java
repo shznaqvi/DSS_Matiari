@@ -113,11 +113,15 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put(MWRATable.COLUMN_PROJECT_NAME, mwra.getProjectName());
-        values.put(MWRATable.COLUMN_UID, mwra.getUuid());
-        values.put(MWRATable.COLUMN_UUID, mwra.getUid());
+        values.put(MWRATable.COLUMN_UID, mwra.getUid());
+        values.put(MWRATable.COLUMN_UUID, mwra.getUuid());
         values.put(MWRATable.COLUMN_USERNAME, mwra.getUserName());
         values.put(MWRATable.COLUMN_SYSDATE, mwra.getSysDate());
         values.put(MWRATable.COLUMN_HDSSID, mwra.getHdssId());
+        values.put(MWRATable.COLUMN_UC_CODE, mwra.getUcCode());
+        values.put(MWRATable.COLUMN_VILLAGE_CODE, mwra.getVillageCode());
+        values.put(MWRATable.COLUMN_STRUCTURE_NO, mwra.getStructureNo());
+        values.put(MWRATable.COLUMN_HOUSEHOLD_NO, mwra.getHhNo());
         values.put(MWRATable.COLUMN_SB, mwra.sBtoString());
         values.put(MWRATable.COLUMN_ISTATUS, mwra.getiStatus());
         values.put(MWRATable.COLUMN_DEVICETAGID, mwra.getDeviceTag());
@@ -886,15 +890,17 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return form;
     }
 
-    public List<MWRA> getMWRABYHDSSID(String hdssid) throws JSONException {
+    public List<MWRA> getAllMWRAByHH(String village, String structure, String hhNo) throws JSONException {
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor c = null;
         String[] columns = null;
 
         String whereClause;
-        whereClause = MWRATable.COLUMN_HDSSID + "=?";
+        whereClause = MWRATable.COLUMN_VILLAGE_CODE + "=? AND "
+                + MWRATable.COLUMN_STRUCTURE_NO + "=? AND "
+                + MWRATable.COLUMN_HOUSEHOLD_NO + "=? ";
 
-        String[] whereArgs = {hdssid};
+        String[] whereArgs = {village, structure, hhNo};
 
         String groupBy = null;
         String having = null;
@@ -928,11 +934,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return mwraByHH;
     }
 
-    public int getMaxHHNo(String vCode) {
+    public int getMaxStructure(String vCode) {
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor c = db.rawQuery(
                 "SELECT " +
-                        "MAX(" + FormsTable.COLUMN_HOUSEHOLD_NO + ") AS " + FormsTable.COLUMN_HOUSEHOLD_NO +
+                        "MAX(" + FormsTable.COLUMN_STRUCTURE_NO + ") AS " + FormsTable.COLUMN_STRUCTURE_NO +
                         " FROM " + FormsTable.TABLE_NAME +
                         " WHERE " + FormsTable.COLUMN_VILLAGE_CODE + "=? " +
                         " GROUP BY " + FormsTable.COLUMN_VILLAGE_CODE
@@ -940,9 +946,69 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 new String[]{vCode});
         float maxHHno = 0;
         while (c.moveToNext()) {
+            maxHHno = c.getFloat(c.getColumnIndex(FormsTable.COLUMN_STRUCTURE_NO));
+        }
+        Log.d(TAG, "getMaxHHNo: " + maxHHno);
+        return Math.round(maxHHno);
+    }
+
+    public int getMaxHHNo(String vCode, String structure) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor c = db.rawQuery(
+                "SELECT " +
+                        "MAX(" + FormsTable.COLUMN_HOUSEHOLD_NO + ") AS " + FormsTable.COLUMN_HOUSEHOLD_NO +
+                        " FROM " + FormsTable.TABLE_NAME +
+                        " WHERE " + FormsTable.COLUMN_VILLAGE_CODE + "=? AND " + FormsTable.COLUMN_STRUCTURE_NO + "=? " +
+                        " GROUP BY " + FormsTable.COLUMN_VILLAGE_CODE
+                ,
+                new String[]{vCode, structure});
+        float maxHHno = 0;
+        while (c.moveToNext()) {
             maxHHno = c.getFloat(c.getColumnIndex(FormsTable.COLUMN_HOUSEHOLD_NO));
         }
         Log.d(TAG, "getMaxHHNo: " + maxHHno);
         return Math.round(maxHHno);
+    }
+
+    public List<Form> getHouseholdBYStructure(String village, String structure) throws JSONException {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor c = null;
+        String[] columns = null;
+
+        String whereClause;
+        whereClause = FormsTable.COLUMN_VILLAGE_CODE + "=? AND " + FormsTable.COLUMN_STRUCTURE_NO + "=? ";
+
+        String[] whereArgs = {village, structure};
+
+        String groupBy = null;
+        String having = null;
+
+        String orderBy = FormsTable.COLUMN_ID + " ASC";
+
+        ArrayList<Form> householdByHH = new ArrayList<>();
+        try {
+            c = db.query(
+                    FormsTable.TABLE_NAME,  // The table to query
+                    columns,                   // The columns to return
+                    whereClause,               // The columns for the WHERE clause
+                    whereArgs,                 // The values for the WHERE clause
+                    groupBy,                   // don't group the rows
+                    having,                    // don't filter by row groups
+                    orderBy                    // The sort order
+            );
+            while (c.moveToNext()) {
+                Form household = new Form().Hydrate(c);
+
+                householdByHH.add(household);
+            }
+        } finally {
+            if (c != null) {
+                c.close();
+            }
+            if (db != null) {
+                db.close();
+            }
+        }
+        return householdByHH;
     }
 }

@@ -46,6 +46,10 @@ object CreateTable {
             + MWRATable.COLUMN_SYNCED_DATE + " TEXT,"
             + MWRATable.COLUMN_APPVERSION + " TEXT,"
             + MWRATable.COLUMN_HDSSID + " TEXT,"
+            + MWRATable.COLUMN_VILLAGE_CODE + " TEXT,"
+            + MWRATable.COLUMN_UC_CODE + " TEXT,"
+            + MWRATable.COLUMN_STRUCTURE_NO + " TEXT,"
+            + MWRATable.COLUMN_HOUSEHOLD_NO + " TEXT,"
             + MWRATable.COLUMN_SB + " TEXT"
             + " );"
             )

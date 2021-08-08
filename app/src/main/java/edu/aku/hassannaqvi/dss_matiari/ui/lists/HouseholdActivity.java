@@ -1,0 +1,200 @@
+package edu.aku.hassannaqvi.dss_matiari.ui.lists;
+
+import android.app.Activity;
+import android.content.Intent;
+import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
+import android.widget.Toast;
+
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.databinding.DataBindingUtil;
+import androidx.recyclerview.widget.LinearLayoutManager;
+
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
+import org.json.JSONException;
+
+import java.util.ArrayList;
+
+import edu.aku.hassannaqvi.dss_matiari.R;
+import edu.aku.hassannaqvi.dss_matiari.adapters.HouseholdAdapter;
+import edu.aku.hassannaqvi.dss_matiari.core.MainApp;
+import edu.aku.hassannaqvi.dss_matiari.database.DatabaseHelper;
+import edu.aku.hassannaqvi.dss_matiari.databinding.ActivityHouseholdBinding;
+import edu.aku.hassannaqvi.dss_matiari.models.Form;
+import edu.aku.hassannaqvi.dss_matiari.ui.EndingActivity;
+import edu.aku.hassannaqvi.dss_matiari.ui.MainActivity;
+import edu.aku.hassannaqvi.dss_matiari.ui.sections.SectionAActivity;
+
+import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.selectedHousehold;
+
+
+public class HouseholdActivity extends AppCompatActivity {
+
+    private static final String TAG = "HouseholdActivity";
+    ActivityHouseholdBinding bi;
+    DatabaseHelper db;
+    private HouseholdAdapter hhAdapter;
+    ActivityResultLauncher<Intent> MemberInfoLauncher = registerForActivityResult(
+            new ActivityResultContracts.StartActivityForResult(),
+            new ActivityResultCallback<ActivityResult>() {
+                @Override
+                public void onActivityResult(ActivityResult result) {
+                    if (result.getResultCode() == Activity.RESULT_OK) {
+                        // There are no request codes
+                        //Intent data = result.getData();
+                        Intent data = result.getData();
+                      /*  int age = Integer.parseInt(femalemembers.getHh05y());
+                        boolean isFemale = femalemembers.getHh03().equals("2");
+                        boolean notMarried = femalemembers.getHh06().equals("2");
+                        if (
+                            // Adolescent: Male + Female - 10 to 19
+                                (age >= 10 && age < 20 && notMarried)
+                                        ||
+                                        // HOUSEHOLD: Married females between 14 to 49
+                                        (age >= 14 && age < 50 && !notMarried && isFemale )
+
+                        ) {*/
+                        MainApp.householdList.add(MainApp.household);
+
+                        MainApp.householdCount++;
+
+                        hhAdapter.notifyItemInserted(MainApp.householdList.size() - 1);
+                        //  Collections.sort(MainApp.fm, new SortByStatus());
+                        //fmAdapter.notifyDataSetChanged();
+
+                        //        }
+
+                        checkCompleteFm();
+                    }
+                    if (result.getResultCode() == Activity.RESULT_CANCELED) {
+                        Toast.makeText(HouseholdActivity.this, "No household added.", Toast.LENGTH_SHORT).show();
+                    }
+
+                }
+            });
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        //setContentView(R.layout.activity_household);
+        bi = DataBindingUtil.setContentView(this, R.layout.activity_household);
+        bi.setCallback(this);
+
+        db = MainApp.appInfo.dbHelper;
+        MainApp.householdList = new ArrayList<>();
+
+        Log.d(TAG, "onCreate: householdlist " + MainApp.householdList.size());
+        try {
+
+            String village = MainApp.form.getVillageCode();
+            String structure = MainApp.form.getStructureNo();
+            MainApp.householdList = db.getHouseholdBYStructure(village, structure);
+        } catch (JSONException e) {
+            e.printStackTrace();
+            Toast.makeText(this, "JSONException: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+            Log.d(TAG, "onCreate (JSONException): " + e.getMessage());
+        }
+
+        hhAdapter = new HouseholdAdapter(this, MainApp.householdList);
+        bi.rvHouseholds.setAdapter(hhAdapter);
+        bi.rvHouseholds.setLayoutManager(new LinearLayoutManager(this));
+
+
+        FloatingActionButton fab = findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (!MainApp.form.getiStatus().equals("1")) {
+                    //     Toast.makeText(HouseholdActivity.this, "Opening Household Form", Toast.LENGTH_LONG).show();
+                    addHousehold();
+                } else {
+                    Toast.makeText(HouseholdActivity.this, "This form has been locked. You cannot add new household to locked forms", Toast.LENGTH_LONG).show();
+                }
+            }
+        });
+
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Toast.makeText(this, "Activity Resumed!", Toast.LENGTH_SHORT).show();
+        MainApp.householdCount = Math.round(MainApp.householdList.size());
+
+        MainApp.household = new Form();
+        if (MainApp.householdList.size() > 0) {
+            //MainApp.fm.get(Integer.parseInt(String.valueOf(MainApp.selectedHousehold))).setStatus("1");
+            hhAdapter.notifyItemChanged(Integer.parseInt(String.valueOf(selectedHousehold)));
+        }
+
+
+        checkCompleteFm();
+
+        // bi.fab.setClickable(!MainApp.form.getiStatus().equals("1"));
+      /* bi.completedmember.setText(householdList.size()+ " HOUSEHOLDs added");
+        bi.totalmember.setText(MainApp.householdTotal+ " M completed");*/
+    }
+
+    private void checkCompleteFm() {
+        //     if (!MainApp.form.getIStatus().equals("1")) {
+        int compCount = MainApp.householdList.size();
+
+        MainApp.householdCountComplete = compCount;
+        bi.btnContinue.setVisibility(MainApp.householdCount > 0 ? View.VISIBLE : View.GONE);
+        //   bi.btnContinue.setVisibility(compCount == householdCount && !form.getiStatus().equals("1")? View.VISIBLE : View.GONE);
+     /*   bi.btnContinue.setVisibility(compCount >= householdCount ? View.VISIBLE : View.GONE);
+        bi.btnContinue.setEnabled(bi.btnContinue.getVisibility()==View.VISIBLE);*/
+
+        //  } else {
+        //       Toast.makeText(this, "Form has been completed or locked", Toast.LENGTH_LONG).show();
+        //   }
+    }
+
+    public void addHousehold() {
+
+        MainApp.form.setRa09(String.valueOf(db.getMaxHHNo(MainApp.form.getVillageCode(), MainApp.form.getStructureNo()) + 1));
+        Intent intent = new Intent(this, SectionAActivity.class);
+        //   finish();
+        MemberInfoLauncher.launch(intent);
+    }
+
+    public void btnContinue(View view) {
+
+        finish();
+        startActivity(new Intent(this, EndingActivity.class).putExtra("complete", true));
+
+    }
+
+    public void BtnEnd(View view) {
+
+        finish();
+        startActivity(new Intent(this, MainActivity.class));
+        /*   } else {
+               Toast.makeText(this, "Failed to Update Database!", Toast.LENGTH_SHORT).show()
+           }*/
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        // check if the request code is same as what is passed  here it is 2
+        if (requestCode == 2) {
+            if (resultCode == Activity.RESULT_OK) {
+                //   householdList.get(selectedHousehold).setExpanded(false);
+                checkCompleteFm();
+                hhAdapter.notifyItemChanged(selectedHousehold);
+            }
+            if (resultCode == Activity.RESULT_CANCELED) {
+                // Write your code if there's no result
+                Toast.makeText(this, "Information for " + MainApp.householdList.get(selectedHousehold).getRa14() + " was not saved.", Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
+}

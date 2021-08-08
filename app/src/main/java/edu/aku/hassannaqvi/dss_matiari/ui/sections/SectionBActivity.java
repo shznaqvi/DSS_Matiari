@@ -199,6 +199,10 @@ public class SectionBActivity extends AppCompatActivity {
         //mwra = new MWRA();
 
         MainApp.mwra.setUuid(form.getUid());
+        MainApp.mwra.setUcCode(form.getUcCode());
+        MainApp.mwra.setVillageCode(form.getVillageCode());
+        MainApp.mwra.setStructureNo(form.getStructureNo());
+        MainApp.mwra.setHhNo(form.getHhNo());
         MainApp.mwra.setUserName(MainApp.user.getUserName());
         MainApp.mwra.setSysDate(form.getSysDate());
         MainApp.mwra.setDeviceId(MainApp.deviceid);

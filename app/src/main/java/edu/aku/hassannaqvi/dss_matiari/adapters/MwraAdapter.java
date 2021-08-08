@@ -20,7 +20,7 @@ import edu.aku.hassannaqvi.dss_matiari.models.MWRA;
 import edu.aku.hassannaqvi.dss_matiari.ui.sections.SectionBActivity;
 
 
-public class MembersAdapter extends RecyclerView.Adapter<MembersAdapter.ViewHolder> {
+public class MwraAdapter extends RecyclerView.Adapter<MwraAdapter.ViewHolder> {
     private static final String TAG = "CustomAdapter";
     private final Context mContext;
     private final List<MWRA> mwras;
@@ -32,7 +32,7 @@ public class MembersAdapter extends RecyclerView.Adapter<MembersAdapter.ViewHold
      *
      * @param mwras List<FemaleMembersModel> containing the data to populate views to be used by RecyclerView.
      */
-    public MembersAdapter(Context mContext, List<MWRA> mwras) {
+    public MwraAdapter(Context mContext, List<MWRA> mwras) {
         this.mwras = mwras;
         this.mContext = mContext;
         completeCount = 0;

@@ -181,7 +181,7 @@
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
 
-                <!-- ra09  Input   -->
+             <!--   &lt;!&ndash; ra09  Input   &ndash;&gt;
                 <androidx.cardview.widget.CardView
                     android:id="@+id/fldGrpCVra09"
                     style="@style/cardView">
@@ -218,7 +218,7 @@
                             android:enabled="false"
                             android:hint="@string/ra09" />
                     </LinearLayout>
-                </androidx.cardview.widget.CardView>
+                </androidx.cardview.widget.CardView>-->
 
                 <!-- ra10  Input   -->
                 <androidx.cardview.widget.CardView

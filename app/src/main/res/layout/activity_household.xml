@@ -8,7 +8,7 @@
 
         <variable
             name="callback"
-            type="edu.aku.hassannaqvi.dss_matiari.ui.lists.MwraActivity" />
+            type="edu.aku.hassannaqvi.dss_matiari.ui.lists.HouseholdActivity" />
     </data>
 
     <LinearLayout
@@ -90,7 +90,7 @@
                     android:padding="8dp" />
 
                 <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/rvMembers"
+                    android:id="@+id/rvHouseholds"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_marginStart="110dp"
@@ -127,7 +127,7 @@
                     android:gravity="center_horizontal|center_vertical"
                     android:minHeight="56dp"
                     android:radius="10dp"
-                    android:text="FEMALE MEMBERS"
+                    android:text="LIST OF HOUSEHOLDS"
                     android:textAppearance="@style/TextAppearance.AppCompat.Headline"
                     android:textColor="@color/white" />
 
@@ -176,9 +176,9 @@
                     android:background="@drawable/button_shape_green"
                     android:drawableTint="#00ea00"
                     android:onClick="btnContinue"
-                    android:visibility="invisible"
                     android:text="Save"
-                    android:textColor="@color/white" />
+                    android:textColor="@color/white"
+                    android:visibility="invisible" />
 
             </LinearLayout>
         </RelativeLayout>

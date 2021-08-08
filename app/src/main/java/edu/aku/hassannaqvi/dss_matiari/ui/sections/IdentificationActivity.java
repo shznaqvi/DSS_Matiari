@@ -29,6 +29,7 @@ import edu.aku.hassannaqvi.dss_matiari.databinding.ActivityIdentificationBinding
 import edu.aku.hassannaqvi.dss_matiari.models.Form;
 import edu.aku.hassannaqvi.dss_matiari.models.Villages;
 import edu.aku.hassannaqvi.dss_matiari.ui.EndingActivity;
+import edu.aku.hassannaqvi.dss_matiari.ui.lists.HouseholdActivity;
 
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.hdssid;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.idType;
@@ -61,7 +62,7 @@ public class IdentificationActivity extends AppCompatActivity {
             case 1:
                 bi.btnContinue.setText("Open Household Form");
                 MainApp.form = new Form();
-                openIntent = new Intent(this, SectionAActivity.class);
+                openIntent = new Intent(this, HouseholdActivity.class);
                 break;
            /* case 2:
                 bi.btnContinue.setText("Open Anthro Form");
@@ -115,10 +116,10 @@ public class IdentificationActivity extends AppCompatActivity {
 
                 bi.ra07.setAdapter(null);
                 bi.ra08.setText(null);
-                bi.ra09.setText(null);
+                //bi.ra09.setText(null);
                 bi.ra10.setText(null);
                 bi.ra08.setEnabled(false);
-                bi.ra09.setEnabled(false);
+                //bi.ra09.setEnabled(false);
                 bi.ra10.setEnabled(false);
                 bi.btnContinue.setBackgroundTintList(ContextCompat.getColorStateList(IdentificationActivity.this, R.color.gray));
                 bi.btnContinue.setEnabled(false);
@@ -138,12 +139,12 @@ public class IdentificationActivity extends AppCompatActivity {
                 }
                 if (MainApp.user.getUserName().contains("test") || MainApp.user.getUserName().contains("dmu")) {
 
-                    villageNames.add("Test Village 1");
-                    villageNames.add("Test Village 2");
-                    villageNames.add("Test Village 3");
-                    villageCodes.add("001");
-                    villageCodes.add("002");
-                    villageCodes.add("003");
+                    villageNames.add("Test Village 1 " + ucNames.get(position));
+                    villageNames.add("Test Village 2 " + ucNames.get(position));
+                    villageNames.add("Test Village 3 " + ucNames.get(position));
+                    villageCodes.add(ucCodes.get(position) + "001");
+                    villageCodes.add(ucCodes.get(position) + "002");
+                    villageCodes.add(ucCodes.get(position) + "003");
                 }
                 // Apply the adapter to the spinner
                 bi.ra07.setAdapter(new ArrayAdapter(IdentificationActivity.this, R.layout.custom_spinner, villageNames));
@@ -161,22 +162,22 @@ public class IdentificationActivity extends AppCompatActivity {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
                 bi.ra08.setText(null);
-                bi.ra09.setText(null);
+                // bi.ra09.setText(null);
                 bi.ra10.setText(null);
                 if (position != 0) {
                     String vCode = villageCodes.get(bi.ra07.getSelectedItemPosition());
 
-                    int maxHHno = db.getMaxHHNo(vCode) + 1;
+                    int maxHHno = db.getMaxStructure(vCode) + 1;
                     bi.btnContinue.setBackgroundTintList(ContextCompat.getColorStateList(IdentificationActivity.this, R.color.colorAccent));
                     bi.btnContinue.setEnabled(true);
            /*     bi.checkHousehold.setBackgroundTintList(ContextCompat.getColorStateList(IdentificationActivity.this, R.color.colorAccent));
                 bi.checkHousehold.setEnabled(true);*/
                     bi.ra08.setEnabled(false);
                     //bi.ra09.setEnabled(false);
-                    bi.ra09.setText(String.valueOf(maxHHno));
+                    bi.ra10.setText(String.valueOf(maxHHno));
                     if (position == 0) return;
                     bi.ra08.setEnabled(true);
-                    bi.ra09.setEnabled(true);
+                    // bi.ra09.setEnabled(true);
                     bi.ra10.setEnabled(true);
 
                 }
@@ -195,9 +196,9 @@ public class IdentificationActivity extends AppCompatActivity {
     public void btnContinue(View view) {
 
         hdssid = villageCodes.get(bi.ra07.getSelectedItemPosition()) +
-                bi.ra08.getText().toString() +
-                bi.ra09.getText().toString() +
+                // bi.ra08.getText().toString() +
                 bi.ra10.getText().toString();
+        //bi.ra10.getText().toString();
 
 
         if (!formValidation()) return;
@@ -237,7 +238,7 @@ public class IdentificationActivity extends AppCompatActivity {
         MainApp.form.setRa06(ucCodes.get(bi.ra06.getSelectedItemPosition()));
         MainApp.form.setRa07(villageCodes.get(bi.ra07.getSelectedItemPosition()));
         MainApp.form.setRa08(bi.ra08.getText().toString());
-        MainApp.form.setRa09(bi.ra09.getText().toString());
+        //MainApp.form.setRa09(bi.ra09.getText().toString());
         MainApp.form.setRa10(bi.ra10.getText().toString());
 
     }
@@ -334,9 +335,8 @@ public class IdentificationActivity extends AppCompatActivity {
 
         String vCode = villageCodes.get(bi.ra07.getSelectedItemPosition());
 
-        int maxHHno = db.getMaxHHNo(vCode) + 1;
-
-        bi.ra09.setText(String.valueOf(maxHHno));
+        int maxHHno = db.getMaxStructure(vCode) + 1;
+        bi.ra10.setText(String.valueOf(maxHHno));
 
 
     }
