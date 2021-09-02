@@ -291,6 +291,10 @@ public class MWRA extends BaseObservable implements Observable {
     public void setRb06(String rb06) {
         this.rb06 = rb06;
         Log.d(TAG, "setRb06: " + this.rb06);
+        setRb03(this.rb06.equals("4") ? "" : this.rb03);
+        setRb07(this.rb06.equals("4") ? "" : this.rb07);
+        setRb08(this.rb06.equals("4") ? "" : this.rb08);
+        setRb09(this.rb06.equals("4") ? "" : this.rb09);
         notifyChange(BR.rb06);
     }
 
@@ -301,8 +305,8 @@ public class MWRA extends BaseObservable implements Observable {
 
     public void setRb07(String rb07) {
         this.rb07 = rb07;
-        setRb08(this.rb07.equals("2") ? "" : this.rb08);
-        setRb09(this.rb07.equals("2") ? "" : this.rb09);
+   /*     setRb08(this.rb07.equals("2") ? "" : this.rb08);
+        setRb09(this.rb07.equals("2") ? "" : this.rb09);*/
         Log.d(TAG, "setRb07: " + this.rb07);
         notifyChange(BR.rb07);
     }
@@ -417,6 +421,7 @@ public class MWRA extends BaseObservable implements Observable {
 
 
         json.put(MWRATable.COLUMN_ID, this.id);
+        json.put(MWRATable.COLUMN_PROJECT_NAME, this.projectName);
         json.put(MWRATable.COLUMN_UID, this.uid);
         json.put(MWRATable.COLUMN_UUID, this.uuid);
         json.put(MWRATable.COLUMN_USERNAME, this.userName);
@@ -429,6 +434,7 @@ public class MWRA extends BaseObservable implements Observable {
         json.put(MWRATable.COLUMN_DEVICEID, this.deviceId);
         json.put(MWRATable.COLUMN_DEVICETAGID, this.deviceTag);
         json.put(MWRATable.COLUMN_ISTATUS, this.iStatus);
+        json.put(MWRATable.COLUMN_APPVERSION, this.appver);
         //  json.put(MWRATable.COLUMN_SYNCED, this.synced);
         //  json.put(MWRATable.COLUMN_SYNCED_DATE, this.syncDate);
 

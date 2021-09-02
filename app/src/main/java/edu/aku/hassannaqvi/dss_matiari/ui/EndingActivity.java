@@ -1,6 +1,5 @@
 package edu.aku.hassannaqvi.dss_matiari.ui;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -19,8 +18,6 @@ import edu.aku.hassannaqvi.dss_matiari.core.MainApp;
 import edu.aku.hassannaqvi.dss_matiari.database.DatabaseHelper;
 import edu.aku.hassannaqvi.dss_matiari.databinding.ActivityEndingBinding;
 
-import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.form;
-
 
 public class EndingActivity extends AppCompatActivity {
 
@@ -33,48 +30,88 @@ public class EndingActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+//        MainApp.form.setVisitNo(String.valueOf(Integer.parseInt(MainApp.form.getVisitNo())+1));
+
         bi = DataBindingUtil.setContentView(this, R.layout.activity_ending);
-        bi.setForm(form);
-        setSupportActionBar(bi.toolbar);
+        bi.setForm(MainApp.form);
         setSupportActionBar(bi.toolbar);
         //setTitle(R.string.section1_mainheading);
+        //bi.hhStatus.setText(bi.hhStatus.getText()+" "+(Integer.parseInt(MainApp.form.getVisitNo())+1));
 
         db = MainApp.appInfo.dbHelper;
-        boolean check = getIntent().getBooleanExtra("complete", false);
-        //sectionMainCheck = getIntent().getIntExtra("status", 0);
+        boolean complete = getIntent().getBooleanExtra("complete", false);
+/*        boolean refused = getIntent().getBooleanExtra("refused", false);
+        boolean locked = getIntent().getBooleanExtra("locked", false);*/
 
-
-        bi.istatusa.setEnabled(check && !form.getiStatus().equals("9")); // form is complete and  patient not on hold
-        bi.istatusb.setEnabled(!check);
-        bi.istatusc.setEnabled(check && form.getiStatus().equals("9")); // form is complete and  patient not on hold
+        bi.istatusa.setEnabled(complete);
+        bi.istatusb.setEnabled(!complete);
+        bi.istatusc.setEnabled(!complete);
+        bi.istatusd.setEnabled(true); // Always TRUE
 
 
     }
 
     private void saveDraft() {
 
-        form.setRa11(
-                bi.istatusa.isChecked() ? "1" :
-                        bi.istatusb.isChecked() ? "2" :
-                                bi.istatusc.isChecked() ? "3" :
-                                        bi.istatusd.isChecked() ? "96" :
-                                                "-1"
+        int visitCount = Integer.parseInt(MainApp.form.getVisitNo()) + 1;
 
-        );
-        form.setRa11x(bi.istatusdx.getText().toString());
+        // Only increment visit count if Refused or Locked AND NOT FIRST VISIT
+/*        if (bi.istatusb.isChecked() ||
+                bi.istatusc.isChecked()) {
+            // Do not increment if saving First Visit
+            if(!MainApp.form.getiStatus().equals(""))
+            MainApp.form.setVisitNo(String.valueOf(visitCount));
+        }*/
+        MainApp.form.setVisitNo(String.valueOf(visitCount));
+
+        switch (visitCount) {
+            case 1:
+                MainApp.form.setRa11(
+                        bi.istatusa.isChecked() ? "1" :
+                                bi.istatusb.isChecked() ? "2" :
+                                        bi.istatusc.isChecked() ? "3" :
+                                                bi.istatusd.isChecked() ? "96" :
+                                                        "-1"
+                );
+                MainApp.form.setRa11x(bi.istatusdx.getText().toString());
+                break;
+            case 2:
+                MainApp.form.setRa12(
+                        bi.istatusa.isChecked() ? "1" :
+                                bi.istatusb.isChecked() ? "2" :
+                                        bi.istatusc.isChecked() ? "3" :
+                                                bi.istatusd.isChecked() ? "96" :
+                                                        "-1"
+
+                );
+                MainApp.form.setRa12x(bi.istatusdx.getText().toString());
+                break;
+            case 3:
+                MainApp.form.setRa13(
+                        bi.istatusa.isChecked() ? "1" :
+                                bi.istatusb.isChecked() ? "2" :
+                                        bi.istatusc.isChecked() ? "3" :
+                                                bi.istatusd.isChecked() ? "96" :
+                                                        "-1"
+
+                );
+                MainApp.form.setRa13x(bi.istatusdx.getText().toString());
+                break;
+
+        }
         // form.setEndTime(new SimpleDateFormat("dd-MM-yy HH:mm", Locale.ENGLISH).format(new Date().getTime()));
     }
 
 
-    public void BtnEnd(View view) {
+    public void btnEnd(View view) {
         if (!formValidation()) return;
         saveDraft();
         if (UpdateDB()) {
-
-            cleanupProcess();
+            setResult(RESULT_OK);
             finish();
-            Intent i = new Intent(this, MainActivity.class);
-            startActivity(i);
+            //Intent i = new Intent(this, MainActivity.class);
+            // startActivity(i);
             Toast.makeText(this, "Entry Complete", Toast.LENGTH_SHORT).show();
 
         } else {
@@ -82,14 +119,13 @@ public class EndingActivity extends AppCompatActivity {
         }
     }
 
-    private void cleanupProcess() {
-        form = null;
-    }
 
     private boolean UpdateDB() {
-        int updcount = db.updatesFormColumn(TableContracts.FormsTable.COLUMN_ISTATUS, form.getiStatus());
+        int updcount = 0;
+        db.updatesFormColumn(TableContracts.FormsTable.COLUMN_ISTATUS, MainApp.form.getiStatus());
+        db.updatesFormColumn(TableContracts.FormsTable.COLUMN_VISIT_NO, MainApp.form.getVisitNo());
         try {
-            updcount = db.updatesFormColumn(TableContracts.FormsTable.COLUMN_SA, form.sAtoString());
+            updcount = db.updatesFormColumn(TableContracts.FormsTable.COLUMN_SA, MainApp.form.sAtoString());
         } catch (JSONException e) {
             e.printStackTrace();
             Toast.makeText(this, "JSONException: " + e.getMessage(), Toast.LENGTH_SHORT).show();
@@ -101,7 +137,7 @@ public class EndingActivity extends AppCompatActivity {
 
 
     private boolean formValidation() {
-        return Validator.emptyCheckingContainer(this, bi.fldGrpEnd);
+        return Validator.emptyCheckingContainer(this, bi.fldGrpCVstatus);
     }
 
     @Override

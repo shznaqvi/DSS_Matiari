@@ -1,5 +1,10 @@
 package edu.aku.hassannaqvi.dss_matiari.ui;
 
+import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.PROJECT_NAME;
+import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.sdDir;
+import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.uploadData;
+import static edu.aku.hassannaqvi.dss_matiari.utils.AndroidUtilityKt.isNetworkConnected;
+
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.SuppressLint;
@@ -8,6 +13,7 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -56,11 +62,6 @@ import edu.aku.hassannaqvi.dss_matiari.workers.DataUpWorkerALL;
 import edu.aku.hassannaqvi.dss_matiari.workers.PhotoUploadWorker2;
 import edu.aku.hassannaqvi.dss_matiari.workers.ReadJSONWorker;
 
-import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.PROJECT_NAME;
-import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.sdDir;
-import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.uploadData;
-import static edu.aku.hassannaqvi.dss_matiari.utils.AndroidUtilityKt.isNetworkConnected;
-
 
 public class SyncActivity extends AppCompatActivity {
     private static final String TAG = "SyncActivity";
@@ -82,7 +83,9 @@ public class SyncActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         bi = DataBindingUtil.setContentView(this, R.layout.activity_sync);
         bi.setCallback(this);
-        //setSupportActionBar(bi.toolbar);
+        setSupportActionBar(bi.toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         db = MainApp.appInfo.getDbHelper();
         uploadTables = new ArrayList<>();
         downloadTables = new ArrayList<>();
@@ -690,4 +693,21 @@ public class SyncActivity extends AppCompatActivity {
             }
         });
     }
+
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        switch (id) {
+            // Respond to the action bar's Up/Home button
+            case android.R.id.home:
+                //NavUtils.navigateUpFromSameTask(this);
+                //onBackPressed();
+                finish();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+
 }

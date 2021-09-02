@@ -43,7 +43,8 @@ public class MwraAdapter extends RecyclerView.Adapter<MwraAdapter.ViewHolder> {
 
 
     @Override
-    public void onBindViewHolder(ViewHolder viewHolder, final int position) {
+    public void onBindViewHolder(ViewHolder viewHolder, int position1) {
+        int position = viewHolder.getAdapterPosition();
         Log.d(TAG, "Element " + position + " set.");
         MWRA mwra = this.mwras.get(position);        // Get element from your dataset at this position and replace the contents of the view
         // with that element
@@ -57,14 +58,20 @@ public class MwraAdapter extends RecyclerView.Adapter<MwraAdapter.ViewHolder> {
         MainApp.fmComplete = completeCount == MainApp.mwraCount;
 
         fName.setText(mwra.getRb02());
-        fAge.setText(mwra.getRb05() + " | " + mwra.getRb03());
-
+        //fAge.setText(mwra.getRb05() + "y | " + mwra.getRb03());
+        fAge.setText("w/o " + mwra.getRb03() + " | " + mwra.getRb05() + "y  ");
         String marStatus = "";
         switch (mwra.getRb06()) {
+            case "1":
+                marStatus = "Married";
+                break;
             case "2":
-                marStatus = "Currently Married";
+                marStatus = "Divorced";
                 break;
             case "3":
+                marStatus = "Widow";
+                break;
+            case "4":
                 marStatus = "Unmarried";
                 break;
             default:

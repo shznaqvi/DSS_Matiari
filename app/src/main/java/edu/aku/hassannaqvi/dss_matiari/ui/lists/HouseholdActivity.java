@@ -1,5 +1,7 @@
 package edu.aku.hassannaqvi.dss_matiari.ui.lists;
 
+import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.selectedHousehold;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -27,11 +29,8 @@ import edu.aku.hassannaqvi.dss_matiari.core.MainApp;
 import edu.aku.hassannaqvi.dss_matiari.database.DatabaseHelper;
 import edu.aku.hassannaqvi.dss_matiari.databinding.ActivityHouseholdBinding;
 import edu.aku.hassannaqvi.dss_matiari.models.Form;
-import edu.aku.hassannaqvi.dss_matiari.ui.EndingActivity;
 import edu.aku.hassannaqvi.dss_matiari.ui.MainActivity;
 import edu.aku.hassannaqvi.dss_matiari.ui.sections.SectionAActivity;
-
-import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.selectedHousehold;
 
 
 public class HouseholdActivity extends AppCompatActivity {
@@ -74,6 +73,8 @@ public class HouseholdActivity extends AppCompatActivity {
                     }
                     if (result.getResultCode() == Activity.RESULT_CANCELED) {
                         Toast.makeText(HouseholdActivity.this, "No household added.", Toast.LENGTH_SHORT).show();
+                        //   hhAdapter.notifyDataSetChanged();
+
                     }
 
                 }
@@ -110,12 +111,13 @@ public class HouseholdActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (!MainApp.form.getiStatus().equals("1")) {
+                addHousehold();
+              /*  if (!MainApp.form.getiStatus().equals("1")) {
                     //     Toast.makeText(HouseholdActivity.this, "Opening Household Form", Toast.LENGTH_LONG).show();
-                    addHousehold();
+
                 } else {
                     Toast.makeText(HouseholdActivity.this, "This form has been locked. You cannot add new household to locked forms", Toast.LENGTH_LONG).show();
-                }
+                }*/
             }
         });
 
@@ -129,17 +131,20 @@ public class HouseholdActivity extends AppCompatActivity {
         MainApp.householdCount = Math.round(MainApp.householdList.size());
 
         MainApp.household = new Form();
+
         if (MainApp.householdList.size() > 0) {
             //MainApp.fm.get(Integer.parseInt(String.valueOf(MainApp.selectedHousehold))).setStatus("1");
             hhAdapter.notifyItemChanged(Integer.parseInt(String.valueOf(selectedHousehold)));
         }
-
 
         checkCompleteFm();
 
         // bi.fab.setClickable(!MainApp.form.getiStatus().equals("1"));
       /* bi.completedmember.setText(householdList.size()+ " HOUSEHOLDs added");
         bi.totalmember.setText(MainApp.householdTotal+ " M completed");*/
+        //MainApp.form.resetForm();
+
+
     }
 
     private void checkCompleteFm() {
@@ -159,16 +164,20 @@ public class HouseholdActivity extends AppCompatActivity {
 
     public void addHousehold() {
 
+        // Copy common variables from existing Form to new Form
+        MainApp.form = new Form(MainApp.form);
+
+        // Increment Household Number by 1
         MainApp.form.setRa09(String.valueOf(db.getMaxHHNo(MainApp.form.getVillageCode(), MainApp.form.getStructureNo()) + 1));
+
+        // Launch activity for results.
         Intent intent = new Intent(this, SectionAActivity.class);
-        //   finish();
         MemberInfoLauncher.launch(intent);
     }
 
     public void btnContinue(View view) {
-
         finish();
-        startActivity(new Intent(this, EndingActivity.class).putExtra("complete", true));
+        startActivity(new Intent(this, MainActivity.class).putExtra("complete", true));
 
     }
 

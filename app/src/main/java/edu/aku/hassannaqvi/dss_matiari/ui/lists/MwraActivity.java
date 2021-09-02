@@ -1,5 +1,10 @@
 package edu.aku.hassannaqvi.dss_matiari.ui.lists;
 
+import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.mwra;
+import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.mwraCount;
+import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.mwraList;
+import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.selectedFemale;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -27,12 +32,8 @@ import edu.aku.hassannaqvi.dss_matiari.core.MainApp;
 import edu.aku.hassannaqvi.dss_matiari.database.DatabaseHelper;
 import edu.aku.hassannaqvi.dss_matiari.databinding.ActivityMwraBinding;
 import edu.aku.hassannaqvi.dss_matiari.models.MWRA;
+import edu.aku.hassannaqvi.dss_matiari.ui.EndingActivity;
 import edu.aku.hassannaqvi.dss_matiari.ui.sections.SectionBActivity;
-
-import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.mwra;
-import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.mwraCount;
-import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.mwraList;
-import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.selectedFemale;
 
 
 public class MwraActivity extends AppCompatActivity {
@@ -107,12 +108,14 @@ public class MwraActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 if (!MainApp.form.getiStatus().equals("1")) {
                     //     Toast.makeText(MwraActivity.this, "Opening Mwra Form", Toast.LENGTH_LONG).show();
                     addFemale();
                 } else {
                     Toast.makeText(MwraActivity.this, "This form has been locked. You cannot add new members to locked forms", Toast.LENGTH_LONG).show();
                 }
+
             }
         });
 
@@ -161,7 +164,13 @@ public class MwraActivity extends AppCompatActivity {
     }
 
     public void btnContinue(View view) {
-        setResult(RESULT_OK);
+
+
+        Intent i = new Intent(this, EndingActivity.class);
+        MainApp.household = MainApp.form;
+        i.setFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT);
+        i.putExtra("complete", true);
+        startActivity(i);
         finish();
         //startActivity(new Intent(this, EndingActivity.class).putExtra("complete", true));
 
@@ -169,7 +178,11 @@ public class MwraActivity extends AppCompatActivity {
 
     public void BtnEnd(View view) {
 
-        setResult(RESULT_OK);
+        Intent i = new Intent(this, EndingActivity.class);
+        MainApp.household = MainApp.form;
+        i.setFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT);
+        i.putExtra("complete", false);
+        startActivity(i);
         finish();
         //startActivity(new Intent(this, MainActivity.class));
         /*   } else {

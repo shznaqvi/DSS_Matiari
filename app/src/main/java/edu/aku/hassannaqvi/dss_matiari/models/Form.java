@@ -30,18 +30,24 @@ public class Form extends BaseObservable implements Observable {
     private String ra10 = "";
     private String ra11 = "";
     private String ra11x = "";
-    /*    private String ra12 = "";
-        private String ra1296x = "";
-        private String ra13 = "";
-        private String ra13x = "";*/
+    private String ra12 = "";
+    private String ra12x = "";
+    private String ra13 = "";
+    private String ra13x = "";
     private String ra14 = "";
     private String ra15 = "";
     private String ra16 = "";
-    private String ra17_a = "";
-    private String ra17_b = "";
-    private String ra17_c = "";
-    private String ra17_d = "";
+    private String ra17_a1 = "";
+    private String ra17_b1 = "";
+    private String ra17_c1 = "";
+    private String ra17_d1 = "";
+    private String ra17_a2 = "";
+    private String ra17_b2 = "";
+    private String ra17_c2 = "";
+    private String ra17_d2 = "";
     private String ra18 = "";
+    private String ra19 = "";
+    private String ra20 = "";
 
     private transient PropertyChangeRegistry propertyChangeRegistry = new PropertyChangeRegistry();
     private boolean exist = false;
@@ -57,6 +63,7 @@ public class Form extends BaseObservable implements Observable {
     private String villageCode = StringUtils.EMPTY;
     private String hhNo = StringUtils.EMPTY;
     private String structureNo = StringUtils.EMPTY;
+    private String visitNo = "0";
 
 
     private String deviceId = StringUtils.EMPTY;
@@ -74,6 +81,17 @@ public class Form extends BaseObservable implements Observable {
 
     public Form() {
 
+    }
+
+    public Form(Form form) {
+
+        setUserName(form.getUserName());
+        setDeviceId(form.getDeviceId());
+        setAppver(form.getAppver());
+        setRa06(form.getRa06());
+        setRa07(form.getRa07());
+        setRa08(form.getRa08());
+        setRa10(form.getRa10());
     }
 
 
@@ -123,6 +141,14 @@ public class Form extends BaseObservable implements Observable {
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    public String getVisitNo() {
+        return visitNo;
+    }
+
+    public void setVisitNo(String visitNo) {
+        this.visitNo = visitNo;
     }
 
     public String getUid() {
@@ -269,6 +295,32 @@ public class Form extends BaseObservable implements Observable {
         this.sA = sA;
     }
 
+    public void resetForm() {
+        setRa01("");
+        setRa09("");
+        setRa11("");
+        setRa12("");
+        setRa13("");
+        setRa11x("");
+        setRa12x("");
+        setRa13x("");
+        setRa14("");
+        setRa15("");
+        setRa16("");
+        setRa17_a1("");
+        setRa17_b1("");
+        setRa17_c1("");
+        setRa17_d1("");
+        setRa17_a2("");
+        setRa17_b2("");
+        setRa17_c2("");
+        setRa17_d2("");
+        setRa18("");
+        setRa19("");
+        setRa20("");
+        setsA("");
+    }
+
 
     @Bindable
     public String getRa01() {
@@ -396,46 +448,49 @@ public class Form extends BaseObservable implements Observable {
         notifyChange(BR.ra11x);
     }
 
-    /* @Bindable
-     public String getRa12() {
-         return ra12;
-     }
+    @Bindable
+    public String getRa12() {
+        return ra12;
+    }
 
-     public void setRa12(String ra12) {
-         this.ra12 = ra12;
-         notifyChange(BR.ra12);
-     }
+    public void setRa12(String ra12) {
+        this.ra12 = ra12;
+        setiStatus(ra12);
+        notifyChange(BR.ra12);
+    }
 
-     @Bindable
-     public String getRa1296x() {
-         return ra1296x;
-     }
+    @Bindable
+    public String getRa12x() {
+        return ra12x;
+    }
 
-     public void setRa1296x(String ra1296x) {
-         this.ra1296x = ra1296x;
-         notifyChange(BR.ra1296x);
-     }
+    public void setRa12x(String ra12x) {
+        this.ra12x = ra12x;
+        notifyChange(BR.ra12x);
+    }
 
-     @Bindable
-     public String getRa13() {
-         return ra13;
-     }
+    @Bindable
+    public String getRa13() {
+        return ra13;
+    }
 
-     public void setRa13(String ra13) {
-         this.ra13 = ra13;
-         notifyChange(BR.ra13);
-     }
+    public void setRa13(String ra13) {
+        this.ra13 = ra13;
+        setiStatus(ra13);
+        notifyChange(BR.ra13);
+    }
 
-     @Bindable
-     public String getRa13x() {
-         return ra13x;
-     }
+    @Bindable
+    public String getRa13x() {
+        return ra13x;
+    }
 
-     public void setRa13x(String ra13x) {
-         this.ra13x = ra13x;
-         notifyChange(BR.ra13x);
-     }
- */
+    public void setRa13x(String ra13x) {
+        this.ra13x = ra13x;
+        notifyChange(BR.ra13x);
+    }
+
+
     @Bindable
     public String getRa14() {
         return ra14;
@@ -467,43 +522,83 @@ public class Form extends BaseObservable implements Observable {
     }
 
     @Bindable
-    public String getRa17_a() {
-        return ra17_a;
+    public String getRa17_a1() {
+        return ra17_a1;
     }
 
-    public void setRa17_a(String ra17_a) {
-        this.ra17_a = ra17_a;
-        notifyChange(BR.ra17_a);
-    }
-
-    @Bindable
-    public String getRa17_b() {
-        return ra17_b;
-    }
-
-    public void setRa17_b(String ra17_b) {
-        this.ra17_b = ra17_b;
-        notifyChange(BR.ra17_b);
+    public void setRa17_a1(String ra17_a1) {
+        this.ra17_a1 = ra17_a1;
+        notifyChange(BR.ra17_a1);
     }
 
     @Bindable
-    public String getRa17_c() {
-        return ra17_c;
+    public String getRa17_b1() {
+        return ra17_b1;
     }
 
-    public void setRa17_c(String ra17_c) {
-        this.ra17_c = ra17_c;
-        notifyChange(BR.ra17_c);
+    public void setRa17_b1(String ra17_b1) {
+        this.ra17_b1 = ra17_b1;
+        notifyChange(BR.ra17_b1);
     }
 
     @Bindable
-    public String getRa17_d() {
-        return ra17_d;
+    public String getRa17_c1() {
+        return ra17_c1;
     }
 
-    public void setRa17_d(String ra17_d) {
-        this.ra17_d = ra17_d;
-        notifyChange(BR.ra17_d);
+    public void setRa17_c1(String ra17_c1) {
+        this.ra17_c1 = ra17_c1;
+        notifyChange(BR.ra17_c1);
+    }
+
+    @Bindable
+    public String getRa17_d1() {
+        return ra17_d1;
+    }
+
+    public void setRa17_d1(String ra17_d1) {
+        this.ra17_d1 = ra17_d1;
+        notifyChange(BR.ra17_d1);
+    }
+
+    @Bindable
+    public String getRa17_a2() {
+        return ra17_a2;
+    }
+
+    public void setRa17_a2(String ra17_a2) {
+        this.ra17_a2 = ra17_a2;
+        notifyChange(BR.ra17_a2);
+    }
+
+    @Bindable
+    public String getRa17_b2() {
+        return ra17_b2;
+    }
+
+    public void setRa17_b2(String ra17_b2) {
+        this.ra17_b2 = ra17_b2;
+        notifyChange(BR.ra17_b2);
+    }
+
+    @Bindable
+    public String getRa17_c2() {
+        return ra17_c2;
+    }
+
+    public void setRa17_c2(String ra17_c2) {
+        this.ra17_c2 = ra17_c2;
+        notifyChange(BR.ra17_c2);
+    }
+
+    @Bindable
+    public String getRa17_d2() {
+        return ra17_d2;
+    }
+
+    public void setRa17_d2(String ra17_d2) {
+        this.ra17_d2 = ra17_d2;
+        notifyChange(BR.ra17_d2);
     }
 
     @Bindable
@@ -514,6 +609,26 @@ public class Form extends BaseObservable implements Observable {
     public void setRa18(String ra18) {
         this.ra18 = ra18;
         notifyChange(BR.ra18);
+    }
+
+    @Bindable
+    public String getRa19() {
+        return ra19;
+    }
+
+    public void setRa19(String ra19) {
+        this.ra19 = ra19;
+        notifyChange(BR.ra19);
+    }
+
+    @Bindable
+    public String getRa20() {
+        return ra20;
+    }
+
+    public void setRa20(String ra20) {
+        this.ra20 = ra20;
+        notifyChange(BR.ra20);
     }
 
 
@@ -550,6 +665,7 @@ public class Form extends BaseObservable implements Observable {
         this.villageCode = cursor.getString(cursor.getColumnIndex(FormsTable.COLUMN_VILLAGE_CODE));
         this.hhNo = cursor.getString(cursor.getColumnIndex(FormsTable.COLUMN_HOUSEHOLD_NO));
         this.structureNo = cursor.getString(cursor.getColumnIndex(FormsTable.COLUMN_STRUCTURE_NO));
+        this.visitNo = cursor.getString(cursor.getColumnIndex(FormsTable.COLUMN_VISIT_NO));
 
         this.deviceId = cursor.getString(cursor.getColumnIndex(FormsTable.COLUMN_DEVICEID));
         this.deviceTag = cursor.getString(cursor.getColumnIndex(FormsTable.COLUMN_DEVICETAGID));
@@ -582,18 +698,24 @@ public class Form extends BaseObservable implements Observable {
             this.ra10 = json.getString("ra10");
             this.ra11 = json.getString("ra11");
             this.ra11x = json.getString("ra11x");
-          /*      this.ra12 = json.getString("ra12");
-                this.ra1296x = json.getString("ra1296x");
-                this.ra13 = json.getString("ra13");
-                this.ra13x = json.getString("ra13x");*/
+            this.ra12 = json.getString("ra12");
+            this.ra12x = json.getString("ra12x");
+            this.ra13 = json.getString("ra13");
+            this.ra13x = json.getString("ra13x");
             this.ra14 = json.getString("ra14");
             this.ra15 = json.getString("ra15");
             this.ra16 = json.getString("ra16");
-            this.ra17_a = json.getString("ra17_a");
-            this.ra17_b = json.getString("ra17_b");
-            this.ra17_c = json.getString("ra17_c");
-            this.ra17_d = json.getString("ra17_d");
+            this.ra17_a1 = json.getString("ra17_a1");
+            this.ra17_b1 = json.getString("ra17_b1");
+            this.ra17_c1 = json.getString("ra17_c1");
+            this.ra17_d1 = json.getString("ra17_d1");
+            this.ra17_a2 = json.getString("ra17_a2");
+            this.ra17_b2 = json.getString("ra17_b2");
+            this.ra17_c2 = json.getString("ra17_c2");
+            this.ra17_d2 = json.getString("ra17_d2");
             this.ra18 = json.getString("ra18");
+            this.ra19 = json.getString("ra19");
+            this.ra20 = json.getString("ra20");
 
 
         }
@@ -615,18 +737,24 @@ public class Form extends BaseObservable implements Observable {
                 .put("ra10", ra10)
                 .put("ra11", ra11)
                 .put("ra11x", ra11x)
-                /*    .put("ra12", ra12)
-                    .put("ra1296x", ra1296x)
-                    .put("ra13", ra13)
-                    .put("ra13x", ra13x)*/
+                .put("ra12", ra12)
+                .put("ra12x", ra12x)
+                .put("ra13", ra13)
+                .put("ra13x", ra13x)
                 .put("ra14", ra14)
                 .put("ra15", ra15)
                 .put("ra16", ra16)
-                .put("ra17_a", ra17_a)
-                .put("ra17_b", ra17_b)
-                .put("ra17_c", ra17_c)
-                .put("ra17_d", ra17_d)
-                .put("ra18", ra18);
+                .put("ra17_a1", ra17_a1)
+                .put("ra17_b1", ra17_b1)
+                .put("ra17_c1", ra17_c1)
+                .put("ra17_d1", ra17_d1)
+                .put("ra17_a2", ra17_a2)
+                .put("ra17_b2", ra17_b2)
+                .put("ra17_c2", ra17_c2)
+                .put("ra17_d2", ra17_d2)
+                .put("ra18", ra18)
+                .put("ra19", ra19)
+                .put("ra20", ra20);
 
         return json.toString();
     }
@@ -638,6 +766,7 @@ public class Form extends BaseObservable implements Observable {
 
 
         json.put(FormsTable.COLUMN_ID, this.id);
+        json.put(FormsTable.COLUMN_PROJECT_NAME, this.projectName);
         json.put(FormsTable.COLUMN_UID, this.uid);
         json.put(FormsTable.COLUMN_USERNAME, this.userName);
         json.put(FormsTable.COLUMN_SYSDATE, this.sysDate);
@@ -646,9 +775,11 @@ public class Form extends BaseObservable implements Observable {
         json.put(FormsTable.COLUMN_VILLAGE_CODE, this.villageCode);
         json.put(FormsTable.COLUMN_HOUSEHOLD_NO, this.hhNo);
         json.put(FormsTable.COLUMN_STRUCTURE_NO, this.structureNo);
+        json.put(FormsTable.COLUMN_VISIT_NO, this.visitNo);
         json.put(FormsTable.COLUMN_DEVICEID, this.deviceId);
         json.put(FormsTable.COLUMN_DEVICETAGID, this.deviceTag);
         json.put(FormsTable.COLUMN_ISTATUS, this.iStatus);
+        json.put(FormsTable.COLUMN_APPVERSION, this.appver);
         //  json.put(FormsTable.COLUMN_SYNCED, this.synced);
         //  json.put(FormsTable.COLUMN_SYNCED_DATE, this.syncDate);
 

@@ -87,25 +87,32 @@
     <string name="ra15">Name of Respondent </string>
     <string name="ra16">Unique Family Number</string>
     <string name="ra17">Family Members</string>
-    <string name="ra17_a">0 to 04 Years</string>
-    <string name="ra17_b">05 to 14 Years</string>
-    <string name="a17_c">15 to 49 Years </string>
+    <string name="ra17_a">0 to 05 Years</string>
+    <string name="ra17_b">05 to 18 Years</string>
+    <string name="a17_c">18 to 49 Years </string>
     <string name="ra17_d">&gt;49 Years</string>
+
     <string name="ra18">No. of Married Women</string>
+    <string name="ra19">Caste</string>
+    <string name="ra20">Does this household have women aged 18–49 years?</string>
+    <string name="ra20_a">Yes</string>
+    <string name="ra20_b">No</string>
     <string name="rb_uc">Union council </string>
-    <string name="rb_vil">Village </string>
-    <string name="rb_hno">Household Number    </string>
-    <string name="rb_sid">Structure ID       </string>
+    <string name="rb_vil">Village</string>
+    <string name="rb_hno">Household Number</string>
+    <string name="rb_sid">Structure ID</string>
     <string name="rb_ufn">Unique Family Number</string>
-    <string name="rb01">Line no</string>
-    <string name="rb02">Name of Married Women</string>
+    <string name="rb01">Unique WRA#</string>
+    <string name="rb02">Name of Women</string>
     <string name="rb03">Husband Name</string>
     <string name="rb04">Date of Birth</string>
     <string name="rb04_info">DD/MM/YYYY Use 98/98/9998 if not known</string>
     <string name="rb05">Age in years</string>
-    <string name="rb06">Marital Status </string>
-    <string name="rb0602">Currently Married</string>
-    <string name="rb0603">Divorce</string>
+    <string name="rb06">Marital Status</string>
+    <string name="rb0601">Married</string>
+    <string name="rb0602">Divorce</string>
+    <string name="rb0603">Widow</string>
+    <string name="rb0604">Unmarried</string>
     <string name="rb07">Pregnancy Status</string>
     <string name="rb0701">Pregnan</string>
     <string name="rb0702">Not Pregnant</string>
@@ -139,6 +146,8 @@
     <string name='Q_ra17_b'>ra17_b</string>
     <string name='Q_ra17_d'>ra17_d</string>
     <string name='Q_ra18'>ra18</string>
+    <string name='Q_ra19'>ra19</string>
+    <string name='Q_ra20'>ra20</string>
     <string name='Q_rb_hno'>rb_hno</string>
     <string name='Q_rb_sid'>rb_sid</string>
     <string name='Q_rb_uc'>rb_uc</string>
@@ -174,5 +183,7 @@
     <string name="hlaz">HLAZ</string>
     <string name="waz">WAZ</string>
     <string name="whz">WHZ</string>
+    <string name="a17_1">Male</string>
+    <string name="a17_2">Female</string>
 
 </resources>

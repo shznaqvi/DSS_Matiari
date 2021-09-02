@@ -1,8 +1,5 @@
-<?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    tools:context="edu.aku.hassannaqvi.smk_pwd.ui.other.EndingActivity">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
 
@@ -11,8 +8,11 @@
         <variable
             name="form"
             type="edu.aku.hassannaqvi.dss_matiari.models.Form" />
-    </data>
 
+        <variable
+            name="callback"
+            type="edu.aku.hassannaqvi.dss_matiari.ui.sections.SectionBActivity" />
+    </data>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -40,7 +40,7 @@
             android:layout_height="wrap_content">
 
             <LinearLayout
-                android:id="@+id/fldGrpEnd"
+                android:id="@+id/GrpName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
@@ -65,9 +65,11 @@
                             android:orientation="horizontal">
 
                             <TextView
-                                android:layout_width="match_parent"
+                                android:id="@+id/hhStatus"
+                                android:layout_width="0dp"
                                 android:layout_height="match_parent"
-                                android:text="@string/istatus" />
+                                android:layout_weight="1"
+                                android:text="@string/ra11" />
 
 
                         </LinearLayout>
@@ -118,26 +120,24 @@
                 </androidx.cardview.widget.CardView>
 
 
-                <!--EndButton LinearLayout-->
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="20dp"
-                    android:layout_marginTop="18dp"
-                    android:orientation="vertical"
-                    android:padding="20dp">
+                    android:layout_margin="24dp"
+                    android:gravity="end"
+                    android:orientation="horizontal">
+
 
                     <Button
                         android:id="@+id/btn_End"
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:background="@color/greenLight"
-                        android:onClick="BtnEnd"
+                        android:layout_marginStart="12dp"
+                        android:background="@color/colorAccent"
+                        android:onClick="btnEnd"
                         android:text="Save"
-                        android:textColor="@color/white" />
-
+                        android:textColor="@color/black" />
                 </LinearLayout>
-                <!--EndButton LinearLayout-->
 
             </LinearLayout>
 

@@ -1,5 +1,7 @@
 package edu.aku.hassannaqvi.dss_matiari.ui.sections;
 
+import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.form;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -25,8 +27,6 @@ import edu.aku.hassannaqvi.dss_matiari.databinding.ActivitySectionABinding;
 import edu.aku.hassannaqvi.dss_matiari.ui.MainActivity;
 import edu.aku.hassannaqvi.dss_matiari.ui.lists.MwraActivity;
 
-import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.form;
-
 public class SectionAActivity extends AppCompatActivity {
 
     private static final String TAG = "SectionAActivity";
@@ -51,8 +51,14 @@ public class SectionAActivity extends AppCompatActivity {
         if (!insertNewRecord()) return;
         saveDraft();
         if (updateDB()) {
+
+            Intent i = new Intent(this, MwraActivity.class);
+            MainApp.household = MainApp.form;
+            i.setFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT);
+            startActivity(i);
             finish();
-            startActivity(new Intent(this, MwraActivity.class).putExtra("complete", true));
+            // finish();
+            //  startActivity(new Intent(this, MwraActivity.class).putExtra("complete", true));
         } else {
             Toast.makeText(this, "Failed to Update Database!", Toast.LENGTH_SHORT).show();
         }
@@ -60,12 +66,14 @@ public class SectionAActivity extends AppCompatActivity {
 
     private boolean insertNewRecord() {
         if (!MainApp.form.getUid().equals("")) return true;
+
+        // Updating date at the time of Insert instead of SaveDraft()
+        MainApp.form.setSysDate(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.ENGLISH).format(new Date().getTime()));
         long rowId = 0;
         try {
             rowId = db.addForm(form);
         } catch (JSONException e) {
             e.printStackTrace();
-
             return false;
         }
         form.setId(String.valueOf(rowId));
@@ -107,6 +115,7 @@ public class SectionAActivity extends AppCompatActivity {
         form.setDeviceId(MainApp.deviceid);
         form.setAppver(MainApp.versionName + "." + MainApp.versionCode);
 
+/*
         form.setRa14(bi.ra14.getText().toString());
 
         form.setRa15(bi.ra15.getText().toString());
@@ -122,6 +131,7 @@ public class SectionAActivity extends AppCompatActivity {
         form.setRa17_d(bi.ra17D.getText().toString());
 
         form.setRa18(bi.ra18.getText().toString());
+*/
 
 
     }
@@ -129,11 +139,12 @@ public class SectionAActivity extends AppCompatActivity {
     public void btnEnd(View view) {
         //saveDraft();
         /// if ((insertNewRecord())) {
-        Toast.makeText(this, "Patient information not recorded.", Toast.LENGTH_SHORT).show();
+        //Toast.makeText(this, "Household information not recorded.", Toast.LENGTH_SHORT).show();
+        setResult(RESULT_CANCELED);
         finish();
-        Intent i = new Intent(this, MainActivity.class);
+        // Intent i = new Intent(this, MainActivity.class);
         //   i.putExtra("complete",false);
-        startActivity(i);
+        // startActivity(i);
         //    }
 
     }

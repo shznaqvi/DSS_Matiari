@@ -27,6 +27,7 @@ object CreateTable {
             + FormsTable.COLUMN_VILLAGE_CODE + " TEXT,"
             + FormsTable.COLUMN_HOUSEHOLD_NO + " TEXT,"
             + FormsTable.COLUMN_STRUCTURE_NO + " TEXT,"
+            + FormsTable.COLUMN_VISIT_NO + " TEXT,"
             + FormsTable.COLUMN_SA + " TEXT"
             + " );"
             )

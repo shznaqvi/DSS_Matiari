@@ -17,6 +17,7 @@ public class TableContracts {
         public static final String COLUMN_VILLAGE_CODE = "villageCode";
         public static final String COLUMN_HOUSEHOLD_NO = "hhNo";
         public static final String COLUMN_STRUCTURE_NO = "structureNo";
+        public static final String COLUMN_VISIT_NO = "visitNo";
         public static final String COLUMN_SA = "s1";
 
 
@@ -27,7 +28,6 @@ public class TableContracts {
         public static final String COLUMN_APPVERSION = "appversion";
         public static final String COLUMN_ISTATUS = "istatus";
     }
-
 
     public static abstract class MWRATable implements BaseColumns {
         public static final String TABLE_NAME = "MWRA";

@@ -1,5 +1,9 @@
 package edu.aku.hassannaqvi.dss_matiari.ui.sections;
 
+import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.form;
+import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.mwra;
+import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.mwraCount;
+
 import android.app.Activity;
 import android.os.Bundle;
 import android.text.Editable;
@@ -29,10 +33,6 @@ import edu.aku.hassannaqvi.dss_matiari.core.MainApp;
 import edu.aku.hassannaqvi.dss_matiari.database.DatabaseHelper;
 import edu.aku.hassannaqvi.dss_matiari.databinding.ActivitySectionBBinding;
 
-import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.form;
-import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.mwra;
-import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.mwraCount;
-
 public class SectionBActivity extends AppCompatActivity {
 
     private static final String TAG = "SectionBActivity";
@@ -47,8 +47,21 @@ public class SectionBActivity extends AppCompatActivity {
         bi.setMwra(mwra);
         setListener();
 
-        if (mwra.getRb01().equals(""))
+        // set default model values if new mwra
+        if (mwra.getRb01().equals("")) {
+
             mwra.setRb01(String.valueOf(mwraCount + 1));
+            MainApp.mwra.setUuid(form.getUid());
+            MainApp.mwra.setUcCode(form.getUcCode());
+            MainApp.mwra.setVillageCode(form.getVillageCode());
+            MainApp.mwra.setStructureNo(form.getStructureNo());
+            MainApp.mwra.setHhNo(form.getHhNo());
+            MainApp.mwra.setUserName(MainApp.user.getUserName());
+            MainApp.mwra.setSysDate(form.getSysDate());
+            MainApp.mwra.setDeviceId(MainApp.deviceid);
+            MainApp.mwra.setHdssId(form.getHdssId());
+            MainApp.mwra.setAppver(MainApp.versionName + "." + MainApp.versionCode);
+        }
 
         setTitle(R.string.sectionB_mainheading);
         setImmersive(true);
@@ -198,7 +211,7 @@ public class SectionBActivity extends AppCompatActivity {
 
         //mwra = new MWRA();
 
-        MainApp.mwra.setUuid(form.getUid());
+/*        MainApp.mwra.setUuid(form.getUid());
         MainApp.mwra.setUcCode(form.getUcCode());
         MainApp.mwra.setVillageCode(form.getVillageCode());
         MainApp.mwra.setStructureNo(form.getStructureNo());
@@ -207,10 +220,10 @@ public class SectionBActivity extends AppCompatActivity {
         MainApp.mwra.setSysDate(form.getSysDate());
         MainApp.mwra.setDeviceId(MainApp.deviceid);
         MainApp.mwra.setHdssId(form.getHdssId());
-        MainApp.mwra.setAppver(MainApp.versionName + "." + MainApp.versionCode);
+        MainApp.mwra.setAppver(MainApp.versionName + "." + MainApp.versionCode);*/
 
 
-        mwra.setRb01(bi.rb01.getText().toString());
+/*        mwra.setRb01(bi.rb01.getText().toString());
         mwra.setRb02(bi.rb02.getText().toString());
         mwra.setRb03(bi.rb03.getText().toString());
         mwra.setRb04(bi.rb04.getText().toString());
@@ -222,7 +235,7 @@ public class SectionBActivity extends AppCompatActivity {
                 : bi.rb0702.isChecked() ? "2"
                 : "-1");
         mwra.setRb08(bi.rb08.getText().toString());
-        mwra.setRb09(bi.rb09.getText().toString());
+        mwra.setRb09(bi.rb09.getText().toString());*/
 
     }
 
@@ -267,6 +280,19 @@ public class SectionBActivity extends AppCompatActivity {
         int updcount = 0;
         try {
             updcount = db.updatesMWRAColumn(TableContracts.MWRATable.COLUMN_SB, mwra.sBtoString());
+            // Also reset Synced flag and alter UID
+            db.updatesMWRAColumn(TableContracts.MWRATable.COLUMN_SYNCED, null);
+            // concate last char from uid to alter and create new unique uid
+
+            mwra.setDeviceId(mwra.getDeviceId() + "_" + mwra.getDeviceId().substring(mwra.getDeviceId().length() - 1));
+            db.updatesMWRAColumn(TableContracts.MWRATable.COLUMN_DEVICEID, mwra.getDeviceId());
+            int repeatCount = (mwra.getDeviceId().length() - 16) / 2;
+            // new UID
+            String newUID = mwra.getDeviceId().substring(0, 16) + mwra.getId() + "_" + repeatCount;
+            mwra.setUid(newUID);
+            db.updatesMWRAColumn(TableContracts.MWRATable.COLUMN_UID, newUID);
+
+
         } catch (JSONException e) {
             e.printStackTrace();
             Toast.makeText(this, "JSONException: " + e.getMessage(), Toast.LENGTH_SHORT).show();

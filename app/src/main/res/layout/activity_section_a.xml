@@ -316,6 +316,47 @@
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
 
+                <!-- ra19  Input   -->
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/fldGrpCVra19"
+                    style="@style/cardView">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/bottom"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:text="@string/ra19" />
+
+                            <TextView
+                                style="@style/quesNum"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:text="@string/Q_ra19" />
+
+
+                        </LinearLayout>
+
+                        <EditText
+                            android:id="@+id/ra19"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:digits="abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+                            android:hint="@string/ra19"
+                            android:text="@={form.ra19}" />
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+
                 <!-- ra15  Input   -->
                 <androidx.cardview.widget.CardView
                     android:id="@+id/fldGrpCVra15"
@@ -360,7 +401,8 @@
                 <!-- ra16  Input   -->
                 <androidx.cardview.widget.CardView
                     android:id="@+id/fldGrpCVra16"
-                    style="@style/cardView">
+                    style="@style/cardView"
+                    android:visibility="gone">
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -395,7 +437,63 @@
                             android:text="@={form.ra16}" />
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
+                <!-- ra20  Radio   -->
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/fldGrpCVra20"
+                    style="@style/cardView">
 
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/bottom"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:text="@string/ra20" />
+
+                            <TextView
+                                style="@style/quesNum"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:text="@string/Q_ra20" />
+
+
+                        </LinearLayout>
+
+                        <RadioGroup
+                            android:id="@+id/ra20"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <RadioButton
+                                android:id="@+id/ra2001"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:checked='@{form.getRa20().equals("1")}'
+                                android:onClick='@{()->form.setRa20("1")}'
+                                android:text="@string/ra20_a" />
+
+                            <RadioButton
+                                android:id="@+id/ra2002"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:checked='@{form.getRa20().equals("2")}'
+                                android:onClick='@{()->form.setRa20("2")}'
+                                android:text="@string/ra20_b" />
+                        </RadioGroup>
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
                 <!-- ra17_a  Input   -->
                 <androidx.cardview.widget.CardView
                     android:id="@+id/fldGrpCVra17_a"
@@ -429,6 +527,45 @@
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:background="@color/colorAccent"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:gravity="center"
+                                android:inputType="number"
+                                android:text="Age Groups"
+                                android:textColor="@color/white"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:gravity="center"
+                                android:inputType="number"
+                                android:text="@string/a17_1"
+                                android:textColor="@color/white"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:gravity="center"
+                                android:inputType="number"
+                                android:text="@string/a17_2"
+                                android:textColor="@color/white"
+                                android:textStyle="bold" />
+
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
                             android:background="@drawable/bottom"
                             android:orientation="horizontal">
 
@@ -440,15 +577,29 @@
                                 android:text="@string/ra17_a" />
 
                             <com.edittextpicker.aliazaz.EditTextPicker
-                                android:id="@+id/ra17_a"
+                                android:id="@+id/ra17_a1"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
                                 android:gravity="center"
-                                android:hint="##"
+                                android:hint="@string/a17_1"
                                 android:inputType="number"
                                 android:maxLength="2"
-                                android:text="@={form.ra17_a}"
+                                android:text="@={form.ra17_a1}"
+                                app:maxValue="20"
+                                app:minValue="0"
+                                app:type="range" />
+
+                            <com.edittextpicker.aliazaz.EditTextPicker
+                                android:id="@+id/ra17_a2"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:gravity="center"
+                                android:hint="@string/a17_2"
+                                android:inputType="number"
+                                android:maxLength="2"
+                                android:text="@={form.ra17_a2}"
                                 app:maxValue="20"
                                 app:minValue="0"
                                 app:type="range" />
@@ -470,15 +621,29 @@
                                 android:text="@string/ra17_b" />
 
                             <com.edittextpicker.aliazaz.EditTextPicker
-                                android:id="@+id/ra17_b"
+                                android:id="@+id/ra17_b1"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
                                 android:gravity="center"
-                                android:hint="##"
+                                android:hint="@string/a17_1"
                                 android:inputType="number"
                                 android:maxLength="2"
-                                android:text="@={form.ra17_b}"
+                                android:text="@={form.ra17_b1}"
+                                app:maxValue="20"
+                                app:minValue="0"
+                                app:type="range" />
+
+                            <com.edittextpicker.aliazaz.EditTextPicker
+                                android:id="@+id/ra17_b2"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:gravity="center"
+                                android:hint="@string/a17_2"
+                                android:inputType="number"
+                                android:maxLength="2"
+                                android:text="@={form.ra17_b2}"
                                 app:maxValue="20"
                                 app:minValue="0"
                                 app:type="range" />
@@ -500,15 +665,29 @@
                                 android:text="@string/a17_c" />
 
                             <com.edittextpicker.aliazaz.EditTextPicker
-                                android:id="@+id/ra17_c"
+                                android:id="@+id/ra17_c1"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
                                 android:gravity="center"
-                                android:hint="##"
+                                android:hint="@string/a17_1"
                                 android:inputType="number"
                                 android:maxLength="2"
-                                android:text="@={form.ra17_c}"
+                                android:text="@={form.ra17_c1}"
+                                app:maxValue="20"
+                                app:minValue="0"
+                                app:type="range" />
+
+                            <com.edittextpicker.aliazaz.EditTextPicker
+                                android:id="@+id/ra17_c2"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:gravity="center"
+                                android:hint="@string/a17_2"
+                                android:inputType="number"
+                                android:maxLength="2"
+                                android:text="@={form.ra17_c2}"
                                 app:maxValue="20"
                                 app:minValue="0"
                                 app:type="range" />
@@ -530,15 +709,29 @@
                                 android:text="@string/ra17_d" />
 
                             <com.edittextpicker.aliazaz.EditTextPicker
-                                android:id="@+id/ra17_d"
+                                android:id="@+id/ra17_d1"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
                                 android:gravity="center"
-                                android:hint="##"
+                                android:hint="@string/a17_1"
                                 android:inputType="number"
                                 android:maxLength="2"
-                                android:text="@={form.ra17_d}"
+                                android:text="@={form.ra17_d1}"
+                                app:maxValue="20"
+                                app:minValue="0"
+                                app:type="range" />
+
+                            <com.edittextpicker.aliazaz.EditTextPicker
+                                android:id="@+id/ra17_d2"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:gravity="center"
+                                android:hint="@string/a17_2"
+                                android:inputType="number"
+                                android:maxLength="2"
+                                android:text="@={form.ra17_d2}"
                                 app:maxValue="20"
                                 app:minValue="0"
                                 app:type="range" />

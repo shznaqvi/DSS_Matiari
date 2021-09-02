@@ -6,8 +6,8 @@ plugins {
 
 repositories {
     google()
-    jcenter()
-    //mavenCentral()
+    //jcenter()
+    mavenCentral()
 }
 android {
 

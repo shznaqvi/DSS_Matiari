@@ -158,14 +158,17 @@
                 app:elevation="50dp">
 
                 <Button
+                    android:paddingStart="12dp"
                     android:id="@+id/btn_End"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:paddingEnd="12dp"
+                    android:text="Refused/Locked"
                     android:layout_margin="12dp"
                     android:background="@drawable/button_shape_red"
                     android:drawableTint="#ea0000"
                     android:onClick="BtnEnd"
-                    android:text="Cancel"
+                    android:visibility="gone"
                     android:textColor="@color/white" />
 
                 <Button
@@ -176,7 +179,9 @@
                     android:background="@drawable/button_shape_green"
                     android:drawableTint="#00ea00"
                     android:onClick="btnContinue"
-                    android:text="Save"
+                    android:paddingStart="12dp"
+                    android:paddingEnd="12dp"
+                    android:text="Close Household"
                     android:textColor="@color/white"
                     android:visibility="invisible" />
 

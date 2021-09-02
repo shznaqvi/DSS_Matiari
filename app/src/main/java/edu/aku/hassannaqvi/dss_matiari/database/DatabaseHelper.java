@@ -1,5 +1,13 @@
 package edu.aku.hassannaqvi.dss_matiari.database;
 
+import static edu.aku.hassannaqvi.dss_matiari.database.CreateTable.DATABASE_NAME;
+import static edu.aku.hassannaqvi.dss_matiari.database.CreateTable.DATABASE_VERSION;
+import static edu.aku.hassannaqvi.dss_matiari.database.CreateTable.SQL_CREATE_FORMS;
+import static edu.aku.hassannaqvi.dss_matiari.database.CreateTable.SQL_CREATE_MWRA;
+import static edu.aku.hassannaqvi.dss_matiari.database.CreateTable.SQL_CREATE_USERS;
+import static edu.aku.hassannaqvi.dss_matiari.database.CreateTable.SQL_CREATE_VERSIONAPP;
+import static edu.aku.hassannaqvi.dss_matiari.database.CreateTable.SQL_CREATE_VILLAGES;
+
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -31,14 +39,6 @@ import edu.aku.hassannaqvi.dss_matiari.models.Users;
 import edu.aku.hassannaqvi.dss_matiari.models.VersionApp;
 import edu.aku.hassannaqvi.dss_matiari.models.Villages;
 import edu.aku.hassannaqvi.dss_matiari.models.ZStandard;
-
-import static edu.aku.hassannaqvi.dss_matiari.database.CreateTable.DATABASE_NAME;
-import static edu.aku.hassannaqvi.dss_matiari.database.CreateTable.DATABASE_VERSION;
-import static edu.aku.hassannaqvi.dss_matiari.database.CreateTable.SQL_CREATE_FORMS;
-import static edu.aku.hassannaqvi.dss_matiari.database.CreateTable.SQL_CREATE_MWRA;
-import static edu.aku.hassannaqvi.dss_matiari.database.CreateTable.SQL_CREATE_USERS;
-import static edu.aku.hassannaqvi.dss_matiari.database.CreateTable.SQL_CREATE_VERSIONAPP;
-import static edu.aku.hassannaqvi.dss_matiari.database.CreateTable.SQL_CREATE_VILLAGES;
 
 
 
@@ -94,6 +94,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         values.put(FormsTable.COLUMN_VILLAGE_CODE, form.getVillageCode());
         values.put(FormsTable.COLUMN_HOUSEHOLD_NO, form.getHhNo());
         values.put(FormsTable.COLUMN_STRUCTURE_NO, form.getStructureNo());
+        values.put(FormsTable.COLUMN_VISIT_NO, form.getVisitNo());
         values.put(FormsTable.COLUMN_ISTATUS, form.getiStatus());
         values.put(FormsTable.COLUMN_DEVICETAGID, form.getDeviceTag());
         values.put(FormsTable.COLUMN_DEVICEID, form.getDeviceId());
@@ -230,6 +231,68 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return allForms;
     }
 
+    public ArrayList<Form> getUnclosedForms() {
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor c = null;
+        String[] columns = {
+                FormsTable._ID,
+                FormsTable.COLUMN_UID,
+                FormsTable.COLUMN_SYSDATE,
+                FormsTable.COLUMN_USERNAME,
+                FormsTable.COLUMN_ISTATUS,
+                FormsTable.COLUMN_SYNCED,
+                FormsTable.COLUMN_VISIT_NO,
+                FormsTable.COLUMN_STRUCTURE_NO,
+                FormsTable.COLUMN_VILLAGE_CODE,
+                FormsTable.COLUMN_UC_CODE,
+                FormsTable.COLUMN_HOUSEHOLD_NO,
+
+        };
+        String whereClause = FormsTable.COLUMN_ISTATUS + " != ? AND "
+                + FormsTable.COLUMN_VISIT_NO + " < ?";
+
+
+        String[] whereArgs = {"1", "3"};
+        String groupBy = null;
+        String having = null;
+        String orderBy = FormsTable.COLUMN_ID + " ASC";
+        ArrayList<Form> allForms = new ArrayList<>();
+        try {
+            c = db.query(
+                    FormsTable.TABLE_NAME,  // The table to query
+                    columns,                   // The columns to return
+                    whereClause,               // The columns for the WHERE clause
+                    whereArgs,                 // The values for the WHERE clause
+                    groupBy,                   // don't group the rows
+                    having,                    // don't filter by row groups
+                    orderBy                    // The sort order
+            );
+            while (c.moveToNext()) {
+                Form forms = new Form();
+                forms.setId(c.getString(c.getColumnIndex(FormsTable.COLUMN_ID)));
+                forms.setUid(c.getString(c.getColumnIndex(FormsTable.COLUMN_UID)));
+                forms.setSysDate(c.getString(c.getColumnIndex(FormsTable.COLUMN_SYSDATE)));
+                forms.setUserName(c.getString(c.getColumnIndex(FormsTable.COLUMN_USERNAME)));
+                forms.setiStatus(c.getString(c.getColumnIndex(FormsTable.COLUMN_ISTATUS)));
+                forms.setSynced(c.getString(c.getColumnIndex(FormsTable.COLUMN_SYNCED)));
+                forms.setVisitNo(c.getString(c.getColumnIndex(FormsTable.COLUMN_VISIT_NO)));
+                forms.setStructureNo(c.getString(c.getColumnIndex(FormsTable.COLUMN_STRUCTURE_NO)));
+                forms.setVillageCode(c.getString(c.getColumnIndex(FormsTable.COLUMN_VILLAGE_CODE)));
+                forms.setUcCode(c.getString(c.getColumnIndex(FormsTable.COLUMN_UC_CODE)));
+                forms.setHhNo(c.getString(c.getColumnIndex(FormsTable.COLUMN_HOUSEHOLD_NO)));
+                allForms.add(forms);
+            }
+        } finally {
+            if (c != null) {
+                c.close();
+            }
+            if (db != null) {
+                db.close();
+            }
+        }
+        return allForms;
+    }
 
     // istatus examples: (1) or (1,9) or (1,3,5)
   /*  public Form getFormByAssessNo(String assesNo, String istatus) throws JSONException {
@@ -558,7 +621,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         String whereClause;
         //whereClause = null;
-        whereClause = FormsTable.COLUMN_SYNCED + " is null ";
+        whereClause = FormsTable.COLUMN_SYNCED + " is null AND (" +
+                FormsTable.COLUMN_ISTATUS + " = 1 OR " +
+                FormsTable.COLUMN_VISIT_NO + " > 2 ) ";
 
         String[] whereArgs = null;
 
@@ -890,6 +955,47 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return form;
     }
 
+    public Form getFormByUID(String uid) throws JSONException {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor c = null;
+        String[] columns = null;
+
+        String whereClause;
+        whereClause = FormsTable.COLUMN_UID + "=?";
+
+        String[] whereArgs = {uid};
+
+        String groupBy = null;
+        String having = null;
+
+        String orderBy = FormsTable.COLUMN_ID + " ASC";
+
+        Form form = null;
+        try {
+            c = db.query(
+                    FormsTable.TABLE_NAME,  // The table to query
+                    columns,                   // The columns to return
+                    whereClause,               // The columns for the WHERE clause
+                    whereArgs,                 // The values for the WHERE clause
+                    groupBy,                   // don't group the rows
+                    having,                    // don't filter by row groups
+                    orderBy                    // The sort order
+            );
+            while (c.moveToNext()) {
+                form = new Form().Hydrate(c);
+            }
+        } finally {
+            if (c != null) {
+                c.close();
+            }
+            if (db != null) {
+                db.close();
+            }
+        }
+        return form;
+    }
+
+
     public List<MWRA> getAllMWRAByHH(String village, String structure, String hhNo) throws JSONException {
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor c = null;
@@ -1010,5 +1116,24 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             }
         }
         return householdByHH;
+    }
+
+    public int getMWRACountBYUUID(String uid) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor c = db.rawQuery(
+                "SELECT Count(*) AS mwraCount" +
+
+                        " FROM " + MWRATable.TABLE_NAME +
+                        " WHERE " + MWRATable.COLUMN_UUID + " =? "
+
+                ,
+                new String[]{uid});
+        float maxHHno = 0;
+        int mwraCount = 0;
+        while (c.moveToNext()) {
+            mwraCount = c.getInt(c.getColumnIndex("mwraCount"));
+        }
+        // Log.d(TAG, "getMaxHHNo: " + mwraCount);
+        return mwraCount;
     }
 }

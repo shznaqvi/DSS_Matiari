@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group>
+        <item
+            android:id="@+id/onSync"
+            android:icon="@drawable/ic_sync"
+            android:title="Sync Data" />
+    </group>
+    <group>
+        <item
+            android:id="@+id/checkOpenForms"
+            android:icon="@drawable/ic_baseline_pending_actions_24"
+            android:title="Unfinished Forms" />
+    </group>
+    <item
+        android:id="@+id/formsReportDate"
+        android:title="Forms Report by Date"
+        android:visible="false" />
+    <item
+        android:id="@+id/formsReportCluster"
+        android:title="Pending Households"
+        android:visible="false" />
+
+</menu>

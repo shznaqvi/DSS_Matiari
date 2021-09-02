@@ -14,6 +14,7 @@
 
     <ScrollView
         android:layout_width="match_parent"
+        android:background="@drawable/app_bg_gray"
         android:layout_height="wrap_content">
 
         <LinearLayout
@@ -22,6 +23,17 @@
             android:animateLayoutChanges="false"
             android:gravity="center"
             android:orientation="vertical">
+            <!-- CUSTOM TOOLBAR -->
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:layoutDirection="ltr"
+                android:textAlignment="center"
+                app:layout_scrollFlags="scroll|enterAlways"
+                app:popupTheme="@style/AppTheme.PopupOverlay"
+                app:title="Data Sync Screen"
+                app:titleTextColor="@color/grayDark" />
 
             <TextView
                 style="@style/TextAppearance.AppCompat.Large"

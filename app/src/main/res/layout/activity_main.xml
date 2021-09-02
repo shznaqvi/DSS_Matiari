@@ -30,9 +30,10 @@
             android:layout_height="?attr/actionBarSize"
             android:layoutDirection="ltr"
             android:textAlignment="center"
+
             app:layout_scrollFlags="scroll|enterAlways"
             app:popupTheme="@style/AppTheme.PopupOverlay"
-            app:titleTextColor="@color/black" />
+            app:titleTextColor="@color/grayDark" />
 
 
         <ImageView
