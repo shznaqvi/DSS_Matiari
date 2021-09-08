@@ -2,7 +2,7 @@ package edu.aku.hassannaqvi.dss_matiari.database;
 
 import static edu.aku.hassannaqvi.dss_matiari.database.CreateTable.DATABASE_NAME;
 import static edu.aku.hassannaqvi.dss_matiari.database.CreateTable.DATABASE_VERSION;
-import static edu.aku.hassannaqvi.dss_matiari.database.CreateTable.SQL_CREATE_FORMS;
+import static edu.aku.hassannaqvi.dss_matiari.database.CreateTable.SQL_CREATE_HOUSEHOLDS;
 import static edu.aku.hassannaqvi.dss_matiari.database.CreateTable.SQL_CREATE_MWRA;
 import static edu.aku.hassannaqvi.dss_matiari.database.CreateTable.SQL_CREATE_USERS;
 import static edu.aku.hassannaqvi.dss_matiari.database.CreateTable.SQL_CREATE_VERSIONAPP;
@@ -26,14 +26,15 @@ import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 
-import edu.aku.hassannaqvi.dss_matiari.contracts.TableContracts.FormsTable;
+import edu.aku.hassannaqvi.dss_matiari.contracts.TableContracts;
+import edu.aku.hassannaqvi.dss_matiari.contracts.TableContracts.HouseholdTable;
 import edu.aku.hassannaqvi.dss_matiari.contracts.TableContracts.MWRATable;
 import edu.aku.hassannaqvi.dss_matiari.contracts.TableContracts.TableVillage;
 import edu.aku.hassannaqvi.dss_matiari.contracts.TableContracts.UsersTable;
 import edu.aku.hassannaqvi.dss_matiari.contracts.TableContracts.VersionTable;
 import edu.aku.hassannaqvi.dss_matiari.contracts.TableContracts.ZScoreTable;
 import edu.aku.hassannaqvi.dss_matiari.core.MainApp;
-import edu.aku.hassannaqvi.dss_matiari.models.Form;
+import edu.aku.hassannaqvi.dss_matiari.models.Households;
 import edu.aku.hassannaqvi.dss_matiari.models.MWRA;
 import edu.aku.hassannaqvi.dss_matiari.models.Users;
 import edu.aku.hassannaqvi.dss_matiari.models.VersionApp;
@@ -59,7 +60,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(SQL_CREATE_USERS);
-        db.execSQL(SQL_CREATE_FORMS);
+        db.execSQL(SQL_CREATE_HOUSEHOLDS);
         db.execSQL(SQL_CREATE_MWRA);
         db.execSQL(SQL_CREATE_VERSIONAPP);
         db.execSQL(SQL_CREATE_VILLAGES);
@@ -78,34 +79,34 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
 
     //Addition in DB
-    public Long addForm(Form form) throws JSONException {
+    public Long addHousehold(Households households) throws JSONException {
 
         // Gets the data repository in write mode
         SQLiteDatabase db = this.getWritableDatabase();
 
         // Create a new map of values, where column names are the keys
         ContentValues values = new ContentValues();
-        values.put(FormsTable.COLUMN_PROJECT_NAME, form.getProjectName());
-        values.put(FormsTable.COLUMN_UID, form.getUid());
-        values.put(FormsTable.COLUMN_USERNAME, form.getUserName());
-        values.put(FormsTable.COLUMN_SYSDATE, form.getSysDate());
-        values.put(FormsTable.COLUMN_HDSSID, form.getHdssId());
-        values.put(FormsTable.COLUMN_UC_CODE, form.getUcCode());
-        values.put(FormsTable.COLUMN_VILLAGE_CODE, form.getVillageCode());
-        values.put(FormsTable.COLUMN_HOUSEHOLD_NO, form.getHhNo());
-        values.put(FormsTable.COLUMN_STRUCTURE_NO, form.getStructureNo());
-        values.put(FormsTable.COLUMN_VISIT_NO, form.getVisitNo());
-        values.put(FormsTable.COLUMN_ISTATUS, form.getiStatus());
-        values.put(FormsTable.COLUMN_DEVICETAGID, form.getDeviceTag());
-        values.put(FormsTable.COLUMN_DEVICEID, form.getDeviceId());
-        values.put(FormsTable.COLUMN_APPVERSION, form.getAppver());
-        values.put(FormsTable.COLUMN_SA, form.sAtoString());
+        values.put(HouseholdTable.COLUMN_PROJECT_NAME, households.getProjectName());
+        values.put(HouseholdTable.COLUMN_UID, households.getUid());
+        values.put(HouseholdTable.COLUMN_USERNAME, households.getUserName());
+        values.put(HouseholdTable.COLUMN_SYSDATE, households.getSysDate());
+        values.put(TableContracts.HouseholdTable.COLUMN_HDSSID, households.getHdssId());
+        values.put(HouseholdTable.COLUMN_UC_CODE, households.getUcCode());
+        values.put(HouseholdTable.COLUMN_VILLAGE_CODE, households.getVillageCode());
+        values.put(HouseholdTable.COLUMN_HOUSEHOLD_NO, households.getHhNo());
+        values.put(HouseholdTable.COLUMN_STRUCTURE_NO, households.getStructureNo());
+        values.put(HouseholdTable.COLUMN_VISIT_NO, households.getVisitNo());
+        values.put(TableContracts.HouseholdTable.COLUMN_ISTATUS, households.getiStatus());
+        values.put(HouseholdTable.COLUMN_DEVICETAGID, households.getDeviceTag());
+        values.put(HouseholdTable.COLUMN_DEVICEID, households.getDeviceId());
+        values.put(HouseholdTable.COLUMN_APPVERSION, households.getAppver());
+        values.put(HouseholdTable.COLUMN_SA, households.sAtoString());
 
         // Insert the new row, returning the primary key value of the new row
         long newRowId;
         newRowId = db.insert(
-                FormsTable.TABLE_NAME,
-                FormsTable.COLUMN_NAME_NULLABLE,
+                HouseholdTable.TABLE_NAME,
+                HouseholdTable.COLUMN_NAME_NULLABLE,
                 values);
         return newRowId;
     }
@@ -183,28 +184,28 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
 
-    public ArrayList<Form> getFormsByDate(String sysdate) {
+    public ArrayList<Households> getHouseholdsByDate(String sysdate) {
 
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor c = null;
         String[] columns = {
-                FormsTable._ID,
-                FormsTable.COLUMN_UID,
-                FormsTable.COLUMN_SYSDATE,
-                FormsTable.COLUMN_USERNAME,
-                FormsTable.COLUMN_ISTATUS,
-                FormsTable.COLUMN_SYNCED,
+                HouseholdTable._ID,
+                HouseholdTable.COLUMN_UID,
+                HouseholdTable.COLUMN_SYSDATE,
+                TableContracts.HouseholdTable.COLUMN_USERNAME,
+                HouseholdTable.COLUMN_ISTATUS,
+                HouseholdTable.COLUMN_SYNCED,
 
         };
-        String whereClause = FormsTable.COLUMN_SYSDATE + " Like ? ";
+        String whereClause = HouseholdTable.COLUMN_SYSDATE + " Like ? ";
         String[] whereArgs = new String[]{"%" + sysdate + " %"};
         String groupBy = null;
         String having = null;
-        String orderBy = FormsTable.COLUMN_ID + " ASC";
-        ArrayList<Form> allForms = new ArrayList<>();
+        String orderBy = HouseholdTable.COLUMN_ID + " ASC";
+        ArrayList<Households> allHouseholds = new ArrayList<>();
         try {
             c = db.query(
-                    FormsTable.TABLE_NAME,  // The table to query
+                    TableContracts.HouseholdTable.TABLE_NAME,  // The table to query
                     columns,                   // The columns to return
                     whereClause,               // The columns for the WHERE clause
                     whereArgs,                 // The values for the WHERE clause
@@ -213,12 +214,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                     orderBy                    // The sort order
             );
             while (c.moveToNext()) {
-                Form forms = new Form();
-                forms.setId(c.getString(c.getColumnIndex(FormsTable.COLUMN_ID)));
-                forms.setUid(c.getString(c.getColumnIndex(FormsTable.COLUMN_UID)));
-                forms.setSysDate(c.getString(c.getColumnIndex(FormsTable.COLUMN_SYSDATE)));
-                forms.setUserName(c.getString(c.getColumnIndex(FormsTable.COLUMN_USERNAME)));
-                allForms.add(forms);
+                Households households = new Households();
+                households.setId(c.getString(c.getColumnIndex(HouseholdTable.COLUMN_ID)));
+                households.setUid(c.getString(c.getColumnIndex(HouseholdTable.COLUMN_UID)));
+                households.setSysDate(c.getString(c.getColumnIndex(HouseholdTable.COLUMN_SYSDATE)));
+                households.setUserName(c.getString(c.getColumnIndex(HouseholdTable.COLUMN_USERNAME)));
+                allHouseholds.add(households);
             }
         } finally {
             if (c != null) {
@@ -228,39 +229,39 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 db.close();
             }
         }
-        return allForms;
+        return allHouseholds;
     }
 
-    public ArrayList<Form> getUnclosedForms() {
+    public ArrayList<Households> getUnclosedHouseholds() {
 
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor c = null;
         String[] columns = {
-                FormsTable._ID,
-                FormsTable.COLUMN_UID,
-                FormsTable.COLUMN_SYSDATE,
-                FormsTable.COLUMN_USERNAME,
-                FormsTable.COLUMN_ISTATUS,
-                FormsTable.COLUMN_SYNCED,
-                FormsTable.COLUMN_VISIT_NO,
-                FormsTable.COLUMN_STRUCTURE_NO,
-                FormsTable.COLUMN_VILLAGE_CODE,
-                FormsTable.COLUMN_UC_CODE,
-                FormsTable.COLUMN_HOUSEHOLD_NO,
+                HouseholdTable._ID,
+                HouseholdTable.COLUMN_UID,
+                TableContracts.HouseholdTable.COLUMN_SYSDATE,
+                HouseholdTable.COLUMN_USERNAME,
+                TableContracts.HouseholdTable.COLUMN_ISTATUS,
+                HouseholdTable.COLUMN_SYNCED,
+                HouseholdTable.COLUMN_VISIT_NO,
+                HouseholdTable.COLUMN_STRUCTURE_NO,
+                HouseholdTable.COLUMN_VILLAGE_CODE,
+                TableContracts.HouseholdTable.COLUMN_UC_CODE,
+                TableContracts.HouseholdTable.COLUMN_HOUSEHOLD_NO,
 
         };
-        String whereClause = FormsTable.COLUMN_ISTATUS + " != ? AND "
-                + FormsTable.COLUMN_VISIT_NO + " < ?";
+        String whereClause = HouseholdTable.COLUMN_ISTATUS + " != ? AND "
+                + TableContracts.HouseholdTable.COLUMN_VISIT_NO + " < ?";
 
 
         String[] whereArgs = {"1", "3"};
         String groupBy = null;
         String having = null;
-        String orderBy = FormsTable.COLUMN_ID + " ASC";
-        ArrayList<Form> allForms = new ArrayList<>();
+        String orderBy = TableContracts.HouseholdTable.COLUMN_ID + " ASC";
+        ArrayList<Households> allHouseholds = new ArrayList<>();
         try {
             c = db.query(
-                    FormsTable.TABLE_NAME,  // The table to query
+                    HouseholdTable.TABLE_NAME,  // The table to query
                     columns,                   // The columns to return
                     whereClause,               // The columns for the WHERE clause
                     whereArgs,                 // The values for the WHERE clause
@@ -269,19 +270,19 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                     orderBy                    // The sort order
             );
             while (c.moveToNext()) {
-                Form forms = new Form();
-                forms.setId(c.getString(c.getColumnIndex(FormsTable.COLUMN_ID)));
-                forms.setUid(c.getString(c.getColumnIndex(FormsTable.COLUMN_UID)));
-                forms.setSysDate(c.getString(c.getColumnIndex(FormsTable.COLUMN_SYSDATE)));
-                forms.setUserName(c.getString(c.getColumnIndex(FormsTable.COLUMN_USERNAME)));
-                forms.setiStatus(c.getString(c.getColumnIndex(FormsTable.COLUMN_ISTATUS)));
-                forms.setSynced(c.getString(c.getColumnIndex(FormsTable.COLUMN_SYNCED)));
-                forms.setVisitNo(c.getString(c.getColumnIndex(FormsTable.COLUMN_VISIT_NO)));
-                forms.setStructureNo(c.getString(c.getColumnIndex(FormsTable.COLUMN_STRUCTURE_NO)));
-                forms.setVillageCode(c.getString(c.getColumnIndex(FormsTable.COLUMN_VILLAGE_CODE)));
-                forms.setUcCode(c.getString(c.getColumnIndex(FormsTable.COLUMN_UC_CODE)));
-                forms.setHhNo(c.getString(c.getColumnIndex(FormsTable.COLUMN_HOUSEHOLD_NO)));
-                allForms.add(forms);
+                Households households = new Households();
+                households.setId(c.getString(c.getColumnIndex(HouseholdTable.COLUMN_ID)));
+                households.setUid(c.getString(c.getColumnIndex(HouseholdTable.COLUMN_UID)));
+                households.setSysDate(c.getString(c.getColumnIndex(HouseholdTable.COLUMN_SYSDATE)));
+                households.setUserName(c.getString(c.getColumnIndex(HouseholdTable.COLUMN_USERNAME)));
+                households.setiStatus(c.getString(c.getColumnIndex(HouseholdTable.COLUMN_ISTATUS)));
+                households.setSynced(c.getString(c.getColumnIndex(HouseholdTable.COLUMN_SYNCED)));
+                households.setVisitNo(c.getString(c.getColumnIndex(HouseholdTable.COLUMN_VISIT_NO)));
+                households.setStructureNo(c.getString(c.getColumnIndex(HouseholdTable.COLUMN_STRUCTURE_NO)));
+                households.setVillageCode(c.getString(c.getColumnIndex(HouseholdTable.COLUMN_VILLAGE_CODE)));
+                households.setUcCode(c.getString(c.getColumnIndex(TableContracts.HouseholdTable.COLUMN_UC_CODE)));
+                households.setHhNo(c.getString(c.getColumnIndex(HouseholdTable.COLUMN_HOUSEHOLD_NO)));
+                allHouseholds.add(households);
             }
         } finally {
             if (c != null) {
@@ -291,30 +292,30 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 db.close();
             }
         }
-        return allForms;
+        return allHouseholds;
     }
 
     // istatus examples: (1) or (1,9) or (1,3,5)
-  /*  public Form getFormByAssessNo(String assesNo, String istatus) throws JSONException {
+  /*  public Households getFormByAssessNo(String assesNo, String istatus) throws JSONException {
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor c = null;
         String[] columns = null;
 
         String whereClause;
-        whereClause = FormsTable.COLUMN_ASSESMENT_NO + "=? AND " +
-                FormsTable.COLUMN_ISTATUS + " in " + istatus;
+        whereClause = HouseholdTable.COLUMN_ASSESMENT_NO + "=? AND " +
+                HouseholdTable.COLUMN_ISTATUS + " in " + istatus;
 
         String[] whereArgs = {assesNo};
 
         String groupBy = null;
         String having = null;
 
-        String orderBy = FormsTable.COLUMN_ID + " ASC";
+        String orderBy = HouseholdTable.COLUMN_ID + " ASC";
 
-        Form allFC = null;
+        Households allFC = null;
         try {
             c = db.query(
-                    FormsTable.TABLE_NAME,  // The table to query
+                    HouseholdTable.TABLE_NAME,  // The table to query
                     columns,                   // The columns to return
                     whereClause,               // The columns for the WHERE clause
                     whereArgs,                 // The values for the WHERE clause
@@ -323,7 +324,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                     orderBy                    // The sort order
             );
             while (c.moveToNext()) {
-                allFC = new Form().Hydrate(c);
+                allFC = new Households().Hydrate(c);
             }
         } finally {
             if (c != null) {
@@ -373,16 +374,16 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
 
-    public int updatesFormColumn(String column, String value) {
+    public int updatesHouseholdColumn(String column, String value) {
         SQLiteDatabase db = this.getWritableDatabase();
 
         ContentValues values = new ContentValues();
         values.put(column, value);
 
-        String selection = FormsTable._ID + " =? ";
-        String[] selectionArgs = {String.valueOf(MainApp.form.getId())};
+        String selection = TableContracts.HouseholdTable._ID + " =? ";
+        String[] selectionArgs = {String.valueOf(MainApp.households.getId())};
 
-        return db.update(FormsTable.TABLE_NAME,
+        return db.update(HouseholdTable.TABLE_NAME,
                 values,
                 selection,
                 selectionArgs);
@@ -408,16 +409,16 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getReadableDatabase();
 
         ContentValues values = new ContentValues();
-        values.put(FormsTable.COLUMN_SYSDATE, new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.ENGLISH).format(new Date().getTime()) + "-Updated");
-        values.put(FormsTable.COLUMN_ISTATUS, "1");
-        values.put(FormsTable.COLUMN_SYNCED, (byte[]) null);
+        values.put(HouseholdTable.COLUMN_SYSDATE, new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.ENGLISH).format(new Date().getTime()) + "-Updated");
+        values.put(HouseholdTable.COLUMN_ISTATUS, "1");
+        values.put(HouseholdTable.COLUMN_SYNCED, (byte[]) null);
 
-        String selection = FormsTable.COLUMN_ASSESMENT_NO + " =? AND " + FormsTable.COLUMN_ISTATUS + " =? ";
-        // String selection = FormsTable.COLUMN_ASSESMENT_NO + " =? ";
+        String selection = HouseholdTable.COLUMN_ASSESMENT_NO + " =? AND " + HouseholdTable.COLUMN_ISTATUS + " =? ";
+        // String selection = HouseholdTable.COLUMN_ASSESMENT_NO + " =? ";
         String[] selectionArgs = {assessNo, "9"};
         // String[] selectionArgs = {assessNo};
 
-        return db.update(FormsTable.TABLE_NAME,
+        return db.update(HouseholdTable.TABLE_NAME,
                 values,
                 selection,
                 selectionArgs);
@@ -428,13 +429,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         // New value for one column
         ContentValues values = new ContentValues();
-        values.put(FormsTable.COLUMN_ISTATUS, MainApp.form.getiStatus());
+        values.put(HouseholdTable.COLUMN_ISTATUS, MainApp.households.getiStatus());
 
         // Which row to update, based on the ID
-        String selection = FormsTable.COLUMN_ID + " =? ";
-        String[] selectionArgs = {String.valueOf(MainApp.form.getId())};
+        String selection = HouseholdTable.COLUMN_ID + " =? ";
+        String[] selectionArgs = {String.valueOf(MainApp.households.getId())};
 
-        return db.update(FormsTable.TABLE_NAME,
+        return db.update(TableContracts.HouseholdTable.TABLE_NAME,
                 values,
                 selection,
                 selectionArgs);
@@ -614,28 +615,28 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
     //get UnSyncedTables
-    public JSONArray getUnsyncedForms() throws JSONException {
+    public JSONArray getUnsyncedHouseholds() throws JSONException {
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor c = null;
         String[] columns = null;
 
         String whereClause;
         //whereClause = null;
-        whereClause = FormsTable.COLUMN_SYNCED + " is null AND (" +
-                FormsTable.COLUMN_ISTATUS + " = 1 OR " +
-                FormsTable.COLUMN_VISIT_NO + " > 2 ) ";
+        whereClause = HouseholdTable.COLUMN_SYNCED + " is null AND (" +
+                HouseholdTable.COLUMN_ISTATUS + " = 1 OR " +
+                HouseholdTable.COLUMN_VISIT_NO + " > 2 ) ";
 
         String[] whereArgs = null;
 
         String groupBy = null;
         String having = null;
 
-        String orderBy = FormsTable.COLUMN_ID + " ASC";
+        String orderBy = TableContracts.HouseholdTable.COLUMN_ID + " ASC";
 
-        JSONArray allForms = new JSONArray();
+        JSONArray allHouseholds = new JSONArray();
         try {
             c = db.query(
-                    FormsTable.TABLE_NAME,  // The table to query
+                    HouseholdTable.TABLE_NAME,  // The table to query
                     columns,                   // The columns to return
                     whereClause,               // The columns for the WHERE clause
                     whereArgs,                 // The values for the WHERE clause
@@ -645,11 +646,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             );
             while (c.moveToNext()) {
                 /** WorkManager Upload
-                 /*Form fc = new Form();
+                 /*Households fc = new Households();
                  allFC.add(fc.Hydrate(c));*/
-                Log.d(TAG, "getUnsyncedForms: " + c.getCount());
-                Form form = new Form();
-                allForms.put(form.Hydrate(c).toJSONObject());
+                Log.d(TAG, "getUnsyncedHouseholds: " + c.getCount());
+                Households households = new Households();
+                allHouseholds.put(households.Hydrate(c).toJSONObject());
 
 
             }
@@ -661,9 +662,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 db.close();
             }
         }
-        Log.d(TAG, "getUnsyncedForms: " + allForms.toString().length());
-        Log.d(TAG, "getUnsyncedForms: " + allForms);
-        return allForms;
+        Log.d(TAG, "getUnsyncedHouseholds: " + allHouseholds.toString().length());
+        Log.d(TAG, "getUnsyncedHouseholds: " + allHouseholds);
+        return allHouseholds;
     }
 
     public JSONArray getUnsyncedMWRA() throws JSONException {
@@ -711,20 +712,20 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
 
     //update SyncedTables
-    public void updateSyncedforms(String id) {
+    public void updateSyncedhouseholds(String id) {
         SQLiteDatabase db = this.getReadableDatabase();
 
 // New value for one column
         ContentValues values = new ContentValues();
-        values.put(FormsTable.COLUMN_SYNCED, true);
-        values.put(FormsTable.COLUMN_SYNCED_DATE, new Date().toString());
+        values.put(HouseholdTable.COLUMN_SYNCED, true);
+        values.put(TableContracts.HouseholdTable.COLUMN_SYNCED_DATE, new Date().toString());
 
 // Which row to update, based on the title
-        String where = FormsTable.COLUMN_ID + " = ?";
+        String where = HouseholdTable.COLUMN_ID + " = ?";
         String[] whereArgs = {id};
 
         int count = db.update(
-                FormsTable.TABLE_NAME,
+                HouseholdTable.TABLE_NAME,
                 values,
                 where,
                 whereArgs);
@@ -915,25 +916,25 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return insertCount;
     }
 
-    public Form getFormByHDSSID(String hdssid) throws JSONException {
+    public Households getHouseholdByHDSSID(String hdssid) throws JSONException {
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor c = null;
         String[] columns = null;
 
         String whereClause;
-        whereClause = FormsTable.COLUMN_HDSSID + "=?";
+        whereClause = HouseholdTable.COLUMN_HDSSID + "=?";
 
         String[] whereArgs = {hdssid};
 
         String groupBy = null;
         String having = null;
 
-        String orderBy = FormsTable.COLUMN_ID + " ASC";
+        String orderBy = HouseholdTable.COLUMN_ID + " ASC";
 
-        Form form = null;
+        Households households = null;
         try {
             c = db.query(
-                    FormsTable.TABLE_NAME,  // The table to query
+                    TableContracts.HouseholdTable.TABLE_NAME,  // The table to query
                     columns,                   // The columns to return
                     whereClause,               // The columns for the WHERE clause
                     whereArgs,                 // The values for the WHERE clause
@@ -942,7 +943,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                     orderBy                    // The sort order
             );
             while (c.moveToNext()) {
-                form = new Form().Hydrate(c);
+                households = new Households().Hydrate(c);
             }
         } finally {
             if (c != null) {
@@ -952,28 +953,28 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 db.close();
             }
         }
-        return form;
+        return households;
     }
 
-    public Form getFormByUID(String uid) throws JSONException {
+    public Households getHouseholdByUID(String uid) throws JSONException {
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor c = null;
         String[] columns = null;
 
         String whereClause;
-        whereClause = FormsTable.COLUMN_UID + "=?";
+        whereClause = HouseholdTable.COLUMN_UID + "=?";
 
         String[] whereArgs = {uid};
 
         String groupBy = null;
         String having = null;
 
-        String orderBy = FormsTable.COLUMN_ID + " ASC";
+        String orderBy = HouseholdTable.COLUMN_ID + " ASC";
 
-        Form form = null;
+        Households households = null;
         try {
             c = db.query(
-                    FormsTable.TABLE_NAME,  // The table to query
+                    HouseholdTable.TABLE_NAME,  // The table to query
                     columns,                   // The columns to return
                     whereClause,               // The columns for the WHERE clause
                     whereArgs,                 // The values for the WHERE clause
@@ -982,7 +983,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                     orderBy                    // The sort order
             );
             while (c.moveToNext()) {
-                form = new Form().Hydrate(c);
+                households = new Households().Hydrate(c);
             }
         } finally {
             if (c != null) {
@@ -992,7 +993,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 db.close();
             }
         }
-        return form;
+        return households;
     }
 
 
@@ -1044,57 +1045,57 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor c = db.rawQuery(
                 "SELECT " +
-                        "MAX(" + FormsTable.COLUMN_STRUCTURE_NO + ") AS " + FormsTable.COLUMN_STRUCTURE_NO +
-                        " FROM " + FormsTable.TABLE_NAME +
-                        " WHERE " + FormsTable.COLUMN_VILLAGE_CODE + "=? " +
-                        " GROUP BY " + FormsTable.COLUMN_VILLAGE_CODE
+                        "MAX(" + HouseholdTable.COLUMN_STRUCTURE_NO + ") AS " + HouseholdTable.COLUMN_STRUCTURE_NO +
+                        " FROM " + TableContracts.HouseholdTable.TABLE_NAME +
+                        " WHERE " + HouseholdTable.COLUMN_VILLAGE_CODE + "=? " +
+                        " GROUP BY " + HouseholdTable.COLUMN_VILLAGE_CODE
                 ,
                 new String[]{vCode});
         float maxHHno = 0;
         while (c.moveToNext()) {
-            maxHHno = c.getFloat(c.getColumnIndex(FormsTable.COLUMN_STRUCTURE_NO));
+            maxHHno = c.getFloat(c.getColumnIndex(HouseholdTable.COLUMN_STRUCTURE_NO));
         }
         Log.d(TAG, "getMaxHHNo: " + maxHHno);
         return Math.round(maxHHno);
     }
 
-    public int getMaxHHNo(String vCode, String structure) {
+    public int getMaxHHNo(String vCode) {
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor c = db.rawQuery(
                 "SELECT " +
-                        "MAX(" + FormsTable.COLUMN_HOUSEHOLD_NO + ") AS " + FormsTable.COLUMN_HOUSEHOLD_NO +
-                        " FROM " + FormsTable.TABLE_NAME +
-                        " WHERE " + FormsTable.COLUMN_VILLAGE_CODE + "=? AND " + FormsTable.COLUMN_STRUCTURE_NO + "=? " +
-                        " GROUP BY " + FormsTable.COLUMN_VILLAGE_CODE
+                        "MAX(" + HouseholdTable.COLUMN_HOUSEHOLD_NO + ") AS " + HouseholdTable.COLUMN_HOUSEHOLD_NO +
+                        " FROM " + HouseholdTable.TABLE_NAME +
+                        " WHERE " + HouseholdTable.COLUMN_VILLAGE_CODE + "=?" +
+                        " GROUP BY " + HouseholdTable.COLUMN_VILLAGE_CODE
                 ,
-                new String[]{vCode, structure});
+                new String[]{vCode});
         float maxHHno = 0;
         while (c.moveToNext()) {
-            maxHHno = c.getFloat(c.getColumnIndex(FormsTable.COLUMN_HOUSEHOLD_NO));
+            maxHHno = c.getFloat(c.getColumnIndex(HouseholdTable.COLUMN_HOUSEHOLD_NO));
         }
         Log.d(TAG, "getMaxHHNo: " + maxHHno);
         return Math.round(maxHHno);
     }
 
-    public List<Form> getHouseholdBYStructure(String village, String structure) throws JSONException {
+    public List<Households> getHouseholdBYStructure(String village, String structure) throws JSONException {
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor c = null;
         String[] columns = null;
 
         String whereClause;
-        whereClause = FormsTable.COLUMN_VILLAGE_CODE + "=? AND " + FormsTable.COLUMN_STRUCTURE_NO + "=? ";
+        whereClause = HouseholdTable.COLUMN_VILLAGE_CODE + "=? AND " + HouseholdTable.COLUMN_STRUCTURE_NO + "=? ";
 
         String[] whereArgs = {village, structure};
 
         String groupBy = null;
         String having = null;
 
-        String orderBy = FormsTable.COLUMN_ID + " ASC";
+        String orderBy = HouseholdTable.COLUMN_ID + " ASC";
 
-        ArrayList<Form> householdByHH = new ArrayList<>();
+        ArrayList<Households> householdByHH = new ArrayList<>();
         try {
             c = db.query(
-                    FormsTable.TABLE_NAME,  // The table to query
+                    HouseholdTable.TABLE_NAME,  // The table to query
                     columns,                   // The columns to return
                     whereClause,               // The columns for the WHERE clause
                     whereArgs,                 // The values for the WHERE clause
@@ -1103,7 +1104,49 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                     orderBy                    // The sort order
             );
             while (c.moveToNext()) {
-                Form household = new Form().Hydrate(c);
+                Households household = new Households().Hydrate(c);
+
+                householdByHH.add(household);
+            }
+        } finally {
+            if (c != null) {
+                c.close();
+            }
+            if (db != null) {
+                db.close();
+            }
+        }
+        return householdByHH;
+    }
+
+    public List<Households> getHouseholdBYVillage(String village) throws JSONException {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor c = null;
+        String[] columns = null;
+
+        String whereClause;
+        whereClause = HouseholdTable.COLUMN_VILLAGE_CODE + "=? ";
+
+        String[] whereArgs = {village};
+
+        String groupBy = null;
+        String having = null;
+
+        String orderBy = HouseholdTable.COLUMN_ID + " ASC";
+
+        ArrayList<Households> householdByHH = new ArrayList<>();
+        try {
+            c = db.query(
+                    TableContracts.HouseholdTable.TABLE_NAME,  // The table to query
+                    columns,                   // The columns to return
+                    whereClause,               // The columns for the WHERE clause
+                    whereArgs,                 // The values for the WHERE clause
+                    groupBy,                   // don't group the rows
+                    having,                    // don't filter by row groups
+                    orderBy                    // The sort order
+            );
+            while (c.moveToNext()) {
+                Households household = new Households().Hydrate(c);
 
                 householdByHH.add(household);
             }

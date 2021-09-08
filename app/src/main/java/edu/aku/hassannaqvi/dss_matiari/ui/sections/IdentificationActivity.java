@@ -1,12 +1,13 @@
 package edu.aku.hassannaqvi.dss_matiari.ui.sections;
 
+import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.idType;
+import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.sharedPref;
+
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
@@ -14,25 +15,17 @@ import androidx.databinding.DataBindingUtil;
 
 import com.validatorcrawler.aliazaz.Validator;
 
-import org.json.JSONException;
-
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Date;
-import java.util.Locale;
 
 import edu.aku.hassannaqvi.dss_matiari.R;
 import edu.aku.hassannaqvi.dss_matiari.core.MainApp;
 import edu.aku.hassannaqvi.dss_matiari.database.DatabaseHelper;
 import edu.aku.hassannaqvi.dss_matiari.databinding.ActivityIdentificationBinding;
-import edu.aku.hassannaqvi.dss_matiari.models.Form;
+import edu.aku.hassannaqvi.dss_matiari.models.Households;
 import edu.aku.hassannaqvi.dss_matiari.models.Villages;
 import edu.aku.hassannaqvi.dss_matiari.ui.EndingActivity;
 import edu.aku.hassannaqvi.dss_matiari.ui.lists.HouseholdActivity;
-
-import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.hdssid;
-import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.idType;
 
 public class IdentificationActivity extends AppCompatActivity {
 
@@ -48,35 +41,39 @@ public class IdentificationActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        String lang = sharedPref.getString("lang", "1");
+        setTheme(lang.equals("1") ? R.style.AppThemeEnglish1 : R.style.AppThemeUrdu);
         db = MainApp.appInfo.dbHelper;
         bi = DataBindingUtil.setContentView(this, R.layout.activity_identification);
         // setContentView(R.layout.activity_identification);
+
         bi.setCallback(this);
 
         populateSpinner();
+        MainApp.previousAddress = "";
 
         openIntent = new Intent();
 
 
         switch (MainApp.idType) {
             case 1:
-                bi.btnContinue.setText("Open Household Form");
-                MainApp.form = new Form();
+                bi.btnContinue.setText("Open Household List");
+                MainApp.households = new Households();
                 openIntent = new Intent(this, HouseholdActivity.class);
                 break;
            /* case 2:
-                bi.btnContinue.setText("Open Anthro Form");
+                bi.btnContinue.setText("Open Anthro Households");
                 anthro = new Anthro();
                 openIntent = new Intent(this, SectionAnthroActivity.class);
                 break;
             case 3:
-                bi.btnContinue.setText("Open Blood Form");
+                bi.btnContinue.setText("Open Blood Households");
                 //     MainApp.sample = new Sample();
                 openIntent = new Intent(this, SectionSamplesActivity.class);
                 openIntent.putExtra("type", "1"); // BLOOD - 1
                 break;
             case 4:
-                bi.btnContinue.setText("Open Stool Form");
+                bi.btnContinue.setText("Open Stool Households");
                 //    MainApp.sample = new Sample();
                 openIntent = new Intent(this, SectionSamplesActivity.class);
                 openIntent.putExtra("type", "2"); // STOOL - 2
@@ -115,10 +112,10 @@ public class IdentificationActivity extends AppCompatActivity {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
                 bi.ra07.setAdapter(null);
-                bi.ra08.setText(null);
+                //  bi.ra08.setText(null);
                 //bi.ra09.setText(null);
                 bi.ra10.setText(null);
-                bi.ra08.setEnabled(false);
+                //bi.ra08.setEnabled(false);
                 //bi.ra09.setEnabled(false);
                 bi.ra10.setEnabled(false);
                 bi.btnContinue.setBackgroundTintList(ContextCompat.getColorStateList(IdentificationActivity.this, R.color.gray));
@@ -161,7 +158,7 @@ public class IdentificationActivity extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
-                bi.ra08.setText(null);
+                //   bi.ra08.setText(null);
                 // bi.ra09.setText(null);
                 bi.ra10.setText(null);
                 if (position != 0) {
@@ -172,11 +169,11 @@ public class IdentificationActivity extends AppCompatActivity {
                     bi.btnContinue.setEnabled(true);
            /*     bi.checkHousehold.setBackgroundTintList(ContextCompat.getColorStateList(IdentificationActivity.this, R.color.colorAccent));
                 bi.checkHousehold.setEnabled(true);*/
-                    bi.ra08.setEnabled(false);
+                    //  bi.ra08.setEnabled(false);
                     //bi.ra09.setEnabled(false);
                     bi.ra10.setText(String.valueOf(maxHHno));
                     if (position == 0) return;
-                    bi.ra08.setEnabled(true);
+                    // bi.ra08.setEnabled(true);
                     // bi.ra09.setEnabled(true);
                     bi.ra10.setEnabled(true);
 
@@ -195,22 +192,24 @@ public class IdentificationActivity extends AppCompatActivity {
 
     public void btnContinue(View view) {
 
-        hdssid = villageCodes.get(bi.ra07.getSelectedItemPosition()) +
+     /*   hdssid = villageCodes.get(bi.ra07.getSelectedItemPosition()) +
                 // bi.ra08.getText().toString() +
                 bi.ra10.getText().toString();
-        //bi.ra10.getText().toString();
+        //bi.ra10.getText().toString();*/
 
 
         if (!formValidation()) return;
         switch (idType) {
             case 1:
-                if (!hhExists()) {
-                    saveDraftForm();
-                } else {
-                    MainApp.form.setExist(true);
+                // if (!hhExists()) {
+                MainApp.selectedVillage = villageCodes.get(bi.ra07.getSelectedItemPosition());
+                //  saveDraftForm();
+                /*} else {
+                    MainApp.households.setExist(true);
                 }
+                */
                 break;
-            case 2:
+        /*    case 2:
                 if (!hhExists())
                     saveDraftAnthro();
                 break;
@@ -218,7 +217,7 @@ public class IdentificationActivity extends AppCompatActivity {
             case 4:
                 if (!hhExists())
                     saveDraftSamples();
-                break;
+                break;*/
 
         }
         finish();
@@ -227,19 +226,20 @@ public class IdentificationActivity extends AppCompatActivity {
     }
 
     private void saveDraftForm() {
-        MainApp.form = new Form();
+        MainApp.households = new Households();
 
-        MainApp.form.setUserName(MainApp.user.getUserName());
-        MainApp.form.setSysDate(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.ENGLISH).format(new Date().getTime()));
-        MainApp.form.setDeviceId(MainApp.deviceid);
-        MainApp.form.setHdssId(hdssid);
-        MainApp.form.setAppver(MainApp.versionName + "." + MainApp.versionCode);
+       /* MainApp.households.setUserName(MainApp.user.getUserName());
+        MainApp.households.setSysDate(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.ENGLISH).format(new Date().getTime()));
+        MainApp.households.setDeviceId(MainApp.deviceid);
+        //MainApp.households.setHdssId(hdssid);  <== saved in SectionA
+        MainApp.households.setAppver(MainApp.versionName + "." + MainApp.versionCode);
 
-        MainApp.form.setRa06(ucCodes.get(bi.ra06.getSelectedItemPosition()));
-        MainApp.form.setRa07(villageCodes.get(bi.ra07.getSelectedItemPosition()));
-        MainApp.form.setRa08(bi.ra08.getText().toString());
-        //MainApp.form.setRa09(bi.ra09.getText().toString());
-        MainApp.form.setRa10(bi.ra10.getText().toString());
+        MainApp.households.setRa06(ucCodes.get(bi.ra06.getSelectedItemPosition()));
+        MainApp.households.setRa07(villageCodes.get(bi.ra07.getSelectedItemPosition()));
+        // MainApp.households.setRa08(bi.ra08.getText().toString());
+        // MainApp.households.setRa09(bi.ra09.getText().toString());
+        MainApp.households.setRa10(bi.ra10.getText().toString());*/
+
 
     }
 
@@ -301,36 +301,7 @@ public class IdentificationActivity extends AppCompatActivity {
         }
     }*/
 
-    private boolean hhExists() {
-
-        switch (idType) {
-            case 1:
-                MainApp.form = new Form();
-                try {
-                    MainApp.form = db.getFormByHDSSID(hdssid);
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                    Toast.makeText(this, "JSONException: " + e.getMessage(), Toast.LENGTH_SHORT).show();
-                    Log.d(TAG, "ProcessStart (JSONException): " + e.getMessage());
-                }
-                return MainApp.form != null;
-
-            //TODO: Antro & Samples will be multiple. Different logic will be required
-        /*    case 2:
-                anthro = new Anthro();
-                anthro = db.getAnthroByClusterHHNo(bi.h103.getText().toString(), bi.h103.getText().toString());
-                return anthro != null;
-            case 2:
-                samples = new Samples();
-                anthro = db.getSamplesByClusterHHNo(bi.h103.getText().toString(), bi.h103.getText().toString());
-                return anthro != null;*/
-            default:
-                return false;
-
-        }
-    }
-
-    public void getHouseNo(View view) {
+/*    public void getHouseNo(View view) {
 
 
         String vCode = villageCodes.get(bi.ra07.getSelectedItemPosition());
@@ -339,5 +310,5 @@ public class IdentificationActivity extends AppCompatActivity {
         bi.ra10.setText(String.valueOf(maxHHno));
 
 
-    }
+    }*/
 }

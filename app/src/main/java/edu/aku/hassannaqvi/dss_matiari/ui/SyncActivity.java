@@ -48,7 +48,7 @@ import java.util.concurrent.TimeUnit;
 
 import edu.aku.hassannaqvi.dss_matiari.R;
 import edu.aku.hassannaqvi.dss_matiari.adapters.SyncListAdapter;
-import edu.aku.hassannaqvi.dss_matiari.contracts.TableContracts.FormsTable;
+import edu.aku.hassannaqvi.dss_matiari.contracts.TableContracts.HouseholdTable;
 import edu.aku.hassannaqvi.dss_matiari.contracts.TableContracts.MWRATable;
 import edu.aku.hassannaqvi.dss_matiari.contracts.TableContracts.TableVillage;
 import edu.aku.hassannaqvi.dss_matiari.contracts.TableContracts.UsersTable;
@@ -145,8 +145,8 @@ public class SyncActivity extends AppCompatActivity {
                 MainApp.uploadData.clear();
                 try {
                     // Forms
-                    uploadTables.add(new SyncModel(FormsTable.TABLE_NAME));
-                    MainApp.uploadData.add(db.getUnsyncedForms());
+                    uploadTables.add(new SyncModel(HouseholdTable.TABLE_NAME));
+                    MainApp.uploadData.add(db.getUnsyncedHouseholds());
                 } catch (JSONException e) {
                     e.printStackTrace();
                     Toast.makeText(this, "JSONException: " + e.getMessage(), Toast.LENGTH_SHORT).show();

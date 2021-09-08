@@ -1,9 +1,15 @@
 package edu.aku.hassannaqvi.dss_matiari.ui;
 
+import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.PROJECT_NAME;
+import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.editor;
+import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.sharedPref;
+import static edu.aku.hassannaqvi.dss_matiari.database.CreateTable.DATABASE_COPY;
+import static edu.aku.hassannaqvi.dss_matiari.database.CreateTable.DATABASE_NAME;
+
 import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
+import android.content.res.Configuration;
 import android.location.LocationManager;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -15,6 +21,7 @@ import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.CompoundButton;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -41,6 +48,7 @@ import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 import java.util.Objects;
 
 import javax.crypto.Cipher;
@@ -54,24 +62,20 @@ import edu.aku.hassannaqvi.dss_matiari.database.DatabaseHelper;
 import edu.aku.hassannaqvi.dss_matiari.databinding.ActivityLoginBinding;
 import edu.aku.hassannaqvi.dss_matiari.models.Users;
 
-import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.PROJECT_NAME;
-import static edu.aku.hassannaqvi.dss_matiari.database.CreateTable.DATABASE_COPY;
-import static edu.aku.hassannaqvi.dss_matiari.database.CreateTable.DATABASE_NAME;
-
 public class LoginActivity extends AppCompatActivity {
 
+    private static final int SINDHI = 3;
     protected static LocationManager locationManager;
 
     // UI references.
 
     ActivityLoginBinding bi;
     Spinner spinnerDistrict;
-    SharedPreferences sharedPref;
-    SharedPreferences.Editor editor;
     String DirectoryName;
     DatabaseHelper db;
     ArrayAdapter<String> provinceAdapter;
     int attemptCounter = 0;
+    private int countryCode;
 
     public static String encrypt(String plain) {
         try {
@@ -107,6 +111,7 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        initializingCountry();
         Dexter.withContext(this)
                 .withPermissions(
                         Manifest.permission.ACCESS_NETWORK_STATE,
@@ -127,11 +132,14 @@ public class LoginActivity extends AppCompatActivity {
             }
         }).check();
         bi = DataBindingUtil.setContentView(this, R.layout.activity_login);
+
+
         bi.setCallback(this);
         MainApp.appInfo = new AppInfo(this);
         db = MainApp.appInfo.getDbHelper();
         MainApp.user = new Users();
         bi.txtinstalldate.setText(MainApp.appInfo.getAppInfo());
+        settingCountryCode();
 
         dbBackup();
 
@@ -140,8 +148,7 @@ public class LoginActivity extends AppCompatActivity {
 
     public void dbBackup() {
 
-        sharedPref = getSharedPreferences("dss01", MODE_PRIVATE);
-        editor = sharedPref.edit();
+
 
         if (sharedPref.getBoolean("flag", false)) {
 
@@ -319,5 +326,62 @@ public class LoginActivity extends AppCompatActivity {
     }
 
 
+    /*
+     * Toggle Language
+     * */
+    private void changeLanguage(int countryCode) {
+        String lang;
+        String country;
+        if (countryCode == SINDHI) {
+            lang = "sd";
+            country = "PK";
+            editor
+                    .putString("lang", "3")
+                    .apply();
+        } else {
+            lang = "en";
+            country = "PK";
+            editor
+                    .putString("lang", "1")
+                    .apply();
+        }
+        Locale locale = new Locale(lang, country);
+        Locale.setDefault(locale);
+        Configuration config = new Configuration();
+        config.setLocale(locale);
+        config.setLayoutDirection(new Locale(lang, country));
+        this.getResources().updateConfiguration(config, this.getResources().getDisplayMetrics());
+
+    }
+
+    private void settingCountryCode() {
+
+        bi.countrySwitch.setChecked(sharedPref.getString("lang", "1").equals("1"));
+
+        bi.countrySwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                // do something, the isChecked will be
+                // true if the switch is in the On position
+                changeLanguage(isChecked ? 1 : 3);
+
+                startActivity(new Intent(LoginActivity.this, LoginActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
+                overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+
+            }
+        });
+
+    }
+
+    /*
+     * Setting country code in Shared Preference
+     * */
+    private void initializingCountry() {
+        countryCode = Integer.parseInt(sharedPref.getString("lang", "0"));
+        if (countryCode == 0) {
+            editor.putString("lang", "1").apply();
+        }
+
+        changeLanguage(Integer.parseInt(sharedPref.getString("lang", "0")));
+    }
 }
 

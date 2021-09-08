@@ -12,12 +12,13 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import edu.aku.hassannaqvi.dss_matiari.BR;
-import edu.aku.hassannaqvi.dss_matiari.contracts.TableContracts.FormsTable;
+import edu.aku.hassannaqvi.dss_matiari.contracts.TableContracts;
+import edu.aku.hassannaqvi.dss_matiari.contracts.TableContracts.HouseholdTable;
 import edu.aku.hassannaqvi.dss_matiari.core.MainApp;
 
-public class Form extends BaseObservable implements Observable {
+public class Households extends BaseObservable implements Observable {
 
-    private final String TAG = "Form";
+    private final String TAG = "Households";
     private String ra01 = "";
     private String ra02 = "";
     private String ra04 = "";
@@ -48,6 +49,8 @@ public class Form extends BaseObservable implements Observable {
     private String ra18 = "";
     private String ra19 = "";
     private String ra20 = "";
+    private String ra21 = "";
+    private String ra22 = "";
 
     private transient PropertyChangeRegistry propertyChangeRegistry = new PropertyChangeRegistry();
     private boolean exist = false;
@@ -79,19 +82,19 @@ public class Form extends BaseObservable implements Observable {
     private String sA = StringUtils.EMPTY;
 
 
-    public Form() {
+    public Households() {
 
     }
 
-    public Form(Form form) {
+    public Households(Households households) {
 
-        setUserName(form.getUserName());
-        setDeviceId(form.getDeviceId());
-        setAppver(form.getAppver());
-        setRa06(form.getRa06());
-        setRa07(form.getRa07());
-        setRa08(form.getRa08());
-        setRa10(form.getRa10());
+        setUserName(households.getUserName());
+        setDeviceId(households.getDeviceId());
+        setAppver(households.getAppver());
+        setRa06(households.getRa06());
+        setRa07(households.getRa07());
+        setRa08(households.getRa08());
+        setRa10(households.getRa10());
     }
 
 
@@ -295,7 +298,7 @@ public class Form extends BaseObservable implements Observable {
         this.sA = sA;
     }
 
-    public void resetForm() {
+    public void resetHousehold() {
         setRa01("");
         setRa09("");
         setRa11("");
@@ -379,7 +382,7 @@ public class Form extends BaseObservable implements Observable {
 
     public void setRa07(String ra07) {
         this.ra07 = ra07;
-        this.villageCode = ra07;
+        setVillageCode(ra07);
         notifyChange(BR.ra07);
     }
 
@@ -390,7 +393,7 @@ public class Form extends BaseObservable implements Observable {
 
     public void setRa06(String ra06) {
         this.ra06 = ra06;
-        this.ucCode = ra06;
+        setUcCode(ra06);
         notifyChange(BR.ra06);
     }
 
@@ -412,7 +415,7 @@ public class Form extends BaseObservable implements Observable {
 
     public void setRa09(String ra09) {
         this.ra09 = ra09;
-        this.hhNo = ra09;
+        setHhNo(ra09);
         notifyChange(BR.ra09);
     }
 
@@ -631,6 +634,26 @@ public class Form extends BaseObservable implements Observable {
         notifyChange(BR.ra20);
     }
 
+    @Bindable
+    public String getRa21() {
+        return ra21;
+    }
+
+    public void setRa21(String ra21) {
+        this.ra21 = ra21;
+        notifyChange(BR.ra21);
+    }
+
+    @Bindable
+    public String getRa22() {
+        return ra22;
+    }
+
+    public void setRa22(String ra22) {
+        this.ra22 = ra22;
+        notifyChange(BR.ra22);
+    }
+
 
     private synchronized void notifyChange(int propertyId) {
         if (propertyChangeRegistry == null) {
@@ -655,26 +678,26 @@ public class Form extends BaseObservable implements Observable {
         }
     }
 
-    public Form Hydrate(Cursor cursor) throws JSONException {
-        this.id = cursor.getString(cursor.getColumnIndex(FormsTable.COLUMN_ID));
-        this.uid = cursor.getString(cursor.getColumnIndex(FormsTable.COLUMN_UID));
-        this.userName = cursor.getString(cursor.getColumnIndex(FormsTable.COLUMN_USERNAME));
-        this.sysDate = cursor.getString(cursor.getColumnIndex(FormsTable.COLUMN_SYSDATE));
-        this.hdssId = cursor.getString(cursor.getColumnIndex(FormsTable.COLUMN_HDSSID));
-        this.ucCode = cursor.getString(cursor.getColumnIndex(FormsTable.COLUMN_UC_CODE));
-        this.villageCode = cursor.getString(cursor.getColumnIndex(FormsTable.COLUMN_VILLAGE_CODE));
-        this.hhNo = cursor.getString(cursor.getColumnIndex(FormsTable.COLUMN_HOUSEHOLD_NO));
-        this.structureNo = cursor.getString(cursor.getColumnIndex(FormsTable.COLUMN_STRUCTURE_NO));
-        this.visitNo = cursor.getString(cursor.getColumnIndex(FormsTable.COLUMN_VISIT_NO));
+    public Households Hydrate(Cursor cursor) throws JSONException {
+        this.id = cursor.getString(cursor.getColumnIndex(HouseholdTable.COLUMN_ID));
+        this.uid = cursor.getString(cursor.getColumnIndex(HouseholdTable.COLUMN_UID));
+        this.userName = cursor.getString(cursor.getColumnIndex(TableContracts.HouseholdTable.COLUMN_USERNAME));
+        this.sysDate = cursor.getString(cursor.getColumnIndex(HouseholdTable.COLUMN_SYSDATE));
+        this.hdssId = cursor.getString(cursor.getColumnIndex(HouseholdTable.COLUMN_HDSSID));
+        this.ucCode = cursor.getString(cursor.getColumnIndex(HouseholdTable.COLUMN_UC_CODE));
+        this.villageCode = cursor.getString(cursor.getColumnIndex(HouseholdTable.COLUMN_VILLAGE_CODE));
+        this.hhNo = cursor.getString(cursor.getColumnIndex(HouseholdTable.COLUMN_HOUSEHOLD_NO));
+        this.structureNo = cursor.getString(cursor.getColumnIndex(HouseholdTable.COLUMN_STRUCTURE_NO));
+        this.visitNo = cursor.getString(cursor.getColumnIndex(HouseholdTable.COLUMN_VISIT_NO));
 
-        this.deviceId = cursor.getString(cursor.getColumnIndex(FormsTable.COLUMN_DEVICEID));
-        this.deviceTag = cursor.getString(cursor.getColumnIndex(FormsTable.COLUMN_DEVICETAGID));
-        this.appver = cursor.getString(cursor.getColumnIndex(FormsTable.COLUMN_APPVERSION));
-        this.iStatus = cursor.getString(cursor.getColumnIndex(FormsTable.COLUMN_ISTATUS));
-        this.synced = cursor.getString(cursor.getColumnIndex(FormsTable.COLUMN_SYNCED));
-        this.syncDate = cursor.getString(cursor.getColumnIndex(FormsTable.COLUMN_SYNCED_DATE));
+        this.deviceId = cursor.getString(cursor.getColumnIndex(HouseholdTable.COLUMN_DEVICEID));
+        this.deviceTag = cursor.getString(cursor.getColumnIndex(HouseholdTable.COLUMN_DEVICETAGID));
+        this.appver = cursor.getString(cursor.getColumnIndex(HouseholdTable.COLUMN_APPVERSION));
+        this.iStatus = cursor.getString(cursor.getColumnIndex(HouseholdTable.COLUMN_ISTATUS));
+        this.synced = cursor.getString(cursor.getColumnIndex(TableContracts.HouseholdTable.COLUMN_SYNCED));
+        this.syncDate = cursor.getString(cursor.getColumnIndex(HouseholdTable.COLUMN_SYNCED_DATE));
 
-        s1Hydrate(cursor.getString(cursor.getColumnIndex(FormsTable.COLUMN_SA)));
+        s1Hydrate(cursor.getString(cursor.getColumnIndex(TableContracts.HouseholdTable.COLUMN_SA)));
 
 
         return this;
@@ -716,6 +739,8 @@ public class Form extends BaseObservable implements Observable {
             this.ra18 = json.getString("ra18");
             this.ra19 = json.getString("ra19");
             this.ra20 = json.getString("ra20");
+            this.ra21 = json.getString("ra21");
+            this.ra22 = json.getString("ra22");
 
 
         }
@@ -754,7 +779,9 @@ public class Form extends BaseObservable implements Observable {
                 .put("ra17_d2", ra17_d2)
                 .put("ra18", ra18)
                 .put("ra19", ra19)
-                .put("ra20", ra20);
+                .put("ra20", ra20)
+                .put("ra21", ra21)
+                .put("ra22", ra22);
 
         return json.toString();
     }
@@ -765,25 +792,25 @@ public class Form extends BaseObservable implements Observable {
         JSONObject json = new JSONObject();
 
 
-        json.put(FormsTable.COLUMN_ID, this.id);
-        json.put(FormsTable.COLUMN_PROJECT_NAME, this.projectName);
-        json.put(FormsTable.COLUMN_UID, this.uid);
-        json.put(FormsTable.COLUMN_USERNAME, this.userName);
-        json.put(FormsTable.COLUMN_SYSDATE, this.sysDate);
-        json.put(FormsTable.COLUMN_HDSSID, this.hdssId);
-        json.put(FormsTable.COLUMN_UC_CODE, this.ucCode);
-        json.put(FormsTable.COLUMN_VILLAGE_CODE, this.villageCode);
-        json.put(FormsTable.COLUMN_HOUSEHOLD_NO, this.hhNo);
-        json.put(FormsTable.COLUMN_STRUCTURE_NO, this.structureNo);
-        json.put(FormsTable.COLUMN_VISIT_NO, this.visitNo);
-        json.put(FormsTable.COLUMN_DEVICEID, this.deviceId);
-        json.put(FormsTable.COLUMN_DEVICETAGID, this.deviceTag);
-        json.put(FormsTable.COLUMN_ISTATUS, this.iStatus);
-        json.put(FormsTable.COLUMN_APPVERSION, this.appver);
-        //  json.put(FormsTable.COLUMN_SYNCED, this.synced);
-        //  json.put(FormsTable.COLUMN_SYNCED_DATE, this.syncDate);
+        json.put(HouseholdTable.COLUMN_ID, this.id);
+        json.put(HouseholdTable.COLUMN_PROJECT_NAME, this.projectName);
+        json.put(HouseholdTable.COLUMN_UID, this.uid);
+        json.put(HouseholdTable.COLUMN_USERNAME, this.userName);
+        json.put(HouseholdTable.COLUMN_SYSDATE, this.sysDate);
+        json.put(HouseholdTable.COLUMN_HDSSID, this.hdssId);
+        json.put(HouseholdTable.COLUMN_UC_CODE, this.ucCode);
+        json.put(HouseholdTable.COLUMN_VILLAGE_CODE, this.villageCode);
+        json.put(HouseholdTable.COLUMN_HOUSEHOLD_NO, this.hhNo);
+        json.put(HouseholdTable.COLUMN_STRUCTURE_NO, this.structureNo);
+        json.put(HouseholdTable.COLUMN_VISIT_NO, this.visitNo);
+        json.put(HouseholdTable.COLUMN_DEVICEID, this.deviceId);
+        json.put(HouseholdTable.COLUMN_DEVICETAGID, this.deviceTag);
+        json.put(HouseholdTable.COLUMN_ISTATUS, this.iStatus);
+        json.put(HouseholdTable.COLUMN_APPVERSION, this.appver);
+        //  json.put(HouseholdTable.COLUMN_SYNCED, this.synced);
+        //  json.put(HouseholdTable.COLUMN_SYNCED_DATE, this.syncDate);
 
-        json.put(FormsTable.COLUMN_SA, new JSONObject(sAtoString()));
+        json.put(HouseholdTable.COLUMN_SA, new JSONObject(sAtoString()));
         //Log.d(TAG, "toJSONObject: "+new JSONObject(s2toString()));
 
 

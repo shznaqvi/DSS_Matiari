@@ -13,7 +13,7 @@ import androidx.databinding.DataBindingUtil;
 import edu.aku.hassannaqvi.dss_matiari.R;
 import edu.aku.hassannaqvi.dss_matiari.core.MainApp;
 import edu.aku.hassannaqvi.dss_matiari.databinding.ActivityMainBinding;
-import edu.aku.hassannaqvi.dss_matiari.models.Form;
+import edu.aku.hassannaqvi.dss_matiari.models.Households;
 import edu.aku.hassannaqvi.dss_matiari.ui.lists.FormsReportCluster;
 import edu.aku.hassannaqvi.dss_matiari.ui.sections.IdentificationActivity;
 import edu.aku.hassannaqvi.dss_matiari.ui.sections.SectionAActivity;
@@ -52,15 +52,15 @@ public class MainActivity extends AppCompatActivity {
             case R.id.openForm:
             case R.id.ident:
                 MainApp.idType = 1;
-                MainApp.form = new Form();
+                MainApp.households = new Households();
                 startActivity(new Intent(this, IdentificationActivity.class));
                 break;
             case R.id.seca:
-                MainApp.form = new Form();
+                MainApp.households = new Households();
                 startActivity(new Intent(this, SectionAActivity.class));
                 break;
             case R.id.secb:
-                MainApp.form = new Form();
+                MainApp.households = new Households();
                 startActivity(new Intent(this, SectionBActivity.class));
                 break;
         }

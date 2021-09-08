@@ -32,7 +32,7 @@
             android:theme="@style/ToolbarTheme"
             app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
             app:subtitleTextAppearance="@style/Toolbar.SubtitleText"
-            app:title="@string/sectionB_mainheading"
+            app:title="@string/demographicinformation_mainheading"
             app:titleTextAppearance="@style/Toolbar.TitleText" />
 
         <ScrollView
@@ -133,6 +133,119 @@
                             android:text="@={mwra.rb02}" />
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
+
+                <!-- rb04  Input   -->
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/fldGrpCVrb04"
+                    style="@style/cardView">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/bottom"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:text="@string/rb04" />
+
+                            <TextView
+                                style="@style/quesNum"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:text="@string/Q_rb04" />
+
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <io.blackbox_vision.datetimepickeredittext.view.DatePickerEditText
+                                android:id="@+id/rb04"
+                                style="@style/textInput"
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_marginBottom="0dp"
+                                android:layout_weight="1"
+                                android:enabled="@{!mwra.rb04.equals(`98`)}"
+                                android:gravity="center"
+                                android:hint="YYYY-MM-DD"
+                                android:text="@={mwra.rb04}"
+                                app:dateFormat="yyyy-MM-dd"
+                                app:maxDate="CR_DATE"
+                                app:theme="@style/DatePickerEditTextDialogTheme" />
+
+                            <CheckBox
+                                android:id="@+id/rb04check"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:backgroundTint="@color/lightPink"
+                                android:checked='@{mwra.rb04.equals("98")}'
+                                android:onClick="@{()->mwra.setRb04(mwra.rb04.equals(`98`)?``:`98`)}"
+                                android:tag="-1"
+                                android:text="@string/dkn"
+                                android:textColor="@color/redDark" />
+                        </LinearLayout>
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+
+                <!-- rb05  Input   -->
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/fldGrpCVrb05"
+                    style="@style/cardView">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/bottom"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:text="@string/rb05" />
+
+                            <TextView
+                                style="@style/quesNum"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:text="@string/Q_rb05" />
+
+                        </LinearLayout>
+
+                        <com.edittextpicker.aliazaz.EditTextPicker
+                            android:id="@+id/rb05"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:enabled="@{mwra.rb04.equals(`98`)}"
+                            android:gravity="center"
+                            android:hint="##"
+                            android:inputType="number"
+                            android:maxLength="2"
+                            android:text="@={mwra.rb05}"
+                            app:maxValue="49"
+                            app:minValue="15"
+                            app:type="range" />
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+
+
                 <!-- rb06  Radio   -->
                 <androidx.cardview.widget.CardView
                     android:id="@+id/fldGrpCVrb06"
@@ -208,9 +321,8 @@
                 <!-- rb03  Input   -->
                 <androidx.cardview.widget.CardView
                     android:id="@+id/fldGrpCVrb03"
-                    style="@style/cardView"
-                    android:visibility='@{mwra.Rb06.equals("4")? View.GONE : View.VISIBLE}'>
-
+                    style="@style/cardView">
+                    <!--android:visibility='@{mwra.Rb06.equals("4")? View.GONE : View.VISIBLE}'-->
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -226,7 +338,15 @@
                                 android:layout_width="0dp"
                                 android:layout_height="match_parent"
                                 android:layout_weight="1"
-                                android:text="@string/rb03" />
+                                android:text="@string/rb03h"
+                                android:visibility='@{mwra.Rb06.equals("4")? View.GONE : View.VISIBLE}' />
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:text="@string/rb03f"
+                                android:visibility='@{mwra.Rb06.equals("4")? View.VISIBLE : View.GONE}' />
 
                             <TextView
                                 style="@style/quesNum"
@@ -242,116 +362,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:digits="abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ"
-                            android:hint="@string/rb03"
                             android:text="@={mwra.rb03}" />
-                    </LinearLayout>
-                </androidx.cardview.widget.CardView>
-
-                <!-- rb04  Input   -->
-                <androidx.cardview.widget.CardView
-                    android:id="@+id/fldGrpCVrb04"
-                    style="@style/cardView">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical">
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:background="@drawable/bottom"
-                            android:orientation="horizontal">
-
-                            <TextView
-                                android:layout_width="0dp"
-                                android:layout_height="match_parent"
-                                android:layout_weight="1"
-                                android:text="@string/rb04" />
-
-                            <TextView
-                                style="@style/quesNum"
-                                android:layout_width="wrap_content"
-                                android:layout_height="match_parent"
-                                android:text="@string/Q_rb04" />
-
-
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="horizontal">
-
-                            <io.blackbox_vision.datetimepickeredittext.view.DatePickerEditText
-                                android:id="@+id/rb04"
-                                style="@style/textInput"
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_marginBottom="0dp"
-                                android:layout_weight="1"
-                                android:enabled="@{!mwra.rb04.equals(`98`)}"
-                                android:gravity="center"
-                                android:hint="YYYY-MM-DD"
-                                android:text="@={mwra.rb04}"
-                                app:dateFormat="yyyy-MM-dd"
-                                app:maxDate="CR_DATE" />
-
-                            <CheckBox
-                                android:id="@+id/rb04check"
-                                android:layout_width="wrap_content"
-                                android:layout_height="match_parent"
-                                android:checked='@{mwra.rb04.equals("98")}'
-                                android:onClick="@{()->mwra.setRb04(mwra.rb04.equals(`98`)?``:`98`)}"
-                                android:tag="-1"
-                                android:text="@string/dkn" />
-                        </LinearLayout>
-                    </LinearLayout>
-                </androidx.cardview.widget.CardView>
-
-                <!-- rb05  Input   -->
-                <androidx.cardview.widget.CardView
-                    android:id="@+id/fldGrpCVrb05"
-                    style="@style/cardView">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical">
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:background="@drawable/bottom"
-                            android:orientation="horizontal">
-
-                            <TextView
-                                android:layout_width="0dp"
-                                android:layout_height="match_parent"
-                                android:layout_weight="1"
-                                android:text="@string/rb05" />
-
-                            <TextView
-                                style="@style/quesNum"
-                                android:layout_width="wrap_content"
-                                android:layout_height="match_parent"
-                                android:text="@string/Q_rb05" />
-
-                        </LinearLayout>
-
-                        <com.edittextpicker.aliazaz.EditTextPicker
-                            android:id="@+id/rb05"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:gravity="center"
-                            android:hint="##"
-                            android:inputType="number"
-                            android:maxLength="2"
-                            android:enabled="@{mwra.rb04.equals(`98`)}"
-                            android:text="@={mwra.rb05}"
-                            app:maxValue="49"
-                            app:minValue="15"
-                            app:type="range" />
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
 
@@ -420,9 +431,8 @@
                 <androidx.cardview.widget.CardView
                     android:id="@+id/fldGrpCVrb08"
                     style="@style/cardView"
-                    android:visibility='@{mwra.Rb06.equals("4") ? View.GONE : View.VISIBLE}'
+                    android:visibility='@{ mwra.Rb07.equals("1")? View.VISIBLE : View.GONE}'>
 
-                    >
                     <!--android:visibility='@{mwra.Rb06.equals("4") || mwra.Rb07.equals("2")? View.GONE : View.VISIBLE}'-->
 
                     <LinearLayout
@@ -458,6 +468,7 @@
                             android:gravity="center"
                             android:hint="YYYY-MM-DD"
                             android:text="@={mwra.rb08}"
+                            app:theme="@style/DatePickerEditTextDialogTheme"
                             app:dateFormat="yyyy-MM-dd" />
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
@@ -466,7 +477,7 @@
                 <androidx.cardview.widget.CardView
                     android:id="@+id/fldGrpCVrb09"
                     style="@style/cardView"
-                    android:visibility='@{mwra.Rb06.equals("4")? View.GONE : View.VISIBLE}'>
+                    android:visibility='@{mwra.Rb07.equals("1")? View.VISIBLE : View.GONE}'>
                     <!--android:visibility='@{mwra.Rb06.equals("4")|| mwra.Rb07.equals("2")? View.GONE : View.VISIBLE}'-->
 
                     <LinearLayout
@@ -501,6 +512,7 @@
                             android:gravity="center"
                             android:hint="YYYY-MM-DD"
                             android:text="@={mwra.rb09}"
+                            app:theme="@style/DatePickerEditTextDialogTheme"
                             app:dateFormat="yyyy-MM-dd" />
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>

@@ -49,7 +49,7 @@ public class FormsReportCluster extends AppCompatActivity {
         recyclerView.setLayoutManager(layoutManager);
         //dtFilter = findViewById(R.id.dtFilter);
         db = new DatabaseHelper(this);
-        MainApp.householdList = db.getUnclosedForms();
+        MainApp.householdList = db.getUnclosedHouseholds();
 
         // specify an adapter (see also next example)
         formsAdapter = new FormsAdapter(MainApp.householdList, this);
@@ -62,7 +62,7 @@ public class FormsReportCluster extends AppCompatActivity {
     public void filterForms(View view) {
         Toast.makeText(this, "updated", Toast.LENGTH_SHORT).show();
         //fc = db.getUnclosedForms(dtFilter.getText().toString());
-        MainApp.householdList = db.getUnclosedForms();
+        MainApp.householdList = db.getUnclosedHouseholds();
         formsAdapter = new FormsAdapter(MainApp.householdList, this);
         formsAdapter.notifyDataSetChanged();
         recyclerView.setAdapter(formsAdapter);

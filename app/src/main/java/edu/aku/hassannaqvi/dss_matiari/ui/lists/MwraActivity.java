@@ -6,6 +6,7 @@ import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.mwraList;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.selectedFemale;
 
 import android.app.Activity;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -16,6 +17,7 @@ import androidx.activity.result.ActivityResult;
 import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -92,7 +94,7 @@ public class MwraActivity extends AppCompatActivity {
         MainApp.mwraList = new ArrayList<>();
         Log.d(TAG, "onCreate: mwralist " + mwraList.size());
         try {
-            MainApp.mwraList = db.getAllMWRAByHH(MainApp.form.getVillageCode(), MainApp.form.getStructureNo(), MainApp.form.getHhNo());
+            MainApp.mwraList = db.getAllMWRAByHH(MainApp.households.getVillageCode(), MainApp.households.getStructureNo(), MainApp.households.getHhNo());
         } catch (JSONException e) {
             e.printStackTrace();
             Toast.makeText(this, "JSONException: " + e.getMessage(), Toast.LENGTH_SHORT).show();
@@ -109,11 +111,11 @@ public class MwraActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                if (!MainApp.form.getiStatus().equals("1")) {
-                    //     Toast.makeText(MwraActivity.this, "Opening Mwra Form", Toast.LENGTH_LONG).show();
+                if (!MainApp.households.getiStatus().equals("1")) {
+                    //     Toast.makeText(MwraActivity.this, "Opening Mwra Households", Toast.LENGTH_LONG).show();
                     addFemale();
                 } else {
-                    Toast.makeText(MwraActivity.this, "This form has been locked. You cannot add new members to locked forms", Toast.LENGTH_LONG).show();
+                    Toast.makeText(MwraActivity.this, "This households has been locked. You cannot add new members to locked forms", Toast.LENGTH_LONG).show();
                 }
 
             }
@@ -137,49 +139,58 @@ public class MwraActivity extends AppCompatActivity {
 
         checkCompleteFm();
 
-        // bi.fab.setClickable(!MainApp.form.getiStatus().equals("1"));
+        // bi.fab.setClickable(!MainApp.households.getiStatus().equals("1"));
       /* bi.completedmember.setText(mwraList.size()+ " MWRAs added");
         bi.totalmember.setText(MainApp.mwraTotal+ " M completed");*/
     }
 
     private void checkCompleteFm() {
-        //     if (!MainApp.form.getIStatus().equals("1")) {
+        //     if (!MainApp.households.getIStatus().equals("1")) {
         int compCount = mwraList.size();
 
         MainApp.mwraCountComplete = compCount;
         bi.btnContinue.setVisibility(mwraCount > 0 ? View.VISIBLE : View.GONE);
-        //   bi.btnContinue.setVisibility(compCount == mwraCount && !form.getiStatus().equals("1")? View.VISIBLE : View.GONE);
+        //   bi.btnContinue.setVisibility(compCount == mwraCount && !households.getiStatus().equals("1")? View.VISIBLE : View.GONE);
      /*   bi.btnContinue.setVisibility(compCount >= mwraCount ? View.VISIBLE : View.GONE);
         bi.btnContinue.setEnabled(bi.btnContinue.getVisibility()==View.VISIBLE);*/
 
         //  } else {
-        //       Toast.makeText(this, "Form has been completed or locked", Toast.LENGTH_LONG).show();
+        //       Toast.makeText(this, "Households has been completed or locked", Toast.LENGTH_LONG).show();
         //   }
     }
 
     public void addFemale() {
+
+
+        if (MainApp.mwraList.size() >= Integer.parseInt(MainApp.households.getRa18())) {
+            displayAddMoreDialog();
+        } else {
+            addMoreFemale();
+
+        }
+
+
+    }
+
+    private void addMoreFemale() {
         Intent intent = new Intent(this, SectionBActivity.class);
         //   finish();
         MemberInfoLauncher.launch(intent);
     }
 
     public void btnContinue(View view) {
+        if (MainApp.mwraList.size() < Integer.parseInt(MainApp.households.getRa18())) {
+            displayProceedDialog();
+        } else {
+            proceedSelect();
+        }
 
-
-        Intent i = new Intent(this, EndingActivity.class);
-        MainApp.household = MainApp.form;
-        i.setFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT);
-        i.putExtra("complete", true);
-        startActivity(i);
-        finish();
-        //startActivity(new Intent(this, EndingActivity.class).putExtra("complete", true));
 
     }
 
     public void BtnEnd(View view) {
 
         Intent i = new Intent(this, EndingActivity.class);
-        MainApp.household = MainApp.form;
         i.setFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT);
         i.putExtra("complete", false);
         startActivity(i);
@@ -205,5 +216,56 @@ public class MwraActivity extends AppCompatActivity {
                 Toast.makeText(this, "Information for " + mwraList.get(selectedFemale).getRb02() + " was not saved.", Toast.LENGTH_SHORT).show();
             }
         }
+    }
+
+    private void displayAddMoreDialog() {
+        new AlertDialog.Builder(this)
+                .setTitle(R.string.title_wra_dialog_complete)
+                .setMessage(String.format(getString(R.string.message_wra_dialog_addmore), MainApp.households.getRa18()))
+
+                // Specifying a listener allows you to take an action before dismissing the dialog.
+                // The dialog is automatically dismissed when a dialog button is clicked.
+                .setPositiveButton(R.string.ra20_a, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        // Continue with delete operation
+                        addMoreFemale();
+                    }
+                })
+
+                // A null listener allows the button to dismiss the dialog and take no further action.
+                .setNegativeButton(R.string.ra20_b, null)
+                .setIcon(R.drawable.ic_warning_24)
+                .show();
+
+    }
+
+    private void displayProceedDialog() {
+        new AlertDialog.Builder(this)
+                .setTitle(R.string.title_wra_dialog_remain)
+                .setMessage(String.format(getString(R.string.message_wra_dialog_proceeed), MainApp.mwraList.size() + "", MainApp.households.getRa18()))
+
+                // Specifying a listener allows you to take an action before dismissing the dialog.
+                // The dialog is automatically dismissed when a dialog button is clicked.
+                .setPositiveButton(R.string.ra20_a, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        // Continue with delete operation
+                        proceedSelect();
+                    }
+                })
+
+                // A null listener allows the button to dismiss the dialog and take no further action.
+                .setNegativeButton(R.string.ra20_b, null)
+                .setIcon(R.drawable.ic_alert_24)
+                .show();
+
+    }
+
+    private void proceedSelect() {
+        Intent i = new Intent(this, EndingActivity.class);
+        i.setFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT);
+        i.putExtra("complete", true);
+        startActivity(i);
+        finish();
+        //startActivity(new Intent(this, EndingActivity.class).putExtra("complete", true));
     }
 }

@@ -114,7 +114,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="36dp"
                                 android:gravity="center_horizontal|center_vertical"
-                                android:text="Open to enter new registration form"
+                                android:text="Open to enter new registration households"
                                 android:textColor="@color/gray"
                                 android:textSize="14sp" />
                         </LinearLayout>
@@ -174,7 +174,7 @@
                                          android:layout_height="wrap_content"
                                          android:layout_marginStart="36dp"
                                          android:gravity="center_horizontal|center_vertical"
-                                         android:text="Update temperature of the On-Hold forms"
+                                         android:text="Update temperature of the On-Hold households"
                                          android:textColor="@color/gray"
                                          android:textSize="14sp" />
                                  </LinearLayout>
@@ -234,7 +234,7 @@
                                          android:layout_height="wrap_content"
                                          android:layout_marginStart="36dp"
                                          android:gravity="center_horizontal|center_vertical"
-                                         android:text="Open to enter follow-up forms"
+                                         android:text="Open to enter follow-up households"
                                          android:textColor="@color/gray"
                                          android:textSize="14sp" />
                                  </LinearLayout>

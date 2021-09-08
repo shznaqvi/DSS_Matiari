@@ -18,24 +18,24 @@ import java.util.List;
 import edu.aku.hassannaqvi.dss_matiari.R;
 import edu.aku.hassannaqvi.dss_matiari.core.MainApp;
 import edu.aku.hassannaqvi.dss_matiari.database.DatabaseHelper;
-import edu.aku.hassannaqvi.dss_matiari.models.Form;
+import edu.aku.hassannaqvi.dss_matiari.models.Households;
 import edu.aku.hassannaqvi.dss_matiari.ui.sections.SectionAActivity;
 
 
 public class HouseholdAdapter extends RecyclerView.Adapter<HouseholdAdapter.ViewHolder> {
     private static final String TAG = "CustomAdapter";
     private final Context mContext;
-    private final List<Form> forms;
+    private final List<Households> households;
     private final int mExpandedPosition = -1;
     private final int completeCount;
 
     /**
      * Initialize the dataset of the Adapter.
      *
-     * @param forms List<FemaleMembersModel> containing the data to populate views to be used by RecyclerView.
+     * @param households List<FemaleMembersModel> containing the data to populate views to be used by RecyclerView.
      */
-    public HouseholdAdapter(Context mContext, List<Form> forms) {
-        this.forms = forms;
+    public HouseholdAdapter(Context mContext, List<Households> households) {
+        this.households = households;
         this.mContext = mContext;
         completeCount = 0;
         MainApp.fmComplete = false;
@@ -47,7 +47,7 @@ public class HouseholdAdapter extends RecyclerView.Adapter<HouseholdAdapter.View
     @Override
     public void onBindViewHolder(ViewHolder viewHolder, final int position) {
         Log.d(TAG, "Element " + position + " set.");
-        Form form = this.forms.get(position);        // Get element from your dataset at this position and replace the contents of the view
+        Households households = this.households.get(position);        // Get element from your dataset at this position and replace the contents of the view
         // with that element
 
         TextView hhNo = viewHolder.hhNo;
@@ -56,13 +56,13 @@ public class HouseholdAdapter extends RecyclerView.Adapter<HouseholdAdapter.View
         TextView secStatus = viewHolder.secStatus;
         ImageView imgStatus = viewHolder.imgStatus;
 
-        //String pregStatus = form.getRb07().equals("1") ? "Pregnant" : "Not Pregnant";
+        //String pregStatus = households.getRb07().equals("1") ? "Pregnant" : "Not Pregnant";
 
         //MainApp.fmComplete = completeCount == MainApp.formCount;
 
 
         String hhStatus = "";
-        switch (form.getiStatus()) {
+        switch (households.getiStatus()) {
             case "1":
                 hhStatus = "Complete";
                 break;
@@ -81,25 +81,25 @@ public class HouseholdAdapter extends RecyclerView.Adapter<HouseholdAdapter.View
 {"ra01":"2021-08-23","ra02":"","ra04":"","ra03":"","ra05":"","ra07":"9001","ra06":"9","ra08":"asd","ra09":"2","ra10":"1","ra11":"96","ra11x":"ghg","ra12":"96","ra12x":"vgv","ra13":"","ra13x":"","ra14":"head","ra15":"resp","ra16":"2","ra17_a":"1","ra17_b":"1","ra17_c":"1","ra17_d":"1","ra18":"1"}
         fMaritalStatus.setText(marStatus + " | " + pregStatus);*/
         DatabaseHelper db = MainApp.appInfo.dbHelper;
-        int totalMWRA = db.getMWRACountBYUUID(form.getUid());
+        int totalMWRA = db.getMWRACountBYUUID(households.getUid());
 
-        hhNo.setText(form.getRa07() + "-" + form.getRa10() + "-" + form.getRa09());
-        hhHead.setText(form.getRa14());
-        mwraCount.setText(totalMWRA + " MWRA(s)");
+        hhNo.setText(households.getRa07() + "-" + households.getRa09());
+        hhHead.setText(households.getRa14());
+        mwraCount.setText(totalMWRA + " Women");
         secStatus.setText(hhStatus);
-        imgStatus.setVisibility(form.getiStatus().equals("1") || Integer.parseInt(form.getVisitNo()) > 2 ? View.VISIBLE : View.GONE);
+        imgStatus.setVisibility(households.getiStatus().equals("1") || Integer.parseInt(households.getVisitNo()) > 2 ? View.VISIBLE : View.GONE);
 
         viewHolder.itemView.setOnClickListener(v -> {
             // Get the current state of the item
 
-            MainApp.form = MainApp.householdList.get(position);
-            //MainApp.form.setVisitNo(String.valueOf(Integer.parseInt(MainApp.form.getVisitNo())+1));
-            if (!MainApp.form.getiStatus().equals("1")) {
+            MainApp.households = MainApp.householdList.get(position);
+            //MainApp.households.setVisitNo(String.valueOf(Integer.parseInt(MainApp.households.getVisitNo())+1));
+            if (!MainApp.households.getiStatus().equals("1")) {
 
                 editHousehold(position);
 
             } else {
-                Toast.makeText(mContext, "This form has been locked. You cannot edit household for locked forms", Toast.LENGTH_LONG).show();
+                Toast.makeText(mContext, "This households has been locked. You cannot edit household for locked households", Toast.LENGTH_LONG).show();
             }
 
 
@@ -127,7 +127,7 @@ public class HouseholdAdapter extends RecyclerView.Adapter<HouseholdAdapter.View
 
     @Override
     public int getItemCount() {
-        return forms.size();
+        return households.size();
     }
 
     /**

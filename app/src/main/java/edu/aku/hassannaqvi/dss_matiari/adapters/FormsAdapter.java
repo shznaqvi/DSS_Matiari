@@ -21,7 +21,7 @@ import java.util.List;
 import edu.aku.hassannaqvi.dss_matiari.R;
 import edu.aku.hassannaqvi.dss_matiari.core.MainApp;
 import edu.aku.hassannaqvi.dss_matiari.database.DatabaseHelper;
-import edu.aku.hassannaqvi.dss_matiari.models.Form;
+import edu.aku.hassannaqvi.dss_matiari.models.Households;
 import edu.aku.hassannaqvi.dss_matiari.ui.sections.SectionAActivity;
 
 
@@ -31,10 +31,10 @@ import edu.aku.hassannaqvi.dss_matiari.ui.sections.SectionAActivity;
 public class FormsAdapter extends RecyclerView.Adapter<FormsAdapter.ViewHolder> {
     Context c;
     DatabaseHelper db;
-    private List<Form> fc = Collections.emptyList();
+    private List<Households> fc = Collections.emptyList();
 
     // Provide a suitable constructor (depends on the kind of dataset)
-    public FormsAdapter(List<Form> fc, Context c) {
+    public FormsAdapter(List<Households> fc, Context c) {
         this.fc = fc;
         this.c = c;
         Log.d("TAG:count", String.valueOf(getItemCount()));
@@ -99,24 +99,24 @@ public class FormsAdapter extends RecyclerView.Adapter<FormsAdapter.ViewHolder> 
                 iColor = Color.RED;
                 break;
             default:
-                iStatus = "   Open Form   ";
+                iStatus = "   Open Households   ";
                 iColor = Color.RED;
                 break;
 
         }
 
         /*
-                TableContracts.FormsTable._ID,
-                TableContracts.FormsTable.COLUMN_UID,
-                TableContracts.FormsTable.COLUMN_SYSDATE,
-                TableContracts.FormsTable.COLUMN_USERNAME,
-                TableContracts.FormsTable.COLUMN_ISTATUS,
-                TableContracts.FormsTable.COLUMN_SYNCED,
-                TableContracts.FormsTable.COLUMN_VISIT_NO,
-                TableContracts.FormsTable.COLUMN_STRUCTURE_NO,
-                TableContracts.FormsTable.COLUMN_VILLAGE_CODE,
-                TableContracts.FormsTable.COLUMN_UC_CODE,
-                TableContracts.FormsTable.COLUMN_HOUSEHOLD_NO,
+                TableContracts.HouseholdTable._ID,
+                TableContracts.HouseholdTable.COLUMN_UID,
+                TableContracts.HouseholdTable.COLUMN_SYSDATE,
+                TableContracts.HouseholdTable.COLUMN_USERNAME,
+                TableContracts.HouseholdTable.COLUMN_ISTATUS,
+                TableContracts.HouseholdTable.COLUMN_SYNCED,
+                TableContracts.HouseholdTable.COLUMN_VISIT_NO,
+                TableContracts.HouseholdTable.COLUMN_STRUCTURE_NO,
+                TableContracts.HouseholdTable.COLUMN_VILLAGE_CODE,
+                TableContracts.HouseholdTable.COLUMN_UC_CODE,
+                TableContracts.HouseholdTable.COLUMN_HOUSEHOLD_NO,
 */
         String cluster = fc.get(position).getUcCode() + "-" + fc.get(position).getVillageCode() + "-" + fc.get(position).getStructureNo() + "-" + fc.get(position).getHhNo();
 
@@ -134,19 +134,19 @@ public class FormsAdapter extends RecyclerView.Adapter<FormsAdapter.ViewHolder> 
             // Get the current state of the item
 
             try {
-                MainApp.form = db.getFormByUID(MainApp.householdList.get(position).getUid());
+                MainApp.households = db.getHouseholdByUID(MainApp.householdList.get(position).getUid());
 
-                //MainApp.form.setVisitNo(String.valueOf(Integer.parseInt(MainApp.form.getVisitNo())+1));
-                if (!MainApp.form.getiStatus().equals("1") && Integer.parseInt(MainApp.form.getVisitNo()) < 3) {
+                //MainApp.households.setVisitNo(String.valueOf(Integer.parseInt(MainApp.households.getVisitNo())+1));
+                if (!MainApp.households.getiStatus().equals("1") && Integer.parseInt(MainApp.households.getVisitNo()) < 3) {
 
                     editHousehold(position);
 
                 } else {
-                    Toast.makeText(c, "This form has been locked. You cannot edit household for locked forms", Toast.LENGTH_LONG).show();
+                    Toast.makeText(c, "This households has been locked. You cannot edit household for locked forms", Toast.LENGTH_LONG).show();
                 }
             } catch (JSONException e) {
                 e.printStackTrace();
-                Toast.makeText(c, "JSONException(Form): " + e.getMessage(), Toast.LENGTH_LONG).show();
+                Toast.makeText(c, "JSONException(Households): " + e.getMessage(), Toast.LENGTH_LONG).show();
 
             }
 

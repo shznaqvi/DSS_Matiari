@@ -370,7 +370,7 @@ public class AndroidDatabaseManager extends Activity implements OnItemClickListe
                     //saving cursor to the static indexinfo class which can be resued by the other functions
                     indexInfo.maincursor = c2;
 
-                    // if the cursor returned form the database is not null we display the data in VillageTable layout
+                    // if the cursor returned households the database is not null we display the data in VillageTable layout
                     if (c2 != null) {
                         int counts = c2.getCount();
                         indexInfo.isEmpty = false;
@@ -547,7 +547,7 @@ public class AndroidDatabaseManager extends Activity implements OnItemClickListe
                                     addnewlayout.setBackgroundColor(Color.WHITE);
                                     addrowsv.addView(addnewlayout);
                                     Log.d("Button Clicked", "");
-                                    //the above form layout which we have created above will be displayed in an alert dialog
+                                    //the above households layout which we have created above will be displayed in an alert dialog
                                     runOnUiThread(new Runnable() {
                                         @Override
                                         public void run() {
@@ -980,7 +980,7 @@ public class AndroidDatabaseManager extends Activity implements OnItemClickListe
         if (d == 1) {
             c3 = indexInfo.maincursor;
         }
-        // if the cursor returened form tha database is not null we display the data in VillageTable layout
+        // if the cursor returened households tha database is not null we display the data in VillageTable layout
         if (c3 != null) {
             int counts = c3.getCount();
 

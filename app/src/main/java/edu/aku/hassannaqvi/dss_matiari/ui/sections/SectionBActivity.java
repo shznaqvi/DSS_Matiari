@@ -1,8 +1,9 @@
 package edu.aku.hassannaqvi.dss_matiari.ui.sections;
 
-import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.form;
+import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.households;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.mwra;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.mwraCount;
+import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.sharedPref;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -42,31 +43,36 @@ public class SectionBActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        String lang = sharedPref.getString("lang", "1");
+        setTheme(lang.equals("1") ? R.style.AppThemeEnglish1 : R.style.AppThemeUrdu);
         bi = DataBindingUtil.setContentView(this, R.layout.activity_section_b);
         bi.setCallback(this);
         bi.setMwra(mwra);
+
+
         setListener();
 
         // set default model values if new mwra
         if (mwra.getRb01().equals("")) {
 
             mwra.setRb01(String.valueOf(mwraCount + 1));
-            MainApp.mwra.setUuid(form.getUid());
-            MainApp.mwra.setUcCode(form.getUcCode());
-            MainApp.mwra.setVillageCode(form.getVillageCode());
-            MainApp.mwra.setStructureNo(form.getStructureNo());
-            MainApp.mwra.setHhNo(form.getHhNo());
+            MainApp.mwra.setUuid(households.getUid());
+            MainApp.mwra.setUcCode(households.getUcCode());
+            MainApp.mwra.setVillageCode(households.getVillageCode());
+            MainApp.mwra.setStructureNo(households.getStructureNo());
+            MainApp.mwra.setHhNo(households.getHhNo());
             MainApp.mwra.setUserName(MainApp.user.getUserName());
-            MainApp.mwra.setSysDate(form.getSysDate());
+            MainApp.mwra.setSysDate(households.getSysDate());
             MainApp.mwra.setDeviceId(MainApp.deviceid);
-            MainApp.mwra.setHdssId(form.getHdssId());
+            MainApp.mwra.setHdssId(households.getHdssId());
             MainApp.mwra.setAppver(MainApp.versionName + "." + MainApp.versionCode);
         }
 
-        setTitle(R.string.sectionB_mainheading);
+        setTitle(R.string.marriedwomenregistration_mainheading);
         setImmersive(true);
 
         db = MainApp.appInfo.dbHelper;
+        bi.btnContinue.setText(MainApp.mwra.getUid().equals("") ? "Save" : "Update");
 
         // To set min max range of date fields
         setDateRanges();
@@ -79,7 +85,7 @@ public class SectionBActivity extends AppCompatActivity {
             Calendar cal = Calendar.getInstance();
 
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
-            cal.setTime(sdf.parse(form.getRa01()));// all done
+            cal.setTime(sdf.parse(households.getRa01()));// all done
 
             sdf = new SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH);
 
@@ -90,9 +96,9 @@ public class SectionBActivity extends AppCompatActivity {
             Log.d(TAG, "onCreate: " + minDob);
 
             // Set maxDob date to 50 years back from DOV
-            cal.add(Calendar.YEAR, -14);
+            cal.add(Calendar.YEAR, -18);
             String maxDob = sdf.format(cal.getTime());
-            cal.add(Calendar.YEAR, +14); // Calender reset to DOV
+            cal.add(Calendar.YEAR, +18); // Calender reset to DOV
             Log.d(TAG, "onCreate: " + maxDob);
 
 
@@ -165,7 +171,7 @@ public class SectionBActivity extends AppCompatActivity {
 
                         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
 
-                        cur.setTime(sdf.parse(form.getRa01())); // DOV
+                        cur.setTime(sdf.parse(households.getRa01())); // DOV
                         cal.setTime(sdf.parse(mwra.getRb04())); // DOB
 
 
@@ -211,15 +217,15 @@ public class SectionBActivity extends AppCompatActivity {
 
         //mwra = new MWRA();
 
-/*        MainApp.mwra.setUuid(form.getUid());
-        MainApp.mwra.setUcCode(form.getUcCode());
-        MainApp.mwra.setVillageCode(form.getVillageCode());
-        MainApp.mwra.setStructureNo(form.getStructureNo());
-        MainApp.mwra.setHhNo(form.getHhNo());
+/*        MainApp.mwra.setUuid(households.getUid());
+        MainApp.mwra.setUcCode(households.getUcCode());
+        MainApp.mwra.setVillageCode(households.getVillageCode());
+        MainApp.mwra.setStructureNo(households.getStructureNo());
+        MainApp.mwra.setHhNo(households.getHhNo());
         MainApp.mwra.setUserName(MainApp.user.getUserName());
-        MainApp.mwra.setSysDate(form.getSysDate());
+        MainApp.mwra.setSysDate(households.getSysDate());
         MainApp.mwra.setDeviceId(MainApp.deviceid);
-        MainApp.mwra.setHdssId(form.getHdssId());
+        MainApp.mwra.setHdssId(households.getHdssId());
         MainApp.mwra.setAppver(MainApp.versionName + "." + MainApp.versionCode);*/
 
 
@@ -240,13 +246,13 @@ public class SectionBActivity extends AppCompatActivity {
     }
 
 /*    private boolean insertNewRecord() {
-        if (MainApp.form.isExist()) return true;
+        if (MainApp.households.isExist()) return true;
         db = MainApp.appInfo.getDbHelper();
-        long rowId = db.addForm(form);
-        form.setId(String.valueOf(rowId));
+        long rowId = db.addForm(households);
+        households.setId(String.valueOf(rowId));
         if (rowId > 0) {
-            form.setUid(form.getDeviceId() + form.getId());
-            db.updatesFormColumn(TableContracts.FormsTable.COLUMN_UID, form.getUid());
+            households.setUid(households.getDeviceId() + households.getId());
+            db.updatesFormColumn(TableContracts.HouseholdTable.COLUMN_UID, households.getUid());
             return true;
         } else {
             Toast.makeText(this, "Updating Database... ERROR!", Toast.LENGTH_SHORT).show();
@@ -335,7 +341,7 @@ public class SectionBActivity extends AppCompatActivity {
     private boolean compareTwoDate(EditText et, int month, String msg) {
         try {
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-            Date dateDOV = sdf.parse(form.getRa01());
+            Date dateDOV = sdf.parse(households.getRa01());
             Calendar calendarDOV1 = Calendar.getInstance();
             Calendar calendarDOV2 = Calendar.getInstance();
             calendarDOV1.setTime(dateDOV);

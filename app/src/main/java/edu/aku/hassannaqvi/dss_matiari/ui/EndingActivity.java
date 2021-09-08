@@ -31,13 +31,13 @@ public class EndingActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-//        MainApp.form.setVisitNo(String.valueOf(Integer.parseInt(MainApp.form.getVisitNo())+1));
+//        MainApp.households.setVisitNo(String.valueOf(Integer.parseInt(MainApp.households.getVisitNo())+1));
 
         bi = DataBindingUtil.setContentView(this, R.layout.activity_ending);
-        bi.setForm(MainApp.form);
+        bi.setHousehold(MainApp.households);
         setSupportActionBar(bi.toolbar);
         //setTitle(R.string.section1_mainheading);
-        //bi.hhStatus.setText(bi.hhStatus.getText()+" "+(Integer.parseInt(MainApp.form.getVisitNo())+1));
+        //bi.hhStatus.setText(bi.hhStatus.getText()+" "+(Integer.parseInt(MainApp.households.getVisitNo())+1));
 
         db = MainApp.appInfo.dbHelper;
         boolean complete = getIntent().getBooleanExtra("complete", false);
@@ -54,30 +54,30 @@ public class EndingActivity extends AppCompatActivity {
 
     private void saveDraft() {
 
-        int visitCount = Integer.parseInt(MainApp.form.getVisitNo()) + 1;
+        int visitCount = Integer.parseInt(MainApp.households.getVisitNo()) + 1;
 
         // Only increment visit count if Refused or Locked AND NOT FIRST VISIT
 /*        if (bi.istatusb.isChecked() ||
                 bi.istatusc.isChecked()) {
             // Do not increment if saving First Visit
-            if(!MainApp.form.getiStatus().equals(""))
-            MainApp.form.setVisitNo(String.valueOf(visitCount));
+            if(!MainApp.households.getiStatus().equals(""))
+            MainApp.households.setVisitNo(String.valueOf(visitCount));
         }*/
-        MainApp.form.setVisitNo(String.valueOf(visitCount));
+        MainApp.households.setVisitNo(String.valueOf(visitCount));
 
         switch (visitCount) {
             case 1:
-                MainApp.form.setRa11(
+                MainApp.households.setRa11(
                         bi.istatusa.isChecked() ? "1" :
                                 bi.istatusb.isChecked() ? "2" :
                                         bi.istatusc.isChecked() ? "3" :
                                                 bi.istatusd.isChecked() ? "96" :
                                                         "-1"
                 );
-                MainApp.form.setRa11x(bi.istatusdx.getText().toString());
+                MainApp.households.setRa11x(bi.istatusdx.getText().toString());
                 break;
             case 2:
-                MainApp.form.setRa12(
+                MainApp.households.setRa12(
                         bi.istatusa.isChecked() ? "1" :
                                 bi.istatusb.isChecked() ? "2" :
                                         bi.istatusc.isChecked() ? "3" :
@@ -85,10 +85,10 @@ public class EndingActivity extends AppCompatActivity {
                                                         "-1"
 
                 );
-                MainApp.form.setRa12x(bi.istatusdx.getText().toString());
+                MainApp.households.setRa12x(bi.istatusdx.getText().toString());
                 break;
             case 3:
-                MainApp.form.setRa13(
+                MainApp.households.setRa13(
                         bi.istatusa.isChecked() ? "1" :
                                 bi.istatusb.isChecked() ? "2" :
                                         bi.istatusc.isChecked() ? "3" :
@@ -96,11 +96,11 @@ public class EndingActivity extends AppCompatActivity {
                                                         "-1"
 
                 );
-                MainApp.form.setRa13x(bi.istatusdx.getText().toString());
+                MainApp.households.setRa13x(bi.istatusdx.getText().toString());
                 break;
 
         }
-        // form.setEndTime(new SimpleDateFormat("dd-MM-yy HH:mm", Locale.ENGLISH).format(new Date().getTime()));
+        // households.setEndTime(new SimpleDateFormat("dd-MM-yy HH:mm", Locale.ENGLISH).format(new Date().getTime()));
     }
 
 
@@ -122,10 +122,10 @@ public class EndingActivity extends AppCompatActivity {
 
     private boolean UpdateDB() {
         int updcount = 0;
-        db.updatesFormColumn(TableContracts.FormsTable.COLUMN_ISTATUS, MainApp.form.getiStatus());
-        db.updatesFormColumn(TableContracts.FormsTable.COLUMN_VISIT_NO, MainApp.form.getVisitNo());
+        db.updatesHouseholdColumn(TableContracts.HouseholdTable.COLUMN_ISTATUS, MainApp.households.getiStatus());
+        db.updatesHouseholdColumn(TableContracts.HouseholdTable.COLUMN_VISIT_NO, MainApp.households.getVisitNo());
         try {
-            updcount = db.updatesFormColumn(TableContracts.FormsTable.COLUMN_SA, MainApp.form.sAtoString());
+            updcount = db.updatesHouseholdColumn(TableContracts.HouseholdTable.COLUMN_SA, MainApp.households.sAtoString());
         } catch (JSONException e) {
             e.printStackTrace();
             Toast.makeText(this, "JSONException: " + e.getMessage(), Toast.LENGTH_SHORT).show();

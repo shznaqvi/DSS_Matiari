@@ -1,11 +1,13 @@
 package edu.aku.hassannaqvi.dss_matiari.ui.sections;
 
-import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.form;
+import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.households;
+import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.sharedPref;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.CompoundButton;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -36,24 +38,42 @@ public class SectionAActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        String lang = sharedPref.getString("lang", "1");
+        setTheme(lang.equals("1") ? R.style.AppThemeEnglish1 : R.style.AppThemeUrdu);
         bi = DataBindingUtil.setContentView(this, R.layout.activity_section_a);
         bi.setCallback(this);
-        bi.setForm(form);
+        bi.setHousehold(MainApp.households);
 
-        setTitle(R.string.sectionA_mainheading);
+        setTitle(R.string.demographicinformation_mainheading);
         setImmersive(true);
 
         db = MainApp.appInfo.dbHelper;
+
+        bi.btnContinue.setText(MainApp.households.getUid().equals("") ? "Save" : "Update");
+        if (MainApp.previousAddress.trim().equals("") || !MainApp.households.getRa08().equals(""))
+            bi.rb08check.setVisibility(View.GONE);
+        if (!MainApp.dateOfVisit.trim().equals(""))
+            bi.ra01.setText(MainApp.dateOfVisit);
+
+        bi.rb08check.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    bi.ra08.setText(MainApp.previousAddress);
+                } else {
+                    bi.ra08.setText("");
+
+                }
+            }
+        });
     }
 
     public void btnContinue(View view) {
         if (!formValidation()) return;
         if (!insertNewRecord()) return;
-        saveDraft();
         if (updateDB()) {
 
             Intent i = new Intent(this, MwraActivity.class);
-            MainApp.household = MainApp.form;
             i.setFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT);
             startActivity(i);
             finish();
@@ -65,21 +85,22 @@ public class SectionAActivity extends AppCompatActivity {
     }
 
     private boolean insertNewRecord() {
-        if (!MainApp.form.getUid().equals("")) return true;
+        if (!MainApp.households.getUid().equals("")) return true;
+        saveDraft();
 
         // Updating date at the time of Insert instead of SaveDraft()
-        MainApp.form.setSysDate(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.ENGLISH).format(new Date().getTime()));
+        //    MainApp.households.setSysDate(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.ENGLISH).format(new Date().getTime()));
         long rowId = 0;
         try {
-            rowId = db.addForm(form);
+            rowId = db.addHousehold(households);
         } catch (JSONException e) {
             e.printStackTrace();
             return false;
         }
-        form.setId(String.valueOf(rowId));
+        households.setId(String.valueOf(rowId));
         if (rowId > 0) {
-            form.setUid(form.getDeviceId() + form.getId());
-            db.updatesFormColumn(TableContracts.FormsTable.COLUMN_UID, form.getUid());
+            households.setUid(households.getDeviceId() + households.getId());
+            db.updatesHouseholdColumn(TableContracts.HouseholdTable.COLUMN_UID, households.getUid());
             return true;
         } else {
             Toast.makeText(this, "Updating Database... ERROR!", Toast.LENGTH_SHORT).show();
@@ -91,7 +112,7 @@ public class SectionAActivity extends AppCompatActivity {
         DatabaseHelper db = MainApp.appInfo.getDbHelper();
         int updcount = 0;
         try {
-            updcount = db.updatesFormColumn(TableContracts.FormsTable.COLUMN_SA, form.sAtoString());
+            updcount = db.updatesHouseholdColumn(TableContracts.HouseholdTable.COLUMN_SA, households.sAtoString());
         } catch (JSONException e) {
             e.printStackTrace();
             Toast.makeText(this, "JSONException: " + e.getMessage(), Toast.LENGTH_SHORT).show();
@@ -108,29 +129,35 @@ public class SectionAActivity extends AppCompatActivity {
 
     private void saveDraft() {
 
-        //  MainApp.form = new Form();
+        //  MainApp.households = new Households();
 
-        form.setUserName(MainApp.user.getUserName());
-        form.setSysDate(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.ENGLISH).format(new Date().getTime()));
-        form.setDeviceId(MainApp.deviceid);
-        form.setAppver(MainApp.versionName + "." + MainApp.versionCode);
+        households.setUserName(MainApp.user.getUserName());
+        households.setSysDate(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.ENGLISH).format(new Date().getTime()));
+        households.setDeviceId(MainApp.deviceid);
+        households.setRa06(MainApp.selectedVillage.substring(0, 1));
+        households.setRa07(MainApp.selectedVillage);
+        households.setHdssId(households.getVillageCode() + households.getHhNo());
+        households.setDeviceId(MainApp.deviceid);
+        households.setAppver(MainApp.versionName + "." + MainApp.versionCode);
+        MainApp.previousAddress = bi.ra08.getText().toString();
+        MainApp.dateOfVisit = bi.ra01.getText().toString();
 
 /*
-        form.setRa14(bi.ra14.getText().toString());
+        households.setRa14(bi.ra14.getText().toString());
 
-        form.setRa15(bi.ra15.getText().toString());
+        households.setRa15(bi.ra15.getText().toString());
 
-        form.setRa16(bi.ra16.getText().toString());
+        households.setRa16(bi.ra16.getText().toString());
 
-        form.setRa17_a(bi.ra17A.getText().toString());
+        households.setRa17_a(bi.ra17A.getText().toString());
 
-        form.setRa17_b(bi.ra17B.getText().toString());
+        households.setRa17_b(bi.ra17B.getText().toString());
 
-        form.setRa17_c(bi.ra17C.getText().toString());
+        households.setRa17_c(bi.ra17C.getText().toString());
 
-        form.setRa17_d(bi.ra17D.getText().toString());
+        households.setRa17_d(bi.ra17D.getText().toString());
 
-        form.setRa18(bi.ra18.getText().toString());
+        households.setRa18(bi.ra18.getText().toString());
 */
 
 

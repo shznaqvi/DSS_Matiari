@@ -1,6 +1,9 @@
 package edu.aku.hassannaqvi.dss_matiari.ui.lists;
 
+import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.hdssid;
+import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.idType;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.selectedHousehold;
+import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.selectedVillage;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -28,7 +31,7 @@ import edu.aku.hassannaqvi.dss_matiari.adapters.HouseholdAdapter;
 import edu.aku.hassannaqvi.dss_matiari.core.MainApp;
 import edu.aku.hassannaqvi.dss_matiari.database.DatabaseHelper;
 import edu.aku.hassannaqvi.dss_matiari.databinding.ActivityHouseholdBinding;
-import edu.aku.hassannaqvi.dss_matiari.models.Form;
+import edu.aku.hassannaqvi.dss_matiari.models.Households;
 import edu.aku.hassannaqvi.dss_matiari.ui.MainActivity;
 import edu.aku.hassannaqvi.dss_matiari.ui.sections.SectionAActivity;
 
@@ -59,7 +62,7 @@ public class HouseholdActivity extends AppCompatActivity {
                                         (age >= 14 && age < 50 && !notMarried && isFemale )
 
                         ) {*/
-                        MainApp.householdList.add(MainApp.household);
+                        MainApp.householdList.add(MainApp.households);
 
                         MainApp.householdCount++;
 
@@ -93,9 +96,7 @@ public class HouseholdActivity extends AppCompatActivity {
         Log.d(TAG, "onCreate: householdlist " + MainApp.householdList.size());
         try {
 
-            String village = MainApp.form.getVillageCode();
-            String structure = MainApp.form.getStructureNo();
-            MainApp.householdList = db.getHouseholdBYStructure(village, structure);
+            MainApp.householdList = db.getHouseholdBYVillage(MainApp.selectedVillage);
         } catch (JSONException e) {
             e.printStackTrace();
             Toast.makeText(this, "JSONException: " + e.getMessage(), Toast.LENGTH_SHORT).show();
@@ -112,11 +113,11 @@ public class HouseholdActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 addHousehold();
-              /*  if (!MainApp.form.getiStatus().equals("1")) {
-                    //     Toast.makeText(HouseholdActivity.this, "Opening Household Form", Toast.LENGTH_LONG).show();
+              /*  if (!MainApp.households.getiStatus().equals("1")) {
+                    //     Toast.makeText(HouseholdActivity.this, "Opening Household Households", Toast.LENGTH_LONG).show();
 
                 } else {
-                    Toast.makeText(HouseholdActivity.this, "This form has been locked. You cannot add new household to locked forms", Toast.LENGTH_LONG).show();
+                    Toast.makeText(HouseholdActivity.this, "This households has been locked. You cannot add new household to locked forms", Toast.LENGTH_LONG).show();
                 }*/
             }
         });
@@ -130,7 +131,7 @@ public class HouseholdActivity extends AppCompatActivity {
         Toast.makeText(this, "Activity Resumed!", Toast.LENGTH_SHORT).show();
         MainApp.householdCount = Math.round(MainApp.householdList.size());
 
-        MainApp.household = new Form();
+        MainApp.households = new Households();
 
         if (MainApp.householdList.size() > 0) {
             //MainApp.fm.get(Integer.parseInt(String.valueOf(MainApp.selectedHousehold))).setStatus("1");
@@ -139,36 +140,36 @@ public class HouseholdActivity extends AppCompatActivity {
 
         checkCompleteFm();
 
-        // bi.fab.setClickable(!MainApp.form.getiStatus().equals("1"));
+        // bi.fab.setClickable(!MainApp.households.getiStatus().equals("1"));
       /* bi.completedmember.setText(householdList.size()+ " HOUSEHOLDs added");
         bi.totalmember.setText(MainApp.householdTotal+ " M completed");*/
-        //MainApp.form.resetForm();
+        //MainApp.households.resetHousehold();
 
 
     }
 
     private void checkCompleteFm() {
-        //     if (!MainApp.form.getIStatus().equals("1")) {
+        //     if (!MainApp.households.getIStatus().equals("1")) {
         int compCount = MainApp.householdList.size();
 
         MainApp.householdCountComplete = compCount;
         bi.btnContinue.setVisibility(MainApp.householdCount > 0 ? View.VISIBLE : View.GONE);
-        //   bi.btnContinue.setVisibility(compCount == householdCount && !form.getiStatus().equals("1")? View.VISIBLE : View.GONE);
+        //   bi.btnContinue.setVisibility(compCount == householdCount && !households.getiStatus().equals("1")? View.VISIBLE : View.GONE);
      /*   bi.btnContinue.setVisibility(compCount >= householdCount ? View.VISIBLE : View.GONE);
         bi.btnContinue.setEnabled(bi.btnContinue.getVisibility()==View.VISIBLE);*/
 
         //  } else {
-        //       Toast.makeText(this, "Form has been completed or locked", Toast.LENGTH_LONG).show();
+        //       Toast.makeText(this, "Households has been completed or locked", Toast.LENGTH_LONG).show();
         //   }
     }
 
     public void addHousehold() {
 
-        // Copy common variables from existing Form to new Form
-        MainApp.form = new Form(MainApp.form);
+        // Copy common variables from existing Households to new Households
+        // MainApp.households = new Households(MainApp.households);
 
         // Increment Household Number by 1
-        MainApp.form.setRa09(String.valueOf(db.getMaxHHNo(MainApp.form.getVillageCode(), MainApp.form.getStructureNo()) + 1));
+        MainApp.households.setRa09(String.valueOf(db.getMaxHHNo(selectedVillage) + 1));
 
         // Launch activity for results.
         Intent intent = new Intent(this, SectionAActivity.class);
@@ -204,6 +205,35 @@ public class HouseholdActivity extends AppCompatActivity {
                 // Write your code if there's no result
                 Toast.makeText(this, "Information for " + MainApp.householdList.get(selectedHousehold).getRa14() + " was not saved.", Toast.LENGTH_SHORT).show();
             }
+        }
+    }
+
+    private boolean hhExists() {
+
+        switch (idType) {
+            case 1:
+                MainApp.households = new Households();
+                try {
+                    MainApp.households = db.getHouseholdByHDSSID(hdssid);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    Toast.makeText(this, "JSONException: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                    Log.d(TAG, "ProcessStart (JSONException): " + e.getMessage());
+                }
+                return MainApp.households != null;
+
+            //TODO: Antro & Samples will be multiple. Different logic will be required
+        /*    case 2:
+                anthro = new Anthro();
+                anthro = db.getAnthroByClusterHHNo(bi.h103.getText().toString(), bi.h103.getText().toString());
+                return anthro != null;
+            case 2:
+                samples = new Samples();
+                anthro = db.getSamplesByClusterHHNo(bi.h103.getText().toString(), bi.h103.getText().toString());
+                return anthro != null;*/
+            default:
+                return false;
+
         }
     }
 }

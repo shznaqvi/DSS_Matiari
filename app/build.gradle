@@ -116,7 +116,7 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
 
 
-    // Form Validator
+    // Households Validator
     implementation 'com.github.AliAzaz:AndroidValidatorCrawler:1.0.3'
 
     // Some string

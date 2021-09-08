@@ -14,7 +14,7 @@ import java.util.List;
 
 import edu.aku.hassannaqvi.dss_matiari.BuildConfig;
 import edu.aku.hassannaqvi.dss_matiari.R;
-import edu.aku.hassannaqvi.dss_matiari.models.Form;
+import edu.aku.hassannaqvi.dss_matiari.models.Households;
 import edu.aku.hassannaqvi.dss_matiari.models.MWRA;
 import edu.aku.hassannaqvi.dss_matiari.models.Users;
 
@@ -48,7 +48,7 @@ public class MainApp extends Application {
 
     public static File sdDir;
     public static String[] downloadData;
-    public static Form form;
+    public static Households households;
     public static MWRA mwra;
     public static String DeviceURL = "devices.php";
     public static AppInfo appInfo;
@@ -71,10 +71,12 @@ public class MainApp extends Application {
     public static int selectedFemale;
     public static int selectedHousehold;
     public static int mwraCountComplete = 0;
-    public static List<Form> householdList;
-    public static Form household;
+    public static List<Households> householdList;
     public static int householdCount = 0;
     public static int householdCountComplete = 0;
+    public static String previousAddress = "";
+    public static String dateOfVisit = "";
+    public static String selectedVillage;
 
     public static void hideSystemUI(View decorView) {
         // Enables regular immersive mode.
@@ -110,6 +112,7 @@ public class MainApp extends Application {
         }
         return "deviceId";
     }
+
 
     @Override
     public void onCreate() {

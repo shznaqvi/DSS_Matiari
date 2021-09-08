@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
@@ -52,6 +53,8 @@ public class MwraAdapter extends RecyclerView.Adapter<MwraAdapter.ViewHolder> {
         TextView fName = viewHolder.fName;
         TextView fAge = viewHolder.fAge;
         TextView fMaritalStatus = viewHolder.fMatitalStatus;
+        ImageView indicator = viewHolder.indicator;
+        TextView secStatus = viewHolder.secStatus;
 
         String pregStatus = mwra.getRb07().equals("1") ? "Pregnant" : "Not Pregnant";
 
@@ -59,27 +62,49 @@ public class MwraAdapter extends RecyclerView.Adapter<MwraAdapter.ViewHolder> {
 
         fName.setText(mwra.getRb02());
         //fAge.setText(mwra.getRb05() + "y | " + mwra.getRb03());
-        fAge.setText("w/o " + mwra.getRb03() + " | " + mwra.getRb05() + "y  ");
         String marStatus = "";
+        String wifeOrDaughter = "";
+
+
         switch (mwra.getRb06()) {
             case "1":
                 marStatus = "Married";
+                indicator.setBackgroundColor(ContextCompat.getColor(mContext, R.color.redDark));
+                wifeOrDaughter = "w/o ";
                 break;
             case "2":
                 marStatus = "Divorced";
+                indicator.setBackgroundColor(ContextCompat.getColor(mContext, R.color.teal_700));
+                wifeOrDaughter = "w/o ";
+
                 break;
             case "3":
                 marStatus = "Widow";
+                indicator.setBackgroundColor(ContextCompat.getColor(mContext, R.color.teal_200));
+                wifeOrDaughter = "w/o ";
+
                 break;
             case "4":
                 marStatus = "Unmarried";
+                indicator.setBackgroundColor(ContextCompat.getColor(mContext, R.color.lightPink));
+                wifeOrDaughter = "d/o ";
+
                 break;
             default:
                 marStatus = "Value Unknown";
                 break;
         }
 
-        fMaritalStatus.setText(marStatus + " | " + pregStatus);
+        fAge.setText(wifeOrDaughter + mwra.getRb03() + " | " + mwra.getRb05() + "y  ");
+
+        if (mwra.getRb07().equals("1")) {
+            secStatus.setBackgroundColor(ContextCompat.getColor(mContext, R.color.redLight));
+            indicator.setImageDrawable(ContextCompat.getDrawable(mContext, R.drawable.ic_baseline_pregnant_woman_24));
+
+        }
+        fMaritalStatus.setText(marStatus);
+        secStatus.setText(pregStatus);
+
 
         viewHolder.itemView.setOnClickListener(v -> {
             // Get the current state of the item
@@ -123,7 +148,7 @@ public class MwraAdapter extends RecyclerView.Adapter<MwraAdapter.ViewHolder> {
         private final TextView fMatitalStatus;
         private final TextView secStatus;
         private final ImageView fmRow;
-        private final View indicator;
+        private final ImageView indicator;
 
 
         public ViewHolder(View v) {

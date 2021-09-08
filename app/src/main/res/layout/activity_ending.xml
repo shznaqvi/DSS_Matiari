@@ -6,8 +6,8 @@
         <import type="android.view.View" />
 
         <variable
-            name="form"
-            type="edu.aku.hassannaqvi.dss_matiari.models.Form" />
+            name="household"
+            type="edu.aku.hassannaqvi.dss_matiari.models.Households" />
 
         <variable
             name="callback"

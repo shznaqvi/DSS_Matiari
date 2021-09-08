@@ -291,7 +291,7 @@ public class MWRA extends BaseObservable implements Observable {
     public void setRb06(String rb06) {
         this.rb06 = rb06;
         Log.d(TAG, "setRb06: " + this.rb06);
-        setRb03(this.rb06.equals("4") ? "" : this.rb03);
+        //setRb03(this.rb06.equals("4") ? "" : this.rb03);
         setRb07(this.rb06.equals("4") ? "" : this.rb07);
         setRb08(this.rb06.equals("4") ? "" : this.rb08);
         setRb09(this.rb06.equals("4") ? "" : this.rb09);

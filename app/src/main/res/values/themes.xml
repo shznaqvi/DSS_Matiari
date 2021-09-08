@@ -296,22 +296,24 @@
     <style name="Summary_Layout" parent="Theme.AppCompat.Light.DarkActionBar" />
 
 
-    <style name="MyDatePickerDialogTheme" parent="Theme.AppCompat.Light.Dialog">
+    <style name="DatePickerEditTextDialogTheme" parent="Theme.AppCompat.Light.Dialog">
         <!-- this is new -->
         <item name="colorAccent">@color/colorAccent</item>
 
-        <item name="android:datePickerStyle">@style/MyDatePickerStyle</item>
+        <item name="android:datePickerStyle">@style/DatePickerEditTextStyle</item>
         <item name="android:colorAccent">@color/colorPrimaryDark</item>
     </style>
 
-    <style name="MyDatePickerStyle" parent="@android:style/Widget.Material.Light.DatePicker">
+    <style name="DatePickerEditTextStyle" parent="@android:style/Widget.Material.Light.DatePicker">
         <item name="android:headerBackground">@color/colorPrimary</item>
         <item name="android:calendarTextColor">@color/colorPrimaryDark</item>
         <item name="android:dayOfWeekBackground">@color/colorPrimaryDark</item>
         <item name="android:yearListSelectorColor">@color/colorAccent</item>
+        <item name="android:firstDayOfWeek">2</item>
         <item name="android:datePickerMode">calendar</item>
-        <item name="android:minDate">01/01/2000</item>
+
     </style>
+
 
     <style name="ToolbarTheme" parent="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
         <!-- android:textColorPrimary is the color of the title text in the Toolbar  -->

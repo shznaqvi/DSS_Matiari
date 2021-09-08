@@ -1,18 +1,14 @@
 <resources>
     <string name="app_name">DSS Matiari</string>
-    <string name="section1_mainheading"> Section 1: Identifying Information</string>
-    <string name="section2_mainheading"> Section 2: Young Infant Information</string>
-    <string name="section3_mainheading"> Section 3: Eligibility </string>
-    <string name="section4_mainheading"> Section 4: Treatment </string>
-    <string name="section5_mainheading"> Section 5: Diagnosis and outcome</string>
 
     <string name="open_surveillance_form">OPEN SURVEILLANCE FORM</string>
     <string name="open_mwra_registration_form">OPEN MWRA REGISTRATION FORM</string>
     <string name="open_onhold_form">UPDATE ONHOLD FORM</string>
     <string name="open_followup_form">OPEN FOLLOW-UP FORM</string>
 
-    <string name="sectionA_mainheading">Demographic Information</string>
-    <string name="sectionB_mainheading">Married Women Registration</string>
+    <string name="demographicinformation_mainheading">Demographic Information</string>
+    <string name="marriedwomenregistration_mainheading">Married Women Registration</string>
+
     <string name="btnSync">Download Data</string>
     <string name="btnUpload">Upload Data</string>
     <string name="prompt_email">Email</string>
@@ -53,6 +49,7 @@
     <string name="rupees">  Rupees </string>
     <string name="num"> Number </string>
     <string name="name"> Name </string>
+    <string name="roundNo"> Round No. </string>
     <string name="contactnum">Contact Number </string>
     <string name="checkHHpresent"> The name of head of the household corresponds to the line listing data.</string>
     <string name="newHHheadname"> Name of new head of the household </string>
@@ -92,7 +89,7 @@
     <string name="a17_c">18 to 49 Years </string>
     <string name="ra17_d">&gt;49 Years</string>
 
-    <string name="ra18">No. of Married Women</string>
+    <string name="ra18">No. of Women aged 14 – 49 years</string>
     <string name="ra19">Caste</string>
     <string name="ra20">Does this household have women aged 18–49 years?</string>
     <string name="ra20_a">Yes</string>
@@ -104,7 +101,8 @@
     <string name="rb_ufn">Unique Family Number</string>
     <string name="rb01">Unique WRA#</string>
     <string name="rb02">Name of Women</string>
-    <string name="rb03">Husband Name</string>
+    <string name="rb03h">Husband Name</string>
+    <string name="rb03f">Father Name</string>
     <string name="rb04">Date of Birth</string>
     <string name="rb04_info">DD/MM/YYYY Use 98/98/9998 if not known</string>
     <string name="rb05">Age in years</string>
@@ -122,68 +120,95 @@
     <string name="rb09_info">DD/MM/YYYY</string>
 
 
-    <string name='Q_a17_c'>a17_c</string>
-    <string name='Q_ra_lat'>ra_lat</string>
-    <string name='Q_ra_lon'>ra_lon</string>
-    <string name='Q_ra01'>ra01</string>
-    <string name='Q_ra02'>ra02</string>
-    <string name='Q_ra03'>ra03</string>
-    <string name='Q_ra04'>ra04</string>
-    <string name='Q_ra05'>ra05</string>
-    <string name='Q_ra06'>ra06</string>
-    <string name='Q_ra07'>ra07</string>
-    <string name='Q_ra08'>ra08</string>
-    <string name='Q_ra09'>ra09</string>
-    <string name='Q_ra10'>ra10</string>
-    <string name='Q_ra11'>ra11</string>
-    <string name='Q_ra12'>ra12</string>
-    <string name='Q_ra13'>ra13</string>
-    <string name='Q_ra14'>ra14</string>
-    <string name='Q_ra15'>ra15</string>
-    <string name='Q_ra16'>ra16</string>
-    <string name='Q_ra17'>ra17</string>
-    <string name='Q_ra17_a'>ra17_a</string>
-    <string name='Q_ra17_b'>ra17_b</string>
-    <string name='Q_ra17_d'>ra17_d</string>
-    <string name='Q_ra18'>ra18</string>
-    <string name='Q_ra19'>ra19</string>
-    <string name='Q_ra20'>ra20</string>
-    <string name='Q_rb_hno'>rb_hno</string>
-    <string name='Q_rb_sid'>rb_sid</string>
-    <string name='Q_rb_uc'>rb_uc</string>
-    <string name='Q_rb_ufn'>rb_ufn</string>
-    <string name='Q_rb_vil'>rb_vil</string>
-    <string name='Q_rb01'>rb01</string>
-    <string name='Q_rb02'>rb02</string>
-    <string name='Q_rb03'>rb03</string>
-    <string name='Q_rb04'>rb04</string>
-    <string name='Q_rb05'>rb05</string>
-    <string name='Q_rb06'>rb06</string>
-    <string name='Q_rb07'>rb07</string>
-    <string name='Q_rb08'>rb08</string>
-    <string name='Q_rb09'>rb09</string>
+    <string name='Q_a17_c' translatable="false">a17_c</string>
+    <string name='Q_ra_lat' translatable="false">ra_lat</string>
+    <string name='Q_ra_lon' translatable="false">ra_lon</string>
+    <string name='Q_ra01' translatable="false">ra01</string>
+    <string name='Q_ra02' translatable="false">ra02</string>
+    <string name='Q_ra03' translatable="false">ra03</string>
+    <string name='Q_ra04' translatable="false">ra04</string>
+    <string name='Q_ra05' translatable="false">ra05</string>
+    <string name='Q_ra06' translatable="false">ra07</string>
+    <string name='Q_ra07' translatable="false">ra08</string>
+    <string name='Q_ra08' translatable="false">ra09</string>
+    <string name='Q_ra09' translatable="false">ra10</string>
+    <string name='Q_ra10' translatable="false">ra10</string>
+    <string name='Q_ra11' translatable="false">ra11</string>
+    <string name='Q_ra12' translatable="false">ra12</string>
+    <string name='Q_ra13' translatable="false">ra13</string>
+    <string name='Q_ra14' translatable="false">ra13</string>
+    <string name='Q_ra15' translatable="false">ra15</string>
+    <string name='Q_ra16' translatable="false">ra16</string>
+    <string name='Q_ra17' translatable="false">ra17</string>
+    <string name='Q_ra17_a' translatable="false">ra17_a</string>
+    <string name='Q_ra17_b' translatable="false">ra17_b</string>
+    <string name='Q_ra17_d' translatable="false">ra17_d</string>
+    <string name='Q_ra18' translatable="false">ra18</string>
+    <string name='Q_ra19' translatable="false">ra14</string>
+    <string name='Q_ra20' translatable="false">ra16</string>
+    <string name="Q_ra21" translatable="false">RA11a</string>
+    <string name='Q_rb_hno' translatable="false">rb_hno</string>
+    <string name='Q_rb_sid' translatable="false">rb_sid</string>
+    <string name='Q_rb_uc' translatable="false">rb_uc</string>
+    <string name='Q_rb_ufn' translatable="false">rb_ufn</string>
+    <string name='Q_rb_vil' translatable="false">rb_vil</string>
+    <string name='Q_rb01' translatable="false">rb01</string>
+    <string name='Q_rb02' translatable="false">rb02</string>
+    <string name='Q_rb03' translatable="false">rb03</string>
+    <string name='Q_rb04' translatable="false">rb05</string>
+    <string name='Q_rb05' translatable="false">rb06</string>
+    <string name='Q_rb06' translatable="false">rb03</string>
+    <string name='Q_rb07' translatable="false">rb07</string>
+    <string name='Q_rb08' translatable="false">rb08</string>
+    <string name='Q_rb09' translatable="false">rb09</string>
 
     <!--
     This string is used for square devices and overridden by hello_world in
     values-round/strings.xml for round devices.
     -->
-    <string name="hello_world">Hello Square World!</string>
-    <string name="tsf40298">Don\'t Know</string>
-    <string name="hold_child">Please hold child <b>%1$s</b> in waiting area and check temperature after 30 minutes.</string>
+    <string name="hello_world" translatable="false">Hello Square World!</string>
+    <string name="tsf40298" translatable="false">Don\'t Know</string>
+    <string name="hold_child" translatable="false">Please hold child <b>%1$s</b> in waiting area and check temperature after 30 minutes.</string>
     <string name="istatus">Household Visit Status</string>
     <string name="istatusa">Completed</string>
     <string name="istatusb">Locked / no eligible respondent </string>
     <string name="istatusc">Refused </string>
     <string name="istatusd">Other (specify)</string>
-    <string name="btnDownload">Download Data</string>
+    <string name="btnDownload" translatable="false">Download Data</string>
 
     <!--Z-Score-->
-    <string name="zScoreMsg">"Please click on Z-Score Button"</string>
-    <string name="zScoreEmpty">"Z-Score cannot be evaluated with missing values."</string>
-    <string name="hlaz">HLAZ</string>
-    <string name="waz">WAZ</string>
-    <string name="whz">WHZ</string>
+    <string name="zScoreMsg" translatable="false">"Please click on Z-Score Button"</string>
+    <string name="zScoreEmpty" translatable="false">"Z-Score cannot be evaluated with missing values."</string>
+    <string name="hlaz" translatable="false">HLAZ</string>
+    <string name="waz" translatable="false">WAZ</string>
+    <string name="whz" translatable="false">WHZ</string>
     <string name="a17_1">Male</string>
     <string name="a17_2">Female</string>
+    <string name="title_wra_dialog_remain" translatable="false">Proceed?</string>
+    <string name="title_wra_dialog_complete" translatable="false">Add More?</string>
+    <string name="message_wra_dialog_addmore" translatable="false">You have already entered %1$s women between 14 – 50. \n\nWould you like to add more women?</string>
+    <string name="message_wra_dialog_proceeed" translatable="false">You have entered only %1$s of %2$s women between 14 – 50 in the household. \n\nAre you sure you want to close this household?</string>
+    <string name="ra16_a">yes</string>
+    <string name="ra16_b">no</string>
+    <string name="ra17_a1">male</string>
+    <string name="ra17_a2">female</string>
+    <string name="ra17_b1">male</string>
+    <string name="a17_c1">male</string>
+    <string name="ra17_d1">male</string>
+    <string name="ra17_b2">female</string>
+    <string name="a17_c2">female</string>
+    <string name="ra17_d2">female</string>
+    <string name="rb03">marital status</string>
+    <string name="rb03_a">married</string>
+    <string name="rb03_b">divorced</string>
+    <string name="rb03_c">widow</string>
+    <string name="rb03_d">unmarried</string>
+    <string name="rb05_info">don\'t know</string>
+    <string name="language">Change Language</string>
+    <string name="identification_mainheading">Identification Section</string>
+    <string name="ra21">Detail Address with land mark</string>
+    <string name="ra22">Household ID</string>
+    <string name="Q_ra22">RA11</string>
+
 
 </resources>
