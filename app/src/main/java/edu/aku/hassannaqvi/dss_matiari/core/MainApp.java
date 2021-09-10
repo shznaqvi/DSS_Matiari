@@ -64,6 +64,8 @@ public class MainApp extends Application {
     //    public static long TWO_MINUTES = 1000 * 60 * 2;
     public static boolean permissionCheck = false;
     public static int idType = 0;
+    public static String round = "0";
+
     public static List<MWRA> mwraList;
     public static String hdssid;
     public static int mwraCount = 0;
@@ -76,7 +78,7 @@ public class MainApp extends Application {
     public static int householdCountComplete = 0;
     public static String previousAddress = "";
     public static String dateOfVisit = "";
-    public static String selectedVillage;
+    public static String selectedVillage = "0";
 
     public static void hideSystemUI(View decorView) {
         // Enables regular immersive mode.

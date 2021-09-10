@@ -17,6 +17,7 @@
 
     <style name="AppThemeEnglish1" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="fontFamily">@font/roboto</item>
+        <item name="android:layoutDirection">ltr</item>
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
@@ -33,8 +34,7 @@
         <item name="android:fillAfter">true</item>
         <item name="android:enterFadeDuration">600</item>
         <item name="android:exitFadeDuration">200</item>
-        <item name="android:layoutDirection">ltr</item>
-        <item name="android:animateLayoutChanges">false</item>
+        <item name="android:animateLayoutChanges">true</item>
     </style>
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light">
@@ -50,16 +50,14 @@
     <style name="AppThemeUrdu" parent="Theme.AppCompat.Light.NoActionBar">
 
         <item name="android:fontFamily">@font/urdu_nastaleeq</item>
-        <item name="android:textSize">16sp</item>
+        <item name="android:layoutDirection">rtl</item>
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="spinnerStyle">@style/spinnerStyle</item>
         <item name="colorAccent">@color/colorAccent</item>
-        <item name="android:scrollViewStyle">@style/BackgroundStyle</item>
-        <item name="android:spinnerStyle">@style/spinnerStyle</item>
+        <item name="android:spinnerStyle">@style/spinner</item>
         <item name="android:actionBarStyle">@style/topBarStyle</item>
         <item name="android:textViewStyle">@style/labels</item>
-        <item name="android:editTextStyle">@style/textInput</item>
+        <item name="editTextStyle">@style/textInput</item>
         <item name="radioButtonStyle">@style/radiobutton</item>
         <item name="checkboxStyle">@style/checkbox</item>
         <item name="hintEnabled">false</item>
@@ -69,8 +67,7 @@
         <item name="android:fillAfter">true</item>
         <item name="android:enterFadeDuration">600</item>
         <item name="android:exitFadeDuration">200</item>
-        <item name="android:layoutDirection">rtl</item>
-        <item name="android:animateLayoutChanges">false</item>
+        <item name="android:animateLayoutChanges">true</item>
 
     </style>
 

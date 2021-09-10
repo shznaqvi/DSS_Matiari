@@ -26,7 +26,7 @@ import edu.aku.hassannaqvi.dss_matiari.contracts.TableContracts;
 import edu.aku.hassannaqvi.dss_matiari.core.MainApp;
 import edu.aku.hassannaqvi.dss_matiari.database.DatabaseHelper;
 import edu.aku.hassannaqvi.dss_matiari.databinding.ActivitySectionABinding;
-import edu.aku.hassannaqvi.dss_matiari.ui.MainActivity;
+import edu.aku.hassannaqvi.dss_matiari.ui.EndingActivity;
 import edu.aku.hassannaqvi.dss_matiari.ui.lists.MwraActivity;
 
 public class SectionAActivity extends AppCompatActivity {
@@ -73,12 +73,19 @@ public class SectionAActivity extends AppCompatActivity {
         if (!insertNewRecord()) return;
         if (updateDB()) {
 
-            Intent i = new Intent(this, MwraActivity.class);
-            i.setFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT);
-            startActivity(i);
+
+            if (households.getRa20().equals("1")) {
+                startActivity(new Intent(this, MwraActivity.class)
+                        .setFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT));
+            } else {
+                startActivity(new Intent(this, EndingActivity.class)
+                        .setFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT)
+                        .putExtra("noWRA", true));
+            }
+
+
             finish();
-            // finish();
-            //  startActivity(new Intent(this, MwraActivity.class).putExtra("complete", true));
+
         } else {
             Toast.makeText(this, "Failed to Update Database!", Toast.LENGTH_SHORT).show();
         }
@@ -184,7 +191,7 @@ public class SectionAActivity extends AppCompatActivity {
     public void onBackPressed() {
         // Toast.makeText(getApplicationContext(), "Back Press Not Allowed", Toast.LENGTH_LONG).show();
         finish();
-        startActivity(new Intent(this, MainActivity.class));
+        //startActivity(new Intent(this, MainActivity.class));
     }
 
 

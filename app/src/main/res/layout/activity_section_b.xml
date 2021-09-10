@@ -130,6 +130,7 @@
                             android:layout_height="wrap_content"
                             android:digits="abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ"
                             android:hint="@string/rb02"
+                            android:inputType="textPersonName|textCapWords"
                             android:text="@={mwra.rb02}" />
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
@@ -240,7 +241,7 @@
                             android:maxLength="2"
                             android:text="@={mwra.rb05}"
                             app:maxValue="49"
-                            app:minValue="15"
+                            app:minValue="18"
                             app:type="range" />
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
@@ -361,11 +362,11 @@
                             android:id="@+id/rb03"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:inputType="textPersonName|textCapWords"
                             android:digits="abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ"
                             android:text="@={mwra.rb03}" />
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
-
 
 
                 <!-- rb07  Radio   -->
@@ -468,8 +469,8 @@
                             android:gravity="center"
                             android:hint="YYYY-MM-DD"
                             android:text="@={mwra.rb08}"
-                            app:theme="@style/DatePickerEditTextDialogTheme"
-                            app:dateFormat="yyyy-MM-dd" />
+                            app:dateFormat="yyyy-MM-dd"
+                            app:theme="@style/DatePickerEditTextDialogTheme" />
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
 
@@ -477,7 +478,7 @@
                 <androidx.cardview.widget.CardView
                     android:id="@+id/fldGrpCVrb09"
                     style="@style/cardView"
-                    android:visibility='@{mwra.Rb07.equals("1")? View.VISIBLE : View.GONE}'>
+                    android:visibility='@{!mwra.Rb08.equals("")? View.VISIBLE : View.GONE}'>
                     <!--android:visibility='@{mwra.Rb06.equals("4")|| mwra.Rb07.equals("2")? View.GONE : View.VISIBLE}'-->
 
                     <LinearLayout
@@ -505,15 +506,21 @@
 
                         </LinearLayout>
 
+
                         <io.blackbox_vision.datetimepickeredittext.view.DatePickerEditText
                             android:id="@+id/rb09"
+                            style="@style/labelsHead"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:enabled="false"
                             android:gravity="center"
                             android:hint="YYYY-MM-DD"
                             android:text="@={mwra.rb09}"
-                            app:theme="@style/DatePickerEditTextDialogTheme"
-                            app:dateFormat="yyyy-MM-dd" />
+                            app:dateFormat="yyyy-MM-dd"
+                            app:theme="@style/DatePickerEditTextDialogTheme" />
+
+
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
 

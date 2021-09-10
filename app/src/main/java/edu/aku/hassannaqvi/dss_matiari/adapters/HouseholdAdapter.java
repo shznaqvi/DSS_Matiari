@@ -11,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
@@ -72,6 +73,9 @@ public class HouseholdAdapter extends RecyclerView.Adapter<HouseholdAdapter.View
             case "3":
                 hhStatus = "Refused";
                 break;
+            case "4":
+                hhStatus = "No WRA";
+                break;
             default:
                 hhStatus = "Other";
                 break;
@@ -88,13 +92,15 @@ public class HouseholdAdapter extends RecyclerView.Adapter<HouseholdAdapter.View
         mwraCount.setText(totalMWRA + " Women");
         secStatus.setText(hhStatus);
         imgStatus.setVisibility(households.getiStatus().equals("1") || Integer.parseInt(households.getVisitNo()) > 2 ? View.VISIBLE : View.GONE);
+        secStatus.setBackgroundColor(ContextCompat.getColor(mContext, R.color.grayDark));
+
 
         viewHolder.itemView.setOnClickListener(v -> {
             // Get the current state of the item
 
-            MainApp.households = MainApp.householdList.get(position);
+            //households = MainApp.householdList.get(position);
             //MainApp.households.setVisitNo(String.valueOf(Integer.parseInt(MainApp.households.getVisitNo())+1));
-            if (!MainApp.households.getiStatus().equals("1")) {
+            if (!households.getiStatus().equals("1") && Integer.parseInt(households.getVisitNo()) < 3) {
 
                 editHousehold(position);
 

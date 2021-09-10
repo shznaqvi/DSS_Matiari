@@ -268,4 +268,12 @@ public class MwraActivity extends AppCompatActivity {
         finish();
         //startActivity(new Intent(this, EndingActivity.class).putExtra("complete", true));
     }
+
+    @Override
+    public void onBackPressed() {
+        // Toast.makeText(getApplicationContext(), "Back Press Not Allowed", Toast.LENGTH_LONG).show();
+        setResult(RESULT_OK);
+        finish();
+    }
+
 }

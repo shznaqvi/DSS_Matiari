@@ -41,12 +41,14 @@ public class EndingActivity extends AppCompatActivity {
 
         db = MainApp.appInfo.dbHelper;
         boolean complete = getIntent().getBooleanExtra("complete", false);
+        boolean noWRA = getIntent().getBooleanExtra("noWRA", false);
 /*        boolean refused = getIntent().getBooleanExtra("refused", false);
         boolean locked = getIntent().getBooleanExtra("locked", false);*/
 
         bi.istatusa.setEnabled(complete);
         bi.istatusb.setEnabled(!complete);
         bi.istatusc.setEnabled(!complete);
+        bi.istatuse.setEnabled(noWRA);
         bi.istatusd.setEnabled(true); // Always TRUE
 
 
@@ -71,8 +73,9 @@ public class EndingActivity extends AppCompatActivity {
                         bi.istatusa.isChecked() ? "1" :
                                 bi.istatusb.isChecked() ? "2" :
                                         bi.istatusc.isChecked() ? "3" :
-                                                bi.istatusd.isChecked() ? "96" :
-                                                        "-1"
+                                                bi.istatuse.isChecked() ? "4" :
+                                                        bi.istatusd.isChecked() ? "96" :
+                                                                "-1"
                 );
                 MainApp.households.setRa11x(bi.istatusdx.getText().toString());
                 break;
@@ -81,8 +84,9 @@ public class EndingActivity extends AppCompatActivity {
                         bi.istatusa.isChecked() ? "1" :
                                 bi.istatusb.isChecked() ? "2" :
                                         bi.istatusc.isChecked() ? "3" :
-                                                bi.istatusd.isChecked() ? "96" :
-                                                        "-1"
+                                                bi.istatuse.isChecked() ? "4" :
+                                                        bi.istatusd.isChecked() ? "96" :
+                                                                "-1"
 
                 );
                 MainApp.households.setRa12x(bi.istatusdx.getText().toString());
@@ -92,8 +96,9 @@ public class EndingActivity extends AppCompatActivity {
                         bi.istatusa.isChecked() ? "1" :
                                 bi.istatusb.isChecked() ? "2" :
                                         bi.istatusc.isChecked() ? "3" :
-                                                bi.istatusd.isChecked() ? "96" :
-                                                        "-1"
+                                                bi.istatuse.isChecked() ? "4" :
+                                                        bi.istatusd.isChecked() ? "96" :
+                                                                "-1"
 
                 );
                 MainApp.households.setRa13x(bi.istatusdx.getText().toString());

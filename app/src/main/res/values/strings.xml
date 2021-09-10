@@ -69,6 +69,7 @@
     <string name="ra11a">Completed</string>
     <string name="ra11b">Locked / no eligible respondent </string>
     <string name="ra11c">Refused </string>
+    <string name="ra11e">No WRA 18 – 49 </string>
     <string name="ra11d">Other (specify)</string>
     <string name="ra12">Household Visit Status</string>
     <string name="ra1201">Completed</string>
@@ -84,12 +85,12 @@
     <string name="ra15">Name of Respondent </string>
     <string name="ra16">Unique Family Number</string>
     <string name="ra17">Family Members</string>
-    <string name="ra17_a">0 to 05 Years</string>
-    <string name="ra17_b">05 to 18 Years</string>
+    <string name="ra17_a">0 to 04 Years</string>
+    <string name="ra17_b">05 to 17 Years</string>
     <string name="a17_c">18 to 49 Years </string>
     <string name="ra17_d">&gt;49 Years</string>
 
-    <string name="ra18">No. of Women aged 14 – 49 years</string>
+    <string name="ra18">No. of Women aged 18 – 49 years</string>
     <string name="ra19">Caste</string>
     <string name="ra20">Does this household have women aged 18–49 years?</string>
     <string name="ra20_a">Yes</string>
@@ -126,8 +127,8 @@
     <string name='Q_ra01' translatable="false">ra01</string>
     <string name='Q_ra02' translatable="false">ra02</string>
     <string name='Q_ra03' translatable="false">ra03</string>
-    <string name='Q_ra04' translatable="false">ra04</string>
-    <string name='Q_ra05' translatable="false">ra05</string>
+    <string name='Q_ra04' translatable="false">ra05</string>
+    <string name='Q_ra05' translatable="false">ra06</string>
     <string name='Q_ra06' translatable="false">ra07</string>
     <string name='Q_ra07' translatable="false">ra08</string>
     <string name='Q_ra08' translatable="false">ra09</string>
@@ -154,7 +155,7 @@
     <string name='Q_rb_vil' translatable="false">rb_vil</string>
     <string name='Q_rb01' translatable="false">rb01</string>
     <string name='Q_rb02' translatable="false">rb02</string>
-    <string name='Q_rb03' translatable="false">rb03</string>
+    <string name='Q_rb03' translatable="false">rb04</string>
     <string name='Q_rb04' translatable="false">rb05</string>
     <string name='Q_rb05' translatable="false">rb06</string>
     <string name='Q_rb06' translatable="false">rb03</string>
@@ -209,6 +210,8 @@
     <string name="ra21">Detail Address with land mark</string>
     <string name="ra22">Household ID</string>
     <string name="Q_ra22">RA11</string>
+    <string name="rb09hint">Press button to calculate EDD &gt;&gt;&gt;</string>
+    <string name="age_groups">Age Groups</string>
 
 
 </resources>

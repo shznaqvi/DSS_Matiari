@@ -12,13 +12,13 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import edu.aku.hassannaqvi.dss_matiari.BR;
-import edu.aku.hassannaqvi.dss_matiari.contracts.TableContracts;
 import edu.aku.hassannaqvi.dss_matiari.contracts.TableContracts.HouseholdTable;
 import edu.aku.hassannaqvi.dss_matiari.core.MainApp;
 
 public class Households extends BaseObservable implements Observable {
 
     private final String TAG = "Households";
+    private String round = "";
     private String ra01 = "";
     private String ra02 = "";
     private String ra04 = "";
@@ -84,9 +84,17 @@ public class Households extends BaseObservable implements Observable {
 
     public Households() {
 
+        setRound(MainApp.round);
+        setUserName(MainApp.user.getUserName());
+        setDeviceId(MainApp.deviceid);
+        setAppver(MainApp.appInfo.getAppVersion());
+        setAppver(MainApp.appInfo.getAppVersion());
+        setRa07(MainApp.selectedVillage);
+        setRa06(MainApp.selectedVillage.substring(0, 1));
     }
 
     public Households(Households households) {
+
 
         setUserName(households.getUserName());
         setDeviceId(households.getDeviceId());
@@ -95,6 +103,9 @@ public class Households extends BaseObservable implements Observable {
         setRa07(households.getRa07());
         setRa08(households.getRa08());
         setRa10(households.getRa10());
+        setRound(households.getRound());
+
+
     }
 
 
@@ -178,19 +189,14 @@ public class Households extends BaseObservable implements Observable {
         this.sysDate = sysDate;
     }
 
-    public String getHdssId() {
-        return hdssId;
-    }
 
-    public void setHdssId(String hdssId) {
-        this.hdssId = hdssId;
-    }
 
     public String getUcCode() {
         return ucCode;
     }
 
     public void setUcCode(String ucCode) {
+
         this.ucCode = ucCode;
     }
 
@@ -208,6 +214,7 @@ public class Households extends BaseObservable implements Observable {
 
     public void setHhNo(String hhNo) {
         this.hhNo = hhNo;
+        setHdssId(getUcCode() + "-" + getVillageCode() + "-" + getHhNo());
     }
 
     public String getStructureNo() {
@@ -335,6 +342,17 @@ public class Households extends BaseObservable implements Observable {
         notifyChange(BR.ra01);
     }
 
+
+    @Bindable
+    public String getRound() {
+        return round;
+    }
+
+    public void setRound(String round) {
+        this.round = round;
+        notifyPropertyChanged(BR.round);
+    }
+
     @Bindable
     public String getRa02() {
         return ra02;
@@ -382,7 +400,7 @@ public class Households extends BaseObservable implements Observable {
 
     public void setRa07(String ra07) {
         this.ra07 = ra07;
-        setVillageCode(ra07);
+        setVillageCode(this.ra07);
         notifyChange(BR.ra07);
     }
 
@@ -392,8 +410,8 @@ public class Households extends BaseObservable implements Observable {
     }
 
     public void setRa06(String ra06) {
-        this.ra06 = ra06;
-        setUcCode(ra06);
+        this.ra06 = String.format("%02d", Integer.parseInt(ra06));
+        setUcCode(this.ra06);
         notifyChange(BR.ra06);
     }
 
@@ -414,8 +432,8 @@ public class Households extends BaseObservable implements Observable {
     }
 
     public void setRa09(String ra09) {
-        this.ra09 = ra09;
-        setHhNo(ra09);
+        this.ra09 = String.format("%03d", Integer.parseInt(ra09));
+        setHhNo(this.ra09);
         notifyChange(BR.ra09);
     }
 
@@ -591,6 +609,7 @@ public class Households extends BaseObservable implements Observable {
 
     public void setRa17_c2(String ra17_c2) {
         this.ra17_c2 = ra17_c2;
+        setRa18(this.ra17_c2);
         notifyChange(BR.ra17_c2);
     }
 
@@ -631,6 +650,17 @@ public class Households extends BaseObservable implements Observable {
 
     public void setRa20(String ra20) {
         this.ra20 = ra20;
+        if (!this.ra20.equals("1")) {
+            setRa17_a1("");
+            setRa17_a2("");
+            setRa17_b1("");
+            setRa17_b2("");
+            setRa17_c1("");
+            setRa17_c2("");
+            setRa17_d1("");
+            setRa17_d2("");
+
+        }
         notifyChange(BR.ra20);
     }
 
@@ -652,6 +682,17 @@ public class Households extends BaseObservable implements Observable {
     public void setRa22(String ra22) {
         this.ra22 = ra22;
         notifyChange(BR.ra22);
+    }
+
+    @Bindable
+    public String getHdssId() {
+        return hdssId;
+    }
+
+    public void setHdssId(String hdssId) {
+        this.hdssId = hdssId;
+        setRa22(hdssId);
+        //notifyChange(BR.ra22);
     }
 
 
@@ -681,7 +722,7 @@ public class Households extends BaseObservable implements Observable {
     public Households Hydrate(Cursor cursor) throws JSONException {
         this.id = cursor.getString(cursor.getColumnIndex(HouseholdTable.COLUMN_ID));
         this.uid = cursor.getString(cursor.getColumnIndex(HouseholdTable.COLUMN_UID));
-        this.userName = cursor.getString(cursor.getColumnIndex(TableContracts.HouseholdTable.COLUMN_USERNAME));
+        this.userName = cursor.getString(cursor.getColumnIndex(HouseholdTable.COLUMN_USERNAME));
         this.sysDate = cursor.getString(cursor.getColumnIndex(HouseholdTable.COLUMN_SYSDATE));
         this.hdssId = cursor.getString(cursor.getColumnIndex(HouseholdTable.COLUMN_HDSSID));
         this.ucCode = cursor.getString(cursor.getColumnIndex(HouseholdTable.COLUMN_UC_CODE));
@@ -694,10 +735,10 @@ public class Households extends BaseObservable implements Observable {
         this.deviceTag = cursor.getString(cursor.getColumnIndex(HouseholdTable.COLUMN_DEVICETAGID));
         this.appver = cursor.getString(cursor.getColumnIndex(HouseholdTable.COLUMN_APPVERSION));
         this.iStatus = cursor.getString(cursor.getColumnIndex(HouseholdTable.COLUMN_ISTATUS));
-        this.synced = cursor.getString(cursor.getColumnIndex(TableContracts.HouseholdTable.COLUMN_SYNCED));
+        this.synced = cursor.getString(cursor.getColumnIndex(HouseholdTable.COLUMN_SYNCED));
         this.syncDate = cursor.getString(cursor.getColumnIndex(HouseholdTable.COLUMN_SYNCED_DATE));
 
-        s1Hydrate(cursor.getString(cursor.getColumnIndex(TableContracts.HouseholdTable.COLUMN_SA)));
+        s1Hydrate(cursor.getString(cursor.getColumnIndex(HouseholdTable.COLUMN_SA)));
 
 
         return this;
@@ -709,6 +750,7 @@ public class Households extends BaseObservable implements Observable {
 
             JSONObject json = null;
             json = new JSONObject(string);
+            this.round = json.getString("round");
             this.ra01 = json.getString("ra01");
             this.ra02 = json.getString("ra02");
             this.ra04 = json.getString("ra04");
@@ -751,6 +793,7 @@ public class Households extends BaseObservable implements Observable {
         JSONObject json = new JSONObject();
 
         json.put("ra01", ra01)
+                .put("round", round)
                 .put("ra02", ra02)
                 .put("ra04", ra04)
                 .put("ra03", ra03)

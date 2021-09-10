@@ -11,7 +11,7 @@
 
         <variable
             name="callback"
-            type="edu.aku.hassannaqvi.dss_matiari.ui.sections.SectionBActivity" />
+            type="edu.aku.hassannaqvi.dss_matiari.ui.EndingActivity" />
     </data>
 
     <LinearLayout
@@ -97,6 +97,12 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:text="@string/ra11c" />
+
+                            <RadioButton
+                                android:id="@+id/istatuse"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="@string/ra11e" />
 
                             <RadioButton
                                 android:id="@+id/istatusd"

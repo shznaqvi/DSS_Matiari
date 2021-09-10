@@ -134,7 +134,6 @@ public class SectionBActivity extends AppCompatActivity {
             bi.rb09.setMaxDate(maxEDD);
             bi.rb09.setMinDate(minEDD);
 
-
         } catch (ParseException e) {
             e.printStackTrace();
         }
@@ -359,4 +358,6 @@ public class SectionBActivity extends AppCompatActivity {
         }
         return true;
     }
+
+
 }

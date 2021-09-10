@@ -12,7 +12,11 @@ import org.apache.commons.lang3.StringUtils;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.util.Calendar;
+import java.util.Locale;
 
 import edu.aku.hassannaqvi.dss_matiari.BR;
 import edu.aku.hassannaqvi.dss_matiari.contracts.TableContracts.MWRATable;
@@ -21,10 +25,9 @@ import edu.aku.hassannaqvi.dss_matiari.core.MainApp;
 public class MWRA extends BaseObservable implements Observable {
 
     private final String TAG = "MWRA";
-    private transient PropertyChangeRegistry propertyChangeRegistry = new PropertyChangeRegistry();
-
     //Not saving in DB
     private final LocalDate localDate = null;
+    private transient PropertyChangeRegistry propertyChangeRegistry = new PropertyChangeRegistry();
     private boolean exist = false;
     private boolean expanded;
 
@@ -54,6 +57,7 @@ public class MWRA extends BaseObservable implements Observable {
     // SECTION VARIABLES
     private String sB = StringUtils.EMPTY;
 
+    private String round = "";
     private String rb01 = "";
     private String rb02 = "";
     private String rb03 = "";
@@ -65,7 +69,25 @@ public class MWRA extends BaseObservable implements Observable {
     private String rb09 = "";
 
     public MWRA() {
+        setRound(MainApp.round);
+        setRound(MainApp.round);
+        setUserName(MainApp.user.getUserName());
+        setDeviceId(MainApp.deviceid);
+        setAppver(MainApp.appInfo.getAppVersion());
+        setAppver(MainApp.appInfo.getAppVersion());
+        setVillageCode(MainApp.selectedVillage);
+        setUcCode(MainApp.selectedVillage.substring(0, 1));
 
+    }
+
+    @Bindable
+    public String getRound() {
+        return round;
+    }
+
+    public void setRound(String round) {
+        this.round = round;
+        notifyPropertyChanged(BR.round);
     }
 
 
@@ -270,6 +292,7 @@ public class MWRA extends BaseObservable implements Observable {
 
     public void setRb04(String rb04) {
         this.rb04 = rb04;
+        setRb05(this.rb04.equals("98") ? "" : this.rb05);
         notifyChange(BR.rb04);
     }
 
@@ -305,8 +328,8 @@ public class MWRA extends BaseObservable implements Observable {
 
     public void setRb07(String rb07) {
         this.rb07 = rb07;
-   /*     setRb08(this.rb07.equals("2") ? "" : this.rb08);
-        setRb09(this.rb07.equals("2") ? "" : this.rb09);*/
+        setRb08(this.rb07.equals("2") ? "" : this.rb08);
+        setRb09(this.rb07.equals("2") ? "" : this.rb09);
         Log.d(TAG, "setRb07: " + this.rb07);
         notifyChange(BR.rb07);
     }
@@ -318,6 +341,11 @@ public class MWRA extends BaseObservable implements Observable {
 
     public void setRb08(String rb08) {
         this.rb08 = rb08;
+        if (!this.rb08.equals("")) {
+            setRb09(calcEDD());
+        } else {
+            setRb09("");
+        }
         notifyChange(BR.rb08);
     }
 
@@ -384,14 +412,15 @@ public class MWRA extends BaseObservable implements Observable {
             JSONObject json = null;
             json = new JSONObject(string);
             this.rb01 = json.getString("rb01");
+            this.round = json.getString("round");
             this.rb02 = json.getString("rb02");
             this.rb03 = json.getString("rb03");
             this.rb04 = json.getString("rb04");
             this.rb05 = json.getString("rb05");
-                this.rb06 = json.getString("rb06");
-                this.rb07 = json.getString("rb07");
-                this.rb08 = json.getString("rb08");
-                this.rb09 = json.getString("rb09");
+            this.rb06 = json.getString("rb06");
+            this.rb07 = json.getString("rb07");
+            this.rb08 = json.getString("rb08");
+            this.rb09 = json.getString("rb09");
 
         }
     }
@@ -402,14 +431,15 @@ public class MWRA extends BaseObservable implements Observable {
 
 
         json.put("rb01", rb01)
+                .put("round", round)
                 .put("rb02", rb02)
                 .put("rb03", rb03)
                 .put("rb04", rb04)
                 .put("rb05", rb05)
                 .put("rb06", rb06)
                 .put("rb07", rb07)
-                    .put("rb08", rb08)
-                    .put("rb09", rb09);
+                .put("rb08", rb08)
+                .put("rb09", rb09);
 
         return json.toString();
     }
@@ -452,5 +482,26 @@ public class MWRA extends BaseObservable implements Observable {
     public void setExpanded(boolean expanded) {
         this.expanded = expanded;
         notifyChange(BR.expanded);
+    }
+
+    public String calcEDD() {
+
+        Calendar cal = Calendar.getInstance();
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
+
+        try {
+            cal.setTime(sdf.parse(getRb08()));// all done
+
+            // Set EDD by default
+            cal.add(Calendar.DAY_OF_YEAR, 7);
+            cal.add(Calendar.MONTH, 9);
+
+            return sdf.format(cal.getTime());
+
+        } catch (ParseException e) {
+            e.printStackTrace();
+            return e.getMessage();
+        }
+
     }
 }
