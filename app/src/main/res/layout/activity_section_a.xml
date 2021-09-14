@@ -92,6 +92,7 @@
                 <!-- ra04  Input   -->
                 <androidx.cardview.widget.CardView
                     android:id="@+id/fldGrpCVra04"
+                    android:visibility="gone"
                     style="@style/cardView">
 
                     <LinearLayout
@@ -133,6 +134,7 @@
                 <!-- ra05  Input   -->
                 <androidx.cardview.widget.CardView
                     android:id="@+id/fldGrpCVra05"
+                    android:visibility="gone"
                     style="@style/cardView">
 
                     <LinearLayout
@@ -264,7 +266,7 @@
                             android:background="@color/colorAccentLight"
                             android:gravity="center"
                             android:padding="8dp"
-                            android:text="007"
+                            android:text="@={household.ra09}"
                             android:textColor="@color/colorPrimary"
                             android:textStyle="bold" />
                     </LinearLayout>

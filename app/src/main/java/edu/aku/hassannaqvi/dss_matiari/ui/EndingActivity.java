@@ -12,6 +12,9 @@ import com.validatorcrawler.aliazaz.Validator;
 
 import org.json.JSONException;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+
 import edu.aku.hassannaqvi.dss_matiari.R;
 import edu.aku.hassannaqvi.dss_matiari.contracts.TableContracts;
 import edu.aku.hassannaqvi.dss_matiari.core.MainApp;
@@ -25,7 +28,7 @@ public class EndingActivity extends AppCompatActivity {
     ActivityEndingBinding bi;
     int sectionMainCheck;
     private DatabaseHelper db;
-
+    int visitCount;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +43,7 @@ public class EndingActivity extends AppCompatActivity {
         //bi.hhStatus.setText(bi.hhStatus.getText()+" "+(Integer.parseInt(MainApp.households.getVisitNo())+1));
 
         db = MainApp.appInfo.dbHelper;
+        visitCount = Integer.parseInt(MainApp.households.getVisitNo());
         boolean complete = getIntent().getBooleanExtra("complete", false);
         boolean noWRA = getIntent().getBooleanExtra("noWRA", false);
 /*        boolean refused = getIntent().getBooleanExtra("refused", false);
@@ -52,11 +56,28 @@ public class EndingActivity extends AppCompatActivity {
         bi.istatusd.setEnabled(true); // Always TRUE
 
 
+        //visit date
+        Calendar cal = Calendar.getInstance();
+
+        String now = new SimpleDateFormat("yyyy-MM-dd").format(cal.getTime());
+
+
+        if (visitCount == 1) {
+            MainApp.households.setRa01v2(now);
+            //  bi.fldGrpCVra01v2.setVisibility(View.VISIBLE);
+        } else if (visitCount > 1) {
+            MainApp.households.setRa01v3(now);
+            // bi.fldGrpCVra01v3.setVisibility(View.VISIBLE);
+
+        }
+/*
+        bi.fldGrpCVra01v2.setVisibility(visitCount == 1 ? View.VISIBLE : View.GONE);
+        bi.fldGrpCVra01v3.setVisibility(visitCount > 1 ? View.VISIBLE : View.GONE);*/
     }
 
     private void saveDraft() {
 
-        int visitCount = Integer.parseInt(MainApp.households.getVisitNo()) + 1;
+        visitCount++;
 
         // Only increment visit count if Refused or Locked AND NOT FIRST VISIT
 /*        if (bi.istatusb.isChecked() ||
@@ -90,6 +111,7 @@ public class EndingActivity extends AppCompatActivity {
 
                 );
                 MainApp.households.setRa12x(bi.istatusdx.getText().toString());
+                MainApp.households.setRa01v2(bi.ra01v2.getText().toString());
                 break;
             case 3:
                 MainApp.households.setRa13(
@@ -102,6 +124,7 @@ public class EndingActivity extends AppCompatActivity {
 
                 );
                 MainApp.households.setRa13x(bi.istatusdx.getText().toString());
+                MainApp.households.setRa01v3(bi.ra01v3.getText().toString());
                 break;
 
         }

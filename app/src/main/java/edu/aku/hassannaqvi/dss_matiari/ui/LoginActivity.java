@@ -10,6 +10,7 @@ import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
+import android.graphics.Color;
 import android.location.LocationManager;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -23,6 +24,7 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.CompoundButton;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -45,7 +47,9 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
@@ -73,7 +77,8 @@ public class LoginActivity extends AppCompatActivity {
     Spinner spinnerDistrict;
     String DirectoryName;
     DatabaseHelper db;
-    ArrayAdapter<String> provinceAdapter;
+    ArrayList<String> leaderNames;
+    ArrayList<String> leaderCodes;
     int attemptCounter = 0;
     private int countryCode;
 
@@ -142,12 +147,33 @@ public class LoginActivity extends AppCompatActivity {
         settingCountryCode();
 
         dbBackup();
-
+        //   populateSpinner();
 
     }
 
-    public void dbBackup() {
 
+    private void populateSpinner() {
+
+        Collection<Users> teamleaders = db.getTeamleaders();
+        leaderNames = new ArrayList<>();
+        leaderCodes = new ArrayList<>();
+
+        leaderNames.add("...");
+        leaderNames.add("Test Team Leader");
+        leaderCodes.add("...");
+        leaderCodes.add("testteamleader");
+
+
+        for (Users u : teamleaders) {
+            leaderNames.add(u.getFullname());
+            leaderCodes.add(u.getUserName());
+        }
+
+        // Apply the adapter to the spinner
+        bi.teamleader.setAdapter(new ArrayAdapter(LoginActivity.this, R.layout.custom_spinner, leaderNames));
+    }
+
+    public void dbBackup() {
 
 
         if (sharedPref.getBoolean("flag", false)) {
@@ -259,12 +285,22 @@ public class LoginActivity extends AppCompatActivity {
                 return;
             }
 
+            if (bi.teamleader.getSelectedItemPosition() == 0) {
+                TextView errorText = (TextView) bi.teamleader.getSelectedView();
+                errorText.setError("");
+                errorText.setTextColor(Color.RED);//just to highlight that this is an error
+                errorText.setText("Select your team leader");//changes the selected item text to this
+                return;
+            }
+
             if ((username.equals("dmu@aku") && password.equals("aku?dmu"))
                     || (username.equals("test1234") && password.equals("test1234"))
                     || db.doLogin(username, password)
             ) {
                 MainApp.admin = username.contains("@") || username.contains("test1234");
                 MainApp.user.setUserName(username);
+                MainApp.leaderCode = leaderCodes.get(bi.teamleader.getSelectedItemPosition());
+
 
                 Intent iLogin = new Intent(edu.aku.hassannaqvi.dss_matiari.ui.LoginActivity.this, MainActivity.class);
                 startActivity(iLogin);
@@ -296,6 +332,12 @@ public class LoginActivity extends AppCompatActivity {
         if (hasFocus) {
             hideSystemUI();
         }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        populateSpinner();
     }
 
     private void hideSystemUI() {

@@ -718,7 +718,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 // New value for one column
         ContentValues values = new ContentValues();
         values.put(HouseholdTable.COLUMN_SYNCED, true);
-        values.put(TableContracts.HouseholdTable.COLUMN_SYNCED_DATE, new Date().toString());
+        values.put(HouseholdTable.COLUMN_SYNCED_DATE, new Date().toString());
 
 // Which row to update, based on the title
         String where = HouseholdTable.COLUMN_ID + " = ?";
@@ -1179,4 +1179,64 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         // Log.d(TAG, "getMaxHHNo: " + mwraCount);
         return mwraCount;
     }
+
+    public Collection<Users> getTeamleaders() {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor c = db.rawQuery(
+                "SELECT * " +
+
+                        " FROM " + UsersTable.TABLE_NAME +
+                        " WHERE " + UsersTable.COLUMN_USERNAME + " like '%team%' ", null);
+        ArrayList<Users> users = new ArrayList<>();
+        while (c.moveToNext()) {
+            Users user = new Users().hydrate(c);
+
+            users.add(user);
+        }
+        // Log.d(TAG, "getMaxHHNo: " + mwraCount);
+        return users;
+    }
+
+    /*public VersionApp getAppDetails() {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor c = null;
+        String[] columns = {
+                "DISTINCT " + VersionTable.COLUMN_UCNAME,
+                TableVillage.COLUMN_VILLAGE_CODE,
+                TableVillage.COLUMN_UC_CODE,
+        };
+
+        String whereClause = null;
+        String[] whereArgs = null;
+        String groupBy = TableVillage.COLUMN_UCNAME;
+        String having = null;
+
+        String orderBy =
+                TableVillage.COLUMN_UCNAME + " ASC";
+
+        Collection<Villages> allVil = new ArrayList<Villages>();
+        try {
+            c = db.query(
+                    TableVillage.TABLE_NAME,  // The table to query
+                    columns,                   // The columns to return
+                    whereClause,               // The columns for the WHERE clause
+                    whereArgs,                 // The values for the WHERE clause
+                    groupBy,                   // don't group the rows
+                    having,                    // don't filter by row groups
+                    orderBy                    // The sort order
+            );
+            while (c.moveToNext()) {
+                Villages vil = new Villages();
+                allVil.add(vil.HydrateUc(c));
+            }
+        } finally {
+            if (c != null) {
+                c.close();
+            }
+            if (db != null) {
+                db.close();
+            }
+        }
+        return allVil;
+    }*/
 }

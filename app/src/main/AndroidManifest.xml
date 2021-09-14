@@ -50,6 +50,7 @@
             android:name=".ui.EndingActivity"
             android:theme="@style/AppThemeEnglish1"
             android:windowSoftInputMode="adjustResize|stateHidden" />
+
     </application>
 
 </manifest>

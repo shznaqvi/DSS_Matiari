@@ -102,6 +102,7 @@
     <string name="rb_ufn">Unique Family Number</string>
     <string name="rb01">Unique WRA#</string>
     <string name="rb02">Name of Women</string>
+    <string name="rb03">Husband/Father Name</string>
     <string name="rb03h">Husband Name</string>
     <string name="rb03f">Father Name</string>
     <string name="rb04">Date of Birth</string>
@@ -113,11 +114,11 @@
     <string name="rb0603">Widow</string>
     <string name="rb0604">Unmarried</string>
     <string name="rb07">Pregnancy Status</string>
-    <string name="rb0701">Pregnan</string>
+    <string name="rb0701">Pregnant</string>
     <string name="rb0702">Not Pregnant</string>
-    <string name="rb08">If pregnant LMP Date</string>
+    <string name="rb08">If pregnant enter LMP Date</string>
     <string name="rb08_info">DD/MM/YYYY</string>
-    <string name="rb09">If pregnant EDD Date</string>
+    <string name="rb09">EDD Date [auto-calculated]</string>
     <string name="rb09_info">DD/MM/YYYY</string>
 
 
@@ -147,7 +148,7 @@
     <string name='Q_ra18' translatable="false">ra18</string>
     <string name='Q_ra19' translatable="false">ra14</string>
     <string name='Q_ra20' translatable="false">ra16</string>
-    <string name="Q_ra21" translatable="false">RA11a</string>
+    <string name="Q_ra21" translatable="false">RA21</string>
     <string name='Q_rb_hno' translatable="false">rb_hno</string>
     <string name='Q_rb_sid' translatable="false">rb_sid</string>
     <string name='Q_rb_uc' translatable="false">rb_uc</string>
@@ -187,8 +188,8 @@
     <string name="a17_2">Female</string>
     <string name="title_wra_dialog_remain" translatable="false">Proceed?</string>
     <string name="title_wra_dialog_complete" translatable="false">Add More?</string>
-    <string name="message_wra_dialog_addmore" translatable="false">You have already entered %1$s women between 14 – 50. \n\nWould you like to add more women?</string>
-    <string name="message_wra_dialog_proceeed" translatable="false">You have entered only %1$s of %2$s women between 14 – 50 in the household. \n\nAre you sure you want to close this household?</string>
+    <string name="message_wra_dialog_addmore" translatable="false">You have already entered %1$s women between 18 – 49. \n\nWould you like to add more women?</string>
+    <string name="message_wra_dialog_proceeed" translatable="false">You have entered only %1$s of %2$s women between 18 – 49 in the household. \n\nAre you sure you want to close this household?</string>
     <string name="ra16_a">yes</string>
     <string name="ra16_b">no</string>
     <string name="ra17_a1">male</string>
@@ -199,17 +200,17 @@
     <string name="ra17_b2">female</string>
     <string name="a17_c2">female</string>
     <string name="ra17_d2">female</string>
-    <string name="rb03">marital status</string>
-    <string name="rb03_a">married</string>
-    <string name="rb03_b">divorced</string>
-    <string name="rb03_c">widow</string>
-    <string name="rb03_d">unmarried</string>
-    <string name="rb05_info">don\'t know</string>
+    <!--    <string name="rb03">marital status</string>
+        <string name="rb03_a">married</string>
+        <string name="rb03_b">divorced</string>
+        <string name="rb03_c">widow</string>
+        <string name="rb03_d">unmarried</string>
+        <string name="rb05_info">don\'t know</string>-->
     <string name="language">Change Language</string>
     <string name="identification_mainheading">Identification Section</string>
     <string name="ra21">Detail Address with land mark</string>
     <string name="ra22">Household ID</string>
-    <string name="Q_ra22">RA11</string>
+    <string name="Q_ra22" translatable="false">RA11</string>
     <string name="rb09hint">Press button to calculate EDD &gt;&gt;&gt;</string>
     <string name="age_groups">Age Groups</string>
 

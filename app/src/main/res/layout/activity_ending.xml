@@ -45,7 +45,83 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
+                <!-- ra01v2  Input   -->
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/fldGrpCVra01v2"
+                    style="@style/cardView"
+                    android:visibility="gone">
 
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/bottom"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:text="@string/ra01" />
+
+                        </LinearLayout>
+
+                        <io.blackbox_vision.datetimepickeredittext.view.DatePickerEditText
+                            android:id="@+id/ra01v2"
+                            style="@style/textInput"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="0dp"
+                            android:gravity="center"
+                            android:hint="YYYY-MM-DD"
+                            android:text="@={household.ra01v2}"
+                            app:dateFormat="yyyy-MM-dd"
+                            app:maxDate="CR_DATE"
+                            app:theme="@style/DatePickerEditTextDialogTheme" />
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView> <!-- ra01v3v2  Input   -->
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/fldGrpCVra01v3"
+                    style="@style/cardView"
+                    android:visibility="gone">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/bottom"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:text="@string/ra01" />
+
+                        </LinearLayout>
+
+                        <io.blackbox_vision.datetimepickeredittext.view.DatePickerEditText
+                            android:id="@+id/ra01v3"
+                            style="@style/textInput"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="0dp"
+                            android:gravity="center"
+                            android:hint="YYYY-MM-DD"
+                            android:text="@={household.ra01v3}"
+                            app:dateFormat="yyyy-MM-dd"
+                            app:maxDate="CR_DATE"
+                            app:theme="@style/DatePickerEditTextDialogTheme" />
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
                 <!-- status Radio   -->
                 <androidx.cardview.widget.CardView
                     android:id="@+id/fldGrpCVstatus"
@@ -115,7 +191,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:digits="AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz0123456789,. "
-                                android:hint="@string/ra11"
+                                android:hint="@string/ra11d"
                                 android:tag="ra11"
                                 android:text='@{istatusd.checked ? istatusdx.getText().toString() : ""}'
                                 android:visibility='@{istatusd.checked? View.VISIBLE : View.GONE}' />

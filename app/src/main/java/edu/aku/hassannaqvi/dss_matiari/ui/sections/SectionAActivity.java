@@ -17,10 +17,6 @@ import com.validatorcrawler.aliazaz.Validator;
 
 import org.json.JSONException;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Locale;
-
 import edu.aku.hassannaqvi.dss_matiari.R;
 import edu.aku.hassannaqvi.dss_matiari.contracts.TableContracts;
 import edu.aku.hassannaqvi.dss_matiari.core.MainApp;
@@ -49,16 +45,22 @@ public class SectionAActivity extends AppCompatActivity {
 
         db = MainApp.appInfo.dbHelper;
 
+        // Update text for btnContinue
         bi.btnContinue.setText(MainApp.households.getUid().equals("") ? "Save" : "Update");
+
+        // Add same as previous check box for Mohalla
         if (MainApp.previousAddress.trim().equals("") || !MainApp.households.getRa08().equals(""))
             bi.rb08check.setVisibility(View.GONE);
-        if (!MainApp.dateOfVisit.trim().equals(""))
-            bi.ra01.setText(MainApp.dateOfVisit);
+
+        // Set Visit data same as previous household of the same day.
+        /*    if (!MainApp.dateOfVisit.trim().equals(""))
+         */
 
         bi.rb08check.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
+                    //MainApp.households.setRa01(MainApp.dateOfVisit);
                     bi.ra08.setText(MainApp.previousAddress);
                 } else {
                     bi.ra08.setText("");
@@ -138,14 +140,15 @@ public class SectionAActivity extends AppCompatActivity {
 
         //  MainApp.households = new Households();
 
-        households.setUserName(MainApp.user.getUserName());
+        /*households.setUserName(MainApp.user.getUserName());
         households.setSysDate(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.ENGLISH).format(new Date().getTime()));
         households.setDeviceId(MainApp.deviceid);
-        households.setRa06(MainApp.selectedVillage.substring(0, 1));
+        households.setRa06(MainApp.selectedUC);
         households.setRa07(MainApp.selectedVillage);
-        households.setHdssId(households.getVillageCode() + households.getHhNo());
+        //households.setHdssId(getUcCode() + "-" + getVillageCode() + "-" + getHhNo());
         households.setDeviceId(MainApp.deviceid);
         households.setAppver(MainApp.versionName + "." + MainApp.versionCode);
+        */
         MainApp.previousAddress = bi.ra08.getText().toString();
         MainApp.dateOfVisit = bi.ra01.getText().toString();
 

@@ -140,6 +140,7 @@
                                 <LinearLayout
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
+                                    android:layout_marginBottom="12dp"
                                     android:orientation="horizontal">
 
                                     <EditText
@@ -180,6 +181,21 @@
 
                                 </LinearLayout>
 
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:background="@color/white"
+                                    android:elevation="1dp"
+                                    android:radius="2dp">
+
+                                    <androidx.appcompat.widget.AppCompatSpinner
+                                        android:id="@+id/teamleader"
+                                        style="@style/spinnerStyle"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:minHeight="48dp"
+                                        android:radius="2dp" />
+                                </LinearLayout>
                                 <ProgressBar
                                     android:id="@+id/pbarMR"
                                     android:layout_width="wrap_content"

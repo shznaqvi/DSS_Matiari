@@ -20,6 +20,8 @@ public class Households extends BaseObservable implements Observable {
     private final String TAG = "Households";
     private String round = "";
     private String ra01 = "";
+    private String ra01v2 = "";
+    private String ra01v3 = "";
     private String ra02 = "";
     private String ra04 = "";
     private String ra03 = "";
@@ -89,8 +91,11 @@ public class Households extends BaseObservable implements Observable {
         setDeviceId(MainApp.deviceid);
         setAppver(MainApp.appInfo.getAppVersion());
         setAppver(MainApp.appInfo.getAppVersion());
+        setRa06(MainApp.selectedUC);
         setRa07(MainApp.selectedVillage);
-        setRa06(MainApp.selectedVillage.substring(0, 1));
+        setRa04(MainApp.leaderCode);
+        setRa05(MainApp.leaderCode);
+
     }
 
     public Households(Households households) {
@@ -340,6 +345,26 @@ public class Households extends BaseObservable implements Observable {
     public void setRa01(String ra01) {
         this.ra01 = ra01;
         notifyChange(BR.ra01);
+    }
+
+    @Bindable
+    public String getRa01v2() {
+        return ra01v2;
+    }
+
+    public void setRa01v2(String ra01v2) {
+        this.ra01v2 = ra01v2;
+        notifyChange(BR.ra01v2);
+    }
+
+    @Bindable
+    public String getRa01v3() {
+        return ra01v3;
+    }
+
+    public void setRa01v3(String ra01v3) {
+        this.ra01v3 = ra01v3;
+        notifyChange(BR.ra01v3);
     }
 
 
@@ -752,6 +777,8 @@ public class Households extends BaseObservable implements Observable {
             json = new JSONObject(string);
             this.round = json.getString("round");
             this.ra01 = json.getString("ra01");
+            this.ra01v2 = json.getString("ra01v2");
+            this.ra01v3 = json.getString("ra01v3");
             this.ra02 = json.getString("ra02");
             this.ra04 = json.getString("ra04");
             this.ra03 = json.getString("ra03");
@@ -793,6 +820,8 @@ public class Households extends BaseObservable implements Observable {
         JSONObject json = new JSONObject();
 
         json.put("ra01", ra01)
+                .put("ra01v3", ra01v3)
+                .put("ra01v2", ra01v2)
                 .put("round", round)
                 .put("ra02", ra02)
                 .put("ra04", ra04)

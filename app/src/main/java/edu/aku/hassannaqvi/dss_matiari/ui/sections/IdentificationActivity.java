@@ -202,6 +202,7 @@ public class IdentificationActivity extends AppCompatActivity {
         switch (idType) {
             case 1:
                 // if (!hhExists()) {
+                MainApp.selectedUC = ucCodes.get(bi.ra06.getSelectedItemPosition());
                 MainApp.selectedVillage = villageCodes.get(bi.ra07.getSelectedItemPosition());
                 //  saveDraftForm();
                 /*} else {

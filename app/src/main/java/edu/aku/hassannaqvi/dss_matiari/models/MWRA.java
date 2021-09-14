@@ -69,14 +69,14 @@ public class MWRA extends BaseObservable implements Observable {
     private String rb09 = "";
 
     public MWRA() {
-        setRound(MainApp.round);
+
         setRound(MainApp.round);
         setUserName(MainApp.user.getUserName());
         setDeviceId(MainApp.deviceid);
         setAppver(MainApp.appInfo.getAppVersion());
         setAppver(MainApp.appInfo.getAppVersion());
         setVillageCode(MainApp.selectedVillage);
-        setUcCode(MainApp.selectedVillage.substring(0, 1));
+        setUcCode(MainApp.selectedUC);
 
     }
 
@@ -316,8 +316,8 @@ public class MWRA extends BaseObservable implements Observable {
         Log.d(TAG, "setRb06: " + this.rb06);
         //setRb03(this.rb06.equals("4") ? "" : this.rb03);
         setRb07(this.rb06.equals("4") ? "" : this.rb07);
-        setRb08(this.rb06.equals("4") ? "" : this.rb08);
-        setRb09(this.rb06.equals("4") ? "" : this.rb09);
+/*        setRb08(this.rb06.equals("4") ? "" : this.rb08);
+        setRb09(this.rb06.equals("4") ? "" : this.rb09);*/
         notifyChange(BR.rb06);
     }
 
@@ -328,8 +328,8 @@ public class MWRA extends BaseObservable implements Observable {
 
     public void setRb07(String rb07) {
         this.rb07 = rb07;
-        setRb08(this.rb07.equals("2") ? "" : this.rb08);
-        setRb09(this.rb07.equals("2") ? "" : this.rb09);
+        setRb08(this.rb07.equals("1") ? this.rb08 : "");
+        setRb09(this.rb07.equals("1") ? this.rb09 : "");
         Log.d(TAG, "setRb07: " + this.rb07);
         notifyChange(BR.rb07);
     }

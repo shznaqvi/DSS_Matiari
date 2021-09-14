@@ -1,7 +1,5 @@
 package edu.aku.hassannaqvi.dss_matiari.ui.lists;
 
-import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.selectedHousehold;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -48,14 +46,24 @@ public class FormsReportCluster extends AppCompatActivity {
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
         //dtFilter = findViewById(R.id.dtFilter);
-        db = new DatabaseHelper(this);
-        MainApp.householdList = db.getUnclosedHouseholds();
+        db = MainApp.appInfo.dbHelper;
 
         // specify an adapter (see also next example)
+        MainApp.householdList = db.getUnclosedHouseholds();
         formsAdapter = new FormsAdapter(MainApp.householdList, this);
         recyclerView.setAdapter(formsAdapter);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        MainApp.householdList = db.getUnclosedHouseholds();
+        formsAdapter.notifyDataSetChanged();
+        Toast.makeText(this, "Activity Resumed", Toast.LENGTH_SHORT).show();
 
     }
 
@@ -75,7 +83,9 @@ public class FormsReportCluster extends AppCompatActivity {
         // check if the request code is same as what is passed  here it is 2
         if (requestCode == 2) {
             if (resultCode == Activity.RESULT_OK) {
-                formsAdapter.notifyItemChanged(selectedHousehold);
+                MainApp.householdList = db.getUnclosedHouseholds();
+                formsAdapter.notifyDataSetChanged();
+                Toast.makeText(this, "Results updated", Toast.LENGTH_SHORT).show();
             }
             if (resultCode == Activity.RESULT_CANCELED) {
                 // Write your code if there's no result

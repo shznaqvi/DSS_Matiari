@@ -78,7 +78,9 @@ public class MainApp extends Application {
     public static int householdCountComplete = 0;
     public static String previousAddress = "";
     public static String dateOfVisit = "";
-    public static String selectedVillage = "0";
+    public static String selectedVillage = "0000";
+    public static String leaderCode;
+    public static String selectedUC = "00";
 
     public static void hideSystemUI(View decorView) {
         // Enables regular immersive mode.

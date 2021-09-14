@@ -98,9 +98,9 @@ public class HouseholdAdapter extends RecyclerView.Adapter<HouseholdAdapter.View
         viewHolder.itemView.setOnClickListener(v -> {
             // Get the current state of the item
 
-            //households = MainApp.householdList.get(position);
+            MainApp.households = MainApp.householdList.get(position);
             //MainApp.households.setVisitNo(String.valueOf(Integer.parseInt(MainApp.households.getVisitNo())+1));
-            if (!households.getiStatus().equals("1") && Integer.parseInt(households.getVisitNo()) < 3) {
+            if (!MainApp.households.getiStatus().equals("1") && Integer.parseInt(MainApp.households.getVisitNo()) < 3) {
 
                 editHousehold(position);
 

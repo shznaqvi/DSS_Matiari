@@ -46,19 +46,23 @@
                 android:shadowDx="2"
                 android:shadowDy="2"
                 android:shadowRadius="2"
+                android:visibility="gone"
                 android:text="DATA SYNC ACTIVITY"
                 android:textColor="@color/colorPrimary" />
 
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:background="@color/colorAccentLightOverlay"
+                android:padding="24dp"
                 android:orientation="horizontal">
 
 
                 <Button
                     android:id="@+id/btnSync"
                     style="@style/TextAppearance.AppCompat.Small"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
                     android:layout_height="wrap_content"
                     android:layout_margin="5dp"
                     android:background="@color/colorPrimary"
@@ -73,8 +77,9 @@
                     android:id="@+id/btnUpload"
                     style="@style/TextAppearance.AppCompat.Small"
 
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_weight="1"
                     android:layout_margin="5dp"
                     android:layout_marginTop="15dp"
                     android:background="@color/colorPrimary"
@@ -88,7 +93,8 @@
                 <Button
                     android:id="@+id/btnUploadPhotos"
                     style="@style/TextAppearance.AppCompat.Small"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
 
                     android:layout_height="wrap_content"
                     android:layout_margin="5dp"
@@ -99,7 +105,7 @@
                     android:text="Upload Photos"
                     android:textColor="@color/white"
                     android:textStyle="bold"
-                    android:visibility="visible" />
+                    android:visibility="gone" />
             </LinearLayout>
 
             <androidx.cardview.widget.CardView
@@ -203,27 +209,21 @@
 
                         <TextView
                             android:id="@+id/activityTitle"
-                            style="@style/labels"
+                            style="@style/labelsHead"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_margin="12dp"
-                            android:layout_marginBottom="1dp"
-
-                            android:background="@color/whiteOverlay"
-                            android:elevation="1dp"
-                            android:gravity="center_horizontal"
-                            android:paddingBottom="1dp"
-                            android:shadowColor="@color/grayLight"
-                            android:shadowDx="1"
-                            android:shadowDy="1"
-                            android:shadowRadius="1"
-                            android:text="Download Data" />
+                            android:gravity="center_horizontal|center_vertical"
+                            android:text="DATA SYNC"
+                            android:textColor="@color/colorPrimary" />
 
                         <androidx.recyclerview.widget.RecyclerView
                             android:id="@+id/rv_upload_list"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:background="@color/grayLight"
                             android:visibility="visible"
+                            android:padding="12dp"
+                            tools:itemCount="4"
                             tools:listitem="@layout/sync_list_adapter">
 
                         </androidx.recyclerview.widget.RecyclerView>

@@ -130,13 +130,15 @@ public class SyncActivity extends AppCompatActivity {
 
     @SuppressLint("NonConstantResourceId")
     public void ProcessStart(View view) {
-
         if (!isNetworkConnected(this))
             return;
 
         switch (view.getId()) {
 
             case R.id.btnUpload:
+
+                bi.activityTitle.setText("Upload Data");
+
                 bi.dataLayout.setVisibility(View.VISIBLE);
                 bi.photoLayout.setVisibility(View.GONE);
                 bi.mTextViewS.setVisibility(View.GONE);
@@ -169,6 +171,8 @@ public class SyncActivity extends AppCompatActivity {
                 BeginUpload();
                 break;
             case R.id.btnSync:
+
+                bi.activityTitle.setText("Download Data");
 
                 MainApp.downloadData = new String[0];
                 bi.dataLayout.setVisibility(View.VISIBLE);
@@ -412,7 +416,7 @@ public class SyncActivity extends AppCompatActivity {
                                     Log.d(TAG, "onChanged Compare: " + method1.getName().equals("updateSynced" + tableName));
                                     if (method1.getName().equals("updateSynced" + tableName)) {
                                         method = method1;
-                                        Toast.makeText(SyncActivity.this, "updateSynced not found: updateSynced" + tableName, Toast.LENGTH_SHORT).show();
+                                        //Toast.makeText(SyncActivity.this, "updateSynced not found: updateSynced" + tableName, Toast.LENGTH_SHORT).show();
                                         break;
                                     }
                                 }
@@ -704,10 +708,23 @@ public class SyncActivity extends AppCompatActivity {
                 //NavUtils.navigateUpFromSameTask(this);
                 //onBackPressed();
                 finish();
+                //   downloadApp();
                 return true;
         }
         return super.onOptionsItemSelected(item);
     }
+
+/*    private void downloadApp() throws MalformedURLException {
+
+        URL url = new URL(MainApp._HOST_URL + _UPDATE_URL);
+
+        IntentFilter intentFilter = new IntentFilter();
+        intentFilter.addAction(Intent.ACTION_PACKAGE_ADDED);
+        intentFilter.addAction(Intent.ACTION_PACKAGE_INSTALL);
+        intentFilter.addDataScheme("package");
+        registerReceiver(br, intentFilter);
+
+    }*/
 
 
 }
