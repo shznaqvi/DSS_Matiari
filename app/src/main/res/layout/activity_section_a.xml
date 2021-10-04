@@ -1171,6 +1171,28 @@
                     android:gravity="end"
                     android:orientation="horizontal">
 
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="0dp"
+                        android:layout_weight="1"
+                        android:gravity="start"
+                        android:orientation="horizontal">
+
+                        <Button
+                            android:id="@+id/btn_locked"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="end"
+                            android:layout_marginStart="12dp"
+                            android:background="@color/colorPrimaryLightOverlay"
+                            android:drawableStart="@drawable/ic_close"
+                            android:onClick="btnContinue"
+                            android:paddingEnd="8dp"
+                            android:text="Discontinue"
+                            android:textColor="@color/colorPrimaryDark" />
+                    </LinearLayout>
+
                     <Button
                         android:id="@+id/btn_End"
                         android:layout_width="wrap_content"
@@ -1190,6 +1212,7 @@
                         android:onClick="btnContinue"
                         android:text="Save"
                         android:textColor="@color/black" />
+
                 </LinearLayout>
             </LinearLayout>
         </ScrollView>

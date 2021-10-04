@@ -57,12 +57,14 @@ public class FormsReportCluster extends AppCompatActivity {
 
     }
 
+
     @Override
     protected void onResume() {
         super.onResume();
-
         MainApp.householdList = db.getUnclosedHouseholds();
-        formsAdapter.notifyDataSetChanged();
+        formsAdapter = new FormsAdapter(MainApp.householdList, this);
+        recyclerView.setAdapter(formsAdapter);
+        /* formsAdapter.notifyDataSetChanged();*/
         Toast.makeText(this, "Activity Resumed", Toast.LENGTH_SHORT).show();
 
     }

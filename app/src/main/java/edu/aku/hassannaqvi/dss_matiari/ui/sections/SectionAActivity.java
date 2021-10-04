@@ -71,6 +71,22 @@ public class SectionAActivity extends AppCompatActivity {
     }
 
     public void btnContinue(View view) {
+
+        if (view.getId() == bi.btnLocked.getId()) {
+            bi.ra14.setTag("-1");
+            bi.ra19.setTag("-1");
+            bi.ra15.setTag("-1");
+            bi.ra20.setTag("-1");
+            bi.ra17A1.setTag("-1");
+            bi.ra17B1.setTag("-1");
+            bi.ra17C1.setTag("-1");
+            bi.ra17D1.setTag("-1");
+            bi.ra17A2.setTag("-1");
+            bi.ra17B2.setTag("-1");
+            bi.ra17C2.setTag("-1");
+            bi.ra17D2.setTag("-1");
+            bi.ra18.setTag("-1");
+        }
         if (!formValidation()) return;
         if (!insertNewRecord()) return;
         if (updateDB()) {
