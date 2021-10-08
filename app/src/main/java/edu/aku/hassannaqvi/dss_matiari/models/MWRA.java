@@ -76,7 +76,7 @@ public class MWRA extends BaseObservable implements Observable {
         setUserName(MainApp.user.getUserName());
         setDeviceId(MainApp.deviceid);
         setAppver(MainApp.appInfo.getAppVersion());
-        setAppver(MainApp.appInfo.getAppVersion());
+        setUuid(MainApp.households.getUid());
         setVillageCode(MainApp.selectedVillage);
         setUcCode(MainApp.selectedUC);
 

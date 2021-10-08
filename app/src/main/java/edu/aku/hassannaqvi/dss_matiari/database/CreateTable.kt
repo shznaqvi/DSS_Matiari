@@ -7,7 +7,7 @@ object CreateTable {
 
     const val DATABASE_NAME = "$PROJECT_NAME.db"
     const val DATABASE_COPY = "${PROJECT_NAME}_copy.db"
-    const val DATABASE_VERSION = 1
+    const val DATABASE_VERSION = 2
 
     const val SQL_CREATE_HOUSEHOLDS = ("CREATE TABLE "
             + HouseholdTable.TABLE_NAME + "("
@@ -61,6 +61,7 @@ object CreateTable {
             + UsersTable.COLUMN_USERNAME + " TEXT,"
             + UsersTable.COLUMN_PASSWORD + " TEXT,"
             + UsersTable.COLUMN_FULLNAME + " TEXT"
+            + UsersTable.COLUMN_DESIGNATION + " TEXT"
             + " );"
             )
 
@@ -90,5 +91,8 @@ object CreateTable {
             ZScoreTable.COLUMN_S + " TEXT, " +
             ZScoreTable.COLUMN_CAT + " TEXT " +
             ");"
+
+    const val SQL_ALTER_USERS =
+        "ALTER TABLE " + UsersTable.TABLE_NAME + " ADD " + UsersTable.COLUMN_DESIGNATION + " TEXT;"
 
 }

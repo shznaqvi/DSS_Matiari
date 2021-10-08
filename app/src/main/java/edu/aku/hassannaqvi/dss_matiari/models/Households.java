@@ -782,8 +782,8 @@ public class Households extends BaseObservable implements Observable {
             json = new JSONObject(string);
             this.round = json.getString("round");
             this.ra01 = json.getString("ra01");
-            this.ra01v2 = json.getString("ra01v2");
-            this.ra01v3 = json.getString("ra01v3");
+            this.ra01v2 = json.has("ra01v2") ? json.getString("ra01v2") : "";
+            this.ra01v3 = json.has("ra01v3") ? json.getString("ra01v3") : "";
             this.ra02 = json.getString("ra02");
             this.ra04 = json.getString("ra04");
             this.ra03 = json.getString("ra03");

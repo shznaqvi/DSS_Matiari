@@ -154,7 +154,6 @@ public class LoginActivity extends AppCompatActivity {
 
     private void populateSpinner() {
 
-        Collection<Users> teamleaders = db.getTeamleaders();
         leaderNames = new ArrayList<>();
         leaderCodes = new ArrayList<>();
 
@@ -164,6 +163,7 @@ public class LoginActivity extends AppCompatActivity {
         leaderCodes.add("testteamleader");
 
 
+        Collection<Users> teamleaders = db.getTeamleaders();
         for (Users u : teamleaders) {
             leaderNames.add(u.getFullname());
             leaderCodes.add(u.getUserName());

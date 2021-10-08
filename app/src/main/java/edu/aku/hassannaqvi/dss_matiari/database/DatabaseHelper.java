@@ -2,6 +2,7 @@ package edu.aku.hassannaqvi.dss_matiari.database;
 
 import static edu.aku.hassannaqvi.dss_matiari.database.CreateTable.DATABASE_NAME;
 import static edu.aku.hassannaqvi.dss_matiari.database.CreateTable.DATABASE_VERSION;
+import static edu.aku.hassannaqvi.dss_matiari.database.CreateTable.SQL_ALTER_USERS;
 import static edu.aku.hassannaqvi.dss_matiari.database.CreateTable.SQL_CREATE_HOUSEHOLDS;
 import static edu.aku.hassannaqvi.dss_matiari.database.CreateTable.SQL_CREATE_MWRA;
 import static edu.aku.hassannaqvi.dss_matiari.database.CreateTable.SQL_CREATE_USERS;
@@ -73,6 +74,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         switch (oldVersion) {
             case 1:
+                db.execSQL(SQL_ALTER_USERS);
             case 2:
         }
     }
@@ -145,12 +147,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public boolean doLogin(String username, String password) {
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor c = null;
-        String[] columns = {
-                UsersTable.COLUMN_ID,
-                UsersTable.COLUMN_USERNAME,
-                UsersTable.COLUMN_PASSWORD,
-                UsersTable.COLUMN_FULLNAME,
-        };
+        String[] columns = null;
         String whereClause = UsersTable.COLUMN_USERNAME + "=? AND " + UsersTable.COLUMN_PASSWORD + "=?";
         String[] whereArgs = {username, password};
         String groupBy = null;
@@ -484,6 +481,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 values.put(UsersTable.COLUMN_USERNAME, user.getUserName());
                 values.put(UsersTable.COLUMN_PASSWORD, user.getPassword());
                 values.put(UsersTable.COLUMN_FULLNAME, user.getFullname());
+                values.put(UsersTable.COLUMN_DESIGNATION, user.getDesignation());
                 long rowID = db.insert(UsersTable.TABLE_NAME, null, values);
                 if (rowID != -1) insertCount++;
             }
@@ -1186,7 +1184,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 "SELECT * " +
 
                         " FROM " + UsersTable.TABLE_NAME +
-                        " WHERE " + UsersTable.COLUMN_USERNAME + " like '%team%' ", null);
+                        " WHERE " + UsersTable.COLUMN_DESIGNATION + " like '%team%' ", null);
         ArrayList<Users> users = new ArrayList<>();
         while (c.moveToNext()) {
             Users user = new Users().hydrate(c);

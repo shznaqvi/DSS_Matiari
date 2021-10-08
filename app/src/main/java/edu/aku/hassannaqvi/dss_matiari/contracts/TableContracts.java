@@ -63,6 +63,7 @@ public class TableContracts {
         public static final String COLUMN_USERNAME = "username";
         public static final String COLUMN_PASSWORD = "password";
         public static final String COLUMN_FULLNAME = "full_name";
+        public static final String COLUMN_DESIGNATION = "designation";
 
     }
 

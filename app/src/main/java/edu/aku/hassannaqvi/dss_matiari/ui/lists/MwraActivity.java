@@ -173,6 +173,7 @@ public class MwraActivity extends AppCompatActivity {
     }
 
     private void addMoreFemale() {
+        MainApp.mwra = new MWRA();
         Intent intent = new Intent(this, SectionBActivity.class);
         //   finish();
         MemberInfoLauncher.launch(intent);

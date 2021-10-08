@@ -14,6 +14,7 @@ class Users {
     var userName: String = StringUtils.EMPTY
     var password: String = StringUtils.EMPTY
     var fullname: String = StringUtils.EMPTY
+    var designation: String = StringUtils.EMPTY
 
     constructor() {
         // Default Constructor
@@ -29,6 +30,7 @@ class Users {
         userName = jsonObject.getString(UsersTable.COLUMN_USERNAME)
         password = jsonObject.getString(UsersTable.COLUMN_PASSWORD)
         fullname = jsonObject.getString(UsersTable.COLUMN_FULLNAME)
+        designation = jsonObject.getString(UsersTable.COLUMN_DESIGNATION)
         return this
     }
 
@@ -37,6 +39,7 @@ class Users {
         userName = cursor.getString(cursor.getColumnIndex(UsersTable.COLUMN_USERNAME))
         password = cursor.getString(cursor.getColumnIndex(UsersTable.COLUMN_PASSWORD))
         fullname = cursor.getString(cursor.getColumnIndex(UsersTable.COLUMN_FULLNAME))
+        designation = cursor.getString(cursor.getColumnIndex(UsersTable.COLUMN_DESIGNATION))
         return this
     }
 
