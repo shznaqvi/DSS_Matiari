@@ -182,14 +182,20 @@ public class SyncActivity extends AppCompatActivity {
                 downloadTables.clear();
                 boolean sync_flag = getIntent().getBooleanExtra("login", false);
                 if (sync_flag) {
-
-                    downloadTables.add(new SyncModel(UsersTable.TABLE_NAME));
+                    String select = null;
+                    String filter = " colflag is null ";
+                    downloadTables.add(new SyncModel(UsersTable.TABLE_NAME, select, filter));
                     downloadTables.add(new SyncModel(VersionTable.TABLE_NAME));
-                    downloadTables.add(new SyncModel(TableVillage.TABLE_NAME));
+                    downloadTables.add(new SyncModel(TableVillage.TABLE_NAME, select, filter));
                 } else {
                     // Set tables to DOWNLOAD
-                    downloadTables.add(new SyncModel(UsersTable.TABLE_NAME));
+                    String select = null;
+                    String filter = " colflag is null ";
+                    downloadTables.add(new SyncModel(UsersTable.TABLE_NAME, select, filter));
+
                     downloadTables.add(new SyncModel(VersionTable.TABLE_NAME));
+                    downloadTables.add(new SyncModel(TableVillage.TABLE_NAME, select, filter));
+
 
                  /*   String select = " idCamp, camp_no, dist_id, district, ucCode, ucName, area_name, plan_date ";
                     String filter = " camp_status = 'Planned' AND locked = 0 ";
@@ -218,7 +224,7 @@ public class SyncActivity extends AppCompatActivity {
                     .putString("table", downloadTables.get(i).gettableName())
                     .putInt("position", i)
                     .putString("select", downloadTables.get(i).getSelect() != null ? downloadTables.get(i).getSelect() : " * ")
-                    .putString("filter", downloadTables.get(i).getFilter() != null ? downloadTables.get(i).getFilter() : " 1=1 ");
+                    .putString("where", downloadTables.get(i).getFilter() != null ? downloadTables.get(i).getFilter() : " 1=1 ");
             /*if (downloadTables.get(i).gettableName().equals(Doctor.TableDoctor.TABLE_NAME)) {
                 data.putString("where", Doctor.TableDoctor.COLUMN_ID_CAMP + "='" + campCode + "'");
             }*/
