@@ -49,7 +49,6 @@ import java.security.SecureRandom;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
@@ -163,11 +162,13 @@ public class LoginActivity extends AppCompatActivity {
         leaderCodes.add("testteamleader");
 
 
+/*
         Collection<Users> teamleaders = db.getTeamleaders();
         for (Users u : teamleaders) {
             leaderNames.add(u.getFullname());
             leaderCodes.add(u.getUserName());
         }
+*/
 
         // Apply the adapter to the spinner
         bi.teamleader.setAdapter(new ArrayAdapter(LoginActivity.this, R.layout.custom_spinner, leaderNames));

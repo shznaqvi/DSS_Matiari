@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="edu.aku.hassannaqvi.dss_matiari">
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
@@ -9,14 +10,15 @@
 
     <application
         android:name=".core.MainApp"
-        android:allowBackup="true"
+        android:allowBackup="false"
         android:icon="@drawable/app_icon"
         android:immersive="true"
         android:label="@string/app_name"
         android:roundIcon="@drawable/app_icon"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
-        android:usesCleartextTraffic="true">
+        android:usesCleartextTraffic="true"
+        tools:replace="android:allowBackup">
         <activity android:name=".ui.lists.MwraActivity" />
         <activity android:name=".ui.lists.HouseholdActivity" />
         <activity android:name=".ui.lists.FormsReportCluster" />
