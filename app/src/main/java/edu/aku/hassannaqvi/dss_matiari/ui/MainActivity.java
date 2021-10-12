@@ -12,6 +12,7 @@ import androidx.databinding.DataBindingUtil;
 
 import edu.aku.hassannaqvi.dss_matiari.R;
 import edu.aku.hassannaqvi.dss_matiari.core.MainApp;
+import edu.aku.hassannaqvi.dss_matiari.database.AndroidManager;
 import edu.aku.hassannaqvi.dss_matiari.databinding.ActivityMainBinding;
 import edu.aku.hassannaqvi.dss_matiari.models.Households;
 import edu.aku.hassannaqvi.dss_matiari.ui.lists.FormsReportCluster;
@@ -41,6 +42,9 @@ public class MainActivity extends AppCompatActivity {
         switch (view.getId()) {
             case R.id.openForm:
                 MainApp.idType = 1;
+                break;
+            case R.id.dbm:
+                startActivity(new Intent(this, AndroidManager.class));
                 break;
             default:
                 MainApp.idType = 0;
@@ -82,6 +86,8 @@ public class MainActivity extends AppCompatActivity {
             case R.id.checkOpenForms:
                 intent = new Intent(MainActivity.this, FormsReportCluster.class);
                 break;
+            case R.id.dbm:
+                startActivity(new Intent(this, AndroidManager.class));
         }
         startActivity(intent);
         return super.onOptionsItemSelected(item);

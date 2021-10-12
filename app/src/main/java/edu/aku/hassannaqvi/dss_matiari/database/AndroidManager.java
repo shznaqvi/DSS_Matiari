@@ -1,8 +1,6 @@
 package edu.aku.hassannaqvi.dss_matiari.database;
 
-/**
- * Created by hassan.naqvi on 11/30/2016.
- */
+//all required import files
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -34,7 +32,9 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.LinkedList;
 
-public class AndroidDatabaseManager extends Activity implements OnItemClickListener {
+import edu.aku.hassannaqvi.dss_matiari.core.MainApp;
+
+public class AndroidManager extends Activity implements OnItemClickListener {
 
     //in the below line Change the text 'yourCustomSqlHelper' with your custom sqlitehelper class name.
     //Do not change the variable name dbm
@@ -59,12 +59,12 @@ public class AndroidDatabaseManager extends Activity implements OnItemClickListe
 
 
         //in the below line Change the text 'yourCustomSqlHelper' with your custom sqlitehelper class name
-        dbm = new DatabaseHelper(AndroidDatabaseManager.this);
+        dbm = MainApp.appInfo.dbHelper;
 
-        mainscrollview = new ScrollView(AndroidDatabaseManager.this);
+        mainscrollview = new ScrollView(AndroidManager.this);
 
         //the main linear layout to which all tables spinners etc will be added.In this activity every element is created dynamically  to avoid using xml file
-        mainLayout = new LinearLayout(AndroidDatabaseManager.this);
+        mainLayout = new LinearLayout(AndroidManager.this);
         mainLayout.setOrientation(LinearLayout.VERTICAL);
         mainLayout.setBackgroundColor(Color.WHITE);
         mainLayout.setScrollContainer(true);
@@ -74,16 +74,16 @@ public class AndroidDatabaseManager extends Activity implements OnItemClickListe
         setContentView(mainscrollview);
 
         //the first row of layout which has a text view and spinner
-        final LinearLayout firstrow = new LinearLayout(AndroidDatabaseManager.this);
+        final LinearLayout firstrow = new LinearLayout(AndroidManager.this);
         firstrow.setPadding(0, 10, 0, 20);
         LinearLayout.LayoutParams firstrowlp = new LinearLayout.LayoutParams(0, 150);
         firstrowlp.weight = 1;
 
-        TextView maintext = new TextView(AndroidDatabaseManager.this);
+        TextView maintext = new TextView(AndroidManager.this);
         maintext.setText("Select Table");
         maintext.setTextSize(22);
         maintext.setLayoutParams(firstrowlp);
-        select_table = new Spinner(AndroidDatabaseManager.this);
+        select_table = new Spinner(AndroidManager.this);
         select_table.setLayoutParams(firstrowlp);
 
         firstrow.addView(maintext);
@@ -92,24 +92,24 @@ public class AndroidDatabaseManager extends Activity implements OnItemClickListe
 
         ArrayList<Cursor> alc;
 
-        //the horizontal scroll view for VillageTable if the VillageTable content doesnot fit into screen
-        hsv = new HorizontalScrollView(AndroidDatabaseManager.this);
+        //the horizontal scroll view for table if the table content doesnot fit into screen
+        hsv = new HorizontalScrollView(AndroidManager.this);
 
-        //the main VillageTable layout where the content of the sql tables will be displayed when user selects a VillageTable
-        tableLayout = new TableLayout(AndroidDatabaseManager.this);
+        //the main table layout where the content of the sql tables will be displayed when user selects a table
+        tableLayout = new TableLayout(AndroidManager.this);
         tableLayout.setHorizontalScrollBarEnabled(true);
         hsv.addView(tableLayout);
 
-        //the second row of the layout which shows number of records in the VillageTable selected by user
-        final LinearLayout secondrow = new LinearLayout(AndroidDatabaseManager.this);
+        //the second row of the layout which shows number of records in the table selected by user
+        final LinearLayout secondrow = new LinearLayout(AndroidManager.this);
         secondrow.setPadding(0, 20, 0, 10);
         LinearLayout.LayoutParams secondrowlp = new LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
         secondrowlp.weight = 1;
-        TextView secondrowtext = new TextView(AndroidDatabaseManager.this);
+        TextView secondrowtext = new TextView(AndroidManager.this);
         secondrowtext.setText("No. Of Records : ");
         secondrowtext.setTextSize(20);
         secondrowtext.setLayoutParams(secondrowlp);
-        tv = new TextView(AndroidDatabaseManager.this);
+        tv = new TextView(AndroidManager.this);
         tv.setTextSize(20);
         tv.setLayoutParams(secondrowlp);
         secondrow.addView(secondrowtext);
@@ -121,19 +121,19 @@ public class AndroidDatabaseManager extends Activity implements OnItemClickListe
         customquerytext.setHint("Enter Your Query here and Click on Submit Query Button .Results will be displayed below");
         mainLayout.addView(customquerytext);
 
-        final Button submitQuery = new Button(AndroidDatabaseManager.this);
+        final Button submitQuery = new Button(AndroidManager.this);
         submitQuery.setVisibility(View.GONE);
         submitQuery.setText("Submit Query");
 
         submitQuery.setBackgroundColor(Color.parseColor("#BAE7F6"));
         mainLayout.addView(submitQuery);
 
-        final TextView help = new TextView(AndroidDatabaseManager.this);
+        final TextView help = new TextView(AndroidManager.this);
         help.setText("Click on the row below to update values or delete the tuple");
         help.setPadding(0, 5, 0, 5);
 
-        // the spinner which gives user a option to add new row , drop or delete VillageTable
-        final Spinner spinnertable = new Spinner(AndroidDatabaseManager.this);
+        // the spinner which gives user a option to add new row , drop or delete table
+        final Spinner spinnertable = new Spinner(AndroidManager.this);
         mainLayout.addView(spinnertable);
         mainLayout.addView(help);
         hsv.setPadding(0, 10, 0, 10);
@@ -141,13 +141,13 @@ public class AndroidDatabaseManager extends Activity implements OnItemClickListe
         hsv.setScrollBarStyle(View.SCROLLBARS_OUTSIDE_INSET);
         mainLayout.addView(hsv);
         //the third layout which has buttons for the pagination of content from database
-        final LinearLayout thirdrow = new LinearLayout(AndroidDatabaseManager.this);
-        previous = new Button(AndroidDatabaseManager.this);
+        final LinearLayout thirdrow = new LinearLayout(AndroidManager.this);
+        previous = new Button(AndroidManager.this);
         previous.setText("Previous");
 
         previous.setBackgroundColor(Color.parseColor("#BAE7F6"));
         previous.setLayoutParams(secondrowlp);
-        next = new Button(AndroidDatabaseManager.this);
+        next = new Button(AndroidManager.this);
         next.setText("Next");
         next.setBackgroundColor(Color.parseColor("#BAE7F6"));
         next.setLayoutParams(secondrowlp);
@@ -160,14 +160,14 @@ public class AndroidDatabaseManager extends Activity implements OnItemClickListe
         mainLayout.addView(thirdrow);
 
         //the text view at the bottom of the screen which displays error or success messages after a query is executed
-        tvmessage = new TextView(AndroidDatabaseManager.this);
+        tvmessage = new TextView(AndroidManager.this);
 
         tvmessage.setText("Error Messages will be displayed here");
-        String Query = "SELECT name _id FROM sqlite_master WHERE type ='VillageTable'";
+        String Query = "SELECT name _id FROM sqlite_master WHERE type ='table'";
         tvmessage.setTextSize(18);
         mainLayout.addView(tvmessage);
 
-        final Button customQuery = new Button(AndroidDatabaseManager.this);
+        final Button customQuery = new Button(AndroidManager.this);
         customQuery.setText("Custom Query");
         customQuery.setBackgroundColor(Color.parseColor("#BAE7F6"));
         mainLayout.addView(customQuery);
@@ -202,23 +202,23 @@ public class AndroidDatabaseManager extends Activity implements OnItemClickListe
                 String Query10 = customquerytext.getText().toString();
                 Log.d("query", Query10);
                 //pass the query to getdata method and get results
-                alc2 = dbm.getDatabaseManagerData(Query10);
+                alc2 = dbm.getData(Query10);
                 final Cursor c4 = alc2.get(0);
                 Cursor Message2 = alc2.get(1);
                 Message2.moveToLast();
 
-                //if the query returns results display the results in VillageTable layout
+                //if the query returns results display the results in table layout
                 if (Message2.getString(0).equalsIgnoreCase("Success")) {
 
                     tvmessage.setBackgroundColor(Color.parseColor("#2ecc71"));
                     if (c4 != null) {
-                        tvmessage.setText("Query Executed successfully.Number of rows returned :" + c4.getCount());
+                        tvmessage.setText("Queru Executed successfully.Number of rows returned :" + c4.getCount());
                         if (c4.getCount() > 0) {
                             indexInfo.maincursor = c4;
                             refreshTable(1);
                         }
                     } else {
-                        tvmessage.setText("Query Executed successfully");
+                        tvmessage.setText("Queru Executed successfully");
                         refreshTable(1);
                     }
 
@@ -230,12 +230,12 @@ public class AndroidDatabaseManager extends Activity implements OnItemClickListe
                 }
             }
         });
-        //layout parameters for each row in the VillageTable
+        //layout parameters for each row in the table
         tableRowParams = new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
         tableRowParams.setMargins(0, 0, 2, 0);
 
         // a query which returns a cursor with the list of tables in the database.We use this cursor to populate spinner in the first row
-        alc = dbm.getDatabaseManagerData(Query);
+        alc = dbm.getData(Query);
 
         //the first cursor has reults of the query
         final Cursor c = alc.get(0);
@@ -254,12 +254,12 @@ public class AndroidDatabaseManager extends Activity implements OnItemClickListe
             c.moveToFirst();
             tablenames.add("click here");
             do {
-                //add names of the VillageTable to tablenames array list
+                //add names of the table to tablenames array list
                 tablenames.add(c.getString(0));
             } while (c.moveToNext());
         }
         //an array adapter with above created arraylist
-        ArrayAdapter<String> tablenamesadapter = new ArrayAdapter<String>(AndroidDatabaseManager.this,
+        ArrayAdapter<String> tablenamesadapter = new ArrayAdapter<String>(AndroidManager.this,
                 android.R.layout.simple_spinner_item, tablenames) {
 
             public View getView(int position, View convertView, ViewGroup parent) {
@@ -289,7 +289,7 @@ public class AndroidDatabaseManager extends Activity implements OnItemClickListe
             select_table.setAdapter(tablenamesadapter);
         }
 
-        // when a VillageTable names is selecte display the VillageTable contents
+        // when a table names is selecte display the table contents
         select_table.setOnItemSelectedListener(new OnItemSelectedListener() {
 
             @Override
@@ -320,24 +320,24 @@ public class AndroidDatabaseManager extends Activity implements OnItemClickListe
                     thirdrow.setVisibility(View.VISIBLE);
                     c.moveToPosition(pos - 1);
                     indexInfo.cursorpostion = pos - 1;
-                    //displaying the content of the VillageTable which is selected in the select_table spinner
-                    Log.d("selected VillageTable name is", "" + c.getString(0));
+                    //displaying the content of the table which is selected in the select_table spinner
+                    Log.d("selected table name is", "" + c.getString(0));
                     indexInfo.table_name = c.getString(0);
                     tvmessage.setText("Error Messages will be displayed here");
                     tvmessage.setBackgroundColor(Color.WHITE);
 
-                    //removes any data if present in the VillageTable layout
+                    //removes any data if present in the table layout
                     tableLayout.removeAllViews();
                     ArrayList<String> spinnertablevalues = new ArrayList<String>();
-                    spinnertablevalues.add("Click here to change this VillageTable");
-                    spinnertablevalues.add("Add row to this VillageTable");
-                    spinnertablevalues.add("Delete this VillageTable");
-                    spinnertablevalues.add("Drop this VillageTable");
+                    spinnertablevalues.add("Click here to change this table");
+                    spinnertablevalues.add("Add row to this table");
+                    spinnertablevalues.add("Delete this table");
+                    spinnertablevalues.add("Drop this table");
                     ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_spinner_dropdown_item, spinnertablevalues);
                     spinnerArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_item);
 
-                    // a array adapter which add values to the spinner which helps in user making changes to the VillageTable
-                    ArrayAdapter<String> adapter = new ArrayAdapter<String>(AndroidDatabaseManager.this,
+                    // a array adapter which add values to the spinner which helps in user making changes to the table
+                    ArrayAdapter<String> adapter = new ArrayAdapter<String>(AndroidManager.this,
                             android.R.layout.simple_spinner_item, spinnertablevalues) {
 
                         public View getView(int position, View convertView, ViewGroup parent) {
@@ -364,13 +364,13 @@ public class AndroidDatabaseManager extends Activity implements OnItemClickListe
                     String Query2 = "select * from " + c.getString(0);
                     Log.d("", "" + Query2);
 
-                    //getting contents of the VillageTable which user selected from the select_table spinner
-                    ArrayList<Cursor> alc2 = dbm.getDatabaseManagerData(Query2);
+                    //getting contents of the table which user selected from the select_table spinner
+                    ArrayList<Cursor> alc2 = dbm.getData(Query2);
                     final Cursor c2 = alc2.get(0);
                     //saving cursor to the static indexinfo class which can be resued by the other functions
                     indexInfo.maincursor = c2;
 
-                    // if the cursor returned households the database is not null we display the data in VillageTable layout
+                    // if the cursor returned form the database is not null we display the data in table layout
                     if (c2 != null) {
                         int counts = c2.getCount();
                         indexInfo.isEmpty = false;
@@ -378,7 +378,7 @@ public class AndroidDatabaseManager extends Activity implements OnItemClickListe
                         tv.setText("" + counts);
 
 
-                        //the spinnertable has the 3 items to drop , delete , add row to the VillageTable selected by the user
+                        //the spinnertable has the 3 items to drop , delete , add row to the table selected by the user
                         //here we handle the 3 operations.
                         spinnertable.setOnItemSelectedListener((new OnItemSelectedListener() {
                             @Override
@@ -386,27 +386,27 @@ public class AndroidDatabaseManager extends Activity implements OnItemClickListe
 
 
                                 ((TextView) parentView.getChildAt(0)).setTextColor(Color.rgb(0, 0, 0));
-                                //when user selects to drop the VillageTable the below code in if block will be executed
-                                if (spinnertable.getSelectedItem().toString().equals("Drop this VillageTable")) {
+                                //when user selects to drop the table the below code in if block will be executed
+                                if (spinnertable.getSelectedItem().toString().equals("Drop this table")) {
                                     // an alert dialog to confirm user selection
                                     runOnUiThread(new Runnable() {
                                         @Override
                                         public void run() {
                                             if (!isFinishing()) {
 
-                                                new AlertDialog.Builder(AndroidDatabaseManager.this)
+                                                new AlertDialog.Builder(AndroidManager.this)
                                                         .setTitle("Are you sure ?")
-                                                        .setMessage("Pressing yes will remove " + indexInfo.table_name + " VillageTable from database")
+                                                        .setMessage("Pressing yes will remove " + indexInfo.table_name + " table from database")
                                                         .setPositiveButton("yes",
                                                                 new DialogInterface.OnClickListener() {
-                                                                    // when user confirms by clicking on yes we drop the VillageTable by executing drop VillageTable query
+                                                                    // when user confirms by clicking on yes we drop the table by executing drop table query
                                                                     public void onClick(DialogInterface dialog, int which) {
 
-                                                                        String Query6 = "Drop VillageTable " + indexInfo.table_name;
-                                                                        ArrayList<Cursor> aldropt = dbm.getDatabaseManagerData(Query6);
+                                                                        String Query6 = "Drop table " + indexInfo.table_name;
+                                                                        ArrayList<Cursor> aldropt = dbm.getData(Query6);
                                                                         Cursor tempc = aldropt.get(1);
                                                                         tempc.moveToLast();
-                                                                        Log.d("Drop VillageTable Mesage", tempc.getString(0));
+                                                                        Log.d("Drop table Mesage", tempc.getString(0));
                                                                         if (tempc.getString(0).equalsIgnoreCase("Success")) {
                                                                             tvmessage.setBackgroundColor(Color.parseColor("#2ecc71"));
                                                                             tvmessage.setText(indexInfo.table_name + "Dropped successfully");
@@ -431,30 +431,30 @@ public class AndroidDatabaseManager extends Activity implements OnItemClickListe
                                     });
 
                                 }
-                                //when user selects to drop the VillageTable the below code in if block will be executed
-                                if (spinnertable.getSelectedItem().toString().equals("Delete this VillageTable")) {    // an alert dialog to confirm user selection
+                                //when user selects to drop the table the below code in if block will be executed
+                                if (spinnertable.getSelectedItem().toString().equals("Delete this table")) {    // an alert dialog to confirm user selection
                                     runOnUiThread(new Runnable() {
                                         @Override
                                         public void run() {
                                             if (!isFinishing()) {
 
-                                                new AlertDialog.Builder(AndroidDatabaseManager.this)
+                                                new AlertDialog.Builder(AndroidManager.this)
                                                         .setTitle("Are you sure?")
-                                                        .setMessage("Clicking on yes will delete all the contents of " + indexInfo.table_name + " VillageTable from database")
+                                                        .setMessage("Clicking on yes will delete all the contents of " + indexInfo.table_name + " table from database")
                                                         .setPositiveButton("yes",
                                                                 new DialogInterface.OnClickListener() {
 
-                                                                    // when user confirms by clicking on yes we drop the VillageTable by executing delete VillageTable query
+                                                                    // when user confirms by clicking on yes we drop the table by executing delete table query
                                                                     public void onClick(DialogInterface dialog, int which) {
                                                                         String Query7 = "Delete  from " + indexInfo.table_name;
-                                                                        Log.d("delete VillageTable query", Query7);
-                                                                        ArrayList<Cursor> aldeletet = dbm.getDatabaseManagerData(Query7);
+                                                                        Log.d("delete table query", Query7);
+                                                                        ArrayList<Cursor> aldeletet = dbm.getData(Query7);
                                                                         Cursor tempc = aldeletet.get(1);
                                                                         tempc.moveToLast();
-                                                                        Log.d("Delete VillageTable Mesage", tempc.getString(0));
+                                                                        Log.d("Delete table Mesage", tempc.getString(0));
                                                                         if (tempc.getString(0).equalsIgnoreCase("Success")) {
                                                                             tvmessage.setBackgroundColor(Color.parseColor("#2ecc71"));
-                                                                            tvmessage.setText(indexInfo.table_name + " VillageTable content deleted successfully");
+                                                                            tvmessage.setText(indexInfo.table_name + " table content deleted successfully");
                                                                             indexInfo.isEmpty = true;
                                                                             refreshTable(0);
                                                                         } else {
@@ -477,13 +477,13 @@ public class AndroidDatabaseManager extends Activity implements OnItemClickListe
 
                                 }
 
-                                //when user selects to add row to the VillageTable the below code in if block will be executed
-                                if (spinnertable.getSelectedItem().toString().equals("Add row to this VillageTable")) {
-                                    //we create a layout which has textviews with column names of the VillageTable and edittexts where
+                                //when user selects to add row to the table the below code in if block will be executed
+                                if (spinnertable.getSelectedItem().toString().equals("Add row to this table")) {
+                                    //we create a layout which has textviews with column names of the table and edittexts where
                                     //user can enter value which will be inserted into the datbase.
                                     final LinkedList<TextView> addnewrownames = new LinkedList<TextView>();
                                     final LinkedList<EditText> addnewrowvalues = new LinkedList<EditText>();
-                                    final ScrollView addrowsv = new ScrollView(AndroidDatabaseManager.this);
+                                    final ScrollView addrowsv = new ScrollView(AndroidManager.this);
                                     Cursor c4 = indexInfo.maincursor;
                                     if (indexInfo.isEmpty) {
                                         getcolumnnames();
@@ -514,7 +514,7 @@ public class AndroidDatabaseManager extends Activity implements OnItemClickListe
                                             addnewrowvalues.add(et);
                                         }
                                     }
-                                    final RelativeLayout addnewlayout = new RelativeLayout(AndroidDatabaseManager.this);
+                                    final RelativeLayout addnewlayout = new RelativeLayout(AndroidManager.this);
                                     RelativeLayout.LayoutParams addnewparams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
                                     addnewparams.addRule(RelativeLayout.ALIGN_PARENT_TOP);
                                     for (int i = 0; i < addnewrownames.size(); i++) {
@@ -529,7 +529,7 @@ public class AndroidDatabaseManager extends Activity implements OnItemClickListe
                                         et.setBackgroundColor(Color.parseColor("#F2F2F2"));
                                         et.setTextColor(Color.parseColor("#000000"));
                                         et.setId(k);
-                                        final LinearLayout ll = new LinearLayout(AndroidDatabaseManager.this);
+                                        final LinearLayout ll = new LinearLayout(AndroidManager.this);
                                         LinearLayout.LayoutParams tvl = new LinearLayout.LayoutParams(0, 100);
                                         tvl.weight = 1;
                                         ll.addView(tv, tvl);
@@ -547,12 +547,12 @@ public class AndroidDatabaseManager extends Activity implements OnItemClickListe
                                     addnewlayout.setBackgroundColor(Color.WHITE);
                                     addrowsv.addView(addnewlayout);
                                     Log.d("Button Clicked", "");
-                                    //the above households layout which we have created above will be displayed in an alert dialog
+                                    //the above form layout which we have created above will be displayed in an alert dialog
                                     runOnUiThread(new Runnable() {
                                         @Override
                                         public void run() {
                                             if (!isFinishing()) {
-                                                new AlertDialog.Builder(AndroidDatabaseManager.this)
+                                                new AlertDialog.Builder(AndroidManager.this)
                                                         .setTitle("values")
                                                         .setCancelable(false)
                                                         .setView(addrowsv)
@@ -563,7 +563,7 @@ public class AndroidDatabaseManager extends Activity implements OnItemClickListe
 
                                                                         indexInfo.index = 10;
                                                                         //tableLayout.removeAllViews();
-                                                                        //trigger select VillageTable listener to be triggerd
+                                                                        //trigger select table listener to be triggerd
                                                                         String Query4 = "Insert into " + indexInfo.table_name + " (";
                                                                         for (int i = 0; i < addnewrownames.size(); i++) {
 
@@ -593,7 +593,7 @@ public class AndroidDatabaseManager extends Activity implements OnItemClickListe
                                                                         }
                                                                         //this is the insert query which has been generated
                                                                         Log.d("Insert Query", Query4);
-                                                                        ArrayList<Cursor> altc = dbm.getDatabaseManagerData(Query4);
+                                                                        ArrayList<Cursor> altc = dbm.getData(Query4);
                                                                         Cursor tempc = altc.get(1);
                                                                         tempc.moveToLast();
                                                                         Log.d("Add New Row", tempc.getString(0));
@@ -626,13 +626,13 @@ public class AndroidDatabaseManager extends Activity implements OnItemClickListe
                             }
                         }));
 
-                        //display the first row of the VillageTable with column names of the VillageTable selected by the user
+                        //display the first row of the table with column names of the table selected by the user
                         TableRow tableheader = new TableRow(getApplicationContext());
 
                         tableheader.setBackgroundColor(Color.BLACK);
                         tableheader.setPadding(0, 2, 0, 2);
                         for (int k = 0; k < c2.getColumnCount(); k++) {
-                            LinearLayout cell = new LinearLayout(AndroidDatabaseManager.this);
+                            LinearLayout cell = new LinearLayout(AndroidManager.this);
                             cell.setBackgroundColor(Color.WHITE);
                             cell.setLayoutParams(tableRowParams);
                             final TextView tableheadercolums = new TextView(getApplicationContext());
@@ -655,7 +655,7 @@ public class AndroidDatabaseManager extends Activity implements OnItemClickListe
                         paginatetable(c2.getCount());
 
                     } else {
-                        //if the cursor returned from the database is empty we show that VillageTable is empty
+                        //if the cursor returned from the database is empty we show that table is empty
                         help.setVisibility(View.GONE);
                         tableLayout.removeAllViews();
                         getcolumnnames();
@@ -663,7 +663,7 @@ public class AndroidDatabaseManager extends Activity implements OnItemClickListe
                         tableheader2.setBackgroundColor(Color.BLACK);
                         tableheader2.setPadding(0, 2, 0, 2);
 
-                        LinearLayout cell = new LinearLayout(AndroidDatabaseManager.this);
+                        LinearLayout cell = new LinearLayout(AndroidManager.this);
                         cell.setBackgroundColor(Color.WHITE);
                         cell.setLayoutParams(tableRowParams);
                         final TextView tableheadercolums = new TextView(getApplicationContext());
@@ -692,7 +692,7 @@ public class AndroidDatabaseManager extends Activity implements OnItemClickListe
 
     //get columnnames of the empty tables and save them in a array list
     public void getcolumnnames() {
-        ArrayList<Cursor> alc3 = dbm.getDatabaseManagerData("PRAGMA table_info(" + indexInfo.table_name + ")");
+        ArrayList<Cursor> alc3 = dbm.getData("PRAGMA table_info(" + indexInfo.table_name + ")");
         Cursor c5 = alc3.get(0);
         indexInfo.isEmpty = true;
         if (c5 != null) {
@@ -741,13 +741,13 @@ public class AndroidDatabaseManager extends Activity implements OnItemClickListe
 
         int lastrid = 0;
         // all text views , edit texts are added to this relative layout lp
-        final RelativeLayout lp = new RelativeLayout(AndroidDatabaseManager.this);
+        final RelativeLayout lp = new RelativeLayout(AndroidManager.this);
         lp.setBackgroundColor(Color.WHITE);
         RelativeLayout.LayoutParams lay = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
         lay.addRule(RelativeLayout.ALIGN_PARENT_TOP);
 
-        final ScrollView updaterowsv = new ScrollView(AndroidDatabaseManager.this);
-        LinearLayout lcrud = new LinearLayout(AndroidDatabaseManager.this);
+        final ScrollView updaterowsv = new ScrollView(AndroidManager.this);
+        LinearLayout lcrud = new LinearLayout(AndroidManager.this);
 
         LinearLayout.LayoutParams paramcrudtext = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
 
@@ -756,7 +756,7 @@ public class AndroidDatabaseManager extends Activity implements OnItemClickListe
         //spinner which displays update , delete options
         final Spinner crud_dropdown = new Spinner(getApplicationContext());
 
-        ArrayAdapter<String> crudadapter = new ArrayAdapter<String>(AndroidDatabaseManager.this,
+        ArrayAdapter<String> crudadapter = new ArrayAdapter<String>(AndroidManager.this,
                 android.R.layout.simple_spinner_item, spinnerArray) {
 
             public View getView(int position, View convertView, ViewGroup parent) {
@@ -783,9 +783,7 @@ public class AndroidDatabaseManager extends Activity implements OnItemClickListe
         crudadapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
         crud_dropdown.setAdapter(crudadapter);
-        int my_var = 0;
-        my_var = my_var + 299;
-        lcrud.setId(my_var);
+        lcrud.setId(View.generateViewId());
         lcrud.addView(crud_dropdown, paramcrudtext);
 
         RelativeLayout.LayoutParams rlcrudparam = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
@@ -806,7 +804,7 @@ public class AndroidDatabaseManager extends Activity implements OnItemClickListe
             et.setTextColor(Color.parseColor("#000000"));
             et.setId(k);
             Log.d("text View Value", "" + tv.getText().toString());
-            final LinearLayout ll = new LinearLayout(AndroidDatabaseManager.this);
+            final LinearLayout ll = new LinearLayout(AndroidManager.this);
             ll.setBackgroundColor(Color.parseColor("#FFFFFF"));
             ll.setId(lid);
             LinearLayout.LayoutParams lpp = new LinearLayout.LayoutParams(0, 100);
@@ -832,7 +830,7 @@ public class AndroidDatabaseManager extends Activity implements OnItemClickListe
             @Override
             public void run() {
                 if (!isFinishing()) {
-                    new AlertDialog.Builder(AndroidDatabaseManager.this)
+                    new AlertDialog.Builder(AndroidManager.this)
                             .setTitle("values")
                             .setView(updaterowsv)
                             .setCancelable(false)
@@ -890,14 +888,14 @@ public class AndroidDatabaseManager extends Activity implements OnItemClickListe
                                                 }
                                                 Log.d("Update Query", Query3);
                                                 //dbm.getData(Query3);
-                                                ArrayList<Cursor> aluc = dbm.getDatabaseManagerData(Query3);
+                                                ArrayList<Cursor> aluc = dbm.getData(Query3);
                                                 Cursor tempc = aluc.get(1);
                                                 tempc.moveToLast();
                                                 Log.d("Update Mesage", tempc.getString(0));
 
                                                 if (tempc.getString(0).equalsIgnoreCase("Success")) {
                                                     tvmessage.setBackgroundColor(Color.parseColor("#2ecc71"));
-                                                    tvmessage.setText(indexInfo.table_name + " VillageTable Updated Successfully");
+                                                    tvmessage.setText(indexInfo.table_name + " table Updated Successfully");
                                                     refreshTable(0);
                                                 } else {
                                                     tvmessage.setBackgroundColor(Color.parseColor("#e74c3c"));
@@ -930,16 +928,16 @@ public class AndroidDatabaseManager extends Activity implements OnItemClickListe
                                                 }
                                                 Log.d("Delete Query", Query5);
 
-                                                dbm.getDatabaseManagerData(Query5);
+                                                dbm.getData(Query5);
 
-                                                ArrayList<Cursor> aldc = dbm.getDatabaseManagerData(Query5);
+                                                ArrayList<Cursor> aldc = dbm.getData(Query5);
                                                 Cursor tempc = aldc.get(1);
                                                 tempc.moveToLast();
                                                 Log.d("Update Mesage", tempc.getString(0));
 
                                                 if (tempc.getString(0).equalsIgnoreCase("Success")) {
                                                     tvmessage.setBackgroundColor(Color.parseColor("#2ecc71"));
-                                                    tvmessage.setText("Row deleted from " + indexInfo.table_name + " VillageTable");
+                                                    tvmessage.setText("Row deleted from " + indexInfo.table_name + " table");
                                                     refreshTable(0);
                                                 } else {
                                                     tvmessage.setBackgroundColor(Color.parseColor("#e74c3c"));
@@ -972,7 +970,7 @@ public class AndroidDatabaseManager extends Activity implements OnItemClickListe
         tableLayout.removeAllViews();
         if (d == 0) {
             String Query8 = "select * from " + indexInfo.table_name;
-            ArrayList<Cursor> alc3 = dbm.getDatabaseManagerData(Query8);
+            ArrayList<Cursor> alc3 = dbm.getData(Query8);
             c3 = alc3.get(0);
             //saving cursor to the static indexinfo class which can be resued by the other functions
             indexInfo.maincursor = c3;
@@ -980,7 +978,7 @@ public class AndroidDatabaseManager extends Activity implements OnItemClickListe
         if (d == 1) {
             c3 = indexInfo.maincursor;
         }
-        // if the cursor returened households tha database is not null we display the data in VillageTable layout
+        // if the cursor returened form tha database is not null we display the data in table layout
         if (c3 != null) {
             int counts = c3.getCount();
 
@@ -991,7 +989,7 @@ public class AndroidDatabaseManager extends Activity implements OnItemClickListe
             tableheader.setBackgroundColor(Color.BLACK);
             tableheader.setPadding(0, 2, 0, 2);
             for (int k = 0; k < c3.getColumnCount(); k++) {
-                LinearLayout cell = new LinearLayout(AndroidDatabaseManager.this);
+                LinearLayout cell = new LinearLayout(AndroidManager.this);
                 cell.setBackgroundColor(Color.WHITE);
                 cell.setLayoutParams(tableRowParams);
                 final TextView tableheadercolums = new TextView(getApplicationContext());
@@ -1006,7 +1004,7 @@ public class AndroidDatabaseManager extends Activity implements OnItemClickListe
             c3.moveToFirst();
 
             //after displaying column names in the first row  we display data in the remaining columns
-            //the below paginate VillageTable function will display the first 10 tuples of the tables
+            //the below paginate table function will display the first 10 tuples of the tables
             //the remaining tuples can be viewed by clicking on the next button
             paginatetable(c3.getCount());
         } else {
@@ -1015,7 +1013,7 @@ public class AndroidDatabaseManager extends Activity implements OnItemClickListe
             tableheader2.setBackgroundColor(Color.BLACK);
             tableheader2.setPadding(0, 2, 0, 2);
 
-            LinearLayout cell = new LinearLayout(AndroidDatabaseManager.this);
+            LinearLayout cell = new LinearLayout(AndroidManager.this);
             cell.setBackgroundColor(Color.WHITE);
             cell.setLayoutParams(tableRowParams);
 
@@ -1036,7 +1034,7 @@ public class AndroidDatabaseManager extends Activity implements OnItemClickListe
 
     }
 
-    //the function which displays tuples from database in a VillageTable layout
+    //the function which displays tuples from database in a table layout
     public void paginatetable(final int number) {
 
 
@@ -1046,7 +1044,7 @@ public class AndroidDatabaseManager extends Activity implements OnItemClickListe
         c3.moveToFirst();
         int currentrow = 0;
 
-        //display the first 10 tuples of the VillageTable selected by user
+        //display the first 10 tuples of the table selected by user
         do {
 
             final TableRow tableRow = new TableRow(getApplicationContext());
@@ -1074,7 +1072,7 @@ public class AndroidDatabaseManager extends Activity implements OnItemClickListe
 
             tableRow.setVisibility(View.VISIBLE);
             currentrow = currentrow + 1;
-            //we create listener for each VillageTable row when clicked a alert dialog will be displayed
+            //we create listener for each table row when clicked a alert dialog will be displayed
             //from where user can update or delete the row
             tableRow.setOnClickListener(new OnClickListener() {
                 public void onClick(View v) {
@@ -1101,7 +1099,7 @@ public class AndroidDatabaseManager extends Activity implements OnItemClickListe
         indexInfo.index = currentrow;
 
 
-        // when user clicks on the previous button update the VillageTable with the previous 10 tuples from the database
+        // when user clicks on the previous button update the table with the previous 10 tuples from the database
         previous.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -1145,7 +1143,7 @@ public class AndroidDatabaseManager extends Activity implements OnItemClickListe
             }
         });
 
-        // when user clicks on the next button update the VillageTable with the next 10 tuples from the database
+        // when user clicks on the next button update the table with the next 10 tuples from the database
         next.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -1191,7 +1189,7 @@ public class AndroidDatabaseManager extends Activity implements OnItemClickListe
 
     }
 
-    //a static class to save cursor,VillageTable values etc which is used by functions to share data in the program.
+    //a static class to save cursor,table values etc which is used by functions to share data in the program.
     static class indexInfo {
         public static int index = 10;
         public static int numberofpages = 0;
