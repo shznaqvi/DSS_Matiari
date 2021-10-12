@@ -60,6 +60,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
+        Log.d(TAG, "onCreate(users): " + SQL_CREATE_USERS);
         db.execSQL(SQL_CREATE_USERS);
         db.execSQL(SQL_CREATE_HOUSEHOLDS);
         db.execSQL(SQL_CREATE_MWRA);

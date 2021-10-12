@@ -60,7 +60,7 @@ object CreateTable {
             + UsersTable.COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
             + UsersTable.COLUMN_USERNAME + " TEXT,"
             + UsersTable.COLUMN_PASSWORD + " TEXT,"
-            + UsersTable.COLUMN_FULLNAME + " TEXT"
+            + UsersTable.COLUMN_FULLNAME + " TEXT,"
             + UsersTable.COLUMN_DESIGNATION + " TEXT"
             + " );"
             )
