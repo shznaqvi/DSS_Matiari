@@ -66,6 +66,8 @@ public class SectionBActivity extends AppCompatActivity {
             MainApp.mwra.setDeviceId(MainApp.deviceid);
             MainApp.mwra.setHdssId(households.getHdssId());
             MainApp.mwra.setAppver(MainApp.versionName + "." + MainApp.versionCode);
+
+            MainApp.mwra.setRa01(MainApp.households.getRa01());
         }
 
         setTitle(R.string.marriedwomenregistration_mainheading);

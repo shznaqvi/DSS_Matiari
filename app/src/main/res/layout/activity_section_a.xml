@@ -84,6 +84,7 @@
                             android:hint="YYYY-MM-DD"
                             android:text="@={household.ra01}"
                             app:dateFormat="yyyy-MM-dd"
+                            android:enabled="@{!household.ra01.equals(``)}"
                             app:maxDate="CR_DATE"
                             app:theme="@style/DatePickerEditTextDialogTheme" />
                     </LinearLayout>
