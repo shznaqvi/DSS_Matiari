@@ -160,6 +160,7 @@ public class FormsAdapter extends RecyclerView.Adapter<FormsAdapter.ViewHolder> 
         Intent intent = new Intent(c, SectionAActivity.class);
         intent.putExtra("position", position);
         MainApp.selectedHousehold = position;
+       // MainApp.households = MainApp.householdList.get(MainApp.selectedHousehold);
         intent.putExtra("position", position);
 
         ((Activity) c).startActivityForResult(intent, 2);

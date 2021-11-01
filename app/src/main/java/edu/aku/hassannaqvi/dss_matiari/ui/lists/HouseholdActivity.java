@@ -163,7 +163,7 @@ public class HouseholdActivity extends AppCompatActivity {
     }
 
     public void addHousehold() {
-
+        MainApp.households = new Households();
         // Copy common variables from existing Households to new Households
         // MainApp.households = new Households(MainApp.households);
 

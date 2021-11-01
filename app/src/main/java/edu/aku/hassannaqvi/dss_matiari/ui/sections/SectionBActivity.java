@@ -54,7 +54,6 @@ public class SectionBActivity extends AppCompatActivity {
 
         // set default model values if new mwra
         if (mwra.getRb01().equals("")) {
-
             mwra.setRb01(String.valueOf(mwraCount + 1));
             MainApp.mwra.setUuid(households.getUid());
             MainApp.mwra.setUcCode(households.getUcCode());
