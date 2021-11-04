@@ -9,7 +9,7 @@ android {
         dataBinding true
     }
     compileSdkVersion 31
-    buildToolsVersion "30.0.3"
+    buildToolsVersion '31.0.0'
 
     Properties versionProps = new Properties()
     def versionPropsFile = file('version.properties')
@@ -56,7 +56,7 @@ android {
             applicationId "edu.aku.hassannaqvi.dss_matiari"
             versionCode versionBuild
             versionName "${versionNumber}.${versionPatch}${versionType}"
-            minSdkVersion 31
+            minSdkVersion 29
             targetSdkVersion 31
         }
 
