@@ -47,7 +47,7 @@
 
 
                 <!-- rc01  Input-Numeric   -->
-                <androidx.cardview.widget.CardView
+               <!-- <androidx.cardview.widget.CardView
                     android:id="@+id/fldGrpCVrb01"
                     style="@style/cardView">
 
@@ -93,7 +93,7 @@
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
 
-                <!-- rc02  Input   -->
+                &lt;!&ndash; rc02  Input   &ndash;&gt;
                 <androidx.cardview.widget.CardView
                     android:id="@+id/fldGrpCVrb02"
                     style="@style/cardView">
@@ -134,7 +134,7 @@
                             android:text="@={outcome.rc02}" />
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
-                <!--
+                &lt;!&ndash;
 
                                 &lt;!&ndash; rb04  Input   &ndash;&gt;
                                 <androidx.cardview.widget.CardView
@@ -201,8 +201,8 @@
                                         </LinearLayout>
                                     </LinearLayout>
                                 </androidx.cardview.widget.CardView>
-                -->
-                <!--
+                &ndash;&gt;
+                &lt;!&ndash;
 
                                 &lt;!&ndash; rb05  Input   &ndash;&gt;
                                 <androidx.cardview.widget.CardView
@@ -249,10 +249,10 @@
                                             app:type="range" />
                                     </LinearLayout>
                                 </androidx.cardview.widget.CardView>
-                -->
+                &ndash;&gt;
 
 
-                <!-- rc06  Radio   -->
+                &lt;!&ndash; rc06  Radio   &ndash;&gt;
                 <androidx.cardview.widget.CardView
                     android:id="@+id/fldGrpCVrb06"
                     style="@style/cardView">
@@ -324,11 +324,11 @@
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
 
-                <!-- rc03  Input   -->
+                &lt;!&ndash; rc03  Input   &ndash;&gt;
                 <androidx.cardview.widget.CardView
                     android:id="@+id/fldGrpCVrb03"
                     style="@style/cardView">
-                    <!--android:visibility='@{outcome.Rb06.equals("4")? View.GONE : View.VISIBLE}'-->
+                    &lt;!&ndash;android:visibility='@{outcome.Rb06.equals("4")? View.GONE : View.VISIBLE}'&ndash;&gt;
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -374,7 +374,7 @@
                 </androidx.cardview.widget.CardView>
 
 
-                <!-- rc07  Radio   -->
+                &lt;!&ndash; rc07  Radio   &ndash;&gt;
                 <androidx.cardview.widget.CardView
                     android:id="@+id/fldGrpCVrb07"
                     style="@style/cardView"
@@ -433,13 +433,13 @@
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
 
-                <!-- rc08  Input   -->
+                &lt;!&ndash; rc08  Input   &ndash;&gt;
                 <androidx.cardview.widget.CardView
                     android:id="@+id/fldGrpCVrb08"
                     style="@style/cardView"
                     android:visibility='@{ outcome.Rb07.equals("1")? View.VISIBLE : View.GONE}'>
 
-                    <!--android:visibility='@{outcome.Rb06.equals("4") || outcome.Rb07.equals("2")? View.GONE : View.VISIBLE}'-->
+                    &lt;!&ndash;android:visibility='@{outcome.Rb06.equals("4") || outcome.Rb07.equals("2")? View.GONE : View.VISIBLE}'&ndash;&gt;
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -479,12 +479,12 @@
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
 
-                <!-- rc09  Input   -->
+                &lt;!&ndash; rc09  Input   &ndash;&gt;
                 <androidx.cardview.widget.CardView
                     android:id="@+id/fldGrpCVrb09"
                     style="@style/cardView"
                     android:visibility='@{!outcome.Rb08.equals("")? View.VISIBLE : View.GONE}'>
-                    <!--android:visibility='@{outcome.Rb06.equals("4")|| outcome.Rb07.equals("2")? View.GONE : View.VISIBLE}'-->
+                    &lt;!&ndash;android:visibility='@{outcome.Rb06.equals("4")|| outcome.Rb07.equals("2")? View.GONE : View.VISIBLE}'&ndash;&gt;
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -527,7 +527,7 @@
 
 
                     </LinearLayout>
-                </androidx.cardview.widget.CardView>
+                </androidx.cardview.widget.CardView>-->
 
                 <!--EndButton LinearLayout-->
                 <LinearLayout

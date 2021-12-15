@@ -49,8 +49,10 @@ public class SectionDActivity extends AppCompatActivity {
         // setListener();
 
         // set default model values if new mwra
-        if (MainApp.pregnancy.getRb01().equals("")) {
-            MainApp.pregnancy.setRb01(String.valueOf(mwraCount + 1));
+        /*if
+        (MainApp.pregnancy.getRb01().equals(""))
+        {
+            //MainApp.pregnancy.setRb01(String.valueOf(mwraCount + 1));
             MainApp.pregnancy.setUuid(households.getUid());
             MainApp.pregnancy.setUcCode(households.getUcCode());
             MainApp.pregnancy.setVillageCode(households.getVillageCode());
@@ -64,8 +66,8 @@ public class SectionDActivity extends AppCompatActivity {
             MainApp.pregnancy.setHdssId(households.getHdssId());
             MainApp.pregnancy.setAppver(MainApp.versionName + "." + MainApp.versionCode);
 
-            MainApp.pregnancy.setRa01(MainApp.households.getRa01());
-        }
+            //MainApp.pregnancy.setRa01(MainApp.households.getRa01());
+        }*/
 
         setTitle(R.string.marriedwomenregistration_mainheading);
         setImmersive(true);

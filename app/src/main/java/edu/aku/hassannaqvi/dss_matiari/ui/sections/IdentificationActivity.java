@@ -26,6 +26,8 @@ import edu.aku.hassannaqvi.dss_matiari.models.Followups;
 import edu.aku.hassannaqvi.dss_matiari.models.Households;
 import edu.aku.hassannaqvi.dss_matiari.models.Villages;
 import edu.aku.hassannaqvi.dss_matiari.ui.EndingActivity;
+import edu.aku.hassannaqvi.dss_matiari.ui.lists.FPHouseholdActivity;
+import edu.aku.hassannaqvi.dss_matiari.ui.lists.FPMwraActivity;
 import edu.aku.hassannaqvi.dss_matiari.ui.lists.HouseholdActivity;
 
 public class IdentificationActivity extends AppCompatActivity {
@@ -65,7 +67,7 @@ public class IdentificationActivity extends AppCompatActivity {
             case 2:
                 bi.btnContinue.setText("Open Followups List");
                 MainApp.followups = new Followups();
-                openIntent = new Intent(this, HouseholdActivity.class);
+                openIntent = new Intent(this, FPHouseholdActivity.class);
                 break;
 
 

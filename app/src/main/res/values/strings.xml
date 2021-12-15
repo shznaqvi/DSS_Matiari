@@ -9,6 +9,7 @@
 
     <string name="demographicinformation_mainheading">Demographic Information</string>
     <string name="marriedwomenregistration_mainheading">Married Women Registration</string>
+    <string name="pregnancy_mainheading">Pregnancy Information (If previously pregnant)</string>
 
     <string name="btnSync">Download Data</string>
     <string name="btnUpload">Upload Data</string>
@@ -135,10 +136,21 @@
     <string name="rc07">Pregnancy Status</string>
     <string name="rc0701">Pregnant</string>
     <string name="rc0702">Not Pregnant</string>
-    <string name="rc08">If pregnant enter LMP Date</string>
-    <string name="rc08_info">DD/MM/YYYY</string>
-    <string name="rc09">EDD Date [auto-calculated]</string>
-    <string name="rc09_info">DD/MM/YYYY</string>
+    <string name="rc08">Is Pregnancy Continued?</string>
+    <string name="rc0801">Yes</string>
+    <string name="rc0802">No</string>
+    <string name="rc09">Pregnancy Outcome</string>
+    <string name="rc0901">Live Birth</string>
+    <string name="rc0902">Still Birth</string>
+    <string name="rc0903">Abortion / Miscarriage</string>
+    <string name="rc0904">False PW</string>
+    <string name="rc10">Date of Delivery</string>
+    <string name="rc10_info">DD/MM/YYYY Use 98/98/9998 if not known</string>
+    <string name="rc11">Status of Pregnancy Outcome</string>
+    <string name="rc1101">Single</string>
+    <string name="rc1102">Twins</string>
+    <string name="rc1103">Triplets</string>
+
     <string name='Q_a17_c' translatable="false">a17_c</string>
     <string name='Q_ra_lat' translatable="false">ra_lat</string>
     <string name='Q_ra_lon' translatable="false">ra_lon</string>
@@ -189,6 +201,8 @@
     <string name='Q_rc07' translatable="false">rc07</string>
     <string name='Q_rc08' translatable="false">rc08</string>
     <string name='Q_rc09' translatable="false">rc09</string>
+    <string name='Q_rc10' translatable="false">rc10</string>
+    <string name='Q_rc11' translatable="false">rc11</string>
 
     <!--
     This string is used for square devices and overridden by hello_world in
