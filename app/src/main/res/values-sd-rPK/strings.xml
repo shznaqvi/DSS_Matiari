@@ -3,6 +3,7 @@
 
     <string name="open_surveillance_form">OPEN SURVEILLANCE FORM</string>
     <string name="open_mwra_registration_form">OPEN MWRA REGISTRATION FORM</string>
+    <string name="open_mwra_followup_form">OPEN MWRA FOLLOWUP FORM</string>
     <string name="open_onhold_form">UPDATE ONHOLD FORM</string>
     <string name="open_followup_form">OPEN FOLLOW-UP FORM</string>
 
@@ -81,14 +82,6 @@
     <string name="rb_hno">گھر جو نمبر </string>
     <string name="rb_sid">سڃاڻپ جي آء ڊي </string>
     <string name="rb_ufn">فيملي جو مخصو ص نمبر</string>
-    <string name="rb01">عورت جو سڃاڻپ نمبر</string>
-    <string name="rb02"> عورت جو نالو</string>
-    <!-- <string name="rb03">ازدواجي حيثيت</string>
-     <string name="rb03_a">شادي شده</string>
-     <string name="rb03_b">طلاق شده</string>
-     <string name="rb03_c">بيواه</string>
-     <string name="rb03_d">غير شادي شده</string>
-     <string name="rb05_info">جيڪڏهن معلوم ناهي</string>-->
     <string name="ra03">جو نالو  CHW</string>
     <string name="ra02">جو ڪوڊ نمبرCHW</string>
     <string name="ra05">ٽيم ليڊر جو نالو </string>
@@ -106,6 +99,21 @@
     <string name="ra20_a">ها</string>
     <string name="ra20_b"> نه </string>
     <string name="ra10">سڃاڻپ جي آء ڊي </string>
+    <string name="ra11b">بند پيل يا ڪو به اهل جواٻ ڏيندر موجود نه آهي</string>
+    <string name="ra11c">انڪار ڪيو</string>
+    <string name="ra11e">۔18 ۽ 49 سالن جي وچ ۾ ڪا به عورت ناهي </string>
+    <string name="ra11d">ٻيو ڪجھ وضا حت ڪريو</string>
+    <string name="ra1201">مڪمل</string>
+    <string name="ra13a">مڪمل</string>
+    <string name="ra1202">بند پيل يا ڪو به اهل جواٻ ڏيندر موجود نه آهي</string>
+    <string name="ra13b">بند پيل يا ڪو به اهل جواٻ ڏيندر موجود نه آهي</string>
+    <string name="ra1203">انڪار ڪيو</string>
+    <string name="ra13c">انڪار ڪيو</string>
+    <string name="ra1296">ٻيو ڪجھ وضا حت ڪريو</string>
+    <string name="ra13">"دوري جو نتيجو "</string>
+
+    <string name="rb01">عورت جو سڃاڻپ نمبر</string>
+    <string name="rb02"> عورت جو نالو</string>
     <string name="rb03">مڙس/پيء جو نالو</string>
     <string name="rb03h">مڙس جو نالو</string>
     <string name="rb03f">پيءُ جو نالو</string>
@@ -123,18 +131,25 @@
     <string name="rb08_info">DD/MM/YYYY</string>
     <string name="rb09">متوقع ويم جي تاريخ</string>
     <string name="rb09_info">DD/MM/YYYY</string>
-    <string name="ra11b">بند پيل يا ڪو به اهل جواٻ ڏيندر موجود نه آهي</string>
-    <string name="ra11c">انڪار ڪيو</string>
-    <string name="ra11e">۔18 ۽ 49 سالن جي وچ ۾ ڪا به عورت ناهي </string>
-    <string name="ra11d">ٻيو ڪجھ وضا حت ڪريو</string>
-    <string name="ra1201">مڪمل</string>
-    <string name="ra13a">مڪمل</string>
-    <string name="ra1202">بند پيل يا ڪو به اهل جواٻ ڏيندر موجود نه آهي</string>
-    <string name="ra13b">بند پيل يا ڪو به اهل جواٻ ڏيندر موجود نه آهي</string>
-    <string name="ra1203">انڪار ڪيو</string>
-    <string name="ra13c">انڪار ڪيو</string>
-    <string name="ra1296">ٻيو ڪجھ وضا حت ڪريو</string>
-    <string name="ra13">"دوري جو نتيجو "</string>
+
+    <string name="rc01">عورت جو سڃاڻپ نمبر</string>
+    <string name="rc02"> عورت جو نالو</string>
+    <string name="rc03">مڙس/پيء جو نالو</string>
+    <string name="rc03h">مڙس جو نالو</string>
+    <string name="rc03f">پيءُ جو نالو</string>
+    <string name="rc06">ازدواجي حيثيت</string>
+    <string name="rc0601">شادي شده</string>
+    <string name="rc0602">طلاق شده</string>
+    <string name="rc0603"> بيواه</string>
+    <string name="rc0604">غير شادي شده</string>
+    <string name="rc07">حمل جي حيثيت</string>
+    <string name="rc0701">حمل سان آهي</string>
+    <string name="rc0702">حمل سان نه آهي</string>
+    <string name="rc08">جيڪڏهن حمل سان آهي ته آخري ماھواري جی تاريخ لکو</string>
+    <string name="rc08_info">DD/MM/YYYY</string>
+    <string name="rc09">متوقع ويم جي تاريخ</string>
+    <string name="rc09_info">DD/MM/YYYY</string>
+
     <string name="rb04_info">DD/MM/YYYY Use 98/98/9998 if not known</string>
     <string name="istatus"> دوري جو نتيجو</string>
     <string name="istatusa">مڪمل</string>

@@ -22,6 +22,7 @@ import edu.aku.hassannaqvi.dss_matiari.R;
 import edu.aku.hassannaqvi.dss_matiari.core.MainApp;
 import edu.aku.hassannaqvi.dss_matiari.database.DatabaseHelper;
 import edu.aku.hassannaqvi.dss_matiari.databinding.ActivityIdentificationBinding;
+import edu.aku.hassannaqvi.dss_matiari.models.Followups;
 import edu.aku.hassannaqvi.dss_matiari.models.Households;
 import edu.aku.hassannaqvi.dss_matiari.models.Villages;
 import edu.aku.hassannaqvi.dss_matiari.ui.EndingActivity;
@@ -61,23 +62,12 @@ public class IdentificationActivity extends AppCompatActivity {
                 MainApp.households = new Households();
                 openIntent = new Intent(this, HouseholdActivity.class);
                 break;
-           /* case 2:
-                bi.btnContinue.setText("Open Anthro Households");
-                anthro = new Anthro();
-                openIntent = new Intent(this, SectionAnthroActivity.class);
+            case 2:
+                bi.btnContinue.setText("Open Followups List");
+                MainApp.followups = new Followups();
+                openIntent = new Intent(this, HouseholdActivity.class);
                 break;
-            case 3:
-                bi.btnContinue.setText("Open Blood Households");
-                //     MainApp.sample = new Sample();
-                openIntent = new Intent(this, SectionSamplesActivity.class);
-                openIntent.putExtra("type", "1"); // BLOOD - 1
-                break;
-            case 4:
-                bi.btnContinue.setText("Open Stool Households");
-                //    MainApp.sample = new Sample();
-                openIntent = new Intent(this, SectionSamplesActivity.class);
-                openIntent.putExtra("type", "2"); // STOOL - 2
-                break;*/
+
 
         }
 
@@ -201,6 +191,7 @@ public class IdentificationActivity extends AppCompatActivity {
         if (!formValidation()) return;
         switch (idType) {
             case 1:
+            case 2:
                 // if (!hhExists()) {
                 MainApp.selectedUC = ucCodes.get(bi.ra06.getSelectedItemPosition());
                 MainApp.selectedVillage = villageCodes.get(bi.ra07.getSelectedItemPosition());

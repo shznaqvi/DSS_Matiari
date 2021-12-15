@@ -680,7 +680,8 @@ public class Households extends BaseObservable implements Observable {
 
     public void setRa20(String ra20) {
         this.ra20 = ra20;
-        if (!this.ra20.equals("1")) {
+        // removed skip as per Sir Imran's instructions
+       /* if (!this.ra20.equals("1")) {
             setRa17_a1("");
             setRa17_a2("");
             setRa17_b1("");
@@ -690,7 +691,7 @@ public class Households extends BaseObservable implements Observable {
             setRa17_d1("");
             setRa17_d2("");
 
-        }
+        }*/
         notifyChange(BR.ra20);
     }
 
@@ -750,25 +751,25 @@ public class Households extends BaseObservable implements Observable {
     }
 
     public Households Hydrate(Cursor cursor) throws JSONException {
-        this.id = cursor.getString(cursor.getColumnIndex(HouseholdTable.COLUMN_ID));
-        this.uid = cursor.getString(cursor.getColumnIndex(HouseholdTable.COLUMN_UID));
-        this.userName = cursor.getString(cursor.getColumnIndex(HouseholdTable.COLUMN_USERNAME));
-        this.sysDate = cursor.getString(cursor.getColumnIndex(HouseholdTable.COLUMN_SYSDATE));
-        this.hdssId = cursor.getString(cursor.getColumnIndex(HouseholdTable.COLUMN_HDSSID));
-        this.ucCode = cursor.getString(cursor.getColumnIndex(HouseholdTable.COLUMN_UC_CODE));
-        this.villageCode = cursor.getString(cursor.getColumnIndex(HouseholdTable.COLUMN_VILLAGE_CODE));
-        this.hhNo = cursor.getString(cursor.getColumnIndex(HouseholdTable.COLUMN_HOUSEHOLD_NO));
-        this.structureNo = cursor.getString(cursor.getColumnIndex(HouseholdTable.COLUMN_STRUCTURE_NO));
-        this.visitNo = cursor.getString(cursor.getColumnIndex(HouseholdTable.COLUMN_VISIT_NO));
+        this.id = cursor.getString(cursor.getColumnIndexOrThrow(HouseholdTable.COLUMN_ID));
+        this.uid = cursor.getString(cursor.getColumnIndexOrThrow(HouseholdTable.COLUMN_UID));
+        this.userName = cursor.getString(cursor.getColumnIndexOrThrow(HouseholdTable.COLUMN_USERNAME));
+        this.sysDate = cursor.getString(cursor.getColumnIndexOrThrow(HouseholdTable.COLUMN_SYSDATE));
+        this.hdssId = cursor.getString(cursor.getColumnIndexOrThrow(HouseholdTable.COLUMN_HDSSID));
+        this.ucCode = cursor.getString(cursor.getColumnIndexOrThrow(HouseholdTable.COLUMN_UC_CODE));
+        this.villageCode = cursor.getString(cursor.getColumnIndexOrThrow(HouseholdTable.COLUMN_VILLAGE_CODE));
+        this.hhNo = cursor.getString(cursor.getColumnIndexOrThrow(HouseholdTable.COLUMN_HOUSEHOLD_NO));
+        this.structureNo = cursor.getString(cursor.getColumnIndexOrThrow(HouseholdTable.COLUMN_STRUCTURE_NO));
+        this.visitNo = cursor.getString(cursor.getColumnIndexOrThrow(HouseholdTable.COLUMN_VISIT_NO));
 
-        this.deviceId = cursor.getString(cursor.getColumnIndex(HouseholdTable.COLUMN_DEVICEID));
-        this.deviceTag = cursor.getString(cursor.getColumnIndex(HouseholdTable.COLUMN_DEVICETAGID));
-        this.appver = cursor.getString(cursor.getColumnIndex(HouseholdTable.COLUMN_APPVERSION));
-        this.iStatus = cursor.getString(cursor.getColumnIndex(HouseholdTable.COLUMN_ISTATUS));
-        this.synced = cursor.getString(cursor.getColumnIndex(HouseholdTable.COLUMN_SYNCED));
-        this.syncDate = cursor.getString(cursor.getColumnIndex(HouseholdTable.COLUMN_SYNCED_DATE));
+        this.deviceId = cursor.getString(cursor.getColumnIndexOrThrow(HouseholdTable.COLUMN_DEVICEID));
+        this.deviceTag = cursor.getString(cursor.getColumnIndexOrThrow(HouseholdTable.COLUMN_DEVICETAGID));
+        this.appver = cursor.getString(cursor.getColumnIndexOrThrow(HouseholdTable.COLUMN_APPVERSION));
+        this.iStatus = cursor.getString(cursor.getColumnIndexOrThrow(HouseholdTable.COLUMN_ISTATUS));
+        this.synced = cursor.getString(cursor.getColumnIndexOrThrow(HouseholdTable.COLUMN_SYNCED));
+        this.syncDate = cursor.getString(cursor.getColumnIndexOrThrow(HouseholdTable.COLUMN_SYNCED_DATE));
 
-        s1Hydrate(cursor.getString(cursor.getColumnIndex(HouseholdTable.COLUMN_SA)));
+        s1Hydrate(cursor.getString(cursor.getColumnIndexOrThrow(HouseholdTable.COLUMN_SA)));
 
 
         return this;

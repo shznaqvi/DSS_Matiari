@@ -23,7 +23,7 @@ import edu.aku.hassannaqvi.dss_matiari.BR;
 import edu.aku.hassannaqvi.dss_matiari.contracts.TableContracts.MWRATable;
 import edu.aku.hassannaqvi.dss_matiari.core.MainApp;
 
-public class MWRA extends BaseObservable implements Observable {
+public class Followups extends BaseObservable implements Observable {
 
     private final String TAG = "MWRA";
     //Not saving in DB
@@ -59,19 +59,15 @@ public class MWRA extends BaseObservable implements Observable {
     private String sB = StringUtils.EMPTY;
 
     private String round = "";
-    private String ra01 = "";
+    private String rc01 = "";
+    private String rc02 = "";
+    private String rc03 = "";
+    private String rc06 = "";
+    private String rc07 = "";
+    private String rc08 = "";
+    private String rc09 = "";
 
-    private String rb01 = "";
-    private String rb02 = "";
-    private String rb03 = "";
-    private String rb04 = "";
-    private String rb05 = "";
-    private String rb06 = "";
-    private String rb07 = "";
-    private String rb08 = "";
-    private String rb09 = "";
-
-    public MWRA() {
+    public Followups() {
 
         setRound(MainApp.round);
         setSysDate(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.ENGLISH).format(new Date().getTime()));
@@ -262,116 +258,87 @@ public class MWRA extends BaseObservable implements Observable {
 
 
     @Bindable
-    public String getRb01() {
-        return rb01;
+    public String getRc01() {
+        return rc01;
     }
 
-    public void setRb01(String rb01) {
-        this.rb01 = rb01;
+    public void setRc01(String rc01) {
+        this.rc01 = rc01;
         notifyChange(BR.rb01);
     }
 
-    @Bindable
-    public String getRa01() {
-        return ra01;
-    }
-
-    public void setRa01(String ra01) {
-        this.ra01 = ra01;
-        notifyChange(BR.ra01);
-    }
 
     @Bindable
-    public String getRb02() {
-        return rb02;
+    public String getRc02() {
+        return rc02;
     }
 
-    public void setRb02(String rb02) {
-        this.rb02 = rb02;
+    public void setRc02(String rc02) {
+        this.rc02 = rc02;
         notifyChange(BR.rb02);
     }
 
     @Bindable
-    public String getRb03() {
-        return rb03;
+    public String getRc03() {
+        return rc03;
     }
 
-    public void setRb03(String rb03) {
-        this.rb03 = rb03;
+    public void setRc03(String rc03) {
+        this.rc03 = rc03;
         notifyChange(BR.rb03);
     }
 
-    @Bindable
-    public String getRb04() {
-        return rb04;
-    }
-
-    public void setRb04(String rb04) {
-        this.rb04 = rb04;
-        setRb05(this.rb04.equals("98") ? "" : this.rb05);
-        notifyChange(BR.rb04);
-    }
 
     @Bindable
-    public String getRb05() {
-        return rb05;
+    public String getRc06() {
+        return rc06;
     }
 
-    public void setRb05(String rb05) {
-        this.rb05 = rb05;
-        notifyChange(BR.rb05);
-    }
-
-    @Bindable
-    public String getRb06() {
-        return rb06;
-    }
-
-    public void setRb06(String rb06) {
-        this.rb06 = rb06;
-        Log.d(TAG, "setRc06: " + this.rb06);
-        //setRc03(this.rb06.equals("4") ? "" : this.rb03);
-        setRb07(this.rb06.equals("4") ? "" : this.rb07);
-/*        setRc08(this.rb06.equals("4") ? "" : this.rb08);
-        setRc09(this.rb06.equals("4") ? "" : this.rb09);*/
+    public void setRc06(String rc06) {
+        this.rc06 = rc06;
+        Log.d(TAG, "setRc06: " + this.rc06);
+        //setRc03(this.rc06.equals("4") ? "" : this.rc03);
+        setRc07(this.rc06.equals("4") ? "" : this.rc07);
+/*        setRc08(this.rc06.equals("4") ? "" : this.rc08);
+        setRc09(this.rc06.equals("4") ? "" : this.rc09);*/
         notifyChange(BR.rb06);
     }
 
     @Bindable
-    public String getRb07() {
-        return rb07;
+    public String getRc07() {
+        return rc07;
     }
 
-    public void setRb07(String rb07) {
-        this.rb07 = rb07;
-        setRb08(this.rb07.equals("1") ? this.rb08 : "");
-        setRb09(this.rb07.equals("1") ? this.rb09 : "");
-        Log.d(TAG, "setRc07: " + this.rb07);
+    public void setRc07(String rc07) {
+        this.rc07 = rc07;
+        setRc08(this.rc07.equals("1") ? this.rc08 : "");
+        setRc09(this.rc07.equals("1") ? this.rc09 : "");
+        Log.d(TAG, "setRc07: " + this.rc07);
         notifyChange(BR.rb07);
     }
 
     @Bindable
-    public String getRb08() {
-        return rb08;
+    public String getRc08() {
+        return rc08;
     }
 
-    public void setRb08(String rb08) {
-        this.rb08 = rb08;
-        if (!this.rb08.equals("")) {
-            setRb09(calcEDD());
+    public void setRc08(String rc08) {
+        this.rc08 = rc08;
+        if (!this.rc08.equals("")) {
+            setRc09(calcEDD());
         } else {
-            setRb09("");
+            setRc09("");
         }
         notifyChange(BR.rb08);
     }
 
     @Bindable
-    public String getRb09() {
-        return rb09;
+    public String getRc09() {
+        return rc09;
     }
 
-    public void setRb09(String rb09) {
-        this.rb09 = rb09;
+    public void setRc09(String rc09) {
+        this.rc09 = rc09;
         notifyChange(BR.rb09);
     }
 
@@ -398,7 +365,7 @@ public class MWRA extends BaseObservable implements Observable {
         }
     }
 
-    public MWRA Hydrate(Cursor cursor) throws JSONException {
+    public Followups Hydrate(Cursor cursor) throws JSONException {
         this.id = cursor.getString(cursor.getColumnIndexOrThrow(MWRATable.COLUMN_ID));
         this.uid = cursor.getString(cursor.getColumnIndexOrThrow(MWRATable.COLUMN_UID));
         this.uuid = cursor.getString(cursor.getColumnIndexOrThrow(MWRATable.COLUMN_UUID));
@@ -427,17 +394,15 @@ public class MWRA extends BaseObservable implements Observable {
 
             JSONObject json = null;
             json = new JSONObject(string);
-            this.rb01 = json.getString("rb01");
-            this.ra01 = json.getString("ra01");
+            this.rc01 = json.getString("rc01");
             this.round = json.getString("round");
-            this.rb02 = json.getString("rb02");
-            this.rb03 = json.getString("rb03");
-            this.rb04 = json.getString("rb04");
-            this.rb05 = json.getString("rb05");
-            this.rb06 = json.getString("rb06");
-            this.rb07 = json.getString("rb07");
-            this.rb08 = json.getString("rb08");
-            this.rb09 = json.getString("rb09");
+            this.rc02 = json.getString("rc02");
+            this.rc03 = json.getString("rc03");
+
+            this.rc06 = json.getString("rc06");
+            this.rc07 = json.getString("rc07");
+            this.rc08 = json.getString("rc08");
+            this.rc09 = json.getString("rc09");
 
         }
     }
@@ -447,17 +412,15 @@ public class MWRA extends BaseObservable implements Observable {
         JSONObject json = new JSONObject();
 
 
-        json.put("rb01", rb01)
-                .put("ra01", ra01)
+        json.put("rc01", rc01)
                 .put("round", round)
-                .put("rb02", rb02)
-                .put("rb03", rb03)
-                .put("rb04", rb04)
-                .put("rb05", rb05)
-                .put("rb06", rb06)
-                .put("rb07", rb07)
-                .put("rb08", rb08)
-                .put("rb09", rb09);
+                .put("rc02", rc02)
+                .put("rc03", rc03)
+
+                .put("rc06", rc06)
+                .put("rc07", rc07)
+                .put("rc08", rc08)
+                .put("rc09", rc09);
 
         return json.toString();
     }
@@ -508,7 +471,7 @@ public class MWRA extends BaseObservable implements Observable {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
 
         try {
-            cal.setTime(sdf.parse(getRb08()));// all done
+            cal.setTime(sdf.parse(getRc08()));// all done
 
             // Set EDD by default
             cal.add(Calendar.DAY_OF_YEAR, 7);

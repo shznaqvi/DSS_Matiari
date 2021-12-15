@@ -14,8 +14,11 @@ import java.util.List;
 
 import edu.aku.hassannaqvi.dss_matiari.BuildConfig;
 import edu.aku.hassannaqvi.dss_matiari.R;
+import edu.aku.hassannaqvi.dss_matiari.models.Followups;
 import edu.aku.hassannaqvi.dss_matiari.models.Households;
 import edu.aku.hassannaqvi.dss_matiari.models.MWRA;
+import edu.aku.hassannaqvi.dss_matiari.models.Outcome;
+import edu.aku.hassannaqvi.dss_matiari.models.Pregnancy;
 import edu.aku.hassannaqvi.dss_matiari.models.Users;
 
 
@@ -81,6 +84,9 @@ public class MainApp extends Application {
     public static String selectedVillage = "0000";
     public static String leaderCode;
     public static String selectedUC = "00";
+    public static Followups followups;
+    public static Pregnancy pregnancy;
+    public static Outcome outcome;
 
     public static void hideSystemUI(View decorView) {
         // Enables regular immersive mode.

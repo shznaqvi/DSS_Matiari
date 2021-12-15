@@ -7,8 +7,6 @@ import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.sharedPref;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
@@ -26,18 +24,17 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
-import java.util.concurrent.TimeUnit;
 
 import edu.aku.hassannaqvi.dss_matiari.R;
 import edu.aku.hassannaqvi.dss_matiari.contracts.TableContracts;
 import edu.aku.hassannaqvi.dss_matiari.core.MainApp;
 import edu.aku.hassannaqvi.dss_matiari.database.DatabaseHelper;
-import edu.aku.hassannaqvi.dss_matiari.databinding.ActivitySectionBBinding;
+import edu.aku.hassannaqvi.dss_matiari.databinding.ActivitySectionCBinding;
 
-public class SectionBActivity extends AppCompatActivity {
+public class SectionCActivity extends AppCompatActivity {
 
-    private static final String TAG = "SectionBActivity";
-    ActivitySectionBBinding bi;
+    private static final String TAG = "SectionCActivity";
+    ActivitySectionCBinding bi;
     private DatabaseHelper db;
 
     @Override
@@ -45,28 +42,30 @@ public class SectionBActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         String lang = sharedPref.getString("lang", "1");
         setTheme(lang.equals("1") ? R.style.AppThemeEnglish1 : R.style.AppThemeUrdu);
-        bi = DataBindingUtil.setContentView(this, R.layout.activity_section_b);
+        bi = DataBindingUtil.setContentView(this, R.layout.activity_section_c);
         bi.setCallback(this);
-        bi.setMwra(mwra);
+        bi.setFollowups(MainApp.followups);
 
 
-        setListener();
+        // setListener(); // Age calculation not required in followups
 
         // set default model values if new mwra
-        if (mwra.getRb01().equals("")) {
-            mwra.setRb01(String.valueOf(mwraCount + 1));
-            MainApp.mwra.setUuid(households.getUid());
-            MainApp.mwra.setUcCode(households.getUcCode());
-            MainApp.mwra.setVillageCode(households.getVillageCode());
-            MainApp.mwra.setStructureNo(households.getStructureNo());
-            MainApp.mwra.setHhNo(households.getHhNo());
-            MainApp.mwra.setUserName(MainApp.user.getUserName());
-            MainApp.mwra.setSysDate(households.getSysDate());
-            MainApp.mwra.setDeviceId(MainApp.deviceid);
-            MainApp.mwra.setHdssId(households.getHdssId());
-            MainApp.mwra.setAppver(MainApp.versionName + "." + MainApp.versionCode);
+        if (MainApp.followups.getRc01().equals("")) {
+            MainApp.followups.setRc01(String.valueOf(mwraCount + 1));
+            MainApp.followups.setUuid(households.getUid());
+            MainApp.followups.setUcCode(households.getUcCode());
+            MainApp.followups.setVillageCode(households.getVillageCode());
+            MainApp.followups.setStructureNo(households.getStructureNo());
+            MainApp.followups.setHhNo(households.getHhNo());
+            // TODO: set MWRA ID from downloaded data
+            //   MainApp.followups.setMWRAID(households.getHhNo());
+            MainApp.followups.setUserName(MainApp.user.getUserName());
+            MainApp.followups.setSysDate(households.getSysDate());
+            MainApp.followups.setDeviceId(MainApp.deviceid);
+            MainApp.followups.setHdssId(households.getHdssId());
+            MainApp.followups.setAppver(MainApp.versionName + "." + MainApp.versionCode);
 
-            MainApp.mwra.setRa01(MainApp.households.getRa01());
+            MainApp.followups.setRc01(MainApp.households.getRa01());
         }
 
         setTitle(R.string.marriedwomenregistration_mainheading);
@@ -90,7 +89,7 @@ public class SectionBActivity extends AppCompatActivity {
 
             sdf = new SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH);
 
-            // Set MinDob date to 50 years back from DOV
+          /*  // Set MinDob date to 50 years back from DOV
             cal.add(Calendar.YEAR, -50);
             String minDob = sdf.format(cal.getTime());
             cal.add(Calendar.YEAR, +50); // Calender reset to DOV
@@ -102,7 +101,7 @@ public class SectionBActivity extends AppCompatActivity {
             cal.add(Calendar.YEAR, +18); // Calender reset to DOV
             Log.d(TAG, "onCreate: " + maxDob);
 
-
+*/
             // Set MinLMP date to 2 months back from DOV
             cal.add(Calendar.MONTH, -9);
             String minLMP = sdf.format(cal.getTime());
@@ -123,24 +122,24 @@ public class SectionBActivity extends AppCompatActivity {
             cal.add(Calendar.MONTH, -9);
             Log.d(TAG, "onCreate: " + maxLMP);
 
-            // DOB
+          /*  // DOB
             bi.rb04.setMaxDate(maxDob);
-            bi.rb04.setMinDate(minDob);
+            bi.rb04.setMinDate(minDob);*/
 
             // LMP
-            bi.rb08.setMaxDate(maxLMP);
-            bi.rb08.setMinDate(minLMP);
+            bi.rc08.setMaxDate(maxLMP);
+            bi.rc08.setMinDate(minLMP);
 
             // EDD
-            bi.rb09.setMaxDate(maxEDD);
-            bi.rb09.setMinDate(minEDD);
+            bi.rc09.setMaxDate(maxEDD);
+            bi.rc09.setMinDate(minEDD);
 
         } catch (ParseException e) {
             e.printStackTrace();
         }
     }
 
-    private void setListener() {
+   /* private void setListener() {
         bi.rb04.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -185,7 +184,7 @@ public class SectionBActivity extends AppCompatActivity {
                     }
 
 
-/*
+*//*
                     String[] arrStr = mwra.getRb04().split("-");
                     String day, month, year;
                     year = arrStr.length > 0 ? arrStr[0] : "0";
@@ -195,11 +194,11 @@ public class SectionBActivity extends AppCompatActivity {
                         return;
                     }
                     bi.rb05.setText(DateUtilsKt.getAge(year, month, day, false));
-*/
+*//*
                 }
             }
         });
-    }
+    }*/
 
     public void btnContinue(View view) {
         if (!formValidation()) return;

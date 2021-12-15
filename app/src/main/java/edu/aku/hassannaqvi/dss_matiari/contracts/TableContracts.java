@@ -20,7 +20,6 @@ public class TableContracts {
         public static final String COLUMN_VISIT_NO = "visitNo";
         public static final String COLUMN_SA = "s1";
 
-
         public static final String COLUMN_DEVICEID = "deviceid";
         public static final String COLUMN_DEVICETAGID = "devicetagid";
         public static final String COLUMN_SYNCED = "synced";
@@ -45,6 +44,81 @@ public class TableContracts {
         public static final String COLUMN_STRUCTURE_NO = "structureNo";
         public static final String COLUMN_SB = "s2";
 
+
+        public static final String COLUMN_DEVICEID = "deviceid";
+        public static final String COLUMN_DEVICETAGID = "devicetagid";
+        public static final String COLUMN_SYNCED = "synced";
+        public static final String COLUMN_SYNCED_DATE = "synced_date";
+        public static final String COLUMN_APPVERSION = "appversion";
+        public static final String COLUMN_ISTATUS = "istatus";
+    }
+
+
+    public static abstract class FollowupsTable implements BaseColumns {
+        public static final String TABLE_NAME = "followups";
+        public static final String COLUMN_NAME_NULLABLE = "NULLHACK";
+        public static final String COLUMN_PROJECT_NAME = "projectName";
+        public static final String COLUMN_ID = "_id";
+        public static final String COLUMN_UID = "_uid";
+        public static final String COLUMN_UUID = "_uuid";
+        public static final String COLUMN_USERNAME = "username";
+        public static final String COLUMN_SYSDATE = "sysdate";
+        public static final String COLUMN_HDSSID = "hdssid";
+        public static final String COLUMN_UC_CODE = "ucCode";
+        public static final String COLUMN_VILLAGE_CODE = "villageCode";
+        public static final String COLUMN_HOUSEHOLD_NO = "hhNo";
+        public static final String COLUMN_STRUCTURE_NO = "structureNo";
+
+        public static final String COLUMN_SC = "s3";
+
+
+        public static final String COLUMN_DEVICEID = "deviceid";
+        public static final String COLUMN_DEVICETAGID = "devicetagid";
+        public static final String COLUMN_SYNCED = "synced";
+        public static final String COLUMN_SYNCED_DATE = "synced_date";
+        public static final String COLUMN_APPVERSION = "appversion";
+        public static final String COLUMN_ISTATUS = "istatus";
+    }
+
+    public static abstract class PregnancyTable implements BaseColumns {
+        public static final String TABLE_NAME = "pregnancy";
+        public static final String COLUMN_NAME_NULLABLE = "NULLHACK";
+        public static final String COLUMN_PROJECT_NAME = "projectName";
+        public static final String COLUMN_ID = "_id";
+        public static final String COLUMN_UID = "_uid";
+        public static final String COLUMN_UUID = "_uuid";
+        public static final String COLUMN_USERNAME = "username";
+        public static final String COLUMN_SYSDATE = "sysdate";
+        public static final String COLUMN_HDSSID = "hdssid";
+        public static final String COLUMN_UC_CODE = "ucCode";
+        public static final String COLUMN_VILLAGE_CODE = "villageCode";
+        public static final String COLUMN_HOUSEHOLD_NO = "hhNo";
+        public static final String COLUMN_STRUCTURE_NO = "structureNo";
+        public static final String COLUMN_SD = "s4";
+
+        public static final String COLUMN_DEVICEID = "deviceid";
+        public static final String COLUMN_DEVICETAGID = "devicetagid";
+        public static final String COLUMN_SYNCED = "synced";
+        public static final String COLUMN_SYNCED_DATE = "synced_date";
+        public static final String COLUMN_APPVERSION = "appversion";
+        public static final String COLUMN_ISTATUS = "istatus";
+    }
+
+    public static abstract class OutcomeTable implements BaseColumns {
+        public static final String TABLE_NAME = "outcome";
+        public static final String COLUMN_NAME_NULLABLE = "NULLHACK";
+        public static final String COLUMN_PROJECT_NAME = "projectName";
+        public static final String COLUMN_ID = "_id";
+        public static final String COLUMN_UID = "_uid";
+        public static final String COLUMN_UUID = "_uuid";
+        public static final String COLUMN_USERNAME = "username";
+        public static final String COLUMN_SYSDATE = "sysdate";
+        public static final String COLUMN_HDSSID = "hdssid";
+        public static final String COLUMN_UC_CODE = "ucCode";
+        public static final String COLUMN_VILLAGE_CODE = "villageCode";
+        public static final String COLUMN_HOUSEHOLD_NO = "hhNo";
+        public static final String COLUMN_STRUCTURE_NO = "structureNo";
+        public static final String COLUMN_SE = "s5";
 
         public static final String COLUMN_DEVICEID = "deviceid";
         public static final String COLUMN_DEVICETAGID = "devicetagid";

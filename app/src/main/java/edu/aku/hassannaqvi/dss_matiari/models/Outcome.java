@@ -23,9 +23,9 @@ import edu.aku.hassannaqvi.dss_matiari.BR;
 import edu.aku.hassannaqvi.dss_matiari.contracts.TableContracts.MWRATable;
 import edu.aku.hassannaqvi.dss_matiari.core.MainApp;
 
-public class MWRA extends BaseObservable implements Observable {
+public class Outcome extends BaseObservable implements Observable {
 
-    private final String TAG = "MWRA";
+    private final String TAG = "Outcome";
     //Not saving in DB
     private final LocalDate localDate = null;
     private transient PropertyChangeRegistry propertyChangeRegistry = new PropertyChangeRegistry();
@@ -71,7 +71,7 @@ public class MWRA extends BaseObservable implements Observable {
     private String rb08 = "";
     private String rb09 = "";
 
-    public MWRA() {
+    public Outcome() {
 
         setRound(MainApp.round);
         setSysDate(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.ENGLISH).format(new Date().getTime()));
@@ -398,8 +398,8 @@ public class MWRA extends BaseObservable implements Observable {
         }
     }
 
-    public MWRA Hydrate(Cursor cursor) throws JSONException {
-        this.id = cursor.getString(cursor.getColumnIndexOrThrow(MWRATable.COLUMN_ID));
+    public Outcome Hydrate(Cursor cursor) throws JSONException {
+        this.id = cursor.getString(cursor.getColumnIndexOrThrowOrThrow(MWRATable.COLUMN_ID));
         this.uid = cursor.getString(cursor.getColumnIndexOrThrow(MWRATable.COLUMN_UID));
         this.uuid = cursor.getString(cursor.getColumnIndexOrThrow(MWRATable.COLUMN_UUID));
         this.userName = cursor.getString(cursor.getColumnIndexOrThrow(MWRATable.COLUMN_USERNAME));

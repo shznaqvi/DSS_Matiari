@@ -106,7 +106,7 @@
                                 android:gravity="center_vertical"
                                 android:minWidth="460dp"
                                 android:text="@string/open_mwra_registration_form"
-                                android:textColor="@color/colorPrimary"
+                                android:textColor="@color/colorAccent"
                                 android:textSize="16dp" />
 
                             <TextView
@@ -124,6 +124,67 @@
                             android:layout_height="wrap_content"
                             android:layout_margin="12dp"
                             android:background="@drawable/ic_item_right_arrow"
+                            android:gravity="center_horizontal|center_vertical"
+                            android:textColor="@color/colorAccent"
+                            android:textSize="24dp" />
+
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="24dp"
+                    android:layout_marginTop="24dp"
+                    android:layout_marginEnd="24dp"
+                    android:padding="12dp"
+                    app:cardCornerRadius="24dp"
+
+                    >
+
+                    <LinearLayout
+                        android:id="@+id/openFollowup"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:clickable="true"
+                        android:onClick="sectionPress"
+                        android:orientation="horizontal">
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="12dp"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:background="@color/white"
+                                android:drawableStart="@drawable/repeat_followups"
+                                android:drawablePadding="12dp"
+                                android:gravity="center_vertical"
+                                android:minWidth="460dp"
+                                android:text="@string/open_followup_form"
+                                android:textColor="@color/colorPrimary"
+                                android:textSize="16dp" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="36dp"
+                                android:gravity="center_horizontal|center_vertical"
+                                android:text="Open to enter WRA followups"
+                                android:textColor="@color/gray"
+                                android:textSize="14sp" />
+                        </LinearLayout>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="12dp"
+                            android:background="@drawable/ic_item_right_arrow"
+                            android:backgroundTint="@color/colorPrimary"
                             android:gravity="center_horizontal|center_vertical"
                             android:textColor="@color/colorAccent"
                             android:textSize="24dp" />

@@ -43,11 +43,7 @@ public class MainActivity extends AppCompatActivity {
             case R.id.openForm:
                 MainApp.idType = 1;
                 break;
-            case R.id.dbm:
-                startActivity(new Intent(this, AndroidManager.class));
-                break;
-            default:
-                MainApp.idType = 0;
+
         }
 
 
@@ -67,6 +63,16 @@ public class MainActivity extends AppCompatActivity {
                 MainApp.households = new Households();
                 startActivity(new Intent(this, SectionBActivity.class));
                 break;
+            case R.id.openFollowup:
+                MainApp.idType = 2;
+                startActivity(new Intent(this, IdentificationActivity.class));
+
+                break;
+            case R.id.dbm:
+                startActivity(new Intent(this, AndroidManager.class));
+                break;
+            default:
+                MainApp.idType = 0;
         }
     }
 

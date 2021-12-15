@@ -3,8 +3,11 @@ package edu.aku.hassannaqvi.dss_matiari.database;
 import static edu.aku.hassannaqvi.dss_matiari.database.CreateTable.DATABASE_NAME;
 import static edu.aku.hassannaqvi.dss_matiari.database.CreateTable.DATABASE_VERSION;
 import static edu.aku.hassannaqvi.dss_matiari.database.CreateTable.SQL_ALTER_USERS;
+import static edu.aku.hassannaqvi.dss_matiari.database.CreateTable.SQL_CREATE_FOLLOWUPS;
 import static edu.aku.hassannaqvi.dss_matiari.database.CreateTable.SQL_CREATE_HOUSEHOLDS;
 import static edu.aku.hassannaqvi.dss_matiari.database.CreateTable.SQL_CREATE_MWRA;
+import static edu.aku.hassannaqvi.dss_matiari.database.CreateTable.SQL_CREATE_OUTCOME;
+import static edu.aku.hassannaqvi.dss_matiari.database.CreateTable.SQL_CREATE_PREGNANCY;
 import static edu.aku.hassannaqvi.dss_matiari.database.CreateTable.SQL_CREATE_USERS;
 import static edu.aku.hassannaqvi.dss_matiari.database.CreateTable.SQL_CREATE_VERSIONAPP;
 import static edu.aku.hassannaqvi.dss_matiari.database.CreateTable.SQL_CREATE_VILLAGES;
@@ -64,6 +67,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL(SQL_CREATE_USERS);
         db.execSQL(SQL_CREATE_HOUSEHOLDS);
         db.execSQL(SQL_CREATE_MWRA);
+        db.execSQL(SQL_CREATE_FOLLOWUPS);
+        db.execSQL(SQL_CREATE_PREGNANCY);
+        db.execSQL(SQL_CREATE_OUTCOME);
         db.execSQL(SQL_CREATE_VERSIONAPP);
         db.execSQL(SQL_CREATE_VILLAGES);
 
@@ -76,7 +82,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         switch (oldVersion) {
             case 1:
                 db.execSQL(SQL_ALTER_USERS);
-            case 2:
+            case 2: // Added followups
+                db.execSQL(SQL_CREATE_FOLLOWUPS);
+                db.execSQL(SQL_CREATE_PREGNANCY);
+                db.execSQL(SQL_CREATE_OUTCOME);
+
         }
     }
 
@@ -213,10 +223,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             );
             while (c.moveToNext()) {
                 Households households = new Households();
-                households.setId(c.getString(c.getColumnIndex(HouseholdTable.COLUMN_ID)));
-                households.setUid(c.getString(c.getColumnIndex(HouseholdTable.COLUMN_UID)));
-                households.setSysDate(c.getString(c.getColumnIndex(HouseholdTable.COLUMN_SYSDATE)));
-                households.setUserName(c.getString(c.getColumnIndex(HouseholdTable.COLUMN_USERNAME)));
+                households.setId(c.getString(c.getColumnIndexOrThrow(HouseholdTable.COLUMN_ID)));
+                households.setUid(c.getString(c.getColumnIndexOrThrow(HouseholdTable.COLUMN_UID)));
+                households.setSysDate(c.getString(c.getColumnIndexOrThrow(HouseholdTable.COLUMN_SYSDATE)));
+                households.setUserName(c.getString(c.getColumnIndexOrThrow(HouseholdTable.COLUMN_USERNAME)));
                 allHouseholds.add(households);
             }
         } finally {
@@ -269,17 +279,17 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             );
             while (c.moveToNext()) {
                 Households households = new Households();
-                households.setId(c.getString(c.getColumnIndex(HouseholdTable.COLUMN_ID)));
-                households.setUid(c.getString(c.getColumnIndex(HouseholdTable.COLUMN_UID)));
-                households.setSysDate(c.getString(c.getColumnIndex(HouseholdTable.COLUMN_SYSDATE)));
-                households.setUserName(c.getString(c.getColumnIndex(HouseholdTable.COLUMN_USERNAME)));
-                households.setiStatus(c.getString(c.getColumnIndex(HouseholdTable.COLUMN_ISTATUS)));
-                households.setSynced(c.getString(c.getColumnIndex(HouseholdTable.COLUMN_SYNCED)));
-                households.setVisitNo(c.getString(c.getColumnIndex(HouseholdTable.COLUMN_VISIT_NO)));
-                households.setStructureNo(c.getString(c.getColumnIndex(HouseholdTable.COLUMN_STRUCTURE_NO)));
-                households.setVillageCode(c.getString(c.getColumnIndex(HouseholdTable.COLUMN_VILLAGE_CODE)));
-                households.setUcCode(c.getString(c.getColumnIndex(TableContracts.HouseholdTable.COLUMN_UC_CODE)));
-                households.setHhNo(c.getString(c.getColumnIndex(HouseholdTable.COLUMN_HOUSEHOLD_NO)));
+                households.setId(c.getString(c.getColumnIndexOrThrow(HouseholdTable.COLUMN_ID)));
+                households.setUid(c.getString(c.getColumnIndexOrThrow(HouseholdTable.COLUMN_UID)));
+                households.setSysDate(c.getString(c.getColumnIndexOrThrow(HouseholdTable.COLUMN_SYSDATE)));
+                households.setUserName(c.getString(c.getColumnIndexOrThrow(HouseholdTable.COLUMN_USERNAME)));
+                households.setiStatus(c.getString(c.getColumnIndexOrThrow(HouseholdTable.COLUMN_ISTATUS)));
+                households.setSynced(c.getString(c.getColumnIndexOrThrow(HouseholdTable.COLUMN_SYNCED)));
+                households.setVisitNo(c.getString(c.getColumnIndexOrThrow(HouseholdTable.COLUMN_VISIT_NO)));
+                households.setStructureNo(c.getString(c.getColumnIndexOrThrow(HouseholdTable.COLUMN_STRUCTURE_NO)));
+                households.setVillageCode(c.getString(c.getColumnIndexOrThrow(HouseholdTable.COLUMN_VILLAGE_CODE)));
+                households.setUcCode(c.getString(c.getColumnIndexOrThrow(TableContracts.HouseholdTable.COLUMN_UC_CODE)));
+                households.setHhNo(c.getString(c.getColumnIndexOrThrow(HouseholdTable.COLUMN_HOUSEHOLD_NO)));
                 allHouseholds.add(households);
             }
         } finally {
@@ -847,12 +857,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         List<String> lms = null;
         while (c.moveToNext()) {
             lms = new ArrayList<>();
-            lms.add(c.getString(c.getColumnIndex(ZScoreTable.COLUMN_L)));
-            Log.d(TAG, "getLMS: L -> " + c.getString(c.getColumnIndex(ZScoreTable.COLUMN_L)));
-            lms.add(c.getString(c.getColumnIndex(ZScoreTable.COLUMN_M)));
-            Log.d(TAG, "getLMS: M -> " + c.getString(c.getColumnIndex(ZScoreTable.COLUMN_M)));
-            lms.add(c.getString(c.getColumnIndex(ZScoreTable.COLUMN_S)));
-            Log.d(TAG, "getLMS: S -> " + c.getString(c.getColumnIndex(ZScoreTable.COLUMN_S)));
+            lms.add(c.getString(c.getColumnIndexOrThrow(ZScoreTable.COLUMN_L)));
+            Log.d(TAG, "getLMS: L -> " + c.getString(c.getColumnIndexOrThrow(ZScoreTable.COLUMN_L)));
+            lms.add(c.getString(c.getColumnIndexOrThrow(ZScoreTable.COLUMN_M)));
+            Log.d(TAG, "getLMS: M -> " + c.getString(c.getColumnIndexOrThrow(ZScoreTable.COLUMN_M)));
+            lms.add(c.getString(c.getColumnIndexOrThrow(ZScoreTable.COLUMN_S)));
+            Log.d(TAG, "getLMS: S -> " + c.getString(c.getColumnIndexOrThrow(ZScoreTable.COLUMN_S)));
 
         }
         return lms;
@@ -872,9 +882,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         Log.d(TAG, "getWHLMS: " + c.getCount());
         while (c.moveToNext()) {
             whlms = new ArrayList<>();
-            whlms.add(c.getString(c.getColumnIndex(ZScoreTable.COLUMN_L)));
-            whlms.add(c.getString(c.getColumnIndex(ZScoreTable.COLUMN_M)));
-            whlms.add(c.getString(c.getColumnIndex(ZScoreTable.COLUMN_S)));
+            whlms.add(c.getString(c.getColumnIndexOrThrow(ZScoreTable.COLUMN_L)));
+            whlms.add(c.getString(c.getColumnIndexOrThrow(ZScoreTable.COLUMN_M)));
+            whlms.add(c.getString(c.getColumnIndexOrThrow(ZScoreTable.COLUMN_S)));
 
         }
         c.close();
@@ -1052,7 +1062,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 new String[]{vCode});
         float maxHHno = 0;
         while (c.moveToNext()) {
-            maxHHno = c.getFloat(c.getColumnIndex(HouseholdTable.COLUMN_STRUCTURE_NO));
+            maxHHno = c.getFloat(c.getColumnIndexOrThrow(HouseholdTable.COLUMN_STRUCTURE_NO));
         }
         Log.d(TAG, "getMaxHHNo: " + maxHHno);
         return Math.round(maxHHno);
@@ -1070,7 +1080,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 new String[]{vCode});
         float maxHHno = 0;
         while (c.moveToNext()) {
-            maxHHno = c.getFloat(c.getColumnIndex(HouseholdTable.COLUMN_HOUSEHOLD_NO));
+            maxHHno = c.getFloat(c.getColumnIndexOrThrow(HouseholdTable.COLUMN_HOUSEHOLD_NO));
         }
         Log.d(TAG, "getMaxHHNo: " + maxHHno);
         return Math.round(maxHHno);
@@ -1173,7 +1183,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         float maxHHno = 0;
         int mwraCount = 0;
         while (c.moveToNext()) {
-            mwraCount = c.getInt(c.getColumnIndex("mwraCount"));
+            mwraCount = c.getInt(c.getColumnIndexOrThrow("mwraCount"));
         }
         // Log.d(TAG, "getMaxHHNo: " + mwraCount);
         return mwraCount;

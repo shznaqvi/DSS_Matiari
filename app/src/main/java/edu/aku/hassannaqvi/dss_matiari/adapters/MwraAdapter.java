@@ -61,7 +61,7 @@ public class MwraAdapter extends RecyclerView.Adapter<MwraAdapter.ViewHolder> {
         MainApp.fmComplete = completeCount == MainApp.mwraCount;
 
         fName.setText(mwra.getRb02());
-        //fAge.setText(mwra.getRb05() + "y | " + mwra.getRb03());
+        //fAge.setText(mwra.getRb05() + "y | " + mwra.getRc03());
         String marStatus = "";
         String wifeOrDaughter = "";
 

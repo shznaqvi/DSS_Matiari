@@ -95,15 +95,15 @@ public class Villages {
     }
 
     public Villages HydrateUc(Cursor cursor) {
-        this.ucname = cursor.getString(cursor.getColumnIndex(TableVillage.COLUMN_UCNAME));
-        this.villagecode = cursor.getString(cursor.getColumnIndex(TableVillage.COLUMN_VILLAGE_CODE));
-        this.uccode = cursor.getString(cursor.getColumnIndex(TableVillage.COLUMN_UC_CODE));
+        this.ucname = cursor.getString(cursor.getColumnIndexOrThrow(TableVillage.COLUMN_UCNAME));
+        this.villagecode = cursor.getString(cursor.getColumnIndexOrThrow(TableVillage.COLUMN_VILLAGE_CODE));
+        this.uccode = cursor.getString(cursor.getColumnIndexOrThrow(TableVillage.COLUMN_UC_CODE));
         return this;
     }
 
     public Villages HydrateVil(Cursor cursor) {
-        this.villagename = cursor.getString(cursor.getColumnIndex(TableVillage.COLUMN_VILLAGE_NAME));
-        this.villagecode = cursor.getString(cursor.getColumnIndex(TableVillage.COLUMN_VILLAGE_CODE));
+        this.villagename = cursor.getString(cursor.getColumnIndexOrThrow(TableVillage.COLUMN_VILLAGE_NAME));
+        this.villagecode = cursor.getString(cursor.getColumnIndexOrThrow(TableVillage.COLUMN_VILLAGE_CODE));
         return this;
     }
 }

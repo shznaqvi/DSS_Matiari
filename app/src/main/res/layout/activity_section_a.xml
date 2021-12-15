@@ -734,7 +734,7 @@
                     android:id="@+id/fldGrpCVra17_a"
                     style="@style/cardView"
 
-                    android:visibility="@{household.Ra20.equals(`1`)?View.VISIBLE:View.GONE}">
+                   >
 
                     <LinearLayout
                         android:layout_width="match_parent"

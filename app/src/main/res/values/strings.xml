@@ -3,6 +3,7 @@
 
     <string name="open_surveillance_form">OPEN SURVEILLANCE FORM</string>
     <string name="open_mwra_registration_form">OPEN MWRA REGISTRATION FORM</string>
+    <string name="open_mwra_followup_form">OPEN MWRA FOLLOWUP FORM</string>
     <string name="open_onhold_form">UPDATE ONHOLD FORM</string>
     <string name="open_followup_form">OPEN FOLLOW-UP FORM</string>
 
@@ -121,7 +122,23 @@
     <string name="rb09">EDD Date [auto-calculated]</string>
     <string name="rb09_info">DD/MM/YYYY</string>
 
-
+    <string name="rc01">Unique WRA#</string>
+    <string name="rc02">Name of Women</string>
+    <string name="rc03">Husband/Father Name</string>
+    <string name="rc03h">Husband Name</string>
+    <string name="rc03f">Father Name</string>
+    <string name="rc06">Marital Status</string>
+    <string name="rc0601">Married</string>
+    <string name="rc0602">Divorce</string>
+    <string name="rc0603">Widow</string>
+    <string name="rc0604">Unmarried</string>
+    <string name="rc07">Pregnancy Status</string>
+    <string name="rc0701">Pregnant</string>
+    <string name="rc0702">Not Pregnant</string>
+    <string name="rc08">If pregnant enter LMP Date</string>
+    <string name="rc08_info">DD/MM/YYYY</string>
+    <string name="rc09">EDD Date [auto-calculated]</string>
+    <string name="rc09_info">DD/MM/YYYY</string>
     <string name='Q_a17_c' translatable="false">a17_c</string>
     <string name='Q_ra_lat' translatable="false">ra_lat</string>
     <string name='Q_ra_lon' translatable="false">ra_lon</string>
@@ -163,6 +180,15 @@
     <string name='Q_rb07' translatable="false">rb07</string>
     <string name='Q_rb08' translatable="false">rb08</string>
     <string name='Q_rb09' translatable="false">rb09</string>
+    <string name='Q_rc01' translatable="false">rc01</string>
+    <string name='Q_rc02' translatable="false">rc02</string>
+    <string name='Q_rc03' translatable="false">rc04</string>
+    <string name='Q_rc04' translatable="false">rc05</string>
+    <string name='Q_rc05' translatable="false">rc06</string>
+    <string name='Q_rc06' translatable="false">rc03</string>
+    <string name='Q_rc07' translatable="false">rc07</string>
+    <string name='Q_rc08' translatable="false">rc08</string>
+    <string name='Q_rc09' translatable="false">rc09</string>
 
     <!--
     This string is used for square devices and overridden by hello_world in
@@ -202,7 +228,7 @@
     <string name="ra17_d2">female</string>
     <!--    <string name="rb03">marital status</string>
         <string name="rb03_a">married</string>
-        <string name="rb03_b">divorced</string>
+        <string name="rb03_b">divorbed</string>
         <string name="rb03_c">widow</string>
         <string name="rb03_d">unmarried</string>
         <string name="rb05_info">don\'t know</string>-->

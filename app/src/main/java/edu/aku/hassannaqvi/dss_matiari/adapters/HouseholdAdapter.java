@@ -57,7 +57,7 @@ public class HouseholdAdapter extends RecyclerView.Adapter<HouseholdAdapter.View
         TextView secStatus = viewHolder.secStatus;
         ImageView imgStatus = viewHolder.imgStatus;
 
-        //String pregStatus = households.getRb07().equals("1") ? "Pregnant" : "Not Pregnant";
+        //String pregStatus = households.getRc07().equals("1") ? "Pregnant" : "Not Pregnant";
 
         //MainApp.fmComplete = completeCount == MainApp.formCount;
 

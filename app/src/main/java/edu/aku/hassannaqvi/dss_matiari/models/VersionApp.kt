@@ -20,9 +20,11 @@ class VersionApp {
     }
 
     fun hydrate(cursor: Cursor): VersionApp {
-        versioncode = cursor.getString(cursor.getColumnIndex(VersionTable.COLUMN_VERSION_CODE))
-        pathname = cursor.getString(cursor.getColumnIndex(VersionTable.COLUMN_PATH_NAME))
-        versionname = cursor.getString(cursor.getColumnIndex(VersionTable.COLUMN_VERSION_NAME))
+        versioncode =
+            cursor.getString(cursor.getColumnIndexOrThrow(VersionTable.COLUMN_VERSION_CODE))
+        pathname = cursor.getString(cursor.getColumnIndexOrThrow(VersionTable.COLUMN_PATH_NAME))
+        versionname =
+            cursor.getString(cursor.getColumnIndexOrThrow(VersionTable.COLUMN_VERSION_NAME))
         return this
     }
 

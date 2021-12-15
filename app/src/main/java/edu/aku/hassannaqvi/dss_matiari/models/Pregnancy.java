@@ -23,7 +23,7 @@ import edu.aku.hassannaqvi.dss_matiari.BR;
 import edu.aku.hassannaqvi.dss_matiari.contracts.TableContracts.MWRATable;
 import edu.aku.hassannaqvi.dss_matiari.core.MainApp;
 
-public class MWRA extends BaseObservable implements Observable {
+public class Pregnancy extends BaseObservable implements Observable {
 
     private final String TAG = "MWRA";
     //Not saving in DB
@@ -71,7 +71,7 @@ public class MWRA extends BaseObservable implements Observable {
     private String rb08 = "";
     private String rb09 = "";
 
-    public MWRA() {
+    public Pregnancy() {
 
         setRound(MainApp.round);
         setSysDate(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.ENGLISH).format(new Date().getTime()));
@@ -398,7 +398,7 @@ public class MWRA extends BaseObservable implements Observable {
         }
     }
 
-    public MWRA Hydrate(Cursor cursor) throws JSONException {
+    public Pregnancy Hydrate(Cursor cursor) throws JSONException {
         this.id = cursor.getString(cursor.getColumnIndexOrThrow(MWRATable.COLUMN_ID));
         this.uid = cursor.getString(cursor.getColumnIndexOrThrow(MWRATable.COLUMN_UID));
         this.uuid = cursor.getString(cursor.getColumnIndexOrThrow(MWRATable.COLUMN_UUID));

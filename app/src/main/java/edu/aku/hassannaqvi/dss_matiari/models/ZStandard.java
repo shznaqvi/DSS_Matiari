@@ -120,13 +120,13 @@ public class ZStandard {
     }
 
     public edu.aku.hassannaqvi.dss_matiari.models.ZStandard Hydrate(Cursor cursor) {
-        this.sex = cursor.getString(cursor.getColumnIndex(TableContracts.ZScoreTable.COLUMN_SEX));
-        this.age = cursor.getString(cursor.getColumnIndex(TableContracts.ZScoreTable.COLUMN_AGE));
-        this.measure = cursor.getString(cursor.getColumnIndex(TableContracts.ZScoreTable.COLUMN_MEASURE));
-        this.L = cursor.getString(cursor.getColumnIndex(TableContracts.ZScoreTable.COLUMN_L));
-        this.M = cursor.getString(cursor.getColumnIndex(TableContracts.ZScoreTable.COLUMN_M));
-        this.S = cursor.getString(cursor.getColumnIndex(TableContracts.ZScoreTable.COLUMN_S));
-        this.cat = cursor.getString(cursor.getColumnIndex(TableContracts.ZScoreTable.COLUMN_CAT));
+        this.sex = cursor.getString(cursor.getColumnIndexOrThrow(TableContracts.ZScoreTable.COLUMN_SEX));
+        this.age = cursor.getString(cursor.getColumnIndexOrThrow(TableContracts.ZScoreTable.COLUMN_AGE));
+        this.measure = cursor.getString(cursor.getColumnIndexOrThrow(TableContracts.ZScoreTable.COLUMN_MEASURE));
+        this.L = cursor.getString(cursor.getColumnIndexOrThrow(TableContracts.ZScoreTable.COLUMN_L));
+        this.M = cursor.getString(cursor.getColumnIndexOrThrow(TableContracts.ZScoreTable.COLUMN_M));
+        this.S = cursor.getString(cursor.getColumnIndexOrThrow(TableContracts.ZScoreTable.COLUMN_S));
+        this.cat = cursor.getString(cursor.getColumnIndexOrThrow(TableContracts.ZScoreTable.COLUMN_CAT));
         return this;
 
     }
