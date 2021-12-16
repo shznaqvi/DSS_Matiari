@@ -81,20 +81,22 @@
                             android:id="@+id/rc08"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:orientation="vertical">
+                            android:orientation="horizontal">
 
                             <RadioButton
                                 android:id="@+id/rb0801"
-                                android:layout_width="match_parent"
+                                android:layout_width="0dp"
                                 android:layout_height="wrap_content"
+                                android:layout_weight="1"
                                 android:checked='@{pregnancy.rc08.equals("1")}'
                                 android:onClick='@{()->pregnancy.setRc08("1") + rc09.clearCheck() + rc11.clearCheck()}'
                                 android:text="@string/rc0801" />
 
                             <RadioButton
                                 android:id="@+id/rb0802"
-                                android:layout_width="match_parent"
+                                android:layout_width="0dp"
                                 android:layout_height="wrap_content"
+                                android:layout_weight="1"
                                 android:checked='@{pregnancy.rc08.equals("2")}'
                                 android:onClick='@{()->pregnancy.setRc08("2")}'
                                 android:text="@string/rc0802" />
@@ -144,19 +146,38 @@
 
                         </LinearLayout>
 
-                        <com.edittextpicker.aliazaz.EditTextPicker
-                            android:id="@+id/rc10"
+                        <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:enabled="false"
-                            android:gravity="center_vertical|center_horizontal"
-                            android:hint="@string/rc10"
-                            android:inputType="number"
-                            android:maxLength="2"
-                            android:text="@={pregnancy.rc10}"
-                            app:maxValue="10"
-                            app:minValue="1"
-                            app:type="range" />
+                            android:orientation="horizontal">
+
+                            <io.blackbox_vision.datetimepickeredittext.view.DatePickerEditText
+                                android:id="@+id/rc10"
+                                style="@style/textInput"
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_marginBottom="0dp"
+                                android:layout_weight="1"
+                                android:enabled="@{!pregnancy.rc10.equals(`98`)}"
+                                android:gravity="center"
+                                android:hint="YYYY-MM-DD"
+                                android:text="@={pregnancy.rc10}"
+                                app:dateFormat="yyyy-MM-dd"
+                                app:maxDate="CR_DATE"
+                                android:datePickerMode="spinner"
+                                app:theme="@style/DatePickerEditTextDialogTheme" />
+
+                            <CheckBox
+                                android:id="@+id/rc10check"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:backgroundTint="@color/lightPink"
+                                android:checked='@{pregnancy.rc10.equals("98")}'
+                                android:onClick="@{()->pregnancy.setRc10(pregnancy.rc10.equals(`98`)?``:`98`)}"
+                                android:tag="-1"
+                                android:text="@string/dkn"
+                                android:textColor="@color/redDark" />
+                        </LinearLayout>
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
 

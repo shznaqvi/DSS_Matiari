@@ -10,6 +10,7 @@
     <string name="demographicinformation_mainheading">آبادیاتی معلومات</string>
     <string name="marriedwomenregistration_mainheading">هر ۾ موجود   شادي شده عورتن جي لاءِ </string>
     <string name="pregnancy_mainheading">حمل جي معلومات</string>
+    <string name="outcome_mainheading">ٻار جي معلومات</string>
     <string name="app_name">DSS مٹیاری</string>
     <string name="btnSync">Download Data</string>
     <string name="btnUpload">Upload Data</string>
@@ -161,6 +162,13 @@
     <string name="rc1102">جاڙا ٻار</string>
     <string name="rc1103">ٽي ٻار</string>
 
+    <string name="rc12">جنس</string>
+    <string name="rc1201">مرد</string>
+    <string name="rc1202">عورت</string>
+    <string name="rc13">ٻار جي حالت</string>
+    <string name="rc1301">زنده</string>
+    <string name="rc1302">مول</string>
+    <string name="rc14"> وفات جي تاريخ</string>
 
     <string name="istatus"> دوري جو نتيجو</string>
     <string name="istatusa">مڪمل</string>

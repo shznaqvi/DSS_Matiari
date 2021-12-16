@@ -57,20 +57,14 @@ public class Outcome extends BaseObservable implements Observable {
     private String syncDate = StringUtils.EMPTY;
 
     // SECTION VARIABLES
-    private String sB = StringUtils.EMPTY;
+    private String sE = StringUtils.EMPTY;
 
-    private String round = "";
-    private String ra01 = "";
+    private String round = StringUtils.EMPTY;
+    private String rc12 = StringUtils.EMPTY;
 
-    private String rb01 = "";
-    private String rb02 = "";
-    private String rb03 = "";
-    private String rb04 = "";
-    private String rb05 = "";
-    private String rb06 = "";
-    private String rb07 = "";
-    private String rb08 = "";
-    private String rb09 = "";
+    private String rc13 = StringUtils.EMPTY;
+    private String rc14 = StringUtils.EMPTY;
+
 
     public Outcome() {
 
@@ -253,127 +247,43 @@ public class Outcome extends BaseObservable implements Observable {
         this.exist = exist;
     }
 
-    public String getSB() {
-        return sB;
+    public String getSE() {
+        return sE;
     }
 
-    public void setsB(String sB) {
-        this.sB = sB;
+    public void setsE(String sE) {
+        this.sE = sE;
     }
 
 
     @Bindable
-    public String getRb01() {
-        return rb01;
-    }
-
-    public void setRb01(String rb01) {
-        this.rb01 = rb01;
-        notifyChange(BR.rb01);
+    public String getRc12() {
+        return rc12;
     }
 
     @Bindable
-    public String getRa01() {
-        return ra01;
-    }
-
-    public void setRa01(String ra01) {
-        this.ra01 = ra01;
-        notifyChange(BR.ra01);
+    public String getRc13() {
+        return rc13;
     }
 
     @Bindable
-    public String getRb02() {
-        return rb02;
+    public String getRc14() {
+        return rc14;
     }
 
-    public void setRb02(String rb02) {
-        this.rb02 = rb02;
-        notifyChange(BR.rb02);
+    public void setRc12(String rc12) {
+        this.rc12 = rc12;
+        notifyPropertyChanged(BR.rc12);
     }
 
-    @Bindable
-    public String getRb03() {
-        return rb03;
+    public void setRc13(String rc13) {
+        this.rc13 = rc13;
+        notifyPropertyChanged(BR.rc13);
     }
 
-    public void setRb03(String rb03) {
-        this.rb03 = rb03;
-        notifyChange(BR.rb03);
-    }
-
-    @Bindable
-    public String getRb04() {
-        return rb04;
-    }
-
-    public void setRb04(String rb04) {
-        this.rb04 = rb04;
-        setRb05(this.rb04.equals("98") ? "" : this.rb05);
-        notifyChange(BR.rb04);
-    }
-
-    @Bindable
-    public String getRb05() {
-        return rb05;
-    }
-
-    public void setRb05(String rb05) {
-        this.rb05 = rb05;
-        notifyChange(BR.rb05);
-    }
-
-    @Bindable
-    public String getRb06() {
-        return rb06;
-    }
-
-    public void setRb06(String rb06) {
-        this.rb06 = rb06;
-        Log.d(TAG, "setRc06: " + this.rb06);
-        //setRc03(this.rb06.equals("4") ? "" : this.rb03);
-        setRb07(this.rb06.equals("4") ? "" : this.rb07);
-/*        setRc08(this.rb06.equals("4") ? "" : this.rb08);
-        setRc09(this.rb06.equals("4") ? "" : this.rb09);*/
-        notifyChange(BR.rb06);
-    }
-
-    @Bindable
-    public String getRb07() {
-        return rb07;
-    }
-
-    public void setRb07(String rb07) {
-        this.rb07 = rb07;
-        setRb08(this.rb07.equals("1") ? this.rb08 : "");
-        setRb09(this.rb07.equals("1") ? this.rb09 : "");
-        Log.d(TAG, "setRc07: " + this.rb07);
-        notifyChange(BR.rb07);
-    }
-
-    @Bindable
-    public String getRb08() {
-        return rb08;
-    }
-
-    public void setRb08(String rb08) {
-        this.rb08 = rb08;
-        if (!this.rb08.equals("")) {
-            setRb09(calcEDD());
-        } else {
-            setRb09("");
-        }
-        notifyChange(BR.rb08);
-    }
-
-    @Bindable
-    public String getRb09() {
-        return rb09;
-    }
-
-    public void setRb09(String rb09) {
-        this.rb09 = rb09;
-        notifyChange(BR.rb09);
+    public void setRc14(String rc14) {
+        this.rc14 = rc14;
+        notifyPropertyChanged(BR.rc14);
     }
 
     private synchronized void notifyChange(int propertyId) {
@@ -417,48 +327,35 @@ public class Outcome extends BaseObservable implements Observable {
         this.synced = cursor.getString(cursor.getColumnIndexOrThrow(TableContracts.OutcomeTable.COLUMN_SYNCED));
         this.syncDate = cursor.getString(cursor.getColumnIndexOrThrow(TableContracts.OutcomeTable.COLUMN_SYNCED_DATE));
 
-        //sBHydrate(cursor.getString(cursor.getColumnIndexOrThrow(TableContracts.OutcomeTable.COLUMN_SB)));
+        sEHydrate(cursor.getString(cursor.getColumnIndexOrThrow(TableContracts.OutcomeTable.COLUMN_SE)));
         return this;
     }
 
 
-    public void sBHydrate(String string) throws JSONException {
+    public void sEHydrate(String string) throws JSONException {
         Log.d(TAG, "s2Hydrate: " + string);
         if (string != null) {
 
             JSONObject json = null;
             json = new JSONObject(string);
-            this.rb01 = json.getString("rb01");
-            this.ra01 = json.getString("ra01");
+            this.rc12 = json.getString("rc12");
+            this.rc13 = json.getString("rc13");
             this.round = json.getString("round");
-            this.rb02 = json.getString("rb02");
-            this.rb03 = json.getString("rb03");
-            this.rb04 = json.getString("rb04");
-            this.rb05 = json.getString("rb05");
-            this.rb06 = json.getString("rb06");
-            this.rb07 = json.getString("rb07");
-            this.rb08 = json.getString("rb08");
-            this.rb09 = json.getString("rb09");
+            this.rc14 = json.getString("rc14");
+
 
         }
     }
 
 
-    public String sBtoString() throws JSONException {
+    public String sEtoString() throws JSONException {
         JSONObject json = new JSONObject();
 
 
-        json.put("rb01", rb01)
-                .put("ra01", ra01)
+        json.put("rc12", rc12)
+                .put("rc13", rc13)
                 .put("round", round)
-                .put("rb02", rb02)
-                .put("rb03", rb03)
-                .put("rb04", rb04)
-                .put("rb05", rb05)
-                .put("rb06", rb06)
-                .put("rb07", rb07)
-                .put("rb08", rb08)
-                .put("rb09", rb09);
+                .put("rc14", rc14);
 
         return json.toString();
     }
@@ -469,25 +366,25 @@ public class Outcome extends BaseObservable implements Observable {
         JSONObject json = new JSONObject();
 
 
-        json.put(MWRATable.COLUMN_ID, this.id);
-        json.put(MWRATable.COLUMN_PROJECT_NAME, this.projectName);
-        json.put(MWRATable.COLUMN_UID, this.uid);
-        json.put(MWRATable.COLUMN_UUID, this.uuid);
-        json.put(MWRATable.COLUMN_USERNAME, this.userName);
-        json.put(MWRATable.COLUMN_SYSDATE, this.sysDate);
-        json.put(MWRATable.COLUMN_HDSSID, this.hdssId);
-        json.put(MWRATable.COLUMN_UC_CODE, this.ucCode);
-        json.put(MWRATable.COLUMN_VILLAGE_CODE, this.villageCode);
-        json.put(MWRATable.COLUMN_STRUCTURE_NO, this.structureNo);
-        json.put(MWRATable.COLUMN_HOUSEHOLD_NO, this.hhNo);
-        json.put(MWRATable.COLUMN_DEVICEID, this.deviceId);
-        json.put(MWRATable.COLUMN_DEVICETAGID, this.deviceTag);
-        json.put(MWRATable.COLUMN_ISTATUS, this.iStatus);
-        json.put(MWRATable.COLUMN_APPVERSION, this.appver);
+        json.put(TableContracts.OutcomeTable.COLUMN_ID, this.id);
+        json.put(TableContracts.OutcomeTable.COLUMN_PROJECT_NAME, this.projectName);
+        json.put(TableContracts.OutcomeTable.COLUMN_UID, this.uid);
+        json.put(TableContracts.OutcomeTable.COLUMN_UUID, this.uuid);
+        json.put(TableContracts.OutcomeTable.COLUMN_USERNAME, this.userName);
+        json.put(TableContracts.OutcomeTable.COLUMN_SYSDATE, this.sysDate);
+        json.put(TableContracts.OutcomeTable.COLUMN_HDSSID, this.hdssId);
+        json.put(TableContracts.OutcomeTable.COLUMN_UC_CODE, this.ucCode);
+        json.put(TableContracts.OutcomeTable.COLUMN_VILLAGE_CODE, this.villageCode);
+        json.put(TableContracts.OutcomeTable.COLUMN_STRUCTURE_NO, this.structureNo);
+        json.put(TableContracts.OutcomeTable.COLUMN_HOUSEHOLD_NO, this.hhNo);
+        json.put(TableContracts.OutcomeTable.COLUMN_DEVICEID, this.deviceId);
+        json.put(TableContracts.OutcomeTable.COLUMN_DEVICETAGID, this.deviceTag);
+        json.put(TableContracts.OutcomeTable.COLUMN_ISTATUS, this.iStatus);
+        json.put(TableContracts.OutcomeTable.COLUMN_APPVERSION, this.appver);
         //  json.put(MWRATable.COLUMN_SYNCED, this.synced);
         //  json.put(MWRATable.COLUMN_SYNCED_DATE, this.syncDate);
 
-        json.put(MWRATable.COLUMN_SB, new JSONObject(sBtoString()));
+        json.put(TableContracts.OutcomeTable.COLUMN_SE, new JSONObject(sEtoString()));
         return json;
 
     }
@@ -503,7 +400,7 @@ public class Outcome extends BaseObservable implements Observable {
         notifyChange(BR.expanded);
     }
 
-    public String calcEDD() {
+    /*public String calcEDD() {
 
         Calendar cal = Calendar.getInstance();
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
@@ -523,4 +420,4 @@ public class Outcome extends BaseObservable implements Observable {
         }
 
     }
-}
+*/}

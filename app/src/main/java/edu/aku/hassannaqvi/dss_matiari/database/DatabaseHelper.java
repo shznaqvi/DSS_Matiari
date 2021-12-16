@@ -29,6 +29,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
+import java.util.function.Predicate;
 
 import edu.aku.hassannaqvi.dss_matiari.contracts.TableContracts;
 import edu.aku.hassannaqvi.dss_matiari.contracts.TableContracts.HouseholdTable;
@@ -40,6 +41,8 @@ import edu.aku.hassannaqvi.dss_matiari.contracts.TableContracts.ZScoreTable;
 import edu.aku.hassannaqvi.dss_matiari.core.MainApp;
 import edu.aku.hassannaqvi.dss_matiari.models.Households;
 import edu.aku.hassannaqvi.dss_matiari.models.MWRA;
+import edu.aku.hassannaqvi.dss_matiari.models.Outcome;
+import edu.aku.hassannaqvi.dss_matiari.models.Pregnancy;
 import edu.aku.hassannaqvi.dss_matiari.models.Users;
 import edu.aku.hassannaqvi.dss_matiari.models.VersionApp;
 import edu.aku.hassannaqvi.dss_matiari.models.Villages;
@@ -147,6 +150,61 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         newRowId = db.insert(
                 MWRATable.TABLE_NAME,
                 MWRATable.COLUMN_NAME_NULLABLE,
+                values);
+        return newRowId;
+    }
+
+
+    public Long addPregnancy(Pregnancy pregnancy) throws JSONException {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(TableContracts.PregnancyTable.COLUMN_PROJECT_NAME, pregnancy.getProjectName());
+        values.put(TableContracts.PregnancyTable.COLUMN_UID, pregnancy.getUid());
+        values.put(TableContracts.PregnancyTable.COLUMN_UUID, pregnancy.getUuid());
+        values.put(TableContracts.PregnancyTable.COLUMN_USERNAME, pregnancy.getUserName());
+        values.put(TableContracts.PregnancyTable.COLUMN_SYSDATE, pregnancy.getSysDate());
+        values.put(TableContracts.PregnancyTable.COLUMN_HDSSID, pregnancy.getHdssId());
+        values.put(TableContracts.PregnancyTable.COLUMN_UC_CODE, pregnancy.getUcCode());
+        values.put(TableContracts.PregnancyTable.COLUMN_VILLAGE_CODE, pregnancy.getVillageCode());
+        values.put(TableContracts.PregnancyTable.COLUMN_STRUCTURE_NO, pregnancy.getStructureNo());
+        values.put(TableContracts.PregnancyTable.COLUMN_HOUSEHOLD_NO, pregnancy.getHhNo());
+        values.put(TableContracts.PregnancyTable.COLUMN_SD, pregnancy.sDtoString());
+        values.put(TableContracts.PregnancyTable.COLUMN_ISTATUS, pregnancy.getiStatus());
+        values.put(TableContracts.PregnancyTable.COLUMN_DEVICETAGID, pregnancy.getDeviceTag());
+        values.put(TableContracts.PregnancyTable.COLUMN_DEVICEID, pregnancy.getDeviceId());
+        values.put(TableContracts.PregnancyTable.COLUMN_APPVERSION, pregnancy.getAppver());
+
+        long newRowId;
+        newRowId = db.insert(
+                TableContracts.PregnancyTable.TABLE_NAME,
+                TableContracts.PregnancyTable.COLUMN_NAME_NULLABLE,
+                values);
+        return newRowId;
+    }
+
+    public Long addOutcome(Outcome outcome) throws JSONException {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(TableContracts.OutcomeTable.COLUMN_PROJECT_NAME, outcome.getProjectName());
+        values.put(TableContracts.OutcomeTable.COLUMN_UID, outcome.getUid());
+        values.put(TableContracts.OutcomeTable.COLUMN_UUID, outcome.getUuid());
+        values.put(TableContracts.OutcomeTable.COLUMN_USERNAME, outcome.getUserName());
+        values.put(TableContracts.OutcomeTable.COLUMN_SYSDATE, outcome.getSysDate());
+        values.put(TableContracts.OutcomeTable.COLUMN_HDSSID, outcome.getHdssId());
+        values.put(TableContracts.OutcomeTable.COLUMN_UC_CODE, outcome.getUcCode());
+        values.put(TableContracts.OutcomeTable.COLUMN_VILLAGE_CODE, outcome.getVillageCode());
+        values.put(TableContracts.OutcomeTable.COLUMN_STRUCTURE_NO, outcome.getStructureNo());
+        values.put(TableContracts.OutcomeTable.COLUMN_HOUSEHOLD_NO, outcome.getHhNo());
+        values.put(TableContracts.OutcomeTable.COLUMN_SE, outcome.sEtoString());
+        values.put(TableContracts.OutcomeTable.COLUMN_ISTATUS, outcome.getiStatus());
+        values.put(TableContracts.OutcomeTable.COLUMN_DEVICETAGID, outcome.getDeviceTag());
+        values.put(TableContracts.OutcomeTable.COLUMN_DEVICEID, outcome.getDeviceId());
+        values.put(TableContracts.OutcomeTable.COLUMN_APPVERSION, outcome.getAppver());
+
+        long newRowId;
+        newRowId = db.insert(
+                TableContracts.OutcomeTable.TABLE_NAME,
+                TableContracts.OutcomeTable.COLUMN_NAME_NULLABLE,
                 values);
         return newRowId;
     }
@@ -407,6 +465,36 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         String[] selectionArgs = {String.valueOf(MainApp.mwra.getId())};
 
         return db.update(MWRATable.TABLE_NAME,
+                values,
+                selection,
+                selectionArgs);
+    }
+
+    public int updatesPregnancyColumn(String column, String value) {
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+        values.put(column, value);
+
+        String selection = TableContracts.PregnancyTable._ID + " =? ";
+        String[] selectionArgs = {String.valueOf(MainApp.pregnancy.getId())};
+
+        return db.update(TableContracts.PregnancyTable.TABLE_NAME,
+                values,
+                selection,
+                selectionArgs);
+    }
+
+    public int updatesOutcomeColumn(String column, String value) {
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+        values.put(column, value);
+
+        String selection = TableContracts.OutcomeTable._ID + " =? ";
+        String[] selectionArgs = {String.valueOf(MainApp.outcome.getId())};
+
+        return db.update(TableContracts.OutcomeTable.TABLE_NAME,
                 values,
                 selection,
                 selectionArgs);

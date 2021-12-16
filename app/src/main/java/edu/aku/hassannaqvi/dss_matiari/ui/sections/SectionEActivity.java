@@ -3,10 +3,14 @@ package edu.aku.hassannaqvi.dss_matiari.ui.sections;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.households;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.mwra;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.mwraCount;
+import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.outcome;
+import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.pregnancy;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.sharedPref;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
@@ -23,6 +27,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Locale;
 
 import edu.aku.hassannaqvi.dss_matiari.R;
 import edu.aku.hassannaqvi.dss_matiari.contracts.TableContracts;
@@ -49,7 +54,7 @@ public class SectionEActivity extends AppCompatActivity {
         // setListener();
 
         // set default model values if new mwra
-        if (MainApp.pregnancy.getRb01().equals("")) {
+        /*if (MainApp.pregnancy.getRb01().equals("")) {
             MainApp.pregnancy.setRb01(String.valueOf(mwraCount + 1));
             MainApp.pregnancy.setUuid(households.getUid());
             MainApp.pregnancy.setUcCode(households.getUcCode());
@@ -65,7 +70,7 @@ public class SectionEActivity extends AppCompatActivity {
             MainApp.pregnancy.setAppver(MainApp.versionName + "." + MainApp.versionCode);
 
             MainApp.pregnancy.setRa01(MainApp.households.getRa01());
-        }
+        }*/
 
         setTitle(R.string.marriedwomenregistration_mainheading);
         setImmersive(true);
@@ -138,8 +143,8 @@ public class SectionEActivity extends AppCompatActivity {
            }
        }
    */
- /*   private void setListener() {
-        bi.rb04.addTextChangedListener(new TextWatcher() {
+    /*private void setListener() {
+        bi.rc14.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
@@ -152,7 +157,7 @@ public class SectionEActivity extends AppCompatActivity {
 
             @Override
             public void afterTextChanged(Editable s) {
-                if (!mwra.getRb04().equalsIgnoreCase("") && !mwra.getRb04().equals("98")) {
+                if (!outcome.getRc14().equalsIgnoreCase("") && !outcome.getRc14().equals("98")) {
 //                    String[] arrStr = mwra.getRb04().split("-");
 //                    int day, month, year;
 //                    year = arrStr.length > 0 ? Integer.valueOf(arrStr[0]) : 0;
@@ -170,21 +175,21 @@ public class SectionEActivity extends AppCompatActivity {
                         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
 
                         cur.setTime(sdf.parse(households.getRa01())); // DOV
-                        cal.setTime(sdf.parse(mwra.getRb04())); // DOB
+                        cal.setTime(sdf.parse(outcome.getRc14())); // DOB
 
 
                         long yearsinMillisec = cur.getTimeInMillis() - cal.getTimeInMillis();
-                        String ageInYears = String.valueOf(TimeUnit.MILLISECONDS.toDays(yearsinMillisec) / 365);
+                        //String ageInYears = String.valueOf(TimeUnit.MILLISECONDS.toDays(yearsinMillisec) / 365);
 
-                        bi.rb05.setText(ageInYears);
+                        //bi.rb05.setText(ageInYears);
 
                     } catch (ParseException e) {
                         e.printStackTrace();
                     }
 
 
-*//*
-                    String[] arrStr = mwra.getRb04().split("-");
+
+                    *//*String[] arrStr = mwra.getRb04().split("-");
                     String day, month, year;
                     year = arrStr.length > 0 ? arrStr[0] : "0";
                     month = arrStr.length > 1 ? arrStr[1] : "0";
@@ -192,13 +197,13 @@ public class SectionEActivity extends AppCompatActivity {
                     if (year.equalsIgnoreCase("0") || month.equalsIgnoreCase("0") || day.equalsIgnoreCase("0")) {
                         return;
                     }
-                    bi.rb05.setText(DateUtilsKt.getAge(year, month, day, false));
-*//*
+                    bi.rb05.setText(DateUtilsKt.getAge(year, month, day, false));*//*
+
                 }
             }
         });
-    }
-*/
+    }*/
+
     public void btnContinue(View view) {
         if (!formValidation()) return;
         saveDraft();
@@ -262,17 +267,17 @@ public class SectionEActivity extends AppCompatActivity {
         db = MainApp.appInfo.getDbHelper();
         long rowId = 0;
         try {
-            rowId = db.addMWRA(mwra);
+            rowId = db.addOutcome(outcome);
         } catch (JSONException e) {
             e.printStackTrace();
             Toast.makeText(this, "JSONException: " + e.getMessage(), Toast.LENGTH_SHORT).show();
             Log.d(TAG, "insertNewRecord (JSONException): " + e.getMessage());
             return false;
         }
-        mwra.setId(String.valueOf(rowId));
+        outcome.setId(String.valueOf(rowId));
         if (rowId > 0) {
-            mwra.setUid(mwra.getDeviceId() + mwra.getId());
-            db.updatesMWRAColumn(TableContracts.MWRATable.COLUMN_UID, mwra.getUid());
+            outcome.setUid(outcome.getDeviceId() + outcome.getId());
+            db.updatesOutcomeColumn(TableContracts.OutcomeTable.COLUMN_UID, outcome.getUid());
             return true;
         } else {
             Toast.makeText(this, "Updating Database... ERROR!", Toast.LENGTH_SHORT).show();
@@ -281,6 +286,22 @@ public class SectionEActivity extends AppCompatActivity {
     }
 
     private boolean updateDB() {
+        int updcount = 0;
+        try {
+            updcount = db.updatesOutcomeColumn(TableContracts.OutcomeTable.COLUMN_SE, outcome.sEtoString());
+        } catch (JSONException e) {
+            Toast.makeText(this, R.string.upd_db + e.getMessage(), Toast.LENGTH_SHORT).show();
+        }
+        if (updcount == 1) {
+            return true;
+        } else {
+            Toast.makeText(this, R.string.upd_db_error, Toast.LENGTH_SHORT).show();
+            return false;
+        }
+    }
+
+
+    /*private boolean updateDB() {
         int updcount = 0;
         try {
             updcount = db.updatesMWRAColumn(TableContracts.MWRATable.COLUMN_SB, mwra.sBtoString());
@@ -309,7 +330,7 @@ public class SectionEActivity extends AppCompatActivity {
             Toast.makeText(this, "Updating Database... ERROR!", Toast.LENGTH_SHORT).show();
             return false;
         }
-    }
+    }*/
 
     public void btnEnd(View view) {
         setResult(Activity.RESULT_CANCELED);
