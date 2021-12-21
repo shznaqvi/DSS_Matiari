@@ -121,7 +121,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_centerInParent="true"
-                    android:layout_centerHorizontal="true"
                     android:layout_marginStart="64dp"
                     android:layout_marginEnd="64dp"
                     android:background="@drawable/capsule"
@@ -130,7 +129,7 @@
                     android:gravity="center_horizontal|center_vertical"
                     android:minHeight="56dp"
                     android:radius="10dp"
-                    android:text="LIST OF HOUSEHOLDS"
+                    android:text="LIST OF HOUSEHOLDS FOLLOWUPS"
                     android:textAppearance="@style/TextAppearance.AppCompat.Headline"
                     android:textColor="@color/white" />
 
@@ -138,9 +137,9 @@
                     android:id="@+id/fab"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="end|bottom"
                     android:layout_alignEnd="@id/fmHeading"
                     android:layout_centerInParent="true"
+                    android:layout_gravity="end|bottom"
                     android:backgroundTint="@android:color/transparent"
                     android:src="@drawable/ic_home_add" />
             </RelativeLayout>

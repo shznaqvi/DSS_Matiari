@@ -208,4 +208,23 @@ public class TableContracts {
             return ContentUris.withAppendedId(CONTENT_URI, id);
         }*/
     }
+
+    public static abstract class TableFollowUpsSche implements BaseColumns {
+
+        public static final String TABLE_NAME = "hhFolloupsList";
+
+        public static final String COLUMN_ID = "id";
+        public static final String COLUMN_VILLAGE_CODE = "villageCode";
+        public static final String COLUMN_UC_CODE = "ucCode";
+        public static final String COLUMN_HOUSEHOLD_NO = "hhNo";
+        public static final String COLUMN_HDSSID = "hdssid";
+        public static final String COLUMN_RA01 = "ra01"; // Date of First Visit
+        public static final String COLUMN_RA08 = "ra08"; // Para
+        public static final String COLUMN_RA14 = "ra14"; // Head of Household
+        public static final String COLUMN_RA18 = "ra18"; // No. of MWRA in the household
+        public static final String COLUMN_FROUND = "fRound";
+        public static final String COLUMN_RB01 = "rb01"; // MWRA Sno
+        public static final String COLUMN_RB02 = "rb02"; // MWRA Name
+        public static final String COLUMN_RB07 = "rb07";  // Pregnancy Status
+    }
 }

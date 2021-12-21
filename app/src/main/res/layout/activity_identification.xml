@@ -5,7 +5,7 @@
 
         <import type="android.view.View" />
         <!--<variable
-            name="households"
+            name="fpHouseholds"
             type="edu.aku.hassannaqvi.dssmwsr.models.Households" />-->
         <variable
             name="callback"

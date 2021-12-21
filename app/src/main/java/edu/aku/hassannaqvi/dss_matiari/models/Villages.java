@@ -69,20 +69,16 @@ public class Villages {
     }
 
 
-    public JSONObject toJSONObject() {
+    public JSONObject toJSONObject() throws JSONException {
 
         JSONObject json = new JSONObject();
-        try {
-            json.put(TableVillage._ID, this.id == null ? JSONObject.NULL : this.id);
-            json.put(TableVillage.COLUMN_UCNAME, this.ucname == null ? JSONObject.NULL : this.ucname);
-            json.put(TableVillage.COLUMN_VILLAGE_NAME, this.villagename == null ? JSONObject.NULL : this.villagename);
-            json.put(TableVillage.COLUMN_VILLAGE_CODE, this.villagecode == null ? JSONObject.NULL : this.villagecode);
-            json.put(TableVillage.COLUMN_UC_CODE, this.villagecode == null ? JSONObject.NULL : this.villagecode);
-            return json;
-        } catch (JSONException e) {
-            e.printStackTrace();
-            return null;
-        }
+        json.put(TableVillage._ID, this.id == null ? JSONObject.NULL : this.id);
+        json.put(TableVillage.COLUMN_UCNAME, this.ucname == null ? JSONObject.NULL : this.ucname);
+        json.put(TableVillage.COLUMN_VILLAGE_NAME, this.villagename == null ? JSONObject.NULL : this.villagename);
+        json.put(TableVillage.COLUMN_VILLAGE_CODE, this.villagecode == null ? JSONObject.NULL : this.villagecode);
+        json.put(TableVillage.COLUMN_UC_CODE, this.villagecode == null ? JSONObject.NULL : this.villagecode);
+        return json;
+
     }
 
     public Villages Sync(JSONObject jsonObject) throws JSONException {

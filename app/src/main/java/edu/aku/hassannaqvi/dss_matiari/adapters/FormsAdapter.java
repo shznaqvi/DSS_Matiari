@@ -99,7 +99,7 @@ public class FormsAdapter extends RecyclerView.Adapter<FormsAdapter.ViewHolder> 
         }
 
         /*
-                TableContracts.HouseholdTable._ID,
+                TableContracts.HouseholdTable.COLUMN_ID,
                 TableContracts.HouseholdTable.COLUMN_UID,
                 TableContracts.HouseholdTable.COLUMN_SYSDATE,
                 TableContracts.HouseholdTable.COLUMN_USERNAME,

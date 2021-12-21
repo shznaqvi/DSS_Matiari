@@ -14,6 +14,7 @@ import edu.aku.hassannaqvi.dss_matiari.R;
 import edu.aku.hassannaqvi.dss_matiari.core.MainApp;
 import edu.aku.hassannaqvi.dss_matiari.database.AndroidManager;
 import edu.aku.hassannaqvi.dss_matiari.databinding.ActivityMainBinding;
+import edu.aku.hassannaqvi.dss_matiari.models.Followups;
 import edu.aku.hassannaqvi.dss_matiari.models.Households;
 import edu.aku.hassannaqvi.dss_matiari.ui.lists.FormsReportCluster;
 import edu.aku.hassannaqvi.dss_matiari.ui.sections.IdentificationActivity;
@@ -43,6 +44,9 @@ public class MainActivity extends AppCompatActivity {
             case R.id.openForm:
                 MainApp.idType = 1;
                 break;
+            case R.id.openFollowup:
+                MainApp.idType = 2;
+                break;
 
         }
 
@@ -55,6 +59,8 @@ public class MainActivity extends AppCompatActivity {
                 MainApp.households = new Households();
                 startActivity(new Intent(this, IdentificationActivity.class));
                 break;
+
+
             case R.id.seca:
                 MainApp.households = new Households();
                 startActivity(new Intent(this, SectionAActivity.class));
@@ -65,6 +71,8 @@ public class MainActivity extends AppCompatActivity {
                 break;
             case R.id.openFollowup:
                 MainApp.idType = 2;
+                MainApp.followups = new Followups();
+
                 startActivity(new Intent(this, IdentificationActivity.class));
 
                 break;

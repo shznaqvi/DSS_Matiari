@@ -4,6 +4,7 @@ import static edu.aku.hassannaqvi.dss_matiari.database.CreateTable.DATABASE_NAME
 import static edu.aku.hassannaqvi.dss_matiari.database.CreateTable.DATABASE_VERSION;
 import static edu.aku.hassannaqvi.dss_matiari.database.CreateTable.SQL_ALTER_USERS;
 import static edu.aku.hassannaqvi.dss_matiari.database.CreateTable.SQL_CREATE_FOLLOWUPS;
+import static edu.aku.hassannaqvi.dss_matiari.database.CreateTable.SQL_CREATE_FOLLOWUPSCHE;
 import static edu.aku.hassannaqvi.dss_matiari.database.CreateTable.SQL_CREATE_HOUSEHOLDS;
 import static edu.aku.hassannaqvi.dss_matiari.database.CreateTable.SQL_CREATE_MWRA;
 import static edu.aku.hassannaqvi.dss_matiari.database.CreateTable.SQL_CREATE_OUTCOME;
@@ -29,16 +30,17 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
-import java.util.function.Predicate;
 
 import edu.aku.hassannaqvi.dss_matiari.contracts.TableContracts;
 import edu.aku.hassannaqvi.dss_matiari.contracts.TableContracts.HouseholdTable;
 import edu.aku.hassannaqvi.dss_matiari.contracts.TableContracts.MWRATable;
+import edu.aku.hassannaqvi.dss_matiari.contracts.TableContracts.TableFollowUpsSche;
 import edu.aku.hassannaqvi.dss_matiari.contracts.TableContracts.TableVillage;
 import edu.aku.hassannaqvi.dss_matiari.contracts.TableContracts.UsersTable;
 import edu.aku.hassannaqvi.dss_matiari.contracts.TableContracts.VersionTable;
 import edu.aku.hassannaqvi.dss_matiari.contracts.TableContracts.ZScoreTable;
 import edu.aku.hassannaqvi.dss_matiari.core.MainApp;
+import edu.aku.hassannaqvi.dss_matiari.models.FollowUpsSche;
 import edu.aku.hassannaqvi.dss_matiari.models.Households;
 import edu.aku.hassannaqvi.dss_matiari.models.MWRA;
 import edu.aku.hassannaqvi.dss_matiari.models.Outcome;
@@ -75,6 +77,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL(SQL_CREATE_OUTCOME);
         db.execSQL(SQL_CREATE_VERSIONAPP);
         db.execSQL(SQL_CREATE_VILLAGES);
+        db.execSQL(SQL_CREATE_FOLLOWUPSCHE);
 
 //        db.execSQL(SQL_CREATE_ZSTANDARD);
 
@@ -621,6 +624,42 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         } finally {
             db.close();
         }
+        return insertCount;
+    }
+
+    public int syncFollowUpsSche(JSONArray followupsList) throws JSONException {
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.delete(TableFollowUpsSche.TABLE_NAME, null, null);
+        int insertCount = 0;
+        for (int i = 0; i < followupsList.length(); i++) {
+
+            JSONObject jsonObjectVil = followupsList.getJSONObject(i);
+
+            FollowUpsSche followUpsSche = new FollowUpsSche();
+            followUpsSche.Sync(jsonObjectVil);
+            ContentValues values = new ContentValues();
+
+            values.put(TableFollowUpsSche.COLUMN_UC_CODE, followUpsSche.getUcCode());
+            values.put(TableFollowUpsSche.COLUMN_VILLAGE_CODE, followUpsSche.getVillageCode());
+            values.put(TableFollowUpsSche.COLUMN_HOUSEHOLD_NO, followUpsSche.getHhNo());
+            values.put(TableFollowUpsSche.COLUMN_HDSSID, followUpsSche.getHdssid());
+            values.put(TableFollowUpsSche.COLUMN_RA01, followUpsSche.getRa01());
+            values.put(TableFollowUpsSche.COLUMN_RA08, followUpsSche.getRa08());
+            values.put(TableFollowUpsSche.COLUMN_RA14, followUpsSche.getRa14());
+            values.put(TableFollowUpsSche.COLUMN_RA18, followUpsSche.getRa18());
+            values.put(TableFollowUpsSche.COLUMN_FROUND, followUpsSche.getfRound());
+            values.put(TableFollowUpsSche.COLUMN_RB01, followUpsSche.getRb01());
+            values.put(TableFollowUpsSche.COLUMN_RB02, followUpsSche.getRb02());
+            values.put(TableFollowUpsSche.COLUMN_RB07, followUpsSche.getRb07());
+            long rowID = db.insert(TableFollowUpsSche.TABLE_NAME, null, values);
+            if (rowID != -1) insertCount++;
+        }
+
+
+        db.close();
+
+        db.close();
+
         return insertCount;
     }
 
@@ -1256,6 +1295,45 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             }
         }
         return householdByHH;
+    }
+
+
+    public List<FollowUpsSche> getFPHouseholdBYVillage(String village) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor c = null;
+        String[] columns = null;
+
+        String whereClause;
+        whereClause = TableFollowUpsSche.COLUMN_VILLAGE_CODE + "=? ";
+
+        String[] whereArgs = {village};
+
+        String groupBy = TableFollowUpsSche.COLUMN_HDSSID;
+        String having = null;
+
+        String orderBy = TableFollowUpsSche.COLUMN_RA01 + " Desc";
+
+        ArrayList<FollowUpsSche> followUpsSches = new ArrayList<>();
+        c = db.query(
+                TableContracts.TableFollowUpsSche.TABLE_NAME,  // The table to query
+                columns,                   // The columns to return
+                whereClause,               // The columns for the WHERE clause
+                whereArgs,                 // The values for the WHERE clause
+                groupBy,                   // don't group the rows
+                having,                    // don't filter by row groups
+                orderBy,                    // The sort order
+                "100"
+        );
+        while (c.moveToNext()) {
+
+            followUpsSches.add(new FollowUpsSche().Hydrate(c));
+        }
+
+        c.close();
+
+        db.close();
+
+        return followUpsSches;
     }
 
     public int getMWRACountBYUUID(String uid) {

@@ -14,6 +14,7 @@ import java.util.List;
 
 import edu.aku.hassannaqvi.dss_matiari.BuildConfig;
 import edu.aku.hassannaqvi.dss_matiari.R;
+import edu.aku.hassannaqvi.dss_matiari.models.FollowUpsSche;
 import edu.aku.hassannaqvi.dss_matiari.models.Followups;
 import edu.aku.hassannaqvi.dss_matiari.models.Households;
 import edu.aku.hassannaqvi.dss_matiari.models.MWRA;
@@ -28,8 +29,8 @@ public class MainApp extends Application {
     public static final String DIST_ID = null;
     public static final String SYNC_LOGIN = "sync_login";
     public static final String _IP = "https://pedres2.aku.edu/";// .LIVE server
-    //public static final String _IP = "https://vcoe1.aku.edu";// .LIVE server
-    //public static final String _IP = "http://f38158/prosystem";// .TEST server
+    // public static final String _IP = "https://vcoe1.aku.edu";// .LIVE server
+    // public static final String _IP = "http://cls-pae-fp51764";// .TEST server
     //public static final String _IP = "http://43.245.131.159:8080";// .TEST server
     public static final String _HOST_URL = MainApp._IP + "/dss_matiari/api/";// .TEST server;
     public static final String _SERVER_URL = "sync.php";
@@ -77,6 +78,7 @@ public class MainApp extends Application {
     public static int selectedHousehold;
     public static int mwraCountComplete = 0;
     public static List<Households> householdList;
+    public static List<FollowUpsSche> fpHouseholdList;
     public static int householdCount = 0;
     public static int householdCountComplete = 0;
     public static String previousAddress = "";
@@ -87,6 +89,7 @@ public class MainApp extends Application {
     public static Followups followups;
     public static Pregnancy pregnancy;
     public static Outcome outcome;
+    public static FollowUpsSche fpHouseholds;
 
     public static void hideSystemUI(View decorView) {
         // Enables regular immersive mode.

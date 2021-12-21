@@ -2,20 +2,12 @@ package edu.aku.hassannaqvi.dss_matiari.ui.lists;
 
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.hdssid;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.idType;
-import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.selectedHousehold;
-import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.selectedVillage;
 
-import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
-import androidx.activity.result.ActivityResult;
-import androidx.activity.result.ActivityResultCallback;
-import androidx.activity.result.ActivityResultLauncher;
-import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -27,13 +19,11 @@ import org.json.JSONException;
 import java.util.ArrayList;
 
 import edu.aku.hassannaqvi.dss_matiari.R;
-import edu.aku.hassannaqvi.dss_matiari.adapters.HouseholdAdapter;
+import edu.aku.hassannaqvi.dss_matiari.adapters.FPHouseholdAdapter;
 import edu.aku.hassannaqvi.dss_matiari.core.MainApp;
 import edu.aku.hassannaqvi.dss_matiari.database.DatabaseHelper;
 import edu.aku.hassannaqvi.dss_matiari.databinding.ActivityFphouseholdBinding;
-import edu.aku.hassannaqvi.dss_matiari.databinding.ActivityHouseholdBinding;
 import edu.aku.hassannaqvi.dss_matiari.models.Households;
-import edu.aku.hassannaqvi.dss_matiari.ui.sections.SectionAActivity;
 
 
 public class FPHouseholdActivity extends AppCompatActivity {
@@ -41,8 +31,8 @@ public class FPHouseholdActivity extends AppCompatActivity {
     private static final String TAG = "FPHouseholdActivity";
     ActivityFphouseholdBinding bi;
     DatabaseHelper db;
-    private HouseholdAdapter hhAdapter;
-    ActivityResultLauncher<Intent> MemberInfoLauncher = registerForActivityResult(
+    private FPHouseholdAdapter hhAdapter;
+   /* ActivityResultLauncher<Intent> MemberInfoLauncher = registerForActivityResult(
             new ActivityResultContracts.StartActivityForResult(),
             new ActivityResultCallback<ActivityResult>() {
                 @Override
@@ -51,7 +41,7 @@ public class FPHouseholdActivity extends AppCompatActivity {
                         // There are no request codes
                         //Intent data = result.getData();
                         Intent data = result.getData();
-                      /*  int age = Integer.parseInt(femalemembers.getHh05y());
+                      *//*  int age = Integer.parseInt(femalemembers.getHh05y());
                         boolean isFemale = femalemembers.getHh03().equals("2");
                         boolean notMarried = femalemembers.getHh06().equals("2");
                         if (
@@ -61,12 +51,12 @@ public class FPHouseholdActivity extends AppCompatActivity {
                                         // HOUSEHOLD: Married females between 14 to 49
                                         (age >= 14 && age < 50 && !notMarried && isFemale )
 
-                        ) {*/
-                        MainApp.householdList.add(MainApp.households);
+                        ) {*//*
+                        MainApp.fpHouseholdList.add(MainApp.fpHousehold);
 
                         MainApp.householdCount++;
 
-                        hhAdapter.notifyItemInserted(MainApp.householdList.size() - 1);
+                        hhAdapter.notifyItemInserted(MainApp.fpHouseholdList.size() - 1);
                         //  Collections.sort(MainApp.fm, new SortByStatus());
                         //fmAdapter.notifyDataSetChanged();
 
@@ -81,7 +71,7 @@ public class FPHouseholdActivity extends AppCompatActivity {
                     }
 
                 }
-            });
+            });*/
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -91,19 +81,15 @@ public class FPHouseholdActivity extends AppCompatActivity {
         bi.setCallback(this);
 
         db = MainApp.appInfo.dbHelper;
-        MainApp.householdList = new ArrayList<>();
+        MainApp.fpHouseholdList = new ArrayList<>();
 
-        Log.d(TAG, "onCreate: householdlist " + MainApp.householdList.size());
-        try {
+        Log.d(TAG, "onCreate: fpHouseholdList " + MainApp.fpHouseholdList.size());
 
-            MainApp.householdList = db.getHouseholdBYVillage(MainApp.selectedVillage);
-        } catch (JSONException e) {
-            e.printStackTrace();
-            Toast.makeText(this, "JSONException: " + e.getMessage(), Toast.LENGTH_SHORT).show();
-            Log.d(TAG, "onCreate (JSONException): " + e.getMessage());
-        }
 
-        hhAdapter = new HouseholdAdapter(this, MainApp.householdList);
+        MainApp.fpHouseholdList = db.getFPHouseholdBYVillage(MainApp.selectedVillage);
+
+
+        hhAdapter = new FPHouseholdAdapter(this, MainApp.fpHouseholdList);
         bi.rvHouseholds.setAdapter(hhAdapter);
         bi.rvHouseholds.setLayoutManager(new LinearLayoutManager(this));
 
@@ -112,7 +98,9 @@ public class FPHouseholdActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                addHousehold();
+
+                //TODO: Add new Household
+                //     addHousehold();
               /*  if (!MainApp.households.getiStatus().equals("1")) {
                     //     Toast.makeText(HouseholdActivity.this, "Opening Household Households", Toast.LENGTH_LONG).show();
 
@@ -129,19 +117,19 @@ public class FPHouseholdActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         Toast.makeText(this, "Activity Resumed!", Toast.LENGTH_SHORT).show();
-        MainApp.householdCount = Math.round(MainApp.householdList.size());
+        // MainApp.householdCount = Math.round(MainApp.fpHouseholdList.size());
 
-        MainApp.households = new Households();
+        //  MainApp.households = new Households();
 
-        if (MainApp.householdList.size() > 0) {
+      /*  if (MainApp.fpHouseholdList.size() > 0) {
             //MainApp.fm.get(Integer.parseInt(String.valueOf(MainApp.selectedHousehold))).setStatus("1");
             hhAdapter.notifyItemChanged(Integer.parseInt(String.valueOf(selectedHousehold)));
         }
 
         checkCompleteFm();
-
+*/
         // bi.fab.setClickable(!MainApp.households.getiStatus().equals("1"));
-      /* bi.completedmember.setText(householdList.size()+ " HOUSEHOLDs added");
+      /* bi.completedmember.setText(fpHouseholdList.size()+ " HOUSEHOLDs added");
         bi.totalmember.setText(MainApp.householdTotal+ " M completed");*/
         //MainApp.households.resetHousehold();
 
@@ -150,7 +138,7 @@ public class FPHouseholdActivity extends AppCompatActivity {
 
     private void checkCompleteFm() {
         //     if (!MainApp.households.getIStatus().equals("1")) {
-        int compCount = MainApp.householdList.size();
+        int compCount = MainApp.fpHouseholdList.size();
 
         MainApp.householdCountComplete = compCount;
         bi.btnContinue.setVisibility(MainApp.householdCount > 0 ? View.VISIBLE : View.GONE);
@@ -163,6 +151,7 @@ public class FPHouseholdActivity extends AppCompatActivity {
         //   }
     }
 
+/*
     public void addHousehold() {
         MainApp.households = new Households();
         // Copy common variables from existing Households to new Households
@@ -175,6 +164,7 @@ public class FPHouseholdActivity extends AppCompatActivity {
         Intent intent = new Intent(this, SectionAActivity.class);
         MemberInfoLauncher.launch(intent);
     }
+*/
 
     public void btnContinue(View view) {
         finish();
@@ -191,22 +181,22 @@ public class FPHouseholdActivity extends AppCompatActivity {
            }*/
     }
 
-    @Override
+  /*  @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         // check if the request code is same as what is passed  here it is 2
         if (requestCode == 2) {
             if (resultCode == Activity.RESULT_OK) {
-                //   householdList.get(selectedHousehold).setExpanded(false);
+                //   fpHouseholdList.get(selectedHousehold).setExpanded(false);
                 checkCompleteFm();
                 hhAdapter.notifyItemChanged(selectedHousehold);
             }
             if (resultCode == Activity.RESULT_CANCELED) {
                 // Write your code if there's no result
-                Toast.makeText(this, "Information for " + MainApp.householdList.get(selectedHousehold).getRa14() + " was not saved.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Information for " + MainApp.fpHouseholdList.get(selectedHousehold).getRa14() + " was not saved.", Toast.LENGTH_SHORT).show();
             }
         }
-    }
+    }*/
 
     private boolean hhExists() {
 

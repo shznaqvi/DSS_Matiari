@@ -147,6 +147,21 @@ object CreateTable {
             + TableVillage.COLUMN_VILLAGE_CODE + " TEXT,"
             + TableVillage.COLUMN_UC_CODE + " TEXT" + " );")
 
+    const val SQL_CREATE_FOLLOWUPSCHE = ("CREATE TABLE " + TableFollowUpsSche.TABLE_NAME + "("
+            + TableFollowUpsSche.COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
+            + TableFollowUpsSche.COLUMN_UC_CODE + " TEXT,"
+            + TableFollowUpsSche.COLUMN_VILLAGE_CODE + " TEXT,"
+            + TableFollowUpsSche.COLUMN_HOUSEHOLD_NO + " TEXT,"
+            + TableFollowUpsSche.COLUMN_HDSSID + " TEXT,"
+            + TableFollowUpsSche.COLUMN_RA01 + " TEXT,"
+            + TableFollowUpsSche.COLUMN_RA08 + " TEXT,"
+            + TableFollowUpsSche.COLUMN_RA14 + " TEXT,"
+            + TableFollowUpsSche.COLUMN_RA18 + " TEXT,"
+            + TableFollowUpsSche.COLUMN_FROUND + " TEXT,"
+            + TableFollowUpsSche.COLUMN_RB01 + " TEXT,"
+            + TableFollowUpsSche.COLUMN_RB02 + " TEXT,"
+            + TableFollowUpsSche.COLUMN_RB07 + " TEXT" + " );")
+
 
     const val SQL_CREATE_ZSTANDARD = "CREATE TABLE " + ZScoreTable.TABLE_NAME + " (" +
             ZScoreTable._ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
