@@ -6,8 +6,8 @@
         <import type="android.view.View" />
 
         <variable
-            name="pregnancy"
-            type="edu.aku.hassannaqvi.dss_matiari.models.Pregnancy" />
+            name="followups"
+            type="edu.aku.hassannaqvi.dss_matiari.models.Followups" />
 
         <variable
             name="callback"
@@ -88,8 +88,8 @@
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
-                                android:checked='@{pregnancy.rc08.equals("1")}'
-                                android:onClick='@{()->pregnancy.setRc08("1") + rc09.clearCheck() + rc11.clearCheck()}'
+                                android:checked='@{followups.rc08.equals("1")}'
+                                android:onClick='@{()->followups.setRc08("1") + rc09.clearCheck() + rc11.clearCheck()}'
                                 android:text="@string/rc0801" />
 
                             <RadioButton
@@ -97,8 +97,8 @@
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
-                                android:checked='@{pregnancy.rc08.equals("2")}'
-                                android:onClick='@{()->pregnancy.setRc08("2")}'
+                                android:checked='@{followups.rc08.equals("2")}'
+                                android:onClick='@{()->followups.setRc08("2")}'
                                 android:text="@string/rc0802" />
 
                         </RadioGroup>
@@ -108,34 +108,33 @@
                 </androidx.cardview.widget.CardView>
 
 
-
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
                     android:id="@+id/fldGrprc10"
-                    android:visibility="@{pregnancy.rc08.equals(`1`) ? View.GONE : View.VISIBLE}">
+                    android:visibility="@{followups.rc08.equals(`1`) ? View.GONE : View.VISIBLE}">
 
-                <androidx.cardview.widget.CardView
-                    android:id="@+id/fldGrpCVrc10"
-                    style="@style/cardView">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical">
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/fldGrpCVrc10"
+                        style="@style/cardView">
 
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:background="@drawable/bottom"
-                            android:orientation="horizontal">
+                            android:orientation="vertical">
 
-                            <TextView
-                                android:layout_width="0dp"
-                                android:layout_height="match_parent"
-                                android:layout_weight="1"
-                                android:text="@string/rc10" />
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:background="@drawable/bottom"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="1"
+                                    android:text="@string/rc10" />
 
                             <TextView
                                 style="@style/quesNum"
@@ -158,10 +157,10 @@
                                 android:layout_height="match_parent"
                                 android:layout_marginBottom="0dp"
                                 android:layout_weight="1"
-                                android:enabled="@{!pregnancy.rc10.equals(`98`)}"
+                                android:enabled="@{!followups.rc10.equals(`98`)}"
                                 android:gravity="center"
                                 android:hint="YYYY-MM-DD"
-                                android:text="@={pregnancy.rc10}"
+                                android:text="@={followups.rc10}"
                                 app:dateFormat="yyyy-MM-dd"
                                 app:maxDate="CR_DATE"
                                 android:datePickerMode="spinner"
@@ -172,8 +171,8 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="match_parent"
                                 android:backgroundTint="@color/lightPink"
-                                android:checked='@{pregnancy.rc10.equals("98")}'
-                                android:onClick="@{()->pregnancy.setRc10(pregnancy.rc10.equals(`98`)?``:`98`)}"
+                                android:checked='@{followups.rc10.equals("98")}'
+                                android:onClick="@{()->followups.setRc10(followups.rc10.equals(`98`)?``:`98`)}"
                                 android:tag="-1"
                                 android:text="@string/dkn"
                                 android:textColor="@color/redDark" />
@@ -223,32 +222,32 @@
                                 android:id="@+id/rc0901"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:checked='@{pregnancy.rc09.equals("1")}'
-                                android:onClick='@{()->pregnancy.setRc09("1")}'
+                                android:checked='@{followups.rc09.equals("1")}'
+                                android:onClick='@{()->followups.setRc09("1")}'
                                 android:text="@string/rc0901" />
 
                             <RadioButton
                                 android:id="@+id/rc0902"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:checked='@{pregnancy.rc09.equals("2")}'
-                                android:onClick='@{()->pregnancy.setRc09("2")}'
+                                android:checked='@{followups.rc09.equals("2")}'
+                                android:onClick='@{()->followups.setRc09("2")}'
                                 android:text="@string/rc0902" />
 
                             <RadioButton
                                 android:id="@+id/rc0903"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:checked='@{pregnancy.rc09.equals("3")}'
-                                android:onClick='@{()->pregnancy.setRc09("3")}'
+                                android:checked='@{followups.rc09.equals("3")}'
+                                android:onClick='@{()->followups.setRc09("3")}'
                                 android:text="@string/rc0903" />
 
                             <RadioButton
                                 android:id="@+id/rc0904"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:checked='@{pregnancy.rc09.equals("4")}'
-                                android:onClick='@{()->pregnancy.setRc09("4")}'
+                                android:checked='@{followups.rc09.equals("4")}'
+                                android:onClick='@{()->followups.setRc09("4")}'
                                 android:text="@string/rc0904" />
                         </RadioGroup>
                     </LinearLayout>
@@ -296,24 +295,24 @@
                                 android:id="@+id/rc1101"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:checked='@{pregnancy.rc11.equals("1")}'
-                                android:onClick='@{()->pregnancy.setRc11("1")}'
+                                android:checked='@{followups.rc11.equals("1")}'
+                                android:onClick='@{()->followups.setRc11("1")}'
                                 android:text="@string/rc1101" />
 
                             <RadioButton
                                 android:id="@+id/rc1102"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:checked='@{pregnancy.rc09.equals("2")}'
-                                android:onClick='@{()->pregnancy.setRc09("2")}'
+                                android:checked='@{followups.rc09.equals("2")}'
+                                android:onClick='@{()->followups.setRc09("2")}'
                                 android:text="@string/rc1102" />
 
                             <RadioButton
                                 android:id="@+id/rc1103"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:checked='@{pregnancy.rc11.equals("3")}'
-                                android:onClick='@{()->pregnancy.setRc11("3")}'
+                                android:checked='@{followups.rc11.equals("3")}'
+                                android:onClick='@{()->followups.setRc11("3")}'
                                 android:text="@string/rc1103" />
                         </RadioGroup>
 

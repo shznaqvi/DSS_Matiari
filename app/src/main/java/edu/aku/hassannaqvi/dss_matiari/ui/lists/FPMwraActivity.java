@@ -1,6 +1,7 @@
 package edu.aku.hassannaqvi.dss_matiari.ui.lists;
 
-import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.mwra;
+import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.followups;
+import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.fpMWRAList;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.mwraCount;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.mwraList;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.selectedFemale;
@@ -13,10 +14,6 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
-import androidx.activity.result.ActivityResult;
-import androidx.activity.result.ActivityResultCallback;
-import androidx.activity.result.ActivityResultLauncher;
-import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
@@ -24,16 +21,13 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
-import org.json.JSONException;
-
-import java.util.ArrayList;
-
 import edu.aku.hassannaqvi.dss_matiari.R;
-import edu.aku.hassannaqvi.dss_matiari.adapters.MwraAdapter;
+import edu.aku.hassannaqvi.dss_matiari.adapters.FpMwraAdapter;
 import edu.aku.hassannaqvi.dss_matiari.core.MainApp;
 import edu.aku.hassannaqvi.dss_matiari.database.DatabaseHelper;
 import edu.aku.hassannaqvi.dss_matiari.databinding.ActivityFpmwraBinding;
-import edu.aku.hassannaqvi.dss_matiari.databinding.ActivityMwraBinding;
+import edu.aku.hassannaqvi.dss_matiari.models.Followups;
+import edu.aku.hassannaqvi.dss_matiari.models.Households;
 import edu.aku.hassannaqvi.dss_matiari.models.MWRA;
 import edu.aku.hassannaqvi.dss_matiari.ui.EndingActivity;
 import edu.aku.hassannaqvi.dss_matiari.ui.sections.SectionBActivity;
@@ -44,8 +38,8 @@ public class FPMwraActivity extends AppCompatActivity {
     private static final String TAG = "FPMwraActivity";
     ActivityFpmwraBinding bi;
     DatabaseHelper db;
-    private MwraAdapter fmAdapter;
-    ActivityResultLauncher<Intent> MemberInfoLauncher = registerForActivityResult(
+    private FpMwraAdapter fmAdapter;
+   /* ActivityResultLauncher<Intent> MemberInfoLauncher = registerForActivityResult(
             new ActivityResultContracts.StartActivityForResult(),
             new ActivityResultCallback<ActivityResult>() {
                 @Override
@@ -54,7 +48,7 @@ public class FPMwraActivity extends AppCompatActivity {
                         // There are no request codes
                         //Intent data = result.getData();
                         Intent data = result.getData();
-                      /*  int age = Integer.parseInt(femalemembers.getHh05y());
+                      *//*  int age = Integer.parseInt(femalemembers.getHh05y());
                         boolean isFemale = femalemembers.getHh03().equals("2");
                         boolean notMarried = femalemembers.getHh06().equals("2");
                         if (
@@ -64,8 +58,15 @@ public class FPMwraActivity extends AppCompatActivity {
                                         // MWRA: Married females between 14 to 49
                                         (age >= 14 && age < 50 && !notMarried && isFemale )
 
-                        ) {*/
-                        mwraList.add(mwra);
+                        ) {*//*
+                        FollowUpsSche fupsche = new FollowUpsSche();
+                        fupsche.setHdssid(MainApp.mwra.getHdssId());
+                        fupsche.setHdssid(MainApp.mwra.getHdssId());
+                        fupsche.setHdssid(MainApp.mwra.getHdssId());
+                        fupsche.setHdssid(MainApp.mwra.getHdssId());
+
+
+                        fpMWRAList.add(fupsche);
 
                         mwraCount++;
 
@@ -82,7 +83,7 @@ public class FPMwraActivity extends AppCompatActivity {
                     }
 
                 }
-            });
+            });*/
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -92,17 +93,18 @@ public class FPMwraActivity extends AppCompatActivity {
         bi.setCallback(this);
 
         db = MainApp.appInfo.dbHelper;
-        MainApp.mwraList = new ArrayList<>();
-        Log.d(TAG, "onCreate: mwralist " + mwraList.size());
+        // MainApp.fpMWRAList = new ArrayList<>();
+     /*   Log.d(TAG, "onCreate: mwralist " + MainApp.fpMWRAList.size());
+        Log.d(TAG, "onCreate: mwralist " + MainApp.fpHouseholds.getVillageCode());*/
         try {
-            MainApp.mwraList = db.getAllMWRAByHH(MainApp.households.getVillageCode(), MainApp.households.getStructureNo(), MainApp.households.getHhNo());
-        } catch (JSONException e) {
+            fpMWRAList = db.getAllfollowupsScheByHH(MainApp.fpHouseholds.getVillageCode(), MainApp.fpHouseholds.getUcCode(), MainApp.fpHouseholds.getHhNo());
+        } catch (Exception e) {
             e.printStackTrace();
             Toast.makeText(this, "JSONException: " + e.getMessage(), Toast.LENGTH_SHORT).show();
             Log.d(TAG, "onCreate (JSONException): " + e.getMessage());
         }
 
-        fmAdapter = new MwraAdapter(this, MainApp.mwraList);
+        fmAdapter = new FpMwraAdapter(this, fpMWRAList);
         bi.rvMembers.setAdapter(fmAdapter);
         bi.rvMembers.setLayoutManager(new LinearLayoutManager(this));
 
@@ -112,9 +114,9 @@ public class FPMwraActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                if (!MainApp.households.getiStatus().equals("1")) {
+                if (!MainApp.fpHouseholds.getiStatus().equals("1")) {
                     //     Toast.makeText(MwraActivity.this, "Opening Mwra Households", Toast.LENGTH_LONG).show();
-                    addFemale();
+                    addMoreFemale();
                 } else {
                     Toast.makeText(FPMwraActivity.this, "This households has been locked. You cannot add new members to locked forms", Toast.LENGTH_LONG).show();
                 }
@@ -129,16 +131,16 @@ public class FPMwraActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         Toast.makeText(this, "Activity Resumed!", Toast.LENGTH_SHORT).show();
-        mwraCount = Math.round(MainApp.mwraList.size());
+        //       mwraCount = Math.round(MainApp.fpMWRAList.size());
 
-        MainApp.mwra = new MWRA();
-        if (MainApp.mwraList.size() > 0) {
+        followups = new Followups();
+    /*    if (MainApp.fpMWRAList.size() > 0) {
             //MainApp.fm.get(Integer.parseInt(String.valueOf(MainApp.selectedFemale))).setStatus("1");
             fmAdapter.notifyItemChanged(Integer.parseInt(String.valueOf(selectedFemale)));
-        }
+        }*/
 
 
-        checkCompleteFm();
+        //     checkCompleteFm();
 
         // bi.fab.setClickable(!MainApp.households.getiStatus().equals("1"));
       /* bi.completedmember.setText(mwraList.size()+ " MWRAs added");
@@ -174,10 +176,19 @@ public class FPMwraActivity extends AppCompatActivity {
     }
 
     private void addMoreFemale() {
+        MainApp.households = new Households();
         MainApp.mwra = new MWRA();
-        Intent intent = new Intent(this, SectionBActivity.class);
+
+        MainApp.households.setRa01(MainApp.fpHouseholds.getSysDate().substring(0, 10));
+        MainApp.households.setUid(MainApp.fpHouseholds.getUid());
+        MainApp.households.setUcCode(MainApp.fpHouseholds.getUcCode());
+        MainApp.households.setVillageCode(MainApp.fpHouseholds.getVillageCode());
+        MainApp.households.setHhNo(MainApp.fpHouseholds.getHhNo());
+        MainApp.households.setSysDate(MainApp.fpHouseholds.getSysDate());
+        MainApp.households.setHdssId(MainApp.fpHouseholds.getHdssId());
+        startActivity(new Intent(this, SectionBActivity.class));
         //   finish();
-        MemberInfoLauncher.launch(intent);
+
     }
 
     public void btnContinue(View view) {
@@ -207,17 +218,19 @@ public class FPMwraActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         // check if the request code is same as what is passed  here it is 2
-        if (requestCode == 2) {
+
             if (resultCode == Activity.RESULT_OK) {
                 //   mwraList.get(selectedFemale).setExpanded(false);
-                checkCompleteFm();
-                fmAdapter.notifyItemChanged(selectedFemale);
+
+                // TODO: Mark followup done
+             /*   checkCompleteFm();
+                fmAdapter.notifyItemChanged(selectedFemale);*/
             }
             if (resultCode == Activity.RESULT_CANCELED) {
                 // Write your code if there's no result
                 Toast.makeText(this, "Information for " + mwraList.get(selectedFemale).getRb02() + " was not saved.", Toast.LENGTH_SHORT).show();
             }
-        }
+
     }
 
     private void displayAddMoreDialog() {

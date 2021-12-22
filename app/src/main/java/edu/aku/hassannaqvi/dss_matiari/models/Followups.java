@@ -20,7 +20,8 @@ import java.util.Date;
 import java.util.Locale;
 
 import edu.aku.hassannaqvi.dss_matiari.BR;
-import edu.aku.hassannaqvi.dss_matiari.contracts.TableContracts.MWRATable;
+import edu.aku.hassannaqvi.dss_matiari.contracts.TableContracts;
+import edu.aku.hassannaqvi.dss_matiari.contracts.TableContracts.FollowupsTable;
 import edu.aku.hassannaqvi.dss_matiari.core.MainApp;
 
 public class Followups extends BaseObservable implements Observable {
@@ -45,7 +46,7 @@ public class Followups extends BaseObservable implements Observable {
     private String ucCode = StringUtils.EMPTY;
     private String villageCode = StringUtils.EMPTY;
     private String hhNo = StringUtils.EMPTY;
-    private String structureNo = StringUtils.EMPTY;
+    private String sNo = StringUtils.EMPTY;
 
     private String deviceId = StringUtils.EMPTY;
     private String deviceTag = StringUtils.EMPTY;
@@ -56,16 +57,20 @@ public class Followups extends BaseObservable implements Observable {
     private String syncDate = StringUtils.EMPTY;
 
     // SECTION VARIABLES
-    private String sB = StringUtils.EMPTY;
 
     private String round = "";
+    private String prePreg = "";
     private String rc01 = "";
     private String rc02 = "";
     private String rc03 = "";
     private String rc06 = "";
     private String rc07 = "";
+
+    // Previous Pregnancy Information
     private String rc08 = "";
     private String rc09 = "";
+    private String rc10 = StringUtils.EMPTY;
+    private String rc11 = StringUtils.EMPTY;
 
     public Followups() {
 
@@ -80,6 +85,22 @@ public class Followups extends BaseObservable implements Observable {
         setVillageCode(MainApp.selectedVillage);
         setUcCode(MainApp.selectedUC);
 
+    }
+
+    public void populateMeta() {
+
+        MainApp.followups.setUuid(MainApp.fpHouseholds.getUid());
+        MainApp.followups.setUcCode(MainApp.fpHouseholds.getUcCode());
+        MainApp.followups.setVillageCode(MainApp.fpHouseholds.getVillageCode());
+        MainApp.followups.setSno(MainApp.fpHouseholds.getStructureNo());
+        MainApp.followups.setHhNo(MainApp.fpHouseholds.getHhNo());
+        // TODO: set MWRA ID from downloaded data
+        //   MainApp.followups.setMWRAID(households.getHhNo());
+        MainApp.followups.setUserName(MainApp.user.getUserName());
+        MainApp.followups.setSysDate(MainApp.fpHouseholds.getSysDate());
+        MainApp.followups.setDeviceId(MainApp.deviceid);
+        MainApp.followups.setHdssId(MainApp.fpHouseholds.getHdssId());
+        MainApp.followups.setAppver(MainApp.versionName + "." + MainApp.versionCode);
     }
 
     @Bindable
@@ -176,12 +197,12 @@ public class Followups extends BaseObservable implements Observable {
         this.hhNo = hhNo;
     }
 
-    public String getStructureNo() {
-        return structureNo;
+    public String getSno() {
+        return sNo;
     }
 
-    public void setStructureNo(String structureNo) {
-        this.structureNo = structureNo;
+    public void setSno(String sNo) {
+        this.sNo = sNo;
     }
 
     public String getDeviceId() {
@@ -248,14 +269,13 @@ public class Followups extends BaseObservable implements Observable {
         this.exist = exist;
     }
 
-    public String getSB() {
-        return sB;
+    public String getPrePreg() {
+        return prePreg;
     }
 
-    public void setsB(String sB) {
-        this.sB = sB;
+    public void setPrePreg(String prePreg) {
+        this.prePreg = prePreg;
     }
-
 
     @Bindable
     public String getRc01() {
@@ -264,6 +284,7 @@ public class Followups extends BaseObservable implements Observable {
 
     public void setRc01(String rc01) {
         this.rc01 = rc01;
+        setSno(rc01);
         notifyChange(BR.rb01);
     }
 
@@ -342,6 +363,26 @@ public class Followups extends BaseObservable implements Observable {
         notifyChange(BR.rb09);
     }
 
+    @Bindable
+    public String getRc10() {
+        return rc10;
+    }
+
+    public void setRc10(String rc10) {
+        this.rc10 = rc10;
+        notifyChange(BR.rb09);
+    }
+
+    @Bindable
+    public String getRc11() {
+        return rc11;
+    }
+
+    public void setRc11(String rc11) {
+        this.rc11 = rc11;
+        notifyChange(BR.rb09);
+    }
+
     private synchronized void notifyChange(int propertyId) {
         if (propertyChangeRegistry == null) {
             propertyChangeRegistry = new PropertyChangeRegistry();
@@ -366,29 +407,30 @@ public class Followups extends BaseObservable implements Observable {
     }
 
     public Followups Hydrate(Cursor cursor) throws JSONException {
-        this.id = cursor.getString(cursor.getColumnIndexOrThrow(MWRATable.COLUMN_ID));
-        this.uid = cursor.getString(cursor.getColumnIndexOrThrow(MWRATable.COLUMN_UID));
-        this.uuid = cursor.getString(cursor.getColumnIndexOrThrow(MWRATable.COLUMN_UUID));
-        this.userName = cursor.getString(cursor.getColumnIndexOrThrow(MWRATable.COLUMN_USERNAME));
-        this.sysDate = cursor.getString(cursor.getColumnIndexOrThrow(MWRATable.COLUMN_SYSDATE));
-        this.hdssId = cursor.getString(cursor.getColumnIndexOrThrow(MWRATable.COLUMN_HDSSID));
-        this.ucCode = cursor.getString(cursor.getColumnIndexOrThrow(MWRATable.COLUMN_UC_CODE));
-        this.villageCode = cursor.getString(cursor.getColumnIndexOrThrow(MWRATable.COLUMN_VILLAGE_CODE));
-        this.structureNo = cursor.getString(cursor.getColumnIndexOrThrow(MWRATable.COLUMN_STRUCTURE_NO));
-        this.hhNo = cursor.getString(cursor.getColumnIndexOrThrow(MWRATable.COLUMN_HOUSEHOLD_NO));
-        this.deviceId = cursor.getString(cursor.getColumnIndexOrThrow(MWRATable.COLUMN_DEVICEID));
-        this.deviceTag = cursor.getString(cursor.getColumnIndexOrThrow(MWRATable.COLUMN_DEVICETAGID));
-        this.appver = cursor.getString(cursor.getColumnIndexOrThrow(MWRATable.COLUMN_APPVERSION));
-        this.iStatus = cursor.getString(cursor.getColumnIndexOrThrow(MWRATable.COLUMN_ISTATUS));
-        this.synced = cursor.getString(cursor.getColumnIndexOrThrow(MWRATable.COLUMN_SYNCED));
-        this.syncDate = cursor.getString(cursor.getColumnIndexOrThrow(MWRATable.COLUMN_SYNCED_DATE));
+        this.id = cursor.getString(cursor.getColumnIndexOrThrow(FollowupsTable.COLUMN_ID));
+        this.uid = cursor.getString(cursor.getColumnIndexOrThrow(FollowupsTable.COLUMN_UID));
+        this.uuid = cursor.getString(cursor.getColumnIndexOrThrow(FollowupsTable.COLUMN_UUID));
+        this.userName = cursor.getString(cursor.getColumnIndexOrThrow(FollowupsTable.COLUMN_USERNAME));
+        this.sysDate = cursor.getString(cursor.getColumnIndexOrThrow(FollowupsTable.COLUMN_SYSDATE));
+        this.hdssId = cursor.getString(cursor.getColumnIndexOrThrow(FollowupsTable.COLUMN_HDSSID));
+        this.ucCode = cursor.getString(cursor.getColumnIndexOrThrow(FollowupsTable.COLUMN_UC_CODE));
+        this.villageCode = cursor.getString(cursor.getColumnIndexOrThrow(FollowupsTable.COLUMN_VILLAGE_CODE));
+        this.sNo = cursor.getString(cursor.getColumnIndexOrThrow(FollowupsTable.COLUMN_SNO));
+        this.hhNo = cursor.getString(cursor.getColumnIndexOrThrow(FollowupsTable.COLUMN_HOUSEHOLD_NO));
+        this.deviceId = cursor.getString(cursor.getColumnIndexOrThrow(FollowupsTable.COLUMN_DEVICEID));
+        this.deviceTag = cursor.getString(cursor.getColumnIndexOrThrow(FollowupsTable.COLUMN_DEVICETAGID));
+        this.appver = cursor.getString(cursor.getColumnIndexOrThrow(FollowupsTable.COLUMN_APPVERSION));
+        this.iStatus = cursor.getString(cursor.getColumnIndexOrThrow(FollowupsTable.COLUMN_ISTATUS));
+        this.synced = cursor.getString(cursor.getColumnIndexOrThrow(FollowupsTable.COLUMN_SYNCED));
+        this.syncDate = cursor.getString(cursor.getColumnIndexOrThrow(FollowupsTable.COLUMN_SYNCED_DATE));
 
-        sBHydrate(cursor.getString(cursor.getColumnIndexOrThrow(MWRATable.COLUMN_SB)));
+        sCHydrate(cursor.getString(cursor.getColumnIndexOrThrow(FollowupsTable.COLUMN_SC)));
+        sDHydrate(cursor.getString(cursor.getColumnIndexOrThrow(FollowupsTable.COLUMN_SD)));
         return this;
     }
 
 
-    public void sBHydrate(String string) throws JSONException {
+    public void sCHydrate(String string) throws JSONException {
         Log.d(TAG, "s2Hydrate: " + string);
         if (string != null) {
 
@@ -396,6 +438,7 @@ public class Followups extends BaseObservable implements Observable {
             json = new JSONObject(string);
             this.rc01 = json.getString("rc01");
             this.round = json.getString("round");
+            this.prePreg = json.getString("prePreg");
             this.rc02 = json.getString("rc02");
             this.rc03 = json.getString("rc03");
 
@@ -408,48 +451,76 @@ public class Followups extends BaseObservable implements Observable {
     }
 
 
-    public String sBtoString() throws JSONException {
+    public String sCtoString() throws JSONException {
         JSONObject json = new JSONObject();
 
 
         json.put("rc01", rc01)
                 .put("round", round)
+                .put("prePreg", prePreg)
                 .put("rc02", rc02)
                 .put("rc03", rc03)
 
                 .put("rc06", rc06)
-                .put("rc07", rc07)
-                .put("rc08", rc08)
-                .put("rc09", rc09);
+                .put("rc07", rc07);
+
 
         return json.toString();
     }
 
+    public void sDHydrate(String string) throws JSONException {
+        Log.d(TAG, "s2Hydrate: " + string);
+        if (string != null) {
+
+            JSONObject json = null;
+            json = new JSONObject(string);
+            this.rc08 = json.getString("rc08");
+            this.rc09 = json.getString("rc09");
+            this.rc10 = json.getString("rc10");
+            this.rc11 = json.getString("rc11");
+
+
+        }
+    }
+
+
+    public String sDtoString() throws JSONException {
+        JSONObject json = new JSONObject();
+
+
+        json.put("rc08", rc08)
+                .put("rc09", rc09)
+                .put("rc10", rc10)
+                .put("rc11", rc11);
+
+        return json.toString();
+    }
 
     public JSONObject toJSONObject() throws JSONException {
 
         JSONObject json = new JSONObject();
 
 
-        json.put(MWRATable.COLUMN_ID, this.id);
-        json.put(MWRATable.COLUMN_PROJECT_NAME, this.projectName);
-        json.put(MWRATable.COLUMN_UID, this.uid);
-        json.put(MWRATable.COLUMN_UUID, this.uuid);
-        json.put(MWRATable.COLUMN_USERNAME, this.userName);
-        json.put(MWRATable.COLUMN_SYSDATE, this.sysDate);
-        json.put(MWRATable.COLUMN_HDSSID, this.hdssId);
-        json.put(MWRATable.COLUMN_UC_CODE, this.ucCode);
-        json.put(MWRATable.COLUMN_VILLAGE_CODE, this.villageCode);
-        json.put(MWRATable.COLUMN_STRUCTURE_NO, this.structureNo);
-        json.put(MWRATable.COLUMN_HOUSEHOLD_NO, this.hhNo);
-        json.put(MWRATable.COLUMN_DEVICEID, this.deviceId);
-        json.put(MWRATable.COLUMN_DEVICETAGID, this.deviceTag);
-        json.put(MWRATable.COLUMN_ISTATUS, this.iStatus);
-        json.put(MWRATable.COLUMN_APPVERSION, this.appver);
-        //  json.put(MWRATable.COLUMN_SYNCED, this.synced);
-        //  json.put(MWRATable.COLUMN_SYNCED_DATE, this.syncDate);
+        json.put(TableContracts.FollowupsTable.COLUMN_ID, this.id);
+        json.put(FollowupsTable.COLUMN_PROJECT_NAME, this.projectName);
+        json.put(FollowupsTable.COLUMN_UID, this.uid);
+        json.put(FollowupsTable.COLUMN_UUID, this.uuid);
+        json.put(FollowupsTable.COLUMN_USERNAME, this.userName);
+        json.put(FollowupsTable.COLUMN_SYSDATE, this.sysDate);
+        json.put(FollowupsTable.COLUMN_HDSSID, this.hdssId);
+        json.put(FollowupsTable.COLUMN_UC_CODE, this.ucCode);
+        json.put(FollowupsTable.COLUMN_VILLAGE_CODE, this.villageCode);
+        json.put(FollowupsTable.COLUMN_SNO, this.sNo);
+        json.put(FollowupsTable.COLUMN_HOUSEHOLD_NO, this.hhNo);
+        json.put(FollowupsTable.COLUMN_DEVICEID, this.deviceId);
+        json.put(FollowupsTable.COLUMN_DEVICETAGID, this.deviceTag);
+        json.put(FollowupsTable.COLUMN_ISTATUS, this.iStatus);
+        json.put(FollowupsTable.COLUMN_APPVERSION, this.appver);
+        //  json.put(FollowupsTable.COLUMN_SYNCED, this.synced);
+        //  json.put(FollowupsTable.COLUMN_SYNCED_DATE, this.syncDate);
 
-        json.put(MWRATable.COLUMN_SB, new JSONObject(sBtoString()));
+        json.put(FollowupsTable.COLUMN_SC, new JSONObject(sCtoString()));
+        json.put(FollowupsTable.COLUMN_SD, new JSONObject(sDtoString()));
         return json;
 
     }

@@ -14,12 +14,12 @@ import java.util.List;
 
 import edu.aku.hassannaqvi.dss_matiari.BuildConfig;
 import edu.aku.hassannaqvi.dss_matiari.R;
+import edu.aku.hassannaqvi.dss_matiari.models.FPHouseholds;
 import edu.aku.hassannaqvi.dss_matiari.models.FollowUpsSche;
 import edu.aku.hassannaqvi.dss_matiari.models.Followups;
 import edu.aku.hassannaqvi.dss_matiari.models.Households;
 import edu.aku.hassannaqvi.dss_matiari.models.MWRA;
 import edu.aku.hassannaqvi.dss_matiari.models.Outcome;
-import edu.aku.hassannaqvi.dss_matiari.models.Pregnancy;
 import edu.aku.hassannaqvi.dss_matiari.models.Users;
 
 
@@ -75,10 +75,13 @@ public class MainApp extends Application {
     public static int mwraCount = 0;
     public static boolean fmComplete;
     public static int selectedFemale;
+    public static int selectedFpFemale;
     public static int selectedHousehold;
+    public static int selectedFpHousehold;
     public static int mwraCountComplete = 0;
     public static List<Households> householdList;
     public static List<FollowUpsSche> fpHouseholdList;
+    public static List<FollowUpsSche> fpMWRAList;
     public static int householdCount = 0;
     public static int householdCountComplete = 0;
     public static String previousAddress = "";
@@ -87,9 +90,11 @@ public class MainApp extends Application {
     public static String leaderCode;
     public static String selectedUC = "00";
     public static Followups followups;
-    public static Pregnancy pregnancy;
     public static Outcome outcome;
-    public static FollowUpsSche fpHouseholds;
+    public static FPHouseholds fpHouseholds;
+    public static FollowUpsSche fpMwra;
+    public static int totalOutcomes;
+    public static int outcomeCounter = 0;
 
     public static void hideSystemUI(View decorView) {
         // Enables regular immersive mode.

@@ -13,7 +13,6 @@ import static edu.aku.hassannaqvi.dss_matiari.database.CreateTable.SQL_CREATE_PR
 import static edu.aku.hassannaqvi.dss_matiari.database.CreateTable.SQL_CREATE_USERS;
 import static edu.aku.hassannaqvi.dss_matiari.database.CreateTable.SQL_CREATE_VERSIONAPP;
 import static edu.aku.hassannaqvi.dss_matiari.database.CreateTable.SQL_CREATE_VILLAGES;
-import static edu.aku.hassannaqvi.dss_matiari.database.CreateTable.SQL_CREATE_ZSTANDARD;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -34,8 +33,11 @@ import java.util.Date;
 import java.util.List;
 
 import edu.aku.hassannaqvi.dss_matiari.contracts.TableContracts;
+import edu.aku.hassannaqvi.dss_matiari.contracts.TableContracts.FPHouseholdTable;
+import edu.aku.hassannaqvi.dss_matiari.contracts.TableContracts.FollowupsTable;
 import edu.aku.hassannaqvi.dss_matiari.contracts.TableContracts.HouseholdTable;
 import edu.aku.hassannaqvi.dss_matiari.contracts.TableContracts.MWRATable;
+import edu.aku.hassannaqvi.dss_matiari.contracts.TableContracts.OutcomeTable;
 import edu.aku.hassannaqvi.dss_matiari.contracts.TableContracts.TableFollowUpsSche;
 import edu.aku.hassannaqvi.dss_matiari.contracts.TableContracts.TableVillage;
 import edu.aku.hassannaqvi.dss_matiari.contracts.TableContracts.UsersTable;
@@ -44,6 +46,7 @@ import edu.aku.hassannaqvi.dss_matiari.contracts.TableContracts.ZScoreTable;
 import edu.aku.hassannaqvi.dss_matiari.core.MainApp;
 import edu.aku.hassannaqvi.dss_matiari.models.FPHouseholds;
 import edu.aku.hassannaqvi.dss_matiari.models.FollowUpsSche;
+import edu.aku.hassannaqvi.dss_matiari.models.Followups;
 import edu.aku.hassannaqvi.dss_matiari.models.Households;
 import edu.aku.hassannaqvi.dss_matiari.models.MWRA;
 import edu.aku.hassannaqvi.dss_matiari.models.Outcome;
@@ -113,13 +116,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         values.put(HouseholdTable.COLUMN_UID, households.getUid());
         values.put(HouseholdTable.COLUMN_USERNAME, households.getUserName());
         values.put(HouseholdTable.COLUMN_SYSDATE, households.getSysDate());
-        values.put(TableContracts.HouseholdTable.COLUMN_HDSSID, households.getHdssId());
+        values.put(HouseholdTable.COLUMN_HDSSID, households.getHdssId());
         values.put(HouseholdTable.COLUMN_UC_CODE, households.getUcCode());
         values.put(HouseholdTable.COLUMN_VILLAGE_CODE, households.getVillageCode());
         values.put(HouseholdTable.COLUMN_HOUSEHOLD_NO, households.getHhNo());
         values.put(HouseholdTable.COLUMN_STRUCTURE_NO, households.getStructureNo());
         values.put(HouseholdTable.COLUMN_VISIT_NO, households.getVisitNo());
-        values.put(TableContracts.HouseholdTable.COLUMN_ISTATUS, households.getiStatus());
+        values.put(HouseholdTable.COLUMN_ISTATUS, households.getiStatus());
         values.put(HouseholdTable.COLUMN_DEVICETAGID, households.getDeviceTag());
         values.put(HouseholdTable.COLUMN_DEVICEID, households.getDeviceId());
         values.put(HouseholdTable.COLUMN_APPVERSION, households.getAppver());
@@ -161,6 +164,57 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return newRowId;
     }
 
+    public Long addFpHousehold(FPHouseholds fpHouseholds) throws JSONException {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(FollowupsTable.COLUMN_PROJECT_NAME, fpHouseholds.getProjectName());
+        values.put(FollowupsTable.COLUMN_UID, fpHouseholds.getUid());
+        values.put(FollowupsTable.COLUMN_USERNAME, fpHouseholds.getUserName());
+        values.put(FollowupsTable.COLUMN_SYSDATE, fpHouseholds.getSysDate());
+        values.put(FollowupsTable.COLUMN_HDSSID, fpHouseholds.getHdssId());
+        values.put(FollowupsTable.COLUMN_UC_CODE, fpHouseholds.getUcCode());
+        values.put(FollowupsTable.COLUMN_VILLAGE_CODE, fpHouseholds.getVillageCode());
+        values.put(FollowupsTable.COLUMN_HOUSEHOLD_NO, fpHouseholds.getHhNo());
+        values.put(FollowupsTable.COLUMN_ISTATUS, fpHouseholds.getiStatus());
+        values.put(FollowupsTable.COLUMN_DEVICETAGID, fpHouseholds.getDeviceTag());
+        values.put(FollowupsTable.COLUMN_DEVICEID, fpHouseholds.getDeviceId());
+        values.put(FollowupsTable.COLUMN_APPVERSION, fpHouseholds.getAppver());
+
+        long newRowId;
+        newRowId = db.insert(
+                FollowupsTable.TABLE_NAME,
+                FollowupsTable.COLUMN_NAME_NULLABLE,
+                values);
+        return newRowId;
+    }
+
+    public Long addFollowup(Followups followups) throws JSONException {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(FollowupsTable.COLUMN_PROJECT_NAME, followups.getProjectName());
+        values.put(FollowupsTable.COLUMN_UID, followups.getUid());
+        values.put(FollowupsTable.COLUMN_UUID, followups.getUuid());
+        values.put(FollowupsTable.COLUMN_USERNAME, followups.getUserName());
+        values.put(FollowupsTable.COLUMN_SYSDATE, followups.getSysDate());
+        values.put(FollowupsTable.COLUMN_HDSSID, followups.getHdssId());
+        values.put(FollowupsTable.COLUMN_UC_CODE, followups.getUcCode());
+        values.put(FollowupsTable.COLUMN_VILLAGE_CODE, followups.getVillageCode());
+        values.put(FollowupsTable.COLUMN_SNO, followups.getSno());
+        values.put(FollowupsTable.COLUMN_HOUSEHOLD_NO, followups.getHhNo());
+        values.put(FollowupsTable.COLUMN_SC, followups.sCtoString());
+        values.put(FollowupsTable.COLUMN_ISTATUS, followups.getiStatus());
+        values.put(FollowupsTable.COLUMN_DEVICETAGID, followups.getDeviceTag());
+        values.put(FollowupsTable.COLUMN_DEVICEID, followups.getDeviceId());
+        values.put(FollowupsTable.COLUMN_APPVERSION, followups.getAppver());
+
+        long newRowId;
+        newRowId = db.insert(
+                FollowupsTable.TABLE_NAME,
+                FollowupsTable.COLUMN_NAME_NULLABLE,
+                values);
+        return newRowId;
+    }
+
 
     public Long addPregnancy(Pregnancy pregnancy) throws JSONException {
         SQLiteDatabase db = this.getWritableDatabase();
@@ -195,12 +249,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         values.put(TableContracts.OutcomeTable.COLUMN_PROJECT_NAME, outcome.getProjectName());
         values.put(TableContracts.OutcomeTable.COLUMN_UID, outcome.getUid());
         values.put(TableContracts.OutcomeTable.COLUMN_UUID, outcome.getUuid());
+        values.put(OutcomeTable.COLUMN_MUID, outcome.getMuid());
         values.put(TableContracts.OutcomeTable.COLUMN_USERNAME, outcome.getUserName());
         values.put(TableContracts.OutcomeTable.COLUMN_SYSDATE, outcome.getSysDate());
         values.put(TableContracts.OutcomeTable.COLUMN_HDSSID, outcome.getHdssId());
         values.put(TableContracts.OutcomeTable.COLUMN_UC_CODE, outcome.getUcCode());
         values.put(TableContracts.OutcomeTable.COLUMN_VILLAGE_CODE, outcome.getVillageCode());
-        values.put(TableContracts.OutcomeTable.COLUMN_STRUCTURE_NO, outcome.getStructureNo());
+        values.put(TableContracts.OutcomeTable.COLUMN_SNO, outcome.getSno());
         values.put(TableContracts.OutcomeTable.COLUMN_HOUSEHOLD_NO, outcome.getHhNo());
         values.put(TableContracts.OutcomeTable.COLUMN_SE, outcome.sEtoString());
         values.put(TableContracts.OutcomeTable.COLUMN_ISTATUS, outcome.getiStatus());
@@ -477,7 +532,37 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 selectionArgs);
     }
 
-    public int updatesPregnancyColumn(String column, String value) {
+    public int updatesFollowUpsColumn(String column, String value) {
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+        values.put(column, value);
+
+        String selection = FollowupsTable.COLUMN_ID + " =? ";
+        String[] selectionArgs = {String.valueOf(MainApp.followups.getId())};
+
+        return db.update(FollowupsTable.TABLE_NAME,
+                values,
+                selection,
+                selectionArgs);
+    }
+
+    public int updatesFPHouseholdsColumn(String column, String value) {
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+        values.put(column, value);
+
+        String selection = FPHouseholdTable.COLUMN_ID + " =? ";
+        String[] selectionArgs = {String.valueOf(MainApp.fpHouseholds.getId())};
+
+        return db.update(FPHouseholdTable.TABLE_NAME,
+                values,
+                selection,
+                selectionArgs);
+    }
+
+/*    public int updatesPregnancyColumn(String column, String value) {
         SQLiteDatabase db = this.getWritableDatabase();
 
         ContentValues values = new ContentValues();
@@ -490,7 +575,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 values,
                 selection,
                 selectionArgs);
-    }
+    }*/
 
     public int updatesOutcomeColumn(String column, String value) {
         SQLiteDatabase db = this.getWritableDatabase();
@@ -654,6 +739,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             values.put(TableFollowUpsSche.COLUMN_FROUND, followUpsSche.getfRound());
             values.put(TableFollowUpsSche.COLUMN_RB01, followUpsSche.getRb01());
             values.put(TableFollowUpsSche.COLUMN_RB02, followUpsSche.getRb02());
+            values.put(TableFollowUpsSche.COLUMN_RB03, followUpsSche.getRb03());
+            values.put(TableFollowUpsSche.COLUMN_RB05, followUpsSche.getRb05());
             values.put(TableFollowUpsSche.COLUMN_RB07, followUpsSche.getRb07());
             long rowID = db.insert(TableFollowUpsSche.TABLE_NAME, null, values);
             if (rowID != -1) insertCount++;
@@ -1235,6 +1322,46 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return mwraByHH;
     }
 
+    public List<FollowUpsSche> getAllfollowupsScheByHH(String village, String ucCode, String hhNo) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor c = null;
+        String[] columns = null;
+
+        String whereClause;
+        whereClause = TableFollowUpsSche.COLUMN_VILLAGE_CODE + "=? AND "
+                + TableFollowUpsSche.COLUMN_UC_CODE + "=? AND "
+                + TableFollowUpsSche.COLUMN_HOUSEHOLD_NO + "=? ";
+
+        String[] whereArgs = {village, ucCode, hhNo};
+
+        String groupBy = null;
+        String having = null;
+
+        String orderBy = TableFollowUpsSche.COLUMN_ID + " ASC";
+
+        ArrayList<FollowUpsSche> followupsByHH = new ArrayList<>();
+        c = db.query(
+                TableFollowUpsSche.TABLE_NAME,  // The table to query
+                columns,                   // The columns to return
+                whereClause,               // The columns for the WHERE clause
+                whereArgs,                 // The values for the WHERE clause
+                groupBy,                   // don't group the rows
+                having,                    // don't filter by row groups
+                orderBy                    // The sort order
+        );
+        while (c.moveToNext()) {
+            FollowUpsSche followups = new FollowUpsSche().Hydrate(c);
+
+            followupsByHH.add(followups);
+        }
+
+        c.close();
+
+        db.close();
+
+        return followupsByHH;
+    }
+
     public int getMaxStructure(String vCode) {
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor c = db.rawQuery(
@@ -1428,6 +1555,84 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         }
         // Log.d(TAG, "getMaxHHNo: " + mwraCount);
         return users;
+    }
+
+    public Followups getFollowupsBySno(String rb01) throws JSONException {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor c = null;
+        String[] columns = null;
+
+        String whereClause;
+        whereClause = FollowupsTable.COLUMN_UID + "=? AND " +
+                FollowupsTable.COLUMN_SNO + "=? ";
+
+        String[] whereArgs = {MainApp.fpHouseholds.getUid(), rb01};
+
+        String groupBy = null;
+        String having = null;
+
+        String orderBy = FollowupsTable.COLUMN_ID + " ASC";
+
+        Followups followup = new Followups();
+
+        c = db.query(
+                FollowupsTable.TABLE_NAME,  // The table to query
+                columns,                   // The columns to return
+                whereClause,               // The columns for the WHERE clause
+                whereArgs,                 // The values for the WHERE clause
+                groupBy,                   // don't group the rows
+                having,                    // don't filter by row groups
+                orderBy                    // The sort order
+        );
+        while (c.moveToNext()) {
+            followup = new Followups().Hydrate(c);
+        }
+
+        c.close();
+
+        db.close();
+
+        return followup;
+    }
+
+    public Outcome getOutComeBYID(String uid, String sno) throws JSONException {
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor c = null;
+        String[] columns = null;
+
+        String whereClause;
+        whereClause = OutcomeTable.COLUMN_UUID + "=? AND " +
+                OutcomeTable.COLUMN_MUID + "=? AND " +
+                OutcomeTable.COLUMN_SNO + "=? ";
+
+        String[] whereArgs = {MainApp.fpHouseholds.getUid(), uid, sno};
+
+        String groupBy = null;
+        String having = null;
+
+        String orderBy = OutcomeTable.COLUMN_ID + " ASC";
+
+        Outcome outcome = new Outcome();
+
+        c = db.query(
+                OutcomeTable.TABLE_NAME,  // The table to query
+                columns,                   // The columns to return
+                whereClause,               // The columns for the WHERE clause
+                whereArgs,                 // The values for the WHERE clause
+                groupBy,                   // don't group the rows
+                having,                    // don't filter by row groups
+                orderBy                    // The sort order
+        );
+        while (c.moveToNext()) {
+            outcome = new Outcome().Hydrate(c);
+        }
+
+        c.close();
+
+        db.close();
+
+        return outcome;
     }
 
     /*public VersionApp getAppDetails() {

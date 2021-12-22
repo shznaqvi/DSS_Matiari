@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
@@ -18,9 +19,9 @@ import java.util.List;
 import edu.aku.hassannaqvi.dss_matiari.R;
 import edu.aku.hassannaqvi.dss_matiari.core.MainApp;
 import edu.aku.hassannaqvi.dss_matiari.database.DatabaseHelper;
+import edu.aku.hassannaqvi.dss_matiari.models.FPHouseholds;
 import edu.aku.hassannaqvi.dss_matiari.models.FollowUpsSche;
 import edu.aku.hassannaqvi.dss_matiari.ui.lists.FPMwraActivity;
-import edu.aku.hassannaqvi.dss_matiari.ui.sections.SectionAActivity;
 
 
 public class FPHouseholdAdapter extends RecyclerView.Adapter<FPHouseholdAdapter.ViewHolder> {
@@ -99,17 +100,19 @@ public class FPHouseholdAdapter extends RecyclerView.Adapter<FPHouseholdAdapter.
         viewHolder.itemView.setOnClickListener(v -> {
             // Get the current state of the item
 
-            MainApp.fpHouseholds = MainApp.fpHouseholdList.get(position);
-            //MainApp.fpHouseholds.setVisitNo(String.valueOf(Integer.parseInt(MainApp.fpHouseholds.getVisitNo())+1));
+            MainApp.fpHouseholds = new FPHouseholds();
+            MainApp.fpHouseholds.populateMeta(position);
+
+            MainApp.fpHouseholds.setVisitNo(String.valueOf(Integer.parseInt(MainApp.fpHouseholds.getVisitNo()) + 1));
             ((Activity) mContext).startActivity(new Intent(mContext, FPMwraActivity.class));
 
-          /*  if (!MainApp.fpHouseholds.getiStatus().equals("1") && Integer.parseInt(MainApp.fpHouseholds.getVisitNo()) < 3) {
+            if (!MainApp.fpHouseholds.getiStatus().equals("1") && Integer.parseInt(MainApp.fpHouseholds.getVisitNo()) < 3) {
 
                 editHousehold(position);
 
             } else {
                 Toast.makeText(mContext, "This fpHouseholds has been locked. You cannot edit household for locked fpHouseholds", Toast.LENGTH_LONG).show();
-            }*/
+            }
 
 
         });
@@ -117,9 +120,9 @@ public class FPHouseholdAdapter extends RecyclerView.Adapter<FPHouseholdAdapter.
     }
 
     private void editHousehold(int position) {
-        Intent intent = new Intent(mContext, SectionAActivity.class);
+        Intent intent = new Intent(mContext, FPMwraActivity.class);
         intent.putExtra("position", position);
-        MainApp.selectedHousehold = position;
+        MainApp.selectedFpHousehold = position;
         intent.putExtra("position", position);
 
         ((Activity) mContext).startActivityForResult(intent, 2);

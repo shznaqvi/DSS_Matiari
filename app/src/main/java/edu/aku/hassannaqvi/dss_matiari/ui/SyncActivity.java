@@ -101,7 +101,7 @@ public class SyncActivity extends AppCompatActivity {
 
         db = new DatabaseHelper(this);
         //dbBackup(this);
-       /* OneTimeWorkRequest JSONWorker =
+/*        OneTimeWorkRequest JSONWorker =
                 new OneTimeWorkRequest.Builder(ReadJSONWorker.class)
                         .build();
         WorkManager.getInstance(this).enqueue(JSONWorker);*/
@@ -268,26 +268,30 @@ public class SyncActivity extends AppCompatActivity {
 //Do something with the JSON string
                     if (result != null) {
                         if (result.length() > 0) {
+                            downloadTables.get(position).setstatus("In Progress");
+                            downloadTables.get(position).setstatusID(0);
+                            downloadTables.get(position).setmessage("Inserting...");
+                            syncListAdapter.updatesyncList(downloadTables);
                             Log.d(TAG, "onChanged: result " + result);
                             System.out.println("SYSTEM onChanged: result" + result);
                             DatabaseHelper db = new DatabaseHelper(SyncActivity.this);
-                                JSONArray jsonArray = new JSONArray();
-                                int insertCount = 0;
-                                switch (tableName) {
-                                    case UsersTable.TABLE_NAME:
-                                        try {
-                                            jsonArray = new JSONArray(result);
-                                            insertCount = db.syncUser(jsonArray);
-                                        } catch (JSONException e) {
-                                            e.printStackTrace();
-                                            downloadTables.get(position).setstatus("Process Failed");
-                                            downloadTables.get(position).setstatusID(1);
-                                            downloadTables.get(position).setmessage(e.getMessage());
-                                            syncListAdapter.updatesyncList(downloadTables);
-                                        }
-                                        break;
-                                    case VersionTable.TABLE_NAME:
-                                        try {
+                            JSONArray jsonArray = new JSONArray();
+                            int insertCount = 0;
+                            switch (tableName) {
+                                case UsersTable.TABLE_NAME:
+                                    try {
+                                        jsonArray = new JSONArray(result);
+                                        insertCount = db.syncUser(jsonArray);
+                                    } catch (JSONException e) {
+                                        e.printStackTrace();
+                                        downloadTables.get(position).setstatus("Process Failed");
+                                        downloadTables.get(position).setstatusID(1);
+                                        downloadTables.get(position).setmessage(e.getMessage());
+                                        syncListAdapter.updatesyncList(downloadTables);
+                                    }
+                                    break;
+                                case VersionTable.TABLE_NAME:
+                                    try {
                                             insertCount = db.syncVersionApp(new JSONObject(result));
                                             if (insertCount == 1) jsonArray.put("1");
                                         } catch (JSONException e) {

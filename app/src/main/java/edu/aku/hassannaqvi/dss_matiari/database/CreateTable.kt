@@ -71,9 +71,10 @@ object CreateTable {
             + FollowupsTable.COLUMN_HDSSID + " TEXT,"
             + FollowupsTable.COLUMN_VILLAGE_CODE + " TEXT,"
             + FollowupsTable.COLUMN_UC_CODE + " TEXT,"
-            + FollowupsTable.COLUMN_STRUCTURE_NO + " TEXT,"
+            + FollowupsTable.COLUMN_SNO + " TEXT,"
             + FollowupsTable.COLUMN_HOUSEHOLD_NO + " TEXT,"
-            + FollowupsTable.COLUMN_SC + " TEXT"
+            + FollowupsTable.COLUMN_SC + " TEXT,"
+            + FollowupsTable.COLUMN_SD + " TEXT"
             + " );"
             )
 
@@ -105,6 +106,7 @@ object CreateTable {
             + OutcomeTable.COLUMN_PROJECT_NAME + " TEXT,"
             + OutcomeTable.COLUMN_UID + " TEXT,"
             + OutcomeTable.COLUMN_UUID + " TEXT,"
+            + OutcomeTable.COLUMN_MUID + " TEXT,"
             + OutcomeTable.COLUMN_USERNAME + " TEXT,"
             + OutcomeTable.COLUMN_SYSDATE + " TEXT,"
             + OutcomeTable.COLUMN_ISTATUS + " TEXT,"
@@ -116,7 +118,7 @@ object CreateTable {
             + OutcomeTable.COLUMN_HDSSID + " TEXT,"
             + OutcomeTable.COLUMN_VILLAGE_CODE + " TEXT,"
             + OutcomeTable.COLUMN_UC_CODE + " TEXT,"
-            + OutcomeTable.COLUMN_STRUCTURE_NO + " TEXT,"
+            + OutcomeTable.COLUMN_SNO + " TEXT,"
             + OutcomeTable.COLUMN_HOUSEHOLD_NO + " TEXT,"
             + OutcomeTable.COLUMN_SE + " TEXT"
             + " );"
@@ -160,6 +162,8 @@ object CreateTable {
             + TableFollowUpsSche.COLUMN_FROUND + " TEXT,"
             + TableFollowUpsSche.COLUMN_RB01 + " TEXT,"
             + TableFollowUpsSche.COLUMN_RB02 + " TEXT,"
+            + TableFollowUpsSche.COLUMN_RB03 + " TEXT,"
+            + TableFollowUpsSche.COLUMN_RB05 + " TEXT,"
             + TableFollowUpsSche.COLUMN_RB07 + " TEXT" + " );")
 
     const val SQL_CREATE_FP_HOUSEHOLDS = ("CREATE TABLE "

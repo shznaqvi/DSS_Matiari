@@ -82,6 +82,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
                             android:src="@drawable/ic_lock_close"
+                            android:visibility="gone"
                             app:tint="@color/colorAccent" />
 
                     </LinearLayout>

@@ -26,7 +26,10 @@ public class FollowUpsSche implements Observable {
     private String fRound;
     private String rb01; // MWRA Sno
     private String rb02; // MWRA Name
+    private String rb03; // Age in Years
+    private String rb05;  // Husband / Father
     private String rb07;  // Pregnancy Status
+
 
     @Override
     public void addOnPropertyChangedCallback(OnPropertyChangedCallback callback) {
@@ -141,6 +144,21 @@ public class FollowUpsSche implements Observable {
         this.rb07 = rb07;
     }
 
+    public String getRb03() {
+        return rb03;
+    }
+
+    public void setRb03(String rb03) {
+        this.rb03 = rb03;
+    }
+
+    public String getRb05() {
+        return rb05;
+    }
+
+    public void setRb05(String rb05) {
+        this.rb05 = rb05;
+    }
 
     public FollowUpsSche Sync(JSONObject jsonObject) throws JSONException {
         this.ucCode = jsonObject.getString(TableFollowUpsSche.COLUMN_UC_CODE);
@@ -154,6 +172,8 @@ public class FollowUpsSche implements Observable {
         this.fRound = jsonObject.getString(TableFollowUpsSche.COLUMN_FROUND);
         this.rb01 = jsonObject.getString(TableFollowUpsSche.COLUMN_RB01);
         this.rb02 = jsonObject.getString(TableFollowUpsSche.COLUMN_RB02);
+        this.rb03 = jsonObject.getString(TableFollowUpsSche.COLUMN_RB03);
+        this.rb05 = jsonObject.getString(TableFollowUpsSche.COLUMN_RB05);
         this.rb07 = jsonObject.getString(TableFollowUpsSche.COLUMN_RB07);
 
         return this;
@@ -171,6 +191,8 @@ public class FollowUpsSche implements Observable {
         this.fRound = cursor.getString(cursor.getColumnIndexOrThrow(TableFollowUpsSche.COLUMN_FROUND));
         this.rb01 = cursor.getString(cursor.getColumnIndexOrThrow(TableFollowUpsSche.COLUMN_RB01));
         this.rb02 = cursor.getString(cursor.getColumnIndexOrThrow(TableFollowUpsSche.COLUMN_RB02));
+        this.rb03 = cursor.getString(cursor.getColumnIndexOrThrow(TableFollowUpsSche.COLUMN_RB03));
+        this.rb05 = cursor.getString(cursor.getColumnIndexOrThrow(TableFollowUpsSche.COLUMN_RB05));
         this.rb07 = cursor.getString(cursor.getColumnIndexOrThrow(TableFollowUpsSche.COLUMN_RB07));
 
 

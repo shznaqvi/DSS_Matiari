@@ -12,16 +12,13 @@ import org.apache.commons.lang3.StringUtils;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
 import edu.aku.hassannaqvi.dss_matiari.BR;
 import edu.aku.hassannaqvi.dss_matiari.contracts.TableContracts;
-import edu.aku.hassannaqvi.dss_matiari.contracts.TableContracts.MWRATable;
 import edu.aku.hassannaqvi.dss_matiari.core.MainApp;
 
 public class Outcome extends BaseObservable implements Observable {
@@ -40,13 +37,14 @@ public class Outcome extends BaseObservable implements Observable {
     private String id = StringUtils.EMPTY;
     private String uid = StringUtils.EMPTY;
     private String uuid = StringUtils.EMPTY;
+    private String muid = StringUtils.EMPTY;
     private String userName = StringUtils.EMPTY;
     private String sysDate = StringUtils.EMPTY;
     private String hdssId = StringUtils.EMPTY;
     private String ucCode = StringUtils.EMPTY;
     private String villageCode = StringUtils.EMPTY;
     private String hhNo = StringUtils.EMPTY;
-    private String structureNo = StringUtils.EMPTY;
+    private String sno = StringUtils.EMPTY;
 
     private String deviceId = StringUtils.EMPTY;
     private String deviceTag = StringUtils.EMPTY;
@@ -56,12 +54,8 @@ public class Outcome extends BaseObservable implements Observable {
     private String synced = StringUtils.EMPTY;
     private String syncDate = StringUtils.EMPTY;
 
-    // SECTION VARIABLES
-    private String sE = StringUtils.EMPTY;
-
     private String round = StringUtils.EMPTY;
     private String rc12 = StringUtils.EMPTY;
-
     private String rc13 = StringUtils.EMPTY;
     private String rc14 = StringUtils.EMPTY;
 
@@ -126,6 +120,14 @@ public class Outcome extends BaseObservable implements Observable {
         this.uuid = uuid;
     }
 
+    public String getMuid() {
+        return muid;
+    }
+
+    public void setMuid(String muid) {
+        this.muid = muid;
+    }
+
 
     public String getUserName() {
         return userName;
@@ -175,12 +177,12 @@ public class Outcome extends BaseObservable implements Observable {
         this.hhNo = hhNo;
     }
 
-    public String getStructureNo() {
-        return structureNo;
+    public String getSno() {
+        return sno;
     }
 
-    public void setStructureNo(String structureNo) {
-        this.structureNo = structureNo;
+    public void setSno(String sno) {
+        this.sno = sno;
     }
 
     public String getDeviceId() {
@@ -247,13 +249,6 @@ public class Outcome extends BaseObservable implements Observable {
         this.exist = exist;
     }
 
-    public String getSE() {
-        return sE;
-    }
-
-    public void setsE(String sE) {
-        this.sE = sE;
-    }
 
 
     @Bindable
@@ -313,12 +308,13 @@ public class Outcome extends BaseObservable implements Observable {
         this.id = cursor.getString(cursor.getColumnIndexOrThrow(TableContracts.OutcomeTable.COLUMN_ID));
         this.uid = cursor.getString(cursor.getColumnIndexOrThrow(TableContracts.OutcomeTable.COLUMN_UID));
         this.uuid = cursor.getString(cursor.getColumnIndexOrThrow(TableContracts.OutcomeTable.COLUMN_UUID));
+        this.muid = cursor.getString(cursor.getColumnIndexOrThrow(TableContracts.OutcomeTable.COLUMN_MUID));
         this.userName = cursor.getString(cursor.getColumnIndexOrThrow(TableContracts.OutcomeTable.COLUMN_USERNAME));
         this.sysDate = cursor.getString(cursor.getColumnIndexOrThrow(TableContracts.OutcomeTable.COLUMN_SYSDATE));
         this.hdssId = cursor.getString(cursor.getColumnIndexOrThrow(TableContracts.OutcomeTable.COLUMN_HDSSID));
         this.ucCode = cursor.getString(cursor.getColumnIndexOrThrow(TableContracts.OutcomeTable.COLUMN_UC_CODE));
         this.villageCode = cursor.getString(cursor.getColumnIndexOrThrow(TableContracts.OutcomeTable.COLUMN_VILLAGE_CODE));
-        this.structureNo = cursor.getString(cursor.getColumnIndexOrThrow(TableContracts.OutcomeTable.COLUMN_STRUCTURE_NO));
+        this.sno = cursor.getString(cursor.getColumnIndexOrThrow(TableContracts.OutcomeTable.COLUMN_SNO));
         this.hhNo = cursor.getString(cursor.getColumnIndexOrThrow(TableContracts.OutcomeTable.COLUMN_HOUSEHOLD_NO));
         this.deviceId = cursor.getString(cursor.getColumnIndexOrThrow(TableContracts.OutcomeTable.COLUMN_DEVICEID));
         this.deviceTag = cursor.getString(cursor.getColumnIndexOrThrow(TableContracts.OutcomeTable.COLUMN_DEVICETAGID));
@@ -370,12 +366,13 @@ public class Outcome extends BaseObservable implements Observable {
         json.put(TableContracts.OutcomeTable.COLUMN_PROJECT_NAME, this.projectName);
         json.put(TableContracts.OutcomeTable.COLUMN_UID, this.uid);
         json.put(TableContracts.OutcomeTable.COLUMN_UUID, this.uuid);
+        json.put(TableContracts.OutcomeTable.COLUMN_MUID, this.muid);
         json.put(TableContracts.OutcomeTable.COLUMN_USERNAME, this.userName);
         json.put(TableContracts.OutcomeTable.COLUMN_SYSDATE, this.sysDate);
         json.put(TableContracts.OutcomeTable.COLUMN_HDSSID, this.hdssId);
         json.put(TableContracts.OutcomeTable.COLUMN_UC_CODE, this.ucCode);
         json.put(TableContracts.OutcomeTable.COLUMN_VILLAGE_CODE, this.villageCode);
-        json.put(TableContracts.OutcomeTable.COLUMN_STRUCTURE_NO, this.structureNo);
+        json.put(TableContracts.OutcomeTable.COLUMN_SNO, this.sno);
         json.put(TableContracts.OutcomeTable.COLUMN_HOUSEHOLD_NO, this.hhNo);
         json.put(TableContracts.OutcomeTable.COLUMN_DEVICEID, this.deviceId);
         json.put(TableContracts.OutcomeTable.COLUMN_DEVICETAGID, this.deviceTag);

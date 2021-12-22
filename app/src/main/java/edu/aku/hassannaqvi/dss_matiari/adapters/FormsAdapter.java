@@ -106,7 +106,7 @@ public class FormsAdapter extends RecyclerView.Adapter<FormsAdapter.ViewHolder> 
                 TableContracts.HouseholdTable.COLUMN_ISTATUS,
                 TableContracts.HouseholdTable.COLUMN_SYNCED,
                 TableContracts.HouseholdTable.COLUMN_VISIT_NO,
-                TableContracts.HouseholdTable.COLUMN_STRUCTURE_NO,
+                TableContracts.HouseholdTable.COLUMN_SNO,
                 TableContracts.HouseholdTable.COLUMN_VILLAGE_CODE,
                 TableContracts.HouseholdTable.COLUMN_UC_CODE,
                 TableContracts.HouseholdTable.COLUMN_HOUSEHOLD_NO,

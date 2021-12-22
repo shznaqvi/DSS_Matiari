@@ -1,15 +1,15 @@
 package edu.aku.hassannaqvi.dss_matiari.ui.sections;
 
+import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.followups;
+import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.fpHouseholds;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.households;
-import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.mwra;
-import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.mwraCount;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.sharedPref;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -22,7 +22,6 @@ import org.json.JSONException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.Locale;
 
 import edu.aku.hassannaqvi.dss_matiari.R;
@@ -43,39 +42,36 @@ public class SectionCActivity extends AppCompatActivity {
         String lang = sharedPref.getString("lang", "1");
         setTheme(lang.equals("1") ? R.style.AppThemeEnglish1 : R.style.AppThemeUrdu);
         bi = DataBindingUtil.setContentView(this, R.layout.activity_section_c);
-        bi.setCallback(this);
+        db = MainApp.appInfo.dbHelper;
+
+        try {
+            followups = db.getFollowupsBySno(MainApp.fpMwra.getRb01());
+        } catch (JSONException e) {
+            e.printStackTrace();
+            Toast.makeText(this, "JSONException(Followups): " + e.getMessage(), Toast.LENGTH_SHORT).show();
+        }
+
+        if (MainApp.followups.getUid().equals("")) {
+            MainApp.followups.setRc01(MainApp.fpMwra.getRb01());
+            MainApp.followups.setRc02(MainApp.fpMwra.getRb02());
+            MainApp.followups.setPrePreg(MainApp.fpMwra.getRb07());
+        }
+
         bi.setFollowups(MainApp.followups);
 
 
         // setListener(); // Age calculation not required in followups
 
         // set default model values if new mwra
-        if (MainApp.followups.getRc01().equals("")) {
-            MainApp.followups.setRc01(String.valueOf(mwraCount + 1));
-            MainApp.followups.setUuid(households.getUid());
-            MainApp.followups.setUcCode(households.getUcCode());
-            MainApp.followups.setVillageCode(households.getVillageCode());
-            MainApp.followups.setStructureNo(households.getStructureNo());
-            MainApp.followups.setHhNo(households.getHhNo());
-            // TODO: set MWRA ID from downloaded data
-            //   MainApp.followups.setMWRAID(households.getHhNo());
-            MainApp.followups.setUserName(MainApp.user.getUserName());
-            MainApp.followups.setSysDate(households.getSysDate());
-            MainApp.followups.setDeviceId(MainApp.deviceid);
-            MainApp.followups.setHdssId(households.getHdssId());
-            MainApp.followups.setAppver(MainApp.versionName + "." + MainApp.versionCode);
 
-            MainApp.followups.setRc01(MainApp.households.getRa01());
-        }
 
         setTitle(R.string.marriedwomenregistration_mainheading);
         setImmersive(true);
 
-        db = MainApp.appInfo.dbHelper;
-        bi.btnContinue.setText(MainApp.mwra.getUid().equals("") ? "Save" : "Update");
+        bi.btnContinue.setText(MainApp.followups.getUid().equals("") ? "Save" : "Update");
 
         // To set min max range of date fields
-        setDateRanges();
+        //setDateRanges();
 
 
     }
@@ -203,9 +199,17 @@ public class SectionCActivity extends AppCompatActivity {
     public void btnContinue(View view) {
         if (!formValidation()) return;
         saveDraft();
-        if (MainApp.mwra.getUid().equals("") ? insertNewRecord() : updateDB()) {
-            setResult(RESULT_OK);
-            finish();
+        if (MainApp.followups.getUid().equals("") ? insertNewRecord() : updateDB()) {
+
+
+            if (MainApp.followups.getPrePreg().equals("1")) {
+                setResult(RESULT_OK);
+                startActivity(new Intent(this, SectionDActivity.class).addFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT).putExtra("complete", true));
+                finish();
+            } else {
+                setResult(RESULT_OK);
+                finish();
+            }
             //  startActivity(new Intent(this, EndingActivity.class).putExtra("complete", true));
         } else {
             Toast.makeText(this, "Failed to Update Database!", Toast.LENGTH_SHORT).show();
@@ -219,7 +223,7 @@ public class SectionCActivity extends AppCompatActivity {
 /*        MainApp.mwra.setUuid(households.getUid());
         MainApp.mwra.setUcCode(households.getUcCode());
         MainApp.mwra.setVillageCode(households.getVillageCode());
-        MainApp.mwra.setStructureNo(households.getStructureNo());
+        MainApp.mwra.setsNo(households.getsNo());
         MainApp.mwra.setHhNo(households.getHhNo());
         MainApp.mwra.setUserName(MainApp.user.getUserName());
         MainApp.mwra.setSysDate(households.getSysDate());
@@ -261,19 +265,47 @@ public class SectionCActivity extends AppCompatActivity {
 
     private boolean insertNewRecord() {
         db = MainApp.appInfo.getDbHelper();
+        if (fpHouseholds.getUid().equals("")) {
+            insertFpHousehold();
+        }
+        followups.populateMeta();
+
         long rowId = 0;
         try {
-            rowId = db.addMWRA(mwra);
+            rowId = db.addFollowup(followups);
         } catch (JSONException e) {
             e.printStackTrace();
-            Toast.makeText(this, "JSONException: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "JSONException(Followups): " + e.getMessage(), Toast.LENGTH_SHORT).show();
             Log.d(TAG, "insertNewRecord (JSONException): " + e.getMessage());
             return false;
         }
-        mwra.setId(String.valueOf(rowId));
+        followups.setId(String.valueOf(rowId));
         if (rowId > 0) {
-            mwra.setUid(mwra.getDeviceId() + mwra.getId());
-            db.updatesMWRAColumn(TableContracts.MWRATable.COLUMN_UID, mwra.getUid());
+            followups.setUid(followups.getDeviceId() + followups.getId());
+            db.updatesFollowUpsColumn(TableContracts.FollowupsTable.COLUMN_UID, followups.getUid());
+            return true;
+        } else {
+            Toast.makeText(this, "Updating Database... ERROR!", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+    }
+
+    private boolean insertFpHousehold() {
+        db = MainApp.appInfo.getDbHelper();
+
+        long rowId = 0;
+        try {
+            rowId = db.addFpHousehold(fpHouseholds);
+        } catch (JSONException e) {
+            e.printStackTrace();
+            Toast.makeText(this, "JSONException(FPHousholds): " + e.getMessage(), Toast.LENGTH_SHORT).show();
+            Log.d(TAG, "insertNewRecord (JSONException): " + e.getMessage());
+            return false;
+        }
+        fpHouseholds.setId(String.valueOf(rowId));
+        if (rowId > 0) {
+            fpHouseholds.setUid(fpHouseholds.getDeviceId() + fpHouseholds.getId());
+            db.updatesFPHouseholdsColumn(TableContracts.FollowupsTable.COLUMN_UID, fpHouseholds.getUid());
             return true;
         } else {
             Toast.makeText(this, "Updating Database... ERROR!", Toast.LENGTH_SHORT).show();
@@ -284,18 +316,18 @@ public class SectionCActivity extends AppCompatActivity {
     private boolean updateDB() {
         int updcount = 0;
         try {
-            updcount = db.updatesMWRAColumn(TableContracts.MWRATable.COLUMN_SB, mwra.sBtoString());
+            updcount = db.updatesFollowUpsColumn(TableContracts.FollowupsTable.COLUMN_SC, followups.sCtoString());
             // Also reset Synced flag and alter UID
-            db.updatesMWRAColumn(TableContracts.MWRATable.COLUMN_SYNCED, null);
+            // db.updatesMWRAColumn(TableContracts.MWRATable.COLUMN_SYNCED, null);
             // concate last char from uid to alter and create new unique uid
 
-            mwra.setDeviceId(mwra.getDeviceId() + "_" + mwra.getDeviceId().substring(mwra.getDeviceId().length() - 1));
-            db.updatesMWRAColumn(TableContracts.MWRATable.COLUMN_DEVICEID, mwra.getDeviceId());
-            int repeatCount = (mwra.getDeviceId().length() - 16) / 2;
+            followups.setDeviceId(followups.getDeviceId() + "_" + followups.getDeviceId().substring(followups.getDeviceId().length() - 1));
+            db.updatesFollowUpsColumn(TableContracts.FollowupsTable.COLUMN_DEVICEID, followups.getDeviceId());
+            int repeatCount = (followups.getDeviceId().length() - 16) / 2;
             // new UID
-            String newUID = mwra.getDeviceId().substring(0, 16) + mwra.getId() + "_" + repeatCount;
-            mwra.setUid(newUID);
-            db.updatesMWRAColumn(TableContracts.MWRATable.COLUMN_UID, newUID);
+            String newUID = followups.getDeviceId().substring(0, 16) + followups.getId() + "_" + repeatCount;
+            followups.setUid(newUID);
+            db.updatesFollowUpsColumn(TableContracts.FollowupsTable.COLUMN_UID, newUID);
 
 
         } catch (JSONException e) {
@@ -335,28 +367,6 @@ public class SectionCActivity extends AppCompatActivity {
         return compareTwoDate(bi.rb09, 9,
                 "EDD should be within 9 months back from DOV");
                 */
-    }
-
-    private boolean compareTwoDate(EditText et, int month, String msg) {
-        try {
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-            Date dateDOV = sdf.parse(households.getRa01());
-            Calendar calendarDOV1 = Calendar.getInstance();
-            Calendar calendarDOV2 = Calendar.getInstance();
-            calendarDOV1.setTime(dateDOV);
-            calendarDOV2.setTime(dateDOV);
-            calendarDOV2.add(Calendar.MONTH, month);
-            Date dateTwo = sdf.parse(et.getText().toString().trim());
-            if (dateTwo.before(calendarDOV1.getTime()) || dateTwo.after(calendarDOV2.getTime())) {
-                Validator.emptyCustomTextBox(this, et, msg);
-                return false;
-            } else {
-                return true;
-            }
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        return true;
     }
 
 

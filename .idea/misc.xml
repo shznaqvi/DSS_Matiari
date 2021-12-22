@@ -21,6 +21,7 @@
         <entry key="..\:/Android/DSS_Matiari/app/src/main/res/drawable/ic_sync.xml" value="0.23203125" />
         <entry key="..\:/Android/DSS_Matiari/app/src/main/res/layout/activity_ending.xml" value="0.56328125" />
         <entry key="..\:/Android/DSS_Matiari/app/src/main/res/layout/activity_forms_report_cluster.xml" value="0.56328125" />
+        <entry key="..\:/Android/DSS_Matiari/app/src/main/res/layout/activity_fphousehold.xml" value="0.2484375" />
         <entry key="..\:/Android/DSS_Matiari/app/src/main/res/layout/activity_household.xml" value="0.452991452991453" />
         <entry key="..\:/Android/DSS_Matiari/app/src/main/res/layout/activity_identification.xml" value="0.5625" />
         <entry key="..\:/Android/DSS_Matiari/app/src/main/res/layout/activity_login.xml" value="0.56328125" />
@@ -28,6 +29,8 @@
         <entry key="..\:/Android/DSS_Matiari/app/src/main/res/layout/activity_mwra.xml" value="0.56328125" />
         <entry key="..\:/Android/DSS_Matiari/app/src/main/res/layout/activity_section_a.xml" value="0.56328125" />
         <entry key="..\:/Android/DSS_Matiari/app/src/main/res/layout/activity_section_b.xml" value="0.52875" />
+        <entry key="..\:/Android/DSS_Matiari/app/src/main/res/layout/activity_section_c.xml" value="0.56328125" />
+        <entry key="..\:/Android/DSS_Matiari/app/src/main/res/layout/activity_section_d.xml" value="0.46" />
         <entry key="..\:/Android/DSS_Matiari/app/src/main/res/layout/activity_sync.xml" value="0.5503816793893129" />
         <entry key="..\:/Android/DSS_Matiari/app/src/main/res/layout/custom_spinner.xml" value="0.56328125" />
         <entry key="..\:/Android/DSS_Matiari/app/src/main/res/layout/household_row.xml" value="0.52875" />
@@ -45,7 +48,6 @@
         <entry key="..\:/Users/hassan.naqvi/StudioProjects/DSS_Matiari/app/src/main/res/layout/activity_section_c.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/hassan.naqvi/StudioProjects/DSS_Matiari/app/src/main/res/layout/activity_section_d.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/hassan.naqvi/StudioProjects/DSS_Matiari/app/src/main/res/layout/activity_section_e.xml" value="0.36666666666666664" />
-        <entry key="..\:/Users/hassan.naqvi/StudioProjects/DSS_Matiari/app/src/main/res/menu/item_menu.xml" value="0.2671875" />
       </map>
     </option>
   </component>

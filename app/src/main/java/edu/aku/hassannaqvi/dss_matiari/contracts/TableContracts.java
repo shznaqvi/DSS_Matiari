@@ -67,9 +67,10 @@ public class TableContracts {
         public static final String COLUMN_UC_CODE = "ucCode";
         public static final String COLUMN_VILLAGE_CODE = "villageCode";
         public static final String COLUMN_HOUSEHOLD_NO = "hhNo";
-        public static final String COLUMN_STRUCTURE_NO = "structureNo";
+        public static final String COLUMN_SNO = "sNo";
 
         public static final String COLUMN_SC = "s3";
+        public static final String COLUMN_SD = "s4";
 
 
         public static final String COLUMN_DEVICEID = "deviceid";
@@ -111,13 +112,14 @@ public class TableContracts {
         public static final String COLUMN_ID = "_id";
         public static final String COLUMN_UID = "_uid";
         public static final String COLUMN_UUID = "_uuid";
+        public static final String COLUMN_MUID = "_muid";
         public static final String COLUMN_USERNAME = "username";
         public static final String COLUMN_SYSDATE = "sysdate";
         public static final String COLUMN_HDSSID = "hdssid";
         public static final String COLUMN_UC_CODE = "ucCode";
         public static final String COLUMN_VILLAGE_CODE = "villageCode";
         public static final String COLUMN_HOUSEHOLD_NO = "hhNo";
-        public static final String COLUMN_STRUCTURE_NO = "structureNo";
+        public static final String COLUMN_SNO = "sno";
         public static final String COLUMN_SE = "s5";
 
         public static final String COLUMN_DEVICEID = "deviceid";
@@ -225,6 +227,8 @@ public class TableContracts {
         public static final String COLUMN_FROUND = "fRound";
         public static final String COLUMN_RB01 = "rb01"; // MWRA Sno
         public static final String COLUMN_RB02 = "rb02"; // MWRA Name
+        public static final String COLUMN_RB03 = "rb03"; // Age
+        public static final String COLUMN_RB05 = "rb05"; // Husband or Father
         public static final String COLUMN_RB07 = "rb07";  // Pregnancy Status
     }
 

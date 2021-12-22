@@ -67,6 +67,8 @@ public class SectionBActivity extends AppCompatActivity {
             MainApp.mwra.setAppver(MainApp.versionName + "." + MainApp.versionCode);
 
             MainApp.mwra.setRa01(MainApp.households.getRa01());
+
+
         }
 
         setTitle(R.string.marriedwomenregistration_mainheading);
@@ -220,7 +222,7 @@ public class SectionBActivity extends AppCompatActivity {
 /*        MainApp.mwra.setUuid(households.getUid());
         MainApp.mwra.setUcCode(households.getUcCode());
         MainApp.mwra.setVillageCode(households.getVillageCode());
-        MainApp.mwra.setStructureNo(households.getStructureNo());
+        MainApp.mwra.setsNo(households.getsNo());
         MainApp.mwra.setHhNo(households.getHhNo());
         MainApp.mwra.setUserName(MainApp.user.getUserName());
         MainApp.mwra.setSysDate(households.getSysDate());

@@ -1,5 +1,7 @@
 package edu.aku.hassannaqvi.dss_matiari.models;
 
+import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.PROJECT_NAME;
+
 import android.database.Cursor;
 
 import androidx.databinding.BaseObservable;
@@ -15,33 +17,32 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
-import edu.aku.hassannaqvi.dss_matiari.BR;
 import edu.aku.hassannaqvi.dss_matiari.contracts.TableContracts;
-import edu.aku.hassannaqvi.dss_matiari.contracts.TableContracts.HouseholdTable;
 import edu.aku.hassannaqvi.dss_matiari.core.MainApp;
 
 public class FPHouseholds extends BaseObservable implements Observable {
 
     private final String TAG = "FPHouseholds";
-    private String fround = "";
 
     private transient PropertyChangeRegistry propertyChangeRegistry = new PropertyChangeRegistry();
     private boolean exist = false;
-    // APP VARIABLES
-    private String projectName = MainApp.PROJECT_NAME;
+    // SECTION VARIABLES
+    private final String sA = StringUtils.EMPTY;
     // APP VARIABLES
     private String id = StringUtils.EMPTY;
     private String uid = StringUtils.EMPTY;
     private String userName = StringUtils.EMPTY;
     private String sysDate = StringUtils.EMPTY;
-    private String hdssId = StringUtils.EMPTY;
+    // APP VARIABLES
+    private String projectName = PROJECT_NAME;
     private String ucCode = StringUtils.EMPTY;
     private String villageCode = StringUtils.EMPTY;
     private String hhNo = StringUtils.EMPTY;
-    private String structureNo = StringUtils.EMPTY;
+    // to be populated before first insert
+    private String hdssId = StringUtils.EMPTY;
+
     private String visitNo = "0";
-
-
+    private String fround = "";
     private String deviceId = StringUtils.EMPTY;
     private String deviceTag = StringUtils.EMPTY;
     private String appver = StringUtils.EMPTY;
@@ -50,14 +51,12 @@ public class FPHouseholds extends BaseObservable implements Observable {
     private String iStatus96x = StringUtils.EMPTY;
     private String synced = StringUtils.EMPTY;
     private String syncDate = StringUtils.EMPTY;
-
-    // SECTION VARIABLES
-    private String sA = StringUtils.EMPTY;
+    private String structureNo = StringUtils.EMPTY;
 
 
     public FPHouseholds() {
 
-        setFround(MainApp.round);
+/*        setFround(MainApp.round);
         setSysDate(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.ENGLISH).format(new Date().getTime()));
         setUserName(MainApp.user.getUserName());
         setDeviceId(MainApp.deviceid);
@@ -66,7 +65,7 @@ public class FPHouseholds extends BaseObservable implements Observable {
         //setRa06(MainApp.selectedUC);
         //setRa07(MainApp.selectedVillage);
         //setRa04(MainApp.leaderCode);
-        //setRa05(MainApp.leaderCode);
+        //setRa05(MainApp.leaderCode);*/
 
     }
 
@@ -81,6 +80,22 @@ public class FPHouseholds extends BaseObservable implements Observable {
 
     }
 
+    public void populateMeta(int position) {
+
+        setSysDate(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.ENGLISH).format(new Date().getTime()));
+        setUserName(MainApp.user.getUserName());
+        setDeviceId(MainApp.deviceid);
+        //   setUuid(MainApp.form.getUid());  // not applicable in Form table
+        setAppver(MainApp.appInfo.getAppVersion());
+        setProjectName(PROJECT_NAME);
+        setHdssId(MainApp.fpHouseholdList.get(position).getHdssid());
+        setUcCode(MainApp.fpHouseholdList.get(position).getUcCode());
+        setVillageCode(MainApp.fpHouseholdList.get(position).getVillageCode());
+        setHhNo(MainApp.fpHouseholdList.get(position).getHhNo());
+        setFround(MainApp.fpHouseholdList.get(position).getfRound());
+
+
+    }
 
 /*
     private synchronized void notifyChange(int propertyId) {
