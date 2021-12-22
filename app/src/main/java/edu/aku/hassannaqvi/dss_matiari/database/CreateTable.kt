@@ -162,6 +162,30 @@ object CreateTable {
             + TableFollowUpsSche.COLUMN_RB02 + " TEXT,"
             + TableFollowUpsSche.COLUMN_RB07 + " TEXT" + " );")
 
+    const val SQL_CREATE_FP_HOUSEHOLDS = ("CREATE TABLE "
+            + FPHouseholdTable.TABLE_NAME + "("
+            + FPHouseholdTable.COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
+            + FPHouseholdTable.COLUMN_PROJECT_NAME + " TEXT,"
+            + FPHouseholdTable.COLUMN_UID + " TEXT,"
+            + FPHouseholdTable.COLUMN_USERNAME + " TEXT,"
+            + FPHouseholdTable.COLUMN_SYSDATE + " TEXT,"
+            + FPHouseholdTable.COLUMN_ISTATUS + " TEXT,"
+            + FPHouseholdTable.COLUMN_DEVICEID + " TEXT,"
+            + FPHouseholdTable.COLUMN_DEVICETAGID + " TEXT,"
+            + FPHouseholdTable.COLUMN_SYNCED + " TEXT,"
+            + FPHouseholdTable.COLUMN_SYNCED_DATE + " TEXT,"
+            + FPHouseholdTable.COLUMN_APPVERSION + " TEXT,"
+            + FPHouseholdTable.COLUMN_HDSSID + " TEXT,"
+            + FPHouseholdTable.COLUMN_UC_CODE + " TEXT,"
+            + FPHouseholdTable.COLUMN_VILLAGE_CODE + " TEXT,"
+            + FPHouseholdTable.COLUMN_HOUSEHOLD_NO + " TEXT,"
+            + FPHouseholdTable.COLUMN_STRUCTURE_NO + " TEXT,"
+            + FPHouseholdTable.COLUMN_FP_ROUND + " TEXT,"
+            + FPHouseholdTable.COLUMN_VISIT_NO + " TEXT"
+            + " );"
+            )
+
+
 
     const val SQL_CREATE_ZSTANDARD = "CREATE TABLE " + ZScoreTable.TABLE_NAME + " (" +
             ZScoreTable._ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +

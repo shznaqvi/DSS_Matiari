@@ -62,7 +62,6 @@ import edu.aku.hassannaqvi.dss_matiari.models.SyncModel;
 import edu.aku.hassannaqvi.dss_matiari.workers.DataDownWorkerALL;
 import edu.aku.hassannaqvi.dss_matiari.workers.DataUpWorkerALL;
 import edu.aku.hassannaqvi.dss_matiari.workers.PhotoUploadWorker2;
-import edu.aku.hassannaqvi.dss_matiari.workers.ReadJSONWorker;
 
 
 public class SyncActivity extends AppCompatActivity {
@@ -102,10 +101,10 @@ public class SyncActivity extends AppCompatActivity {
 
         db = new DatabaseHelper(this);
         //dbBackup(this);
-        OneTimeWorkRequest JSONWorker =
+       /* OneTimeWorkRequest JSONWorker =
                 new OneTimeWorkRequest.Builder(ReadJSONWorker.class)
                         .build();
-        WorkManager.getInstance(this).enqueue(JSONWorker);
+        WorkManager.getInstance(this).enqueue(JSONWorker);*/
 
     }
 

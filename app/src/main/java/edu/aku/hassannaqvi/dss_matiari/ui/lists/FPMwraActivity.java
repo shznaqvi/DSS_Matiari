@@ -88,7 +88,7 @@ public class FPMwraActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         //setContentView(R.layout.activity_mwra);
-        bi = DataBindingUtil.setContentView(this, R.layout.activity_mwra);
+        bi = DataBindingUtil.setContentView(this, R.layout.activity_fpmwra);
         bi.setCallback(this);
 
         db = MainApp.appInfo.dbHelper;

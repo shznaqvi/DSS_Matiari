@@ -5,6 +5,7 @@ import static edu.aku.hassannaqvi.dss_matiari.database.CreateTable.DATABASE_VERS
 import static edu.aku.hassannaqvi.dss_matiari.database.CreateTable.SQL_ALTER_USERS;
 import static edu.aku.hassannaqvi.dss_matiari.database.CreateTable.SQL_CREATE_FOLLOWUPS;
 import static edu.aku.hassannaqvi.dss_matiari.database.CreateTable.SQL_CREATE_FOLLOWUPSCHE;
+import static edu.aku.hassannaqvi.dss_matiari.database.CreateTable.SQL_CREATE_FP_HOUSEHOLDS;
 import static edu.aku.hassannaqvi.dss_matiari.database.CreateTable.SQL_CREATE_HOUSEHOLDS;
 import static edu.aku.hassannaqvi.dss_matiari.database.CreateTable.SQL_CREATE_MWRA;
 import static edu.aku.hassannaqvi.dss_matiari.database.CreateTable.SQL_CREATE_OUTCOME;
@@ -12,6 +13,7 @@ import static edu.aku.hassannaqvi.dss_matiari.database.CreateTable.SQL_CREATE_PR
 import static edu.aku.hassannaqvi.dss_matiari.database.CreateTable.SQL_CREATE_USERS;
 import static edu.aku.hassannaqvi.dss_matiari.database.CreateTable.SQL_CREATE_VERSIONAPP;
 import static edu.aku.hassannaqvi.dss_matiari.database.CreateTable.SQL_CREATE_VILLAGES;
+import static edu.aku.hassannaqvi.dss_matiari.database.CreateTable.SQL_CREATE_ZSTANDARD;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -40,6 +42,7 @@ import edu.aku.hassannaqvi.dss_matiari.contracts.TableContracts.UsersTable;
 import edu.aku.hassannaqvi.dss_matiari.contracts.TableContracts.VersionTable;
 import edu.aku.hassannaqvi.dss_matiari.contracts.TableContracts.ZScoreTable;
 import edu.aku.hassannaqvi.dss_matiari.core.MainApp;
+import edu.aku.hassannaqvi.dss_matiari.models.FPHouseholds;
 import edu.aku.hassannaqvi.dss_matiari.models.FollowUpsSche;
 import edu.aku.hassannaqvi.dss_matiari.models.Households;
 import edu.aku.hassannaqvi.dss_matiari.models.MWRA;
@@ -71,6 +74,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         Log.d(TAG, "onCreate(users): " + SQL_CREATE_USERS);
         db.execSQL(SQL_CREATE_USERS);
         db.execSQL(SQL_CREATE_HOUSEHOLDS);
+        db.execSQL(SQL_CREATE_FP_HOUSEHOLDS);
         db.execSQL(SQL_CREATE_MWRA);
         db.execSQL(SQL_CREATE_FOLLOWUPS);
         db.execSQL(SQL_CREATE_PREGNANCY);
@@ -658,10 +662,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         db.close();
 
-        db.close();
-
         return insertCount;
     }
+
+
 
     public Collection<Villages> getVillage() {
         SQLiteDatabase db = this.getReadableDatabase();
@@ -802,6 +806,60 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         Log.d(TAG, "getUnsyncedHouseholds: " + allHouseholds);
         return allHouseholds;
     }
+
+
+    public JSONArray getUnsyncedFPHouseholds() throws JSONException {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor c = null;
+        String[] columns = null;
+
+        String whereClause;
+        //whereClause = null;
+        whereClause = TableContracts.FPHouseholdTable.COLUMN_SYNCED + " is null AND (" +
+                TableContracts.FPHouseholdTable.COLUMN_ISTATUS + " = 1 OR " +
+                TableContracts.FPHouseholdTable.COLUMN_VISIT_NO + " > 2 ) ";
+
+        String[] whereArgs = null;
+
+        String groupBy = null;
+        String having = null;
+
+        String orderBy = TableContracts.FPHouseholdTable.COLUMN_ID + " ASC";
+
+        JSONArray allHouseholds = new JSONArray();
+        try {
+            c = db.query(
+                    TableContracts.FPHouseholdTable.TABLE_NAME,  // The table to query
+                    columns,                   // The columns to return
+                    whereClause,               // The columns for the WHERE clause
+                    whereArgs,                 // The values for the WHERE clause
+                    groupBy,                   // don't group the rows
+                    having,                    // don't filter by row groups
+                    orderBy                    // The sort order
+            );
+            while (c.moveToNext()) {
+                /** WorkManager Upload
+                 /*Households fc = new Households();
+                 allFC.add(fc.Hydrate(c));*/
+                Log.d(TAG, "getUnsyncedFPHouseholds: " + c.getCount());
+                FPHouseholds households = new FPHouseholds();
+                allHouseholds.put(households.Hydrate(c).toJSONObject());
+
+
+            }
+        } finally {
+            if (c != null) {
+                c.close();
+            }
+            if (db != null) {
+                db.close();
+            }
+        }
+        Log.d(TAG, "getUnsyncedFPHouseholds: " + allHouseholds.toString().length());
+        Log.d(TAG, "getUnsyncedFPHouseholds: " + allHouseholds);
+        return allHouseholds;
+    }
+
 
     public JSONArray getUnsyncedMWRA() throws JSONException {
         SQLiteDatabase db = this.getReadableDatabase();
