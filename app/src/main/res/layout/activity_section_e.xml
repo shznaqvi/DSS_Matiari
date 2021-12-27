@@ -46,129 +46,6 @@
                 android:orientation="vertical">
 
                 <androidx.cardview.widget.CardView
-                    android:id="@+id/fldGrpCVrc12"
-                    style="@style/cardView">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical">
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:background="@drawable/bottom"
-                            android:orientation="horizontal">
-
-                            <TextView
-                                android:layout_width="0dp"
-                                android:layout_height="match_parent"
-                                android:layout_weight="1"
-                                android:text="@string/rc12" />
-
-                            <TextView
-                                style="@style/quesNum"
-                                android:layout_width="wrap_content"
-                                android:layout_height="match_parent"
-                                android:text="@string/Q_rc12" />
-
-
-                        </LinearLayout>
-
-                        <RadioGroup
-                            android:id="@+id/rc12"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="horizontal">
-
-                            <RadioButton
-                                android:id="@+id/rb1201"
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:checked='@{outcome.rc12.equals("1")}'
-                                android:onClick='@{()->outcome.setRc12("1")}'
-                                android:text="@string/rc1201" />
-
-                            <RadioButton
-                                android:id="@+id/rb1202"
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:checked='@{outcome.rc12.equals("2")}'
-                                android:onClick='@{()->outcome.setRc12("2")}'
-                                android:text="@string/rc1202" />
-
-                        </RadioGroup>
-
-
-                    </LinearLayout>
-                </androidx.cardview.widget.CardView>
-
-
-                <androidx.cardview.widget.CardView
-                    android:id="@+id/fldGrpCVrc13"
-                    style="@style/cardView">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical">
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:background="@drawable/bottom"
-                            android:orientation="horizontal">
-
-                            <TextView
-                                android:layout_width="0dp"
-                                android:layout_height="match_parent"
-                                android:layout_weight="1"
-                                android:text="@string/rc13" />
-
-                            <TextView
-                                style="@style/quesNum"
-                                android:layout_width="wrap_content"
-                                android:layout_height="match_parent"
-                                android:text="@string/Q_rc13" />
-
-
-                        </LinearLayout>
-
-                        <RadioGroup
-                            android:id="@+id/rc13"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="horizontal">
-
-                            <RadioButton
-                                android:id="@+id/rb1301"
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:checked='@{outcome.rc13.equals("1")}'
-                                android:onClick='@{()->outcome.setRc13("1")}'
-                                android:text="@string/rc1301" />
-
-                            <RadioButton
-                                android:id="@+id/rb1302"
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:checked='@{outcome.rc13.equals("2")}'
-                                android:onClick='@{()->outcome.setRc13("2")}'
-                                android:text="@string/rc1302" />
-
-                        </RadioGroup>
-
-
-                    </LinearLayout>
-                </androidx.cardview.widget.CardView>
-
-
-
-                <androidx.cardview.widget.CardView
                     android:id="@+id/fldGrpCVrc14"
                     style="@style/cardView">
 
@@ -198,34 +75,157 @@
 
                         </LinearLayout>
 
+                        <RadioGroup
+                            android:id="@+id/rc14"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <RadioButton
+                                android:id="@+id/rc1201"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:checked='@{outcome.rc14.equals("1")}'
+                                android:onClick='@{()->outcome.setRc14("1")}'
+                                android:text="@string/rc1401" />
+
+                            <RadioButton
+                                android:id="@+id/rc1202"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:checked='@{outcome.rc14.equals("2")}'
+                                android:onClick='@{()->outcome.setRc14("2")}'
+                                android:text="@string/rc1402" />
+
+                        </RadioGroup>
+
+
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/fldGrpCVrc15"
+                    style="@style/cardView">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/bottom"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:text="@string/rc15" />
+
+                            <TextView
+                                style="@style/quesNum"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:text="@string/Q_rc15" />
+
+
+                        </LinearLayout>
+
+                        <RadioGroup
+                            android:id="@+id/rc15"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <RadioButton
+                                android:id="@+id/rc1501"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:checked='@{outcome.rc15.equals("1")}'
+                                android:onClick='@{()->outcome.setRc15("1")}'
+                                android:text="@string/rc1501" />
+
+                            <RadioButton
+                                android:id="@+id/rc1502"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:checked='@{outcome.rc15.equals("2")}'
+                                android:onClick='@{()->outcome.setRc15("2")}'
+                                android:text="@string/rc1502" />
+
+                        </RadioGroup>
+
+
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+
+
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/fldGrpCVrc16"
+                    style="@style/cardView">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/bottom"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:text="@string/rc16" />
+
+                            <TextView
+                                style="@style/quesNum"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:text="@string/Q_rc16" />
+
+
+                        </LinearLayout>
+
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:orientation="horizontal">
 
                             <io.blackbox_vision.datetimepickeredittext.view.DatePickerEditText
-                                android:id="@+id/rc14"
+                                android:id="@+id/rc16"
                                 style="@style/textInput"
                                 android:layout_width="0dp"
                                 android:layout_height="match_parent"
                                 android:layout_marginBottom="0dp"
                                 android:layout_weight="1"
-                                android:enabled="@{!outcome.rc14.equals(`98`)}"
+                                android:enabled="@{!outcome.rc16.equals(`98`)}"
                                 android:gravity="center"
                                 android:hint="YYYY-MM-DD"
-                                android:text="@={outcome.rc14}"
+                                android:text="@={outcome.rc16}"
                                 app:dateFormat="yyyy-MM-dd"
                                 app:maxDate="CR_DATE"
                                 android:datePickerMode="spinner"
                                 app:theme="@style/DatePickerEditTextDialogTheme" />
 
                             <CheckBox
-                                android:id="@+id/rc14check"
+                                android:id="@+id/rc16check"
                                 android:layout_width="wrap_content"
                                 android:layout_height="match_parent"
                                 android:backgroundTint="@color/lightPink"
-                                android:checked='@{outcome.rc14.equals("98")}'
-                                android:onClick="@{()->outcome.setRc14(outcome.rc14.equals(`98`)?``:`98`)}"
+                                android:checked='@{outcome.rc16.equals("98")}'
+                                android:onClick="@{()->outcome.setRc16(outcome.rc16.equals(`98`)?``:`98`)}"
                                 android:tag="-1"
                                 android:text="@string/dkn"
                                 android:textColor="@color/redDark" />

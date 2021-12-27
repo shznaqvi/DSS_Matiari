@@ -22,6 +22,7 @@
         <entry key="..\:/Android/DSS_Matiari/app/src/main/res/layout/activity_ending.xml" value="0.56328125" />
         <entry key="..\:/Android/DSS_Matiari/app/src/main/res/layout/activity_forms_report_cluster.xml" value="0.56328125" />
         <entry key="..\:/Android/DSS_Matiari/app/src/main/res/layout/activity_fphousehold.xml" value="0.2484375" />
+        <entry key="..\:/Android/DSS_Matiari/app/src/main/res/layout/activity_fpmwra.xml" value="0.56328125" />
         <entry key="..\:/Android/DSS_Matiari/app/src/main/res/layout/activity_household.xml" value="0.452991452991453" />
         <entry key="..\:/Android/DSS_Matiari/app/src/main/res/layout/activity_identification.xml" value="0.5625" />
         <entry key="..\:/Android/DSS_Matiari/app/src/main/res/layout/activity_login.xml" value="0.56328125" />
@@ -31,6 +32,7 @@
         <entry key="..\:/Android/DSS_Matiari/app/src/main/res/layout/activity_section_b.xml" value="0.52875" />
         <entry key="..\:/Android/DSS_Matiari/app/src/main/res/layout/activity_section_c.xml" value="0.56328125" />
         <entry key="..\:/Android/DSS_Matiari/app/src/main/res/layout/activity_section_d.xml" value="0.46" />
+        <entry key="..\:/Android/DSS_Matiari/app/src/main/res/layout/activity_section_e.xml" value="0.53" />
         <entry key="..\:/Android/DSS_Matiari/app/src/main/res/layout/activity_sync.xml" value="0.5503816793893129" />
         <entry key="..\:/Android/DSS_Matiari/app/src/main/res/layout/custom_spinner.xml" value="0.56328125" />
         <entry key="..\:/Android/DSS_Matiari/app/src/main/res/layout/household_row.xml" value="0.52875" />
@@ -51,7 +53,7 @@
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="11" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_15" project-jdk-name="11" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">

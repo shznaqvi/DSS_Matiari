@@ -40,12 +40,12 @@ public class SectionEActivity extends AppCompatActivity {
 
 
         try {
-            outcome = db.getOutComeBYID(MainApp.followups.getUid(), String.valueOf(++MainApp.outcomeCounter));
+
+            outcome = db.getOutComeBYID(String.valueOf(++MainApp.outcomeCounter));
         } catch (JSONException e) {
             e.printStackTrace();
             Toast.makeText(this, "JSONException(OutCome): " + e.getMessage(), Toast.LENGTH_SHORT).show();
         }
-
         bi.setOutcome(MainApp.outcome);
 
 
@@ -103,6 +103,8 @@ public class SectionEActivity extends AppCompatActivity {
 
     private boolean insertNewRecord() {
         db = MainApp.appInfo.getDbHelper();
+        outcome.populateMeta();
+
         long rowId = 0;
         try {
             rowId = db.addOutcome(outcome);

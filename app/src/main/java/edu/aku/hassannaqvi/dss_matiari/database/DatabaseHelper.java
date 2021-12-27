@@ -167,23 +167,24 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public Long addFpHousehold(FPHouseholds fpHouseholds) throws JSONException {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
-        values.put(FollowupsTable.COLUMN_PROJECT_NAME, fpHouseholds.getProjectName());
-        values.put(FollowupsTable.COLUMN_UID, fpHouseholds.getUid());
-        values.put(FollowupsTable.COLUMN_USERNAME, fpHouseholds.getUserName());
-        values.put(FollowupsTable.COLUMN_SYSDATE, fpHouseholds.getSysDate());
-        values.put(FollowupsTable.COLUMN_HDSSID, fpHouseholds.getHdssId());
-        values.put(FollowupsTable.COLUMN_UC_CODE, fpHouseholds.getUcCode());
-        values.put(FollowupsTable.COLUMN_VILLAGE_CODE, fpHouseholds.getVillageCode());
-        values.put(FollowupsTable.COLUMN_HOUSEHOLD_NO, fpHouseholds.getHhNo());
-        values.put(FollowupsTable.COLUMN_ISTATUS, fpHouseholds.getiStatus());
-        values.put(FollowupsTable.COLUMN_DEVICETAGID, fpHouseholds.getDeviceTag());
-        values.put(FollowupsTable.COLUMN_DEVICEID, fpHouseholds.getDeviceId());
-        values.put(FollowupsTable.COLUMN_APPVERSION, fpHouseholds.getAppver());
+        values.put(FPHouseholdTable.COLUMN_PROJECT_NAME, fpHouseholds.getProjectName());
+        values.put(FPHouseholdTable.COLUMN_UID, fpHouseholds.getUid());
+        values.put(FPHouseholdTable.COLUMN_USERNAME, fpHouseholds.getUserName());
+        values.put(FPHouseholdTable.COLUMN_SYSDATE, fpHouseholds.getSysDate());
+        values.put(FPHouseholdTable.COLUMN_HDSSID, fpHouseholds.getHdssId());
+        values.put(FPHouseholdTable.COLUMN_UC_CODE, fpHouseholds.getUcCode());
+        values.put(FPHouseholdTable.COLUMN_VILLAGE_CODE, fpHouseholds.getVillageCode());
+        values.put(FPHouseholdTable.COLUMN_HOUSEHOLD_NO, fpHouseholds.getHhNo());
+        values.put(FPHouseholdTable.COLUMN_ISTATUS, fpHouseholds.getiStatus());
+        values.put(FPHouseholdTable.COLUMN_DEVICETAGID, fpHouseholds.getDeviceTag());
+        values.put(FPHouseholdTable.COLUMN_DEVICEID, fpHouseholds.getDeviceId());
+        values.put(FPHouseholdTable.COLUMN_APPVERSION, fpHouseholds.getAppver());
+        values.put(FPHouseholdTable.COLUMN_VISIT_NO, fpHouseholds.getVisitNo());
 
         long newRowId;
         newRowId = db.insert(
-                FollowupsTable.TABLE_NAME,
-                FollowupsTable.COLUMN_NAME_NULLABLE,
+                FPHouseholdTable.TABLE_NAME,
+                FPHouseholdTable.COLUMN_NAME_NULLABLE,
                 values);
         return newRowId;
     }
@@ -532,6 +533,21 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 selectionArgs);
     }
 
+    public int updatesFollowUpsScheColumn(String column, String value) {
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+        values.put(column, value);
+
+        String selection = TableFollowUpsSche.COLUMN_ID + " =? ";
+        String[] selectionArgs = {String.valueOf(MainApp.fpMwra.getId())};
+
+        return db.update(TableFollowUpsSche.TABLE_NAME,
+                values,
+                selection,
+                selectionArgs);
+    }
+
     public int updatesFollowUpsColumn(String column, String value) {
         SQLiteDatabase db = this.getWritableDatabase();
 
@@ -737,6 +753,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             values.put(TableFollowUpsSche.COLUMN_RA14, followUpsSche.getRa14());
             values.put(TableFollowUpsSche.COLUMN_RA18, followUpsSche.getRa18());
             values.put(TableFollowUpsSche.COLUMN_FROUND, followUpsSche.getfRound());
+            values.put(TableFollowUpsSche.COLUMN_DONE_DATE, followUpsSche.getfpDoneDt());
             values.put(TableFollowUpsSche.COLUMN_RB01, followUpsSche.getRb01());
             values.put(TableFollowUpsSche.COLUMN_RB02, followUpsSche.getRb02());
             values.put(TableFollowUpsSche.COLUMN_RB03, followUpsSche.getRb03());
@@ -1483,7 +1500,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
 
-    public List<FollowUpsSche> getFPHouseholdBYVillage(String village) {
+    public List<FollowUpsSche> getFollowUpsScheHHBYVillage(String village) {
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor c = null;
         String[] columns = null;
@@ -1519,6 +1536,44 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.close();
 
         return followUpsSches;
+    }
+
+    public FPHouseholds getFPHouseholdBYHdssid(String hdssid) throws JSONException {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor c = null;
+        String[] columns = null;
+
+        String whereClause;
+        whereClause = FPHouseholdTable.COLUMN_HDSSID + "=? ";
+
+        String[] whereArgs = {hdssid};
+
+        String groupBy = FPHouseholdTable.COLUMN_HDSSID;
+        String having = null;
+
+        String orderBy = FPHouseholdTable.COLUMN_HDSSID + " Desc";
+
+        FPHouseholds fpHousholds = new FPHouseholds();
+        c = db.query(
+                FPHouseholdTable.TABLE_NAME,  // The table to query
+                columns,                   // The columns to return
+                whereClause,               // The columns for the WHERE clause
+                whereArgs,                 // The values for the WHERE clause
+                groupBy,                   // don't group the rows
+                having,                    // don't filter by row groups
+                orderBy,                    // The sort order
+                "1"
+        );
+        while (c.moveToNext()) {
+
+            fpHousholds = new FPHouseholds().Hydrate(c);
+        }
+
+        c.close();
+
+        db.close();
+
+        return fpHousholds;
     }
 
     public int getMWRACountBYUUID(String uid) {
@@ -1563,7 +1618,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         String[] columns = null;
 
         String whereClause;
-        whereClause = FollowupsTable.COLUMN_UID + "=? AND " +
+        whereClause = FollowupsTable.COLUMN_UUID + "=? AND " +
                 FollowupsTable.COLUMN_SNO + "=? ";
 
         String[] whereArgs = {MainApp.fpHouseholds.getUid(), rb01};
@@ -1595,7 +1650,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return followup;
     }
 
-    public Outcome getOutComeBYID(String uid, String sno) throws JSONException {
+    public Outcome getOutComeBYID(String sno) throws JSONException {
 
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor c = null;
@@ -1606,7 +1661,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 OutcomeTable.COLUMN_MUID + "=? AND " +
                 OutcomeTable.COLUMN_SNO + "=? ";
 
-        String[] whereArgs = {MainApp.fpHouseholds.getUid(), uid, sno};
+        String[] whereArgs = {MainApp.fpHouseholds.getUid(), MainApp.followups.getUid().split("_")[0], sno};
 
         String groupBy = null;
         String having = null;

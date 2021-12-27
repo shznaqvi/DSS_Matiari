@@ -71,6 +71,8 @@ public class Followups extends BaseObservable implements Observable {
     private String rc09 = "";
     private String rc10 = StringUtils.EMPTY;
     private String rc11 = StringUtils.EMPTY;
+    private String rc12 = StringUtils.EMPTY;
+    private String rc13 = StringUtils.EMPTY;
 
     public Followups() {
 
@@ -92,7 +94,6 @@ public class Followups extends BaseObservable implements Observable {
         MainApp.followups.setUuid(MainApp.fpHouseholds.getUid());
         MainApp.followups.setUcCode(MainApp.fpHouseholds.getUcCode());
         MainApp.followups.setVillageCode(MainApp.fpHouseholds.getVillageCode());
-        MainApp.followups.setSno(MainApp.fpHouseholds.getStructureNo());
         MainApp.followups.setHhNo(MainApp.fpHouseholds.getHhNo());
         // TODO: set MWRA ID from downloaded data
         //   MainApp.followups.setMWRAID(households.getHhNo());
@@ -285,7 +286,7 @@ public class Followups extends BaseObservable implements Observable {
     public void setRc01(String rc01) {
         this.rc01 = rc01;
         setSno(rc01);
-        notifyChange(BR.rb01);
+        notifyChange(BR.rc01);
     }
 
 
@@ -296,7 +297,7 @@ public class Followups extends BaseObservable implements Observable {
 
     public void setRc02(String rc02) {
         this.rc02 = rc02;
-        notifyChange(BR.rb02);
+        notifyChange(BR.rc02);
     }
 
     @Bindable
@@ -306,7 +307,7 @@ public class Followups extends BaseObservable implements Observable {
 
     public void setRc03(String rc03) {
         this.rc03 = rc03;
-        notifyChange(BR.rb03);
+        notifyChange(BR.rc03);
     }
 
 
@@ -322,7 +323,7 @@ public class Followups extends BaseObservable implements Observable {
         setRc07(this.rc06.equals("4") ? "" : this.rc07);
 /*        setRc08(this.rc06.equals("4") ? "" : this.rc08);
         setRc09(this.rc06.equals("4") ? "" : this.rc09);*/
-        notifyChange(BR.rb06);
+        notifyChange(BR.rc06);
     }
 
     @Bindable
@@ -335,7 +336,7 @@ public class Followups extends BaseObservable implements Observable {
         setRc08(this.rc07.equals("1") ? this.rc08 : "");
         setRc09(this.rc07.equals("1") ? this.rc09 : "");
         Log.d(TAG, "setRc07: " + this.rc07);
-        notifyChange(BR.rb07);
+        notifyChange(BR.rc07);
     }
 
     @Bindable
@@ -350,7 +351,7 @@ public class Followups extends BaseObservable implements Observable {
         } else {
             setRc09("");
         }
-        notifyChange(BR.rb08);
+        notifyChange(BR.rc08);
     }
 
     @Bindable
@@ -360,7 +361,7 @@ public class Followups extends BaseObservable implements Observable {
 
     public void setRc09(String rc09) {
         this.rc09 = rc09;
-        notifyChange(BR.rb09);
+        notifyChange(BR.rc09);
     }
 
     @Bindable
@@ -370,7 +371,7 @@ public class Followups extends BaseObservable implements Observable {
 
     public void setRc10(String rc10) {
         this.rc10 = rc10;
-        notifyChange(BR.rb09);
+        notifyChange(BR.rc10);
     }
 
     @Bindable
@@ -380,7 +381,28 @@ public class Followups extends BaseObservable implements Observable {
 
     public void setRc11(String rc11) {
         this.rc11 = rc11;
-        notifyChange(BR.rb09);
+        notifyChange(BR.rc11);
+    }
+
+
+    @Bindable
+    public String getRc12() {
+        return rc12;
+    }
+
+    public void setRc12(String rc12) {
+        this.rc12 = rc12;
+        notifyChange(BR.rc12);
+    }
+
+    @Bindable
+    public String getRc13() {
+        return rc13;
+    }
+
+    public void setRc13(String rc13) {
+        this.rc13 = rc13;
+        notifyChange(BR.rc13);
     }
 
     private synchronized void notifyChange(int propertyId) {
@@ -436,6 +458,7 @@ public class Followups extends BaseObservable implements Observable {
 
             JSONObject json = null;
             json = new JSONObject(string);
+
             this.rc01 = json.getString("rc01");
             this.round = json.getString("round");
             this.prePreg = json.getString("prePreg");
@@ -454,7 +477,6 @@ public class Followups extends BaseObservable implements Observable {
     public String sCtoString() throws JSONException {
         JSONObject json = new JSONObject();
 
-
         json.put("rc01", rc01)
                 .put("round", round)
                 .put("prePreg", prePreg)
@@ -462,7 +484,9 @@ public class Followups extends BaseObservable implements Observable {
                 .put("rc03", rc03)
 
                 .put("rc06", rc06)
-                .put("rc07", rc07);
+                .put("rc07", rc07)
+                .put("rc08", rc08)
+                .put("rc09", rc09);
 
 
         return json.toString();
@@ -474,10 +498,10 @@ public class Followups extends BaseObservable implements Observable {
 
             JSONObject json = null;
             json = new JSONObject(string);
-            this.rc08 = json.getString("rc08");
-            this.rc09 = json.getString("rc09");
             this.rc10 = json.getString("rc10");
             this.rc11 = json.getString("rc11");
+            this.rc12 = json.getString("rc12");
+            this.rc13 = json.getString("rc13");
 
 
         }
@@ -487,11 +511,10 @@ public class Followups extends BaseObservable implements Observable {
     public String sDtoString() throws JSONException {
         JSONObject json = new JSONObject();
 
-
-        json.put("rc08", rc08)
-                .put("rc09", rc09)
-                .put("rc10", rc10)
-                .put("rc11", rc11);
+        json.put("rc10", rc10)
+                .put("rc11", rc11)
+                .put("rc12", rc12)
+                .put("rc13", rc13);
 
         return json.toString();
     }

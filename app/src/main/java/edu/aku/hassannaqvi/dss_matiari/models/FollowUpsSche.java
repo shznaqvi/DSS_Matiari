@@ -29,6 +29,7 @@ public class FollowUpsSche implements Observable {
     private String rb03; // Age in Years
     private String rb05;  // Husband / Father
     private String rb07;  // Pregnancy Status
+    private String fpDoneDt = "";  // Pregnancy Status
 
 
     @Override
@@ -120,6 +121,14 @@ public class FollowUpsSche implements Observable {
         this.fRound = fRound;
     }
 
+    public String getfpDoneDt() {
+        return fpDoneDt;
+    }
+
+    public void setfpDoneDt(String fpDoneDt) {
+        this.fpDoneDt = fpDoneDt;
+    }
+
     public String getRb01() {
         return rb01;
     }
@@ -189,6 +198,7 @@ public class FollowUpsSche implements Observable {
         this.ra14 = cursor.getString(cursor.getColumnIndexOrThrow(TableFollowUpsSche.COLUMN_RA14));
         this.ra18 = cursor.getString(cursor.getColumnIndexOrThrow(TableFollowUpsSche.COLUMN_RA18));
         this.fRound = cursor.getString(cursor.getColumnIndexOrThrow(TableFollowUpsSche.COLUMN_FROUND));
+        this.fpDoneDt = cursor.getString(cursor.getColumnIndexOrThrow(TableFollowUpsSche.COLUMN_DONE_DATE));
         this.rb01 = cursor.getString(cursor.getColumnIndexOrThrow(TableFollowUpsSche.COLUMN_RB01));
         this.rb02 = cursor.getString(cursor.getColumnIndexOrThrow(TableFollowUpsSche.COLUMN_RB02));
         this.rb03 = cursor.getString(cursor.getColumnIndexOrThrow(TableFollowUpsSche.COLUMN_RB03));

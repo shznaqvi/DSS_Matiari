@@ -86,7 +86,7 @@ public class FPHouseholdActivity extends AppCompatActivity {
         Log.d(TAG, "onCreate: fpHouseholdList " + MainApp.fpHouseholdList.size());
 
 
-        MainApp.fpHouseholdList = db.getFPHouseholdBYVillage(MainApp.selectedVillage);
+        MainApp.fpHouseholdList = db.getFollowUpsScheHHBYVillage(MainApp.selectedVillage);
 
 
         hhAdapter = new FPHouseholdAdapter(this, MainApp.fpHouseholdList);

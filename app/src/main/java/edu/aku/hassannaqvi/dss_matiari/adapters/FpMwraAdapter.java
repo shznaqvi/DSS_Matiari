@@ -66,6 +66,9 @@ public class FpMwraAdapter extends RecyclerView.Adapter<FpMwraAdapter.ViewHolder
         String wifeOrDaughter = "";
 
 
+        if (!followUpsSche.getfpDoneDt().equals("")) {
+            indicator.setBackgroundColor(ContextCompat.getColor(mContext, R.color.teal_700));
+        }
 /*        switch (followUpsSche.getRb06()) {
             case "1":
                 marStatus = "Married";
@@ -110,7 +113,6 @@ public class FpMwraAdapter extends RecyclerView.Adapter<FpMwraAdapter.ViewHolder
             // Get the current state of the item
 
             MainApp.fpMwra = MainApp.fpMWRAList.get(position);
-
 
             Intent intent = new Intent(mContext, SectionCActivity.class);
 

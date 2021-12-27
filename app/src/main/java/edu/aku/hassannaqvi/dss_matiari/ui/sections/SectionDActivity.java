@@ -50,12 +50,14 @@ public class SectionDActivity extends AppCompatActivity {
         if (!formValidation()) return;
         if (updateDB()) {
 
-            if (followups.getRc08().equals("1")) {
+
+            // If continued from previous pregnancy
+            if (followups.getRc10().equals("1")) {
                 setResult(RESULT_OK);
                 finish();
             } else {
-
-                MainApp.totalOutcomes = Integer.parseInt(followups.getRc08());
+                // get outcome of previous pregnancy
+                MainApp.totalOutcomes = Integer.parseInt(followups.getRc13());
                 MainApp.outcomeCounter = 0;
                 setResult(RESULT_OK);
                 startActivity(new Intent(this, SectionEActivity.class).addFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT).putExtra("complete", true));

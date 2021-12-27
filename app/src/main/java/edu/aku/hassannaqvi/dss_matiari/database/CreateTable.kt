@@ -160,6 +160,7 @@ object CreateTable {
             + TableFollowUpsSche.COLUMN_RA14 + " TEXT,"
             + TableFollowUpsSche.COLUMN_RA18 + " TEXT,"
             + TableFollowUpsSche.COLUMN_FROUND + " TEXT,"
+            + TableFollowUpsSche.COLUMN_DONE_DATE + " TEXT,"
             + TableFollowUpsSche.COLUMN_RB01 + " TEXT,"
             + TableFollowUpsSche.COLUMN_RB02 + " TEXT,"
             + TableFollowUpsSche.COLUMN_RB03 + " TEXT,"

@@ -225,6 +225,7 @@ public class TableContracts {
         public static final String COLUMN_RA14 = "ra14"; // Head of Household
         public static final String COLUMN_RA18 = "ra18"; // No. of MWRA in the household
         public static final String COLUMN_FROUND = "fRound";
+        public static final String COLUMN_DONE_DATE = "fpDoneDt";
         public static final String COLUMN_RB01 = "rb01"; // MWRA Sno
         public static final String COLUMN_RB02 = "rb02"; // MWRA Name
         public static final String COLUMN_RB03 = "rb03"; // Age

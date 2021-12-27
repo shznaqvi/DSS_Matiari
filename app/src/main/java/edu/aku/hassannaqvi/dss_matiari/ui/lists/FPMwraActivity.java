@@ -23,6 +23,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import edu.aku.hassannaqvi.dss_matiari.R;
 import edu.aku.hassannaqvi.dss_matiari.adapters.FpMwraAdapter;
+import edu.aku.hassannaqvi.dss_matiari.contracts.TableContracts;
 import edu.aku.hassannaqvi.dss_matiari.core.MainApp;
 import edu.aku.hassannaqvi.dss_matiari.database.DatabaseHelper;
 import edu.aku.hassannaqvi.dss_matiari.databinding.ActivityFpmwraBinding;
@@ -48,7 +49,7 @@ public class FPMwraActivity extends AppCompatActivity {
                         // There are no request codes
                         //Intent data = result.getData();
                         Intent data = result.getData();
-                      *//*  int age = Integer.parseInt(femalemembers.getHh05y());
+                        int age = Integer.parseInt(femalemembers.getHh05y());
                         boolean isFemale = femalemembers.getHh03().equals("2");
                         boolean notMarried = femalemembers.getHh06().equals("2");
                         if (
@@ -58,7 +59,7 @@ public class FPMwraActivity extends AppCompatActivity {
                                         // MWRA: Married females between 14 to 49
                                         (age >= 14 && age < 50 && !notMarried && isFemale )
 
-                        ) {*//*
+                        ) {
                         FollowUpsSche fupsche = new FollowUpsSche();
                         fupsche.setHdssid(MainApp.mwra.getHdssId());
                         fupsche.setHdssid(MainApp.mwra.getHdssId());
@@ -108,7 +109,7 @@ public class FPMwraActivity extends AppCompatActivity {
         bi.rvMembers.setAdapter(fmAdapter);
         bi.rvMembers.setLayoutManager(new LinearLayoutManager(this));
 
-
+        mwraCount = fpMWRAList.size();
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -177,8 +178,6 @@ public class FPMwraActivity extends AppCompatActivity {
 
     private void addMoreFemale() {
         MainApp.households = new Households();
-        MainApp.mwra = new MWRA();
-
         MainApp.households.setRa01(MainApp.fpHouseholds.getSysDate().substring(0, 10));
         MainApp.households.setUid(MainApp.fpHouseholds.getUid());
         MainApp.households.setUcCode(MainApp.fpHouseholds.getUcCode());
@@ -186,8 +185,18 @@ public class FPMwraActivity extends AppCompatActivity {
         MainApp.households.setHhNo(MainApp.fpHouseholds.getHhNo());
         MainApp.households.setSysDate(MainApp.fpHouseholds.getSysDate());
         MainApp.households.setHdssId(MainApp.fpHouseholds.getHdssId());
-        startActivity(new Intent(this, SectionBActivity.class));
-        //   finish();
+        MainApp.households.setRa18(String.valueOf(fpMWRAList.size()));
+        //  startActivity(new Intent(this, MwraActivity.class));
+
+        MainApp.mwra = new MWRA();
+        //MainApp.mwra.setRb01(String.valueOf(mwraCount + 1));
+        //startActivity(new Intent(this, MwraActivity.class));
+
+      /*  Intent intent = new Intent(FPMwraActivity.this, SectionBActivity.class);
+        MemberInfoLauncher.launch(intent);
+*/
+        startActivityForResult(new Intent(this, SectionBActivity.class), 3);
+        finish();
 
     }
 
@@ -218,8 +227,30 @@ public class FPMwraActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         // check if the request code is same as what is passed  here it is 2
-
+        if (requestCode == 2) {
             if (resultCode == Activity.RESULT_OK) {
+                //   mwraList.get(selectedFemale).setExpanded(false);
+
+                // TODO: Mark followup done
+
+                fpMWRAList.get(selectedFemale).setfpDoneDt(followups.getSysDate());
+                fmAdapter.notifyItemChanged(selectedFemale);
+                db.updatesFollowUpsScheColumn(TableContracts.TableFollowUpsSche.COLUMN_DONE_DATE, followups.getSysDate());
+                //checkCompleteFm();
+                //fmAdapter.notifyItemChanged(selectedFemale);
+            }
+            if (resultCode == Activity.RESULT_CANCELED) {
+                // Write your code if there's no result
+//                Toast.makeText(this, "Information for " + mwraList.get(selectedFemale).getRb02() + " was not saved.", Toast.LENGTH_SHORT).show();
+            }
+        }
+        if (requestCode == 3) {
+            if (resultCode == Activity.RESULT_OK) {
+
+                mwraCount++;
+                int newMwra = mwraCount - fpMWRAList.size();
+                bi.newMwra.setText(newMwra + " new women added to this household");
+                bi.newMwra.setVisibility(View.VISIBLE);
                 //   mwraList.get(selectedFemale).setExpanded(false);
 
                 // TODO: Mark followup done
@@ -228,8 +259,9 @@ public class FPMwraActivity extends AppCompatActivity {
             }
             if (resultCode == Activity.RESULT_CANCELED) {
                 // Write your code if there's no result
-                Toast.makeText(this, "Information for " + mwraList.get(selectedFemale).getRb02() + " was not saved.", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(this, "Information for " + mwraList.get(selectedFemale).getRb02() + " was not saved.", Toast.LENGTH_SHORT).show();
             }
+        }
 
     }
 
@@ -291,4 +323,9 @@ public class FPMwraActivity extends AppCompatActivity {
         finish();
     }
 
+    public void toggleNewMwraList(View view) {
+
+        startActivity(new Intent(this, MwraActivity.class));
+        // bi.newMwraList.setVisibility(View.VISIBLE);
+    }
 }

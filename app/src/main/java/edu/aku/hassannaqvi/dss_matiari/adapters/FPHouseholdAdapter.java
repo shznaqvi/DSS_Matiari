@@ -14,12 +14,13 @@ import android.widget.Toast;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
+import org.json.JSONException;
+
 import java.util.List;
 
 import edu.aku.hassannaqvi.dss_matiari.R;
 import edu.aku.hassannaqvi.dss_matiari.core.MainApp;
 import edu.aku.hassannaqvi.dss_matiari.database.DatabaseHelper;
-import edu.aku.hassannaqvi.dss_matiari.models.FPHouseholds;
 import edu.aku.hassannaqvi.dss_matiari.models.FollowUpsSche;
 import edu.aku.hassannaqvi.dss_matiari.ui.lists.FPMwraActivity;
 
@@ -100,8 +101,15 @@ public class FPHouseholdAdapter extends RecyclerView.Adapter<FPHouseholdAdapter.
         viewHolder.itemView.setOnClickListener(v -> {
             // Get the current state of the item
 
-            MainApp.fpHouseholds = new FPHouseholds();
-            MainApp.fpHouseholds.populateMeta(position);
+            try {
+                MainApp.fpHouseholds = db.getFPHouseholdBYHdssid(MainApp.fpHouseholdList.get(position).getHdssid());
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+            if (MainApp.fpHouseholds.getUid().equals(""))
+                MainApp.fpHouseholds.populateMeta(position);
+
 
             MainApp.fpHouseholds.setVisitNo(String.valueOf(Integer.parseInt(MainApp.fpHouseholds.getVisitNo()) + 1));
             ((Activity) mContext).startActivity(new Intent(mContext, FPMwraActivity.class));

@@ -58,6 +58,8 @@ public class Outcome extends BaseObservable implements Observable {
     private String rc12 = StringUtils.EMPTY;
     private String rc13 = StringUtils.EMPTY;
     private String rc14 = StringUtils.EMPTY;
+    private String rc15 = StringUtils.EMPTY;
+    private String rc16 = StringUtils.EMPTY;
 
 
     public Outcome() {
@@ -261,10 +263,6 @@ public class Outcome extends BaseObservable implements Observable {
         return rc13;
     }
 
-    @Bindable
-    public String getRc14() {
-        return rc14;
-    }
 
     public void setRc12(String rc12) {
         this.rc12 = rc12;
@@ -280,6 +278,32 @@ public class Outcome extends BaseObservable implements Observable {
         this.rc14 = rc14;
         notifyPropertyChanged(BR.rc14);
     }
+
+    @Bindable
+    public String getRc14() {
+        return rc14;
+    }
+
+    @Bindable
+    public String getRc15() {
+        return rc15;
+    }
+
+    public void setRc15(String rc15) {
+        this.rc15 = rc15;
+        notifyPropertyChanged(BR.rc15);
+    }
+
+    @Bindable
+    public String getRc16() {
+        return rc16;
+    }
+
+    public void setRc16(String rc16) {
+        this.rc16 = rc16;
+        notifyPropertyChanged(BR.rc16);
+    }
+
 
     private synchronized void notifyChange(int propertyId) {
         if (propertyChangeRegistry == null) {
@@ -327,17 +351,18 @@ public class Outcome extends BaseObservable implements Observable {
         return this;
     }
 
-
     public void sEHydrate(String string) throws JSONException {
         Log.d(TAG, "s2Hydrate: " + string);
         if (string != null) {
 
             JSONObject json = null;
             json = new JSONObject(string);
+            this.round = json.getString("round");
             this.rc12 = json.getString("rc12");
             this.rc13 = json.getString("rc13");
-            this.round = json.getString("round");
             this.rc14 = json.getString("rc14");
+            this.rc15 = json.getString("rc15");
+            this.rc16 = json.getString("rc16");
 
 
         }
@@ -348,10 +373,13 @@ public class Outcome extends BaseObservable implements Observable {
         JSONObject json = new JSONObject();
 
 
-        json.put("rc12", rc12)
-                .put("rc13", rc13)
+        json
                 .put("round", round)
-                .put("rc14", rc14);
+                .put("rc12", rc12)
+                .put("rc13", rc13)
+                .put("rc14", rc14)
+                .put("rc15", rc15)
+                .put("rc16", rc16);
 
         return json.toString();
     }
@@ -395,6 +423,22 @@ public class Outcome extends BaseObservable implements Observable {
     public void setExpanded(boolean expanded) {
         this.expanded = expanded;
         notifyChange(BR.expanded);
+    }
+
+    public void populateMeta() {
+        MainApp.outcome.setUuid(MainApp.fpHouseholds.getUid());
+        MainApp.outcome.setMuid(MainApp.followups.getUid().split("_")[0]);
+        MainApp.outcome.setUcCode(MainApp.fpHouseholds.getUcCode());
+        MainApp.outcome.setVillageCode(MainApp.fpHouseholds.getVillageCode());
+        MainApp.outcome.setHhNo(MainApp.fpHouseholds.getHhNo());
+        MainApp.outcome.setSno(String.valueOf(MainApp.outcomeCounter));
+        // TODO: set MWRA ID from downloaded data
+        //   MainApp.followups.setMWRAID(households.getHhNo());
+        MainApp.outcome.setUserName(MainApp.user.getUserName());
+        MainApp.outcome.setSysDate(MainApp.fpHouseholds.getSysDate());
+        MainApp.outcome.setDeviceId(MainApp.deviceid);
+        MainApp.outcome.setHdssId(MainApp.fpHouseholds.getHdssId());
+        MainApp.outcome.setAppver(MainApp.versionName + "." + MainApp.versionCode);
     }
 
     /*public String calcEDD() {

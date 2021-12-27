@@ -12,13 +12,13 @@
     <string name="pregnancy_mainheading">Pregnancy Information (If previously pregnant)</string>
     <string name="outcome_mainheading">Outcome Information </string>
 
-    <string name="upd_db_form"> updateDB(Form):\t </string>
-    <string name="upd_db_error"> Updating Database… ERROR! </string>
-    <string name="db_excp_error"> Database Exception... ERROR! </string>
-    <string name="upd_db"> Updating Database...\t </string>
-    <string name="fail_db_upd"> Failed to Update Database! </string>
-    <string name="backPress"> Back Press Not Allowed </string>
-    <string name="invalid_response"> Invalid Response </string>
+    <string name="upd_db_form" translatable="false"> updateDB(Form):\t </string>
+    <string name="upd_db_error" translatable="false"> Updating Database… ERROR! </string>
+    <string name="db_excp_error" translatable="false"> Database Exception... ERROR! </string>
+    <string name="upd_db" translatable="false"> Updating Database...\t </string>
+    <string name="fail_db_upd" translatable="false"> Failed to Update Database! </string>
+    <string name="backPress" translatable="false"> Back Press Not Allowed </string>
+    <string name="invalid_response" translatable="false"> Invalid Response </string>
 
 
     <string name="btnSync">Download Data</string>
@@ -118,7 +118,7 @@
     <string name="rb03h">Husband Name</string>
     <string name="rb03f">Father Name</string>
     <string name="rb04">Date of Birth</string>
-    <string name="rb04_info">DD/MM/YYYY Use 98/98/9998 if not known</string>
+    <string name="rb04_info" translatable="false">DD/MM/YYYY Use 98/98/9998 if not known</string>
     <string name="rb05">Age in years</string>
     <string name="rb06">Marital Status</string>
     <string name="rb0601">Married</string>
@@ -146,28 +146,33 @@
     <string name="rc07">Pregnancy Status</string>
     <string name="rc0701">Pregnant</string>
     <string name="rc0702">Not Pregnant</string>
-    <string name="rc08">Is Pregnancy Continued?</string>
-    <string name="rc0801">Yes</string>
-    <string name="rc0802">No</string>
-    <string name="rc09">Pregnancy Outcome</string>
-    <string name="rc0901">Live Birth</string>
-    <string name="rc0902">Still Birth</string>
-    <string name="rc0903">Abortion / Miscarriage</string>
-    <string name="rc0904">False PW</string>
-    <string name="rc10">Date of Delivery</string>
-    <string name="rc10_info">DD/MM/YYYY Use 98/98/9998 if not known</string>
-    <string name="rc11">Status of Pregnancy Outcome</string>
-    <string name="rc1101">Single</string>
-    <string name="rc1102">Twins</string>
-    <string name="rc1103">Triplets</string>
+    <string name="rc08">If pregnant enter LMP Date</string>
+    <string name="rc08_info">DD/MM/YYYY</string>
+    <string name="rc09">EDD Date [auto-calculated]</string>
+    <string name="rc09_info">DD/MM/YYYY</string>
 
-    <string name="rc12">Gender</string>
-    <string name="rc1201">Male</string>
-    <string name="rc1202">Female</string>
-    <string name="rc13">Current Child Status</string>
-    <string name="rc1301">Live</string>
-    <string name="rc1302">Death</string>
-    <string name="rc14">Date of Death </string>
+    <string name="rc10">Is Pregnancy Continued?</string>
+    <string name="rc1001">Yes</string>
+    <string name="rc1002">No</string>
+    <string name="rc1003">False PW</string>
+    <string name="rc12">Pregnancy Outcome</string>
+    <string name="rc1201">Live Birth</string>
+    <string name="rc1202">Still Birth</string>
+    <string name="rc1203">Abortion / Miscarriage</string>
+    <string name="rc11">Date of Delivery</string>
+    <string name="rc11_info">DD/MM/YYYY Use 98/98/9998 if not known</string>
+    <string name="rc13">Status of Pregnancy Outcome</string>
+    <string name="rc1301">Single</string>
+    <string name="rc1302">Twins</string>
+    <string name="rc1303">Triplets</string>
+
+    <string name="rc14">Gender</string>
+    <string name="rc1401">Male</string>
+    <string name="rc1402">Female</string>
+    <string name="rc15">Current Child Status</string>
+    <string name="rc1501">Live</string>
+    <string name="rc1502">Death</string>
+    <string name="rc16">Date of Death </string>
 
 
     <string name='Q_a17_c' translatable="false">a17_c</string>
@@ -225,6 +230,8 @@
     <string name='Q_rc12' translatable="false">rc12</string>
     <string name='Q_rc13' translatable="false">rc13</string>
     <string name='Q_rc14' translatable="false">rc14</string>
+    <string name='Q_rc15' translatable="false">rc15</string>
+    <string name='Q_rc16' translatable="false">rc16</string>
 
     <!--
     This string is used for square devices and overridden by hello_world in
