@@ -44,8 +44,11 @@ public class SectionCActivity extends AppCompatActivity {
         bi = DataBindingUtil.setContentView(this, R.layout.activity_section_c);
         db = MainApp.appInfo.dbHelper;
 
+        // Set Round Number from followups data
+        MainApp.round = MainApp.fpMwra.getfRound();
+
         try {
-            followups = db.getFollowupsBySno(MainApp.fpMwra.getRb01());
+            followups = db.getFollowupsBySno(MainApp.fpMwra.getRb01(), MainApp.fpMwra.getfRound());
         } catch (JSONException e) {
             e.printStackTrace();
             Toast.makeText(this, "JSONException(Followups): " + e.getMessage(), Toast.LENGTH_SHORT).show();
@@ -268,6 +271,7 @@ public class SectionCActivity extends AppCompatActivity {
         if (fpHouseholds.getUid().equals("")) {
             insertFpHousehold();
         }
+
         followups.populateMeta();
 
         long rowId = 0;

@@ -16,7 +16,6 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.Locale;
 
 import edu.aku.hassannaqvi.dss_matiari.BR;
@@ -58,7 +57,7 @@ public class Followups extends BaseObservable implements Observable {
 
     // SECTION VARIABLES
 
-    private String round = "";
+    private String fRound = "";
     private String prePreg = "";
     private String rc01 = "";
     private String rc02 = "";
@@ -76,7 +75,7 @@ public class Followups extends BaseObservable implements Observable {
 
     public Followups() {
 
-        setRound(MainApp.round);
+       /* setfRound(MainApp.round);
         setSysDate(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.ENGLISH).format(new Date().getTime()));
         setUserName(MainApp.user.getUserName());
         setDeviceId(MainApp.deviceid);
@@ -85,7 +84,7 @@ public class Followups extends BaseObservable implements Observable {
             setUuid(MainApp.households.getUid());
         }
         setVillageCode(MainApp.selectedVillage);
-        setUcCode(MainApp.selectedUC);
+        setUcCode(MainApp.selectedUC);*/
 
     }
 
@@ -95,6 +94,7 @@ public class Followups extends BaseObservable implements Observable {
         MainApp.followups.setUcCode(MainApp.fpHouseholds.getUcCode());
         MainApp.followups.setVillageCode(MainApp.fpHouseholds.getVillageCode());
         MainApp.followups.setHhNo(MainApp.fpHouseholds.getHhNo());
+        MainApp.followups.setfRound(MainApp.round);
         // TODO: set MWRA ID from downloaded data
         //   MainApp.followups.setMWRAID(households.getHhNo());
         MainApp.followups.setUserName(MainApp.user.getUserName());
@@ -105,12 +105,12 @@ public class Followups extends BaseObservable implements Observable {
     }
 
     @Bindable
-    public String getRound() {
-        return round;
+    public String getfRound() {
+        return fRound;
     }
 
-    public void setRound(String round) {
-        this.round = round;
+    public void setfRound(String fRound) {
+        this.fRound = fRound;
         notifyPropertyChanged(BR.round);
     }
 
@@ -438,6 +438,7 @@ public class Followups extends BaseObservable implements Observable {
         this.ucCode = cursor.getString(cursor.getColumnIndexOrThrow(FollowupsTable.COLUMN_UC_CODE));
         this.villageCode = cursor.getString(cursor.getColumnIndexOrThrow(FollowupsTable.COLUMN_VILLAGE_CODE));
         this.sNo = cursor.getString(cursor.getColumnIndexOrThrow(FollowupsTable.COLUMN_SNO));
+        this.fRound = cursor.getString(cursor.getColumnIndexOrThrow(FollowupsTable.COLUMN_FP_ROUND));
         this.hhNo = cursor.getString(cursor.getColumnIndexOrThrow(FollowupsTable.COLUMN_HOUSEHOLD_NO));
         this.deviceId = cursor.getString(cursor.getColumnIndexOrThrow(FollowupsTable.COLUMN_DEVICEID));
         this.deviceTag = cursor.getString(cursor.getColumnIndexOrThrow(FollowupsTable.COLUMN_DEVICETAGID));
@@ -460,7 +461,6 @@ public class Followups extends BaseObservable implements Observable {
             json = new JSONObject(string);
 
             this.rc01 = json.getString("rc01");
-            this.round = json.getString("round");
             this.prePreg = json.getString("prePreg");
             this.rc02 = json.getString("rc02");
             this.rc03 = json.getString("rc03");
@@ -478,7 +478,6 @@ public class Followups extends BaseObservable implements Observable {
         JSONObject json = new JSONObject();
 
         json.put("rc01", rc01)
-                .put("round", round)
                 .put("prePreg", prePreg)
                 .put("rc02", rc02)
                 .put("rc03", rc03)
@@ -533,6 +532,7 @@ public class Followups extends BaseObservable implements Observable {
         json.put(FollowupsTable.COLUMN_HDSSID, this.hdssId);
         json.put(FollowupsTable.COLUMN_UC_CODE, this.ucCode);
         json.put(FollowupsTable.COLUMN_VILLAGE_CODE, this.villageCode);
+        json.put(FollowupsTable.COLUMN_FP_ROUND, this.fRound);
         json.put(FollowupsTable.COLUMN_SNO, this.sNo);
         json.put(FollowupsTable.COLUMN_HOUSEHOLD_NO, this.hhNo);
         json.put(FollowupsTable.COLUMN_DEVICEID, this.deviceId);

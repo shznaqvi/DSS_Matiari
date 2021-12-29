@@ -72,6 +72,7 @@ object CreateTable {
             + FollowupsTable.COLUMN_VILLAGE_CODE + " TEXT,"
             + FollowupsTable.COLUMN_UC_CODE + " TEXT,"
             + FollowupsTable.COLUMN_SNO + " TEXT,"
+            + FollowupsTable.COLUMN_FP_ROUND + " TEXT,"
             + FollowupsTable.COLUMN_HOUSEHOLD_NO + " TEXT,"
             + FollowupsTable.COLUMN_SC + " TEXT,"
             + FollowupsTable.COLUMN_SD + " TEXT"

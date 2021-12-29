@@ -17,6 +17,7 @@ import java.util.List;
 
 import edu.aku.hassannaqvi.dss_matiari.R;
 import edu.aku.hassannaqvi.dss_matiari.core.MainApp;
+import edu.aku.hassannaqvi.dss_matiari.database.DatabaseHelper;
 import edu.aku.hassannaqvi.dss_matiari.models.FollowUpsSche;
 import edu.aku.hassannaqvi.dss_matiari.ui.sections.SectionCActivity;
 
@@ -27,6 +28,7 @@ public class FpMwraAdapter extends RecyclerView.Adapter<FpMwraAdapter.ViewHolder
     private final List<FollowUpsSche> followupsSche;
     private final int mExpandedPosition = -1;
     private final int completeCount;
+    private final DatabaseHelper db;
 
     /**
      * Initialize the dataset of the Adapter.
@@ -39,7 +41,7 @@ public class FpMwraAdapter extends RecyclerView.Adapter<FpMwraAdapter.ViewHolder
         completeCount = 0;
         MainApp.fmComplete = false;
 
-
+        db = MainApp.appInfo.dbHelper;
     }
 
 

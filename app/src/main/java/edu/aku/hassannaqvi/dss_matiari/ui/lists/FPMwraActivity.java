@@ -21,6 +21,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import org.json.JSONException;
+
 import edu.aku.hassannaqvi.dss_matiari.R;
 import edu.aku.hassannaqvi.dss_matiari.adapters.FpMwraAdapter;
 import edu.aku.hassannaqvi.dss_matiari.contracts.TableContracts;
@@ -105,11 +107,28 @@ public class FPMwraActivity extends AppCompatActivity {
             Log.d(TAG, "onCreate (JSONException): " + e.getMessage());
         }
 
+        // Updated status in FollowupsSche for existing followups done
+        for (int i = 0; i < fpMWRAList.size(); i++) {
+
+            String fupStatus = "";
+            try {
+                fupStatus = db.getFollowupsBySno(fpMWRAList.get(i).getRb01(), fpMWRAList.get(i).getfRound()).getSysDate();
+                fpMWRAList.get(i).setfpDoneDt(fupStatus);
+
+            } catch (JSONException e) {
+
+                Toast.makeText(this, "JSONException(Followups): " + e.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+
+
+        }
+
         fmAdapter = new FpMwraAdapter(this, fpMWRAList);
         bi.rvMembers.setAdapter(fmAdapter);
         bi.rvMembers.setLayoutManager(new LinearLayoutManager(this));
 
         mwraCount = fpMWRAList.size();
+
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override

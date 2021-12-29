@@ -75,7 +75,7 @@ public class FPHouseholds extends BaseObservable implements Observable {
         setUserName(households.getUserName());
         setDeviceId(households.getDeviceId());
         setAppver(households.getAppver());
-        //setRound(households.getRound());
+        //setfRound(households.getfRound());
 
 
     }
