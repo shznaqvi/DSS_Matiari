@@ -96,6 +96,7 @@ public class FPMwraActivity extends AppCompatActivity {
         bi.setCallback(this);
 
         db = MainApp.appInfo.dbHelper;
+        MainApp.mwraDone = 0;
         // MainApp.fpMWRAList = new ArrayList<>();
      /*   Log.d(TAG, "onCreate: mwralist " + MainApp.fpMWRAList.size());
         Log.d(TAG, "onCreate: mwralist " + MainApp.fpHouseholds.getVillageCode());*/
@@ -114,6 +115,9 @@ public class FPMwraActivity extends AppCompatActivity {
             try {
                 fupStatus = db.getFollowupsBySno(fpMWRAList.get(i).getRb01(), fpMWRAList.get(i).getfRound()).getSysDate();
                 fpMWRAList.get(i).setfpDoneDt(fupStatus);
+                if (!fupStatus.equals("")) {
+                    MainApp.mwraDone++;
+                }
 
             } catch (JSONException e) {
 
@@ -144,7 +148,9 @@ public class FPMwraActivity extends AppCompatActivity {
             }
         });
 
-
+        if (MainApp.mwraDone >= fpMWRAList.size()) {
+            bi.btnContinue.setVisibility(View.VISIBLE);
+        }
     }
 
     @Override
@@ -154,6 +160,27 @@ public class FPMwraActivity extends AppCompatActivity {
         //       mwraCount = Math.round(MainApp.fpMWRAList.size());
 
         followups = new Followups();
+
+        // Created object of Household from FollowsSche info for adding new MWRA
+        MainApp.households = new Households();
+        MainApp.households.setRa01(MainApp.fpHouseholds.getSysDate().substring(0, 10));
+        MainApp.households.setUid(MainApp.fpHouseholds.getUid());
+        MainApp.households.setUcCode(MainApp.fpHouseholds.getUcCode());
+        MainApp.households.setVillageCode(MainApp.fpHouseholds.getVillageCode());
+        MainApp.households.setHhNo(MainApp.fpHouseholds.getHhNo());
+        MainApp.households.setSysDate(MainApp.fpHouseholds.getSysDate());
+        MainApp.households.setHdssId(MainApp.fpHouseholds.getHdssId());
+        MainApp.households.setRa18(String.valueOf(fpMWRAList.size()));
+
+        int newMwra = db.getMWRACountBYUUID(MainApp.fpHouseholds.getUid());
+
+
+        // int newMwra = mwraCount - fpMWRAList.size();
+        if (newMwra > 0) {
+            bi.newMwra.setText(newMwra + " new women added to this household");
+            bi.newMwra.setVisibility(View.VISIBLE);
+
+        }
     /*    if (MainApp.fpMWRAList.size() > 0) {
             //MainApp.fm.get(Integer.parseInt(String.valueOf(MainApp.selectedFemale))).setStatus("1");
             fmAdapter.notifyItemChanged(Integer.parseInt(String.valueOf(selectedFemale)));
@@ -196,15 +223,7 @@ public class FPMwraActivity extends AppCompatActivity {
     }
 
     private void addMoreFemale() {
-        MainApp.households = new Households();
-        MainApp.households.setRa01(MainApp.fpHouseholds.getSysDate().substring(0, 10));
-        MainApp.households.setUid(MainApp.fpHouseholds.getUid());
-        MainApp.households.setUcCode(MainApp.fpHouseholds.getUcCode());
-        MainApp.households.setVillageCode(MainApp.fpHouseholds.getVillageCode());
-        MainApp.households.setHhNo(MainApp.fpHouseholds.getHhNo());
-        MainApp.households.setSysDate(MainApp.fpHouseholds.getSysDate());
-        MainApp.households.setHdssId(MainApp.fpHouseholds.getHdssId());
-        MainApp.households.setRa18(String.valueOf(fpMWRAList.size()));
+
         //  startActivity(new Intent(this, MwraActivity.class));
 
         MainApp.mwra = new MWRA();
@@ -215,7 +234,7 @@ public class FPMwraActivity extends AppCompatActivity {
         MemberInfoLauncher.launch(intent);
 */
         startActivityForResult(new Intent(this, SectionBActivity.class), 3);
-        finish();
+        // finish();
 
     }
 
@@ -253,23 +272,26 @@ public class FPMwraActivity extends AppCompatActivity {
                 // TODO: Mark followup done
 
                 fpMWRAList.get(selectedFemale).setfpDoneDt(followups.getSysDate());
+
                 fmAdapter.notifyItemChanged(selectedFemale);
                 db.updatesFollowUpsScheColumn(TableContracts.TableFollowUpsSche.COLUMN_DONE_DATE, followups.getSysDate());
+                if (++MainApp.mwraDone >= fpMWRAList.size()) {
+                    bi.btnContinue.setVisibility(View.VISIBLE);
+                }
                 //checkCompleteFm();
                 //fmAdapter.notifyItemChanged(selectedFemale);
+                Toast.makeText(this, "Followup for " + fpMWRAList.get(selectedFemale).getRb02() + " has been saved.", Toast.LENGTH_SHORT).show();
+
             }
             if (resultCode == Activity.RESULT_CANCELED) {
                 // Write your code if there's no result
-//                Toast.makeText(this, "Information for " + mwraList.get(selectedFemale).getRb02() + " was not saved.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Followup for " + fpMWRAList.get(selectedFemale).getRb02() + " was not saved.", Toast.LENGTH_SHORT).show();
             }
         }
         if (requestCode == 3) {
             if (resultCode == Activity.RESULT_OK) {
+                //      mwraCount++;
 
-                mwraCount++;
-                int newMwra = mwraCount - fpMWRAList.size();
-                bi.newMwra.setText(newMwra + " new women added to this household");
-                bi.newMwra.setVisibility(View.VISIBLE);
                 //   mwraList.get(selectedFemale).setExpanded(false);
 
                 // TODO: Mark followup done

@@ -95,6 +95,7 @@ public class MainApp extends Application {
     public static FollowUpsSche fpMwra;
     public static int totalOutcomes;
     public static int outcomeCounter = 0;
+    public static int mwraDone = 0;
 
     public static void hideSystemUI(View decorView) {
         // Enables regular immersive mode.
