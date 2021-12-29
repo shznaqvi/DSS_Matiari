@@ -67,8 +67,8 @@
                         android:gravity="center_vertical"
                         android:padding="8dp"
                         android:onClick="toggleNewMwraList"
-                        android:visibility="gone"
                         android:text="TEXT"
+                        android:visibility="gone"
                         android:textAppearance="@style/TextAppearance.AppCompat.Widget.ActionBar.Subtitle" />
 
                     <TextView
@@ -76,9 +76,12 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center_vertical"
-                        android:padding="8dp"
                         android:paddingStart="64dp"
-                        android:text="TEXT"
+                        android:includeFontPadding="false"
+                        android:paddingTop="2dp"
+                        android:paddingBottom="2dp"
+                        android:text="Note: Newly added females will show in next followup"
+                        android:visibility="gone"
                         android:textAppearance="@style/TextAppearance.AppCompat.Widget.ActionBar.Subtitle" />
                 </LinearLayout>
 

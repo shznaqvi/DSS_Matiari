@@ -177,8 +177,10 @@ public class FPMwraActivity extends AppCompatActivity {
 
         // int newMwra = mwraCount - fpMWRAList.size();
         if (newMwra > 0) {
+            mwraCount = mwraCount + newMwra;
             bi.newMwra.setText(newMwra + " new women added to this household");
             bi.newMwra.setVisibility(View.VISIBLE);
+            bi.newMwraList.setVisibility(View.VISIBLE);
 
         }
     /*    if (MainApp.fpMWRAList.size() > 0) {

@@ -1416,6 +1416,25 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return Math.round(maxHHno);
     }
 
+
+    public int getMaxHHNoFromFolloupsSche(String vCode) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor c = db.rawQuery(
+                "SELECT " +
+                        "MAX(" + TableFollowUpsSche.COLUMN_HOUSEHOLD_NO + ") AS " + TableFollowUpsSche.COLUMN_HOUSEHOLD_NO +
+                        " FROM " + TableFollowUpsSche.TABLE_NAME +
+                        " WHERE " + TableFollowUpsSche.COLUMN_VILLAGE_CODE + "=?" +
+                        " GROUP BY " + TableFollowUpsSche.COLUMN_VILLAGE_CODE
+                ,
+                new String[]{vCode});
+        float maxHHno = 0;
+        while (c.moveToNext()) {
+            maxHHno = c.getFloat(c.getColumnIndexOrThrow(TableFollowUpsSche.COLUMN_HOUSEHOLD_NO));
+        }
+        Log.d(TAG, "getMaxHHNo: " + maxHHno);
+        return Math.round(maxHHno);
+    }
+
     public List<Households> getHouseholdBYStructure(String village, String structure) throws JSONException {
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor c = null;
@@ -1594,6 +1613,26 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         }
         // Log.d(TAG, "getMaxHHNo: " + mwraCount);
         return mwraCount;
+    }
+
+
+    public int getHouseholdCountByVillage(String villagecode) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor c = db.rawQuery(
+                "SELECT Count(*) AS hhCount" +
+
+                        " FROM " + HouseholdTable.TABLE_NAME +
+                        " WHERE " + HouseholdTable.COLUMN_VILLAGE_CODE + " =? "
+
+                ,
+                new String[]{villagecode});
+        float maxHHno = 0;
+        int hhCount = 0;
+        while (c.moveToNext()) {
+            hhCount = c.getInt(c.getColumnIndexOrThrow("hhCount"));
+        }
+        // Log.d(TAG, "getMaxHHNo: " + mwraCount);
+        return hhCount;
     }
 
     public Collection<Users> getTeamleaders() {

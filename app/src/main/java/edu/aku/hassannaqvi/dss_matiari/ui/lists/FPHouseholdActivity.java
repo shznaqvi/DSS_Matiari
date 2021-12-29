@@ -1,13 +1,21 @@
 package edu.aku.hassannaqvi.dss_matiari.ui.lists;
 
+import static java.lang.Integer.max;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.hdssid;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.idType;
+import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.selectedVillage;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -24,6 +32,7 @@ import edu.aku.hassannaqvi.dss_matiari.core.MainApp;
 import edu.aku.hassannaqvi.dss_matiari.database.DatabaseHelper;
 import edu.aku.hassannaqvi.dss_matiari.databinding.ActivityFphouseholdBinding;
 import edu.aku.hassannaqvi.dss_matiari.models.Households;
+import edu.aku.hassannaqvi.dss_matiari.ui.sections.SectionAActivity;
 
 
 public class FPHouseholdActivity extends AppCompatActivity {
@@ -32,7 +41,7 @@ public class FPHouseholdActivity extends AppCompatActivity {
     ActivityFphouseholdBinding bi;
     DatabaseHelper db;
     private FPHouseholdAdapter hhAdapter;
-   /* ActivityResultLauncher<Intent> MemberInfoLauncher = registerForActivityResult(
+    ActivityResultLauncher<Intent> MemberInfoLauncher = registerForActivityResult(
             new ActivityResultContracts.StartActivityForResult(),
             new ActivityResultCallback<ActivityResult>() {
                 @Override
@@ -41,7 +50,7 @@ public class FPHouseholdActivity extends AppCompatActivity {
                         // There are no request codes
                         //Intent data = result.getData();
                         Intent data = result.getData();
-                      *//*  int age = Integer.parseInt(femalemembers.getHh05y());
+                      /*  int age = Integer.parseInt(femalemembers.getHh05y());
                         boolean isFemale = femalemembers.getHh03().equals("2");
                         boolean notMarried = femalemembers.getHh06().equals("2");
                         if (
@@ -51,18 +60,20 @@ public class FPHouseholdActivity extends AppCompatActivity {
                                         // HOUSEHOLD: Married females between 14 to 49
                                         (age >= 14 && age < 50 && !notMarried && isFemale )
 
-                        ) {*//*
-                        MainApp.fpHouseholdList.add(MainApp.fpHousehold);
+                        ) {*/
+                        // MainApp.householdList.add(MainApp.households);
 
-                        MainApp.householdCount++;
+                        // MainApp.householdCount++;
 
-                        hhAdapter.notifyItemInserted(MainApp.fpHouseholdList.size() - 1);
+                        // hhAdapter.notifyItemInserted(MainApp.householdList.size() - 1);
                         //  Collections.sort(MainApp.fm, new SortByStatus());
                         //fmAdapter.notifyDataSetChanged();
 
                         //        }
 
-                        checkCompleteFm();
+                        //      checkCompleteFm();
+                        Toast.makeText(FPHouseholdActivity.this, "New Household added.", Toast.LENGTH_SHORT).show();
+
                     }
                     if (result.getResultCode() == Activity.RESULT_CANCELED) {
                         Toast.makeText(FPHouseholdActivity.this, "No household added.", Toast.LENGTH_SHORT).show();
@@ -71,7 +82,7 @@ public class FPHouseholdActivity extends AppCompatActivity {
                     }
 
                 }
-            });*/
+            });
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -86,12 +97,13 @@ public class FPHouseholdActivity extends AppCompatActivity {
         Log.d(TAG, "onCreate: fpHouseholdList " + MainApp.fpHouseholdList.size());
 
 
-        MainApp.fpHouseholdList = db.getFollowUpsScheHHBYVillage(MainApp.selectedVillage);
+        MainApp.fpHouseholdList = db.getFollowUpsScheHHBYVillage(selectedVillage);
 
 
         hhAdapter = new FPHouseholdAdapter(this, MainApp.fpHouseholdList);
         bi.rvHouseholds.setAdapter(hhAdapter);
         bi.rvHouseholds.setLayoutManager(new LinearLayoutManager(this));
+
 
 
         FloatingActionButton fab = findViewById(R.id.fab);
@@ -100,12 +112,12 @@ public class FPHouseholdActivity extends AppCompatActivity {
             public void onClick(View view) {
 
                 //TODO: Add new Household
-                //     addHousehold();
+                addHousehold();
               /*  if (!MainApp.households.getiStatus().equals("1")) {
                     //     Toast.makeText(HouseholdActivity.this, "Opening Household Households", Toast.LENGTH_LONG).show();
 
                 } else {
-                    Toast.makeText(HouseholdActivity.this, "This households has been locked. You cannot add new household to locked forms", Toast.LENGTH_LONG).show();
+                    Toast.makeText(FPHouseholdActivity.this, "This households has been locked. You cannot add new household to locked forms", Toast.LENGTH_LONG).show();
                 }*/
             }
         });
@@ -132,6 +144,7 @@ public class FPHouseholdActivity extends AppCompatActivity {
       /* bi.completedmember.setText(fpHouseholdList.size()+ " HOUSEHOLDs added");
         bi.totalmember.setText(MainApp.householdTotal+ " M completed");*/
         //MainApp.households.resetHousehold();
+        int newHouseholds = db.getHouseholdCountByVillage(selectedVillage);
 
 
     }
@@ -151,20 +164,22 @@ public class FPHouseholdActivity extends AppCompatActivity {
         //   }
     }
 
-/*
     public void addHousehold() {
         MainApp.households = new Households();
         // Copy common variables from existing Households to new Households
         // MainApp.households = new Households(MainApp.households);
 
+        int maxHH = db.getMaxHHNo(selectedVillage);
+        int maxFpHH = db.getMaxHHNoFromFolloupsSche(selectedVillage);
+        int maxHHFinal = max(maxHH, maxFpHH);
         // Increment Household Number by 1
-        MainApp.households.setRa09(String.valueOf(db.getMaxHHNo(selectedVillage) + 1));
+        MainApp.households.setRa09(String.valueOf(maxHHFinal + 1));
 
         // Launch activity for results.
         Intent intent = new Intent(this, SectionAActivity.class);
         MemberInfoLauncher.launch(intent);
+
     }
-*/
 
     public void btnContinue(View view) {
         finish();
