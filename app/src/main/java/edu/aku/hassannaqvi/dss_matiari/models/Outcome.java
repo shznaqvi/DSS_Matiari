@@ -266,17 +266,17 @@ public class Outcome extends BaseObservable implements Observable {
 
     public void setRc12(String rc12) {
         this.rc12 = rc12;
-        notifyPropertyChanged(BR.rc12);
+        notifyChange(BR.rc12);
     }
 
     public void setRc13(String rc13) {
         this.rc13 = rc13;
-        notifyPropertyChanged(BR.rc13);
+        notifyChange(BR.rc13);
     }
 
     public void setRc14(String rc14) {
         this.rc14 = rc14;
-        notifyPropertyChanged(BR.rc14);
+        notifyChange(BR.rc14);
     }
 
     @Bindable
@@ -291,7 +291,8 @@ public class Outcome extends BaseObservable implements Observable {
 
     public void setRc15(String rc15) {
         this.rc15 = rc15;
-        notifyPropertyChanged(BR.rc15);
+        setRc16(rc15.equals("1") ? "" : this.rc16);
+        notifyChange(BR.rc15);
     }
 
     @Bindable
@@ -301,7 +302,7 @@ public class Outcome extends BaseObservable implements Observable {
 
     public void setRc16(String rc16) {
         this.rc16 = rc16;
-        notifyPropertyChanged(BR.rc16);
+        notifyChange(BR.rc16);
     }
 
 
