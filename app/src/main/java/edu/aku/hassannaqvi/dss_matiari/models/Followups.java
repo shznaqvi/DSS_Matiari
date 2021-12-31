@@ -46,7 +46,11 @@ public class Followups extends BaseObservable implements Observable {
     private String villageCode = StringUtils.EMPTY;
     private String hhNo = StringUtils.EMPTY;
     private String sNo = StringUtils.EMPTY;
+    private String visitNo = StringUtils.EMPTY;
 
+
+    private String rc01v2 = "";
+    private String rc01v3 = "";
     private String deviceId = StringUtils.EMPTY;
     private String deviceTag = StringUtils.EMPTY;
     private String appver = StringUtils.EMPTY;
@@ -70,8 +74,11 @@ public class Followups extends BaseObservable implements Observable {
     private String rc09 = "";
     private String rc10 = StringUtils.EMPTY;
     private String rc11 = StringUtils.EMPTY;
+    private String rc11x = StringUtils.EMPTY;
     private String rc12 = StringUtils.EMPTY;
+    private String rc12x = StringUtils.EMPTY;
     private String rc13 = StringUtils.EMPTY;
+    private String rc13x = StringUtils.EMPTY;
 
     public Followups() {
 
@@ -278,6 +285,34 @@ public class Followups extends BaseObservable implements Observable {
         this.prePreg = prePreg;
     }
 
+    public String getVisitNo() {
+        return visitNo;
+    }
+
+    public void setVisitNo(String visitNo) {
+        this.visitNo = visitNo;
+    }
+
+    @Bindable
+    public String getRc01v2() {
+        return rc01v2;
+    }
+
+    @Bindable
+    public String getRc01v3() {
+        return rc01v3;
+    }
+
+    public void setRc01v2(String rc01v2) {
+        this.rc01v2 = rc01v2;
+        notifyChange(BR.rc01v2);
+    }
+
+    public void setRc01v3(String rc01v3) {
+        this.rc01v3 = rc01v3;
+        notifyChange(BR.rc01v3);
+    }
+
     @Bindable
     public String getRc01() {
         return rc01;
@@ -384,6 +419,29 @@ public class Followups extends BaseObservable implements Observable {
         notifyChange(BR.rc11);
     }
 
+    @Bindable
+    public String getRc11x() {
+        return rc11x;
+    }
+
+    public void setRc11x(String rc11x) {
+        this.rc11x = rc11x;
+        notifyChange(BR.rc11x);
+    }
+
+
+    @Bindable
+    public String getRc12x() {
+        return rc12x;
+    }
+
+    public void setRc12x(String rc12x) {
+        this.rc12x = rc12x;
+        notifyChange(BR.rc12x);
+    }
+
+
+
 
     @Bindable
     public String getRc12() {
@@ -403,6 +461,16 @@ public class Followups extends BaseObservable implements Observable {
     public void setRc13(String rc13) {
         this.rc13 = rc13;
         notifyChange(BR.rc13);
+    }
+
+    @Bindable
+    public String getRc13x() {
+        return rc13x;
+    }
+
+    public void setRc13x(String rc13x) {
+        this.rc12x = rc13x;
+        notifyChange(BR.rc13x);
     }
 
     private synchronized void notifyChange(int propertyId) {
@@ -437,6 +505,7 @@ public class Followups extends BaseObservable implements Observable {
         this.hdssId = cursor.getString(cursor.getColumnIndexOrThrow(FollowupsTable.COLUMN_HDSSID));
         this.ucCode = cursor.getString(cursor.getColumnIndexOrThrow(FollowupsTable.COLUMN_UC_CODE));
         this.villageCode = cursor.getString(cursor.getColumnIndexOrThrow(FollowupsTable.COLUMN_VILLAGE_CODE));
+        this.visitNo = cursor.getString(cursor.getColumnIndexOrThrow(FollowupsTable.COLUMN_VISIT_NO));
         this.sNo = cursor.getString(cursor.getColumnIndexOrThrow(FollowupsTable.COLUMN_SNO));
         this.fRound = cursor.getString(cursor.getColumnIndexOrThrow(FollowupsTable.COLUMN_FP_ROUND));
         this.hhNo = cursor.getString(cursor.getColumnIndexOrThrow(FollowupsTable.COLUMN_HOUSEHOLD_NO));
@@ -461,6 +530,8 @@ public class Followups extends BaseObservable implements Observable {
             json = new JSONObject(string);
 
             this.rc01 = json.getString("rc01");
+            this.rc01v2 = json.has("rc01v2") ? json.getString("rc01v2") : "";
+            this.rc01v3 = json.has("rc01v3") ? json.getString("rc01v3") : "";
             this.prePreg = json.getString("prePreg");
             this.rc02 = json.getString("rc02");
             this.rc03 = json.getString("rc03");
@@ -469,6 +540,12 @@ public class Followups extends BaseObservable implements Observable {
             this.rc07 = json.getString("rc07");
             this.rc08 = json.getString("rc08");
             this.rc09 = json.getString("rc09");
+            this.rc11 = json.getString("rc11");
+            this.rc11x = json.getString("rc11x");
+            this.rc12 = json.getString("rc12");
+            this.rc12x = json.getString("rc12x");
+            this.rc13 = json.getString("rc13");
+            this.rc13x = json.getString("rc09");
 
         }
     }
@@ -479,13 +556,23 @@ public class Followups extends BaseObservable implements Observable {
 
         json.put("rc01", rc01)
                 .put("prePreg", prePreg)
+                .put("rc01v2", rc01v2)
+                .put("rc01v3", rc01v3)
                 .put("rc02", rc02)
                 .put("rc03", rc03)
 
                 .put("rc06", rc06)
                 .put("rc07", rc07)
                 .put("rc08", rc08)
-                .put("rc09", rc09);
+                .put("rc09", rc09)
+                .put("rc11", rc11)
+                .put("rc11x", rc11x)
+                .put("rc12", rc12)
+                .put("rc12x", rc12x)
+                .put("rc13", rc13)
+                .put("rc13x", rc13x)
+        ;
+
 
 
         return json.toString();
@@ -535,6 +622,7 @@ public class Followups extends BaseObservable implements Observable {
         json.put(FollowupsTable.COLUMN_FP_ROUND, this.fRound);
         json.put(FollowupsTable.COLUMN_SNO, this.sNo);
         json.put(FollowupsTable.COLUMN_HOUSEHOLD_NO, this.hhNo);
+        json.put(FollowupsTable.COLUMN_VISIT_NO, this.visitNo);
         json.put(FollowupsTable.COLUMN_DEVICEID, this.deviceId);
         json.put(FollowupsTable.COLUMN_DEVICETAGID, this.deviceTag);
         json.put(FollowupsTable.COLUMN_ISTATUS, this.iStatus);

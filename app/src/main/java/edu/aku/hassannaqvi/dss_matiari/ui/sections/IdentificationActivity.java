@@ -26,6 +26,7 @@ import edu.aku.hassannaqvi.dss_matiari.models.Followups;
 import edu.aku.hassannaqvi.dss_matiari.models.Households;
 import edu.aku.hassannaqvi.dss_matiari.models.Villages;
 import edu.aku.hassannaqvi.dss_matiari.ui.EndingActivity;
+import edu.aku.hassannaqvi.dss_matiari.ui.FPEndingActivity;
 import edu.aku.hassannaqvi.dss_matiari.ui.lists.FPHouseholdActivity;
 import edu.aku.hassannaqvi.dss_matiari.ui.lists.FPMwraActivity;
 import edu.aku.hassannaqvi.dss_matiari.ui.lists.HouseholdActivity;
@@ -264,7 +265,19 @@ public class IdentificationActivity extends AppCompatActivity {
 
     public void btnEnd(View view) {
         finish();
-        startActivity(new Intent(this, EndingActivity.class).putExtra("complete", false));
+
+        switch (MainApp.idType) {
+            case 1:
+                openIntent = new Intent(this, EndingActivity.class).putExtra("complete", false);
+                break;
+            case 2:
+                openIntent = new Intent(this, FPEndingActivity.class).putExtra("complete", false);
+
+
+
+        }
+
+        //startActivity(new Intent(this, EndingActivity.class).putExtra("complete", false));
     }
 
 

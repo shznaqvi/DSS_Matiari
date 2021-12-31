@@ -68,6 +68,7 @@ public class TableContracts {
         public static final String COLUMN_VILLAGE_CODE = "villageCode";
         public static final String COLUMN_FP_ROUND = "fRound";
         public static final String COLUMN_HOUSEHOLD_NO = "hhNo";
+        public static final String COLUMN_VISIT_NO = "visitNo";
         public static final String COLUMN_SNO = "sNo";
 
         public static final String COLUMN_SC = "s3";

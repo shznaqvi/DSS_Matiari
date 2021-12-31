@@ -33,6 +33,7 @@ import edu.aku.hassannaqvi.dss_matiari.models.Followups;
 import edu.aku.hassannaqvi.dss_matiari.models.Households;
 import edu.aku.hassannaqvi.dss_matiari.models.MWRA;
 import edu.aku.hassannaqvi.dss_matiari.ui.EndingActivity;
+import edu.aku.hassannaqvi.dss_matiari.ui.FPEndingActivity;
 import edu.aku.hassannaqvi.dss_matiari.ui.sections.SectionBActivity;
 
 
@@ -252,7 +253,7 @@ public class FPMwraActivity extends AppCompatActivity {
 
     public void BtnEnd(View view) {
 
-        Intent i = new Intent(this, EndingActivity.class);
+        Intent i = new Intent(this, FPEndingActivity.class);
         i.setFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT);
         i.putExtra("complete", false);
         startActivity(i);
@@ -351,7 +352,7 @@ public class FPMwraActivity extends AppCompatActivity {
     }
 
     private void proceedSelect() {
-        Intent i = new Intent(this, EndingActivity.class);
+        Intent i = new Intent(this, FPEndingActivity.class);
         i.setFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT);
         i.putExtra("complete", true);
         startActivity(i);
