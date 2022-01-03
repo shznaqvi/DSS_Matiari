@@ -39,12 +39,13 @@ public class FPEndingActivity extends AppCompatActivity {
 
         bi = DataBindingUtil.setContentView(this, R.layout.activity_fp_ending);
         bi.setFollowup(MainApp.followups);
+        //bi.setHousehold(MainApp.households);
         setSupportActionBar(bi.toolbar);
         //setTitle(R.string.section1_mainheading);
         //bi.hhStatus.setText(bi.hhStatus.getText()+" "+(Integer.parseInt(MainApp.households.getVisitNo())+1));
 
         db = MainApp.appInfo.dbHelper;
-        visitCount = Integer.parseInt(MainApp.followups.getVisitNo());
+        visitCount = Integer.parseInt(MainApp.households.getVisitNo());
         boolean complete = getIntent().getBooleanExtra("complete", false);
         boolean noWRA = getIntent().getBooleanExtra("noWRA", false);
 /*        boolean refused = getIntent().getBooleanExtra("refused", false);
@@ -151,10 +152,10 @@ public class FPEndingActivity extends AppCompatActivity {
 
     private boolean UpdateDB() {
         int updcount = 0;
-        db.updatesHouseholdColumn(TableContracts.HouseholdTable.COLUMN_ISTATUS, MainApp.households.getiStatus());
-        db.updatesHouseholdColumn(TableContracts.HouseholdTable.COLUMN_VISIT_NO, MainApp.households.getVisitNo());
+        db.updatesFollowUpsColumn(TableContracts.FollowupsTable.COLUMN_ISTATUS, MainApp.followups.getRc12());
+        db.updatesFollowUpsColumn(TableContracts.FollowupsTable.COLUMN_VISIT_NO, MainApp.followups.getVisitNo());
         try {
-            updcount = db.updatesHouseholdColumn(TableContracts.HouseholdTable.COLUMN_SA, MainApp.households.sAtoString());
+            updcount = db.updatesFollowUpsColumn(TableContracts.FollowupsTable.COLUMN_SC, MainApp.followups.sCtoString());
         } catch (JSONException e) {
             e.printStackTrace();
             Toast.makeText(this, "JSONException: " + e.getMessage(), Toast.LENGTH_SHORT).show();

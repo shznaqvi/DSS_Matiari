@@ -3,6 +3,7 @@ package edu.aku.hassannaqvi.dss_matiari.ui.lists;
 import static java.lang.Integer.max;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.hdssid;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.idType;
+import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.selectedFpHousehold;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.selectedVillage;
 
 import android.app.Activity;
@@ -32,6 +33,7 @@ import edu.aku.hassannaqvi.dss_matiari.core.MainApp;
 import edu.aku.hassannaqvi.dss_matiari.database.DatabaseHelper;
 import edu.aku.hassannaqvi.dss_matiari.databinding.ActivityFphouseholdBinding;
 import edu.aku.hassannaqvi.dss_matiari.models.Households;
+import edu.aku.hassannaqvi.dss_matiari.ui.MainActivity;
 import edu.aku.hassannaqvi.dss_matiari.ui.sections.SectionAActivity;
 
 
@@ -183,7 +185,7 @@ public class FPHouseholdActivity extends AppCompatActivity {
 
     public void btnContinue(View view) {
         finish();
-        //startActivity(new Intent(this, MainActivity.class).putExtra("complete", true));
+        //startActivity(new Intent(this, MainActivity.class));
 
     }
 
@@ -195,8 +197,7 @@ public class FPHouseholdActivity extends AppCompatActivity {
                Toast.makeText(this, "Failed to Update Database!", Toast.LENGTH_SHORT).show()
            }*/
     }
-
-  /*  @Override
+    /*@Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         // check if the request code is same as what is passed  here it is 2
@@ -204,15 +205,15 @@ public class FPHouseholdActivity extends AppCompatActivity {
             if (resultCode == Activity.RESULT_OK) {
                 //   fpHouseholdList.get(selectedHousehold).setExpanded(false);
                 checkCompleteFm();
-                hhAdapter.notifyItemChanged(selectedHousehold);
+                hhAdapter.notifyItemChanged(MainApp.selectedFpHousehold);
             }
             if (resultCode == Activity.RESULT_CANCELED) {
                 // Write your code if there's no result
-                Toast.makeText(this, "Information for " + MainApp.fpHouseholdList.get(selectedHousehold).getRa14() + " was not saved.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Information for " + MainApp.fpHouseholdList.get(selectedFpHousehold).getRa14() + " was not saved.", Toast.LENGTH_SHORT).show();
             }
         }
-    }*/
-
+    }
+*/
     private boolean hhExists() {
 
         switch (idType) {

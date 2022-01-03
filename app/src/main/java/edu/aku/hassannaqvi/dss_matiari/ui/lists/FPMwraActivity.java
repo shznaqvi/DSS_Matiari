@@ -171,6 +171,7 @@ public class FPMwraActivity extends AppCompatActivity {
         MainApp.households.setHhNo(MainApp.fpHouseholds.getHhNo());
         MainApp.households.setSysDate(MainApp.fpHouseholds.getSysDate());
         MainApp.households.setHdssId(MainApp.fpHouseholds.getHdssId());
+        MainApp.households.setVisitNo(MainApp.fpHouseholds.getVisitNo());
         MainApp.households.setRa18(String.valueOf(fpMWRAList.size()));
 
         int newMwra = db.getMWRACountBYUUID(MainApp.fpHouseholds.getUid());
@@ -242,7 +243,7 @@ public class FPMwraActivity extends AppCompatActivity {
     }
 
     public void btnContinue(View view) {
-        if (MainApp.mwraList.size() < Integer.parseInt(MainApp.households.getRa18())) {
+        if (mwraList.size() < Integer.parseInt(MainApp.households.getRa18())) {
             displayProceedDialog();
         } else {
             proceedSelect();
@@ -253,11 +254,12 @@ public class FPMwraActivity extends AppCompatActivity {
 
     public void BtnEnd(View view) {
 
-        Intent i = new Intent(this, FPEndingActivity.class);
-        i.setFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT);
-        i.putExtra("complete", false);
-        startActivity(i);
-        finish();
+            Intent i = new Intent(this, FPEndingActivity.class);
+            i.setFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT);
+            i.putExtra("complete", false);
+            startActivity(i);
+            finish();
+
         //startActivity(new Intent(this, MainActivity.class));
         /*   } else {
                Toast.makeText(this, "Failed to Update Database!", Toast.LENGTH_SHORT).show()
