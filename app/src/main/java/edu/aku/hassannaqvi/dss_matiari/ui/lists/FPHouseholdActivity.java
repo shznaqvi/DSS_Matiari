@@ -185,7 +185,7 @@ public class FPHouseholdActivity extends AppCompatActivity {
 
     public void btnContinue(View view) {
         finish();
-        //startActivity(new Intent(this, MainActivity.class));
+        //startActivity(new Intent(this, MainActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK));
 
     }
 
@@ -197,7 +197,7 @@ public class FPHouseholdActivity extends AppCompatActivity {
                Toast.makeText(this, "Failed to Update Database!", Toast.LENGTH_SHORT).show()
            }*/
     }
-    /*@Override
+    @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         // check if the request code is same as what is passed  here it is 2
@@ -213,7 +213,7 @@ public class FPHouseholdActivity extends AppCompatActivity {
             }
         }
     }
-*/
+
     private boolean hhExists() {
 
         switch (idType) {

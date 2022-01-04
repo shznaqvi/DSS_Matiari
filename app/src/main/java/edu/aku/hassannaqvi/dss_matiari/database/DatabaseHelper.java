@@ -203,7 +203,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         values.put(FollowupsTable.COLUMN_SNO, followups.getSno());
         values.put(FollowupsTable.COLUMN_FP_ROUND, followups.getfRound());
         values.put(FollowupsTable.COLUMN_HOUSEHOLD_NO, followups.getHhNo());
+        values.put(FollowupsTable.COLUMN_VISIT_NO, followups.getVisitNo());
         values.put(FollowupsTable.COLUMN_SC, followups.sCtoString());
+        values.put(FollowupsTable.COLUMN_SD, followups.sDtoString());
         values.put(FollowupsTable.COLUMN_ISTATUS, followups.getiStatus());
         values.put(FollowupsTable.COLUMN_DEVICETAGID, followups.getDeviceTag());
         values.put(FollowupsTable.COLUMN_DEVICEID, followups.getDeviceId());
@@ -555,7 +557,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         ContentValues values = new ContentValues();
         values.put(column, value);
 
-        String selection = FollowupsTable.COLUMN_ID + " =? ";
+        String selection = FollowupsTable._ID + " =? ";
         String[] selectionArgs = {String.valueOf(MainApp.followups.getId())};
 
         return db.update(FollowupsTable.TABLE_NAME,
@@ -1730,6 +1732,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         return outcome;
     }
+
 
 
 

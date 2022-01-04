@@ -523,7 +523,7 @@ public class Followups extends BaseObservable implements Observable {
 
 
     public void sCHydrate(String string) throws JSONException {
-        Log.d(TAG, "s2Hydrate: " + string);
+        Log.d(TAG, "s3Hydrate: " + string);
         if (string != null) {
 
             JSONObject json = null;
@@ -545,7 +545,7 @@ public class Followups extends BaseObservable implements Observable {
             this.rc12 = json.getString("rc12");
             this.rc12x = json.getString("rc12x");
             this.rc13 = json.getString("rc13");
-            this.rc13x = json.getString("rc09");
+            this.rc13x = json.getString("rc13x");
 
         }
     }
@@ -579,7 +579,7 @@ public class Followups extends BaseObservable implements Observable {
     }
 
     public void sDHydrate(String string) throws JSONException {
-        Log.d(TAG, "s2Hydrate: " + string);
+        Log.d(TAG, "s4Hydrate: " + string);
         if (string != null) {
 
             JSONObject json = null;

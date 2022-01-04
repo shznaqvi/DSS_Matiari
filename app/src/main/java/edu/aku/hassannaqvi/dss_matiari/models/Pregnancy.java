@@ -346,7 +346,7 @@ public class Pregnancy extends BaseObservable implements Observable {
 
 
     public void sDHydrate(String string) throws JSONException {
-        Log.d(TAG, "s2Hydrate: " + string);
+        Log.d(TAG, "s4Hydrate: " + string);
         if (string != null) {
 
             JSONObject json = null;

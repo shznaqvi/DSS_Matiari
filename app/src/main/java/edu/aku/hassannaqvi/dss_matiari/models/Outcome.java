@@ -353,7 +353,7 @@ public class Outcome extends BaseObservable implements Observable {
     }
 
     public void sEHydrate(String string) throws JSONException {
-        Log.d(TAG, "s2Hydrate: " + string);
+        Log.d(TAG, "s5Hydrate: " + string);
         if (string != null) {
 
             JSONObject json = null;

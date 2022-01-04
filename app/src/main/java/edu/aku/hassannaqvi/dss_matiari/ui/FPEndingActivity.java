@@ -79,6 +79,14 @@ public class FPEndingActivity extends AppCompatActivity {
 
     private void saveDraft() {
 
+        MainApp.followups.setiStatus(bi.istatusa.isChecked() ? "1"
+                : bi.istatusb.isChecked() ? "2"
+                : bi.istatusc.isChecked() ? "3"
+                : bi.istatusd.isChecked() ? "4"
+                : bi.istatuse.isChecked() ? "5"
+                : "-1");
+        MainApp.followups.setiStatus96x(bi.istatusdx.getText().toString());
+
         visitCount++;
 
         // Only increment visit count if Refused or Locked AND NOT FIRST VISIT
@@ -152,7 +160,7 @@ public class FPEndingActivity extends AppCompatActivity {
 
     private boolean UpdateDB() {
         int updcount = 0;
-        db.updatesFollowUpsColumn(TableContracts.FollowupsTable.COLUMN_ISTATUS, MainApp.followups.getRc12());
+        db.updatesFollowUpsColumn(TableContracts.FollowupsTable.COLUMN_ISTATUS, MainApp.followups.getiStatus());
         db.updatesFollowUpsColumn(TableContracts.FollowupsTable.COLUMN_VISIT_NO, MainApp.followups.getVisitNo());
         try {
             updcount = db.updatesFollowUpsColumn(TableContracts.FollowupsTable.COLUMN_SC, MainApp.followups.sCtoString());

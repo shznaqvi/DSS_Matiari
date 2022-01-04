@@ -243,7 +243,7 @@ public class FPMwraActivity extends AppCompatActivity {
     }
 
     public void btnContinue(View view) {
-        if (mwraList.size() < Integer.parseInt(MainApp.households.getRa18())) {
+        if (fpMWRAList.size() < Integer.parseInt(MainApp.households.getRa18())) {
             displayProceedDialog();
         } else {
             proceedSelect();
