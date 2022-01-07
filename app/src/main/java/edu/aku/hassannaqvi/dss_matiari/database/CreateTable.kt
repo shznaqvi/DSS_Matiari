@@ -188,6 +188,7 @@ object CreateTable {
             + FPHouseholdTable.COLUMN_HOUSEHOLD_NO + " TEXT,"
             + FPHouseholdTable.COLUMN_STRUCTURE_NO + " TEXT,"
             + FPHouseholdTable.COLUMN_FP_ROUND + " TEXT,"
+            + FPHouseholdTable.COLUMN_SA + " TEXT,"
             + FPHouseholdTable.COLUMN_VISIT_NO + " TEXT"
             + " );"
             )

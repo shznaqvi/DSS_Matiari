@@ -52,6 +52,8 @@ public class FPHouseholds extends BaseObservable implements Observable {
     private String synced = StringUtils.EMPTY;
     private String syncDate = StringUtils.EMPTY;
     private String structureNo = StringUtils.EMPTY;
+    private String rc01v2 = StringUtils.EMPTY;
+    private String rc01v3 = StringUtils.EMPTY;
 
 
     public FPHouseholds() {
@@ -97,7 +99,25 @@ public class FPHouseholds extends BaseObservable implements Observable {
 
     }
 
-/*
+    @Bindable
+    public String getRc01v2() {
+        return rc01v2;
+    }
+
+    @Bindable
+    public String getRc01v3() {
+        return rc01v3;
+    }
+
+    public void setRc01v2(String rc01v2) {
+        this.rc01v2 = rc01v2;
+    }
+
+    public void setRc01v3(String rc01v3) {
+        this.rc01v3 = rc01v3;
+    }
+
+    /*
     private synchronized void notifyChange(int propertyId) {
         if (propertyChangeRegistry == null) {
             propertyChangeRegistry = new PropertyChangeRegistry();
@@ -305,6 +325,11 @@ public class FPHouseholds extends BaseObservable implements Observable {
         //notifyChange(BR.ra22);
     }
 
+    public String getsA() {
+        return sA;
+    }
+
+
 
     private synchronized void notifyChange(int propertyId) {
         if (propertyChangeRegistry == null) {
@@ -349,6 +374,8 @@ public class FPHouseholds extends BaseObservable implements Observable {
         this.synced = cursor.getString(cursor.getColumnIndexOrThrow(TableContracts.FPHouseholdTable.COLUMN_SYNCED));
         this.syncDate = cursor.getString(cursor.getColumnIndexOrThrow(TableContracts.FPHouseholdTable.COLUMN_SYNCED_DATE));
 
+        s1Hydrate(cursor.getString(cursor.getColumnIndexOrThrow(TableContracts.HouseholdTable.COLUMN_SA)));
+
 
 
 
@@ -357,6 +384,18 @@ public class FPHouseholds extends BaseObservable implements Observable {
     }
 
 
+    public void s1Hydrate(String string) throws JSONException {
+
+        if (string != null) {
+
+            JSONObject json = null;
+            json = new JSONObject(string);
+
+            this.rc01v2 = json.has("rc01v2") ? json.getString("rc01v2") : "";
+            this.rc01v3 = json.has("rc01v3") ? json.getString("rc01v3") : "";
+
+        }
+    }
 
 
     public JSONObject toJSONObject() throws JSONException {
@@ -383,13 +422,24 @@ public class FPHouseholds extends BaseObservable implements Observable {
         //  json.put(HouseholdTable.COLUMN_SYNCED, this.synced);
         //  json.put(HouseholdTable.COLUMN_SYNCED_DATE, this.syncDate);
 
-        //json.put(HouseholdTable.COLUMN_SA, new JSONObject(sAtoString()));
+        json.put(TableContracts.FPHouseholdTable.COLUMN_SA, new JSONObject(sAtoString()));
         //Log.d(TAG, "toJSONObject: "+new JSONObject(s2toString()));
 
 
         return json;
 
     }
+
+    public String sAtoString() throws JSONException {
+        JSONObject json = new JSONObject();
+
+        json
+                .put("rc01v3", rc01v3)
+                .put("rc01v2", rc01v2);
+
+        return json.toString();
+    }
+
 
     public FPHouseholds Sync(JSONObject jsonObject) throws JSONException {
         this.ucCode = jsonObject.getString(TableContracts.FPHouseholdTable.COLUMN_UC_CODE);

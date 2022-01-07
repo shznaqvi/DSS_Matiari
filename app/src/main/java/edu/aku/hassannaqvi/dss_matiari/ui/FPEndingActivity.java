@@ -1,5 +1,8 @@
 package edu.aku.hassannaqvi.dss_matiari.ui;
 
+import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.followups;
+import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.fpHouseholds;
+
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -38,7 +41,7 @@ public class FPEndingActivity extends AppCompatActivity {
 //        MainApp.households.setVisitNo(String.valueOf(Integer.parseInt(MainApp.households.getVisitNo())+1));
 
         bi = DataBindingUtil.setContentView(this, R.layout.activity_fp_ending);
-        bi.setFollowup(MainApp.followups);
+        bi.setFollowup(fpHouseholds);
         //bi.setHousehold(MainApp.households);
         setSupportActionBar(bi.toolbar);
         //setTitle(R.string.section1_mainheading);
@@ -65,10 +68,10 @@ public class FPEndingActivity extends AppCompatActivity {
 
 
         if (visitCount == 1) {
-            MainApp.followups.setRc01v2(now);
+            followups.setRc01v2(now);
             //  bi.fldGrpCVra01v2.setVisibility(View.VISIBLE);
         } else if (visitCount > 1) {
-            MainApp.followups.setRc01v3(now);
+            followups.setRc01v3(now);
             // bi.fldGrpCVra01v3.setVisibility(View.VISIBLE);
 
         }
@@ -79,13 +82,13 @@ public class FPEndingActivity extends AppCompatActivity {
 
     private void saveDraft() {
 
-        MainApp.followups.setiStatus(bi.istatusa.isChecked() ? "1"
+        fpHouseholds.setiStatus(bi.istatusa.isChecked() ? "1"
                 : bi.istatusb.isChecked() ? "2"
                 : bi.istatusc.isChecked() ? "3"
                 : bi.istatusd.isChecked() ? "4"
                 : bi.istatuse.isChecked() ? "5"
                 : "-1");
-        MainApp.followups.setiStatus96x(bi.istatusdx.getText().toString());
+        fpHouseholds.setiStatus96x(bi.istatusdx.getText().toString());
 
         visitCount++;
 
@@ -96,11 +99,11 @@ public class FPEndingActivity extends AppCompatActivity {
             if(!MainApp.households.getiStatus().equals(""))
             MainApp.households.setVisitNo(String.valueOf(visitCount));
         }*/
-        MainApp.followups.setVisitNo(String.valueOf(visitCount));
+        fpHouseholds.setVisitNo(String.valueOf(visitCount));
 
         switch (visitCount) {
             case 1:
-                MainApp.followups.setRc11(
+                followups.setRc11(
                         bi.istatusa.isChecked() ? "1" :
                                 bi.istatusb.isChecked() ? "2" :
                                         bi.istatusc.isChecked() ? "3" :
@@ -108,10 +111,10 @@ public class FPEndingActivity extends AppCompatActivity {
                                                         bi.istatusd.isChecked() ? "96" :
                                                                 "-1"
                 );
-                MainApp.followups.setRc11x(bi.istatusdx.getText().toString());
+                followups.setRc11x(bi.istatusdx.getText().toString());
                 break;
             case 2:
-                MainApp.followups.setRc12(
+                followups.setRc12(
                         bi.istatusa.isChecked() ? "1" :
                                 bi.istatusb.isChecked() ? "2" :
                                         bi.istatusc.isChecked() ? "3" :
@@ -120,11 +123,11 @@ public class FPEndingActivity extends AppCompatActivity {
                                                                 "-1"
 
                 );
-                MainApp.followups.setRc12x(bi.istatusdx.getText().toString());
-                MainApp.followups.setRc01v2(bi.ra01v2.getText().toString());
+                followups.setRc12x(bi.istatusdx.getText().toString());
+                followups.setRc01v2(bi.ra01v2.getText().toString());
                 break;
             case 3:
-                MainApp.followups.setRc13(
+                followups.setRc13(
                         bi.istatusa.isChecked() ? "1" :
                                 bi.istatusb.isChecked() ? "2" :
                                         bi.istatusc.isChecked() ? "3" :
@@ -133,8 +136,8 @@ public class FPEndingActivity extends AppCompatActivity {
                                                                 "-1"
 
                 );
-                MainApp.followups.setRc13x(bi.istatusdx.getText().toString());
-                MainApp.followups.setRc01v3(bi.ra01v3.getText().toString());
+                followups.setRc13x(bi.istatusdx.getText().toString());
+                followups.setRc01v3(bi.ra01v3.getText().toString());
                 break;
 
         }
@@ -160,10 +163,10 @@ public class FPEndingActivity extends AppCompatActivity {
 
     private boolean UpdateDB() {
         int updcount = 0;
-        db.updatesFollowUpsColumn(TableContracts.FollowupsTable.COLUMN_ISTATUS, MainApp.followups.getiStatus());
-        db.updatesFollowUpsColumn(TableContracts.FollowupsTable.COLUMN_VISIT_NO, MainApp.followups.getVisitNo());
+        db.updatesFPHouseholdsColumn(TableContracts.FPHouseholdTable.COLUMN_ISTATUS, fpHouseholds.getiStatus());
+        db.updatesFPHouseholdsColumn(TableContracts.FPHouseholdTable.COLUMN_VISIT_NO, followups.getVisitNo());
         try {
-            updcount = db.updatesFollowUpsColumn(TableContracts.FollowupsTable.COLUMN_SC, MainApp.followups.sCtoString());
+            updcount = db.updatesFPHouseholdsColumn(TableContracts.FPHouseholdTable.COLUMN_SA, fpHouseholds.sAtoString());
         } catch (JSONException e) {
             e.printStackTrace();
             Toast.makeText(this, "JSONException: " + e.getMessage(), Toast.LENGTH_SHORT).show();

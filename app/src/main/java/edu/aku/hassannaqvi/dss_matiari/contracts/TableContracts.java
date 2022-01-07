@@ -251,6 +251,7 @@ public class TableContracts {
         public static final String COLUMN_FP_ROUND = "round";
         public static final String COLUMN_STRUCTURE_NO = "structureNo";
         public static final String COLUMN_VISIT_NO = "visitNo";
+        public static final String COLUMN_SA = "s1";
 
         public static final String COLUMN_DEVICEID = "deviceid";
         public static final String COLUMN_DEVICETAGID = "devicetagid";
