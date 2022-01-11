@@ -1,5 +1,7 @@
 package edu.aku.hassannaqvi.dss_matiari.workers;
 
+import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.PROJECT_NAME;
+
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.ProgressDialog;
@@ -27,8 +29,6 @@ import java.net.URL;
 
 import edu.aku.hassannaqvi.dss_matiari.R;
 import edu.aku.hassannaqvi.dss_matiari.core.MainApp;
-
-import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.PROJECT_NAME;
 
 
 public class DataDownWorkerALL extends Worker {
@@ -137,7 +137,7 @@ public class DataDownWorkerALL extends Worker {
                 String line;
                 while ((line = reader.readLine()) != null) {
                     result.append(line);
-
+                    Log.d(TAG, "doWork: " + result.length());
                 }
 
                 if (result.equals("[]")) {

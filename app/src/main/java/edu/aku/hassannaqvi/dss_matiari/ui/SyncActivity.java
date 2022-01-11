@@ -188,16 +188,12 @@ public class SyncActivity extends AppCompatActivity {
                     downloadTables.add(new SyncModel(UsersTable.TABLE_NAME, select, filter));
                     downloadTables.add(new SyncModel(VersionTable.TABLE_NAME));
                     downloadTables.add(new SyncModel(TableVillage.TABLE_NAME, select, filter));
-                    downloadTables.add(new SyncModel(TableContracts.TableFollowUpsSche.TABLE_NAME));
+                 //   downloadTables.add(new SyncModel(TableContracts.TableFollowUpsSche.TABLE_NAME));
                 } else {
                     // Set tables to DOWNLOAD
                     String select = null;
-                    String filter = " colflag is null ";
-                    downloadTables.add(new SyncModel(UsersTable.TABLE_NAME, select, filter));
-
-                    downloadTables.add(new SyncModel(VersionTable.TABLE_NAME));
-                    downloadTables.add(new SyncModel(TableVillage.TABLE_NAME, select, filter));
-                    downloadTables.add(new SyncModel(TableContracts.TableFollowUpsSche.TABLE_NAME));
+                    String filter = " uccode = '05' ";
+                    downloadTables.add(new SyncModel(TableContracts.TableFollowUpsSche.TABLE_NAME, select, filter));
 
 
 
