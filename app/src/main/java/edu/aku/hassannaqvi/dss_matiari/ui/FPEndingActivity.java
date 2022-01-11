@@ -164,7 +164,7 @@ public class FPEndingActivity extends AppCompatActivity {
     private boolean UpdateDB() {
         int updcount = 0;
         db.updatesFPHouseholdsColumn(TableContracts.FPHouseholdTable.COLUMN_ISTATUS, fpHouseholds.getiStatus());
-        db.updatesFPHouseholdsColumn(TableContracts.FPHouseholdTable.COLUMN_VISIT_NO, followups.getVisitNo());
+        db.updatesFPHouseholdsColumn(TableContracts.FPHouseholdTable.COLUMN_VISIT_NO, fpHouseholds.getVisitNo());
         try {
             updcount = db.updatesFPHouseholdsColumn(TableContracts.FPHouseholdTable.COLUMN_SA, fpHouseholds.sAtoString());
         } catch (JSONException e) {

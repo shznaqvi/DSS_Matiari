@@ -3,6 +3,7 @@ package edu.aku.hassannaqvi.dss_matiari.ui.lists;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.followups;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.fpMWRAList;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.mwraCount;
+import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.mwraDone;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.mwraList;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.selectedFemale;
 
@@ -245,7 +246,9 @@ public class FPMwraActivity extends AppCompatActivity {
     public void btnContinue(View view) {
         if (fpMWRAList.size() < Integer.parseInt(MainApp.households.getRa18())) {
             displayProceedDialog();
-        } else {
+
+        }
+        else {
             proceedSelect();
         }
 
@@ -354,11 +357,12 @@ public class FPMwraActivity extends AppCompatActivity {
     }
 
     private void proceedSelect() {
-        Intent i = new Intent(this, FPEndingActivity.class);
-        i.setFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT);
-        i.putExtra("complete", true);
-        startActivity(i);
-        finish();
+            Intent i = new Intent(this, FPEndingActivity.class);
+            i.setFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT);
+            i.putExtra("complete", true);
+            startActivity(i);
+            finish();
+
         //startActivity(new Intent(this, EndingActivity.class).putExtra("complete", true));
     }
 
