@@ -260,13 +260,13 @@ public class SectionC2Activity extends AppCompatActivity {
             // db.updatesMWRAColumn(TableContracts.MWRATable.COLUMN_SYNCED, null);
             // concate last char from uid to alter and create new unique uid
 
-            followups.setDeviceId(followups.getDeviceId() + "_" + followups.getDeviceId().substring(followups.getDeviceId().length() - 1));
-            db.updatesFollowUpsColumn(TableContracts.FollowupsTable.COLUMN_DEVICEID, followups.getDeviceId());
-            int repeatCount = (followups.getDeviceId().length() - 16) / 2;
+            //   followups.setDeviceId(followups.getDeviceId() + "_" + followups.getDeviceId().substring(followups.getDeviceId().length() - 1));
+            //   db.updatesFollowUpsColumn(TableContracts.FollowupsTable.COLUMN_DEVICEID, followups.getDeviceId());
+            //   int repeatCount = (followups.getDeviceId().length() - 16) / 2;
             // new UID
-            String newUID = followups.getDeviceId().substring(0, 16) + followups.getId() + "_" + repeatCount;
-            followups.setUid(newUID);
-            db.updatesFollowUpsColumn(TableContracts.FollowupsTable.COLUMN_UID, newUID);
+            // String newUID = followups.getDeviceId().substring(0, 16) + followups.getId() + "_" + repeatCount;
+            // followups.setUid(newUID);
+            // db.updatesFollowUpsColumn(TableContracts.FollowupsTable.COLUMN_UID, newUID);
 
 
         } catch (JSONException e) {
