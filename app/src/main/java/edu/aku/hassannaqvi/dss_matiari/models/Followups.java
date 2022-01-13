@@ -67,6 +67,7 @@ public class Followups extends BaseObservable implements Observable {
     private String rc01 = "";
     private String rc02 = "";
     private String rc03 = "";
+    private String rc05 = "";
     private String rc06 = "";
     private String rc07 = "";
 
@@ -361,6 +362,16 @@ public class Followups extends BaseObservable implements Observable {
 
 
     @Bindable
+    public String getRc05() {
+        return rc05;
+    }
+
+    public void setRc05(String rc05) {
+        this.rc05 = rc05;
+        notifyPropertyChanged(BR.rc05);
+    }
+
+    @Bindable
     public String getRc06() {
         return rc06;
     }
@@ -550,6 +561,7 @@ public class Followups extends BaseObservable implements Observable {
             this.prePreg = json.getString("prePreg");
             this.rc02 = json.getString("rc02");
             this.rc03 = json.getString("rc03");
+            this.rc05 = json.getString("rc05");
 
             this.rc06 = json.getString("rc06");
             this.rc07 = json.getString("rc07");
@@ -577,6 +589,7 @@ public class Followups extends BaseObservable implements Observable {
                 .put("rc01v3", rc01v3)
                 .put("rc02", rc02)
                 .put("rc03", rc03)
+                .put("rc05", rc05)
 
                 .put("rc06", rc06)
                 .put("rc07", rc07)

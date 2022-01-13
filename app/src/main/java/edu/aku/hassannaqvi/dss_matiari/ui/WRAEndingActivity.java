@@ -3,7 +3,6 @@ package edu.aku.hassannaqvi.dss_matiari.ui;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.followups;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.fpHouseholds;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -23,15 +22,15 @@ import edu.aku.hassannaqvi.dss_matiari.R;
 import edu.aku.hassannaqvi.dss_matiari.contracts.TableContracts;
 import edu.aku.hassannaqvi.dss_matiari.core.MainApp;
 import edu.aku.hassannaqvi.dss_matiari.database.DatabaseHelper;
-import edu.aku.hassannaqvi.dss_matiari.databinding.ActivityEndingBinding;
 import edu.aku.hassannaqvi.dss_matiari.databinding.ActivityFpEndingBinding;
-import edu.aku.hassannaqvi.dss_matiari.ui.lists.FPHouseholdActivity;
+import edu.aku.hassannaqvi.dss_matiari.databinding.ActivityMwraBinding;
+import edu.aku.hassannaqvi.dss_matiari.databinding.ActivityWraEndingBinding;
 
 
-public class FPEndingActivity extends AppCompatActivity {
+public class WRAEndingActivity extends AppCompatActivity {
 
     private static final String TAG = "FPEndingActivity";
-    ActivityFpEndingBinding bi;
+    ActivityWraEndingBinding bi;
     int sectionMainCheck;
     private DatabaseHelper db;
     int visitCount;
@@ -42,8 +41,8 @@ public class FPEndingActivity extends AppCompatActivity {
 
 //        MainApp.households.setVisitNo(String.valueOf(Integer.parseInt(MainApp.households.getVisitNo())+1));
 
-        bi = DataBindingUtil.setContentView(this, R.layout.activity_fp_ending);
-        bi.setFollowup(fpHouseholds);
+        bi = DataBindingUtil.setContentView(this, R.layout.activity_wra_ending);
+        bi.setFollowup(followups);
         //bi.setHousehold(MainApp.households);
         setSupportActionBar(bi.toolbar);
         //setTitle(R.string.section1_mainheading);
@@ -84,13 +83,14 @@ public class FPEndingActivity extends AppCompatActivity {
 
     private void saveDraft() {
 
-        fpHouseholds.setiStatus(bi.istatusa.isChecked() ? "1"
+        followups.setiStatus(bi.istatusa.isChecked() ? "1"
                 : bi.istatusb.isChecked() ? "2"
                 : bi.istatusc.isChecked() ? "3"
                 : bi.istatusd.isChecked() ? "4"
                 : bi.istatuse.isChecked() ? "5"
+                : bi.istatusf.isChecked() ? "6"
                 : "-1");
-        fpHouseholds.setiStatus96x(bi.istatusdx.getText().toString());
+        //fpHouseholds.setiStatus96x(bi.istatusdx.getText().toString());
 
         visitCount++;
 
@@ -101,11 +101,11 @@ public class FPEndingActivity extends AppCompatActivity {
             if(!MainApp.households.getiStatus().equals(""))
             MainApp.households.setVisitNo(String.valueOf(visitCount));
         }*/
-        fpHouseholds.setVisitNo(String.valueOf(visitCount));
+        followups.setVisitNo(String.valueOf(visitCount));
 
-        switch (visitCount) {
+        /*switch (visitCount) {
             case 1:
-                fpHouseholds.setRa11(
+                followups.setRc11(
                         bi.istatusa.isChecked() ? "1" :
                                 bi.istatusb.isChecked() ? "2" :
                                         bi.istatusc.isChecked() ? "3" :
@@ -143,7 +143,7 @@ public class FPEndingActivity extends AppCompatActivity {
                 break;
 
         }
-        // households.setEndTime(new SimpleDateFormat("dd-MM-yy HH:mm", Locale.ENGLISH).format(new Date().getTime()));
+*/        // households.setEndTime(new SimpleDateFormat("dd-MM-yy HH:mm", Locale.ENGLISH).format(new Date().getTime()));
     }
 
 
@@ -152,9 +152,7 @@ public class FPEndingActivity extends AppCompatActivity {
         saveDraft();
         if (UpdateDB()) {
             setResult(RESULT_OK);
-            startActivity(new Intent(this, FPHouseholdActivity.class).addFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT));
             finish();
-
             //Intent i = new Intent(this, MainActivity.class);
             // startActivity(i);
             Toast.makeText(this, "Entry Complete", Toast.LENGTH_SHORT).show();
@@ -166,17 +164,7 @@ public class FPEndingActivity extends AppCompatActivity {
 
 
     private boolean UpdateDB() {
-        int updcount = 0;
-        db.updatesFPHouseholdsColumn(TableContracts.FPHouseholdTable.COLUMN_ISTATUS, fpHouseholds.getiStatus());
-        db.updatesFPHouseholdsColumn(TableContracts.FPHouseholdTable.COLUMN_VISIT_NO, fpHouseholds.getVisitNo());
-        try {
-            updcount = db.updatesFPHouseholdsColumn(TableContracts.FPHouseholdTable.COLUMN_SA, fpHouseholds.sAtoString());
-        } catch (JSONException e) {
-            e.printStackTrace();
-            Toast.makeText(this, "JSONException: " + e.getMessage(), Toast.LENGTH_SHORT).show();
-            Log.d(TAG, "UpdateDB (JSONException): " + e.getMessage());
-            return false;
-        }
+        int updcount = db.updatesFollowUpsColumn(TableContracts.FollowupsTable.COLUMN_ISTATUS, followups.getiStatus());
         return updcount > 0;
     }
 

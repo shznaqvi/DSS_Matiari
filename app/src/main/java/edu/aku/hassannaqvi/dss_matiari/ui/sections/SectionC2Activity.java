@@ -5,6 +5,7 @@ import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.fpHouseholds;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.sharedPref;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -27,6 +28,7 @@ import edu.aku.hassannaqvi.dss_matiari.contracts.TableContracts;
 import edu.aku.hassannaqvi.dss_matiari.core.MainApp;
 import edu.aku.hassannaqvi.dss_matiari.database.DatabaseHelper;
 import edu.aku.hassannaqvi.dss_matiari.databinding.ActivitySectionCBinding;
+import edu.aku.hassannaqvi.dss_matiari.ui.WRAEndingActivity;
 
 public class SectionC2Activity extends AppCompatActivity {
 
@@ -286,16 +288,15 @@ public class SectionC2Activity extends AppCompatActivity {
     public void btnEnd(View view) {
         setResult(Activity.RESULT_CANCELED);
         finish();
-        /*saveDraft();
         if (updateDB()) {
 
-            Toast.makeText(this, "Patient information not recorded.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Woman information not recorded.", Toast.LENGTH_SHORT).show();
             finish();
-        *//*    Intent i = new Intent(this, EndingActivity.class);
+            Intent i = new Intent(this, WRAEndingActivity.class);
             i.putExtra("complete", false);
-            startActivity(i);*//*
-        }*/
+            startActivity(i);
 
+        }
     }
 
     private boolean formValidation() {

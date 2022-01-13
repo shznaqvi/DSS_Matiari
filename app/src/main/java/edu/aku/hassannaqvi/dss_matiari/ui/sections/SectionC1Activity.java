@@ -28,6 +28,7 @@ import edu.aku.hassannaqvi.dss_matiari.contracts.TableContracts;
 import edu.aku.hassannaqvi.dss_matiari.core.MainApp;
 import edu.aku.hassannaqvi.dss_matiari.database.DatabaseHelper;
 import edu.aku.hassannaqvi.dss_matiari.databinding.ActivitySectionCBinding;
+import edu.aku.hassannaqvi.dss_matiari.ui.WRAEndingActivity;
 
 public class SectionC1Activity extends AppCompatActivity {
 
@@ -217,6 +218,7 @@ public class SectionC1Activity extends AppCompatActivity {
                 finish();
             } else {
                 setResult(RESULT_OK);
+                startActivity(new Intent(this, WRAEndingActivity.class).addFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT).putExtra("complete", true));
                 finish();
             }
             //  startActivity(new Intent(this, EndingActivity.class).putExtra("complete", true));
@@ -278,7 +280,7 @@ public class SectionC1Activity extends AppCompatActivity {
             insertFpHousehold();
         }
 
-        // followups.populateMeta();
+         followups.populateMeta();
 
         long rowId = 0;
         try {
@@ -355,17 +357,11 @@ public class SectionC1Activity extends AppCompatActivity {
     }
 
     public void btnEnd(View view) {
-        setResult(Activity.RESULT_CANCELED);
+        setResult(RESULT_CANCELED);
+        insertNewRecord();
+        updateDB();
+        startActivity(new Intent(this, WRAEndingActivity.class).addFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT).putExtra("complete", false));
         finish();
-        /*saveDraft();
-        if (updateDB()) {
-
-            Toast.makeText(this, "Patient information not recorded.", Toast.LENGTH_SHORT).show();
-            finish();
-        *//*    Intent i = new Intent(this, EndingActivity.class);
-            i.putExtra("complete", false);
-            startActivity(i);*//*
-        }*/
 
     }
 

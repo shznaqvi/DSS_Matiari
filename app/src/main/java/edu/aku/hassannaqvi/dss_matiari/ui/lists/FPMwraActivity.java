@@ -254,10 +254,10 @@ public class FPMwraActivity extends AppCompatActivity {
 
     public void BtnEnd(View view) {
 
-            Intent i = new Intent(this, FPEndingActivity.class);
+            /*Intent i = new Intent(this, FPEndingActivity.class);
             i.setFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT);
             i.putExtra("complete", false);
-            startActivity(i);
+            startActivity(i);*/
             finish();
 
         //startActivity(new Intent(this, MainActivity.class));
