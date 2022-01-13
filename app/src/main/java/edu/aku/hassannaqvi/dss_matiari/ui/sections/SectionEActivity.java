@@ -92,6 +92,7 @@ public class SectionEActivity extends AppCompatActivity {
                 finish();
             } else {
                 setResult(RESULT_OK);
+                startActivity(new Intent(this, SectionC2Activity.class).addFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT).putExtra("complete", true));
                 finish();
             }
             //  startActivity(new Intent(this, EndingActivity.class).putExtra("complete", true));

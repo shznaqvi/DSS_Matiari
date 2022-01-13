@@ -107,7 +107,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
                                 android:checked='@{followups.rc10.equals("3")}'
-                                android:onClick='@{()->followups.setRc10("3")}'
+                                android:onClick='@{()->followups.setRc10("3") + rc12.clearCheck() + rc13.clearCheck()}'
                                 android:text="@string/rc1003" />
                         </RadioGroup>
 
@@ -121,7 +121,7 @@
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
                     android:id="@+id/fldGrprc11"
-                    android:visibility="@{followups.rc10.equals(`1`) ? View.GONE : View.VISIBLE}">
+                    android:visibility="@{followups.rc10.equals(`1`) || followups.rc10.equals(`3`) ? View.GONE : View.VISIBLE}">
 
                     <androidx.cardview.widget.CardView
                         android:id="@+id/fldGrpCVrc11"

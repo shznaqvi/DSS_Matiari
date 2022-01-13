@@ -53,8 +53,9 @@ public class SectionDActivity extends AppCompatActivity {
 
 
             // If continued from previous pregnancy
-            if (followups.getRc10().equals("1")) {
+            if (followups.getRc10().equals("1") || followups.getRc10().equals("3")) {
                 setResult(RESULT_OK);
+                startActivity(new Intent(this, SectionC2Activity.class).addFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT).putExtra("complete", true));
                 finish();
             } else {
                 // get outcome of previous pregnancy
