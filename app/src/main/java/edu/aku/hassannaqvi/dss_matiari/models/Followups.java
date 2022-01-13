@@ -420,6 +420,10 @@ public class Followups extends BaseObservable implements Observable {
 
     public void setRc10(String rc10) {
         this.rc10 = rc10;
+
+        setRc11(this.rc10.equals("1") || this.rc10.equals("3") ? "" : this.rc11);
+        setRc12(this.rc10.equals("1") || this.rc10.equals("3") ? "" : this.rc12);
+        setRc13(this.rc10.equals("1") || this.rc10.equals("3") ? "" : this.rc13);
         notifyChange(BR.rc10);
     }
 
