@@ -49,6 +49,7 @@ public class Followups extends BaseObservable implements Observable {
     private String visitNo = StringUtils.EMPTY;
 
 
+    private String ra01 = "";
     private String rc01v2 = "";
     private String rc01v3 = "";
     private String deviceId = StringUtils.EMPTY;
@@ -97,18 +98,22 @@ public class Followups extends BaseObservable implements Observable {
 
     public void populateMeta() {
 
-        MainApp.followups.setUuid(MainApp.fpHouseholds.getUid());
-        MainApp.followups.setUcCode(MainApp.fpHouseholds.getUcCode());
-        MainApp.followups.setVillageCode(MainApp.fpHouseholds.getVillageCode());
-        MainApp.followups.setHhNo(MainApp.fpHouseholds.getHhNo());
-        MainApp.followups.setfRound(MainApp.round);
-        // TODO: set MWRA ID from downloaded data
-        //   MainApp.followups.setMWRAID(households.getHhNo());
+        // From MainApp
         MainApp.followups.setUserName(MainApp.user.getUserName());
-        MainApp.followups.setSysDate(MainApp.fpHouseholds.getSysDate());
         MainApp.followups.setDeviceId(MainApp.deviceid);
-        MainApp.followups.setHdssId(MainApp.fpHouseholds.getHdssId());
         MainApp.followups.setAppver(MainApp.versionName + "." + MainApp.versionCode);
+
+        // From fpHouseholds
+        MainApp.followups.setSysDate(MainApp.fpHouseholds.getSysDate());
+        MainApp.followups.setUuid(MainApp.fpHouseholds.getUid());
+
+        // From FollowupsSche - MWRA
+        MainApp.followups.setUcCode(MainApp.fpMwra.getUcCode());
+        MainApp.followups.setVillageCode(MainApp.fpMwra.getVillageCode());
+        MainApp.followups.setHhNo(MainApp.fpMwra.getHhNo());
+        MainApp.followups.setfRound(MainApp.fpMwra.getfRound());
+        MainApp.followups.setSno(MainApp.fpMwra.getRb01());
+        MainApp.followups.setHdssId(MainApp.fpMwra.getHdssid());
     }
 
     @Bindable
@@ -311,6 +316,15 @@ public class Followups extends BaseObservable implements Observable {
     public void setRc01v3(String rc01v3) {
         this.rc01v3 = rc01v3;
         notifyChange(BR.rc01v3);
+    }
+
+    @Bindable
+    public String getRa01() {
+        return ra01;
+    }
+
+    public void setRa01(String ra01) {
+        this.ra01 = ra01;
     }
 
     @Bindable
@@ -530,6 +544,7 @@ public class Followups extends BaseObservable implements Observable {
             json = new JSONObject(string);
 
             this.rc01 = json.getString("rc01");
+            this.ra01 = json.getString("ra01");
             this.rc01v2 = json.has("rc01v2") ? json.getString("rc01v2") : "";
             this.rc01v3 = json.has("rc01v3") ? json.getString("rc01v3") : "";
             this.prePreg = json.getString("prePreg");
@@ -554,7 +569,9 @@ public class Followups extends BaseObservable implements Observable {
     public String sCtoString() throws JSONException {
         JSONObject json = new JSONObject();
 
-        json.put("rc01", rc01)
+        json
+                .put("ra01", ra01)
+                .put("rc01", rc01)
                 .put("prePreg", prePreg)
                 .put("rc01v2", rc01v2)
                 .put("rc01v3", rc01v3)

@@ -33,7 +33,6 @@ import edu.aku.hassannaqvi.dss_matiari.core.MainApp;
 import edu.aku.hassannaqvi.dss_matiari.database.DatabaseHelper;
 import edu.aku.hassannaqvi.dss_matiari.databinding.ActivityFphouseholdBinding;
 import edu.aku.hassannaqvi.dss_matiari.models.Households;
-import edu.aku.hassannaqvi.dss_matiari.ui.MainActivity;
 import edu.aku.hassannaqvi.dss_matiari.ui.sections.SectionAActivity;
 
 
@@ -94,15 +93,15 @@ public class FPHouseholdActivity extends AppCompatActivity {
         bi.setCallback(this);
 
         db = MainApp.appInfo.dbHelper;
-        MainApp.fpHouseholdList = new ArrayList<>();
+        MainApp.followUpsScheHHList = new ArrayList<>();
 
-        Log.d(TAG, "onCreate: fpHouseholdList " + MainApp.fpHouseholdList.size());
-
-
-        MainApp.fpHouseholdList = db.getFollowUpsScheHHBYVillage(selectedVillage);
+        Log.d(TAG, "onCreate: followUpsScheHHList " + MainApp.followUpsScheHHList.size());
 
 
-        hhAdapter = new FPHouseholdAdapter(this, MainApp.fpHouseholdList);
+        MainApp.followUpsScheHHList = db.getFollowUpsScheHHBYVillage(selectedVillage, "");
+
+
+        hhAdapter = new FPHouseholdAdapter(this, MainApp.followUpsScheHHList);
         bi.rvHouseholds.setAdapter(hhAdapter);
         bi.rvHouseholds.setLayoutManager(new LinearLayoutManager(this));
 
@@ -127,15 +126,27 @@ public class FPHouseholdActivity extends AppCompatActivity {
 
     }
 
+
+    public void filterForms(View view) {
+        Toast.makeText(this, "updated", Toast.LENGTH_SHORT).show();
+        //fc = db.getUnclosedForms(dtFilter.getText().toString());
+        MainApp.followUpsScheHHList = db.getFollowUpsScheHHBYVillage(selectedVillage, bi.hhead.getText().toString());
+        hhAdapter = new FPHouseholdAdapter(this, MainApp.followUpsScheHHList);
+        hhAdapter.notifyDataSetChanged();
+        bi.rvHouseholds.setAdapter(hhAdapter);
+
+    }
+
+
     @Override
     protected void onResume() {
         super.onResume();
         Toast.makeText(this, "Activity Resumed!", Toast.LENGTH_SHORT).show();
-        // MainApp.householdCount = Math.round(MainApp.fpHouseholdList.size());
+        // MainApp.householdCount = Math.round(MainApp.followUpsScheHHList.size());
 
         //  MainApp.households = new Households();
 
-      /*  if (MainApp.fpHouseholdList.size() > 0) {
+      /*  if (MainApp.followUpsScheHHList.size() > 0) {
             //MainApp.fm.get(Integer.parseInt(String.valueOf(MainApp.selectedHousehold))).setStatus("1");
             hhAdapter.notifyItemChanged(Integer.parseInt(String.valueOf(selectedHousehold)));
         }
@@ -143,7 +154,7 @@ public class FPHouseholdActivity extends AppCompatActivity {
         checkCompleteFm();
 */
         // bi.fab.setClickable(!MainApp.households.getiStatus().equals("1"));
-      /* bi.completedmember.setText(fpHouseholdList.size()+ " HOUSEHOLDs added");
+      /* bi.completedmember.setText(followUpsScheHHList.size()+ " HOUSEHOLDs added");
         bi.totalmember.setText(MainApp.householdTotal+ " M completed");*/
         //MainApp.households.resetHousehold();
         int newHouseholds = db.getHouseholdCountByVillage(selectedVillage);
@@ -153,7 +164,7 @@ public class FPHouseholdActivity extends AppCompatActivity {
 
     private void checkCompleteFm() {
         //     if (!MainApp.households.getIStatus().equals("1")) {
-        int compCount = MainApp.fpHouseholdList.size();
+        int compCount = MainApp.followUpsScheHHList.size();
 
         MainApp.householdCountComplete = compCount;
         bi.btnContinue.setVisibility(MainApp.householdCount > 0 ? View.VISIBLE : View.GONE);
@@ -203,13 +214,13 @@ public class FPHouseholdActivity extends AppCompatActivity {
         // check if the request code is same as what is passed  here it is 2
         if (requestCode == 2) {
             if (resultCode == Activity.RESULT_OK) {
-                //   fpHouseholdList.get(selectedHousehold).setExpanded(false);
+                //   followUpsScheHHList.get(selectedHousehold).setExpanded(false);
                 checkCompleteFm();
                 hhAdapter.notifyItemChanged(MainApp.selectedFpHousehold);
             }
             if (resultCode == Activity.RESULT_CANCELED) {
                 // Write your code if there's no result
-                Toast.makeText(this, "Information for " + MainApp.fpHouseholdList.get(selectedFpHousehold).getRa14() + " was not saved.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Information for " + MainApp.followUpsScheHHList.get(selectedFpHousehold).getRa14() + " was not saved.", Toast.LENGTH_SHORT).show();
             }
         }
     }

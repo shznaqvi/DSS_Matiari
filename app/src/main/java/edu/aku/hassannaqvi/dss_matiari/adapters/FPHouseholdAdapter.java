@@ -102,7 +102,7 @@ public class FPHouseholdAdapter extends RecyclerView.Adapter<FPHouseholdAdapter.
             // Get the current state of the item
 
             try {
-                MainApp.fpHouseholds = db.getFPHouseholdBYHdssid(MainApp.fpHouseholdList.get(position).getHdssid());
+                MainApp.fpHouseholds = db.getFPHouseholdBYHdssid(MainApp.followUpsScheHHList.get(position).getHdssid());
             } catch (JSONException e) {
                 e.printStackTrace();
             }
@@ -112,7 +112,7 @@ public class FPHouseholdAdapter extends RecyclerView.Adapter<FPHouseholdAdapter.
 
 
             MainApp.fpHouseholds.setVisitNo(String.valueOf(Integer.parseInt(MainApp.fpHouseholds.getVisitNo()) + 1));
-            ((Activity) mContext).startActivity(new Intent(mContext, FPMwraActivity.class));
+            mContext.startActivity(new Intent(mContext, FPMwraActivity.class));
 
             if (!MainApp.fpHouseholds.getiStatus().equals("1") && Integer.parseInt(MainApp.fpHouseholds.getVisitNo()) < 3) {
 

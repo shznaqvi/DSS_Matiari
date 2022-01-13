@@ -10,7 +10,6 @@ import android.view.View;
 import org.json.JSONArray;
 
 import java.io.File;
-import java.util.ArrayList;
 import java.util.List;
 
 import edu.aku.hassannaqvi.dss_matiari.BuildConfig;
@@ -81,8 +80,8 @@ public class MainApp extends Application {
     public static int selectedFpHousehold;
     public static int mwraCountComplete = 0;
     public static List<Households> householdList;
-    public static List<FollowUpsSche> fpHouseholdList;
-    public static List<FollowUpsSche> fpMWRAList;
+    public static List<FollowUpsSche> followUpsScheHHList; // Followups - Households List
+    public static List<FollowUpsSche> followUpsScheMWRAList; // Followups - MWRAs List
     public static int householdCount = 0;
     public static int householdCountComplete = 0;
     public static String previousAddress = "";

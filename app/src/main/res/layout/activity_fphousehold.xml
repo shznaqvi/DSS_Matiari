@@ -57,7 +57,25 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
 
+    <EditText
+        android:id="@+id/hhead"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:hint="Head of Household"
+        android:importantForAutofill="no" />
+
+    <Button
+        android:layout_width="56dp"
+        android:layout_height="match_parent"
+        android:drawableStart="@drawable/search"
+        android:onClick="filterForms" />
+</LinearLayout>
                     <TextView
                         android:id="@+id/newHouseholds"
                         android:layout_width="match_parent"

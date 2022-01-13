@@ -24,7 +24,7 @@ import edu.aku.hassannaqvi.dss_matiari.databinding.ActivitySectionDBinding;
 
 public class SectionDActivity extends AppCompatActivity {
 
-    private static final String TAG = "SectionCActivity";
+    private static final String TAG = "SectionC1Activity";
     ActivitySectionDBinding bi;
     private DatabaseHelper db;
 

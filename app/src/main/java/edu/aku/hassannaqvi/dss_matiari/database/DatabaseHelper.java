@@ -1522,15 +1522,16 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
 
-    public List<FollowUpsSche> getFollowUpsScheHHBYVillage(String village) {
+    public List<FollowUpsSche> getFollowUpsScheHHBYVillage(String village, String hhead) {
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor c = null;
         String[] columns = null;
 
         String whereClause;
-        whereClause = TableFollowUpsSche.COLUMN_VILLAGE_CODE + "=? ";
+        whereClause = TableFollowUpsSche.COLUMN_VILLAGE_CODE + "=? AND " +
+                TableFollowUpsSche.COLUMN_VILLAGE_CODE + " like ? ";
 
-        String[] whereArgs = {village};
+        String[] whereArgs = {village, "%" + hhead + "%"};
 
         String groupBy = TableFollowUpsSche.COLUMN_HDSSID;
         String having = null;

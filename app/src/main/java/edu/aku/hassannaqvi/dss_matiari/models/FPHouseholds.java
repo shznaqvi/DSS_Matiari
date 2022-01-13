@@ -52,9 +52,15 @@ public class FPHouseholds extends BaseObservable implements Observable {
     private String synced = StringUtils.EMPTY;
     private String syncDate = StringUtils.EMPTY;
     private String structureNo = StringUtils.EMPTY;
-    private String rc01v2 = StringUtils.EMPTY;
-    private String rc01v3 = StringUtils.EMPTY;
-
+    private String ra01 = "";  // Date of Visit
+    private String ra01v2 = StringUtils.EMPTY;
+    private String ra01v3 = StringUtils.EMPTY;
+    private String ra11 = StringUtils.EMPTY;  //
+    private String ra11x = StringUtils.EMPTY;
+    private String ra12 = StringUtils.EMPTY;
+    private String ra12x = StringUtils.EMPTY;
+    private String ra13 = StringUtils.EMPTY;
+    private String ra13x = StringUtils.EMPTY;
 
     public FPHouseholds() {
 
@@ -90,34 +96,91 @@ public class FPHouseholds extends BaseObservable implements Observable {
         //   setUuid(MainApp.form.getUid());  // not applicable in Form table
         setAppver(MainApp.appInfo.getAppVersion());
         setProjectName(PROJECT_NAME);
-        setHdssId(MainApp.fpHouseholdList.get(position).getHdssid());
-        setUcCode(MainApp.fpHouseholdList.get(position).getUcCode());
-        setVillageCode(MainApp.fpHouseholdList.get(position).getVillageCode());
-        setHhNo(MainApp.fpHouseholdList.get(position).getHhNo());
-        setFround(MainApp.fpHouseholdList.get(position).getfRound());
+        setHdssId(MainApp.followUpsScheHHList.get(position).getHdssid());
+        setUcCode(MainApp.followUpsScheHHList.get(position).getUcCode());
+        setVillageCode(MainApp.followUpsScheHHList.get(position).getVillageCode());
+        setHhNo(MainApp.followUpsScheHHList.get(position).getHhNo());
+        setFround(MainApp.followUpsScheHHList.get(position).getfRound());
 
 
     }
 
     @Bindable
-    public String getRc01v2() {
-        return rc01v2;
+    public String getRa01() {
+        return ra01;
+    }
+
+    public void setRa01(String ra01) {
+        this.ra01 = ra01;
+    }
+
+
+    @Bindable
+    public String getRa01v2() {
+        return ra01v2;
+    }
+
+    public void setRa01v2(String ra01v2) {
+        this.ra01v2 = ra01v2;
     }
 
     @Bindable
-    public String getRc01v3() {
-        return rc01v3;
+    public String getRa01v3() {
+        return ra01v3;
     }
 
-    public void setRc01v2(String rc01v2) {
-        this.rc01v2 = rc01v2;
+    public void setRa01v3(String ra01v3) {
+        this.ra01v3 = ra01v3;
     }
 
-    public void setRc01v3(String rc01v3) {
-        this.rc01v3 = rc01v3;
+    public String getRa11() {
+        return ra11;
     }
 
-    /*
+    public void setRa11(String ra11) {
+        this.ra11 = ra11;
+    }
+
+    public String getRa11x() {
+        return ra11x;
+    }
+
+    public void setRa11x(String ra11x) {
+        this.ra11x = ra11x;
+    }
+
+    public String getRa12() {
+        return ra12;
+    }
+
+    public void setRa12(String ra12) {
+        this.ra12 = ra12;
+    }
+
+    public String getRa12x() {
+        return ra12x;
+    }
+
+    public void setRa12x(String ra12x) {
+        this.ra12x = ra12x;
+    }
+
+    public String getRa13() {
+        return ra13;
+    }
+
+    public void setRa13(String ra13) {
+        this.ra13 = ra13;
+    }
+
+    public String getRa13x() {
+        return ra13x;
+    }
+
+    public void setRa13x(String ra13x) {
+        this.ra13x = ra13x;
+    }
+/*
     private synchronized void notifyChange(int propertyId) {
         if (propertyChangeRegistry == null) {
             propertyChangeRegistry = new PropertyChangeRegistry();
@@ -391,8 +454,8 @@ public class FPHouseholds extends BaseObservable implements Observable {
             JSONObject json = null;
             json = new JSONObject(string);
 
-            this.rc01v2 = json.has("rc01v2") ? json.getString("rc01v2") : "";
-            this.rc01v3 = json.has("rc01v3") ? json.getString("rc01v3") : "";
+            this.ra01v2 = json.has("ra01v2") ? json.getString("ra01v2") : "";
+            this.ra01v3 = json.has("ra01v3") ? json.getString("ra01v3") : "";
 
         }
     }
@@ -434,8 +497,8 @@ public class FPHouseholds extends BaseObservable implements Observable {
         JSONObject json = new JSONObject();
 
         json
-                .put("rc01v3", rc01v3)
-                .put("rc01v2", rc01v2);
+                .put("ra01v3", ra01v3)
+                .put("ra01v2", ra01v2);
 
         return json.toString();
     }

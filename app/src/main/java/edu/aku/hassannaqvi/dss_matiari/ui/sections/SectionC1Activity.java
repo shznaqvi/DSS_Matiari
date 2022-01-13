@@ -2,7 +2,6 @@ package edu.aku.hassannaqvi.dss_matiari.ui.sections;
 
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.followups;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.fpHouseholds;
-import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.households;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.sharedPref;
 
 import android.app.Activity;
@@ -30,9 +29,9 @@ import edu.aku.hassannaqvi.dss_matiari.core.MainApp;
 import edu.aku.hassannaqvi.dss_matiari.database.DatabaseHelper;
 import edu.aku.hassannaqvi.dss_matiari.databinding.ActivitySectionCBinding;
 
-public class SectionCActivity extends AppCompatActivity {
+public class SectionC1Activity extends AppCompatActivity {
 
-    private static final String TAG = "SectionCActivity";
+    private static final String TAG = "SectionC1Activity";
     ActivitySectionCBinding bi;
     private DatabaseHelper db;
 
@@ -43,6 +42,9 @@ public class SectionCActivity extends AppCompatActivity {
         setTheme(lang.equals("1") ? R.style.AppThemeEnglish1 : R.style.AppThemeUrdu);
         bi = DataBindingUtil.setContentView(this, R.layout.activity_section_c);
         db = MainApp.appInfo.dbHelper;
+
+        bi.fldGrp01.setVisibility(View.VISIBLE);
+        bi.fldGrp02.setVisibility(MainApp.fpMwra.getRb07().equals("1") ? View.GONE : View.VISIBLE);    // Current Pregnancy Status
 
         // Set Round Number from followups data
         MainApp.round = MainApp.fpMwra.getfRound();
@@ -57,9 +59,13 @@ public class SectionCActivity extends AppCompatActivity {
         if (MainApp.followups.getUid().equals("")) {
             MainApp.followups.setRc01(MainApp.fpMwra.getRb01());
             MainApp.followups.setRc02(MainApp.fpMwra.getRb02());
+            MainApp.followups.setRc03(MainApp.fpMwra.getRb03());
+            // TODO: Marital Status not received from server
+            //MainApp.followups.setRc06(MainApp.fpMwra.getRb06());
             MainApp.followups.setPrePreg(MainApp.fpMwra.getRb07());
         }
 
+        bi.setFpHouseholds(MainApp.fpHouseholds);
         bi.setFollowups(MainApp.followups);
 
 
@@ -68,7 +74,7 @@ public class SectionCActivity extends AppCompatActivity {
         // set default model values if new mwra
 
 
-        setTitle(R.string.marriedwomenregistration_mainheading);
+        // setTitle(R.string.marriedwomenregistration_mainheading);
         setImmersive(true);
 
         bi.btnContinue.setText(MainApp.followups.getUid().equals("") ? "Save" : "Update");
@@ -84,7 +90,7 @@ public class SectionCActivity extends AppCompatActivity {
             Calendar cal = Calendar.getInstance();
 
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
-            cal.setTime(sdf.parse(households.getRa01()));// all done
+            cal.setTime(sdf.parse(followups.getRa01()));// all done
 
             sdf = new SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH);
 
@@ -272,7 +278,7 @@ public class SectionCActivity extends AppCompatActivity {
             insertFpHousehold();
         }
 
-        followups.populateMeta();
+        // followups.populateMeta();
 
         long rowId = 0;
         try {
@@ -302,7 +308,7 @@ public class SectionCActivity extends AppCompatActivity {
             rowId = db.addFpHousehold(fpHouseholds);
         } catch (JSONException e) {
             e.printStackTrace();
-            Toast.makeText(this, "JSONException(FPHousholds): " + e.getMessage(), Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "JSONException(FPHouseholds): " + e.getMessage(), Toast.LENGTH_SHORT).show();
             Log.d(TAG, "insertNewRecord (JSONException): " + e.getMessage());
             return false;
         }
@@ -364,6 +370,7 @@ public class SectionCActivity extends AppCompatActivity {
     }
 
     private boolean formValidation() {
+        setDateRanges();
         return Validator.emptyCheckingContainer(this, bi.GrpName);
        /*
        if (!compareTwoDate(bi.rb08, 2,

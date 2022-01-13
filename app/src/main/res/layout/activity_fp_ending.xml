@@ -78,7 +78,7 @@
                             android:layout_marginBottom="0dp"
                             android:gravity="center"
                             android:hint="YYYY-MM-DD"
-                            android:text="@={followup.rc01v2}"
+                            android:text="@={followup.ra01v2}"
                             app:dateFormat="yyyy-MM-dd"
                             app:maxDate="CR_DATE"
                             app:theme="@style/DatePickerEditTextDialogTheme" />
@@ -116,7 +116,7 @@
                             android:layout_marginBottom="0dp"
                             android:gravity="center"
                             android:hint="YYYY-MM-DD"
-                            android:text="@={followup.rc01v3}"
+                            android:text="@={followup.ra01v3}"
                             app:dateFormat="yyyy-MM-dd"
                             app:maxDate="CR_DATE"
                             app:theme="@style/DatePickerEditTextDialogTheme" />
