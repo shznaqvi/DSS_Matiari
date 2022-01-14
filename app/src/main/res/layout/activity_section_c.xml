@@ -199,7 +199,6 @@
                         </LinearLayout>
                     </androidx.cardview.widget.CardView>
 
-
                     <!-- rc05  Input   -->
                     <androidx.cardview.widget.CardView
                         android:id="@+id/fldGrpCVrc05"
@@ -226,7 +225,7 @@
                                     style="@style/quesNum"
                                     android:layout_width="wrap_content"
                                     android:layout_height="match_parent"
-                                    android:text="@string/Q_rc04" />
+                                    android:text="@string/Q_rc05" />
 
 
                             </LinearLayout>
@@ -257,131 +256,16 @@
 
                             </RadioGroup>
 
-
-
-
                         </LinearLayout>
                     </androidx.cardview.widget.CardView>
 
 
-
-                    <!--
-
-                                    &lt;!&ndash; rb04  Input   &ndash;&gt;
-                                    <androidx.cardview.widget.CardView
-                                        android:id="@+id/fldGrpCVrb04"
-                                        style="@style/cardView">
-
-                                        <LinearLayout
-                                            android:layout_width="match_parent"
-                                            android:layout_height="wrap_content"
-                                            android:orientation="vertical">
-
-                                            <LinearLayout
-                                                android:layout_width="match_parent"
-                                                android:layout_height="wrap_content"
-                                                android:background="@drawable/bottom"
-                                                android:orientation="horizontal">
-
-                                                <TextView
-                                                    android:layout_width="0dp"
-                                                    android:layout_height="match_parent"
-                                                    android:layout_weight="1"
-                                                    android:text="@string/rc04" />
-
-                                                <TextView
-                                                    style="@style/quesNum"
-                                                    android:layout_width="wrap_content"
-                                                    android:layout_height="match_parent"
-                                                    android:text="@string/Q_rc04" />
-
-
-                                            </LinearLayout>
-
-                                            <LinearLayout
-                                                android:layout_width="match_parent"
-                                                android:layout_height="wrap_content"
-                                                android:orientation="horizontal">
-
-                                                <io.blackbox_vision.datetimepickeredittext.view.DatePickerEditText
-                                                    android:id="@+id/rc04"
-                                                    style="@style/textInput"
-                                                    android:layout_width="0dp"
-                                                    android:layout_height="match_parent"
-                                                    android:layout_marginBottom="0dp"
-                                                    android:layout_weight="1"
-                                                    android:enabled="@{!followups.rc04.equals(`98`)}"
-                                                    android:gravity="center"
-                                                    android:hint="YYYY-MM-DD"
-                                                    android:text="@={followups.rc04}"
-                                                    app:dateFormat="yyyy-MM-dd"
-                                                    app:maxDate="CR_DATE"
-                                                    android:datePickerMode="spinner"
-                                                    app:theme="@style/DatePickerEditTextDialogTheme" />
-
-                                                <CheckBox
-                                                    android:id="@+id/rc04check"
-                                                    android:layout_width="wrap_content"
-                                                    android:layout_height="match_parent"
-                                                    android:backgroundTint="@color/lightPink"
-                                                    android:checked='@{followups.rc04.equals("98")}'
-                                                    android:onClick="@{()->followups.setRb04(followups.rc04.equals(`98`)?``:`98`)}"
-                                                    android:tag="-1"
-                                                    android:text="@string/dkn"
-                                                    android:textColor="@color/redDark" />
-                                            </LinearLayout>
-                                        </LinearLayout>
-                                    </androidx.cardview.widget.CardView>
-                    -->
-                    <!--
-
-                                    &lt;!&ndash; rb05  Input   &ndash;&gt;
-                                    <androidx.cardview.widget.CardView
-                                        android:id="@+id/fldGrpCVrb05"
-                                        style="@style/cardView">
-
-                                        <LinearLayout
-                                            android:layout_width="match_parent"
-                                            android:layout_height="wrap_content"
-                                            android:orientation="vertical">
-
-                                            <LinearLayout
-                                                android:layout_width="match_parent"
-                                                android:layout_height="wrap_content"
-                                                android:background="@drawable/bottom"
-                                                android:orientation="horizontal">
-
-                                                <TextView
-                                                    android:layout_width="0dp"
-                                                    android:layout_height="match_parent"
-                                                    android:layout_weight="1"
-                                                    android:text="@string/rc05" />
-
-                                                <TextView
-                                                    style="@style/quesNum"
-                                                    android:layout_width="wrap_content"
-                                                    android:layout_height="match_parent"
-                                                    android:text="@string/Q_rc05" />
-
-                                            </LinearLayout>
-
-                                            <com.edittextpicker.aliazaz.EditTextPicker
-                                                android:id="@+id/rc05"
-                                                android:layout_width="match_parent"
-                                                android:layout_height="wrap_content"
-                                                android:enabled="@{followups.rc04.equals(`98`)}"
-                                                android:gravity="center"
-                                                android:hint="##"
-                                                android:inputType="number"
-                                                android:maxLength="2"
-                                                android:text="@={followups.rc05}"
-                                                app:maxValue="49"
-                                                app:minValue="18"
-                                                app:type="range" />
-                                        </LinearLayout>
-                                    </androidx.cardview.widget.CardView>
-                    -->
-
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:id="@+id/fldGrprc03"
+                        android:visibility="@{followups.rc05.equals(`1`) ? View.VISIBLE : View.GONE}">
 
                     <!-- rc06  Radio   -->
                     <androidx.cardview.widget.CardView
@@ -491,7 +375,6 @@
                                     android:layout_height="match_parent"
                                     android:text="@string/Q_rc03" />
 
-
                             </LinearLayout>
 
                             <EditText
@@ -503,6 +386,8 @@
                                 android:text="@={followups.rc03}" />
                         </LinearLayout>
                     </androidx.cardview.widget.CardView>
+                </LinearLayout>
+
                 </LinearLayout>
 
                 <View
@@ -540,7 +425,7 @@
                     <androidx.cardview.widget.CardView
                         android:id="@+id/fldGrpCVrb07"
                         style="@style/cardView"
-                        android:visibility='@{followups.rc06.equals("4")? View.GONE : View.VISIBLE}'>
+                        android:visibility='@{followups.rc06.equals("4") || followups.rc05.equals(`2`)  ? View.GONE : View.VISIBLE}'>
 
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -691,6 +576,7 @@
                         </LinearLayout>
                     </androidx.cardview.widget.CardView>
                 </LinearLayout>
+
                 <!--EndButton LinearLayout-->
                 <LinearLayout
                     android:layout_width="match_parent"

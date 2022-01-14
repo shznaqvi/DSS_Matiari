@@ -259,7 +259,7 @@ public class FPMwraActivity extends AppCompatActivity {
             i.setFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT);
             i.putExtra("complete", false);
             startActivity(i);*/
-        startActivity(new Intent(this, FPHouseholdActivity.class));
+        startActivity(new Intent(this, FPEndingActivity.class).putExtra("complete", false));
         finish();
 
         //startActivity(new Intent(this, MainActivity.class));

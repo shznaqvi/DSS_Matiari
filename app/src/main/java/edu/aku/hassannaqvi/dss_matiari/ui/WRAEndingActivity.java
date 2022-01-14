@@ -58,8 +58,9 @@ public class WRAEndingActivity extends AppCompatActivity {
         bi.istatusa.setEnabled(complete);
         bi.istatusb.setEnabled(!complete);
         bi.istatusc.setEnabled(!complete);
-        bi.istatuse.setEnabled(noWRA);
-        bi.istatusd.setEnabled(true); // Always TRUE
+        bi.istatusd.setEnabled(!complete);
+        bi.istatuse.setEnabled(!complete);
+        bi.istatusf.setEnabled(!complete);
 
 
         //visit date

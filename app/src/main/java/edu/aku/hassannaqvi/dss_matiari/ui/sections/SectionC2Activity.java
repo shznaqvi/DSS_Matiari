@@ -191,6 +191,7 @@ public class SectionC2Activity extends AppCompatActivity {
         if (!formValidation()) return;
         if (updateDB()) {
             setResult(RESULT_OK);
+            startActivity(new Intent(this, WRAEndingActivity.class).addFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT).putExtra("complete", true));
             finish();
             //  startActivity(new Intent(this, EndingActivity.class).putExtra("complete", true));
         } else {

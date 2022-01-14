@@ -368,7 +368,12 @@ public class Followups extends BaseObservable implements Observable {
 
     public void setRc05(String rc05) {
         this.rc05 = rc05;
-        notifyPropertyChanged(BR.rc05);
+        setRc06(rc05.equals("1") ? this.rc06 : "");
+        setRc07(rc05.equals("1") ? this.rc07 : "");
+
+
+
+        notifyChange(BR.rc05);
     }
 
     @Bindable

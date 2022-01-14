@@ -45,7 +45,7 @@ public class SectionC1Activity extends AppCompatActivity {
         db = MainApp.appInfo.dbHelper;
 
         bi.fldGrp01.setVisibility(View.VISIBLE);
-        bi.fldGrp02.setVisibility(MainApp.fpMwra.getRb07().equals("1") ? View.GONE : View.VISIBLE);    // Current Pregnancy Status
+        bi.fldGrp02.setVisibility(MainApp.fpMwra.getRb07().equals("1") && bi.rc0502.isChecked() ? View.GONE : View.VISIBLE);    // Current Pregnancy Status
 
         // Set Round Number from followups data
         MainApp.round = MainApp.fpMwra.getfRound();
@@ -212,7 +212,7 @@ public class SectionC1Activity extends AppCompatActivity {
         if (MainApp.followups.getUid().equals("") ? insertNewRecord() : updateDB()) {
 
 
-            if (MainApp.followups.getPrePreg().equals("1")) {
+            if (MainApp.followups.getPrePreg().equals("1") && bi.rc0501.isChecked()) {
                 setResult(RESULT_OK);
                 startActivity(new Intent(this, SectionDActivity.class).addFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT).putExtra("complete", true));
                 finish();

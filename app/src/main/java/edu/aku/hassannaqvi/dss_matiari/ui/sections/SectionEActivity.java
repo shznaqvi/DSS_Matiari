@@ -22,6 +22,7 @@ import edu.aku.hassannaqvi.dss_matiari.contracts.TableContracts;
 import edu.aku.hassannaqvi.dss_matiari.core.MainApp;
 import edu.aku.hassannaqvi.dss_matiari.database.DatabaseHelper;
 import edu.aku.hassannaqvi.dss_matiari.databinding.ActivitySectionEBinding;
+import edu.aku.hassannaqvi.dss_matiari.ui.WRAEndingActivity;
 
 public class SectionEActivity extends AppCompatActivity {
 
