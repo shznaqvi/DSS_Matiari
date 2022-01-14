@@ -251,7 +251,7 @@
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:checked='@{followups.rc05.equals("2")}'
-                                    android:onClick='@{()->followups.setRc05("2")}'
+                                    android:onClick='@{()->followups.setRc05("2") + rc06.clearCheck() + rc07.clearCheck()}'
                                     android:text="@string/rc0502" />
 
                             </RadioGroup>
