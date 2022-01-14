@@ -1529,9 +1529,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         String whereClause;
         whereClause = TableFollowUpsSche.COLUMN_VILLAGE_CODE + "=? AND " +
-                TableFollowUpsSche.COLUMN_VILLAGE_CODE + " like ? ";
+                TableFollowUpsSche.COLUMN_RA14 + " Like ? ";
 
-        String[] whereArgs = {village, "%" + hhead + "%"};
+        String[] whereArgs = {village, "%" + hhead + " %"};
 
         String groupBy = TableFollowUpsSche.COLUMN_HDSSID;
         String having = null;

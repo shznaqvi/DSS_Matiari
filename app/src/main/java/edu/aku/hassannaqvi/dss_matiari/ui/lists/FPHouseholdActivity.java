@@ -1,6 +1,5 @@
 package edu.aku.hassannaqvi.dss_matiari.ui.lists;
 
-import static java.lang.Integer.max;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.hdssid;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.idType;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.selectedFpHousehold;
@@ -185,7 +184,7 @@ public class FPHouseholdActivity extends AppCompatActivity {
 
         int maxHH = db.getMaxHHNo(selectedVillage);
         int maxFpHH = db.getMaxHHNoFromFolloupsSche(selectedVillage);
-        int maxHHFinal = max(maxHH, maxFpHH);
+        int maxHHFinal = Math.max(maxHH, maxFpHH);
         // Increment Household Number by 1
         MainApp.households.setRa09(String.valueOf(maxHHFinal + 1));
 

@@ -167,8 +167,15 @@ public class HouseholdActivity extends AppCompatActivity {
         // Copy common variables from existing Households to new Households
         // MainApp.households = new Households(MainApp.households);
 
-        // Increment Household Number by 1
-        MainApp.households.setRa09(String.valueOf(db.getMaxHHNo(selectedVillage) + 1));
+
+        // Increment Household Number by 1 (New Method)
+        int maxHH = db.getMaxHHNo(selectedVillage);
+        int maxFpHH = db.getMaxHHNoFromFolloupsSche(selectedVillage);
+        int maxHHFinal = Math.max(maxHH, maxFpHH);
+        MainApp.households.setRa09(String.valueOf(maxHHFinal + 1));
+
+        // Increment Household Number by 1 (Old Method)
+        // MainApp.households.setRa09(String.valueOf(db.getMaxHHNo(selectedVillage) + 1));
 
         // Launch activity for results.
         Intent intent = new Intent(this, SectionAActivity.class);
