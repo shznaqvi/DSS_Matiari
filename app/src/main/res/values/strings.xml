@@ -154,37 +154,41 @@
     <string name="rc0602">Divorce</string>
     <string name="rc0603">Widow</string>
     <string name="rc0604">Unmarried</string>
-    <string name="rc07">Pregnancy Status</string>
+    <string name="rc07">Previous round Pregnancy Status</string>
     <string name="rc0701">Pregnant</string>
     <string name="rc0702">Not Pregnant</string>
-    <string name="rc08">If pregnant enter LMP Date</string>
-    <string name="rc08_info">DD/MM/YYYY</string>
-    <string name="rc09">EDD Date [auto-calculated]</string>
-    <string name="rc09_info">DD/MM/YYYY</string>
 
-    <string name="rc10">Is Pregnancy Continued?</string>
-    <string name="rc1001">Yes</string>
-    <string name="rc1002">No</string>
-    <string name="rc1003">False PW</string>
-    <string name="rc12">Pregnancy Outcome</string>
-    <string name="rc1201">Live Birth</string>
-    <string name="rc1202">Still Birth</string>
-    <string name="rc1203">Abortion / Miscarriage</string>
-    <string name="rc11">Date of Delivery</string>
-    <string name="rc11_info">DD/MM/YYYY Use 98/98/9998 if not known</string>
-    <string name="rc13">Status of Pregnancy Outcome</string>
-    <string name="rc1301">Single</string>
-    <string name="rc1302">Twins</string>
-    <string name="rc1303">Triplets</string>
+    <string name="rc08">Is Pregnancy Continued?</string>
+    <string name="rc0801">Yes</string>
+    <string name="rc0802">No</string>
+    <string name="rc0803">False PW</string>
+    <string name="rc09">Pregnancy Outcome</string>
+    <string name="rc0901">Live Birth</string>
+    <string name="rc0902">Still Birth</string>
+    <string name="rc0903">Abortion / Miscarriage</string>
+    <string name="rc0904">False PW</string>
 
-    <string name="rc14">Gender</string>
-    <string name="rc1401">Male</string>
-    <string name="rc1402">Female</string>
-    <string name="rc15">Current Child Status</string>
-    <string name="rc1501">Live</string>
-    <string name="rc1502">Death</string>
-    <string name="rc16">Date of Death </string>
+    <string name="rc10">Date of Delivery</string>
+    <string name="rc10_info">DD/MM/YYYY Use 98/98/9998 if not known</string>
+    <string name="rc11">Status of Pregnancy Outcome</string>
+    <string name="rc1101">Single</string>
+    <string name="rc1102">Twins</string>
+    <string name="rc1103">Triplets</string>
 
+    <string name="rc12">Gender</string>
+    <string name="rc1201">Male</string>
+    <string name="rc1202">Female</string>
+    <string name="rc13">Current Child Status</string>
+    <string name="rc1301">Live</string>
+    <string name="rc1302">Death</string>
+    <string name="rc14">Date of Death </string>
+    <string name="rc15">Current Pregnancy Status</string>
+    <string name="rc1501">Pregnant</string>
+    <string name="rc1502">Not Pregnant</string>
+    <string name="rc16">If pregnant enter LMP Date</string>
+    <string name="rc16_info">DD/MM/YYYY</string>
+    <string name="rc17">EDD Date [auto-calculated]</string>
+    <string name="rc17_info">DD/MM/YYYY</string>
 
     <string name='Q_a17_c' translatable="false">a17_c</string>
     <string name='Q_ra_lat' translatable="false">ra_lat</string>
@@ -234,6 +238,7 @@
     <string name='Q_rc05' translatable="false">rc05</string>
     <string name='Q_rc06' translatable="false">rc06</string>
     <string name='Q_rc07' translatable="false">rc07</string>
+    <string name='Q_rc07a' translatable="false">rc07a</string>
     <string name='Q_rc08' translatable="false">rc08</string>
     <string name='Q_rc09' translatable="false">rc09</string>
     <string name='Q_rc10' translatable="false">rc10</string>
@@ -243,6 +248,7 @@
     <string name='Q_rc14' translatable="false">rc14</string>
     <string name='Q_rc15' translatable="false">rc15</string>
     <string name='Q_rc16' translatable="false">rc16</string>
+    <string name='Q_rc17' translatable="false">rc17</string>
 
     <!--
     This string is used for square devices and overridden by hello_world in

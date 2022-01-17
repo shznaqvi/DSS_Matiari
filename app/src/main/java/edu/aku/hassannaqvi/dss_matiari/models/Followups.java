@@ -81,6 +81,10 @@ public class Followups extends BaseObservable implements Observable {
     private String rc12x = StringUtils.EMPTY;
     private String rc13 = StringUtils.EMPTY;
     private String rc13x = StringUtils.EMPTY;
+    private String rc14 = StringUtils.EMPTY;
+    private String rc15 = StringUtils.EMPTY;
+    private String rc16 = StringUtils.EMPTY;
+    private String rc17 = StringUtils.EMPTY;
 
     public Followups() {
 
@@ -507,6 +511,46 @@ public class Followups extends BaseObservable implements Observable {
         notifyChange(BR.rc13x);
     }
 
+    @Bindable
+    public String getRc14() {
+        return rc14;
+    }
+
+    public void setRc14(String rc14) {
+        this.rc14 = rc14;
+        notifyChange(BR.rc14);
+    }
+
+    @Bindable
+    public String getRc15() {
+        return rc15;
+    }
+
+    public void setRc15(String rc15) {
+        this.rc15 = rc15;
+        notifyChange(BR.rc15);
+    }
+
+    @Bindable
+    public String getRc16() {
+        return rc16;
+    }
+
+    public void setRc16(String rc16) {
+        this.rc16 = rc16;
+        notifyChange(BR.rc16);
+    }
+
+    @Bindable
+    public String getRc17() {
+        return rc17;
+    }
+
+    public void setRc17(String rc17) {
+        this.rc17 = rc17;
+        notifyChange(BR.rc17);
+    }
+
     private synchronized void notifyChange(int propertyId) {
         if (propertyChangeRegistry == null) {
             propertyChangeRegistry = new PropertyChangeRegistry();
@@ -551,7 +595,7 @@ public class Followups extends BaseObservable implements Observable {
         this.syncDate = cursor.getString(cursor.getColumnIndexOrThrow(FollowupsTable.COLUMN_SYNCED_DATE));
 
         sCHydrate(cursor.getString(cursor.getColumnIndexOrThrow(FollowupsTable.COLUMN_SC)));
-        sDHydrate(cursor.getString(cursor.getColumnIndexOrThrow(FollowupsTable.COLUMN_SD)));
+        /*        sDHydrate(cursor.getString(cursor.getColumnIndexOrThrow(FollowupsTable.COLUMN_SD)));*/
         return this;
     }
 
@@ -582,6 +626,10 @@ public class Followups extends BaseObservable implements Observable {
             this.rc12x = json.getString("rc12x");
             this.rc13 = json.getString("rc13");
             this.rc13x = json.getString("rc13x");
+            this.rc14 = json.getString("rc14");
+            this.rc15 = json.getString("rc15");
+            this.rc16 = json.getString("rc16");
+            this.rc17 = json.getString("rc17");
 
         }
     }
@@ -610,6 +658,11 @@ public class Followups extends BaseObservable implements Observable {
                 .put("rc12x", rc12x)
                 .put("rc13", rc13)
                 .put("rc13x", rc13x)
+                .put("rc14", rc14)
+                .put("rc15", rc15)
+                .put("rc16", rc16)
+                .put("rc17", rc17)
+
         ;
 
 
@@ -617,7 +670,7 @@ public class Followups extends BaseObservable implements Observable {
         return json.toString();
     }
 
-    public void sDHydrate(String string) throws JSONException {
+/*    public void sDHydrate(String string) throws JSONException {
         Log.d(TAG, "s4Hydrate: " + string);
         if (string != null) {
 
@@ -627,22 +680,30 @@ public class Followups extends BaseObservable implements Observable {
             this.rc11 = json.getString("rc11");
             this.rc12 = json.getString("rc12");
             this.rc13 = json.getString("rc13");
+            this.rc14 = json.getString("rc14");
+            this.rc15 = json.getString("rc15");
+            this.rc16 = json.getString("rc16");
+            this.rc17 = json.getString("rc17");
 
 
         }
-    }
+    }*/
 
 
-    public String sDtoString() throws JSONException {
+/*    public String sDtoString() throws JSONException {
         JSONObject json = new JSONObject();
 
         json.put("rc10", rc10)
                 .put("rc11", rc11)
                 .put("rc12", rc12)
-                .put("rc13", rc13);
+                .put("rc13", rc13)
+                .put("rc14", rc14)
+                .put("rc15", rc15)
+                .put("rc16", rc16)
+                .put("rc17", rc17);
 
         return json.toString();
-    }
+    }*/
 
     public JSONObject toJSONObject() throws JSONException {
 
@@ -670,7 +731,7 @@ public class Followups extends BaseObservable implements Observable {
         //  json.put(FollowupsTable.COLUMN_SYNCED_DATE, this.syncDate);
 
         json.put(FollowupsTable.COLUMN_SC, new JSONObject(sCtoString()));
-        json.put(FollowupsTable.COLUMN_SD, new JSONObject(sDtoString()));
+        /*        json.put(FollowupsTable.COLUMN_SD, new JSONObject(sDtoString()));*/
         return json;
 
     }

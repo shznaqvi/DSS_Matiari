@@ -22,7 +22,7 @@ import edu.aku.hassannaqvi.dss_matiari.R;
 import edu.aku.hassannaqvi.dss_matiari.core.MainApp;
 import edu.aku.hassannaqvi.dss_matiari.database.DatabaseHelper;
 import edu.aku.hassannaqvi.dss_matiari.models.FollowUpsSche;
-import edu.aku.hassannaqvi.dss_matiari.ui.sections.SectionC1Activity;
+import edu.aku.hassannaqvi.dss_matiari.ui.sections.SectionCxActivity;
 
 
 public class FpMwraAdapter extends RecyclerView.Adapter<FpMwraAdapter.ViewHolder> {
@@ -128,7 +128,7 @@ public class FpMwraAdapter extends RecyclerView.Adapter<FpMwraAdapter.ViewHolder
             MainApp.fpMwra = MainApp.followUpsScheMWRAList.get(position);
             MainApp.followups.populateMeta();
 
-            Intent intent = new Intent(mContext, SectionC1Activity.class);
+            Intent intent = new Intent(mContext, SectionCxActivity.class);
 
             intent.putExtra("position", position);
 

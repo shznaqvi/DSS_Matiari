@@ -21,7 +21,6 @@ import edu.aku.hassannaqvi.dss_matiari.contracts.TableContracts;
 import edu.aku.hassannaqvi.dss_matiari.core.MainApp;
 import edu.aku.hassannaqvi.dss_matiari.database.DatabaseHelper;
 import edu.aku.hassannaqvi.dss_matiari.databinding.ActivitySectionDBinding;
-import edu.aku.hassannaqvi.dss_matiari.ui.WRAEndingActivity;
 
 public class SectionDActivity extends AppCompatActivity {
 
@@ -76,7 +75,10 @@ public class SectionDActivity extends AppCompatActivity {
     private boolean updateDB() {
         int updcount = 0;
         try {
-            updcount = db.updatesFollowUpsColumn(TableContracts.FollowupsTable.COLUMN_SD, followups.sDtoString());
+
+            // Todo: Testing SECTION C
+            //updcount = db.updatesFollowUpsColumn(TableContracts.FollowupsTable.COLUMN_SD, followups.sDtoString());
+            updcount = db.updatesFollowUpsColumn(TableContracts.FollowupsTable.COLUMN_SD, followups.sCtoString());
         } catch (JSONException e) {
             Toast.makeText(this, R.string.upd_db + e.getMessage(), Toast.LENGTH_SHORT).show();
         }
