@@ -118,7 +118,7 @@
     <string name="rb03h">Husband Name</string>
     <string name="rb03f">Father Name</string>
     <string name="rb04">Date of Birth</string>
-    <string name="rb04_info" translatable="false">DD/MM/YYYY Use 98/98/9998 if not known</string>
+    <string name="rb04_info">DD/MM/YYYY Use 98/98/9998 if not known</string>
     <string name="rb05">Age in years</string>
     <string name="rb06">Marital Status</string>
     <string name="rb0601">Married</string>
@@ -162,15 +162,22 @@
     <string name="rc0801">Yes</string>
     <string name="rc0802">No</string>
     <string name="rc0803">False PW</string>
+    <string name="rc08_info">DD/MM/YYYY</string>
     <string name="rc09">Pregnancy Outcome</string>
+    <string name="rc09_info">DD/MM/YYYY</string>
     <string name="rc0901">Live Birth</string>
     <string name="rc0902">Still Birth</string>
     <string name="rc0903">Abortion / Miscarriage</string>
     <string name="rc0904">False PW</string>
 
     <string name="rc10">Date of Delivery</string>
+    <string name="rc1001">ها </string>
+    <string name="rc1002">نه </string>
+    <string name="rc1003">ڪوڙو حمل</string>
+
     <string name="rc10_info">DD/MM/YYYY Use 98/98/9998 if not known</string>
     <string name="rc11">Status of Pregnancy Outcome</string>
+    <string name="rc11_info">DD/MM/YYYY </string>
     <string name="rc1101">Single</string>
     <string name="rc1102">Twins</string>
     <string name="rc1103">Triplets</string>
@@ -178,10 +185,16 @@
     <string name="rc12">Gender</string>
     <string name="rc1201">Male</string>
     <string name="rc1202">Female</string>
+    <string name="rc1203">حمل ضايع</string>
+
+
     <string name="rc13">Current Child Status</string>
     <string name="rc1301">Live</string>
     <string name="rc1302">Death</string>
+    <string name="rc1303">ٽي ٻار</string>
     <string name="rc14">Date of Death </string>
+    <string name="rc1401">مرد</string>
+    <string name="rc1402">عورت</string>
     <string name="rc15">Current Pregnancy Status</string>
     <string name="rc1501">Pregnant</string>
     <string name="rc1502">Not Pregnant</string>

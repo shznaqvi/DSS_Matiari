@@ -120,6 +120,7 @@
     <string name="rb03h">مڙس جو نالو</string>
     <string name="rb03f">پيءُ جو نالو</string>
     <string name="rb04">ڄمڻ جي تاريخ </string>
+    <string name="rb04_info">DD/MM/YYYY Use 98/98/9998 if not known</string>
     <string name="rb05">عمر سالن ۾</string>
     <string name="rb06">ازدواجي حيثيت</string>
     <string name="rb0601">شادي شده</string>
@@ -133,6 +134,7 @@
     <string name="rb08_info">DD/MM/YYYY</string>
     <string name="rb09">متوقع ويم جي تاريخ</string>
     <string name="rb09_info">DD/MM/YYYY</string>
+
 
     <string name="rc01">عورت جو سڃاڻپ نمبر</string>
     <string name="rc02"> عورت جو نالو</string>
@@ -166,6 +168,7 @@
     <string name="rc1001">ها </string>
     <string name="rc1002">نه </string>
     <string name="rc1003">ڪوڙو حمل</string>
+    <string name="rc10_info">DD/MM/YYYY Use 98/98/9998 if not known</string>
     <string name="rc11"> ويم جي تاريخ</string>
     <string name="rc11_info">DD/MM/YYYY </string>
     <string name="rc12">حمل جي نتيجو </string>
@@ -185,6 +188,9 @@
     <string name="rc1502">مول</string>
     <string name="rc16"> وفات جي تاريخ</string>
 
+    <string name="rc16_info">DD/MM/YYYY</string>
+    <string name="rc17">EDD Date [auto-calculated]</string>
+    <string name="rc17_info">DD/MM/YYYY</string>
     <string name="istatus"> دوري جو نتيجو</string>
     <string name="istatusa">مڪمل</string>
     <string name="istatusb">بند پيل يا ڪو به اهل جواٻ ڏيندر موجود نه آهي</string>
@@ -200,5 +206,15 @@
     <string name="rb09hint">۔ٍِِEDD حساب ڪرڻ لاءِ بٽڻ تي ڪلڪ ڪريو &gt;&gt;&gt;</string>
     <string name="age_groups">عمر جو گروپ</string>
     <string name="rc0503">"انڪار ڪيو "</string>
+    <string name="rc1101">"اڪيلو ٻار "</string>
+    <string name="rc1102">جاڙا ٻار</string>
+    <string name="rc1103">"ٽي ٻار "</string>
+    <string name="rc0901">"ٻار زنده ڄائو  "</string>
+    <string name="rc0902">ٻارمئل ڄائو</string>
+    <string name="rc0903">حمل ضايع</string>
+    <string name="rc0904">ڪوڙو حمل</string>
+    <string name="rc0801">ها</string>
+    <string name="rc0802">نه</string>
+    <string name="rc0803">ڪوڙو حمل</string>
 
 </resources>
