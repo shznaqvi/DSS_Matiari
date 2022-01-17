@@ -251,8 +251,17 @@
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:checked='@{followups.rc05.equals("2")}'
-                                    android:onClick='@{()->followups.setRc05("2") + rc06.clearCheck() + rc07.clearCheck()}'
+                                    android:onClick='@{()->followups.setRc05("2") +  rc07.clearCheck()}'
                                     android:text="@string/rc0502" />
+
+                                <RadioButton
+                                    android:id="@+id/rc0503"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:checked='@{followups.rc05.equals("3")}'
+                                    android:onClick='@{()->followups.setRc05("3") +  rc07.clearCheck()}'
+                                    android:text="@string/rc0503" />
 
                             </RadioGroup>
 
@@ -265,17 +274,17 @@
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
                         android:id="@+id/fldGrprc03"
-                        android:visibility="@{followups.rc05.equals(`1`) ? View.VISIBLE : View.GONE}">
+                        android:visibility="@{!followups.rc05.equals(`1`) ? View.GONE : View.VISIBLE}">
 
-                    <!-- rc06  Radio   -->
-                    <androidx.cardview.widget.CardView
-                        android:id="@+id/fldGrpCVrb06"
-                        style="@style/cardView">
+                        <!-- rc06  Radio   -->
+                        <androidx.cardview.widget.CardView
+                            android:id="@+id/fldGrpCVrb06"
+                            style="@style/cardView">
 
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="vertical">
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical">
 
                             <LinearLayout
                                 android:layout_width="match_parent"
@@ -332,6 +341,7 @@
                                     android:id="@+id/rc0604"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
+                                    android:enabled='@{!followups.prePreg.equals("")}'
                                     android:checked='@{followups.rc06.equals("4")}'
                                     android:onClick='@{()->followups.setRc06("4")}'
                                     android:text="@string/rc0604" />
@@ -425,7 +435,7 @@
                     <androidx.cardview.widget.CardView
                         android:id="@+id/fldGrpCVrb07"
                         style="@style/cardView"
-                        android:visibility='@{followups.rc06.equals("4") || followups.rc05.equals(`2`)  ? View.GONE : View.VISIBLE}'>
+                        android:visibility='@{!followups.rc05.equals("1") || followups.rc06.equals(`4`) ? View.GONE : View.VISIBLE}'>
 
                         <LinearLayout
                             android:layout_width="match_parent"

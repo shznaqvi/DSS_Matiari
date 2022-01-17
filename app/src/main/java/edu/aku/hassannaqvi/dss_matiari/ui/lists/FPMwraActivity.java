@@ -5,6 +5,8 @@ import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.followups;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.mwraCount;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.mwraList;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.selectedFemale;
+import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.selectedHhNO;
+import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.selectedVillage;
 
 import android.app.Activity;
 import android.content.DialogInterface;
@@ -33,7 +35,6 @@ import edu.aku.hassannaqvi.dss_matiari.models.Followups;
 import edu.aku.hassannaqvi.dss_matiari.models.Households;
 import edu.aku.hassannaqvi.dss_matiari.models.MWRA;
 import edu.aku.hassannaqvi.dss_matiari.ui.FPEndingActivity;
-import edu.aku.hassannaqvi.dss_matiari.ui.WRAEndingActivity;
 import edu.aku.hassannaqvi.dss_matiari.ui.sections.SectionBActivity;
 
 
@@ -237,14 +238,19 @@ public class FPMwraActivity extends AppCompatActivity {
       /*  Intent intent = new Intent(FPMwraActivity.this, SectionBActivity.class);
         MemberInfoLauncher.launch(intent);
 */
+
+        int maxMWRA = db.getMaxMWRSNoBYHH(selectedVillage, selectedHhNO);
+        int maxFpMWRA = db.getMaxMWRANoBYHHFromFolloupsSche(selectedVillage, selectedHhNO);
+        mwraCount = Math.max(maxMWRA, maxFpMWRA);
         startActivityForResult(new Intent(this, SectionBActivity.class), 3);
         // finish();
 
     }
 
     public void btnContinue(View view) {
-        if (followUpsScheMWRAList.size() < Integer.parseInt(MainApp.households.getRa18())) {
-            displayProceedDialog();
+        if (MainApp.fpHouseholds.getUid().equals("")) {
+            setResult(RESULT_CANCELED);
+            finish();
 
         } else {
             proceedSelect();
@@ -259,7 +265,8 @@ public class FPMwraActivity extends AppCompatActivity {
             i.setFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT);
             i.putExtra("complete", false);
             startActivity(i);*/
-        startActivity(new Intent(this, FPEndingActivity.class).putExtra("complete", false));
+        // startActivity(new Intent(this, FPEndingActivity.class).putExtra("complete", false));
+        setResult(RESULT_CANCELED);
         finish();
 
         //startActivity(new Intent(this, MainActivity.class));
@@ -367,6 +374,7 @@ public class FPMwraActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
+        super.onBackPressed();
         // Toast.makeText(getApplicationContext(), "Back Press Not Allowed", Toast.LENGTH_LONG).show();
         setResult(RESULT_OK);
         finish();

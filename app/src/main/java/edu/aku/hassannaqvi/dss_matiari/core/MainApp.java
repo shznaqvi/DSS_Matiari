@@ -87,6 +87,7 @@ public class MainApp extends Application {
     public static String previousAddress = "";
     public static String dateOfVisit = "";
     public static String selectedVillage = "0000";
+    public static String selectedHhNO = "0000";
     public static String leaderCode;
     public static String selectedUC = "00";
     public static Followups followups;

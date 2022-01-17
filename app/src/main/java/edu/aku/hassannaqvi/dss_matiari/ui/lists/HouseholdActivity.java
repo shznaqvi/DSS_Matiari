@@ -173,6 +173,7 @@ public class HouseholdActivity extends AppCompatActivity {
         int maxFpHH = db.getMaxHHNoFromFolloupsSche(selectedVillage);
         int maxHHFinal = Math.max(maxHH, maxFpHH);
         MainApp.households.setRa09(String.valueOf(maxHHFinal + 1));
+        MainApp.selectedHhNO = String.valueOf(maxHHFinal + 1);
 
         // Increment Household Number by 1 (Old Method)
         // MainApp.households.setRa09(String.valueOf(db.getMaxHHNo(selectedVillage) + 1));

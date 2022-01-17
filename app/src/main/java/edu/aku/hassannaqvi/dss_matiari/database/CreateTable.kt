@@ -51,9 +51,17 @@ object CreateTable {
             + MWRATable.COLUMN_UC_CODE + " TEXT,"
             + MWRATable.COLUMN_STRUCTURE_NO + " TEXT,"
             + MWRATable.COLUMN_HOUSEHOLD_NO + " TEXT,"
+            + MWRATable.COLUMN_SNO + " TEXT,"
             + MWRATable.COLUMN_SB + " TEXT"
             + " );"
             )
+
+    const val SQL_ALTER_MWRA_ADD_SNO = ("ALTER TABLE "
+            + MWRATable.TABLE_NAME
+            + "ADD " + MWRATable.COLUMN_SNO + " TEXT;"
+
+            )
+
     const val SQL_CREATE_FOLLOWUPS = ("CREATE TABLE "
             + FollowupsTable.TABLE_NAME + "("
             + FollowupsTable.COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"

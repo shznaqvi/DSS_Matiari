@@ -131,6 +131,7 @@ public class FPHouseholdAdapter extends RecyclerView.Adapter<FPHouseholdAdapter.
         Intent intent = new Intent(mContext, FPMwraActivity.class);
         intent.putExtra("position", position);
         MainApp.selectedFpHousehold = position;
+        MainApp.selectedHhNO = MainApp.followUpsScheHHList.get(position).getHhNo();
         intent.putExtra("position", position);
 
         ((Activity) mContext).startActivityForResult(intent, 2);

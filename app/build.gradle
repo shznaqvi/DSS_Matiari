@@ -133,4 +133,7 @@ dependencies {
 
     // Permissions Handeling
     implementation 'com.karumi:dexter:6.2.3'
+
+    // for Debug Database
+    debugImplementation 'com.amitshekhar.android:debug-db:1.0.6'
 }

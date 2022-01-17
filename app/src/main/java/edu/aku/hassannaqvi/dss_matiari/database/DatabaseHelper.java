@@ -2,6 +2,7 @@ package edu.aku.hassannaqvi.dss_matiari.database;
 
 import static edu.aku.hassannaqvi.dss_matiari.database.CreateTable.DATABASE_NAME;
 import static edu.aku.hassannaqvi.dss_matiari.database.CreateTable.DATABASE_VERSION;
+import static edu.aku.hassannaqvi.dss_matiari.database.CreateTable.SQL_ALTER_MWRA_ADD_SNO;
 import static edu.aku.hassannaqvi.dss_matiari.database.CreateTable.SQL_ALTER_USERS;
 import static edu.aku.hassannaqvi.dss_matiari.database.CreateTable.SQL_CREATE_FOLLOWUPS;
 import static edu.aku.hassannaqvi.dss_matiari.database.CreateTable.SQL_CREATE_FOLLOWUPSCHE;
@@ -96,6 +97,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             case 1:
                 db.execSQL(SQL_ALTER_USERS);
             case 2: // Added followups
+                db.execSQL(SQL_ALTER_MWRA_ADD_SNO);
                 db.execSQL(SQL_CREATE_FOLLOWUPS);
                 db.execSQL(SQL_CREATE_PREGNANCY);
                 db.execSQL(SQL_CREATE_OUTCOME);
@@ -149,6 +151,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         values.put(MWRATable.COLUMN_UC_CODE, mwra.getUcCode());
         values.put(MWRATable.COLUMN_VILLAGE_CODE, mwra.getVillageCode());
         values.put(MWRATable.COLUMN_STRUCTURE_NO, mwra.getStructureNo());
+        values.put(MWRATable.COLUMN_SNO, mwra.getsNo());
         values.put(MWRATable.COLUMN_HOUSEHOLD_NO, mwra.getHhNo());
         values.put(MWRATable.COLUMN_SB, mwra.sBtoString());
         values.put(MWRATable.COLUMN_ISTATUS, mwra.getiStatus());
@@ -771,7 +774,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         return insertCount;
     }
-
 
 
     public Collection<Villages> getVillage() {
@@ -1418,6 +1420,25 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return Math.round(maxHHno);
     }
 
+    public int getMaxMWRSNoBYHH(String vCode, String hhNo) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor c = db.rawQuery(
+                "SELECT " +
+                        "MAX(" + MWRATable.COLUMN_SNO + ") AS " + MWRATable.COLUMN_SNO +
+                        " FROM " + MWRATable.TABLE_NAME +
+                        " WHERE " + MWRATable.COLUMN_VILLAGE_CODE + "=? AND " +
+                        MWRATable.COLUMN_HOUSEHOLD_NO + "=?  " +
+                        " GROUP BY " + MWRATable.COLUMN_HOUSEHOLD_NO
+                ,
+                new String[]{vCode, hhNo});
+        float maxHHno = 0;
+        while (c.moveToNext()) {
+            maxHHno = c.getFloat(c.getColumnIndexOrThrow(MWRATable.COLUMN_SNO));
+        }
+        Log.d(TAG, "getMaxHHNo: " + maxHHno);
+        return Math.round(maxHHno);
+    }
+
 
     public int getMaxHHNoFromFolloupsSche(String vCode) {
         SQLiteDatabase db = this.getReadableDatabase();
@@ -1432,6 +1453,25 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         float maxHHno = 0;
         while (c.moveToNext()) {
             maxHHno = c.getFloat(c.getColumnIndexOrThrow(TableFollowUpsSche.COLUMN_HOUSEHOLD_NO));
+        }
+        Log.d(TAG, "getMaxHHNo: " + maxHHno);
+        return Math.round(maxHHno);
+    }
+
+    public int getMaxMWRANoBYHHFromFolloupsSche(String vCode, String hhNo) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor c = db.rawQuery(
+                "SELECT " +
+                        "MAX(" + TableFollowUpsSche.COLUMN_RB01 + ") AS " + TableFollowUpsSche.COLUMN_RB01 +
+                        " FROM " + TableFollowUpsSche.TABLE_NAME +
+                        " WHERE " + TableFollowUpsSche.COLUMN_VILLAGE_CODE + "=? AND " +
+                        TableFollowUpsSche.COLUMN_HOUSEHOLD_NO + "=?  " +
+                        " GROUP BY " + TableFollowUpsSche.COLUMN_HOUSEHOLD_NO
+                ,
+                new String[]{vCode, hhNo});
+        float maxHHno = 0;
+        while (c.moveToNext()) {
+            maxHHno = c.getFloat(c.getColumnIndexOrThrow(TableFollowUpsSche.COLUMN_RB01));
         }
         Log.d(TAG, "getMaxHHNo: " + maxHHno);
         return Math.round(maxHHno);
@@ -1536,7 +1576,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         String groupBy = TableFollowUpsSche.COLUMN_HDSSID;
         String having = null;
 
-        String orderBy = TableFollowUpsSche.COLUMN_RA01 + " Desc";
+        String orderBy = TableFollowUpsSche.COLUMN_HOUSEHOLD_NO + " ASC";
 
         ArrayList<FollowUpsSche> followUpsSches = new ArrayList<>();
         c = db.query(

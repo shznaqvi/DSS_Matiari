@@ -9,9 +9,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
+
+import org.json.JSONException;
 
 import java.util.List;
 
@@ -58,7 +61,17 @@ public class FpMwraAdapter extends RecyclerView.Adapter<FpMwraAdapter.ViewHolder
         ImageView indicator = viewHolder.indicator;
         TextView secStatus = viewHolder.secStatus;
 
-        String pregStatus = followUpsSche.getRb07().equals("1") ? "Pregnant" : "Not Pregnant";
+        String pregStatus = followUpsSche.getRb07().equals("1") ? "PW" : "  ";
+        try {
+            String curPregStatus = db.getFollowupsBySno(followUpsSche.getRb01(), followUpsSche.getfRound()).getRc07();
+            if (!curPregStatus.equals("")) {
+                pregStatus = curPregStatus.equals("1") ? "Pregnant" : " Not Pregnant ";
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+            Toast.makeText(mContext, "JSONException(Followups): " + e.getMessage(), Toast.LENGTH_SHORT).show();
+        }
+
 
         MainApp.fmComplete = completeCount == MainApp.mwraCount;
 
@@ -67,10 +80,8 @@ public class FpMwraAdapter extends RecyclerView.Adapter<FpMwraAdapter.ViewHolder
         String marStatus = "";
         String wifeOrDaughter = "";
 
+        indicator.setBackgroundColor(!followUpsSche.getfpDoneDt().equals("") ? ContextCompat.getColor(mContext, R.color.teal_700) : ContextCompat.getColor(mContext, R.color.colorAccent));
 
-        if (!followUpsSche.getfpDoneDt().equals("")) {
-            indicator.setBackgroundColor(ContextCompat.getColor(mContext, R.color.teal_700));
-        }
 /*        switch (followUpsSche.getRb06()) {
             case "1":
                 marStatus = "Married";
@@ -102,11 +113,11 @@ public class FpMwraAdapter extends RecyclerView.Adapter<FpMwraAdapter.ViewHolder
 
         fAge.setText(wifeOrDaughter + followUpsSche.getRb03() + " | " + followUpsSche.getRb05() + "y  ");
 
-        if (followUpsSche.getRb07().equals("1")) {
-            secStatus.setBackgroundColor(ContextCompat.getColor(mContext, R.color.redLight));
-            indicator.setImageDrawable(ContextCompat.getDrawable(mContext, R.drawable.ic_baseline_pregnant_woman_24));
 
-        }
+        secStatus.setBackgroundColor(followUpsSche.getRb07().equals("1") ? ContextCompat.getColor(mContext, R.color.redLight) : ContextCompat.getColor(mContext, R.color.grayLight));
+        indicator.setImageDrawable(followUpsSche.getRb07().equals("1") ? ContextCompat.getDrawable(mContext, R.drawable.ic_baseline_pregnant_woman_24) : ContextCompat.getDrawable(mContext, R.drawable.ic_girl));
+
+
         fMaritalStatus.setText(marStatus);
         secStatus.setText(pregStatus);
 

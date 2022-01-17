@@ -4,7 +4,6 @@ import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.followups;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.fpHouseholds;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.sharedPref;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -44,8 +43,7 @@ public class SectionC1Activity extends AppCompatActivity {
         bi = DataBindingUtil.setContentView(this, R.layout.activity_section_c);
         db = MainApp.appInfo.dbHelper;
 
-        bi.fldGrp01.setVisibility(View.VISIBLE);
-        bi.fldGrp02.setVisibility(MainApp.fpMwra.getRb07().equals("1") && bi.rc0502.isChecked() ? View.GONE : View.VISIBLE);    // Current Pregnancy Status
+
 
         // Set Round Number from followups data
         MainApp.round = MainApp.fpMwra.getfRound();
@@ -64,7 +62,10 @@ public class SectionC1Activity extends AppCompatActivity {
             // TODO: Marital Status not received from server
             //MainApp.followups.setRc06(MainApp.fpMwra.getRb06());
             MainApp.followups.setPrePreg(MainApp.fpMwra.getRb07());
+
         }
+        bi.fldGrp01.setVisibility(View.VISIBLE);
+        bi.fldGrp02.setVisibility(MainApp.followups.getPrePreg().equals("1") ? View.GONE : View.VISIBLE);    // Current Pregnancy Status
 
         bi.setFpHouseholds(MainApp.fpHouseholds);
         bi.setFollowups(MainApp.followups);
@@ -280,7 +281,7 @@ public class SectionC1Activity extends AppCompatActivity {
             insertFpHousehold();
         }
 
-         followups.populateMeta();
+        followups.populateMeta();
 
         long rowId = 0;
         try {
@@ -358,9 +359,13 @@ public class SectionC1Activity extends AppCompatActivity {
 
     public void btnEnd(View view) {
         setResult(RESULT_CANCELED);
-        insertNewRecord();
-        updateDB();
-        startActivity(new Intent(this, WRAEndingActivity.class).addFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT).putExtra("complete", false));
+        if (followups.getRc05().equals("2") || followups.getRc05().equals("3")) {
+            if (!formValidation()) return;
+            setResult(RESULT_OK);
+            insertNewRecord();
+            updateDB();
+            startActivity(new Intent(this, WRAEndingActivity.class).addFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT).putExtra("complete", false));
+        }
         finish();
 
     }

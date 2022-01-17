@@ -42,6 +42,7 @@ public class TableContracts {
         public static final String COLUMN_VILLAGE_CODE = "villageCode";
         public static final String COLUMN_HOUSEHOLD_NO = "hhNo";
         public static final String COLUMN_STRUCTURE_NO = "structureNo";
+        public static final String COLUMN_SNO = "sNo";
         public static final String COLUMN_SB = "s2";
 
 

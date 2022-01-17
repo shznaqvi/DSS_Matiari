@@ -46,6 +46,7 @@ public class MWRA extends BaseObservable implements Observable {
     private String villageCode = StringUtils.EMPTY;
     private String hhNo = StringUtils.EMPTY;
     private String structureNo = StringUtils.EMPTY;
+    private String sNo = StringUtils.EMPTY;
 
     private String deviceId = StringUtils.EMPTY;
     private String deviceTag = StringUtils.EMPTY;
@@ -188,6 +189,14 @@ public class MWRA extends BaseObservable implements Observable {
         this.structureNo = structureNo;
     }
 
+    public String getsNo() {
+        return sNo;
+    }
+
+    public void setsNo(String sNo) {
+        this.sNo = sNo;
+    }
+
     public String getDeviceId() {
         return deviceId;
     }
@@ -268,6 +277,7 @@ public class MWRA extends BaseObservable implements Observable {
 
     public void setRb01(String rb01) {
         this.rb01 = rb01;
+        this.sNo = rb01;
         notifyChange(BR.rb01);
     }
 
@@ -408,6 +418,7 @@ public class MWRA extends BaseObservable implements Observable {
         this.ucCode = cursor.getString(cursor.getColumnIndexOrThrow(MWRATable.COLUMN_UC_CODE));
         this.villageCode = cursor.getString(cursor.getColumnIndexOrThrow(MWRATable.COLUMN_VILLAGE_CODE));
         this.structureNo = cursor.getString(cursor.getColumnIndexOrThrow(MWRATable.COLUMN_STRUCTURE_NO));
+        this.sNo = cursor.getString(cursor.getColumnIndexOrThrow(MWRATable.COLUMN_SNO));
         this.hhNo = cursor.getString(cursor.getColumnIndexOrThrow(MWRATable.COLUMN_HOUSEHOLD_NO));
         this.deviceId = cursor.getString(cursor.getColumnIndexOrThrow(MWRATable.COLUMN_DEVICEID));
         this.deviceTag = cursor.getString(cursor.getColumnIndexOrThrow(MWRATable.COLUMN_DEVICETAGID));
@@ -478,6 +489,7 @@ public class MWRA extends BaseObservable implements Observable {
         json.put(MWRATable.COLUMN_UC_CODE, this.ucCode);
         json.put(MWRATable.COLUMN_VILLAGE_CODE, this.villageCode);
         json.put(MWRATable.COLUMN_STRUCTURE_NO, this.structureNo);
+        json.put(MWRATable.COLUMN_SNO, this.sNo);
         json.put(MWRATable.COLUMN_HOUSEHOLD_NO, this.hhNo);
         json.put(MWRATable.COLUMN_DEVICEID, this.deviceId);
         json.put(MWRATable.COLUMN_DEVICETAGID, this.deviceTag);

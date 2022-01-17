@@ -4,6 +4,8 @@ import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.mwra;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.mwraCount;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.mwraList;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.selectedFemale;
+import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.selectedHhNO;
+import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.selectedVillage;
 
 import android.app.Activity;
 import android.content.DialogInterface;
@@ -176,6 +178,10 @@ public class MwraActivity extends AppCompatActivity {
         MainApp.mwra = new MWRA();
         Intent intent = new Intent(this, SectionBActivity.class);
         //   finish();
+
+        int maxMWRA = db.getMaxMWRSNoBYHH(selectedVillage, selectedHhNO);
+        int maxFpMWRA = db.getMaxMWRANoBYHHFromFolloupsSche(selectedVillage, selectedHhNO);
+        mwraCount = Math.max(maxMWRA, maxFpMWRA);
         MemberInfoLauncher.launch(intent);
     }
 
