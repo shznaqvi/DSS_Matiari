@@ -77,11 +77,20 @@ public class Followups extends BaseObservable implements Observable {
     private String rc10 = StringUtils.EMPTY;
     private String rc11 = StringUtils.EMPTY;
     private String rc11x = StringUtils.EMPTY;
+    private String rc1201 = StringUtils.EMPTY;
+    private String rc1202 = StringUtils.EMPTY;
+    private String rc1203 = StringUtils.EMPTY;
     private String rc12 = StringUtils.EMPTY;
     private String rc12x = StringUtils.EMPTY;
+    private String rc1301 = StringUtils.EMPTY;
+    private String rc1302 = StringUtils.EMPTY;
+    private String rc1303 = StringUtils.EMPTY;
     private String rc13 = StringUtils.EMPTY;
     private String rc13x = StringUtils.EMPTY;
     private String rc14 = StringUtils.EMPTY;
+    private String rc1401 = StringUtils.EMPTY;
+    private String rc1402 = StringUtils.EMPTY;
+    private String rc1403 = StringUtils.EMPTY;
     private String rc15 = StringUtils.EMPTY;
     private String rc16 = StringUtils.EMPTY;
     private String rc17 = StringUtils.EMPTY;
@@ -345,6 +354,40 @@ public class Followups extends BaseObservable implements Observable {
 
 
     @Bindable
+    public String getRc12() {
+        return rc12;
+    }
+
+    public void setRc12(String rc12) {
+        this.rc12 = rc12;
+
+        notifyChange(BR.rc12);
+    }
+
+    @Bindable
+    public String getRc13() {
+        return rc13;
+    }
+
+    public void setRc13(String rc13) {
+        this.rc13 = rc13;
+
+        notifyChange(BR.rc13);
+    }
+
+    @Bindable
+    public String getRc14() {
+        return rc14;
+    }
+
+    public void setRc14(String rc14) {
+        this.rc14 = rc14;
+
+        notifyChange(BR.rc14);
+    }
+
+
+    @Bindable
     public String getRc02() {
         return rc02;
     }
@@ -406,9 +449,18 @@ public class Followups extends BaseObservable implements Observable {
         setRc09(this.rc07.equals("1") ? this.rc09 : "");
         setRc10(this.rc07.equals("1") ? this.rc10 : "");
         setRc11(this.rc07.equals("1") ? this.rc11 : "");
-        setRc12(this.rc07.equals("1") ? this.rc12 : "");
-        setRc13(this.rc07.equals("1") ? this.rc13 : "");
-        setRc14(this.rc07.equals("1") ? this.rc14 : "");
+        setRc1201(this.rc07.equals("1") ? this.rc1201 : "");
+        setRc1301(this.rc07.equals("1") ? this.rc1301 : "");
+        setRc1401(this.rc07.equals("1") ? this.rc1401 : "");
+
+        setRc1202(this.rc07.equals("1") ? this.rc1202 : "");
+        setRc1302(this.rc07.equals("1") ? this.rc1302 : "");
+        setRc1402(this.rc07.equals("1") ? this.rc1402 : "");
+
+        setRc1203(this.rc07.equals("1") ? this.rc1203 : "");
+        setRc1303(this.rc07.equals("1") ? this.rc1303 : "");
+        setRc1403(this.rc07.equals("1") ? this.rc1403 : "");
+
 
         Log.d(TAG, "setRc07: " + this.rc07);
         notifyChange(BR.rc07);
@@ -424,9 +476,15 @@ public class Followups extends BaseObservable implements Observable {
         setRc09(this.rc08.equals("1") ? "" : this.rc09);
         setRc10(this.rc08.equals("1") ? "" : this.rc10);
         setRc11(this.rc08.equals("1") ? "" : this.rc11);
-        setRc12(this.rc08.equals("1") ? "" : this.rc12);
-        setRc13(this.rc08.equals("1") ? "" : this.rc13);
-        setRc14(this.rc08.equals("1") ? "" : this.rc14);
+        setRc1201(this.rc08.equals("1") ? "" : this.rc1201);
+        setRc1301(this.rc08.equals("1") ? "" : this.rc1301);
+        setRc1401(this.rc08.equals("1") ? "" : this.rc1401);
+        setRc1202(this.rc08.equals("1") ? "" : this.rc1202);
+        setRc1302(this.rc08.equals("1") ? "" : this.rc1302);
+        setRc1402(this.rc08.equals("1") ? "" : this.rc1402);
+        setRc1203(this.rc08.equals("1") ? "" : this.rc1203);
+        setRc1303(this.rc08.equals("1") ? "" : this.rc1303);
+        setRc1403(this.rc08.equals("1") ? "" : this.rc1403);
         setRc15(this.rc08.equals("1") ? "" : this.rc15);
         setRc16(this.rc08.equals("1") ? "" : this.rc16);
         setRc17(this.rc08.equals("1") ? "" : this.rc17);
@@ -491,27 +549,25 @@ public class Followups extends BaseObservable implements Observable {
     }
 
 
-
-
     @Bindable
-    public String getRc12() {
-        return rc12;
+    public String getRc1201() {
+        return rc1201;
     }
 
-    public void setRc12(String rc12) {
-        this.rc12 = rc12;
-        notifyChange(BR.rc12);
+    public void setRc1201(String rc1201) {
+        this.rc1201 = rc1201;
+        notifyChange(BR.rc1201);
     }
 
     @Bindable
-    public String getRc13() {
-        return rc13;
+    public String getRc1301() {
+        return rc1301;
     }
 
-    public void setRc13(String rc13) {
-        this.rc13 = rc13;
-        setRc14(this.rc13.equals("1") ? "" : this.rc14);
-        notifyChange(BR.rc13);
+    public void setRc1301(String rc1301) {
+        this.rc1301 = rc1301;
+        setRc1401(this.rc1301.equals("1") ? "" : this.rc1401);
+        notifyChange(BR.rc1301);
     }
 
     @Bindable
@@ -520,18 +576,84 @@ public class Followups extends BaseObservable implements Observable {
     }
 
     public void setRc13x(String rc13x) {
-        this.rc12x = rc13x;
+        this.rc13x = rc13x;
         notifyChange(BR.rc13x);
     }
 
     @Bindable
-    public String getRc14() {
-        return rc14;
+    public String getRc1401() {
+        return rc1401;
     }
 
-    public void setRc14(String rc14) {
-        this.rc14 = rc14;
-        notifyChange(BR.rc14);
+    public void setRc1401(String rc1401) {
+        this.rc1401 = rc1401;
+        notifyChange(BR.rc1401);
+    }
+
+    @Bindable
+    public String getRc1202() {
+        return rc1202;
+    }
+
+    public void setRc1202(String rc1202) {
+        this.rc1202 = rc1202;
+        notifyChange(BR.rc1202);
+    }
+
+
+    @Bindable
+    public String getRc1302() {
+        return rc1302;
+    }
+
+    public void setRc1302(String rc1302) {
+        this.rc1302 = rc1302;
+        setRc1402(this.rc1302.equals("1") ? "" : this.rc1402);
+        notifyChange(BR.rc1302);
+    }
+
+
+    @Bindable
+    public String getRc1402() {
+        return rc1402;
+    }
+
+    public void setRc1402(String rc1402) {
+        this.rc1402 = rc1402;
+        notifyChange(BR.rc1402);
+    }
+
+    @Bindable
+    public String getRc1203() {
+        return rc1203;
+    }
+
+    public void setRc1203(String rc1203) {
+        this.rc1203 = rc1203;
+        notifyChange(BR.rc1203);
+    }
+
+
+    @Bindable
+    public String getRc1303() {
+        return rc1303;
+    }
+
+    public void setRc1303(String rc1303) {
+        this.rc1303 = rc1303;
+        setRc1403(this.rc1303.equals("1") ? "" : this.rc1403);
+        notifyChange(BR.rc1303);
+    }
+
+
+    @Bindable
+    public String getRc1403() {
+        return rc1403;
+    }
+
+    public void setRc1403(String rc1403) {
+        this.rc1403 = rc1403;
+        notifyChange(BR.rc1403);
     }
 
     @Bindable
@@ -645,11 +767,19 @@ public class Followups extends BaseObservable implements Observable {
             this.rc09 = json.getString("rc09");
             this.rc11 = json.getString("rc11");
             this.rc11x = json.getString("rc11x");
-            this.rc12 = json.getString("rc12");
+            this.rc1201 = json.getString("rc1201");
             this.rc12x = json.getString("rc12x");
-            this.rc13 = json.getString("rc13");
+            this.rc1301 = json.getString("rc1301");
             this.rc13x = json.getString("rc13x");
-            this.rc14 = json.getString("rc14");
+            this.rc1401 = json.getString("rc1401");
+            this.rc1202 = json.getString("rc1202");
+            this.rc1302 = json.getString("rc1302");
+            this.rc1402 = json.getString("rc1402");
+
+            this.rc1203 = json.getString("rc1203");
+            this.rc1303 = json.getString("rc1303");
+            this.rc1403 = json.getString("rc1403");
+
             this.rc15 = json.getString("rc15");
             this.rc16 = json.getString("rc16");
             this.rc17 = json.getString("rc17");
@@ -677,11 +807,17 @@ public class Followups extends BaseObservable implements Observable {
                 .put("rc09", rc09)
                 .put("rc11", rc11)
                 .put("rc11x", rc11x)
-                .put("rc12", rc12)
+                .put("rc1201", rc1201)
                 .put("rc12x", rc12x)
-                .put("rc13", rc13)
+                .put("rc1301", rc1301)
                 .put("rc13x", rc13x)
-                .put("rc14", rc14)
+                .put("rc1401", rc1401)
+                .put("rc1202", rc1202)
+                .put("rc1302", rc1302)
+                .put("rc1402", rc1402)
+                .put("rc1203", rc1203)
+                .put("rc1303", rc1303)
+                .put("rc1403", rc1403)
                 .put("rc15", rc15)
                 .put("rc16", rc16)
                 .put("rc17", rc17)
