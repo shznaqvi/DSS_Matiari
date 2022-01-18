@@ -404,6 +404,12 @@ public class Followups extends BaseObservable implements Observable {
         this.rc07 = rc07;
         setRc08(this.rc07.equals("1") ? this.rc08 : "");
         setRc09(this.rc07.equals("1") ? this.rc09 : "");
+        setRc10(this.rc07.equals("1") ? this.rc10 : "");
+        setRc11(this.rc07.equals("1") ? this.rc11 : "");
+        setRc12(this.rc07.equals("1") ? this.rc12 : "");
+        setRc13(this.rc07.equals("1") ? this.rc13 : "");
+        setRc14(this.rc07.equals("1") ? this.rc14 : "");
+
         Log.d(TAG, "setRc07: " + this.rc07);
         notifyChange(BR.rc07);
     }
@@ -415,11 +421,16 @@ public class Followups extends BaseObservable implements Observable {
 
     public void setRc08(String rc08) {
         this.rc08 = rc08;
-        if (!this.rc08.equals("")) {
-            setRc09(calcEDD());
-        } else {
-            setRc09("");
-        }
+        setRc09(this.rc08.equals("1") ? "" : this.rc09);
+        setRc10(this.rc08.equals("1") ? "" : this.rc10);
+        setRc11(this.rc08.equals("1") ? "" : this.rc11);
+        setRc12(this.rc08.equals("1") ? "" : this.rc12);
+        setRc13(this.rc08.equals("1") ? "" : this.rc13);
+        setRc14(this.rc08.equals("1") ? "" : this.rc14);
+        setRc15(this.rc08.equals("1") ? "" : this.rc15);
+        setRc16(this.rc08.equals("1") ? "" : this.rc16);
+        setRc17(this.rc08.equals("1") ? "" : this.rc17);
+
         notifyChange(BR.rc08);
     }
 
@@ -430,6 +441,7 @@ public class Followups extends BaseObservable implements Observable {
 
     public void setRc09(String rc09) {
         this.rc09 = rc09;
+        setRc10(this.rc09.equals("3") || this.rc09.equals("4") ? "" : this.rc10);
         notifyChange(BR.rc09);
     }
 
@@ -441,9 +453,9 @@ public class Followups extends BaseObservable implements Observable {
     public void setRc10(String rc10) {
         this.rc10 = rc10;
 
-        setRc11(this.rc10.equals("1") || this.rc10.equals("3") ? "" : this.rc11);
+        /*setRc11(this.rc10.equals("1") || this.rc10.equals("3") ? "" : this.rc11);
         setRc12(this.rc10.equals("1") || this.rc10.equals("3") ? "" : this.rc12);
-        setRc13(this.rc10.equals("1") || this.rc10.equals("3") ? "" : this.rc13);
+        setRc13(this.rc10.equals("1") || this.rc10.equals("3") ? "" : this.rc13);*/
         notifyChange(BR.rc10);
     }
 
@@ -498,6 +510,7 @@ public class Followups extends BaseObservable implements Observable {
 
     public void setRc13(String rc13) {
         this.rc13 = rc13;
+        setRc14(this.rc13.equals("1") ? "" : this.rc14);
         notifyChange(BR.rc13);
     }
 
@@ -528,6 +541,11 @@ public class Followups extends BaseObservable implements Observable {
 
     public void setRc15(String rc15) {
         this.rc15 = rc15;
+
+        setRc16(this.rc15.equals("1") ? this.rc16 : "");
+        setRc17(this.rc15.equals("1") ? this.rc17 : "");
+
+
         notifyChange(BR.rc15);
     }
 
@@ -538,6 +556,11 @@ public class Followups extends BaseObservable implements Observable {
 
     public void setRc16(String rc16) {
         this.rc16 = rc16;
+        if (!this.rc16.equals("")) {
+            setRc17(calcEDD());
+        } else {
+            setRc17("");
+        }
         notifyChange(BR.rc16);
     }
 
@@ -753,7 +776,7 @@ public class Followups extends BaseObservable implements Observable {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
 
         try {
-            cal.setTime(sdf.parse(getRc08()));// all done
+            cal.setTime(sdf.parse(getRc16()));// all done
 
             // Set EDD by default
             cal.add(Calendar.DAY_OF_YEAR, 7);

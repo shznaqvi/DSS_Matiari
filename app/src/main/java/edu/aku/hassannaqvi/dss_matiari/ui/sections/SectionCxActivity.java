@@ -27,12 +27,13 @@ import edu.aku.hassannaqvi.dss_matiari.contracts.TableContracts;
 import edu.aku.hassannaqvi.dss_matiari.core.MainApp;
 import edu.aku.hassannaqvi.dss_matiari.database.DatabaseHelper;
 import edu.aku.hassannaqvi.dss_matiari.databinding.ActivitySectionCBinding;
+import edu.aku.hassannaqvi.dss_matiari.databinding.ActivitySectionCxBinding;
 import edu.aku.hassannaqvi.dss_matiari.ui.WRAEndingActivity;
 
 public class SectionCxActivity extends AppCompatActivity {
 
-    private static final String TAG = "SectionC1Activity";
-    ActivitySectionCBinding bi;
+    private static final String TAG = "SectionCxActivity";
+    ActivitySectionCxBinding bi;
     private DatabaseHelper db;
 
     @Override
@@ -40,7 +41,7 @@ public class SectionCxActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         String lang = sharedPref.getString("lang", "1");
         setTheme(lang.equals("1") ? R.style.AppThemeEnglish1 : R.style.AppThemeUrdu);
-        bi = DataBindingUtil.setContentView(this, R.layout.activity_section_c);
+        bi = DataBindingUtil.setContentView(this, R.layout.activity_section_cx);
         db = MainApp.appInfo.dbHelper;
 
 
@@ -63,8 +64,8 @@ public class SectionCxActivity extends AppCompatActivity {
             MainApp.followups.setPrePreg(MainApp.fpMwra.getRb07());
 
         }
-        bi.fldGrp01.setVisibility(View.VISIBLE);
-        bi.fldGrp02.setVisibility(MainApp.followups.getPrePreg().equals("1") ? View.GONE : View.VISIBLE);    // Current Pregnancy Status
+        //bi.fldGrp01.setVisibility(View.VISIBLE);
+        //bi.fldGrp02.setVisibility(MainApp.followups.getPrePreg().equals("1") ? View.VISIBLE : View.GONE);    // Current Pregnancy Status
 
         bi.setFpHouseholds(MainApp.fpHouseholds);
         bi.setFollowups(MainApp.followups);
@@ -133,12 +134,12 @@ public class SectionCxActivity extends AppCompatActivity {
             bi.rb04.setMinDate(minDob);*/
 
             // LMP
-            bi.rc08.setMaxDate(maxLMP);
-            bi.rc08.setMinDate(minLMP);
+            bi.rc16.setMaxDate(maxLMP);
+            bi.rc16.setMinDate(minLMP);
 
             // EDD
-            bi.rc09.setMaxDate(maxEDD);
-            bi.rc09.setMinDate(minEDD);
+            bi.rc17.setMaxDate(maxEDD);
+            bi.rc17.setMinDate(minEDD);
 
         } catch (ParseException e) {
             e.printStackTrace();
@@ -211,7 +212,7 @@ public class SectionCxActivity extends AppCompatActivity {
         saveDraft();
         if (MainApp.followups.getUid().equals("") ? insertNewRecord() : updateDB()) {
             setResult(RESULT_OK);
-            // startActivity(new Intent(this, SectionDActivity.class).addFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT).putExtra("complete", true));
+             startActivity(new Intent(this, WRAEndingActivity.class).addFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT).putExtra("complete", true));
             finish();
 
          /*   if (MainApp.followups.getPrePreg().equals("1") && bi.rc0501.isChecked()) {

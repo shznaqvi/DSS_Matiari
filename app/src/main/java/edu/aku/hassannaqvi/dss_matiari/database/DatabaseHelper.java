@@ -208,7 +208,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         values.put(FollowupsTable.COLUMN_HOUSEHOLD_NO, followups.getHhNo());
         values.put(FollowupsTable.COLUMN_VISIT_NO, followups.getVisitNo());
         values.put(FollowupsTable.COLUMN_SC, followups.sCtoString());
-        values.put(FollowupsTable.COLUMN_SD, followups.sDtoString());
+        //values.put(FollowupsTable.COLUMN_SD, followups.sDtoString());
         values.put(FollowupsTable.COLUMN_ISTATUS, followups.getiStatus());
         values.put(FollowupsTable.COLUMN_DEVICETAGID, followups.getDeviceTag());
         values.put(FollowupsTable.COLUMN_DEVICEID, followups.getDeviceId());

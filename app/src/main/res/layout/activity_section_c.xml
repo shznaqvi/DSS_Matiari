@@ -494,7 +494,7 @@
                     <androidx.cardview.widget.CardView
                         android:id="@+id/fldGrpCVrb08"
                         style="@style/cardView"
-                        android:visibility='@{ followups.rc07.equals("1")? View.VISIBLE : View.GONE}'>
+                        android:visibility='@{followups.rc07.equals("1") ? View.VISIBLE : View.GONE}'>
 
                         <!--android:visibility='@{followups.rc06.equals("4") || followups.rc07.equals("2")? View.GONE : View.VISIBLE}'-->
 
