@@ -229,6 +229,7 @@
                             android:id="@+id/rc03"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:enabled="false"
                             android:digits="abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ"
                             android:inputType="textPersonName|textCapWords"
                             android:text="@={followups.rc03}" />
@@ -321,73 +322,134 @@
 
                 </androidx.cardview.widget.CardView>
 -->
+                <!-- rc07  Radio   -->
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/fldGrpCVrb07"
+                    style="@style/cardView"
+                    android:visibility='@{followups.rc07.equals(``) ? View.GONE : View.VISIBLE}'>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/bottom"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:text="@string/rc07" />
+
+                            <TextView
+                                style="@style/quesNum"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:text="@string/Q_rc07" />
+
+
+                        </LinearLayout>
+
+                        <RadioGroup
+                            android:id="@+id/rc07"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <RadioButton
+                                android:id="@+id/rc0701"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:checked='@{followups.rc07.equals("1")}'
+                                android:enabled="false"
+                                android:onClick='@{()->followups.setRc07("1")}'
+                                android:text="@string/rc0701" />
+
+                            <RadioButton
+                                android:id="@+id/rc0702"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:checked='@{followups.rc07.equals("2")}'
+                                android:enabled="false"
+                                android:onClick='@{()->followups.setRc07("2") + rc08.clearCheck() + rc09.clearCheck() + rc11.clearCheck() + rc1201.clearCheck() + rc1301.clearCheck() + rc1202.clearCheck() + rc1302.clearCheck() + rc1203.clearCheck() + rc1303.clearCheck()}'
+                                android:text="@string/rc0702" />
+                        </RadioGroup>
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+                <!-- rc05  Input   -->
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/fldGrpCVrc05"
+                    style="@style/cardView">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/bottom"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:text="@string/rc05" />
+
+                            <TextView
+                                style="@style/quesNum"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:text="@string/Q_rc05" />
+
+
+                        </LinearLayout>
+
+                        <RadioGroup
+                            android:id="@+id/rc05"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <RadioButton
+                                android:id="@+id/rc0501"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:checked='@{followups.rc05.equals("1")}'
+                                android:onClick='@{()->followups.setRc05("1")}'
+                                android:text="@string/rc0501" />
+
+                            <RadioButton
+                                android:id="@+id/rc0502"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:checked='@{followups.rc05.equals("2")}'
+                                android:onClick='@{()->followups.setRc05("2") }'
+                                android:text="@string/rc0502" />
+
+                        </RadioGroup>
+
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
 
                 <LinearLayout
                     android:id="@+id/fldGrp02"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:visibility="visible"
+                    android:visibility="@{followups.rc05.equals(`2`)?View.GONE:View.VISIBLE}"
                     tools:visibility="visible">
-                    <!-- rc05  Input   -->
-                    <androidx.cardview.widget.CardView
-                        android:id="@+id/fldGrpCVrc05"
-                        style="@style/cardView">
 
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="vertical">
-
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:background="@drawable/bottom"
-                                android:orientation="horizontal">
-
-                                <TextView
-                                    android:layout_width="0dp"
-                                    android:layout_height="match_parent"
-                                    android:layout_weight="1"
-                                    android:text="@string/rc05" />
-
-                                <TextView
-                                    style="@style/quesNum"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="match_parent"
-                                    android:text="@string/Q_rc05" />
-
-
-                            </LinearLayout>
-
-                            <RadioGroup
-                                android:id="@+id/rc05"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:orientation="horizontal">
-
-                                <RadioButton
-                                    android:id="@+id/rc0501"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:layout_weight="1"
-                                    android:checked='@{followups.rc05.equals("1")}'
-                                    android:onClick='@{()->followups.setRc05("1")}'
-                                    android:text="@string/rc0501" />
-
-                                <RadioButton
-                                    android:id="@+id/rc0502"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:layout_weight="1"
-                                    android:checked='@{followups.rc05.equals("2")}'
-                                    android:onClick='@{()->followups.setRc05("2") +  rc07.clearCheck()}'
-                                    android:text="@string/rc0502" />
-
-                            </RadioGroup>
-
-                        </LinearLayout>
-                    </androidx.cardview.widget.CardView>
 
                     <!-- rc06  Radio   -->
                     <androidx.cardview.widget.CardView
@@ -461,64 +523,7 @@
                             </RadioGroup>
                         </LinearLayout>
                     </androidx.cardview.widget.CardView>
-                    <!-- rc07  Radio   -->
-                    <androidx.cardview.widget.CardView
-                        android:id="@+id/fldGrpCVrb07"
-                        style="@style/cardView"
-                        android:visibility='@{!followups.rc05.equals(`1`) || followups.rc06.equals(`4`) ? View.GONE : View.VISIBLE}'>
 
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="vertical">
-
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:background="@drawable/bottom"
-                                android:orientation="horizontal">
-
-                                <TextView
-                                    android:layout_width="0dp"
-                                    android:layout_height="match_parent"
-                                    android:layout_weight="1"
-                                    android:text="@string/rc07" />
-
-                                <TextView
-                                    style="@style/quesNum"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="match_parent"
-                                    android:text="@string/Q_rc07" />
-
-
-                            </LinearLayout>
-
-                            <RadioGroup
-                                android:id="@+id/rc07"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:orientation="horizontal">
-
-                                <RadioButton
-                                    android:id="@+id/rc0701"
-                                    android:layout_width="0dp"
-                                    android:layout_height="wrap_content"
-                                    android:layout_weight="1"
-                                    android:checked='@{followups.rc07.equals("1")}'
-                                    android:onClick='@{()->followups.setRc07("1")}'
-                                    android:text="@string/rc0701" />
-
-                                <RadioButton
-                                    android:id="@+id/rc0702"
-                                    android:layout_width="0dp"
-                                    android:layout_height="wrap_content"
-                                    android:layout_weight="1"
-                                    android:checked='@{followups.rc07.equals("2")}'
-                                    android:onClick='@{()->followups.setRc07("2") + rc08.clearCheck() + rc09.clearCheck() + rc11.clearCheck() + rc1201.clearCheck() + rc1301.clearCheck() + rc1202.clearCheck() + rc1302.clearCheck() + rc1203.clearCheck() + rc1303.clearCheck()}'
-                                    android:text="@string/rc0702" />
-                            </RadioGroup>
-                        </LinearLayout>
-                    </androidx.cardview.widget.CardView>
 
                     <LinearLayout
                         android:id="@+id/fldGrprc08"
@@ -803,6 +808,11 @@
                             </androidx.cardview.widget.CardView>
 
                             <!-- 1st Baby RC1201-->
+                            <TextView
+                                style="@style/sub_labels"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="1st Baby" />
 
                             <androidx.cardview.widget.CardView
                                 android:id="@+id/fldGrpCVrc1201"
@@ -1402,11 +1412,15 @@
 
                             </LinearLayout>
 
+
+                        </LinearLayout>
+
                         </LinearLayout>
                         <!-- rc15  Radio   -->
                         <androidx.cardview.widget.CardView
                             android:id="@+id/fldGrpCVrb15"
-                            style="@style/cardView">
+                            style="@style/cardView"
+                            android:visibility='@{followups.rc05.equals("2") || followups.rc08.equals("1") ? View.GONE : View.VISIBLE}'>
 
                             <LinearLayout
                                 android:layout_width="match_parent"
@@ -1460,102 +1474,98 @@
                                 </RadioGroup>
                             </LinearLayout>
                         </androidx.cardview.widget.CardView>
-
-                        <!-- rc16  Input   -->
-                        <androidx.cardview.widget.CardView
-                            android:id="@+id/fldGrpCVrb08"
-                            style="@style/cardView"
-                            android:visibility='@{followups.rc15.equals("1") ? View.VISIBLE : View.GONE}'>
-
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:orientation="vertical">
-
-                                <LinearLayout
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:background="@drawable/bottom"
-                                    android:orientation="horizontal">
-
-                                    <TextView
-                                        android:layout_width="0dp"
-                                        android:layout_height="match_parent"
-                                        android:layout_weight="1"
-                                        android:text="@string/rc16" />
-
-                                    <TextView
-                                        style="@style/quesNum"
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="match_parent"
-                                        android:text="@string/Q_rc16" />
-
-
-                                </LinearLayout>
-
-                                <io.blackbox_vision.datetimepickeredittext.view.DatePickerEditText
-                                    android:id="@+id/rc16"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:gravity="center"
-                                    android:hint="YYYY-MM-DD"
-                                    android:text="@={followups.rc16}"
-                                    app:dateFormat="yyyy-MM-dd"
-                                    app:theme="@style/DatePickerEditTextDialogTheme" />
-                            </LinearLayout>
-                        </androidx.cardview.widget.CardView>
-
-                        <!-- rc17  Input   -->
-                        <androidx.cardview.widget.CardView
-                            android:id="@+id/fldGrpCVrb09"
-                            style="@style/cardView"
-                            android:visibility='@{followups.rc15.equals("1") ? View.VISIBLE : View.GONE}'>
-
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:orientation="vertical">
-
-                                <LinearLayout
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:background="@drawable/bottom"
-                                    android:orientation="horizontal">
-
-                                    <TextView
-                                        android:layout_width="0dp"
-                                        android:layout_height="match_parent"
-                                        android:layout_weight="1"
-                                        android:text="@string/rc17" />
-
-                                    <TextView
-                                        style="@style/quesNum"
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="match_parent"
-                                        android:text="@string/Q_rc17" />
-
-                                </LinearLayout>
-
-                                <io.blackbox_vision.datetimepickeredittext.view.DatePickerEditText
-                                    android:id="@+id/rc17"
-                                    style="@style/labelsHead"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:layout_weight="1"
-                                    android:enabled="false"
-                                    android:gravity="center"
-                                    android:hint="YYYY-MM-DD"
-                                    android:text="@={followups.rc17}"
-                                    app:dateFormat="yyyy-MM-dd"
-                                    app:theme="@style/DatePickerEditTextDialogTheme" />
-
-
-                            </LinearLayout>
-                        </androidx.cardview.widget.CardView>
-
                     </LinearLayout>
+                    <!-- rc16  Input   -->
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/fldGrpCVrb08"
+                        style="@style/cardView"
+                        android:visibility='@{followups.rc15.equals("1") ? View.VISIBLE : View.GONE}'>
 
-                </LinearLayout>
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:background="@drawable/bottom"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="1"
+                                    android:text="@string/rc16" />
+
+                                <TextView
+                                    style="@style/quesNum"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="match_parent"
+                                    android:text="@string/Q_rc16" />
+
+
+                            </LinearLayout>
+
+                            <io.blackbox_vision.datetimepickeredittext.view.DatePickerEditText
+                                android:id="@+id/rc16"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:gravity="center"
+                                android:hint="YYYY-MM-DD"
+                                android:text="@={followups.rc16}"
+                                app:dateFormat="yyyy-MM-dd"
+                                app:theme="@style/DatePickerEditTextDialogTheme" />
+                        </LinearLayout>
+                    </androidx.cardview.widget.CardView>
+
+                    <!-- rc17  Input   -->
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/fldGrpCVrb09"
+                        style="@style/cardView"
+                        android:visibility='@{followups.rc15.equals("1") ? View.VISIBLE : View.GONE}'>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:background="@drawable/bottom"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="1"
+                                    android:text="@string/rc17" />
+
+                                <TextView
+                                    style="@style/quesNum"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="match_parent"
+                                    android:text="@string/Q_rc17" />
+
+                            </LinearLayout>
+
+                            <io.blackbox_vision.datetimepickeredittext.view.DatePickerEditText
+                                android:id="@+id/rc17"
+                                style="@style/labelsHead"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:enabled="false"
+                                android:gravity="center"
+                                android:hint="YYYY-MM-DD"
+                                android:text="@={followups.rc17}"
+                                app:dateFormat="yyyy-MM-dd"
+                                app:theme="@style/DatePickerEditTextDialogTheme" />
+
+
+                        </LinearLayout>
+                    </androidx.cardview.widget.CardView>
                 </LinearLayout>
 
 

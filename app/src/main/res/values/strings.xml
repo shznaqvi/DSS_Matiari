@@ -149,7 +149,7 @@
     <string name="rc0501">Live</string>
     <string name="rc0502">Death</string>
     <string name="rc0503">Refused</string>
-    <string name="rc06">Marital Status</string>
+    <string name="rc06"> Current Marital Status</string>
     <string name="rc0601">Married</string>
     <string name="rc0602">Divorce</string>
     <string name="rc0603">Widow</string>
@@ -159,13 +159,13 @@
     <string name="rc0702">Not Pregnant</string>
 
     <string name="rc08">Is Pregnancy Continued?</string>
-    <string name="rc0801">Yes</string>
-    <string name="rc0802">No</string>
-    <string name="rc0803">False PW</string>
+    <string name="rc0801" translatable="false">Yes</string>
+    <string name="rc0802" translatable="false">No</string>
+    <string name="rc0803" translatable="false">False PW</string>
     <string name="rc08_info">DD/MM/YYYY</string>
     <string name="rc09">Pregnancy Outcome</string>
     <string name="rc09_info">DD/MM/YYYY</string>
-    <string name="rc0901">Live Birth</string>
+    <string name="rc0901" translatable="false">Live Birth</string>
     <string name="rc0902">Still Birth</string>
     <string name="rc0903">Abortion / Miscarriage</string>
     <string name="rc0904">False PW</string>
@@ -313,5 +313,13 @@
     <string name="rb09hint">Press button to calculate EDD &gt;&gt;&gt;</string>
     <string name="age_groups">Age Groups</string>
 
-
+    <!--    <string name="rc09_info">DD/MM/YYYY</string>-->
+    <!--    <string name="rc1001">ها </string>-->
+    <!--    <string name="rc1002">نه </string>-->
+    <!--    <string name="rc1003">ڪوڙو حمل</string>-->
+    <!--    <string name="rc11_info">DD/MM/YYYY </string>-->
+    <!--    <string name="rc1203">حمل ضايع</string>-->
+    <!--    <string name="rc1303">ٽي ٻار</string>-->
+    <!--    <string name="rc1401">مرد</string>-->
+    <!--    <string name="rc1402">عورت</string>-->
 </resources>

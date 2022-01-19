@@ -67,6 +67,7 @@ public class Followups extends BaseObservable implements Observable {
     private String rc01 = "";
     private String rc02 = "";
     private String rc03 = "";
+    private String rc04 = "";
     private String rc05 = "";
     private String rc06 = "";
     private String rc07 = "";
@@ -407,6 +408,16 @@ public class Followups extends BaseObservable implements Observable {
         notifyChange(BR.rc03);
     }
 
+    @Bindable
+    public String getRc04() {
+        return rc04;
+    }
+
+    public void setRc04(String rc04) {
+        this.rc04 = rc04;
+        notifyChange(BR.rc04);
+    }
+
 
     @Bindable
     public String getRc05() {
@@ -415,9 +426,8 @@ public class Followups extends BaseObservable implements Observable {
 
     public void setRc05(String rc05) {
         this.rc05 = rc05;
-       // setRc06(rc05.equals("1") ? this.rc06 : "");
-        setRc07(rc05.equals("1") ? this.rc07 : "");
-
+        // setRc06(rc05.equals("1") ? this.rc06 : "");
+        //    setRc07(rc05.equals("1") ? this.rc07 : "");
 
 
         notifyChange(BR.rc05);
@@ -432,7 +442,6 @@ public class Followups extends BaseObservable implements Observable {
         this.rc06 = rc06;
         Log.d(TAG, "setRc06: " + this.rc06);
         //setRc03(this.rc06.equals("4") ? "" : this.rc03);
-        setRc07(this.rc06.equals("4") ? "" : this.rc07);
 /*        setRc08(this.rc06.equals("4") ? "" : this.rc08);
         setRc09(this.rc06.equals("4") ? "" : this.rc09);*/
         notifyChange(BR.rc06);
@@ -766,6 +775,7 @@ public class Followups extends BaseObservable implements Observable {
             this.prePreg = json.getString("prePreg");
             this.rc02 = json.getString("rc02");
             this.rc03 = json.getString("rc03");
+            this.rc04 = json.getString("rc04");
             this.rc05 = json.getString("rc05");
 
             this.rc06 = json.getString("rc06");
@@ -806,6 +816,7 @@ public class Followups extends BaseObservable implements Observable {
                 .put("rc01v3", rc01v3)
                 .put("rc02", rc02)
                 .put("rc03", rc03)
+                .put("rc04", rc04)
                 .put("rc05", rc05)
 
                 .put("rc06", rc06)

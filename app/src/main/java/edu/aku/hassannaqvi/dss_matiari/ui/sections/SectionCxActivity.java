@@ -26,7 +26,6 @@ import edu.aku.hassannaqvi.dss_matiari.R;
 import edu.aku.hassannaqvi.dss_matiari.contracts.TableContracts;
 import edu.aku.hassannaqvi.dss_matiari.core.MainApp;
 import edu.aku.hassannaqvi.dss_matiari.database.DatabaseHelper;
-import edu.aku.hassannaqvi.dss_matiari.databinding.ActivitySectionCBinding;
 import edu.aku.hassannaqvi.dss_matiari.databinding.ActivitySectionCxBinding;
 import edu.aku.hassannaqvi.dss_matiari.ui.WRAEndingActivity;
 
@@ -62,6 +61,7 @@ public class SectionCxActivity extends AppCompatActivity {
             // TODO: Marital Status not received from server
             //MainApp.followups.setRc06(MainApp.fpMwra.getRb06());
             MainApp.followups.setPrePreg(MainApp.fpMwra.getRb07());
+            MainApp.followups.setRc07(MainApp.fpMwra.getRb07());
 
         }
         //bi.fldGrp01.setVisibility(View.VISIBLE);
