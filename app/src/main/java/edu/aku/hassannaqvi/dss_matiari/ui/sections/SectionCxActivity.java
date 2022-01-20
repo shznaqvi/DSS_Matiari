@@ -4,7 +4,6 @@ import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.followups;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.fpHouseholds;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.sharedPref;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -27,7 +26,6 @@ import edu.aku.hassannaqvi.dss_matiari.contracts.TableContracts;
 import edu.aku.hassannaqvi.dss_matiari.core.MainApp;
 import edu.aku.hassannaqvi.dss_matiari.database.DatabaseHelper;
 import edu.aku.hassannaqvi.dss_matiari.databinding.ActivitySectionCxBinding;
-import edu.aku.hassannaqvi.dss_matiari.ui.WRAEndingActivity;
 
 public class SectionCxActivity extends AppCompatActivity {
 
@@ -212,7 +210,7 @@ public class SectionCxActivity extends AppCompatActivity {
         saveDraft();
         if (MainApp.followups.getUid().equals("") ? insertNewRecord() : updateDB()) {
             setResult(RESULT_OK);
-             startActivity(new Intent(this, WRAEndingActivity.class).addFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT).putExtra("complete", true));
+//             startActivity(new Intent(this, WRAEndingActivity.class).addFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT).putExtra("complete", true));
             finish();
 
          /*   if (MainApp.followups.getPrePreg().equals("1") && bi.rc0501.isChecked()) {
@@ -361,13 +359,13 @@ public class SectionCxActivity extends AppCompatActivity {
 
     public void btnEnd(View view) {
         setResult(RESULT_CANCELED);
-        if (followups.getRc05().equals("2") || followups.getRc05().equals("3")) {
+/*        if (followups.getRc05().equals("2") || followups.getRc05().equals("3")) {
             if (!formValidation()) return;
             setResult(RESULT_OK);
             insertNewRecord();
             updateDB();
             startActivity(new Intent(this, WRAEndingActivity.class).addFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT).putExtra("complete", false));
-        }
+        }*/
         finish();
 
     }

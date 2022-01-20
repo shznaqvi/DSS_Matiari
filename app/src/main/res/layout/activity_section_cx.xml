@@ -237,7 +237,8 @@
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
 
-                <!--<androidx.cardview.widget.CardView
+                <!-- rc04 Radio-->
+                <androidx.cardview.widget.CardView
                     android:id="@+id/fldGrpCVstatus"
                     style="@style/cardView"
                     android:layout_width="match_parent"
@@ -255,93 +256,115 @@
                             android:orientation="horizontal">
 
                             <TextView
-                                android:id="@+id/hhStatus"
                                 android:layout_width="0dp"
                                 android:layout_height="match_parent"
                                 android:layout_weight="1"
                                 android:text="@string/rc04" />
 
-
+                            <TextView
+                                style="@style/quesNum"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:text="@string/Q_rc04" />
                         </LinearLayout>
 
 
                         <RadioGroup
-                            android:id="@+id/istatus"
+                            android:id="@+id/rc04"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content">
 
                             <RadioButton
-                                android:id="@+id/istatusa"
+                                android:id="@+id/rc0401"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
+                                android:checked='@{followups.rc04.equals("1")}'
+                                android:onClick='@{()->followups.setRc04("1")}'
                                 android:text="@string/rc0401" />
 
                             <RadioButton
-                                android:id="@+id/istatusb"
+                                android:id="@+id/rc0402"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
+                                android:checked='@{followups.rc04.equals("2")}'
+                                android:onClick='@{()->followups.setRc04("2") + rc05.clearCheck() + rc06.clearCheck() + rc08.clearCheck() + rc09.clearCheck() + rc11.clearCheck() + rc1201.clearCheck() + rc1301.clearCheck() + rc1202.clearCheck() + rc1302.clearCheck() + rc1203.clearCheck() + rc1303.clearCheck() + rc15.clearCheck()}'
                                 android:text="@string/rc0402" />
 
                             <RadioButton
-                                android:id="@+id/istatusc"
+                                android:id="@+id/rc0403"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
+                                android:checked='@{followups.rc04.equals("3")}'
+                                android:onClick='@{()->followups.setRc04("3") + rc05.clearCheck() + rc06.clearCheck() + rc08.clearCheck() + rc09.clearCheck() + rc11.clearCheck() + rc1201.clearCheck() + rc1301.clearCheck() + rc1202.clearCheck() + rc1302.clearCheck() + rc1203.clearCheck() + rc1303.clearCheck() + rc15.clearCheck()}'
                                 android:text="@string/rc0403" />
 
 
                             <RadioButton
-                                android:id="@+id/istatusd"
+                                android:id="@+id/rc0404"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
+                                android:checked='@{followups.rc04.equals("4")}'
+                                android:onClick='@{()->followups.setRc04("4") + rc05.clearCheck() + rc06.clearCheck() + rc08.clearCheck() + rc09.clearCheck() + rc11.clearCheck() + rc1201.clearCheck() + rc1301.clearCheck() + rc1202.clearCheck() + rc1302.clearCheck() + rc1203.clearCheck() + rc1303.clearCheck() + rc15.clearCheck()}'
                                 android:text="@string/rc0404" />
 
                             <RadioButton
-                                android:id="@+id/istatuse"
+                                android:id="@+id/rc0405"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
+                                android:checked='@{followups.rc04.equals("5")}'
+                                android:onClick='@{()->followups.setRc04("5") + rc05.clearCheck() + rc06.clearCheck() + rc08.clearCheck() + rc09.clearCheck() + rc11.clearCheck() + rc1201.clearCheck() + rc1301.clearCheck() + rc1202.clearCheck() + rc1302.clearCheck() + rc1203.clearCheck() + rc1303.clearCheck() + rc15.clearCheck()}'
                                 android:text="@string/rc0405" />
 
                             <RadioButton
-                                android:id="@+id/istatusf"
+                                android:id="@+id/rc0406"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
+                                android:checked='@{followups.rc04.equals("6")}'
+                                android:onClick='@{()->followups.setRc04("6") + rc05.clearCheck() + rc06.clearCheck() + rc08.clearCheck() + rc09.clearCheck() + rc11.clearCheck() + rc1201.clearCheck() + rc1301.clearCheck() + rc1202.clearCheck() + rc1302.clearCheck() + rc1203.clearCheck() + rc1303.clearCheck() + rc15.clearCheck()}'
                                 android:text="@string/rc0406" />
 
 
-                            &lt;!&ndash; <EditText
-                                 android:id="@+id/istatusdx"
-                                 android:layout_width="match_parent"
-                                 android:layout_height="wrap_content"
-                                 android:digits="AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz0123456789,. "
-                                 android:hint="@string/ra11d"
-                                 android:tag="ra11"
-                                 android:text='@{istatusd.checked ? istatusdx.getText().toString() : ""}'
-                                 android:visibility='@{istatusd.checked? View.VISIBLE : View.GONE}' />&ndash;&gt;
+                            <!--<EditText
+                                android:id="@+id/istatusdx"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:digits="AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz0123456789,. "
+                                android:hint="@string/ra11d"
+                                android:tag="ra11"
+                                android:text='@{istatusd.checked ? istatusdx.getText().toString() : ""}'
+                                android:visibility='@{istatusd.checked? View.VISIBLE : View.GONE}' />-->
                         </RadioGroup>
 
                     </LinearLayout>
 
                 </androidx.cardview.widget.CardView>
--->
-                <!-- rc07  Radio   -->
 
-                <androidx.cardview.widget.CardView
-                    android:id="@+id/fldGrpCVrb07"
-                    style="@style/cardView"
-                    android:visibility='@{followups.rc07.equals(``) ? View.GONE : View.VISIBLE}'>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:visibility="@{followups.rc04.equals(`1`)?View.VISIBLE:View.GONE}">
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical">
+
+                    <!-- rc07  Radio   -->
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/fldGrpCVrb07"
+                        style="@style/cardView"
+                        android:visibility='@{followups.rc07.equals(``) ? View.GONE : View.VISIBLE}'>
 
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:background="@drawable/bottom"
-                            android:orientation="horizontal">
+                            android:orientation="vertical">
 
-                            <TextView
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:background="@drawable/bottom"
+                                android:orientation="horizontal">
+
+                                <TextView
                                 android:layout_width="0dp"
                                 android:layout_height="match_parent"
                                 android:layout_weight="1"
@@ -437,7 +460,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
                                 android:checked='@{followups.rc05.equals("2")}'
-                                android:onClick='@{()->followups.setRc05("2") }'
+                                android:onClick='@{()->followups.setRc05("2") + rc06.clearCheck() + rc08.clearCheck() + rc09.clearCheck() + rc11.clearCheck() + rc1201.clearCheck() + rc1301.clearCheck() + rc1202.clearCheck() + rc1302.clearCheck() + rc1203.clearCheck() + rc1303.clearCheck() + rc15.clearCheck()}'
                                 android:text="@string/rc0502" />
 
                         </RadioGroup>
@@ -792,7 +815,7 @@
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
                                             android:checked='@{followups.rc11.equals("1")}'
-                                            android:onClick='@{()->followups.setRc11("1")}'
+                                            android:onClick='@{()->followups.setRc11("1") + rc1202.clearCheck() + rc1302.clearCheck() + rc1203.clearCheck() + rc1303.clearCheck()}'
                                             android:text="@string/rc1101" />
 
                                         <RadioButton
@@ -800,7 +823,7 @@
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
                                             android:checked='@{followups.rc11.equals("2")}'
-                                            android:onClick='@{()->followups.setRc11("2")}'
+                                            android:onClick='@{()->followups.setRc11("2")+ rc1203.clearCheck() + rc1303.clearCheck()}'
                                             android:text="@string/rc1102" />
 
                                         <RadioButton
@@ -1577,6 +1600,7 @@
                         </LinearLayout>
                     </androidx.cardview.widget.CardView>
 
+                </LinearLayout>
                 </LinearLayout>
 
 

@@ -139,7 +139,8 @@
     <string name="rc03h">Husband Name</string>
     <string name="rc03f">Father Name</string>
     <string name="rc04">Visit Status</string>
-    <string name="rc0401">Complete</string>
+    <!--    <string name="rc0401">Complete</string>-->
+    <string name="rc0401">Available</string>
     <string name="rc0402">Migration Out </string>
     <string name="rc0403">Refused </string>
     <string name="rc0404">Not Available/Lock  </string>

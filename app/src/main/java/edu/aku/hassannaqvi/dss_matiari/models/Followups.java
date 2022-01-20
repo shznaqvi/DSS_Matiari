@@ -415,6 +415,28 @@ public class Followups extends BaseObservable implements Observable {
 
     public void setRc04(String rc04) {
         this.rc04 = rc04;
+        setRc05(rc04.equals("1") ? this.rc05 : "");
+        setRc06(rc04.equals("1") ? this.rc06 : "");
+        setRc08(rc04.equals("1") ? this.rc08 : "");
+        setRc09(rc04.equals("1") ? this.rc09 : "");
+        setRc10(rc04.equals("1") ? this.rc10 : "");
+        setRc11(rc04.equals("1") ? this.rc11 : "");
+
+        setRc1201(rc04.equals("1") ? this.rc1201 : "");
+        setRc1301(rc04.equals("1") ? this.rc1301 : "");
+        setRc1401(rc04.equals("1") ? this.rc1401 : "");
+
+        setRc1202(rc04.equals("1") ? this.rc1202 : "");
+        setRc1302(rc04.equals("1") ? this.rc1302 : "");
+        setRc1402(rc04.equals("1") ? this.rc1402 : "");
+
+        setRc1203(rc04.equals("1") ? this.rc1203 : "");
+        setRc1303(rc04.equals("1") ? this.rc1303 : "");
+        setRc1403(rc04.equals("1") ? this.rc1403 : "");
+
+        setRc15(rc04.equals("1") ? this.rc15 : "");
+        setRc16(rc04.equals("1") ? this.rc16 : "");
+        setRc17(rc04.equals("1") ? this.rc17 : "");
         notifyChange(BR.rc04);
     }
 
