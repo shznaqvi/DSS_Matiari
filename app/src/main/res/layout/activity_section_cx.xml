@@ -194,6 +194,7 @@
                             android:text="@={followups.rc02}" />
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
+
                 <!-- rc03  Input   -->
                 <androidx.cardview.widget.CardView
                     android:id="@+id/fldGrpCVrb03"
@@ -323,6 +324,7 @@
                 </androidx.cardview.widget.CardView>
 -->
                 <!-- rc07  Radio   -->
+
                 <androidx.cardview.widget.CardView
                     android:id="@+id/fldGrpCVrb07"
                     style="@style/cardView"
@@ -382,6 +384,7 @@
                         </RadioGroup>
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
+
                 <!-- rc05  Input   -->
                 <androidx.cardview.widget.CardView
                     android:id="@+id/fldGrpCVrc05"
@@ -530,6 +533,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="vertical">
+
                         <!-- rc05  Radio   -->
                         <androidx.cardview.widget.CardView
                             android:id="@+id/fldGrpCVrb05"
@@ -593,23 +597,27 @@
                             android:orientation="vertical"
                             android:id="@+id/fldGrprcEnd"
                             android:visibility="@{followups.rc08.equals(`1`) ? View.GONE : View.VISIBLE}">
-                        <LinearLayout
-                            android:id="@+id/fldGrprc09"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="vertical"
-                            android:visibility="@{followups.rc07.equals(`1`) ? View.VISIBLE : View.GONE}">
-                            <!-- rc09 Radio   -->
-                            <androidx.cardview.widget.CardView
-                                android:id="@+id/fldGrpCVrc09"
-                                style="@style/cardView">
 
-                                <LinearLayout
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:orientation="vertical">
+
+                            <LinearLayout
+                                android:id="@+id/fldGrprc09"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical"
+                                android:visibility="@{followups.rc07.equals(`1`) ? View.VISIBLE : View.GONE}">
+
+
+                                <!-- rc09 Radio   -->
+                                <androidx.cardview.widget.CardView
+                                    android:id="@+id/fldGrpCVrc09"
+                                    style="@style/cardView">
 
                                     <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:orientation="vertical">
+
+                                        <LinearLayout
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
                                         android:background="@drawable/bottom"
@@ -1416,6 +1424,7 @@
                         </LinearLayout>
 
                         </LinearLayout>
+
                         <!-- rc15  Radio   -->
                         <androidx.cardview.widget.CardView
                             android:id="@+id/fldGrpCVrb15"
@@ -1475,6 +1484,7 @@
                             </LinearLayout>
                         </androidx.cardview.widget.CardView>
                     </LinearLayout>
+
                     <!-- rc16  Input   -->
                     <androidx.cardview.widget.CardView
                         android:id="@+id/fldGrpCVrb08"
@@ -1566,6 +1576,7 @@
 
                         </LinearLayout>
                     </androidx.cardview.widget.CardView>
+
                 </LinearLayout>
 
 

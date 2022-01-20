@@ -672,6 +672,7 @@
                             android:text="@={household.ra16}" />
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
+
                 <!-- ra20  Radio   -->
                 <androidx.cardview.widget.CardView
                     android:id="@+id/fldGrpCVra20"
@@ -729,12 +730,11 @@
                         </RadioGroup>
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
+
                 <!-- ra17_a  Input   -->
                 <androidx.cardview.widget.CardView
                     android:id="@+id/fldGrpCVra17_a"
-                    style="@style/cardView"
-
-                   >
+                    style="@style/cardView">
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -979,6 +979,7 @@
 
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
+
                 <!--
                                 &lt;!&ndash; ra17_b  Input-Numeric   &ndash;&gt;
                                 <androidx.cardview.widget.CardView
@@ -1164,7 +1165,10 @@
                             app:minValue="0"
                             app:type="range" />
                     </LinearLayout>
-                </androidx.cardview.widget.CardView><!--EndButton LinearLayout-->
+                </androidx.cardview.widget.CardView>
+
+
+                <!--EndButton LinearLayout-->
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

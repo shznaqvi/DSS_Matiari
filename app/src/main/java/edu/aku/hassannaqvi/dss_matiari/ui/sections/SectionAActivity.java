@@ -203,7 +203,13 @@ public class SectionAActivity extends AppCompatActivity {
     }
 
     private boolean formValidation() {
-        return Validator.emptyCheckingContainer(this, bi.GrpName);
+        if (!Validator.emptyCheckingContainer(this, bi.GrpName))
+            return false;
+
+        if (bi.ra18.getText().toString().isEmpty())
+            return Validator.emptyCustomTextBox(this, bi.ra18, "No of women cannot be empty");
+
+        return true;
     }
 
     @Override
