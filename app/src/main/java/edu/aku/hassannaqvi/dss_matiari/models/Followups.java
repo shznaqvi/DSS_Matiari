@@ -428,25 +428,25 @@ public class Followups extends BaseObservable implements Observable {
         this.rc05 = rc05;
         setRc06(rc05.equals("1") ? this.rc06 : "");
         setRc08(rc05.equals("1") ? this.rc08 : "");
-        setRc09(this.rc08.equals("1") ? "" : this.rc09);
-        setRc10(this.rc08.equals("1") ? "" : this.rc10);
-        setRc11(this.rc08.equals("1") ? "" : this.rc11);
+        setRc09(rc05.equals("1") ? this.rc09 : "");
+        setRc10(rc05.equals("1") ? this.rc10 : "");
+        setRc11(rc05.equals("1") ? this.rc11 : "");
 
-        setRc1201(this.rc08.equals("1") ? "" : this.rc1201);
-        setRc1301(this.rc08.equals("1") ? "" : this.rc1301);
-        setRc1401(this.rc08.equals("1") ? "" : this.rc1401);
+        setRc1201(rc05.equals("1") ? this.rc1201 : "");
+        setRc1301(rc05.equals("1") ? this.rc1301 : "");
+        setRc1401(rc05.equals("1") ? this.rc1401 : "");
 
-        setRc1202(this.rc08.equals("1") ? "" : this.rc1202);
-        setRc1302(this.rc08.equals("1") ? "" : this.rc1302);
-        setRc1402(this.rc08.equals("1") ? "" : this.rc1402);
+        setRc1202(rc05.equals("1") ? this.rc1202 : "");
+        setRc1302(rc05.equals("1") ? this.rc1302 : "");
+        setRc1402(rc05.equals("1") ? this.rc1402 : "");
 
-        setRc1203(this.rc08.equals("1") ? "" : this.rc1203);
-        setRc1303(this.rc08.equals("1") ? "" : this.rc1303);
-        setRc1403(this.rc08.equals("1") ? "" : this.rc1403);
+        setRc1203(rc05.equals("1") ? this.rc1203 : "");
+        setRc1303(rc05.equals("1") ? this.rc1303 : "");
+        setRc1403(rc05.equals("1") ? this.rc1403 : "");
 
-        setRc15(this.rc08.equals("1") ? "" : this.rc15);
-        setRc16(this.rc08.equals("1") ? "" : this.rc16);
-        setRc17(this.rc08.equals("1") ? "" : this.rc17);
+        setRc15(rc05.equals("1") ? this.rc15 : "");
+        setRc16(rc05.equals("1") ? this.rc16 : "");
+        setRc17(rc05.equals("1") ? this.rc17 : "");
 
         notifyChange(BR.rc05);
     }
