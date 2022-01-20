@@ -680,8 +680,6 @@ public class Households extends BaseObservable implements Observable {
 
     public void setRa20(String ra20) {
         this.ra20 = ra20;
-        setRa18(ra20.equals("1") ? this.ra18 : "");
-
         // removed skip as per Sir Imran's instructions
        /* if (!this.ra20.equals("1")) {
             setRa17_a1("");
