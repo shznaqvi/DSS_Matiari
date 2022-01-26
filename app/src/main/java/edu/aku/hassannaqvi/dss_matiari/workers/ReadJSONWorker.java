@@ -1,5 +1,7 @@
 package edu.aku.hassannaqvi.dss_matiari.workers;
 
+import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.PROJECT_NAME;
+
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.content.Context;
@@ -16,20 +18,19 @@ import org.json.JSONException;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.net.HttpURLConnection;
 import java.nio.charset.StandardCharsets;
+
+import javax.net.ssl.HttpsURLConnection;
 
 import edu.aku.hassannaqvi.dss_matiari.R;
 import edu.aku.hassannaqvi.dss_matiari.core.MainApp;
 import edu.aku.hassannaqvi.dss_matiari.database.DatabaseHelper;
 
-import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.PROJECT_NAME;
-
 
 public class ReadJSONWorker extends Worker {
 
     private final String TAG = "DataWorkerEN()";
-    HttpURLConnection urlConnection;
+    HttpsURLConnection urlConnection;
     private int length;
     private DatabaseHelper db;
 
