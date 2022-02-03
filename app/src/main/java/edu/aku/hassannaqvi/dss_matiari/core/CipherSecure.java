@@ -1,5 +1,6 @@
 package edu.aku.hassannaqvi.dss_matiari.core;
 
+
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.IBAHC;
 
 import android.content.Context;
@@ -10,6 +11,8 @@ import android.util.Log;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
+import java.security.InvalidAlgorithmParameterException;
+import java.security.InvalidKeyException;
 import java.security.KeyManagementException;
 import java.security.KeyStore;
 import java.security.KeyStoreException;
@@ -23,7 +26,10 @@ import java.security.cert.CertificateNotYetValidException;
 import java.security.cert.X509Certificate;
 import java.util.Arrays;
 
+import javax.crypto.BadPaddingException;
 import javax.crypto.Cipher;
+import javax.crypto.IllegalBlockSizeException;
+import javax.crypto.NoSuchPaddingException;
 import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
 import javax.net.ssl.SSLContext;
@@ -33,36 +39,29 @@ import javax.net.ssl.TrustManagerFactory;
 public class CipherSecure {
     private static final String TAG = "CipherSecure";
 
-    public static String encrypt(String plain) {
-        try {
-            Log.d(TAG, "encrypt: " + IBAHC);
-            byte[] iv = new byte[16];
-            new SecureRandom().nextBytes(iv);
-            Cipher cipher = Cipher.getInstance("AES/CBC/PKCS5Padding");
-            cipher.init(Cipher.ENCRYPT_MODE, new SecretKeySpec(IBAHC.getBytes(StandardCharsets.UTF_8), "AES"), new IvParameterSpec(iv));
-            byte[] cipherText = cipher.doFinal(plain.getBytes(StandardCharsets.UTF_8));
-            byte[] ivAndCipherText = new byte[iv.length + cipherText.length];
-            System.arraycopy(iv, 0, ivAndCipherText, 0, iv.length);
-            System.arraycopy(cipherText, 0, ivAndCipherText, iv.length, cipherText.length);
-            return Base64.encodeToString(ivAndCipherText, Base64.NO_WRAP);
-        } catch (Exception e) {
-            e.getMessage();
-            return "[]";
-        }
+    public static String encrypt(String plain) throws NoSuchPaddingException, NoSuchAlgorithmException, InvalidAlgorithmParameterException, InvalidKeyException, BadPaddingException, IllegalBlockSizeException {
+        Log.d(TAG, "encrypt: " + IBAHC);
+        byte[] iv = new byte[16];
+        new SecureRandom().nextBytes(iv);
+        Cipher cipher = Cipher.getInstance("AES/CBC/PKCS5Padding");
+        cipher.init(Cipher.ENCRYPT_MODE, new SecretKeySpec(IBAHC.getBytes(StandardCharsets.UTF_8), "AES"), new IvParameterSpec(iv));
+        byte[] cipherText = cipher.doFinal(plain.getBytes(StandardCharsets.UTF_8));
+        byte[] ivAndCipherText = new byte[iv.length + cipherText.length];
+        System.arraycopy(iv, 0, ivAndCipherText, 0, iv.length);
+        System.arraycopy(cipherText, 0, ivAndCipherText, iv.length, cipherText.length);
+        return Base64.encodeToString(ivAndCipherText, Base64.NO_WRAP);
+
     }
 
-    public static String decrypt(String encoded) {
-        try {
-            byte[] ivAndCipherText = Base64.decode(encoded, Base64.NO_WRAP);
-            byte[] iv = Arrays.copyOfRange(ivAndCipherText, 0, 16);
-            byte[] cipherText = Arrays.copyOfRange(ivAndCipherText, 16, ivAndCipherText.length);
-            Cipher cipher = Cipher.getInstance("AES/CBC/PKCS5Padding");
-            cipher.init(Cipher.DECRYPT_MODE, new SecretKeySpec(IBAHC.getBytes(StandardCharsets.UTF_8), "AES"), new IvParameterSpec(iv));
-            return new String(cipher.doFinal(cipherText), StandardCharsets.UTF_8);
-        } catch (Exception e) {
-            e.getMessage();
-            return "[]";
-        }
+    public static String decrypt(String encoded) throws NoSuchPaddingException, NoSuchAlgorithmException, BadPaddingException, IllegalBlockSizeException, InvalidAlgorithmParameterException, InvalidKeyException {
+        Log.d(TAG, "decrypt: encoded " + encoded);
+        byte[] ivAndCipherText = Base64.decode(encoded, Base64.NO_WRAP);
+        byte[] iv = Arrays.copyOfRange(ivAndCipherText, 0, 16);
+        byte[] cipherText = Arrays.copyOfRange(ivAndCipherText, 16, ivAndCipherText.length);
+        Cipher cipher = Cipher.getInstance("AES/CBC/PKCS5Padding");
+        cipher.init(Cipher.DECRYPT_MODE, new SecretKeySpec(IBAHC.getBytes(StandardCharsets.UTF_8), "AES"), new IvParameterSpec(iv));
+        return new String(cipher.doFinal(cipherText), StandardCharsets.UTF_8);
+
     }
 
     public static SSLSocketFactory buildSslSocketFactory(Context context) {
