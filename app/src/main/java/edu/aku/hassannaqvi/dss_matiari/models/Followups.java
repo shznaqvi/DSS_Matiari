@@ -481,6 +481,17 @@ public class Followups extends BaseObservable implements Observable {
     public void setRc06(String rc06) {
         this.rc06 = rc06;
         Log.d(TAG, "setRc06: " + this.rc06);
+        setRc07(rc06.equals("4") ? "" : this.rc07);
+        setRc08(rc06.equals("4") ? "" : this.rc08);
+        setRc09(rc06.equals("4") ? "" : this.rc09);
+        setRc10(rc06.equals("4") ? "" : this.rc10);
+        setRc11(rc06.equals("4") ? "" : this.rc11);
+        setRc12(rc06.equals("4") ? "" : this.rc12);
+        setRc13(rc06.equals("4") ? "" : this.rc13);
+        setRc14(rc06.equals("4") ? "" : this.rc14);
+        setRc15(rc06.equals("4") ? "" : this.rc15);
+        setRc16(rc06.equals("4") ? "" : this.rc16);
+        setRc17(rc06.equals("4") ? "" : this.rc17);
         //setRc03(this.rc06.equals("4") ? "" : this.rc03);
 /*        setRc08(this.rc06.equals("4") ? "" : this.rc08);
         setRc09(this.rc06.equals("4") ? "" : this.rc09);*/
@@ -552,6 +563,10 @@ public class Followups extends BaseObservable implements Observable {
     public void setRc09(String rc09) {
         this.rc09 = rc09;
         setRc10(this.rc09.equals("3") || this.rc09.equals("4") ? "" : this.rc10);
+        setRc11(this.rc09.equals("3") || this.rc09.equals("4") ? "" : this.rc11);
+        setRc12(this.rc09.equals("3") || this.rc09.equals("4") ? "" : this.rc12);
+        setRc13(this.rc09.equals("3") || this.rc09.equals("4") ? "" : this.rc13);
+        setRc14(this.rc09.equals("3") || this.rc09.equals("4") ? "" : this.rc14);
         notifyChange(BR.rc09);
     }
 

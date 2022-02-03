@@ -543,7 +543,7 @@
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:checked='@{followups.rc06.equals("4")}'
-                                    android:enabled='@{!followups.prePreg.equals("")}'
+                                    android:enabled='@{followups.prePreg.equals("")}'
                                     android:onClick='@{()->followups.setRc06("4")}'
                                     android:text="@string/rc0604" />
                             </RadioGroup>
@@ -555,7 +555,8 @@
                         android:id="@+id/fldGrprc08"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical">
+                        android:orientation="vertical"
+                        android:visibility="@{followups.rc06.equals(`4`) ? View.GONE : View.VISIBLE}">
 
                         <!-- rc05  Radio   -->
                         <androidx.cardview.widget.CardView
@@ -704,10 +705,16 @@
                                 </LinearLayout>
                             </androidx.cardview.widget.CardView>
 
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:id="@+id/fldGrpCv10"
+                                    android:orientation="vertical"
+                                    android:visibility="@{followups.rc09.equals(`3`) || followups.rc09.equals(`4`) ? View.GONE : View.VISIBLE}">
+
                             <androidx.cardview.widget.CardView
                                 android:id="@+id/fldGrpCVrc10"
-                                style="@style/cardView"
-                                android:visibility="@{followups.rc09.equals(`3`) || followups.rc09.equals(`4`) ? View.GONE : View.VISIBLE}">
+                                style="@style/cardView">
 
                                 <LinearLayout
                                     android:layout_width="match_parent"
@@ -1237,6 +1244,7 @@
                                     </LinearLayout>
                                 </LinearLayout>
                             </androidx.cardview.widget.CardView>
+                            </LinearLayout>
                         </LinearLayout>
                         <!-- 3rd Baby-->
                             <LinearLayout
@@ -1506,7 +1514,6 @@
                                 </RadioGroup>
                             </LinearLayout>
                         </androidx.cardview.widget.CardView>
-                    </LinearLayout>
 
                     <!-- rc16  Input   -->
                     <androidx.cardview.widget.CardView
@@ -1599,7 +1606,7 @@
 
                         </LinearLayout>
                     </androidx.cardview.widget.CardView>
-
+                    </LinearLayout>
                 </LinearLayout>
                 </LinearLayout>
 
