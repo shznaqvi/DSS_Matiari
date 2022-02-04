@@ -5,6 +5,7 @@ import org.apache.commons.lang3.StringUtils;
 public class SyncModel {
     String tableName;
     String status;
+    String info;
     int statusID;
     String message;
     String filter = null;
@@ -55,6 +56,14 @@ public class SyncModel {
 
     public void setstatus(String status) {
         this.status = status;
+    }
+
+    public String getInfo() {
+        return info;
+    }
+
+    public void setInfo(String info) {
+        this.info = info;
     }
 
     public int getstatusID() {

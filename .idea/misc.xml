@@ -32,7 +32,7 @@
         <entry key="..\:/Android/DSS_Matiari/app/src/main/res/layout/activity_section_a.xml" value="0.56328125" />
         <entry key="..\:/Android/DSS_Matiari/app/src/main/res/layout/activity_section_b.xml" value="0.52875" />
         <entry key="..\:/Android/DSS_Matiari/app/src/main/res/layout/activity_section_c.xml" value="0.56328125" />
-        <entry key="..\:/Android/DSS_Matiari/app/src/main/res/layout/activity_section_cx.xml" value="0.4506024096385542" />
+        <entry key="..\:/Android/DSS_Matiari/app/src/main/res/layout/activity_section_cx.xml" value="0.41700404858299595" />
         <entry key="..\:/Android/DSS_Matiari/app/src/main/res/layout/activity_section_d.xml" value="0.46" />
         <entry key="..\:/Android/DSS_Matiari/app/src/main/res/layout/activity_section_e.xml" value="0.53" />
         <entry key="..\:/Android/DSS_Matiari/app/src/main/res/layout/activity_sync.xml" value="0.5503816793893129" />
@@ -41,6 +41,7 @@
         <entry key="..\:/Android/DSS_Matiari/app/src/main/res/layout/household_row.xml" value="0.52875" />
         <entry key="..\:/Android/DSS_Matiari/app/src/main/res/layout/member_row.xml" value="0.56328125" />
         <entry key="..\:/Android/DSS_Matiari/app/src/main/res/layout/pendingform_layout.xml" value="0.56328125" />
+        <entry key="..\:/Android/DSS_Matiari/app/src/main/res/layout/sync_list_adapter.xml" value="0.5" />
         <entry key="..\:/Android/DSS_Matiari/app/src/main/res/menu/item_menu.xml" value="0.56328125" />
         <entry key="..\:/Users/hassan.naqvi/StudioProjects/DSS_Matiari/app/src/main/res/layout/activity_fp.xml" value="0.35260416666666666" />
         <entry key="..\:/Users/hassan.naqvi/StudioProjects/DSS_Matiari/app/src/main/res/layout/activity_fphousehold.xml" value="0.35260416666666666" />
@@ -51,14 +52,13 @@
         <entry key="..\:/Users/hassan.naqvi/StudioProjects/DSS_Matiari/app/src/main/res/layout/activity_section_a.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/hassan.naqvi/StudioProjects/DSS_Matiari/app/src/main/res/layout/activity_section_b.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/hassan.naqvi/StudioProjects/DSS_Matiari/app/src/main/res/layout/activity_section_c.xml" value="0.36666666666666664" />
-        <entry key="..\:/Users/hassan.naqvi/StudioProjects/DSS_Matiari/app/src/main/res/layout/activity_section_cx.xml" value="0.22552083333333334" />
         <entry key="..\:/Users/hassan.naqvi/StudioProjects/DSS_Matiari/app/src/main/res/layout/activity_section_d.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/hassan.naqvi/StudioProjects/DSS_Matiari/app/src/main/res/layout/activity_section_e.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/hassan.naqvi/StudioProjects/DSS_Matiari/app/src/main/res/layout/activity_wra_ending.xml" value="0.36666666666666664" />
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="11" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_X" project-jdk-name="11" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">

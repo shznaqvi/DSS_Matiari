@@ -77,6 +77,7 @@ public class SyncListAdapter extends RecyclerView.Adapter<edu.aku.hassannaqvi.ds
             binding.statusColor.setBackgroundColor(checkStatus(model.getstatusID()));
             binding.tvTableName.setText(model.gettableName().toUpperCase());
             binding.tvStatus.setText(model.getstatus());
+            binding.tvInfo.setText(model.getInfo());
             binding.tvMsg.setText(model.getmessage());
             if (model.getstatusID() == 1 || model.getstatusID() == 3 || model.getstatusID() == 4) {
                 binding.pb.setVisibility(View.GONE);
