@@ -196,7 +196,7 @@ public class SyncActivity extends AppCompatActivity {
 
                     //String filter = " uccode = '05' and  DATEADD(MONTH,3,ra01) between DATEADD(DAY,-1,GETDATE()) AND GETDATE()";
                     // TODO: backdate limit removed (get all followups that are due upto now
-                    String filter = " villagecode = '092' and uccode = '05' and  DATEADD(MONTH,3,ra01) between ra01 AND GETDATE() ";
+                    String filter = " DATEADD(MONTH,4,ra01) between ra01 AND GETDATE() ";
                     downloadTables.add(new SyncModel(TableContracts.TableFollowUpsSche.TABLE_NAME, select, filter));
 
 
@@ -785,7 +785,7 @@ public class SyncActivity extends AppCompatActivity {
 
         long timeElapsed = System.currentTimeMillis() - startTime;
         long toMinutes = TimeUnit.MILLISECONDS.toMinutes(timeElapsed);
-        long toSeconds = TimeUnit.MILLISECONDS.toSeconds(timeElapsed - toMinutes);
+        long toSeconds = TimeUnit.MILLISECONDS.toSeconds(timeElapsed - (toMinutes * 60 * 1000));
 
         return toMinutes + "m " + toSeconds + "s";
     }

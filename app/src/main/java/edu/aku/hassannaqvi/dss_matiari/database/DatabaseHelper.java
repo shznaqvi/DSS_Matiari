@@ -1576,7 +1576,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         whereClause = TableFollowUpsSche.COLUMN_VILLAGE_CODE + "=? AND " +
                 TableFollowUpsSche.COLUMN_RA14 + " Like ? ";
 
-        String[] whereArgs = {village, "%" + hhead + " %"};
+        String[] whereArgs = {village, "%" + hhead + "%"};
 
         String groupBy = TableFollowUpsSche.COLUMN_HDSSID;
         String having = null;
@@ -1591,8 +1591,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 whereArgs,                 // The values for the WHERE clause
                 groupBy,                   // don't group the rows
                 having,                    // don't filter by row groups
-                orderBy,                    // The sort order
-                "100"
+                orderBy                    // The sort order
+
         );
         while (c.moveToNext()) {
 

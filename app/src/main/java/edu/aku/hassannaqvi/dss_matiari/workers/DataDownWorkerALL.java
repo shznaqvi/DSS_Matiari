@@ -210,7 +210,7 @@ public class DataDownWorkerALL extends Worker {
 
                 jsonTable.put("table", uploadTable);
                 jsonTable.put("select", uploadColumns);
-                jsonTable.put("where", uploadWhere);
+                jsonTable.put("filter", uploadWhere);
 
                 jsonTable.put("check", "");
 
