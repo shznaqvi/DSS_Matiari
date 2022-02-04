@@ -342,9 +342,9 @@ public class DataDownWorkerALL extends Worker {
 
         long timeElapsed = System.currentTimeMillis() - startTime;
         long toMinutes = TimeUnit.MILLISECONDS.toMinutes(timeElapsed);
-        long toSeconds = TimeUnit.MILLISECONDS.toSeconds(timeElapsed - toMinutes);
+        long toSeconds = TimeUnit.MILLISECONDS.toSeconds(timeElapsed - (toMinutes * 60 * 1000));
 
-        return toMinutes + "m " + toSeconds + "s";
+        return toMinutes > 0 ? toMinutes + "m " + toSeconds + "s" : toSeconds > 0 ? TimeUnit.MILLISECONDS.toSeconds(timeElapsed) + "s" : timeElapsed + "ms";
     }
 
     private boolean certIsValid(Certificate[] certs, Certificate ca) {
