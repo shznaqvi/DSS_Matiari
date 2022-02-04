@@ -770,6 +770,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             values.put(TableFollowUpsSche.COLUMN_RB03, followUpsSche.getRb03());
             values.put(TableFollowUpsSche.COLUMN_RB05, followUpsSche.getRb05());
             values.put(TableFollowUpsSche.COLUMN_RB07, followUpsSche.getRb07());
+            values.put(TableFollowUpsSche.COLUMN_RB06, followUpsSche.getRb06());
+
             long rowID = db.insert(TableFollowUpsSche.TABLE_NAME, null, values);
             if (rowID != -1) insertCount++;
         }

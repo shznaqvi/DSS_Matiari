@@ -29,6 +29,7 @@ public class FollowUpsSche implements Observable {
     private String rb03; // Age in Years
     private String rb05;  // Husband / Father
     private String rb07;  // Pregnancy Status
+    private String rb06; // Marital Status
     private String fpDoneDt = "";  // Pregnancy Status
 
 
@@ -153,6 +154,15 @@ public class FollowUpsSche implements Observable {
         this.rb07 = rb07;
     }
 
+    public String getRb06() {
+        return rb06;
+    }
+
+    public void setRb06(String rb06) {
+        this.rb06 = rb06;
+    }
+
+
     public String getRb03() {
         return rb03;
     }
@@ -184,6 +194,7 @@ public class FollowUpsSche implements Observable {
         this.rb03 = jsonObject.getString(TableFollowUpsSche.COLUMN_RB03);
         this.rb05 = jsonObject.getString(TableFollowUpsSche.COLUMN_RB05);
         this.rb07 = jsonObject.getString(TableFollowUpsSche.COLUMN_RB07);
+        this.rb06 = jsonObject.getString(TableFollowUpsSche.COLUMN_RB06);
 
         return this;
     }
@@ -204,6 +215,7 @@ public class FollowUpsSche implements Observable {
         this.rb03 = cursor.getString(cursor.getColumnIndexOrThrow(TableFollowUpsSche.COLUMN_RB03));
         this.rb05 = cursor.getString(cursor.getColumnIndexOrThrow(TableFollowUpsSche.COLUMN_RB05));
         this.rb07 = cursor.getString(cursor.getColumnIndexOrThrow(TableFollowUpsSche.COLUMN_RB07));
+        this.rb06 = cursor.getString(cursor.getColumnIndexOrThrow(TableFollowUpsSche.COLUMN_RB06));
 
 
         return this;

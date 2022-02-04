@@ -234,6 +234,7 @@ public class TableContracts {
         public static final String COLUMN_RB03 = "rb03"; // Age
         public static final String COLUMN_RB05 = "rb05"; // Husband or Father
         public static final String COLUMN_RB07 = "rb07";  // Pregnancy Status
+        public static final String COLUMN_RB06 = "rb06";  // Marital Status
     }
 
 

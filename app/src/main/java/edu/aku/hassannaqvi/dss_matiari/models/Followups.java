@@ -64,6 +64,7 @@ public class Followups extends BaseObservable implements Observable {
 
     private String fRound = "";
     private String prePreg = "";
+    private String  rb06 =  "";
     private String rc01 = "";
     private String rc02 = "";
     private String rc03 = "";
@@ -129,6 +130,8 @@ public class Followups extends BaseObservable implements Observable {
         MainApp.followups.setfRound(MainApp.fpMwra.getfRound());
         MainApp.followups.setSno(MainApp.fpMwra.getRb01());
         MainApp.followups.setHdssId(MainApp.fpMwra.getHdssid());
+        MainApp.followups.setRb06(MainApp.fpMwra.getRb06());
+
     }
 
     @Bindable
@@ -311,6 +314,16 @@ public class Followups extends BaseObservable implements Observable {
 
     public void setVisitNo(String visitNo) {
         this.visitNo = visitNo;
+    }
+
+    @Bindable
+    public String getRb06() {
+        return rb06;
+    }
+
+    public void setRb06(String rb06) {
+        this.rb06 = rb06;
+        notifyChange(BR.rb06);
     }
 
     @Bindable
@@ -831,6 +844,7 @@ public class Followups extends BaseObservable implements Observable {
             this.rc01v2 = json.has("rc01v2") ? json.getString("rc01v2") : "";
             this.rc01v3 = json.has("rc01v3") ? json.getString("rc01v3") : "";
             this.prePreg = json.getString("prePreg");
+            this.rb06 = json.getString("rb06");
             this.rc02 = json.getString("rc02");
             this.rc03 = json.getString("rc03");
             this.rc04 = json.getString("rc04");
@@ -870,6 +884,7 @@ public class Followups extends BaseObservable implements Observable {
                 .put("ra01", ra01)
                 .put("rc01", rc01)
                 .put("prePreg", prePreg)
+                .put("rb06", rb06)
                 .put("rc01v2", rc01v2)
                 .put("rc01v3", rc01v3)
                 .put("rc02", rc02)

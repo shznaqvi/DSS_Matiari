@@ -175,6 +175,7 @@ object CreateTable {
             + TableFollowUpsSche.COLUMN_RB02 + " TEXT,"
             + TableFollowUpsSche.COLUMN_RB03 + " TEXT,"
             + TableFollowUpsSche.COLUMN_RB05 + " TEXT,"
+            + TableFollowUpsSche.COLUMN_RB06 + " TEXT,"
             + TableFollowUpsSche.COLUMN_RB07 + " TEXT" + " );")
 
     const val SQL_CREATE_FP_HOUSEHOLDS = ("CREATE TABLE "
