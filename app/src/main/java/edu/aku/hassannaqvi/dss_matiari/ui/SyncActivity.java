@@ -193,7 +193,7 @@ public class SyncActivity extends AppCompatActivity {
                     // Set tables to DOWNLOAD
                     String select = null;
 
-                    //String filter = " uccode = '05' and  DATEADD(MONTH,3,ra01) between DATEADD(DAY,-7,GETDATE()) AND GETDATE()";
+                    //String filter = " uccode = '05' and  DATEADD(MONTH,3,ra01) between DATEADD(DAY,-1,GETDATE()) AND GETDATE()";
                     // TODO: backdate limit removed (get all followups that are due upto now
                     String filter = " villagecode = '092' and uccode = '05' and  DATEADD(MONTH,3,ra01) between ra01 AND GETDATE() ";
                     downloadTables.add(new SyncModel(TableContracts.TableFollowUpsSche.TABLE_NAME, select, filter));

@@ -66,7 +66,7 @@ public class DataDownWorkerALL extends Worker {
         uploadTable = workerParams.getInputData().getString("table");
         position = workerParams.getInputData().getInt("position", -2);
         uploadColumns = workerParams.getInputData().getString("select");
-        uploadWhere = workerParams.getInputData().getString("filter");
+        uploadWhere = workerParams.getInputData().getString("where");
 
     }
 
@@ -205,11 +205,11 @@ public class DataDownWorkerALL extends Worker {
 
                 jsonTable.put("table", uploadTable);
                 jsonTable.put("select", uploadColumns);
-                jsonTable.put("filter", uploadWhere);
+                jsonTable.put("where", uploadWhere);
 
                 jsonTable.put("check", "");
 
-                if (uploadTable.equals(TableContracts.VersionTable.TABLE_NAME)) {
+                if (uploadTable.equals(TableContracts.TableFollowUpsSche.TABLE_NAME)) {
                     jsonTable.put("folder", "/");
                 }
 
