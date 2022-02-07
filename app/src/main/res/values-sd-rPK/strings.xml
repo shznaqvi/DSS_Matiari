@@ -146,11 +146,11 @@
     <string name="rc0402"> ٻاهر لڏي وئي </string>
     <string name="rc0403">انڪار ڪيو </string>
     <string name="rc0404"> موجود ناهي  / بند  </string>
-    <string name="rc0405">شادي ڪري ٻئي گهر هلي وئي </string>
-    <string name="rc0406">شادي ڪري ٻئي ڳوٺ هلي وئي</string>
-    <string name="rc05">موجوده حالت</string>
+    <string name="rc0405">شادي ڪري ساڳئي ڳوٺ جي ٻي گھر ۾ هلي وئي  </string>
+    <string name="rc0406">شادي ڪري ٻي ڳوٺ هلي وئي</string>
+    <string name="rc05"> موجوده حيثيت </string>
     <string name="rc0501">زنده</string>
-    <string name="rc0502">گذاري وئي</string>
+    <string name="rc0502">مئل</string>
     <string name="rc06">ازدواجي حيثيت</string>
     <string name="rc0601">شادي شده</string>
     <string name="rc0602">طلاق شده</string>
@@ -184,7 +184,7 @@
     <string name="rc1203">حمل ضايع</string>
     <string name="rc13">ٻار جي حالت</string>
     <string name="rc1301">زنده</string>
-    <string name="rc1302">مول</string>
+    <string name="rc1302">مئل</string>
     <string name="rc1303">ٽي ٻار</string>
     <string name="rc14"> وفات جي تاريخ</string>
 
