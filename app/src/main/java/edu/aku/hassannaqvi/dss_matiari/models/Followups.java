@@ -141,7 +141,7 @@ public class Followups extends BaseObservable implements Observable {
 
     public void setfRound(String fRound) {
         this.fRound = fRound;
-        notifyPropertyChanged(BR.round);
+        notifyChange(BR.round);
     }
 
 

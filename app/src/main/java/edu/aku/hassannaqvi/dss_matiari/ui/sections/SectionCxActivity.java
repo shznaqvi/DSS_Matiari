@@ -56,8 +56,7 @@ public class SectionCxActivity extends AppCompatActivity {
             MainApp.followups.setRc01(MainApp.fpMwra.getRb01());
             MainApp.followups.setRc02(MainApp.fpMwra.getRb02());
             MainApp.followups.setRc03(MainApp.fpMwra.getRb03());
-            // TODO: Marital Status not received from server
-            MainApp.followups.setRc06(MainApp.fpMwra.getRb06());
+            MainApp.followups.setRb06(MainApp.fpMwra.getRb06());
             MainApp.followups.setPrePreg(MainApp.fpMwra.getRb07());
             MainApp.followups.setRc07(MainApp.fpMwra.getRb07());
 
