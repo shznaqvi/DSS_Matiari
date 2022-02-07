@@ -196,6 +196,7 @@
     <string name="rc14">Date of Death </string>
     <string name="rc1401">مرد</string>
     <string name="rc1402">عورت</string>
+    <string name="rc14_info">DD/MM/YYYY</string>
     <string name="rc15">Current Pregnancy Status</string>
     <string name="rc1501">Pregnant</string>
     <string name="rc1502">Not Pregnant</string>

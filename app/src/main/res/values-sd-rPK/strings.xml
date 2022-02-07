@@ -117,7 +117,7 @@
     <string name="rb01">عورت جو سڃاڻپ نمبر</string>
     <string name="rb02"> عورت جو نالو</string>
     <string name="rb03">مڙس/پيء جو نالو</string>
-    <string name="rb03h">مڙس جو نالو</string>
+    <string name="rb03h">مڙس جو نالو/ پيءُ جو نالو </string>
     <string name="rb03f">پيءُ جو نالو</string>
     <string name="rb04">ڄمڻ جي تاريخ </string>
     <string name="rb04_info">DD/MM/YYYY Use 98/98/9998 if not known</string>
@@ -156,40 +156,47 @@
     <string name="rc0602">طلاق شده</string>
     <string name="rc0603"> بيواه</string>
     <string name="rc0604">غير شادي شده</string>
-    <string name="rc07">حمل جي حيثيت</string>
+    <string name="rc07">گذريل  دوري دوران حمل جي حيثيت</string>
     <string name="rc0701">حمل سان آهي</string>
     <string name="rc0702">حمل سان نه آهي</string>
 
-    <string name="rc08">جيڪڏهن حمل سان آهي ته آخري ماھواري جی تاريخ لکو</string>
+    <string name="rc08">ڇا اڃا تائين حاملا آهي؟</string>
+    <string name="rc0801">ها </string>
+    <string name="rc0802">نه </string>
     <string name="rc08_info">DD/MM/YYYY</string>
-    <string name="rc09">متوقع ويم جي تاريخ</string>
     <string name="rc09_info">DD/MM/YYYY</string>
-    <string name="rc10">ڇا اڃا تائين حاملا آهي؟</string>
+
+
+    <string name="rc10_info">DD/MM/YYYY Use 98/98/9998 if not known</string>
+    <string name="rc10"> ويم جي تاريخ</string>
     <string name="rc1001">ها </string>
     <string name="rc1002">نه </string>
     <string name="rc1003">ڪوڙو حمل</string>
-    <string name="rc10_info">DD/MM/YYYY Use 98/98/9998 if not known</string>
-    <string name="rc11"> ويم جي تاريخ</string>
-    <string name="rc11_info">DD/MM/YYYY </string>
-    <string name="rc12">حمل جي نتيجو </string>
-    <string name="rc1201">ٻار زنده ڄائو</string>
-    <string name="rc1202">ٻارمئل ڄائو</string>
-    <string name="rc1203">حمل ضايع</string>
-    <string name="rc13">حمل جو نتيجو</string>
-    <string name="rc1301"> اڪيلو ٻار</string>
-    <string name="rc1302">جاڙا ٻار</string>
-    <string name="rc1303">ٽي ٻار</string>
+    <string name="rc09">حمل جي نتيجو </string>
 
-    <string name="rc14">جنس</string>
+    <string name="rc11">حمل جو نتيجو</string>
+    <string name="rc11_info">DD/MM/YYYY </string>
+
+
+    <string name="rc12">جنس</string>
+    <string name="rc1201">مرد</string>
+    <string name="rc1202">عورت</string>
+    <string name="rc1203">حمل ضايع</string>
+    <string name="rc13">ٻار جي حالت</string>
+    <string name="rc1301">زنده</string>
+    <string name="rc1302">مول</string>
+    <string name="rc1303">ٽي ٻار</string>
+    <string name="rc14"> وفات جي تاريخ</string>
+
     <string name="rc1401">مرد</string>
     <string name="rc1402">عورت</string>
-    <string name="rc15">ٻار جي حالت</string>
-    <string name="rc1501">زنده</string>
-    <string name="rc1502">مول</string>
-    <string name="rc16"> وفات جي تاريخ</string>
-
+    <string name="rc15">موجوده حمل جو نتيجو</string>
+    <string name="rc1501">حمل سان آهي</string>
+    <string name="rc1502">حمل سان نه آهي</string>
+    <string name="rc16">جيڪڏهن حمل سان آهي ته تاريخ لکو</string>
     <string name="rc16_info">DD/MM/YYYY</string>
-    <string name="rc17">EDD Date [auto-calculated]</string>
+    <string name="rc14_info">DD/MM/YYYY</string>
+    <string name="rc17">متوقع ويم جي تاريخ[auto-calculated]</string>
     <string name="rc17_info">DD/MM/YYYY</string>
     <string name="istatus"> دوري جو نتيجو</string>
     <string name="istatusa">مڪمل</string>
@@ -213,8 +220,6 @@
     <string name="rc0902">ٻارمئل ڄائو</string>
     <string name="rc0903">حمل ضايع</string>
     <string name="rc0904">ڪوڙو حمل</string>
-    <string name="rc0801">ها</string>
-    <string name="rc0802">نه</string>
-    <string name="rc0803">ڪوڙو حمل</string>
+
 
 </resources>
