@@ -342,7 +342,7 @@ public class SyncActivity extends AppCompatActivity {
 
                             }
 
-                            downloadTables.get(position).setmessage("Received: " + jsonArray.length() + ", Saved: " + insertCount);
+                            downloadTables.get(position).setmessage("Received: " + jsonArray.length() + " • Saved: " + insertCount);
                             downloadTables.get(position).setstatus(insertCount == 0 ? "Unsuccessful" : "Successful");
                             downloadTables.get(position).setInfo("Time: " + time + "/" + getTime() + "\t Size: " + size);
                             downloadTables.get(position).setstatusID(insertCount == 0 ? 1 : 3);
@@ -394,7 +394,6 @@ public class SyncActivity extends AppCompatActivity {
                     .putString("table", uploadTables.get(i).gettableName())
                     .putInt("position", i)
                     //    .putString("data", uploadData.get(i).toString())
-
                     //.putString("columns", "_id, sysdate")
                     // .putString("where", where)
                     .build();
@@ -411,7 +410,7 @@ public class SyncActivity extends AppCompatActivity {
         wc.enqueue();
 
         // FOR WORKREQUESTS CHAIN (ONE TABLE DOWNLOADS AT A TIME)
-/*        WorkManager wm = WorkManager.getInstance();
+        /*        WorkManager wm = WorkManager.getInstance();
         WorkContinuation wc = wm.beginWith(workRequests.get(0));
         for (int i=1; i < workRequests.size(); i++ ) {
             wc = wc.then(workRequests.get(i));
