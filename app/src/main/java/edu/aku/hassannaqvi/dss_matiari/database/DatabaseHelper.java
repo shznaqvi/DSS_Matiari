@@ -298,7 +298,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         String orderBy = UsersTable.COLUMN_ID + " ASC";
 
         Users loggedInUser = null;
-        try {
             c = db.query(
                     UsersTable.TABLE_NAME,  // The table to query
                     columns,                   // The columns to return
@@ -311,14 +310,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             while (c.moveToNext()) {
                 loggedInUser = new Users().hydrate(c);
             }
-        } finally {
-            if (c != null) {
+
                 c.close();
-            }
-            if (db != null) {
+
                 db.close();
-            }
-        }
+
         MainApp.user = loggedInUser;
         return c.getCount() > 0;
     }
@@ -343,7 +339,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         String having = null;
         String orderBy = HouseholdTable.COLUMN_ID + " ASC";
         ArrayList<Households> allHouseholds = new ArrayList<>();
-        try {
             c = db.query(
                     TableContracts.HouseholdTable.TABLE_NAME,  // The table to query
                     columns,                   // The columns to return
@@ -361,14 +356,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 households.setUserName(c.getString(c.getColumnIndexOrThrow(HouseholdTable.COLUMN_USERNAME)));
                 allHouseholds.add(households);
             }
-        } finally {
-            if (c != null) {
+
                 c.close();
-            }
-            if (db != null) {
+
                 db.close();
-            }
-        }
+
         return allHouseholds;
     }
 
@@ -399,7 +391,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         String having = null;
         String orderBy = TableContracts.HouseholdTable.COLUMN_ID + " ASC";
         ArrayList<Households> allHouseholds = new ArrayList<>();
-        try {
             c = db.query(
                     HouseholdTable.TABLE_NAME,  // The table to query
                     columns,                   // The columns to return
@@ -424,14 +415,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 households.setHhNo(c.getString(c.getColumnIndexOrThrow(HouseholdTable.COLUMN_HOUSEHOLD_NO)));
                 allHouseholds.add(households);
             }
-        } finally {
-            if (c != null) {
-                c.close();
-            }
-            if (db != null) {
-                db.close();
-            }
-        }
+
+        c.close();
+
+        db.close();
+
         return allHouseholds;
     }
 
@@ -657,43 +645,41 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
 
-    public int syncVersionApp(JSONObject VersionList) {
+    public int syncVersionApp(JSONObject VersionList) throws JSONException {
         SQLiteDatabase db = this.getWritableDatabase(DATABASE_PASSWORD);
         db.delete(VersionTable.TABLE_NAME, null, null);
         long count = 0;
-        try {
-            JSONObject jsonObjectCC = ((JSONArray) VersionList.get(VersionTable.COLUMN_VERSION_PATH)).getJSONObject(0);
-            VersionApp Vc = new VersionApp();
-            Vc.sync(jsonObjectCC);
+        JSONObject jsonObjectCC = ((JSONArray) VersionList.get(VersionTable.COLUMN_VERSION_PATH)).getJSONObject(0);
+        VersionApp Vc = new VersionApp();
+        Vc.sync(jsonObjectCC);
 
-            ContentValues values = new ContentValues();
+        ContentValues values = new ContentValues();
 
-            values.put(VersionTable.COLUMN_PATH_NAME, Vc.getPathname());
+        values.put(VersionTable.COLUMN_PATH_NAME, Vc.getPathname());
             values.put(VersionTable.COLUMN_VERSION_CODE, Vc.getVersioncode());
             values.put(VersionTable.COLUMN_VERSION_NAME, Vc.getVersionname());
 
             count = db.insert(VersionTable.TABLE_NAME, null, values);
             if (count > 0) count = 1;
 
-        } catch (Exception ignored) {
-        } finally {
-            db.close();
-        }
+
+        db.close();
+
 
         return (int) count;
     }
 
-    public int syncUser(JSONArray userList) {
+    public int syncUser(JSONArray userList) throws JSONException {
         SQLiteDatabase db = this.getWritableDatabase(DATABASE_PASSWORD);
         db.delete(UsersTable.TABLE_NAME, null, null);
         int insertCount = 0;
-        try {
-            for (int i = 0; i < userList.length(); i++) {
 
-                JSONObject jsonObjectUser = userList.getJSONObject(i);
+        for (int i = 0; i < userList.length(); i++) {
 
-                Users user = new Users();
-                user.sync(jsonObjectUser);
+            JSONObject jsonObjectUser = userList.getJSONObject(i);
+
+            Users user = new Users();
+            user.sync(jsonObjectUser);
                 ContentValues values = new ContentValues();
 
                 values.put(UsersTable.COLUMN_USERNAME, user.getUserName());
@@ -704,27 +690,23 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 if (rowID != -1) insertCount++;
             }
 
-        } catch (Exception e) {
-            Log.d(TAG, "syncUser(e): " + e);
-            db.close();
-        } finally {
-            db.close();
-        }
+
+        db.close();
+
         return insertCount;
     }
 
-    public int syncVillage(JSONArray villageList) {
+    public int syncVillage(JSONArray villageList) throws JSONException {
         SQLiteDatabase db = this.getWritableDatabase(DATABASE_PASSWORD);
         db.delete(TableVillage.TABLE_NAME, null, null);
         int insertCount = 0;
-        try {
-            for (int i = 0; i < villageList.length(); i++) {
+        for (int i = 0; i < villageList.length(); i++) {
 
-                JSONObject jsonObjectVil = villageList.getJSONObject(i);
+            JSONObject jsonObjectVil = villageList.getJSONObject(i);
 
-                Villages village = new Villages();
-                village.Sync(jsonObjectVil);
-                ContentValues values = new ContentValues();
+            Villages village = new Villages();
+            village.Sync(jsonObjectVil);
+            ContentValues values = new ContentValues();
 
                 values.put(TableVillage.COLUMN_UCNAME, village.getUcname());
                 values.put(TableVillage.COLUMN_VILLAGE_NAME, village.getVillagename());
@@ -734,12 +716,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 if (rowID != -1) insertCount++;
             }
 
-        } catch (Exception e) {
-            Log.d(TAG, "syncVillage(e): " + e);
-            db.close();
-        } finally {
-            db.close();
-        }
+
+        db.close();
+
         return insertCount;
     }
 
@@ -802,7 +781,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 TableVillage.COLUMN_UCNAME + " ASC";
 
         Collection<Villages> allVil = new ArrayList<Villages>();
-        try {
             c = db.query(
                     TableVillage.TABLE_NAME,  // The table to query
                     columns,                   // The columns to return
@@ -816,14 +794,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 Villages vil = new Villages();
                 allVil.add(vil.HydrateUc(c));
             }
-        } finally {
-            if (c != null) {
-                c.close();
-            }
-            if (db != null) {
-                db.close();
-            }
-        }
+
+        c.close();
+
+        db.close();
+
         return allVil;
     }
 
@@ -845,7 +820,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 TableVillage.COLUMN_UCNAME + " ASC";
 
         Collection<Villages> allVil = new ArrayList<Villages>();
-        try {
             c = db.query(
                     TableVillage.TABLE_NAME,  // The table to query
                     columns,                   // The columns to return
@@ -859,14 +833,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 Villages vil = new Villages();
                 allVil.add(vil.HydrateUc(c));
             }
-        } finally {
-            if (c != null) {
-                c.close();
-            }
-            if (db != null) {
-                db.close();
-            }
-        }
+
+        c.close();
+
+        db.close();
+
         return allVil;
     }
 
@@ -890,7 +861,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         String orderBy = TableContracts.HouseholdTable.COLUMN_ID + " ASC";
 
         JSONArray allHouseholds = new JSONArray();
-        try {
             c = db.query(
                     HouseholdTable.TABLE_NAME,  // The table to query
                     columns,                   // The columns to return
@@ -910,14 +880,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
 
             }
-        } finally {
-            if (c != null) {
-                c.close();
-            }
-            if (db != null) {
-                db.close();
-            }
-        }
+
+        c.close();
+
+        db.close();
+
         Log.d(TAG, "getUnsyncedHouseholds: " + allHouseholds.toString().length());
         Log.d(TAG, "getUnsyncedHouseholds: " + allHouseholds);
         return allHouseholds;
@@ -943,7 +910,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         String orderBy = TableContracts.FPHouseholdTable.COLUMN_ID + " ASC";
 
         JSONArray allHouseholds = new JSONArray();
-        try {
             c = db.query(
                     TableContracts.FPHouseholdTable.TABLE_NAME,  // The table to query
                     columns,                   // The columns to return
@@ -963,14 +929,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
 
             }
-        } finally {
-            if (c != null) {
-                c.close();
-            }
-            if (db != null) {
-                db.close();
-            }
-        }
+
+        c.close();
+
+        db.close();
+
         Log.d(TAG, "getUnsyncedFPHouseholds: " + allHouseholds.toString().length());
         Log.d(TAG, "getUnsyncedFPHouseholds: " + allHouseholds);
         return allHouseholds;
@@ -992,7 +955,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         String orderBy = MWRATable.COLUMN_ID + " ASC";
 
         JSONArray allMwra = new JSONArray();
-        try {
             c = db.query(
                     MWRATable.TABLE_NAME,  // The table to query
                     columns,                   // The columns to return
@@ -1007,19 +969,54 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 MWRA mwra = new MWRA();
                 allMwra.put(mwra.Hydrate(c).toJSONObject());
             }
-        } finally {
-            if (c != null) {
-                c.close();
-            }
-            if (db != null) {
-                db.close();
-            }
-        }
+
+        c.close();
+
+        db.close();
+
         Log.d(TAG, "getUnsyncedMWRA: " + allMwra.toString().length());
         Log.d(TAG, "getUnsyncedMWRA: " + allMwra);
         return allMwra;
     }
 
+    public JSONArray getUnsyncedFollowups() throws JSONException {
+        SQLiteDatabase db = this.getReadableDatabase(DATABASE_PASSWORD);
+        Cursor c = null;
+        String[] columns = null;
+        String whereClause;
+        whereClause = FollowupsTable.COLUMN_SYNCED + " is null ";
+
+        String[] whereArgs = null;
+
+        String groupBy = null;
+        String having = null;
+
+        String orderBy = FollowupsTable.COLUMN_ID + " ASC";
+
+        JSONArray allFollowups = new JSONArray();
+        c = db.query(
+                FollowupsTable.TABLE_NAME,  // The table to query
+                columns,                   // The columns to return
+                whereClause,               // The columns for the WHERE clause
+                whereArgs,                 // The values for the WHERE clause
+                groupBy,                   // don't group the rows
+                having,                    // don't filter by row groups
+                orderBy                    // The sort order
+        );
+        while (c.moveToNext()) {
+            Log.d(TAG, "getUnsyncedFollowups: " + c.getCount());
+            Followups Followups = new Followups();
+            allFollowups.put(Followups.Hydrate(c).toJSONObject());
+        }
+
+        c.close();
+
+        db.close();
+
+        Log.d(TAG, "getUnsyncedFollowups: " + allFollowups.toString().length());
+        Log.d(TAG, "getUnsyncedFollowups: " + allFollowups);
+        return allFollowups;
+    }
 
     //update SyncedTables
     public void updateSyncedhouseholds(String id) {
@@ -1050,6 +1047,40 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         String[] whereArgs = {id};
         int count = db.update(
                 MWRATable.TABLE_NAME,
+                values,
+                where,
+                whereArgs);
+    }
+
+    //update SyncedTables
+    public void updateSyncedfphouseholds(String id) {
+        SQLiteDatabase db = this.getReadableDatabase(DATABASE_PASSWORD);
+
+// New value for one column
+        ContentValues values = new ContentValues();
+        values.put(FPHouseholdTable.COLUMN_SYNCED, true);
+        values.put(FPHouseholdTable.COLUMN_SYNCED_DATE, new Date().toString());
+
+// Which row to update, based on the title
+        String where = FPHouseholdTable.COLUMN_ID + " = ?";
+        String[] whereArgs = {id};
+
+        int count = db.update(
+                FPHouseholdTable.TABLE_NAME,
+                values,
+                where,
+                whereArgs);
+    }
+
+    public void updateSyncedfollowups(String id) {
+        SQLiteDatabase db = this.getReadableDatabase(DATABASE_PASSWORD);
+        ContentValues values = new ContentValues();
+        values.put(FollowupsTable.COLUMN_SYNCED, true);
+        values.put(FollowupsTable.COLUMN_SYNCED_DATE, new Date().toString());
+        String where = FollowupsTable.COLUMN_ID + " = ?";
+        String[] whereArgs = {id};
+        int count = db.update(
+                FollowupsTable.TABLE_NAME,
                 values,
                 where,
                 whereArgs);
@@ -1118,7 +1149,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 TableVillage.COLUMN_VILLAGE_NAME + " ASC";
 
         Collection<Villages> allVil = new ArrayList<Villages>();
-        try {
             c = db.query(
                     TableVillage.TABLE_NAME,  // The table to query
                     columns,                   // The columns to return
@@ -1132,14 +1162,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 Villages vil = new Villages();
                 allVil.add(vil.HydrateVil(c));
             }
-        } finally {
-            if (c != null) {
-                c.close();
-            }
-            if (db != null) {
-                db.close();
-            }
-        }
+
+        c.close();
+
+        db.close();
+
         return allVil;
     }
 
@@ -1193,18 +1220,17 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
 
-    public int syncZStandard(JSONArray zsList) {
+    public int syncZStandard(JSONArray zsList) throws JSONException {
         SQLiteDatabase db = this.getWritableDatabase(DATABASE_PASSWORD);
         db.delete(ZScoreTable.TABLE_NAME, null, null);
         int insertCount = 0;
-        try {
-            for (int i = 0; i < zsList.length(); i++) {
+        for (int i = 0; i < zsList.length(); i++) {
 
-                JSONObject jsonObjectzs = zsList.getJSONObject(i);
+            JSONObject jsonObjectzs = zsList.getJSONObject(i);
 
-                ZStandard Zstandard = new ZStandard();
-                Zstandard.Sync(jsonObjectzs);
-                ContentValues values = new ContentValues();
+            ZStandard Zstandard = new ZStandard();
+            Zstandard.Sync(jsonObjectzs);
+            ContentValues values = new ContentValues();
 
                 values.put(ZScoreTable.COLUMN_SEX, Zstandard.getSex());
                 values.put(ZScoreTable.COLUMN_AGE, Zstandard.getAge());
@@ -1217,12 +1243,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 if (rowID != -1) insertCount++;
             }
 
-        } catch (Exception e) {
-            Log.d(TAG, "syncZStandard(e): " + e);
             db.close();
-        } finally {
-            db.close();
-        }
+
         return insertCount;
     }
 
@@ -1242,7 +1264,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         String orderBy = HouseholdTable.COLUMN_ID + " ASC";
 
         Households households = null;
-        try {
             c = db.query(
                     TableContracts.HouseholdTable.TABLE_NAME,  // The table to query
                     columns,                   // The columns to return
@@ -1255,14 +1276,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             while (c.moveToNext()) {
                 households = new Households().Hydrate(c);
             }
-        } finally {
-            if (c != null) {
-                c.close();
-            }
-            if (db != null) {
-                db.close();
-            }
-        }
+
+        c.close();
+
+        db.close();
+
         return households;
     }
 
@@ -1282,7 +1300,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         String orderBy = HouseholdTable.COLUMN_ID + " ASC";
 
         Households households = null;
-        try {
             c = db.query(
                     HouseholdTable.TABLE_NAME,  // The table to query
                     columns,                   // The columns to return
@@ -1295,14 +1312,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             while (c.moveToNext()) {
                 households = new Households().Hydrate(c);
             }
-        } finally {
-            if (c != null) {
-                c.close();
-            }
-            if (db != null) {
+
+        c.close();
                 db.close();
-            }
-        }
+
         return households;
     }
 
@@ -1325,7 +1338,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         String orderBy = MWRATable.COLUMN_ID + " ASC";
 
         ArrayList<MWRA> mwraByHH = new ArrayList<>();
-        try {
             c = db.query(
                     MWRATable.TABLE_NAME,  // The table to query
                     columns,                   // The columns to return
@@ -1340,14 +1352,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
                 mwraByHH.add(mwra);
             }
-        } finally {
-            if (c != null) {
-                c.close();
-            }
-            if (db != null) {
-                db.close();
-            }
-        }
+
+        c.close();
+
+        db.close();
+
         return mwraByHH;
     }
 
@@ -1500,7 +1509,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         String orderBy = HouseholdTable.COLUMN_ID + " ASC";
 
         ArrayList<Households> householdByHH = new ArrayList<>();
-        try {
             c = db.query(
                     HouseholdTable.TABLE_NAME,  // The table to query
                     columns,                   // The columns to return
@@ -1515,14 +1523,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
                 householdByHH.add(household);
             }
-        } finally {
-            if (c != null) {
-                c.close();
-            }
-            if (db != null) {
+
+        c.close();
                 db.close();
-            }
-        }
+
         return householdByHH;
     }
 
@@ -1542,7 +1546,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         String orderBy = HouseholdTable.COLUMN_ID + " ASC";
 
         ArrayList<Households> householdByHH = new ArrayList<>();
-        try {
             c = db.query(
                     TableContracts.HouseholdTable.TABLE_NAME,  // The table to query
                     columns,                   // The columns to return
@@ -1557,14 +1560,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
                 householdByHH.add(household);
             }
-        } finally {
-            if (c != null) {
-                c.close();
-            }
-            if (db != null) {
-                db.close();
-            }
-        }
+
+        c.close();
+
+        db.close();
+
         return householdByHH;
     }
 

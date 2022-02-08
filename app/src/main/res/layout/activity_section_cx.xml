@@ -4,11 +4,6 @@
 
     <data>
 
-        <!--FPHouseholds-->
-        <variable
-            name="cPart"
-            type="edu.aku.hassannaqvi.dss_matiari.models.FPHouseholds" />
-
         <import type="android.view.View" />
 
         <!--FPHouseholds-->

@@ -153,7 +153,7 @@ public class SyncActivity extends AppCompatActivity {
                     MainApp.uploadData.add(db.getUnsyncedHouseholds());
                 } catch (JSONException e) {
                     e.printStackTrace();
-                    Toast.makeText(this, "JSONException: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, "JSONException(Forms): " + e.getMessage(), Toast.LENGTH_SHORT).show();
                     Log.d(TAG, "ProcessStart (JSONException): " + e.getMessage());
 
                 }
@@ -164,14 +164,37 @@ public class SyncActivity extends AppCompatActivity {
 
                 } catch (JSONException e) {
                     e.printStackTrace();
-                    Toast.makeText(this, "JSONException: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, "JSONException(MWRA): " + e.getMessage(), Toast.LENGTH_SHORT).show();
                     Log.d(TAG, "ProcessStart (JSONException): " + e.getMessage());
+                }
+                try {
+                    // Followups
+                    uploadTables.add(new SyncModel(TableContracts.FollowupsTable.TABLE_NAME));
+                    MainApp.uploadData.add(db.getUnsyncedFollowups());
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    Toast.makeText(this, "JSONException(Followups): " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                    Log.d(TAG, "ProcessStart (Followups): " + e.getMessage());
+                }
+
+                try {
+                    // FpHouseholds
+                    uploadTables.add(new SyncModel(TableContracts.FPHouseholdTable.TABLE_NAME));
+                    MainApp.uploadData.add(db.getUnsyncedFPHouseholds());
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    Toast.makeText(this, "JSONException(FPHousehold): " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                    Log.d(TAG, "ProcessStart (FPHouseholdTable): " + e.getMessage());
                 }
 
                 MainApp.downloadData = new String[uploadData.size()];
                 setAdapter(uploadTables);
                 BeginUpload();
                 break;
+
+
             case R.id.btnSync:
 
                 bi.activityTitle.setText("Download Data");
