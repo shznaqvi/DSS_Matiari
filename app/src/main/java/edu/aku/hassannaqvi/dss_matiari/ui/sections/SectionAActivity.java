@@ -61,10 +61,10 @@ public class SectionAActivity extends AppCompatActivity {
         bi.ra20.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
-                if(bi.ra2001.isChecked())
-                {
+                if (bi.ra2001.isChecked()) {
                     bi.ra17C2.setMinvalue(1);
-                }else{
+                }
+                if (bi.ra2002.isChecked()) {
                     bi.ra17C2.setMinvalue(0);
                 }
             }
