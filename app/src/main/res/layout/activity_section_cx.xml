@@ -543,7 +543,7 @@
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:checked='@{followups.rc06.equals("4")}'
-                                    android:enabled='@{followups.rb06.equals(`4`)}'
+                                    android:enabled='@{followups.prePreg.equals("")}'
                                     android:onClick='@{()->followups.setRc06("4") + rc08.clearCheck() + rc09.clearCheck() + rc11.clearCheck() + rc1202.clearCheck() + rc1203.clearCheck() + rc1302.clearCheck() + rc1303.clearCheck() + rc15.clearCheck()}'
                                     android:text="@string/rc0604" />
                             </RadioGroup>

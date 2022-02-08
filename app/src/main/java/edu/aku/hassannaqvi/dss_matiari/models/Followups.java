@@ -429,7 +429,7 @@ public class Followups extends BaseObservable implements Observable {
     public void setRc04(String rc04) {
         this.rc04 = rc04;
         setRc05(rc04.equals("1") ? this.rc05 : "");
-        setRc06(rc04.equals("1") ? this.rc06 : "");
+        //setRc06(rc04.equals("1") ? this.rc06 : "");
         setRc08(rc04.equals("1") ? this.rc08 : "");
         setRc09(rc04.equals("1") ? this.rc09 : "");
         setRc10(rc04.equals("1") ? this.rc10 : "");
@@ -461,7 +461,7 @@ public class Followups extends BaseObservable implements Observable {
 
     public void setRc05(String rc05) {
         this.rc05 = rc05;
-        setRc06(rc05.equals("1") ? this.rc06 : "");
+        // setRc06(rc05.equals("1") ? this.rc06 : "");
         setRc08(rc05.equals("1") ? this.rc08 : "");
         setRc09(rc05.equals("1") ? this.rc09 : "");
         setRc10(rc05.equals("1") ? this.rc10 : "");
