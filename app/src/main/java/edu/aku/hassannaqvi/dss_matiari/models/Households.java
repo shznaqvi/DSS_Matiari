@@ -692,6 +692,8 @@ public class Households extends BaseObservable implements Observable {
             setRa17_d2("");
 
         }*/
+
+        setRa18(ra20.equals("1") ? this.ra18 : "");
         notifyChange(BR.ra20);
     }
 

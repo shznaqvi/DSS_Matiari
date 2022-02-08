@@ -65,7 +65,8 @@ public class SectionAActivity extends AppCompatActivity {
                 {
                     bi.ra17C2.setMinvalue(1);
                 }else{
-                    bi.ra17C2.setMinvalue(0);
+                    bi.ra17C2.setMaxvalue(0);
+
                 }
             }
 
