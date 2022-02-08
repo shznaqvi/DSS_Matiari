@@ -63,9 +63,11 @@ public class SectionAActivity extends AppCompatActivity {
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 if (bi.ra2001.isChecked()) {
                     bi.ra17C2.setMinvalue(1);
+                    bi.ra17C2.setMaxvalue(20);
                 }
-                if (bi.ra2002.isChecked()) {
+                else if (bi.ra2002.isChecked()) {
                     bi.ra17C2.setMinvalue(0);
+                    bi.ra17C2.setMaxvalue(0);
                 }
             }
 
