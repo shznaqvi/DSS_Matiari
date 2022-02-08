@@ -63,7 +63,7 @@ public class IdentificationActivity extends AppCompatActivity {
             case 1:
                 bi.btnContinue.setText("Open Household List");
                 MainApp.households = new Households();
-                openIntent = new Intent(this, HouseholdActivity.class);
+                openIntent = new Intent(this,  HouseholdActivity.class);
                 break;
             case 2:
                 bi.btnContinue.setText("Open Followups List");

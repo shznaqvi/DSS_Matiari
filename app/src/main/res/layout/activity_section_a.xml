@@ -1,4 +1,4 @@
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
+ <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
@@ -927,7 +927,7 @@
                                 android:maxLength="2"
                                 android:text="@={household.ra17_c2}"
                                 app:maxValue="20"
-                                app:minValue="1"
+                                app:minValue="0"
                                 app:type="range" />
 
 
@@ -1122,8 +1122,8 @@
                 <!-- ra18  Input-Numeric   -->
                 <androidx.cardview.widget.CardView
                     android:id="@+id/fldGrpCVra18"
-                    android:visibility="@{household.Ra20.equals(`1`)?View.VISIBLE:View.GONE}"
-                    style="@style/cardView">
+                    style="@style/cardView"
+                    android:visibility="@{household.ra17_c1.equals(`0`) ? View.GONE : View.VISIBLE}">
 
                     <LinearLayout
                         android:layout_width="match_parent"

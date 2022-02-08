@@ -8,6 +8,8 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.CompoundButton;
+import android.widget.CompoundButton.OnCheckedChangeListener;
+import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -38,7 +40,7 @@ public class SectionAActivity extends AppCompatActivity {
         setTheme(lang.equals("1") ? R.style.AppThemeEnglish1 : R.style.AppThemeUrdu);
         bi = DataBindingUtil.setContentView(this, R.layout.activity_section_a);
         bi.setCallback(this);
-        bi.setHousehold(MainApp.households);
+        bi.setHousehold(households);
 
         setTitle(R.string.demographicinformation_mainheading);
         setImmersive(true);
@@ -46,17 +48,30 @@ public class SectionAActivity extends AppCompatActivity {
         db = MainApp.appInfo.dbHelper;
 
         // Update text for btnContinue
-        bi.btnContinue.setText(MainApp.households.getUid().equals("") ? "Save" : "Update");
+        bi.btnContinue.setText(households.getUid().equals("") ? "Save" : "Update");
 
         // Add same as previous check box for Mohalla
-        if (MainApp.previousAddress.trim().equals("") || !MainApp.households.getRa08().equals(""))
+        if (MainApp.previousAddress.trim().equals("") || !households.getRa08().equals(""))
             bi.rb08check.setVisibility(View.GONE);
 
         // Set Visit data same as previous household of the same day.
         /*    if (!MainApp.dateOfVisit.trim().equals(""))
          */
 
-        bi.rb08check.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        bi.ra20.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                if(bi.ra2001.isChecked())
+                {
+                    bi.ra17C2.setMinvalue(1);
+                }else{
+                    bi.ra17C2.setMinvalue(0);
+                }
+            }
+
+        });
+
+        bi.rb08check.setOnCheckedChangeListener(new OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
@@ -68,6 +83,12 @@ public class SectionAActivity extends AppCompatActivity {
                 }
             }
         });
+
+
+
+
+
+
     }
 
     public void btnContinue(View view) {
