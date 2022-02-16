@@ -3,6 +3,7 @@ package edu.aku.hassannaqvi.dss_matiari.ui.lists;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.hdssid;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.idType;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.selectedHousehold;
+import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.selectedUC;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.selectedVillage;
 
 import android.app.Activity;
@@ -169,9 +170,9 @@ public class HouseholdActivity extends AppCompatActivity {
 
 
         // Increment Household Number by 1 (New Method)
-        int maxHH = db.getMaxHHNo(selectedVillage);
-        int maxFpHH = db.getMaxHHNoFromFolloupsSche(selectedVillage);
-        int maxHHFinal = Math.max(maxHH, maxFpHH);
+        int maxHH = db.getMaxHouseholdNo(selectedUC, selectedVillage);      // From Households table on device
+        int maxHHNo = db.getMaxHHNoByVillage(selectedUC, selectedVillage);  // From Max Household numbers fetched from server
+        int maxHHFinal = Math.max(maxHH, maxHHNo);
         MainApp.households.setRa09(String.valueOf(maxHHFinal + 1));
         MainApp.selectedHhNO = String.valueOf(maxHHFinal + 1);
 

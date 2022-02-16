@@ -22,7 +22,6 @@ import edu.aku.hassannaqvi.dss_matiari.contracts.TableContracts;
 import edu.aku.hassannaqvi.dss_matiari.core.MainApp;
 import edu.aku.hassannaqvi.dss_matiari.database.DatabaseHelper;
 import edu.aku.hassannaqvi.dss_matiari.databinding.ActivitySectionEBinding;
-import edu.aku.hassannaqvi.dss_matiari.ui.WRAEndingActivity;
 
 public class SectionEActivity extends AppCompatActivity {
 
@@ -68,7 +67,7 @@ public class SectionEActivity extends AppCompatActivity {
             MainApp.pregnancy.setHdssId(households.getHdssId());
             MainApp.pregnancy.setAppver(MainApp.versionName + "." + MainApp.versionCode);
 
-            MainApp.pregnancy.setRa01(MainApp.households.getRa01());
+            MainApp.pregnancy.setRb01a(MainApp.households.getRb01a());
         }*/
 
         setTitle(R.string.marriedwomenregistration_mainheading);

@@ -314,6 +314,10 @@
     <string name="Q_ra22" translatable="false">RA11</string>
     <string name="rb09hint">Press button to calculate EDD &gt;&gt;&gt;</string>
     <string name="age_groups">Age Groups</string>
+    <string name="rb01a">Date of Enrollment</string>
+    <string name="Q_rb01a" translatable="false">RB01A</string>
+    <string name="Q_rc01a" translatable="false">RC01A</string>
+    <string name="rc01a">Date of Follow-up</string>
 
     <!--    <string name="rc09_info">DD/MM/YYYY</string>-->
     <!--    <string name="rc1001">ها </string>-->

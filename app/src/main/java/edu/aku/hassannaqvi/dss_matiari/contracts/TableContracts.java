@@ -196,6 +196,7 @@ public class TableContracts {
         public static final String COLUMN_VILLAGE_CODE = "villagecode";
         public static final String COLUMN_UC_CODE = "uccode";
 
+
         //public static final String SERVER_URI = "villages.php";
 
 /*        public static String PATH = "villages";
@@ -212,6 +213,15 @@ public class TableContracts {
         public static Uri buildUriWithId(long id) {
             return ContentUris.withAppendedId(CONTENT_URI, id);
         }*/
+    }
+
+    public static abstract class MaxHhnoTable implements BaseColumns {
+        public static final String COLUMN_NAME_NULLABLE = "NULLHACK";
+        public static final String TABLE_NAME = "maxhhno";
+        public static final String COLUMN_ID = "_id";
+        public static final String COLUMN_UC_CODE = "ucCode";
+        public static final String COLUMN_VILLAGE_CODE = "villageCode";
+        public static final String COLUMN_MAX_HHNO = "maxhhno";
     }
 
     public static abstract class TableFollowUpsSche implements BaseColumns {

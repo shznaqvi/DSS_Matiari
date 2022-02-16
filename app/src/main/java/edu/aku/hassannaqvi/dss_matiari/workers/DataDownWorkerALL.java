@@ -63,7 +63,8 @@ public class DataDownWorkerALL extends Worker {
     private final String uploadColumns;
     HttpsURLConnection urlConnection;
     private long startTime;
-    private int length = 0;
+    private int responseLength = 0, requestLength = 0;
+
 
     public DataDownWorkerALL(@NonNull Context context, @NonNull WorkerParameters workerParams) {
         super(context, workerParams);
@@ -142,6 +143,7 @@ public class DataDownWorkerALL extends Worker {
     @NonNull
     @Override
     public Result doWork() {
+        startTime = System.currentTimeMillis();
 
         String nTitle = uploadTable + " : Data Upload";
 
@@ -226,15 +228,21 @@ public class DataDownWorkerALL extends Worker {
 
 
                 Log.d(TAG + " : " + uploadTable, "doWork: jsonTable: " + jsonTable);
-                wr.writeBytes(CipherSecure.encrypt(String.valueOf(jsonTable)));
-                Log.d(TAG + " : " + uploadTable, "doWork: Encrypted: " + CipherSecure.encrypt(String.valueOf(jsonTable)));
+                String cipheredRequest = CipherSecure.encrypt(String.valueOf(jsonTable));
+                requestLength = cipheredRequest.length();
+                wr.writeBytes(cipheredRequest);
+
+                Log.d(TAG, "Content Length: " + uploadTable + " Request " + cipheredRequest.length());
+
+                Log.d(TAG + " : " + uploadTable, "doWork: Encrypted: " + cipheredRequest);
                 wr.flush();
                 wr.close();
 
 
                 if (urlConnection.getResponseCode() == HttpsURLConnection.HTTP_OK) {
 
-                    length = urlConnection.getContentLength();
+                    responseLength = urlConnection.getContentLength();
+                    Log.d(TAG, "Content Length: " + uploadTable + " conn " + responseLength);
 
                     InputStream in = new BufferedInputStream(urlConnection.getInputStream());
 
@@ -246,12 +254,14 @@ public class DataDownWorkerALL extends Worker {
 
                     }
                     Log.d(TAG + " : " + uploadTable, "doWork: result-server: " + result);
+                    Log.d(TAG, "Content Length: " + uploadTable + " response " + result.length());
                     try {
                         result = new StringBuilder(CipherSecure.decrypt(result.toString()));
+
                     } catch (IllegalArgumentException e) {
                         data = new Data.Builder()
                                 .putString("time", getTime())
-                                .putString("size", getSize(length))
+                                .putString("size", getSize(requestLength) + "/" + getSize(responseLength))
                                 .putString("error", e.getMessage() + " | " + Html.fromHtml(String.valueOf(result)))
                                 .putInt("position", this.position)
                                 .build();
@@ -262,7 +272,7 @@ public class DataDownWorkerALL extends Worker {
                     if (result.toString().equals("[]")) {
                         data = new Data.Builder()
                                 .putString("time", getTime())
-                                .putString("size", getSize(length))
+                                .putString("size", getSize(requestLength) + "/" + getSize(responseLength))
                                 .putString("error", "No data received from server: " + result)
                                 .putInt("position", this.position)
                                 .build();
@@ -271,7 +281,7 @@ public class DataDownWorkerALL extends Worker {
                 } else {
                     data = new Data.Builder()
                             .putString("time", getTime())
-                            .putString("size", getSize(length))
+                            .putString("size", getSize(requestLength) + "/" + getSize(responseLength))
                             .putString("error", String.valueOf(urlConnection.getResponseCode()))
                             .putInt("position", this.position)
                             .build();
@@ -280,7 +290,7 @@ public class DataDownWorkerALL extends Worker {
             } else {
                 data = new Data.Builder()
                         .putString("time", getTime())
-                        .putString("size", getSize(length))
+                        .putString("size", getSize(requestLength) + "/" + getSize(responseLength))
                         .putString("error", "Invalid Certificate")
                         .putInt("position", this.position)
                         .build();
@@ -290,7 +300,7 @@ public class DataDownWorkerALL extends Worker {
         } catch (java.net.SocketTimeoutException e) {
             data = new Data.Builder()
                     .putString("time", getTime())
-                    .putString("size", getSize(length))
+                    .putString("size", getSize(requestLength) + "/" + getSize(responseLength))
                     .putString("error", e.getMessage())
                     .putInt("position", this.position)
                     .build();
@@ -300,7 +310,7 @@ public class DataDownWorkerALL extends Worker {
             Toast.makeText(mContext, "(SSLPeerUnverifiedException): %s" + e.getMessage(), Toast.LENGTH_SHORT).show();
             data = new Data.Builder()
                     .putString("time", getTime())
-                    .putString("size", getSize(length))
+                    .putString("size", getSize(requestLength) + "/" + getSize(responseLength))
                     .putString("error", e.getMessage())
                     .putInt("position", this.position)
                     .build();
@@ -309,7 +319,7 @@ public class DataDownWorkerALL extends Worker {
         } catch (IOException | JSONException | NoSuchPaddingException | NoSuchAlgorithmException | InvalidAlgorithmParameterException | InvalidKeyException | BadPaddingException | IllegalBlockSizeException e) {
             data = new Data.Builder()
                     .putString("time", getTime())
-                    .putString("size", getSize(length))
+                    .putString("size", getSize(requestLength) + "/" + getSize(responseLength))
                     .putString("error", e.getMessage())
                     .putInt("position", this.position)
                     .build();
@@ -323,7 +333,7 @@ public class DataDownWorkerALL extends Worker {
 
         data = new Data.Builder()
                 .putString("time", getTime())
-                .putString("size", getSize(length))
+                .putString("size", getSize(requestLength) + "/" + getSize(responseLength))
 
                 //     .putString("data", String.valueOf(result))
                 .putInt("position", this.position)
@@ -334,8 +344,9 @@ public class DataDownWorkerALL extends Worker {
     }
 
     private String getSize(int length) {
+        if (length < 0) return "0B";
         double lengthM = length / 1024 / 1024;
-        return lengthM > 1 ? lengthM + "MB" : (length / 1024) + "KB";
+        return lengthM > 1 ? lengthM + "MB" : (length / 1024) > 1 ? (length / 1024) + "KB" : length + "B";
     }
 
     private String getTime() {

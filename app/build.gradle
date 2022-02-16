@@ -40,7 +40,7 @@ android {
             versionType = "R"
         }
 
-        def versionNumber = 1
+        def versionNumber = 2
         //  def versionMinor = 0
         def versionPatch = versionProps['VERSION_PATCH'].toInteger() + value
         def versionBuild = versionProps['VERSION_BUILD'].toInteger() + 1
@@ -90,6 +90,9 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+        debug {
+            resValue("string", "DB_PASSWORD_HDSS_Matiari.db", "L@OTHinSh@oulde3")
         }
     }
     compileOptions {

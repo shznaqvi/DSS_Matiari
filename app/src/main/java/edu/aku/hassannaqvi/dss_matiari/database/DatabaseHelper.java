@@ -3,8 +3,6 @@ package edu.aku.hassannaqvi.dss_matiari.database;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.IBAHC;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.PROJECT_NAME;
 import static edu.aku.hassannaqvi.dss_matiari.database.CreateTable.DATABASE_VERSION;
-import static edu.aku.hassannaqvi.dss_matiari.database.CreateTable.SQL_ALTER_MWRA_ADD_SNO;
-import static edu.aku.hassannaqvi.dss_matiari.database.CreateTable.SQL_ALTER_USERS;
 import static edu.aku.hassannaqvi.dss_matiari.database.CreateTable.SQL_CREATE_FOLLOWUPS;
 import static edu.aku.hassannaqvi.dss_matiari.database.CreateTable.SQL_CREATE_FOLLOWUPSCHE;
 import static edu.aku.hassannaqvi.dss_matiari.database.CreateTable.SQL_CREATE_FP_HOUSEHOLDS;
@@ -40,6 +38,7 @@ import edu.aku.hassannaqvi.dss_matiari.contracts.TableContracts.FPHouseholdTable
 import edu.aku.hassannaqvi.dss_matiari.contracts.TableContracts.FollowupsTable;
 import edu.aku.hassannaqvi.dss_matiari.contracts.TableContracts.HouseholdTable;
 import edu.aku.hassannaqvi.dss_matiari.contracts.TableContracts.MWRATable;
+import edu.aku.hassannaqvi.dss_matiari.contracts.TableContracts.MaxHhnoTable;
 import edu.aku.hassannaqvi.dss_matiari.contracts.TableContracts.OutcomeTable;
 import edu.aku.hassannaqvi.dss_matiari.contracts.TableContracts.TableFollowUpsSche;
 import edu.aku.hassannaqvi.dss_matiari.contracts.TableContracts.TableVillage;
@@ -52,6 +51,7 @@ import edu.aku.hassannaqvi.dss_matiari.models.FollowUpsSche;
 import edu.aku.hassannaqvi.dss_matiari.models.Followups;
 import edu.aku.hassannaqvi.dss_matiari.models.Households;
 import edu.aku.hassannaqvi.dss_matiari.models.MWRA;
+import edu.aku.hassannaqvi.dss_matiari.models.MaxHhno;
 import edu.aku.hassannaqvi.dss_matiari.models.Outcome;
 import edu.aku.hassannaqvi.dss_matiari.models.Pregnancy;
 import edu.aku.hassannaqvi.dss_matiari.models.Users;
@@ -84,6 +84,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL(SQL_CREATE_USERS);
         db.execSQL(SQL_CREATE_HOUSEHOLDS);
         db.execSQL(SQL_CREATE_FP_HOUSEHOLDS);
+        db.execSQL(CreateTable.SQL_CREATE_MAXHHNO);
         db.execSQL(SQL_CREATE_MWRA);
         db.execSQL(SQL_CREATE_FOLLOWUPS);
         db.execSQL(SQL_CREATE_PREGNANCY);
@@ -99,13 +100,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         switch (oldVersion) {
-            case 1:
-                db.execSQL(SQL_ALTER_USERS);
-            case 2: // Added followups
-                db.execSQL(SQL_ALTER_MWRA_ADD_SNO);
-                db.execSQL(SQL_CREATE_FOLLOWUPS);
-                db.execSQL(SQL_CREATE_PREGNANCY);
-                db.execSQL(SQL_CREATE_OUTCOME);
 
         }
     }
@@ -659,14 +653,38 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             values.put(VersionTable.COLUMN_VERSION_CODE, Vc.getVersioncode());
             values.put(VersionTable.COLUMN_VERSION_NAME, Vc.getVersionname());
 
-            count = db.insert(VersionTable.TABLE_NAME, null, values);
-            if (count > 0) count = 1;
+        count = db.insert(VersionTable.TABLE_NAME, null, values);
+        if (count > 0) count = 1;
 
 
         db.close();
 
 
         return (int) count;
+    }
+
+    public int syncMaxHhno(JSONArray maxHhnoList) throws JSONException {
+        SQLiteDatabase db = this.getWritableDatabase(DATABASE_PASSWORD);
+        db.delete(MaxHhnoTable.TABLE_NAME, null, null);
+        int insertCount = 0;
+        for (int i = 0; i < maxHhnoList.length(); i++) {
+
+            JSONObject json = maxHhnoList.getJSONObject(i);
+
+            MaxHhno maxHhno = new MaxHhno().sync(json);
+            ContentValues values = new ContentValues();
+
+            values.put(MaxHhnoTable.COLUMN_UC_CODE, maxHhno.getUccode());
+            values.put(MaxHhnoTable.COLUMN_VILLAGE_CODE, maxHhno.getVillageCode());
+            values.put(MaxHhnoTable.COLUMN_MAX_HHNO, maxHhno.getMaxHhno());
+
+            long rowID = db.insert(MaxHhnoTable.TABLE_NAME, null, values);
+            if (rowID != -1) insertCount++;
+        }
+
+        db.close();
+
+        return insertCount;
     }
 
     public int syncUser(JSONArray userList) throws JSONException {
@@ -1418,13 +1436,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return Math.round(maxHHno);
     }
 
-    public int getMaxHHNo(String vCode) {
+    public int getMaxHouseholdNo(String ucCode, String vCode) {
         SQLiteDatabase db = this.getReadableDatabase(DATABASE_PASSWORD);
         Cursor c = db.rawQuery(
                 "SELECT " +
                         "MAX(" + HouseholdTable.COLUMN_HOUSEHOLD_NO + ") AS " + HouseholdTable.COLUMN_HOUSEHOLD_NO +
                         " FROM " + HouseholdTable.TABLE_NAME +
-                        " WHERE " + HouseholdTable.COLUMN_VILLAGE_CODE + "=?" +
+                        " WHERE " + HouseholdTable.COLUMN_UC_CODE + "=? AND " + HouseholdTable.COLUMN_VILLAGE_CODE + "=? " +
                         " GROUP BY " + HouseholdTable.COLUMN_VILLAGE_CODE
                 ,
                 new String[]{vCode});
@@ -1432,6 +1450,42 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         while (c.moveToNext()) {
             maxHHno = c.getFloat(c.getColumnIndexOrThrow(HouseholdTable.COLUMN_HOUSEHOLD_NO));
         }
+        Log.d(TAG, "getMaxHHNo: " + maxHHno);
+        return Math.round(maxHHno);
+    }
+
+    public int getMaxHHNoByVillage(String ucCode, String vCode) {
+        SQLiteDatabase db = this.getReadableDatabase(DATABASE_PASSWORD);
+        Cursor c = null;
+        String[] columns = {MaxHhnoTable.COLUMN_MAX_HHNO};
+
+        String whereClause;
+        whereClause = MaxHhnoTable.COLUMN_UC_CODE + "=? AND " +
+                MaxHhnoTable.COLUMN_VILLAGE_CODE + "=?";
+
+
+        String[] whereArgs = {ucCode, vCode};
+
+        String groupBy = null;
+        String having = null;
+
+        String orderBy = MaxHhnoTable.COLUMN_ID + " ASC";
+
+        //ArrayList<FollowUpsSche> followupsByHH = new ArrayList<>();
+        c = db.query(
+                MaxHhnoTable.TABLE_NAME,  // The table to query
+                columns,                   // The columns to return
+                whereClause,               // The columns for the WHERE clause
+                whereArgs,                 // The values for the WHERE clause
+                groupBy,                   // don't group the rows
+                having,                    // don't filter by row groups
+                orderBy,                    // The sort order
+                "1"
+        );
+        int maxHHno = 0;
+        c.moveToFirst();
+        maxHHno = Integer.parseInt(c.getString(c.getColumnIndexOrThrow(MaxHhnoTable.COLUMN_MAX_HHNO)));
+
         Log.d(TAG, "getMaxHHNo: " + maxHHno);
         return Math.round(maxHHno);
     }

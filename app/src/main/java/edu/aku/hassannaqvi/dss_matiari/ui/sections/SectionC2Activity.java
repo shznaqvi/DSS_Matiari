@@ -157,7 +157,7 @@ public class SectionC2Activity extends AppCompatActivity {
 
                         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
 
-                        cur.setTime(sdf.parse(households.getRa01())); // DOV
+                        cur.setTime(sdf.parse(households.getRb01a())); // DOV
                         cal.setTime(sdf.parse(mwra.getRb04())); // DOB
 
 

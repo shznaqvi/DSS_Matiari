@@ -60,7 +60,7 @@ public class MWRA extends BaseObservable implements Observable {
     private String sB = StringUtils.EMPTY;
 
     private String round = "";
-    private String ra01 = "";
+    private String rb01a = "";
 
     private String rb01 = "";
     private String rb02 = "";
@@ -282,12 +282,12 @@ public class MWRA extends BaseObservable implements Observable {
     }
 
     @Bindable
-    public String getRa01() {
-        return ra01;
+    public String getRb01a() {
+        return rb01a;
     }
 
-    public void setRa01(String ra01) {
-        this.ra01 = ra01;
+    public void setRb01a(String ra01) {
+        this.rb01a = ra01;
         notifyChange(BR.ra01);
     }
 
@@ -439,7 +439,7 @@ public class MWRA extends BaseObservable implements Observable {
             JSONObject json = null;
             json = new JSONObject(string);
             this.rb01 = json.getString("rb01");
-            this.ra01 = json.getString("ra01");
+            this.rb01a = json.getString("rb01a");
             this.round = json.getString("round");
             this.rb02 = json.getString("rb02");
             this.rb03 = json.getString("rb03");
@@ -459,7 +459,7 @@ public class MWRA extends BaseObservable implements Observable {
 
 
         json.put("rb01", rb01)
-                .put("ra01", ra01)
+                .put("rb01a", rb01a)
                 .put("round", round)
                 .put("rb02", rb02)
                 .put("rb03", rb03)

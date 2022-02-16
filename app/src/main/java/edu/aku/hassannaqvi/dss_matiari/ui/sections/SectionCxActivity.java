@@ -90,7 +90,7 @@ public class SectionCxActivity extends AppCompatActivity {
             Calendar cal = Calendar.getInstance();
 
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
-            cal.setTime(sdf.parse(followups.getRa01()));// all done
+            cal.setTime(sdf.parse(followups.getRc01a()));// all done
 
             sdf = new SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH);
 
@@ -175,7 +175,7 @@ public class SectionCxActivity extends AppCompatActivity {
 
                         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
 
-                        cur.setTime(sdf.parse(households.getRa01())); // DOV
+                        cur.setTime(sdf.parse(households.getRb01a())); // DOV
                         cal.setTime(sdf.parse(mwra.getRb04())); // DOB
 
 

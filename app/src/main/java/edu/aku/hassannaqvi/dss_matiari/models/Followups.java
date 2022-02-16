@@ -49,7 +49,7 @@ public class Followups extends BaseObservable implements Observable {
     private String visitNo = StringUtils.EMPTY;
 
 
-    private String ra01 = "";
+    private String rc01a = "";
     private String rc01v2 = "";
     private String rc01v3 = "";
     private String deviceId = StringUtils.EMPTY;
@@ -64,7 +64,7 @@ public class Followups extends BaseObservable implements Observable {
 
     private String fRound = "";
     private String prePreg = "";
-    private String  rb06 =  "";
+    private String rb06 = "";
     private String rc01 = "";
     private String rc02 = "";
     private String rc03 = "";
@@ -347,12 +347,12 @@ public class Followups extends BaseObservable implements Observable {
     }
 
     @Bindable
-    public String getRa01() {
-        return ra01;
+    public String getRc01a() {
+        return rc01a;
     }
 
-    public void setRa01(String ra01) {
-        this.ra01 = ra01;
+    public void setRc01a(String ra01) {
+        this.rc01a = ra01;
     }
 
     @Bindable
@@ -840,7 +840,7 @@ public class Followups extends BaseObservable implements Observable {
             json = new JSONObject(string);
 
             this.rc01 = json.getString("rc01");
-            this.ra01 = json.getString("ra01");
+            this.rc01a = json.getString("rc01a");
             this.rc01v2 = json.has("rc01v2") ? json.getString("rc01v2") : "";
             this.rc01v3 = json.has("rc01v3") ? json.getString("rc01v3") : "";
             this.prePreg = json.getString("prePreg");
@@ -881,7 +881,7 @@ public class Followups extends BaseObservable implements Observable {
         JSONObject json = new JSONObject();
 
         json
-                .put("ra01", ra01)
+                .put("rc01a", rc01a)
                 .put("rc01", rc01)
                 .put("prePreg", prePreg)
                 .put("rb06", rb06)

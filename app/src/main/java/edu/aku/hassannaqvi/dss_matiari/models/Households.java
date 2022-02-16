@@ -462,7 +462,7 @@ public class Households extends BaseObservable implements Observable {
     }
 
     public void setRa09(String ra09) {
-        this.ra09 = String.format("%03d", Integer.parseInt(ra09));
+        this.ra09 = String.format("%04d", Integer.parseInt(ra09));
         setHhNo(this.ra09);
         notifyChange(BR.ra09);
     }

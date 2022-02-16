@@ -51,6 +51,7 @@ import edu.aku.hassannaqvi.dss_matiari.adapters.SyncListAdapter;
 import edu.aku.hassannaqvi.dss_matiari.contracts.TableContracts;
 import edu.aku.hassannaqvi.dss_matiari.contracts.TableContracts.HouseholdTable;
 import edu.aku.hassannaqvi.dss_matiari.contracts.TableContracts.MWRATable;
+import edu.aku.hassannaqvi.dss_matiari.contracts.TableContracts.MaxHhnoTable;
 import edu.aku.hassannaqvi.dss_matiari.contracts.TableContracts.TableFollowUpsSche;
 import edu.aku.hassannaqvi.dss_matiari.contracts.TableContracts.TableVillage;
 import edu.aku.hassannaqvi.dss_matiari.contracts.TableContracts.UsersTable;
@@ -212,7 +213,7 @@ public class SyncActivity extends AppCompatActivity {
                     downloadTables.add(new SyncModel(UsersTable.TABLE_NAME, select, filter));
                     downloadTables.add(new SyncModel(VersionTable.TABLE_NAME));
                     downloadTables.add(new SyncModel(TableVillage.TABLE_NAME, select, filter));
-                 //   downloadTables.add(new SyncModel(TableContracts.TableFollowUpsSche.TABLE_NAME));
+                    //   downloadTables.add(new SyncModel(TableContracts.TableFollowUpsSche.TABLE_NAME));
                 } else {
                     // Set tables to DOWNLOAD
                     String select = null;
@@ -221,6 +222,7 @@ public class SyncActivity extends AppCompatActivity {
                     // TODO: backdate limit removed (get all followups that are due upto now
                     String filter = " DATEADD(MONTH,4,ra01) between ra01 AND GETDATE() ";
                     downloadTables.add(new SyncModel(TableContracts.TableFollowUpsSche.TABLE_NAME, select, filter));
+                    downloadTables.add(new SyncModel(TableContracts.MaxHhnoTable.TABLE_NAME));
 
 
 
@@ -319,9 +321,9 @@ public class SyncActivity extends AppCompatActivity {
                                     break;
                                 case VersionTable.TABLE_NAME:
                                     try {
-                                            insertCount = db.syncVersionApp(new JSONObject(result));
-                                            if (insertCount == 1) jsonArray.put("1");
-                                        } catch (JSONException e) {
+                                        insertCount = db.syncVersionApp(new JSONObject(result));
+                                        if (insertCount == 1) jsonArray.put("1");
+                                    } catch (JSONException e) {
                                         e.printStackTrace();
                                         downloadTables.get(position).setstatus("Process Failed");
                                         downloadTables.get(position).setInfo("Time: " + time + "/" + getTime() + "\t Size: " + size);
@@ -329,34 +331,48 @@ public class SyncActivity extends AppCompatActivity {
                                         downloadTables.get(position).setmessage(e.getMessage());
                                         syncListAdapter.updatesyncList(downloadTables);
                                     }
-                                        break;
-                                    case TableVillage.TABLE_NAME:
-                                        try {
-                                            jsonArray = new JSONArray(result);
-                                            insertCount = db.syncVillage(jsonArray);
-                                        } catch (JSONException e) {
-                                            e.printStackTrace();
-                                            downloadTables.get(position).setstatus("Process Failed");
-                                            downloadTables.get(position).setInfo("Time: " + time + "/" + getTime() + "\t Size: " + size);
-                                            downloadTables.get(position).setstatusID(1);
-                                            downloadTables.get(position).setmessage(e.getMessage());
-                                            syncListAdapter.updatesyncList(downloadTables);
-                                        }
-                                        break;
-                                    case TableFollowUpsSche.TABLE_NAME:
-                                        try {
-                                            jsonArray = new JSONArray(result);
-                                            insertCount = db.syncFollowUpsSche(jsonArray);
-                                        } catch (JSONException e) {
-                                            e.printStackTrace();
-                                            downloadTables.get(position).setstatus("Process Failed");
-                                            downloadTables.get(position).setstatusID(1);
-                                            downloadTables.get(position).setInfo("Time: " + time + "/" + getTime() + "\t Size: " + size);
+                                    break;
+                                case TableVillage.TABLE_NAME:
+                                    try {
+                                        jsonArray = new JSONArray(result);
+                                        insertCount = db.syncVillage(jsonArray);
+                                    } catch (JSONException e) {
+                                        e.printStackTrace();
+                                        downloadTables.get(position).setstatus("Process Failed");
+                                        downloadTables.get(position).setInfo("Time: " + time + "/" + getTime() + "\t Size: " + size);
+                                        downloadTables.get(position).setstatusID(1);
+                                        downloadTables.get(position).setmessage(e.getMessage());
+                                        syncListAdapter.updatesyncList(downloadTables);
+                                    }
+                                    break;
 
-                                            downloadTables.get(position).setmessage(e.getMessage());
-                                            syncListAdapter.updatesyncList(downloadTables);
-                                        }
-                                        break;
+                                case MaxHhnoTable.TABLE_NAME:
+                                    try {
+                                        jsonArray = new JSONArray(result);
+                                        insertCount = db.syncMaxHhno(jsonArray);
+                                    } catch (JSONException e) {
+                                        e.printStackTrace();
+                                        downloadTables.get(position).setstatus("Process Failed");
+                                        downloadTables.get(position).setInfo("Time: " + time + "/" + getTime() + "\t Size: " + size);
+                                        downloadTables.get(position).setstatusID(1);
+                                        downloadTables.get(position).setmessage(e.getMessage());
+                                        syncListAdapter.updatesyncList(downloadTables);
+                                    }
+                                    break;
+                                case TableFollowUpsSche.TABLE_NAME:
+                                    try {
+                                        jsonArray = new JSONArray(result);
+                                        insertCount = db.syncFollowUpsSche(jsonArray);
+                                    } catch (JSONException e) {
+                                        e.printStackTrace();
+                                        downloadTables.get(position).setstatus("Process Failed");
+                                        downloadTables.get(position).setstatusID(1);
+                                        downloadTables.get(position).setInfo("Time: " + time + "/" + getTime() + "\t Size: " + size);
+
+                                        downloadTables.get(position).setmessage(e.getMessage());
+                                        syncListAdapter.updatesyncList(downloadTables);
+                                    }
+                                    break;
                           /*          case Camps.TableCamp.TABLE_NAME:
                                         jsonArray = new JSONArray(result);
                                         insertCount = db.syncCamp(jsonArray);
@@ -454,7 +470,9 @@ public class SyncActivity extends AppCompatActivity {
                 int position = workInfo.getOutputData().getInt("position", 0);
                 String tableName = uploadTables.get(position).gettableName();
                 String result = MainApp.downloadData[position];
-
+                startTime = System.currentTimeMillis();
+                String time = workInfo.getOutputData().getString("time");
+                String size = workInfo.getOutputData().getString("size");
                         /*String progress = workInfo.getProgress().getString("progress");
                         bi.wmError.setText("Progress: " + progress);*/
 
@@ -516,17 +534,20 @@ public class SyncActivity extends AppCompatActivity {
                                     if (sSyncedError.toString().equals("")) {
                                         uploadTables.get(position).setmessage(" Synced: " + sSynced + "  •  Duplicates: " + sDuplicate + "  •  Errors: " + sSyncedError);
                                         uploadTables.get(position).setstatus("Completed");
+                                        uploadTables.get(position).setInfo("Time: " + time + "/" + getTime() + "\t Size: " + size);
                                         uploadTables.get(position).setstatusID(3);
                                         syncListAdapter.updatesyncList(uploadTables);
                                     } else {
                                         uploadTables.get(position).setmessage(" Synced: " + sSynced + "  •  Duplicates: " + sDuplicate + "  •  Errors: " + sSyncedError);
                                         uploadTables.get(position).setstatus("Process Failed6");
+                                        uploadTables.get(position).setInfo("Time: " + time + "/" + getTime() + "\t Size: " + size);
                                         uploadTables.get(position).setstatusID(1);
                                         syncListAdapter.updatesyncList(uploadTables);
                                     }
                                 } else {
                                     uploadTables.get(position).setmessage("Method not found: updateSynced" + tableName);
                                     uploadTables.get(position).setstatus("Process Failed5");
+                                    uploadTables.get(position).setInfo("Time: " + time + "/" + getTime() + "\t Size: " + size);
                                     uploadTables.get(position).setstatusID(1);
                                     syncListAdapter.updatesyncList(uploadTables);
                                 }
@@ -536,12 +557,14 @@ public class SyncActivity extends AppCompatActivity {
 
                                 uploadTables.get(position).setmessage(result);
                                 uploadTables.get(position).setstatus("Process Failed4");
+                                uploadTables.get(position).setInfo("Time: " + time + "/" + getTime() + "\t Size: " + size);
                                 uploadTables.get(position).setstatusID(1);
-                                    syncListAdapter.updatesyncList(uploadTables);
+                                syncListAdapter.updatesyncList(uploadTables);
 
                             } catch (IllegalAccessException | InvocationTargetException e) {
                                 e.printStackTrace();
                                 uploadTables.get(position).setstatus("Process Failed3");
+                                uploadTables.get(position).setInfo("Time: " + time + "/" + getTime() + "\t Size: " + size);
                                 uploadTables.get(position).setstatusID(1);
                                 uploadTables.get(position).setmessage(e.getMessage());
                                 syncListAdapter.updatesyncList(uploadTables);
@@ -549,12 +572,14 @@ public class SyncActivity extends AppCompatActivity {
                         } else {
                             uploadTables.get(position).setmessage("Received: " + result.length() + "");
                             uploadTables.get(position).setstatus("Successful");
+                            uploadTables.get(position).setInfo("Time: " + time + "/" + getTime() + "\t Size: " + size);
                             uploadTables.get(position).setstatusID(3);
                             syncListAdapter.updatesyncList(uploadTables);
 //                pd.show();
                         }
                     } else {
                         uploadTables.get(position).setstatus("Process Failed2");
+                        uploadTables.get(position).setInfo("Time: " + time + "/" + getTime() + "\t Size: " + size);
                         uploadTables.get(position).setstatusID(1);
                         uploadTables.get(position).setmessage("Server not found!");
                         syncListAdapter.updatesyncList(uploadTables);
@@ -568,10 +593,12 @@ public class SyncActivity extends AppCompatActivity {
                     if (message.equals("No new records to upload")) {
                         uploadTables.get(position).setmessage(message);
                         uploadTables.get(position).setstatus("Not processed");
+                        uploadTables.get(position).setInfo("Time: " + time + "/" + getTime() + "\t Size: " + size);
                         uploadTables.get(position).setstatusID(4);
                         syncListAdapter.updatesyncList(uploadTables);
                     } else {
                         uploadTables.get(position).setstatus("Process Failed");
+                        uploadTables.get(position).setInfo("Time: " + time + "/" + getTime() + "\t Size: " + size);
                         uploadTables.get(position).setstatusID(1);
                         uploadTables.get(position).setmessage(message);
                         syncListAdapter.updatesyncList(uploadTables);

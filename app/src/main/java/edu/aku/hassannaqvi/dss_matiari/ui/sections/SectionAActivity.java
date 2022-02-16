@@ -77,7 +77,7 @@ public class SectionAActivity extends AppCompatActivity {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
-                    //MainApp.households.setRa01(MainApp.dateOfVisit);
+                    //MainApp.households.setRb01a(MainApp.dateOfVisit);
                     bi.ra08.setText(MainApp.previousAddress);
                 } else {
                     bi.ra08.setText("");

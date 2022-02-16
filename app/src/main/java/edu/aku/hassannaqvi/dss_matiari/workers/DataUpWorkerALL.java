@@ -36,6 +36,7 @@ import java.security.cert.CertificateExpiredException;
 import java.security.cert.CertificateFactory;
 import java.security.cert.CertificateNotYetValidException;
 import java.security.cert.X509Certificate;
+import java.util.concurrent.TimeUnit;
 
 import javax.crypto.BadPaddingException;
 import javax.crypto.IllegalBlockSizeException;
@@ -65,8 +66,10 @@ public class DataUpWorkerALL extends Worker {
     private final String uploadWhere;
     HttpsURLConnection urlConnection;
     private ProgressDialog pd;
-    private int length;
+
     private Data data;
+    private long startTime;
+    private int responseLength = 0, requestLength = 0;
 
 
     public DataUpWorkerALL(@NonNull Context context, @NonNull WorkerParameters workerParams) {
@@ -178,7 +181,7 @@ public class DataUpWorkerALL extends Worker {
 
         final int maxProgress = 100;
         int curProgress = 0;
-        notification.setProgress(length, curProgress, false);
+        notification.setProgress(responseLength, curProgress, false);
 
         notificationManager.notify(1, notification.build());
     }
@@ -210,8 +213,12 @@ public class DataUpWorkerALL extends Worker {
     @NonNull
     @Override
     public Result doWork() {
+        startTime = System.currentTimeMillis();
+
         if (uploadData.length() == 0) {
             data = new Data.Builder()
+                    .putString("time", getTime())
+                    .putString("size", getSize(requestLength) + "/" + getSize(responseLength))
                     .putString("error", "No new records to upload")
                     .putInt("position", this.position)
                     .build();
@@ -274,6 +281,7 @@ public class DataUpWorkerALL extends Worker {
             urlConnection.setRequestProperty("Content-Type", "application/json");
             urlConnection.setRequestProperty("charset", "utf-8");
             urlConnection.setUseCaches(false);
+            startTime = System.currentTimeMillis();
             urlConnection.connect();
 
             Certificate[] certs = urlConnection.getServerCertificates();
@@ -304,11 +312,12 @@ public class DataUpWorkerALL extends Worker {
 
 
                 //wr.writeBytes(URLEncoder.encode(jsonParam.toString(), "utf-8"));
-                wr.writeBytes(CipherSecure.encrypt(jsonParam.toString()));
+                // wr.writeBytes(CipherSecure.encrypt(jsonParam.toString()));
 
-                String writeEnc = CipherSecure.encrypt(jsonParam.toString());
-
-                longInfo("Encrypted: " + writeEnc);
+                String cipheredRequest = CipherSecure.encrypt(String.valueOf(jsonParam));
+                requestLength = cipheredRequest.length();
+                wr.writeBytes(cipheredRequest);
+                longInfo("Encrypted: " + cipheredRequest);
 
                 //     wr.writeBytes(jsonParam.toString());
 
@@ -321,8 +330,8 @@ public class DataUpWorkerALL extends Worker {
                     Log.d(TAG, "Connection Response: " + urlConnection.getResponseCode());
                     displayNotification(nTitle, "Connection Established");
 
-                    length = urlConnection.getContentLength();
-                    Log.d(TAG, "Content Length: " + length);
+                    responseLength = urlConnection.getContentLength();
+                    Log.d(TAG, "Content Length: " + responseLength);
 
                     InputStream in = new BufferedInputStream(urlConnection.getInputStream());
 
@@ -334,13 +343,16 @@ public class DataUpWorkerALL extends Worker {
 
                     }
                     displayNotification(nTitle, "Received Data");
-                    longInfo("result-server: " + writeEnc);
+                    longInfo("result-server: " + cipheredRequest);
+                    Log.d(TAG, "Content Length: " + cipheredRequest.length());
 
                 } else {
 
                     Log.d(TAG, "Connection Response (Server Failure): " + urlConnection.getResponseCode());
 
                     data = new Data.Builder()
+                            .putString("time", getTime())
+                            .putString("size", getSize(requestLength) + "/" + getSize(responseLength))
                             .putString("error", String.valueOf(urlConnection.getResponseCode()))
                             .putInt("position", this.position)
                             .build();
@@ -348,6 +360,8 @@ public class DataUpWorkerALL extends Worker {
                 }
             } else {
                 data = new Data.Builder()
+                        .putString("time", getTime())
+                        .putString("size", getSize(requestLength) + "/" + getSize(responseLength))
                         .putString("error", "Invalid Certificate")
                         .putInt("position", this.position)
                         .build();
@@ -358,6 +372,8 @@ public class DataUpWorkerALL extends Worker {
             Log.d(TAG, "doWork (Timeout): " + e.getMessage());
             displayNotification(nTitle, "Timeout Error: " + e.getMessage());
             data = new Data.Builder()
+                    .putString("time", getTime())
+                    .putString("size", getSize(requestLength) + "/" + getSize(responseLength))
                     .putString("error", e.getMessage())
                     .putInt("position", this.position)
                     .build();
@@ -367,6 +383,8 @@ public class DataUpWorkerALL extends Worker {
             Log.d(TAG, "doWork (IO Error): " + e.getMessage());
             displayNotification(nTitle, "IO Error: " + e.getMessage());
             data = new Data.Builder()
+                    .putString("time", getTime())
+                    .putString("size", getSize(requestLength) + "/" + getSize(responseLength))
                     .putString("error", e.getMessage())
                     .putInt("position", this.position)
                     .build();
@@ -378,11 +396,13 @@ public class DataUpWorkerALL extends Worker {
         }
         try {
             result = new StringBuilder(CipherSecure.decrypt(result.toString()));
-        } catch (NoSuchPaddingException | NoSuchAlgorithmException | BadPaddingException | IllegalBlockSizeException | InvalidAlgorithmParameterException | InvalidKeyException e) {
+        } catch (NoSuchPaddingException | IllegalArgumentException | NoSuchAlgorithmException | BadPaddingException | IllegalBlockSizeException | InvalidAlgorithmParameterException | InvalidKeyException e) {
             Log.d(TAG, "doWork (Encryption Error): " + e.getMessage());
             displayNotification(nTitle, "Encryption Error: " + e.getMessage());
             data = new Data.Builder()
-                    .putString("error", e.getMessage())
+                    .putString("time", getTime())
+                    .putString("size", getSize(requestLength) + "/" + getSize(responseLength))
+                    .putString("error", e.getMessage() + result.toString())
                     .putInt("position", this.position)
                     .build();
 
@@ -415,6 +435,8 @@ public class DataUpWorkerALL extends Worker {
 
             data = new Data.Builder()
                     //  .putString("message", String.valueOf(result))
+                    .putString("time", getTime())
+                    .putString("size", getSize(requestLength) + "/" + getSize(responseLength))
                     .putInt("position", this.position)
                     .build();
             /*   }*/
@@ -424,6 +446,8 @@ public class DataUpWorkerALL extends Worker {
 
         } else {
             data = new Data.Builder()
+                    .putString("time", getTime())
+                    .putString("size", getSize(requestLength) + "/" + getSize(responseLength))
                     .putString("error", String.valueOf(result))
                     .putInt("position", this.position)
                     .build();
@@ -432,5 +456,20 @@ public class DataUpWorkerALL extends Worker {
         }
 
 
+    }
+
+    private String getSize(int length) {
+        if (length < 0) return "0B";
+        double lengthM = length / 1024 / 1024;
+        return lengthM > 1 ? lengthM + "MB" : (length / 1024) > 1 ? (length / 1024) + "KB" : length + "B";
+    }
+
+    private String getTime() {
+
+        long timeElapsed = System.currentTimeMillis() - startTime;
+        long toMinutes = TimeUnit.MILLISECONDS.toMinutes(timeElapsed);
+        long toSeconds = TimeUnit.MILLISECONDS.toSeconds(timeElapsed - (toMinutes * 60 * 1000));
+
+        return toMinutes > 0 ? toMinutes + "m " + toSeconds + "s" : toSeconds > 0 ? TimeUnit.MILLISECONDS.toSeconds(timeElapsed) + "s" : timeElapsed + "ms";
     }
 }

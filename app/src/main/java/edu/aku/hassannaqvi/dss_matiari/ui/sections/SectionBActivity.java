@@ -66,7 +66,7 @@ public class SectionBActivity extends AppCompatActivity {
             MainApp.mwra.setHdssId(households.getHdssId());
             MainApp.mwra.setAppver(MainApp.versionName + "." + MainApp.versionCode);
 
-            MainApp.mwra.setRa01(MainApp.households.getRa01());
+          //  MainApp.mwra.setRb01a(MainApp.households.getRc01a());
 
 
         }
@@ -88,7 +88,7 @@ public class SectionBActivity extends AppCompatActivity {
             Calendar cal = Calendar.getInstance();
 
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
-            cal.setTime(sdf.parse(households.getRa01()));// all done
+            cal.setTime(sdf.parse(mwra.getRb01a()));// all done
 
             sdf = new SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH);
 

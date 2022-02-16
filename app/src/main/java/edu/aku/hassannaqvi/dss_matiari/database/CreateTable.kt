@@ -7,7 +7,7 @@ object CreateTable {
 
     const val DATABASE_NAME = "$PROJECT_NAME.db"
     const val DATABASE_COPY = "${PROJECT_NAME}_copy.db"
-    const val DATABASE_VERSION = 3
+    const val DATABASE_VERSION = 1
 
     const val SQL_CREATE_HOUSEHOLDS = ("CREATE TABLE "
             + HouseholdTable.TABLE_NAME + "("
@@ -56,11 +56,6 @@ object CreateTable {
             + " );"
             )
 
-    const val SQL_ALTER_MWRA_ADD_SNO = ("ALTER TABLE "
-            + MWRATable.TABLE_NAME
-            + "ADD " + MWRATable.COLUMN_SNO + " TEXT;"
-
-            )
 
     const val SQL_CREATE_FOLLOWUPS = ("CREATE TABLE "
             + FollowupsTable.TABLE_NAME + "("
@@ -159,6 +154,14 @@ object CreateTable {
             + TableVillage.COLUMN_VILLAGE_CODE + " TEXT,"
             + TableVillage.COLUMN_UC_CODE + " TEXT" + " );")
 
+    const val SQL_CREATE_MAXHHNO = ("CREATE TABLE "
+            + MaxHhnoTable.TABLE_NAME + "("
+            + MaxHhnoTable.COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
+            + MaxHhnoTable.COLUMN_UC_CODE + " TEXT,"
+            + MaxHhnoTable.COLUMN_VILLAGE_CODE + " TEXT,"
+            + MaxHhnoTable.COLUMN_MAX_HHNO + " TEXT"
+            + " );"
+            )
     const val SQL_CREATE_FOLLOWUPSCHE = ("CREATE TABLE " + TableFollowUpsSche.TABLE_NAME + "("
             + TableFollowUpsSche.COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
             + TableFollowUpsSche.COLUMN_UC_CODE + " TEXT,"
@@ -203,7 +206,6 @@ object CreateTable {
             )
 
 
-
     const val SQL_CREATE_ZSTANDARD = "CREATE TABLE " + ZScoreTable.TABLE_NAME + " (" +
             ZScoreTable._ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
             ZScoreTable.COLUMN_SEX + " TEXT, " +
@@ -215,7 +217,13 @@ object CreateTable {
             ZScoreTable.COLUMN_CAT + " TEXT " +
             ");"
 
+/*
     const val SQL_ALTER_USERS =
         "ALTER TABLE " + UsersTable.TABLE_NAME + " ADD " + UsersTable.COLUMN_DESIGNATION + " TEXT;"
+
+    const val SQL_ALTER_MWRA_ADD_SNO =
+        "ALTER TABLE " + MWRATable.TABLE_NAME + " ADD " + MWRATable.COLUMN_SNO + " TEXT;"
+
+*/
 
 }

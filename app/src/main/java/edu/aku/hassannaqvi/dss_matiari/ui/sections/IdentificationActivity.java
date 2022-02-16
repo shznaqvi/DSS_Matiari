@@ -131,11 +131,11 @@ public class IdentificationActivity extends AppCompatActivity {
                 if (MainApp.user.getUserName().contains("test") || MainApp.user.getUserName().contains("dmu")) {
 
                     villageNames.add("Test Village 1 " + ucNames.get(position));
-                    villageNames.add("Test Village 2 " + ucNames.get(position));
-                    villageNames.add("Test Village 3 " + ucNames.get(position));
-                    villageCodes.add(ucCodes.get(position) + "001");
-                    villageCodes.add(ucCodes.get(position) + "002");
-                    villageCodes.add(ucCodes.get(position) + "003");
+                    villageNames.add("Test Village 1 " + ucNames.get(position));
+                    villageNames.add("Test Village 1 " + ucNames.get(position));
+                    villageCodes.add(ucCodes.get(position) + "0901");
+                    villageCodes.add(ucCodes.get(position) + "0902");
+                    villageCodes.add(ucCodes.get(position) + "0903");
                 }
                 // Apply the adapter to the spinner
                 bi.ra07.setAdapter(new ArrayAdapter(IdentificationActivity.this, R.layout.custom_spinner, villageNames));
