@@ -222,13 +222,13 @@
                                 android:layout_height="match_parent"
                                 android:layout_marginBottom="0dp"
                                 android:layout_weight="1"
+                                android:datePickerMode="spinner"
                                 android:enabled="@{!mwra.rb04.equals(`98`)}"
                                 android:gravity="center"
                                 android:hint="YYYY-MM-DD"
                                 android:text="@={mwra.rb04}"
                                 app:dateFormat="yyyy-MM-dd"
                                 app:maxDate="CR_DATE"
-                                android:datePickerMode="spinner"
                                 app:theme="@style/DatePickerEditTextDialogTheme" />
 
                             <CheckBox
@@ -407,8 +407,8 @@
                             android:id="@+id/rb03"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:inputType="textPersonName|textCapWords"
                             android:digits="abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+                            android:inputType="textPersonName|textCapWords"
                             android:text="@={mwra.rb03}" />
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>

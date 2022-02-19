@@ -1483,8 +1483,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 "1"
         );
         int maxHHno = 0;
-        c.moveToFirst();
-        maxHHno = Integer.parseInt(c.getString(c.getColumnIndexOrThrow(MaxHhnoTable.COLUMN_MAX_HHNO)));
+        while (c.moveToNext()) {
+            maxHHno = Integer.parseInt(c.getString(c.getColumnIndexOrThrow(MaxHhnoTable.COLUMN_MAX_HHNO)));
+        }
 
         Log.d(TAG, "getMaxHHNo: " + maxHHno);
         return Math.round(maxHHno);
