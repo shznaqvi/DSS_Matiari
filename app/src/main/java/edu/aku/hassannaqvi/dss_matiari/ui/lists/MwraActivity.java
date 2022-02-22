@@ -123,7 +123,9 @@ public class MwraActivity extends AppCompatActivity {
             }
         });
 
-
+        if (!MainApp.households.getRa18().equals("999")) {
+            bi.btnContinue.setVisibility(View.GONE);
+        }
     }
 
     @Override
@@ -196,12 +198,18 @@ public class MwraActivity extends AppCompatActivity {
     }
 
     public void BtnEnd(View view) {
+        if (!MainApp.households.getRa18().equals("999")) {
 
-        Intent i = new Intent(this, EndingActivity.class);
-        i.setFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT);
-        i.putExtra("complete", false);
-        startActivity(i);
-        finish();
+            Intent i = new Intent(this, EndingActivity.class);
+            i.setFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT);
+            i.putExtra("complete", false);
+            startActivity(i);
+            finish();
+        } else {
+            setResult(RESULT_OK);
+            finish();
+        }
+
         //startActivity(new Intent(this, MainActivity.class));
         /*   } else {
                Toast.makeText(this, "Failed to Update Database!", Toast.LENGTH_SHORT).show()
@@ -220,7 +228,7 @@ public class MwraActivity extends AppCompatActivity {
             }
             if (resultCode == Activity.RESULT_CANCELED) {
                 // Write your code if there's no result
-                Toast.makeText(this, "Information for " + mwraList.get(selectedFemale).getRb02() + " was not saved.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Information for " + mwraList.get(selectedFemale).getRb02() + " was not saved.4", Toast.LENGTH_SHORT).show();
             }
         }
     }

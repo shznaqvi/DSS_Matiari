@@ -1,5 +1,7 @@
 package edu.aku.hassannaqvi.dss_matiari.models;
 
+import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.PROJECT_NAME;
+
 import android.database.Cursor;
 import android.util.Log;
 
@@ -33,7 +35,7 @@ public class MWRA extends BaseObservable implements Observable {
     private boolean expanded;
 
     // APP VARIABLES
-    private String projectName = MainApp.PROJECT_NAME;
+    private String projectName = PROJECT_NAME;
 
     // APP VARIABLES
     private String id = StringUtils.EMPTY;
@@ -74,7 +76,7 @@ public class MWRA extends BaseObservable implements Observable {
 
     public MWRA() {
 
-        setRound(MainApp.round);
+        setRound(MainApp.ROUND);
         setSysDate(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.ENGLISH).format(new Date().getTime()));
         setUserName(MainApp.user.getUserName());
         setDeviceId(MainApp.deviceid);
@@ -85,6 +87,19 @@ public class MWRA extends BaseObservable implements Observable {
         setVillageCode(MainApp.selectedVillage);
         setUcCode(MainApp.selectedUC);
 
+    }
+
+    public void populateMeta() {
+
+        setSysDate(MainApp.households.getSysDate());
+        setUuid(MainApp.households.getUid());  // not applicable in Form table
+        setUserName(MainApp.user.getUserName());
+        setDeviceId(MainApp.deviceid);
+        setAppver(MainApp.appInfo.getAppVersion());
+        setProjectName(PROJECT_NAME);
+        setRound(MainApp.ROUND);
+        setVillageCode(MainApp.selectedVillage);
+        setUcCode(MainApp.selectedUC);
     }
 
     @Bindable
@@ -440,7 +455,7 @@ public class MWRA extends BaseObservable implements Observable {
             json = new JSONObject(string);
             this.rb01 = json.getString("rb01");
             this.rb01a = json.getString("rb01a");
-            this.round = json.getString("round");
+            this.round = json.getString("ROUND");
             this.rb02 = json.getString("rb02");
             this.rb03 = json.getString("rb03");
             this.rb04 = json.getString("rb04");
@@ -460,7 +475,7 @@ public class MWRA extends BaseObservable implements Observable {
 
         json.put("rb01", rb01)
                 .put("rb01a", rb01a)
-                .put("round", round)
+                .put("ROUND", round)
                 .put("rb02", rb02)
                 .put("rb03", rb03)
                 .put("rb04", rb04)

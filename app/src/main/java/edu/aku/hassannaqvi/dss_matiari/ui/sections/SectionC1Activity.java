@@ -46,7 +46,7 @@ public class SectionC1Activity extends AppCompatActivity {
 
 
         // Set Round Number from followups data
-        MainApp.round = MainApp.fpMwra.getfRound();
+        MainApp.ROUND = MainApp.fpMwra.getfRound();
 
         try {
             followups = db.getFollowupsBySno(MainApp.fpMwra.getRb01(), MainApp.fpMwra.getfRound());

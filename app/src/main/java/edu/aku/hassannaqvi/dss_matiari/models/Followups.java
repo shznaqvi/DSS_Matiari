@@ -99,7 +99,7 @@ public class Followups extends BaseObservable implements Observable {
 
     public Followups() {
 
-       /* setfRound(MainApp.round);
+       /* setfRound(MainApp.ROUND);
         setSysDate(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.ENGLISH).format(new Date().getTime()));
         setUserName(MainApp.user.getUserName());
         setDeviceId(MainApp.deviceid);

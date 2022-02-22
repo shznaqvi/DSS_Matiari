@@ -134,8 +134,7 @@ public class SectionAActivity extends AppCompatActivity {
 
     private boolean insertNewRecord() {
         if (!MainApp.households.getUid().equals("")) return true;
-        saveDraft();
-
+        MainApp.households.populateMeta();
         // Updating date at the time of Insert instead of SaveDraft()
         //    MainApp.households.setSysDate(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.ENGLISH).format(new Date().getTime()));
         long rowId = 0;

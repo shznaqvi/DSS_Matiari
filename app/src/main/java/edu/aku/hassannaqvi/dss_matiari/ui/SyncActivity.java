@@ -1,6 +1,7 @@
 package edu.aku.hassannaqvi.dss_matiari.ui;
 
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.PROJECT_NAME;
+import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.editor;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.sdDir;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.uploadData;
 import static edu.aku.hassannaqvi.dss_matiari.utils.AndroidUtilityKt.isNetworkConnected;
@@ -40,9 +41,11 @@ import org.json.JSONObject;
 import java.io.File;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
+import java.util.Date;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -386,7 +389,8 @@ public class SyncActivity extends AppCompatActivity {
                             downloadTables.get(position).setInfo("Time: " + time + "/" + getTime() + "\t Size: " + size);
                             downloadTables.get(position).setstatusID(insertCount == 0 ? 1 : 3);
                             syncListAdapter.updatesyncList(downloadTables);
-
+                            editor.putString("downloaded", new SimpleDateFormat("dd-MM-yyyy HH:mm").format(new Date()));
+                            editor.apply();
 //                    pd.show();
 
                         } else {
@@ -544,6 +548,9 @@ public class SyncActivity extends AppCompatActivity {
                                         uploadTables.get(position).setstatusID(1);
                                         syncListAdapter.updatesyncList(uploadTables);
                                     }
+
+                                    editor.putString("uploaded", new SimpleDateFormat("dd-MM-yyyy HH:mm").format(new Date()));
+                                    editor.apply();
                                 } else {
                                     uploadTables.get(position).setmessage("Method not found: updateSynced" + tableName);
                                     uploadTables.get(position).setstatus("Process Failed5");

@@ -64,7 +64,7 @@ public class Outcome extends BaseObservable implements Observable {
 
     public Outcome() {
 
-        setRound(MainApp.round);
+        setRound(MainApp.ROUND);
         setSysDate(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.ENGLISH).format(new Date().getTime()));
         setUserName(MainApp.user.getUserName());
         setDeviceId(MainApp.deviceid);
@@ -358,7 +358,7 @@ public class Outcome extends BaseObservable implements Observable {
 
             JSONObject json = null;
             json = new JSONObject(string);
-            this.round = json.getString("round");
+            this.round = json.getString("ROUND");
             this.rc12 = json.getString("rc12");
             this.rc13 = json.getString("rc13");
             this.rc14 = json.getString("rc14");
@@ -375,7 +375,7 @@ public class Outcome extends BaseObservable implements Observable {
 
 
         json
-                .put("round", round)
+                .put("ROUND", round)
                 .put("rc12", rc12)
                 .put("rc13", rc13)
                 .put("rc14", rc14)

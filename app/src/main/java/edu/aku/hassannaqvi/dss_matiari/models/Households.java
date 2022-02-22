@@ -90,7 +90,12 @@ public class Households extends BaseObservable implements Observable {
 
     public Households() {
 
-        setRound(MainApp.round);
+
+    }
+
+    public void populateMeta() {
+
+        setRound(MainApp.ROUND);
         setSysDate(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.ENGLISH).format(new Date().getTime()));
         setUserName(MainApp.user.getUserName());
         setDeviceId(MainApp.deviceid);
@@ -100,7 +105,6 @@ public class Households extends BaseObservable implements Observable {
         setRa07(MainApp.selectedVillage);
         setRa04(MainApp.leaderCode);
         setRa05(MainApp.leaderCode);
-
     }
 
     public Households(Households households) {
@@ -783,7 +787,7 @@ public class Households extends BaseObservable implements Observable {
 
             JSONObject json = null;
             json = new JSONObject(string);
-            this.round = json.getString("round");
+            this.round = json.getString("ROUND");
             this.ra01 = json.getString("ra01");
             this.ra01v2 = json.has("ra01v2") ? json.getString("ra01v2") : "";
             this.ra01v3 = json.has("ra01v3") ? json.getString("ra01v3") : "";
@@ -830,7 +834,7 @@ public class Households extends BaseObservable implements Observable {
         json.put("ra01", ra01)
                 .put("ra01v3", ra01v3)
                 .put("ra01v2", ra01v2)
-                .put("round", round)
+                .put("ROUND", round)
                 .put("ra02", ra02)
                 .put("ra04", ra04)
                 .put("ra03", ra03)

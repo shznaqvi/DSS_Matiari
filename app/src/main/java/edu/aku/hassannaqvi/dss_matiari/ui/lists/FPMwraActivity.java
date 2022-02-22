@@ -159,7 +159,7 @@ public class FPMwraActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         Toast.makeText(this, "Activity Resumed!", Toast.LENGTH_SHORT).show();
-        //       mwraCount = Math.round(MainApp.followUpsScheMWRAList.size());
+        //       mwraCount = Math.ROUND(MainApp.followUpsScheMWRAList.size());
 
         followups = new Followups();
 
@@ -173,7 +173,8 @@ public class FPMwraActivity extends AppCompatActivity {
         MainApp.households.setSysDate(MainApp.fpHouseholds.getSysDate());
         MainApp.households.setHdssId(MainApp.fpHouseholds.getHdssId());
         MainApp.households.setVisitNo(MainApp.fpHouseholds.getVisitNo());
-        MainApp.households.setRa18(String.valueOf(followUpsScheMWRAList.size()));
+        //MainApp.households.setRa18(String.valueOf(followUpsScheMWRAList.size()));
+        MainApp.households.setRa18("999");
 
         int newMwra = db.getMWRACountBYUUID(MainApp.fpHouseholds.getUid());
 
@@ -230,6 +231,15 @@ public class FPMwraActivity extends AppCompatActivity {
     private void addMoreFemale() {
 
         //  startActivity(new Intent(this, MwraActivity.class));
+        int maxMWRA = db.getMaxMWRSNoBYHH(selectedVillage, selectedHhNO);
+        int maxFpMWRA = db.getMaxMWRANoBYHHFromFolloupsSche(selectedVillage, selectedHhNO);
+        mwraCount = Math.max(maxMWRA, maxFpMWRA);
+
+        MainApp.households = new Households();
+        MainApp.households.setUid(followups.getUid());
+        MainApp.households.setSysDate(followups.getSysDate());
+        MainApp.households.setRa18("999");
+
 
         MainApp.mwra = new MWRA();
         //MainApp.mwra.setRb01(String.valueOf(mwraCount + 1));
@@ -239,9 +249,7 @@ public class FPMwraActivity extends AppCompatActivity {
         MemberInfoLauncher.launch(intent);
 */
 
-        int maxMWRA = db.getMaxMWRSNoBYHH(selectedVillage, selectedHhNO);
-        int maxFpMWRA = db.getMaxMWRANoBYHHFromFolloupsSche(selectedVillage, selectedHhNO);
-        mwraCount = Math.max(maxMWRA, maxFpMWRA);
+
         startActivityForResult(new Intent(this, SectionBActivity.class), 3);
         // finish();
 
@@ -249,7 +257,8 @@ public class FPMwraActivity extends AppCompatActivity {
 
     public void btnContinue(View view) {
         if (MainApp.fpHouseholds.getUid().equals("")) {
-            setResult(RESULT_CANCELED);
+            Toast.makeText(this, "btnContinue(uid)", Toast.LENGTH_SHORT).show();
+            setResult(RESULT_OK);
             finish();
 
         } else {
@@ -299,7 +308,7 @@ public class FPMwraActivity extends AppCompatActivity {
             }
             if (resultCode == Activity.RESULT_CANCELED) {
                 // Write your code if there's no result
-                Toast.makeText(this, "Followup for " + followUpsScheMWRAList.get(selectedFemale).getRb02() + " was not saved.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Followup for " + followUpsScheMWRAList.get(selectedFemale).getRb02() + " was not saved.2", Toast.LENGTH_SHORT).show();
             }
         }
         if (requestCode == 3) {
@@ -363,6 +372,7 @@ public class FPMwraActivity extends AppCompatActivity {
     }
 
     private void proceedSelect() {
+        Toast.makeText(this, "proceedSelect()", Toast.LENGTH_SHORT).show();
             Intent i = new Intent(this, FPEndingActivity.class);
             i.setFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT);
             i.putExtra("complete", true);
@@ -381,6 +391,13 @@ public class FPMwraActivity extends AppCompatActivity {
     }
 
     public void toggleNewMwraList(View view) {
+    /*    MainApp.households = new Households();
+        MainApp.households.setUid(followups.getUid());
+        MainApp.households.setSysDate(followups.getSysDate());
+
+        MainApp.households.setVillageCode(followups.getVillageCode());
+        MainApp.households.setStructureNo("");
+        MainApp.households.setHhNo(followups.getHhNo());*/
 
         startActivity(new Intent(this, MwraActivity.class));
         // bi.newMwraList.setVisibility(View.VISIBLE);

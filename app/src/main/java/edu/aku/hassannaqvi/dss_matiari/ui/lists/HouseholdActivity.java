@@ -211,7 +211,7 @@ public class HouseholdActivity extends AppCompatActivity {
             }
             if (resultCode == Activity.RESULT_CANCELED) {
                 // Write your code if there's no result
-                Toast.makeText(this, "Information for " + MainApp.householdList.get(selectedHousehold).getRa14() + " was not saved.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Information for " + MainApp.householdList.get(selectedHousehold).getRa14() + " was not saved.3", Toast.LENGTH_SHORT).show();
             }
         }
     }

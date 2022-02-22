@@ -142,7 +142,7 @@ public class FPHouseholdActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         Toast.makeText(this, "Activity Resumed!", Toast.LENGTH_SHORT).show();
-        // MainApp.householdCount = Math.round(MainApp.followUpsScheHHList.size());
+        // MainApp.householdCount = Math.ROUND(MainApp.followUpsScheHHList.size());
 
         //  MainApp.households = new Households();
 
@@ -220,7 +220,7 @@ public class FPHouseholdActivity extends AppCompatActivity {
             }
             if (resultCode == Activity.RESULT_CANCELED) {
                 // Write your code if there's no result
-                Toast.makeText(this, "Information for " + MainApp.followUpsScheHHList.get(selectedFpHousehold).getRa14() + " was not saved.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Information for " + MainApp.followUpsScheHHList.get(selectedFpHousehold).getRa14() + " was not saved.1", Toast.LENGTH_SHORT).show();
             }
         }
     }

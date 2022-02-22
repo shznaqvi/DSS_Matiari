@@ -1,5 +1,6 @@
 package edu.aku.hassannaqvi.dss_matiari.ui.sections;
 
+import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.fpHouseholds;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.households;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.mwra;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.mwraCount;
@@ -173,7 +174,7 @@ public class SectionBActivity extends AppCompatActivity {
 
                         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
 
-                        cur.setTime(sdf.parse(households.getRa01())); // DOV
+                        cur.setTime(sdf.parse(mwra.getRb01a())); // DOV
                         cal.setTime(sdf.parse(mwra.getRb04())); // DOB
 
 
@@ -205,7 +206,6 @@ public class SectionBActivity extends AppCompatActivity {
 
     public void btnContinue(View view) {
         if (!formValidation()) return;
-        saveDraft();
         if (MainApp.mwra.getUid().equals("") ? insertNewRecord() : updateDB()) {
             setResult(RESULT_OK);
             finish();
@@ -215,55 +215,14 @@ public class SectionBActivity extends AppCompatActivity {
         }
     }
 
-    private void saveDraft() {
 
-        //mwra = new MWRA();
-
-/*        MainApp.mwra.setUuid(households.getUid());
-        MainApp.mwra.setUcCode(households.getUcCode());
-        MainApp.mwra.setVillageCode(households.getVillageCode());
-        MainApp.mwra.setsNo(households.getsNo());
-        MainApp.mwra.setHhNo(households.getHhNo());
-        MainApp.mwra.setUserName(MainApp.user.getUserName());
-        MainApp.mwra.setSysDate(households.getSysDate());
-        MainApp.mwra.setDeviceId(MainApp.deviceid);
-        MainApp.mwra.setHdssId(households.getHdssId());
-        MainApp.mwra.setAppver(MainApp.versionName + "." + MainApp.versionCode);*/
-
-
-/*        mwra.setRc01(bi.rb01.getText().toString());
-        mwra.setRc02(bi.rb02.getText().toString());
-        mwra.setRc03(bi.rb03.getText().toString());
-        mwra.setRb04(bi.rb04.getText().toString());
-        mwra.setRb05(bi.rb05.getText().toString());
-        mwra.setRc06(bi.rb0602.isChecked() ? "2"
-                : bi.rb0603.isChecked() ? "3"
-                : "-1");
-        mwra.setRc07(bi.rb0701.isChecked() ? "1"
-                : bi.rb0702.isChecked() ? "2"
-                : "-1");
-        mwra.setRc08(bi.rb08.getText().toString());
-        mwra.setRc09(bi.rb09.getText().toString());*/
-
-    }
-
-/*    private boolean insertNewRecord() {
-        if (MainApp.households.isExist()) return true;
-        db = MainApp.appInfo.getDbHelper();
-        long rowId = db.addForm(households);
-        households.setId(String.valueOf(rowId));
-        if (rowId > 0) {
-            households.setUid(households.getDeviceId() + households.getId());
-            db.updatesFormColumn(TableContracts.HouseholdTable.COLUMN_UID, households.getUid());
-            return true;
-        } else {
-            Toast.makeText(this, "Updating Database... ERROR!", Toast.LENGTH_SHORT).show();
-            return false;
-        }
-    }*/
 
     private boolean insertNewRecord() {
         db = MainApp.appInfo.getDbHelper();
+        if (MainApp.households.getRa18().equals("999") && fpHouseholds.getUid().equals("")) {
+            insertFpHousehold();
+        }
+        MainApp.mwra.populateMeta();
         long rowId = 0;
         try {
             rowId = db.addMWRA(mwra);
@@ -362,5 +321,29 @@ public class SectionBActivity extends AppCompatActivity {
         return true;
     }
 
+    private boolean insertFpHousehold() {
+        db = MainApp.appInfo.getDbHelper();
+        long rowId = 0;
+        try {
+            rowId = db.addFpHousehold(fpHouseholds);
+        } catch (JSONException e) {
+            e.printStackTrace();
+            Toast.makeText(this, "JSONException(FPHouseholds): " + e.getMessage(), Toast.LENGTH_SHORT).show();
+            Log.d(TAG, "insertNewRecord (JSONException): " + e.getMessage());
+            return false;
+        }
+        fpHouseholds.setId(String.valueOf(rowId));
+        if (rowId > 0) {
+            fpHouseholds.setUid(fpHouseholds.getDeviceId() + fpHouseholds.getId());
 
+            // This not a mistake. It is done on purpose
+            households.setUid(fpHouseholds.getDeviceId() + fpHouseholds.getId());
+
+            db.updatesFPHouseholdsColumn(TableContracts.FPHouseholdTable.COLUMN_UID, fpHouseholds.getUid());
+            return true;
+        } else {
+            Toast.makeText(this, "Updating Database... ERROR!", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+    }
 }

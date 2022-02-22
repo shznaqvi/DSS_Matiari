@@ -12,16 +12,13 @@ import org.apache.commons.lang3.StringUtils;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
 import edu.aku.hassannaqvi.dss_matiari.BR;
 import edu.aku.hassannaqvi.dss_matiari.contracts.TableContracts;
-import edu.aku.hassannaqvi.dss_matiari.contracts.TableContracts.MWRATable;
 import edu.aku.hassannaqvi.dss_matiari.core.MainApp;
 
 public class Pregnancy extends BaseObservable implements Observable {
@@ -59,16 +56,16 @@ public class Pregnancy extends BaseObservable implements Observable {
     // SECTION VARIABLES
     private String sD = StringUtils.EMPTY;
 
-    private String round = StringUtils.EMPTY;;
-    private String rc08 = StringUtils.EMPTY;;
+    private String round = StringUtils.EMPTY;
+    private String rc08 = StringUtils.EMPTY;
 
-    private String rc10 = StringUtils.EMPTY;;
-    private String rc09 = StringUtils.EMPTY;;
-    private String rc11 = StringUtils.EMPTY;;
+    private String rc10 = StringUtils.EMPTY;
+    private String rc09 = StringUtils.EMPTY;
+    private String rc11 = StringUtils.EMPTY;
 
     public Pregnancy() {
 
-        setRound(MainApp.round);
+        setRound(MainApp.ROUND);
         setSysDate(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.ENGLISH).format(new Date().getTime()));
         setUserName(MainApp.user.getUserName());
         setDeviceId(MainApp.deviceid);
@@ -353,7 +350,7 @@ public class Pregnancy extends BaseObservable implements Observable {
             json = new JSONObject(string);
             this.rc08 = json.getString("rb08");
             this.rc09 = json.getString("ra09");
-            this.round = json.getString("round");
+            this.round = json.getString("ROUND");
             this.rc10 = json.getString("rb10");
             this.rc11 = json.getString("rb11");
 

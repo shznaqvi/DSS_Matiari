@@ -138,7 +138,7 @@
                     android:gravity="center_horizontal|center_vertical"
                     android:minHeight="56dp"
                     android:radius="10dp"
-                    android:text="LIST OF HOUSEHOLDS FOLLOWUPS"
+                    android:text="FOLLOW-UPS - HOUSEHOLDS"
                     android:textAppearance="@style/TextAppearance.AppCompat.Headline"
                     android:textColor="@color/white" />
 

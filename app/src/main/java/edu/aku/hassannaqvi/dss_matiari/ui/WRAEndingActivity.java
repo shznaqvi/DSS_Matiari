@@ -1,10 +1,8 @@
 package edu.aku.hassannaqvi.dss_matiari.ui;
 
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.followups;
-import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.fpHouseholds;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -13,8 +11,6 @@ import androidx.databinding.DataBindingUtil;
 
 import com.validatorcrawler.aliazaz.Validator;
 
-import org.json.JSONException;
-
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
@@ -22,8 +18,6 @@ import edu.aku.hassannaqvi.dss_matiari.R;
 import edu.aku.hassannaqvi.dss_matiari.contracts.TableContracts;
 import edu.aku.hassannaqvi.dss_matiari.core.MainApp;
 import edu.aku.hassannaqvi.dss_matiari.database.DatabaseHelper;
-import edu.aku.hassannaqvi.dss_matiari.databinding.ActivityFpEndingBinding;
-import edu.aku.hassannaqvi.dss_matiari.databinding.ActivityMwraBinding;
 import edu.aku.hassannaqvi.dss_matiari.databinding.ActivityWraEndingBinding;
 
 
@@ -159,7 +153,7 @@ public class WRAEndingActivity extends AppCompatActivity {
             Toast.makeText(this, "Entry Complete", Toast.LENGTH_SHORT).show();
 
         } else {
-            Toast.makeText(this, "Error in updating Database.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Error in updating Database.1", Toast.LENGTH_SHORT).show();
         }
     }
 
