@@ -185,9 +185,10 @@ public class FPHouseholdActivity extends AppCompatActivity {
         int maxHH = db.getMaxHouseholdNo(selectedUC, selectedVillage);      // From Households table on device
         int maxHHNo = db.getMaxHHNoByVillage(selectedUC, selectedVillage);  // From Max Household numbers fetched from server
         int maxHHFinal = Math.max(maxHH, maxHHNo);
+        MainApp.households.setUcCode(selectedUC);
+        MainApp.households.setVillageCode(selectedVillage);
         MainApp.households.setRa09(String.valueOf(maxHHFinal + 1));
         MainApp.selectedHhNO = String.valueOf(maxHHFinal + 1);
-
         // Launch activity for results.
         Intent intent = new Intent(this, SectionAActivity.class);
         MemberInfoLauncher.launch(intent);

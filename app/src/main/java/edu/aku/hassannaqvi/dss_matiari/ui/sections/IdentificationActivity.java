@@ -1,6 +1,5 @@
 package edu.aku.hassannaqvi.dss_matiari.ui.sections;
 
-import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.idType;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.sharedPref;
 
 import android.content.Intent;
@@ -193,29 +192,11 @@ public class IdentificationActivity extends AppCompatActivity {
 
 
         if (!formValidation()) return;
-        switch (idType) {
-            case 1:
-            case 2:
-                // if (!hhExists()) {
-                MainApp.selectedUC = ucCodes.get(bi.ra06.getSelectedItemPosition());
-                MainApp.selectedVillage = villageCodes.get(bi.ra07.getSelectedItemPosition());
-                //  saveDraftForm();
-                /*} else {
-                    MainApp.households.setExist(true);
-                }
-                */
-                break;
-        /*    case 2:
-                if (!hhExists())
-                    saveDraftAnthro();
-                break;
-            case 3:
-            case 4:
-                if (!hhExists())
-                    saveDraftSamples();
-                break;*/
 
-        }
+        MainApp.selectedUC = ucCodes.get(bi.ra06.getSelectedItemPosition());
+                MainApp.selectedVillage = villageCodes.get(bi.ra07.getSelectedItemPosition());
+
+
         finish();
         startActivity(openIntent);
 
