@@ -7,7 +7,7 @@ object CreateTable {
 
     const val DATABASE_NAME = "$PROJECT_NAME.db"
     const val DATABASE_COPY = "${PROJECT_NAME}_copy.db"
-    const val DATABASE_VERSION = 1
+    const val DATABASE_VERSION = 2
 
     const val SQL_CREATE_HOUSEHOLDS = ("CREATE TABLE "
             + HouseholdTable.TABLE_NAME + "("
@@ -174,6 +174,7 @@ object CreateTable {
             + TableFollowUpsSche.COLUMN_RA18 + " TEXT,"
             + TableFollowUpsSche.COLUMN_FROUND + " TEXT,"
             + TableFollowUpsSche.COLUMN_DONE_DATE + " TEXT,"
+            + TableFollowUpsSche.COLUMN_ISTATUS + " TEXT,"
             + TableFollowUpsSche.COLUMN_RB01 + " TEXT,"
             + TableFollowUpsSche.COLUMN_RB02 + " TEXT,"
             + TableFollowUpsSche.COLUMN_RB03 + " TEXT,"
@@ -217,10 +218,10 @@ object CreateTable {
             ZScoreTable.COLUMN_CAT + " TEXT " +
             ");"
 
-/*
-    const val SQL_ALTER_USERS =
-        "ALTER TABLE " + UsersTable.TABLE_NAME + " ADD " + UsersTable.COLUMN_DESIGNATION + " TEXT;"
 
+    const val SQL_ALTER_FOLLOWUPSCHE =
+        "ALTER TABLE " + TableFollowUpsSche.TABLE_NAME + " ADD " + TableFollowUpsSche.COLUMN_ISTATUS + " TEXT;"
+/*
     const val SQL_ALTER_MWRA_ADD_SNO =
         "ALTER TABLE " + MWRATable.TABLE_NAME + " ADD " + MWRATable.COLUMN_SNO + " TEXT;"
 

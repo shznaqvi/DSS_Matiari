@@ -1,5 +1,6 @@
 package edu.aku.hassannaqvi.dss_matiari.ui.lists;
 
+import static android.content.Intent.FLAG_ACTIVITY_CLEAR_TOP;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.mwra;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.mwraCount;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.mwraList;
@@ -277,10 +278,10 @@ public class MwraActivity extends AppCompatActivity {
 
     private void proceedSelect() {
         Intent i = new Intent(this, EndingActivity.class);
-        i.setFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT);
+        i.setFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT | FLAG_ACTIVITY_CLEAR_TOP);
         i.putExtra("complete", true);
-        startActivity(i);
         finish();
+        startActivity(i);
         //startActivity(new Intent(this, EndingActivity.class).putExtra("complete", true));
     }
 

@@ -1,6 +1,8 @@
 package edu.aku.hassannaqvi.dss_matiari.models;
 
+import static java.util.concurrent.TimeUnit.MILLISECONDS;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.PROJECT_NAME;
+import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.mwra;
 
 import android.database.Cursor;
 import android.util.Log;
@@ -73,6 +75,7 @@ public class MWRA extends BaseObservable implements Observable {
     private String rb07 = "";
     private String rb08 = "";
     private String rb09 = "";
+    private long ageInMonths;
 
     public MWRA() {
 
@@ -333,7 +336,13 @@ public class MWRA extends BaseObservable implements Observable {
 
     public void setRb04(String rb04) {
         this.rb04 = rb04;
-        setRb05(this.rb04.equals("98") ? "" : this.rb05);
+        if (!this.rb04.equals("98")) {
+            setRb05(this.rb05);
+            CaluculateAge();
+        } else {
+            setRb05("");
+
+        }
         notifyChange(BR.rb04);
     }
 
@@ -528,6 +537,47 @@ public class MWRA extends BaseObservable implements Observable {
         this.expanded = expanded;
         notifyChange(BR.expanded);
     }
+
+
+    private void CaluculateAge() {
+
+
+        setRb05("");
+
+
+        try {
+            Calendar cal = Calendar.getInstance();
+            Calendar cur = Calendar.getInstance();
+
+
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
+            cal.setTime(sdf.parse(mwra.getRb01a()));// all done
+
+
+            //long millis = System.currentTimeMillis() - cal.getTimeInMillis();
+            long millis = cur.getTimeInMillis() - cal.getTimeInMillis();
+            cal.setTimeInMillis(millis);
+
+
+            this.ageInMonths = MILLISECONDS.toDays(millis) / 30;
+            long tYear = MILLISECONDS.toDays(millis) / 365;
+            long tMonth = (MILLISECONDS.toDays(millis) - (tYear * 365)) / 30;
+            long tDay = MILLISECONDS.toDays(millis) - ((tYear * 365) + (tMonth * 30));
+
+            Log.d(TAG, "CaluculateAge: Y-" + tYear + " M-" + tMonth + " D-" + tDay);
+               /* setH231d(String.valueOf(tDay));
+                setH231m(String.valueOf(tMonth));*/
+
+            setRb05(String.valueOf(tYear));
+
+
+        } catch (ParseException e) {
+            Log.d(TAG, "CaluculateAge: " + e.getMessage());
+            e.printStackTrace();
+
+        }
+    }
+
 
     public String calcEDD() {
 

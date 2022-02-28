@@ -79,7 +79,6 @@ public class SectionBActivity extends AppCompatActivity {
         bi.btnContinue.setText(MainApp.mwra.getUid().equals("") ? "Save" : "Update");
 
         // To set min max range of date fields
-        setDateRanges();
 
 
     }
@@ -144,9 +143,27 @@ public class SectionBActivity extends AppCompatActivity {
     }
 
     private void setListener() {
+        bi.rb01a.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                setDateRanges();
+
+            }
+        });
         bi.rb04.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
 
             }
 

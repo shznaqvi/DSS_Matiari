@@ -30,6 +30,7 @@ public class FollowUpsSche implements Observable {
     private String rb05;  // Husband / Father
     private String rb07;  // Pregnancy Status
     private String rb06; // Marital Status
+    private String istatus; // Marital Status
     private String fpDoneDt = "";  // Pregnancy Status
 
 
@@ -130,6 +131,14 @@ public class FollowUpsSche implements Observable {
         this.fpDoneDt = fpDoneDt;
     }
 
+    public String getiStatus() {
+        return istatus;
+    }
+
+    public void setiStatus(String istatus) {
+        this.istatus = istatus;
+    }
+
     public String getRb01() {
         return rb01;
     }
@@ -189,6 +198,7 @@ public class FollowUpsSche implements Observable {
         this.ra14 = jsonObject.getString(TableFollowUpsSche.COLUMN_RA14);
         this.ra18 = jsonObject.getString(TableFollowUpsSche.COLUMN_RA18);
         this.fRound = jsonObject.getString(TableFollowUpsSche.COLUMN_FROUND);
+        this.istatus = jsonObject.getString(TableFollowUpsSche.COLUMN_ISTATUS);
         this.rb01 = jsonObject.getString(TableFollowUpsSche.COLUMN_RB01);
         this.rb02 = jsonObject.getString(TableFollowUpsSche.COLUMN_RB02);
         this.rb03 = jsonObject.getString(TableFollowUpsSche.COLUMN_RB03);
@@ -210,6 +220,7 @@ public class FollowUpsSche implements Observable {
         this.ra18 = cursor.getString(cursor.getColumnIndexOrThrow(TableFollowUpsSche.COLUMN_RA18));
         this.fRound = cursor.getString(cursor.getColumnIndexOrThrow(TableFollowUpsSche.COLUMN_FROUND));
         this.fpDoneDt = cursor.getString(cursor.getColumnIndexOrThrow(TableFollowUpsSche.COLUMN_DONE_DATE));
+        this.istatus = cursor.getString(cursor.getColumnIndexOrThrow(TableFollowUpsSche.COLUMN_ISTATUS));
         this.rb01 = cursor.getString(cursor.getColumnIndexOrThrow(TableFollowUpsSche.COLUMN_RB01));
         this.rb02 = cursor.getString(cursor.getColumnIndexOrThrow(TableFollowUpsSche.COLUMN_RB02));
         this.rb03 = cursor.getString(cursor.getColumnIndexOrThrow(TableFollowUpsSche.COLUMN_RB03));

@@ -2,6 +2,7 @@ package edu.aku.hassannaqvi.dss_matiari.ui.lists;
 
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.hdssid;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.idType;
+import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.position;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.selectedFpHousehold;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.selectedUC;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.selectedVillage;
@@ -42,7 +43,7 @@ public class FPHouseholdActivity extends AppCompatActivity {
     ActivityFphouseholdBinding bi;
     DatabaseHelper db;
     private FPHouseholdAdapter hhAdapter;
-    ActivityResultLauncher<Intent> MemberInfoLauncher = registerForActivityResult(
+    public ActivityResultLauncher<Intent> MemberInfoLauncher = registerForActivityResult(
             new ActivityResultContracts.StartActivityForResult(),
             new ActivityResultCallback<ActivityResult>() {
                 @Override
@@ -62,18 +63,11 @@ public class FPHouseholdActivity extends AppCompatActivity {
                                         (age >= 14 && age < 50 && !notMarried && isFemale )
 
                         ) {*/
-                        // MainApp.householdList.add(MainApp.households);
 
-                        // MainApp.householdCount++;
 
-                        // hhAdapter.notifyItemInserted(MainApp.householdList.size() - 1);
-                        //  Collections.sort(MainApp.fm, new SortByStatus());
-                        //fmAdapter.notifyDataSetChanged();
+                        hhAdapter.notifyItemChanged(position);
 
-                        //        }
-
-                        //      checkCompleteFm();
-                        Toast.makeText(FPHouseholdActivity.this, "New Household added.", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(FPHouseholdActivity.this, "Followup updated for " + MainApp.followUpsScheHHList.get(position).getHdssid(), Toast.LENGTH_SHORT).show();
 
                     }
                     if (result.getResultCode() == Activity.RESULT_CANCELED) {
@@ -142,6 +136,7 @@ public class FPHouseholdActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         Toast.makeText(this, "Activity Resumed!", Toast.LENGTH_SHORT).show();
+        hhAdapter.notifyDataSetChanged();
         // MainApp.householdCount = Math.ROUND(MainApp.followUpsScheHHList.size());
 
         //  MainApp.households = new Households();
@@ -217,7 +212,7 @@ public class FPHouseholdActivity extends AppCompatActivity {
             if (resultCode == Activity.RESULT_OK) {
                 //   followUpsScheHHList.get(selectedHousehold).setExpanded(false);
                 checkCompleteFm();
-                hhAdapter.notifyItemChanged(MainApp.selectedFpHousehold);
+                hhAdapter.notifyItemChanged(selectedFpHousehold);
             }
             if (resultCode == Activity.RESULT_CANCELED) {
                 // Write your code if there's no result

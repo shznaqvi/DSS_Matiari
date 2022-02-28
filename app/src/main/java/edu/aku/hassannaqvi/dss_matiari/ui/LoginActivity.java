@@ -254,6 +254,8 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void attemptLogin(View view) {
+
+        MainApp.user = new Users();
         attemptCounter++;
         // Reset errors.
         bi.username.setError(null);

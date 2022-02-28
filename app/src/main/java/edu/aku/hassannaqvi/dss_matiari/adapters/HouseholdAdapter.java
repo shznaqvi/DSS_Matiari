@@ -117,7 +117,7 @@ public class HouseholdAdapter extends RecyclerView.Adapter<HouseholdAdapter.View
         Intent intent = new Intent(mContext, SectionAActivity.class);
         intent.putExtra("position", position);
         MainApp.selectedHousehold = position;
-        MainApp.selectedHhNO = MainApp.followUpsScheHHList.get(position).getHhNo();
+        MainApp.selectedHhNO = MainApp.householdList.get(position).getHhNo();
         intent.putExtra("position", position);
 
         ((Activity) mContext).startActivityForResult(intent, 2);

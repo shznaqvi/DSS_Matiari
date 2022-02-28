@@ -230,7 +230,6 @@ public class SectionCxActivity extends AppCompatActivity {
 
 
     private boolean insertNewRecord() {
-        db = MainApp.appInfo.getDbHelper();
         if (fpHouseholds.getUid().equals("")) {
             insertFpHousehold();
         }
@@ -258,7 +257,6 @@ public class SectionCxActivity extends AppCompatActivity {
     }
 
     private boolean insertFpHousehold() {
-        db = MainApp.appInfo.getDbHelper();
         long rowId = 0;
         try {
             rowId = db.addFpHousehold(fpHouseholds);

@@ -1,5 +1,6 @@
 package edu.aku.hassannaqvi.dss_matiari.ui.sections;
 
+import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.fpHouseholds;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.households;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.sharedPref;
 
@@ -114,18 +115,17 @@ public class SectionAActivity extends AppCompatActivity {
         if (!insertNewRecord()) return;
         if (updateDB()) {
 
-
+            setResult(RESULT_OK);
             if (households.getRa20().equals("1")) {
+                finish();
                 startActivity(new Intent(this, MwraActivity.class)
                         .setFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT));
             } else {
+                finish();
                 startActivity(new Intent(this, EndingActivity.class)
                         .setFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT)
                         .putExtra("noWRA", true));
             }
-
-
-            finish();
 
         } else {
             Toast.makeText(this, "Failed to Update Database!", Toast.LENGTH_SHORT).show();
@@ -133,6 +133,7 @@ public class SectionAActivity extends AppCompatActivity {
     }
 
     private boolean insertNewRecord() {
+
         if (!MainApp.households.getUid().equals("")) return true;
         MainApp.households.populateMeta();
         // Updating date at the time of Insert instead of SaveDraft()
@@ -148,6 +149,33 @@ public class SectionAActivity extends AppCompatActivity {
         if (rowId > 0) {
             households.setUid(households.getDeviceId() + households.getId());
             db.updatesHouseholdColumn(TableContracts.HouseholdTable.COLUMN_UID, households.getUid());
+            if (fpHouseholds.getUid().equals("")) {
+                insertFpHousehold();
+            }
+            return true;
+        } else {
+            Toast.makeText(this, "Updating Database... ERROR!", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+    }
+
+    private boolean insertFpHousehold() {
+
+        if (!MainApp.fpHouseholds.getUid().equals("")) return true;
+
+        long rowId = 0;
+        try {
+            rowId = db.addFpHousehold(fpHouseholds);
+        } catch (JSONException e) {
+            e.printStackTrace();
+            Toast.makeText(this, "JSONException(FPHouseholds): " + e.getMessage(), Toast.LENGTH_SHORT).show();
+            Log.d(TAG, "insertNewRecord (JSONException): " + e.getMessage());
+            return false;
+        }
+        fpHouseholds.setId(String.valueOf(rowId));
+        if (rowId > 0) {
+            fpHouseholds.setUid(fpHouseholds.getDeviceId() + fpHouseholds.getId());
+            db.updatesFPHouseholdsColumn(TableContracts.FPHouseholdTable.COLUMN_UID, fpHouseholds.getUid());
             return true;
         } else {
             Toast.makeText(this, "Updating Database... ERROR!", Toast.LENGTH_SHORT).show();

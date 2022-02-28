@@ -3,6 +3,7 @@ package edu.aku.hassannaqvi.dss_matiari.database;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.IBAHC;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.PROJECT_NAME;
 import static edu.aku.hassannaqvi.dss_matiari.database.CreateTable.DATABASE_VERSION;
+import static edu.aku.hassannaqvi.dss_matiari.database.CreateTable.SQL_ALTER_FOLLOWUPSCHE;
 import static edu.aku.hassannaqvi.dss_matiari.database.CreateTable.SQL_CREATE_FOLLOWUPS;
 import static edu.aku.hassannaqvi.dss_matiari.database.CreateTable.SQL_CREATE_FOLLOWUPSCHE;
 import static edu.aku.hassannaqvi.dss_matiari.database.CreateTable.SQL_CREATE_FP_HOUSEHOLDS;
@@ -100,7 +101,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         switch (oldVersion) {
-
+            case 1:
+                db.execSQL(SQL_ALTER_FOLLOWUPSCHE);
         }
     }
 
@@ -181,6 +183,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         values.put(FPHouseholdTable.COLUMN_DEVICETAGID, fpHouseholds.getDeviceTag());
         values.put(FPHouseholdTable.COLUMN_DEVICEID, fpHouseholds.getDeviceId());
         values.put(FPHouseholdTable.COLUMN_APPVERSION, fpHouseholds.getAppver());
+        values.put(FPHouseholdTable.COLUMN_FP_ROUND, fpHouseholds.getFround());
         values.put(FPHouseholdTable.COLUMN_VISIT_NO, fpHouseholds.getVisitNo());
 
         long newRowId;
@@ -762,6 +765,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             values.put(TableFollowUpsSche.COLUMN_RA18, followUpsSche.getRa18());
             values.put(TableFollowUpsSche.COLUMN_FROUND, followUpsSche.getfRound());
             values.put(TableFollowUpsSche.COLUMN_DONE_DATE, followUpsSche.getfpDoneDt());
+            values.put(TableFollowUpsSche.COLUMN_ISTATUS, followUpsSche.getiStatus());
             values.put(TableFollowUpsSche.COLUMN_RB01, followUpsSche.getRb01());
             values.put(TableFollowUpsSche.COLUMN_RB02, followUpsSche.getRb02());
             values.put(TableFollowUpsSche.COLUMN_RB03, followUpsSche.getRb03());
@@ -1267,14 +1271,20 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
     public Households getHouseholdByHDSSID(String hdssid) throws JSONException {
+
+        // Household number in DSSID was changed to 4-digits to capture more than 999 households
+        String[] hdssidSplit = hdssid.split("-");
+        String newHDSSID = hdssidSplit[0] + "-" + hdssidSplit[1] + "-" + String.format("%04d", Integer.parseInt(hdssidSplit[2]));
+
         SQLiteDatabase db = this.getReadableDatabase(DATABASE_PASSWORD);
         Cursor c = null;
         String[] columns = null;
 
         String whereClause;
-        whereClause = HouseholdTable.COLUMN_HDSSID + "=?";
+        whereClause = HouseholdTable.COLUMN_HDSSID + "=? OR " +
+                HouseholdTable.COLUMN_HDSSID + "=? ";
 
-        String[] whereArgs = {hdssid};
+        String[] whereArgs = {hdssid, newHDSSID};
 
         String groupBy = null;
         String having = null;
@@ -1445,7 +1455,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                         " WHERE " + HouseholdTable.COLUMN_UC_CODE + "=? AND " + HouseholdTable.COLUMN_VILLAGE_CODE + "=? " +
                         " GROUP BY " + HouseholdTable.COLUMN_VILLAGE_CODE
                 ,
-                new String[]{vCode});
+                new String[]{ucCode, vCode});
         float maxHHno = 0;
         while (c.moveToNext()) {
             maxHHno = c.getFloat(c.getColumnIndexOrThrow(HouseholdTable.COLUMN_HOUSEHOLD_NO));
@@ -1664,14 +1674,20 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
     public FPHouseholds getFPHouseholdBYHdssid(String hdssid) throws JSONException {
+
+        // Household number in DSSID was changed to 4-digits to capture more than 999 households
+        String[] hdssidSplit = hdssid.split("-");
+        String newHDSSID = hdssidSplit[0] + "-" + hdssidSplit[1] + "-" + String.format("%04d", Integer.parseInt(hdssidSplit[2]));
+
         SQLiteDatabase db = this.getReadableDatabase(DATABASE_PASSWORD);
         Cursor c = null;
         String[] columns = null;
 
         String whereClause;
-        whereClause = FPHouseholdTable.COLUMN_HDSSID + "=? ";
+        whereClause = FPHouseholdTable.COLUMN_HDSSID + "=? OR " +
+                FPHouseholdTable.COLUMN_HDSSID + "=? ";
 
-        String[] whereArgs = {hdssid};
+        String[] whereArgs = {hdssid, newHDSSID};
 
         String groupBy = FPHouseholdTable.COLUMN_HDSSID;
         String having = null;

@@ -100,8 +100,27 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:includeFontPadding="false"
-
                             android:text="Name of Head" />
+
+                        <TextView
+                            android:id="@+id/prvStatus"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="end"
+                            android:layout_weight="1"
+                            android:background="@color/redOverlay"
+                            android:gravity="center_vertical|center_horizontal"
+                            android:includeFontPadding="false"
+                            android:letterSpacing="0.24"
+                            android:paddingStart="12dp"
+                            android:paddingTop="2dp"
+                            android:paddingEnd="12dp"
+                            android:paddingBottom="2dp"
+                            android:text="Status"
+                            android:textColor="@color/white"
+                            android:textSize="11dp"
+                            android:textStyle="italic|normal"
+                            android:visibility="gone" />
 
                     </LinearLayout>
 

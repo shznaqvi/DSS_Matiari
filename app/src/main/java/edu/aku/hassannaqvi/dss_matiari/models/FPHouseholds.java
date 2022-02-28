@@ -284,7 +284,9 @@ public class FPHouseholds extends BaseObservable implements Observable {
     }
 
     public void setHhNo(String hhNo) {
-        this.hhNo = hhNo;
+        String[] hdssidSplit = hdssId.split("-");
+        String newhhno = String.format("%04d", Integer.parseInt(hhNo));
+        this.hhNo = newhhno;
         setHdssId(getUcCode() + "-" + getVillageCode() + "-" + getHhNo());
     }
 
@@ -383,7 +385,12 @@ public class FPHouseholds extends BaseObservable implements Observable {
     }
 
     public void setHdssId(String hdssId) {
-        this.hdssId = hdssId;
+        // Household number in DSSID was changed to 4-digits to capture more than 999 households
+        String[] hdssidSplit = hdssId.split("-");
+        String newHDSSID = hdssidSplit[0] + "-" + hdssidSplit[1] + "-" + String.format("%04d", Integer.parseInt(hdssidSplit[2]));
+
+        this.hdssId = newHDSSID;
+
         //setRa22(hdssId);
         //notifyChange(BR.ra22);
     }

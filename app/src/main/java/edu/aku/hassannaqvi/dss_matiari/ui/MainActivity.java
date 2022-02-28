@@ -46,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
         super.onResume();
         downloaded = sharedPref.getString("downloaded", "never");
         uploaded = sharedPref.getString("uploaded", "never");
-        bi.syncStatus.setText("Last Downlaoded: " + downloaded + "\nLast Uploaded: " + uploaded);
+        bi.syncStatus.setText("Last Downloaded: " + downloaded + "\nLast Uploaded: " + uploaded);
 
     }
 

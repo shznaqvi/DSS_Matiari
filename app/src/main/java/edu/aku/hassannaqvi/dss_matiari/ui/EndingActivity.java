@@ -154,11 +154,31 @@ public class EndingActivity extends AppCompatActivity {
         db.updatesHouseholdColumn(TableContracts.HouseholdTable.COLUMN_VISIT_NO, MainApp.households.getVisitNo());
         try {
             updcount = db.updatesHouseholdColumn(TableContracts.HouseholdTable.COLUMN_SA, MainApp.households.sAtoString());
+
+
         } catch (JSONException e) {
             e.printStackTrace();
-            Toast.makeText(this, "JSONException: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "JSONException(Households): " + e.getMessage(), Toast.LENGTH_SHORT).show();
             Log.d(TAG, "UpdateDB (JSONException): " + e.getMessage());
             return false;
+        }
+        try {
+            MainApp.fpHouseholds = db.getFPHouseholdBYHdssid(MainApp.households.getHdssId());
+
+            if (!MainApp.fpHouseholds.getUid().equals("")) {
+                MainApp.fpHouseholds.setiStatus(MainApp.households.getiStatus());
+                MainApp.fpHouseholds.setVisitNo(MainApp.households.getVisitNo());
+                MainApp.fpHouseholds.setRa01v2(MainApp.households.getRa01v2());
+                MainApp.fpHouseholds.setRa01v3(MainApp.households.getRa01v3());
+                db.updatesFPHouseholdsColumn(TableContracts.FPHouseholdTable.COLUMN_ISTATUS, MainApp.fpHouseholds.getiStatus());
+                db.updatesFPHouseholdsColumn(TableContracts.FPHouseholdTable.COLUMN_VISIT_NO, MainApp.fpHouseholds.getVisitNo());
+                db.updatesFPHouseholdsColumn(TableContracts.FPHouseholdTable.COLUMN_SA, MainApp.fpHouseholds.sAtoString());
+
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+            Toast.makeText(this, "JSONException(FPHouseholds): " + e.getMessage(), Toast.LENGTH_SHORT).show();
+
         }
         return updcount > 0;
     }
