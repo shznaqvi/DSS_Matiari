@@ -216,7 +216,7 @@ public class DataDownWorkerALL extends Worker {
 
                 jsonTable.put("check", "");
 
-                if (uploadTable.equals(TableContracts.TableFollowUpsSche.TABLE_NAME)) {
+                if (uploadTable.equals(TableContracts.VersionTable.TABLE_NAME)) {
                     jsonTable.put("folder", "/");
                 }
 

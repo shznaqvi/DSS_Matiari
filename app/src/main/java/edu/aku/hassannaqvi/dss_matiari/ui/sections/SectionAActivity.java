@@ -149,7 +149,7 @@ public class SectionAActivity extends AppCompatActivity {
         if (rowId > 0) {
             households.setUid(households.getDeviceId() + households.getId());
             db.updatesHouseholdColumn(TableContracts.HouseholdTable.COLUMN_UID, households.getUid());
-            if (fpHouseholds.getUid().equals("")) {
+            if (fpHouseholds != null && fpHouseholds.getUid().equals("")) {
                 insertFpHousehold();
             }
             return true;

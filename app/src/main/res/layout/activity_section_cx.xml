@@ -362,6 +362,14 @@
                                 android:onClick='@{()->followups.setRc04("6") + rc05.clearCheck() + rc06.clearCheck() + rc08.clearCheck() + rc09.clearCheck() + rc11.clearCheck() + rc1201.clearCheck() + rc1301.clearCheck() + rc1202.clearCheck() + rc1302.clearCheck() + rc1203.clearCheck() + rc1303.clearCheck() + rc15.clearCheck()}'
                                 android:text="@string/rc0406" />
 
+                            <RadioButton
+                                android:id="@+id/rc0407"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:checked='@{followups.rc04.equals("7")}'
+                                android:onClick='@{()->followups.setRc04("7") + rc05.clearCheck() + rc07.clearCheck() + rc08.clearCheck() + rc09.clearCheck() + rc11.clearCheck() + rc1201.clearCheck() + rc1301.clearCheck() + rc1202.clearCheck() + rc1302.clearCheck() + rc1203.clearCheck() + rc1303.clearCheck() + rc15.clearCheck()}'
+                                android:text="@string/rc0502" />
+
 
                             <!--<EditText
                                 android:id="@+id/istatusdx"
@@ -489,6 +497,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
+                                android:enabled="false"
                                 android:checked='@{followups.rc05.equals("1")}'
                                 android:onClick='@{()->followups.setRc05("1")}'
                                 android:text="@string/rc0501" />
@@ -498,6 +507,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
+                                android:enabled="false"
                                 android:checked='@{followups.rc05.equals("2")}'
                                 android:onClick='@{()->followups.setRc05("2") + rc06.clearCheck() + rc08.clearCheck() + rc09.clearCheck() + rc11.clearCheck() + rc1201.clearCheck() + rc1301.clearCheck() + rc1202.clearCheck() + rc1302.clearCheck() + rc1203.clearCheck() + rc1303.clearCheck() + rc15.clearCheck()}'
                                 android:text="@string/rc0502" />

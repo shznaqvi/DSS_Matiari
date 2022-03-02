@@ -1362,7 +1362,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         String whereClause;
         whereClause = MWRATable.COLUMN_VILLAGE_CODE + "=? AND "
-                + MWRATable.COLUMN_STRUCTURE_NO + "=? AND "
+                + MWRATable.COLUMN_STRUCTURE_NO + "=? AND (  "
                 + MWRATable.COLUMN_HOUSEHOLD_NO + "=? OR "
                 + MWRATable.COLUMN_HOUSEHOLD_NO + "=?  ) ";
 

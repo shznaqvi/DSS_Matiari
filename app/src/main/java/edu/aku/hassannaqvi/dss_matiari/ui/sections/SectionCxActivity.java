@@ -5,6 +5,8 @@ import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.fpHouseholds;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.sharedPref;
 
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
@@ -81,12 +83,29 @@ public class SectionCxActivity extends AppCompatActivity {
 
         // To set min max range of date fields
         //setDateRanges();
+        bi.rc10.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                setDateRanges();
+            }
+        });
 
     }
 
     private void setDateRanges() {
         try {
+
+            // Set time from RC01a
             Calendar cal = Calendar.getInstance();
 
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
@@ -138,6 +157,18 @@ public class SectionCxActivity extends AppCompatActivity {
             // EDD
             bi.rc17.setMaxDate(maxEDD);
             bi.rc17.setMinDate(minEDD);
+
+            // Date of Death from Date of Deliver(RC10)
+            sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
+            cal.setTime(sdf.parse(followups.getRc10()));// all done
+            sdf = new SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH);
+            String minDOD = sdf.format(cal.getTime());
+
+            // Single
+            bi.rc1401.setMinDate(minDOD);
+            bi.rc1402.setMinDate(minDOD);
+            bi.rc1403.setMinDate(minDOD);
+
 
         } catch (ParseException e) {
             e.printStackTrace();
@@ -226,7 +257,6 @@ public class SectionCxActivity extends AppCompatActivity {
             Toast.makeText(this, "Failed to Update Database!", Toast.LENGTH_SHORT).show();
         }
     }
-
 
 
     private boolean insertNewRecord() {

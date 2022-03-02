@@ -67,7 +67,7 @@ public class FPHouseholdActivity extends AppCompatActivity {
 
                         hhAdapter.notifyItemChanged(position);
 
-                        Toast.makeText(FPHouseholdActivity.this, "Followup updated for " + MainApp.followUpsScheHHList.get(position).getHdssid(), Toast.LENGTH_SHORT).show();
+                  //      Toast.makeText(FPHouseholdActivity.this, "Followup updated for " + MainApp.followUpsScheHHList.get(hhAd).getHdssid(), Toast.LENGTH_SHORT).show();
 
                     }
                     if (result.getResultCode() == Activity.RESULT_CANCELED) {
