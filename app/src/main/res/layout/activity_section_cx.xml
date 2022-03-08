@@ -254,7 +254,15 @@
                                 android:layout_width="0dp"
                                 android:layout_height="match_parent"
                                 android:layout_weight="1"
-                                android:text="@string/rc03h" />
+                                android:text="@string/rb03h"
+                                android:visibility='@{followups.Rc06.equals("4")? View.GONE : View.VISIBLE}' />
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:text="@string/rb03f"
+                                android:visibility='@{followups.Rc06.equals("4")? View.VISIBLE : View.GONE}' />
 
 
                             <TextView

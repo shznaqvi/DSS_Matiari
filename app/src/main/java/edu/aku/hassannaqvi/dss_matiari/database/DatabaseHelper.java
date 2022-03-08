@@ -1348,7 +1348,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
 
-    public List<MWRA> getAllMWRAByHH(String village, String structure, String hhNo) throws JSONException {
+    public List<MWRA> getAllMWRAByHH(String uc, String village, String structure, String hhNo) throws JSONException {
         // Household number in DSSID was changed to 4-digits to capture more than 999 households
         String newhhNo = hhNo;
         if (hhNo.length() == 3) {
@@ -1361,12 +1361,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         String[] columns = null;
 
         String whereClause;
-        whereClause = MWRATable.COLUMN_VILLAGE_CODE + "=? AND "
+        whereClause = MWRATable.COLUMN_UC_CODE + "=? AND "
+                + MWRATable.COLUMN_VILLAGE_CODE + "=? AND "
                 + MWRATable.COLUMN_STRUCTURE_NO + "=? AND (  "
                 + MWRATable.COLUMN_HOUSEHOLD_NO + "=? OR "
                 + MWRATable.COLUMN_HOUSEHOLD_NO + "=?  ) ";
 
-        String[] whereArgs = {village, structure, hhNo, newhhNo};
+        String[] whereArgs = {uc, village, structure, hhNo, newhhNo};
 
         String groupBy = null;
         String having = null;
@@ -1446,16 +1447,16 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return followupsByHH;
     }
 
-    public int getMaxStructure(String vCode) {
+    public int getMaxStructure(String uc, String vCode) {
         SQLiteDatabase db = this.getReadableDatabase(DATABASE_PASSWORD);
         Cursor c = db.rawQuery(
                 "SELECT " +
                         "MAX(" + HouseholdTable.COLUMN_STRUCTURE_NO + ") AS " + HouseholdTable.COLUMN_STRUCTURE_NO +
                         " FROM " + TableContracts.HouseholdTable.TABLE_NAME +
-                        " WHERE " + HouseholdTable.COLUMN_VILLAGE_CODE + "=? " +
+                        " WHERE " + HouseholdTable.COLUMN_UC_CODE + "=? AND " + HouseholdTable.COLUMN_VILLAGE_CODE + "=? " +
                         " GROUP BY " + HouseholdTable.COLUMN_VILLAGE_CODE
                 ,
-                new String[]{vCode});
+                new String[]{uc, vCode});
         float maxHHno = 0;
         while (c.moveToNext()) {
             maxHHno = c.getFloat(c.getColumnIndexOrThrow(HouseholdTable.COLUMN_STRUCTURE_NO));
@@ -1519,7 +1520,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return Math.round(maxHHno);
     }
 
-    public int getMaxMWRSNoBYHH(String vCode, String hhNo) {
+    public int getMaxMWRSNoBYHH(String ucCode, String vCode, String hhNo) {
         // Household number in DSSID was changed to 4-digits to capture more than 999 households
         String newhhNo = hhNo;
         if (hhNo.length() == 3) {
@@ -1533,12 +1534,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 "SELECT " +
                         "MAX(" + MWRATable.COLUMN_SNO + ") AS " + MWRATable.COLUMN_SNO +
                         " FROM " + MWRATable.TABLE_NAME +
-                        " WHERE " + MWRATable.COLUMN_VILLAGE_CODE + "=? AND ( " +
+                        " WHERE " + MWRATable.COLUMN_UC_CODE + "=? AND " + MWRATable.COLUMN_VILLAGE_CODE + "=? AND " +
+                        "( " +
                         MWRATable.COLUMN_HOUSEHOLD_NO + "=? OR " +
                         MWRATable.COLUMN_HOUSEHOLD_NO + "=? ) " +
                         " GROUP BY " + MWRATable.COLUMN_HOUSEHOLD_NO
                 ,
-                new String[]{vCode, hhNo, newhhNo});
+                new String[]{ucCode, vCode, hhNo, newhhNo});
         float maxHHno = 0;
         while (c.moveToNext()) {
             maxHHno = c.getFloat(c.getColumnIndexOrThrow(MWRATable.COLUMN_SNO));
@@ -1548,16 +1550,17 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
 
-    public int getMaxHHNoFromFolloupsSche(String vCode) {
+    public int getMaxHHNoFromFolloupsSche(String ucCode, String vCode) {
         SQLiteDatabase db = this.getReadableDatabase(DATABASE_PASSWORD);
         Cursor c = db.rawQuery(
                 "SELECT " +
                         "MAX(" + TableFollowUpsSche.COLUMN_HOUSEHOLD_NO + ") AS " + TableFollowUpsSche.COLUMN_HOUSEHOLD_NO +
                         " FROM " + TableFollowUpsSche.TABLE_NAME +
-                        " WHERE " + TableFollowUpsSche.COLUMN_VILLAGE_CODE + "=?" +
-                        " GROUP BY " + TableFollowUpsSche.COLUMN_VILLAGE_CODE
+                        " WHERE " + TableFollowUpsSche.COLUMN_UC_CODE + "=? AND "
+                        + TableFollowUpsSche.COLUMN_VILLAGE_CODE + "=? "
+                        + " GROUP BY " + TableFollowUpsSche.COLUMN_VILLAGE_CODE
                 ,
-                new String[]{vCode});
+                new String[]{ucCode, vCode});
         float maxHHno = 0;
         while (c.moveToNext()) {
             maxHHno = c.getFloat(c.getColumnIndexOrThrow(TableFollowUpsSche.COLUMN_HOUSEHOLD_NO));
@@ -1566,7 +1569,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return Math.round(maxHHno);
     }
 
-    public int getMaxMWRANoBYHHFromFolloupsSche(String vCode, String hhNo) {
+    public int getMaxMWRANoBYHHFromFolloupsSche(String uc, String vCode, String hhNo) {
         // Household number in DSSID was changed to 4-digits to capture more than 999 households
         String newhhNo = hhNo;
         if (hhNo.length() == 3) {
@@ -1579,12 +1582,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 "SELECT " +
                         "MAX(" + TableFollowUpsSche.COLUMN_RB01 + ") AS " + TableFollowUpsSche.COLUMN_RB01 +
                         " FROM " + TableFollowUpsSche.TABLE_NAME +
-                        " WHERE " + TableFollowUpsSche.COLUMN_VILLAGE_CODE + "=? AND ( " +
+                        " WHERE " + TableFollowUpsSche.COLUMN_UC_CODE + "=? AND " + TableFollowUpsSche.COLUMN_VILLAGE_CODE + "=? AND ( " +
                         TableFollowUpsSche.COLUMN_HOUSEHOLD_NO + "=?  OR " +
                         TableFollowUpsSche.COLUMN_HOUSEHOLD_NO + "=? ) " +
                         " GROUP BY " + TableFollowUpsSche.COLUMN_HOUSEHOLD_NO
                 ,
-                new String[]{vCode, hhNo, newhhNo});
+                new String[]{uc, vCode, hhNo, newhhNo});
         float maxHHno = 0;
         while (c.moveToNext()) {
             maxHHno = c.getFloat(c.getColumnIndexOrThrow(TableFollowUpsSche.COLUMN_RB01));
@@ -1593,15 +1596,15 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return Math.round(maxHHno);
     }
 
-    public List<Households> getHouseholdBYStructure(String village, String structure) throws JSONException {
+    public List<Households> getHouseholdBYStructure(String uc, String village, String structure) throws JSONException {
         SQLiteDatabase db = this.getReadableDatabase(DATABASE_PASSWORD);
         Cursor c = null;
         String[] columns = null;
 
         String whereClause;
-        whereClause = HouseholdTable.COLUMN_VILLAGE_CODE + "=? AND " + HouseholdTable.COLUMN_STRUCTURE_NO + "=? ";
+        whereClause = HouseholdTable.COLUMN_UC_CODE + "=? AND " + HouseholdTable.COLUMN_VILLAGE_CODE + "=? AND " + HouseholdTable.COLUMN_STRUCTURE_NO + "=? ";
 
-        String[] whereArgs = {village, structure};
+        String[] whereArgs = {uc, village, structure};
 
         String groupBy = null;
         String having = null;
@@ -1630,15 +1633,16 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return householdByHH;
     }
 
-    public List<Households> getHouseholdBYVillage(String village) throws JSONException {
+    public List<Households> getHouseholdBYVillage(String uc, String village) throws JSONException {
         SQLiteDatabase db = this.getReadableDatabase(DATABASE_PASSWORD);
         Cursor c = null;
         String[] columns = null;
 
         String whereClause;
-        whereClause = HouseholdTable.COLUMN_VILLAGE_CODE + "=? ";
+        whereClause = HouseholdTable.COLUMN_UC_CODE + "=? AND "
+                + HouseholdTable.COLUMN_VILLAGE_CODE + "=? ";
 
-        String[] whereArgs = {village};
+        String[] whereArgs = {uc, village};
 
         String groupBy = null;
         String having = null;
@@ -1669,16 +1673,35 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
 
-    public List<FollowUpsSche> getFollowUpsScheHHBYVillage(String village, String hhead) {
+    public List<FollowUpsSche> getFollowUpsScheHHBYVillage(String uc, String village, String hhead) {
         SQLiteDatabase db = this.getReadableDatabase(DATABASE_PASSWORD);
         Cursor c = null;
-        String[] columns = null;
+        String[] columns = {
+                TableFollowUpsSche.COLUMN_VILLAGE_CODE,
+                TableFollowUpsSche.COLUMN_UC_CODE,
+                TableFollowUpsSche.COLUMN_HOUSEHOLD_NO,
+                TableFollowUpsSche.COLUMN_HDSSID,
+                TableFollowUpsSche.COLUMN_RA01,
+                TableFollowUpsSche.COLUMN_RA08,
+                TableFollowUpsSche.COLUMN_RA14,
+                TableFollowUpsSche.COLUMN_RA18,
+                TableFollowUpsSche.COLUMN_FROUND,
+                TableFollowUpsSche.COLUMN_DONE_DATE,
+                TableFollowUpsSche.COLUMN_ISTATUS,
+                TableFollowUpsSche.COLUMN_RB01,
+                TableFollowUpsSche.COLUMN_RB02,
+                TableFollowUpsSche.COLUMN_RB03,
+                TableFollowUpsSche.COLUMN_RB05,
+                TableFollowUpsSche.COLUMN_RB06,
+                "sum(case when " + TableFollowUpsSche.COLUMN_RB07 + "='1' then 1 else 0 end) AS " + TableFollowUpsSche.COLUMN_RB07
+        };
 
         String whereClause;
-        whereClause = TableFollowUpsSche.COLUMN_VILLAGE_CODE + "=? AND " +
+        whereClause = TableFollowUpsSche.COLUMN_UC_CODE + "=? AND " +
+                TableFollowUpsSche.COLUMN_VILLAGE_CODE + "=? AND " +
                 TableFollowUpsSche.COLUMN_RA14 + " Like ? ";
 
-        String[] whereArgs = {village, "%" + hhead + "%"};
+        String[] whereArgs = {uc, village, "%" + hhead + "%"};
 
         String groupBy = TableFollowUpsSche.COLUMN_HDSSID;
         String having = null;

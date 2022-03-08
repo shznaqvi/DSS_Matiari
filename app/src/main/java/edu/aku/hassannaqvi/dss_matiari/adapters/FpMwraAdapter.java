@@ -78,47 +78,43 @@ public class FpMwraAdapter extends RecyclerView.Adapter<FpMwraAdapter.ViewHolder
         fName.setText(followUpsSche.getRb02());
         //fAge.setText(mwra.getRb05() + "y | " + mwra.getRc03());
         String marStatus = "";
-        String wifeOrDaughter = "";
+        String wifeOrDaughter = followUpsSche.getRb06().equals("4") ? " d/o " : " w/o ";
 
-        indicator.setBackgroundColor(!followUpsSche.getfpDoneDt().equals("") ? ContextCompat.getColor(mContext, R.color.teal_700) : ContextCompat.getColor(mContext, R.color.colorAccent));
+        indicator.setBackgroundColor(!followUpsSche.getfpDoneDt().equals("") ? ContextCompat.getColor(mContext, R.color.greenLight) : ContextCompat.getColor(mContext, R.color.colorAccent));
 
-/*        switch (followUpsSche.getRb06()) {
+        switch (followUpsSche.getRb06()) {
             case "1":
                 marStatus = "Married";
-                indicator.setBackgroundColor(ContextCompat.getColor(mContext, R.color.redDark));
-                wifeOrDaughter = "w/o ";
+                indicator.setBackgroundColor(ContextCompat.getColor(mContext, R.color.redLight));
                 break;
             case "2":
                 marStatus = "Divorced";
                 indicator.setBackgroundColor(ContextCompat.getColor(mContext, R.color.teal_700));
-                wifeOrDaughter = "w/o ";
 
                 break;
             case "3":
                 marStatus = "Widow";
                 indicator.setBackgroundColor(ContextCompat.getColor(mContext, R.color.teal_200));
-                wifeOrDaughter = "w/o ";
 
                 break;
             case "4":
                 marStatus = "Unmarried";
                 indicator.setBackgroundColor(ContextCompat.getColor(mContext, R.color.lightPink));
-                wifeOrDaughter = "d/o ";
 
                 break;
             default:
                 marStatus = "Value Unknown";
                 break;
-        }*/
+        }
 
-        fAge.setText(wifeOrDaughter + followUpsSche.getRb03() + " | " + followUpsSche.getRb05() + "y  ");
+        fAge.setText(marStatus + " | " + followUpsSche.getRb05() + "y  ");
 
 
         secStatus.setBackgroundColor(followUpsSche.getRb07().equals("1") ? ContextCompat.getColor(mContext, R.color.redLight) : ContextCompat.getColor(mContext, R.color.grayLight));
         indicator.setImageDrawable(followUpsSche.getRb07().equals("1") ? ContextCompat.getDrawable(mContext, R.drawable.ic_baseline_pregnant_woman_24) : ContextCompat.getDrawable(mContext, R.drawable.ic_girl));
 
 
-        fMaritalStatus.setText(marStatus);
+        fMaritalStatus.setText(wifeOrDaughter + followUpsSche.getRb03());
         secStatus.setText(pregStatus);
 
 

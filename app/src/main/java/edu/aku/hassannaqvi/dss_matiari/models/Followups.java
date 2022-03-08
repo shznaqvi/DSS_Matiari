@@ -854,7 +854,7 @@ public class Followups extends BaseObservable implements Observable {
             this.rc07 = json.getString("rc07");
             this.rc08 = json.getString("rc08");
             this.rc09 = json.getString("rc09");
-            this.rc10 = json.getString("rc10");
+            this.rc10 = json.has("rc10") ? json.getString("rc10") : "";
             this.rc11 = json.getString("rc11");
             this.rc11x = json.getString("rc11x");
             this.rc1201 = json.getString("rc1201");

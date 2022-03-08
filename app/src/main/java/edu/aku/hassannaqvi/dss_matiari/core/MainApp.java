@@ -77,6 +77,7 @@ public class MainApp extends Application {
     public static String ROUND = "1";
 
     public static List<MWRA> mwraList;
+    //public static List<Followups> followupsList;
     public static String hdssid;
     public static int mwraCount = 0;
     public static boolean fmComplete;

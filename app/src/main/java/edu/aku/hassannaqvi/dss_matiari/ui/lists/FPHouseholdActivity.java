@@ -92,13 +92,13 @@ public class FPHouseholdActivity extends AppCompatActivity {
         Log.d(TAG, "onCreate: followUpsScheHHList " + MainApp.followUpsScheHHList.size());
 
 
-        MainApp.followUpsScheHHList = db.getFollowUpsScheHHBYVillage(selectedVillage, "");
+        MainApp.followUpsScheHHList = db.getFollowUpsScheHHBYVillage(selectedUC, selectedVillage, "");
+        bi.villageCode.setText("List of " + selectedUC + "-" + selectedVillage);
 
 
         hhAdapter = new FPHouseholdAdapter(this, MainApp.followUpsScheHHList);
         bi.rvHouseholds.setAdapter(hhAdapter);
         bi.rvHouseholds.setLayoutManager(new LinearLayoutManager(this));
-
 
 
         FloatingActionButton fab = findViewById(R.id.fab);
@@ -124,7 +124,7 @@ public class FPHouseholdActivity extends AppCompatActivity {
     public void filterForms(View view) {
         Toast.makeText(this, "updated", Toast.LENGTH_SHORT).show();
         //fc = db.getUnclosedForms(dtFilter.getText().toString());
-        MainApp.followUpsScheHHList = db.getFollowUpsScheHHBYVillage(selectedVillage, bi.hhead.getText().toString());
+        MainApp.followUpsScheHHList = db.getFollowUpsScheHHBYVillage(selectedUC, selectedVillage, bi.hhead.getText().toString());
         hhAdapter = new FPHouseholdAdapter(this, MainApp.followUpsScheHHList);
         hhAdapter.notifyDataSetChanged();
         bi.rvHouseholds.setAdapter(hhAdapter);

@@ -136,6 +136,9 @@ public class SyncActivity extends AppCompatActivity {
 
     @SuppressLint("NonConstantResourceId")
     public void ProcessStart(View view) {
+        bi.errMessage.setVisibility(View.GONE);
+        bi.errMessage.setText(null);
+
         if (!isNetworkConnected(this))
             return;
 
@@ -153,44 +156,52 @@ public class SyncActivity extends AppCompatActivity {
                 MainApp.uploadData.clear();
                 try {
                     // Forms
-                    uploadTables.add(new SyncModel(HouseholdTable.TABLE_NAME));
                     MainApp.uploadData.add(db.getUnsyncedHouseholds());
+                    uploadTables.add(new SyncModel(HouseholdTable.TABLE_NAME));
                 } catch (JSONException e) {
                     e.printStackTrace();
-                    Toast.makeText(this, "JSONException(Forms): " + e.getMessage(), Toast.LENGTH_SHORT).show();
-                    Log.d(TAG, "ProcessStart (JSONException): " + e.getMessage());
+                    Toast.makeText(this, "JSONException(Household): " + e.getMessage(), Toast.LENGTH_LONG).show();
+                    Log.d(TAG, "JSONException(Household): " + e.getMessage());
+                    bi.errMessage.setText(bi.errMessage.getText() + "\nERROR - JSONException(Household): " + e.getMessage());
+                    bi.errMessage.setVisibility(View.VISIBLE);
 
                 }
                 try {
                     // MWRA
-                    uploadTables.add(new SyncModel(MWRATable.TABLE_NAME));
                     MainApp.uploadData.add(db.getUnsyncedMWRA());
+                    uploadTables.add(new SyncModel(MWRATable.TABLE_NAME));
 
                 } catch (JSONException e) {
                     e.printStackTrace();
-                    Toast.makeText(this, "JSONException(MWRA): " + e.getMessage(), Toast.LENGTH_SHORT).show();
-                    Log.d(TAG, "ProcessStart (JSONException): " + e.getMessage());
+                    Toast.makeText(this, "JSONException(MWRA): " + e.getMessage(), Toast.LENGTH_LONG).show();
+                    Log.d(TAG, "JSONException(MWRA): " + e.getMessage());
+                    bi.errMessage.setText(bi.errMessage.getText() + "\nERROR - JSONException(MWRA): " + e.getMessage());
+                    bi.errMessage.setVisibility(View.VISIBLE);
                 }
                 try {
                     // Followups
-                    uploadTables.add(new SyncModel(TableContracts.FollowupsTable.TABLE_NAME));
                     MainApp.uploadData.add(db.getUnsyncedFollowups());
+                    uploadTables.add(new SyncModel(TableContracts.FollowupsTable.TABLE_NAME));
 
                 } catch (JSONException e) {
                     e.printStackTrace();
-                    Toast.makeText(this, "JSONException(Followups): " + e.getMessage(), Toast.LENGTH_SHORT).show();
-                    Log.d(TAG, "ProcessStart (Followups): " + e.getMessage());
+                    Toast.makeText(this, "JSONException(Followups): " + e.getMessage(), Toast.LENGTH_LONG).show();
+                    Log.d(TAG, "JSONException(Followups): " + e.getMessage());
+                    bi.errMessage.setText(bi.errMessage.getText() + "\nERROR - JSONException(Followups): " + e.getMessage());
+                    bi.errMessage.setVisibility(View.VISIBLE);
                 }
 
                 try {
                     // FpHouseholds
-                    uploadTables.add(new SyncModel(TableContracts.FPHouseholdTable.TABLE_NAME));
                     MainApp.uploadData.add(db.getUnsyncedFPHouseholds());
+                    uploadTables.add(new SyncModel(TableContracts.FPHouseholdTable.TABLE_NAME));
 
                 } catch (JSONException e) {
                     e.printStackTrace();
-                    Toast.makeText(this, "JSONException(FPHousehold): " + e.getMessage(), Toast.LENGTH_SHORT).show();
-                    Log.d(TAG, "ProcessStart (FPHouseholdTable): " + e.getMessage());
+                    Toast.makeText(this, "JSONException(FPHousehold): " + e.getMessage(), Toast.LENGTH_LONG).show();
+                    Log.d(TAG, "JSONException(FPHousehold): " + e.getMessage());
+                    bi.errMessage.setText(bi.errMessage.getText() + "\nERROR - JSONException(FPHousehold): " + e.getMessage());
+                    bi.errMessage.setVisibility(View.VISIBLE);
                 }
 
                 MainApp.downloadData = new String[uploadData.size()];

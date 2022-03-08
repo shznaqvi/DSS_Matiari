@@ -2,10 +2,12 @@ package edu.aku.hassannaqvi.dss_matiari.ui.lists;
 
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.followUpsScheMWRAList;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.followups;
+import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.fpHouseholds;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.mwraCount;
-import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.mwraList;
+import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.mwraDone;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.selectedFemale;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.selectedHhNO;
+import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.selectedUC;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.selectedVillage;
 
 import android.app.Activity;
@@ -97,13 +99,17 @@ public class FPMwraActivity extends AppCompatActivity {
         bi = DataBindingUtil.setContentView(this, R.layout.activity_fpmwra);
         bi.setCallback(this);
 
+
         db = MainApp.appInfo.dbHelper;
-        MainApp.mwraDone = 0;
+        mwraDone = 0;
+        bi.hdssid.setText(fpHouseholds.getHdssId());
         // MainApp.followUpsScheMWRAList = new ArrayList<>();
      /*   Log.d(TAG, "onCreate: mwralist " + MainApp.followUpsScheMWRAList.size());
         Log.d(TAG, "onCreate: mwralist " + MainApp.fpHouseholds.getVillageCode());*/
         try {
-            followUpsScheMWRAList = db.getAllfollowupsScheByHH(MainApp.fpHouseholds.getVillageCode(), MainApp.fpHouseholds.getUcCode(), MainApp.fpHouseholds.getHhNo());
+
+            followUpsScheMWRAList = db.getAllfollowupsScheByHH(fpHouseholds.getVillageCode(), fpHouseholds.getUcCode(), fpHouseholds.getHhNo());
+
         } catch (Exception e) {
             e.printStackTrace();
             Toast.makeText(this, "JSONException: " + e.getMessage(), Toast.LENGTH_SHORT).show();
@@ -118,9 +124,9 @@ public class FPMwraActivity extends AppCompatActivity {
                 fupStatus = db.getFollowupsBySno(followUpsScheMWRAList.get(i).getRb01(), followUpsScheMWRAList.get(i).getfRound()).getSysDate();
                 followUpsScheMWRAList.get(i).setfpDoneDt(fupStatus);
                 if (!fupStatus.equals("")) {
-                    MainApp.mwraDone++;
-                }
+                    mwraDone++;
 
+                }
             } catch (JSONException e) {
 
                 Toast.makeText(this, "JSONException(Followups): " + e.getMessage(), Toast.LENGTH_SHORT).show();
@@ -133,14 +139,14 @@ public class FPMwraActivity extends AppCompatActivity {
         bi.rvMembers.setAdapter(fmAdapter);
         bi.rvMembers.setLayoutManager(new LinearLayoutManager(this));
 
-        mwraCount = followUpsScheMWRAList.size();
+        // mwraCount = followUpsScheMWRAList.size();
 
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                if (!MainApp.fpHouseholds.getiStatus().equals("1")) {
+                if (!fpHouseholds.getiStatus().equals("1")) {
                     //     Toast.makeText(MwraActivity.this, "Opening Mwra Households", Toast.LENGTH_LONG).show();
                     addMoreFemale();
                 } else {
@@ -150,7 +156,7 @@ public class FPMwraActivity extends AppCompatActivity {
             }
         });
 
-        if (MainApp.mwraDone >= followUpsScheMWRAList.size()) {
+        if (mwraDone >= followUpsScheMWRAList.size()) {
             bi.btnContinue.setVisibility(View.VISIBLE);
         }
     }
@@ -165,18 +171,18 @@ public class FPMwraActivity extends AppCompatActivity {
 
         // Created object of Household from FollowsSche info for adding new MWRA
         MainApp.households = new Households();
-        MainApp.households.setRa01(MainApp.fpHouseholds.getSysDate().substring(0, 10));
-        MainApp.households.setUid(MainApp.fpHouseholds.getUid());
-        MainApp.households.setUcCode(MainApp.fpHouseholds.getUcCode());
-        MainApp.households.setVillageCode(MainApp.fpHouseholds.getVillageCode());
-        MainApp.households.setHhNo(MainApp.fpHouseholds.getHhNo());
-        MainApp.households.setSysDate(MainApp.fpHouseholds.getSysDate());
-        MainApp.households.setHdssId(MainApp.fpHouseholds.getHdssId());
-        MainApp.households.setVisitNo(MainApp.fpHouseholds.getVisitNo());
+        MainApp.households.setRa01(fpHouseholds.getSysDate().substring(0, 10));
+        MainApp.households.setUid(fpHouseholds.getUid());
+        MainApp.households.setUcCode(fpHouseholds.getUcCode());
+        MainApp.households.setVillageCode(fpHouseholds.getVillageCode());
+        MainApp.households.setHhNo(fpHouseholds.getHhNo());
+        MainApp.households.setSysDate(fpHouseholds.getSysDate());
+        MainApp.households.setHdssId(fpHouseholds.getHdssId());
+        MainApp.households.setVisitNo(fpHouseholds.getVisitNo());
         //MainApp.households.setRa18(String.valueOf(followUpsScheMWRAList.size()));
         MainApp.households.setRa18("999");
 
-        int newMwra = db.getMWRACountBYUUID(MainApp.fpHouseholds.getUid());
+        int newMwra = db.getMWRACountBYUUID(fpHouseholds.getUid());
 
 
         // int newMwra = mwraCount - followUpsScheMWRAList.size();
@@ -200,15 +206,15 @@ public class FPMwraActivity extends AppCompatActivity {
         bi.totalmember.setText(MainApp.mwraTotal+ " M completed");*/
     }
 
-    private void checkCompleteFm() {
+/*    private void checkCompleteFm() {
         //     if (!MainApp.households.getIStatus().equals("1")) {
         int compCount = mwraList.size();
 
         MainApp.mwraCountComplete = compCount;
-        bi.btnContinue.setVisibility(mwraCount > 0 ? View.VISIBLE : View.GONE);
+       // bi.btnContinue.setVisibility(mwraCount > 0 ? View.VISIBLE : View.GONE);
         //   bi.btnContinue.setVisibility(compCount == mwraCount && !households.getiStatus().equals("1")? View.VISIBLE : View.GONE);
-     /*   bi.btnContinue.setVisibility(compCount >= mwraCount ? View.VISIBLE : View.GONE);
-        bi.btnContinue.setEnabled(bi.btnContinue.getVisibility()==View.VISIBLE);*/
+     *//*   bi.btnContinue.setVisibility(compCount >= mwraCount ? View.VISIBLE : View.GONE);
+        bi.btnContinue.setEnabled(bi.btnContinue.getVisibility()==View.VISIBLE);*//*
 
         //  } else {
         //       Toast.makeText(this, "Households has been completed or locked", Toast.LENGTH_LONG).show();
@@ -226,18 +232,22 @@ public class FPMwraActivity extends AppCompatActivity {
         }
 
 
-    }
+    }*/
 
     private void addMoreFemale() {
 
+        if (mwraDone < followUpsScheMWRAList.size()) {
+            Toast.makeText(FPMwraActivity.this, "Please complete followups before adding new women.", Toast.LENGTH_LONG).show();
+            return;
+        }
         //  startActivity(new Intent(this, MwraActivity.class));
-        int maxMWRA = db.getMaxMWRSNoBYHH(selectedVillage, selectedHhNO);
-        int maxFpMWRA = db.getMaxMWRANoBYHHFromFolloupsSche(selectedVillage, selectedHhNO);
+        int maxMWRA = db.getMaxMWRSNoBYHH(selectedUC, selectedVillage, selectedHhNO);
+        int maxFpMWRA = db.getMaxMWRANoBYHHFromFolloupsSche(selectedUC, selectedVillage, selectedHhNO);
         mwraCount = Math.max(maxMWRA, maxFpMWRA);
 
-        MainApp.households = new Households();
+       /* MainApp.households = new Households();
         MainApp.households.setUid(followups.getUid());
-        MainApp.households.setSysDate(followups.getSysDate());
+        MainApp.households.setSysDate(followups.getSysDate());*/
         MainApp.households.setRa18("999");
 
 
@@ -256,7 +266,7 @@ public class FPMwraActivity extends AppCompatActivity {
     }
 
     public void btnContinue(View view) {
-        if (MainApp.fpHouseholds.getUid().equals("")) {
+        if (fpHouseholds.getUid().equals("")) {
             Toast.makeText(this, "btnContinue(uid)", Toast.LENGTH_SHORT).show();
             setResult(RESULT_OK);
             finish();
@@ -290,15 +300,17 @@ public class FPMwraActivity extends AppCompatActivity {
         // check if the request code is same as what is passed  here it is 2
         if (requestCode == 2) {
             if (resultCode == Activity.RESULT_OK) {
-                //   mwraList.get(selectedFemale).setExpanded(false);
+                // Followups fp = followupsList.get(selectedFemale);
+                if (followUpsScheMWRAList.get(selectedFemale).getfpDoneDt().equals(""))
+                    // followupsList.add(followups);
+                    mwraDone++;
 
-                // TODO: Mark followup done
 
                 followUpsScheMWRAList.get(selectedFemale).setfpDoneDt(followups.getSysDate());
 
                 fmAdapter.notifyItemChanged(selectedFemale);
                 db.updatesFollowUpsScheColumn(TableContracts.TableFollowUpsSche.COLUMN_DONE_DATE, followups.getSysDate());
-                if (++MainApp.mwraDone >= followUpsScheMWRAList.size()) {
+                if (mwraDone >= followUpsScheMWRAList.size()) {
                     bi.btnContinue.setVisibility(View.VISIBLE);
                 }
                 //checkCompleteFm();
@@ -391,13 +403,7 @@ public class FPMwraActivity extends AppCompatActivity {
     }
 
     public void toggleNewMwraList(View view) {
-    /*    MainApp.households = new Households();
-        MainApp.households.setUid(followups.getUid());
-        MainApp.households.setSysDate(followups.getSysDate());
 
-        MainApp.households.setVillageCode(followups.getVillageCode());
-        MainApp.households.setStructureNo("");
-        MainApp.households.setHhNo(followups.getHhNo());*/
 
         startActivity(new Intent(this, MwraActivity.class));
         // bi.newMwraList.setVisibility(View.VISIBLE);

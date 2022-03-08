@@ -96,7 +96,7 @@ public class HouseholdActivity extends AppCompatActivity {
         Log.d(TAG, "onCreate: householdlist " + MainApp.householdList.size());
         try {
 
-            MainApp.householdList = db.getHouseholdBYVillage(MainApp.selectedVillage);
+            MainApp.householdList = db.getHouseholdBYVillage(selectedUC, MainApp.selectedVillage);
         } catch (JSONException e) {
             e.printStackTrace();
             Toast.makeText(this, "JSONException: " + e.getMessage(), Toast.LENGTH_SHORT).show();

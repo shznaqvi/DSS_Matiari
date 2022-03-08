@@ -62,6 +62,8 @@ public class SectionCxActivity extends AppCompatActivity {
             MainApp.followups.setRc06(MainApp.fpMwra.getRb06());
             MainApp.followups.setPrePreg(MainApp.fpMwra.getRb07());
             MainApp.followups.setRc07(MainApp.fpMwra.getRb07());
+            MainApp.followups.setHdssId(MainApp.fpMwra.getHdssid());
+            MainApp.followups.setHhNo(MainApp.fpMwra.getHhNo());
 
         }
         //bi.fldGrp01.setVisibility(View.VISIBLE);
@@ -96,6 +98,9 @@ public class SectionCxActivity extends AppCompatActivity {
 
             @Override
             public void afterTextChanged(Editable editable) {
+                bi.rc1401.setText(null);
+                bi.rc1402.setText(null);
+                bi.rc1403.setText(null);
                 setDateRanges();
             }
         });

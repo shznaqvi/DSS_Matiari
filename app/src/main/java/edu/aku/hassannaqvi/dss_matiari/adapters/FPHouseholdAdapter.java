@@ -14,6 +14,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -57,12 +58,11 @@ public class FPHouseholdAdapter extends RecyclerView.Adapter<FPHouseholdAdapter.
 
     }
 
-
     @Override
-    public void onBindViewHolder(ViewHolder viewHolder, final int pos) {
-        int position = pos;
-        Log.d(TAG, "Element " + position + " set.");
-        FollowUpsSche followUpsSche = this.followUpsScheList.get(position);        // Get element from your dataset at this position and replace the contents of the view
+    public void onBindViewHolder(@NonNull ViewHolder viewHolder, int pos) {
+
+        Log.d(TAG, "Element " + viewHolder.getAdapterPosition() + " set.");
+        FollowUpsSche followUpsSche = this.followUpsScheList.get(viewHolder.getAdapterPosition());        // Get element from your dataset at this position and replace the contents of the view
         // with that element
 
         TextView hhNo = viewHolder.hhNo;
@@ -72,7 +72,7 @@ public class FPHouseholdAdapter extends RecyclerView.Adapter<FPHouseholdAdapter.
         TextView prvStatus = viewHolder.prvStatus;
         ImageView imgStatus = viewHolder.imgStatus;
 
-        //String pregStatus = followUpsScheList.getRc07().equals("1") ? "Pregnant" : "Not Pregnant";
+        String pregStatus = followUpsSche.getRb07() + " Pregnant";
 
         //MainApp.fmComplete = completeCount == MainApp.formCount;
         try {
@@ -141,7 +141,7 @@ public class FPHouseholdAdapter extends RecyclerView.Adapter<FPHouseholdAdapter.
 {"ra01":"2021-08-23","ra02":"","ra04":"","ra03":"","ra05":"","ra07":"9001","ra06":"9","ra08":"asd","ra09":"2","ra10":"1","ra11":"96","ra11x":"ghg","ra12":"96","ra12x":"vgv","ra13":"","ra13x":"","ra14":"head","ra15":"resp","ra16":"2","ra17_a":"1","ra17_b":"1","ra17_c":"1","ra17_d":"1","ra18":"1"}
         fMaritalStatus.setText(marStatus + " | " + pregStatus);*/
         int totalMWRA = Integer.parseInt(followUpsSche.getRa18().equals("") ? "0" : followUpsSche.getRa18());
-        hhNo.setText(followUpsSche.getVillageCode() + "-" + followUpsSche.getHhNo());
+        hhNo.setText(followUpsSche.getVillageCode() + "-" + followUpsSche.getHhNo() + "(" + viewHolder.getAdapterPosition() + ")");
 
         if (followUpsSche.getiStatus().equals("1")) {
             prvStatus.setVisibility(View.GONE);
@@ -152,7 +152,7 @@ public class FPHouseholdAdapter extends RecyclerView.Adapter<FPHouseholdAdapter.
             prvStatus.setText(hhPrvStatus);
             prvStatus.setVisibility(View.VISIBLE);
         }
-        mwraCount.setText(totalMWRA + " Women");
+        mwraCount.setText(totalMWRA + " Women | " + pregStatus);
         secStatus.setText(hhStatus);
         imgStatus.setVisibility(fpHouseholds.getiStatus().equals("1") || Integer.parseInt(fpHouseholds.getVisitNo()) > 2 ? View.VISIBLE : View.GONE);
         secStatus.setBackgroundColor(ContextCompat.getColor(mContext, R.color.grayDark));
@@ -162,13 +162,13 @@ public class FPHouseholdAdapter extends RecyclerView.Adapter<FPHouseholdAdapter.
                 // Get the current state of the item
 
                 try {
-                    MainApp.fpHouseholds = db.getFPHouseholdBYHdssid(MainApp.followUpsScheHHList.get(position).getHdssid());
+                    MainApp.fpHouseholds = db.getFPHouseholdBYHdssid(MainApp.followUpsScheHHList.get(viewHolder.getAdapterPosition()).getHdssid());
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
 
                 if (MainApp.fpHouseholds.getUid().equals(""))
-                    MainApp.fpHouseholds.populateMeta(position);
+                    MainApp.fpHouseholds.populateMeta(viewHolder.getAdapterPosition());
 
            /*     MainApp.fpHouseholds.setVisitNo(String.valueOf(Integer.parseInt(MainApp.fpHouseholds.getVisitNo()) + 1));
                 mContext.startActivity(new Intent(mContext, FPMwraActivity.class));*/
@@ -176,7 +176,7 @@ public class FPHouseholdAdapter extends RecyclerView.Adapter<FPHouseholdAdapter.
                 if (!MainApp.fpHouseholds.getiStatus().equals("1") && Integer.parseInt(MainApp.fpHouseholds.getVisitNo()) < 3) {
 
                     if (followUpsSche.getiStatus().equals("1")) {
-                        editHousehold(position);
+                        editHousehold(viewHolder.getAdapterPosition());
                     } else {
                         try {
                             MainApp.households = db.getHouseholdByHDSSID(followUpsSche.getHdssid());
@@ -189,7 +189,7 @@ public class FPHouseholdAdapter extends RecyclerView.Adapter<FPHouseholdAdapter.
                                 MainApp.households.setRa09(followUpsSche.getHhNo());
                             }
                             MainApp.selectedHhNO = followUpsSche.getHhNo();
-                            MainApp.position = position;
+                            MainApp.position = viewHolder.getAdapterPosition();
                             if (!MainApp.households.getiStatus().equals("1") && Integer.parseInt(MainApp.households.getVisitNo()) < 3) {
 
                                 Intent intent = new Intent(mContext, SectionAActivity.class);
@@ -229,7 +229,7 @@ public class FPHouseholdAdapter extends RecyclerView.Adapter<FPHouseholdAdapter.
         View v = LayoutInflater.from(viewGroup.getContext())
                 .inflate(R.layout.household_row, viewGroup, false);
 
-        return new ViewHolder(v);
+        return new ViewHolder(v, mContext);
     }
 
     @Override
@@ -276,7 +276,7 @@ public class FPHouseholdAdapter extends RecyclerView.Adapter<FPHouseholdAdapter.
         private final View indicator;*/
 
 
-        public ViewHolder(View v) {
+        public ViewHolder(View v, Context c) {
             super(v);
             hhNo = v.findViewById(R.id.ra09);
             hhHead = v.findViewById(R.id.ra14);
@@ -295,4 +295,5 @@ public class FPHouseholdAdapter extends RecyclerView.Adapter<FPHouseholdAdapter.
             return hhHead;
         }
     }
+
 }

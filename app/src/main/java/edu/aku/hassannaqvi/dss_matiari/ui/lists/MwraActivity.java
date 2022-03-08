@@ -6,6 +6,7 @@ import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.mwraCount;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.mwraList;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.selectedFemale;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.selectedHhNO;
+import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.selectedUC;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.selectedVillage;
 
 import android.app.Activity;
@@ -97,7 +98,7 @@ public class MwraActivity extends AppCompatActivity {
         MainApp.mwraList = new ArrayList<>();
         Log.d(TAG, "onCreate: mwralist " + mwraList.size());
         try {
-            MainApp.mwraList = db.getAllMWRAByHH(MainApp.households.getVillageCode(), MainApp.households.getStructureNo(), MainApp.households.getHhNo());
+            MainApp.mwraList = db.getAllMWRAByHH(selectedUC, MainApp.households.getVillageCode(), MainApp.households.getStructureNo(), MainApp.households.getHhNo());
         } catch (JSONException e) {
             e.printStackTrace();
             Toast.makeText(this, "JSONException: " + e.getMessage(), Toast.LENGTH_SHORT).show();
@@ -182,8 +183,8 @@ public class MwraActivity extends AppCompatActivity {
         Intent intent = new Intent(this, SectionBActivity.class);
         //   finish();
 
-        int maxMWRA = db.getMaxMWRSNoBYHH(selectedVillage, selectedHhNO);
-        int maxFpMWRA = db.getMaxMWRANoBYHHFromFolloupsSche(selectedVillage, selectedHhNO);
+        int maxMWRA = db.getMaxMWRSNoBYHH(selectedUC, selectedVillage, selectedHhNO);
+        int maxFpMWRA = db.getMaxMWRANoBYHHFromFolloupsSche(selectedUC, selectedVillage, selectedHhNO);
         mwraCount = Math.max(maxMWRA, maxFpMWRA);
         MemberInfoLauncher.launch(intent);
     }
