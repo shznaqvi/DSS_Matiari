@@ -49,10 +49,9 @@ public class FpMwraAdapter extends RecyclerView.Adapter<FpMwraAdapter.ViewHolder
 
 
     @Override
-    public void onBindViewHolder(ViewHolder viewHolder, int position1) {
-        int position = viewHolder.getAdapterPosition();
-        Log.d(TAG, "Element " + position + " set.");
-        FollowUpsSche followUpsSche = this.followupsSche.get(position);        // Get element from your dataset at this position and replace the contents of the view
+    public void onBindViewHolder(ViewHolder viewHolder, int positio) {
+        Log.d(TAG, "Element " + viewHolder.getAdapterPosition() + " set.");
+        FollowUpsSche followUpsSche = this.followupsSche.get(viewHolder.getAdapterPosition());        // Get element from your dataset at this position and replace the contents of the view
         // with that element
 
         TextView fName = viewHolder.fName;
@@ -121,16 +120,16 @@ public class FpMwraAdapter extends RecyclerView.Adapter<FpMwraAdapter.ViewHolder
         viewHolder.itemView.setOnClickListener(v -> {
             // Get the current state of the item
 
-            MainApp.fpMwra = MainApp.followUpsScheMWRAList.get(position);
+            MainApp.fpMwra = MainApp.followUpsScheMWRAList.get(viewHolder.getAdapterPosition());
             MainApp.followups.populateMeta();
 
             Intent intent = new Intent(mContext, SectionCxActivity.class);
 
-            intent.putExtra("position", position);
+            intent.putExtra("position", viewHolder.getAdapterPosition());
 
-            MainApp.selectedFemale = position;
+            MainApp.selectedFemale = viewHolder.getAdapterPosition();
 
-            intent.putExtra("position", position);
+            intent.putExtra("position", viewHolder.getAdapterPosition());
 
             ((Activity) mContext).startActivityForResult(intent, 2);
 

@@ -141,7 +141,7 @@ public class FPHouseholdAdapter extends RecyclerView.Adapter<FPHouseholdAdapter.
 {"ra01":"2021-08-23","ra02":"","ra04":"","ra03":"","ra05":"","ra07":"9001","ra06":"9","ra08":"asd","ra09":"2","ra10":"1","ra11":"96","ra11x":"ghg","ra12":"96","ra12x":"vgv","ra13":"","ra13x":"","ra14":"head","ra15":"resp","ra16":"2","ra17_a":"1","ra17_b":"1","ra17_c":"1","ra17_d":"1","ra18":"1"}
         fMaritalStatus.setText(marStatus + " | " + pregStatus);*/
         int totalMWRA = Integer.parseInt(followUpsSche.getRa18().equals("") ? "0" : followUpsSche.getRa18());
-        hhNo.setText(followUpsSche.getVillageCode() + "-" + followUpsSche.getHhNo() + "(" + viewHolder.getAdapterPosition() + ")");
+        hhNo.setText(followUpsSche.getVillageCode() + "-" + followUpsSche.getHhNo());
 
         if (followUpsSche.getiStatus().equals("1")) {
             prvStatus.setVisibility(View.GONE);

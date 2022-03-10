@@ -55,7 +55,7 @@ public class FormsAdapter extends RecyclerView.Adapter<FormsAdapter.ViewHolder> 
 
     // Replace the contents of a view (invoked by the layout manager)
     @Override
-    public void onBindViewHolder(final ViewHolder holder, final int position) {
+    public void onBindViewHolder(final ViewHolder holder, final int positio) {
         // - get element from your dataset at this position
         // - replace the contents of the view with that element
 
@@ -69,7 +69,7 @@ public class FormsAdapter extends RecyclerView.Adapter<FormsAdapter.ViewHolder> 
 
         String iStatus = "Status  Unknown";
         int iColor = 0;
-        switch (fc.get(position).getiStatus()) {
+        switch (fc.get(holder.getAdapterPosition()).getiStatus()) {
             case "1":
                 iStatus = "   Complete    ";
                 iColor = Color.GREEN;
@@ -111,28 +111,28 @@ public class FormsAdapter extends RecyclerView.Adapter<FormsAdapter.ViewHolder> 
                 TableContracts.HouseholdTable.COLUMN_UC_CODE,
                 TableContracts.HouseholdTable.COLUMN_HOUSEHOLD_NO,
 */
-        String cluster = fc.get(position).getUcCode() + "-" + fc.get(position).getVillageCode() + "-" + fc.get(position).getStructureNo() + "-" + fc.get(position).getHhNo();
+        String cluster = fc.get(holder.getAdapterPosition()).getUcCode() + "-" + fc.get(holder.getAdapterPosition()).getVillageCode() + "-" + fc.get(holder.getAdapterPosition()).getStructureNo() + "-" + fc.get(holder.getAdapterPosition()).getHhNo();
 
-        holder.sysdate.setText(fc.get(position).getSysDate());
+        holder.sysdate.setText(fc.get(holder.getAdapterPosition()).getSysDate());
         holder.cluster.setText(cluster);
         holder.istatus.setText(iStatus);
         // holder.sysdate.setText("  Child Count: " + childCount + " \t\t\t Card Seen: " + cardChild + " \t\t\t Photo Child: " + photoChild);
         holder.istatus.setTextColor(iColor);
-        holder.fathername.setText(fc.get(position).getVisitNo() + " visits");
+        holder.fathername.setText(fc.get(holder.getAdapterPosition()).getVisitNo() + " visits");
 
-        int totalMWRA = db.getMWRACountBYUUID(fc.get(position).getUid());
+        int totalMWRA = db.getMWRACountBYUUID(fc.get(holder.getAdapterPosition()).getUid());
         holder.hhno.setText(totalMWRA + " MWRA(s)");
 
         holder.itemView.setOnClickListener(v -> {
             // Get the current state of the item
 
             try {
-                MainApp.households = db.getHouseholdByUID(MainApp.householdList.get(position).getUid());
+                MainApp.households = db.getHouseholdByUID(MainApp.householdList.get(holder.getAdapterPosition()).getUid());
 
                 //MainApp.households.setVisitNo(String.valueOf(Integer.parseInt(MainApp.households.getVisitNo())+1));
                 if (!MainApp.households.getiStatus().equals("1") && Integer.parseInt(MainApp.households.getVisitNo()) < 3) {
 
-                    editHousehold(position);
+                    editHousehold(holder.getAdapterPosition());
 
                 } else {
                     Toast.makeText(c, "This households has been locked. You cannot edit household for locked forms", Toast.LENGTH_LONG).show();
