@@ -4,7 +4,7 @@
         <domain includeSubdomains="true">aku.edu</domain>
 
         <trust-anchors>
-            <certificates src="@raw/star_aku_edu" />
+            <certificates src="@raw/pedres2_aku_edu" />
         </trust-anchors>
         <pin-set expiration="2023-03-08">
             <pin digest="SHA-256">sBehhhJc5wTNYVfhoFYMY9LR6xtWYmN0AIBvjlPVR8o=</pin>
