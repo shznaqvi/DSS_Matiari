@@ -7,9 +7,9 @@
             <certificates src="@raw/pedres2_aku_edu" />
         </trust-anchors>
         <pin-set expiration="2023-03-08">
-            <pin digest="SHA-256">sBehhhJc5wTNYVfhoFYMY9LR6xtWYmN0AIBvjlPVR8o=</pin>
+            <pin digest="SHA-256">Mt8PYrwhBQY4VjT8sYcyvPwmbXKsO+WmPrPrs85VGSg=</pin>
             <!-- backup pin -->
-            <pin digest="SHA-256">5kJvNEMw0KjrCAu7eXY5HZdvyCS13BbA0VJG1RSP91w=</pin>
+            <pin digest="SHA-256">RQeZkB42znUfsDIIFWIRiYEcKl7nHwNFwWCrnMMJbVc=</pin>
         </pin-set>
 
     </domain-config>

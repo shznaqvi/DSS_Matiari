@@ -234,7 +234,7 @@ public class SyncActivity extends AppCompatActivity {
 
                     //String filter = " uccode = '05' and  DATEADD(MONTH,3,ra01) between DATEADD(DAY,-1,GETDATE()) AND GETDATE()";
                     // TODO: backdate limit removed (get all followups that are due upto now
-                    String filter = " DATEADD(MONTH,4,ra01) between ra01 AND GETDATE() ";
+                    String filter = " DATEADD(MONTH,3,ra01) between ra01 AND GETDATE() ";
                     downloadTables.add(new SyncModel(TableContracts.TableFollowUpsSche.TABLE_NAME, select, filter));
                     downloadTables.add(new SyncModel(TableContracts.MaxHhnoTable.TABLE_NAME));
 
