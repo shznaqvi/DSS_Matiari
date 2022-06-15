@@ -79,9 +79,15 @@ public class Followups extends BaseObservable implements Observable {
     private String rc10 = StringUtils.EMPTY;
     private String rc11 = StringUtils.EMPTY;
     private String rc11x = StringUtils.EMPTY;
+    private String rc1201ln = StringUtils.EMPTY;
+    private String rc1201nm = StringUtils.EMPTY;
     private String rc1201 = StringUtils.EMPTY;
     private String rc1202 = StringUtils.EMPTY;
+    private String rc1202ln = StringUtils.EMPTY;
+    private String rc1202nm = StringUtils.EMPTY;
     private String rc1203 = StringUtils.EMPTY;
+    private String rc1203ln = StringUtils.EMPTY;
+    private String rc1203nm = StringUtils.EMPTY;
     private String rc12 = StringUtils.EMPTY;
     private String rc12x = StringUtils.EMPTY;
     private String rc1301 = StringUtils.EMPTY;
@@ -422,6 +428,66 @@ public class Followups extends BaseObservable implements Observable {
     }
 
     @Bindable
+    public String getRc1201ln() {
+        return rc1201ln;
+    }
+
+    @Bindable
+    public String getRc1201nm() {
+        return rc1201nm;
+    }
+
+    public void setRc1201ln(String rc1201ln) {
+        this.rc1201ln = rc1201ln;
+        notifyPropertyChanged(BR.rc1201ln);
+    }
+
+    public void setRc1201nm(String rc1201nm) {
+        this.rc1201nm = rc1201nm;
+        notifyPropertyChanged(BR.rc1201nm);
+    }
+
+    @Bindable
+    public String getRc1202ln() {
+        return rc1202ln;
+    }
+
+    public void setRc1202ln(String rc1202ln) {
+        this.rc1202ln = rc1202ln;
+        notifyPropertyChanged(BR.rc1202ln);
+    }
+
+    @Bindable
+    public String getRc1202nm() {
+        return rc1202nm;
+    }
+
+    public void setRc1202nm(String rc1202nm) {
+        this.rc1202nm = rc1202nm;
+        notifyPropertyChanged(BR.rc1202nm);
+    }
+
+    @Bindable
+    public String getRc1203ln() {
+        return rc1203ln;
+    }
+
+    public void setRc1203ln(String rc1203ln) {
+        this.rc1203ln = rc1203ln;
+        notifyPropertyChanged(BR.rc1203ln);
+    }
+
+    @Bindable
+    public String getRc1203nm() {
+        return rc1203nm;
+    }
+
+    public void setRc1203nm(String rc1203nm) {
+        this.rc1203nm = rc1203nm;
+        notifyPropertyChanged(BR.rc1203nm);
+    }
+
+    @Bindable
     public String getRc04() {
         return rc04;
     }
@@ -435,19 +501,25 @@ public class Followups extends BaseObservable implements Observable {
         setRc10(rc04.equals("1") ? this.rc10 : "");
         setRc11(rc04.equals("1") ? this.rc11 : "");
 
-        setRc1201(rc04.equals("1") ? this.rc1201 : "");
+        /*setRc1201(rc04.equals("1") ? this.rc1201 : "");
+        setRc1201ln(rc04.equals("1") ? this.rc1201ln : "");
+        setRc1201nm(rc04.equals("1") ? this.rc1201nm : "");
         setRc1301(rc04.equals("1") ? this.rc1301 : "");
         setRc1401(rc04.equals("1") ? this.rc1401 : "");
 
         setRc1202(rc04.equals("1") ? this.rc1202 : "");
+        setRc1202ln(rc04.equals("1") ? this.rc1202ln : "");
+        setRc1202nm(rc04.equals("1") ? this.rc1202nm : "");
         setRc1302(rc04.equals("1") ? this.rc1302 : "");
         setRc1402(rc04.equals("1") ? this.rc1402 : "");
 
         setRc1203(rc04.equals("1") ? this.rc1203 : "");
+        setRc1203ln(rc04.equals("1") ? this.rc1203ln : "");
+        setRc1203nm(rc04.equals("1") ? this.rc1203nm : "");
         setRc1303(rc04.equals("1") ? this.rc1303 : "");
         setRc1403(rc04.equals("1") ? this.rc1403 : "");
 
-        setRc15(rc04.equals("1") ? this.rc15 : "");
+        */setRc15(rc04.equals("1") ? this.rc15 : "");
         setRc16(rc04.equals("1") ? this.rc16 : "");
         setRc17(rc04.equals("1") ? this.rc17 : "");
         notifyChange(BR.rc04);
@@ -467,18 +539,24 @@ public class Followups extends BaseObservable implements Observable {
         setRc10(rc05.equals("1") ? this.rc10 : "");
         setRc11(rc05.equals("1") ? this.rc11 : "");
 
-        setRc1201(rc05.equals("1") ? this.rc1201 : "");
+        /*setRc1201(rc05.equals("1") ? this.rc1201 : "");
+        setRc1201ln(rc05.equals("1") ? this.rc1201ln : "");
+        setRc1201nm(rc05.equals("1") ? this.rc1201nm : "");
         setRc1301(rc05.equals("1") ? this.rc1301 : "");
         setRc1401(rc05.equals("1") ? this.rc1401 : "");
 
         setRc1202(rc05.equals("1") ? this.rc1202 : "");
+        setRc1202ln(rc05.equals("1") ? this.rc1202ln : "");
+        setRc1202nm(rc05.equals("1") ? this.rc1202nm : "");
         setRc1302(rc05.equals("1") ? this.rc1302 : "");
         setRc1402(rc05.equals("1") ? this.rc1402 : "");
 
         setRc1203(rc05.equals("1") ? this.rc1203 : "");
+        setRc1203ln(rc05.equals("1") ? this.rc1203ln : "");
+        setRc1203nm(rc05.equals("1") ? this.rc1203nm : "");
         setRc1303(rc05.equals("1") ? this.rc1303 : "");
         setRc1403(rc05.equals("1") ? this.rc1403 : "");
-
+*/
         setRc15(rc05.equals("1") ? this.rc15 : "");
         setRc16(rc05.equals("1") ? this.rc16 : "");
         setRc17(rc05.equals("1") ? this.rc17 : "");
@@ -499,10 +577,10 @@ public class Followups extends BaseObservable implements Observable {
         setRc09(rc06.equals("4") ? "" : this.rc09);
         setRc10(rc06.equals("4") ? "" : this.rc10);
         setRc11(rc06.equals("4") ? "" : this.rc11);
-        setRc12(rc06.equals("4") ? "" : this.rc12);
+        /*setRc12(rc06.equals("4") ? "" : this.rc12);
         setRc13(rc06.equals("4") ? "" : this.rc13);
         setRc14(rc06.equals("4") ? "" : this.rc14);
-        setRc15(rc06.equals("4") ? "" : this.rc15);
+        */setRc15(rc06.equals("4") ? "" : this.rc15);
         setRc16(rc06.equals("4") ? "" : this.rc16);
         setRc17(rc06.equals("4") ? "" : this.rc17);
         //setRc03(this.rc06.equals("4") ? "" : this.rc03);
@@ -522,18 +600,24 @@ public class Followups extends BaseObservable implements Observable {
         setRc09(this.rc07.equals("1") ? this.rc09 : "");
         setRc10(this.rc07.equals("1") ? this.rc10 : "");
         setRc11(this.rc07.equals("1") ? this.rc11 : "");
-        setRc1201(this.rc07.equals("1") ? this.rc1201 : "");
+        /*setRc1201(this.rc07.equals("1") ? this.rc1201 : "");
+        setRc1201ln(this.rc07.equals("1") ? this.rc1201ln : "");
+        setRc1201nm(this.rc07.equals("1") ? this.rc1201nm : "");
         setRc1301(this.rc07.equals("1") ? this.rc1301 : "");
         setRc1401(this.rc07.equals("1") ? this.rc1401 : "");
 
         setRc1202(this.rc07.equals("1") ? this.rc1202 : "");
+        setRc1202ln(this.rc07.equals("1") ? this.rc1202ln : "");
+        setRc1202nm(this.rc07.equals("1") ? this.rc1202nm : "");
         setRc1302(this.rc07.equals("1") ? this.rc1302 : "");
         setRc1402(this.rc07.equals("1") ? this.rc1402 : "");
 
         setRc1203(this.rc07.equals("1") ? this.rc1203 : "");
+        setRc1202ln(this.rc07.equals("1") ? this.rc1202ln : "");
+        setRc1202nm(this.rc07.equals("1") ? this.rc1202nm : "");
         setRc1303(this.rc07.equals("1") ? this.rc1303 : "");
         setRc1403(this.rc07.equals("1") ? this.rc1403 : "");
-
+*/
 
         Log.d(TAG, "setRc07: " + this.rc07);
         notifyChange(BR.rc07);
@@ -549,18 +633,24 @@ public class Followups extends BaseObservable implements Observable {
         setRc09(this.rc08.equals("1") ? "" : this.rc09);
         setRc10(this.rc08.equals("1") ? "" : this.rc10);
         setRc11(this.rc08.equals("1") ? "" : this.rc11);
-        setRc1201(this.rc08.equals("1") ? "" : this.rc1201);
+        /*setRc1201(this.rc08.equals("1") ? "" : this.rc1201);
+        setRc1201ln(this.rc08.equals("1") ? this.rc1201ln : "");
+        setRc1201nm(this.rc08.equals("1") ? this.rc1201nm : "");
         setRc1301(this.rc08.equals("1") ? "" : this.rc1301);
         setRc1401(this.rc08.equals("1") ? "" : this.rc1401);
 
         setRc1202(this.rc08.equals("1") ? "" : this.rc1202);
+        setRc1202ln(this.rc08.equals("1") ? this.rc1202ln : "");
+        setRc1202nm(this.rc08.equals("1") ? this.rc1202nm : "");
         setRc1302(this.rc08.equals("1") ? "" : this.rc1302);
         setRc1402(this.rc08.equals("1") ? "" : this.rc1402);
 
         setRc1203(this.rc08.equals("1") ? "" : this.rc1203);
+        setRc1203ln(this.rc08.equals("1") ? this.rc1203ln : "");
+        setRc1203nm(this.rc08.equals("1") ? this.rc1203nm : "");
         setRc1303(this.rc08.equals("1") ? "" : this.rc1303);
         setRc1403(this.rc08.equals("1") ? "" : this.rc1403);
-
+*/
         setRc15(this.rc08.equals("1") ? "" : this.rc15);
         setRc16(this.rc08.equals("1") ? "" : this.rc16);
         setRc17(this.rc08.equals("1") ? "" : this.rc17);
@@ -577,9 +667,9 @@ public class Followups extends BaseObservable implements Observable {
         this.rc09 = rc09;
         setRc10(this.rc09.equals("3") || this.rc09.equals("4") ? "" : this.rc10);
         setRc11(this.rc09.equals("3") || this.rc09.equals("4") ? "" : this.rc11);
-        setRc12(this.rc09.equals("3") || this.rc09.equals("4") ? "" : this.rc12);
+        /*setRc12(this.rc09.equals("3") || this.rc09.equals("4") ? "" : this.rc12);
         setRc13(this.rc09.equals("3") || this.rc09.equals("4") ? "" : this.rc13);
-        setRc14(this.rc09.equals("3") || this.rc09.equals("4") ? "" : this.rc14);
+        setRc14(this.rc09.equals("3") || this.rc09.equals("4") ? "" : this.rc14);*/
         notifyChange(BR.rc09);
     }
 
@@ -604,12 +694,12 @@ public class Followups extends BaseObservable implements Observable {
 
     public void setRc11(String rc11) {
         this.rc11 = rc11;
-        setRc1202(!this.rc11.equals("1") ? this.rc1202 : "");
+        /*setRc1202(!this.rc11.equals("1") ? this.rc1202 : "");
         setRc1302(!this.rc11.equals("1") ? this.rc1302 : "");
         setRc1402(!this.rc11.equals("1") ? this.rc1402 : "");
         setRc1203(this.rc11.equals("3") ? this.rc1203 : "");
         setRc1303(this.rc11.equals("3") ? this.rc1303 : "");
-        setRc1403(this.rc11.equals("3") ? this.rc1403 : "");
+        setRc1403(this.rc11.equals("3") ? this.rc1403 : "");*/
 
         notifyChange(BR.rc11);
     }
@@ -625,7 +715,7 @@ public class Followups extends BaseObservable implements Observable {
     }
 
 
-    @Bindable
+   /* @Bindable
     public String getRc12x() {
         return rc12x;
     }
@@ -633,10 +723,10 @@ public class Followups extends BaseObservable implements Observable {
     public void setRc12x(String rc12x) {
         this.rc12x = rc12x;
         notifyChange(BR.rc12x);
-    }
+    }*/
 
 
-    @Bindable
+    /*@Bindable
     public String getRc1201() {
         return rc1201;
     }
@@ -742,7 +832,7 @@ public class Followups extends BaseObservable implements Observable {
         this.rc1403 = rc1403;
         notifyChange(BR.rc1403);
     }
-
+*/
     @Bindable
     public String getRc15() {
         return rc15;
@@ -857,19 +947,25 @@ public class Followups extends BaseObservable implements Observable {
             this.rc10 = json.has("rc10") ? json.getString("rc10") : "";
             this.rc11 = json.getString("rc11");
             this.rc11x = json.getString("rc11x");
-            this.rc1201 = json.getString("rc1201");
+            /*this.rc1201 = json.getString("rc1201");
+            this.rc1201ln = json.getString("rc1201ln");
+            this.rc1201nm = json.getString("rc1201nm");
             this.rc12x = json.getString("rc12x");
             this.rc1301 = json.getString("rc1301");
             this.rc13x = json.getString("rc13x");
             this.rc1401 = json.getString("rc1401");
             this.rc1202 = json.getString("rc1202");
+            this.rc1202ln = json.getString("rc1202ln");
+            this.rc1201nm = json.getString("rc1201nm");
             this.rc1302 = json.getString("rc1302");
             this.rc1402 = json.getString("rc1402");
 
             this.rc1203 = json.getString("rc1203");
+            this.rc1203ln = json.getString("rc1203ln");
+            this.rc1203nm = json.getString("rc1203nm");
             this.rc1303 = json.getString("rc1303");
             this.rc1403 = json.getString("rc1403");
-
+*/
             this.rc15 = json.getString("rc15");
             this.rc16 = json.getString("rc16");
             this.rc17 = json.getString("rc17");
@@ -900,17 +996,21 @@ public class Followups extends BaseObservable implements Observable {
                 .put("rc10", rc10)
                 .put("rc11", rc11)
                 .put("rc11x", rc11x)
-                .put("rc1201", rc1201)
+                /*.put("rc1201", rc1201)
+                .put("rc1201ln", rc1201ln)
                 .put("rc12x", rc12x)
                 .put("rc1301", rc1301)
                 .put("rc13x", rc13x)
                 .put("rc1401", rc1401)
                 .put("rc1202", rc1202)
+                .put("rc1202ln", rc1202ln)
+                .put("rc1202nm", rc1202nm)
                 .put("rc1302", rc1302)
                 .put("rc1402", rc1402)
                 .put("rc1203", rc1203)
+                .put("rc1203ln", rc1203)
                 .put("rc1303", rc1303)
-                .put("rc1403", rc1403)
+                .put("rc1403", rc1403)*/
                 .put("rc15", rc15)
                 .put("rc16", rc16)
                 .put("rc17", rc17)

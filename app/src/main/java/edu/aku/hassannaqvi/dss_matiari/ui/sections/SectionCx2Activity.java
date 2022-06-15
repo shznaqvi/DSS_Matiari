@@ -6,8 +6,6 @@ import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.sharedPref;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.RadioGroup;
@@ -29,12 +27,13 @@ import edu.aku.hassannaqvi.dss_matiari.R;
 import edu.aku.hassannaqvi.dss_matiari.contracts.TableContracts;
 import edu.aku.hassannaqvi.dss_matiari.core.MainApp;
 import edu.aku.hassannaqvi.dss_matiari.database.DatabaseHelper;
+import edu.aku.hassannaqvi.dss_matiari.databinding.ActivitySectionCx2Binding;
 import edu.aku.hassannaqvi.dss_matiari.databinding.ActivitySectionCxBinding;
 
-public class SectionCxActivity extends AppCompatActivity {
+public class SectionCx2Activity extends AppCompatActivity {
 
-    private static final String TAG = "SectionCxActivity";
-    ActivitySectionCxBinding bi;
+    private static final String TAG = "SectionCx2Activity";
+    ActivitySectionCx2Binding bi;
     private DatabaseHelper db;
 
     @Override
@@ -42,11 +41,13 @@ public class SectionCxActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         String lang = sharedPref.getString("lang", "1");
         setTheme(lang.equals("1") ? R.style.AppThemeEnglish1 : R.style.AppThemeUrdu);
-        bi = DataBindingUtil.setContentView(this, R.layout.activity_section_cx);
+        bi = DataBindingUtil.setContentView(this, R.layout.activity_section_cx_2);
         db = MainApp.appInfo.dbHelper;
 
+        bi.setFollowups(followups);
 
-        // Set Round Number from followups data
+
+        /*// Set Round Number from followups data
         MainApp.ROUND = MainApp.fpMwra.getfRound();
 
         try {
@@ -73,14 +74,14 @@ public class SectionCxActivity extends AppCompatActivity {
 
         bi.setFpHouseholds(MainApp.fpHouseholds);
         bi.setFollowups(MainApp.followups);
-
+*/
 
         // setListener(); // Age calculation not required in followups
 
         // set default model values if new mwra
 
 
-        // setTitle(R.string.marriedwomenregistration_mainheading);
+        setTitle(R.string.marriedwomenregistration_mainheading);
         setImmersive(true);
 
         bi.btnContinue.setText(MainApp.followups.getUid().equals("") ? "Save" : "Update");
@@ -107,21 +108,7 @@ public class SectionCxActivity extends AppCompatActivity {
             }
         });*/
 
-        bi.rc11.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(RadioGroup group, int checkedId) {
-                if(bi.rc1101.isChecked())
-                {
-                    MainApp.totalChildCount = 1;
-                }else if(bi.rc1102.isChecked()){
-                    MainApp.totalChildCount = 2;
-                }else if (bi.rc1103.isChecked())
-                {
-                    MainApp.totalChildCount = 3;
-                }
 
-            }
-        });
 
     }
 
@@ -174,12 +161,12 @@ public class SectionCxActivity extends AppCompatActivity {
             bi.rb04.setMinDate(minDob);*/
 
             // LMP
-            /*bi.rc16.setMaxDate(maxLMP);
+            bi.rc16.setMaxDate(maxLMP);
             bi.rc16.setMinDate(minLMP);
 
             // EDD
             bi.rc17.setMaxDate(maxEDD);
-            bi.rc17.setMinDate(minEDD);*/
+            bi.rc17.setMinDate(minEDD);
 
             // Date of Death from Date of Deliver(RC10)
             sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
@@ -261,24 +248,11 @@ public class SectionCxActivity extends AppCompatActivity {
 
     public void btnContinue(View view) {
         if (!formValidation()) return;
-        if (MainApp.followups.getUid().equals("") ? insertNewRecord() : updateDB()) {
 
-            if(followups.getPrePreg().equals("1") && bi.rc0901.isChecked()) {
-                Intent forwardIntent = new Intent(this, SectionOutcomeActivity.class).putExtra("complete", true);
-                forwardIntent.setFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT);
-                setResult(RESULT_OK, forwardIntent);
-                startActivity(forwardIntent);
-                finish();
-            }else if (!bi.rc0604.isChecked()) {
-                Intent forwardIntent = new Intent(this, SectionCx2Activity.class).putExtra("complete", true);
-                forwardIntent.setFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT);
-                setResult(RESULT_OK, forwardIntent);
-                startActivity(forwardIntent);
-                finish();
-            }else if(bi.rc0604.isChecked()){
+        if(updateDB()){
                 setResult(RESULT_OK);
                 finish();
-            }
+
 //             startActivity(new Intent(this, WRAEndingActivity.class).addFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT).putExtra("complete", true));
 
          /*   if (MainApp.followups.getPrePreg().equals("1") && bi.rc0501.isChecked()) {
@@ -353,13 +327,13 @@ public class SectionCxActivity extends AppCompatActivity {
             // db.updatesMWRAColumn(TableContracts.MWRATable.COLUMN_SYNCED, null);
             // concate last char from uid to alter and create new unique uid
 
-            followups.setDeviceId(followups.getDeviceId() + "_" + followups.getDeviceId().substring(followups.getDeviceId().length() - 1));
+           /* followups.setDeviceId(followups.getDeviceId() + "_" + followups.getDeviceId().substring(followups.getDeviceId().length() - 1));
             db.updatesFollowUpsColumn(TableContracts.FollowupsTable.COLUMN_DEVICEID, followups.getDeviceId());
             int repeatCount = (followups.getDeviceId().length() - 16) / 2;
             // new UID
             String newUID = followups.getDeviceId().substring(0, 16) + followups.getId() + "_" + repeatCount;
             followups.setUid(newUID);
-            db.updatesFollowUpsColumn(TableContracts.FollowupsTable.COLUMN_UID, newUID);
+            db.updatesFollowUpsColumn(TableContracts.FollowupsTable.COLUMN_UID, newUID);*/
 
 
         } catch (JSONException e) {

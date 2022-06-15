@@ -184,6 +184,8 @@
     <string name="rc1103">Triplets</string>
 
     <string name="rc12">Gender</string>
+    <string name="rc12ln">Line Number</string>
+    <string name="rc12nm">Name</string>
     <string name="rc1201">Male</string>
     <string name="rc1202">Female</string>
     <string name="rc1203">حمل ضايع</string>

@@ -55,6 +55,8 @@ public class Outcome extends BaseObservable implements Observable {
     private String syncDate = StringUtils.EMPTY;
 
     private String round = StringUtils.EMPTY;
+    private String rc12ln = StringUtils.EMPTY;
+    private String rc12nm = StringUtils.EMPTY;
     private String rc12 = StringUtils.EMPTY;
     private String rc13 = StringUtils.EMPTY;
     private String rc14 = StringUtils.EMPTY;
@@ -252,6 +254,26 @@ public class Outcome extends BaseObservable implements Observable {
     }
 
 
+    @Bindable
+    public String getRc12ln() {
+        return rc12ln;
+    }
+
+    public void setRc12ln(String rc12ln) {
+        this.rc12ln = rc12ln;
+        this.sno = rc12ln;
+        notifyChange(BR.rc12ln);
+    }
+
+    @Bindable
+    public String getRc12nm() {
+        return rc12nm;
+    }
+
+    public void setRc12nm(String rc12nm) {
+        this.rc12nm = rc12nm;
+        notifyChange(BR.rc12nm);
+    }
 
     @Bindable
     public String getRc12() {
@@ -271,6 +293,7 @@ public class Outcome extends BaseObservable implements Observable {
 
     public void setRc13(String rc13) {
         this.rc13 = rc13;
+        setRc14(rc13.equals("1") ? this.rc14 : "");
         notifyChange(BR.rc13);
     }
 
@@ -359,6 +382,8 @@ public class Outcome extends BaseObservable implements Observable {
             JSONObject json = null;
             json = new JSONObject(string);
             this.round = json.getString("ROUND");
+            this.rc12ln = json.getString("rc12ln");
+            this.rc12nm = json.getString("rc12nm");
             this.rc12 = json.getString("rc12");
             this.rc13 = json.getString("rc13");
             this.rc14 = json.getString("rc14");
@@ -376,6 +401,8 @@ public class Outcome extends BaseObservable implements Observable {
 
         json
                 .put("ROUND", round)
+                .put("rc12ln", rc12ln)
+                .put("rc12nm", rc12nm)
                 .put("rc12", rc12)
                 .put("rc13", rc13)
                 .put("rc14", rc14)

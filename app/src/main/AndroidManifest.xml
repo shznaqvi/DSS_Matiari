@@ -21,8 +21,20 @@
         android:usesCleartextTraffic="true"
         tools:replace="android:allowBackup">
         <activity
+            android:name=".ui.sections.SectionOutcomeActivity"
+            android:theme="@style/AppThemeEnglish1"
+            android:windowSoftInputMode="adjustResize|stateHidden" />
+        <activity
             android:name=".ui.sections.SectionCxActivity"
-            android:exported="true" />
+            android:theme="@style/AppThemeEnglish1"
+            android:windowSoftInputMode="adjustResize|stateHidden"
+             />
+
+        <activity
+            android:name=".ui.sections.SectionCx2Activity"
+            android:theme="@style/AppThemeEnglish1"
+            android:windowSoftInputMode="adjustResize|stateHidden"
+            />
         <activity
             android:name=".ui.lists.FPMwraActivity"
             android:exported="true" />

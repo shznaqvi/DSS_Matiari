@@ -1911,6 +1911,46 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
 
+    public Outcome getChildByUUid(String pSNo) throws JSONException {
+        SQLiteDatabase db = this.getReadableDatabase(DATABASE_PASSWORD);
+        Cursor c;
+        String[] columns = null;
+
+        String whereClause;
+        whereClause = OutcomeTable.COLUMN_MUID + "=? AND " +
+                OutcomeTable.COLUMN_UUID + "=? AND " +
+                OutcomeTable.COLUMN_SNO + "=? "
+        ;
+
+        String[] whereArgs = {MainApp.outcome.getUid(), MainApp.followups.getUid(), pSNo};
+
+        String groupBy = null;
+        String having = null;
+
+        String orderBy = OutcomeTable.COLUMN_ID + " ASC";
+
+        Outcome outcome = new Outcome();  // Outcome can never be null.
+
+        c = db.query(
+                OutcomeTable.TABLE_NAME,  // The table to query
+                columns,                   // The columns to return
+                whereClause,               // The columns for the WHERE clause
+                whereArgs,                 // The values for the WHERE clause
+                groupBy,                   // don't group the rows
+                having,                    // don't filter by row groups
+                orderBy                    // The sort order
+        );
+        while (c.moveToNext()) {
+            outcome = new Outcome().Hydrate(c);
+        }
+
+        db.close();
+
+        return outcome;
+    }
+
+
+
 
 
     /*public VersionApp getAppDetails() {

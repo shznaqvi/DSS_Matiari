@@ -58,7 +58,7 @@ public class SectionDActivity extends AppCompatActivity {
                 finish();
             } else {
                 // get outcome of previous pregnancy
-                MainApp.totalOutcomes = Integer.parseInt(followups.getRc13());
+                //MainApp.totalOutcomes = Integer.parseInt(followups.getRc13());
                 MainApp.outcomeCounter = 0;
                 setResult(RESULT_OK);
                 startActivity(new Intent(this, SectionEActivity.class).addFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT).putExtra("complete", true));
