@@ -138,6 +138,7 @@
     <string name="rc03">Husband/Father Name</string>
     <string name="rc03h">Husband / Father Name </string>
     <string name="rc03f">Father Name</string>
+    <string name="rc03a">contact  Number </string>
     <string name="rc04">Visit Status</string>
     <!--    <string name="rc0401">Complete</string>-->
     <string name="rc0401">Available</string>
@@ -150,6 +151,8 @@
     <string name="rc0501">Live</string>
     <string name="rc0502">Death</string>
     <string name="rc0503">Refused</string>
+    <string name="rc05a">Date of Death</string>
+    <string name="rc05b">Suspected cause of Death</string>
     <string name="rc06"> Current Marital Status</string>
     <string name="rc0601">Married</string>
     <string name="rc0602">Divorce</string>
@@ -188,7 +191,8 @@
     <string name="rc12nm">Name</string>
     <string name="rc1201">Male</string>
     <string name="rc1202">Female</string>
-    <string name="rc1203">حمل ضايع</string>
+    <string name="rc1203">Transgender</string>
+
 
 
     <string name="rc13">Current Child Status</string>
@@ -251,8 +255,11 @@
     <string name='Q_rc01' translatable="false">rc01</string>
     <string name='Q_rc02' translatable="false">rc02</string>
     <string name='Q_rc03' translatable="false">rc03</string>
+    <string name='Q_rc03a' translatable="false">rc03a</string>
     <string name='Q_rc04' translatable="false">rc04</string>
     <string name='Q_rc05' translatable="false">rc05</string>
+    <string name='Q_rc05a' translatable="false">rc05a</string>
+    <string name='Q_rc05b' translatable="false">rc05b</string>
     <string name='Q_rc06' translatable="false">rc06</string>
     <string name='Q_rc07' translatable="false">rc07</string>
     <string name='Q_rc07a' translatable="false">rc07a</string>
@@ -261,6 +268,8 @@
     <string name='Q_rc10' translatable="false">rc10</string>
     <string name='Q_rc11' translatable="false">rc11</string>
     <string name='Q_rc12' translatable="false">rc12</string>
+    <string name='Q_rc12ln' translatable="false">rc12ln</string>
+    <string name='Q_rc12nm' translatable="false">rc12nm</string>
     <string name='Q_rc13' translatable="false">rc13</string>
     <string name='Q_rc14' translatable="false">rc14</string>
     <string name='Q_rc15' translatable="false">rc15</string>

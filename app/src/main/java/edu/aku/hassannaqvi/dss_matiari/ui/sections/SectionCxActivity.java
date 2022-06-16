@@ -263,34 +263,28 @@ public class SectionCxActivity extends AppCompatActivity {
         if (!formValidation()) return;
         if (MainApp.followups.getUid().equals("") ? insertNewRecord() : updateDB()) {
 
-            if(followups.getPrePreg().equals("1") && bi.rc0901.isChecked()) {
-                Intent forwardIntent = new Intent(this, SectionOutcomeActivity.class).putExtra("complete", true);
-                forwardIntent.setFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT);
-                setResult(RESULT_OK, forwardIntent);
-                startActivity(forwardIntent);
-                finish();
-            }else if (!bi.rc0604.isChecked()) {
-                Intent forwardIntent = new Intent(this, SectionCx2Activity.class).putExtra("complete", true);
-                forwardIntent.setFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT);
-                setResult(RESULT_OK, forwardIntent);
-                startActivity(forwardIntent);
-                finish();
-            }else if(bi.rc0604.isChecked()){
+            if(bi.rc0401.isChecked()) {
+
+                if (followups.getPrePreg().equals("1") && bi.rc0901.isChecked()) {
+                    Intent forwardIntent = new Intent(this, SectionOutcomeActivity.class).putExtra("complete", true);
+                    forwardIntent.setFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT);
+                    setResult(RESULT_OK, forwardIntent);
+                    startActivity(forwardIntent);
+                    finish();
+                } else if (!bi.rc0604.isChecked()) {
+                    Intent forwardIntent = new Intent(this, SectionCx2Activity.class).putExtra("complete", true);
+                    forwardIntent.setFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT);
+                    setResult(RESULT_OK, forwardIntent);
+                    startActivity(forwardIntent);
+                    finish();
+                } else if (bi.rc0604.isChecked() || bi.rc0801.isChecked()) {
+                    setResult(RESULT_OK);
+                    finish();
+                }
+            }else{
                 setResult(RESULT_OK);
                 finish();
             }
-//             startActivity(new Intent(this, WRAEndingActivity.class).addFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT).putExtra("complete", true));
-
-         /*   if (MainApp.followups.getPrePreg().equals("1") && bi.rc0501.isChecked()) {
-                setResult(RESULT_OK);
-                startActivity(new Intent(this, SectionDActivity.class).addFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT).putExtra("complete", true));
-                finish();
-            } else {
-                setResult(RESULT_OK);
-                startActivity(new Intent(this, WRAEndingActivity.class).addFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT).putExtra("complete", true));
-                finish();
-            }*/
-            //  startActivity(new Intent(this, EndingActivity.class).putExtra("complete", true));
         } else {
             Toast.makeText(this, "Failed to Update Database!", Toast.LENGTH_SHORT).show();
         }

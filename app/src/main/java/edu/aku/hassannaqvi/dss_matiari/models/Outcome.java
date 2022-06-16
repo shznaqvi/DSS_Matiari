@@ -79,6 +79,8 @@ public class Outcome extends BaseObservable implements Observable {
 
     }
 
+
+
     @Bindable
     public String getRound() {
         return round;
@@ -459,7 +461,7 @@ public class Outcome extends BaseObservable implements Observable {
         MainApp.outcome.setUcCode(MainApp.fpHouseholds.getUcCode());
         MainApp.outcome.setVillageCode(MainApp.fpHouseholds.getVillageCode());
         MainApp.outcome.setHhNo(MainApp.fpHouseholds.getHhNo());
-        MainApp.outcome.setSno(String.valueOf(MainApp.outcomeCounter));
+        MainApp.outcome.setSno(String.valueOf(MainApp.childCount));
         // TODO: set MWRA ID from downloaded data
         //   MainApp.followups.setMWRAID(households.getHhNo());
         MainApp.outcome.setUserName(MainApp.user.getUserName());

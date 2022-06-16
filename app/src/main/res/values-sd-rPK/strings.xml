@@ -141,6 +141,7 @@
     <string name="rc03">مڙس/پيء جو نالو</string>
     <string name="rc03h">مڙس جو نالو</string>
     <string name="rc03f">پيءُ جو نالو</string>
+    <string name="rc03a">رابطي جو نمبر</string>
     <string name="rc04">دوري جو نتيجو   </string>
     <string name="rc0401">موجود</string>
     <string name="rc0402"> ٻاهر لڏي وئي </string>
@@ -151,6 +152,8 @@
     <string name="rc05"> موجوده حيثيت </string>
     <string name="rc0501">زنده</string>
     <string name="rc0502">مئل</string>
+    <string name="rc05a">وفات جي تاريخ</string>
+    <string name="rc05b">موت جو سبب</string>
     <string name="rc06">ازدواجي حيثيت</string>
     <string name="rc0601">شادي شده</string>
     <string name="rc0602">طلاق شده</string>
@@ -181,7 +184,7 @@
     <string name="rc12">جنس</string>
     <string name="rc1201">مرد</string>
     <string name="rc1202">عورت</string>
-    <string name="rc1203">حمل ضايع</string>
+    <string name="rc1203">مخنث</string>
     <string name="rc13">ٻار جي حالت</string>
     <string name="rc1301">زنده</string>
     <string name="rc1302">مئل</string>

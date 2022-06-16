@@ -284,6 +284,48 @@
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
 
+                <!-- rc03  Input   -->
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/fldGrpCVrb03a"
+                    style="@style/cardView">
+                    <!--android:visibility='@{followups.rc06.equals("4")? View.GONE : View.VISIBLE}'-->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/bottom"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:text="@string/rc03a"
+                                />
+
+                            <TextView
+                                style="@style/quesNum"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:text="@string/Q_rc03a" />
+
+                        </LinearLayout>
+
+                        <EditText
+                            android:id="@+id/rc03a"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:enabled="true"
+                            android:digits="0123456789"
+                            android:inputType="phone"
+                            android:maxLength="11"
+                            android:text="@={followups.rc03a}" />
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
 
                 <!-- rc04 Radio-->
                 <androidx.cardview.widget.CardView
@@ -376,7 +418,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:checked='@{followups.rc04.equals("7")}'
-                                android:onClick='@{()->followups.setRc04("7") + rc05.clearCheck() + rc07.clearCheck() + rc08.clearCheck() + rc09.clearCheck() + rc11.clearCheck()}'
+                                android:onClick='@{()->followups.setRc04("7") + rc05.clearCheck() + rc08.clearCheck() + rc09.clearCheck() + rc11.clearCheck()}'
                                 android:text="@string/rc0502" />
 
 
@@ -394,6 +436,167 @@
                     </LinearLayout>
 
                 </androidx.cardview.widget.CardView>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:visibility="@{followups.rc04.equals(`1`) || followups.rc04.equals(`7`) ? View.VISIBLE : View.GONE}">
+
+                <!-- rc05  Input   -->
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/fldGrpCVrc05"
+                    style="@style/cardView">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/bottom"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:text="@string/rc05" />
+
+                            <TextView
+                                style="@style/quesNum"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:text="@string/Q_rc05" />
+
+
+                        </LinearLayout>
+
+                        <RadioGroup
+                            android:id="@+id/rc05"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <RadioButton
+                                android:id="@+id/rc0501"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:enabled="false"
+                                android:checked='@{followups.rc05.equals("1")}'
+                                android:onClick='@{()->followups.setRc05("1")}'
+                                android:text="@string/rc0501" />
+
+                            <RadioButton
+                                android:id="@+id/rc0502"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:enabled="false"
+                                android:checked='@{followups.rc05.equals("2")}'
+                                android:onClick='@{()->followups.setRc05("2") + rc06.clearCheck() + rc08.clearCheck() + rc09.clearCheck() + rc11.clearCheck()}'
+                                android:text="@string/rc0502" />
+
+                        </RadioGroup>
+
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/fldGrpCVrc05a"
+                    style="@style/cardView"
+                    android:visibility="@{followups.rc05.equals(`1`) ? View.GONE : View.VISIBLE }">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/bottom"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:text="@string/rc05a" />
+
+                            <TextView
+                                style="@style/quesNum"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:text="@string/Q_rc05a" />
+
+                        </LinearLayout>
+
+                        <io.blackbox_vision.datetimepickeredittext.view.DatePickerEditText
+                            android:id="@+id/rc05a"
+                            style="@style/textInput"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="0dp"
+                            android:enabled="@{followups.rc05a.equals(``)}"
+                            android:gravity="center"
+                            android:hint="YYYY-MM-DD"
+                            android:text="@={followups.rc05a}"
+                            app:dateFormat="yyyy-MM-dd"
+                            app:maxDate="CR_DATE"
+                            app:theme="@style/DatePickerEditTextDialogTheme" />
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/fldGrpCVrc05b"
+                    style="@style/cardView"
+                    android:visibility="@{followups.rc05.equals(`1`) ? View.GONE : View.VISIBLE }">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/bottom"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:text="@string/rc05b" />
+
+                            <TextView
+                                style="@style/quesNum"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:text="@string/Q_rc05b" />
+
+
+                        </LinearLayout>
+
+                        <EditText
+                            android:id="@+id/rc05b"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:digits="abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+                            android:enabled="true"
+                            android:hint="@string/rc05b"
+                            android:inputType="text"
+                            android:text="@={followups.rc05b}" />
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+
+            </LinearLayout>
+
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -461,68 +664,6 @@
                                 android:onClick='@{()->followups.setRc07("2") + rc06.clearCheck() + rc08.clearCheck() + rc09.clearCheck() + rc11.clearCheck()}'
                                 android:text="@string/rc0702" />
                         </RadioGroup>
-                    </LinearLayout>
-                </androidx.cardview.widget.CardView>
-
-                <!-- rc05  Input   -->
-                <androidx.cardview.widget.CardView
-                    android:id="@+id/fldGrpCVrc05"
-                    style="@style/cardView">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical">
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:background="@drawable/bottom"
-                            android:orientation="horizontal">
-
-                            <TextView
-                                android:layout_width="0dp"
-                                android:layout_height="match_parent"
-                                android:layout_weight="1"
-                                android:text="@string/rc05" />
-
-                            <TextView
-                                style="@style/quesNum"
-                                android:layout_width="wrap_content"
-                                android:layout_height="match_parent"
-                                android:text="@string/Q_rc05" />
-
-
-                        </LinearLayout>
-
-                        <RadioGroup
-                            android:id="@+id/rc05"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="horizontal">
-
-                            <RadioButton
-                                android:id="@+id/rc0501"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:enabled="false"
-                                android:checked='@{followups.rc05.equals("1")}'
-                                android:onClick='@{()->followups.setRc05("1")}'
-                                android:text="@string/rc0501" />
-
-                            <RadioButton
-                                android:id="@+id/rc0502"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:enabled="false"
-                                android:checked='@{followups.rc05.equals("2")}'
-                                android:onClick='@{()->followups.setRc05("2") + rc06.clearCheck() + rc08.clearCheck() + rc09.clearCheck() + rc11.clearCheck()}'
-                                android:text="@string/rc0502" />
-
-                        </RadioGroup>
-
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
 

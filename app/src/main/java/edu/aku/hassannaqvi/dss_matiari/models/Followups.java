@@ -68,8 +68,11 @@ public class Followups extends BaseObservable implements Observable {
     private String rc01 = "";
     private String rc02 = "";
     private String rc03 = "";
+    private String rc03a = "";
     private String rc04 = "";
     private String rc05 = "";
+    private String rc05a = "";
+    private String rc05b = "";
     private String rc06 = "";
     private String rc07 = "";
 
@@ -323,6 +326,36 @@ public class Followups extends BaseObservable implements Observable {
     }
 
     @Bindable
+    public String getRc03a() {
+        return rc03a;
+    }
+
+    public void setRc03a(String rc03a) {
+        this.rc03a = rc03a;
+        notifyChange(BR.rc03a);
+    }
+
+    @Bindable
+    public String getRc05a() {
+        return rc05a;
+    }
+
+    public void setRc05a(String rc05a) {
+        this.rc05a = rc05a;
+        notifyChange(BR.rc05a);
+    }
+
+    @Bindable
+    public String getRc05b() {
+        return rc05b;
+    }
+
+    public void setRc05b(String rc05b) {
+        this.rc05b = rc05b;
+        notifyChange(BR.rc05b);
+    }
+
+    @Bindable
     public String getRb06() {
         return rb06;
     }
@@ -534,6 +567,8 @@ public class Followups extends BaseObservable implements Observable {
     public void setRc05(String rc05) {
         this.rc05 = rc05;
         // setRc06(rc05.equals("1") ? this.rc06 : "");
+        setRc05a(rc05.equals("1") ? "" : this.rc05a);
+        setRc05b(rc05.equals("1") ? "" : this.rc05b);
         setRc08(rc05.equals("1") ? this.rc08 : "");
         setRc09(rc05.equals("1") ? this.rc09 : "");
         setRc10(rc05.equals("1") ? this.rc10 : "");
@@ -937,9 +972,11 @@ public class Followups extends BaseObservable implements Observable {
             this.rb06 = json.getString("rb06");
             this.rc02 = json.getString("rc02");
             this.rc03 = json.getString("rc03");
+            this.rc03a = json.getString("rc03a");
             this.rc04 = json.getString("rc04");
             this.rc05 = json.getString("rc05");
-
+            this.rc05a = json.getString("rc05a");
+            this.rc05b = json.getString("rc05b");
             this.rc06 = json.getString("rc06");
             this.rc07 = json.getString("rc07");
             this.rc08 = json.getString("rc08");
@@ -986,9 +1023,11 @@ public class Followups extends BaseObservable implements Observable {
                 .put("rc01v3", rc01v3)
                 .put("rc02", rc02)
                 .put("rc03", rc03)
+                .put("rc03a", rc03a)
                 .put("rc04", rc04)
                 .put("rc05", rc05)
-
+                .put("rc05a", rc05a)
+                .put("rc05b", rc05b)
                 .put("rc06", rc06)
                 .put("rc07", rc07)
                 .put("rc08", rc08)

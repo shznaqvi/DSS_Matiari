@@ -132,7 +132,7 @@
                                 style="@style/quesNum"
                                 android:layout_width="wrap_content"
                                 android:layout_height="match_parent"
-                                android:text="@string/Q_rc12" />
+                                android:text="@string/Q_rc12nm" />
 
 
                         </LinearLayout>
@@ -182,13 +182,13 @@
                         </LinearLayout>
 
                         <RadioGroup
-                            android:id="@+id/rc1201"
+                            android:id="@+id/rc12"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:orientation="horizontal">
 
                             <RadioButton
-                                android:id="@+id/rc120101"
+                                android:id="@+id/rc1201"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
@@ -197,13 +197,23 @@
                                 android:text="@string/rc1201" />
 
                             <RadioButton
-                                android:id="@+id/rc120102"
+                                android:id="@+id/rc1202"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
                                 android:checked='@{outcome.rc12.equals("2")}'
                                 android:onClick='@{()->outcome.setRc12("2")}'
                                 android:text="@string/rc1202" />
+
+
+                            <RadioButton
+                                android:id="@+id/rc1203"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:checked='@{outcome.rc12.equals("3")}'
+                                android:onClick='@{()->outcome.setRc12("3")}'
+                                android:text="@string/rc1203" />
 
                         </RadioGroup>
 

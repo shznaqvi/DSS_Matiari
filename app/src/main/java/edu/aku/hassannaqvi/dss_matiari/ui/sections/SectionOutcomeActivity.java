@@ -48,7 +48,7 @@ public class SectionOutcomeActivity extends AppCompatActivity {
             e.printStackTrace();
             Toast.makeText(this, "JSONException(Outcome): " + e.getMessage(), Toast.LENGTH_SHORT).show();
         }
-        bi.setOutcome(outcome);
+
         outcome.setRc12ln(String.valueOf(MainApp.childCount));
         //bi.rc12ln.setText(MainApp.childCount);
         // Set Round Number from followups data
@@ -61,7 +61,7 @@ public class SectionOutcomeActivity extends AppCompatActivity {
             Toast.makeText(this, "JSONException(Followups): " + e.getMessage(), Toast.LENGTH_SHORT).show();
         }
 
-
+        bi.setOutcome(outcome);
         setImmersive(true);
 
         bi.btnContinue.setText(outcome.getUid().equals("") ? "Save" : "Update");
@@ -75,19 +75,15 @@ public class SectionOutcomeActivity extends AppCompatActivity {
 
         if(updateDB())
         {
-            outcome = new Outcome();
-            finish();
-
-        //if (outcome.getUid().equals("") ? insertNewRecord() : updateDB()) {
-
-                //MainApp.totalChildCount--;
-                //MainApp.childCount++;
                 if (MainApp.totalChildCount > MainApp.childCount) {
+
                     setResult(RESULT_OK);
                     finish();
                     startActivity(new Intent(this, SectionOutcomeActivity.class).addFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT).putExtra("complete", true));
 
                 } else {
+                    MainApp.childCount = 0;
+                    MainApp.totalChildCount = 0;
                     setResult(RESULT_OK);
                     finish();
                     startActivity(new Intent(this, SectionCx2Activity.class).addFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT).putExtra("complete", true));
@@ -101,11 +97,7 @@ public class SectionOutcomeActivity extends AppCompatActivity {
     }
 
     private boolean insertNewRecord() {
-        /*if (followups.getUid().equals("")) {
-            insertFpHousehold();
-        }
-*/
-        outcome.populateMeta();
+           outcome.populateMeta();
 
         long rowId = 0;
         try {

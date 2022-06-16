@@ -53,6 +53,7 @@
         <entry key="..\:/Android/DSS_Matiari/app/src/main/res/layout/sync_list_adapter.xml" value="0.5" />
         <entry key="..\:/Android/DSS_Matiari/app/src/main/res/menu/item_menu.xml" value="0.56328125" />
         <entry key="..\:/Users/hassan.naqvi/StudioProjects/DSS_Matiari/app/src/main/res/drawable-v24/ic_username.xml" value="0.15416666666666667" />
+        <entry key="..\:/Users/hassan.naqvi/StudioProjects/DSS_Matiari/app/src/main/res/layout/activity_ending.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/hassan.naqvi/StudioProjects/DSS_Matiari/app/src/main/res/layout/activity_fp.xml" value="0.35260416666666666" />
         <entry key="..\:/Users/hassan.naqvi/StudioProjects/DSS_Matiari/app/src/main/res/layout/activity_fphousehold.xml" value="0.35260416666666666" />
         <entry key="..\:/Users/hassan.naqvi/StudioProjects/DSS_Matiari/app/src/main/res/layout/activity_fpmwra.xml" value="0.36666666666666664" />
@@ -67,7 +68,7 @@
         <entry key="..\:/Users/hassan.naqvi/StudioProjects/DSS_Matiari/app/src/main/res/layout/activity_section_cx_2.xml" value="0.1" />
         <entry key="..\:/Users/hassan.naqvi/StudioProjects/DSS_Matiari/app/src/main/res/layout/activity_section_d.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/hassan.naqvi/StudioProjects/DSS_Matiari/app/src/main/res/layout/activity_section_e.xml" value="0.36666666666666664" />
-        <entry key="..\:/Users/hassan.naqvi/StudioProjects/DSS_Matiari/app/src/main/res/layout/activity_section_outcome.xml" value="0.1" />
+        <entry key="..\:/Users/hassan.naqvi/StudioProjects/DSS_Matiari/app/src/main/res/layout/activity_section_outcome.xml" value="0.25" />
         <entry key="..\:/Users/hassan.naqvi/StudioProjects/DSS_Matiari/app/src/main/res/layout/activity_wra_ending.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/hassan.naqvi/StudioProjects/DSS_Matiari/app/src/main/res/layout/recycler_view_item_1.xml" value="0.284375" />
       </map>

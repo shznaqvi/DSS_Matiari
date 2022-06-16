@@ -192,6 +192,7 @@ public class FPHouseholdActivity extends AppCompatActivity {
 
     public void btnContinue(View view) {
         finish();
+
         //  startActivity(new Intent(this, MainActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK));
 
     }
