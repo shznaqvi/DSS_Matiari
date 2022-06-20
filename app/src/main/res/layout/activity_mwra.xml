@@ -137,9 +137,9 @@
                     android:id="@+id/fab"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="end|bottom"
                     android:layout_alignEnd="@id/fmHeading"
                     android:layout_centerInParent="true"
+                    android:layout_gravity="end|bottom"
                     android:backgroundTint="@android:color/transparent"
                     android:src="@drawable/ic_person_add" />
             </RelativeLayout>

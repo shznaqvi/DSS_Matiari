@@ -1523,11 +1523,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public int getMaxMWRSNoBYHH(String ucCode, String vCode, String hhNo) {
         // Household number in DSSID was changed to 4-digits to capture more than 999 households
         String newhhNo = hhNo;
-        if (hhNo.length() == 3) {
+
+        if (hhNo.length() < 4) {
             newhhNo = String.format("%04d", Integer.parseInt(hhNo));
-        } else {
-            newhhNo = String.format("%03d", Integer.parseInt(hhNo));
-        }
+        } /*else {
+            newhhNo = String.format("%04d", Integer.parseInt(hhNo));
+        }*/
 
         SQLiteDatabase db = this.getReadableDatabase(DATABASE_PASSWORD);
         Cursor c = db.rawQuery(
@@ -1541,7 +1542,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                         " GROUP BY " + MWRATable.COLUMN_HOUSEHOLD_NO
                 ,
                 new String[]{ucCode, vCode, hhNo, newhhNo});
+
         float maxHHno = 0;
+
         while (c.moveToNext()) {
             maxHHno = c.getFloat(c.getColumnIndexOrThrow(MWRATable.COLUMN_SNO));
         }
