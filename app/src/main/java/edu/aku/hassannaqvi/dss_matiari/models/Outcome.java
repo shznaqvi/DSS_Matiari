@@ -57,6 +57,7 @@ public class Outcome extends BaseObservable implements Observable {
     private String round = StringUtils.EMPTY;
     private String rc12ln = StringUtils.EMPTY;
     private String rc12nm = StringUtils.EMPTY;
+    private String rc12dob = StringUtils.EMPTY;
     private String rc12 = StringUtils.EMPTY;
     private String rc13 = StringUtils.EMPTY;
     private String rc14 = StringUtils.EMPTY;
@@ -255,6 +256,15 @@ public class Outcome extends BaseObservable implements Observable {
         this.exist = exist;
     }
 
+    @Bindable
+    public String getRc12dob() {
+        return rc12dob;
+    }
+
+    public void setRc12dob(String rc12dob) {
+        this.rc12dob = rc12dob;
+        notifyChange(BR.rc12dob);
+    }
 
     @Bindable
     public String getRc12ln() {
@@ -386,6 +396,7 @@ public class Outcome extends BaseObservable implements Observable {
             this.round = json.getString("ROUND");
             this.rc12ln = json.getString("rc12ln");
             this.rc12nm = json.getString("rc12nm");
+            this.rc12nm = json.getString("rc12dob");
             this.rc12 = json.getString("rc12");
             this.rc13 = json.getString("rc13");
             this.rc14 = json.getString("rc14");
@@ -405,6 +416,7 @@ public class Outcome extends BaseObservable implements Observable {
                 .put("ROUND", round)
                 .put("rc12ln", rc12ln)
                 .put("rc12nm", rc12nm)
+                .put("rc12dob", rc12dob)
                 .put("rc12", rc12)
                 .put("rc13", rc13)
                 .put("rc14", rc14)

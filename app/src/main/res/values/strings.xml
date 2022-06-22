@@ -138,7 +138,7 @@
     <string name="rc03">Husband/Father Name</string>
     <string name="rc03h">Husband / Father Name </string>
     <string name="rc03f">Father Name</string>
-    <string name="rc03a">contact  Number </string>
+    <string name="rc03a">Contact  Number </string>
     <string name="rc04">Visit Status</string>
     <!--    <string name="rc0401">Complete</string>-->
     <string name="rc0401">Available</string>
@@ -189,6 +189,7 @@
     <string name="rc12">Gender</string>
     <string name="rc12ln">Line Number</string>
     <string name="rc12nm">Name</string>
+    <string name="rc12dob">Date of Birth</string>
     <string name="rc1201">Male</string>
     <string name="rc1202">Female</string>
     <string name="rc1203">Transgender</string>
@@ -270,6 +271,7 @@
     <string name='Q_rc12' translatable="false">rc12</string>
     <string name='Q_rc12ln' translatable="false">rc12ln</string>
     <string name='Q_rc12nm' translatable="false">rc12nm</string>
+    <string name='Q_rc12dob' translatable="false">DOB</string>
     <string name='Q_rc13' translatable="false">rc13</string>
     <string name='Q_rc14' translatable="false">rc14</string>
     <string name='Q_rc15' translatable="false">rc15</string>
@@ -298,6 +300,7 @@
     <string name="whz" translatable="false">WHZ</string>
     <string name="a17_1">Male</string>
     <string name="a17_2">Female</string>
+    <string name="a17_3">Transgender</string>
     <string name="title_wra_dialog_remain" translatable="false">Proceed?</string>
     <string name="title_wra_dialog_complete" translatable="false">Add More?</string>
     <string name="message_wra_dialog_addmore" translatable="false">You have already entered %1$s women between 18 – 49. \n\nWould you like to add more women?</string>

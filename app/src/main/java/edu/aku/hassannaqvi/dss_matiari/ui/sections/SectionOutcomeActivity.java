@@ -49,6 +49,8 @@ public class SectionOutcomeActivity extends AppCompatActivity {
             Toast.makeText(this, "JSONException(Outcome): " + e.getMessage(), Toast.LENGTH_SHORT).show();
         }
 
+        outcome.setRc12dob(followups.getRc10());
+
         outcome.setRc12ln(String.valueOf(MainApp.childCount));
         //bi.rc12ln.setText(MainApp.childCount);
         // Set Round Number from followups data

@@ -386,6 +386,9 @@ public class SectionCxActivity extends AppCompatActivity {
     private boolean formValidation() {
         setDateRanges();
         return Validator.emptyCheckingContainer(this, bi.GrpName);
+
+
+
        /*
        if (!compareTwoDate(bi.rb08, 2,
                 "LMP should be within 2 months back from DOV")) return false;

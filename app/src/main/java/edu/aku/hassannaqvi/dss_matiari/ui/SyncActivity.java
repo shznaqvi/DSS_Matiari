@@ -204,6 +204,20 @@ public class SyncActivity extends AppCompatActivity {
                     bi.errMessage.setVisibility(View.VISIBLE);
                 }
 
+
+                try {
+                    // Outcome
+                    MainApp.uploadData.add(db.getUnsyncedOutcomes());
+                    uploadTables.add(new SyncModel(TableContracts.OutcomeTable.TABLE_NAME));
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    Toast.makeText(this, "JSONException(Outcome): " + e.getMessage(), Toast.LENGTH_LONG).show();
+                    Log.d(TAG, "JSONException(Outcome): " + e.getMessage());
+                    bi.errMessage.setText(bi.errMessage.getText() + "\nERROR - JSONException(FPHousehold): " + e.getMessage());
+                    bi.errMessage.setVisibility(View.VISIBLE);
+                }
+
                 MainApp.downloadData = new String[uploadData.size()];
                 setAdapter(uploadTables);
                 BeginUpload();

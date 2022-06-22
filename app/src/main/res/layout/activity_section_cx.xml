@@ -315,7 +315,7 @@
 
                         </LinearLayout>
 
-                        <EditText
+                        <com.edittextpicker.aliazaz.EditTextPicker
                             android:id="@+id/rc03a"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -324,6 +324,18 @@
                             android:inputType="phone"
                             android:maxLength="11"
                             android:text="@={followups.rc03a}" />
+
+                        <com.edittextpicker.aliazaz.EditTextPicker
+                            android:id="@+id/rc03b"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:enabled="true"
+                            android:digits="0123456789"
+                            android:inputType="phone"
+                            android:maxLength="11"
+                            android:tag="-1"
+                            android:text="@={followups.rc03b}" />
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
 

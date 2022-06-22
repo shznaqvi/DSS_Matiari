@@ -798,6 +798,17 @@
                                 android:textStyle="bold" />
 
 
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:gravity="center"
+                                android:inputType="number"
+                                android:text="@string/a17_3"
+                                android:textColor="@color/white"
+                                android:textStyle="bold" />
+
+
                         </LinearLayout>
 
                         <LinearLayout
@@ -842,6 +853,20 @@
                                 app:minValue="0"
                                 app:type="range" />
 
+                            <com.edittextpicker.aliazaz.EditTextPicker
+                                android:id="@+id/ra17_a3"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:gravity="center"
+                                android:hint="@string/a17_3"
+                                android:inputType="number"
+                                android:maxLength="2"
+                                android:text="@={household.ra17_a3}"
+                                app:maxValue="20"
+                                app:minValue="0"
+                                app:type="range" />
+
 
                         </LinearLayout>
 
@@ -882,6 +907,20 @@
                                 android:inputType="number"
                                 android:maxLength="2"
                                 android:text="@={household.ra17_b2}"
+                                app:maxValue="20"
+                                app:minValue="0"
+                                app:type="range" />
+
+                            <com.edittextpicker.aliazaz.EditTextPicker
+                                android:id="@+id/ra17_b3"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:gravity="center"
+                                android:hint="@string/a17_3"
+                                android:inputType="number"
+                                android:maxLength="2"
+                                android:text="@={household.ra17_b3}"
                                 app:maxValue="20"
                                 app:minValue="0"
                                 app:type="range" />
@@ -931,6 +970,21 @@
                                 app:type="range" />
 
 
+                            <com.edittextpicker.aliazaz.EditTextPicker
+                                android:id="@+id/ra17_c3"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:gravity="center"
+                                android:hint="@string/a17_3"
+                                android:inputType="number"
+                                android:maxLength="2"
+                                android:text="@={household.ra17_c3}"
+                                app:maxValue="20"
+                                app:minValue="0"
+                                app:type="range" />
+
+
                         </LinearLayout>
 
                         <LinearLayout
@@ -970,6 +1024,20 @@
                                 android:inputType="number"
                                 android:maxLength="2"
                                 android:text="@={household.ra17_d2}"
+                                app:maxValue="20"
+                                app:minValue="0"
+                                app:type="range" />
+
+                            <com.edittextpicker.aliazaz.EditTextPicker
+                                android:id="@+id/ra17_d3"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:gravity="center"
+                                android:hint="@string/a17_3"
+                                android:inputType="number"
+                                android:maxLength="2"
+                                android:text="@={household.ra17_d3}"
                                 app:maxValue="20"
                                 app:minValue="0"
                                 app:type="range" />

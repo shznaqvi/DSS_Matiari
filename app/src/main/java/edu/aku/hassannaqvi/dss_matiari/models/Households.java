@@ -52,6 +52,11 @@ public class Households extends BaseObservable implements Observable {
     private String ra17_b2 = "";
     private String ra17_c2 = "";
     private String ra17_d2 = "";
+
+    private String ra17_a3 = "";
+    private String ra17_b3 = "";
+    private String ra17_c3 = "";
+    private String ra17_d3 = "";
     private String ra18 = "";
     private String ra19 = "";
     private String ra20 = "";
@@ -661,6 +666,46 @@ public class Households extends BaseObservable implements Observable {
     }
 
     @Bindable
+    public String getRa17_a3() {
+        return ra17_a3;
+    }
+
+    public void setRa17_a3(String ra17_a3) {
+        this.ra17_a3 = ra17_a3;
+        notifyPropertyChanged(BR.ra17_a3);
+    }
+
+    @Bindable
+    public String getRa17_b3() {
+        return ra17_b3;
+    }
+
+    public void setRa17_b3(String ra17_b3) {
+        this.ra17_b3 = ra17_b3;
+        notifyPropertyChanged(BR.ra17_b3);
+    }
+
+    @Bindable
+    public String getRa17_c3() {
+        return ra17_c3;
+    }
+
+    public void setRa17_c3(String ra17_c3) {
+        this.ra17_c3 = ra17_c3;
+        notifyPropertyChanged(BR.ra17_c3);
+    }
+
+    @Bindable
+    public String getRa17_d3() {
+        return ra17_d3;
+    }
+
+    public void setRa17_d3(String ra17_d3) {
+        this.ra17_d3 = ra17_d3;
+        notifyPropertyChanged(BR.ra17_d3);
+    }
+
+    @Bindable
     public String getRa18() {
         return ra18;
     }
@@ -824,6 +869,11 @@ public class Households extends BaseObservable implements Observable {
             this.ra17_b2 = json.getString("ra17_b2");
             this.ra17_c2 = json.getString("ra17_c2");
             this.ra17_d2 = json.getString("ra17_d2");
+            this.ra17_a3 = json.getString("ra17_a3");
+            this.ra17_b3 = json.getString("ra17_b3");
+            this.ra17_c3 = json.getString("ra17_c3");
+            this.ra17_d3 = json.getString("ra17_d3");
+
             this.ra18 = json.getString("ra18");
             this.ra19 = json.getString("ra19");
             this.ra20 = json.getString("ra20");
@@ -868,6 +918,10 @@ public class Households extends BaseObservable implements Observable {
                 .put("ra17_b2", ra17_b2)
                 .put("ra17_c2", ra17_c2)
                 .put("ra17_d2", ra17_d2)
+                .put("ra17_a3", ra17_a3)
+                .put("ra17_b3", ra17_b3)
+                .put("ra17_c3", ra17_c3)
+                .put("ra17_d3", ra17_d3)
                 .put("ra18", ra18)
                 .put("ra19", ra19)
                 .put("ra20", ra20)

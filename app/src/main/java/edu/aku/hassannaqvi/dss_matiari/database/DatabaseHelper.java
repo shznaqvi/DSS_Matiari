@@ -962,6 +962,48 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
 
+    public JSONArray getUnsyncedOutcomes() throws JSONException {
+        SQLiteDatabase db = this.getReadableDatabase(DATABASE_PASSWORD);
+        Cursor c = null;
+        String[] columns = null;
+        String whereClause;
+        whereClause = OutcomeTable.COLUMN_SYNCED + " is null ";
+
+        String[] whereArgs = null;
+
+        String groupBy = null;
+        String having = null;
+
+        String orderBy = OutcomeTable.COLUMN_ID + " ASC";
+
+        JSONArray allOutcome = new JSONArray();
+        c = db.query(
+                OutcomeTable.TABLE_NAME,  // The table to query
+                columns,                   // The columns to return
+                whereClause,               // The columns for the WHERE clause
+                whereArgs,                 // The values for the WHERE clause
+                groupBy,                   // don't group the rows
+                having,                    // don't filter by row groups
+                orderBy                    // The sort order
+        );
+        while (c.moveToNext()) {
+            Log.d(TAG, "getUnsyncedOutcome: " + c.getCount());
+            Outcome outcome = new Outcome();
+            allOutcome.put(outcome.Hydrate(c).toJSONObject());
+        }
+
+        c.close();
+
+        db.close();
+
+        Log.d(TAG, "getUnsyncedOutcome: " + allOutcome.toString().length());
+        Log.d(TAG, "getUnsyncedOutcome: " + allOutcome);
+        return allOutcome;
+    }
+
+
+
+
     public JSONArray getUnsyncedMWRA() throws JSONException {
         SQLiteDatabase db = this.getReadableDatabase(DATABASE_PASSWORD);
         Cursor c = null;
@@ -1103,6 +1145,20 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         String[] whereArgs = {id};
         int count = db.update(
                 FollowupsTable.TABLE_NAME,
+                values,
+                where,
+                whereArgs);
+    }
+
+    public void updateSyncedoutcome(String id) {
+        SQLiteDatabase db = this.getReadableDatabase(DATABASE_PASSWORD);
+        ContentValues values = new ContentValues();
+        values.put(OutcomeTable.COLUMN_SYNCED, true);
+        values.put(OutcomeTable.COLUMN_SYNCED_DATE, new Date().toString());
+        String where = OutcomeTable.COLUMN_ID + " = ?";
+        String[] whereArgs = {id};
+        int count = db.update(
+                OutcomeTable.TABLE_NAME,
                 values,
                 where,
                 whereArgs);
