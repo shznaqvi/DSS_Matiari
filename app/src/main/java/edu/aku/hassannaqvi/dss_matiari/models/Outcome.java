@@ -396,7 +396,7 @@ public class Outcome extends BaseObservable implements Observable {
             this.round = json.getString("ROUND");
             this.rc12ln = json.getString("rc12ln");
             this.rc12nm = json.getString("rc12nm");
-            this.rc12nm = json.getString("rc12dob");
+            this.rc12dob = json.getString("rc12dob");
             this.rc12 = json.getString("rc12");
             this.rc13 = json.getString("rc13");
             this.rc14 = json.getString("rc14");
