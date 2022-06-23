@@ -12,10 +12,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
-import java.util.Date;
-import java.util.Locale;
 
 import edu.aku.hassannaqvi.dss_matiari.BR;
 import edu.aku.hassannaqvi.dss_matiari.contracts.TableContracts;
@@ -68,11 +65,15 @@ public class Outcome extends BaseObservable implements Observable {
     public Outcome() {
 
         setRound(MainApp.ROUND);
-        setSysDate(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.ENGLISH).format(new Date().getTime()));
+
+        // TODO: *** THIS IS A BLUNDER *** -- DATE IN ALL LINKED TABLES COMES FROM PARENT TABLE (followups in this case)
+        //setSysDate(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.ENGLISH).format(new Date().getTime()));
+        setSysDate(MainApp.followups.getSysDate());
         setUserName(MainApp.user.getUserName());
         setDeviceId(MainApp.deviceid);
         setAppver(MainApp.appInfo.getAppVersion());
         if (MainApp.households != null) {
+            //TODO: Why is this household uid, this should be followup uid
             setUuid(MainApp.households.getUid());
         }
         setVillageCode(MainApp.selectedVillage);
@@ -396,7 +397,7 @@ public class Outcome extends BaseObservable implements Observable {
             this.round = json.getString("ROUND");
             this.rc12ln = json.getString("rc12ln");
             this.rc12nm = json.getString("rc12nm");
-            this.rc12dob = json.getString("rc12dob");
+            this.rc12dob = json.has("rc12dob") ? json.getString("rc12dob") : "";
             this.rc12 = json.getString("rc12");
             this.rc13 = json.getString("rc13");
             this.rc14 = json.getString("rc14");
