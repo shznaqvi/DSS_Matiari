@@ -181,6 +181,20 @@
 
                         </LinearLayout>
 
+                        <!--<io.blackbox_vision.datetimepickeredittext.view.DatePickerEditText
+                            android:id="@+id/rc12dob"
+                            style="@style/textInput"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_marginBottom="0dp"
+                            android:layout_weight="1"
+                            android:enabled="false"
+                            android:gravity="center"
+                            android:hint="YYYY-MM-DD"
+                            android:text="@={outcome.rc12dob}"
+                            app:dateFormat="yyyy-MM-dd"
+                            />-->
+
                         <EditText
                             android:id="@+id/rc12dob"
                             android:layout_width="match_parent"

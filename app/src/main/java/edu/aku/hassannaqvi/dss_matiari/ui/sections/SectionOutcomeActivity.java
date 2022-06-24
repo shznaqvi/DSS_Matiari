@@ -18,6 +18,12 @@ import com.validatorcrawler.aliazaz.Validator;
 
 import org.json.JSONException;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
+
 import edu.aku.hassannaqvi.dss_matiari.R;
 import edu.aku.hassannaqvi.dss_matiari.contracts.TableContracts;
 import edu.aku.hassannaqvi.dss_matiari.core.MainApp;
@@ -67,6 +73,11 @@ public class SectionOutcomeActivity extends AppCompatActivity {
         setImmersive(true);
 
         bi.btnContinue.setText(outcome.getUid().equals("") ? "Save" : "Update");
+
+
+        String date = toBlackVisionDate(followups.getRc10());
+
+        bi.rc14.setMinDate(date);
 
 
     }
@@ -168,13 +179,22 @@ public class SectionOutcomeActivity extends AppCompatActivity {
     private boolean formValidation() {
         //setDateRanges();
         return Validator.emptyCheckingContainer(this, bi.GrpName);
-       /*
-       if (!compareTwoDate(bi.rb08, 2,
-                "LMP should be within 2 months back from DOV")) return false;
-        return compareTwoDate(bi.rb09, 9,
-                "EDD should be within 9 months back from DOV");
-                */
     }
+
+
+        String originalFormat = "yyyy-MM-dd";
+        String blackBoxFormat = "dd/MM/yyyy";
+
+        String originalDate = "2020-06-23";
+        String newDate = toBlackVisionDate(originalDate);
+
+    public static String toBlackVisionDate(String currentDate) {
+        String newDate = currentDate;
+        String[] oldDateParts = currentDate.split("-");
+        newDate = oldDateParts[2] + "/" + oldDateParts[1] + "/" + oldDateParts[0];
+        return newDate;
+    }
+
 
 
 }
