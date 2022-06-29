@@ -52,6 +52,9 @@ public class Outcome extends BaseObservable implements Observable {
     private String syncDate = StringUtils.EMPTY;
 
     private String round = StringUtils.EMPTY;
+    private String rb02 = StringUtils.EMPTY;
+    private String rb01a = StringUtils.EMPTY;
+
     private String rc12ln = StringUtils.EMPTY;
     private String rc12nm = StringUtils.EMPTY;
     private String rc12dob = StringUtils.EMPTY;
@@ -72,13 +75,38 @@ public class Outcome extends BaseObservable implements Observable {
         setUserName(MainApp.user.getUserName());
         setDeviceId(MainApp.deviceid);
         setAppver(MainApp.appInfo.getAppVersion());
-        if (MainApp.households != null) {
+        if (MainApp.households != null && MainApp.mwra != null) {
             //TODO: Why is this household uid, this should be followup uid
             setUuid(MainApp.households.getUid());
+            setRb02(MainApp.mwra.getRb02());
+            setRb01a(MainApp.mwra.getRb01a());
+
         }
         setVillageCode(MainApp.selectedVillage);
         setUcCode(MainApp.selectedUC);
 
+    }
+
+
+
+    @Bindable
+    public String getRb02() {
+        return rb02;
+    }
+
+    public void setRb02(String rb02) {
+        this.rb02 = rb02;
+        notifyPropertyChanged(BR.rb02);
+    }
+
+    @Bindable
+    public String getRb01a() {
+        return rb01a;
+    }
+
+    public void setRb01a(String rb01a) {
+        this.rb01a = rb01a;
+        notifyPropertyChanged(BR.rb01a);
     }
 
 
@@ -395,6 +423,8 @@ public class Outcome extends BaseObservable implements Observable {
             JSONObject json = null;
             json = new JSONObject(string);
             this.round = json.getString("ROUND");
+            this.rb02 = json.getString("rb02");
+            this.rb01a = json.getString("rb01a");
             this.rc12ln = json.getString("rc12ln");
             this.rc12nm = json.getString("rc12nm");
             this.rc12dob = json.has("rc12dob") ? json.getString("rc12dob") : "";
@@ -415,6 +445,8 @@ public class Outcome extends BaseObservable implements Observable {
 
         json
                 .put("ROUND", round)
+                .put("rb02", rb02)
+                .put("rb01a", rb01a)
                 .put("rc12ln", rc12ln)
                 .put("rc12nm", rc12nm)
                 .put("rc12dob", rc12dob)

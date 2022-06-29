@@ -60,6 +60,8 @@ public class FpMwraAdapter extends RecyclerView.Adapter<FpMwraAdapter.ViewHolder
         ImageView indicator = viewHolder.indicator;
         TextView secStatus = viewHolder.secStatus;
 
+        TextView secDob = viewHolder.secDob;
+        TextView secGender = viewHolder.secGender;
         String pregStatus = followUpsSche.getRb07().equals("1") ? "PW" : "  ";
         try {
             String curPregStatus = db.getFollowupsBySno(followUpsSche.getRb01(), followUpsSche.getfRound()).getRc07();
@@ -116,6 +118,9 @@ public class FpMwraAdapter extends RecyclerView.Adapter<FpMwraAdapter.ViewHolder
         fMaritalStatus.setText(wifeOrDaughter + followUpsSche.getRb03());
         secStatus.setText(pregStatus);
 
+        secDob.setText(followUpsSche.getRb04());
+        secGender.setText(followUpsSche.getRc12());
+
 
         viewHolder.itemView.setOnClickListener(v -> {
             // Get the current state of the item
@@ -160,6 +165,8 @@ public class FpMwraAdapter extends RecyclerView.Adapter<FpMwraAdapter.ViewHolder
         private final TextView fAge;
         private final TextView fMatitalStatus;
         private final TextView secStatus;
+        private final TextView secDob;
+        private final TextView secGender;
         private final ImageView fmRow;
         private final ImageView indicator;
 
@@ -170,6 +177,8 @@ public class FpMwraAdapter extends RecyclerView.Adapter<FpMwraAdapter.ViewHolder
             fAge = v.findViewById(R.id.hh05);
             fMatitalStatus = v.findViewById(R.id.hh06);
             secStatus = v.findViewById(R.id.secStatus);
+            secDob = v.findViewById(R.id.secDob);
+            secGender = v.findViewById(R.id.secGender);
             fmRow = v.findViewById(R.id.fmRow);
             indicator = v.findViewById(R.id.indicator);
 

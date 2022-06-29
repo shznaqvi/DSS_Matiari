@@ -178,6 +178,8 @@ object CreateTable {
             + TableFollowUpsSche.COLUMN_RB01 + " TEXT,"
             + TableFollowUpsSche.COLUMN_RB02 + " TEXT,"
             + TableFollowUpsSche.COLUMN_RB03 + " TEXT,"
+            + TableFollowUpsSche.COLUMN_RB04 + " TEXT,"
+            + TableFollowUpsSche.COLUMN_RC12 + " TEXT,"
             + TableFollowUpsSche.COLUMN_RB05 + " TEXT,"
             + TableFollowUpsSche.COLUMN_RB06 + " TEXT,"
             + TableFollowUpsSche.COLUMN_RB07 + " TEXT" + " );")

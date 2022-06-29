@@ -769,6 +769,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             values.put(TableFollowUpsSche.COLUMN_RB01, followUpsSche.getRb01());
             values.put(TableFollowUpsSche.COLUMN_RB02, followUpsSche.getRb02());
             values.put(TableFollowUpsSche.COLUMN_RB03, followUpsSche.getRb03());
+            values.put(TableFollowUpsSche.COLUMN_RB04, followUpsSche.getRb04());
+            values.put(TableFollowUpsSche.COLUMN_RC12, followUpsSche.getRc12());
             values.put(TableFollowUpsSche.COLUMN_RB05, followUpsSche.getRb05());
             values.put(TableFollowUpsSche.COLUMN_RB07, followUpsSche.getRb07());
             values.put(TableFollowUpsSche.COLUMN_RB06, followUpsSche.getRb06());
@@ -1631,11 +1633,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public int getMaxMWRANoBYHHFromFolloupsSche(String uc, String vCode, String hhNo) {
         // Household number in DSSID was changed to 4-digits to capture more than 999 households
         String newhhNo = hhNo;
-        if (hhNo.length() == 3) {
+        if (hhNo.length() < 4) {
             newhhNo = String.format("%04d", Integer.parseInt(hhNo));
-        } else {
+        }/* else {
             newhhNo = String.format("%03d", Integer.parseInt(hhNo));
-        }
+        }*/
         SQLiteDatabase db = this.getReadableDatabase(DATABASE_PASSWORD);
         Cursor c = db.rawQuery(
                 "SELECT " +
@@ -1750,6 +1752,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 TableFollowUpsSche.COLUMN_RB01,
                 TableFollowUpsSche.COLUMN_RB02,
                 TableFollowUpsSche.COLUMN_RB03,
+                TableFollowUpsSche.COLUMN_RB04,
+                TableFollowUpsSche.COLUMN_RC12,
                 TableFollowUpsSche.COLUMN_RB05,
                 TableFollowUpsSche.COLUMN_RB06,
                 "sum(case when " + TableFollowUpsSche.COLUMN_RB07 + "='1' then 1 else 0 end) AS " + TableFollowUpsSche.COLUMN_RB07
