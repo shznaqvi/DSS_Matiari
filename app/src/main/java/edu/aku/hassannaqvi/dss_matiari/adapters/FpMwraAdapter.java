@@ -118,12 +118,12 @@ public class FpMwraAdapter extends RecyclerView.Adapter<FpMwraAdapter.ViewHolder
 
 
         fMaritalStatus.setText(wifeOrDaughter + followUpsSche.getRb03());
-        if(MainApp.fpMwra.getMemberType().equals("1")) {
-            mStatus.setVisibility(View.VISIBLE);
+        //if(MainApp.fpMwra.getMemberType().equals("1")) {
+            //mStatus.setVisibility(View.VISIBLE);
             secStatus.setText(pregStatus);
-        }else{
-            mStatus.setVisibility(View.VISIBLE);
-        }
+        //}else{
+            //mStatus.setVisibility(View.VISIBLE);
+        //}
 
         secDob.setText(followUpsSche.getRb04());
         secGender.setText(followUpsSche.getRc12());
