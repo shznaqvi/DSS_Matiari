@@ -12,9 +12,7 @@
         style="@style/cardView"
         android:layout_margin="2dp"
         android:background="?android:attr/selectableItemBackground"
-        android:paddingBottom="0dp"
-
-        >
+        android:paddingBottom="0dp">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -80,7 +78,8 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal">
+                        android:orientation="horizontal"
+                        android:id="@+id/mstatus">
 
                         <TextView
                             android:id="@+id/hh06"
@@ -119,7 +118,8 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:includeFontPadding="false"
-                            android:text="Date of Birth of Child " />
+                            android:text="Date of Birth"
+                            />
 
                         <TextView
                             android:id="@+id/secDob"

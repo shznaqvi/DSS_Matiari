@@ -32,6 +32,7 @@ public class FollowUpsSche implements Observable {
     private String rb05;  // Husband / Father
     private String rb07;  // Pregnancy Status
     private String rb06; // Marital Status
+    private String memberType; // Member Type (Mother or child)
     private String istatus; // Marital Status
     private String fpDoneDt = "";  // Pregnancy Status
 
@@ -206,6 +207,14 @@ public class FollowUpsSche implements Observable {
         this.rc12 = rc12;
     }
 
+    public String getMemberType() {
+        return memberType;
+    }
+
+    public void setMemberType(String memberType) {
+        this.memberType = memberType;
+    }
+
     public FollowUpsSche Sync(JSONObject jsonObject) throws JSONException {
         this.ucCode = jsonObject.getString(TableFollowUpsSche.COLUMN_UC_CODE);
         this.villageCode = jsonObject.getString(TableFollowUpsSche.COLUMN_VILLAGE_CODE);
@@ -225,6 +234,7 @@ public class FollowUpsSche implements Observable {
         this.rb05 = jsonObject.getString(TableFollowUpsSche.COLUMN_RB05);
         this.rb07 = jsonObject.getString(TableFollowUpsSche.COLUMN_RB07);
         this.rb06 = jsonObject.getString(TableFollowUpsSche.COLUMN_RB06);
+        this.memberType = jsonObject.getString(TableFollowUpsSche.COLUMN_MEMBERTYPE);
 
         return this;
     }
@@ -249,6 +259,7 @@ public class FollowUpsSche implements Observable {
         this.rb05 = cursor.getString(cursor.getColumnIndexOrThrow(TableFollowUpsSche.COLUMN_RB05));
         this.rb07 = cursor.getString(cursor.getColumnIndexOrThrow(TableFollowUpsSche.COLUMN_RB07));
         this.rb06 = cursor.getString(cursor.getColumnIndexOrThrow(TableFollowUpsSche.COLUMN_RB06));
+        this.memberType = cursor.getString(cursor.getColumnIndexOrThrow(TableFollowUpsSche.COLUMN_MEMBERTYPE));
 
 
         return this;

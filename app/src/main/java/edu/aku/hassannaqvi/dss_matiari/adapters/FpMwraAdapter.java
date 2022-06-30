@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -59,6 +60,7 @@ public class FpMwraAdapter extends RecyclerView.Adapter<FpMwraAdapter.ViewHolder
         TextView fMaritalStatus = viewHolder.fMatitalStatus;
         ImageView indicator = viewHolder.indicator;
         TextView secStatus = viewHolder.secStatus;
+        LinearLayout mStatus = viewHolder.mstatus;
 
         TextView secDob = viewHolder.secDob;
         TextView secGender = viewHolder.secGender;
@@ -116,7 +118,12 @@ public class FpMwraAdapter extends RecyclerView.Adapter<FpMwraAdapter.ViewHolder
 
 
         fMaritalStatus.setText(wifeOrDaughter + followUpsSche.getRb03());
-        secStatus.setText(pregStatus);
+        if(MainApp.fpMwra.getMemberType().equals("1")) {
+            mStatus.setVisibility(View.VISIBLE);
+            secStatus.setText(pregStatus);
+        }else{
+            mStatus.setVisibility(View.VISIBLE);
+        }
 
         secDob.setText(followUpsSche.getRb04());
         secGender.setText(followUpsSche.getRc12());
@@ -169,6 +176,7 @@ public class FpMwraAdapter extends RecyclerView.Adapter<FpMwraAdapter.ViewHolder
         private final TextView secGender;
         private final ImageView fmRow;
         private final ImageView indicator;
+        private final LinearLayout mstatus;
 
 
         public ViewHolder(View v) {
@@ -181,6 +189,7 @@ public class FpMwraAdapter extends RecyclerView.Adapter<FpMwraAdapter.ViewHolder
             secGender = v.findViewById(R.id.secGender);
             fmRow = v.findViewById(R.id.fmRow);
             indicator = v.findViewById(R.id.indicator);
+            mstatus = v.findViewById(R.id.mstatus);
 
         }
 

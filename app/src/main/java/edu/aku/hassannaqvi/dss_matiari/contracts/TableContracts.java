@@ -244,10 +244,11 @@ public class TableContracts {
         public static final String COLUMN_RB02 = "rb02"; // MWRA Name
         public static final String COLUMN_RB03 = "rb03"; // Age
         public static final String COLUMN_RB04 = "rb04"; // DOB
-        public static final String COLUMN_RC12 = "rc12"; // Age
+        public static final String COLUMN_RC12 = "rc12"; // Gender
         public static final String COLUMN_RB05 = "rb05"; // Husband or Father
         public static final String COLUMN_RB07 = "rb07";  // Pregnancy Status
         public static final String COLUMN_RB06 = "rb06";  // Marital Status
+        public static final String COLUMN_MEMBERTYPE = "memberType";  // Marital Status
     }
 
 

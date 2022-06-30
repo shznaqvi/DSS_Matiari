@@ -182,6 +182,7 @@ object CreateTable {
             + TableFollowUpsSche.COLUMN_RC12 + " TEXT,"
             + TableFollowUpsSche.COLUMN_RB05 + " TEXT,"
             + TableFollowUpsSche.COLUMN_RB06 + " TEXT,"
+            + TableFollowUpsSche.COLUMN_MEMBERTYPE + " TEXT,"
             + TableFollowUpsSche.COLUMN_RB07 + " TEXT" + " );")
 
     const val SQL_CREATE_FP_HOUSEHOLDS = ("CREATE TABLE "
@@ -223,10 +224,16 @@ object CreateTable {
 
     const val SQL_ALTER_FOLLOWUPSCHE =
         "ALTER TABLE " + TableFollowUpsSche.TABLE_NAME + " ADD " + TableFollowUpsSche.COLUMN_ISTATUS + " TEXT;"
-/*
-    const val SQL_ALTER_MWRA_ADD_SNO =
-        "ALTER TABLE " + MWRATable.TABLE_NAME + " ADD " + MWRATable.COLUMN_SNO + " TEXT;"
 
-*/
+    const val SQL_ALTER_ADD_DOB =
+        "ALTER TABLE " + TableFollowUpsSche.TABLE_NAME + " ADD " + TableFollowUpsSche.COLUMN_RB04 + " TEXT; "
+
+
+    const val SQL_ALTER_ADD_GENDER =
+        "ALTER TABLE " + TableFollowUpsSche.TABLE_NAME + " ADD " + TableFollowUpsSche.COLUMN_RC12 + " TEXT; "
+
+    const val SQL_ALTER_ADD_MEMEBER_TYPE =
+        "ALTER TABLE " + TableFollowUpsSche.TABLE_NAME + " ADD " + TableFollowUpsSche.COLUMN_MEMBERTYPE + " TEXT; "
+
 
 }

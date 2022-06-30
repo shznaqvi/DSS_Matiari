@@ -4,6 +4,9 @@ import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.IBAHC;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.PROJECT_NAME;
 import static edu.aku.hassannaqvi.dss_matiari.database.CreateTable.DATABASE_VERSION;
 import static edu.aku.hassannaqvi.dss_matiari.database.CreateTable.SQL_ALTER_FOLLOWUPSCHE;
+import static edu.aku.hassannaqvi.dss_matiari.database.CreateTable.SQL_ALTER_ADD_DOB;
+import static edu.aku.hassannaqvi.dss_matiari.database.CreateTable.SQL_ALTER_ADD_GENDER;
+import static edu.aku.hassannaqvi.dss_matiari.database.CreateTable.SQL_ALTER_ADD_MEMBER_TYPE;
 import static edu.aku.hassannaqvi.dss_matiari.database.CreateTable.SQL_CREATE_FOLLOWUPS;
 import static edu.aku.hassannaqvi.dss_matiari.database.CreateTable.SQL_CREATE_FOLLOWUPSCHE;
 import static edu.aku.hassannaqvi.dss_matiari.database.CreateTable.SQL_CREATE_FP_HOUSEHOLDS;
@@ -72,6 +75,7 @@ import edu.aku.hassannaqvi.dss_matiari.models.ZStandard;
 public class DatabaseHelper extends SQLiteOpenHelper {
     public static final String DATABASE_NAME = PROJECT_NAME + ".db";
     public static final String DATABASE_COPY = PROJECT_NAME + "_copy.db";
+    //public static final String DATABASE_COPY2 = PROJECT_NAME + "_copy.db";
     private static final String DATABASE_PASSWORD = IBAHC;
     private final String TAG = "DatabaseHelper";
 
@@ -94,6 +98,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL(SQL_CREATE_VILLAGES);
         db.execSQL(SQL_CREATE_FOLLOWUPSCHE);
 
+
 //        db.execSQL(SQL_CREATE_ZSTANDARD);
 
     }
@@ -103,7 +108,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         switch (oldVersion) {
             case 1:
                 db.execSQL(SQL_ALTER_FOLLOWUPSCHE);
+                /*db.execSQL(SQL_ALTER_ADD_DOB);
+                db.execSQL(SQL_ALTER_ADD_GENDER);
+                db.execSQL(SQL_ALTER_ADD_MEMBER_TYPE);*/
+
         }
+
+
     }
 
 
@@ -774,6 +785,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             values.put(TableFollowUpsSche.COLUMN_RB05, followUpsSche.getRb05());
             values.put(TableFollowUpsSche.COLUMN_RB07, followUpsSche.getRb07());
             values.put(TableFollowUpsSche.COLUMN_RB06, followUpsSche.getRb06());
+            values.put(TableFollowUpsSche.COLUMN_MEMBERTYPE, followUpsSche.getMemberType());
 
             long rowID = db.insert(TableFollowUpsSche.TABLE_NAME, null, values);
             if (rowID != -1) insertCount++;
@@ -1756,6 +1768,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 TableFollowUpsSche.COLUMN_RC12,
                 TableFollowUpsSche.COLUMN_RB05,
                 TableFollowUpsSche.COLUMN_RB06,
+                TableFollowUpsSche.COLUMN_MEMBERTYPE,
                 "sum(case when " + TableFollowUpsSche.COLUMN_RB07 + "='1' then 1 else 0 end) AS " + TableFollowUpsSche.COLUMN_RB07
         };
 
