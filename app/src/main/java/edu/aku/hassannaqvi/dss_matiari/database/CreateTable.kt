@@ -232,7 +232,7 @@ object CreateTable {
     const val SQL_ALTER_ADD_GENDER =
         "ALTER TABLE " + TableFollowUpsSche.TABLE_NAME + " ADD " + TableFollowUpsSche.COLUMN_RC12 + " TEXT; "
 
-    const val SQL_ALTER_ADD_MEMEBER_TYPE =
+    const val SQL_ALTER_ADD_MEMBER_TYPE =
         "ALTER TABLE " + TableFollowUpsSche.TABLE_NAME + " ADD " + TableFollowUpsSche.COLUMN_MEMBERTYPE + " TEXT; "
 
 

@@ -501,7 +501,7 @@ public class Outcome extends BaseObservable implements Observable {
     }
 
     public void populateMeta() {
-        MainApp.outcome.setUuid(MainApp.fpHouseholds.getUid());
+        MainApp.outcome.setUuid(MainApp.households.getUid());
         MainApp.outcome.setMuid(MainApp.followups.getUid().split("_")[0]);
         MainApp.outcome.setUcCode(MainApp.fpHouseholds.getUcCode());
         MainApp.outcome.setVillageCode(MainApp.fpHouseholds.getVillageCode());
