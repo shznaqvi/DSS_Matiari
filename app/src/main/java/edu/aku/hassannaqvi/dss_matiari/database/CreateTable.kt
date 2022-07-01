@@ -7,7 +7,8 @@ object CreateTable {
 
     const val DATABASE_NAME = "$PROJECT_NAME.db"
     const val DATABASE_COPY = "${PROJECT_NAME}_copy.db"
-    const val DATABASE_VERSION = 2
+    const val DATABASE_COPY2 = "${PROJECT_NAME}_copy.db"
+    const val DATABASE_VERSION = 3
 
     const val SQL_CREATE_HOUSEHOLDS = ("CREATE TABLE "
             + HouseholdTable.TABLE_NAME + "("
@@ -80,6 +81,31 @@ object CreateTable {
             + FollowupsTable.COLUMN_VISIT_NO + " TEXT,"
             + FollowupsTable.COLUMN_SC + " TEXT,"
             + FollowupsTable.COLUMN_SD + " TEXT"
+            + " );"
+            )
+
+    const val SQL_CREATE_OUTCOME_FOLLOWUPS = ("CREATE TABLE "
+            + OutcomeFollowupTable.TABLE_NAME + "("
+            + OutcomeFollowupTable.COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
+            + OutcomeFollowupTable.COLUMN_PROJECT_NAME + " TEXT,"
+            + OutcomeFollowupTable.COLUMN_UID + " TEXT,"
+            + OutcomeFollowupTable.COLUMN_UUID + " TEXT,"
+            + OutcomeFollowupTable.COLUMN_USERNAME + " TEXT,"
+            + OutcomeFollowupTable.COLUMN_SYSDATE + " TEXT,"
+            + OutcomeFollowupTable.COLUMN_ISTATUS + " TEXT,"
+            + OutcomeFollowupTable.COLUMN_DEVICEID + " TEXT,"
+            + OutcomeFollowupTable.COLUMN_DEVICETAGID + " TEXT,"
+            + OutcomeFollowupTable.COLUMN_SYNCED + " TEXT,"
+            + OutcomeFollowupTable.COLUMN_SYNCED_DATE + " TEXT,"
+            + OutcomeFollowupTable.COLUMN_APPVERSION + " TEXT,"
+            + OutcomeFollowupTable.COLUMN_HDSSID + " TEXT,"
+            + OutcomeFollowupTable.COLUMN_VILLAGE_CODE + " TEXT,"
+            + OutcomeFollowupTable.COLUMN_UC_CODE + " TEXT,"
+            + OutcomeFollowupTable.COLUMN_SNO + " TEXT,"
+            + OutcomeFollowupTable.COLUMN_FP_ROUND + " TEXT,"
+            + OutcomeFollowupTable.COLUMN_HOUSEHOLD_NO + " TEXT,"
+            + OutcomeFollowupTable.COLUMN_VISIT_NO + " TEXT,"
+            + OutcomeFollowupTable.COLUMN_SE + " TEXT"
             + " );"
             )
 

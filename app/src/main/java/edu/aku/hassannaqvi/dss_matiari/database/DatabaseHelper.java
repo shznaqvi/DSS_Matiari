@@ -2,17 +2,20 @@ package edu.aku.hassannaqvi.dss_matiari.database;
 
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.IBAHC;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.PROJECT_NAME;
+import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.outcomeFollowups;
 import static edu.aku.hassannaqvi.dss_matiari.database.CreateTable.DATABASE_VERSION;
+import static edu.aku.hassannaqvi.dss_matiari.database.CreateTable.SQL_ALTER_ADD_MEMBER_TYPE;
 import static edu.aku.hassannaqvi.dss_matiari.database.CreateTable.SQL_ALTER_FOLLOWUPSCHE;
 import static edu.aku.hassannaqvi.dss_matiari.database.CreateTable.SQL_ALTER_ADD_DOB;
 import static edu.aku.hassannaqvi.dss_matiari.database.CreateTable.SQL_ALTER_ADD_GENDER;
-import static edu.aku.hassannaqvi.dss_matiari.database.CreateTable.SQL_ALTER_ADD_MEMBER_TYPE;
+//import static edu.aku.hassannaqvi.dss_matiari.database.CreateTable.SQL_ALTER_ADD_MEMBER_TYPE;
 import static edu.aku.hassannaqvi.dss_matiari.database.CreateTable.SQL_CREATE_FOLLOWUPS;
 import static edu.aku.hassannaqvi.dss_matiari.database.CreateTable.SQL_CREATE_FOLLOWUPSCHE;
 import static edu.aku.hassannaqvi.dss_matiari.database.CreateTable.SQL_CREATE_FP_HOUSEHOLDS;
 import static edu.aku.hassannaqvi.dss_matiari.database.CreateTable.SQL_CREATE_HOUSEHOLDS;
 import static edu.aku.hassannaqvi.dss_matiari.database.CreateTable.SQL_CREATE_MWRA;
 import static edu.aku.hassannaqvi.dss_matiari.database.CreateTable.SQL_CREATE_OUTCOME;
+import static edu.aku.hassannaqvi.dss_matiari.database.CreateTable.SQL_CREATE_OUTCOME_FOLLOWUPS;
 import static edu.aku.hassannaqvi.dss_matiari.database.CreateTable.SQL_CREATE_PREGNANCY;
 import static edu.aku.hassannaqvi.dss_matiari.database.CreateTable.SQL_CREATE_USERS;
 import static edu.aku.hassannaqvi.dss_matiari.database.CreateTable.SQL_CREATE_VERSIONAPP;
@@ -57,6 +60,7 @@ import edu.aku.hassannaqvi.dss_matiari.models.Households;
 import edu.aku.hassannaqvi.dss_matiari.models.MWRA;
 import edu.aku.hassannaqvi.dss_matiari.models.MaxHhno;
 import edu.aku.hassannaqvi.dss_matiari.models.Outcome;
+import edu.aku.hassannaqvi.dss_matiari.models.OutcomeFollowups;
 import edu.aku.hassannaqvi.dss_matiari.models.Pregnancy;
 import edu.aku.hassannaqvi.dss_matiari.models.Users;
 import edu.aku.hassannaqvi.dss_matiari.models.VersionApp;
@@ -75,7 +79,7 @@ import edu.aku.hassannaqvi.dss_matiari.models.ZStandard;
 public class DatabaseHelper extends SQLiteOpenHelper {
     public static final String DATABASE_NAME = PROJECT_NAME + ".db";
     public static final String DATABASE_COPY = PROJECT_NAME + "_copy.db";
-    //public static final String DATABASE_COPY2 = PROJECT_NAME + "_copy.db";
+    public static final String DATABASE_COPY2 = PROJECT_NAME + "_copy.db";
     private static final String DATABASE_PASSWORD = IBAHC;
     private final String TAG = "DatabaseHelper";
 
@@ -97,6 +101,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL(SQL_CREATE_VERSIONAPP);
         db.execSQL(SQL_CREATE_VILLAGES);
         db.execSQL(SQL_CREATE_FOLLOWUPSCHE);
+        db.execSQL(SQL_CREATE_OUTCOME_FOLLOWUPS);
 
 
 //        db.execSQL(SQL_CREATE_ZSTANDARD);
@@ -108,9 +113,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         switch (oldVersion) {
             case 1:
                 db.execSQL(SQL_ALTER_FOLLOWUPSCHE);
-                /*db.execSQL(SQL_ALTER_ADD_DOB);
+                db.execSQL(SQL_ALTER_ADD_DOB);
                 db.execSQL(SQL_ALTER_ADD_GENDER);
-                db.execSQL(SQL_ALTER_ADD_MEMBER_TYPE);*/
+                db.execSQL(SQL_ALTER_ADD_MEMBER_TYPE);
+
+            case 2:
+                db.execSQL(SQL_CREATE_OUTCOME_FOLLOWUPS);
 
         }
 
@@ -235,6 +243,37 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return newRowId;
     }
 
+
+    public Long addOutcomeFollowup(OutcomeFollowups followups) throws JSONException {
+        SQLiteDatabase db = this.getWritableDatabase(DATABASE_PASSWORD);
+        ContentValues values = new ContentValues();
+        values.put(TableContracts.OutcomeFollowupTable.COLUMN_PROJECT_NAME, followups.getProjectName());
+        values.put(TableContracts.OutcomeFollowupTable.COLUMN_UID, followups.getUid());
+        values.put(TableContracts.OutcomeFollowupTable.COLUMN_UUID, followups.getUuid());
+        values.put(TableContracts.OutcomeFollowupTable.COLUMN_MUID, followups.getMuid());
+        values.put(TableContracts.OutcomeFollowupTable.COLUMN_USERNAME, followups.getUserName());
+        values.put(TableContracts.OutcomeFollowupTable.COLUMN_SYSDATE, followups.getSysDate());
+        values.put(TableContracts.OutcomeFollowupTable.COLUMN_HDSSID, followups.getHdssId());
+        values.put(TableContracts.OutcomeFollowupTable.COLUMN_UC_CODE, followups.getUcCode());
+        values.put(TableContracts.OutcomeFollowupTable.COLUMN_VILLAGE_CODE, followups.getVillageCode());
+        values.put(TableContracts.OutcomeFollowupTable.COLUMN_SNO, followups.getSno());
+        values.put(TableContracts.OutcomeFollowupTable.COLUMN_FP_ROUND, followups.getRound());
+        values.put(TableContracts.OutcomeFollowupTable.COLUMN_HOUSEHOLD_NO, followups.getHhNo());
+        values.put(TableContracts.OutcomeFollowupTable.COLUMN_VISIT_NO, followups.getVisitNo());
+        values.put(TableContracts.OutcomeFollowupTable.COLUMN_SE, followups.sEtoString());
+        //values.put(FollowupsTable.COLUMN_SD, followups.sDtoString());
+        values.put(TableContracts.OutcomeFollowupTable.COLUMN_ISTATUS, followups.getiStatus());
+        values.put(TableContracts.OutcomeFollowupTable.COLUMN_DEVICETAGID, followups.getDeviceTag());
+        values.put(TableContracts.OutcomeFollowupTable.COLUMN_DEVICEID, followups.getDeviceId());
+        values.put(TableContracts.OutcomeFollowupTable.COLUMN_APPVERSION, followups.getAppver());
+
+        long newRowId;
+        newRowId = db.insert(
+                TableContracts.OutcomeFollowupTable.TABLE_NAME,
+                TableContracts.OutcomeFollowupTable.COLUMN_NAME_NULLABLE,
+                values);
+        return newRowId;
+    }
 
     public Long addPregnancy(Pregnancy pregnancy) throws JSONException {
         SQLiteDatabase db = this.getWritableDatabase(DATABASE_PASSWORD);
@@ -565,6 +604,21 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         String[] selectionArgs = {String.valueOf(MainApp.followups.getId())};
 
         return db.update(FollowupsTable.TABLE_NAME,
+                values,
+                selection,
+                selectionArgs);
+    }
+
+    public int updateOutcomeFollouwps(String column, String value) {
+        SQLiteDatabase db = this.getWritableDatabase(DATABASE_PASSWORD);
+
+        ContentValues values = new ContentValues();
+        values.put(column, value);
+
+        String selection = TableContracts.OutcomeFollowupTable._ID + " =? ";
+        String[] selectionArgs = {String.valueOf(outcomeFollowups.getId())};
+
+        return db.update(TableContracts.OutcomeFollowupTable.TABLE_NAME,
                 values,
                 selection,
                 selectionArgs);
@@ -1905,6 +1959,45 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         }
         // Log.d(TAG, "getMaxHHNo: " + mwraCount);
         return users;
+    }
+
+    public OutcomeFollowups getOutcomeFollowupsBySno(String rb01, String fRound) throws JSONException {
+        SQLiteDatabase db = this.getReadableDatabase(DATABASE_PASSWORD);
+        Cursor c = null;
+        String[] columns = null;
+
+        String whereClause;
+        whereClause = OutcomeTable.COLUMN_UUID + "=? AND " +
+                TableContracts.OutcomeFollowupTable.COLUMN_SNO + "=? AND " +
+                TableContracts.OutcomeFollowupTable.COLUMN_FP_ROUND + "=? ";
+
+        String[] whereArgs = {MainApp.fpHouseholds.getUid(), rb01, fRound};
+
+        String groupBy = null;
+        String having = null;
+
+        String orderBy = TableContracts.OutcomeFollowupTable.COLUMN_ID + " ASC";
+
+        OutcomeFollowups fp = new OutcomeFollowups();
+
+        c = db.query(
+                TableContracts.OutcomeFollowupTable.TABLE_NAME,  // The table to query
+                columns,                   // The columns to return
+                whereClause,               // The columns for the WHERE clause
+                whereArgs,                 // The values for the WHERE clause
+                groupBy,                   // don't group the rows
+                having,                    // don't filter by row groups
+                orderBy                    // The sort order
+        );
+        while (c.moveToNext()) {
+            fp = new OutcomeFollowups().Hydrate(c);
+        }
+
+        c.close();
+
+        db.close();
+
+        return fp;
     }
 
     public Followups getFollowupsBySno(String rb01, String fRound) throws JSONException {

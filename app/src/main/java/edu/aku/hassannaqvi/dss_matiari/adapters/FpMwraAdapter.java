@@ -23,7 +23,9 @@ import edu.aku.hassannaqvi.dss_matiari.R;
 import edu.aku.hassannaqvi.dss_matiari.core.MainApp;
 import edu.aku.hassannaqvi.dss_matiari.database.DatabaseHelper;
 import edu.aku.hassannaqvi.dss_matiari.models.FollowUpsSche;
+import edu.aku.hassannaqvi.dss_matiari.ui.sections.OutcomeFollowupActivity;
 import edu.aku.hassannaqvi.dss_matiari.ui.sections.SectionCxActivity;
+import edu.aku.hassannaqvi.dss_matiari.ui.sections.SectionOutcomeActivity;
 
 
 public class FpMwraAdapter extends RecyclerView.Adapter<FpMwraAdapter.ViewHolder> {
@@ -113,11 +115,18 @@ public class FpMwraAdapter extends RecyclerView.Adapter<FpMwraAdapter.ViewHolder
         fAge.setText(marStatus + " | " + followUpsSche.getRb05() + "y  ");
 
 
-        secStatus.setBackgroundColor(followUpsSche.getRb07().equals("1") ? ContextCompat.getColor(mContext, R.color.redLight) : ContextCompat.getColor(mContext, R.color.grayLight));
-        indicator.setImageDrawable(followUpsSche.getRb07().equals("1") ? ContextCompat.getDrawable(mContext, R.drawable.ic_baseline_pregnant_woman_24) : ContextCompat.getDrawable(mContext, R.drawable.ic_girl));
+        if(followUpsSche.getMemberType().equals("1")) {
 
+            secStatus.setBackgroundColor(followUpsSche.getRb07().equals("1") ? ContextCompat.getColor(mContext, R.color.redLight) : ContextCompat.getColor(mContext, R.color.grayLight));
+            indicator.setImageDrawable(followUpsSche.getRb07().equals("1") ? ContextCompat.getDrawable(mContext, R.drawable.ic_baseline_pregnant_woman_24) : ContextCompat.getDrawable(mContext, R.drawable.ic_girl));
 
+        }else{
+            secStatus.setBackgroundColor(followUpsSche.getRb07().equals("1") ? ContextCompat.getColor(mContext, R.color.redLight) : ContextCompat.getColor(mContext, R.color.grayLight));
+            indicator.setImageDrawable(followUpsSche.getRb07().equals("1") ? ContextCompat.getDrawable(mContext, R.drawable.ic_baby) : ContextCompat.getDrawable(mContext, R.drawable.ic_baby));
+
+        }
         fMaritalStatus.setText(wifeOrDaughter + followUpsSche.getRb03());
+
         //if(MainApp.fpMwra.getMemberType().equals("1")) {
             //mStatus.setVisibility(View.VISIBLE);
             secStatus.setText(pregStatus);
@@ -132,18 +141,36 @@ public class FpMwraAdapter extends RecyclerView.Adapter<FpMwraAdapter.ViewHolder
         viewHolder.itemView.setOnClickListener(v -> {
             // Get the current state of the item
 
-            MainApp.fpMwra = MainApp.followUpsScheMWRAList.get(viewHolder.getAdapterPosition());
-            MainApp.followups.populateMeta();
 
-            Intent intent = new Intent(mContext, SectionCxActivity.class);
+            if(followUpsSche.getMemberType().equals("1")) {
+                MainApp.fpMwra = MainApp.followUpsScheMWRAList.get(viewHolder.getAdapterPosition());
+                MainApp.followups.populateMeta();
 
-            intent.putExtra("position", viewHolder.getAdapterPosition());
+                Intent intent = new Intent(mContext, SectionCxActivity.class);
 
-            MainApp.selectedFemale = viewHolder.getAdapterPosition();
+                intent.putExtra("position", viewHolder.getAdapterPosition());
 
-            intent.putExtra("position", viewHolder.getAdapterPosition());
+                MainApp.selectedFemale = viewHolder.getAdapterPosition();
 
-            ((Activity) mContext).startActivityForResult(intent, 2);
+                intent.putExtra("position", viewHolder.getAdapterPosition());
+
+                ((Activity) mContext).startActivityForResult(intent, 2);
+            }else{
+                MainApp.fpMwra = MainApp.followUpsScheMWRAList.get(viewHolder.getAdapterPosition());
+                MainApp.outcomeFollowups.populateMeta();
+
+                Intent intent = new Intent(mContext, OutcomeFollowupActivity.class);
+
+                intent.putExtra("position", viewHolder.getAdapterPosition());
+
+                MainApp.selectedFemale = viewHolder.getAdapterPosition();
+
+                intent.putExtra("position", viewHolder.getAdapterPosition());
+
+
+                ((Activity) mContext).startActivityForResult(intent, 2);
+
+            }
 
 
         });

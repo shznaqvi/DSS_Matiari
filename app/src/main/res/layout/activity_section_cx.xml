@@ -599,7 +599,7 @@
                             android:id="@+id/rc05b"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:digits="abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+                            android:digits="abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ ,.\/"
                             android:enabled="true"
                             android:hint="@string/rc05b"
                             android:inputType="text"
@@ -616,9 +616,7 @@
                     android:orientation="vertical"
                     android:visibility="@{followups.rc04.equals(`1`) ? View.VISIBLE : View.GONE}">
 
-
                     <!-- rc07  Radio   -->
-
                     <androidx.cardview.widget.CardView
                         android:id="@+id/fldGrpCVrb07"
                         style="@style/cardView"

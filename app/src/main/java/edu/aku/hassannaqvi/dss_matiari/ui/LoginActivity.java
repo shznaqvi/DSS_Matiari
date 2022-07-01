@@ -4,6 +4,7 @@ import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.PROJECT_NAME;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.editor;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.sharedPref;
 import static edu.aku.hassannaqvi.dss_matiari.database.CreateTable.DATABASE_COPY;
+import static edu.aku.hassannaqvi.dss_matiari.database.CreateTable.DATABASE_COPY2;
 import static edu.aku.hassannaqvi.dss_matiari.database.CreateTable.DATABASE_NAME;
 
 import android.Manifest;
@@ -202,7 +203,7 @@ public class LoginActivity extends AppCompatActivity {
                     try {
                         File dbFile = new File(this.getDatabasePath(DATABASE_NAME).getPath());
                         FileInputStream fis = new FileInputStream(dbFile);
-                        String outFileName = DirectoryName + File.separator + DATABASE_COPY;
+                        String outFileName = DirectoryName + File.separator + DATABASE_COPY2;
                         // Open the empty db as the output stream
                         OutputStream output = new FileOutputStream(outFileName);
 
