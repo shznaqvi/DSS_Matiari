@@ -46,14 +46,14 @@ public class OutcomeFollowupActivity extends AppCompatActivity {
         MainApp.ROUND = MainApp.fpMwra.getfRound();
 
         try {
-            followups = db.getFollowupsBySno(MainApp.fpMwra.getRb01(), MainApp.fpMwra.getfRound());
+            outcomeFollowups = db.getOutcomeFollowupsBySno(MainApp.fpMwra.getRb01(), MainApp.fpMwra.getfRound());
         } catch (JSONException e) {
             e.printStackTrace();
             Toast.makeText(this, "JSONException(Followups): " + e.getMessage(), Toast.LENGTH_SHORT).show();
         }
 
         if (outcomeFollowups.getUid().equals("")) {
-            //outcomeFollowups.set(MainApp.fpMwra.getRb01());
+            outcomeFollowups.setRc12ln(MainApp.fpMwra.getRb01());
             outcomeFollowups.setRb02(MainApp.fpMwra.getRb02());
             MainApp.outcomeFollowups.setRb03(MainApp.fpMwra.getRb03());
             outcomeFollowups.setRb04(MainApp.fpMwra.getRb04());
@@ -80,7 +80,7 @@ public class OutcomeFollowupActivity extends AppCompatActivity {
             Calendar cal = Calendar.getInstance();
 
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
-            cal.setTime(sdf.parse(followups.getRc01a()));// all done
+            cal.setTime(sdf.parse(outcomeFollowups.getRc01a()));// all done
 
             sdf = new SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH);
 
@@ -131,7 +131,7 @@ public class OutcomeFollowupActivity extends AppCompatActivity {
 
             // Date of Death from Date of Deliver(RC10)
             sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
-            cal.setTime(sdf.parse(followups.getRc10()));// all done
+            cal.setTime(sdf.parse(outcomeFollowups.getRc14()));// all done
             sdf = new SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH);
             String minDOD = sdf.format(cal.getTime());
 

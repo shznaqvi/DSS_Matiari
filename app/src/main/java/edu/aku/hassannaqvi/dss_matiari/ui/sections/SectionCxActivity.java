@@ -30,6 +30,7 @@ import edu.aku.hassannaqvi.dss_matiari.contracts.TableContracts;
 import edu.aku.hassannaqvi.dss_matiari.core.MainApp;
 import edu.aku.hassannaqvi.dss_matiari.database.DatabaseHelper;
 import edu.aku.hassannaqvi.dss_matiari.databinding.ActivitySectionCxBinding;
+import edu.aku.hassannaqvi.dss_matiari.utils.DateUtilsKt;
 
 public class SectionCxActivity extends AppCompatActivity {
 
@@ -77,35 +78,9 @@ public class SectionCxActivity extends AppCompatActivity {
 
         // setListener(); // Age calculation not required in followups
 
-        // set default model values if new mwra
-
-
-        // setTitle(R.string.marriedwomenregistration_mainheading);
         setImmersive(true);
 
         bi.btnContinue.setText(MainApp.followups.getUid().equals("") ? "Save" : "Update");
-
-        // To set min max range of date fields
-        //setDateRanges();
-        /*bi.rc10.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable editable) {
-                bi.rc1401.setText(null);
-                bi.rc1402.setText(null);
-                bi.rc1403.setText(null);
-                setDateRanges();
-            }
-        });*/
 
         bi.rc11.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
@@ -122,6 +97,11 @@ public class SectionCxActivity extends AppCompatActivity {
 
             }
         });
+
+        if(!MainApp.fpMwra.getRb07().equals("") && MainApp.fpMwra.getRb07().equals("1"))
+        {
+            //MainApp.fpMwra.getrb08
+        }
 
     }
 
@@ -198,8 +178,8 @@ public class SectionCxActivity extends AppCompatActivity {
         }
     }
 
-   /* private void setListener() {
-        bi.rb04.addTextChangedListener(new TextWatcher() {
+    private void setListener() {
+        /*bi.rb04.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
@@ -213,15 +193,15 @@ public class SectionCxActivity extends AppCompatActivity {
             @Override
             public void afterTextChanged(Editable s) {
                 if (!mwra.getRb04().equalsIgnoreCase("") && !mwra.getRb04().equals("98")) {
-//                    String[] arrStr = mwra.getRb04().split("-");
-//                    int day, month, year;
-//                    year = arrStr.length > 0 ? Integer.valueOf(arrStr[0]) : 0;
-//                    month = arrStr.length > 1 ? Integer.valueOf(arrStr[1]) : 0;
-//                    day = arrStr.length > 2 ? Integer.valueOf(arrStr[2]) : 0;
-//                    if (year == 0 || month == 0 || day ==0) {
-//                        return;
-//                    }
-//                    bi.rb05.setText(DateUtilsKt.ageInYears(day, month ,year ,year));
+                    String[] arrStr = mwra.getRb04().split("-");
+                    int day, month, year;
+                    year = arrStr.length > 0 ? Integer.valueOf(arrStr[0]) : 0;
+                    month = arrStr.length > 1 ? Integer.valueOf(arrStr[1]) : 0;
+                    day = arrStr.length > 2 ? Integer.valueOf(arrStr[2]) : 0;
+                    if (year == 0 || month == 0 || day ==0) {
+                        return;
+                    }
+                    bi.rb05.setText(DateUtilsKt.ageInYears(day, month ,year ,year));
                     try {
                         Calendar cur = Calendar.getInstance(); // DOV
                         Calendar cal = Calendar.getInstance(); // DOB
@@ -241,10 +221,10 @@ public class SectionCxActivity extends AppCompatActivity {
                     } catch (ParseException e) {
                         e.printStackTrace();
                     }
+*/
 
 
-*//*
-                    String[] arrStr = mwra.getRb04().split("-");
+                   /* String[] arrStr = mwra.getRb04().split("-");
                     String day, month, year;
                     year = arrStr.length > 0 ? arrStr[0] : "0";
                     month = arrStr.length > 1 ? arrStr[1] : "0";
@@ -253,11 +233,11 @@ public class SectionCxActivity extends AppCompatActivity {
                         return;
                     }
                     bi.rb05.setText(DateUtilsKt.getAge(year, month, day, false));
-*//*
+
                 }
             }
-        });
-    }*/
+        });*/
+    }
 
     public void btnContinue(View view) {
         if (!formValidation()) return;

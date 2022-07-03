@@ -250,7 +250,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         values.put(TableContracts.OutcomeFollowupTable.COLUMN_PROJECT_NAME, followups.getProjectName());
         values.put(TableContracts.OutcomeFollowupTable.COLUMN_UID, followups.getUid());
         values.put(TableContracts.OutcomeFollowupTable.COLUMN_UUID, followups.getUuid());
-        values.put(TableContracts.OutcomeFollowupTable.COLUMN_MUID, followups.getMuid());
+        //values.put(TableContracts.OutcomeFollowupTable.COLUMN_MUID, followups.getMuid());
         values.put(TableContracts.OutcomeFollowupTable.COLUMN_USERNAME, followups.getUserName());
         values.put(TableContracts.OutcomeFollowupTable.COLUMN_SYSDATE, followups.getSysDate());
         values.put(TableContracts.OutcomeFollowupTable.COLUMN_HDSSID, followups.getHdssId());
