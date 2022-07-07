@@ -2,6 +2,7 @@ package edu.aku.hassannaqvi.dss_matiari.ui.sections;
 
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.followups;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.fpHouseholds;
+import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.fpMwra;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.outcomeFollowups;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.sharedPref;
 
@@ -69,6 +70,13 @@ public class OutcomeFollowupActivity extends AppCompatActivity {
         setImmersive(true);
 
         bi.btnContinue.setText(outcomeFollowups.getUid().equals("") ? "Save" : "Update");
+
+        if(!MainApp.fpMwra.getRb04().equals("98") && !MainApp.fpMwra.getRb04().equals(""))
+        {
+            String date = toBlackVisionDate(outcomeFollowups.getRb04());
+
+            bi.rc14.setMinDate(date);
+        }
 
 
     }
@@ -256,5 +264,12 @@ public class OutcomeFollowupActivity extends AppCompatActivity {
         setDateRanges();
         return Validator.emptyCheckingContainer(this, bi.GrpName);
 
+    }
+
+    public static String toBlackVisionDate(String currentDate) {
+        String newDate = currentDate;
+        String[] oldDateParts = currentDate.split("-");
+        newDate = oldDateParts[2] + "/" + oldDateParts[1] + "/" + oldDateParts[0];
+        return newDate;
     }
 }
