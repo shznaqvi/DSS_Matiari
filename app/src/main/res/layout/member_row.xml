@@ -151,7 +151,7 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:includeFontPadding="false"
-                            android:text="Gender of Child " />
+                            android:text="Gender" />
 
                         <TextView
                             android:id="@+id/secGender"
