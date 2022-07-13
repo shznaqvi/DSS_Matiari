@@ -251,7 +251,7 @@ public class SectionCxActivity extends AppCompatActivity {
                     setResult(RESULT_OK, forwardIntent);
                     startActivity(forwardIntent);
                     finish();
-                } else if (!bi.rc0604.isChecked()) {
+                } else if (!bi.rc0604.isChecked() && bi.rc0802.isChecked()) {
                     Intent forwardIntent = new Intent(this, SectionCx2Activity.class).putExtra("complete", true);
                     forwardIntent.setFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT);
                     setResult(RESULT_OK, forwardIntent);

@@ -218,6 +218,19 @@ public class SyncActivity extends AppCompatActivity {
                     bi.errMessage.setVisibility(View.VISIBLE);
                 }
 
+                try {
+                    //Outcome Followups
+                    MainApp.uploadData.add(db.getUnsyncedOutcomeFollowups());
+                    uploadTables.add(new SyncModel(TableContracts.OutcomeFollowupTable.TABLE_NAME));
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    Toast.makeText(this, "JSONException(Followups): " + e.getMessage(), Toast.LENGTH_LONG).show();
+                    Log.d(TAG, "JSONException(Followups): " + e.getMessage());
+                    bi.errMessage.setText(bi.errMessage.getText() + "\nERROR - JSONException(Followups): " + e.getMessage());
+                    bi.errMessage.setVisibility(View.VISIBLE);
+                }
+
                 MainApp.downloadData = new String[uploadData.size()];
                 setAdapter(uploadTables);
                 BeginUpload();

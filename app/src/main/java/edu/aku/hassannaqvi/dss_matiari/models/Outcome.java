@@ -12,7 +12,10 @@ import org.apache.commons.lang3.StringUtils;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.util.Date;
+import java.util.Locale;
 
 import edu.aku.hassannaqvi.dss_matiari.BR;
 import edu.aku.hassannaqvi.dss_matiari.contracts.TableContracts;
@@ -75,11 +78,10 @@ public class Outcome extends BaseObservable implements Observable {
         setUserName(MainApp.user.getUserName());
         setDeviceId(MainApp.deviceid);
         setAppver(MainApp.appInfo.getAppVersion());
-        if (MainApp.households != null && MainApp.mwra != null) {
-            //TODO: Why is this household uid, this should be followup uid
-            setUuid(MainApp.households.getUid());
-            setRb02(MainApp.mwra.getRb02());
-            setRb01a(MainApp.mwra.getRb01a());
+        if (MainApp.followups != null && MainApp.fpMwra != null ) {
+            setUuid(MainApp.followups.getUid());
+            setRb02(MainApp.followups.getRc02());
+            setRb01a(MainApp.fpMwra.getRa01());
 
         }
         setVillageCode(MainApp.selectedVillage);
@@ -501,7 +503,7 @@ public class Outcome extends BaseObservable implements Observable {
     }
 
     public void populateMeta() {
-        MainApp.outcome.setUuid(MainApp.households.getUid());
+        MainApp.outcome.setUuid(MainApp.followups.getUid());
         MainApp.outcome.setMuid(MainApp.followups.getUid().split("_")[0]);
         MainApp.outcome.setUcCode(MainApp.fpHouseholds.getUcCode());
         MainApp.outcome.setVillageCode(MainApp.fpHouseholds.getVillageCode());
