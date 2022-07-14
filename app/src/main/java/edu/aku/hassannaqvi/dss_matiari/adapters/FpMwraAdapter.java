@@ -17,7 +17,12 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import org.json.JSONException;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import edu.aku.hassannaqvi.dss_matiari.R;
 import edu.aku.hassannaqvi.dss_matiari.core.MainApp;
@@ -83,7 +88,13 @@ public class FpMwraAdapter extends RecyclerView.Adapter<FpMwraAdapter.ViewHolder
         fName.setText(followUpsSche.getRb02());
         //fAge.setText(mwra.getRb05() + "y | " + mwra.getRc03());
         String marStatus = "";
-        String wifeOrDaughter = followUpsSche.getRb06().equals("4") ? " d/o " : " w/o ";
+        String wifeOrDaughter = "";
+        if(followUpsSche.getMemberType().equals("1")) {
+            wifeOrDaughter =followUpsSche.getRb06().equals("4") ? " d/o " : " w/o ";
+
+        }else{
+           wifeOrDaughter = " c/o ";
+        }
 
         indicator.setBackgroundColor(!followUpsSche.getfpDoneDt().equals("") ? ContextCompat.getColor(mContext, R.color.greenLight) : ContextCompat.getColor(mContext, R.color.colorAccent));
 
@@ -109,30 +120,58 @@ public class FpMwraAdapter extends RecyclerView.Adapter<FpMwraAdapter.ViewHolder
                 break;
             default:
                 marStatus = "Value Unknown";
+                indicator.setBackgroundColor(ContextCompat.getColor(mContext, R.color.purple_200));
                 break;
         }
-
-        fAge.setText(marStatus + " | " + followUpsSche.getRb05() + "y  ");
 
 
         if(followUpsSche.getMemberType().equals("1")) {
 
+            fAge.setText(marStatus + " | " + followUpsSche.getRb05() + "y  ");
             secStatus.setBackgroundColor(followUpsSche.getRb07().equals("1") ? ContextCompat.getColor(mContext, R.color.redLight) : ContextCompat.getColor(mContext, R.color.grayLight));
             indicator.setImageDrawable(followUpsSche.getRb07().equals("1") ? ContextCompat.getDrawable(mContext, R.drawable.ic_baseline_pregnant_woman_24) : ContextCompat.getDrawable(mContext, R.drawable.ic_girl));
 
         }else{
-            secStatus.setBackgroundColor(followUpsSche.getRb07().equals("1") ? ContextCompat.getColor(mContext, R.color.purple_200) : ContextCompat.getColor(mContext, R.color.grayLight));
-            indicator.setImageDrawable(followUpsSche.getRb07().equals("1") ? ContextCompat.getDrawable(mContext, R.drawable.ic_baby) : ContextCompat.getDrawable(mContext, R.drawable.ic_baby));
+
+            indicator.setImageDrawable(ContextCompat.getDrawable(mContext, R.drawable.ic_baby));
+
+            try {
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
+
+                Date date = sdf.parse(followUpsSche.getRb04());
+
+                // set current Date
+                Calendar cur = Calendar.getInstance();
+                cur.setTime(cur.getTime());// all done
+
+                // set DOB
+                Calendar cal = Calendar.getInstance();
+                cal.setTime(date);
+
+                long millis = cur.getTimeInMillis() - cal.getTimeInMillis();
+                cal.setTimeInMillis(millis);
+
+                Calendar c = Calendar.getInstance();
+
+                c.setTimeInMillis(millis);
+                int tYear = c.get(Calendar.YEAR) - 1970;
+                int tMonth = c.get(Calendar.MONTH);
+                int months = tMonth+tYear*12;
+                //int tDay = c.get(Calendar.DAY_OF_MONTH);
+
+                fAge.setText(months +"m");
+
+
+        } catch (ParseException e) {
+            Log.d(TAG, "CaluculateAge: " + e.getMessage());
+            e.printStackTrace();
+
+        }
 
         }
         fMaritalStatus.setText(wifeOrDaughter + followUpsSche.getRb03());
 
-        //if(MainApp.fpMwra.getMemberType().equals("1")) {
-            //mStatus.setVisibility(View.VISIBLE);
-            secStatus.setText(pregStatus);
-        //}else{
-            //mStatus.setVisibility(View.VISIBLE);
-        //}
+        secStatus.setText(pregStatus);
 
         secDob.setText(followUpsSche.getRb04());
         secGender.setText(followUpsSche.getRc12());
@@ -224,6 +263,11 @@ public class FpMwraAdapter extends RecyclerView.Adapter<FpMwraAdapter.ViewHolder
             return fName;
         }
     }
+
+
+
+
+
 
 
 }

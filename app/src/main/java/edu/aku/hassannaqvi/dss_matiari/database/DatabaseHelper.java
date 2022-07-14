@@ -1272,6 +1272,21 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
 
+    public void updateSyncedoutcomeFollowup(String id) {
+        SQLiteDatabase db = this.getReadableDatabase(DATABASE_PASSWORD);
+        ContentValues values = new ContentValues();
+        values.put(TableContracts.OutcomeFollowupTable.COLUMN_SYNCED, true);
+        values.put(TableContracts.OutcomeFollowupTable.COLUMN_SYNCED_DATE, new Date().toString());
+        String where = TableContracts.OutcomeFollowupTable.COLUMN_ID + " = ?";
+        String[] whereArgs = {id};
+        int count = db.update(
+                TableContracts.OutcomeFollowupTable.TABLE_NAME,
+                values,
+                where,
+                whereArgs);
+    }
+
+
     public ArrayList<Cursor> getData(String Query) {
         //get writable database
         SQLiteDatabase sqlDB = this.getWritableDatabase(DATABASE_PASSWORD);

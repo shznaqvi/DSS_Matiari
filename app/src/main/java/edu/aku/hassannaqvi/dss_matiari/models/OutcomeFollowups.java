@@ -12,7 +12,11 @@ import org.apache.commons.lang3.StringUtils;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.util.Calendar;
+import java.util.Locale;
 
 import edu.aku.hassannaqvi.dss_matiari.BR;
 import edu.aku.hassannaqvi.dss_matiari.contracts.TableContracts;
@@ -349,7 +353,8 @@ public class OutcomeFollowups extends BaseObservable implements Observable {
 
     public void setRc13(String rc13) {
         this.rc13 = rc13;
-        setRc14(rc13.equals("1") ? this.rc14 : "");
+        setRc14(rc13.equals("1") ? "" : this.rc14);
+        setRc15(rc13.equals("1") ? "" : this.rc15);
         notifyChange(BR.rc13);
     }
 
@@ -370,7 +375,7 @@ public class OutcomeFollowups extends BaseObservable implements Observable {
 
     public void setRc15(String rc15) {
         this.rc15 = rc15;
-        setRc16(rc15.equals("1") ? "" : this.rc16);
+        //setRc16(rc15.equals("1") ? "" : this.rc16);
         notifyChange(BR.rc15);
     }
 
@@ -537,6 +542,9 @@ public class OutcomeFollowups extends BaseObservable implements Observable {
         //MainApp.followups.setRb06(MainApp.fpMwra.getRb06());
     }
 
+
+}
+
     /*public String calcEDD() {
 
         Calendar cal = Calendar.getInstance();
@@ -557,4 +565,6 @@ public class OutcomeFollowups extends BaseObservable implements Observable {
         }
 
     }
-*/}
+
+
+*/
