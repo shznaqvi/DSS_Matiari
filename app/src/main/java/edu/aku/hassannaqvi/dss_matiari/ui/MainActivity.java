@@ -75,10 +75,12 @@ public class MainActivity extends AppCompatActivity {
 
             case R.id.seca:
                 MainApp.households = new Households();
+                MainApp.followups = new Followups();
                 startActivity(new Intent(this, SectionAActivity.class));
                 break;
             case R.id.secb:
                 MainApp.households = new Households();
+                MainApp.followups = new Followups();
                 startActivity(new Intent(this, SectionBActivity.class));
                 break;
             case R.id.openFollowup:

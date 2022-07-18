@@ -38,6 +38,7 @@ public class Outcome extends BaseObservable implements Observable {
     private String uid = StringUtils.EMPTY;
     private String uuid = StringUtils.EMPTY;
     private String muid = StringUtils.EMPTY;
+    private String msno = StringUtils.EMPTY;
     private String userName = StringUtils.EMPTY;
     private String sysDate = StringUtils.EMPTY;
     private String hdssId = StringUtils.EMPTY;
@@ -164,6 +165,15 @@ public class Outcome extends BaseObservable implements Observable {
 
     public void setMuid(String muid) {
         this.muid = muid;
+    }
+
+
+    public String getMsno() {
+        return msno;
+    }
+
+    public void setMsno(String msno) {
+        this.msno = msno;
     }
 
 
@@ -400,6 +410,7 @@ public class Outcome extends BaseObservable implements Observable {
         this.uid = cursor.getString(cursor.getColumnIndexOrThrow(TableContracts.OutcomeTable.COLUMN_UID));
         this.uuid = cursor.getString(cursor.getColumnIndexOrThrow(TableContracts.OutcomeTable.COLUMN_UUID));
         this.muid = cursor.getString(cursor.getColumnIndexOrThrow(TableContracts.OutcomeTable.COLUMN_MUID));
+        this.msno = cursor.getString(cursor.getColumnIndexOrThrow(TableContracts.OutcomeTable.COLUMN_MSNO));
         this.userName = cursor.getString(cursor.getColumnIndexOrThrow(TableContracts.OutcomeTable.COLUMN_USERNAME));
         this.sysDate = cursor.getString(cursor.getColumnIndexOrThrow(TableContracts.OutcomeTable.COLUMN_SYSDATE));
         this.hdssId = cursor.getString(cursor.getColumnIndexOrThrow(TableContracts.OutcomeTable.COLUMN_HDSSID));
@@ -472,6 +483,7 @@ public class Outcome extends BaseObservable implements Observable {
         json.put(TableContracts.OutcomeTable.COLUMN_UID, this.uid);
         json.put(TableContracts.OutcomeTable.COLUMN_UUID, this.uuid);
         json.put(TableContracts.OutcomeTable.COLUMN_MUID, this.muid);
+        json.put(TableContracts.OutcomeTable.COLUMN_MSNO, this.msno);
         json.put(TableContracts.OutcomeTable.COLUMN_USERNAME, this.userName);
         json.put(TableContracts.OutcomeTable.COLUMN_SYSDATE, this.sysDate);
         json.put(TableContracts.OutcomeTable.COLUMN_HDSSID, this.hdssId);
@@ -505,6 +517,7 @@ public class Outcome extends BaseObservable implements Observable {
     public void populateMeta() {
         MainApp.outcome.setUuid(MainApp.followups.getUid());
         MainApp.outcome.setMuid(MainApp.followups.getUid().split("_")[0]);
+        MainApp.outcome.setMsno(MainApp.followups.getRc01());
         MainApp.outcome.setUcCode(MainApp.fpHouseholds.getUcCode());
         MainApp.outcome.setVillageCode(MainApp.fpHouseholds.getVillageCode());
         MainApp.outcome.setHhNo(MainApp.fpHouseholds.getHhNo());

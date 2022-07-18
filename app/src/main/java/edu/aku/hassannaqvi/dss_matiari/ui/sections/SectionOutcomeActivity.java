@@ -2,7 +2,11 @@ package edu.aku.hassannaqvi.dss_matiari.ui.sections;
 
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.followups;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.fpHouseholds;
+import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.households;
+import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.mwra;
+import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.mwraCount;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.outcome;
+import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.outcomeFollowups;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.sharedPref;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -72,6 +76,31 @@ public class SectionOutcomeActivity extends AppCompatActivity {
         bi.setOutcome(outcome);
         setImmersive(true);
 
+
+
+            // Followups data
+            outcomeFollowups.setUuid(followups.getUid());
+            outcomeFollowups.setMuid(outcome.getMuid());
+            outcomeFollowups.setUcCode(followups.getUcCode());
+            outcomeFollowups.setVillageCode(followups.getVillageCode());
+            //MainApp.followups.setStructureNo(households.getStructureNo());
+            outcomeFollowups.setSno(outcome.getSno());
+            outcomeFollowups.setRound("0");
+            outcomeFollowups.setHhNo(followups.getHhNo());
+            outcomeFollowups.setUserName(MainApp.user.getUserName());
+            outcomeFollowups.setSysDate(followups.getSysDate());
+            outcomeFollowups.setDeviceId(MainApp.deviceid);
+            outcomeFollowups.setHdssId(followups.getHdssId());
+            outcomeFollowups.setAppver(MainApp.versionName + "." + MainApp.versionCode);
+
+
+
+
+            //  MainApp.mwra.setRb01a(MainApp.households.getRc01a());
+
+
+
+
         bi.btnContinue.setText(outcome.getUid().equals("") ? "Save" : "Update");
 
 
@@ -85,6 +114,7 @@ public class SectionOutcomeActivity extends AppCompatActivity {
     public void btnContinue(View view) {
         if (!formValidation()) return;
         if(!insertNewRecord()) return;
+        if(!insertNewFollowupRecord()) return;
 
         if(updateDB())
         {
@@ -125,6 +155,33 @@ public class SectionOutcomeActivity extends AppCompatActivity {
         if (rowId > 0) {
             outcome.setUid(outcome.getDeviceId() + outcome.getId());
             db.updatesOutcomeColumn(TableContracts.OutcomeTable.COLUMN_UID, outcome.getUid());
+            return true;
+        } else {
+            Toast.makeText(this, "Updating Database... ERROR!", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+    }
+
+    private boolean insertNewFollowupRecord() {
+        db = MainApp.appInfo.getDbHelper();
+        //followups.populateMeta();
+        long rowId = 0;
+        try {
+            rowId = db.addOutcomeFollowup(outcomeFollowups);
+        } catch (JSONException e) {
+            e.printStackTrace();
+            Toast.makeText(this, "JSONException(OutcomeFollowups): " + e.getMessage(), Toast.LENGTH_SHORT).show();
+            Log.d(TAG, "insertNewRecord (JSONException): " + e.getMessage());
+            return false;
+        }
+        outcomeFollowups.setId(String.valueOf(rowId));
+        if (rowId > 0) {
+            outcomeFollowups.setUid(outcomeFollowups.getDeviceId() + outcomeFollowups.getId());
+
+            // This not a mistake. It is done on purpose
+            //households.setUid(fpHouseholds.getDeviceId() + fpHouseholds.getId());
+
+            db.updateOutcomeFollouwps(TableContracts.OutcomeFollowupTable.COLUMN_UID, outcomeFollowups.getUid());
             return true;
         } else {
             Toast.makeText(this, "Updating Database... ERROR!", Toast.LENGTH_SHORT).show();

@@ -250,7 +250,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         values.put(TableContracts.OutcomeFollowupTable.COLUMN_PROJECT_NAME, followups.getProjectName());
         values.put(TableContracts.OutcomeFollowupTable.COLUMN_UID, followups.getUid());
         values.put(TableContracts.OutcomeFollowupTable.COLUMN_UUID, followups.getUuid());
-        //values.put(TableContracts.OutcomeFollowupTable.COLUMN_MUID, followups.getMuid());
+        values.put(TableContracts.OutcomeFollowupTable.COLUMN_MUID, followups.getMuid());
+        values.put(TableContracts.OutcomeFollowupTable.COLUMN_MSNO, followups.getMsno());
         values.put(TableContracts.OutcomeFollowupTable.COLUMN_USERNAME, followups.getUserName());
         values.put(TableContracts.OutcomeFollowupTable.COLUMN_SYSDATE, followups.getSysDate());
         values.put(TableContracts.OutcomeFollowupTable.COLUMN_HDSSID, followups.getHdssId());
@@ -309,6 +310,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         values.put(TableContracts.OutcomeTable.COLUMN_UID, outcome.getUid());
         values.put(TableContracts.OutcomeTable.COLUMN_UUID, outcome.getUuid());
         values.put(OutcomeTable.COLUMN_MUID, outcome.getMuid());
+        values.put(OutcomeTable.COLUMN_MSNO, outcome.getMsno());
         values.put(TableContracts.OutcomeTable.COLUMN_USERNAME, outcome.getUserName());
         values.put(TableContracts.OutcomeTable.COLUMN_SYSDATE, outcome.getSysDate());
         values.put(TableContracts.OutcomeTable.COLUMN_HDSSID, outcome.getHdssId());

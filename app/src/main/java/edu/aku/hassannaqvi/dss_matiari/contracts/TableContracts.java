@@ -116,6 +116,7 @@ public class TableContracts {
         public static final String COLUMN_UID = "_uid";
         public static final String COLUMN_UUID = "_uuid";
         public static final String COLUMN_MUID = "_muid";
+        public static final String COLUMN_MSNO = "msno";
         public static final String COLUMN_USERNAME = "username";
         public static final String COLUMN_SYSDATE = "sysdate";
         public static final String COLUMN_HDSSID = "hdssid";
@@ -141,7 +142,8 @@ public class TableContracts {
         public static final String COLUMN_ID = "_id";
         public static final String COLUMN_UID = "_uid";
         public static final String COLUMN_UUID = "_uuid";
-        //public static final String COLUMN_MUID = "_muid";
+        public static final String COLUMN_MUID = "_muid";
+        public static final String COLUMN_MSNO = "msno";
         public static final String COLUMN_USERNAME = "username";
         public static final String COLUMN_SYSDATE = "sysdate";
         public static final String COLUMN_HDSSID = "hdssid";

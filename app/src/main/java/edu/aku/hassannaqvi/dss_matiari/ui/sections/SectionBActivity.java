@@ -1,5 +1,6 @@
 package edu.aku.hassannaqvi.dss_matiari.ui.sections;
 
+import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.followups;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.fpHouseholds;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.households;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.mwra;
@@ -66,6 +67,24 @@ public class SectionBActivity extends AppCompatActivity {
             MainApp.mwra.setDeviceId(MainApp.deviceid);
             MainApp.mwra.setHdssId(households.getHdssId());
             MainApp.mwra.setAppver(MainApp.versionName + "." + MainApp.versionCode);
+
+
+            // Followups data
+            MainApp.followups.setUuid(households.getUid());
+            MainApp.followups.setUcCode(households.getUcCode());
+            MainApp.followups.setVillageCode(households.getVillageCode());
+            //MainApp.followups.setStructureNo(households.getStructureNo());
+            followups.setSno(mwra.getRb01());
+            followups.setfRound("0");
+            MainApp.followups.setHhNo(households.getHhNo());
+            MainApp.followups.setUserName(MainApp.user.getUserName());
+            MainApp.followups.setSysDate(households.getSysDate());
+            MainApp.followups.setDeviceId(MainApp.deviceid);
+            MainApp.followups.setHdssId(households.getHdssId());
+            MainApp.followups.setAppver(MainApp.versionName + "." + MainApp.versionCode);
+
+
+
 
           //  MainApp.mwra.setRb01a(MainApp.households.getRc01a());
 
@@ -223,7 +242,7 @@ public class SectionBActivity extends AppCompatActivity {
 
     public void btnContinue(View view) {
         if (!formValidation()) return;
-        if (MainApp.mwra.getUid().equals("") ? insertNewRecord() : updateDB()) {
+        if (MainApp.mwra.getUid().equals("") ? insertNewRecord() && insertNewFollowupRecord() : updateDB()) {
             setResult(RESULT_OK);
             finish();
             //  startActivity(new Intent(this, EndingActivity.class).putExtra("complete", true));
@@ -259,6 +278,37 @@ public class SectionBActivity extends AppCompatActivity {
             return false;
         }
     }
+
+
+    private boolean insertNewFollowupRecord() {
+        db = MainApp.appInfo.getDbHelper();
+        //followups.populateMeta();
+        long rowId = 0;
+        try {
+            rowId = db.addFollowup(followups);
+        } catch (JSONException e) {
+            e.printStackTrace();
+            Toast.makeText(this, "JSONException(FPHouseholds): " + e.getMessage(), Toast.LENGTH_SHORT).show();
+            Log.d(TAG, "insertNewRecord (JSONException): " + e.getMessage());
+            return false;
+        }
+        followups.setId(String.valueOf(rowId));
+        if (rowId > 0) {
+            followups.setUid(followups.getDeviceId() + followups.getId());
+
+            // This not a mistake. It is done on purpose
+            //households.setUid(fpHouseholds.getDeviceId() + fpHouseholds.getId());
+
+            db.updatesFollowUpsColumn(TableContracts.FollowupsTable.COLUMN_UID, followups.getUid());
+            return true;
+        } else {
+            Toast.makeText(this, "Updating Database... ERROR!", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+    }
+
+
+
 
     private boolean updateDB() {
         int updcount = 0;

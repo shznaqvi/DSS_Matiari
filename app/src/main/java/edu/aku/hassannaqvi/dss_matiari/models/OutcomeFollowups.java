@@ -39,6 +39,7 @@ public class OutcomeFollowups extends BaseObservable implements Observable {
     private String uid = StringUtils.EMPTY;
     private String uuid = StringUtils.EMPTY;
     private String muid = StringUtils.EMPTY;
+    private String msno = StringUtils.EMPTY;
     private String userName = StringUtils.EMPTY;
     private String sysDate = StringUtils.EMPTY;
     private String hdssId = StringUtils.EMPTY;
@@ -179,6 +180,14 @@ public class OutcomeFollowups extends BaseObservable implements Observable {
 
     public void setMuid(String muid) {
         this.muid = muid;
+    }
+
+    public String getMsno() {
+        return msno;
+    }
+
+    public void setMsno(String msno) {
+        this.msno = msno;
     }
 
 
@@ -417,7 +426,8 @@ public class OutcomeFollowups extends BaseObservable implements Observable {
         this.id = cursor.getString(cursor.getColumnIndexOrThrow(TableContracts.OutcomeFollowupTable.COLUMN_ID));
         this.uid = cursor.getString(cursor.getColumnIndexOrThrow(TableContracts.OutcomeFollowupTable.COLUMN_UID));
         this.uuid = cursor.getString(cursor.getColumnIndexOrThrow(TableContracts.OutcomeFollowupTable.COLUMN_UUID));
-        //this.muid = cursor.getString(cursor.getColumnIndexOrThrow(TableContracts.OutcomeTable.COLUMN_MUID));
+        this.muid = cursor.getString(cursor.getColumnIndexOrThrow(TableContracts.OutcomeFollowupTable.COLUMN_MUID));
+        this.msno = cursor.getString(cursor.getColumnIndexOrThrow(TableContracts.OutcomeFollowupTable.COLUMN_MSNO));
         this.round = cursor.getString(cursor.getColumnIndexOrThrow(TableContracts.OutcomeFollowupTable.COLUMN_FP_ROUND));
         this.userName = cursor.getString(cursor.getColumnIndexOrThrow(TableContracts.OutcomeFollowupTable.COLUMN_USERNAME));
         this.sysDate = cursor.getString(cursor.getColumnIndexOrThrow(TableContracts.OutcomeFollowupTable.COLUMN_SYSDATE));
@@ -490,7 +500,8 @@ public class OutcomeFollowups extends BaseObservable implements Observable {
         json.put(TableContracts.OutcomeFollowupTable.COLUMN_PROJECT_NAME, this.projectName);
         json.put(TableContracts.OutcomeFollowupTable.COLUMN_UID, this.uid);
         json.put(TableContracts.OutcomeFollowupTable.COLUMN_UUID, this.uuid);
-        //json.put(TableContracts.OutcomeTable.COLUMN_MUID, this.muid);
+        json.put(TableContracts.OutcomeFollowupTable.COLUMN_MUID, this.muid);
+        json.put(TableContracts.OutcomeFollowupTable.COLUMN_MSNO, this.msno);
         json.put(TableContracts.OutcomeFollowupTable.COLUMN_USERNAME, this.userName);
         json.put(TableContracts.OutcomeFollowupTable.COLUMN_SYSDATE, this.sysDate);
         json.put(TableContracts.OutcomeFollowupTable.COLUMN_HDSSID, this.hdssId);
@@ -532,13 +543,18 @@ public class OutcomeFollowups extends BaseObservable implements Observable {
         MainApp.outcomeFollowups.setSysDate(MainApp.fpHouseholds.getSysDate());
         MainApp.outcomeFollowups.setUuid(MainApp.fpHouseholds.getUid());
 
+
         // From FollowupsSche - MWRA
         MainApp.outcomeFollowups.setUcCode(MainApp.fpMwra.getUcCode());
         MainApp.outcomeFollowups.setVillageCode(MainApp.fpMwra.getVillageCode());
         MainApp.outcomeFollowups.setHhNo(MainApp.fpMwra.getHhNo());
         MainApp.outcomeFollowups.setRound(MainApp.fpMwra.getfRound());
         MainApp.outcomeFollowups.setSno(MainApp.fpMwra.getRb01());
-        MainApp.outcomeFollowups.setHdssId(MainApp.fpMwra.getHdssid());
+
+        //TODO add muid and mother sno in hhFollowupslist
+
+        //MainApp.outcomeFollowups.setMuid(MainApp.fpMwra.getmuid());
+        //MainApp.outcomeFollowups.setMsno(MainApp.fpMwra.getmsno());
         //MainApp.followups.setRb06(MainApp.fpMwra.getRb06());
     }
 
