@@ -21,6 +21,10 @@ import com.validatorcrawler.aliazaz.Validator;
 
 import org.json.JSONException;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
+
 import edu.aku.hassannaqvi.dss_matiari.R;
 import edu.aku.hassannaqvi.dss_matiari.contracts.TableContracts;
 import edu.aku.hassannaqvi.dss_matiari.core.MainApp;
@@ -88,6 +92,23 @@ public class SectionAActivity extends AppCompatActivity {
             }
         });
 
+        if(fpHouseholds != null) {
+            // FP Households Data
+            fpHouseholds.setHhNo(households.getHhNo());
+            fpHouseholds.setUcCode(households.getUcCode());
+            fpHouseholds.setVillageCode(households.getVillageCode());
+            fpHouseholds.setDeviceId(MainApp.deviceid);
+            fpHouseholds.setUserName(MainApp.user.getUserName());
+            fpHouseholds.setFround("0");
+
+            fpHouseholds.setSysDate(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.ENGLISH).format(new Date().getTime()));
+            fpHouseholds.setHdssId(households.getUcCode() + "-" + households.getVillageCode() + "-" + households.getHhNo());
+            fpHouseholds.setStructureNo(households.getRa10());
+        }
+
+
+
+
 
 
 
@@ -114,6 +135,9 @@ public class SectionAActivity extends AppCompatActivity {
         }
         if (!formValidation()) return;
         if (!insertNewRecord()) return;
+
+
+        if (!insertFpHousehold()) return;
         if (updateDB()) {
 
             setResult(RESULT_OK);
@@ -161,7 +185,7 @@ public class SectionAActivity extends AppCompatActivity {
     }
 
     private boolean insertFpHousehold() {
-
+        db = MainApp.appInfo.getDbHelper();
         if (!MainApp.fpHouseholds.getUid().equals("")) return true;
 
         long rowId = 0;
