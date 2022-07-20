@@ -219,6 +219,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         values.put(FollowupsTable.COLUMN_PROJECT_NAME, followups.getProjectName());
         values.put(FollowupsTable.COLUMN_UID, followups.getUid());
         values.put(FollowupsTable.COLUMN_UUID, followups.getUuid());
+        values.put(FollowupsTable.COLUMN_FMUID, followups.getFmuid());
         values.put(FollowupsTable.COLUMN_USERNAME, followups.getUserName());
         values.put(FollowupsTable.COLUMN_SYSDATE, followups.getSysDate());
         values.put(FollowupsTable.COLUMN_HDSSID, followups.getHdssId());
@@ -826,6 +827,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             values.put(TableFollowUpsSche.COLUMN_VILLAGE_CODE, followUpsSche.getVillageCode());
             values.put(TableFollowUpsSche.COLUMN_HOUSEHOLD_NO, followUpsSche.getHhNo());
             values.put(TableFollowUpsSche.COLUMN_HDSSID, followUpsSche.getHdssid());
+            values.put(TableFollowUpsSche.COLUMN_FMUID, followUpsSche.getFmuid());
             values.put(TableFollowUpsSche.COLUMN_RA01, followUpsSche.getRa01());
             values.put(TableFollowUpsSche.COLUMN_RA08, followUpsSche.getRa08());
             values.put(TableFollowUpsSche.COLUMN_RA14, followUpsSche.getRa14());

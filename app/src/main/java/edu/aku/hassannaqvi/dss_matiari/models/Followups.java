@@ -39,6 +39,7 @@ public class Followups extends BaseObservable implements Observable {
     private String id = StringUtils.EMPTY;
     private String uid = StringUtils.EMPTY;
     private String uuid = StringUtils.EMPTY;
+    private String fmuid = StringUtils.EMPTY;
     private String userName = StringUtils.EMPTY;
     private String sysDate = StringUtils.EMPTY;
     private String hdssId = StringUtils.EMPTY;
@@ -136,11 +137,13 @@ public class Followups extends BaseObservable implements Observable {
         // From FollowupsSche - MWRA
         MainApp.followups.setUcCode(MainApp.fpMwra.getUcCode());
         MainApp.followups.setVillageCode(MainApp.fpMwra.getVillageCode());
+        MainApp.followups.setFmuid(MainApp.fpMwra.getFmuid());
         MainApp.followups.setHhNo(MainApp.fpMwra.getHhNo());
         MainApp.followups.setfRound(MainApp.fpMwra.getfRound());
         MainApp.followups.setSno(MainApp.fpMwra.getRb01());
         MainApp.followups.setHdssId(MainApp.fpMwra.getHdssid());
         MainApp.followups.setRb06(MainApp.fpMwra.getRb06());
+
 
     }
 
@@ -187,6 +190,15 @@ public class Followups extends BaseObservable implements Observable {
 
     public void setUuid(String uuid) {
         this.uuid = uuid;
+    }
+
+
+    public String getFmuid() {
+        return fmuid;
+    }
+
+    public void setFmuid(String fmuid) {
+        this.fmuid = fmuid;
     }
 
 
@@ -946,6 +958,7 @@ public class Followups extends BaseObservable implements Observable {
         this.id = cursor.getString(cursor.getColumnIndexOrThrow(FollowupsTable.COLUMN_ID));
         this.uid = cursor.getString(cursor.getColumnIndexOrThrow(FollowupsTable.COLUMN_UID));
         this.uuid = cursor.getString(cursor.getColumnIndexOrThrow(FollowupsTable.COLUMN_UUID));
+        this.fmuid = cursor.getString(cursor.getColumnIndexOrThrow(FollowupsTable.COLUMN_FMUID));
         this.userName = cursor.getString(cursor.getColumnIndexOrThrow(FollowupsTable.COLUMN_USERNAME));
         this.sysDate = cursor.getString(cursor.getColumnIndexOrThrow(FollowupsTable.COLUMN_SYSDATE));
         this.hdssId = cursor.getString(cursor.getColumnIndexOrThrow(FollowupsTable.COLUMN_HDSSID));
@@ -1118,6 +1131,7 @@ public class Followups extends BaseObservable implements Observable {
         json.put(FollowupsTable.COLUMN_PROJECT_NAME, this.projectName);
         json.put(FollowupsTable.COLUMN_UID, this.uid);
         json.put(FollowupsTable.COLUMN_UUID, this.uuid);
+        json.put(FollowupsTable.COLUMN_FMUID, this.fmuid);
         json.put(FollowupsTable.COLUMN_USERNAME, this.userName);
         json.put(FollowupsTable.COLUMN_SYSDATE, this.sysDate);
         json.put(FollowupsTable.COLUMN_HDSSID, this.hdssId);

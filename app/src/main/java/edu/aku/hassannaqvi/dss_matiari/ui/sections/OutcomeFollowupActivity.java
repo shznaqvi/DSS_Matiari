@@ -3,6 +3,7 @@ package edu.aku.hassannaqvi.dss_matiari.ui.sections;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.followups;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.fpHouseholds;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.fpMwra;
+import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.outcome;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.outcomeFollowups;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.sharedPref;
 
@@ -61,6 +62,7 @@ public class OutcomeFollowupActivity extends AppCompatActivity {
             outcomeFollowups.setRc12(MainApp.fpMwra.getRc12());
             outcomeFollowups.setHdssId(MainApp.fpMwra.getHdssid());
             outcomeFollowups.setHhNo(MainApp.fpMwra.getHhNo());
+            outcomeFollowups.setMuid(fpMwra.getFmuid());
 
         }
 

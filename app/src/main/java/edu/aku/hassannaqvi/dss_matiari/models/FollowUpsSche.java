@@ -19,6 +19,7 @@ public class FollowUpsSche implements Observable {
     private String villageCode;
     private String hhNo;
     private String hdssid;
+    private String fmuid;
     private String ra01; // Date of First Visit
     private String ra08; // Para
     private String ra14; // Head of Household
@@ -26,15 +27,15 @@ public class FollowUpsSche implements Observable {
     private String fRound;
     private String rb01; // MWRA Sno
     private String rb02; // MWRA Name
-    private String rb03; // Age in Years
+    private String rb03; // Husband / Father
     private String rb04; // DOB
     private String rc12; // Gender
-    private String rb05;  // Husband / Father
+    private String rb05;  // Age in years
     private String rb07;  // Pregnancy Status
     private String rb06; // Marital Status
     private String memberType; // Member Type (Mother or child)
-    private String istatus; // Marital Status
-    private String fpDoneDt = "";  // Pregnancy Status
+    private String istatus; // Interview Status
+    private String fpDoneDt = "";  // followup-done date
 
 
     @Override
@@ -60,6 +61,14 @@ public class FollowUpsSche implements Observable {
 
     public void setUcCode(String ucCode) {
         this.ucCode = ucCode;
+    }
+
+    public String getFmuid() {
+        return fmuid;
+    }
+
+    public void setFmuid(String fmuid) {
+        this.fmuid = fmuid;
     }
 
     public String getVillageCode() {
@@ -218,6 +227,7 @@ public class FollowUpsSche implements Observable {
     public FollowUpsSche Sync(JSONObject jsonObject) throws JSONException {
         this.ucCode = jsonObject.getString(TableFollowUpsSche.COLUMN_UC_CODE);
         this.villageCode = jsonObject.getString(TableFollowUpsSche.COLUMN_VILLAGE_CODE);
+        this.fmuid = jsonObject.getString(TableFollowUpsSche.COLUMN_FMUID);
         this.hhNo = jsonObject.getString(TableFollowUpsSche.COLUMN_HOUSEHOLD_NO);
         this.hdssid = jsonObject.getString(TableFollowUpsSche.COLUMN_HDSSID);
         this.ra01 = jsonObject.getString(TableFollowUpsSche.COLUMN_RA01);
@@ -242,6 +252,7 @@ public class FollowUpsSche implements Observable {
     public FollowUpsSche Hydrate(Cursor cursor) {
         this.ucCode = cursor.getString(cursor.getColumnIndexOrThrow(TableFollowUpsSche.COLUMN_UC_CODE));
         this.villageCode = cursor.getString(cursor.getColumnIndexOrThrow(TableFollowUpsSche.COLUMN_VILLAGE_CODE));
+        this.fmuid = cursor.getString(cursor.getColumnIndexOrThrow(TableFollowUpsSche.COLUMN_FMUID));
         this.hhNo = cursor.getString(cursor.getColumnIndexOrThrow(TableFollowUpsSche.COLUMN_HOUSEHOLD_NO));
         this.hdssid = cursor.getString(cursor.getColumnIndexOrThrow(TableFollowUpsSche.COLUMN_HDSSID));
         this.ra01 = cursor.getString(cursor.getColumnIndexOrThrow(TableFollowUpsSche.COLUMN_RA01));
