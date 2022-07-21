@@ -197,7 +197,7 @@ object CreateTable {
             + TableFollowUpsSche.COLUMN_UC_CODE + " TEXT,"
             + TableFollowUpsSche.COLUMN_VILLAGE_CODE + " TEXT,"
             + TableFollowUpsSche.COLUMN_HOUSEHOLD_NO + " TEXT,"
-            + TableFollowUpsSche.COLUMN_FMUID + " TEXT,"
+            /*+ TableFollowUpsSche.COLUMN_FMUID + " TEXT,"*/
             + TableFollowUpsSche.COLUMN_HDSSID + " TEXT,"
             + TableFollowUpsSche.COLUMN_RA01 + " TEXT,"
             + TableFollowUpsSche.COLUMN_RA08 + " TEXT,"

@@ -550,7 +550,7 @@ public class OutcomeFollowups extends BaseObservable implements Observable {
         MainApp.outcomeFollowups.setHhNo(MainApp.fpMwra.getHhNo());
         MainApp.outcomeFollowups.setRound(MainApp.fpMwra.getfRound());
         MainApp.outcomeFollowups.setSno(MainApp.fpMwra.getRb01());
-        MainApp.outcomeFollowups.setMuid(MainApp.fpMwra.getFmuid());
+        //MainApp.outcomeFollowups.setMuid(MainApp.fpMwra.getFmuid());
 
         //TODO add mother sno in hhFollowupslist
 

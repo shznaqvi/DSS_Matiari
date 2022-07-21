@@ -227,7 +227,7 @@ public class FollowUpsSche implements Observable {
     public FollowUpsSche Sync(JSONObject jsonObject) throws JSONException {
         this.ucCode = jsonObject.getString(TableFollowUpsSche.COLUMN_UC_CODE);
         this.villageCode = jsonObject.getString(TableFollowUpsSche.COLUMN_VILLAGE_CODE);
-        this.fmuid = jsonObject.getString(TableFollowUpsSche.COLUMN_FMUID);
+        //this.fmuid = jsonObject.getString(TableFollowUpsSche.COLUMN_FMUID);
         this.hhNo = jsonObject.getString(TableFollowUpsSche.COLUMN_HOUSEHOLD_NO);
         this.hdssid = jsonObject.getString(TableFollowUpsSche.COLUMN_HDSSID);
         this.ra01 = jsonObject.getString(TableFollowUpsSche.COLUMN_RA01);
@@ -252,7 +252,7 @@ public class FollowUpsSche implements Observable {
     public FollowUpsSche Hydrate(Cursor cursor) {
         this.ucCode = cursor.getString(cursor.getColumnIndexOrThrow(TableFollowUpsSche.COLUMN_UC_CODE));
         this.villageCode = cursor.getString(cursor.getColumnIndexOrThrow(TableFollowUpsSche.COLUMN_VILLAGE_CODE));
-        this.fmuid = cursor.getString(cursor.getColumnIndexOrThrow(TableFollowUpsSche.COLUMN_FMUID));
+        //this.fmuid = cursor.getString(cursor.getColumnIndexOrThrow(TableFollowUpsSche.COLUMN_FMUID));
         this.hhNo = cursor.getString(cursor.getColumnIndexOrThrow(TableFollowUpsSche.COLUMN_HOUSEHOLD_NO));
         this.hdssid = cursor.getString(cursor.getColumnIndexOrThrow(TableFollowUpsSche.COLUMN_HDSSID));
         this.ra01 = cursor.getString(cursor.getColumnIndexOrThrow(TableFollowUpsSche.COLUMN_RA01));

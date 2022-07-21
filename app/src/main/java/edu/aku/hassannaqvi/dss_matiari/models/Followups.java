@@ -137,7 +137,7 @@ public class Followups extends BaseObservable implements Observable {
         // From FollowupsSche - MWRA
         MainApp.followups.setUcCode(MainApp.fpMwra.getUcCode());
         MainApp.followups.setVillageCode(MainApp.fpMwra.getVillageCode());
-        MainApp.followups.setFmuid(MainApp.fpMwra.getFmuid());
+        //MainApp.followups.setFmuid(MainApp.fpMwra.getFmuid());
         MainApp.followups.setHhNo(MainApp.fpMwra.getHhNo());
         MainApp.followups.setfRound(MainApp.fpMwra.getfRound());
         MainApp.followups.setSno(MainApp.fpMwra.getRb01());
