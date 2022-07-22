@@ -80,7 +80,7 @@ public class SectionOutcomeActivity extends AppCompatActivity {
 
             // Followups data
             outcomeFollowups.setUuid(followups.getUid());
-            //outcomeFollowups.setMuid(outcome.getMuid());
+            outcomeFollowups.setMuid(outcome.getMuid());
             outcomeFollowups.setUcCode(followups.getUcCode());
             outcomeFollowups.setVillageCode(followups.getVillageCode());
             outcomeFollowups.setMuid(followups.getFmuid());

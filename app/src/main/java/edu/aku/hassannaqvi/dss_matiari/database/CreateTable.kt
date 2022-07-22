@@ -197,7 +197,7 @@ object CreateTable {
             + TableFollowUpsSche.COLUMN_UC_CODE + " TEXT,"
             + TableFollowUpsSche.COLUMN_VILLAGE_CODE + " TEXT,"
             + TableFollowUpsSche.COLUMN_HOUSEHOLD_NO + " TEXT,"
-            /*+ TableFollowUpsSche.COLUMN_FMUID + " TEXT,"*/
+            + TableFollowUpsSche.COLUMN_FMUID + " TEXT,"
             + TableFollowUpsSche.COLUMN_HDSSID + " TEXT,"
             + TableFollowUpsSche.COLUMN_RA01 + " TEXT,"
             + TableFollowUpsSche.COLUMN_RA08 + " TEXT,"
@@ -211,6 +211,7 @@ object CreateTable {
             + TableFollowUpsSche.COLUMN_RB03 + " TEXT,"
             + TableFollowUpsSche.COLUMN_RB04 + " TEXT,"
             + TableFollowUpsSche.COLUMN_RC12 + " TEXT,"
+            + TableFollowUpsSche.COLUMN_RC15 + " TEXT,"
             + TableFollowUpsSche.COLUMN_RB05 + " TEXT,"
             + TableFollowUpsSche.COLUMN_RB06 + " TEXT,"
             + TableFollowUpsSche.COLUMN_MEMBERTYPE + " TEXT,"

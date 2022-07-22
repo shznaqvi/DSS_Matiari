@@ -30,6 +30,7 @@ public class FollowUpsSche implements Observable {
     private String rb03; // Husband / Father
     private String rb04; // DOB
     private String rc12; // Gender
+    private String rc15; // Pregnancy status current
     private String rb05;  // Age in years
     private String rb07;  // Pregnancy Status
     private String rb06; // Marital Status
@@ -216,6 +217,14 @@ public class FollowUpsSche implements Observable {
         this.rc12 = rc12;
     }
 
+    public String getRc15() {
+        return rc15;
+    }
+
+    public void setRc15(String rc15) {
+        this.rc15 = rc15;
+    }
+
     public String getMemberType() {
         return memberType;
     }
@@ -227,7 +236,7 @@ public class FollowUpsSche implements Observable {
     public FollowUpsSche Sync(JSONObject jsonObject) throws JSONException {
         this.ucCode = jsonObject.getString(TableFollowUpsSche.COLUMN_UC_CODE);
         this.villageCode = jsonObject.getString(TableFollowUpsSche.COLUMN_VILLAGE_CODE);
-        //this.fmuid = jsonObject.getString(TableFollowUpsSche.COLUMN_FMUID);
+        this.fmuid = jsonObject.getString(TableFollowUpsSche.COLUMN_FMUID);
         this.hhNo = jsonObject.getString(TableFollowUpsSche.COLUMN_HOUSEHOLD_NO);
         this.hdssid = jsonObject.getString(TableFollowUpsSche.COLUMN_HDSSID);
         this.ra01 = jsonObject.getString(TableFollowUpsSche.COLUMN_RA01);
@@ -241,6 +250,7 @@ public class FollowUpsSche implements Observable {
         this.rb03 = jsonObject.getString(TableFollowUpsSche.COLUMN_RB03);
         this.rb04 = jsonObject.getString(TableFollowUpsSche.COLUMN_RB04);
         this.rc12 = jsonObject.getString(TableFollowUpsSche.COLUMN_RC12);
+        this.rc15 = jsonObject.getString(TableFollowUpsSche.COLUMN_RC15);
         this.rb05 = jsonObject.getString(TableFollowUpsSche.COLUMN_RB05);
         this.rb07 = jsonObject.getString(TableFollowUpsSche.COLUMN_RB07);
         this.rb06 = jsonObject.getString(TableFollowUpsSche.COLUMN_RB06);
@@ -252,7 +262,7 @@ public class FollowUpsSche implements Observable {
     public FollowUpsSche Hydrate(Cursor cursor) {
         this.ucCode = cursor.getString(cursor.getColumnIndexOrThrow(TableFollowUpsSche.COLUMN_UC_CODE));
         this.villageCode = cursor.getString(cursor.getColumnIndexOrThrow(TableFollowUpsSche.COLUMN_VILLAGE_CODE));
-        //this.fmuid = cursor.getString(cursor.getColumnIndexOrThrow(TableFollowUpsSche.COLUMN_FMUID));
+        this.fmuid = cursor.getString(cursor.getColumnIndexOrThrow(TableFollowUpsSche.COLUMN_FMUID));
         this.hhNo = cursor.getString(cursor.getColumnIndexOrThrow(TableFollowUpsSche.COLUMN_HOUSEHOLD_NO));
         this.hdssid = cursor.getString(cursor.getColumnIndexOrThrow(TableFollowUpsSche.COLUMN_HDSSID));
         this.ra01 = cursor.getString(cursor.getColumnIndexOrThrow(TableFollowUpsSche.COLUMN_RA01));
@@ -267,6 +277,7 @@ public class FollowUpsSche implements Observable {
         this.rb03 = cursor.getString(cursor.getColumnIndexOrThrow(TableFollowUpsSche.COLUMN_RB03));
         this.rb04 = cursor.getString(cursor.getColumnIndexOrThrow(TableFollowUpsSche.COLUMN_RB04));
         this.rc12 = cursor.getString(cursor.getColumnIndexOrThrow(TableFollowUpsSche.COLUMN_RC12));
+        this.rc15 = cursor.getString(cursor.getColumnIndexOrThrow(TableFollowUpsSche.COLUMN_RC15));
         this.rb05 = cursor.getString(cursor.getColumnIndexOrThrow(TableFollowUpsSche.COLUMN_RB05));
         this.rb07 = cursor.getString(cursor.getColumnIndexOrThrow(TableFollowUpsSche.COLUMN_RB07));
         this.rb06 = cursor.getString(cursor.getColumnIndexOrThrow(TableFollowUpsSche.COLUMN_RB06));

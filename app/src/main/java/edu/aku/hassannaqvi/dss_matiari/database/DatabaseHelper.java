@@ -827,7 +827,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             values.put(TableFollowUpsSche.COLUMN_VILLAGE_CODE, followUpsSche.getVillageCode());
             values.put(TableFollowUpsSche.COLUMN_HOUSEHOLD_NO, followUpsSche.getHhNo());
             values.put(TableFollowUpsSche.COLUMN_HDSSID, followUpsSche.getHdssid());
-            //values.put(TableFollowUpsSche.COLUMN_FMUID, followUpsSche.getFmuid());
+            values.put(TableFollowUpsSche.COLUMN_FMUID, followUpsSche.getFmuid());
             values.put(TableFollowUpsSche.COLUMN_RA01, followUpsSche.getRa01());
             values.put(TableFollowUpsSche.COLUMN_RA08, followUpsSche.getRa08());
             values.put(TableFollowUpsSche.COLUMN_RA14, followUpsSche.getRa14());
@@ -840,6 +840,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             values.put(TableFollowUpsSche.COLUMN_RB03, followUpsSche.getRb03());
             values.put(TableFollowUpsSche.COLUMN_RB04, followUpsSche.getRb04());
             values.put(TableFollowUpsSche.COLUMN_RC12, followUpsSche.getRc12());
+            values.put(TableFollowUpsSche.COLUMN_RC15, followUpsSche.getRc15());
             values.put(TableFollowUpsSche.COLUMN_RB05, followUpsSche.getRb05());
             values.put(TableFollowUpsSche.COLUMN_RB07, followUpsSche.getRb07());
             values.put(TableFollowUpsSche.COLUMN_RB06, followUpsSche.getRb06());
@@ -2096,6 +2097,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         return followup;
     }
+
+
 
     public Outcome getOutComeBYID(String sno) throws JSONException {
 

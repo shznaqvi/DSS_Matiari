@@ -65,6 +65,7 @@ public class SectionCxActivity extends AppCompatActivity {
             MainApp.followups.setRc06(MainApp.fpMwra.getRb06());
             MainApp.followups.setPrePreg(MainApp.fpMwra.getRb07());
             MainApp.followups.setRc07(MainApp.fpMwra.getRb07());
+            //MainApp.followups.setRc15(MainApp.fpMwra.getRb07());
             MainApp.followups.setHdssId(MainApp.fpMwra.getHdssid());
             MainApp.followups.setHhNo(MainApp.fpMwra.getHhNo());
 
