@@ -261,7 +261,7 @@ public class TableContracts {
         public static final String COLUMN_ID = "id";
         public static final String COLUMN_VILLAGE_CODE = "villageCode";
         public static final String COLUMN_UC_CODE = "ucCode";
-        public static final String COLUMN_FMUID = "_muid";
+        public static final String COLUMN_FMUID = "fmuid";
         public static final String COLUMN_HOUSEHOLD_NO = "hhNo";
         public static final String COLUMN_HDSSID = "hdssid";
         public static final String COLUMN_RA01 = "ra01"; // Date of First Visit

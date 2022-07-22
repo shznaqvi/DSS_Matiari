@@ -271,7 +271,7 @@ public class OutcomeFollowupActivity extends AppCompatActivity {
     public static String toBlackVisionDate(String currentDate) {
         String newDate = currentDate;
         String[] oldDateParts = currentDate.split("-");
-        newDate = oldDateParts[2] + "/" + oldDateParts[1] + "/" + oldDateParts[0];
+        newDate = oldDateParts[2].trim() + "/" + oldDateParts[1].trim() + "/" + oldDateParts[0].trim();
         return newDate;
     }
 }
