@@ -407,6 +407,51 @@
                                 android:textColor="@color/redDark"
                                 android:visibility="gone" />
                         </LinearLayout>
+
+
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/fldGrpCVrc05b"
+                    style="@style/cardView"
+                    android:visibility="@{outcome.rc13.equals(`1`) ? View.GONE : View.VISIBLE}">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/bottom"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:text="@string/rc05b" />
+
+                            <TextView
+                                style="@style/quesNum"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:text="@string/Q_rc14a" />
+
+                        </LinearLayout>
+
+                        <EditText
+                            android:id="@+id/rc14a"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:digits="abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ ,.\/"
+                            android:enabled="true"
+                            android:hint="@string/rc05b"
+                            android:inputType="text"
+                            android:text="@={outcome.rc14a}" />
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
 
