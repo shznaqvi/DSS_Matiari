@@ -519,16 +519,18 @@ public class Outcome extends BaseObservable implements Observable {
         MainApp.outcome.setUuid(MainApp.followups.getUid());
         MainApp.outcome.setMuid(MainApp.followups.getUid().split("_")[0]);
         MainApp.outcome.setMsno(MainApp.followups.getRc01());
+        MainApp.outcome.setSysDate(MainApp.followups.getSysDate());
+        MainApp.outcome.setRb02(MainApp.followups.getRc02());
+        MainApp.outcome.setRound(MainApp.followups.getfRound());
         MainApp.outcome.setUcCode(MainApp.fpHouseholds.getUcCode());
         MainApp.outcome.setVillageCode(MainApp.fpHouseholds.getVillageCode());
         MainApp.outcome.setHhNo(MainApp.fpHouseholds.getHhNo());
         MainApp.outcome.setSno(String.valueOf(MainApp.childCount));
-        MainApp.outcome.setRb02(MainApp.followups.getRc02());
-        MainApp.outcome.setRound(MainApp.followups.getfRound());
+
         // TODO: set MWRA ID from downloaded data
         //   MainApp.followups.setMWRAID(households.getHhNo());
         MainApp.outcome.setUserName(MainApp.user.getUserName());
-        MainApp.outcome.setSysDate(MainApp.fpHouseholds.getSysDate());
+
         MainApp.outcome.setDeviceId(MainApp.deviceid);
         MainApp.outcome.setHdssId(MainApp.fpHouseholds.getHdssId());
         MainApp.outcome.setAppver(MainApp.versionName + "." + MainApp.versionCode);
