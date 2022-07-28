@@ -214,7 +214,7 @@ public class SyncActivity extends AppCompatActivity {
                     e.printStackTrace();
                     Toast.makeText(this, "JSONException(Outcome): " + e.getMessage(), Toast.LENGTH_LONG).show();
                     Log.d(TAG, "JSONException(Outcome): " + e.getMessage());
-                    bi.errMessage.setText(bi.errMessage.getText() + "\nERROR - JSONException(FPHousehold): " + e.getMessage());
+                    bi.errMessage.setText(bi.errMessage.getText() + "\nERROR - JSONException(Outcome): " + e.getMessage());
                     bi.errMessage.setVisibility(View.VISIBLE);
                 }
 
@@ -225,9 +225,9 @@ public class SyncActivity extends AppCompatActivity {
 
                 } catch (JSONException e) {
                     e.printStackTrace();
-                    Toast.makeText(this, "JSONException(Followups): " + e.getMessage(), Toast.LENGTH_LONG).show();
+                    Toast.makeText(this, "JSONException(Outcome Followups): " + e.getMessage(), Toast.LENGTH_LONG).show();
                     Log.d(TAG, "JSONException(Followups): " + e.getMessage());
-                    bi.errMessage.setText(bi.errMessage.getText() + "\nERROR - JSONException(Followups): " + e.getMessage());
+                    bi.errMessage.setText(bi.errMessage.getText() + "\nERROR - JSONException(Outcome Followups): " + e.getMessage());
                     bi.errMessage.setVisibility(View.VISIBLE);
                 }
 

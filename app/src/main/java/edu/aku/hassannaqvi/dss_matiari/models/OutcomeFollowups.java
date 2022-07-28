@@ -69,7 +69,7 @@ public class OutcomeFollowups extends BaseObservable implements Observable {
     private String rc12 = StringUtils.EMPTY;
     private String rc13 = StringUtils.EMPTY;
     private String rc14 = StringUtils.EMPTY;
-    private String rc15 = StringUtils.EMPTY;
+    private String rc14a = StringUtils.EMPTY;
     private String rc16 = StringUtils.EMPTY;
 
 
@@ -363,7 +363,7 @@ public class OutcomeFollowups extends BaseObservable implements Observable {
     public void setRc13(String rc13) {
         this.rc13 = rc13;
         setRc14(rc13.equals("1") ? "" : this.rc14);
-        setRc15(rc13.equals("1") ? "" : this.rc15);
+        setRc14a(rc13.equals("1") ? "" : this.rc14a);
         notifyChange(BR.rc13);
     }
 
@@ -378,14 +378,14 @@ public class OutcomeFollowups extends BaseObservable implements Observable {
     }
 
     @Bindable
-    public String getRc15() {
-        return rc15;
+    public String getRc14a() {
+        return rc14a;
     }
 
-    public void setRc15(String rc15) {
-        this.rc15 = rc15;
+    public void setRc14a(String rc14a) {
+        this.rc14a = rc14a;
         //setRc16(rc15.equals("1") ? "" : this.rc16);
-        notifyChange(BR.rc15);
+        notifyChange(BR.rc14a);
     }
 
     @Bindable
@@ -462,7 +462,7 @@ public class OutcomeFollowups extends BaseObservable implements Observable {
             this.rc12 = json.getString("rc12");
             this.rc13 = json.getString("rc13");
             this.rc14 = json.getString("rc14");
-            this.rc15 = json.getString("rc15");
+            this.rc14a = json.getString("rc14a");
             this.rc16 = json.getString("rc16");
 
 
@@ -484,7 +484,7 @@ public class OutcomeFollowups extends BaseObservable implements Observable {
                 .put("rc12", rc12)
                 .put("rc13", rc13)
                 .put("rc14", rc14)
-                .put("rc15", rc15)
+                .put("rc14a", rc14a)
                 .put("rc16", rc16);
 
         return json.toString();

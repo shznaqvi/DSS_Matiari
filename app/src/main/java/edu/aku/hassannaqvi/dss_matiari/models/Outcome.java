@@ -65,17 +65,17 @@ public class Outcome extends BaseObservable implements Observable {
     private String rc12 = StringUtils.EMPTY;
     private String rc13 = StringUtils.EMPTY;
     private String rc14 = StringUtils.EMPTY;
-    private String rc15 = StringUtils.EMPTY;
+    private String rc14a = StringUtils.EMPTY;
     private String rc16 = StringUtils.EMPTY;
 
 
     public Outcome() {
 
-        setRound(MainApp.ROUND);
+        /*setRound(MainApp.ROUND);
 
         // TODO: *** THIS IS A BLUNDER *** -- DATE IN ALL LINKED TABLES COMES FROM PARENT TABLE (followups in this case)
-        //setSysDate(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.ENGLISH).format(new Date().getTime()));
-        setSysDate(MainApp.followups.getSysDate());
+        setSysDate(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.ENGLISH).format(new Date().getTime()));
+        //setSysDate(MainApp.followups.getSysDate());
         setUserName(MainApp.user.getUserName());
         setDeviceId(MainApp.deviceid);
         setAppver(MainApp.appInfo.getAppVersion());
@@ -88,6 +88,7 @@ public class Outcome extends BaseObservable implements Observable {
         setVillageCode(MainApp.selectedVillage);
         setUcCode(MainApp.selectedUC);
 
+    }*/
     }
 
 
@@ -361,14 +362,14 @@ public class Outcome extends BaseObservable implements Observable {
     }
 
     @Bindable
-    public String getRc15() {
-        return rc15;
+    public String getRc14a() {
+        return rc14a;
     }
 
-    public void setRc15(String rc15) {
-        this.rc15 = rc15;
-        setRc16(rc15.equals("1") ? "" : this.rc16);
-        notifyChange(BR.rc15);
+    public void setRc14a(String rc14a) {
+        this.rc14a = rc14a;
+        setRc16(rc14a.equals("1") ? "" : this.rc16);
+        notifyChange(BR.rc14a);
     }
 
     @Bindable
@@ -444,7 +445,7 @@ public class Outcome extends BaseObservable implements Observable {
             this.rc12 = json.getString("rc12");
             this.rc13 = json.getString("rc13");
             this.rc14 = json.getString("rc14");
-            this.rc15 = json.getString("rc15");
+            this.rc14a = json.getString("rc14a");
             this.rc16 = json.getString("rc16");
 
 
@@ -466,7 +467,7 @@ public class Outcome extends BaseObservable implements Observable {
                 .put("rc12", rc12)
                 .put("rc13", rc13)
                 .put("rc14", rc14)
-                .put("rc15", rc15)
+                .put("rc14a", rc14a)
                 .put("rc16", rc16);
 
         return json.toString();
@@ -522,6 +523,8 @@ public class Outcome extends BaseObservable implements Observable {
         MainApp.outcome.setVillageCode(MainApp.fpHouseholds.getVillageCode());
         MainApp.outcome.setHhNo(MainApp.fpHouseholds.getHhNo());
         MainApp.outcome.setSno(String.valueOf(MainApp.childCount));
+        MainApp.outcome.setRb02(MainApp.followups.getRc02());
+        MainApp.outcome.setRound(MainApp.followups.getfRound());
         // TODO: set MWRA ID from downloaded data
         //   MainApp.followups.setMWRAID(households.getHhNo());
         MainApp.outcome.setUserName(MainApp.user.getUserName());
@@ -529,6 +532,8 @@ public class Outcome extends BaseObservable implements Observable {
         MainApp.outcome.setDeviceId(MainApp.deviceid);
         MainApp.outcome.setHdssId(MainApp.fpHouseholds.getHdssId());
         MainApp.outcome.setAppver(MainApp.versionName + "." + MainApp.versionCode);
+        MainApp.outcome.setRb01a(MainApp.fpMwra.getRa01());
+
     }
 
     /*public String calcEDD() {

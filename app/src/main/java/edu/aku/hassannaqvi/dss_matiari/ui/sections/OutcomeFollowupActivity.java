@@ -62,7 +62,7 @@ public class OutcomeFollowupActivity extends AppCompatActivity {
             outcomeFollowups.setRc12(MainApp.fpMwra.getRc12());
             outcomeFollowups.setHdssId(MainApp.fpMwra.getHdssid());
             outcomeFollowups.setHhNo(MainApp.fpMwra.getHhNo());
-            outcomeFollowups.setMuid(fpMwra.getFmuid());
+            outcomeFollowups.setMuid(fpMwra.getMuid());
 
         }
 
