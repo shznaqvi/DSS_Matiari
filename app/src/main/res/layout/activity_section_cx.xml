@@ -755,6 +755,14 @@
                                     android:enabled='@{followups.prePreg.equals("")}'
                                     android:onClick='@{()->followups.setRc06("4") + rc08.clearCheck() + rc09.clearCheck() + rc11.clearCheck()}'
                                     android:text="@string/rc0604" />
+
+                                <RadioButton
+                                    android:id="@+id/rc0605"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:checked='@{followups.rc06.equals("5")}'
+                                    android:onClick='@{()->followups.setRc06("5")}'
+                                    android:text="@string/rc0605" />
                             </RadioGroup>
                         </LinearLayout>
                     </androidx.cardview.widget.CardView>
