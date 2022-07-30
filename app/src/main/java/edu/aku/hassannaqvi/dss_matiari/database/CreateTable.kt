@@ -8,7 +8,7 @@ object CreateTable {
     const val DATABASE_NAME = "$PROJECT_NAME.db"
     const val DATABASE_COPY = "${PROJECT_NAME}_copy.db"
     const val DATABASE_COPY2 = "${PROJECT_NAME}_copy.db"
-    const val DATABASE_VERSION = 4
+    const val DATABASE_VERSION = 2
 
     const val SQL_CREATE_HOUSEHOLDS = ("CREATE TABLE "
             + HouseholdTable.TABLE_NAME + "("

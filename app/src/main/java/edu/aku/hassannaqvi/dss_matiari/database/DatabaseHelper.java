@@ -84,6 +84,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public static final String DATABASE_COPY2 = PROJECT_NAME + "_copy.db";
     private static final String DATABASE_PASSWORD = IBAHC;
     private final String TAG = "DatabaseHelper";
+    private static final int DATABASE_VERSION = 4;
     private static final String SQL_DELETE_OUTCOME_FOLLOWUPS = "DROP TABLE IF EXISTS " + TableContracts.OutcomeFollowupTable.TABLE_NAME;
 
 
