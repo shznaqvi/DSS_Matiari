@@ -84,6 +84,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public static final String DATABASE_COPY2 = PROJECT_NAME + "_copy.db";
     private static final String DATABASE_PASSWORD = IBAHC;
     private final String TAG = "DatabaseHelper";
+    private static final String SQL_DELETE_OUTCOME_FOLLOWUPS = "DROP TABLE IF EXISTS " + TableContracts.OutcomeFollowupTable.TABLE_NAME;
+
 
     public DatabaseHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -113,6 +115,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+
         switch (oldVersion) {
             case 1:
                 db.execSQL(SQL_ALTER_FOLLOWUPSCHE);
@@ -121,7 +124,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 db.execSQL(SQL_ALTER_ADD_MEMBER_TYPE);
 
             case 2:
+                db.execSQL(SQL_DELETE_OUTCOME_FOLLOWUPS );
                 db.execSQL(SQL_CREATE_OUTCOME_FOLLOWUPS);
+
             case 3:
                 db.execSQL(SQL_ALTER_ADD_MUID);
                 db.execSQL(SQL_ALTER_ADD_RA01);
