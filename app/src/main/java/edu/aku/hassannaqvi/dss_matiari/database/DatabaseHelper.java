@@ -83,7 +83,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public static final String DATABASE_COPY2 = PROJECT_NAME + "_copy.db";
     public static final String DATABASE_PASSWORD = IBAHC;
     private final String TAG = "DatabaseHelper";
-    private static final int DATABASE_VERSION = 4;
+    private static final int DATABASE_VERSION = 3;
     private static final String SQL_DELETE_OUTCOME_FOLLOWUPS = "DROP TABLE IF EXISTS " + TableContracts.OutcomeFollowupTable.TABLE_NAME;
 
 
@@ -115,25 +115,33 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 
-        switch (oldVersion) {
-            case 1:
-                db.execSQL(SQL_ALTER_FOLLOWUPSCHE);
-                db.execSQL(SQL_ALTER_ADD_DOB);
-                db.execSQL(SQL_ALTER_ADD_GENDER);
-                db.execSQL(SQL_ALTER_ADD_MEMBER_TYPE);
+        Log.e("GUL VERSIONS", "Old " + oldVersion + " -- New " + newVersion);
+        try {
+            switch (oldVersion) {
+                case 1:
+                    db.execSQL(SQL_ALTER_FOLLOWUPSCHE);
 
-            case 2:
-                db.execSQL(SQL_CREATE_OUTCOME_FOLLOWUPS);
-                db.execSQL(SQL_DELETE_OUTCOME_FOLLOWUPS);
-            case 3:
-                db.execSQL(SQL_ALTER_ADD_MUID);
-                db.execSQL(SQL_ALTER_ADD_RA01);
-                db.execSQL(SQL_ALTER_ADD_RC15);
-
+                case 2:
+                    executeSafeQuery(db, SQL_ALTER_ADD_DOB);
+                    executeSafeQuery(db, SQL_ALTER_ADD_GENDER);
+                    executeSafeQuery(db, SQL_ALTER_ADD_MEMBER_TYPE);
+                    executeSafeQuery(db, SQL_CREATE_OUTCOME_FOLLOWUPS);
+                    executeSafeQuery(db, SQL_ALTER_ADD_MUID);
+                    executeSafeQuery(db, SQL_ALTER_ADD_RA01);
+                    executeSafeQuery(db, SQL_ALTER_ADD_RC15);
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
         }
-
     }
 
+    private void executeSafeQuery(SQLiteDatabase db, String query) {
+        try {
+            db.execSQL(query);
+        } catch (Exception exception) {
+            exception.printStackTrace();
+        }
+    }
 
     //Addition in DB
     public Long addHousehold(Households households) throws JSONException {
@@ -1909,6 +1917,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 TableFollowUpsSche.COLUMN_RB03,
                 TableFollowUpsSche.COLUMN_RB04,
                 TableFollowUpsSche.COLUMN_RC12,
+                TableFollowUpsSche.COLUMN_RC15,
                 TableFollowUpsSche.COLUMN_RB05,
                 TableFollowUpsSche.COLUMN_RB06,
                 TableFollowUpsSche.COLUMN_MEMBERTYPE,
