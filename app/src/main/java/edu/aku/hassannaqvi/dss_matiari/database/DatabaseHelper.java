@@ -127,10 +127,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             case 2:
                 db.execSQL(SQL_DELETE_OUTCOME_FOLLOWUPS );
                 db.execSQL(SQL_CREATE_OUTCOME_FOLLOWUPS);
-
-            case 3:
                 db.execSQL(SQL_ALTER_ADD_MUID);
                 db.execSQL(SQL_ALTER_ADD_RA01);
+
+            case 3:
+
 
         }
 
