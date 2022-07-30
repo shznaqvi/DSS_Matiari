@@ -123,12 +123,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 db.execSQL(SQL_ALTER_ADD_DOB);
                 db.execSQL(SQL_ALTER_ADD_GENDER);
                 db.execSQL(SQL_ALTER_ADD_MEMBER_TYPE);
-
-            case 2:
-                db.execSQL(SQL_DELETE_OUTCOME_FOLLOWUPS );
+                db.execSQL(SQL_DELETE_OUTCOME_FOLLOWUPS);
                 db.execSQL(SQL_CREATE_OUTCOME_FOLLOWUPS);
                 db.execSQL(SQL_ALTER_ADD_MUID);
                 db.execSQL(SQL_ALTER_ADD_RA01);
+
+            case 2:
+
 
             case 3:
 
