@@ -271,6 +271,6 @@ object CreateTable {
         "ALTER TABLE " + TableFollowUpsSche.TABLE_NAME + " ADD " + TableFollowUpsSche.COLUMN_MUID + " TEXT; "
 
     const val SQL_ALTER_ADD_RA01 =
-        "ALTER TABLE " + TableFollowUpsSche.TABLE_NAME + " ADD " + TableFollowUpsSche.COLUMN_MUID + " TEXT; "
+        "ALTER TABLE " + TableFollowUpsSche.TABLE_NAME + " ADD " + TableFollowUpsSche.COLUMN_RA01 + " TEXT; "
 
 }
