@@ -254,27 +254,34 @@ object CreateTable {
             ");"
 
 
-    const val SQL_ALTER_FOLLOWUPSCHE =
-        "ALTER TABLE " + TableFollowUpsSche.TABLE_NAME + " ADD " + TableFollowUpsSche.COLUMN_ISTATUS + " TEXT;"
+    const val SQL_ALTER_FOLLOWUPSCHE = ("ALTER TABLE "
+            + TableFollowUpsSche.TABLE_NAME + " ADD COLUMN "
+            + TableFollowUpsSche.COLUMN_ISTATUS + " TEXT;")
 
-    const val SQL_ALTER_ADD_DOB =
-        "ALTER TABLE " + TableFollowUpsSche.TABLE_NAME + " ADD " + TableFollowUpsSche.COLUMN_RB04 + " TEXT; "
-
-
-    const val SQL_ALTER_ADD_GENDER =
-        "ALTER TABLE " + TableFollowUpsSche.TABLE_NAME + " ADD " + TableFollowUpsSche.COLUMN_RC12 + " TEXT; "
-
-    const val SQL_ALTER_ADD_MEMBER_TYPE =
-        "ALTER TABLE " + TableFollowUpsSche.TABLE_NAME + " ADD " + TableFollowUpsSche.COLUMN_MEMBERTYPE + " TEXT; "
+    const val SQL_ALTER_ADD_DOB = ("ALTER TABLE "
+            + TableFollowUpsSche.TABLE_NAME + " ADD COLUMN "
+            + TableFollowUpsSche.COLUMN_RB04 + " TEXT;")
 
 
-    const val SQL_ALTER_ADD_MUID =
-        "ALTER TABLE " + TableFollowUpsSche.TABLE_NAME + " ADD " + TableFollowUpsSche.COLUMN_MUID + " TEXT; "
+    const val SQL_ALTER_ADD_GENDER = ("ALTER TABLE "
+            + TableFollowUpsSche.TABLE_NAME + " ADD COLUMN "
+            + TableFollowUpsSche.COLUMN_RC12 + " TEXT;")
 
-    const val SQL_ALTER_ADD_RA01 =
-        "ALTER TABLE " + TableFollowUpsSche.TABLE_NAME + " ADD " + TableFollowUpsSche.COLUMN_RA01 + " TEXT; "
+    const val SQL_ALTER_ADD_MEMBER_TYPE = ("ALTER TABLE "
+            + TableFollowUpsSche.TABLE_NAME + " ADD COLUMN "
+            + TableFollowUpsSche.COLUMN_MEMBERTYPE + " TEXT;")
 
-    const val SQL_ALTER_ADD_RC15 =
-        "ALTER TABLE " + TableFollowUpsSche.TABLE_NAME + " ADD " + TableFollowUpsSche.COLUMN_RC15 + " TEXT; "
+
+    const val SQL_ALTER_ADD_MUID = ("ALTER TABLE "
+            + TableFollowUpsSche.TABLE_NAME + " ADD COLUMN "
+            + TableFollowUpsSche.COLUMN_MUID + " TEXT;")
+
+    const val SQL_ALTER_ADD_RA01 = ("ALTER TABLE "
+            + TableFollowUpsSche.TABLE_NAME + " ADD COLUMN "
+            + TableFollowUpsSche.COLUMN_RA01 + " TEXT;")
+
+    const val SQL_ALTER_ADD_RC15 = ("ALTER TABLE "
+            + TableFollowUpsSche.TABLE_NAME + " ADD COLUMN "
+            + TableFollowUpsSche.COLUMN_RC15 + " TEXT;")
 
 }
