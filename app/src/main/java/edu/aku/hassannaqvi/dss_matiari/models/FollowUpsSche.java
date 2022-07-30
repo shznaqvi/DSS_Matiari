@@ -30,6 +30,7 @@ public class FollowUpsSche implements Observable {
     private String rb03; // Husband / Father
     private String rb04; // DOB
     private String rc12; // Gender
+    private String rc15;   // Current pregnancy Status
     private String rb05;  // Age in years
     private String rb07;  // Pregnancy Status
     private String rb06; // Marital Status
@@ -217,6 +218,14 @@ public class FollowUpsSche implements Observable {
     }
 
 
+    public String getRc15() {
+        return rc15;
+    }
+
+    public void setRc15(String rc15) {
+        this.rc15 = rc15;
+    }
+
     public String getMemberType() {
         return memberType;
     }
@@ -242,6 +251,7 @@ public class FollowUpsSche implements Observable {
         this.rb03 = jsonObject.getString(TableFollowUpsSche.COLUMN_RB03);
         this.rb04 = jsonObject.getString(TableFollowUpsSche.COLUMN_RB04);
         this.rc12 = jsonObject.getString(TableFollowUpsSche.COLUMN_RC12);
+        this.rc15 = jsonObject.getString(TableFollowUpsSche.COLUMN_RC15);
         this.rb05 = jsonObject.getString(TableFollowUpsSche.COLUMN_RB05);
         this.rb07 = jsonObject.getString(TableFollowUpsSche.COLUMN_RB07);
         this.rb06 = jsonObject.getString(TableFollowUpsSche.COLUMN_RB06);
@@ -271,6 +281,7 @@ public class FollowUpsSche implements Observable {
         this.rb05 = cursor.getString(cursor.getColumnIndexOrThrow(TableFollowUpsSche.COLUMN_RB05));
         this.rb07 = cursor.getString(cursor.getColumnIndexOrThrow(TableFollowUpsSche.COLUMN_RB07));
         this.rb06 = cursor.getString(cursor.getColumnIndexOrThrow(TableFollowUpsSche.COLUMN_RB06));
+        this.rc15 = cursor.getString(cursor.getColumnIndexOrThrow(TableFollowUpsSche.COLUMN_RC15));
         this.memberType = cursor.getString(cursor.getColumnIndexOrThrow(TableFollowUpsSche.COLUMN_MEMBERTYPE));
 
 

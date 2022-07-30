@@ -112,6 +112,7 @@ public class MainApp extends Application {
     public static int outcomeCounter = 0;
     public static int mwraDone = 0;
     private static final String TAG = "MainApp";
+    public static int TRATS = 8;
     public static String IBAHC = "";
     public static int position;
 

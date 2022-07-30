@@ -8,6 +8,7 @@ import static edu.aku.hassannaqvi.dss_matiari.database.CreateTable.SQL_ALTER_ADD
 import static edu.aku.hassannaqvi.dss_matiari.database.CreateTable.SQL_ALTER_ADD_MEMBER_TYPE;
 import static edu.aku.hassannaqvi.dss_matiari.database.CreateTable.SQL_ALTER_ADD_MUID;
 import static edu.aku.hassannaqvi.dss_matiari.database.CreateTable.SQL_ALTER_ADD_RA01;
+import static edu.aku.hassannaqvi.dss_matiari.database.CreateTable.SQL_ALTER_ADD_RC15;
 import static edu.aku.hassannaqvi.dss_matiari.database.CreateTable.SQL_ALTER_FOLLOWUPSCHE;
 import static edu.aku.hassannaqvi.dss_matiari.database.CreateTable.SQL_CREATE_FOLLOWUPS;
 import static edu.aku.hassannaqvi.dss_matiari.database.CreateTable.SQL_CREATE_FOLLOWUPSCHE;
@@ -124,6 +125,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 db.execSQL(SQL_CREATE_OUTCOME_FOLLOWUPS);
                 db.execSQL(SQL_ALTER_ADD_MUID);
                 db.execSQL(SQL_ALTER_ADD_RA01);
+                db.execSQL(SQL_ALTER_ADD_RC15);
 
             case 2:
 
@@ -851,6 +853,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             values.put(TableFollowUpsSche.COLUMN_RB03, followUpsSche.getRb03());
             values.put(TableFollowUpsSche.COLUMN_RB04, followUpsSche.getRb04());
             values.put(TableFollowUpsSche.COLUMN_RC12, followUpsSche.getRc12());
+            values.put(TableFollowUpsSche.COLUMN_RC15, followUpsSche.getRc15());
             values.put(TableFollowUpsSche.COLUMN_RB05, followUpsSche.getRb05());
             values.put(TableFollowUpsSche.COLUMN_RB07, followUpsSche.getRb07());
             values.put(TableFollowUpsSche.COLUMN_RB06, followUpsSche.getRb06());

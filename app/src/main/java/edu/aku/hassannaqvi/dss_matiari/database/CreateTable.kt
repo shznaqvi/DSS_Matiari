@@ -211,6 +211,7 @@ object CreateTable {
             + TableFollowUpsSche.COLUMN_RB03 + " TEXT,"
             + TableFollowUpsSche.COLUMN_RB04 + " TEXT,"
             + TableFollowUpsSche.COLUMN_RC12 + " TEXT,"
+            + TableFollowUpsSche.COLUMN_RC15 + " TEXT,"
             + TableFollowUpsSche.COLUMN_RB05 + " TEXT,"
             + TableFollowUpsSche.COLUMN_RB06 + " TEXT,"
             + TableFollowUpsSche.COLUMN_MEMBERTYPE + " TEXT,"
@@ -272,5 +273,8 @@ object CreateTable {
 
     const val SQL_ALTER_ADD_RA01 =
         "ALTER TABLE " + TableFollowUpsSche.TABLE_NAME + " ADD " + TableFollowUpsSche.COLUMN_RA01 + " TEXT; "
+
+    const val SQL_ALTER_ADD_RC15 =
+        "ALTER TABLE " + TableFollowUpsSche.TABLE_NAME + " ADD " + TableFollowUpsSche.COLUMN_RC15 + " TEXT; "
 
 }
