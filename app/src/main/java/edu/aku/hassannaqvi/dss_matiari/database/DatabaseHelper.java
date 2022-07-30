@@ -5,6 +5,8 @@ import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.PROJECT_NAME;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.outcomeFollowups;
 import static edu.aku.hassannaqvi.dss_matiari.database.CreateTable.DATABASE_VERSION;
 import static edu.aku.hassannaqvi.dss_matiari.database.CreateTable.SQL_ALTER_ADD_MEMBER_TYPE;
+import static edu.aku.hassannaqvi.dss_matiari.database.CreateTable.SQL_ALTER_ADD_MUID;
+import static edu.aku.hassannaqvi.dss_matiari.database.CreateTable.SQL_ALTER_ADD_RA01;
 import static edu.aku.hassannaqvi.dss_matiari.database.CreateTable.SQL_ALTER_FOLLOWUPSCHE;
 import static edu.aku.hassannaqvi.dss_matiari.database.CreateTable.SQL_ALTER_ADD_DOB;
 import static edu.aku.hassannaqvi.dss_matiari.database.CreateTable.SQL_ALTER_ADD_GENDER;
@@ -104,6 +106,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL(SQL_CREATE_OUTCOME_FOLLOWUPS);
 
 
+
 //        db.execSQL(SQL_CREATE_ZSTANDARD);
 
     }
@@ -119,6 +122,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
             case 2:
                 db.execSQL(SQL_CREATE_OUTCOME_FOLLOWUPS);
+            case 3:
+                db.execSQL(SQL_ALTER_ADD_MUID);
+                db.execSQL(SQL_ALTER_ADD_RA01);
 
         }
 

@@ -8,7 +8,7 @@ object CreateTable {
     const val DATABASE_NAME = "$PROJECT_NAME.db"
     const val DATABASE_COPY = "${PROJECT_NAME}_copy.db"
     const val DATABASE_COPY2 = "${PROJECT_NAME}_copy.db"
-    const val DATABASE_VERSION = 3
+    const val DATABASE_VERSION = 4
 
     const val SQL_CREATE_HOUSEHOLDS = ("CREATE TABLE "
             + HouseholdTable.TABLE_NAME + "("
@@ -266,5 +266,11 @@ object CreateTable {
     const val SQL_ALTER_ADD_MEMBER_TYPE =
         "ALTER TABLE " + TableFollowUpsSche.TABLE_NAME + " ADD " + TableFollowUpsSche.COLUMN_MEMBERTYPE + " TEXT; "
 
+
+    const val SQL_ALTER_ADD_MUID =
+        "ALTER TABLE " + TableFollowUpsSche.TABLE_NAME + " ADD " + TableFollowUpsSche.COLUMN_MUID + " TEXT; "
+
+    const val SQL_ALTER_ADD_RA01 =
+        "ALTER TABLE " + TableFollowUpsSche.TABLE_NAME + " ADD " + TableFollowUpsSche.COLUMN_MUID + " TEXT; "
 
 }
