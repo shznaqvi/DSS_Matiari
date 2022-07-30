@@ -3,14 +3,12 @@ package edu.aku.hassannaqvi.dss_matiari.database;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.IBAHC;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.PROJECT_NAME;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.outcomeFollowups;
-import static edu.aku.hassannaqvi.dss_matiari.database.CreateTable.DATABASE_VERSION;
+import static edu.aku.hassannaqvi.dss_matiari.database.CreateTable.SQL_ALTER_ADD_DOB;
+import static edu.aku.hassannaqvi.dss_matiari.database.CreateTable.SQL_ALTER_ADD_GENDER;
 import static edu.aku.hassannaqvi.dss_matiari.database.CreateTable.SQL_ALTER_ADD_MEMBER_TYPE;
 import static edu.aku.hassannaqvi.dss_matiari.database.CreateTable.SQL_ALTER_ADD_MUID;
 import static edu.aku.hassannaqvi.dss_matiari.database.CreateTable.SQL_ALTER_ADD_RA01;
 import static edu.aku.hassannaqvi.dss_matiari.database.CreateTable.SQL_ALTER_FOLLOWUPSCHE;
-import static edu.aku.hassannaqvi.dss_matiari.database.CreateTable.SQL_ALTER_ADD_DOB;
-import static edu.aku.hassannaqvi.dss_matiari.database.CreateTable.SQL_ALTER_ADD_GENDER;
-//import static edu.aku.hassannaqvi.dss_matiari.database.CreateTable.SQL_ALTER_ADD_MEMBER_TYPE;
 import static edu.aku.hassannaqvi.dss_matiari.database.CreateTable.SQL_CREATE_FOLLOWUPS;
 import static edu.aku.hassannaqvi.dss_matiari.database.CreateTable.SQL_CREATE_FOLLOWUPSCHE;
 import static edu.aku.hassannaqvi.dss_matiari.database.CreateTable.SQL_CREATE_FP_HOUSEHOLDS;
@@ -82,7 +80,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public static final String DATABASE_NAME = PROJECT_NAME + ".db";
     public static final String DATABASE_COPY = PROJECT_NAME + "_copy.db";
     public static final String DATABASE_COPY2 = PROJECT_NAME + "_copy.db";
-    private static final String DATABASE_PASSWORD = IBAHC;
+    public static final String DATABASE_PASSWORD = IBAHC;
     private final String TAG = "DatabaseHelper";
     private static final int DATABASE_VERSION = 4;
     private static final String SQL_DELETE_OUTCOME_FOLLOWUPS = "DROP TABLE IF EXISTS " + TableContracts.OutcomeFollowupTable.TABLE_NAME;
@@ -107,7 +105,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL(SQL_CREATE_VILLAGES);
         db.execSQL(SQL_CREATE_FOLLOWUPSCHE);
         db.execSQL(SQL_CREATE_OUTCOME_FOLLOWUPS);
-
 
 
 //        db.execSQL(SQL_CREATE_ZSTANDARD);
@@ -871,8 +868,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     public boolean isDateInJsonFormat(String date) {
         try {
-           JSONObject dateObj = new JSONObject(date);
-           return true;
+            JSONObject dateObj = new JSONObject(date);
+            return true;
         } catch (JSONException exception) {
             exception.printStackTrace();
             return false;
@@ -1108,8 +1105,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         Log.d(TAG, "getUnsyncedOutcome: " + allOutcome);
         return allOutcome;
     }
-
-
 
 
     public JSONArray getUnsyncedMWRA() throws JSONException {
@@ -2133,7 +2128,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         return followup;
     }
-
 
 
     public Outcome getOutComeBYID(String sno) throws JSONException {
