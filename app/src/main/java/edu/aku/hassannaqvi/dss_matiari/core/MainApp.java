@@ -1,8 +1,5 @@
 package edu.aku.hassannaqvi.dss_matiari.core;
 
-import static edu.aku.hassannaqvi.dss_matiari.database.DatabaseHelper.DATABASE_NAME;
-import static edu.aku.hassannaqvi.dss_matiari.database.DatabaseHelper.DATABASE_PASSWORD;
-
 import android.app.Application;
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -112,7 +109,7 @@ public class MainApp extends Application {
     public static int outcomeCounter = 0;
     public static int mwraDone = 0;
     private static final String TAG = "MainApp";
-    public static int TRATS = 8;
+//    public static int TRATS = 8;
     public static String IBAHC = "";
     public static int position;
 
@@ -179,18 +176,14 @@ public class MainApp extends Application {
     private void initSecure() {
         // Initialize SQLCipher library
         SQLiteDatabase.loadLibs(this);
-        File databaseFile = getDatabasePath(DATABASE_NAME);
-       /* databaseFile.mkdirs();
-        databaseFile.delete();*/
-        SQLiteDatabase database = SQLiteDatabase.openOrCreateDatabase(databaseFile, DATABASE_PASSWORD, null);
+
         // Prepare encryption KEY
         ApplicationInfo ai = null;
         try {
             ai = getPackageManager().getApplicationInfo(getPackageName(), PackageManager.GET_META_DATA);
             Bundle bundle = ai.metaData;
-            TRATS = bundle.getInt("YEK_TRATS");
-            //IBAHC = bundle.getString("YEK_REVRES").substring(TRATS, TRATS + 16);
-            IBAHC = bundle.getString("YEK_REVRES");
+            int TRATS = bundle.getInt("YEK_TRATS");
+            IBAHC = bundle.getString("YEK_REVRES").substring(TRATS, TRATS + 16);
             Log.d(TAG, "onCreate: YEK_REVRES = " + IBAHC);
         } catch (PackageManager.NameNotFoundException e) {
             e.printStackTrace();
