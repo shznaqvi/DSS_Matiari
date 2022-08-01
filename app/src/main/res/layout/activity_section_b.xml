@@ -354,6 +354,14 @@
                                 android:text="@string/rb0603" />
 
                             <RadioButton
+                                android:id="@+id/rb0605"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:checked='@{mwra.rb06.equals("5")}'
+                                android:onClick='@{()->mwra.setRb06("5")}'
+                                android:text="@string/rb0605" />
+
+                            <RadioButton
                                 android:id="@+id/rb0604"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
