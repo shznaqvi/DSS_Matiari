@@ -74,7 +74,7 @@ public class IdentificationActivity extends AppCompatActivity {
                 MainApp.fpHouseholds = new FPHouseholds();
                 MainApp.followups = new Followups();
                 MainApp.outcomeFollowups = new OutcomeFollowups();
-                MainApp.outcome = new Outcome();
+                //MainApp.outcome = new Outcome();
                 openIntent = new Intent(this, FPHouseholdActivity.class);
                 break;
 

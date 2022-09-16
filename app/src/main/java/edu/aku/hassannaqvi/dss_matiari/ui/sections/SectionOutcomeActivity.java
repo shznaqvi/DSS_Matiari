@@ -52,29 +52,31 @@ public class SectionOutcomeActivity extends AppCompatActivity {
         bi = DataBindingUtil.setContentView(this, R.layout.activity_section_outcome);
         db = MainApp.appInfo.dbHelper;
 
-        try {
-            outcome = db.getOutComeBYID(String.valueOf(++MainApp.childCount));
-        } catch (JSONException e) {
-            e.printStackTrace();
-            Toast.makeText(this, "JSONException(Outcome): " + e.getMessage(), Toast.LENGTH_SHORT).show();
+
+        if(outcome.getUid().equals("") && MainApp.totalChildCount > MainApp.childCount) {
+            try {
+                outcome = db.getOutComeBYID(String.valueOf(++MainApp.childCount));
+            } catch (JSONException e) {
+                e.printStackTrace();
+                Toast.makeText(this, "JSONException(Outcome): " + e.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        }else{
+            try {
+                outcome = db.getOutcomesBySno(outcome.getSno());
+            } catch (JSONException e) {
+                e.printStackTrace();
+                Toast.makeText(this, "JSONException(Outcome): " + e.getMessage(), Toast.LENGTH_SHORT).show();
+            }
         }
 
-        outcome.setRc12dob(followups.getRc10());
-
-        outcome.setRc12ln(String.valueOf(MainApp.childCount));
-        //bi.rc12ln.setText(MainApp.childCount);
-        // Set Round Number from followups data
         MainApp.ROUND = MainApp.fpMwra.getfRound();
 
-        try {
-            followups = db.getFollowupsBySno(MainApp.fpMwra.getRb01(), MainApp.fpMwra.getfRound());
-        } catch (JSONException e) {
-            e.printStackTrace();
-            Toast.makeText(this, "JSONException(Followups): " + e.getMessage(), Toast.LENGTH_SHORT).show();
-        }
+
+        outcome.setRc12dob(followups.getRc10());
+        outcome.setRc12ln(outcome.getRc12ln().isEmpty() ? String.valueOf(MainApp.childCount) : outcome.getRc12ln());
 
         bi.setOutcome(outcome);
-        setImmersive(true);
+        //setImmersive(true);
 
 
 
@@ -95,13 +97,6 @@ public class SectionOutcomeActivity extends AppCompatActivity {
             outcomeFollowups.setAppver(MainApp.versionName + "." + MainApp.versionCode);
 
 
-
-
-            //  MainApp.mwra.setRb01a(MainApp.households.getRc01a());
-
-
-
-
         bi.btnContinue.setText(outcome.getUid().equals("") ? "Save" : "Update");
 
 
@@ -114,10 +109,10 @@ public class SectionOutcomeActivity extends AppCompatActivity {
 
     public void btnContinue(View view) {
         if (!formValidation()) return;
-        if(!insertNewRecord()) return;
+        //if(outcome.getUid().equals("") ? !insertNewRecord()) return;
         if(!insertNewFollowupRecord()) return;
 
-        if(updateDB())
+        if(outcome.getUid().equals("") ? insertNewRecord() : updateDB())
         {
                 if (MainApp.totalChildCount > MainApp.childCount) {
 
@@ -126,8 +121,8 @@ public class SectionOutcomeActivity extends AppCompatActivity {
                     startActivity(new Intent(this, SectionOutcomeActivity.class).addFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT).putExtra("complete", true));
 
                 } else {
-                    MainApp.childCount = 0;
-                    MainApp.totalChildCount = 0;
+                    //MainApp.childCount = 0;
+                    //MainApp.totalChildCount = 0;
                     setResult(RESULT_OK);
                     finish();
                     startActivity(new Intent(this, SectionCx2Activity.class).addFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT).putExtra("complete", true));

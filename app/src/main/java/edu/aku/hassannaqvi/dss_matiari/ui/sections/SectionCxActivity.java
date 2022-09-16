@@ -30,6 +30,7 @@ import edu.aku.hassannaqvi.dss_matiari.contracts.TableContracts;
 import edu.aku.hassannaqvi.dss_matiari.core.MainApp;
 import edu.aku.hassannaqvi.dss_matiari.database.DatabaseHelper;
 import edu.aku.hassannaqvi.dss_matiari.databinding.ActivitySectionCxBinding;
+import edu.aku.hassannaqvi.dss_matiari.models.Outcome;
 import edu.aku.hassannaqvi.dss_matiari.utils.DateUtilsKt;
 
 public class SectionCxActivity extends AppCompatActivity {
@@ -95,6 +96,8 @@ public class SectionCxActivity extends AppCompatActivity {
                 {
                     MainApp.totalChildCount = 3;
                 }
+
+                // MainApp.outcome = new Outcome();
 
             }
         });
@@ -247,6 +250,7 @@ public class SectionCxActivity extends AppCompatActivity {
             if(bi.rc0401.isChecked()) {
 
                 if (followups.getPrePreg().equals("1") && bi.rc0901.isChecked()) {
+
                     Intent forwardIntent = new Intent(this, SectionOutcomeActivity.class).putExtra("complete", true);
                     forwardIntent.setFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT);
                     setResult(RESULT_OK, forwardIntent);
@@ -273,6 +277,7 @@ public class SectionCxActivity extends AppCompatActivity {
 
 
     private boolean insertNewRecord() {
+        MainApp.outcome = new Outcome();
         if (fpHouseholds.getUid().equals("")) {
             insertFpHousehold();
         }

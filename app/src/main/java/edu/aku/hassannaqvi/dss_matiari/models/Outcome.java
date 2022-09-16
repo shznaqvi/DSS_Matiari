@@ -305,7 +305,7 @@ public class Outcome extends BaseObservable implements Observable {
 
     public void setRc12dob(String rc12dob) {
         this.rc12dob = rc12dob;
-        notifyChange(BR.rc12dob);
+        notifyPropertyChanged(BR.rc12dob);
     }
 
     @Bindable
@@ -316,7 +316,7 @@ public class Outcome extends BaseObservable implements Observable {
     public void setRc12ln(String rc12ln) {
         this.rc12ln = rc12ln;
         this.sno = rc12ln;
-        notifyChange(BR.rc12ln);
+        notifyPropertyChanged(BR.rc12ln);
     }
 
     @Bindable
@@ -326,7 +326,7 @@ public class Outcome extends BaseObservable implements Observable {
 
     public void setRc12nm(String rc12nm) {
         this.rc12nm = rc12nm;
-        notifyChange(BR.rc12nm);
+        notifyPropertyChanged(BR.rc12nm);
     }
 
     @Bindable
@@ -342,18 +342,18 @@ public class Outcome extends BaseObservable implements Observable {
 
     public void setRc12(String rc12) {
         this.rc12 = rc12;
-        notifyChange(BR.rc12);
+        notifyPropertyChanged(BR.rc12);
     }
 
     public void setRc13(String rc13) {
         this.rc13 = rc13;
         setRc14(rc13.equals("1") ? this.rc14 : "");
-        notifyChange(BR.rc13);
+        notifyPropertyChanged(BR.rc13);
     }
 
     public void setRc14(String rc14) {
         this.rc14 = rc14;
-        notifyChange(BR.rc14);
+        notifyPropertyChanged(BR.rc14);
     }
 
     @Bindable
@@ -369,7 +369,7 @@ public class Outcome extends BaseObservable implements Observable {
     public void setRc14a(String rc14a) {
         this.rc14a = rc14a;
         setRc16(rc14a.equals("1") ? "" : this.rc16);
-        notifyChange(BR.rc14a);
+        notifyPropertyChanged(BR.rc14a);
     }
 
     @Bindable
@@ -379,15 +379,15 @@ public class Outcome extends BaseObservable implements Observable {
 
     public void setRc16(String rc16) {
         this.rc16 = rc16;
-        notifyChange(BR.rc16);
+        notifyPropertyChanged(BR.rc16);
     }
 
 
-    private synchronized void notifyChange(int propertyId) {
+   /* private synchronized void notifyPropertyChanged(int propertyId) {
         if (propertyChangeRegistry == null) {
             propertyChangeRegistry = new PropertyChangeRegistry();
         }
-        propertyChangeRegistry.notifyChange(this, propertyId);
+        propertyChangeRegistry.notifyPropertyChanged(this, propertyId);
     }
 
     @Override
@@ -404,7 +404,7 @@ public class Outcome extends BaseObservable implements Observable {
         if (propertyChangeRegistry != null) {
             propertyChangeRegistry.remove(callback);
         }
-    }
+    }*/
 
     public Outcome Hydrate(Cursor cursor) throws JSONException {
         this.id = cursor.getString(cursor.getColumnIndexOrThrow(TableContracts.OutcomeTable.COLUMN_ID));
@@ -512,7 +512,7 @@ public class Outcome extends BaseObservable implements Observable {
 
     public void setExpanded(boolean expanded) {
         this.expanded = expanded;
-        notifyChange(BR.expanded);
+        notifyPropertyChanged(BR.expanded);
     }
 
     public void populateMeta() {

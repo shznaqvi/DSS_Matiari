@@ -18,6 +18,8 @@ import edu.aku.hassannaqvi.dss_matiari.database.AndroidManager;
 import edu.aku.hassannaqvi.dss_matiari.databinding.ActivityMainBinding;
 import edu.aku.hassannaqvi.dss_matiari.models.Followups;
 import edu.aku.hassannaqvi.dss_matiari.models.Households;
+import edu.aku.hassannaqvi.dss_matiari.models.Outcome;
+import edu.aku.hassannaqvi.dss_matiari.models.OutcomeFollowups;
 import edu.aku.hassannaqvi.dss_matiari.ui.lists.FormsReportCluster;
 import edu.aku.hassannaqvi.dss_matiari.ui.sections.IdentificationActivity;
 import edu.aku.hassannaqvi.dss_matiari.ui.sections.SectionAActivity;

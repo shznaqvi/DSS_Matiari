@@ -69,6 +69,8 @@
         <entry key="..\:/Users/Wajahat Karim/StudioProjects/DSS_Matiari/app/src/main/res/layout/activity_sync.xml" value="0.15625" />
         <entry key="..\:/Users/Wajahat Karim/StudioProjects/DSS_Matiari/app/src/main/res/layout/household_row.xml" value="0.268" />
         <entry key="..\:/Users/Wajahat Karim/StudioProjects/DSS_Matiari/app/src/main/res/layout/member_row.xml" value="0.3" />
+        <entry key="..\:/Users/gul.sanober/StudioProjects/DSS_Matiari/app/src/main/res/layout/activity_section_cx.xml" value="0.35" />
+        <entry key="..\:/Users/gul.sanober/StudioProjects/DSS_Matiari/app/src/main/res/layout/activity_section_outcome.xml" value="0.35" />
         <entry key="..\:/Users/hassan.naqvi/StudioProjects/DSS_Matiari/app/src/main/res/drawable-v24/ic_username.xml" value="0.15416666666666667" />
         <entry key="..\:/Users/hassan.naqvi/StudioProjects/DSS_Matiari/app/src/main/res/layout/activity_ending.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/hassan.naqvi/StudioProjects/DSS_Matiari/app/src/main/res/layout/activity_fp.xml" value="0.35260416666666666" />
@@ -94,7 +96,7 @@
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="11" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_15" project-jdk-name="11" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">
