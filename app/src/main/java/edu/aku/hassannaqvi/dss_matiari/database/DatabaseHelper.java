@@ -2151,9 +2151,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         String whereClause;
         whereClause = OutcomeTable.COLUMN_UUID + "=? AND " +
+                OutcomeTable.COLUMN_MUID + "=? AND " +
                 OutcomeTable.COLUMN_SNO + "=? ";
 
-        String[] whereArgs = {MainApp.fpHouseholds.getUid(), rb01};
+        String[] whereArgs = {MainApp.followups.getUid(), MainApp.followups.getFmuid(), rb01};
 
         String groupBy = null;
         String having = null;
@@ -2177,7 +2178,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         c.close();
 
-        db.close();
+        //db.close();
 
         return outcome;
     }
@@ -2190,11 +2191,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         String[] columns = null;
 
         String whereClause;
-        whereClause = OutcomeTable.COLUMN_UUID + "=? AND " +
+        whereClause =
                 OutcomeTable.COLUMN_MUID + "=? AND " +
                 OutcomeTable.COLUMN_SNO + "=? ";
 
-        String[] whereArgs = {MainApp.fpHouseholds.getUid(), MainApp.followups.getUid().split("_")[0], sno};
+        String[] whereArgs = {MainApp.followups.getUid().split("_")[0], sno};
 
         String groupBy = null;
         String having = null;

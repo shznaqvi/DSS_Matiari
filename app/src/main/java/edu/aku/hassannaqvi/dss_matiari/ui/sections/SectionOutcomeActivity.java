@@ -52,22 +52,13 @@ public class SectionOutcomeActivity extends AppCompatActivity {
         bi = DataBindingUtil.setContentView(this, R.layout.activity_section_outcome);
         db = MainApp.appInfo.dbHelper;
 
-
-        if(outcome.getUid().equals("") && MainApp.totalChildCount > MainApp.childCount) {
-            try {
-                outcome = db.getOutComeBYID(String.valueOf(++MainApp.childCount));
-            } catch (JSONException e) {
-                e.printStackTrace();
-                Toast.makeText(this, "JSONException(Outcome): " + e.getMessage(), Toast.LENGTH_SHORT).show();
-            }
-        }else{
-            try {
-                outcome = db.getOutcomesBySno(outcome.getSno());
-            } catch (JSONException e) {
-                e.printStackTrace();
-                Toast.makeText(this, "JSONException(Outcome): " + e.getMessage(), Toast.LENGTH_SHORT).show();
-            }
+        try {
+            outcome = db.getOutComeBYID(String.valueOf(++MainApp.childCount));
+        } catch (JSONException e) {
+            e.printStackTrace();
+            Toast.makeText(this, "JSONException(Outcome): " + e.getMessage(), Toast.LENGTH_SHORT).show();
         }
+
 
         MainApp.ROUND = MainApp.fpMwra.getfRound();
 
@@ -116,13 +107,14 @@ public class SectionOutcomeActivity extends AppCompatActivity {
         {
                 if (MainApp.totalChildCount > MainApp.childCount) {
 
+                    outcome = new Outcome();
                     setResult(RESULT_OK);
                     finish();
                     startActivity(new Intent(this, SectionOutcomeActivity.class).addFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT).putExtra("complete", true));
 
                 } else {
-                    //MainApp.childCount = 0;
-                    //MainApp.totalChildCount = 0;
+                    MainApp.childCount = 0;
+                    MainApp.totalChildCount = 0;
                     setResult(RESULT_OK);
                     finish();
                     startActivity(new Intent(this, SectionCx2Activity.class).addFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT).putExtra("complete", true));
@@ -217,6 +209,8 @@ public class SectionOutcomeActivity extends AppCompatActivity {
     }
 
     public void btnEnd(View view) {
+        MainApp.totalChildCount =0;
+        MainApp.childCount --;
         setResult(RESULT_CANCELED);
 /*        if (followups.getRc05().equals("2") || followups.getRc05().equals("3")) {
             if (!formValidation()) return;
