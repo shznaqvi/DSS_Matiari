@@ -1752,9 +1752,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         if (hhNo.length() < 4) {
             newhhNo = String.format("%04d", Integer.parseInt(hhNo));
-        } /*else {
-            newhhNo = String.format("%04d", Integer.parseInt(hhNo));
-        }*/
+        }
 
         SQLiteDatabase db = this.getReadableDatabase(DATABASE_PASSWORD);
         Cursor c = db.rawQuery(

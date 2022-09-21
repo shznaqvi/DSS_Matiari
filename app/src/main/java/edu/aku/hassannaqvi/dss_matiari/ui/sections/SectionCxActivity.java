@@ -2,6 +2,10 @@ package edu.aku.hassannaqvi.dss_matiari.ui.sections;
 
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.followups;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.fpHouseholds;
+import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.mwraCount;
+import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.selectedHhNO;
+import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.selectedUC;
+import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.selectedVillage;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.sharedPref;
 
 import android.content.Intent;
@@ -66,19 +70,13 @@ public class SectionCxActivity extends AppCompatActivity {
             MainApp.followups.setRc06(MainApp.fpMwra.getRb06());
             MainApp.followups.setPrePreg(MainApp.fpMwra.getRb07());
             MainApp.followups.setRc07(MainApp.fpMwra.getRb07());
-            //MainApp.followups.setRc15(MainApp.fpMwra.getRb07());
             MainApp.followups.setHdssId(MainApp.fpMwra.getHdssid());
             MainApp.followups.setHhNo(MainApp.fpMwra.getHhNo());
 
         }
-        //bi.fldGrp01.setVisibility(View.VISIBLE);
-        //bi.fldGrp02.setVisibility(MainApp.followups.getPrePreg().equals("1") ? View.VISIBLE : View.GONE);    // Current Pregnancy Status
 
         bi.setFpHouseholds(MainApp.fpHouseholds);
         bi.setFollowups(MainApp.followups);
-
-
-        // setListener(); // Age calculation not required in followups
 
         setImmersive(true);
 
@@ -97,15 +95,24 @@ public class SectionCxActivity extends AppCompatActivity {
                     MainApp.totalChildCount = 3;
                 }
 
-                // MainApp.outcome = new Outcome();
-
             }
         });
 
-        if(!MainApp.fpMwra.getRb07().equals("") && MainApp.fpMwra.getRb07().equals("1"))
-        {
-            //MainApp.fpMwra.getrb08
-        }
+        /*int maxMWRA = db.getMaxMWRSNoBYHH(selectedUC, selectedVillage, selectedHhNO);
+        int maxFpMWRA = db.getMaxMWRANoBYHHFromFolloupsSche(selectedUC, selectedVillage, selectedHhNO);
+        mwraCount = Math.max(maxMWRA, maxFpMWRA);
+
+
+        bi.rc04.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                if(bi.rc0402.isChecked() || bi.rc0407.isChecked())
+                {
+                    mwraCount--;
+                }
+            }
+        });*/
+
 
     }
 
@@ -182,66 +189,7 @@ public class SectionCxActivity extends AppCompatActivity {
         }
     }
 
-    private void setListener() {
-        /*bi.rb04.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-                if (!mwra.getRb04().equalsIgnoreCase("") && !mwra.getRb04().equals("98")) {
-                    String[] arrStr = mwra.getRb04().split("-");
-                    int day, month, year;
-                    year = arrStr.length > 0 ? Integer.valueOf(arrStr[0]) : 0;
-                    month = arrStr.length > 1 ? Integer.valueOf(arrStr[1]) : 0;
-                    day = arrStr.length > 2 ? Integer.valueOf(arrStr[2]) : 0;
-                    if (year == 0 || month == 0 || day ==0) {
-                        return;
-                    }
-                    bi.rb05.setText(DateUtilsKt.ageInYears(day, month ,year ,year));
-                    try {
-                        Calendar cur = Calendar.getInstance(); // DOV
-                        Calendar cal = Calendar.getInstance(); // DOB
-                        //cur.getTimeInMillis();
-
-                        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
-
-                        cur.setTime(sdf.parse(households.getRb01a())); // DOV
-                        cal.setTime(sdf.parse(mwra.getRb04())); // DOB
-
-
-                        long yearsinMillisec = cur.getTimeInMillis() - cal.getTimeInMillis();
-                        String ageInYears = String.valueOf(TimeUnit.MILLISECONDS.toDays(yearsinMillisec) / 365);
-
-                        bi.rb05.setText(ageInYears);
-
-                    } catch (ParseException e) {
-                        e.printStackTrace();
-                    }
-*/
-
-
-                   /* String[] arrStr = mwra.getRb04().split("-");
-                    String day, month, year;
-                    year = arrStr.length > 0 ? arrStr[0] : "0";
-                    month = arrStr.length > 1 ? arrStr[1] : "0";
-                    day = arrStr.length > 2 ? arrStr[2] : "0";
-                    if (year.equalsIgnoreCase("0") || month.equalsIgnoreCase("0") || day.equalsIgnoreCase("0")) {
-                        return;
-                    }
-                    bi.rb05.setText(DateUtilsKt.getAge(year, month, day, false));
-
-                }
-            }
-        });*/
-    }
 
     public void btnContinue(View view) {
         if (!formValidation()) return;
@@ -329,9 +277,6 @@ public class SectionCxActivity extends AppCompatActivity {
         int updcount = 0;
         try {
             updcount = db.updatesFollowUpsColumn(TableContracts.FollowupsTable.COLUMN_SC, followups.sCtoString());
-            // Also reset Synced flag and alter UID
-            // db.updatesMWRAColumn(TableContracts.MWRATable.COLUMN_SYNCED, null);
-            // concate last char from uid to alter and create new unique uid
 
             followups.setDeviceId(followups.getDeviceId() + "_" + followups.getDeviceId().substring(followups.getDeviceId().length() - 1));
             db.updatesFollowUpsColumn(TableContracts.FollowupsTable.COLUMN_DEVICEID, followups.getDeviceId());
@@ -358,13 +303,6 @@ public class SectionCxActivity extends AppCompatActivity {
 
     public void btnEnd(View view) {
         setResult(RESULT_CANCELED);
-/*        if (followups.getRc05().equals("2") || followups.getRc05().equals("3")) {
-            if (!formValidation()) return;
-            setResult(RESULT_OK);
-            insertNewRecord();
-            updateDB();
-            startActivity(new Intent(this, WRAEndingActivity.class).addFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT).putExtra("complete", false));
-        }*/
         finish();
 
     }
@@ -373,14 +311,6 @@ public class SectionCxActivity extends AppCompatActivity {
         setDateRanges();
         return Validator.emptyCheckingContainer(this, bi.GrpName);
 
-
-
-       /*
-       if (!compareTwoDate(bi.rb08, 2,
-                "LMP should be within 2 months back from DOV")) return false;
-        return compareTwoDate(bi.rb09, 9,
-                "EDD should be within 9 months back from DOV");
-                */
     }
 
 

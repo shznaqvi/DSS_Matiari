@@ -51,12 +51,6 @@ public class SectionC2Activity extends AppCompatActivity {
         bi.setFollowups(MainApp.followups);
 
 
-        // setListener(); // Age calculation not required in followups
-
-        // set default model values if new mwra
-
-
-        //setTitle(R.string.marriedwomenregistration_mainheading);
         setImmersive(true);
 
         bi.btnContinue.setText(MainApp.followups.getUid().equals("") ? "Save" : "Update");
@@ -126,66 +120,6 @@ public class SectionC2Activity extends AppCompatActivity {
         }
     }
 
-   /* private void setListener() {
-        bi.rb04.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-                if (!mwra.getRb04().equalsIgnoreCase("") && !mwra.getRb04().equals("98")) {
-//                    String[] arrStr = mwra.getRb04().split("-");
-//                    int day, month, year;
-//                    year = arrStr.length > 0 ? Integer.valueOf(arrStr[0]) : 0;
-//                    month = arrStr.length > 1 ? Integer.valueOf(arrStr[1]) : 0;
-//                    day = arrStr.length > 2 ? Integer.valueOf(arrStr[2]) : 0;
-//                    if (year == 0 || month == 0 || day ==0) {
-//                        return;
-//                    }
-//                    bi.rb05.setText(DateUtilsKt.ageInYears(day, month ,year ,year));
-                    try {
-                        Calendar cur = Calendar.getInstance(); // DOV
-                        Calendar cal = Calendar.getInstance(); // DOB
-                        //cur.getTimeInMillis();
-
-                        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
-
-                        cur.setTime(sdf.parse(households.getRb01a())); // DOV
-                        cal.setTime(sdf.parse(mwra.getRb04())); // DOB
-
-
-                        long yearsinMillisec = cur.getTimeInMillis() - cal.getTimeInMillis();
-                        String ageInYears = String.valueOf(TimeUnit.MILLISECONDS.toDays(yearsinMillisec) / 365);
-
-                        bi.rb05.setText(ageInYears);
-
-                    } catch (ParseException e) {
-                        e.printStackTrace();
-                    }
-
-
-*//*
-                    String[] arrStr = mwra.getRb04().split("-");
-                    String day, month, year;
-                    year = arrStr.length > 0 ? arrStr[0] : "0";
-                    month = arrStr.length > 1 ? arrStr[1] : "0";
-                    day = arrStr.length > 2 ? arrStr[2] : "0";
-                    if (year.equalsIgnoreCase("0") || month.equalsIgnoreCase("0") || day.equalsIgnoreCase("0")) {
-                        return;
-                    }
-                    bi.rb05.setText(DateUtilsKt.getAge(year, month, day, false));
-*//*
-                }
-            }
-        });
-    }*/
 
     public void btnContinue(View view) {
         if (!formValidation()) return;
@@ -201,76 +135,10 @@ public class SectionC2Activity extends AppCompatActivity {
 
 
 
-   /* private boolean insertNewRecord() {
-        db = MainApp.appInfo.getDbHelper();
-        if (fpHouseholds.getUid().equals("")) {
-            insertFpHousehold();
-        }
-
-        followups.populateMeta();
-
-        long rowId = 0;
-        try {
-            rowId = db.addFollowup(followups);
-        } catch (JSONException e) {
-            e.printStackTrace();
-            Toast.makeText(this, "JSONException(Followups): " + e.getMessage(), Toast.LENGTH_SHORT).show();
-            Log.d(TAG, "insertNewRecord (JSONException): " + e.getMessage());
-            return false;
-        }
-        followups.setId(String.valueOf(rowId));
-        if (rowId > 0) {
-            followups.setUid(followups.getDeviceId() + followups.getId());
-            db.updatesFollowUpsColumn(TableContracts.FollowupsTable.COLUMN_UID, followups.getUid());
-            return true;
-        } else {
-            Toast.makeText(this, "Updating Database... ERROR!", Toast.LENGTH_SHORT).show();
-            return false;
-        }
-    }*/
-
-    /* private boolean insertFpHousehold() {
-
-
-   //      MainApp.fpHouseholds.populateMeta(); // Done at itemClick() in FPHouseholdAdapter
-         db = MainApp.appInfo.getDbHelper();
-
-         long rowId = 0;
-         try {
-             rowId = db.addFpHousehold(fpHouseholds);
-         } catch (JSONException e) {
-             e.printStackTrace();
-             Toast.makeText(this, "JSONException(FPHousholds): " + e.getMessage(), Toast.LENGTH_SHORT).show();
-             Log.d(TAG, "insertNewRecord (JSONException): " + e.getMessage());
-             return false;
-         }
-         fpHouseholds.setId(String.valueOf(rowId));
-         if (rowId > 0) {
-             fpHouseholds.setUid(fpHouseholds.getDeviceId() + fpHouseholds.getId());
-             db.updatesFPHouseholdsColumn(TableContracts.FollowupsTable.COLUMN_UID, fpHouseholds.getUid());
-             return true;
-         } else {
-             Toast.makeText(this, "Updating Database... ERROR!", Toast.LENGTH_SHORT).show();
-             return false;
-         }
-     }
- */
     private boolean updateDB() {
         int updcount = 0;
         try {
             updcount = db.updatesFollowUpsColumn(TableContracts.FollowupsTable.COLUMN_SC, followups.sCtoString());
-            // Also reset Synced flag and alter UID
-            // db.updatesMWRAColumn(TableContracts.MWRATable.COLUMN_SYNCED, null);
-            // concate last char from uid to alter and create new unique uid
-
-            //   followups.setDeviceId(followups.getDeviceId() + "_" + followups.getDeviceId().substring(followups.getDeviceId().length() - 1));
-            //   db.updatesFollowUpsColumn(TableContracts.FollowupsTable.COLUMN_DEVICEID, followups.getDeviceId());
-            //   int repeatCount = (followups.getDeviceId().length() - 16) / 2;
-            // new UID
-            // String newUID = followups.getDeviceId().substring(0, 16) + followups.getId() + "_" + repeatCount;
-            // followups.setUid(newUID);
-            // db.updatesFollowUpsColumn(TableContracts.FollowupsTable.COLUMN_UID, newUID);
-
 
         } catch (JSONException e) {
             e.printStackTrace();

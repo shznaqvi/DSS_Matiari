@@ -194,15 +194,6 @@ public class SectionBActivity extends AppCompatActivity {
             @Override
             public void afterTextChanged(Editable s) {
                 if (!mwra.getRb04().equalsIgnoreCase("") && !mwra.getRb04().equals("98")) {
-//                    String[] arrStr = mwra.getRb04().split("-");
-//                    int day, month, year;
-//                    year = arrStr.length > 0 ? Integer.valueOf(arrStr[0]) : 0;
-//                    month = arrStr.length > 1 ? Integer.valueOf(arrStr[1]) : 0;
-//                    day = arrStr.length > 2 ? Integer.valueOf(arrStr[2]) : 0;
-//                    if (year == 0 || month == 0 || day ==0) {
-//                        return;
-//                    }
-//                    bi.rb05.setText(DateUtilsKt.ageInYears(day, month ,year ,year));
                     try {
                         Calendar cur = Calendar.getInstance(); // DOV
                         Calendar cal = Calendar.getInstance(); // DOB
@@ -223,18 +214,6 @@ public class SectionBActivity extends AppCompatActivity {
                         e.printStackTrace();
                     }
 
-
-/*
-                    String[] arrStr = mwra.getRb04().split("-");
-                    String day, month, year;
-                    year = arrStr.length > 0 ? arrStr[0] : "0";
-                    month = arrStr.length > 1 ? arrStr[1] : "0";
-                    day = arrStr.length > 2 ? arrStr[2] : "0";
-                    if (year.equalsIgnoreCase("0") || month.equalsIgnoreCase("0") || day.equalsIgnoreCase("0")) {
-                        return;
-                    }
-                    bi.rb05.setText(DateUtilsKt.getAge(year, month, day, false));
-*/
                 }
             }
         });
@@ -344,26 +323,12 @@ public class SectionBActivity extends AppCompatActivity {
     public void btnEnd(View view) {
         setResult(Activity.RESULT_CANCELED);
         finish();
-        /*saveDraft();
-        if (updateDB()) {
-
-            Toast.makeText(this, "Patient information not recorded.", Toast.LENGTH_SHORT).show();
-            finish();
-        *//*    Intent i = new Intent(this, EndingActivity.class);
-            i.putExtra("complete", false);
-            startActivity(i);*//*
-        }*/
 
     }
 
     private boolean formValidation() {
         return Validator.emptyCheckingContainer(this, bi.GrpName);
-       /*
-       if (!compareTwoDate(bi.rb08, 2,
-                "LMP should be within 2 months back from DOV")) return false;
-        return compareTwoDate(bi.rb09, 9,
-                "EDD should be within 9 months back from DOV");
-                */
+
     }
 
     private boolean compareTwoDate(EditText et, int month, String msg) {
