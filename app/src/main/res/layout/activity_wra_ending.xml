@@ -83,7 +83,9 @@
                             app:maxDate="CR_DATE"
                             app:theme="@style/DatePickerEditTextDialogTheme" />
                     </LinearLayout>
-                </androidx.cardview.widget.CardView> <!-- ra01v3v2  Input   -->
+                </androidx.cardview.widget.CardView>
+
+                <!-- ra01v3v2  Input   -->
                 <androidx.cardview.widget.CardView
                     android:id="@+id/fldGrpCVra01v3"
                     style="@style/cardView"
@@ -122,6 +124,7 @@
                             app:theme="@style/DatePickerEditTextDialogTheme" />
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
+
                 <!-- status Radio   -->
                 <androidx.cardview.widget.CardView
                     android:id="@+id/fldGrpCVstatus"
@@ -147,9 +150,7 @@
                                 android:layout_weight="1"
                                 android:text="@string/rc04" />
 
-
                         </LinearLayout>
-
 
                         <RadioGroup
                             android:id="@+id/istatus"
@@ -160,38 +161,43 @@
                                 android:id="@+id/istatusa"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:text="@string/rc0401" />
+                                android:text="Complete" />
 
                             <RadioButton
                                 android:id="@+id/istatusb"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:text="@string/rc0402" />
+                                android:text="Incomplete" />
 
                             <RadioButton
                                 android:id="@+id/istatusc"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:text="@string/rc0403" />
+                                android:text="@string/rc0403"
+                                android:visibility="gone"/>
 
 
                             <RadioButton
                                 android:id="@+id/istatusd"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:text="@string/rc0404" />
+                                android:text="@string/rc0404"
+                                android:visibility="gone"
+                                />
 
                             <RadioButton
                                 android:id="@+id/istatuse"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:text="@string/rc0405" />
+                                android:text="@string/rc0405"
+                                android:visibility="gone"/>
 
                             <RadioButton
                                 android:id="@+id/istatusf"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:text="@string/rc0406" />
+                                android:text="@string/rc0406"
+                                android:visibility="gone"/>
 
 
                            <!-- <EditText

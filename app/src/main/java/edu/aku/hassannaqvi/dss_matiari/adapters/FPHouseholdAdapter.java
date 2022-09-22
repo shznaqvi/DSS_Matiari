@@ -1,5 +1,7 @@
 package edu.aku.hassannaqvi.dss_matiari.adapters;
 
+import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.mwraCount;
+import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.selectedHhNO;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.selectedUC;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.selectedVillage;
 
@@ -42,6 +44,7 @@ public class FPHouseholdAdapter extends RecyclerView.Adapter<FPHouseholdAdapter.
     private final DatabaseHelper db;
     private FPHouseholds fpHouseholds;
     private Households households;
+    int maxMWRA, maxFpMWRA, totalMWRA = 0;
 
     /**
      * Initialize the dataset of the Adapter.
@@ -55,6 +58,8 @@ public class FPHouseholdAdapter extends RecyclerView.Adapter<FPHouseholdAdapter.
         MainApp.fmComplete = false;
 
         db = MainApp.appInfo.dbHelper;
+
+
 
     }
 
@@ -140,7 +145,14 @@ public class FPHouseholdAdapter extends RecyclerView.Adapter<FPHouseholdAdapter.
 /*
 {"ra01":"2021-08-23","ra02":"","ra04":"","ra03":"","ra05":"","ra07":"9001","ra06":"9","ra08":"asd","ra09":"2","ra10":"1","ra11":"96","ra11x":"ghg","ra12":"96","ra12x":"vgv","ra13":"","ra13x":"","ra14":"head","ra15":"resp","ra16":"2","ra17_a":"1","ra17_b":"1","ra17_c":"1","ra17_d":"1","ra18":"1"}
         fMaritalStatus.setText(marStatus + " | " + pregStatus);*/
-        int totalMWRA = Integer.parseInt(followUpsSche.getRa18().equals("") ? "0" : followUpsSche.getRa18());
+        //int totalMWRA = Integer.parseInt(followUpsSche.getRa18().equals("") ? "0" : followUpsSche.getRa18());
+        //int totalMWRA = db.getMaxMWRANoBYHHFromFolloupsSche(selectedUC, selectedVillage, selectedHhNO);
+
+        maxMWRA = db.getMaxMWRSNoBYHH(selectedUC, selectedVillage, selectedHhNO);
+        maxFpMWRA = db.getMaxMWRANoBYHHFromFolloupsSche(selectedUC, selectedVillage, selectedHhNO);
+        totalMWRA= Math.max(maxMWRA, maxFpMWRA);
+
+
         hhNo.setText(followUpsSche.getVillageCode() + "-" + followUpsSche.getHhNo());
 
         if (followUpsSche.getiStatus().equals("1")) {
@@ -229,6 +241,7 @@ public class FPHouseholdAdapter extends RecyclerView.Adapter<FPHouseholdAdapter.
         View v = LayoutInflater.from(viewGroup.getContext())
                 .inflate(R.layout.household_row, viewGroup, false);
 
+
         return new ViewHolder(v, mContext);
     }
 
@@ -238,27 +251,6 @@ public class FPHouseholdAdapter extends RecyclerView.Adapter<FPHouseholdAdapter.
     }
 
 
-/*    private boolean insertFpHousehold() {
-        if (!MainApp.households.getUid().equals("")) return true;
-        long rowId = 0;
-        try {
-            rowId = db.addFpHousehold(fpHouseholds);
-        } catch (JSONException e) {
-            e.printStackTrace();
-            Toast.makeText(mContext, "JSONException(FPHouseholds): " + e.getMessage(), Toast.LENGTH_SHORT).show();
-            Log.d(TAG, "insertNewRecord (JSONException): " + e.getMessage());
-            return false;
-        }
-        fpHouseholds.setId(String.valueOf(rowId));
-        if (rowId > 0) {
-            fpHouseholds.setUid(fpHouseholds.getDeviceId() + fpHouseholds.getId());
-            db.updatesFPHouseholdsColumn(TableContracts.FPHouseholdTable.COLUMN_UID, fpHouseholds.getUid());
-            return true;
-        } else {
-            Toast.makeText(mContext, "Updating Database... ERROR!", Toast.LENGTH_SHORT).show();
-            return false;
-        }
-    }*/
 
     /**
      * Provide a reference to the type of views that you are using (custom ViewHolder)

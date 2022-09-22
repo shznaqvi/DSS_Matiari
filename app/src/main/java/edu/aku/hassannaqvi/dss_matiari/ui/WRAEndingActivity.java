@@ -80,22 +80,18 @@ public class WRAEndingActivity extends AppCompatActivity {
 
         followups.setiStatus(bi.istatusa.isChecked() ? "1"
                 : bi.istatusb.isChecked() ? "2"
-                : bi.istatusc.isChecked() ? "3"
-                : bi.istatusd.isChecked() ? "4"
-                : bi.istatuse.isChecked() ? "5"
-                : bi.istatusf.isChecked() ? "6"
                 : "-1");
         //fpHouseholds.setiStatus96x(bi.istatusdx.getText().toString());
 
         visitCount++;
 
         // Only increment visit count if Refused or Locked AND NOT FIRST VISIT
-/*        if (bi.istatusb.isChecked() ||
+        if (bi.istatusb.isChecked() ||
                 bi.istatusc.isChecked()) {
             // Do not increment if saving First Visit
             if(!MainApp.households.getiStatus().equals(""))
             MainApp.households.setVisitNo(String.valueOf(visitCount));
-        }*/
+        }
         followups.setVisitNo(String.valueOf(visitCount));
 
         /*switch (visitCount) {

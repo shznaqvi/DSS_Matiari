@@ -130,8 +130,9 @@ public class SectionCx2Activity extends AppCompatActivity {
         if (!formValidation()) return;
 
         if(updateDB()){
-                setResult(RESULT_OK);
-                finish();
+            setResult(RESULT_OK);
+            startActivity(new Intent(this, SectionOutcomeActivity.class).addFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT).putExtra("complete", true));
+            finish();
 
         } else {
             Toast.makeText(this, "Failed to Update Database!", Toast.LENGTH_SHORT).show();
