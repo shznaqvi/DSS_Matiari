@@ -50,8 +50,8 @@ public class FPEndingActivity extends AppCompatActivity {
         //bi.hhStatus.setText(bi.hhStatus.getText()+" "+(Integer.parseInt(MainApp.households.getVisitNo())+1));
 
         db = MainApp.appInfo.dbHelper;
-        visitCount = Integer.parseInt(MainApp.households.getVisitNo());
-        boolean complete = getIntent().getBooleanExtra("complete", false);
+        visitCount = Integer.parseInt(fpHouseholds.getVisitNo());
+        boolean complete = getIntent().getBooleanExtra("complete", MainApp.mwraFlag);
         boolean noWRA = getIntent().getBooleanExtra("noWRA", false);
 /*        boolean refused = getIntent().getBooleanExtra("refused", false);
         boolean locked = getIntent().getBooleanExtra("locked", false);*/
@@ -140,6 +140,7 @@ public class FPEndingActivity extends AppCompatActivity {
                 );
                 fpHouseholds.setRa13x(bi.istatusdx.getText().toString());
                 fpHouseholds.setRa01v3(bi.ra01v3.getText().toString());
+                MainApp.mwraFlag = true;
                 break;
 
         }

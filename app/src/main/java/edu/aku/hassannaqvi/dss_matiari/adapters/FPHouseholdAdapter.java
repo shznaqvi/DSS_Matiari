@@ -94,6 +94,9 @@ public class FPHouseholdAdapter extends RecyclerView.Adapter<FPHouseholdAdapter.
             e.printStackTrace();
         }
 
+        totalMWRA = db.getMaxMWRANoBYHHFromFolloupsSche(followUpsSche.getUcCode(), followUpsSche.getVillageCode(), followUpsSche.getHhNo());
+
+
 /*if (!followUpsSche.getiStatus().equals("1"))
     fpHouseholds.setiStatus(followUpsSche.getiStatus());*/
 
@@ -145,12 +148,12 @@ public class FPHouseholdAdapter extends RecyclerView.Adapter<FPHouseholdAdapter.
 /*
 {"ra01":"2021-08-23","ra02":"","ra04":"","ra03":"","ra05":"","ra07":"9001","ra06":"9","ra08":"asd","ra09":"2","ra10":"1","ra11":"96","ra11x":"ghg","ra12":"96","ra12x":"vgv","ra13":"","ra13x":"","ra14":"head","ra15":"resp","ra16":"2","ra17_a":"1","ra17_b":"1","ra17_c":"1","ra17_d":"1","ra18":"1"}
         fMaritalStatus.setText(marStatus + " | " + pregStatus);*/
-        //int totalMWRA = Integer.parseInt(followUpsSche.getRa18().equals("") ? "0" : followUpsSche.getRa18());
+        //int totalMWRA = Integer.parseInt(followUpsSche.getRb01().equals("") || followUpsSche.getRb01().equals("null") ? "0" : String.valueOf(totalMwra));
         //int totalMWRA = db.getMaxMWRANoBYHHFromFolloupsSche(selectedUC, selectedVillage, selectedHhNO);
 
-        maxMWRA = db.getMaxMWRSNoBYHH(selectedUC, selectedVillage, selectedHhNO);
+        /*maxMWRA = db.getMaxMWRSNoBYHH(selectedUC, selectedVillage, selectedHhNO);
         maxFpMWRA = db.getMaxMWRANoBYHHFromFolloupsSche(selectedUC, selectedVillage, selectedHhNO);
-        totalMWRA= Math.max(maxMWRA, maxFpMWRA);
+        totalMWRA= Math.max(maxMWRA, maxFpMWRA);*/
 
 
         hhNo.setText(followUpsSche.getVillageCode() + "-" + followUpsSche.getHhNo());
@@ -159,11 +162,18 @@ public class FPHouseholdAdapter extends RecyclerView.Adapter<FPHouseholdAdapter.
             prvStatus.setVisibility(View.GONE);
             hhHead.setText(followUpsSche.getRa14());
             hhHead.setVisibility(View.VISIBLE);
-        } else {
+        } else if(!followUpsSche.getiStatus().equals("1") ) {
+
             hhHead.setVisibility(View.GONE);
             prvStatus.setText(hhPrvStatus);
             prvStatus.setVisibility(View.VISIBLE);
+        }else if(totalMWRA == 0){
+            hhHead.setVisibility(View.GONE);
+            prvStatus.setText("NO WRA");
+            prvStatus.setVisibility(View.VISIBLE);
         }
+
+
         mwraCount.setText(totalMWRA + " Women | " + pregStatus);
         secStatus.setText(hhStatus);
         imgStatus.setVisibility(fpHouseholds.getiStatus().equals("1") || Integer.parseInt(fpHouseholds.getVisitNo()) > 2 ? View.VISIBLE : View.GONE);
@@ -189,7 +199,7 @@ public class FPHouseholdAdapter extends RecyclerView.Adapter<FPHouseholdAdapter.
 
                     if (followUpsSche.getiStatus().equals("1")) {
                         editHousehold(viewHolder.getAdapterPosition());
-                    } else {
+                    } else if(!followUpsSche.getiStatus().equals("1") || totalMWRA == 0) {
                         try {
                             MainApp.households = db.getHouseholdByHDSSID(followUpsSche.getHdssid());
 

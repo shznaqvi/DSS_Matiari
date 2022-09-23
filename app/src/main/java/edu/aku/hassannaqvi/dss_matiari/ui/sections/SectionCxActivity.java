@@ -96,6 +96,23 @@ public class SectionCxActivity extends AppCompatActivity {
                 }
 
             }
+
+        });
+
+        if(!MainApp.fpHouseholds.getVisitNo().equals("") && Integer.parseInt(fpHouseholds.getVisitNo()) == 2)
+        {
+            bi.rc0408.setEnabled(true);
+            bi.rc0404.setEnabled(false);
+        }else{
+            bi.rc0408.setEnabled(false);
+            bi.rc0404.setEnabled(true);
+        }
+
+        bi.rc04.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                MainApp.mwraFlag = !bi.rc0404.isChecked();
+            }
         });
 
         /*int maxMWRA = db.getMaxMWRSNoBYHH(selectedUC, selectedVillage, selectedHhNO);

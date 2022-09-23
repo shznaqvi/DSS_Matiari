@@ -148,6 +148,8 @@
     <string name="rc0404">Not Available/Lock  </string>
     <string name="rc0405">Married and moved to another HH in this village </string>
     <string name="rc0406">Married and moved to another village </string>
+    <string name="rc0407">Death </string>
+    <string name="rc0408">Interview Not done after 3 visits</string>
     <string name="rc05">Current Status</string>
     <string name="rc0501">Live</string>
     <string name="rc0502">Death</string>

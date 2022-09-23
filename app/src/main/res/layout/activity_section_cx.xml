@@ -431,7 +431,16 @@
                                 android:layout_height="wrap_content"
                                 android:checked='@{followups.rc04.equals("7")}'
                                 android:onClick='@{()->followups.setRc04("7") + rc05.clearCheck() + rc08.clearCheck() + rc09.clearCheck() + rc11.clearCheck()}'
-                                android:text="@string/rc0502" />
+                                android:text="@string/rc0407" />
+
+
+                            <RadioButton
+                                android:id="@+id/rc0408"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:checked='@{followups.rc04.equals("8")}'
+                                android:onClick='@{()->followups.setRc04("8") + rc05.clearCheck() + rc08.clearCheck() + rc09.clearCheck() + rc11.clearCheck()}'
+                                android:text="@string/rc0408" />
 
 
                             <!--<EditText

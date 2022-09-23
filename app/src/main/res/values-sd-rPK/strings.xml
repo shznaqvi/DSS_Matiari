@@ -151,6 +151,8 @@
     <string name="rc0404"> موجود ناهي  / بند  </string>
     <string name="rc0405">شادي ڪري ساڳئي ڳوٺ جي ٻي گھر ۾ هلي وئي  </string>
     <string name="rc0406">شادي ڪري ٻي ڳوٺ هلي وئي</string>
+    <string name="rc0407">وفات ڪري وئي</string>
+    <string name="rc0408">ٽي وزٽ کان پوء انٽرويو نه ٿي سگھيو</string>
     <string name="rc05"> موجوده حيثيت </string>
     <string name="rc0501">زنده</string>
     <string name="rc0502">مئل</string>

@@ -29,6 +29,7 @@ import edu.aku.hassannaqvi.dss_matiari.core.MainApp;
 import edu.aku.hassannaqvi.dss_matiari.database.DatabaseHelper;
 import edu.aku.hassannaqvi.dss_matiari.databinding.ActivitySectionCx2Binding;
 import edu.aku.hassannaqvi.dss_matiari.databinding.ActivitySectionCxBinding;
+import edu.aku.hassannaqvi.dss_matiari.ui.FPEndingActivity;
 
 public class SectionCx2Activity extends AppCompatActivity {
 
@@ -131,7 +132,7 @@ public class SectionCx2Activity extends AppCompatActivity {
 
         if(updateDB()){
             setResult(RESULT_OK);
-            startActivity(new Intent(this, SectionOutcomeActivity.class).addFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT).putExtra("complete", true));
+            //startActivity(new Intent(this, FPEndingActivity.class).addFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT).putExtra("complete", MainApp.mwraFlag));
             finish();
 
         } else {

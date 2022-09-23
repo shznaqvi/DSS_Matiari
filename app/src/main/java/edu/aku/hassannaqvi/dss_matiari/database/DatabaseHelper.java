@@ -1777,6 +1777,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
 
+
     public int getMaxHHNoFromFolloupsSche(String ucCode, String vCode) {
         SQLiteDatabase db = this.getReadableDatabase(DATABASE_PASSWORD);
         Cursor c = db.rawQuery(
@@ -2026,6 +2027,25 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return mwraCount;
     }
 
+    /*public int getMWRACountBYSNO(String hdssid) {
+        SQLiteDatabase db = this.getReadableDatabase(DATABASE_PASSWORD);
+        Cursor c = db.rawQuery(
+                "SELECT Count(*) AS mwraCount" +
+
+                        " FROM " + TableFollowUpsSche.TABLE_NAME +
+                        " WHERE " + TableFollowUpsSche.COLUMN_RB01 + " != ''"
+
+                ,
+                new String[]{hdssid});
+        float maxHHno = 0;
+        int mwraCount = 0;
+        while (c.moveToNext()) {
+            mwraCount = c.getInt(c.getColumnIndexOrThrow("mwraCount"));
+        }
+        // Log.d(TAG, "getMaxHHNo: " + mwraCount);
+        return mwraCount;
+    }
+*/
 
     public int getHouseholdCountByVillage(String villagecode) {
         SQLiteDatabase db = this.getReadableDatabase(DATABASE_PASSWORD);
