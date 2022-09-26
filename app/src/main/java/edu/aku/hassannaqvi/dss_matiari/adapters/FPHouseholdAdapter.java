@@ -44,7 +44,7 @@ public class FPHouseholdAdapter extends RecyclerView.Adapter<FPHouseholdAdapter.
     private final DatabaseHelper db;
     private FPHouseholds fpHouseholds;
     private Households households;
-    int maxMWRA, maxFpMWRA, totalMWRA = 0;
+    int totalMWRA = 0;
 
     /**
      * Initialize the dataset of the Adapter.
@@ -94,7 +94,7 @@ public class FPHouseholdAdapter extends RecyclerView.Adapter<FPHouseholdAdapter.
             e.printStackTrace();
         }
 
-        totalMWRA = db.getMaxMWRANoBYHHFromFolloupsSche(followUpsSche.getUcCode(), followUpsSche.getVillageCode(), followUpsSche.getHhNo());
+        this.totalMWRA = db.getMaxMWRANoBYHHFromFolloupsSche(followUpsSche.getUcCode(), followUpsSche.getVillageCode(), followUpsSche.getHhNo());
 
 
 /*if (!followUpsSche.getiStatus().equals("1"))
@@ -158,7 +158,24 @@ public class FPHouseholdAdapter extends RecyclerView.Adapter<FPHouseholdAdapter.
 
         hhNo.setText(followUpsSche.getVillageCode() + "-" + followUpsSche.getHhNo());
 
-        if (followUpsSche.getiStatus().equals("1")) {
+        if(totalMWRA == 0)
+        {
+            hhHead.setVisibility(View.GONE);
+            prvStatus.setText("NO WRA");
+            prvStatus.setVisibility(View.VISIBLE);
+        }else{
+            if(followUpsSche.getiStatus().equals("1")){
+                prvStatus.setVisibility(View.GONE);
+                hhHead.setText(followUpsSche.getRa14());
+                hhHead.setVisibility(View.VISIBLE);
+            }else{
+                hhHead.setVisibility(View.GONE);
+                prvStatus.setText(hhPrvStatus);
+                prvStatus.setVisibility(View.VISIBLE);
+            }
+        }
+
+        /*if (followUpsSche.getiStatus().equals("1")) {
             prvStatus.setVisibility(View.GONE);
             hhHead.setText(followUpsSche.getRa14());
             hhHead.setVisibility(View.VISIBLE);
@@ -171,7 +188,7 @@ public class FPHouseholdAdapter extends RecyclerView.Adapter<FPHouseholdAdapter.
             hhHead.setVisibility(View.GONE);
             prvStatus.setText("NO WRA");
             prvStatus.setVisibility(View.VISIBLE);
-        }
+        }*/
 
 
         mwraCount.setText(totalMWRA + " Women | " + pregStatus);
@@ -180,8 +197,63 @@ public class FPHouseholdAdapter extends RecyclerView.Adapter<FPHouseholdAdapter.
         secStatus.setBackgroundColor(ContextCompat.getColor(mContext, R.color.grayDark));
 
         if (!fpHouseholds.getiStatus().equals("1")) {
-            viewHolder.itemView.setOnClickListener(v -> {
-                // Get the current state of the item
+            viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    // Get the current state of the item
+
+                    try {
+                        MainApp.fpHouseholds = db.getFPHouseholdBYHdssid(MainApp.followUpsScheHHList.get(viewHolder.getAdapterPosition()).getHdssid());
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+
+                    if (MainApp.fpHouseholds.getUid().equals(""))
+                        MainApp.fpHouseholds.populateMeta(viewHolder.getAdapterPosition());
+
+           /*     MainApp.fpHouseholds.setVisitNo(String.valueOf(Integer.parseInt(MainApp.fpHouseholds.getVisitNo()) + 1));
+                mContext.startActivity(new Intent(mContext, FPMwraActivity.class));*/
+
+                    if (!MainApp.fpHouseholds.getiStatus().equals("1") && Integer.parseInt(MainApp.fpHouseholds.getVisitNo()) < 3) {
+
+                        if (followUpsSche.getiStatus().equals("1") && totalMWRA > 0) {
+                            editHousehold(viewHolder.getAdapterPosition());
+                        } else if(!followUpsSche.getiStatus().equals("1") || totalMWRA == 0) {
+                            try {
+                                MainApp.households = db.getHouseholdByHDSSID(followUpsSche.getHdssid());
+
+                                if (MainApp.households == null) {
+                                    MainApp.households = new Households();
+
+                                    MainApp.households.setUcCode(selectedUC);
+                                    MainApp.households.setVillageCode(selectedVillage);
+                                    MainApp.households.setRa09(followUpsSche.getHhNo());
+                                }
+                                MainApp.selectedHhNO = followUpsSche.getHhNo();
+                                MainApp.position = viewHolder.getAdapterPosition();
+                                if (!MainApp.households.getiStatus().equals("1") && Integer.parseInt(MainApp.households.getVisitNo()) < 3) {
+
+                                    Intent intent = new Intent(mContext, SectionAActivity.class);
+                                    ((FPHouseholdActivity) mContext).MemberInfoLauncher.launch(intent);
+                                } else {
+                                    Toast.makeText(mContext, "Follow-Up for this household has been locked", Toast.LENGTH_LONG).show();
+                                }
+
+
+                                //  mContext.startActivity(new Intent(mContext, SectionAActivity.class));
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                                Toast.makeText(mContext, "JSONException(households):" + e.getMessage(), Toast.LENGTH_SHORT).show();
+                            }
+                        }
+
+                    } else {
+                        Toast.makeText(mContext, "Follow-Up for this household has been locked", Toast.LENGTH_LONG).show();
+                    }
+                }
+            });
+            //viewHolder.itemView.setOnClickListener(v -> {
+                /*// Get the current state of the item
 
                 try {
                     MainApp.fpHouseholds = db.getFPHouseholdBYHdssid(MainApp.followUpsScheHHList.get(viewHolder.getAdapterPosition()).getHdssid());
@@ -192,12 +264,12 @@ public class FPHouseholdAdapter extends RecyclerView.Adapter<FPHouseholdAdapter.
                 if (MainApp.fpHouseholds.getUid().equals(""))
                     MainApp.fpHouseholds.populateMeta(viewHolder.getAdapterPosition());
 
-           /*     MainApp.fpHouseholds.setVisitNo(String.valueOf(Integer.parseInt(MainApp.fpHouseholds.getVisitNo()) + 1));
-                mContext.startActivity(new Intent(mContext, FPMwraActivity.class));*/
+           *//*     MainApp.fpHouseholds.setVisitNo(String.valueOf(Integer.parseInt(MainApp.fpHouseholds.getVisitNo()) + 1));
+                mContext.startActivity(new Intent(mContext, FPMwraActivity.class));*//*
 
                 if (!MainApp.fpHouseholds.getiStatus().equals("1") && Integer.parseInt(MainApp.fpHouseholds.getVisitNo()) < 3) {
 
-                    if (followUpsSche.getiStatus().equals("1")) {
+                    if (followUpsSche.getiStatus().equals("1") && totalMWRA > 0) {
                         editHousehold(viewHolder.getAdapterPosition());
                     } else if(!followUpsSche.getiStatus().equals("1") || totalMWRA == 0) {
                         try {
@@ -230,8 +302,8 @@ public class FPHouseholdAdapter extends RecyclerView.Adapter<FPHouseholdAdapter.
 
                 } else {
                     Toast.makeText(mContext, "Follow-Up for this household has been locked", Toast.LENGTH_LONG).show();
-                }
-            });
+                }*/
+            //});
         }
     }
 
@@ -272,10 +344,6 @@ public class FPHouseholdAdapter extends RecyclerView.Adapter<FPHouseholdAdapter.
         private final TextView secStatus;
         private final TextView prvStatus;
         private final ImageView imgStatus;
-/*        private final TextView fMatitalStatus;
-
-        private final ImageView fmRow;
-        private final View indicator;*/
 
 
         public ViewHolder(View v, Context c) {
@@ -286,10 +354,6 @@ public class FPHouseholdAdapter extends RecyclerView.Adapter<FPHouseholdAdapter.
             secStatus = v.findViewById(R.id.secStatus);
             prvStatus = v.findViewById(R.id.prvStatus);
             imgStatus = v.findViewById(R.id.imgStatus);
-/*            fMatitalStatus = v.findViewById(R.id.hh06);
-            secStatus = v.findViewById(R.id.secStatus);
-            fmRow = v.findViewById(R.id.fmRow);
-            indicator = v.findViewById(R.id.indicator);*/
 
         }
 

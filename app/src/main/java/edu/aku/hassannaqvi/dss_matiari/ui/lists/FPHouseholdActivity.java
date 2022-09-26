@@ -97,6 +97,7 @@ public class FPHouseholdActivity extends AppCompatActivity {
         bi.villageCode.setText("List of " + selectedUC + "-" + selectedVillage);
 
 
+        //hhAdapter = new FPHouseholdAdapter(this, MainApp.followUpsScheHHList, );
         hhAdapter = new FPHouseholdAdapter(this, MainApp.followUpsScheHHList);
         bi.rvHouseholds.setAdapter(hhAdapter);
         bi.rvHouseholds.setLayoutManager(new LinearLayoutManager(this));
