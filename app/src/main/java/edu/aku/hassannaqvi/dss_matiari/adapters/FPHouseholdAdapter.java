@@ -22,6 +22,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import org.json.JSONException;
 
+import java.util.HashMap;
 import java.util.List;
 
 import edu.aku.hassannaqvi.dss_matiari.R;
@@ -44,7 +45,7 @@ public class FPHouseholdAdapter extends RecyclerView.Adapter<FPHouseholdAdapter.
     private final DatabaseHelper db;
     private FPHouseholds fpHouseholds;
     private Households households;
-    int totalMWRA = 0;
+    HashMap<Integer, Integer> totalMwraMap = new HashMap<>();
 
     /**
      * Initialize the dataset of the Adapter.
@@ -64,11 +65,12 @@ public class FPHouseholdAdapter extends RecyclerView.Adapter<FPHouseholdAdapter.
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder viewHolder, int pos) {
+    public void onBindViewHolder(@NonNull ViewHolder viewHolder, int position) {
 
         Log.d(TAG, "Element " + viewHolder.getAdapterPosition() + " set.");
         FollowUpsSche followUpsSche = this.followUpsScheList.get(viewHolder.getAdapterPosition());        // Get element from your dataset at this position and replace the contents of the view
         // with that element
+        int pos = viewHolder.getAdapterPosition();
 
         TextView hhNo = viewHolder.hhNo;
         TextView hhHead = viewHolder.hhHead;
@@ -94,7 +96,8 @@ public class FPHouseholdAdapter extends RecyclerView.Adapter<FPHouseholdAdapter.
             e.printStackTrace();
         }
 
-        this.totalMWRA = db.getMaxMWRANoBYHHFromFolloupsSche(followUpsSche.getUcCode(), followUpsSche.getVillageCode(), followUpsSche.getHhNo());
+        int tempMWRA = db.getMaxMWRANoBYHHFromFolloupsSche(followUpsSche.getUcCode(), followUpsSche.getVillageCode(), followUpsSche.getHhNo());
+        totalMwraMap.put(pos, tempMWRA);
 
 
 /*if (!followUpsSche.getiStatus().equals("1"))
@@ -158,7 +161,7 @@ public class FPHouseholdAdapter extends RecyclerView.Adapter<FPHouseholdAdapter.
 
         hhNo.setText(followUpsSche.getVillageCode() + "-" + followUpsSche.getHhNo());
 
-        if(totalMWRA == 0)
+        if(tempMWRA == 0)
         {
             hhHead.setVisibility(View.GONE);
             prvStatus.setText("NO WRA");
@@ -191,7 +194,7 @@ public class FPHouseholdAdapter extends RecyclerView.Adapter<FPHouseholdAdapter.
         }*/
 
 
-        mwraCount.setText(totalMWRA + " Women | " + pregStatus);
+        mwraCount.setText(tempMWRA + " Women | " + pregStatus);
         secStatus.setText(hhStatus);
         imgStatus.setVisibility(fpHouseholds.getiStatus().equals("1") || Integer.parseInt(fpHouseholds.getVisitNo()) > 2 ? View.VISIBLE : View.GONE);
         secStatus.setBackgroundColor(ContextCompat.getColor(mContext, R.color.grayDark));
@@ -216,9 +219,10 @@ public class FPHouseholdAdapter extends RecyclerView.Adapter<FPHouseholdAdapter.
 
                     if (!MainApp.fpHouseholds.getiStatus().equals("1") && Integer.parseInt(MainApp.fpHouseholds.getVisitNo()) < 3) {
 
-                        if (followUpsSche.getiStatus().equals("1") && totalMWRA > 0) {
+                        int currentMWRA = totalMwraMap.containsKey(pos) ? totalMwraMap.get(pos) : 0;
+                        if (followUpsSche.getiStatus().equals("1") && currentMWRA > 0) {
                             editHousehold(viewHolder.getAdapterPosition());
-                        } else if(!followUpsSche.getiStatus().equals("1") || totalMWRA == 0) {
+                        } else if(!followUpsSche.getiStatus().equals("1") || currentMWRA == 0) {
                             try {
                                 MainApp.households = db.getHouseholdByHDSSID(followUpsSche.getHdssid());
 
