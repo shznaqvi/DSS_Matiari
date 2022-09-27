@@ -17,6 +17,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
+import edu.aku.hassannaqvi.dss_matiari.BR;
 import edu.aku.hassannaqvi.dss_matiari.contracts.TableContracts;
 import edu.aku.hassannaqvi.dss_matiari.core.MainApp;
 
@@ -103,6 +104,7 @@ public class FPHouseholds extends BaseObservable implements Observable {
         setHhNo(MainApp.followUpsScheHHList.get(position).getHhNo());
         setFround(MainApp.followUpsScheHHList.get(position).getfRound());
         setMuid(MainApp.followUpsScheHHList.get(position).getMuid());
+        setRa01(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.ENGLISH).format(new Date().getTime()));
 
 
 
@@ -473,6 +475,7 @@ public class FPHouseholds extends BaseObservable implements Observable {
             JSONObject json = null;
             json = new JSONObject(string);
 
+            this.ra01 = json.getString("ra01");
             this.ra01v2 = json.has("ra01v2") ? json.getString("ra01v2") : "";
             this.ra01v3 = json.has("ra01v3") ? json.getString("ra01v3") : "";
 
@@ -517,6 +520,7 @@ public class FPHouseholds extends BaseObservable implements Observable {
         JSONObject json = new JSONObject();
 
         json
+                .put("ra01", ra01)
                 .put("ra01v3", ra01v3)
                 .put("ra01v2", ra01v2);
 

@@ -15,6 +15,7 @@ import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.RadioGroup;
+import android.widget.Switch;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -42,6 +43,7 @@ public class SectionCxActivity extends AppCompatActivity {
     private static final String TAG = "SectionCxActivity";
     ActivitySectionCxBinding bi;
     private DatabaseHelper db;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -214,6 +216,8 @@ public class SectionCxActivity extends AppCompatActivity {
 
             if(bi.rc0401.isChecked()) {
 
+                // If pregnant in previous round and delivered with live birth
+
                 if (followups.getPrePreg().equals("1") && bi.rc0901.isChecked()) {
 
                     Intent forwardIntent = new Intent(this, SectionOutcomeActivity.class).putExtra("complete", true);
@@ -221,13 +225,25 @@ public class SectionCxActivity extends AppCompatActivity {
                     setResult(RESULT_OK, forwardIntent);
                     startActivity(forwardIntent);
                     finish();
-                } else if (!bi.rc0604.isChecked() && bi.rc0802.isChecked() || followups.getPrePreg().equals("2")) {
+                }
+                // If married in previeous round and not pregnant
+                else if (!bi.rc0604.isChecked() && bi.rc0802.isChecked()  || followups.getPrePreg().equals("2")) {
                     Intent forwardIntent = new Intent(this, SectionCx2Activity.class).putExtra("complete", true);
                     forwardIntent.setFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT);
                     setResult(RESULT_OK, forwardIntent);
                     startActivity(forwardIntent);
                     finish();
-                } else if (bi.rc0604.isChecked() || bi.rc0801.isChecked()) {
+                } // if unmarried in previous round and get married in current round
+                else if(followups.getRb06().equals("4") && !bi.rc0604.isChecked())
+                {
+                    Intent forwardIntent = new Intent(this, SectionCx2Activity.class).putExtra("complete", true);
+                    forwardIntent.setFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT);
+                    setResult(RESULT_OK, forwardIntent);
+                    startActivity(forwardIntent);
+                    finish();
+                }
+                // if unmarried in current or pregnancy continued
+                else if (bi.rc0604.isChecked() || bi.rc0801.isChecked() || followups.getRb06().equals("2") || followups.getRb06().equals("3") || followups.getRb06().equals("5")) {
                     setResult(RESULT_OK);
                     finish();
                 }

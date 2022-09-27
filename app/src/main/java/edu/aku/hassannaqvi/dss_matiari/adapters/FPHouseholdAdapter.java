@@ -178,20 +178,6 @@ public class FPHouseholdAdapter extends RecyclerView.Adapter<FPHouseholdAdapter.
             }
         }
 
-        /*if (followUpsSche.getiStatus().equals("1")) {
-            prvStatus.setVisibility(View.GONE);
-            hhHead.setText(followUpsSche.getRa14());
-            hhHead.setVisibility(View.VISIBLE);
-        } else if(!followUpsSche.getiStatus().equals("1") ) {
-
-            hhHead.setVisibility(View.GONE);
-            prvStatus.setText(hhPrvStatus);
-            prvStatus.setVisibility(View.VISIBLE);
-        }else if(totalMWRA == 0){
-            hhHead.setVisibility(View.GONE);
-            prvStatus.setText("NO WRA");
-            prvStatus.setVisibility(View.VISIBLE);
-        }*/
 
 
         mwraCount.setText(tempMWRA + " Women | " + pregStatus);

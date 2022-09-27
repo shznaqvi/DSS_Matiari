@@ -98,7 +98,13 @@ public class OutcomeFollowups extends BaseObservable implements Observable {
 
     }
 
+    public String getRb01a() {
+        return rb01a;
+    }
 
+    public void setRb01a(String rb01a) {
+        this.rb01a = rb01a;
+    }
 
     @Bindable
     public String getRb02() {
@@ -456,6 +462,7 @@ public class OutcomeFollowups extends BaseObservable implements Observable {
             //this.round = json.getString("ROUND");
             this.rb02 = json.getString("rb02");
             this.rc01a = json.getString("rc01a");
+            this.rb01a = json.getString("rb01a");
             this.rc12ln = json.getString("rc12ln");
             this.rb03 = json.getString("rb03");
             this.rb04 = json.getString("rb04");
@@ -478,6 +485,7 @@ public class OutcomeFollowups extends BaseObservable implements Observable {
                 .put("ROUND", round)
                 .put("rb02", rb02)
                 .put("rc01a", rc01a)
+                .put("rb01a", rb01a)
                 .put("rc12ln", rc12ln)
                 .put("rb03", rb03)
                 .put("rb04", rb04)
@@ -550,6 +558,7 @@ public class OutcomeFollowups extends BaseObservable implements Observable {
         MainApp.outcomeFollowups.setHhNo(MainApp.fpMwra.getHhNo());
         MainApp.outcomeFollowups.setRound(MainApp.fpMwra.getfRound());
         MainApp.outcomeFollowups.setSno(MainApp.fpMwra.getRb01());
+        MainApp.outcomeFollowups.setRb01a(MainApp.outcomeFollowups.getRc01a());
         //MainApp.outcomeFollowups.setMuid(MainApp.fpMwra.getFmuid());
 
         //TODO add mother sno in hhFollowupslist

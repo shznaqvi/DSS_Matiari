@@ -51,7 +51,7 @@ public class FPEndingActivity extends AppCompatActivity {
 
         db = MainApp.appInfo.dbHelper;
         visitCount = Integer.parseInt(fpHouseholds.getVisitNo());
-        boolean complete = getIntent().getBooleanExtra("complete", MainApp.mwraFlag);
+        boolean complete = getIntent().getBooleanExtra("complete", !MainApp.mwraFlag);
         boolean noWRA = getIntent().getBooleanExtra("noWRA", false);
 /*        boolean refused = getIntent().getBooleanExtra("refused", false);
         boolean locked = getIntent().getBooleanExtra("locked", false);*/

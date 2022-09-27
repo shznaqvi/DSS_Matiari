@@ -521,6 +521,7 @@ public class Outcome extends BaseObservable implements Observable {
         MainApp.outcome.setMsno(MainApp.followups.getRc01());
         MainApp.outcome.setSysDate(MainApp.followups.getSysDate());
         MainApp.outcome.setRb02(MainApp.followups.getRc02());
+        MainApp.outcome.setRb01a(MainApp.followups.getRc01a());
         MainApp.outcome.setRound(MainApp.followups.getfRound());
         MainApp.outcome.setUcCode(MainApp.fpHouseholds.getUcCode());
         MainApp.outcome.setVillageCode(MainApp.fpHouseholds.getVillageCode());
@@ -534,7 +535,7 @@ public class Outcome extends BaseObservable implements Observable {
         MainApp.outcome.setDeviceId(MainApp.deviceid);
         MainApp.outcome.setHdssId(MainApp.fpHouseholds.getHdssId());
         MainApp.outcome.setAppver(MainApp.versionName + "." + MainApp.versionCode);
-        MainApp.outcome.setRb01a(MainApp.fpMwra.getRa01());
+        //MainApp.outcome.setRb01a(MainApp.fpMwra.getRa01());
 
     }
 
