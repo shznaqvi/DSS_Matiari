@@ -153,6 +153,7 @@ public class FPEndingActivity extends AppCompatActivity {
         saveDraft();
         if (UpdateDB()) {
             setResult(RESULT_OK);
+            MainApp.mwraFlag = true;
             startActivity(new Intent(this, FPHouseholdActivity.class).addFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT));
             finish();
 

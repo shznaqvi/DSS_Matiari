@@ -113,6 +113,9 @@ public class SectionCxActivity extends AppCompatActivity {
         bi.rc04.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
+                if (!MainApp.mwraFlag)
+                    return;
+
                 MainApp.mwraFlag = !bi.rc0404.isChecked();
             }
         });
@@ -227,7 +230,8 @@ public class SectionCxActivity extends AppCompatActivity {
                     finish();
                 }
                 // If married in previeous round and not pregnant
-                else if (!bi.rc0604.isChecked() && bi.rc0802.isChecked()  || followups.getPrePreg().equals("2")) {
+                else if (!bi.rc0604.isChecked() && bi.rc0802.isChecked()
+               || (bi.rc0601.isChecked() && followups.getPrePreg().equals("2"))) {
                     Intent forwardIntent = new Intent(this, SectionCx2Activity.class).putExtra("complete", true);
                     forwardIntent.setFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT);
                     setResult(RESULT_OK, forwardIntent);
@@ -243,7 +247,10 @@ public class SectionCxActivity extends AppCompatActivity {
                     finish();
                 }
                 // if unmarried in current or pregnancy continued
-                else if (bi.rc0604.isChecked() || bi.rc0801.isChecked() || followups.getRb06().equals("2") || followups.getRb06().equals("3") || followups.getRb06().equals("5")) {
+                else if (bi.rc0604.isChecked() || bi.rc0801.isChecked() ||
+                        (followups.getRb06().equals("2") && followups.getPrePreg().equals("2"))
+                        || (followups.getRb06().equals("3") && followups.getPrePreg().equals("2"))
+                        || (followups.getRb06().equals("5") && followups.getPrePreg().equals("2"))) {
                     setResult(RESULT_OK);
                     finish();
                 }
