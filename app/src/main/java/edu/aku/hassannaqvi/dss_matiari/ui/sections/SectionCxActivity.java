@@ -14,6 +14,7 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
+import android.widget.CompoundButton;
 import android.widget.RadioGroup;
 import android.widget.Switch;
 import android.widget.Toast;
@@ -104,7 +105,9 @@ public class SectionCxActivity extends AppCompatActivity {
         if(!MainApp.fpHouseholds.getVisitNo().equals("") && Integer.parseInt(fpHouseholds.getVisitNo()) == 2)
         {
             bi.rc0408.setEnabled(true);
+            MainApp.mwraFlag = true;
             bi.rc0404.setEnabled(false);
+            bi.rc0404.setChecked(false);
         }else{
             bi.rc0408.setEnabled(false);
             bi.rc0404.setEnabled(true);
@@ -112,30 +115,49 @@ public class SectionCxActivity extends AppCompatActivity {
 
         bi.rc04.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
+            public void onCheckedChanged(RadioGroup radioGroup, int i) {
+                if(bi.rc0404.isChecked()){
+                    MainApp.mwraFlag = false;
+                }else{
+                    MainApp.mwraFlag = true;
+                }
+            }
+        });
+
+
+        bi.rc0404.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if (!MainApp.mwraFlag)
+                    return;
+
+                MainApp.mwraFlag = !b;
+
+            }
+        });
+
+        bi.rc0408.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if(b)
+                {
+                    MainApp.mwraFlag = true;
+                }
+            }
+        });
+        /*bi.rc04.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 if (!MainApp.mwraFlag)
                     return;
 
                 MainApp.mwraFlag = !bi.rc0404.isChecked();
+                //MainApp.mwraFlag = !bi.rc0404.isChecked();
+                //MainApp.mwraFlag = bi.rc0408.isChecked();
             }
         });
 
-        /*int maxMWRA = db.getMaxMWRSNoBYHH(selectedUC, selectedVillage, selectedHhNO);
-        int maxFpMWRA = db.getMaxMWRANoBYHHFromFolloupsSche(selectedUC, selectedVillage, selectedHhNO);
-        mwraCount = Math.max(maxMWRA, maxFpMWRA);
-
-
-        bi.rc04.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(RadioGroup group, int checkedId) {
-                if(bi.rc0402.isChecked() || bi.rc0407.isChecked())
-                {
-                    mwraCount--;
-                }
-            }
-        });*/
-
-
+*/
     }
 
     private void setDateRanges() {

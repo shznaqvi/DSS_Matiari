@@ -53,12 +53,12 @@ public class FPEndingActivity extends AppCompatActivity {
         visitCount = Integer.parseInt(fpHouseholds.getVisitNo());
         boolean complete = getIntent().getBooleanExtra("complete", !MainApp.mwraFlag);
         boolean noWRA = getIntent().getBooleanExtra("noWRA", false);
-/*        boolean refused = getIntent().getBooleanExtra("refused", false);
-        boolean locked = getIntent().getBooleanExtra("locked", false);*/
+        boolean refused = getIntent().getBooleanExtra("refused", false);
+        boolean locked = getIntent().getBooleanExtra("locked", false);
 
         bi.istatusa.setEnabled(complete);
         bi.istatusb.setEnabled(!complete);
-        bi.istatusc.setEnabled(!complete);
+        bi.istatusc.setEnabled(refused);
         bi.istatuse.setEnabled(noWRA);
         bi.istatusd.setEnabled(true); // Always TRUE
 
