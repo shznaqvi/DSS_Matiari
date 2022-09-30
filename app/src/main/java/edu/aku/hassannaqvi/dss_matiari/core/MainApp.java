@@ -16,6 +16,7 @@ import net.sqlcipher.database.SQLiteDatabase;
 import org.json.JSONArray;
 
 import java.io.File;
+import java.util.HashMap;
 import java.util.List;
 
 import edu.aku.hassannaqvi.dss_matiari.BuildConfig;
@@ -108,7 +109,7 @@ public class MainApp extends Application {
     public static int totalOutcomes;
     public static int outcomeCounter = 0;
     public static int mwraDone = 0;
-    public static boolean mwraFlag = true;
+    public static HashMap<String, Boolean> mwraStatus = new HashMap<>();
     private static final String TAG = "MainApp";
 //    public static int TRATS = 8;
     public static String IBAHC = "";

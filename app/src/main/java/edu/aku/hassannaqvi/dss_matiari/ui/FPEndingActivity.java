@@ -2,6 +2,7 @@ package edu.aku.hassannaqvi.dss_matiari.ui;
 
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.followups;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.fpHouseholds;
+import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.mwraStatus;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -51,7 +52,8 @@ public class FPEndingActivity extends AppCompatActivity {
 
         db = MainApp.appInfo.dbHelper;
         visitCount = Integer.parseInt(fpHouseholds.getVisitNo());
-        boolean complete = getIntent().getBooleanExtra("complete", !MainApp.mwraFlag);
+
+        boolean complete = getIntent().getBooleanExtra("complete", mwraStatus.isEmpty());
         boolean noWRA = getIntent().getBooleanExtra("noWRA", false);
         boolean refused = getIntent().getBooleanExtra("refused", false);
         boolean locked = getIntent().getBooleanExtra("locked", false);
@@ -140,7 +142,6 @@ public class FPEndingActivity extends AppCompatActivity {
                 );
                 fpHouseholds.setRa13x(bi.istatusdx.getText().toString());
                 fpHouseholds.setRa01v3(bi.ra01v3.getText().toString());
-                MainApp.mwraFlag = true;
                 break;
 
         }
@@ -153,7 +154,6 @@ public class FPEndingActivity extends AppCompatActivity {
         saveDraft();
         if (UpdateDB()) {
             setResult(RESULT_OK);
-            MainApp.mwraFlag = true;
             startActivity(new Intent(this, FPHouseholdActivity.class).addFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT));
             finish();
 

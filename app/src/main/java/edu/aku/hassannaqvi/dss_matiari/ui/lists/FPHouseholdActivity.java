@@ -27,6 +27,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import org.json.JSONException;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import edu.aku.hassannaqvi.dss_matiari.R;
 import edu.aku.hassannaqvi.dss_matiari.adapters.FPHouseholdAdapter;
@@ -89,6 +90,7 @@ public class FPHouseholdActivity extends AppCompatActivity {
 
         db = MainApp.appInfo.dbHelper;
         MainApp.followUpsScheHHList = new ArrayList<>();
+        //MainApp.mwraStatus = new HashMap<>();
 
         Log.d(TAG, "onCreate: followUpsScheHHList " + MainApp.followUpsScheHHList.size());
 

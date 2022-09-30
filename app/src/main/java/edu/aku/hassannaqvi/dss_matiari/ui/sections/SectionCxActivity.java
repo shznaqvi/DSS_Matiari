@@ -1,8 +1,11 @@
 package edu.aku.hassannaqvi.dss_matiari.ui.sections;
 
+import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.followUpsScheHHList;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.followups;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.fpHouseholds;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.mwraCount;
+import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.mwraStatus;
+import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.selectedFemale;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.selectedHhNO;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.selectedUC;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.selectedVillage;
@@ -105,7 +108,6 @@ public class SectionCxActivity extends AppCompatActivity {
         if(!MainApp.fpHouseholds.getVisitNo().equals("") && Integer.parseInt(fpHouseholds.getVisitNo()) == 2)
         {
             bi.rc0408.setEnabled(true);
-            MainApp.mwraFlag = true;
             bi.rc0404.setEnabled(false);
             bi.rc0404.setChecked(false);
         }else{
@@ -115,49 +117,17 @@ public class SectionCxActivity extends AppCompatActivity {
 
         bi.rc04.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
-            public void onCheckedChanged(RadioGroup radioGroup, int i) {
-                if(bi.rc0404.isChecked()){
-                    MainApp.mwraFlag = false;
-                }else{
-                    MainApp.mwraFlag = true;
-                }
-            }
-        });
-
-
-        bi.rc0404.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                if (!MainApp.mwraFlag)
-                    return;
-
-                MainApp.mwraFlag = !b;
-
-            }
-        });
-
-        bi.rc0408.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                if(b)
-                {
-                    MainApp.mwraFlag = true;
-                }
-            }
-        });
-        /*bi.rc04.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-            @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
-                if (!MainApp.mwraFlag)
-                    return;
-
-                MainApp.mwraFlag = !bi.rc0404.isChecked();
-                //MainApp.mwraFlag = !bi.rc0404.isChecked();
-                //MainApp.mwraFlag = bi.rc0408.isChecked();
-            }
+                if(bi.rc0404.isChecked())
+                {
+                    mwraStatus.put(followUpsScheHHList.get(selectedFemale).getMuid(), false);
+                }else{
+                    mwraStatus.remove(followUpsScheHHList.get(selectedFemale).getMuid());
+                }
+   }
         });
 
-*/
+
     }
 
     private void setDateRanges() {

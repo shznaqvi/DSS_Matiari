@@ -5,6 +5,7 @@ import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.followups;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.fpHouseholds;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.mwraCount;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.mwraDone;
+import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.mwraStatus;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.outcomeFollowups;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.selectedFemale;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.selectedHhNO;
@@ -197,7 +198,8 @@ public class FPMwraActivity extends AppCompatActivity {
             bi.newMwraList.setVisibility(View.VISIBLE);
 
         }
-    /*    if (MainApp.followUpsScheMWRAList.size() > 0) {
+
+        /*    if (MainApp.followUpsScheMWRAList.size() > 0) {
             //MainApp.fm.get(Integer.parseInt(String.valueOf(MainApp.selectedFemale))).setStatus("1");
             fmAdapter.notifyItemChanged(Integer.parseInt(String.valueOf(selectedFemale)));
         }*/
@@ -391,7 +393,9 @@ public class FPMwraActivity extends AppCompatActivity {
         Toast.makeText(this, "proceedSelect()", Toast.LENGTH_SHORT).show();
             Intent i = new Intent(this, FPEndingActivity.class);
             i.setFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT);
-        i.putExtra("complete", MainApp.mwraFlag);
+            //if(mwraStatus.containsValue(false))
+
+        i.putExtra("complete", mwraStatus.isEmpty());
             startActivity(i);
             finish();
 
