@@ -1777,7 +1777,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
 
-
     public int getMaxHHNoFromFolloupsSche(String ucCode, String vCode) {
         SQLiteDatabase db = this.getReadableDatabase(DATABASE_PASSWORD);
         Cursor c = db.rawQuery(
@@ -2211,7 +2210,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         String whereClause;
         whereClause =
                 OutcomeTable.COLUMN_MUID + "=? AND " +
-                OutcomeTable.COLUMN_SNO + "=? ";
+                        OutcomeTable.COLUMN_SNO + "=? ";
 
         String[] whereArgs = {MainApp.followups.getUid().split("_")[0], sno};
 
