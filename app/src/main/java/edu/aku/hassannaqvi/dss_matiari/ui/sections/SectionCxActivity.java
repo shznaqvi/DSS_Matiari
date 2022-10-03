@@ -312,6 +312,7 @@ public class SectionCxActivity extends AppCompatActivity {
 
             followups.setDeviceId(followups.getDeviceId() + "_" + followups.getDeviceId().substring(followups.getDeviceId().length() - 1));
             db.updatesFollowUpsColumn(TableContracts.FollowupsTable.COLUMN_DEVICEID, followups.getDeviceId());
+            db.updatesFollowUpsColumn(TableContracts.FollowupsTable.COLUMN_ISTATUS, followups.getRc04());
             int repeatCount = (followups.getDeviceId().length() - 16) / 2;
             // new UID
             String newUID = followups.getDeviceId().substring(0, 16) + followups.getId() + "_" + repeatCount;

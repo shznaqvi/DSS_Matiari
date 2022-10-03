@@ -443,15 +443,6 @@
                                 android:text="@string/rc0408" />
 
 
-                            <!--<EditText
-                                android:id="@+id/istatusdx"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:digits="AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz0123456789,. "
-                                android:hint="@string/ra11d"
-                                android:tag="ra11"
-                                android:text='@{istatusd.checked ? istatusdx.getText().toString() : ""}'
-                                android:visibility='@{istatusd.checked? View.VISIBLE : View.GONE}' />-->
                         </RadioGroup>
 
                     </LinearLayout>

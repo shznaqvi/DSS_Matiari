@@ -2,6 +2,7 @@ package edu.aku.hassannaqvi.dss_matiari.database;
 
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.IBAHC;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.PROJECT_NAME;
+import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.followups;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.outcomeFollowups;
 import static edu.aku.hassannaqvi.dss_matiari.database.CreateTable.SQL_ALTER_ADD_DOB;
 import static edu.aku.hassannaqvi.dss_matiari.database.CreateTable.SQL_ALTER_ADD_GENDER;
@@ -254,7 +255,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         values.put(FollowupsTable.COLUMN_VISIT_NO, followups.getVisitNo());
         values.put(FollowupsTable.COLUMN_SC, followups.sCtoString());
         //values.put(FollowupsTable.COLUMN_SD, followups.sDtoString());
-        values.put(FollowupsTable.COLUMN_ISTATUS, followups.getiStatus());
+        values.put(FollowupsTable.COLUMN_ISTATUS, followups.getRc04());
         values.put(FollowupsTable.COLUMN_DEVICETAGID, followups.getDeviceTag());
         values.put(FollowupsTable.COLUMN_DEVICEID, followups.getDeviceId());
         values.put(FollowupsTable.COLUMN_APPVERSION, followups.getAppver());
@@ -1164,7 +1165,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         Cursor c = null;
         String[] columns = null;
         String whereClause;
-        whereClause = FollowupsTable.COLUMN_SYNCED + " is null ";
+        whereClause = FollowupsTable.COLUMN_SYNCED + " is null AND (" +
+                TableContracts.FPHouseholdTable.COLUMN_ISTATUS + " !=  4) ";
 
         String[] whereArgs = null;
 
