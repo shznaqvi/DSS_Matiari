@@ -29,6 +29,7 @@ import edu.aku.hassannaqvi.dss_matiari.models.MWRA;
 import edu.aku.hassannaqvi.dss_matiari.models.Outcome;
 import edu.aku.hassannaqvi.dss_matiari.models.OutcomeFollowups;
 import edu.aku.hassannaqvi.dss_matiari.models.Users;
+import edu.aku.hassannaqvi.dss_matiari.room.DssRoomDatabase;
 
 
 public class MainApp extends Application {
@@ -187,6 +188,10 @@ public class MainApp extends Application {
             int TRATS = bundle.getInt("YEK_TRATS");
             IBAHC = bundle.getString("YEK_REVRES").substring(TRATS, TRATS + 16);
             Log.d(TAG, "onCreate: YEK_REVRES = " + IBAHC);
+
+            // Room DB
+            DssRoomDatabase.init(this, IBAHC);
+
         } catch (PackageManager.NameNotFoundException e) {
             e.printStackTrace();
         }

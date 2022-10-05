@@ -2,10 +2,14 @@ package edu.aku.hassannaqvi.dss_matiari.models;
 
 import android.database.Cursor;
 
+import androidx.annotation.NonNull;
 import androidx.databinding.BaseObservable;
 import androidx.databinding.Bindable;
 import androidx.databinding.Observable;
 import androidx.databinding.PropertyChangeRegistry;
+import androidx.room.ColumnInfo;
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
 
 import org.apache.commons.lang3.StringUtils;
 import org.json.JSONException;
@@ -19,9 +23,9 @@ import edu.aku.hassannaqvi.dss_matiari.BR;
 import edu.aku.hassannaqvi.dss_matiari.contracts.TableContracts.HouseholdTable;
 import edu.aku.hassannaqvi.dss_matiari.core.MainApp;
 
+@Entity(tableName = HouseholdTable.TABLE_NAME + "__1")
 public class Households extends BaseObservable implements Observable {
 
-    private final String TAG = "Households";
     private String round = "";
     private String ra01 = "";
     private String ra01v2 = "";
@@ -65,32 +69,67 @@ public class Households extends BaseObservable implements Observable {
 
     private transient PropertyChangeRegistry propertyChangeRegistry = new PropertyChangeRegistry();
     private boolean exist = false;
+
     // APP VARIABLES
+    @ColumnInfo(name = HouseholdTable.COLUMN_PROJECT_NAME)
     private String projectName = MainApp.PROJECT_NAME;
-    // APP VARIABLES
-    private String id = StringUtils.EMPTY;
+
+    @PrimaryKey @NonNull
+    @ColumnInfo(name = HouseholdTable.COLUMN_ID)
+    String id = StringUtils.EMPTY;
+
+    @ColumnInfo(name = HouseholdTable.COLUMN_UID)
     private String uid = StringUtils.EMPTY;
+
+    @ColumnInfo(name = HouseholdTable.COLUMN_USERNAME)
     private String userName = StringUtils.EMPTY;
+
+    @ColumnInfo(name = HouseholdTable.COLUMN_SYSDATE)
     private String sysDate = StringUtils.EMPTY;
+
+    @ColumnInfo(name = HouseholdTable.COLUMN_HDSSID)
     private String hdssId = StringUtils.EMPTY;
+
+    @ColumnInfo(name = HouseholdTable.COLUMN_UC_CODE)
     private String ucCode = StringUtils.EMPTY;
+
+    @ColumnInfo(name = HouseholdTable.COLUMN_VILLAGE_CODE)
     private String villageCode = StringUtils.EMPTY;
+
+    @ColumnInfo(name = HouseholdTable.COLUMN_HOUSEHOLD_NO)
     private String hhNo = StringUtils.EMPTY;
+
+    @ColumnInfo(name = HouseholdTable.COLUMN_STRUCTURE_NO)
     private String structureNo = StringUtils.EMPTY;
+
+    @ColumnInfo(name = HouseholdTable.COLUMN_VISIT_NO)
     private String visitNo = "0";
 
-
+    @ColumnInfo(name = HouseholdTable.COLUMN_DEVICEID)
     private String deviceId = StringUtils.EMPTY;
+
+    @ColumnInfo(name = HouseholdTable.COLUMN_DEVICETAGID)
     private String deviceTag = StringUtils.EMPTY;
+
+    @ColumnInfo(name = HouseholdTable.COLUMN_APPVERSION)
     private String appver = StringUtils.EMPTY;
+
     private String endTime = StringUtils.EMPTY;
-    private String iStatus = StringUtils.EMPTY;
-    private String iStatus96x = StringUtils.EMPTY;
+
+    @ColumnInfo(name = HouseholdTable.COLUMN_ISTATUS)
+    String iStatus = StringUtils.EMPTY;
+
+    String iStatus96x = StringUtils.EMPTY;
+
+    @ColumnInfo(name = HouseholdTable.COLUMN_SYNCED)
     private String synced = StringUtils.EMPTY;
+
+    @ColumnInfo(name = HouseholdTable.COLUMN_SYNCED_DATE)
     private String syncDate = StringUtils.EMPTY;
 
     // SECTION VARIABLES
-    private String sA = StringUtils.EMPTY;
+    @ColumnInfo(name = HouseholdTable.COLUMN_SA)
+    String sA = StringUtils.EMPTY;
 
 
     public Households() {

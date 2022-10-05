@@ -1,6 +1,9 @@
 package edu.aku.hassannaqvi.dss_matiari.models
 
 import android.database.Cursor
+import androidx.room.ColumnInfo
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 import edu.aku.hassannaqvi.dss_matiari.contracts.TableContracts.UsersTable
 import org.apache.commons.lang3.StringUtils
 import org.json.JSONException
@@ -9,11 +12,23 @@ import org.json.JSONObject
 /**
  * Created by hassan.naqvi on 11/30/2016.
  */
+@Entity(tableName = UsersTable.TABLE_NAME)
 class Users {
+
+    @PrimaryKey
+    @ColumnInfo(name = UsersTable.COLUMN_ID)
     var userID: Long = 0
+
+    @ColumnInfo(name = UsersTable.COLUMN_USERNAME)
     var userName: String = StringUtils.EMPTY
+
+    @ColumnInfo(name = UsersTable.COLUMN_PASSWORD)
     var password: String = StringUtils.EMPTY
+
+    @ColumnInfo(name = UsersTable.COLUMN_FULLNAME)
     var fullname: String = StringUtils.EMPTY
+
+    @ColumnInfo(name = UsersTable.COLUMN_DESIGNATION)
     var designation: String = StringUtils.EMPTY
 
     constructor() {
