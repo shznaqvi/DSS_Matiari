@@ -14,21 +14,35 @@ import org.json.JSONObject
  */
 @Entity(tableName = UsersTable.TABLE_NAME)
 class Users {
-
-    @PrimaryKey
-    @ColumnInfo(name = UsersTable.COLUMN_ID)
+    @PrimaryKey(autoGenerate = true)
+    @ColumnInfo(
+        name = UsersTable.COLUMN_ID,
+        defaultValue = "0"
+    )
     var userID: Long = 0
 
-    @ColumnInfo(name = UsersTable.COLUMN_USERNAME)
-    var userName: String = StringUtils.EMPTY
+    @ColumnInfo(
+        name = UsersTable.COLUMN_USERNAME,
+        defaultValue = StringUtils.EMPTY
+    )
+    var userName: String? = StringUtils.EMPTY
 
-    @ColumnInfo(name = UsersTable.COLUMN_PASSWORD)
-    var password: String = StringUtils.EMPTY
+    @ColumnInfo(
+        name = UsersTable.COLUMN_PASSWORD,
+        defaultValue = StringUtils.EMPTY
+    )
+    var password: String? = StringUtils.EMPTY
 
-    @ColumnInfo(name = UsersTable.COLUMN_FULLNAME)
-    var fullname: String = StringUtils.EMPTY
+    @ColumnInfo(
+        name = UsersTable.COLUMN_FULLNAME,
+        defaultValue = StringUtils.EMPTY
+    )
+    var fullname: String? = StringUtils.EMPTY
 
-    @ColumnInfo(name = UsersTable.COLUMN_DESIGNATION)
+    @ColumnInfo(
+        name = UsersTable.COLUMN_DESIGNATION,
+        defaultValue = StringUtils.EMPTY
+    )
     var designation: String = StringUtils.EMPTY
 
     constructor() {

@@ -63,6 +63,7 @@ import edu.aku.hassannaqvi.dss_matiari.core.MainApp;
 import edu.aku.hassannaqvi.dss_matiari.database.DatabaseHelper;
 import edu.aku.hassannaqvi.dss_matiari.databinding.ActivitySyncBinding;
 import edu.aku.hassannaqvi.dss_matiari.models.SyncModel;
+import edu.aku.hassannaqvi.dss_matiari.room.DssRoomDatabase;
 import edu.aku.hassannaqvi.dss_matiari.workers.DataDownWorkerALL;
 import edu.aku.hassannaqvi.dss_matiari.workers.DataUpWorkerALL;
 import edu.aku.hassannaqvi.dss_matiari.workers.PhotoUploadWorker2;
@@ -350,7 +351,10 @@ public class SyncActivity extends AppCompatActivity {
                                 case UsersTable.TABLE_NAME:
                                     try {
                                         jsonArray = new JSONArray(result);
-                                        insertCount = db.syncUser(jsonArray);
+//                                        insertCount = db.syncUser(jsonArray);
+
+                                        insertCount = DssRoomDatabase.getDbInstance().usersDao().syncUser(jsonArray);
+
                                     } catch (JSONException e) {
                                         e.printStackTrace();
                                         downloadTables.get(position).setstatus("Process Failed");
@@ -360,7 +364,7 @@ public class SyncActivity extends AppCompatActivity {
                                         syncListAdapter.updatesyncList(downloadTables);
                                     }
                                     break;
-                                case VersionTable.TABLE_NAME:
+                                /*case VersionTable.TABLE_NAME:
                                     try {
                                         insertCount = db.syncVersionApp(new JSONObject(result));
                                         if (insertCount == 1) jsonArray.put("1");

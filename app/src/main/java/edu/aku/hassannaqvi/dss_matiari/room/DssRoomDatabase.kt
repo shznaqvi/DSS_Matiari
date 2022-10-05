@@ -16,20 +16,21 @@ import net.sqlcipher.database.SupportFactory
 @Database(
     version = DssRoomDatabase.DATABASE_VERSION,
     entities = [
-        Households::class,
+//        Households::class,
         Users::class
     ]
 )
 abstract class DssRoomDatabase : RoomDatabase() {
 
     abstract fun householdsDao(): HouseholdsDao
+    abstract fun usersDao(): UsersDao
 
     companion object {
         const val DATABASE_VERSION = 5
-        const val DATABASE_NAME = MainApp.PROJECT_NAME + ".db"
+        const val DATABASE_NAME = MainApp.PROJECT_NAME + "1.db"
 
-        @Volatile
-        private var dbInstance: DssRoomDatabase? = null
+        @Volatile @JvmStatic
+        var dbInstance: DssRoomDatabase? = null
 
         @JvmStatic
         fun init(context: Context, password: String): DssRoomDatabase {
@@ -40,8 +41,8 @@ abstract class DssRoomDatabase : RoomDatabase() {
                 val passphrase: ByteArray = SQLiteDatabase.getBytes(password.toCharArray())
                 val factory = SupportFactory(passphrase)
 
-                dbInstance = Room.databaseBuilder(context, DssRoomDatabase::class.java, DATABASE_NAME + "__1+")
-                    .openHelperFactory(factory)
+                dbInstance = Room.databaseBuilder(context, DssRoomDatabase::class.java, DATABASE_NAME)
+//                    .openHelperFactory(factory)
                     .addMigrations(MIGRATION_4_5)
                     .fallbackToDestructiveMigration()
                     .allowMainThreadQueries()

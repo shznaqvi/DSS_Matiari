@@ -12,6 +12,8 @@ import android.view.View;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 
+import com.wajahatkarim3.roomexplorer.RoomExplorer;
+
 import edu.aku.hassannaqvi.dss_matiari.R;
 import edu.aku.hassannaqvi.dss_matiari.core.MainApp;
 import edu.aku.hassannaqvi.dss_matiari.database.AndroidManager;
@@ -20,6 +22,7 @@ import edu.aku.hassannaqvi.dss_matiari.models.Followups;
 import edu.aku.hassannaqvi.dss_matiari.models.Households;
 import edu.aku.hassannaqvi.dss_matiari.models.Outcome;
 import edu.aku.hassannaqvi.dss_matiari.models.OutcomeFollowups;
+import edu.aku.hassannaqvi.dss_matiari.room.DssRoomDatabase;
 import edu.aku.hassannaqvi.dss_matiari.ui.lists.FormsReportCluster;
 import edu.aku.hassannaqvi.dss_matiari.ui.sections.IdentificationActivity;
 import edu.aku.hassannaqvi.dss_matiari.ui.sections.SectionAActivity;
@@ -93,7 +96,8 @@ public class MainActivity extends AppCompatActivity {
 
                 break;
             case R.id.dbm:
-                startActivity(new Intent(this, AndroidManager.class));
+                RoomExplorer.show(this, DssRoomDatabase.class, DssRoomDatabase.DATABASE_NAME);
+//                startActivity(new Intent(this, AndroidManager.class));
                 break;
             default:
                 MainApp.idType = 0;
