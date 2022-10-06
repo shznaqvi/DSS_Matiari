@@ -556,7 +556,7 @@ public class OutcomeFollowups extends BaseObservable implements Observable {
         MainApp.outcomeFollowups.setUcCode(MainApp.fpMwra.getUcCode());
         MainApp.outcomeFollowups.setVillageCode(MainApp.fpMwra.getVillageCode());
         MainApp.outcomeFollowups.setHhNo(MainApp.fpMwra.getHhNo());
-        MainApp.outcomeFollowups.setRound(MainApp.fpMwra.getfRound());
+        MainApp.outcomeFollowups.setRound(MainApp.fpMwra.getFRound());
         MainApp.outcomeFollowups.setSno(MainApp.fpMwra.getRb01());
         MainApp.outcomeFollowups.setRb01a(MainApp.outcomeFollowups.getRc01a());
         //MainApp.outcomeFollowups.setMuid(MainApp.fpMwra.getFmuid());

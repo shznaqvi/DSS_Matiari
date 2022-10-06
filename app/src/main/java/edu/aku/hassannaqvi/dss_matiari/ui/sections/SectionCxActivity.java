@@ -59,10 +59,10 @@ public class SectionCxActivity extends AppCompatActivity {
 
 
         // Set Round Number from followups data
-        MainApp.ROUND = MainApp.fpMwra.getfRound();
+        MainApp.ROUND = MainApp.fpMwra.getFRound();
 
         try {
-            followups = db.getFollowupsBySno(MainApp.fpMwra.getRb01(), MainApp.fpMwra.getfRound());
+            followups = db.getFollowupsBySno(MainApp.fpMwra.getRb01(), MainApp.fpMwra.getFRound());
         } catch (JSONException e) {
             e.printStackTrace();
             Toast.makeText(this, "JSONException(Followups): " + e.getMessage(), Toast.LENGTH_SHORT).show();

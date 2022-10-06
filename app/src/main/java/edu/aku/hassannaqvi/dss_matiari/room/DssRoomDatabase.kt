@@ -1,3 +1,7 @@
+/**
+ * Created by gul.sanober on 10/06/2022.
+ */
+
 package edu.aku.hassannaqvi.dss_matiari.room
 
 import android.content.Context
@@ -7,8 +11,7 @@ import androidx.room.RoomDatabase
 import androidx.room.migration.Migration
 import androidx.sqlite.db.SupportSQLiteDatabase
 import edu.aku.hassannaqvi.dss_matiari.core.MainApp
-import edu.aku.hassannaqvi.dss_matiari.models.Households
-import edu.aku.hassannaqvi.dss_matiari.models.Users
+import edu.aku.hassannaqvi.dss_matiari.models.*
 import net.sqlcipher.database.SQLiteDatabase
 import net.sqlcipher.database.SupportFactory
 
@@ -16,17 +19,27 @@ import net.sqlcipher.database.SupportFactory
 @Database(
     version = DssRoomDatabase.DATABASE_VERSION,
     entities = [
-//        Households::class,
-        Users::class
+        Households::class,
+        Users::class,
+        Villages ::class,
+        FollowUpsSche ::class,
+        MaxHhno ::class
+
+
+
+
     ]
 )
 abstract class DssRoomDatabase : RoomDatabase() {
 
     abstract fun householdsDao(): HouseholdsDao
     abstract fun usersDao(): UsersDao
+    abstract fun VillagesDao(): VillagesDao
+    abstract fun FollowUpsScheDao(): FollowUpsScheDao
+    abstract fun MaxHHNoDao() : MaxHHNoDao
 
     companion object {
-        const val DATABASE_VERSION = 5
+        const val DATABASE_VERSION = 4
         const val DATABASE_NAME = MainApp.PROJECT_NAME + "1.db"
 
         @Volatile @JvmStatic

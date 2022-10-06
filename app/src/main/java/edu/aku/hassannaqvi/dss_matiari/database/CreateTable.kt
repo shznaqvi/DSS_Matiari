@@ -160,7 +160,7 @@ object CreateTable {
             )
 
 
-    const val SQL_CREATE_USERS = ("CREATE TABLE " + UsersTable.TABLE_NAME + "("
+    /*const val SQL_CREATE_USERS = ("CREATE TABLE " + UsersTable.TABLE_NAME + "("
             + UsersTable.COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
             + UsersTable.COLUMN_USERNAME + " TEXT,"
             + UsersTable.COLUMN_PASSWORD + " TEXT,"
@@ -168,7 +168,7 @@ object CreateTable {
             + UsersTable.COLUMN_DESIGNATION + " TEXT"
             + " );"
             )
-
+*/
     const val SQL_CREATE_VERSIONAPP = ("CREATE TABLE " + VersionTable.TABLE_NAME + " ("
             + VersionTable.COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
             + VersionTable.COLUMN_VERSION_CODE + " TEXT, "
@@ -177,22 +177,22 @@ object CreateTable {
             + ");"
             )
 
-    const val SQL_CREATE_VILLAGES = ("CREATE TABLE " + TableVillage.TABLE_NAME + "("
+    /*const val SQL_CREATE_VILLAGES = ("CREATE TABLE " + TableVillage.TABLE_NAME + "("
             + TableVillage._ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
             + TableVillage.COLUMN_UCNAME + " TEXT,"
             + TableVillage.COLUMN_VILLAGE_NAME + " TEXT,"
             + TableVillage.COLUMN_VILLAGE_CODE + " TEXT,"
-            + TableVillage.COLUMN_UC_CODE + " TEXT" + " );")
+            + TableVillage.COLUMN_UC_CODE + " TEXT" + " );")*/
 
-    const val SQL_CREATE_MAXHHNO = ("CREATE TABLE "
+    /*const val SQL_CREATE_MAXHHNO = ("CREATE TABLE "
             + MaxHhnoTable.TABLE_NAME + "("
             + MaxHhnoTable.COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
             + MaxHhnoTable.COLUMN_UC_CODE + " TEXT,"
             + MaxHhnoTable.COLUMN_VILLAGE_CODE + " TEXT,"
             + MaxHhnoTable.COLUMN_MAX_HHNO + " TEXT"
             + " );"
-            )
-    const val SQL_CREATE_FOLLOWUPSCHE = ("CREATE TABLE " + TableFollowUpsSche.TABLE_NAME + "("
+            )*/
+    /*const val SQL_CREATE_FOLLOWUPSCHE = ("CREATE TABLE " + TableFollowUpsSche.TABLE_NAME + "("
             + TableFollowUpsSche.COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
             + TableFollowUpsSche.COLUMN_UC_CODE + " TEXT,"
             + TableFollowUpsSche.COLUMN_VILLAGE_CODE + " TEXT,"
@@ -215,7 +215,7 @@ object CreateTable {
             + TableFollowUpsSche.COLUMN_RB05 + " TEXT,"
             + TableFollowUpsSche.COLUMN_RB06 + " TEXT,"
             + TableFollowUpsSche.COLUMN_MEMBERTYPE + " TEXT,"
-            + TableFollowUpsSche.COLUMN_RB07 + " TEXT" + " );")
+            + TableFollowUpsSche.COLUMN_RB07 + " TEXT" + " );")*/
 
     const val SQL_CREATE_FP_HOUSEHOLDS = ("CREATE TABLE "
             + FPHouseholdTable.TABLE_NAME + "("

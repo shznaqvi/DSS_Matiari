@@ -73,7 +73,7 @@ public class FpMwraAdapter extends RecyclerView.Adapter<FpMwraAdapter.ViewHolder
         TextView secGender = viewHolder.secGender;
         String pregStatus = followUpsSche.getRb07().equals("1") ? "PW" : "  ";
         try {
-            String curPregStatus = db.getFollowupsBySno(followUpsSche.getRb01(), followUpsSche.getfRound()).getRc07();
+            String curPregStatus = db.getFollowupsBySno(followUpsSche.getRb01(), followUpsSche.getFRound()).getRc07();
             if (!curPregStatus.equals("")) {
                 pregStatus = curPregStatus.equals("1") ? "Pregnant" : " Not Pregnant ";
             }

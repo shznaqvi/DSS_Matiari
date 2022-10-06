@@ -376,11 +376,13 @@ public class SyncActivity extends AppCompatActivity {
                                         downloadTables.get(position).setmessage(e.getMessage());
                                         syncListAdapter.updatesyncList(downloadTables);
                                     }
-                                    break;
+                                    break;*/
                                 case TableVillage.TABLE_NAME:
                                     try {
                                         jsonArray = new JSONArray(result);
-                                        insertCount = db.syncVillage(jsonArray);
+                                        //insertCount = db.syncVillage(jsonArray);
+
+                                        insertCount = DssRoomDatabase.getDbInstance().VillagesDao().syncVillages(jsonArray);
                                     } catch (JSONException e) {
                                         e.printStackTrace();
                                         downloadTables.get(position).setstatus("Process Failed");
@@ -394,7 +396,8 @@ public class SyncActivity extends AppCompatActivity {
                                 case MaxHhnoTable.TABLE_NAME:
                                     try {
                                         jsonArray = new JSONArray(result);
-                                        insertCount = db.syncMaxHhno(jsonArray);
+                                        //insertCount = db.syncMaxHhno(jsonArray);
+                                        insertCount = DssRoomDatabase.getDbInstance().MaxHHNoDao().syncMaxHHNo(jsonArray);
                                     } catch (JSONException e) {
                                         e.printStackTrace();
                                         downloadTables.get(position).setstatus("Process Failed");
@@ -407,7 +410,8 @@ public class SyncActivity extends AppCompatActivity {
                                 case TableFollowUpsSche.TABLE_NAME:
                                     try {
                                         jsonArray = new JSONArray(result);
-                                        insertCount = db.syncFollowUpsSche(jsonArray);
+                                        //insertCount = db.syncFollowUpsSche(jsonArray);
+                                        insertCount = DssRoomDatabase.getDbInstance().FollowUpsScheDao().syncFollowUpsSche(jsonArray);
                                     } catch (JSONException e) {
                                         e.printStackTrace();
                                         downloadTables.get(position).setstatus("Process Failed");

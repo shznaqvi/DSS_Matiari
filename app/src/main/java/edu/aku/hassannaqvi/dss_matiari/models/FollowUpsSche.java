@@ -3,7 +3,11 @@ package edu.aku.hassannaqvi.dss_matiari.models;
 import android.database.Cursor;
 
 import androidx.databinding.Observable;
+import androidx.room.ColumnInfo;
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
 
+import org.apache.commons.lang3.StringUtils;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -12,31 +16,82 @@ import edu.aku.hassannaqvi.dss_matiari.contracts.TableContracts.TableFollowUpsSc
 /**
  * Author: Hassan.naqvi
  * Created by: ModelGenerator on 21-12-2021
+ * Edited by: gul.sanober on 06-10-2022
+
  */
+
+@Entity(tableName = TableFollowUpsSche.TABLE_NAME)
 public class FollowUpsSche implements Observable {
+
+    @PrimaryKey(autoGenerate = true)
+    @ColumnInfo(name = TableFollowUpsSche.COLUMN_ID)
     long id;
-    private String ucCode;
-    private String villageCode;
-    private String hhNo;
-    private String hdssid;
-    private String muid;
-    private String ra01; // Date of First Visit
-    private String ra08; // Para
-    private String ra14; // Head of Household
-    private String ra18; // No. of MWRA in the household
-    private String fRound;
-    private String rb01; // MWRA Sno
-    private String rb02; // MWRA Name
-    private String rb03; // Husband / Father
-    private String rb04; // DOB
-    private String rc12; // Gender
-    private String rc15;   // Current pregnancy Status
-    private String rb05;  // Age in years
-    private String rb07;  // Pregnancy Status
-    private String rb06; // Marital Status
-    private String memberType; // Member Type (Mother or child)
-    private String istatus; // Interview Status
-    private String fpDoneDt = "";  // followup-done date
+
+    @ColumnInfo(name = TableFollowUpsSche.COLUMN_UC_CODE)
+    private String ucCode = StringUtils.EMPTY;
+
+    @ColumnInfo(name = TableFollowUpsSche.COLUMN_VILLAGE_CODE)
+    private String villageCode = StringUtils.EMPTY;
+
+    @ColumnInfo(name = TableFollowUpsSche.COLUMN_HOUSEHOLD_NO)
+    private String hhNo = StringUtils.EMPTY;
+
+    @ColumnInfo(name = TableFollowUpsSche.COLUMN_HDSSID)
+    private String hdssid = StringUtils.EMPTY;
+
+    @ColumnInfo(name = TableFollowUpsSche.COLUMN_MUID)
+    private String muid = StringUtils.EMPTY;
+
+    @ColumnInfo(name = TableFollowUpsSche.COLUMN_RA01)
+    private String ra01 = StringUtils.EMPTY; // Date of First Visit
+
+    @ColumnInfo(name = TableFollowUpsSche.COLUMN_RA08)
+    private String ra08 = StringUtils.EMPTY; // Para
+
+    @ColumnInfo(name = TableFollowUpsSche.COLUMN_RA14)
+    private String ra14 = StringUtils.EMPTY; // Head of Household
+
+    @ColumnInfo(name = TableFollowUpsSche.COLUMN_RA18)
+    private String ra18 = StringUtils.EMPTY; // No. of MWRA in the household
+
+    @ColumnInfo(name = TableFollowUpsSche.COLUMN_FROUND)
+    private String fRound = StringUtils.EMPTY;
+
+    @ColumnInfo(name = TableFollowUpsSche.COLUMN_RB01)
+    private String rb01 = StringUtils.EMPTY; // MWRA Sno
+
+    @ColumnInfo(name = TableFollowUpsSche.COLUMN_RB02)
+    private String rb02 = StringUtils.EMPTY; // MWRA Name
+
+    @ColumnInfo(name = TableFollowUpsSche.COLUMN_RB03)
+    private String rb03 = StringUtils.EMPTY; // Husband / Father
+
+    @ColumnInfo(name = TableFollowUpsSche.COLUMN_RB04)
+    private String rb04 = StringUtils.EMPTY; // DOB
+
+    @ColumnInfo(name = TableFollowUpsSche.COLUMN_RC12)
+    private String rc12 = StringUtils.EMPTY; // Gender
+
+    @ColumnInfo(name = TableFollowUpsSche.COLUMN_RC15)
+    private String rc15 = StringUtils.EMPTY;   // Current pregnancy Status
+
+    @ColumnInfo(name = TableFollowUpsSche.COLUMN_RB05)
+    private String rb05 = StringUtils.EMPTY;  // Age in years
+
+    @ColumnInfo(name = TableFollowUpsSche.COLUMN_RB07)
+    private String rb07 = StringUtils.EMPTY;  // Pregnancy Status
+
+    @ColumnInfo(name = TableFollowUpsSche.COLUMN_RB06)
+    private String rb06 = StringUtils.EMPTY; // Marital Status
+
+    @ColumnInfo(name = TableFollowUpsSche.COLUMN_MEMBERTYPE)
+    private String memberType = StringUtils.EMPTY; // Member Type (Mother or child)
+
+    @ColumnInfo(name = TableFollowUpsSche.COLUMN_ISTATUS)
+    private String istatus = StringUtils.EMPTY; // Interview Status
+
+    @ColumnInfo(name = TableFollowUpsSche.COLUMN_DONE_DATE)
+    private String fpDoneDt = StringUtils.EMPTY ;  // followup-done date
 
 
     @Override
@@ -126,14 +181,6 @@ public class FollowUpsSche implements Observable {
 
     public void setRa18(String ra18) {
         this.ra18 = ra18;
-    }
-
-    public String getfRound() {
-        return fRound;
-    }
-
-    public void setfRound(String fRound) {
-        this.fRound = fRound;
     }
 
     public String getfpDoneDt() {
@@ -232,6 +279,30 @@ public class FollowUpsSche implements Observable {
 
     public void setMemberType(String memberType) {
         this.memberType = memberType;
+    }
+
+    public String getIstatus() {
+        return istatus;
+    }
+
+    public void setIstatus(String istatus) {
+        this.istatus = istatus;
+    }
+
+    public String getFpDoneDt() {
+        return fpDoneDt;
+    }
+
+    public void setFpDoneDt(String fpDoneDt) {
+        this.fpDoneDt = fpDoneDt;
+    }
+
+    public String getFRound() {
+        return fRound;
+    }
+
+    public void setFRound(String fRound) {
+        this.fRound = fRound;
     }
 
     public FollowUpsSche Sync(JSONObject jsonObject) throws JSONException {

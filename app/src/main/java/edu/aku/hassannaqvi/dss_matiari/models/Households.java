@@ -166,31 +166,6 @@ public class Households extends BaseObservable implements Observable {
 
     }
 
-
-/*
-    private synchronized void notifyChange(int propertyId) {
-        if (propertyChangeRegistry == null) {
-            propertyChangeRegistry = new PropertyChangeRegistry();
-        }
-        propertyChangeRegistry.notifyChange(this, propertyId);
-    }
-
-    @Override
-    public synchronized void addOnPropertyChangedCallback(OnPropertyChangedCallback callback) {
-        if (propertyChangeRegistry == null) {
-            propertyChangeRegistry = new PropertyChangeRegistry();
-        }
-        propertyChangeRegistry.add(callback);
-
-    }
-
-    @Override
-    public synchronized void removeOnPropertyChangedCallback(OnPropertyChangedCallback callback) {
-        if (propertyChangeRegistry != null) {
-            propertyChangeRegistry.remove(callback);
-        }
-    }*/
-
     public String getProjectName() {
         return projectName;
     }
@@ -199,13 +174,6 @@ public class Households extends BaseObservable implements Observable {
         this.projectName = projectName;
     }
 
-/*    public PropertyChangeRegistry getPropertyChangeRegistry() {
-        return propertyChangeRegistry;
-    }
-
-    public void setPropertyChangeRegistry(PropertyChangeRegistry propertyChangeRegistry) {
-        this.propertyChangeRegistry = propertyChangeRegistry;
-    }*/
 
     public String getId() {
         return id;

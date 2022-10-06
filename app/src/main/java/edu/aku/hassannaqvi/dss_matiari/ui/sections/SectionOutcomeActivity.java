@@ -60,7 +60,7 @@ public class SectionOutcomeActivity extends AppCompatActivity {
         }
 
 
-        MainApp.ROUND = MainApp.fpMwra.getfRound();
+        MainApp.ROUND = MainApp.fpMwra.getFRound();
 
 
         outcome.setRc12dob(followups.getRc10());

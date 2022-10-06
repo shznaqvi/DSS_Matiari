@@ -1,3 +1,6 @@
+/**
+ * Created by gul.sanober on 10/06/2022.
+ */
 package edu.aku.hassannaqvi.dss_matiari.room
 
 import androidx.room.Dao
@@ -34,4 +37,7 @@ interface UsersDao {
 
     @Query("DELETE FROM " + TableContracts.UsersTable.TABLE_NAME)
     fun deleteUsersTable()
+
+    @Query("SELECT * FROM users WHERE " + TableContracts.UsersTable.COLUMN_DESIGNATION + " like '%team%' ")
+    fun getTeamLeaders() : List<Users>
 }

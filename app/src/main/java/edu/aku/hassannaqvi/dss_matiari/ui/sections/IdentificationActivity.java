@@ -28,6 +28,7 @@ import edu.aku.hassannaqvi.dss_matiari.models.Households;
 import edu.aku.hassannaqvi.dss_matiari.models.Outcome;
 import edu.aku.hassannaqvi.dss_matiari.models.OutcomeFollowups;
 import edu.aku.hassannaqvi.dss_matiari.models.Villages;
+import edu.aku.hassannaqvi.dss_matiari.room.DssRoomDatabase;
 import edu.aku.hassannaqvi.dss_matiari.ui.EndingActivity;
 import edu.aku.hassannaqvi.dss_matiari.ui.FPEndingActivity;
 import edu.aku.hassannaqvi.dss_matiari.ui.lists.FPHouseholdActivity;
@@ -85,7 +86,8 @@ public class IdentificationActivity extends AppCompatActivity {
 
     private void populateSpinner() {
 
-        Collection<Villages> uc = db.getVillageUc();
+        //Collection<Villages> uc = db.getVillageUc();
+        Collection<Villages> uc = DssRoomDatabase.getDbInstance().VillagesDao().getVillageUc();
         ucNames = new ArrayList<>();
         ucCodes = new ArrayList<>();
 
@@ -124,7 +126,8 @@ public class IdentificationActivity extends AppCompatActivity {
                 //  bi.checkHousehold.setEnabled(true);
 
                 if (position == 0) return;
-                Collection<Villages> village = db.getVillageByUc(ucCodes.get(position));
+                //Collection<Villages> village = db.getVillageByUc(ucCodes.get(position));
+                Collection<Villages> village = DssRoomDatabase.getDbInstance().VillagesDao().getVillageByUc(ucCodes.get(position));
                 villageNames = new ArrayList<>();
                 villageCodes = new ArrayList<>();
                 villageNames.add("...");

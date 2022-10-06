@@ -758,7 +758,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return (int) count;
     }
 
-    public int syncMaxHhno(JSONArray maxHhnoList) throws JSONException {
+    // Added in MaxHHNoDAIO
+
+    /*public int syncMaxHhno(JSONArray maxHhnoList) throws JSONException {
         SQLiteDatabase db = this.getWritableDatabase(DATABASE_PASSWORD);
         db.delete(MaxHhnoTable.TABLE_NAME, null, null);
         int insertCount = 0;
@@ -780,9 +782,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.close();
 
         return insertCount;
-    }
+    }*/
 
-    public int syncUser(JSONArray userList) throws JSONException {
+    /*public int syncUser(JSONArray userList) throws JSONException {
         SQLiteDatabase db = this.getWritableDatabase(DATABASE_PASSWORD);
         db.delete(UsersTable.TABLE_NAME, null, null);
         int insertCount = 0;
@@ -807,9 +809,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.close();
 
         return insertCount;
-    }
+    }*/
 
-    public int syncVillage(JSONArray villageList) throws JSONException {
+    // Added in VillagesDao
+
+    /*public int syncVillage(JSONArray villageList) throws JSONException {
         SQLiteDatabase db = this.getWritableDatabase(DATABASE_PASSWORD);
         db.delete(TableVillage.TABLE_NAME, null, null);
         int insertCount = 0;
@@ -833,9 +837,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.close();
 
         return insertCount;
-    }
+    }*/
 
-    public int syncFollowUpsSche(JSONArray followupsList) throws JSONException {
+
+    // Added in FollowupsDao
+    /*public int syncFollowUpsSche(JSONArray followupsList) throws JSONException {
         SQLiteDatabase db = this.getWritableDatabase(DATABASE_PASSWORD);
         db.delete(TableFollowUpsSche.TABLE_NAME, null, null);
         int insertCount = 0;
@@ -856,7 +862,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             values.put(TableFollowUpsSche.COLUMN_RA08, followUpsSche.getRa08());
             values.put(TableFollowUpsSche.COLUMN_RA14, followUpsSche.getRa14());
             values.put(TableFollowUpsSche.COLUMN_RA18, followUpsSche.getRa18());
-            values.put(TableFollowUpsSche.COLUMN_FROUND, followUpsSche.getfRound());
+            values.put(TableFollowUpsSche.COLUMN_FROUND, followUpsSche.getFRound());
             values.put(TableFollowUpsSche.COLUMN_DONE_DATE, followUpsSche.getfpDoneDt());
             values.put(TableFollowUpsSche.COLUMN_ISTATUS, followUpsSche.getiStatus());
             values.put(TableFollowUpsSche.COLUMN_RB01, followUpsSche.getRb01());
@@ -878,7 +884,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.close();
 
         return insertCount;
-    }
+    }*/
 
     public boolean isDateInJsonFormat(String date) {
         try {
@@ -2067,7 +2073,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return hhCount;
     }
 
-    public Collection<Users> getTeamleaders() {
+
+    // Added in UserDao
+    /*public Collection<Users> getTeamleaders() {
         SQLiteDatabase db = this.getReadableDatabase(DATABASE_PASSWORD);
         Cursor c = db.rawQuery(
                 "SELECT * " +
@@ -2083,7 +2091,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         // Log.d(TAG, "getMaxHHNo: " + mwraCount);
         return users;
     }
-
+*/
     public OutcomeFollowups getOutcomeFollowupsBySno(String rb01, String fRound, String muid) throws JSONException {
         SQLiteDatabase db = this.getReadableDatabase(DATABASE_PASSWORD);
         Cursor c = null;

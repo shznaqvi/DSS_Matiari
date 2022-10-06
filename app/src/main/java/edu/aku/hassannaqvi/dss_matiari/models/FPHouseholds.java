@@ -102,7 +102,7 @@ public class FPHouseholds extends BaseObservable implements Observable {
         setUcCode(MainApp.followUpsScheHHList.get(position).getUcCode());
         setVillageCode(MainApp.followUpsScheHHList.get(position).getVillageCode());
         setHhNo(MainApp.followUpsScheHHList.get(position).getHhNo());
-        setFround(MainApp.followUpsScheHHList.get(position).getfRound());
+        setFround(MainApp.followUpsScheHHList.get(position).getFRound());
         setMuid(MainApp.followUpsScheHHList.get(position).getMuid());
         setRa01(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.ENGLISH).format(new Date().getTime()));
 

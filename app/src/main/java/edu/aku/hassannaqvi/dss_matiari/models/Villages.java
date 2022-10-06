@@ -3,24 +3,47 @@ package edu.aku.hassannaqvi.dss_matiari.models;
 
 import android.database.Cursor;
 
+import androidx.room.ColumnInfo;
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
+
+import org.apache.commons.lang3.StringUtils;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import edu.aku.hassannaqvi.dss_matiari.contracts.TableContracts;
 import edu.aku.hassannaqvi.dss_matiari.contracts.TableContracts.TableVillage;
 
-
+@Entity(tableName = TableVillage.TABLE_NAME)
 public class Villages {
 
     private static final String TAG = "Villages_CONTRACT";
 
+    @PrimaryKey(autoGenerate = true)
+    @ColumnInfo(name = TableVillage._ID)
     Long id;
-    String ucname;
-    String villagename;
-    String villagecode;
-    String uccode;
+
+    @ColumnInfo(name = TableVillage.COLUMN_UCNAME, defaultValue = StringUtils.EMPTY)
+    String ucname= StringUtils.EMPTY;
+
+    @ColumnInfo(name = TableVillage.COLUMN_VILLAGE_NAME, defaultValue = StringUtils.EMPTY)
+    String villagename= StringUtils.EMPTY;
+
+    @ColumnInfo(name = TableVillage.COLUMN_VILLAGE_CODE, defaultValue = StringUtils.EMPTY)
+    String villagecode= StringUtils.EMPTY;
+
+    @ColumnInfo(name = TableVillage.COLUMN_UC_CODE, defaultValue = StringUtils.EMPTY)
+    String uccode= StringUtils.EMPTY;
 
     public Villages() {
         // Default Constructor
+    }
+
+    public Villages(String villageName, String villageCode)
+    {
+        villageName = this.villagename;
+        villageCode = this.villagecode;
+
     }
 
 
@@ -67,6 +90,8 @@ public class Villages {
     public void setUccode(String uccode) {
         this.uccode = uccode;
     }
+
+
 
 
     public JSONObject toJSONObject() throws JSONException {

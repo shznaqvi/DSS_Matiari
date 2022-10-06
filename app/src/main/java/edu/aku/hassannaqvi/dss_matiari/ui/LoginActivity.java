@@ -66,6 +66,7 @@ import edu.aku.hassannaqvi.dss_matiari.core.MainApp;
 import edu.aku.hassannaqvi.dss_matiari.database.DatabaseHelper;
 import edu.aku.hassannaqvi.dss_matiari.databinding.ActivityLoginBinding;
 import edu.aku.hassannaqvi.dss_matiari.models.Users;
+import edu.aku.hassannaqvi.dss_matiari.room.DssRoomDatabase;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -164,7 +165,9 @@ public class LoginActivity extends AppCompatActivity {
         leaderCodes.add("testteamleader");
 
 
-        Collection<Users> teamleaders = db.getTeamleaders();
+        //Collection<Users> teamleaders = db.getTeamleaders();
+
+        Collection<Users> teamleaders = DssRoomDatabase.getDbInstance().usersDao().getTeamLeaders();
         for (Users u : teamleaders) {
             leaderNames.add(u.getFullname());
             leaderCodes.add(u.getUserName());

@@ -124,7 +124,7 @@ public class FPMwraActivity extends AppCompatActivity {
 
             String fupStatus = "";
             try {
-                fupStatus = db.getFollowupsBySno(followUpsScheMWRAList.get(i).getRb01(), followUpsScheMWRAList.get(i).getfRound()).getSysDate();
+                fupStatus = db.getFollowupsBySno(followUpsScheMWRAList.get(i).getRb01(), followUpsScheMWRAList.get(i).getFRound()).getSysDate();
                 followUpsScheMWRAList.get(i).setfpDoneDt(fupStatus);
                 if (!fupStatus.equals("")) {
                     mwraDone++;

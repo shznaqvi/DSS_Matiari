@@ -45,10 +45,10 @@ public class OutcomeFollowupActivity extends AppCompatActivity {
         bi = DataBindingUtil.setContentView(this, R.layout.activity_outcome_followup);
         db = MainApp.appInfo.dbHelper;
 
-        MainApp.ROUND = MainApp.fpMwra.getfRound();
+        MainApp.ROUND = MainApp.fpMwra.getFRound();
 
         try {
-            outcomeFollowups = db.getOutcomeFollowupsBySno(MainApp.fpMwra.getRb01(), MainApp.fpMwra.getfRound(), fpMwra.getMuid());
+            outcomeFollowups = db.getOutcomeFollowupsBySno(MainApp.fpMwra.getRb01(), MainApp.fpMwra.getFRound(), fpMwra.getMuid());
         } catch (JSONException e) {
             e.printStackTrace();
             Toast.makeText(this, "JSONException(Followups): " + e.getMessage(), Toast.LENGTH_SHORT).show();
