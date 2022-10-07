@@ -86,7 +86,7 @@ public class IdentificationActivity extends AppCompatActivity {
 
     private void populateSpinner() {
 
-        //Collection<Villages> uc = db.getVillageUc();
+//        Collection<Villages> uc = db.getVillageUc();
         Collection<Villages> uc = DssRoomDatabase.getDbInstance().VillagesDao().getVillageUc();
         ucNames = new ArrayList<>();
         ucCodes = new ArrayList<>();
@@ -167,7 +167,10 @@ public class IdentificationActivity extends AppCompatActivity {
                 if (position != 0) {
                     String vCode = villageCodes.get(bi.ra07.getSelectedItemPosition());
 
-                    int maxHHno = db.getMaxStructure(selectedUC, vCode) + 1;
+                    //int maxHHno = db.getMaxStructure(selectedUC, vCode) + 1;
+
+                    int maxHHno = DssRoomDatabase.getDbInstance().householdsDao().getMaxStructure(selectedUC, vCode) +1;
+
                     bi.btnContinue.setBackgroundTintList(ContextCompat.getColorStateList(IdentificationActivity.this, R.color.colorAccent));
                     bi.btnContinue.setEnabled(true);
            /*     bi.checkHousehold.setBackgroundTintList(ContextCompat.getColorStateList(IdentificationActivity.this, R.color.colorAccent));

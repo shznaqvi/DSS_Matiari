@@ -51,10 +51,14 @@ interface VillagesDao {
     fun getVillageByUc(ucCode: String) : List<Villages>
 
 
-    @Query("SELECT DISTINCT " + TableContracts.TableVillage.COLUMN_UCNAME + " ,"
-            + TableContracts.TableVillage.COLUMN_UC_CODE + " ," + TableContracts.TableVillage.COLUMN_VILLAGE_NAME + " ,"
+    @Query("SELECT DISTINCT " + TableContracts.TableVillage.COLUMN_UCNAME + ","
+            + TableContracts.TableVillage.COLUMN_UC_CODE + " ,"
+            + TableContracts.TableVillage.COLUMN_VILLAGE_NAME + " ,"
             + TableContracts.TableVillage.COLUMN_VILLAGE_CODE
-            + " order by " + TableContracts.TableVillage.COLUMN_UCNAME + " ASC")
+            + " FROM " + TableContracts.TableVillage.TABLE_NAME
+            + " GROUP BY " + TableContracts.TableVillage.COLUMN_UCNAME
+            + " order by " + TableContracts.TableVillage.COLUMN_UCNAME + " ASC"
+    )
     fun getVillageUc() : List<Villages>
 
 }

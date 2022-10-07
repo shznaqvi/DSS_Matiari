@@ -23,7 +23,7 @@ import edu.aku.hassannaqvi.dss_matiari.BR;
 import edu.aku.hassannaqvi.dss_matiari.contracts.TableContracts.HouseholdTable;
 import edu.aku.hassannaqvi.dss_matiari.core.MainApp;
 
-@Entity(tableName = HouseholdTable.TABLE_NAME + "__1")
+@Entity(tableName = HouseholdTable.TABLE_NAME)
 public class Households extends BaseObservable implements Observable {
 
     private String round = "";
@@ -162,8 +162,6 @@ public class Households extends BaseObservable implements Observable {
         setRa08(households.getRa08());
         setRa10(households.getRa10());
         setRound(households.getRound());
-
-
     }
 
     public String getProjectName() {

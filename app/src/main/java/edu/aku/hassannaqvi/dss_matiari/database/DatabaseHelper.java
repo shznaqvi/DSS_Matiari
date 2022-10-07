@@ -13,16 +13,16 @@ import static edu.aku.hassannaqvi.dss_matiari.database.CreateTable.SQL_ALTER_ADD
 import static edu.aku.hassannaqvi.dss_matiari.database.CreateTable.SQL_ALTER_ADD_RC15;
 import static edu.aku.hassannaqvi.dss_matiari.database.CreateTable.SQL_ALTER_FOLLOWUPSCHE;
 import static edu.aku.hassannaqvi.dss_matiari.database.CreateTable.SQL_CREATE_FOLLOWUPS;
-import static edu.aku.hassannaqvi.dss_matiari.database.CreateTable.SQL_CREATE_FOLLOWUPSCHE;
+//import static edu.aku.hassannaqvi.dss_matiari.database.CreateTable.SQL_CREATE_FOLLOWUPSCHE;
 import static edu.aku.hassannaqvi.dss_matiari.database.CreateTable.SQL_CREATE_FP_HOUSEHOLDS;
 import static edu.aku.hassannaqvi.dss_matiari.database.CreateTable.SQL_CREATE_HOUSEHOLDS;
 import static edu.aku.hassannaqvi.dss_matiari.database.CreateTable.SQL_CREATE_MWRA;
 import static edu.aku.hassannaqvi.dss_matiari.database.CreateTable.SQL_CREATE_OUTCOME;
 import static edu.aku.hassannaqvi.dss_matiari.database.CreateTable.SQL_CREATE_OUTCOME_FOLLOWUPS;
 import static edu.aku.hassannaqvi.dss_matiari.database.CreateTable.SQL_CREATE_PREGNANCY;
-import static edu.aku.hassannaqvi.dss_matiari.database.CreateTable.SQL_CREATE_USERS;
+//import static edu.aku.hassannaqvi.dss_matiari.database.CreateTable.SQL_CREATE_USERS;
 import static edu.aku.hassannaqvi.dss_matiari.database.CreateTable.SQL_CREATE_VERSIONAPP;
-import static edu.aku.hassannaqvi.dss_matiari.database.CreateTable.SQL_CREATE_VILLAGES;
+//import static edu.aku.hassannaqvi.dss_matiari.database.CreateTable.SQL_CREATE_VILLAGES;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -95,18 +95,18 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        Log.d(TAG, "onCreate(users): " + SQL_CREATE_USERS);
-        db.execSQL(SQL_CREATE_USERS);
+//        Log.d(TAG, "onCreate(users): " + SQL_CREATE_USERS);
+//        db.execSQL(SQL_CREATE_USERS);
         db.execSQL(SQL_CREATE_HOUSEHOLDS);
         db.execSQL(SQL_CREATE_FP_HOUSEHOLDS);
-        db.execSQL(CreateTable.SQL_CREATE_MAXHHNO);
+//        db.execSQL(CreateTable.SQL_CREATE_MAXHHNO);
         db.execSQL(SQL_CREATE_MWRA);
         db.execSQL(SQL_CREATE_FOLLOWUPS);
         db.execSQL(SQL_CREATE_PREGNANCY);
         db.execSQL(SQL_CREATE_OUTCOME);
         db.execSQL(SQL_CREATE_VERSIONAPP);
-        db.execSQL(SQL_CREATE_VILLAGES);
-        db.execSQL(SQL_CREATE_FOLLOWUPSCHE);
+//        db.execSQL(SQL_CREATE_VILLAGES);
+//        db.execSQL(SQL_CREATE_FOLLOWUPSCHE);
         db.execSQL(SQL_CREATE_OUTCOME_FOLLOWUPS);
 
 
