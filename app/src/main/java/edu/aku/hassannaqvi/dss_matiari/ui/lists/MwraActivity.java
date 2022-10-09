@@ -115,7 +115,7 @@ public class MwraActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                if (!MainApp.households.getiStatus().equals("1")) {
+                if (!MainApp.households.getIStatus().equals("1")) {
                     //     Toast.makeText(MwraActivity.this, "Opening Mwra Households", Toast.LENGTH_LONG).show();
                     addFemale();
                 } else {

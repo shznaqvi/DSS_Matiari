@@ -150,7 +150,7 @@ public class EndingActivity extends AppCompatActivity {
 
     private boolean UpdateDB() {
         int updcount = 0;
-        db.updatesHouseholdColumn(TableContracts.HouseholdTable.COLUMN_ISTATUS, MainApp.households.getiStatus());
+        db.updatesHouseholdColumn(TableContracts.HouseholdTable.COLUMN_ISTATUS, MainApp.households.getIStatus());
         db.updatesHouseholdColumn(TableContracts.HouseholdTable.COLUMN_VISIT_NO, MainApp.households.getVisitNo());
         try {
             updcount = db.updatesHouseholdColumn(TableContracts.HouseholdTable.COLUMN_SA, MainApp.households.sAtoString());
@@ -166,7 +166,7 @@ public class EndingActivity extends AppCompatActivity {
             MainApp.fpHouseholds = db.getFPHouseholdBYHdssid(MainApp.households.getHdssId());
 
             if (!MainApp.fpHouseholds.getUid().equals("")) {
-                MainApp.fpHouseholds.setiStatus(MainApp.households.getiStatus());
+                MainApp.fpHouseholds.setiStatus(MainApp.households.getIStatus());
                 MainApp.fpHouseholds.setVisitNo(MainApp.households.getVisitNo());
                 MainApp.fpHouseholds.setRa01v2(MainApp.households.getRa01v2());
                 MainApp.fpHouseholds.setRa01v3(MainApp.households.getRa01v3());

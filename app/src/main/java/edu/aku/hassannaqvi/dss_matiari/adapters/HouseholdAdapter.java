@@ -63,7 +63,7 @@ public class HouseholdAdapter extends RecyclerView.Adapter<HouseholdAdapter.View
 
 
         String hhStatus = "";
-        switch (households.getiStatus()) {
+        switch (households.getIStatus()) {
             case "1":
                 hhStatus = "Complete";
                 break;
@@ -91,7 +91,7 @@ public class HouseholdAdapter extends RecyclerView.Adapter<HouseholdAdapter.View
         hhHead.setText(households.getRa14());
         mwraCount.setText(totalMWRA + " Women");
         secStatus.setText(hhStatus);
-        imgStatus.setVisibility(households.getiStatus().equals("1") || Integer.parseInt(households.getVisitNo()) > 2 ? View.VISIBLE : View.GONE);
+        imgStatus.setVisibility(households.getIStatus().equals("1") || Integer.parseInt(households.getVisitNo()) > 2 ? View.VISIBLE : View.GONE);
         secStatus.setBackgroundColor(ContextCompat.getColor(mContext, R.color.grayDark));
 
 
@@ -100,7 +100,7 @@ public class HouseholdAdapter extends RecyclerView.Adapter<HouseholdAdapter.View
 
             MainApp.households = MainApp.householdList.get(viewHolder.getAdapterPosition());
             //MainApp.households.setVisitNo(String.valueOf(Integer.parseInt(MainApp.households.getVisitNo())+1));
-            if (!MainApp.households.getiStatus().equals("1") && Integer.parseInt(MainApp.households.getVisitNo()) < 3) {
+            if (!MainApp.households.getIStatus().equals("1") && Integer.parseInt(MainApp.households.getVisitNo()) < 3) {
 
                 editHousehold(viewHolder.getAdapterPosition());
 

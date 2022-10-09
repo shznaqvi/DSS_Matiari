@@ -2,7 +2,6 @@ package edu.aku.hassannaqvi.dss_matiari.database;
 
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.IBAHC;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.PROJECT_NAME;
-import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.followups;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.outcomeFollowups;
 import static edu.aku.hassannaqvi.dss_matiari.database.CreateTable.SQL_ALTER_ADD_DOB;
 import static edu.aku.hassannaqvi.dss_matiari.database.CreateTable.SQL_ALTER_ADD_GENDER;
@@ -61,7 +60,6 @@ import edu.aku.hassannaqvi.dss_matiari.models.FollowUpsSche;
 import edu.aku.hassannaqvi.dss_matiari.models.Followups;
 import edu.aku.hassannaqvi.dss_matiari.models.Households;
 import edu.aku.hassannaqvi.dss_matiari.models.MWRA;
-import edu.aku.hassannaqvi.dss_matiari.models.MaxHhno;
 import edu.aku.hassannaqvi.dss_matiari.models.Outcome;
 import edu.aku.hassannaqvi.dss_matiari.models.OutcomeFollowups;
 import edu.aku.hassannaqvi.dss_matiari.models.Pregnancy;
@@ -167,7 +165,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         values.put(HouseholdTable.COLUMN_HOUSEHOLD_NO, households.getHhNo());
         values.put(HouseholdTable.COLUMN_STRUCTURE_NO, households.getStructureNo());
         values.put(HouseholdTable.COLUMN_VISIT_NO, households.getVisitNo());
-        values.put(HouseholdTable.COLUMN_ISTATUS, households.getiStatus());
+        values.put(HouseholdTable.COLUMN_ISTATUS, households.getIStatus());
         values.put(HouseholdTable.COLUMN_DEVICETAGID, households.getDeviceTag());
         values.put(HouseholdTable.COLUMN_DEVICEID, households.getDeviceId());
         values.put(HouseholdTable.COLUMN_APPVERSION, households.getAppver());
@@ -424,7 +422,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         );
         while (c.moveToNext()) {
             Households households = new Households();
-            households.setId(c.getString(c.getColumnIndexOrThrow(HouseholdTable.COLUMN_ID)));
+//            households.setId(c.getString(c.getColumnIndexOrThrow(HouseholdTable.COLUMN_ID)));
             households.setUid(c.getString(c.getColumnIndexOrThrow(HouseholdTable.COLUMN_UID)));
             households.setSysDate(c.getString(c.getColumnIndexOrThrow(HouseholdTable.COLUMN_SYSDATE)));
             households.setUserName(c.getString(c.getColumnIndexOrThrow(HouseholdTable.COLUMN_USERNAME)));
@@ -476,11 +474,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         );
         while (c.moveToNext()) {
             Households households = new Households();
-            households.setId(c.getString(c.getColumnIndexOrThrow(HouseholdTable.COLUMN_ID)));
+//            households.setId(c.getString(c.getColumnIndexOrThrow(HouseholdTable.COLUMN_ID)));
             households.setUid(c.getString(c.getColumnIndexOrThrow(HouseholdTable.COLUMN_UID)));
             households.setSysDate(c.getString(c.getColumnIndexOrThrow(HouseholdTable.COLUMN_SYSDATE)));
             households.setUserName(c.getString(c.getColumnIndexOrThrow(HouseholdTable.COLUMN_USERNAME)));
-            households.setiStatus(c.getString(c.getColumnIndexOrThrow(HouseholdTable.COLUMN_ISTATUS)));
+            households.setIStatus(c.getString(c.getColumnIndexOrThrow(HouseholdTable.COLUMN_ISTATUS)));
             households.setSynced(c.getString(c.getColumnIndexOrThrow(HouseholdTable.COLUMN_SYNCED)));
             households.setVisitNo(c.getString(c.getColumnIndexOrThrow(HouseholdTable.COLUMN_VISIT_NO)));
             households.setStructureNo(c.getString(c.getColumnIndexOrThrow(HouseholdTable.COLUMN_STRUCTURE_NO)));
@@ -721,7 +719,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         // New value for one column
         ContentValues values = new ContentValues();
-        values.put(HouseholdTable.COLUMN_ISTATUS, MainApp.households.getiStatus());
+        values.put(HouseholdTable.COLUMN_ISTATUS, MainApp.households.getIStatus());
 
         // Which row to update, based on the ID
         String selection = HouseholdTable.COLUMN_ID + " =? ";

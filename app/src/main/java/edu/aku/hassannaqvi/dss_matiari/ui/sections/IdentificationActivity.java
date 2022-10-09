@@ -52,7 +52,6 @@ public class IdentificationActivity extends AppCompatActivity {
         setTheme(lang.equals("1") ? R.style.AppThemeEnglish1 : R.style.AppThemeUrdu);
         db = MainApp.appInfo.dbHelper;
         bi = DataBindingUtil.setContentView(this, R.layout.activity_identification);
-        // setContentView(R.layout.activity_identification);
 
         bi.setCallback(this);
 
@@ -75,7 +74,6 @@ public class IdentificationActivity extends AppCompatActivity {
                 MainApp.fpHouseholds = new FPHouseholds();
                 MainApp.followups = new Followups();
                 MainApp.outcomeFollowups = new OutcomeFollowups();
-                //MainApp.outcome = new Outcome();
                 openIntent = new Intent(this, FPHouseholdActivity.class);
                 break;
 
@@ -114,16 +112,10 @@ public class IdentificationActivity extends AppCompatActivity {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
                 bi.ra07.setAdapter(null);
-                //  bi.ra08.setText(null);
-                //bi.ra09.setText(null);
                 bi.ra10.setText(null);
-                //bi.ra08.setEnabled(false);
-                //bi.ra09.setEnabled(false);
                 bi.ra10.setEnabled(false);
                 bi.btnContinue.setBackgroundTintList(ContextCompat.getColorStateList(IdentificationActivity.this, R.color.gray));
                 bi.btnContinue.setEnabled(false);
-                //  bi.checkHousehold.setBackgroundTintList(ContextCompat.getColorStateList(IdentificationActivity.this, R.color.colorAccent));
-                //  bi.checkHousehold.setEnabled(true);
 
                 if (position == 0) return;
                 //Collection<Villages> village = db.getVillageByUc(ucCodes.get(position));
@@ -161,8 +153,6 @@ public class IdentificationActivity extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
-                //   bi.ra08.setText(null);
-                // bi.ra09.setText(null);
                 bi.ra10.setText(null);
                 if (position != 0) {
                     String vCode = villageCodes.get(bi.ra07.getSelectedItemPosition());
@@ -173,14 +163,9 @@ public class IdentificationActivity extends AppCompatActivity {
 
                     bi.btnContinue.setBackgroundTintList(ContextCompat.getColorStateList(IdentificationActivity.this, R.color.colorAccent));
                     bi.btnContinue.setEnabled(true);
-           /*     bi.checkHousehold.setBackgroundTintList(ContextCompat.getColorStateList(IdentificationActivity.this, R.color.colorAccent));
-                bi.checkHousehold.setEnabled(true);*/
-                    //  bi.ra08.setEnabled(false);
-                    //bi.ra09.setEnabled(false);
+
                     bi.ra10.setText(String.valueOf(maxHHno));
                     if (position == 0) return;
-                    // bi.ra08.setEnabled(true);
-                    // bi.ra09.setEnabled(true);
                     bi.ra10.setEnabled(true);
 
                 }
@@ -198,11 +183,6 @@ public class IdentificationActivity extends AppCompatActivity {
 
     public void btnContinue(View view) {
 
-     /*   hdssid = villageCodes.get(bi.ra07.getSelectedItemPosition()) +
-                // bi.ra08.getText().toString() +
-                bi.ra10.getText().toString();
-        //bi.ra10.getText().toString();*/
-
 
         if (!formValidation()) return;
 
@@ -214,49 +194,6 @@ public class IdentificationActivity extends AppCompatActivity {
         startActivity(openIntent);
 
     }
-
-    private void saveDraftForm() {
-        MainApp.households = new Households();
-
-       /* MainApp.households.setUserName(MainApp.user.getUserName());
-        MainApp.households.setSysDate(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.ENGLISH).format(new Date().getTime()));
-        MainApp.households.setDeviceId(MainApp.deviceid);
-        //MainApp.households.setHdssId(hdssid);  <== saved in SectionA
-        MainApp.households.setAppver(MainApp.versionName + "." + MainApp.versionCode);
-
-        MainApp.households.setRa06(ucCodes.get(bi.ra06.getSelectedItemPosition()));
-        MainApp.households.setRa07(villageCodes.get(bi.ra07.getSelectedItemPosition()));
-        // MainApp.households.setRa08(bi.ra08.getText().toString());
-        // MainApp.households.setRa09(bi.ra09.getText().toString());
-        MainApp.households.setRa10(bi.ra10.getText().toString());*/
-
-
-    }
-
-    private void saveDraftAnthro() {
-/*
-        anthro = new Anthro();
-
-        anthro.setUserName(MainApp.user.getUserName());
-        anthro.setSysDate(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.ENGLISH).format(new Date().getTime()));
-        anthro.setDeviceId(MainApp.deviceid);
-        anthro.setAppver(MainApp.versionName + "." + MainApp.versionCode);
-*/
-
-    }
-
-    private void saveDraftSamples() {
-
-        //TODO:
-     /*   MainApp.samples = new Samples();
-
-        samples.setUserName(MainApp.user.getUserName());
-        samples.setSysDate(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.ENGLISH).format(new Date().getTime()));
-        samples.setDeviceId(MainApp.deviceid);
-        samples.setAppver(MainApp.versionName + "." + MainApp.versionCode);*/
-
-    }
-
 
     public void btnEnd(View view) {
         finish();
@@ -272,7 +209,7 @@ public class IdentificationActivity extends AppCompatActivity {
 
         }
 
-        //startActivity(new Intent(this, EndingActivity.class).putExtra("complete", false));
+
     }
 
 
@@ -280,37 +217,4 @@ public class IdentificationActivity extends AppCompatActivity {
         return Validator.emptyCheckingContainer(this, bi.GrpName);
     }
 
-   /* public void checkHousehold(View view) {
-        Random hhFound = db.checkHousehold(bi.h103.getText().toString(), bi.h104.getText().toString());
-        if (hhFound != null) {
-            bi.hhhead.setTextColor(ContextCompat.getColor(this, android.R.color.black));
-            bi.btnContinue.setBackgroundTintList(ContextCompat.getColorStateList(this, R.color.colorAccent));
-            bi.btnContinue.setEnabled(true);
-            bi.checkHousehold.setBackgroundTintList(ContextCompat.getColorStateList(this, R.color.gray));
-            bi.checkHousehold.setEnabled(false);
-
-            bi.hhhead.setText(hhFound.getHeadhh());
-            Toast.makeText(this, hhFound.getHeadhh(), Toast.LENGTH_SHORT).show();
-
-
-        } else {
-            bi.hhhead.setTextColor(ContextCompat.getColor(this, android.R.color.holo_red_dark));
-            bi.hhhead.setText("Household not Found");
-            bi.btnContinue.setBackgroundTintList(ContextCompat.getColorStateList(this, R.color.gray));
-            bi.btnContinue.setEnabled(false);
-
-
-        }
-    }*/
-
-/*    public void getHouseNo(View view) {
-
-
-        String vCode = villageCodes.get(bi.ra07.getSelectedItemPosition());
-
-        int maxHHno = db.getMaxStructure(vCode) + 1;
-        bi.ra10.setText(String.valueOf(maxHHno));
-
-
-    }*/
 }

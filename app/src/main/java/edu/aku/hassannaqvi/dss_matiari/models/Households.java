@@ -74,9 +74,9 @@ public class Households extends BaseObservable implements Observable {
     @ColumnInfo(name = HouseholdTable.COLUMN_PROJECT_NAME)
     private String projectName = MainApp.PROJECT_NAME;
 
-    @PrimaryKey @NonNull
+    @PrimaryKey(autoGenerate = true) @NonNull
     @ColumnInfo(name = HouseholdTable.COLUMN_ID)
-    String id = StringUtils.EMPTY;
+    long id = 0;
 
     @ColumnInfo(name = HouseholdTable.COLUMN_UID)
     private String uid = StringUtils.EMPTY;
@@ -173,11 +173,11 @@ public class Households extends BaseObservable implements Observable {
     }
 
 
-    public String getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(long id) {
         this.id = id;
     }
 
@@ -284,19 +284,19 @@ public class Households extends BaseObservable implements Observable {
         this.endTime = endTime;
     }
 
-    public String getiStatus() {
+    public String getIStatus() {
         return iStatus;
     }
 
-    public void setiStatus(String iStatus) {
+    public void setIStatus(String iStatus) {
         this.iStatus = iStatus;
     }
 
-    public String getiStatus96x() {
+    public String getIStatus96x() {
         return iStatus96x;
     }
 
-    public void setiStatus96x(String iStatus96x) {
+    public void setIStatus96x(String iStatus96x) {
         this.iStatus96x = iStatus96x;
     }
 
@@ -324,11 +324,11 @@ public class Households extends BaseObservable implements Observable {
         this.exist = exist;
     }
 
-    public String getsA() {
+    public String getSA() {
         return sA;
     }
 
-    public void setsA(String sA) {
+    public void setSA(String sA) {
         this.sA = sA;
     }
 
@@ -355,7 +355,7 @@ public class Households extends BaseObservable implements Observable {
         setRa18("");
         setRa19("");
         setRa20("");
-        setsA("");
+        setSA("");
     }
 
 
@@ -502,7 +502,7 @@ public class Households extends BaseObservable implements Observable {
 
     public void setRa11(String ra11) {
         this.ra11 = ra11;
-        setiStatus(ra11);
+        setIStatus(ra11);
         notifyChange(BR.ra11);
     }
 
@@ -523,7 +523,7 @@ public class Households extends BaseObservable implements Observable {
 
     public void setRa12(String ra12) {
         this.ra12 = ra12;
-        setiStatus(ra12);
+        setIStatus(ra12);
         notifyChange(BR.ra12);
     }
 
@@ -544,7 +544,7 @@ public class Households extends BaseObservable implements Observable {
 
     public void setRa13(String ra13) {
         this.ra13 = ra13;
-        setiStatus(ra13);
+        setIStatus(ra13);
         notifyChange(BR.ra13);
     }
 
@@ -814,7 +814,7 @@ public class Households extends BaseObservable implements Observable {
     }
 
     public Households Hydrate(Cursor cursor) throws JSONException {
-        this.id = cursor.getString(cursor.getColumnIndexOrThrow(HouseholdTable.COLUMN_ID));
+        this.id = cursor.getLong(cursor.getColumnIndexOrThrow(HouseholdTable.COLUMN_ID));
         this.uid = cursor.getString(cursor.getColumnIndexOrThrow(HouseholdTable.COLUMN_UID));
         this.userName = cursor.getString(cursor.getColumnIndexOrThrow(HouseholdTable.COLUMN_USERNAME));
         this.sysDate = cursor.getString(cursor.getColumnIndexOrThrow(HouseholdTable.COLUMN_SYSDATE));

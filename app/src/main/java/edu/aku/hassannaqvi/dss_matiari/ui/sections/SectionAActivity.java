@@ -1,6 +1,5 @@
 package edu.aku.hassannaqvi.dss_matiari.ui.sections;
 
-import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.followups;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.fpHouseholds;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.households;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.sharedPref;
@@ -30,6 +29,8 @@ import edu.aku.hassannaqvi.dss_matiari.contracts.TableContracts;
 import edu.aku.hassannaqvi.dss_matiari.core.MainApp;
 import edu.aku.hassannaqvi.dss_matiari.database.DatabaseHelper;
 import edu.aku.hassannaqvi.dss_matiari.databinding.ActivitySectionABinding;
+import edu.aku.hassannaqvi.dss_matiari.models.Households;
+import edu.aku.hassannaqvi.dss_matiari.room.DssRoomDatabase;
 import edu.aku.hassannaqvi.dss_matiari.ui.EndingActivity;
 import edu.aku.hassannaqvi.dss_matiari.ui.lists.MwraActivity;
 
@@ -60,9 +61,6 @@ public class SectionAActivity extends AppCompatActivity {
         if (MainApp.previousAddress.trim().equals("") || !households.getRa08().equals(""))
             bi.rb08check.setVisibility(View.GONE);
 
-        // Set Visit data same as previous household of the same day.
-        /*    if (!MainApp.dateOfVisit.trim().equals(""))
-         */
 
         bi.ra20.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
@@ -83,7 +81,6 @@ public class SectionAActivity extends AppCompatActivity {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
-                    //MainApp.households.setRb01a(MainApp.dateOfVisit);
                     bi.ra08.setText(MainApp.previousAddress);
                 } else {
                     bi.ra08.setText("");
@@ -105,14 +102,6 @@ public class SectionAActivity extends AppCompatActivity {
             fpHouseholds.setHdssId(households.getUcCode() + "-" + households.getVillageCode() + "-" + households.getHhNo());
             fpHouseholds.setStructureNo(households.getRa10());
         }
-
-
-
-
-
-
-
-
 
     }
 
@@ -137,7 +126,7 @@ public class SectionAActivity extends AppCompatActivity {
         if (!insertNewRecord()) return;
 
 
-        if (!insertFpHousehold()) return;
+        //if (!insertFpHousehold()) return;
         if (updateDB()) {
 
             setResult(RESULT_OK);
@@ -161,19 +150,19 @@ public class SectionAActivity extends AppCompatActivity {
 
         if (!MainApp.households.getUid().equals("")) return true;
         MainApp.households.populateMeta();
-        // Updating date at the time of Insert instead of SaveDraft()
-        //    MainApp.households.setSysDate(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.ENGLISH).format(new Date().getTime()));
         long rowId = 0;
         try {
-            rowId = db.addHousehold(households);
-        } catch (JSONException e) {
+            //rowId = db.addHousehold(households);
+            rowId = DssRoomDatabase.getDbInstance().householdsDao().addHousehold(households);
+        } catch (Exception e) {
             e.printStackTrace();
             return false;
         }
-        households.setId(String.valueOf(rowId));
+        households.setId(rowId);
         if (rowId > 0) {
             households.setUid(households.getDeviceId() + households.getId());
-            db.updatesHouseholdColumn(TableContracts.HouseholdTable.COLUMN_UID, households.getUid());
+            DssRoomDatabase.getDbInstance().householdsDao().updateHousehold(households);
+//            db.updatesHouseholdColumn(TableContracts.HouseholdTable.COLUMN_UID, households.getUid());
             if (fpHouseholds != null && fpHouseholds.getUid().equals("")) {
                 insertFpHousehold();
             }
@@ -213,9 +202,13 @@ public class SectionAActivity extends AppCompatActivity {
 
     private boolean updateDB() {
         DatabaseHelper db = MainApp.appInfo.getDbHelper();
+        DssRoomDatabase dssdb = DssRoomDatabase.getDbInstance();
         int updcount = 0;
         try {
-            updcount = db.updatesHouseholdColumn(TableContracts.HouseholdTable.COLUMN_SA, households.sAtoString());
+//            updcount = db.updatesHouseholdColumn(TableContracts.HouseholdTable.COLUMN_SA, households.sAtoString());
+            Households updatedHousehold = households;
+            updatedHousehold.setSA(households.sAtoString());
+            updcount = dssdb.householdsDao().updateHousehold(updatedHousehold);
         } catch (JSONException e) {
             e.printStackTrace();
             Toast.makeText(this, "JSONException: " + e.getMessage(), Toast.LENGTH_SHORT).show();

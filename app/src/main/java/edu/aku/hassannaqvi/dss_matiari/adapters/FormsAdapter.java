@@ -69,7 +69,7 @@ public class FormsAdapter extends RecyclerView.Adapter<FormsAdapter.ViewHolder> 
 
         String iStatus = "Status  Unknown";
         int iColor = 0;
-        switch (fc.get(holder.getAdapterPosition()).getiStatus()) {
+        switch (fc.get(holder.getAdapterPosition()).getIStatus()) {
             case "1":
                 iStatus = "   Complete    ";
                 iColor = Color.GREEN;
@@ -130,7 +130,7 @@ public class FormsAdapter extends RecyclerView.Adapter<FormsAdapter.ViewHolder> 
                 MainApp.households = db.getHouseholdByUID(MainApp.householdList.get(holder.getAdapterPosition()).getUid());
 
                 //MainApp.households.setVisitNo(String.valueOf(Integer.parseInt(MainApp.households.getVisitNo())+1));
-                if (!MainApp.households.getiStatus().equals("1") && Integer.parseInt(MainApp.households.getVisitNo()) < 3) {
+                if (!MainApp.households.getIStatus().equals("1") && Integer.parseInt(MainApp.households.getVisitNo()) < 3) {
 
                     editHousehold(holder.getAdapterPosition());
 

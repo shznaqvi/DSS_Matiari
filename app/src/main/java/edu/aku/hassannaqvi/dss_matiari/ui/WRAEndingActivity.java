@@ -89,7 +89,7 @@ public class WRAEndingActivity extends AppCompatActivity {
         if (bi.istatusb.isChecked() ||
                 bi.istatusc.isChecked()) {
             // Do not increment if saving First Visit
-            if(!MainApp.households.getiStatus().equals(""))
+            if(!MainApp.households.getIStatus().equals(""))
             MainApp.households.setVisitNo(String.valueOf(visitCount));
         }
         followups.setVisitNo(String.valueOf(visitCount));

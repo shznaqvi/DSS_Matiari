@@ -1,7 +1,5 @@
 package edu.aku.hassannaqvi.dss_matiari.adapters;
 
-import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.mwraCount;
-import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.selectedHhNO;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.selectedUC;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.selectedVillage;
 
@@ -221,7 +219,7 @@ public class FPHouseholdAdapter extends RecyclerView.Adapter<FPHouseholdAdapter.
                                 }
                                 MainApp.selectedHhNO = followUpsSche.getHhNo();
                                 MainApp.position = viewHolder.getAdapterPosition();
-                                if (!MainApp.households.getiStatus().equals("1") && Integer.parseInt(MainApp.households.getVisitNo()) < 3) {
+                                if (!MainApp.households.getIStatus().equals("1") && Integer.parseInt(MainApp.households.getVisitNo()) < 3) {
 
                                     Intent intent = new Intent(mContext, SectionAActivity.class);
                                     ((FPHouseholdActivity) mContext).MemberInfoLauncher.launch(intent);
