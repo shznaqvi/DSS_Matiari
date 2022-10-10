@@ -116,11 +116,6 @@ public class SectionCx2Activity extends AppCompatActivity {
             sdf = new SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH);
             String minDOD = sdf.format(cal.getTime());
 
-            // Single
-            /*bi.rc1401.setMinDate(minDOD);
-            bi.rc1402.setMinDate(minDOD);
-            bi.rc1403.setMinDate(minDOD)*/;
-
 
         } catch (ParseException e) {
             e.printStackTrace();
@@ -145,8 +140,6 @@ public class SectionCx2Activity extends AppCompatActivity {
         int updcount = 0;
         try {
             updcount = db.updatesFollowUpsColumn(TableContracts.FollowupsTable.COLUMN_SC, followups.sCtoString());
-
-
         } catch (JSONException e) {
             e.printStackTrace();
             Toast.makeText(this, "JSONException: " + e.getMessage(), Toast.LENGTH_SHORT).show();

@@ -3,7 +3,7 @@ package edu.aku.hassannaqvi.dss_matiari.ui.sections;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.followUpsScheHHList;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.followups;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.fpHouseholds;
-import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.mwraCount;
+
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.mwraStatus;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.selectedFemale;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.selectedHhNO;
@@ -141,19 +141,6 @@ public class SectionCxActivity extends AppCompatActivity {
 
             sdf = new SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH);
 
-          /*  // Set MinDob date to 50 years back from DOV
-            cal.add(Calendar.YEAR, -50);
-            String minDob = sdf.format(cal.getTime());
-            cal.add(Calendar.YEAR, +50); // Calender reset to DOV
-            Log.d(TAG, "onCreate: " + minDob);
-
-            // Set maxDob date to 50 years back from DOV
-            cal.add(Calendar.YEAR, -18);
-            String maxDob = sdf.format(cal.getTime());
-            cal.add(Calendar.YEAR, +18); // Calender reset to DOV
-            Log.d(TAG, "onCreate: " + maxDob);
-
-*/
             // Set MinLMP date to 2 months back from DOV
             cal.add(Calendar.MONTH, -9);
             String minLMP = sdf.format(cal.getTime());
@@ -174,29 +161,11 @@ public class SectionCxActivity extends AppCompatActivity {
             cal.add(Calendar.MONTH, -9);
             Log.d(TAG, "onCreate: " + maxLMP);
 
-          /*  // DOB
-            bi.rb04.setMaxDate(maxDob);
-            bi.rb04.setMinDate(minDob);*/
-
-            // LMP
-            /*bi.rc16.setMaxDate(maxLMP);
-            bi.rc16.setMinDate(minLMP);
-
-            // EDD
-            bi.rc17.setMaxDate(maxEDD);
-            bi.rc17.setMinDate(minEDD);*/
-
             // Date of Death from Date of Deliver(RC10)
             sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
             cal.setTime(sdf.parse(followups.getRc10()));// all done
             sdf = new SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH);
             String minDOD = sdf.format(cal.getTime());
-
-            // Single
-            /*bi.rc1401.setMinDate(minDOD);
-            bi.rc1402.setMinDate(minDOD);
-            bi.rc1403.setMinDate(minDOD)*/;
-
 
         } catch (ParseException e) {
             e.printStackTrace();
@@ -211,45 +180,181 @@ public class SectionCxActivity extends AppCompatActivity {
 
             if(bi.rc0401.isChecked()) {
 
-                // If pregnant in previous round and delivered with live birth
+                switch (followups.getRb06()) {
 
-                if (followups.getPrePreg().equals("1") && bi.rc0901.isChecked()) {
+                    // Married in Previous Round
+                    case "1":
+                        // Pregnant
+                        if (followups.getPrePreg().equals("1")) {
+                            // If pregnancy continued
+                            if (bi.rc0801.isChecked()) {
+                                setResult(RESULT_OK);
+                                //finish();
+                            } else {  // If Pregnancy ended
+                                if (bi.rc0901.isChecked()) // If Live Birth
+                                {
+                                    Intent forwardIntent = new Intent(this, SectionOutcomeActivity.class).putExtra("complete", true);
+                                    forwardIntent.setFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT);
+                                    setResult(RESULT_OK, forwardIntent);
+                                    startActivity(forwardIntent);
+                                    //finish();
+                                } else { // If not live birth
+                                    Intent forwardIntent = new Intent(this, SectionCx2Activity.class).putExtra("complete", true);
+                                    forwardIntent.setFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT);
+                                    setResult(RESULT_OK, forwardIntent);
+                                    startActivity(forwardIntent);
+                                    //finish();
+                                }
+                            }
+                        } else {   // Not Pregnant
+                            Intent forwardIntent = new Intent(this, SectionCx2Activity.class).putExtra("complete", true);
+                            forwardIntent.setFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT);
+                            setResult(RESULT_OK, forwardIntent);
+                            startActivity(forwardIntent);
+                            //finish();
+                        }
 
-                    Intent forwardIntent = new Intent(this, SectionOutcomeActivity.class).putExtra("complete", true);
-                    forwardIntent.setFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT);
-                    setResult(RESULT_OK, forwardIntent);
-                    startActivity(forwardIntent);
-                    finish();
-                }
-                // If married in previeous round and not pregnant
-                else if (!bi.rc0604.isChecked() && bi.rc0802.isChecked()
-               || (bi.rc0601.isChecked() && followups.getPrePreg().equals("2"))) {
-                    Intent forwardIntent = new Intent(this, SectionCx2Activity.class).putExtra("complete", true);
-                    forwardIntent.setFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT);
-                    setResult(RESULT_OK, forwardIntent);
-                    startActivity(forwardIntent);
-                    finish();
-                } // if unmarried in previous round and get married in current round
-                else if(followups.getRb06().equals("4") && !bi.rc0604.isChecked())
-                {
-                    Intent forwardIntent = new Intent(this, SectionCx2Activity.class).putExtra("complete", true);
-                    forwardIntent.setFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT);
-                    setResult(RESULT_OK, forwardIntent);
-                    startActivity(forwardIntent);
-                    finish();
-                }
-                // if unmarried in current or pregnancy continued
-                else if (bi.rc0604.isChecked() || bi.rc0801.isChecked() ||
-                        (followups.getRb06().equals("2") && followups.getPrePreg().equals("2"))
-                        || (followups.getRb06().equals("3") && followups.getPrePreg().equals("2"))
-                        || (followups.getRb06().equals("5") && followups.getPrePreg().equals("2"))) {
+                        break;
+
+                    //finish();
+
+                    // Divorced
+                    case "2":
+                        // Pregnant
+                        if (followups.getPrePreg().equals("1")) {
+
+                            if (bi.rc0801.isChecked()) {  // If Pregnancy Continued
+                                setResult(RESULT_OK);
+                                //finish();
+                            } else {     // If Pregnancy ended
+                                if (bi.rc0901.isChecked()) {    // Live Birth
+                                    Intent forwardIntent = new Intent(this, SectionOutcomeActivity.class).putExtra("complete", true);
+                                    forwardIntent.setFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT);
+                                    setResult(RESULT_OK, forwardIntent);
+                                    startActivity(forwardIntent);
+                                    //finish();
+                                } else {
+                                    setResult(RESULT_OK);
+                                    //finish();
+                                }
+                            }
+                        } else {      // Not Pregnant
+                            // Marital status changed
+                            if (bi.rc0601.isChecked()) {
+                                Intent forwardIntent = new Intent(this, SectionCx2Activity.class).putExtra("complete", true);
+                                forwardIntent.setFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT);
+                                setResult(RESULT_OK, forwardIntent);
+                                startActivity(forwardIntent);
+                                //finish();
+                            } else {
+                                setResult(RESULT_OK);
+                                //finish();
+                            }
+                        }
+                        break;
+
+                    //finish();
+
+                    // Widow
+                    case "3":
+                        // Pregnant
+                        if (followups.getPrePreg().equals("1")) {
+                            if (bi.rc0801.isChecked()) {  // If Pregnancy Continued
+                                setResult(RESULT_OK);
+                                //finish();
+                            } else {     // If Pregnancy ended
+                                if (bi.rc0901.isChecked()) {    // Live Birth
+                                    Intent forwardIntent = new Intent(this, SectionOutcomeActivity.class).putExtra("complete", true);
+                                    forwardIntent.setFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT);
+                                    setResult(RESULT_OK, forwardIntent);
+                                    startActivity(forwardIntent);
+                                    //finish();
+                                } else {
+                                    setResult(RESULT_OK);
+                                    //finish();
+                                }
+                            }
+                        } else {      // Not Pregnant
+                            // Marital status changed
+                            if (bi.rc0601.isChecked()) {
+                                Intent forwardIntent = new Intent(this, SectionCx2Activity.class).putExtra("complete", true);
+                                forwardIntent.setFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT);
+                                setResult(RESULT_OK, forwardIntent);
+                                startActivity(forwardIntent);
+                                //finish();
+                            } else {
+                                setResult(RESULT_OK);
+                                //finish();
+                            }
+                        }
+                        break;
+
+                    //finish();
+                    // Separated
+                    case "5":
+                        // Pregnant
+                        if (followups.getPrePreg().equals("1")) {
+
+                            if (bi.rc0801.isChecked()) {  // If Pregnancy Continued
+                                setResult(RESULT_OK);
+                                //finish();
+                            } else {     // If Pregnancy ended
+                                if (bi.rc0901.isChecked()) {    // Live Birth
+                                    Intent forwardIntent = new Intent(this, SectionOutcomeActivity.class).putExtra("complete", true);
+                                    forwardIntent.setFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT);
+                                    setResult(RESULT_OK, forwardIntent);
+                                    startActivity(forwardIntent);
+                                    finish();
+                                } else {
+                                    setResult(RESULT_OK);
+                                    //finish();
+                                }
+                            }
+                        } else {      // Not Pregnant
+                            // Marital status changed
+                            if (bi.rc0601.isChecked()) {
+                                Intent forwardIntent = new Intent(this, SectionCx2Activity.class).putExtra("complete", true);
+                                forwardIntent.setFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT);
+                                setResult(RESULT_OK, forwardIntent);
+                                startActivity(forwardIntent);
+                                //finish();
+                            } else {
+                                setResult(RESULT_OK);
+                                //finish();
+                            }
+                        }
+                        break;
+
+                    //finish();
+                    case "4": // Unmarried in previous round
+                        // if get married in current round
+                        if (!bi.rc0604.isChecked()) {
+                            Intent forwardIntent = new Intent(this, SectionCx2Activity.class).putExtra("complete", true);
+                            forwardIntent.setFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT);
+                            setResult(RESULT_OK, forwardIntent);
+                            startActivity(forwardIntent);
+                            //finish();
+
+                            // if still unmarried
+                        } else if (bi.rc0604.isChecked()) {
+                            setResult(RESULT_OK);
+                            //finish();
+                        }
+
+                        break;
+
+                    //finish();
+
+               /*default:
                     setResult(RESULT_OK);
-                    finish();
+                    finish();*/
                 }
+                finish();
             }else{
                 setResult(RESULT_OK);
                 finish();
             }
+
         } else {
             Toast.makeText(this, "Failed to Update Database!", Toast.LENGTH_SHORT).show();
         }
