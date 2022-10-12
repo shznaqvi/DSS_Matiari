@@ -11,6 +11,8 @@ import androidx.room.Query
 import androidx.room.Update
 import edu.aku.hassannaqvi.dss_matiari.contracts.TableContracts
 import edu.aku.hassannaqvi.dss_matiari.contracts.TableContracts.HouseholdTable
+import edu.aku.hassannaqvi.dss_matiari.contracts.TableContracts.MWRATable
+import edu.aku.hassannaqvi.dss_matiari.core.MainApp.mwraCount
 import edu.aku.hassannaqvi.dss_matiari.models.Households
 import org.json.JSONException
 
@@ -65,5 +67,7 @@ interface HouseholdsDao {
 
         return getHouseholdByHDSSID_internal(hdssid, newHDSSID)
     }
+
+
 
 }

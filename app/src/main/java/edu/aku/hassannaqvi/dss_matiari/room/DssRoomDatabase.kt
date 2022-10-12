@@ -20,12 +20,11 @@ import net.sqlcipher.database.SupportFactory
     version = DssRoomDatabase.DATABASE_VERSION,
     entities = [
         Households::class,
+        Mwra :: class,
         Users::class,
         Villages ::class,
         FollowUpsSche ::class,
         MaxHhno ::class
-
-
 
 
     ]
@@ -33,10 +32,12 @@ import net.sqlcipher.database.SupportFactory
 abstract class DssRoomDatabase : RoomDatabase() {
 
     abstract fun householdsDao(): HouseholdsDao
+    abstract fun mwraDao() : MwraDao
     abstract fun usersDao(): UsersDao
     abstract fun VillagesDao(): VillagesDao
     abstract fun FollowUpsScheDao(): FollowUpsScheDao
     abstract fun MaxHHNoDao() : MaxHHNoDao
+
 
     companion object {
         const val DATABASE_VERSION = 4

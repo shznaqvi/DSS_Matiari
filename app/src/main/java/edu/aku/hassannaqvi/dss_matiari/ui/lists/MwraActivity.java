@@ -37,7 +37,8 @@ import edu.aku.hassannaqvi.dss_matiari.adapters.MwraAdapter;
 import edu.aku.hassannaqvi.dss_matiari.core.MainApp;
 import edu.aku.hassannaqvi.dss_matiari.database.DatabaseHelper;
 import edu.aku.hassannaqvi.dss_matiari.databinding.ActivityMwraBinding;
-import edu.aku.hassannaqvi.dss_matiari.models.MWRA;
+import edu.aku.hassannaqvi.dss_matiari.models.Mwra;
+import edu.aku.hassannaqvi.dss_matiari.room.DssRoomDatabase;
 import edu.aku.hassannaqvi.dss_matiari.ui.EndingActivity;
 import edu.aku.hassannaqvi.dss_matiari.ui.sections.SectionBActivity;
 
@@ -98,7 +99,10 @@ public class MwraActivity extends AppCompatActivity {
         MainApp.mwraList = new ArrayList<>();
         Log.d(TAG, "onCreate: mwralist " + mwraList.size());
         try {
-            MainApp.mwraList = db.getAllMWRAByHH(selectedUC, MainApp.households.getVillageCode(), MainApp.households.getStructureNo(), MainApp.households.getHhNo());
+
+            //MainApp.mwraList = db.getAllMWRAByHH(selectedUC, MainApp.households.getVillageCode(), MainApp.households.getStructureNo(), MainApp.households.getHhNo());
+
+            mwraList = DssRoomDatabase.getDbInstance().mwraDao().getAllMWRAByHH(selectedUC, MainApp.households.getVillageCode(), MainApp.households.getStructureNo(), MainApp.households.getHhNo());
         } catch (JSONException e) {
             e.printStackTrace();
             Toast.makeText(this, "JSONException: " + e.getMessage(), Toast.LENGTH_SHORT).show();
@@ -136,7 +140,7 @@ public class MwraActivity extends AppCompatActivity {
         Toast.makeText(this, "Activity Resumed!", Toast.LENGTH_SHORT).show();
         mwraCount = Math.round(MainApp.mwraList.size());
 
-        MainApp.mwra = new MWRA();
+        MainApp.mwra = new Mwra();
         if (MainApp.mwraList.size() > 0) {
             //MainApp.fm.get(Integer.parseInt(String.valueOf(MainApp.selectedFemale))).setStatus("1");
             fmAdapter.notifyItemChanged(Integer.parseInt(String.valueOf(selectedFemale)));
@@ -179,12 +183,14 @@ public class MwraActivity extends AppCompatActivity {
     }
 
     private void addMoreFemale() {
-        MainApp.mwra = new MWRA();
+        MainApp.mwra = new Mwra();
         Intent intent = new Intent(this, SectionBActivity.class);
         //   finish();
 
-        int maxMWRA = db.getMaxMWRSNoBYHH(selectedUC, selectedVillage, selectedHhNO);
-        int maxFpMWRA = db.getMaxMWRANoBYHHFromFolloupsSche(selectedUC, selectedVillage, selectedHhNO);
+        //int maxMWRA = db.getMaxMWRSNoBYHH(selectedUC, selectedVillage, selectedHhNO);
+        int maxMWRA = DssRoomDatabase.getDbInstance().mwraDao().getMaxMWRSNoBYHH(selectedUC, selectedVillage, selectedHhNO);
+        //int maxFpMWRA = db.getMaxMWRANoBYHHFromFolloupsSche(selectedUC, selectedVillage, selectedHhNO);
+        int maxFpMWRA = DssRoomDatabase.getDbInstance().mwraDao().getMaxMWRANoBYHHFromFolloupsSche(selectedUC, selectedVillage, selectedHhNO);
         mwraCount = Math.max(maxMWRA, maxFpMWRA);
         MemberInfoLauncher.launch(intent);
     }

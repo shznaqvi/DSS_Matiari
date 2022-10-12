@@ -35,6 +35,8 @@ import edu.aku.hassannaqvi.dss_matiari.contracts.TableContracts;
 import edu.aku.hassannaqvi.dss_matiari.core.MainApp;
 import edu.aku.hassannaqvi.dss_matiari.database.DatabaseHelper;
 import edu.aku.hassannaqvi.dss_matiari.databinding.ActivitySectionBBinding;
+import edu.aku.hassannaqvi.dss_matiari.models.Mwra;
+import edu.aku.hassannaqvi.dss_matiari.room.DssRoomDatabase;
 
 public class SectionBActivity extends AppCompatActivity {
 
@@ -50,7 +52,6 @@ public class SectionBActivity extends AppCompatActivity {
         bi = DataBindingUtil.setContentView(this, R.layout.activity_section_b);
         bi.setCallback(this);
         bi.setMwra(mwra);
-
 
         setListener();
 
@@ -84,11 +85,6 @@ public class SectionBActivity extends AppCompatActivity {
             MainApp.followups.setAppver(MainApp.versionName + "." + MainApp.versionCode);
 
 
-
-
-          //  MainApp.mwra.setRb01a(MainApp.households.getRc01a());
-
-
         }
 
         setTitle(R.string.marriedwomenregistration_mainheading);
@@ -97,7 +93,6 @@ public class SectionBActivity extends AppCompatActivity {
         db = MainApp.appInfo.dbHelper;
         bi.btnContinue.setText(MainApp.mwra.getUid().equals("") ? "Save" : "Update");
 
-        // To set min max range of date fields
 
 
     }
@@ -221,10 +216,10 @@ public class SectionBActivity extends AppCompatActivity {
 
     public void btnContinue(View view) {
         if (!formValidation()) return;
-        if (MainApp.mwra.getUid().equals("") ? insertNewRecord() && insertNewFollowupRecord() : updateDB()) {
+        //if (MainApp.mwra.getUid().equals("") ? insertNewRecord() && insertNewFollowupRecord() : updateDB()) {
+        if (MainApp.mwra.getUid().equals("") ? insertNewRecord() : updateDB()) {
             setResult(RESULT_OK);
             finish();
-            //  startActivity(new Intent(this, EndingActivity.class).putExtra("complete", true));
         } else {
             Toast.makeText(this, "Failed to Update Database!", Toast.LENGTH_SHORT).show();
         }
@@ -240,17 +235,19 @@ public class SectionBActivity extends AppCompatActivity {
         MainApp.mwra.populateMeta();
         long rowId = 0;
         try {
-            rowId = db.addMWRA(mwra);
+            //rowId = db.addMWRA(mwra);
+            rowId = DssRoomDatabase.getDbInstance().mwraDao().addMwra(mwra);
         } catch (JSONException e) {
             e.printStackTrace();
             Toast.makeText(this, "JSONException: " + e.getMessage(), Toast.LENGTH_SHORT).show();
             Log.d(TAG, "insertNewRecord (JSONException): " + e.getMessage());
             return false;
         }
-        mwra.setId(String.valueOf(rowId));
+        mwra.setId(rowId);
         if (rowId > 0) {
             mwra.setUid(mwra.getDeviceId() + mwra.getId());
-            db.updatesMWRAColumn(TableContracts.MWRATable.COLUMN_UID, mwra.getUid());
+            DssRoomDatabase.getDbInstance().mwraDao().updateMwra(mwra);
+            //db.updatesMWRAColumn(TableContracts.MWRATable.COLUMN_UID, mwra.getUid());
             return true;
         } else {
             Toast.makeText(this, "Updating Database... ERROR!", Toast.LENGTH_SHORT).show();
@@ -292,18 +289,28 @@ public class SectionBActivity extends AppCompatActivity {
     private boolean updateDB() {
         int updcount = 0;
         try {
-            updcount = db.updatesMWRAColumn(TableContracts.MWRATable.COLUMN_SB, mwra.sBtoString());
+            Mwra updateMwra = mwra;
+            updateMwra.setSB(mwra.sBtoString());
             // Also reset Synced flag and alter UID
-            db.updatesMWRAColumn(TableContracts.MWRATable.COLUMN_SYNCED, null);
+            updateMwra.setSynced(null);
+            updcount = DssRoomDatabase.getDbInstance().mwraDao().updateMwra(updateMwra);
+
+            //updcount = db.updatesMWRAColumn(TableContracts.MWRATable.COLUMN_SB, mwra.sBtoString());
+            //db.updatesMWRAColumn(TableContracts.MWRATable.COLUMN_SYNCED, null);
+
             // concate last char from uid to alter and create new unique uid
 
             mwra.setDeviceId(mwra.getDeviceId() + "_" + mwra.getDeviceId().substring(mwra.getDeviceId().length() - 1));
-            db.updatesMWRAColumn(TableContracts.MWRATable.COLUMN_DEVICEID, mwra.getDeviceId());
+            DssRoomDatabase.getDbInstance().mwraDao().updateMwra(mwra);
+            //db.updatesMWRAColumn(TableContracts.MWRATable.COLUMN_DEVICEID, mwra.getDeviceId());
             int repeatCount = (mwra.getDeviceId().length() - 16) / 2;
+
             // new UID
             String newUID = mwra.getDeviceId().substring(0, 16) + mwra.getId() + "_" + repeatCount;
             mwra.setUid(newUID);
-            db.updatesMWRAColumn(TableContracts.MWRATable.COLUMN_UID, newUID);
+
+            DssRoomDatabase.getDbInstance().mwraDao().updateMwra(mwra);
+            //db.updatesMWRAColumn(TableContracts.MWRATable.COLUMN_UID, newUID);
 
 
         } catch (JSONException e) {

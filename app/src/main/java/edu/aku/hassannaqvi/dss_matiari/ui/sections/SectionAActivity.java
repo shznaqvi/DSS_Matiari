@@ -126,7 +126,6 @@ public class SectionAActivity extends AppCompatActivity {
         if (!insertNewRecord()) return;
 
 
-        //if (!insertFpHousehold()) return;
         if (updateDB()) {
 
             setResult(RESULT_OK);
@@ -223,53 +222,10 @@ public class SectionAActivity extends AppCompatActivity {
         }
     }
 
-    private void saveDraft() {
-
-        //  MainApp.households = new Households();
-
-        /*households.setUserName(MainApp.user.getUserName());
-        households.setSysDate(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.ENGLISH).format(new Date().getTime()));
-        households.setDeviceId(MainApp.deviceid);
-        households.setRa06(MainApp.selectedUC);
-        households.setRa07(MainApp.selectedVillage);
-        //households.setHdssId(getUcCode() + "-" + getVillageCode() + "-" + getHhNo());
-        households.setDeviceId(MainApp.deviceid);
-        households.setAppver(MainApp.versionName + "." + MainApp.versionCode);
-        */
-        MainApp.previousAddress = bi.ra08.getText().toString();
-        MainApp.dateOfVisit = bi.ra01.getText().toString();
-
-/*
-        households.setRa14(bi.ra14.getText().toString());
-
-        households.setRa15(bi.ra15.getText().toString());
-
-        households.setRa16(bi.ra16.getText().toString());
-
-        households.setRa17_a(bi.ra17A.getText().toString());
-
-        households.setRa17_b(bi.ra17B.getText().toString());
-
-        households.setRa17_c(bi.ra17C.getText().toString());
-
-        households.setRa17_d(bi.ra17D.getText().toString());
-
-        households.setRa18(bi.ra18.getText().toString());
-*/
-
-
-    }
 
     public void btnEnd(View view) {
-        //saveDraft();
-        /// if ((insertNewRecord())) {
-        //Toast.makeText(this, "Household information not recorded.", Toast.LENGTH_SHORT).show();
         setResult(RESULT_CANCELED);
         finish();
-        // Intent i = new Intent(this, MainActivity.class);
-        //   i.putExtra("complete",false);
-        // startActivity(i);
-        //    }
 
     }
 
@@ -279,9 +235,7 @@ public class SectionAActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        // Toast.makeText(getApplicationContext(), "Back Press Not Allowed", Toast.LENGTH_LONG).show();
         finish();
-        //startActivity(new Intent(this, MainActivity.class));
     }
 
 

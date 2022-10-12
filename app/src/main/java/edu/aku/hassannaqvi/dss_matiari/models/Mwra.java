@@ -7,10 +7,14 @@ import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.mwra;
 import android.database.Cursor;
 import android.util.Log;
 
+import androidx.annotation.NonNull;
 import androidx.databinding.BaseObservable;
 import androidx.databinding.Bindable;
 import androidx.databinding.Observable;
 import androidx.databinding.PropertyChangeRegistry;
+import androidx.room.ColumnInfo;
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
 
 import org.apache.commons.lang3.StringUtils;
 import org.json.JSONException;
@@ -18,7 +22,6 @@ import org.json.JSONObject;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
@@ -27,57 +30,95 @@ import edu.aku.hassannaqvi.dss_matiari.BR;
 import edu.aku.hassannaqvi.dss_matiari.contracts.TableContracts.MWRATable;
 import edu.aku.hassannaqvi.dss_matiari.core.MainApp;
 
-public class MWRA extends BaseObservable implements Observable {
+@Entity(tableName = MWRATable.TABLE_NAME)
+public class Mwra extends BaseObservable implements Observable {
 
-    private final String TAG = "MWRA";
+    public String TAG = "MWRA";
     //Not saving in DB
-    private final LocalDate localDate = null;
     private transient PropertyChangeRegistry propertyChangeRegistry = new PropertyChangeRegistry();
     private boolean exist = false;
     private boolean expanded;
 
     // APP VARIABLES
+    @ColumnInfo(name = MWRATable.COLUMN_PROJECT_NAME)
     private String projectName = PROJECT_NAME;
 
     // APP VARIABLES
-    private String id = StringUtils.EMPTY;
+
+    @PrimaryKey(autoGenerate = true) @NonNull
+    @ColumnInfo(name = MWRATable.COLUMN_ID)
+    long id = 0;
+
+    @ColumnInfo(name = MWRATable.COLUMN_UID)
     private String uid = StringUtils.EMPTY;
+
+    @ColumnInfo(name = MWRATable.COLUMN_UUID)
     private String uuid = StringUtils.EMPTY;
+
+    @ColumnInfo(name = MWRATable.COLUMN_USERNAME)
     private String userName = StringUtils.EMPTY;
+
+    @ColumnInfo(name = MWRATable.COLUMN_SYSDATE)
     private String sysDate = StringUtils.EMPTY;
+
+    @ColumnInfo(name = MWRATable.COLUMN_HDSSID)
     private String hdssId = StringUtils.EMPTY;
+
+    @ColumnInfo(name = MWRATable.COLUMN_UC_CODE)
     private String ucCode = StringUtils.EMPTY;
+
+    @ColumnInfo(name = MWRATable.COLUMN_VILLAGE_CODE)
     private String villageCode = StringUtils.EMPTY;
+
+    @ColumnInfo(name = MWRATable.COLUMN_HOUSEHOLD_NO)
     private String hhNo = StringUtils.EMPTY;
+
+    @ColumnInfo(name = MWRATable.COLUMN_STRUCTURE_NO)
     private String structureNo = StringUtils.EMPTY;
+
+    @ColumnInfo(name = MWRATable.COLUMN_SNO)
     private String sNo = StringUtils.EMPTY;
 
+    @ColumnInfo(name = MWRATable.COLUMN_DEVICEID)
     private String deviceId = StringUtils.EMPTY;
+
+    @ColumnInfo(name = MWRATable.COLUMN_DEVICETAGID)
     private String deviceTag = StringUtils.EMPTY;
+
+    @ColumnInfo(name = MWRATable.COLUMN_APPVERSION)
     private String appver = StringUtils.EMPTY;
+
+    @ColumnInfo(name = MWRATable.COLUMN_ISTATUS)
     private String iStatus = StringUtils.EMPTY;
+
     private String iStatus96x = StringUtils.EMPTY;
+
+    @ColumnInfo(name = MWRATable.COLUMN_SYNCED)
     private String synced = StringUtils.EMPTY;
+
+    @ColumnInfo(name = MWRATable.COLUMN_SYNCED_DATE)
     private String syncDate = StringUtils.EMPTY;
 
     // SECTION VARIABLES
+    @ColumnInfo(name = MWRATable.COLUMN_SB)
     private String sB = StringUtils.EMPTY;
 
-    private String round = "";
-    private String rb01a = "";
+    private String round = StringUtils.EMPTY;;
+    private String rb01a = StringUtils.EMPTY;;
 
-    private String rb01 = "";
-    private String rb02 = "";
-    private String rb03 = "";
-    private String rb04 = "";
-    private String rb05 = "";
-    private String rb06 = "";
-    private String rb07 = "";
-    private String rb08 = "";
-    private String rb09 = "";
+    private String rb01 = StringUtils.EMPTY;;
+    private String rb02 = StringUtils.EMPTY;;
+    private String rb03 = StringUtils.EMPTY;;
+    private String rb04 = StringUtils.EMPTY;;
+    private String rb05 = StringUtils.EMPTY;;
+    private String rb06 = StringUtils.EMPTY;;
+    private String rb07 = StringUtils.EMPTY;;
+    private String rb08 = StringUtils.EMPTY;;
+    private String rb09 = StringUtils.EMPTY;;
     private long ageInMonths;
 
-    public MWRA() {
+
+    public Mwra() {
 
         setRound(MainApp.ROUND);
         setSysDate(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.ENGLISH).format(new Date().getTime()));
@@ -125,11 +166,11 @@ public class MWRA extends BaseObservable implements Observable {
     }
 
 
-    public String getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(long id) {
         this.id = id;
     }
 
@@ -207,11 +248,11 @@ public class MWRA extends BaseObservable implements Observable {
         this.structureNo = structureNo;
     }
 
-    public String getsNo() {
+    public String getSNo() {
         return sNo;
     }
 
-    public void setsNo(String sNo) {
+    public void setSNo(String sNo) {
         this.sNo = sNo;
     }
 
@@ -239,19 +280,19 @@ public class MWRA extends BaseObservable implements Observable {
         this.appver = appver;
     }
 
-    public String getiStatus() {
+    public String getIStatus() {
         return iStatus;
     }
 
-    public void setiStatus(String iStatus) {
+    public void setIStatus(String iStatus) {
         this.iStatus = iStatus;
     }
 
-    public String getiStatus96x() {
+    public String getIStatus96x() {
         return iStatus96x;
     }
 
-    public void setiStatus96x(String iStatus96x) {
+    public void setIStatus96x(String iStatus96x) {
         this.iStatus96x = iStatus96x;
     }
 
@@ -283,10 +324,27 @@ public class MWRA extends BaseObservable implements Observable {
         return sB;
     }
 
-    public void setsB(String sB) {
+    public void setSB(String sB) {
         this.sB = sB;
     }
 
+
+    public PropertyChangeRegistry getPropertyChangeRegistry() {
+        return propertyChangeRegistry;
+    }
+
+    public void setPropertyChangeRegistry(PropertyChangeRegistry propertyChangeRegistry) {
+        this.propertyChangeRegistry = propertyChangeRegistry;
+    }
+
+
+    public long getAgeInMonths() {
+        return ageInMonths;
+    }
+
+    public void setAgeInMonths(long ageInMonths) {
+        this.ageInMonths = ageInMonths;
+    }
 
     @Bindable
     public String getRb01() {
@@ -432,8 +490,8 @@ public class MWRA extends BaseObservable implements Observable {
         }
     }
 
-    public MWRA Hydrate(Cursor cursor) throws JSONException {
-        this.id = cursor.getString(cursor.getColumnIndexOrThrow(MWRATable.COLUMN_ID));
+    public Mwra Hydrate(Cursor cursor) throws JSONException {
+        this.id = cursor.getLong(cursor.getColumnIndexOrThrow(MWRATable.COLUMN_ID));
         this.uid = cursor.getString(cursor.getColumnIndexOrThrow(MWRATable.COLUMN_UID));
         this.uuid = cursor.getString(cursor.getColumnIndexOrThrow(MWRATable.COLUMN_UUID));
         this.userName = cursor.getString(cursor.getColumnIndexOrThrow(MWRATable.COLUMN_USERNAME));

@@ -25,7 +25,7 @@ import edu.aku.hassannaqvi.dss_matiari.models.FPHouseholds;
 import edu.aku.hassannaqvi.dss_matiari.models.FollowUpsSche;
 import edu.aku.hassannaqvi.dss_matiari.models.Followups;
 import edu.aku.hassannaqvi.dss_matiari.models.Households;
-import edu.aku.hassannaqvi.dss_matiari.models.MWRA;
+import edu.aku.hassannaqvi.dss_matiari.models.Mwra;
 import edu.aku.hassannaqvi.dss_matiari.models.Outcome;
 import edu.aku.hassannaqvi.dss_matiari.models.OutcomeFollowups;
 import edu.aku.hassannaqvi.dss_matiari.models.Users;
@@ -62,7 +62,7 @@ public class MainApp extends Application {
     public static File sdDir;
     public static String[] downloadData;
     public static Households households;
-    public static MWRA mwra;
+    public static Mwra mwra;
     public static String DeviceURL = "devices.php";
     public static AppInfo appInfo;
     public static Users user;
@@ -79,7 +79,7 @@ public class MainApp extends Application {
     public static int idType = 0;
     public static String ROUND = "2";
 
-    public static List<MWRA> mwraList;
+    public static List<Mwra> mwraList;
     //public static List<Followups> followupsList;
     public static String hdssid;
     public static int mwraCount = 0;

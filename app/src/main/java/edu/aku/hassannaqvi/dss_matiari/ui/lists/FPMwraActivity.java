@@ -37,7 +37,7 @@ import edu.aku.hassannaqvi.dss_matiari.database.DatabaseHelper;
 import edu.aku.hassannaqvi.dss_matiari.databinding.ActivityFpmwraBinding;
 import edu.aku.hassannaqvi.dss_matiari.models.Followups;
 import edu.aku.hassannaqvi.dss_matiari.models.Households;
-import edu.aku.hassannaqvi.dss_matiari.models.MWRA;
+import edu.aku.hassannaqvi.dss_matiari.models.Mwra;
 import edu.aku.hassannaqvi.dss_matiari.models.OutcomeFollowups;
 import edu.aku.hassannaqvi.dss_matiari.ui.FPEndingActivity;
 import edu.aku.hassannaqvi.dss_matiari.ui.sections.SectionBActivity;
@@ -257,7 +257,7 @@ public class FPMwraActivity extends AppCompatActivity {
         MainApp.households.setRa18("999");
 
 
-        MainApp.mwra = new MWRA();
+        MainApp.mwra = new Mwra();
         //MainApp.mwra.setRb01(String.valueOf(mwraCount + 1));
         //startActivity(new Intent(this, MwraActivity.class));
 

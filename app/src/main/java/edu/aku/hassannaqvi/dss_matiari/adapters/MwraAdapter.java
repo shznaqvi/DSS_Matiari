@@ -17,14 +17,14 @@ import java.util.List;
 
 import edu.aku.hassannaqvi.dss_matiari.R;
 import edu.aku.hassannaqvi.dss_matiari.core.MainApp;
-import edu.aku.hassannaqvi.dss_matiari.models.MWRA;
+import edu.aku.hassannaqvi.dss_matiari.models.Mwra;
 import edu.aku.hassannaqvi.dss_matiari.ui.sections.SectionBActivity;
 
 
 public class MwraAdapter extends RecyclerView.Adapter<MwraAdapter.ViewHolder> {
     private static final String TAG = "CustomAdapter";
     private final Context mContext;
-    private final List<MWRA> mwras;
+    private final List<Mwra> mwras;
     private final int mExpandedPosition = -1;
     private final int completeCount;
 
@@ -33,7 +33,7 @@ public class MwraAdapter extends RecyclerView.Adapter<MwraAdapter.ViewHolder> {
      *
      * @param mwras List<FemaleMembersModel> containing the data to populate views to be used by RecyclerView.
      */
-    public MwraAdapter(Context mContext, List<MWRA> mwras) {
+    public MwraAdapter(Context mContext, List<Mwra> mwras) {
 
         this.mwras = mwras;
         this.mContext = mContext;
@@ -48,7 +48,7 @@ public class MwraAdapter extends RecyclerView.Adapter<MwraAdapter.ViewHolder> {
     public void onBindViewHolder(ViewHolder viewHolder, int position1) {
         int position = viewHolder.getAdapterPosition();
         Log.d(TAG, "Element " + position + " set.");
-        MWRA mwra = this.mwras.get(position);        // Get element from your dataset at this position and replace the contents of the view
+        Mwra mwra = this.mwras.get(position);        // Get element from your dataset at this position and replace the contents of the view
         // with that element
 
         TextView fName = viewHolder.fName;

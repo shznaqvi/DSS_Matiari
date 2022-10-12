@@ -59,7 +59,7 @@ import edu.aku.hassannaqvi.dss_matiari.models.FPHouseholds;
 import edu.aku.hassannaqvi.dss_matiari.models.FollowUpsSche;
 import edu.aku.hassannaqvi.dss_matiari.models.Followups;
 import edu.aku.hassannaqvi.dss_matiari.models.Households;
-import edu.aku.hassannaqvi.dss_matiari.models.MWRA;
+import edu.aku.hassannaqvi.dss_matiari.models.Mwra;
 import edu.aku.hassannaqvi.dss_matiari.models.Outcome;
 import edu.aku.hassannaqvi.dss_matiari.models.OutcomeFollowups;
 import edu.aku.hassannaqvi.dss_matiari.models.Pregnancy;
@@ -180,7 +180,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return newRowId;
     }
 
-    public Long addMWRA(MWRA mwra) throws JSONException {
+    public Long addMWRA(Mwra mwra) throws JSONException {
         SQLiteDatabase db = this.getWritableDatabase(DATABASE_PASSWORD);
         ContentValues values = new ContentValues();
         values.put(MWRATable.COLUMN_PROJECT_NAME, mwra.getProjectName());
@@ -192,10 +192,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         values.put(MWRATable.COLUMN_UC_CODE, mwra.getUcCode());
         values.put(MWRATable.COLUMN_VILLAGE_CODE, mwra.getVillageCode());
         values.put(MWRATable.COLUMN_STRUCTURE_NO, mwra.getStructureNo());
-        values.put(MWRATable.COLUMN_SNO, mwra.getsNo());
+        values.put(MWRATable.COLUMN_SNO, mwra.getSNo());
         values.put(MWRATable.COLUMN_HOUSEHOLD_NO, mwra.getHhNo());
         values.put(MWRATable.COLUMN_SB, mwra.sBtoString());
-        values.put(MWRATable.COLUMN_ISTATUS, mwra.getiStatus());
+        values.put(MWRATable.COLUMN_ISTATUS, mwra.getIStatus());
         values.put(MWRATable.COLUMN_DEVICETAGID, mwra.getDeviceTag());
         values.put(MWRATable.COLUMN_DEVICEID, mwra.getDeviceId());
         values.put(MWRATable.COLUMN_APPVERSION, mwra.getAppver());
@@ -1151,7 +1151,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         );
         while (c.moveToNext()) {
             Log.d(TAG, "getUnsyncedMWRA: " + c.getCount());
-            MWRA mwra = new MWRA();
+            Mwra mwra = new Mwra();
             allMwra.put(mwra.Hydrate(c).toJSONObject());
         }
 
@@ -1580,7 +1580,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
 
-    public List<MWRA> getAllMWRAByHH(String uc, String village, String structure, String hhNo) throws JSONException {
+    public List<Mwra> getAllMWRAByHH(String uc, String village, String structure, String hhNo) throws JSONException {
         // Household number in DSSID was changed to 4-digits to capture more than 999 households
         String newhhNo = hhNo;
         if (hhNo.length() == 3) {
@@ -1606,7 +1606,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         String orderBy = MWRATable.COLUMN_ID + " ASC";
 
-        ArrayList<MWRA> mwraByHH = new ArrayList<>();
+        ArrayList<Mwra> mwraByHH = new ArrayList<>();
         c = db.query(
                 MWRATable.TABLE_NAME,  // The table to query
                 columns,                   // The columns to return
@@ -1617,7 +1617,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 orderBy                    // The sort order
         );
         while (c.moveToNext()) {
-            MWRA mwra = new MWRA().Hydrate(c);
+            Mwra mwra = new Mwra().Hydrate(c);
 
             mwraByHH.add(mwra);
         }
