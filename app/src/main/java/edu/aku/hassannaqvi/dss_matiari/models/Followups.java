@@ -3,10 +3,14 @@ package edu.aku.hassannaqvi.dss_matiari.models;
 import android.database.Cursor;
 import android.util.Log;
 
+import androidx.annotation.NonNull;
 import androidx.databinding.BaseObservable;
 import androidx.databinding.Bindable;
 import androidx.databinding.Observable;
 import androidx.databinding.PropertyChangeRegistry;
+import androidx.room.ColumnInfo;
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
 
 import org.apache.commons.lang3.StringUtils;
 import org.json.JSONException;
@@ -23,45 +27,86 @@ import edu.aku.hassannaqvi.dss_matiari.contracts.TableContracts;
 import edu.aku.hassannaqvi.dss_matiari.contracts.TableContracts.FollowupsTable;
 import edu.aku.hassannaqvi.dss_matiari.core.MainApp;
 
+@Entity(tableName = FollowupsTable.TABLE_NAME)
+
 public class Followups extends BaseObservable implements Observable {
 
-    private final String TAG = "MWRA";
+    public final String TAG = "MWRA";
     //Not saving in DB
-    private final LocalDate localDate = null;
     private transient PropertyChangeRegistry propertyChangeRegistry = new PropertyChangeRegistry();
     private boolean exist = false;
     private boolean expanded;
 
     // APP VARIABLES
+    @ColumnInfo(name = FollowupsTable.COLUMN_PROJECT_NAME)
     private String projectName = MainApp.PROJECT_NAME;
 
     // APP VARIABLES
-    private String id = StringUtils.EMPTY;
+
+    @PrimaryKey(autoGenerate = true) @NonNull
+    @ColumnInfo(name = FollowupsTable.COLUMN_ID)
+    private long id = 0;
+
+    @ColumnInfo(name = FollowupsTable.COLUMN_UID)
     private String uid = StringUtils.EMPTY;
+
+    @ColumnInfo(name = FollowupsTable.COLUMN_UUID)
     private String uuid = StringUtils.EMPTY;
+
+    @ColumnInfo(name = FollowupsTable.COLUMN_FMUID)
     private String fmuid = StringUtils.EMPTY;
+
+    @ColumnInfo(name = FollowupsTable.COLUMN_USERNAME)
     private String userName = StringUtils.EMPTY;
+
+    @ColumnInfo(name = FollowupsTable.COLUMN_SYSDATE)
     private String sysDate = StringUtils.EMPTY;
+
+    @ColumnInfo(name = FollowupsTable.COLUMN_HDSSID)
     private String hdssId = StringUtils.EMPTY;
+
+    @ColumnInfo(name = FollowupsTable.COLUMN_UC_CODE)
     private String ucCode = StringUtils.EMPTY;
+
+    @ColumnInfo(name = FollowupsTable.COLUMN_VILLAGE_CODE)
     private String villageCode = StringUtils.EMPTY;
+
+    @ColumnInfo(name = FollowupsTable.COLUMN_HOUSEHOLD_NO)
     private String hhNo = StringUtils.EMPTY;
+
+    @ColumnInfo(name = FollowupsTable.COLUMN_SNO)
     private String sNo = StringUtils.EMPTY;
+
+    @ColumnInfo(name = FollowupsTable.COLUMN_VISIT_NO)
     private String visitNo = StringUtils.EMPTY;
 
-
-    private String rc01a = "";
-    private String rc01v2 = "";
-    private String rc01v3 = "";
+    @ColumnInfo(name = FollowupsTable.COLUMN_DEVICEID)
     private String deviceId = StringUtils.EMPTY;
+
+    @ColumnInfo(name = FollowupsTable.COLUMN_DEVICETAGID)
     private String deviceTag = StringUtils.EMPTY;
+
+    @ColumnInfo(name = FollowupsTable.COLUMN_APPVERSION)
     private String appver = StringUtils.EMPTY;
+
+    @ColumnInfo(name = FollowupsTable.COLUMN_ISTATUS)
     private String iStatus = StringUtils.EMPTY;
+
     private String iStatus96x = StringUtils.EMPTY;
+
+    @ColumnInfo(name = FollowupsTable.COLUMN_SYNCED)
     private String synced = StringUtils.EMPTY;
+
+    @ColumnInfo(name = FollowupsTable.COLUMN_SYNCED_DATE)
     private String syncDate = StringUtils.EMPTY;
 
     // SECTION VARIABLES
+
+    @ColumnInfo(name =FollowupsTable.COLUMN_SC)
+    private String SC = StringUtils.EMPTY;
+    private String rc01a = "";
+    private String rc01v2 = "";
+    private String rc01v3 = "";
 
     private String fRound = "";
     private String prePreg = "";
@@ -84,26 +129,11 @@ public class Followups extends BaseObservable implements Observable {
     private String rc10 = StringUtils.EMPTY;
     private String rc11 = StringUtils.EMPTY;
     private String rc11x = StringUtils.EMPTY;
-    private String rc1201ln = StringUtils.EMPTY;
-    private String rc1201nm = StringUtils.EMPTY;
-    private final String rc1201 = StringUtils.EMPTY;
-    private final String rc1202 = StringUtils.EMPTY;
-    private String rc1202ln = StringUtils.EMPTY;
-    private String rc1202nm = StringUtils.EMPTY;
-    private final String rc1203 = StringUtils.EMPTY;
-    private String rc1203ln = StringUtils.EMPTY;
-    private String rc1203nm = StringUtils.EMPTY;
+
     private String rc12 = StringUtils.EMPTY;
-    private final String rc12x = StringUtils.EMPTY;
-    private final String rc1301 = StringUtils.EMPTY;
-    private final String rc1302 = StringUtils.EMPTY;
-    private final String rc1303 = StringUtils.EMPTY;
     private String rc13 = StringUtils.EMPTY;
-    private final String rc13x = StringUtils.EMPTY;
+
     private String rc14 = StringUtils.EMPTY;
-    private final String rc1401 = StringUtils.EMPTY;
-    private final String rc1402 = StringUtils.EMPTY;
-    private final String rc1403 = StringUtils.EMPTY;
     private String rc15 = StringUtils.EMPTY;
     private String rc16 = StringUtils.EMPTY;
     private String rc17 = StringUtils.EMPTY;
@@ -128,8 +158,8 @@ public class Followups extends BaseObservable implements Observable {
         MainApp.followups.setVillageCode(MainApp.fpMwra.getVillageCode());
         MainApp.followups.setFmuid(MainApp.fpMwra.getMuid());
         MainApp.followups.setHhNo(MainApp.fpMwra.getHhNo());
-        MainApp.followups.setfRound(MainApp.fpMwra.getFRound());
-        MainApp.followups.setSno(MainApp.fpMwra.getRb01());
+        MainApp.followups.setFRound(MainApp.fpMwra.getFRound());
+        MainApp.followups.setSNo(MainApp.fpMwra.getRb01());
         MainApp.followups.setHdssId(MainApp.fpMwra.getHdssid());
         MainApp.followups.setRb06(MainApp.fpMwra.getRb06());
         MainApp.followups.setPrePreg(MainApp.fpMwra.getRb07());
@@ -139,11 +169,11 @@ public class Followups extends BaseObservable implements Observable {
     }
 
     @Bindable
-    public String getfRound() {
+    public String getFRound() {
         return fRound;
     }
 
-    public void setfRound(String fRound) {
+    public void setFRound(String fRound) {
         this.fRound = fRound;
         notifyChange(BR.round);
     }
@@ -158,11 +188,11 @@ public class Followups extends BaseObservable implements Observable {
     }
 
 
-    public String getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(long id) {
         this.id = id;
     }
 
@@ -241,11 +271,11 @@ public class Followups extends BaseObservable implements Observable {
         this.hhNo = hhNo;
     }
 
-    public String getSno() {
+    public String getSNo() {
         return sNo;
     }
 
-    public void setSno(String sNo) {
+    public void setSNo(String sNo) {
         this.sNo = sNo;
     }
 
@@ -273,19 +303,19 @@ public class Followups extends BaseObservable implements Observable {
         this.appver = appver;
     }
 
-    public String getiStatus() {
+    public String getIStatus() {
         return iStatus;
     }
 
-    public void setiStatus(String iStatus) {
+    public void setIStatus(String iStatus) {
         this.iStatus = iStatus;
     }
 
-    public String getiStatus96x() {
+    public String getIStatus96x() {
         return iStatus96x;
     }
 
-    public void setiStatus96x(String iStatus96x) {
+    public void setIStatus96x(String iStatus96x) {
         this.iStatus96x = iStatus96x;
     }
 
@@ -327,6 +357,22 @@ public class Followups extends BaseObservable implements Observable {
 
     public void setVisitNo(String visitNo) {
         this.visitNo = visitNo;
+    }
+
+    public PropertyChangeRegistry getPropertyChangeRegistry() {
+        return propertyChangeRegistry;
+    }
+
+    public void setPropertyChangeRegistry(PropertyChangeRegistry propertyChangeRegistry) {
+        this.propertyChangeRegistry = propertyChangeRegistry;
+    }
+
+    public String getSC() {
+        return SC;
+    }
+
+    public void setSC(String SC) {
+        this.SC = SC;
     }
 
     @Bindable
@@ -415,7 +461,7 @@ public class Followups extends BaseObservable implements Observable {
 
     public void setRc01(String rc01) {
         this.rc01 = rc01;
-        setSno(rc01);
+        setSNo(rc01);
         notifyChange(BR.rc01);
     }
 
@@ -675,7 +721,7 @@ public class Followups extends BaseObservable implements Observable {
     }
 
     public Followups Hydrate(Cursor cursor) throws JSONException {
-        this.id = cursor.getString(cursor.getColumnIndexOrThrow(FollowupsTable.COLUMN_ID));
+        this.id = cursor.getLong(cursor.getColumnIndexOrThrow(FollowupsTable.COLUMN_ID));
         this.uid = cursor.getString(cursor.getColumnIndexOrThrow(FollowupsTable.COLUMN_UID));
         this.uuid = cursor.getString(cursor.getColumnIndexOrThrow(FollowupsTable.COLUMN_UUID));
         this.fmuid = cursor.getString(cursor.getColumnIndexOrThrow(FollowupsTable.COLUMN_FMUID));

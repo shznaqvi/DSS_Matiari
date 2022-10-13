@@ -71,18 +71,18 @@ public class SectionBActivity extends AppCompatActivity {
 
 
             // Followups data
-            MainApp.followups.setUuid(households.getUid());
+            /*MainApp.followups.setUuid(households.getUid());
             MainApp.followups.setUcCode(households.getUcCode());
             MainApp.followups.setVillageCode(households.getVillageCode());
             //MainApp.followups.setStructureNo(households.getStructureNo());
-            followups.setSno(mwra.getRb01());
-            followups.setfRound("0");
+            followups.setSNo(mwra.getRb01());
+            followups.setFRound("0");
             MainApp.followups.setHhNo(households.getHhNo());
             MainApp.followups.setUserName(MainApp.user.getUserName());
             MainApp.followups.setSysDate(households.getSysDate());
             MainApp.followups.setDeviceId(MainApp.deviceid);
             MainApp.followups.setHdssId(households.getHdssId());
-            MainApp.followups.setAppver(MainApp.versionName + "." + MainApp.versionCode);
+            MainApp.followups.setAppver(MainApp.versionName + "." + MainApp.versionCode);*/
 
 
         }
@@ -229,9 +229,9 @@ public class SectionBActivity extends AppCompatActivity {
 
     private boolean insertNewRecord() {
         db = MainApp.appInfo.getDbHelper();
-        if (MainApp.households.getRa18().equals("999") && fpHouseholds.getUid().equals("")) {
+       /* if (MainApp.households.getRa18().equals("999") && fpHouseholds.getUid().equals("")) {
             insertFpHousehold();
-        }
+        }*/
         MainApp.mwra.populateMeta();
         long rowId = 0;
         try {
@@ -268,7 +268,7 @@ public class SectionBActivity extends AppCompatActivity {
             Log.d(TAG, "insertNewRecord (JSONException): " + e.getMessage());
             return false;
         }
-        followups.setId(String.valueOf(rowId));
+        followups.setId(rowId);
         if (rowId > 0) {
             followups.setUid(followups.getDeviceId() + followups.getId());
 

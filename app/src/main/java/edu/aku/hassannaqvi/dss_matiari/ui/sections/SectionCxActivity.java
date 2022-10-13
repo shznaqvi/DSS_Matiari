@@ -3,6 +3,8 @@ package edu.aku.hassannaqvi.dss_matiari.ui.sections;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.followUpsScheHHList;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.followups;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.fpHouseholds;
+import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.households;
+import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.mwra;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.mwraCount;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.mwraStatus;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.selectedFemale;
@@ -39,7 +41,10 @@ import edu.aku.hassannaqvi.dss_matiari.contracts.TableContracts;
 import edu.aku.hassannaqvi.dss_matiari.core.MainApp;
 import edu.aku.hassannaqvi.dss_matiari.database.DatabaseHelper;
 import edu.aku.hassannaqvi.dss_matiari.databinding.ActivitySectionCxBinding;
+import edu.aku.hassannaqvi.dss_matiari.models.Followups;
+import edu.aku.hassannaqvi.dss_matiari.models.Mwra;
 import edu.aku.hassannaqvi.dss_matiari.models.Outcome;
+import edu.aku.hassannaqvi.dss_matiari.room.DssRoomDatabase;
 import edu.aku.hassannaqvi.dss_matiari.utils.DateUtilsKt;
 
 public class SectionCxActivity extends AppCompatActivity {
@@ -62,31 +67,31 @@ public class SectionCxActivity extends AppCompatActivity {
         MainApp.ROUND = MainApp.fpMwra.getFRound();
 
         try {
-            followups = db.getFollowupsBySno(MainApp.fpMwra.getRb01(), MainApp.fpMwra.getFRound());
+            //followups = db.getFollowupsBySno(MainApp.fpMwra.getRb01(), MainApp.fpMwra.getFRound());
+            mwra = DssRoomDatabase.getDbInstance().mwraDao().getFollowupsBySno(MainApp.households.getUid(), MainApp.fpMwra.getRb01());
         } catch (JSONException e) {
             e.printStackTrace();
             Toast.makeText(this, "JSONException(Followups): " + e.getMessage(), Toast.LENGTH_SHORT).show();
         }
 
-        if (MainApp.followups.getUid().equals("")) {
-            MainApp.followups.setRc01(MainApp.fpMwra.getRb01());
-            MainApp.followups.setRc02(MainApp.fpMwra.getRb02());
-            MainApp.followups.setRc03(MainApp.fpMwra.getRb03());
-            MainApp.followups.setRb06(MainApp.fpMwra.getRb06());
-            MainApp.followups.setRc06(MainApp.fpMwra.getRb06());
-            MainApp.followups.setPrePreg(MainApp.fpMwra.getRb07());
-            MainApp.followups.setRc07(MainApp.fpMwra.getRb07());
-            MainApp.followups.setHdssId(MainApp.fpMwra.getHdssid());
-            MainApp.followups.setHhNo(MainApp.fpMwra.getHhNo());
+        if (mwra.getUid().equals("")) {
+            mwra.setRb01(MainApp.fpMwra.getRb01());
+            MainApp.mwra.setRb02(MainApp.fpMwra.getRb02());
+            mwra.setRb03(MainApp.fpMwra.getRb03());
+            mwra.setRb06(MainApp.fpMwra.getRb06());
+            mwra.setRb06(MainApp.fpMwra.getRb06());
+            mwra.setRb07(MainApp.fpMwra.getRb07());
+            mwra.setHdssId(MainApp.fpMwra.getHdssid());
+            mwra.setHhNo(MainApp.fpMwra.getHhNo());
 
         }
 
-        bi.setFpHouseholds(MainApp.fpHouseholds);
-        bi.setFollowups(MainApp.followups);
+        //bi.setFpHouseholds(MainApp.fpHouseholds);
+        bi.setFollowups(MainApp.mwra);
 
         setImmersive(true);
 
-        bi.btnContinue.setText(MainApp.followups.getUid().equals("") ? "Save" : "Update");
+        bi.btnContinue.setText(MainApp.mwra.getUid().equals("") ? "Save" : "Update");
 
         bi.rc11.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
@@ -105,7 +110,7 @@ public class SectionCxActivity extends AppCompatActivity {
 
         });
 
-        if(!MainApp.fpHouseholds.getVisitNo().equals("") && Integer.parseInt(fpHouseholds.getVisitNo()) == 2)
+        if(!MainApp.households.getVisitNo().equals("") && Integer.parseInt(households.getVisitNo()) == 2)
         {
             bi.rc0408.setEnabled(true);
             bi.rc0404.setEnabled(false);
@@ -207,45 +212,174 @@ public class SectionCxActivity extends AppCompatActivity {
 
     public void btnContinue(View view) {
         if (!formValidation()) return;
-        if (MainApp.followups.getUid().equals("") ? insertNewRecord() : updateDB()) {
+        if (mwra.getUid().equals("") ? insertNewRecord() : updateDB()) {
 
             if(bi.rc0401.isChecked()) {
 
-                // If pregnant in previous round and delivered with live birth
+                switch (followups.getRb06()) {
 
-                if (followups.getPrePreg().equals("1") && bi.rc0901.isChecked()) {
+                    // Married in Previous Round
+                    case "1":
+                        // Pregnant
+                        if (mwra.getRb07().equals("1")) {
+                            // If pregnancy continued
+                            if (bi.rc0801.isChecked()) {
+                                setResult(RESULT_OK);
+                                //finish();
+                            } else {  // If Pregnancy ended
+                                if (bi.rc0901.isChecked()) // If Live Birth
+                                {
+                                    Intent forwardIntent = new Intent(this, SectionOutcomeActivity.class).putExtra("complete", true);
+                                    forwardIntent.setFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT);
+                                    setResult(RESULT_OK, forwardIntent);
+                                    startActivity(forwardIntent);
+                                    //finish();
+                                } else { // If not live birth
+                                    Intent forwardIntent = new Intent(this, SectionCx2Activity.class).putExtra("complete", true);
+                                    forwardIntent.setFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT);
+                                    setResult(RESULT_OK, forwardIntent);
+                                    startActivity(forwardIntent);
+                                    //finish();
+                                }
+                            }
+                        } else {   // Not Pregnant
+                            Intent forwardIntent = new Intent(this, SectionCx2Activity.class).putExtra("complete", true);
+                            forwardIntent.setFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT);
+                            setResult(RESULT_OK, forwardIntent);
+                            startActivity(forwardIntent);
+                            //finish();
+                        }
 
-                    Intent forwardIntent = new Intent(this, SectionOutcomeActivity.class).putExtra("complete", true);
-                    forwardIntent.setFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT);
-                    setResult(RESULT_OK, forwardIntent);
-                    startActivity(forwardIntent);
-                    finish();
+                        break;
+
+                    //finish();
+
+                    // Divorced
+                    case "2":
+                        // Pregnant
+                        if (mwra.getRb07().equals("1")) {
+
+                            if (bi.rc0801.isChecked()) {  // If Pregnancy Continued
+                                setResult(RESULT_OK);
+                                //finish();
+                            } else {     // If Pregnancy ended
+                                if (bi.rc0901.isChecked()) {    // Live Birth
+                                    Intent forwardIntent = new Intent(this, SectionOutcomeActivity.class).putExtra("complete", true);
+                                    forwardIntent.setFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT);
+                                    setResult(RESULT_OK, forwardIntent);
+                                    startActivity(forwardIntent);
+                                    //finish();
+                                } else {
+                                    setResult(RESULT_OK);
+                                    //finish();
+                                }
+                            }
+                        } else {      // Not Pregnant
+                            // Marital status changed
+                            if (bi.rc0601.isChecked()) {
+                                Intent forwardIntent = new Intent(this, SectionCx2Activity.class).putExtra("complete", true);
+                                forwardIntent.setFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT);
+                                setResult(RESULT_OK, forwardIntent);
+                                startActivity(forwardIntent);
+                                //finish();
+                            } else {
+                                setResult(RESULT_OK);
+                                //finish();
+                            }
+                        }
+                        break;
+
+                    //finish();
+
+                    // Widow
+                    case "3":
+                        // Pregnant
+                        if (mwra.getRb07().equals("1")) {
+                            if (bi.rc0801.isChecked()) {  // If Pregnancy Continued
+                                setResult(RESULT_OK);
+                                //finish();
+                            } else {     // If Pregnancy ended
+                                if (bi.rc0901.isChecked()) {    // Live Birth
+                                    Intent forwardIntent = new Intent(this, SectionOutcomeActivity.class).putExtra("complete", true);
+                                    forwardIntent.setFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT);
+                                    setResult(RESULT_OK, forwardIntent);
+                                    startActivity(forwardIntent);
+                                    //finish();
+                                } else {
+                                    setResult(RESULT_OK);
+                                    //finish();
+                                }
+                            }
+                        } else {      // Not Pregnant
+                            // Marital status changed
+                            if (bi.rc0601.isChecked()) {
+                                Intent forwardIntent = new Intent(this, SectionCx2Activity.class).putExtra("complete", true);
+                                forwardIntent.setFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT);
+                                setResult(RESULT_OK, forwardIntent);
+                                startActivity(forwardIntent);
+                                //finish();
+                            } else {
+                                setResult(RESULT_OK);
+                                //finish();
+                            }
+                        }
+                        break;
+
+                    //finish();
+                    // Separated
+                    case "5":
+                        // Pregnant
+                        if (mwra.getRb07().equals("1")) {
+
+                            if (bi.rc0801.isChecked()) {  // If Pregnancy Continued
+                                setResult(RESULT_OK);
+                                //finish();
+                            } else {     // If Pregnancy ended
+                                if (bi.rc0901.isChecked()) {    // Live Birth
+                                    Intent forwardIntent = new Intent(this, SectionOutcomeActivity.class).putExtra("complete", true);
+                                    forwardIntent.setFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT);
+                                    setResult(RESULT_OK, forwardIntent);
+                                    startActivity(forwardIntent);
+                                    finish();
+                                } else {
+                                    setResult(RESULT_OK);
+                                    //finish();
+                                }
+                            }
+                        } else {      // Not Pregnant
+                            // Marital status changed
+                            if (bi.rc0601.isChecked()) {
+                                Intent forwardIntent = new Intent(this, SectionCx2Activity.class).putExtra("complete", true);
+                                forwardIntent.setFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT);
+                                setResult(RESULT_OK, forwardIntent);
+                                startActivity(forwardIntent);
+                                //finish();
+                            } else {
+                                setResult(RESULT_OK);
+                                //finish();
+                            }
+                        }
+                        break;
+
+                    //finish();
+                    case "4": // Unmarried in previous round
+                        // if get married in current round
+                        if (!bi.rc0604.isChecked()) {
+                            Intent forwardIntent = new Intent(this, SectionCx2Activity.class).putExtra("complete", true);
+                            forwardIntent.setFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT);
+                            setResult(RESULT_OK, forwardIntent);
+                            startActivity(forwardIntent);
+                            //finish();
+
+                            // if still unmarried
+                        } else if (bi.rc0604.isChecked()) {
+                            setResult(RESULT_OK);
+                            //finish();
+                        }
+
+                        break;
                 }
-                // If married in previeous round and not pregnant
-                else if (!bi.rc0604.isChecked() && bi.rc0802.isChecked()
-               || (bi.rc0601.isChecked() && followups.getPrePreg().equals("2"))) {
-                    Intent forwardIntent = new Intent(this, SectionCx2Activity.class).putExtra("complete", true);
-                    forwardIntent.setFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT);
-                    setResult(RESULT_OK, forwardIntent);
-                    startActivity(forwardIntent);
-                    finish();
-                } // if unmarried in previous round and get married in current round
-                else if(followups.getRb06().equals("4") && !bi.rc0604.isChecked())
-                {
-                    Intent forwardIntent = new Intent(this, SectionCx2Activity.class).putExtra("complete", true);
-                    forwardIntent.setFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT);
-                    setResult(RESULT_OK, forwardIntent);
-                    startActivity(forwardIntent);
-                    finish();
-                }
-                // if unmarried in current or pregnancy continued
-                else if (bi.rc0604.isChecked() || bi.rc0801.isChecked() ||
-                        (followups.getRb06().equals("2") && followups.getPrePreg().equals("2"))
-                        || (followups.getRb06().equals("3") && followups.getPrePreg().equals("2"))
-                        || (followups.getRb06().equals("5") && followups.getPrePreg().equals("2"))) {
-                    setResult(RESULT_OK);
-                    finish();
-                }
+                finish();
             }else{
                 setResult(RESULT_OK);
                 finish();
@@ -258,25 +392,27 @@ public class SectionCxActivity extends AppCompatActivity {
 
     private boolean insertNewRecord() {
         MainApp.outcome = new Outcome();
-        if (fpHouseholds.getUid().equals("")) {
+        /*if (fpHouseholds.getUid().equals("")) {
             insertFpHousehold();
-        }
+        }*/
 
-        followups.populateMeta();
+        mwra.populateMeta();
 
         long rowId = 0;
         try {
-            rowId = db.addFollowup(followups);
+            //rowId = db.addFollowup(followups);
+            rowId = DssRoomDatabase.getDbInstance().mwraDao().addMwra(mwra);
         } catch (JSONException e) {
             e.printStackTrace();
             Toast.makeText(this, "JSONException(Followups): " + e.getMessage(), Toast.LENGTH_SHORT).show();
             Log.d(TAG, "insertNewRecord (JSONException): " + e.getMessage());
             return false;
         }
-        followups.setId(String.valueOf(rowId));
+        mwra.setId(rowId);
         if (rowId > 0) {
-            followups.setUid(followups.getDeviceId() + followups.getId());
-            db.updatesFollowUpsColumn(TableContracts.FollowupsTable.COLUMN_UID, followups.getUid());
+            mwra.setUid(mwra.getDeviceId() + mwra.getId());
+            DssRoomDatabase.getDbInstance().mwraDao().updateMwra(mwra);
+            //db.updatesFollowUpsColumn(TableContracts.FollowupsTable.COLUMN_UID, followups.getUid());
             return true;
         } else {
             Toast.makeText(this, "Updating Database... ERROR!", Toast.LENGTH_SHORT).show();
@@ -284,40 +420,30 @@ public class SectionCxActivity extends AppCompatActivity {
         }
     }
 
-    private boolean insertFpHousehold() {
-        long rowId = 0;
-        try {
-            rowId = db.addFpHousehold(fpHouseholds);
-        } catch (JSONException e) {
-            e.printStackTrace();
-            Toast.makeText(this, "JSONException(FPHouseholds): " + e.getMessage(), Toast.LENGTH_SHORT).show();
-            Log.d(TAG, "insertNewRecord (JSONException): " + e.getMessage());
-            return false;
-        }
-        fpHouseholds.setId(String.valueOf(rowId));
-        if (rowId > 0) {
-            fpHouseholds.setUid(fpHouseholds.getDeviceId() + fpHouseholds.getId());
-            db.updatesFPHouseholdsColumn(TableContracts.FPHouseholdTable.COLUMN_UID, fpHouseholds.getUid());
-            return true;
-        } else {
-            Toast.makeText(this, "Updating Database... ERROR!", Toast.LENGTH_SHORT).show();
-            return false;
-        }
-    }
 
     private boolean updateDB() {
         int updcount = 0;
         try {
-            updcount = db.updatesFollowUpsColumn(TableContracts.FollowupsTable.COLUMN_SC, followups.sCtoString());
+            //updcount = db.updatesFollowUpsColumn(TableContracts.FollowupsTable.COLUMN_SC, followups.sCtoString());
 
-            followups.setDeviceId(followups.getDeviceId() + "_" + followups.getDeviceId().substring(followups.getDeviceId().length() - 1));
-            db.updatesFollowUpsColumn(TableContracts.FollowupsTable.COLUMN_DEVICEID, followups.getDeviceId());
-            db.updatesFollowUpsColumn(TableContracts.FollowupsTable.COLUMN_ISTATUS, followups.getRc04());
-            int repeatCount = (followups.getDeviceId().length() - 16) / 2;
+            Mwra updatedFollowups = mwra;
+            updatedFollowups.setSC(mwra.sCtoString());
+            updcount = DssRoomDatabase.getDbInstance().mwraDao().updateMwra(mwra);
+
+            mwra.setDeviceId(mwra.getDeviceId() + "_" + mwra.getDeviceId().substring(mwra.getDeviceId().length() - 1));
+
+            updatedFollowups.setDeviceId(mwra.getDeviceId());
+            updatedFollowups.setIStatus(mwra.getIStatus());
+            //db.updatesFollowUpsColumn(TableContracts.FollowupsTable.COLUMN_DEVICEID, followups.getDeviceId());
+            //db.updatesFollowUpsColumn(TableContracts.FollowupsTable.COLUMN_ISTATUS, followups.getRc04());
+            DssRoomDatabase.getDbInstance().mwraDao().updateMwra(updatedFollowups);
+            int repeatCount = (mwra.getDeviceId().length() - 16) / 2;
             // new UID
-            String newUID = followups.getDeviceId().substring(0, 16) + followups.getId() + "_" + repeatCount;
-            followups.setUid(newUID);
-            db.updatesFollowUpsColumn(TableContracts.FollowupsTable.COLUMN_UID, newUID);
+            String newUID = mwra.getDeviceId().substring(0, 16) + mwra.getId() + "_" + repeatCount;
+            mwra.setUid(newUID);
+            updatedFollowups.setUid(newUID);
+            DssRoomDatabase.getDbInstance().mwraDao().updateMwra(updatedFollowups);
+            //db.updatesFollowUpsColumn(TableContracts.FollowupsTable.COLUMN_UID, newUID);
 
 
         } catch (JSONException e) {

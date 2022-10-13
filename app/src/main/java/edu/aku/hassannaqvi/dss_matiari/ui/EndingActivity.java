@@ -43,15 +43,11 @@ public class EndingActivity extends AppCompatActivity {
         bi = DataBindingUtil.setContentView(this, R.layout.activity_ending);
         bi.setHousehold(MainApp.households);
         setSupportActionBar(bi.toolbar);
-        //setTitle(R.string.section1_mainheading);
-        //bi.hhStatus.setText(bi.hhStatus.getText()+" "+(Integer.parseInt(MainApp.households.getVisitNo())+1));
 
         db = MainApp.appInfo.dbHelper;
         visitCount = Integer.parseInt(MainApp.households.getVisitNo());
         boolean complete = getIntent().getBooleanExtra("complete", false);
         boolean noWRA = getIntent().getBooleanExtra("noWRA", false);
-/*        boolean refused = getIntent().getBooleanExtra("refused", false);
-        boolean locked = getIntent().getBooleanExtra("locked", false);*/
 
         bi.istatusa.setEnabled(complete);
         bi.istatusb.setEnabled(!complete);
@@ -68,28 +64,18 @@ public class EndingActivity extends AppCompatActivity {
 
         if (visitCount == 1) {
             MainApp.households.setRa01v2(now);
-            //  bi.fldGrpCVra01v2.setVisibility(View.VISIBLE);
+
         } else if (visitCount > 1) {
             MainApp.households.setRa01v3(now);
-            // bi.fldGrpCVra01v3.setVisibility(View.VISIBLE);
+
 
         }
-/*
-        bi.fldGrpCVra01v2.setVisibility(visitCount == 1 ? View.VISIBLE : View.GONE);
-        bi.fldGrpCVra01v3.setVisibility(visitCount > 1 ? View.VISIBLE : View.GONE);*/
     }
 
     private void saveDraft() {
 
         visitCount++;
 
-        // Only increment visit count if Refused or Locked AND NOT FIRST VISIT
-/*        if (bi.istatusb.isChecked() ||
-                bi.istatusc.isChecked()) {
-            // Do not increment if saving First Visit
-            if(!MainApp.households.getiStatus().equals(""))
-            MainApp.households.setVisitNo(String.valueOf(visitCount));
-        }*/
         MainApp.households.setVisitNo(String.valueOf(visitCount));
 
         switch (visitCount) {
@@ -174,7 +160,7 @@ public class EndingActivity extends AppCompatActivity {
             Log.d(TAG, "UpdateDB (JSONException): " + e.getMessage());
             return false;
         }
-        try {
+        /*try {
             MainApp.fpHouseholds = db.getFPHouseholdBYHdssid(MainApp.households.getHdssId());
 
             if (!MainApp.fpHouseholds.getUid().equals("")) {
@@ -191,7 +177,7 @@ public class EndingActivity extends AppCompatActivity {
             e.printStackTrace();
             Toast.makeText(this, "JSONException(FPHouseholds): " + e.getMessage(), Toast.LENGTH_SHORT).show();
 
-        }
+        }*/
         return updcount > 0;
     }
 

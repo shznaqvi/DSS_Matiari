@@ -78,7 +78,7 @@ public class WRAEndingActivity extends AppCompatActivity {
 
     private void saveDraft() {
 
-        followups.setiStatus(bi.istatusa.isChecked() ? "1"
+        followups.setIStatus(bi.istatusa.isChecked() ? "1"
                 : bi.istatusb.isChecked() ? "2"
                 : "-1");
         //fpHouseholds.setiStatus96x(bi.istatusdx.getText().toString());
@@ -155,7 +155,7 @@ public class WRAEndingActivity extends AppCompatActivity {
 
 
     private boolean UpdateDB() {
-        int updcount = db.updatesFollowUpsColumn(TableContracts.FollowupsTable.COLUMN_ISTATUS, followups.getiStatus());
+        int updcount = db.updatesFollowUpsColumn(TableContracts.FollowupsTable.COLUMN_ISTATUS, followups.getIStatus());
         return updcount > 0;
     }
 

@@ -1,8 +1,10 @@
 package edu.aku.hassannaqvi.dss_matiari.room
 
 import androidx.room.*
+import edu.aku.hassannaqvi.dss_matiari.contracts.TableContracts
 import edu.aku.hassannaqvi.dss_matiari.contracts.TableContracts.MWRATable
 import edu.aku.hassannaqvi.dss_matiari.contracts.TableContracts.TableFollowUpsSche
+import edu.aku.hassannaqvi.dss_matiari.models.Followups
 import edu.aku.hassannaqvi.dss_matiari.models.Mwra
 import org.json.JSONException
 import org.json.JSONObject
@@ -33,17 +35,6 @@ interface MwraDao {
             " GROUP BY " + MWRATable.COLUMN_HOUSEHOLD_NO )
     fun getMaxMWRSNoBYHH(ucCode : String, vCode : String, hhNo : String) : Int
 
-    @Query(
-        "SELECT " +
-                "MAX(" + TableFollowUpsSche.COLUMN_RB01 + ") AS "
-                + TableFollowUpsSche.COLUMN_RB01 +
-                " FROM " + TableFollowUpsSche.TABLE_NAME +
-                " WHERE " + TableFollowUpsSche.COLUMN_UC_CODE + " LIKE :uc AND "
-                + TableFollowUpsSche.COLUMN_VILLAGE_CODE + " LIKE :vCode AND ( " +
-                TableFollowUpsSche.COLUMN_HOUSEHOLD_NO + " LIKE :hhNo " + ") " +
-                " GROUP BY " + TableFollowUpsSche.COLUMN_HOUSEHOLD_NO
-    )
-    fun getMaxMWRANoBYHHFromFolloupsSche(uc : String, vCode : String, hhNo: String) : Int
 
 
     @Throws(JSONException ::class)
@@ -60,6 +51,13 @@ interface MwraDao {
             " FROM " + MWRATable.TABLE_NAME +
             " WHERE " + MWRATable.COLUMN_UUID + " LIKE :uid "  )
     fun getMWRACountBYUUID(uid: String) : Int
+
+    @Throws(JSONException::class)
+    @Query("SELECT * FROM " + MWRATable.TABLE_NAME + " WHERE "
+            + MWRATable.COLUMN_UUID + " LIKE :uuid AND " +
+            MWRATable.COLUMN_SNO + " LIKE :rb01 ORDER BY " +
+            MWRATable.COLUMN_ID)
+    fun getFollowupsBySno(uuid : String, rb01 : String) : Mwra?
 
 
 

@@ -96,6 +96,7 @@ public class FPHouseholdActivity extends AppCompatActivity {
 
 
         MainApp.followUpsScheHHList = db.getFollowUpsScheHHBYVillage(selectedUC, selectedVillage, "");
+
         bi.villageCode.setText("List of " + selectedUC + "-" + selectedVillage);
 
 

@@ -42,7 +42,6 @@ public class HouseholdAdapter extends RecyclerView.Adapter<HouseholdAdapter.View
         completeCount = 0;
         MainApp.fmComplete = false;
 
-
     }
 
 
@@ -57,10 +56,6 @@ public class HouseholdAdapter extends RecyclerView.Adapter<HouseholdAdapter.View
         TextView mwraCount = viewHolder.mwraCount;
         TextView secStatus = viewHolder.secStatus;
         ImageView imgStatus = viewHolder.imgStatus;
-
-        //String pregStatus = households.getRc07().equals("1") ? "Pregnant" : "Not Pregnant";
-
-        //MainApp.fmComplete = completeCount == MainApp.formCount;
 
 
         String hhStatus = "";
@@ -82,9 +77,6 @@ public class HouseholdAdapter extends RecyclerView.Adapter<HouseholdAdapter.View
                 break;
         }
 
-/*
-{"ra01":"2021-08-23","ra02":"","ra04":"","ra03":"","ra05":"","ra07":"9001","ra06":"9","ra08":"asd","ra09":"2","ra10":"1","ra11":"96","ra11x":"ghg","ra12":"96","ra12x":"vgv","ra13":"","ra13x":"","ra14":"head","ra15":"resp","ra16":"2","ra17_a":"1","ra17_b":"1","ra17_c":"1","ra17_d":"1","ra18":"1"}
-        fMaritalStatus.setText(marStatus + " | " + pregStatus);*/
         DatabaseHelper db = MainApp.appInfo.dbHelper;
         //int totalMWRA = db.getMWRACountBYUUID(households.getUid());
         int totalMWRA = DssRoomDatabase.getDbInstance().mwraDao().getMWRACountBYUUID(households.getUid());
@@ -101,7 +93,6 @@ public class HouseholdAdapter extends RecyclerView.Adapter<HouseholdAdapter.View
             // Get the current state of the item
 
             MainApp.households = MainApp.householdList.get(viewHolder.getAdapterPosition());
-            //MainApp.households.setVisitNo(String.valueOf(Integer.parseInt(MainApp.households.getVisitNo())+1));
             if (!MainApp.households.getIStatus().equals("1") && Integer.parseInt(MainApp.households.getVisitNo()) < 3) {
 
                 editHousehold(viewHolder.getAdapterPosition());
@@ -148,10 +139,6 @@ public class HouseholdAdapter extends RecyclerView.Adapter<HouseholdAdapter.View
         private final TextView mwraCount;
         private final TextView secStatus;
         private final ImageView imgStatus;
-/*        private final TextView fMatitalStatus;
-
-        private final ImageView fmRow;
-        private final View indicator;*/
 
 
         public ViewHolder(View v) {
@@ -161,10 +148,6 @@ public class HouseholdAdapter extends RecyclerView.Adapter<HouseholdAdapter.View
             mwraCount = v.findViewById(R.id.mwraCount);
             secStatus = v.findViewById(R.id.secStatus);
             imgStatus = v.findViewById(R.id.imgStatus);
-/*            fMatitalStatus = v.findViewById(R.id.hh06);
-            secStatus = v.findViewById(R.id.secStatus);
-            fmRow = v.findViewById(R.id.fmRow);
-            indicator = v.findViewById(R.id.indicator);*/
 
         }
 

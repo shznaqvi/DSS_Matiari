@@ -19,6 +19,7 @@ public class TableContracts {
         public static final String COLUMN_STRUCTURE_NO = "structureNo";
         public static final String COLUMN_VISIT_NO = "visitNo";
         public static final String COLUMN_SA = "s1";
+        public static final String COLUMN_MUID = "muid";
 
         public static final String COLUMN_DEVICEID = "deviceid";
         public static final String COLUMN_DEVICETAGID = "devicetagid";
@@ -42,10 +43,10 @@ public class TableContracts {
         public static final String COLUMN_VILLAGE_CODE = "villageCode";
         public static final String COLUMN_HOUSEHOLD_NO = "hhNo";
         public static final String COLUMN_STRUCTURE_NO = "structureNo";
+        public static final String COLUMN_ROUND = "round";
         public static final String COLUMN_SNO = "sNo";
         public static final String COLUMN_SB = "s2";
-
-
+        public static final String COLUMN_SC = "s3";
         public static final String COLUMN_DEVICEID = "deviceid";
         public static final String COLUMN_DEVICETAGID = "devicetagid";
         public static final String COLUMN_SYNCED = "synced";

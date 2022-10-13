@@ -12,10 +12,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
-import java.util.Date;
-import java.util.Locale;
 
 import edu.aku.hassannaqvi.dss_matiari.BR;
 import edu.aku.hassannaqvi.dss_matiari.contracts.TableContracts;
@@ -522,7 +519,7 @@ public class Outcome extends BaseObservable implements Observable {
         MainApp.outcome.setSysDate(MainApp.followups.getSysDate());
         MainApp.outcome.setRb02(MainApp.followups.getRc02());
         MainApp.outcome.setRb01a(MainApp.followups.getRc01a());
-        MainApp.outcome.setRound(MainApp.followups.getfRound());
+        MainApp.outcome.setRound(MainApp.followups.getFRound());
         MainApp.outcome.setUcCode(MainApp.fpHouseholds.getUcCode());
         MainApp.outcome.setVillageCode(MainApp.fpHouseholds.getVillageCode());
         MainApp.outcome.setHhNo(MainApp.fpHouseholds.getHhNo());

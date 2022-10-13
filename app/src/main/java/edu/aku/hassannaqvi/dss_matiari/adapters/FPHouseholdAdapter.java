@@ -1,5 +1,6 @@
 package edu.aku.hassannaqvi.dss_matiari.adapters;
 
+import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.households;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.selectedUC;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.selectedVillage;
 
@@ -29,6 +30,7 @@ import edu.aku.hassannaqvi.dss_matiari.database.DatabaseHelper;
 import edu.aku.hassannaqvi.dss_matiari.models.FPHouseholds;
 import edu.aku.hassannaqvi.dss_matiari.models.FollowUpsSche;
 import edu.aku.hassannaqvi.dss_matiari.models.Households;
+import edu.aku.hassannaqvi.dss_matiari.room.DssRoomDatabase;
 import edu.aku.hassannaqvi.dss_matiari.ui.lists.FPHouseholdActivity;
 import edu.aku.hassannaqvi.dss_matiari.ui.lists.FPMwraActivity;
 import edu.aku.hassannaqvi.dss_matiari.ui.sections.SectionAActivity;
@@ -41,8 +43,8 @@ public class FPHouseholdAdapter extends RecyclerView.Adapter<FPHouseholdAdapter.
     private final int mExpandedPosition = -1;
     private final int completeCount;
     private final DatabaseHelper db;
-    private FPHouseholds fpHouseholds;
-    private Households households;
+    //private FPHouseholds fpHouseholds;
+    private Households fpHouseholds;
     HashMap<Integer, Integer> totalMwraMap = new HashMap<>();
 
     /**
@@ -80,21 +82,23 @@ public class FPHouseholdAdapter extends RecyclerView.Adapter<FPHouseholdAdapter.
         String pregStatus = followUpsSche.getRb07() + " Pregnant";
 
         //MainApp.fmComplete = completeCount == MainApp.formCount;
-        try {
+       /* try {
             fpHouseholds = db.getFPHouseholdBYHdssid(followUpsSche.getHdssid());
         } catch (JSONException e) {
             e.printStackTrace();
-        }
+        }*/
 
         try {
             // These quick fixes are making this code a mess.
-            this.households = db.getHouseholdByHDSSID(followUpsSche.getHdssid());
+            //this.fpHouseholds = db.getHouseholdByHDSSID(followUpsSche.getHdssid());
+            this.fpHouseholds = DssRoomDatabase.getDbInstance().householdsDao().getHouseholdByHDSSID(followUpsSche.getHdssid());
 
         } catch (JSONException e) {
             e.printStackTrace();
         }
 
-        int tempMWRA = db.getMaxMWRANoBYHHFromFolloupsSche(followUpsSche.getUcCode(), followUpsSche.getVillageCode(), followUpsSche.getHhNo());
+        //int tempMWRA = db.getMaxMWRANoBYHHFromFolloupsSche(followUpsSche.getUcCode(), followUpsSche.getVillageCode(), followUpsSche.getHhNo());
+        int tempMWRA = DssRoomDatabase.getDbInstance().mwraDao().getMaxMWRSNoBYHH(followUpsSche.getUcCode(), followUpsSche.getVillageCode(), followUpsSche.getHhNo());
         totalMwraMap.put(pos, tempMWRA);
 
 
@@ -102,7 +106,7 @@ public class FPHouseholdAdapter extends RecyclerView.Adapter<FPHouseholdAdapter.
     fpHouseholds.setiStatus(followUpsSche.getiStatus());*/
 
         String hhStatus = "";
-        switch (fpHouseholds.getiStatus()) {
+        switch (fpHouseholds.getIStatus()) {
             case "1":
                 hhStatus = "Complete";
                 break;
@@ -146,16 +150,6 @@ public class FPHouseholdAdapter extends RecyclerView.Adapter<FPHouseholdAdapter.
                 break;
         }
 
-/*
-{"ra01":"2021-08-23","ra02":"","ra04":"","ra03":"","ra05":"","ra07":"9001","ra06":"9","ra08":"asd","ra09":"2","ra10":"1","ra11":"96","ra11x":"ghg","ra12":"96","ra12x":"vgv","ra13":"","ra13x":"","ra14":"head","ra15":"resp","ra16":"2","ra17_a":"1","ra17_b":"1","ra17_c":"1","ra17_d":"1","ra18":"1"}
-        fMaritalStatus.setText(marStatus + " | " + pregStatus);*/
-        //int totalMWRA = Integer.parseInt(followUpsSche.getRb01().equals("") || followUpsSche.getRb01().equals("null") ? "0" : String.valueOf(totalMwra));
-        //int totalMWRA = db.getMaxMWRANoBYHHFromFolloupsSche(selectedUC, selectedVillage, selectedHhNO);
-
-        /*maxMWRA = db.getMaxMWRSNoBYHH(selectedUC, selectedVillage, selectedHhNO);
-        maxFpMWRA = db.getMaxMWRANoBYHHFromFolloupsSche(selectedUC, selectedVillage, selectedHhNO);
-        totalMWRA= Math.max(maxMWRA, maxFpMWRA);*/
-
 
         hhNo.setText(followUpsSche.getVillageCode() + "-" + followUpsSche.getHhNo());
 
@@ -180,26 +174,24 @@ public class FPHouseholdAdapter extends RecyclerView.Adapter<FPHouseholdAdapter.
 
         mwraCount.setText(tempMWRA + " Women | " + pregStatus);
         secStatus.setText(hhStatus);
-        imgStatus.setVisibility(fpHouseholds.getiStatus().equals("1") || Integer.parseInt(fpHouseholds.getVisitNo()) > 2 ? View.VISIBLE : View.GONE);
+        imgStatus.setVisibility(fpHouseholds.getIStatus().equals("1") || Integer.parseInt(fpHouseholds.getVisitNo()) > 2 ? View.VISIBLE : View.GONE);
         secStatus.setBackgroundColor(ContextCompat.getColor(mContext, R.color.grayDark));
 
-        if (!fpHouseholds.getiStatus().equals("1")) {
+        if (!fpHouseholds.getIStatus().equals("1")) {
             viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     // Get the current state of the item
 
                     try {
-                        MainApp.fpHouseholds = db.getFPHouseholdBYHdssid(MainApp.followUpsScheHHList.get(viewHolder.getAdapterPosition()).getHdssid());
+                        //MainApp.fpHouseholds = db.getFPHouseholdBYHdssid(MainApp.followUpsScheHHList.get(viewHolder.getAdapterPosition()).getHdssid());
+                       fpHouseholds = DssRoomDatabase.getDbInstance().householdsDao().getHouseholdByHDSSID(MainApp.followUpsScheHHList.get(viewHolder.getAdapterPosition()).getHdssid());
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
 
-                    if (MainApp.fpHouseholds.getUid().equals(""))
+                    if (fpHouseholds.getUid().equals(""))
                         MainApp.fpHouseholds.populateMeta(viewHolder.getAdapterPosition());
-
-           /*     MainApp.fpHouseholds.setVisitNo(String.valueOf(Integer.parseInt(MainApp.fpHouseholds.getVisitNo()) + 1));
-                mContext.startActivity(new Intent(mContext, FPMwraActivity.class));*/
 
                     if (!MainApp.fpHouseholds.getiStatus().equals("1") && Integer.parseInt(MainApp.fpHouseholds.getVisitNo()) < 3) {
 
@@ -208,7 +200,8 @@ public class FPHouseholdAdapter extends RecyclerView.Adapter<FPHouseholdAdapter.
                             editHousehold(viewHolder.getAdapterPosition());
                         } else if(!followUpsSche.getiStatus().equals("1") || currentMWRA == 0) {
                             try {
-                                MainApp.households = db.getHouseholdByHDSSID(followUpsSche.getHdssid());
+                                //MainApp.households = db.getHouseholdByHDSSID(followUpsSche.getHdssid());
+                                households = DssRoomDatabase.getDbInstance().householdsDao().getHouseholdByHDSSID(followUpsSche.getHdssid());
 
                                 if (MainApp.households == null) {
                                     MainApp.households = new Households();
@@ -227,7 +220,6 @@ public class FPHouseholdAdapter extends RecyclerView.Adapter<FPHouseholdAdapter.
                                     Toast.makeText(mContext, "Follow-Up for this household has been locked", Toast.LENGTH_LONG).show();
                                 }
 
-
                                 //  mContext.startActivity(new Intent(mContext, SectionAActivity.class));
                             } catch (JSONException e) {
                                 e.printStackTrace();
@@ -240,58 +232,7 @@ public class FPHouseholdAdapter extends RecyclerView.Adapter<FPHouseholdAdapter.
                     }
                 }
             });
-            //viewHolder.itemView.setOnClickListener(v -> {
-                /*// Get the current state of the item
 
-                try {
-                    MainApp.fpHouseholds = db.getFPHouseholdBYHdssid(MainApp.followUpsScheHHList.get(viewHolder.getAdapterPosition()).getHdssid());
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-
-                if (MainApp.fpHouseholds.getUid().equals(""))
-                    MainApp.fpHouseholds.populateMeta(viewHolder.getAdapterPosition());
-
-           *//*     MainApp.fpHouseholds.setVisitNo(String.valueOf(Integer.parseInt(MainApp.fpHouseholds.getVisitNo()) + 1));
-                mContext.startActivity(new Intent(mContext, FPMwraActivity.class));*//*
-
-                if (!MainApp.fpHouseholds.getiStatus().equals("1") && Integer.parseInt(MainApp.fpHouseholds.getVisitNo()) < 3) {
-
-                    if (followUpsSche.getiStatus().equals("1") && totalMWRA > 0) {
-                        editHousehold(viewHolder.getAdapterPosition());
-                    } else if(!followUpsSche.getiStatus().equals("1") || totalMWRA == 0) {
-                        try {
-                            MainApp.households = db.getHouseholdByHDSSID(followUpsSche.getHdssid());
-
-                            if (MainApp.households == null) {
-                                MainApp.households = new Households();
-
-                                MainApp.households.setUcCode(selectedUC);
-                                MainApp.households.setVillageCode(selectedVillage);
-                                MainApp.households.setRa09(followUpsSche.getHhNo());
-                            }
-                            MainApp.selectedHhNO = followUpsSche.getHhNo();
-                            MainApp.position = viewHolder.getAdapterPosition();
-                            if (!MainApp.households.getiStatus().equals("1") && Integer.parseInt(MainApp.households.getVisitNo()) < 3) {
-
-                                Intent intent = new Intent(mContext, SectionAActivity.class);
-                                ((FPHouseholdActivity) mContext).MemberInfoLauncher.launch(intent);
-                            } else {
-                                Toast.makeText(mContext, "Follow-Up for this household has been locked", Toast.LENGTH_LONG).show();
-                            }
-
-
-                            //  mContext.startActivity(new Intent(mContext, SectionAActivity.class));
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                            Toast.makeText(mContext, "JSONException(households):" + e.getMessage(), Toast.LENGTH_SHORT).show();
-                        }
-                    }
-
-                } else {
-                    Toast.makeText(mContext, "Follow-Up for this household has been locked", Toast.LENGTH_LONG).show();
-                }*/
-            //});
         }
     }
 

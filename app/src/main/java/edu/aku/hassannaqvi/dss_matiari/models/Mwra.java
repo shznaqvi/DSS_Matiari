@@ -99,22 +99,38 @@ public class Mwra extends BaseObservable implements Observable {
     @ColumnInfo(name = MWRATable.COLUMN_SYNCED_DATE)
     private String syncDate = StringUtils.EMPTY;
 
-    // SECTION VARIABLES
+    // SECTION VARIABLES / Registration Variables
     @ColumnInfo(name = MWRATable.COLUMN_SB)
     private String sB = StringUtils.EMPTY;
 
-    private String round = StringUtils.EMPTY;;
-    private String rb01a = StringUtils.EMPTY;;
+    @ColumnInfo(name = MWRATable.COLUMN_SC)
+    private String sC = StringUtils.EMPTY;
 
-    private String rb01 = StringUtils.EMPTY;;
-    private String rb02 = StringUtils.EMPTY;;
-    private String rb03 = StringUtils.EMPTY;;
-    private String rb04 = StringUtils.EMPTY;;
-    private String rb05 = StringUtils.EMPTY;;
-    private String rb06 = StringUtils.EMPTY;;
-    private String rb07 = StringUtils.EMPTY;;
-    private String rb08 = StringUtils.EMPTY;;
-    private String rb09 = StringUtils.EMPTY;;
+    private String round = StringUtils.EMPTY;
+    private String rb01a = StringUtils.EMPTY;
+
+    private String rb01 = StringUtils.EMPTY;
+    private String rb02 = StringUtils.EMPTY;
+    private String rb03 = StringUtils.EMPTY;
+    private String rb04 = StringUtils.EMPTY;
+    private String rb05 = StringUtils.EMPTY;
+    private String rb06 = StringUtils.EMPTY;
+    private String rb07 = StringUtils.EMPTY;
+    private String rb08 = StringUtils.EMPTY;
+    private String rb09 = StringUtils.EMPTY;
+
+    // Followup Variables
+    private String rb03a = StringUtils.EMPTY;
+    private String rb03b = StringUtils.EMPTY;
+    private String rb10 = StringUtils.EMPTY;
+    private String rb11 = StringUtils.EMPTY;
+    private String rb11a = StringUtils.EMPTY;
+    private String rb11b = StringUtils.EMPTY;
+    private String rb12 = StringUtils.EMPTY;
+    private String rb13 = StringUtils.EMPTY;
+    private String rb14 = StringUtils.EMPTY;
+    private String rb15 = StringUtils.EMPTY;
+
     private long ageInMonths;
 
 
@@ -328,6 +344,13 @@ public class Mwra extends BaseObservable implements Observable {
         this.sB = sB;
     }
 
+    public String getSC() {
+        return sC;
+    }
+
+    public void setSC(String sC) {
+        this.sC = sC;
+    }
 
     public PropertyChangeRegistry getPropertyChangeRegistry() {
         return propertyChangeRegistry;
@@ -422,10 +445,7 @@ public class Mwra extends BaseObservable implements Observable {
     public void setRb06(String rb06) {
         this.rb06 = rb06;
         Log.d(TAG, "setRc06: " + this.rb06);
-        //setRc03(this.rb06.equals("4") ? "" : this.rb03);
         setRb07(this.rb06.equals("4") ? "" : this.rb07);
-/*        setRc08(this.rb06.equals("4") ? "" : this.rb08);
-        setRc09(this.rb06.equals("4") ? "" : this.rb09);*/
         notifyChange(BR.rb06);
     }
 
@@ -465,6 +485,106 @@ public class Mwra extends BaseObservable implements Observable {
     public void setRb09(String rb09) {
         this.rb09 = rb09;
         notifyChange(BR.rb09);
+    }
+
+    @Bindable
+    public String getRb03a() {
+        return rb03a;
+    }
+
+    public void setRb03a(String rb03a) {
+        this.rb03a = rb03a;
+        notifyPropertyChanged(BR.rb03a);
+    }
+
+    @Bindable
+    public String getRb03b() {
+        return rb03b;
+    }
+
+    public void setRb03b(String rb03b) {
+        this.rb03b = rb03b;
+        notifyPropertyChanged(BR.rb03b);
+    }
+
+    @Bindable
+    public String getRb10() {
+        return rb10;
+    }
+
+    public void setRb10(String rb10) {
+        this.rb10 = rb10;
+        notifyPropertyChanged(BR.rb10);
+    }
+
+    @Bindable
+    public String getRb11() {
+        return rb11;
+    }
+
+    public void setRb11(String rb11) {
+        this.rb11 = rb11;
+        notifyPropertyChanged(BR.rb11);
+    }
+
+    @Bindable
+    public String getRb11a() {
+        return rb11a;
+    }
+
+    public void setRb11a(String rb11a) {
+        this.rb11a = rb11a;
+        notifyPropertyChanged(BR.rb11a);
+    }
+
+    @Bindable
+    public String getRb11b() {
+        return rb11b;
+    }
+
+    public void setRb11b(String rb11b) {
+        this.rb11b = rb11b;
+        notifyPropertyChanged(BR.rb11b);
+    }
+
+    @Bindable
+    public String getRb12() {
+        return rb12;
+    }
+
+    public void setRb12(String rb12) {
+        this.rb12 = rb12;
+        notifyPropertyChanged(BR.rb12);
+    }
+
+    @Bindable
+    public String getRb13() {
+        return rb13;
+    }
+
+    public void setRb13(String rb13) {
+        this.rb13 = rb13;
+        notifyPropertyChanged(BR.rb13);
+    }
+
+    @Bindable
+    public String getRb14() {
+        return rb14;
+    }
+
+    public void setRb14(String rb14) {
+        this.rb14 = rb14;
+        notifyPropertyChanged(BR.rb14);
+    }
+
+    @Bindable
+    public String getRb15() {
+        return rb15;
+    }
+
+    public void setRb15(String rb15) {
+        this.rb15 = rb15;
+        notifyPropertyChanged(BR.rb15);
     }
 
     private synchronized void notifyChange(int propertyId) {
@@ -510,6 +630,7 @@ public class Mwra extends BaseObservable implements Observable {
         this.syncDate = cursor.getString(cursor.getColumnIndexOrThrow(MWRATable.COLUMN_SYNCED_DATE));
 
         sBHydrate(cursor.getString(cursor.getColumnIndexOrThrow(MWRATable.COLUMN_SB)));
+        sCHydrate(cursor.getString(cursor.getColumnIndexOrThrow(MWRATable.COLUMN_SC)));
         return this;
     }
 
@@ -535,6 +656,27 @@ public class Mwra extends BaseObservable implements Observable {
         }
     }
 
+    public void sCHydrate(String string) throws JSONException {
+        Log.d(TAG, "s3Hydrate: " + string);
+        if (string != null) {
+
+            JSONObject json = null;
+            json = new JSONObject(string);
+            this.rb03a = json.getString("rb03A");
+            this.rb03b = json.getString("rb03a");
+            this.rb11a = json.getString("rb05a");
+            this.rb11b = json.getString("rb05b");
+            this.rb10 = json.getString("rb10");
+            this.rb11 = json.getString("rb11");
+            this.rb12 = json.getString("rb12");
+            this.rb13 = json.getString("rb13");
+            this.rb14 = json.getString("rb14");
+            this.rb15 = json.getString("rb15");
+
+
+        }
+    }
+
 
     public String sBtoString() throws JSONException {
         JSONObject json = new JSONObject();
@@ -551,6 +693,24 @@ public class Mwra extends BaseObservable implements Observable {
                 .put("rb07", rb07)
                 .put("rb08", rb08)
                 .put("rb09", rb09);
+
+        return json.toString();
+    }
+
+    public String sCtoString() throws JSONException {
+        JSONObject json = new JSONObject();
+
+
+        json.put("rb03a", rb03a)
+                .put("rb03b", rb03b)
+                .put("rb05a", rb11a)
+                .put("rb05b", rb11b)
+                .put("rb10", rb10)
+                .put("rb11", rb11)
+                .put("rb12", rb12)
+                .put("rb13", rb13)
+                .put("rb14", rb14)
+                .put("rb15", rb15);
 
         return json.toString();
     }
@@ -577,10 +737,8 @@ public class Mwra extends BaseObservable implements Observable {
         json.put(MWRATable.COLUMN_DEVICETAGID, this.deviceTag);
         json.put(MWRATable.COLUMN_ISTATUS, this.iStatus);
         json.put(MWRATable.COLUMN_APPVERSION, this.appver);
-        //  json.put(MWRATable.COLUMN_SYNCED, this.synced);
-        //  json.put(MWRATable.COLUMN_SYNCED_DATE, this.syncDate);
-
         json.put(MWRATable.COLUMN_SB, new JSONObject(sBtoString()));
+        json.put(MWRATable.COLUMN_SC, new JSONObject(sCtoString()));
         return json;
 
     }

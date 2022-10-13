@@ -190,7 +190,7 @@ public class MwraActivity extends AppCompatActivity {
         //int maxMWRA = db.getMaxMWRSNoBYHH(selectedUC, selectedVillage, selectedHhNO);
         int maxMWRA = DssRoomDatabase.getDbInstance().mwraDao().getMaxMWRSNoBYHH(selectedUC, selectedVillage, selectedHhNO);
         //int maxFpMWRA = db.getMaxMWRANoBYHHFromFolloupsSche(selectedUC, selectedVillage, selectedHhNO);
-        int maxFpMWRA = DssRoomDatabase.getDbInstance().mwraDao().getMaxMWRANoBYHHFromFolloupsSche(selectedUC, selectedVillage, selectedHhNO);
+        int maxFpMWRA = DssRoomDatabase.getDbInstance().FollowUpsScheDao().getMaxMWRANoBYHHFromFolloupsSche(selectedUC, selectedVillage, selectedHhNO);
         mwraCount = Math.max(maxMWRA, maxFpMWRA);
         MemberInfoLauncher.launch(intent);
     }

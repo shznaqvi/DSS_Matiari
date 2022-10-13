@@ -45,6 +45,46 @@ interface FollowUpsScheDao {
     fun deleteFollowupsScheTable()
 
 
+    @Query(
+        "SELECT " +
+                "MAX(" + TableContracts.TableFollowUpsSche.COLUMN_RB01 + ") AS "
+                + TableContracts.TableFollowUpsSche.COLUMN_RB01 +
+                " FROM " + TableContracts.TableFollowUpsSche.TABLE_NAME +
+                " WHERE " + TableContracts.TableFollowUpsSche.COLUMN_UC_CODE + " LIKE :uc AND "
+                + TableContracts.TableFollowUpsSche.COLUMN_VILLAGE_CODE + " LIKE :vCode AND ( " +
+                TableContracts.TableFollowUpsSche.COLUMN_HOUSEHOLD_NO + " LIKE :hhNo " + ") " +
+                " GROUP BY " + TableContracts.TableFollowUpsSche.COLUMN_HOUSEHOLD_NO
+    )
+    fun getMaxMWRANoBYHHFromFolloupsSche(uc : String, vCode : String, hhNo: String) : Int
 
+    @Query("SELECT " + TableContracts.TableFollowUpsSche.COLUMN_VILLAGE_CODE + ", " +
+            TableContracts.TableFollowUpsSche.COLUMN_UC_CODE + ", "
+            + TableContracts.TableFollowUpsSche.COLUMN_HOUSEHOLD_NO + ", "
+            + TableContracts.TableFollowUpsSche.COLUMN_HDSSID + ", "
+            + TableContracts.TableFollowUpsSche.COLUMN_MUID + ", "
+            + TableContracts.TableFollowUpsSche.COLUMN_RA01 + ", "
+            + TableContracts.TableFollowUpsSche.COLUMN_RA08 + ", "
+            + TableContracts.TableFollowUpsSche.COLUMN_RA14 + ", "
+            + TableContracts.TableFollowUpsSche.COLUMN_RA18 + ", "
+            + TableContracts.TableFollowUpsSche.COLUMN_FROUND + ", "
+            + TableContracts.TableFollowUpsSche.COLUMN_DONE_DATE + ", "
+            + TableContracts.TableFollowUpsSche.COLUMN_ISTATUS + ", "
+            + TableContracts.TableFollowUpsSche.COLUMN_RB01 + ", "
+            + TableContracts.TableFollowUpsSche.COLUMN_RB02 + ", "
+            + TableContracts.TableFollowUpsSche.COLUMN_RB03 + ", "
+            + TableContracts.TableFollowUpsSche.COLUMN_RB04 + ", "
+            + TableContracts.TableFollowUpsSche.COLUMN_RC12 + ", "
+            + TableContracts.TableFollowUpsSche.COLUMN_RC15 + ", "
+            + TableContracts.TableFollowUpsSche.COLUMN_RB05 + ", "
+            + TableContracts.TableFollowUpsSche.COLUMN_RB06 + ", "
+            + TableContracts.TableFollowUpsSche.COLUMN_MEMBERTYPE + ", "
+    + " SUM(CASE WHEN " + TableContracts.TableFollowUpsSche.COLUMN_RB07 + "= 1 THEN 1 else 0 END) AS " + TableContracts.TableFollowUpsSche.COLUMN_RB07 +
+        " FROM " + TableContracts.TableFollowUpsSche.TABLE_NAME
+                + " WHERE " + TableContracts.TableFollowUpsSche.COLUMN_UC_CODE + " LIKE :uc AND "
+                + TableContracts.TableFollowUpsSche.COLUMN_VILLAGE_CODE + " LIKE :village AND " +
+            TableContracts.TableFollowUpsSche.COLUMN_RA14 + " LIKE  :hhead GROUP BY "
+            + TableContracts.TableFollowUpsSche.COLUMN_HDSSID
+    + " ORDER BY " + TableContracts.TableFollowUpsSche.COLUMN_ID + " ASC ")
+    fun getFollowUpsScheHHBYVillage(uc : String, village: String, hhead : String) : List<FollowUpsSche>
 
 }

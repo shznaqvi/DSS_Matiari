@@ -292,7 +292,7 @@ public class SectionC1Activity extends AppCompatActivity {
             Log.d(TAG, "insertNewRecord (JSONException): " + e.getMessage());
             return false;
         }
-        followups.setId(String.valueOf(rowId));
+        followups.setId(rowId);
         if (rowId > 0) {
             followups.setUid(followups.getDeviceId() + followups.getId());
             db.updatesFollowUpsColumn(TableContracts.FollowupsTable.COLUMN_UID, followups.getUid());

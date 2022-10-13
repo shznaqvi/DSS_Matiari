@@ -1,5 +1,7 @@
 package edu.aku.hassannaqvi.dss_matiari.models;
 
+import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.PROJECT_NAME;
+
 import android.database.Cursor;
 
 import androidx.annotation.NonNull;
@@ -66,6 +68,8 @@ public class Households extends BaseObservable implements Observable {
     private String ra20 = "";
     private String ra21 = "";
     private String ra22 = "";
+    @ColumnInfo(name = HouseholdTable.COLUMN_MUID)
+    private String muid = StringUtils.EMPTY;
 
     private transient PropertyChangeRegistry propertyChangeRegistry = new PropertyChangeRegistry();
     private boolean exist = false;
@@ -149,6 +153,26 @@ public class Households extends BaseObservable implements Observable {
         setRa07(MainApp.selectedVillage);
         setRa04(MainApp.leaderCode);
         setRa05(MainApp.leaderCode);
+    }
+
+    public void populateMeta(int position) {
+
+        setSysDate(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.ENGLISH).format(new Date().getTime()));
+        setUserName(MainApp.user.getUserName());
+        setDeviceId(MainApp.deviceid);
+        //   setUuid(MainApp.form.getUid());  // not applicable in Form table
+        setAppver(MainApp.appInfo.getAppVersion());
+        setProjectName(PROJECT_NAME);
+        setHdssId(MainApp.followUpsScheHHList.get(position).getHdssid());
+        setUcCode(MainApp.followUpsScheHHList.get(position).getUcCode());
+        setVillageCode(MainApp.followUpsScheHHList.get(position).getVillageCode());
+        setHhNo(MainApp.followUpsScheHHList.get(position).getHhNo());
+        setRound(MainApp.followUpsScheHHList.get(position).getFRound());
+        setMuid(MainApp.followUpsScheHHList.get(position).getMuid());
+        setRa01(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.ENGLISH).format(new Date().getTime()));
+
+
+
     }
 
     public Households(Households households) {
@@ -330,6 +354,14 @@ public class Households extends BaseObservable implements Observable {
 
     public void setSA(String sA) {
         this.sA = sA;
+    }
+
+    public String getMuid() {
+        return muid;
+    }
+
+    public void setMuid(String muid) {
+        this.muid = muid;
     }
 
     public void resetHousehold() {
