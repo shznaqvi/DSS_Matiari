@@ -54,10 +54,10 @@ interface HouseholdsDao {
 
     @Query("SELECT * FROM " + HouseholdTable.TABLE_NAME + " WHERE " + HouseholdTable.COLUMN_HDSSID + " LIKE :hdssid OR "
             + HouseholdTable.COLUMN_HDSSID + " LIKE :newHDSSID ORDER BY " + HouseholdTable.COLUMN_ID + " ASC")
-    fun getHouseholdByHDSSID_internal(hdssid: String, newHDSSID: String): Households?
+    fun getHouseholdByHDSSIDASC_internal(hdssid: String, newHDSSID: String): Households?
 
     @Throws(JSONException ::class)
-    fun getHouseholdByHDSSID(hdssid : String) : Households? {
+    fun getHouseholdByHDSSIDASC(hdssid : String) : Households? {
         // Household number in DSSID was changed to 4-digits to capture more than 999 households
         val hdssidSplit = hdssid.split("-").toTypedArray()
         val newHDSSID = hdssidSplit[0] + "-" + hdssidSplit[1] + "-" + String.format(
@@ -65,7 +65,23 @@ interface HouseholdsDao {
             hdssidSplit[2].toInt()
         )
 
-        return getHouseholdByHDSSID_internal(hdssid, newHDSSID)
+        return getHouseholdByHDSSIDASC_internal(hdssid, newHDSSID)
+    }
+
+    @Query("SELECT * FROM " + HouseholdTable.TABLE_NAME + " WHERE " + HouseholdTable.COLUMN_HDSSID + " LIKE :hdssid OR "
+            + HouseholdTable.COLUMN_HDSSID + " LIKE :newHDSSID ORDER BY " + HouseholdTable.COLUMN_ID + " DESC")
+    fun getHouseholdByHDSSIDDSC_internal(hdssid: String, newHDSSID: String): Households?
+
+    @Throws(JSONException ::class)
+    fun getHouseholdByHDSSIDDSC(hdssid : String) : Households? {
+        // Household number in DSSID was changed to 4-digits to capture more than 999 households
+        val hdssidSplit = hdssid.split("-").toTypedArray()
+        val newHDSSID = hdssidSplit[0] + "-" + hdssidSplit[1] + "-" + String.format(
+            "%04d",
+            hdssidSplit[2].toInt()
+        )
+
+        return getHouseholdByHDSSIDDSC_internal(hdssid, newHDSSID)
     }
 
 

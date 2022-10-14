@@ -34,7 +34,6 @@ import edu.aku.hassannaqvi.dss_matiari.database.DatabaseHelper;
 import edu.aku.hassannaqvi.dss_matiari.databinding.ActivityHouseholdBinding;
 import edu.aku.hassannaqvi.dss_matiari.models.Households;
 import edu.aku.hassannaqvi.dss_matiari.room.DssRoomDatabase;
-import edu.aku.hassannaqvi.dss_matiari.ui.MainActivity;
 import edu.aku.hassannaqvi.dss_matiari.ui.sections.SectionAActivity;
 
 
@@ -180,7 +179,7 @@ public class HouseholdActivity extends AppCompatActivity {
                 MainApp.households = new Households();
                 try {
                     //MainApp.households = db.getHouseholdByHDSSID(hdssid);
-                    MainApp.households = DssRoomDatabase.getDbInstance().householdsDao().getHouseholdByHDSSID(hdssid);
+                    MainApp.households = DssRoomDatabase.getDbInstance().householdsDao().getHouseholdByHDSSIDASC(hdssid);
                 } catch (JSONException e) {
                     e.printStackTrace();
                     Toast.makeText(this, "JSONException: " + e.getMessage(), Toast.LENGTH_SHORT).show();

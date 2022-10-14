@@ -27,7 +27,6 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import org.json.JSONException;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 import edu.aku.hassannaqvi.dss_matiari.R;
 import edu.aku.hassannaqvi.dss_matiari.adapters.FPHouseholdAdapter;
@@ -35,6 +34,7 @@ import edu.aku.hassannaqvi.dss_matiari.core.MainApp;
 import edu.aku.hassannaqvi.dss_matiari.database.DatabaseHelper;
 import edu.aku.hassannaqvi.dss_matiari.databinding.ActivityFphouseholdBinding;
 import edu.aku.hassannaqvi.dss_matiari.models.Households;
+import edu.aku.hassannaqvi.dss_matiari.room.DssRoomDatabase;
 import edu.aku.hassannaqvi.dss_matiari.ui.MainActivity;
 import edu.aku.hassannaqvi.dss_matiari.ui.sections.SectionAActivity;
 
@@ -52,29 +52,13 @@ public class FPHouseholdActivity extends AppCompatActivity {
                 public void onActivityResult(ActivityResult result) {
                     if (result.getResultCode() == Activity.RESULT_OK) {
                         // There are no request codes
-                        //Intent data = result.getData();
                         Intent data = result.getData();
-                      /*  int age = Integer.parseInt(femalemembers.getHh05y());
-                        boolean isFemale = femalemembers.getHh03().equals("2");
-                        boolean notMarried = femalemembers.getHh06().equals("2");
-                        if (
-                            // Adolescent: Male + Female - 10 to 19
-                                (age >= 10 && age < 20 && notMarried)
-                                        ||
-                                        // HOUSEHOLD: Married females between 14 to 49
-                                        (age >= 14 && age < 50 && !notMarried && isFemale )
-
-                        ) {*/
-
 
                         hhAdapter.notifyItemChanged(position);
-
-                  //      Toast.makeText(FPHouseholdActivity.this, "Followup updated for " + MainApp.followUpsScheHHList.get(hhAd).getHdssid(), Toast.LENGTH_SHORT).show();
 
                     }
                     if (result.getResultCode() == Activity.RESULT_CANCELED) {
                         Toast.makeText(FPHouseholdActivity.this, "No household added.", Toast.LENGTH_SHORT).show();
-                        //   hhAdapter.notifyDataSetChanged();
 
                     }
 
@@ -84,23 +68,23 @@ public class FPHouseholdActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //setContentView(R.layout.activity_household);
+
         bi = DataBindingUtil.setContentView(this, R.layout.activity_fphousehold);
         bi.setCallback(this);
 
         db = MainApp.appInfo.dbHelper;
         MainApp.followUpsScheHHList = new ArrayList<>();
-        //MainApp.mwraStatus = new HashMap<>();
+
 
         Log.d(TAG, "onCreate: followUpsScheHHList " + MainApp.followUpsScheHHList.size());
 
 
-        MainApp.followUpsScheHHList = db.getFollowUpsScheHHBYVillage(selectedUC, selectedVillage, "");
+        //MainApp.followUpsScheHHList = db.getFollowUpsScheHHBYVillage(selectedUC, selectedVillage, "");
+        MainApp.followUpsScheHHList = DssRoomDatabase.getDbInstance().FollowUpsScheDao().getFollowUpsScheHHBYVillage(selectedUC, selectedVillage, "");
 
         bi.villageCode.setText("List of " + selectedUC + "-" + selectedVillage);
 
 
-        //hhAdapter = new FPHouseholdAdapter(this, MainApp.followUpsScheHHList, );
         hhAdapter = new FPHouseholdAdapter(this, MainApp.followUpsScheHHList);
         bi.rvHouseholds.setAdapter(hhAdapter);
         bi.rvHouseholds.setLayoutManager(new LinearLayoutManager(this));
@@ -113,12 +97,7 @@ public class FPHouseholdActivity extends AppCompatActivity {
 
                 //TODO: Add new Household
                 addHousehold();
-              /*  if (!MainApp.households.getiStatus().equals("1")) {
-                    //     Toast.makeText(HouseholdActivity.this, "Opening Household Households", Toast.LENGTH_LONG).show();
 
-                } else {
-                    Toast.makeText(FPHouseholdActivity.this, "This households has been locked. You cannot add new household to locked forms", Toast.LENGTH_LONG).show();
-                }*/
             }
         });
 
@@ -128,8 +107,9 @@ public class FPHouseholdActivity extends AppCompatActivity {
 
     public void filterForms(View view) {
         Toast.makeText(this, "updated", Toast.LENGTH_SHORT).show();
-        //fc = db.getUnclosedForms(dtFilter.getText().toString());
-        MainApp.followUpsScheHHList = db.getFollowUpsScheHHBYVillage(selectedUC, selectedVillage, bi.hhead.getText().toString());
+
+        //MainApp.followUpsScheHHList = db.getFollowUpsScheHHBYVillage(selectedUC, selectedVillage, bi.hhead.getText().toString());
+        MainApp.followUpsScheHHList = DssRoomDatabase.getDbInstance().FollowUpsScheDao().getFollowUpsScheHHBYVillage(selectedUC, selectedVillage, bi.hhead.getText().toString());
         hhAdapter = new FPHouseholdAdapter(this, MainApp.followUpsScheHHList);
         hhAdapter.notifyDataSetChanged();
         bi.rvHouseholds.setAdapter(hhAdapter);
@@ -141,49 +121,24 @@ public class FPHouseholdActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         Toast.makeText(this, "Activity Resumed!", Toast.LENGTH_SHORT).show();
-        //hhAdapter.notifyDataSetChanged();
-        // MainApp.householdCount = Math.ROUND(MainApp.followUpsScheHHList.size());
-
-        //  MainApp.households = new Households();
-
-      /*  if (MainApp.followUpsScheHHList.size() > 0) {
-            //MainApp.fm.get(Integer.parseInt(String.valueOf(MainApp.selectedHousehold))).setStatus("1");
-            hhAdapter.notifyItemChanged(Integer.parseInt(String.valueOf(selectedHousehold)));
-        }
-
-        checkCompleteFm();
-*/
-        // bi.fab.setClickable(!MainApp.households.getiStatus().equals("1"));
-      /* bi.completedmember.setText(followUpsScheHHList.size()+ " HOUSEHOLDs added");
-        bi.totalmember.setText(MainApp.householdTotal+ " M completed");*/
-        //MainApp.households.resetHousehold();
-        int newHouseholds = db.getHouseholdCountByVillage(selectedVillage);
-
 
     }
 
     private void checkCompleteFm() {
-        //     if (!MainApp.households.getIStatus().equals("1")) {
         int compCount = MainApp.followUpsScheHHList.size();
 
         MainApp.householdCountComplete = compCount;
         bi.btnContinue.setVisibility(MainApp.householdCount > 0 ? View.VISIBLE : View.GONE);
-        //   bi.btnContinue.setVisibility(compCount == householdCount && !households.getiStatus().equals("1")? View.VISIBLE : View.GONE);
-     /*   bi.btnContinue.setVisibility(compCount >= householdCount ? View.VISIBLE : View.GONE);
-        bi.btnContinue.setEnabled(bi.btnContinue.getVisibility()==View.VISIBLE);*/
 
-        //  } else {
-        //       Toast.makeText(this, "Households has been completed or locked", Toast.LENGTH_LONG).show();
-        //   }
     }
 
     public void addHousehold() {
         MainApp.households = new Households();
-        // Copy common variables from existing Households to new Households
-        // MainApp.households = new Households(MainApp.households);
 
-        int maxHH = db.getMaxHouseholdNo(selectedUC, selectedVillage);      // From Households table on device
-        int maxHHNo = db.getMaxHHNoByVillage(selectedUC, selectedVillage);  // From Max Household numbers fetched from server
+        //int maxHH = db.getMaxHouseholdNo(selectedUC, selectedVillage);      // From Households table on device
+        //int maxHHNo = db.getMaxHHNoByVillage(selectedUC, selectedVillage);  // From Max Household numbers fetched from server
+        int maxHH = DssRoomDatabase.getDbInstance().householdsDao().getMaxHouseholdNo(selectedUC, selectedVillage);     // From Households table on device
+        int maxHHNo = DssRoomDatabase.getDbInstance().householdsDao().getMaxHHNoByVillage(selectedUC, selectedVillage);     // From Max Household numbers fetched from server
         int maxHHFinal = Math.max(maxHH, maxHHNo);
         MainApp.households.setUcCode(selectedUC);
         MainApp.households.setVillageCode(selectedVillage);
@@ -205,10 +160,7 @@ public class FPHouseholdActivity extends AppCompatActivity {
     public void BtnEnd(View view) {
 
         finish();
-        //startActivity(new Intent(this, MainActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK));
-        /*   } else {
-               Toast.makeText(this, "Failed to Update Database!", Toast.LENGTH_SHORT).show()
-           }*/
+
     }
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -216,7 +168,6 @@ public class FPHouseholdActivity extends AppCompatActivity {
         // check if the request code is same as what is passed  here it is 2
         if (requestCode == 2) {
             if (resultCode == Activity.RESULT_OK) {
-                //   followUpsScheHHList.get(selectedHousehold).setExpanded(false);
                 checkCompleteFm();
                 hhAdapter.notifyItemChanged(selectedFpHousehold);
             }
@@ -233,7 +184,8 @@ public class FPHouseholdActivity extends AppCompatActivity {
             case 1:
                 MainApp.households = new Households();
                 try {
-                    MainApp.households = db.getHouseholdByHDSSID(hdssid);
+                    //MainApp.households = db.getHouseholdByHDSSID(hdssid);
+                    MainApp.households = DssRoomDatabase.getDbInstance().householdsDao().getHouseholdByHDSSIDASC(hdssid);
                 } catch (JSONException e) {
                     e.printStackTrace();
                     Toast.makeText(this, "JSONException: " + e.getMessage(), Toast.LENGTH_SHORT).show();
@@ -241,15 +193,7 @@ public class FPHouseholdActivity extends AppCompatActivity {
                 }
                 return MainApp.households != null;
 
-            //TODO: Antro & Samples will be multiple. Different logic will be required
-        /*    case 2:
-                anthro = new Anthro();
-                anthro = db.getAnthroByClusterHHNo(bi.h103.getText().toString(), bi.h103.getText().toString());
-                return anthro != null;
-            case 2:
-                samples = new Samples();
-                anthro = db.getSamplesByClusterHHNo(bi.h103.getText().toString(), bi.h103.getText().toString());
-                return anthro != null;*/
+
             default:
                 return false;
 
@@ -260,7 +204,7 @@ public class FPHouseholdActivity extends AppCompatActivity {
     public void onBackPressed() {
         super.onBackPressed();
         finish();
-        //   Toast.makeText(getApplicationContext(), "Back Press Not Allowed", Toast.LENGTH_LONG).show();
+
     }
 
 }
