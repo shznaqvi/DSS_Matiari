@@ -35,7 +35,8 @@ interface HouseholdsDao {
     fun getMaxStructure(uc : String, vCode : String) : Int
 
     @Throws(JSONException::class)
-    @Query("SELECT * FROM " + HouseholdTable.TABLE_NAME + " WHERE " + HouseholdTable.COLUMN_UC_CODE + " LIKE :uc AND " + HouseholdTable.COLUMN_VILLAGE_CODE + " LIKE :village ORDER BY " + HouseholdTable.COLUMN_ID + " ASC")
+    @Query("SELECT * FROM " + HouseholdTable.TABLE_NAME + " WHERE " + HouseholdTable.COLUMN_UC_CODE + " LIKE :uc AND "
+            + HouseholdTable.COLUMN_VILLAGE_CODE + " LIKE :village ORDER BY " + HouseholdTable.COLUMN_ID + " ASC")
     fun getHouseholdBYVillage(uc: String, village: String): List<Households>
 
     @Query("SELECT " + "MAX(" + HouseholdTable.COLUMN_HOUSEHOLD_NO + ") AS " + HouseholdTable.COLUMN_HOUSEHOLD_NO +
