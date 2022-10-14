@@ -54,6 +54,7 @@ public class FPHouseholds extends BaseObservable implements Observable {
     private String synced = StringUtils.EMPTY;
     private String syncDate = StringUtils.EMPTY;
     private String structureNo = StringUtils.EMPTY;
+
     private String ra01 = "";  // Date of Visit
     private String ra01v2 = StringUtils.EMPTY;
     private String ra01v3 = StringUtils.EMPTY;

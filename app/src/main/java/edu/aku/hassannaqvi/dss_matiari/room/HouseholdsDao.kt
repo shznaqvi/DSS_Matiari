@@ -74,7 +74,7 @@ interface HouseholdsDao {
     fun getHouseholdByHDSSIDDSC_internal(hdssid: String, newHDSSID: String): Households?
 
     @Throws(JSONException ::class)
-    fun getHouseholdByHDSSIDDSC(hdssid : String) : Households? {
+    fun getHouseholdByHDSSIDDSC(hdssid : String, position: Int = 0) : Households? {
         // Household number in DSSID was changed to 4-digits to capture more than 999 households
         val hdssidSplit = hdssid.split("-").toTypedArray()
         val newHDSSID = hdssidSplit[0] + "-" + hdssidSplit[1] + "-" + String.format(
@@ -82,9 +82,20 @@ interface HouseholdsDao {
             hdssidSplit[2].toInt()
         )
 
-        return getHouseholdByHDSSIDDSC_internal(hdssid, newHDSSID)
+
+        val household = getHouseholdByHDSSIDDSC_internal(hdssid, newHDSSID)
+        if (household == null) {
+            val tempHousehold = Households()
+            tempHousehold.populateMeta(position)
+            //tempHousehold.hdssId = hdssid
+            val id = addHousehold(tempHousehold)
+            tempHousehold.id = id
+            return tempHousehold
+        }
+        return household
     }
 
-
+    @Query("SELECT * FROM " + HouseholdTable.TABLE_NAME + " ORDER BY " + HouseholdTable.COLUMN_ID + " DESC")
+    fun getAllHouseholds(): List<Households>
 
 }

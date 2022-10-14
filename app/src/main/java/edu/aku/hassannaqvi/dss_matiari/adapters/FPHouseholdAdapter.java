@@ -84,14 +84,14 @@ public class FPHouseholdAdapter extends RecyclerView.Adapter<FPHouseholdAdapter.
         try {
             // These quick fixes are making this code a mess.
             //this.fpHouseholds = db.getHouseholdByHDSSID(followUpsSche.getHdssid());
-            this.fpHouseholds = DssRoomDatabase.getDbInstance().householdsDao().getHouseholdByHDSSIDDSC(followUpsSche.getHdssid());
+            this.fpHouseholds = DssRoomDatabase.getDbInstance().householdsDao().getHouseholdByHDSSIDDSC(followUpsSche.getHdssid(), viewHolder.getAdapterPosition());
 
         } catch (JSONException e) {
             e.printStackTrace();
         }
 
         //int tempMWRA = db.getMaxMWRANoBYHHFromFolloupsSche(followUpsSche.getUcCode(), followUpsSche.getVillageCode(), followUpsSche.getHhNo());
-        int tempMWRA = DssRoomDatabase.getDbInstance().mwraDao().getMaxMWRSNoBYHH(followUpsSche.getUcCode(), followUpsSche.getVillageCode(), followUpsSche.getHhNo());
+        int tempMWRA = DssRoomDatabase.getDbInstance().FollowUpsScheDao().getMaxMWRANoBYHHFromFolloupsSche(followUpsSche.getUcCode(), followUpsSche.getVillageCode(), followUpsSche.getHhNo());
         totalMwraMap.put(pos, tempMWRA);
 
 

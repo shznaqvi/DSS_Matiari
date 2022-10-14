@@ -20,6 +20,7 @@ import org.json.JSONObject;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
+import java.util.Objects;
 
 import edu.aku.hassannaqvi.dss_matiari.BR;
 import edu.aku.hassannaqvi.dss_matiari.contracts.TableContracts.HouseholdTable;
@@ -78,7 +79,8 @@ public class Households extends BaseObservable implements Observable {
     @ColumnInfo(name = HouseholdTable.COLUMN_PROJECT_NAME)
     private String projectName = MainApp.PROJECT_NAME;
 
-    @PrimaryKey(autoGenerate = true) @NonNull
+    @PrimaryKey(autoGenerate = true)
+    @NonNull
     @ColumnInfo(name = HouseholdTable.COLUMN_ID)
     long id = 0;
 
@@ -138,7 +140,6 @@ public class Households extends BaseObservable implements Observable {
 
     public Households() {
 
-
     }
 
     public void populateMeta() {
@@ -167,16 +168,16 @@ public class Households extends BaseObservable implements Observable {
         setUcCode(MainApp.followUpsScheHHList.get(position).getUcCode());
         setVillageCode(MainApp.followUpsScheHHList.get(position).getVillageCode());
         setHhNo(MainApp.followUpsScheHHList.get(position).getHhNo());
+        setRa09(MainApp.followUpsScheHHList.get(position).getHhNo());
         setRound(MainApp.followUpsScheHHList.get(position).getFRound());
         setMuid(MainApp.followUpsScheHHList.get(position).getMuid());
         setRa01(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.ENGLISH).format(new Date().getTime()));
 
 
-
     }
 
-    public Households(Households households) {
 
+    public Households(Households households) {
 
         setUserName(households.getUserName());
         setDeviceId(households.getDeviceId());
@@ -187,6 +188,7 @@ public class Households extends BaseObservable implements Observable {
         setRa10(households.getRa10());
         setRound(households.getRound());
     }
+
 
     public String getProjectName() {
         return projectName;
@@ -262,6 +264,7 @@ public class Households extends BaseObservable implements Observable {
 
     public void setHhNo(String hhNo) {
         // Household number in DSSID was changed to 4-digits to capture more than 999 households
+        if(this.hhNo.equals("")) return;
         String[] hdssidSplit = hdssId.split("-");
         String newhhno = String.format("%04d", Integer.parseInt(hhNo));
         this.hhNo = newhhno;
@@ -489,6 +492,7 @@ public class Households extends BaseObservable implements Observable {
     }
 
     public void setRa06(String ra06) {
+        if(this.ra06.equals("")) return;
         this.ra06 = String.format("%02d", Integer.parseInt(ra06));
         setUcCode(this.ra06);
         notifyChange(BR.ra06);
@@ -511,6 +515,9 @@ public class Households extends BaseObservable implements Observable {
     }
 
     public void setRa09(String ra09) {
+        if (ra09.equals(""))
+            return;
+
         this.ra09 = String.format("%04d", Integer.parseInt(ra09));
         setHhNo(this.ra09);
         notifyChange(BR.ra09);
@@ -813,6 +820,7 @@ public class Households extends BaseObservable implements Observable {
 
     public void setHdssId(String hdssId) {
         // Household number in DSSID was changed to 4-digits to capture more than 999 households
+        if(this.hdssId.equals("")) return;
         String[] hdssidSplit = hdssId.split("-");
         String newHDSSID = hdssidSplit[0] + "-" + hdssidSplit[1] + "-" + String.format("%04d", Integer.parseInt(hdssidSplit[2]));
 
