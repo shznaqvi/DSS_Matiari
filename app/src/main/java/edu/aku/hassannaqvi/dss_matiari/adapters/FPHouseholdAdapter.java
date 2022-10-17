@@ -166,6 +166,8 @@ public class FPHouseholdAdapter extends RecyclerView.Adapter<FPHouseholdAdapter.
             hhHead.setVisibility(View.GONE);
             prvStatus.setText("NO WRA");
             prvStatus.setVisibility(View.VISIBLE);
+            hhHead.setText(followUpsSche.getRa14());
+            hhHead.setVisibility(View.VISIBLE);
         }else{
             if(followUpsSche.getiStatus().equals("1")){
                 prvStatus.setVisibility(View.GONE);
