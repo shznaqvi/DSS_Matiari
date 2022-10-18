@@ -89,7 +89,7 @@ public class SectionAActivity extends AppCompatActivity {
             }
         });
 
-        if(fpHouseholds != null) {
+        /*if(fpHouseholds != null) {
             // FP Households Data
             fpHouseholds.setHhNo(households.getHhNo());
             fpHouseholds.setUcCode(households.getUcCode());
@@ -101,7 +101,7 @@ public class SectionAActivity extends AppCompatActivity {
             fpHouseholds.setSysDate(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.ENGLISH).format(new Date().getTime()));
             fpHouseholds.setHdssId(households.getUcCode() + "-" + households.getVillageCode() + "-" + households.getHhNo());
             fpHouseholds.setStructureNo(households.getRa10());
-        }
+        }*/
 
     }
 
@@ -162,9 +162,9 @@ public class SectionAActivity extends AppCompatActivity {
             households.setUid(households.getDeviceId() + households.getId());
             DssRoomDatabase.getDbInstance().householdsDao().updateHousehold(households);
 //            db.updatesHouseholdColumn(TableContracts.HouseholdTable.COLUMN_UID, households.getUid());
-            if (fpHouseholds != null && fpHouseholds.getUid().equals("")) {
+            /*if (fpHouseholds != null && fpHouseholds.getUid().equals("")) {
                 insertFpHousehold();
-            }
+            }*/
             return true;
         } else {
             Toast.makeText(this, "Updating Database... ERROR!", Toast.LENGTH_SHORT).show();

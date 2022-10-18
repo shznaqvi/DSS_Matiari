@@ -11,6 +11,7 @@ import androidx.databinding.Observable;
 import androidx.databinding.PropertyChangeRegistry;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
+import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
 import org.apache.commons.lang3.StringUtils;
@@ -29,50 +30,92 @@ import edu.aku.hassannaqvi.dss_matiari.core.MainApp;
 @Entity(tableName = HouseholdTable.TABLE_NAME)
 public class Households extends BaseObservable implements Observable {
 
+    @Ignore
     private String round = "";
+    @Ignore
     private String ra01 = "";
+    @Ignore
     private String ra01v2 = "";
+    @Ignore
     private String ra01v3 = "";
+    @Ignore
     private String ra02 = "";
+    @Ignore
     private String ra04 = "";
+    @Ignore
     private String ra03 = "";
+    @Ignore
     private String ra05 = "";
+    @Ignore
     private String ra07 = "";
+    @Ignore
     private String ra06 = "";
+    @Ignore
     private String ra08 = "";
+    @Ignore
     private String ra09 = "";
+    @Ignore
     private String ra10 = "";
+    @Ignore
     private String ra11 = "";
+    @Ignore
     private String ra11x = "";
+    @Ignore
     private String ra12 = "";
+    @Ignore
     private String ra12x = "";
+    @Ignore
     private String ra13 = "";
+    @Ignore
     private String ra13x = "";
+    @Ignore
     private String ra14 = "";
+    @Ignore
     private String ra15 = "";
+    @Ignore
     private String ra16 = "";
+    @Ignore
     private String ra17_a1 = "";
+    @Ignore
     private String ra17_b1 = "";
+    @Ignore
     private String ra17_c1 = "";
+    @Ignore
     private String ra17_d1 = "";
+    @Ignore
     private String ra17_a2 = "";
+    @Ignore
     private String ra17_b2 = "";
+    @Ignore
     private String ra17_c2 = "";
+    @Ignore
     private String ra17_d2 = "";
-
+    @Ignore
     private String ra17_a3 = "";
+    @Ignore
     private String ra17_b3 = "";
+    @Ignore
     private String ra17_c3 = "";
+    @Ignore
     private String ra17_d3 = "";
+    @Ignore
     private String ra18 = "";
+    @Ignore
     private String ra19 = "";
+    @Ignore
     private String ra20 = "";
+    @Ignore
     private String ra21 = "";
+    @Ignore
     private String ra22 = "";
+
+
     @ColumnInfo(name = HouseholdTable.COLUMN_MUID)
     private String muid = StringUtils.EMPTY;
 
+    @Ignore
     private transient PropertyChangeRegistry propertyChangeRegistry = new PropertyChangeRegistry();
+    @Ignore
     private boolean exist = false;
 
     // APP VARIABLES
@@ -125,6 +168,7 @@ public class Households extends BaseObservable implements Observable {
     @ColumnInfo(name = HouseholdTable.COLUMN_ISTATUS)
     String iStatus = StringUtils.EMPTY;
 
+    @Ignore
     String iStatus96x = StringUtils.EMPTY;
 
     @ColumnInfo(name = HouseholdTable.COLUMN_SYNCED)
@@ -164,6 +208,7 @@ public class Households extends BaseObservable implements Observable {
         //   setUuid(MainApp.form.getUid());  // not applicable in Form table
         setAppver(MainApp.appInfo.getAppVersion());
         setProjectName(PROJECT_NAME);
+        setRa06(MainApp.followUpsScheHHList.get(position).getUcCode());
         setHdssId(MainApp.followUpsScheHHList.get(position).getHdssid());
         setUcCode(MainApp.followUpsScheHHList.get(position).getUcCode());
         setVillageCode(MainApp.followUpsScheHHList.get(position).getVillageCode());
@@ -264,7 +309,7 @@ public class Households extends BaseObservable implements Observable {
 
     public void setHhNo(String hhNo) {
         // Household number in DSSID was changed to 4-digits to capture more than 999 households
-        if(this.hhNo.equals("")) return;
+        //if(this.hhNo.equals("")) return;
         String[] hdssidSplit = hdssId.split("-");
         String newhhno = String.format("%04d", Integer.parseInt(hhNo));
         this.hhNo = newhhno;
@@ -492,8 +537,10 @@ public class Households extends BaseObservable implements Observable {
     }
 
     public void setRa06(String ra06) {
-        if(this.ra06.equals("")) return;
-        this.ra06 = String.format("%02d", Integer.parseInt(ra06));
+        //if(this.ra06.equals("")) return;
+        if(!this.ra06.equals("")) {
+            this.ra06 = String.format("%02d", Integer.parseInt(ra06));
+        }
         setUcCode(this.ra06);
         notifyChange(BR.ra06);
     }
@@ -515,9 +562,6 @@ public class Households extends BaseObservable implements Observable {
     }
 
     public void setRa09(String ra09) {
-        if (ra09.equals(""))
-            return;
-
         this.ra09 = String.format("%04d", Integer.parseInt(ra09));
         setHhNo(this.ra09);
         notifyChange(BR.ra09);
@@ -820,7 +864,6 @@ public class Households extends BaseObservable implements Observable {
 
     public void setHdssId(String hdssId) {
         // Household number in DSSID was changed to 4-digits to capture more than 999 households
-        if(this.hdssId.equals("")) return;
         String[] hdssidSplit = hdssId.split("-");
         String newHDSSID = hdssidSplit[0] + "-" + hdssidSplit[1] + "-" + String.format("%04d", Integer.parseInt(hdssidSplit[2]));
 

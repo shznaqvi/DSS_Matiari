@@ -5,9 +5,7 @@
 package edu.aku.hassannaqvi.dss_matiari.room
 
 import android.content.Context
-import androidx.room.Database
-import androidx.room.Room
-import androidx.room.RoomDatabase
+import androidx.room.*
 import androidx.room.migration.Migration
 import androidx.sqlite.db.SupportSQLiteDatabase
 import edu.aku.hassannaqvi.dss_matiari.core.MainApp
@@ -26,11 +24,10 @@ import net.sqlcipher.database.SupportFactory
         FollowUpsSche ::class,
         MaxHhno ::class,
     Followups ::class
-
-
-
     ]
 )
+
+
 abstract class DssRoomDatabase : RoomDatabase() {
 
     abstract fun householdsDao(): HouseholdsDao

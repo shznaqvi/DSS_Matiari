@@ -12,6 +12,7 @@ import androidx.room.Update
 import edu.aku.hassannaqvi.dss_matiari.contracts.TableContracts
 import edu.aku.hassannaqvi.dss_matiari.contracts.TableContracts.HouseholdTable
 import edu.aku.hassannaqvi.dss_matiari.contracts.TableContracts.MWRATable
+import edu.aku.hassannaqvi.dss_matiari.core.MainApp
 import edu.aku.hassannaqvi.dss_matiari.core.MainApp.mwraCount
 import edu.aku.hassannaqvi.dss_matiari.models.Households
 import org.json.JSONException
@@ -63,8 +64,8 @@ interface HouseholdsDao {
         val hdssidSplit = hdssid.split("-").toTypedArray()
         val newHDSSID = hdssidSplit[0] + "-" + hdssidSplit[1] + "-" + String.format(
             "%04d",
-            hdssidSplit[2].toInt()
-        )
+            hdssidSplit[2].toInt())
+
 
         return getHouseholdByHDSSIDASC_internal(hdssid, newHDSSID)
     }
@@ -83,13 +84,16 @@ interface HouseholdsDao {
         )
 
 
-        val household = getHouseholdByHDSSIDDSC_internal(hdssid, newHDSSID)
+        //return getHouseholdByHDSSIDDSC_internal(hdssid, newHDSSID)
+       val household = getHouseholdByHDSSIDDSC_internal(hdssid, newHDSSID)
         if (household == null) {
             val tempHousehold = Households()
             tempHousehold.populateMeta(position)
             //tempHousehold.hdssId = hdssid
             val id = addHousehold(tempHousehold)
             tempHousehold.id = id
+            tempHousehold.uid = MainApp.deviceid + tempHousehold.id
+
             return tempHousehold
         }
         return household
