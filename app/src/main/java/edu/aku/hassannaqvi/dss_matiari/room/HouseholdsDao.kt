@@ -37,8 +37,9 @@ interface HouseholdsDao {
 
     @Throws(JSONException::class)
     @Query("SELECT * FROM " + HouseholdTable.TABLE_NAME + " WHERE " + HouseholdTable.COLUMN_UC_CODE + " LIKE :uc AND "
-            + HouseholdTable.COLUMN_VILLAGE_CODE + " LIKE :village ORDER BY " + HouseholdTable.COLUMN_ID + " ASC")
-    fun getHouseholdBYVillage(uc: String, village: String): List<Households>
+            + HouseholdTable.COLUMN_VILLAGE_CODE + " LIKE :village AND " + HouseholdTable.COLUMN_REGROUND + " LIKE :regRound ORDER BY "
+            + HouseholdTable.COLUMN_ID + " ASC")
+    fun getHouseholdBYVillage(uc: String, village: String, regRound : String): List<Households>
 
     @Query("SELECT " + "MAX(" + HouseholdTable.COLUMN_HOUSEHOLD_NO + ") AS " + HouseholdTable.COLUMN_HOUSEHOLD_NO +
             " FROM " + HouseholdTable.TABLE_NAME +
@@ -83,7 +84,6 @@ interface HouseholdsDao {
             hdssidSplit[2].toInt()
         )
 
-
         //return getHouseholdByHDSSIDDSC_internal(hdssid, newHDSSID)
        val household = getHouseholdByHDSSIDDSC_internal(hdssid, newHDSSID)
         if (household == null) {
@@ -93,6 +93,7 @@ interface HouseholdsDao {
             val id = addHousehold(tempHousehold)
             tempHousehold.id = id
             tempHousehold.uid = MainApp.deviceid + tempHousehold.id
+            updateHousehold(tempHousehold)
 
             return tempHousehold
         }

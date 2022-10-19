@@ -80,7 +80,7 @@ public class HouseholdActivity extends AppCompatActivity {
         try {
 
 //            MainApp.householdList = db.getHouseholdBYVillage(selectedUC, MainApp.selectedVillage);
-            MainApp.householdList = DssRoomDatabase.getDbInstance().householdsDao().getHouseholdBYVillage(selectedUC, selectedVillage);
+            MainApp.householdList = DssRoomDatabase.getDbInstance().householdsDao().getHouseholdBYVillage(selectedUC, selectedVillage, "1");
         } catch (JSONException e) {
             e.printStackTrace();
             Toast.makeText(this, "JSONException: " + e.getMessage(), Toast.LENGTH_SHORT).show();

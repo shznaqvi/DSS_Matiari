@@ -20,6 +20,8 @@ public class TableContracts {
         public static final String COLUMN_VISIT_NO = "visitNo";
         public static final String COLUMN_SA = "s1";
         public static final String COLUMN_MUID = "muid";
+        public static final String COLUMN_REGROUND = "regRound";
+        public static final String COLUMN_FROUND = "fRound";
 
         public static final String COLUMN_DEVICEID = "deviceid";
         public static final String COLUMN_DEVICETAGID = "devicetagid";

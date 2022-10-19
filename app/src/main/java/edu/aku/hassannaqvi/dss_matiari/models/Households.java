@@ -109,7 +109,6 @@ public class Households extends BaseObservable implements Observable {
     @Ignore
     private String ra22 = "";
 
-
     @ColumnInfo(name = HouseholdTable.COLUMN_MUID)
     private String muid = StringUtils.EMPTY;
 
@@ -117,6 +116,12 @@ public class Households extends BaseObservable implements Observable {
     private transient PropertyChangeRegistry propertyChangeRegistry = new PropertyChangeRegistry();
     @Ignore
     private boolean exist = false;
+
+    @ColumnInfo(name = HouseholdTable.COLUMN_REGROUND)
+    private String regRound = StringUtils.EMPTY;
+
+    @ColumnInfo(name = HouseholdTable.COLUMN_FROUND)
+    private String fRound = StringUtils.EMPTY;
 
     // APP VARIABLES
     @ColumnInfo(name = HouseholdTable.COLUMN_PROJECT_NAME)
@@ -198,6 +203,7 @@ public class Households extends BaseObservable implements Observable {
         setRa07(MainApp.selectedVillage);
         setRa04(MainApp.leaderCode);
         setRa05(MainApp.leaderCode);
+        setRegRound("1");
     }
 
     public void populateMeta(int position) {
@@ -217,6 +223,8 @@ public class Households extends BaseObservable implements Observable {
         setRound(MainApp.followUpsScheHHList.get(position).getFRound());
         setMuid(MainApp.followUpsScheHHList.get(position).getMuid());
         setRa01(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.ENGLISH).format(new Date().getTime()));
+        setFRound("1");
+        setRegRound("");
 
 
     }
@@ -232,6 +240,8 @@ public class Households extends BaseObservable implements Observable {
         setRa08(households.getRa08());
         setRa10(households.getRa10());
         setRound(households.getRound());
+        setRegRound("1");
+
     }
 
 
@@ -284,7 +294,21 @@ public class Households extends BaseObservable implements Observable {
         this.sysDate = sysDate;
     }
 
+    public String getRegRound() {
+        return regRound;
+    }
 
+    public void setRegRound(String regRound) {
+        this.regRound = regRound;
+    }
+
+    public String getFRound() {
+        return fRound;
+    }
+
+    public void setFRound(String fRound) {
+        this.fRound = fRound;
+    }
 
     public String getUcCode() {
         return ucCode;
@@ -820,19 +844,6 @@ public class Households extends BaseObservable implements Observable {
 
     public void setRa20(String ra20) {
         this.ra20 = ra20;
-        // removed skip as per Sir Imran's instructions
-       /* if (!this.ra20.equals("1")) {
-            setRa17_a1("");
-            setRa17_a2("");
-            setRa17_b1("");
-            setRa17_b2("");
-            setRa17_c1("");
-            setRa17_c2("");
-            setRa17_d1("");
-            setRa17_d2("");
-
-        }*/
-
         setRa18(ra20.equals("1") ? this.ra18 : "");
         notifyChange(BR.ra20);
     }
@@ -907,6 +918,8 @@ public class Households extends BaseObservable implements Observable {
         this.hhNo = cursor.getString(cursor.getColumnIndexOrThrow(HouseholdTable.COLUMN_HOUSEHOLD_NO));
         this.structureNo = cursor.getString(cursor.getColumnIndexOrThrow(HouseholdTable.COLUMN_STRUCTURE_NO));
         this.visitNo = cursor.getString(cursor.getColumnIndexOrThrow(HouseholdTable.COLUMN_VISIT_NO));
+        this.regRound = cursor.getString(cursor.getColumnIndexOrThrow(HouseholdTable.COLUMN_REGROUND));
+        this.fRound = cursor.getString(cursor.getColumnIndexOrThrow(HouseholdTable.COLUMN_FROUND));
 
         this.deviceId = cursor.getString(cursor.getColumnIndexOrThrow(HouseholdTable.COLUMN_DEVICEID));
         this.deviceTag = cursor.getString(cursor.getColumnIndexOrThrow(HouseholdTable.COLUMN_DEVICETAGID));
@@ -1040,6 +1053,8 @@ public class Households extends BaseObservable implements Observable {
         json.put(HouseholdTable.COLUMN_DEVICETAGID, this.deviceTag);
         json.put(HouseholdTable.COLUMN_ISTATUS, this.iStatus);
         json.put(HouseholdTable.COLUMN_APPVERSION, this.appver);
+        json.put(HouseholdTable.COLUMN_REGROUND, this.regRound);
+        json.put(HouseholdTable.COLUMN_FROUND, this.fRound);
         //  json.put(HouseholdTable.COLUMN_SYNCED, this.synced);
         //  json.put(HouseholdTable.COLUMN_SYNCED_DATE, this.syncDate);
 
