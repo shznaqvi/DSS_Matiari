@@ -39,14 +39,14 @@ interface HouseholdsDao {
     @Query("SELECT * FROM " + HouseholdTable.TABLE_NAME + " WHERE " + HouseholdTable.COLUMN_UC_CODE + " LIKE :uc AND "
             + HouseholdTable.COLUMN_VILLAGE_CODE + " LIKE :village AND " + HouseholdTable.COLUMN_REGROUND + " LIKE :regRound ORDER BY "
             + HouseholdTable.COLUMN_ID + " ASC")
-    fun getHouseholdBYVillage(uc: String, village: String, regRound : String): List<Households>
+    fun getHouseholdBYVillage(uc: String, village: String, regRound: String): List<Households>
 
     @Query("SELECT " + "MAX(" + HouseholdTable.COLUMN_HOUSEHOLD_NO + ") AS " + HouseholdTable.COLUMN_HOUSEHOLD_NO +
             " FROM " + HouseholdTable.TABLE_NAME +
             " WHERE " + HouseholdTable.COLUMN_UC_CODE + " LIKE :ucCode AND "
-            + HouseholdTable.COLUMN_VILLAGE_CODE + " LIKE :vCode " +
+            + HouseholdTable.COLUMN_VILLAGE_CODE + " LIKE :vCode AND " + HouseholdTable.COLUMN_REGROUND + " LIKE :regRound " +
             "GROUP BY " + HouseholdTable.COLUMN_VILLAGE_CODE)
-    fun getMaxHouseholdNo(ucCode : String, vCode : String) : Int
+    fun getMaxHouseholdNo(ucCode : String, vCode : String, regRound: String) : Int
 
     @Query("SELECT " + TableContracts.MaxHhnoTable.COLUMN_MAX_HHNO + " FROM "
             + TableContracts.MaxHhnoTable.TABLE_NAME +

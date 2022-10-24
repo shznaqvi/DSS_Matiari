@@ -26,6 +26,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import org.json.JSONException;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 import edu.aku.hassannaqvi.dss_matiari.R;
 import edu.aku.hassannaqvi.dss_matiari.adapters.HouseholdAdapter;
@@ -80,7 +81,7 @@ public class HouseholdActivity extends AppCompatActivity {
         try {
 
 //            MainApp.householdList = db.getHouseholdBYVillage(selectedUC, MainApp.selectedVillage);
-            MainApp.householdList = DssRoomDatabase.getDbInstance().householdsDao().getHouseholdBYVillage(selectedUC, selectedVillage, "1");
+            MainApp.householdList = Objects.requireNonNull(DssRoomDatabase.getDbInstance()).householdsDao().getHouseholdBYVillage(selectedUC, selectedVillage, "1");
         } catch (JSONException e) {
             e.printStackTrace();
             Toast.makeText(this, "JSONException: " + e.getMessage(), Toast.LENGTH_SHORT).show();
@@ -133,7 +134,7 @@ public class HouseholdActivity extends AppCompatActivity {
         // Increment Household Number by 1 (New Method)
         //int maxHH = db.getMaxHouseholdNo(selectedUC, selectedVillage);      // From Households table on device
         //int maxHHNo = db.getMaxHHNoByVillage(selectedUC, selectedVillage);  // From Max Household numbers fetched from server
-        int maxHH = DssRoomDatabase.getDbInstance().householdsDao().getMaxHouseholdNo(selectedUC, selectedVillage);
+        int maxHH = DssRoomDatabase.getDbInstance().householdsDao().getMaxHouseholdNo(selectedUC, selectedVillage, "1");
         int maxHHNo = DssRoomDatabase.getDbInstance().householdsDao().getMaxHHNoByVillage(selectedUC, selectedVillage);
         int maxHHFinal = Math.max(maxHH, maxHHNo);
         MainApp.households.setUcCode(selectedUC);
