@@ -37,6 +37,7 @@ public class Households extends BaseObservable implements Observable {
     @Ignore
     private String ra01v2 = "";
     @Ignore
+
     private String ra01v3 = "";
     @Ignore
     private String ra02 = "";
@@ -199,6 +200,7 @@ public class Households extends BaseObservable implements Observable {
         setDeviceId(MainApp.deviceid);
         setAppver(MainApp.appInfo.getAppVersion());
         setAppver(MainApp.appInfo.getAppVersion());
+        setUcCode(MainApp.selectedUC);
         setRa06(MainApp.selectedUC);
         setRa07(MainApp.selectedVillage);
         setRa04(MainApp.leaderCode);

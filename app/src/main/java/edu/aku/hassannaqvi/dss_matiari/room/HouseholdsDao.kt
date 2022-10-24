@@ -37,7 +37,7 @@ interface HouseholdsDao {
 
     @Throws(JSONException::class)
     @Query("SELECT * FROM " + HouseholdTable.TABLE_NAME + " WHERE " + HouseholdTable.COLUMN_UC_CODE + " LIKE :uc AND "
-            + HouseholdTable.COLUMN_VILLAGE_CODE + " LIKE :village AND " + HouseholdTable.COLUMN_REGROUND + " LIKE :regRound ORDER BY "
+            + HouseholdTable.COLUMN_VILLAGE_CODE + " LIKE :village AND " + HouseholdTable.COLUMN_REGROUND + " = :regRound ORDER BY "
             + HouseholdTable.COLUMN_ID + " ASC")
     fun getHouseholdBYVillage(uc: String, village: String, regRound: String): List<Households>
 

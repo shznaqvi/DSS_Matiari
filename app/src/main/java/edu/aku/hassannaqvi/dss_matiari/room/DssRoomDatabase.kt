@@ -10,6 +10,7 @@ import androidx.room.migration.Migration
 import androidx.sqlite.db.SupportSQLiteDatabase
 import edu.aku.hassannaqvi.dss_matiari.core.MainApp
 import edu.aku.hassannaqvi.dss_matiari.models.*
+import edu.aku.hassannaqvi.dss_matiari.models.kt.Households
 import net.sqlcipher.database.SQLiteDatabase
 import net.sqlcipher.database.SupportFactory
 
@@ -17,13 +18,13 @@ import net.sqlcipher.database.SupportFactory
 @Database(
     version = DssRoomDatabase.DATABASE_VERSION,
     entities = [
-        Households::class,
+        edu.aku.hassannaqvi.dss_matiari.models.Households::class,
         Mwra :: class,
         Users::class,
         Villages ::class,
         FollowUpsSche ::class,
         MaxHhno ::class,
-    Followups ::class
+        Followups ::class
     ]
 )
 
