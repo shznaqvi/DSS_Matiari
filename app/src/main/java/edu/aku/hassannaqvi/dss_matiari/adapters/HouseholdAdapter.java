@@ -14,6 +14,12 @@ import android.widget.Toast;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.List;
 
 import edu.aku.hassannaqvi.dss_matiari.R;
@@ -80,8 +86,11 @@ public class HouseholdAdapter extends RecyclerView.Adapter<HouseholdAdapter.View
         DatabaseHelper db = MainApp.appInfo.dbHelper;
         //int totalMWRA = db.getMWRACountBYUUID(households.getUid());
         int totalMWRA = DssRoomDatabase.getDbInstance().mwraDao().getMWRACountBYUUID(households.getUid());
+        JSONObject jsonObject = new JSONObject();
+        //jsonObject.getJSONArray(households.getSA());
+        JsonObject jobj = new Gson().fromJson(households.getSA(), JsonObject.class);
 
-        hhNo.setText(households.getRa07() + "-" + households.getRa09());
+        hhNo.setText(jobj.get("ra07") + "-" + jobj.get("ra09"));
         hhHead.setText(households.getRa14());
         mwraCount.setText(totalMWRA + " Women");
         secStatus.setText(hhStatus);
