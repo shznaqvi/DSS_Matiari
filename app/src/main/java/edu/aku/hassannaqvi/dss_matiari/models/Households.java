@@ -1,6 +1,7 @@
 package edu.aku.hassannaqvi.dss_matiari.models;
 
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.PROJECT_NAME;
+import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.selectedUC;
 
 import android.database.Cursor;
 
@@ -237,6 +238,7 @@ public class Households extends BaseObservable implements Observable {
         setUserName(households.getUserName());
         setDeviceId(households.getDeviceId());
         setAppver(households.getAppver());
+        setUcCode(MainApp.selectedUC);
         setRa06(households.getRa06());
         setRa07(households.getRa07());
         setRa08(households.getRa08());
@@ -564,10 +566,8 @@ public class Households extends BaseObservable implements Observable {
 
     public void setRa06(String ra06) {
         //if(this.ra06.equals("")) return;
-        if(!this.ra06.equals("")) {
-            this.ra06 = String.format("%02d", Integer.parseInt(ra06));
-        }
-        setUcCode(this.ra06);
+        this.ra06 = String.format("%02d", Integer.parseInt(selectedUC));
+        //setUcCode(this.ra06);
         notifyChange(BR.ra06);
     }
 
