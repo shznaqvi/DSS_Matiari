@@ -48,8 +48,6 @@ interface HouseholdsDao {
             "GROUP BY " + HouseholdTable.COLUMN_VILLAGE_CODE)
     fun getMaxHouseholdNo(ucCode : String, vCode : String, regRound: String) : Int
 
-
-
     @Query("SELECT * FROM " + HouseholdTable.TABLE_NAME + " WHERE " + HouseholdTable.COLUMN_HDSSID + " LIKE :hdssid OR "
             + HouseholdTable.COLUMN_HDSSID + " LIKE :newHDSSID ORDER BY " + HouseholdTable.COLUMN_ID + " ASC")
     fun getHouseholdByHDSSIDASC_internal(hdssid: String, newHDSSID: String): Households?
@@ -61,7 +59,6 @@ interface HouseholdsDao {
         val newHDSSID = hdssidSplit[0] + "-" + hdssidSplit[1] + "-" + String.format(
             "%04d",
             hdssidSplit[2].toInt())
-
 
         return getHouseholdByHDSSIDASC_internal(hdssid, newHDSSID)
     }
