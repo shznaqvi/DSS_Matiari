@@ -44,4 +44,11 @@ interface MaxHHNoDao {
 
     @Query("DELETE FROM " + TableContracts.MaxHhnoTable.TABLE_NAME)
     fun deleteMaxHHNoTable()
+
+    @Query("SELECT " + TableContracts.MaxHhnoTable.COLUMN_MAX_HHNO + " FROM "
+            + TableContracts.MaxHhnoTable.TABLE_NAME +
+            " WHERE " + TableContracts.MaxHhnoTable.COLUMN_UC_CODE + " LIKE :ucCode AND "
+            + TableContracts.MaxHhnoTable.COLUMN_VILLAGE_CODE + " LIKE :vCode ORDER BY "
+            + TableContracts.MaxHhnoTable.COLUMN_ID + " ASC")
+    fun getMaxHHNoByVillage(ucCode : String, vCode : String) : Int
 }

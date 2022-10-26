@@ -48,12 +48,7 @@ interface HouseholdsDao {
             "GROUP BY " + HouseholdTable.COLUMN_VILLAGE_CODE)
     fun getMaxHouseholdNo(ucCode : String, vCode : String, regRound: String) : Int
 
-    @Query("SELECT " + TableContracts.MaxHhnoTable.COLUMN_MAX_HHNO + " FROM "
-            + TableContracts.MaxHhnoTable.TABLE_NAME +
-            " WHERE " + TableContracts.MaxHhnoTable.COLUMN_UC_CODE + " LIKE :ucCode AND "
-            + TableContracts.MaxHhnoTable.COLUMN_VILLAGE_CODE + " LIKE :vCode ORDER BY "
-            + TableContracts.MaxHhnoTable.COLUMN_ID + " ASC")
-    fun getMaxHHNoByVillage(ucCode : String, vCode : String) : Int
+
 
     @Query("SELECT * FROM " + HouseholdTable.TABLE_NAME + " WHERE " + HouseholdTable.COLUMN_HDSSID + " LIKE :hdssid OR "
             + HouseholdTable.COLUMN_HDSSID + " LIKE :newHDSSID ORDER BY " + HouseholdTable.COLUMN_ID + " ASC")

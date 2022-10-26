@@ -135,7 +135,7 @@ public class HouseholdActivity extends AppCompatActivity {
         //int maxHH = db.getMaxHouseholdNo(selectedUC, selectedVillage);      // From Households table on device
         //int maxHHNo = db.getMaxHHNoByVillage(selectedUC, selectedVillage);  // From Max Household numbers fetched from server
         int maxHH = DssRoomDatabase.getDbInstance().householdsDao().getMaxHouseholdNo(selectedUC, selectedVillage, "1");
-        int maxHHNo = DssRoomDatabase.getDbInstance().householdsDao().getMaxHHNoByVillage(selectedUC, selectedVillage);
+        int maxHHNo = DssRoomDatabase.getDbInstance().MaxHHNoDao().getMaxHHNoByVillage(selectedUC, selectedVillage);
         int maxHHFinal = Math.max(maxHH, maxHHNo);
         MainApp.households.setUcCode(selectedUC);
         MainApp.households.setVillageCode(selectedVillage);
