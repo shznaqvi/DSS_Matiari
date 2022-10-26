@@ -182,9 +182,9 @@ public class FPHouseholdAdapter extends RecyclerView.Adapter<FPHouseholdAdapter.
                     }
 
                     if (fpHouseholds.getUid().equals(""))
-                        MainApp.fpHouseholds.populateMeta(viewHolder.getAdapterPosition());
+                        fpHouseholds.populateMeta(viewHolder.getAdapterPosition());
 
-                    if (!MainApp.fpHouseholds.getiStatus().equals("1") && Integer.parseInt(MainApp.fpHouseholds.getVisitNo()) < 3) {
+                    if (!fpHouseholds.getIStatus().equals("1") && Integer.parseInt(fpHouseholds.getVisitNo()) < 3) {
 
                         int currentMWRA = totalMwraMap.containsKey(pos) ? totalMwraMap.get(pos) : 0;
                         if (followUpsSche.getiStatus().equals("1") && currentMWRA > 0) {

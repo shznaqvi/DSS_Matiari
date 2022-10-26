@@ -3,6 +3,9 @@ package edu.aku.hassannaqvi.dss_matiari.ui.lists;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.followUpsScheMWRAList;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.followups;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.fpHouseholds;
+import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.fpMwra;
+import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.households;
+import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.mwra;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.mwraCount;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.mwraDone;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.mwraStatus;
@@ -24,6 +27,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.room.RoomDatabase;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -39,6 +43,7 @@ import edu.aku.hassannaqvi.dss_matiari.models.Followups;
 import edu.aku.hassannaqvi.dss_matiari.models.Households;
 import edu.aku.hassannaqvi.dss_matiari.models.Mwra;
 import edu.aku.hassannaqvi.dss_matiari.models.OutcomeFollowups;
+import edu.aku.hassannaqvi.dss_matiari.room.DssRoomDatabase;
 import edu.aku.hassannaqvi.dss_matiari.ui.FPEndingActivity;
 import edu.aku.hassannaqvi.dss_matiari.ui.sections.SectionBActivity;
 
@@ -105,13 +110,14 @@ public class FPMwraActivity extends AppCompatActivity {
 
         db = MainApp.appInfo.dbHelper;
         mwraDone = 0;
-        bi.hdssid.setText(fpHouseholds.getHdssId());
-        // MainApp.followUpsScheMWRAList = new ArrayList<>();
-     /*   Log.d(TAG, "onCreate: mwralist " + MainApp.followUpsScheMWRAList.size());
-        Log.d(TAG, "onCreate: mwralist " + MainApp.fpHouseholds.getVillageCode());*/
+        //bi.hdssid.setText(fpHouseholds.getHdssId());
+        bi.hdssid.setText(households.getHdssId());
+
         try {
 
-            followUpsScheMWRAList = db.getAllfollowupsScheByHH(fpHouseholds.getVillageCode(), fpHouseholds.getUcCode(), fpHouseholds.getHhNo());
+            //followUpsScheMWRAList = db.getAllfollowupsScheByHH(fpHouseholds.getVillageCode(), fpHouseholds.getUcCode(), fpHouseholds.getHhNo());
+
+            followUpsScheMWRAList = DssRoomDatabase.getDbInstance().FollowUpsScheDao().getAllfollowupsScheByHH(households.getVillageCode(), households.getUcCode(), households.getHhNo());
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -124,7 +130,10 @@ public class FPMwraActivity extends AppCompatActivity {
 
             String fupStatus = "";
             try {
-                fupStatus = db.getFollowupsBySno(followUpsScheMWRAList.get(i).getRb01(), followUpsScheMWRAList.get(i).getFRound()).getSysDate();
+                //fupStatus = db.getFollowupsBySno(followUpsScheMWRAList.get(i).getRb01(), followUpsScheMWRAList.get(i).getFRound()).getSysDate();
+
+                fupStatus = DssRoomDatabase.getDbInstance().FollowUpsScheDao().getFollowupsBySno(households.getUid(), followUpsScheMWRAList.get(i).getRb01(), followUpsScheMWRAList.get(i).getFRound()).getSysDate();
+
                 followUpsScheMWRAList.get(i).setfpDoneDt(fupStatus);
                 if (!fupStatus.equals("")) {
                     mwraDone++;
@@ -149,7 +158,7 @@ public class FPMwraActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                if (!fpHouseholds.getiStatus().equals("1")) {
+                if (!households.getIStatus().equals("1")) {
                     //     Toast.makeText(MwraActivity.this, "Opening Mwra Households", Toast.LENGTH_LONG).show();
                     addMoreFemale();
                 } else {
@@ -170,13 +179,15 @@ public class FPMwraActivity extends AppCompatActivity {
         Toast.makeText(this, "Activity Resumed!", Toast.LENGTH_SHORT).show();
         //       mwraCount = Math.ROUND(MainApp.followUpsScheMWRAList.size());
 
-        followups = new Followups();
+        //followups = new Followups();
+
+        mwra = new Mwra();
 
         outcomeFollowups = new OutcomeFollowups();
 
         // Created object of Household from FollowsSche info for adding new MWRA
         MainApp.households = new Households();
-        MainApp.households.setRa01(fpHouseholds.getSysDate().substring(0, 10));
+        /*MainApp.households.setRa01(fpHouseholds.getSysDate().substring(0, 10));
         MainApp.households.setUid(fpHouseholds.getUid());
         MainApp.households.setUcCode(fpHouseholds.getUcCode());
         MainApp.households.setVillageCode(fpHouseholds.getVillageCode());
@@ -184,10 +195,22 @@ public class FPMwraActivity extends AppCompatActivity {
         MainApp.households.setSysDate(fpHouseholds.getSysDate());
         MainApp.households.setHdssId(fpHouseholds.getHdssId());
         MainApp.households.setVisitNo(fpHouseholds.getVisitNo());
-        //MainApp.households.setRa18(String.valueOf(followUpsScheMWRAList.size()));
+        *///MainApp.households.setRa18(String.valueOf(followUpsScheMWRAList.size()));
+
+        households.setRa01(households.getSysDate().substring(0, 10));
+        MainApp.households.setUcCode(households.getUcCode());
+        MainApp.households.setVillageCode(households.getVillageCode());
+        MainApp.households.setHhNo(households.getHhNo());
+        MainApp.households.setSysDate(households.getSysDate());
+        MainApp.households.setHdssId(households.getHdssId());
+        MainApp.households.setVisitNo(households.getVisitNo());
+        households.setRegRound("0");
+        households.setFRound(households.getFRound());
         MainApp.households.setRa18("999");
 
-        int newMwra = db.getMWRACountBYUUID(fpHouseholds.getUid());
+        //int newMwra = db.getMWRACountBYUUID(fpHouseholds.getUid());
+
+        int newMwra = DssRoomDatabase.getDbInstance().mwraDao().getMWRACountBYUUID(households.getUid());
 
 
         // int newMwra = mwraCount - followUpsScheMWRAList.size();
@@ -199,47 +222,7 @@ public class FPMwraActivity extends AppCompatActivity {
 
         }
 
-        /*    if (MainApp.followUpsScheMWRAList.size() > 0) {
-            //MainApp.fm.get(Integer.parseInt(String.valueOf(MainApp.selectedFemale))).setStatus("1");
-            fmAdapter.notifyItemChanged(Integer.parseInt(String.valueOf(selectedFemale)));
-        }*/
-
-
-        //     checkCompleteFm();
-
-        // bi.fab.setClickable(!MainApp.households.getiStatus().equals("1"));
-      /* bi.completedmember.setText(mwraList.size()+ " MWRAs added");
-        bi.totalmember.setText(MainApp.mwraTotal+ " M completed");*/
     }
-
-/*    private void checkCompleteFm() {
-        //     if (!MainApp.households.getIStatus().equals("1")) {
-        int compCount = mwraList.size();
-
-        MainApp.mwraCountComplete = compCount;
-       // bi.btnContinue.setVisibility(mwraCount > 0 ? View.VISIBLE : View.GONE);
-        //   bi.btnContinue.setVisibility(compCount == mwraCount && !households.getiStatus().equals("1")? View.VISIBLE : View.GONE);
-     *//*   bi.btnContinue.setVisibility(compCount >= mwraCount ? View.VISIBLE : View.GONE);
-        bi.btnContinue.setEnabled(bi.btnContinue.getVisibility()==View.VISIBLE);*//*
-
-        //  } else {
-        //       Toast.makeText(this, "Households has been completed or locked", Toast.LENGTH_LONG).show();
-        //   }
-    }
-
-    public void addFemale() {
-
-
-        if (MainApp.mwraList.size() >= Integer.parseInt(MainApp.households.getRa18())) {
-            displayAddMoreDialog();
-        } else {
-            addMoreFemale();
-
-        }
-
-
-    }*/
-
     private void addMoreFemale() {
 
         if (mwraDone < followUpsScheMWRAList.size()) {
@@ -247,8 +230,11 @@ public class FPMwraActivity extends AppCompatActivity {
             return;
         }
         //  startActivity(new Intent(this, MwraActivity.class));
-        int maxMWRA = db.getMaxMWRSNoBYHH(selectedUC, selectedVillage, selectedHhNO);
-        int maxFpMWRA = db.getMaxMWRANoBYHHFromFolloupsSche(selectedUC, selectedVillage, selectedHhNO);
+        //int maxMWRA = db.getMaxMWRSNoBYHH(selectedUC, selectedVillage, selectedHhNO);
+        //int maxFpMWRA = db.getMaxMWRANoBYHHFromFolloupsSche(selectedUC, selectedVillage, selectedHhNO);
+
+        int maxMWRA = DssRoomDatabase.getDbInstance().mwraDao().getMaxMWRSNoBYHH(selectedUC, selectedVillage, selectedHhNO);
+        int maxFpMWRA = DssRoomDatabase.getDbInstance().FollowUpsScheDao().getMaxMWRANoBYHHFromFolloupsSche(selectedUC, selectedVillage, selectedHhNO);
         mwraCount = Math.max(maxMWRA, maxFpMWRA);
 
        /* MainApp.households = new Households();
@@ -272,7 +258,7 @@ public class FPMwraActivity extends AppCompatActivity {
     }
 
     public void btnContinue(View view) {
-        if (fpHouseholds.getUid().equals("")) {
+        if (households.getUid().equals("")) {
             Toast.makeText(this, "btnContinue(uid)", Toast.LENGTH_SHORT).show();
             setResult(RESULT_OK);
             finish();
@@ -286,18 +272,10 @@ public class FPMwraActivity extends AppCompatActivity {
 
     public void BtnEnd(View view) {
 
-            /*Intent i = new Intent(this, FPEndingActivity.class);
-            i.setFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT);
-            i.putExtra("complete", false);
-            startActivity(i);*/
-        // startActivity(new Intent(this, FPEndingActivity.class).putExtra("complete", false));
+
         setResult(RESULT_CANCELED);
         finish();
 
-        //startActivity(new Intent(this, MainActivity.class));
-        /*   } else {
-               Toast.makeText(this, "Failed to Update Database!", Toast.LENGTH_SHORT).show()
-           }*/
     }
 
     @Override
@@ -312,10 +290,15 @@ public class FPMwraActivity extends AppCompatActivity {
                     mwraDone++;
 
 
-                followUpsScheMWRAList.get(selectedFemale).setfpDoneDt(followups.getSysDate());
+                //followUpsScheMWRAList.get(selectedFemale).setfpDoneDt(followups.getSysDate());
+                followUpsScheMWRAList.get(selectedFemale).setfpDoneDt(mwra.getSysDate());
 
                 fmAdapter.notifyItemChanged(selectedFemale);
-                db.updatesFollowUpsScheColumn(TableContracts.TableFollowUpsSche.COLUMN_DONE_DATE, followups.getSysDate());
+
+
+                fpMwra.setfpDoneDt(followUpsScheMWRAList.get(selectedFemale).setfpDoneDt(mwra.getSysDate()));
+                DssRoomDatabase.getDbInstance().FollowUpsScheDao().updateFollowupsSche(fpMwra);
+                //db.updatesFollowUpsScheColumn(TableContracts.TableFollowUpsSche.COLUMN_DONE_DATE, followups.getSysDate());
                 if (mwraDone >= followUpsScheMWRAList.size()) {
                     bi.btnContinue.setVisibility(View.VISIBLE);
                 }
@@ -331,17 +314,9 @@ public class FPMwraActivity extends AppCompatActivity {
         }
         if (requestCode == 3) {
             if (resultCode == Activity.RESULT_OK) {
-                //      mwraCount++;
 
-                //   mwraList.get(selectedFemale).setExpanded(false);
-
-                // TODO: Mark followup done
-             /*   checkCompleteFm();
-                fmAdapter.notifyItemChanged(selectedFemale);*/
             }
             if (resultCode == Activity.RESULT_CANCELED) {
-                // Write your code if there's no result
-//                Toast.makeText(this, "Information for " + mwraList.get(selectedFemale).getRb02() + " was not saved.", Toast.LENGTH_SHORT).show();
             }
         }
 

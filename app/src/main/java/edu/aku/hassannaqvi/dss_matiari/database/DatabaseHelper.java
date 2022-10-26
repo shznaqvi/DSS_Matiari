@@ -894,6 +894,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         }
     }
 
+
+
+
     public String getDateFromJson(String jsonStr) throws JSONException {
         String date = jsonStr;
         if (isDateInJsonFormat(jsonStr)) {

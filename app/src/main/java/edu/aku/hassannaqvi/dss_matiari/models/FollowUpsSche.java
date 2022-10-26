@@ -187,8 +187,9 @@ public class FollowUpsSche implements Observable {
         return fpDoneDt;
     }
 
-    public void setfpDoneDt(String fpDoneDt) {
+    public String setfpDoneDt(String fpDoneDt) {
         this.fpDoneDt = fpDoneDt;
+        return fpDoneDt;
     }
 
     public String getiStatus() {

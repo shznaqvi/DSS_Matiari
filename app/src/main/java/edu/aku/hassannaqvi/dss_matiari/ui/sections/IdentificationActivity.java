@@ -71,6 +71,7 @@ public class IdentificationActivity extends AppCompatActivity {
                 break;
             case 2:
                 bi.btnContinue.setText("Open Followups List");
+                MainApp.households = new Households();
                 MainApp.fpHouseholds = new FPHouseholds();
                 MainApp.followups = new Followups();
                 MainApp.outcomeFollowups = new OutcomeFollowups();

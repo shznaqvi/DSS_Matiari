@@ -86,11 +86,12 @@ public class HouseholdAdapter extends RecyclerView.Adapter<HouseholdAdapter.View
         DatabaseHelper db = MainApp.appInfo.dbHelper;
         //int totalMWRA = db.getMWRACountBYUUID(households.getUid());
         int totalMWRA = DssRoomDatabase.getDbInstance().mwraDao().getMWRACountBYUUID(households.getUid());
-        JSONObject jsonObject = new JSONObject();
-        //jsonObject.getJSONArray(households.getSA());
-        JsonObject jobj = new Gson().fromJson(households.getSA(), JsonObject.class);
 
-        hhNo.setText(jobj.get("ra07") + "-" + jobj.get("ra09"));
+        try {
+            hhNo.setText(getStringFromJson(households.getSA(), "ra07") + "-" + getStringFromJson(households.getSA(), "ra09"));
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
         hhHead.setText(households.getRa14());
         mwraCount.setText(totalMWRA + " Women");
         secStatus.setText(hhStatus);
@@ -164,6 +165,18 @@ public class HouseholdAdapter extends RecyclerView.Adapter<HouseholdAdapter.View
             return hhHead;
         }
     }
+
+    public String getStringFromJson(String jsonStr, String parseString) throws JSONException {
+        String string = jsonStr;
+
+        JSONObject jsonObject = new JSONObject(jsonStr);
+        String outputString = jsonObject.getString(parseString);
+        String[] stringParts = outputString.split(" ");
+        string = stringParts[0];
+
+        return string;
+    }
+
 
 
 }

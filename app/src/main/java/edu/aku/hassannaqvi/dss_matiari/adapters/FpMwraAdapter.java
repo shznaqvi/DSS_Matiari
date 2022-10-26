@@ -28,6 +28,7 @@ import edu.aku.hassannaqvi.dss_matiari.R;
 import edu.aku.hassannaqvi.dss_matiari.core.MainApp;
 import edu.aku.hassannaqvi.dss_matiari.database.DatabaseHelper;
 import edu.aku.hassannaqvi.dss_matiari.models.FollowUpsSche;
+import edu.aku.hassannaqvi.dss_matiari.room.DssRoomDatabase;
 import edu.aku.hassannaqvi.dss_matiari.ui.sections.OutcomeFollowupActivity;
 import edu.aku.hassannaqvi.dss_matiari.ui.sections.SectionCxActivity;
 import edu.aku.hassannaqvi.dss_matiari.ui.sections.SectionOutcomeActivity;
@@ -73,7 +74,8 @@ public class FpMwraAdapter extends RecyclerView.Adapter<FpMwraAdapter.ViewHolder
         TextView secGender = viewHolder.secGender;
         String pregStatus = followUpsSche.getRb07().equals("1") ? "PW" : "  ";
         try {
-            String curPregStatus = db.getFollowupsBySno(followUpsSche.getRb01(), followUpsSche.getFRound()).getRc07();
+            //String curPregStatus = db.getFollowupsBySno(followUpsSche.getRb01(), followUpsSche.getFRound()).getRc07();
+            String curPregStatus = DssRoomDatabase.getDbInstance().FollowUpsScheDao().getFollowupsBySno(MainApp.households.getUid(), followUpsSche.getRb01(), followUpsSche.getFRound()).getRb07();
             if (!curPregStatus.equals("")) {
                 pregStatus = curPregStatus.equals("1") ? "Pregnant" : " Not Pregnant ";
             }

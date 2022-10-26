@@ -5,11 +5,12 @@
 
 package edu.aku.hassannaqvi.dss_matiari.room
 
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.Query
+import androidx.room.*
 import edu.aku.hassannaqvi.dss_matiari.contracts.TableContracts
 import edu.aku.hassannaqvi.dss_matiari.models.FollowUpsSche
+import edu.aku.hassannaqvi.dss_matiari.models.Followups
+import edu.aku.hassannaqvi.dss_matiari.models.Households
+import edu.aku.hassannaqvi.dss_matiari.models.Mwra
 import org.json.JSONArray
 import org.json.JSONException
 import org.json.JSONObject
@@ -41,9 +42,13 @@ interface FollowUpsScheDao {
     @Insert
     fun insertFollowupsSche(followUpsSche: FollowUpsSche) : Long
 
+
     @Query("DELETE FROM " + TableContracts.TableFollowUpsSche.TABLE_NAME)
     fun deleteFollowupsScheTable()
 
+
+    @Update(onConflict = OnConflictStrategy.REPLACE)
+    fun updateFollowupsSche(followUpsSche: FollowUpsSche): Int
 
     @Query(
         "SELECT " +
@@ -87,5 +92,25 @@ interface FollowUpsScheDao {
             + TableContracts.TableFollowUpsSche.COLUMN_HDSSID
     + " ORDER BY " + TableContracts.TableFollowUpsSche.COLUMN_ID + " ASC ")
     fun getFollowUpsScheHHBYVillage(uc : String, village: String, hhead : String) : List<FollowUpsSche>
+
+
+    @Query("SELECT * FROM " + TableContracts.TableFollowUpsSche.TABLE_NAME + " WHERE "
+            + TableContracts.TableFollowUpsSche.COLUMN_VILLAGE_CODE + " LIKE :village AND "
+            + TableContracts.TableFollowUpsSche.COLUMN_UC_CODE + " LIKE :ucCode AND "
+            + TableContracts.TableFollowUpsSche.COLUMN_HOUSEHOLD_NO + " LIKE :hhNo ORDER BY "
+            + TableContracts.TableFollowUpsSche.COLUMN_ID + " ASC"
+    )
+    fun getAllfollowupsScheByHH(village: String, ucCode: String, hhNo: String) : List<FollowUpsSche>
+
+    @Throws(JSONException ::class)
+    @Query("SELECT * FROM " + TableContracts.MWRATable.TABLE_NAME + " WHERE "
+                + TableContracts.MWRATable.COLUMN_UUID + " LIKE :uuid AND "
+                + TableContracts.MWRATable.COLUMN_SNO + " LIKE :rb01 AND "
+                + TableContracts.MWRATable.COLUMN_ROUND + " LIKE :fround ORDER BY "
+                + TableContracts.MWRATable.COLUMN_ID + " ASC"
+    )
+    fun getFollowupsBySno(uuid: String, rb01: String, fround: String) : Mwra
+
+
 
 }

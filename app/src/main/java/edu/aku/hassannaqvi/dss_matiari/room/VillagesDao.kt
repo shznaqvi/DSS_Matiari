@@ -43,7 +43,7 @@ interface VillagesDao {
     @Query("DELETE FROM " + TableContracts.TableVillage.TABLE_NAME)
     fun deleteVillagesTable()
 
-    @Query("SELECT " + TableContracts.TableVillage.COLUMN_VILLAGE_NAME + " ," + TableContracts.TableVillage.COLUMN_VILLAGE_CODE
+    @Query("SELECT " + TableContracts.TableVillage.COLUMN_VILLAGE_NAME + "," + TableContracts.TableVillage.COLUMN_VILLAGE_CODE
             + " FROM " + TableContracts.TableVillage.TABLE_NAME
             + " WHERE " + TableContracts.TableVillage.COLUMN_UC_CODE
             + " LIKE :ucCode" + " order by "
