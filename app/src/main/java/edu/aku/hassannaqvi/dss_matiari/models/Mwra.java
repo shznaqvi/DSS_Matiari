@@ -137,6 +137,9 @@ public class Mwra extends BaseObservable implements Observable {
 
     public Mwra() {
 
+    }
+
+    public void init() {
         setRound(MainApp.ROUND);
         setSysDate(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.ENGLISH).format(new Date().getTime()));
         setUserName(MainApp.user.getUserName());
@@ -147,7 +150,6 @@ public class Mwra extends BaseObservable implements Observable {
         }
         setVillageCode(MainApp.selectedVillage);
         setUcCode(MainApp.selectedUC);
-
     }
 
     public void populateMeta() {

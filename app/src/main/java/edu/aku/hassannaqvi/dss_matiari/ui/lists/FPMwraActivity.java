@@ -132,8 +132,8 @@ public class FPMwraActivity extends AppCompatActivity {
             try {
                 //fupStatus = db.getFollowupsBySno(followUpsScheMWRAList.get(i).getRb01(), followUpsScheMWRAList.get(i).getFRound()).getSysDate();
 
-                fupStatus = DssRoomDatabase.getDbInstance().mwraDao().getFollowupsBySno(households.getUid(), followUpsScheMWRAList.get(i).getRb01(), followUpsScheMWRAList.get(i).getFRound()).getSysDate();
-
+                Mwra tempMwra = DssRoomDatabase.getDbInstance().mwraDao().getFollowupsBySno(households.getUid(), followUpsScheMWRAList.get(i).getRb01(), followUpsScheMWRAList.get(i).getFRound());
+                fupStatus = tempMwra.getSysDate();
                 followUpsScheMWRAList.get(i).setfpDoneDt(fupStatus);
                 if (!fupStatus.equals("")) {
                     mwraDone++;

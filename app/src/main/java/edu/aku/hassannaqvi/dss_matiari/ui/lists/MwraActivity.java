@@ -141,6 +141,7 @@ public class MwraActivity extends AppCompatActivity {
         mwraCount = Math.round(MainApp.mwraList.size());
 
         MainApp.mwra = new Mwra();
+        mwra.init();
         if (MainApp.mwraList.size() > 0) {
             //MainApp.fm.get(Integer.parseInt(String.valueOf(MainApp.selectedFemale))).setStatus("1");
             fmAdapter.notifyItemChanged(Integer.parseInt(String.valueOf(selectedFemale)));
@@ -184,6 +185,7 @@ public class MwraActivity extends AppCompatActivity {
 
     private void addMoreFemale() {
         MainApp.mwra = new Mwra();
+        mwra.init();
         Intent intent = new Intent(this, SectionBActivity.class);
         //   finish();
 
