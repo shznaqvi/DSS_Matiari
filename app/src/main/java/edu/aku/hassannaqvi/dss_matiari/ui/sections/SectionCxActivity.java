@@ -68,12 +68,13 @@ public class SectionCxActivity extends AppCompatActivity {
 
         try {
             //followups = db.getFollowupsBySno(MainApp.fpMwra.getRb01(), MainApp.fpMwra.getFRound());
-            mwra = DssRoomDatabase.getDbInstance().mwraDao().getFollowupsBySno(MainApp.households.getUid(), MainApp.fpMwra.getRb01());
+            mwra = DssRoomDatabase.getDbInstance().mwraDao().getFollowupsBySno(MainApp.households.getUid(), MainApp.fpMwra.getRb01(), MainApp.fpMwra.getFRound());
         } catch (JSONException e) {
             e.printStackTrace();
             Toast.makeText(this, "JSONException(Followups): " + e.getMessage(), Toast.LENGTH_SHORT).show();
         }
 
+        assert mwra != null;
         if (mwra.getUid().equals("")) {
             mwra.setRb01(MainApp.fpMwra.getRb01());
             MainApp.mwra.setRb02(MainApp.fpMwra.getRb02());

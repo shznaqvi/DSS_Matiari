@@ -3,6 +3,7 @@ package edu.aku.hassannaqvi.dss_matiari.models;
 import static java.util.concurrent.TimeUnit.MILLISECONDS;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.PROJECT_NAME;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.mwra;
+import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.position;
 
 import android.database.Cursor;
 import android.util.Log;
@@ -160,6 +161,7 @@ public class Mwra extends BaseObservable implements Observable {
         setRound(MainApp.ROUND);
         setVillageCode(MainApp.selectedVillage);
         setUcCode(MainApp.selectedUC);
+        setSNo(MainApp.followUpsScheHHList.get(position).getRb01());
     }
 
 

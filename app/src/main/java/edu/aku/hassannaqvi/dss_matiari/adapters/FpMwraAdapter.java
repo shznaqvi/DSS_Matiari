@@ -185,7 +185,7 @@ public class FpMwraAdapter extends RecyclerView.Adapter<FpMwraAdapter.ViewHolder
 
             if(followUpsSche.getMemberType().equals("1")) {
                 MainApp.fpMwra = MainApp.followUpsScheMWRAList.get(viewHolder.getAdapterPosition());
-                MainApp.followups.populateMeta();
+                MainApp.mwra.populateMeta();
 
                 Intent intent = new Intent(mContext, SectionCxActivity.class);
 

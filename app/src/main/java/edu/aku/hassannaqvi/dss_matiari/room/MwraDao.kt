@@ -53,13 +53,6 @@ interface MwraDao {
             " WHERE " + MWRATable.COLUMN_UUID + " LIKE :uid "  )
     fun getMWRACountBYUUID(uid: String) : Int
 
-    @Throws(JSONException::class)
-    @Query("SELECT * FROM " + MWRATable.TABLE_NAME + " WHERE "
-            + MWRATable.COLUMN_UUID + " LIKE :uuid AND " +
-            MWRATable.COLUMN_SNO + " LIKE :rb01 ORDER BY " +
-            MWRATable.COLUMN_ID)
-    fun getFollowupsBySno(uuid : String, rb01 : String) : Mwra?
-
 
     @Query("SELECT * FROM " + MWRATable.TABLE_NAME + " WHERE "
             + MWRATable.COLUMN_UUID + " LIKE :uuid AND "
@@ -77,16 +70,9 @@ interface MwraDao {
         if(mwra == null)
         {
             val tempMwra = Mwra()
-            tempMwra.populateMeta()
-            val id = addMwra(tempMwra)
-            tempMwra.id = id
-            tempMwra.uid = MainApp.deviceid + tempMwra.id
-            updateMwra(tempMwra)
-
             return tempMwra
 
         }
-
         return mwra
     }
 
