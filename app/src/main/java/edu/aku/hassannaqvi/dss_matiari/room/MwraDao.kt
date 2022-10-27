@@ -4,6 +4,7 @@ import androidx.room.*
 import edu.aku.hassannaqvi.dss_matiari.contracts.TableContracts
 import edu.aku.hassannaqvi.dss_matiari.contracts.TableContracts.MWRATable
 import edu.aku.hassannaqvi.dss_matiari.contracts.TableContracts.TableFollowUpsSche
+import edu.aku.hassannaqvi.dss_matiari.core.MainApp
 import edu.aku.hassannaqvi.dss_matiari.models.Followups
 import edu.aku.hassannaqvi.dss_matiari.models.Mwra
 import org.json.JSONException
@@ -58,6 +59,36 @@ interface MwraDao {
             MWRATable.COLUMN_SNO + " LIKE :rb01 ORDER BY " +
             MWRATable.COLUMN_ID)
     fun getFollowupsBySno(uuid : String, rb01 : String) : Mwra?
+
+
+    @Query("SELECT * FROM " + MWRATable.TABLE_NAME + " WHERE "
+            + MWRATable.COLUMN_UUID + " LIKE :uuid AND "
+            + MWRATable.COLUMN_SNO + " LIKE :rb01 AND "
+            + MWRATable.COLUMN_ROUND + " LIKE :fround ORDER BY "
+            + MWRATable.COLUMN_ID + " ASC"
+    )
+    fun getFollowupsBySno_internal(uuid: String, rb01: String, fround: String) : Mwra?
+
+
+    @Throws(JSONException ::class)
+    fun getFollowupsBySno(uuid: String, rb01: String, fround: String) : Mwra?
+    {
+        val mwra = getFollowupsBySno_internal(uuid, rb01, fround)
+        if(mwra == null)
+        {
+            val tempMwra = Mwra()
+            tempMwra.populateMeta()
+            val id = addMwra(tempMwra)
+            tempMwra.id = id
+            tempMwra.uid = MainApp.deviceid + tempMwra.id
+            updateMwra(tempMwra)
+
+            return tempMwra
+
+        }
+
+        return mwra
+    }
 
 
 

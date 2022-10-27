@@ -102,14 +102,8 @@ interface FollowUpsScheDao {
     )
     fun getAllfollowupsScheByHH(village: String, ucCode: String, hhNo: String) : List<FollowUpsSche>
 
-    @Throws(JSONException ::class)
-    @Query("SELECT * FROM " + TableContracts.MWRATable.TABLE_NAME + " WHERE "
-                + TableContracts.MWRATable.COLUMN_UUID + " LIKE :uuid AND "
-                + TableContracts.MWRATable.COLUMN_SNO + " LIKE :rb01 AND "
-                + TableContracts.MWRATable.COLUMN_ROUND + " LIKE :fround ORDER BY "
-                + TableContracts.MWRATable.COLUMN_ID + " ASC"
-    )
-    fun getFollowupsBySno(uuid: String, rb01: String, fround: String) : Mwra
+
+
 
 
 

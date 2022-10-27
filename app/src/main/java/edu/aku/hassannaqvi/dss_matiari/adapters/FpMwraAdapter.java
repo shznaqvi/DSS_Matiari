@@ -75,7 +75,7 @@ public class FpMwraAdapter extends RecyclerView.Adapter<FpMwraAdapter.ViewHolder
         String pregStatus = followUpsSche.getRb07().equals("1") ? "PW" : "  ";
         try {
             //String curPregStatus = db.getFollowupsBySno(followUpsSche.getRb01(), followUpsSche.getFRound()).getRc07();
-            String curPregStatus = DssRoomDatabase.getDbInstance().FollowUpsScheDao().getFollowupsBySno(MainApp.households.getUid(), followUpsSche.getRb01(), followUpsSche.getFRound()).getRb07();
+            String curPregStatus = DssRoomDatabase.getDbInstance().mwraDao().getFollowupsBySno(MainApp.households.getUid(), followUpsSche.getRb01(), followUpsSche.getFRound()).getRb07();
             if (!curPregStatus.equals("")) {
                 pregStatus = curPregStatus.equals("1") ? "Pregnant" : " Not Pregnant ";
             }
