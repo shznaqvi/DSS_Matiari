@@ -1,11 +1,11 @@
 package edu.aku.hassannaqvi.dss_matiari.ui.sections;
 
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.followups;
+import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.mwra;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.sharedPref;
 
-import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -16,15 +16,24 @@ import com.validatorcrawler.aliazaz.Validator;
 
 import org.json.JSONException;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Locale;
+
 import edu.aku.hassannaqvi.dss_matiari.R;
 import edu.aku.hassannaqvi.dss_matiari.contracts.TableContracts;
 import edu.aku.hassannaqvi.dss_matiari.core.MainApp;
 import edu.aku.hassannaqvi.dss_matiari.database.DatabaseHelper;
 import edu.aku.hassannaqvi.dss_matiari.databinding.ActivitySectionDBinding;
+import edu.aku.hassannaqvi.dss_matiari.databinding.ActivitySectionFBinding;
+import edu.aku.hassannaqvi.dss_matiari.models.Mwra;
+import edu.aku.hassannaqvi.dss_matiari.room.DssRoomDatabase;
+
 
 public class SectionDActivity extends AppCompatActivity {
 
-    private static final String TAG = "SectionC1Activity";
+    private static final String TAG = "SectionCx2Activity";
     ActivitySectionDBinding bi;
     private DatabaseHelper db;
 
@@ -34,80 +43,139 @@ public class SectionDActivity extends AppCompatActivity {
         String lang = sharedPref.getString("lang", "1");
         setTheme(lang.equals("1") ? R.style.AppThemeEnglish1 : R.style.AppThemeUrdu);
         bi = DataBindingUtil.setContentView(this, R.layout.activity_section_d);
+        db = MainApp.appInfo.dbHelper;
 
-        bi.setFollowups(followups);
+        bi.setFollowups(mwra);
 
         setTitle(R.string.marriedwomenregistration_mainheading);
         setImmersive(true);
 
-        db = MainApp.appInfo.dbHelper;
-        bi.btnContinue.setText(followups.getRc10().equals("") ? "Save" : "Update");
+        bi.btnContinue.setText(mwra.getUid().equals("") ? "Save" : "Update");
 
     }
 
+    private void setDateRanges() {
+        try {
+
+            // Set time from RC01a
+            Calendar cal = Calendar.getInstance();
+
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
+            cal.setTime(sdf.parse(mwra.getRb01a()));// all done
+
+            sdf = new SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH);
+
+          /*  // Set MinDob date to 50 years back from DOV
+            cal.add(Calendar.YEAR, -50);
+            String minDob = sdf.format(cal.getTime());
+            cal.add(Calendar.YEAR, +50); // Calender reset to DOV
+            Log.d(TAG, "onCreate: " + minDob);
+
+            // Set maxDob date to 50 years back from DOV
+            cal.add(Calendar.YEAR, -18);
+            String maxDob = sdf.format(cal.getTime());
+            cal.add(Calendar.YEAR, +18); // Calender reset to DOV
+            Log.d(TAG, "onCreate: " + maxDob);
+
+*/
+            // Set MinLMP date to 2 months back from DOV
+            cal.add(Calendar.MONTH, -9);
+            String minLMP = sdf.format(cal.getTime());
+            cal.add(Calendar.MONTH, +9); // Calender reset to DOV
+            Log.d(TAG, "onCreate: " + minLMP);
+
+            // Set MaxLMP same as DOV
+            String maxLMP = sdf.format(cal.getTime());
+            Log.d(TAG, "onCreate: " + maxLMP);
+
+            // Set MinEDD same as DOV
+            String minEDD = sdf.format(cal.getTime());
+            Log.d(TAG, "onCreate: " + minEDD);
+
+            // Set MaxEDD to 9 months from DOV
+            cal.add(Calendar.MONTH, +9);
+            String maxEDD = sdf.format(cal.getTime());
+            cal.add(Calendar.MONTH, -9);
+            Log.d(TAG, "onCreate: " + maxLMP);
+
+          /*  // DOB
+            bi.rb04.setMaxDate(maxDob);
+            bi.rb04.setMinDate(minDob);*/
+
+            // LMP
+            bi.rb08.setMaxDate(maxLMP);
+            bi.rb08.setMinDate(minLMP);
+
+            // EDD
+            bi.rb09.setMaxDate(maxEDD);
+            bi.rb09.setMinDate(minEDD);
+
+            // Date of Death from Date of Deliver(RC10)
+            sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
+            cal.setTime(sdf.parse(mwra.getRb11a()));// all done
+            sdf = new SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH);
+            String minDOD = sdf.format(cal.getTime());
+
+            // Single
+            /*bi.rc1401.setMinDate(minDOD);
+            bi.rc1402.setMinDate(minDOD);
+            bi.rc1403.setMinDate(minDOD)*/;
+
+
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+    }
 
     public void btnContinue(View view) {
         if (!formValidation()) return;
-        if (updateDB()) {
 
+        if(updateDB()){
+            setResult(RESULT_OK);
+            //startActivity(new Intent(this, FPEndingActivity.class).addFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT).putExtra("complete", MainApp.mwraFlag));
+            finish();
 
-            // If continued from previous pregnancy
-            if (followups.getRc10().equals("1") || followups.getRc10().equals("3")) {
-                setResult(RESULT_OK);
-                startActivity(new Intent(this, SectionC2Activity.class).addFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT).putExtra("complete", true));
-                finish();
-            } else {
-                // get outcome of previous pregnancy
-                //MainApp.totalOutcomes = Integer.parseInt(followups.getRc13());
-                MainApp.outcomeCounter = 0;
-                setResult(RESULT_OK);
-                startActivity(new Intent(this, SectionEActivity.class).addFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT).putExtra("complete", true));
-                finish();
-
-            }
         } else {
             Toast.makeText(this, "Failed to Update Database!", Toast.LENGTH_SHORT).show();
         }
     }
 
 
-
     private boolean updateDB() {
         int updcount = 0;
         try {
 
-            // Todo: Testing SECTION C
-            //updcount = db.updatesFollowUpsColumn(TableContracts.FollowupsTable.COLUMN_SD, followups.sDtoString());
-            updcount = db.updatesFollowUpsColumn(TableContracts.FollowupsTable.COLUMN_SD, followups.sCtoString());
+            //updcount = db.updatesFollowUpsColumn(TableContracts.FollowupsTable.COLUMN_SC, followups.sCtoString())
+             Mwra updatedFollowups = mwra;
+                        updatedFollowups.setSC(mwra.sCtoString());
+                        updcount = DssRoomDatabase.getDbInstance().mwraDao().updateMwra(mwra);;
+
+
         } catch (JSONException e) {
-            Toast.makeText(this, R.string.upd_db + e.getMessage(), Toast.LENGTH_SHORT).show();
+            e.printStackTrace();
+            Toast.makeText(this, "JSONException: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+            Log.d(TAG, "updateDB (JSONException): " + e.getMessage());
+            return false;
         }
         if (updcount == 1) {
             return true;
         } else {
-            Toast.makeText(this, R.string.upd_db_error, Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Updating Database... ERROR!", Toast.LENGTH_SHORT).show();
             return false;
         }
     }
 
     public void btnEnd(View view) {
-        setResult(Activity.RESULT_CANCELED);
+        setResult(RESULT_CANCELED);
         finish();
-      /*  //saveDraft();
-        if (updateDB()) {
 
-            Toast.makeText(this, "Woman information not recorded.", Toast.LENGTH_SHORT).show();
-            finish();
-            Intent i = new Intent(this, WRAEndingActivity.class);
-            i.putExtra("complete", false);
-            startActivity(i);
-
-        }*/
     }
 
     private boolean formValidation() {
+        setDateRanges();
         return Validator.emptyCheckingContainer(this, bi.GrpName);
 
     }
+
 
 }

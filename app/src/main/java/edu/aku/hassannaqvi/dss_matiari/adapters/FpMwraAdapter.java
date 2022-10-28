@@ -29,9 +29,8 @@ import edu.aku.hassannaqvi.dss_matiari.core.MainApp;
 import edu.aku.hassannaqvi.dss_matiari.database.DatabaseHelper;
 import edu.aku.hassannaqvi.dss_matiari.models.FollowUpsSche;
 import edu.aku.hassannaqvi.dss_matiari.room.DssRoomDatabase;
-import edu.aku.hassannaqvi.dss_matiari.ui.sections.OutcomeFollowupActivity;
-import edu.aku.hassannaqvi.dss_matiari.ui.sections.SectionCxActivity;
-import edu.aku.hassannaqvi.dss_matiari.ui.sections.SectionOutcomeActivity;
+import edu.aku.hassannaqvi.dss_matiari.ui.sections.SectionFActivity;
+import edu.aku.hassannaqvi.dss_matiari.ui.sections.SectionCActivity;
 
 
 public class FpMwraAdapter extends RecyclerView.Adapter<FpMwraAdapter.ViewHolder> {
@@ -185,9 +184,9 @@ public class FpMwraAdapter extends RecyclerView.Adapter<FpMwraAdapter.ViewHolder
 
             if(followUpsSche.getMemberType().equals("1")) {
                 MainApp.fpMwra = MainApp.followUpsScheMWRAList.get(viewHolder.getAdapterPosition());
-                MainApp.mwra.populateMeta();
+                MainApp.mwra.populateMetaFollowups();
 
-                Intent intent = new Intent(mContext, SectionCxActivity.class);
+                Intent intent = new Intent(mContext, SectionCActivity.class);
 
                 intent.putExtra("position", viewHolder.getAdapterPosition());
 
@@ -200,7 +199,7 @@ public class FpMwraAdapter extends RecyclerView.Adapter<FpMwraAdapter.ViewHolder
                 MainApp.fpMwra = MainApp.followUpsScheMWRAList.get(viewHolder.getAdapterPosition());
                 MainApp.outcomeFollowups.populateMeta();
 
-                Intent intent = new Intent(mContext, OutcomeFollowupActivity.class);
+                Intent intent = new Intent(mContext, SectionFActivity.class);
 
                 intent.putExtra("position", viewHolder.getAdapterPosition());
 

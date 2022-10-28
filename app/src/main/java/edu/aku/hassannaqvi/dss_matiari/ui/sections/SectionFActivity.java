@@ -1,16 +1,13 @@
 package edu.aku.hassannaqvi.dss_matiari.ui.sections;
 
-import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.followups;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.fpHouseholds;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.fpMwra;
-import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.outcome;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.outcomeFollowups;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.sharedPref;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -29,12 +26,12 @@ import edu.aku.hassannaqvi.dss_matiari.R;
 import edu.aku.hassannaqvi.dss_matiari.contracts.TableContracts;
 import edu.aku.hassannaqvi.dss_matiari.core.MainApp;
 import edu.aku.hassannaqvi.dss_matiari.database.DatabaseHelper;
-import edu.aku.hassannaqvi.dss_matiari.databinding.ActivityOutcomeFollowupBinding;
+import edu.aku.hassannaqvi.dss_matiari.databinding.ActivitySectionFBinding;
 
-public class OutcomeFollowupActivity extends AppCompatActivity {
+public class SectionFActivity extends AppCompatActivity {
 
     private static final String TAG = "OutcomeFollowupActivity";
-    ActivityOutcomeFollowupBinding bi;
+    ActivitySectionFBinding bi;
     private DatabaseHelper db;
 
     @Override
@@ -42,7 +39,7 @@ public class OutcomeFollowupActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         String lang = sharedPref.getString("lang", "1");
         setTheme(lang.equals("1") ? R.style.AppThemeEnglish1 : R.style.AppThemeUrdu);
-        bi = DataBindingUtil.setContentView(this, R.layout.activity_outcome_followup);
+        bi = DataBindingUtil.setContentView(this, R.layout.activity_section_f);
         db = MainApp.appInfo.dbHelper;
 
         MainApp.ROUND = MainApp.fpMwra.getFRound();

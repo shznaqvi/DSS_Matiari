@@ -1,17 +1,18 @@
 package edu.aku.hassannaqvi.dss_matiari.ui.sections;
 
+import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.followups;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.outcome;
+import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.outcomeFollowups;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.sharedPref;
 
-import android.app.Activity;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.databinding.DataBindingUtil;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
-
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.databinding.DataBindingUtil;
 
 import com.validatorcrawler.aliazaz.Validator;
 
@@ -21,13 +22,16 @@ import edu.aku.hassannaqvi.dss_matiari.R;
 import edu.aku.hassannaqvi.dss_matiari.contracts.TableContracts;
 import edu.aku.hassannaqvi.dss_matiari.core.MainApp;
 import edu.aku.hassannaqvi.dss_matiari.database.DatabaseHelper;
+
 import edu.aku.hassannaqvi.dss_matiari.databinding.ActivitySectionEBinding;
+import edu.aku.hassannaqvi.dss_matiari.models.Outcome;
 
 public class SectionEActivity extends AppCompatActivity {
 
-    private static final String TAG = "SectionEActivity";
+    private static final String TAG = "SectionOutcomeActivity";
     ActivitySectionEBinding bi;
     private DatabaseHelper db;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,83 +39,92 @@ public class SectionEActivity extends AppCompatActivity {
         String lang = sharedPref.getString("lang", "1");
         setTheme(lang.equals("1") ? R.style.AppThemeEnglish1 : R.style.AppThemeUrdu);
         bi = DataBindingUtil.setContentView(this, R.layout.activity_section_e);
-        bi.setCallback(this);
         db = MainApp.appInfo.dbHelper;
 
-
         try {
-
-            outcome = db.getOutComeBYID(String.valueOf(++MainApp.outcomeCounter));
+            outcome = db.getOutComeBYID(String.valueOf(++MainApp.childCount));
         } catch (JSONException e) {
             e.printStackTrace();
-            Toast.makeText(this, "JSONException(OutCome): " + e.getMessage(), Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "JSONException(Outcome): " + e.getMessage(), Toast.LENGTH_SHORT).show();
         }
-        bi.setOutcome(MainApp.outcome);
 
 
-        // setListener();
+        MainApp.ROUND = MainApp.fpMwra.getFRound();
 
-        // set default model values if new mwra
-        /*if (MainApp.pregnancy.getRb01().equals("")) {
-            MainApp.pregnancy.setRb01(String.valueOf(mwraCount + 1));
-            MainApp.pregnancy.setUuid(households.getUid());
-            MainApp.pregnancy.setUcCode(households.getUcCode());
-            MainApp.pregnancy.setVillageCode(households.getVillageCode());
-            MainApp.pregnancy.setsNo(households.getsNo());
-            MainApp.pregnancy.setHhNo(households.getHhNo());
-            // TODO: set MWRA ID from downloaded data
-            //   MainApp.followups.setMWRAID(households.getHhNo());
-            MainApp.pregnancy.setUserName(MainApp.user.getUserName());
-            MainApp.pregnancy.setSysDate(households.getSysDate());
-            MainApp.pregnancy.setDeviceId(MainApp.deviceid);
-            MainApp.pregnancy.setHdssId(households.getHdssId());
-            MainApp.pregnancy.setAppver(MainApp.versionName + "." + MainApp.versionCode);
 
-            MainApp.pregnancy.setRb01a(MainApp.households.getRb01a());
-        }*/
+        outcome.setRc12dob(followups.getRc10());
+        outcome.setRc12ln(outcome.getRc12ln().isEmpty() ? String.valueOf(MainApp.childCount) : outcome.getRc12ln());
 
-        setTitle(R.string.marriedwomenregistration_mainheading);
-        setImmersive(true);
+        bi.setOutcome(outcome);
+        //setImmersive(true);
+
+
+
+            // Followups data
+            outcomeFollowups.setUuid(followups.getUid());
+            outcomeFollowups.setMuid(outcome.getMuid());
+            outcomeFollowups.setUcCode(followups.getUcCode());
+            outcomeFollowups.setVillageCode(followups.getVillageCode());
+            outcomeFollowups.setMuid(followups.getFmuid());
+            //MainApp.followups.setStructureNo(households.getStructureNo());
+            outcomeFollowups.setSno(outcome.getSno());
+            outcomeFollowups.setRound("0");
+            outcomeFollowups.setHhNo(followups.getHhNo());
+            outcomeFollowups.setUserName(MainApp.user.getUserName());
+            outcomeFollowups.setSysDate(followups.getSysDate());
+            outcomeFollowups.setDeviceId(MainApp.deviceid);
+            outcomeFollowups.setHdssId(followups.getHdssId());
+            outcomeFollowups.setAppver(MainApp.versionName + "." + MainApp.versionCode);
 
 
         bi.btnContinue.setText(outcome.getUid().equals("") ? "Save" : "Update");
 
-        // To set min max range of date fields
-        // setDateRanges();
+
+        String date = toBlackVisionDate(followups.getRc10());
+
+        bi.rc14.setMinDate(date);
 
 
     }
 
     public void btnContinue(View view) {
         if (!formValidation()) return;
-        if (outcome.getUid().equals("") ? insertNewRecord() : updateDB()) {
+        //if(outcome.getUid().equals("") ? !insertNewRecord()) return;
+        if(!insertNewFollowupRecord()) return;
 
-            if (MainApp.outcomeCounter < MainApp.totalOutcomes) {
-                setResult(RESULT_OK);
-                startActivity(new Intent(this, SectionEActivity.class).addFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT).putExtra("complete", true));
-                finish();
+        if(outcome.getUid().equals("") ? insertNewRecord() : updateDB())
+        {
+                if (MainApp.totalChildCount > MainApp.childCount) {
+
+                    outcome = new Outcome();
+                    setResult(RESULT_OK);
+                    finish();
+                    startActivity(new Intent(this, SectionEActivity.class).addFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT).putExtra("complete", true));
+
+                } else {
+                    MainApp.childCount = 0;
+                    MainApp.totalChildCount = 0;
+                    setResult(RESULT_OK);
+                    finish();
+                    startActivity(new Intent(this, SectionDActivity.class).addFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT).putExtra("complete", true));
+                }
+
             } else {
-                setResult(RESULT_OK);
-                startActivity(new Intent(this, SectionC2Activity.class).addFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT).putExtra("complete", true));
-                finish();
+                Toast.makeText(this, "Failed to Update Database!", Toast.LENGTH_SHORT).show();
             }
-            //  startActivity(new Intent(this, EndingActivity.class).putExtra("complete", true));
-        } else {
-            Toast.makeText(this, "Failed to Update Database!", Toast.LENGTH_SHORT).show();
-        }
+
+
     }
 
-
     private boolean insertNewRecord() {
-        db = MainApp.appInfo.getDbHelper();
-        outcome.populateMeta();
+           outcome.populateMeta();
 
         long rowId = 0;
         try {
             rowId = db.addOutcome(outcome);
         } catch (JSONException e) {
             e.printStackTrace();
-            Toast.makeText(this, "JSONException: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "JSONException(Outcomes): " + e.getMessage(), Toast.LENGTH_SHORT).show();
             Log.d(TAG, "insertNewRecord (JSONException): " + e.getMessage());
             return false;
         }
@@ -126,37 +139,48 @@ public class SectionEActivity extends AppCompatActivity {
         }
     }
 
-/*    private boolean updateDB() {
-        int updcount = 0;
+    private boolean insertNewFollowupRecord() {
+        db = MainApp.appInfo.getDbHelper();
+        //followups.populateMeta();
+        long rowId = 0;
         try {
-            updcount = db.updatesOutcomeColumn(TableContracts.OutcomeTable.COLUMN_SE, outcome.sEtoString());
+            rowId = db.addOutcomeFollowup(outcomeFollowups);
         } catch (JSONException e) {
-            Toast.makeText(this, R.string.upd_db + e.getMessage(), Toast.LENGTH_SHORT).show();
-        }
-        if (updcount == 1) {
-            return true;
-        } else {
-            Toast.makeText(this, R.string.upd_db_error, Toast.LENGTH_SHORT).show();
+            e.printStackTrace();
+            Toast.makeText(this, "JSONException(OutcomeFollowups): " + e.getMessage(), Toast.LENGTH_SHORT).show();
+            Log.d(TAG, "insertNewRecord (JSONException): " + e.getMessage());
             return false;
         }
-    }*/
+        outcomeFollowups.setId(String.valueOf(rowId));
+        if (rowId > 0) {
+            outcomeFollowups.setUid(outcomeFollowups.getDeviceId() + outcomeFollowups.getId());
 
+            // This not a mistake. It is done on purpose
+            //households.setUid(fpHouseholds.getDeviceId() + fpHouseholds.getId());
+
+            db.updateOutcomeFollouwps(TableContracts.OutcomeFollowupTable.COLUMN_UID, outcomeFollowups.getUid());
+            return true;
+        } else {
+            Toast.makeText(this, "Updating Database... ERROR!", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+    }
 
     private boolean updateDB() {
         int updcount = 0;
         try {
             updcount = db.updatesOutcomeColumn(TableContracts.OutcomeTable.COLUMN_SE, outcome.sEtoString());
             // Also reset Synced flag and alter UID
-            db.updatesOutcomeColumn(TableContracts.OutcomeTable.COLUMN_SYNCED, null);
+            // db.updatesMWRAColumn(TableContracts.MWRATable.COLUMN_SYNCED, null);
             // concate last char from uid to alter and create new unique uid
 
             outcome.setDeviceId(outcome.getDeviceId() + "_" + outcome.getDeviceId().substring(outcome.getDeviceId().length() - 1));
             db.updatesOutcomeColumn(TableContracts.OutcomeTable.COLUMN_DEVICEID, outcome.getDeviceId());
-            int repeatCount = (outcome.getDeviceId().length() - 16) / 2;
+            /*int repeatCount = (outcome.getDeviceId().length() - 16) / 2;
             // new UID
-            String newUID = outcome.getDeviceId().substring(0, 16) + outcome.getId() + "_" + repeatCount;
-            outcome.setUid(newUID);
-            db.updatesOutcomeColumn(TableContracts.OutcomeTable.COLUMN_UID, newUID);
+            String newUID = followups.getDeviceId().substring(0, 16) + followups.getId() + "_" + repeatCount;
+            followups.setUid(newUID);*/
+            //db.updatesFollowUpsColumn(TableContracts.FollowupsTable.COLUMN_UID, newUID);
 
 
         } catch (JSONException e) {
@@ -174,13 +198,39 @@ public class SectionEActivity extends AppCompatActivity {
     }
 
     public void btnEnd(View view) {
-        setResult(Activity.RESULT_CANCELED);
+        MainApp.totalChildCount =0;
+        MainApp.childCount --;
+        setResult(RESULT_CANCELED);
+/*        if (followups.getRc05().equals("2") || followups.getRc05().equals("3")) {
+            if (!formValidation()) return;
+            setResult(RESULT_OK);
+            insertNewRecord();
+            updateDB();
+            startActivity(new Intent(this, WRAEndingActivity.class).addFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT).putExtra("complete", false));
+        }*/
         finish();
+
     }
 
     private boolean formValidation() {
+        //setDateRanges();
         return Validator.emptyCheckingContainer(this, bi.GrpName);
-
     }
+
+
+        String originalFormat = "yyyy-MM-dd";
+        String blackBoxFormat = "dd/MM/yyyy";
+
+        String originalDate = "2020-06-23";
+        String newDate = toBlackVisionDate(originalDate);
+
+    public static String toBlackVisionDate(String currentDate) {
+        String newDate = currentDate;
+        String[] oldDateParts = currentDate.split("-");
+        newDate = oldDateParts[2] + "/" + oldDateParts[1] + "/" + oldDateParts[0];
+        return newDate;
+    }
+
+
 
 }

@@ -43,9 +43,10 @@ interface MwraDao {
         MWRATable.COLUMN_UC_CODE + " LIKE :uc AND "
                 + MWRATable.COLUMN_VILLAGE_CODE + " LIKE :village AND "
                 + MWRATable.COLUMN_STRUCTURE_NO + " LIKE :structure AND (  "
-                + MWRATable.COLUMN_HOUSEHOLD_NO + " LIKE :hhNo ) "
+                + MWRATable.COLUMN_HOUSEHOLD_NO + " LIKE :hhNo ) AND "
+                + MWRATable.COLUMN_REGROUND + " LIKE :regRound "
     )
-    fun getAllMWRAByHH(uc : String, village : String, structure : String, hhNo: String) : List<Mwra>
+    fun getAllMWRAByHH(uc : String, village : String, structure : String, hhNo: String, regRound : String) : List<Mwra>
 
 
     @Query("SELECT Count(*) AS mwraCount" +
@@ -57,16 +58,17 @@ interface MwraDao {
     @Query("SELECT * FROM " + MWRATable.TABLE_NAME + " WHERE "
             + MWRATable.COLUMN_UUID + " LIKE :uuid AND "
             + MWRATable.COLUMN_SNO + " LIKE :rb01 AND "
-            + MWRATable.COLUMN_ROUND + " LIKE :fround ORDER BY "
+            + MWRATable.COLUMN_ROUND + " LIKE :fround AND " +
+            MWRATable.COLUMN_REGROUND + " LIKE :regRound ORDER BY "
             + MWRATable.COLUMN_ID + " ASC"
     )
-    fun getFollowupsBySno_internal(uuid: String, rb01: String, fround: String) : Mwra?
+    fun getFollowupsBySno_internal(uuid: String, rb01: String, fround: String, regRound: String) : Mwra?
 
 
     @Throws(JSONException ::class)
     fun getFollowupsBySno(uuid: String, rb01: String, fround: String) : Mwra?
     {
-        val mwra = getFollowupsBySno_internal(uuid, rb01, fround)
+        val mwra = getFollowupsBySno_internal(uuid, rb01, fround, "")
         if(mwra == null)
         {
             val tempMwra = Mwra()

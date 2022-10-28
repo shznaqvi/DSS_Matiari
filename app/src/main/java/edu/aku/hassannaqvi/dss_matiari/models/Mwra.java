@@ -15,6 +15,7 @@ import androidx.databinding.Observable;
 import androidx.databinding.PropertyChangeRegistry;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
+import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
 import org.apache.commons.lang3.StringUtils;
@@ -34,10 +35,14 @@ import edu.aku.hassannaqvi.dss_matiari.core.MainApp;
 @Entity(tableName = MWRATable.TABLE_NAME)
 public class Mwra extends BaseObservable implements Observable {
 
+    @Ignore
     public String TAG = "MWRA";
     //Not saving in DB
+    @Ignore
     private transient PropertyChangeRegistry propertyChangeRegistry = new PropertyChangeRegistry();
+    @Ignore
     private boolean exist = false;
+    @Ignore
     private boolean expanded;
 
     // APP VARIABLES
@@ -100,6 +105,12 @@ public class Mwra extends BaseObservable implements Observable {
     @ColumnInfo(name = MWRATable.COLUMN_SYNCED_DATE)
     private String syncDate = StringUtils.EMPTY;
 
+    @ColumnInfo(name = MWRATable.COLUMN_REGROUND)
+    private String regRound = StringUtils.EMPTY;
+
+    @ColumnInfo(name = MWRATable.COLUMN_FROUND)
+    private String fRound = StringUtils.EMPTY;
+
     // SECTION VARIABLES / Registration Variables
     @ColumnInfo(name = MWRATable.COLUMN_SB)
     private String sB = StringUtils.EMPTY;
@@ -108,30 +119,49 @@ public class Mwra extends BaseObservable implements Observable {
     private String sC = StringUtils.EMPTY;
 
     private String round = StringUtils.EMPTY;
+    @Ignore
     private String rb01a = StringUtils.EMPTY;
-
+    @Ignore
     private String rb01 = StringUtils.EMPTY;
+    @Ignore
     private String rb02 = StringUtils.EMPTY;
+    @Ignore
     private String rb03 = StringUtils.EMPTY;
+    @Ignore
     private String rb04 = StringUtils.EMPTY;
+    @Ignore
     private String rb05 = StringUtils.EMPTY;
+    @Ignore
     private String rb06 = StringUtils.EMPTY;
+    @Ignore
     private String rb07 = StringUtils.EMPTY;
+    @Ignore
     private String rb08 = StringUtils.EMPTY;
+    @Ignore
     private String rb09 = StringUtils.EMPTY;
 
     // Followup Variables
+    @Ignore
     private String rb03a = StringUtils.EMPTY;
+    @Ignore
     private String rb03b = StringUtils.EMPTY;
+    @Ignore
     private String rb10 = StringUtils.EMPTY;
+    @Ignore
     private String rb11 = StringUtils.EMPTY;
+    @Ignore
     private String rb11a = StringUtils.EMPTY;
+    @Ignore
     private String rb11b = StringUtils.EMPTY;
+    @Ignore
     private String rb12 = StringUtils.EMPTY;
+    @Ignore
     private String rb13 = StringUtils.EMPTY;
+    @Ignore
     private String rb14 = StringUtils.EMPTY;
+    @Ignore
     private String rb15 = StringUtils.EMPTY;
-
+    @Ignore
     private long ageInMonths;
 
 
@@ -163,11 +193,12 @@ public class Mwra extends BaseObservable implements Observable {
         setRound(MainApp.ROUND);
         setVillageCode(MainApp.selectedVillage);
         setUcCode(MainApp.selectedUC);
-        setSNo(MainApp.followUpsScheHHList.get(position).getRb01());
+        setRegRound(MainApp.households.getRegRound());
+        setFRound("");
+        //setSNo(MainApp.followUpsScheHHList.get(position).getRb01());
     }
 
-
-    public void populateMeta(int position) {
+    public void populateMetaFollowups() {
 
         setSysDate(MainApp.households.getSysDate());
         setUuid(MainApp.households.getUid());  // not applicable in Form table
@@ -178,7 +209,12 @@ public class Mwra extends BaseObservable implements Observable {
         setRound(MainApp.ROUND);
         setVillageCode(MainApp.selectedVillage);
         setUcCode(MainApp.selectedUC);
+        setSNo(MainApp.followUpsScheHHList.get(position).getRb01());
+        setFRound("1");
+        setRegRound("");
     }
+
+
 
     @Bindable
     public String getRound() {
@@ -187,7 +223,7 @@ public class Mwra extends BaseObservable implements Observable {
 
     public void setRound(String round) {
         this.round = round;
-        notifyPropertyChanged(BR.round);
+        notifyChange(BR.round);
     }
 
 
@@ -225,6 +261,21 @@ public class Mwra extends BaseObservable implements Observable {
         this.uuid = uuid;
     }
 
+    public String getRegRound() {
+        return regRound;
+    }
+
+    public void setRegRound(String regRound) {
+        this.regRound = regRound;
+    }
+
+    public String getFRound() {
+        return fRound;
+    }
+
+    public void setFRound(String fRound) {
+        this.fRound = fRound;
+    }
 
     public String getUserName() {
         return userName;
@@ -512,7 +563,7 @@ public class Mwra extends BaseObservable implements Observable {
 
     public void setRb03a(String rb03a) {
         this.rb03a = rb03a;
-        notifyPropertyChanged(BR.rb03a);
+        notifyChange(BR.rb03a);
     }
 
     @Bindable
@@ -522,7 +573,7 @@ public class Mwra extends BaseObservable implements Observable {
 
     public void setRb03b(String rb03b) {
         this.rb03b = rb03b;
-        notifyPropertyChanged(BR.rb03b);
+        notifyChange(BR.rb03b);
     }
 
     @Bindable
@@ -532,7 +583,7 @@ public class Mwra extends BaseObservable implements Observable {
 
     public void setRb10(String rb10) {
         this.rb10 = rb10;
-        notifyPropertyChanged(BR.rb10);
+        notifyChange(BR.rb10);
     }
 
     @Bindable
@@ -542,7 +593,7 @@ public class Mwra extends BaseObservable implements Observable {
 
     public void setRb11(String rb11) {
         this.rb11 = rb11;
-        notifyPropertyChanged(BR.rb11);
+        notifyChange(BR.rb11);
     }
 
     @Bindable
@@ -552,7 +603,7 @@ public class Mwra extends BaseObservable implements Observable {
 
     public void setRb11a(String rb11a) {
         this.rb11a = rb11a;
-        notifyPropertyChanged(BR.rb11a);
+        notifyChange(BR.rb11a);
     }
 
     @Bindable
@@ -562,7 +613,7 @@ public class Mwra extends BaseObservable implements Observable {
 
     public void setRb11b(String rb11b) {
         this.rb11b = rb11b;
-        notifyPropertyChanged(BR.rb11b);
+        notifyChange(BR.rb11b);
     }
 
     @Bindable
@@ -572,7 +623,7 @@ public class Mwra extends BaseObservable implements Observable {
 
     public void setRb12(String rb12) {
         this.rb12 = rb12;
-        notifyPropertyChanged(BR.rb12);
+        notifyChange(BR.rb12);
     }
 
     @Bindable
@@ -582,7 +633,7 @@ public class Mwra extends BaseObservable implements Observable {
 
     public void setRb13(String rb13) {
         this.rb13 = rb13;
-        notifyPropertyChanged(BR.rb13);
+        notifyChange(BR.rb13);
     }
 
     @Bindable
@@ -592,7 +643,7 @@ public class Mwra extends BaseObservable implements Observable {
 
     public void setRb14(String rb14) {
         this.rb14 = rb14;
-        notifyPropertyChanged(BR.rb14);
+        notifyChange(BR.rb14);
     }
 
     @Bindable
@@ -602,7 +653,7 @@ public class Mwra extends BaseObservable implements Observable {
 
     public void setRb15(String rb15) {
         this.rb15 = rb15;
-        notifyPropertyChanged(BR.rb15);
+        notifyChange(BR.rb15);
     }
 
     private synchronized void notifyChange(int propertyId) {
@@ -680,6 +731,17 @@ public class Mwra extends BaseObservable implements Observable {
 
             JSONObject json = null;
             json = new JSONObject(string);
+            this.rb01 = json.getString("rb01");
+            this.rb01a = json.getString("rb01a");
+            this.round = json.getString("ROUND");
+            this.rb02 = json.getString("rb02");
+            this.rb03 = json.getString("rb03");
+            this.rb04 = json.getString("rb04");
+            this.rb05 = json.getString("rb05");
+            this.rb06 = json.getString("rb06");
+            this.rb07 = json.getString("rb07");
+            this.rb08 = json.getString("rb08");
+            this.rb09 = json.getString("rb09");
             this.rb03a = json.getString("rb03A");
             this.rb03b = json.getString("rb03a");
             this.rb11a = json.getString("rb05a");
@@ -719,16 +781,27 @@ public class Mwra extends BaseObservable implements Observable {
         JSONObject json = new JSONObject();
 
 
-        json.put("rb03a", rb03a)
-                .put("rb03b", rb03b)
-                .put("rb05a", rb11a)
-                .put("rb05b", rb11b)
-                .put("rb10", rb10)
-                .put("rb11", rb11)
-                .put("rb12", rb12)
-                .put("rb13", rb13)
-                .put("rb14", rb14)
-                .put("rb15", rb15);
+        json.put("rb01", rb01)
+                .put("rb01a", rb01a)
+                .put("ROUND", round)
+                .put("rb02", rb02)
+                .put("rb03", rb03)
+                .put("rb03a",rb03a)
+                .put("rb03b",rb03b)
+                .put("rb04", rb04)
+                .put("rb05", rb05)
+                .put("rb06", rb06)
+                .put("rb07", rb07)
+                .put("rb08", rb08)
+                .put("rb09", rb09)
+                .put("rb010",rb10)
+                .put("rb11",rb11)
+                .put("rb11a",rb11a)
+                .put("rb11b",rb11b)
+                .put("rb12",rb12)
+                .put("rb13",rb13)
+                .put("rb14",rb14)
+                .put("rb15",rb15);
 
         return json.toString();
     }

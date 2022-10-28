@@ -2,26 +2,17 @@ package edu.aku.hassannaqvi.dss_matiari.ui.sections;
 
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.followUpsScheHHList;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.followups;
-import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.fpHouseholds;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.households;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.mwra;
-import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.mwraCount;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.mwraStatus;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.selectedFemale;
-import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.selectedHhNO;
-import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.selectedUC;
-import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.selectedVillage;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.sharedPref;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
-import android.widget.CompoundButton;
 import android.widget.RadioGroup;
-import android.widget.Switch;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -37,20 +28,18 @@ import java.util.Calendar;
 import java.util.Locale;
 
 import edu.aku.hassannaqvi.dss_matiari.R;
-import edu.aku.hassannaqvi.dss_matiari.contracts.TableContracts;
 import edu.aku.hassannaqvi.dss_matiari.core.MainApp;
 import edu.aku.hassannaqvi.dss_matiari.database.DatabaseHelper;
-import edu.aku.hassannaqvi.dss_matiari.databinding.ActivitySectionCxBinding;
-import edu.aku.hassannaqvi.dss_matiari.models.Followups;
+import edu.aku.hassannaqvi.dss_matiari.databinding.ActivitySectionCBinding;
+import edu.aku.hassannaqvi.dss_matiari.databinding.ActivitySectionEBinding;
 import edu.aku.hassannaqvi.dss_matiari.models.Mwra;
 import edu.aku.hassannaqvi.dss_matiari.models.Outcome;
 import edu.aku.hassannaqvi.dss_matiari.room.DssRoomDatabase;
-import edu.aku.hassannaqvi.dss_matiari.utils.DateUtilsKt;
 
-public class SectionCxActivity extends AppCompatActivity {
+public class SectionCActivity extends AppCompatActivity {
 
     private static final String TAG = "SectionCxActivity";
-    ActivitySectionCxBinding bi;
+    ActivitySectionCBinding bi;
     private DatabaseHelper db;
 
 
@@ -59,7 +48,7 @@ public class SectionCxActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         String lang = sharedPref.getString("lang", "1");
         setTheme(lang.equals("1") ? R.style.AppThemeEnglish1 : R.style.AppThemeUrdu);
-        bi = DataBindingUtil.setContentView(this, R.layout.activity_section_cx);
+        bi = DataBindingUtil.setContentView(this, R.layout.activity_section_c);
         db = MainApp.appInfo.dbHelper;
 
 
@@ -94,15 +83,15 @@ public class SectionCxActivity extends AppCompatActivity {
 
         bi.btnContinue.setText(MainApp.mwra.getUid().equals("") ? "Save" : "Update");
 
-        bi.rc11.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+        bi.rb15.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
-                if(bi.rc1101.isChecked())
+                if(bi.rb1501.isChecked())
                 {
                     MainApp.totalChildCount = 1;
-                }else if(bi.rc1102.isChecked()){
+                }else if(bi.rb1502.isChecked()){
                     MainApp.totalChildCount = 2;
-                }else if (bi.rc1103.isChecked())
+                }else if (bi.rb1503.isChecked())
                 {
                     MainApp.totalChildCount = 3;
                 }
@@ -113,18 +102,18 @@ public class SectionCxActivity extends AppCompatActivity {
 
         if(!MainApp.households.getVisitNo().equals("") && Integer.parseInt(households.getVisitNo()) == 2)
         {
-            bi.rc0408.setEnabled(true);
-            bi.rc0404.setEnabled(false);
-            bi.rc0404.setChecked(false);
+            bi.rb1008.setEnabled(true);
+            bi.rb1004.setEnabled(false);
+            bi.rb1004.setChecked(false);
         }else{
-            bi.rc0408.setEnabled(false);
-            bi.rc0404.setEnabled(true);
+            bi.rb1008.setEnabled(false);
+            bi.rb1004.setEnabled(true);
         }
 
-        bi.rc04.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+        bi.rb10.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
-                if(bi.rc0404.isChecked())
+                if(bi.rb1004.isChecked())
                 {
                     mwraStatus.put(followUpsScheHHList.get(selectedFemale).getMuid(), false);
                 }else{
@@ -215,28 +204,28 @@ public class SectionCxActivity extends AppCompatActivity {
         if (!formValidation()) return;
         if (mwra.getUid().equals("") ? insertNewRecord() : updateDB()) {
 
-            if(bi.rc0401.isChecked()) {
+            if(bi.rb1001.isChecked()) {
 
-                switch (followups.getRb06()) {
+                switch (mwra.getRb06()) {
 
                     // Married in Previous Round
                     case "1":
                         // Pregnant
                         if (mwra.getRb07().equals("1")) {
                             // If pregnancy continued
-                            if (bi.rc0801.isChecked()) {
+                            if (bi.rb1201.isChecked()) {
                                 setResult(RESULT_OK);
                                 //finish();
                             } else {  // If Pregnancy ended
-                                if (bi.rc0901.isChecked()) // If Live Birth
+                                if (bi.rb1201.isChecked()) // If Live Birth
                                 {
-                                    Intent forwardIntent = new Intent(this, SectionOutcomeActivity.class).putExtra("complete", true);
+                                    Intent forwardIntent = new Intent(this, SectionEActivity.class).putExtra("complete", true);
                                     forwardIntent.setFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT);
                                     setResult(RESULT_OK, forwardIntent);
                                     startActivity(forwardIntent);
                                     //finish();
                                 } else { // If not live birth
-                                    Intent forwardIntent = new Intent(this, SectionCx2Activity.class).putExtra("complete", true);
+                                    Intent forwardIntent = new Intent(this, SectionDActivity.class).putExtra("complete", true);
                                     forwardIntent.setFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT);
                                     setResult(RESULT_OK, forwardIntent);
                                     startActivity(forwardIntent);
@@ -244,7 +233,7 @@ public class SectionCxActivity extends AppCompatActivity {
                                 }
                             }
                         } else {   // Not Pregnant
-                            Intent forwardIntent = new Intent(this, SectionCx2Activity.class).putExtra("complete", true);
+                            Intent forwardIntent = new Intent(this, SectionDActivity.class).putExtra("complete", true);
                             forwardIntent.setFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT);
                             setResult(RESULT_OK, forwardIntent);
                             startActivity(forwardIntent);
@@ -260,12 +249,12 @@ public class SectionCxActivity extends AppCompatActivity {
                         // Pregnant
                         if (mwra.getRb07().equals("1")) {
 
-                            if (bi.rc0801.isChecked()) {  // If Pregnancy Continued
+                            if (bi.rb1201.isChecked()) {  // If Pregnancy Continued
                                 setResult(RESULT_OK);
                                 //finish();
                             } else {     // If Pregnancy ended
-                                if (bi.rc0901.isChecked()) {    // Live Birth
-                                    Intent forwardIntent = new Intent(this, SectionOutcomeActivity.class).putExtra("complete", true);
+                                if (bi.rb1401.isChecked()) {    // Live Birth
+                                    Intent forwardIntent = new Intent(this, SectionEActivity.class).putExtra("complete", true);
                                     forwardIntent.setFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT);
                                     setResult(RESULT_OK, forwardIntent);
                                     startActivity(forwardIntent);
@@ -277,8 +266,8 @@ public class SectionCxActivity extends AppCompatActivity {
                             }
                         } else {      // Not Pregnant
                             // Marital status changed
-                            if (bi.rc0601.isChecked()) {
-                                Intent forwardIntent = new Intent(this, SectionCx2Activity.class).putExtra("complete", true);
+                            if (bi.rb1401.isChecked()) {
+                                Intent forwardIntent = new Intent(this, SectionDActivity.class).putExtra("complete", true);
                                 forwardIntent.setFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT);
                                 setResult(RESULT_OK, forwardIntent);
                                 startActivity(forwardIntent);
@@ -296,12 +285,12 @@ public class SectionCxActivity extends AppCompatActivity {
                     case "3":
                         // Pregnant
                         if (mwra.getRb07().equals("1")) {
-                            if (bi.rc0801.isChecked()) {  // If Pregnancy Continued
+                            if (bi.rb1201.isChecked()) {  // If Pregnancy Continued
                                 setResult(RESULT_OK);
                                 //finish();
                             } else {     // If Pregnancy ended
-                                if (bi.rc0901.isChecked()) {    // Live Birth
-                                    Intent forwardIntent = new Intent(this, SectionOutcomeActivity.class).putExtra("complete", true);
+                                if (bi.rb1401.isChecked()) {    // Live Birth
+                                    Intent forwardIntent = new Intent(this, SectionEActivity.class).putExtra("complete", true);
                                     forwardIntent.setFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT);
                                     setResult(RESULT_OK, forwardIntent);
                                     startActivity(forwardIntent);
@@ -313,8 +302,8 @@ public class SectionCxActivity extends AppCompatActivity {
                             }
                         } else {      // Not Pregnant
                             // Marital status changed
-                            if (bi.rc0601.isChecked()) {
-                                Intent forwardIntent = new Intent(this, SectionCx2Activity.class).putExtra("complete", true);
+                            if (bi.rb0601.isChecked()) {
+                                Intent forwardIntent = new Intent(this, SectionDActivity.class).putExtra("complete", true);
                                 forwardIntent.setFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT);
                                 setResult(RESULT_OK, forwardIntent);
                                 startActivity(forwardIntent);
@@ -332,12 +321,12 @@ public class SectionCxActivity extends AppCompatActivity {
                         // Pregnant
                         if (mwra.getRb07().equals("1")) {
 
-                            if (bi.rc0801.isChecked()) {  // If Pregnancy Continued
+                            if (bi.rb1201.isChecked()) {  // If Pregnancy Continued
                                 setResult(RESULT_OK);
                                 //finish();
                             } else {     // If Pregnancy ended
-                                if (bi.rc0901.isChecked()) {    // Live Birth
-                                    Intent forwardIntent = new Intent(this, SectionOutcomeActivity.class).putExtra("complete", true);
+                                if (bi.rb1401.isChecked()) {    // Live Birth
+                                    Intent forwardIntent = new Intent(this, SectionEActivity.class).putExtra("complete", true);
                                     forwardIntent.setFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT);
                                     setResult(RESULT_OK, forwardIntent);
                                     startActivity(forwardIntent);
@@ -349,8 +338,8 @@ public class SectionCxActivity extends AppCompatActivity {
                             }
                         } else {      // Not Pregnant
                             // Marital status changed
-                            if (bi.rc0601.isChecked()) {
-                                Intent forwardIntent = new Intent(this, SectionCx2Activity.class).putExtra("complete", true);
+                            if (bi.rb0601.isChecked()) {
+                                Intent forwardIntent = new Intent(this, SectionDActivity.class).putExtra("complete", true);
                                 forwardIntent.setFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT);
                                 setResult(RESULT_OK, forwardIntent);
                                 startActivity(forwardIntent);
@@ -365,15 +354,15 @@ public class SectionCxActivity extends AppCompatActivity {
                     //finish();
                     case "4": // Unmarried in previous round
                         // if get married in current round
-                        if (!bi.rc0604.isChecked()) {
-                            Intent forwardIntent = new Intent(this, SectionCx2Activity.class).putExtra("complete", true);
+                        if (!bi.rb0604.isChecked()) {
+                            Intent forwardIntent = new Intent(this, SectionDActivity.class).putExtra("complete", true);
                             forwardIntent.setFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT);
                             setResult(RESULT_OK, forwardIntent);
                             startActivity(forwardIntent);
                             //finish();
 
                             // if still unmarried
-                        } else if (bi.rc0604.isChecked()) {
+                        } else if (bi.rb0604.isChecked()) {
                             setResult(RESULT_OK);
                             //finish();
                         }
@@ -397,7 +386,7 @@ public class SectionCxActivity extends AppCompatActivity {
             insertFpHousehold();
         }*/
 
-        mwra.populateMeta();
+        mwra.populateMetaFollowups();
 
         long rowId = 0;
         try {
