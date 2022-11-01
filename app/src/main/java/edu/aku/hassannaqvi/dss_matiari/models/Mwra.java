@@ -742,10 +742,10 @@ public class Mwra extends BaseObservable implements Observable {
             this.rb07 = json.getString("rb07");
             this.rb08 = json.getString("rb08");
             this.rb09 = json.getString("rb09");
-            this.rb03a = json.getString("rb03A");
-            this.rb03b = json.getString("rb03a");
-            this.rb11a = json.getString("rb05a");
-            this.rb11b = json.getString("rb05b");
+            this.rb03a = json.getString("rb03a");
+            this.rb03b = json.getString("rb03b");
+            this.rb11a = json.getString("rb11a");
+            this.rb11b = json.getString("rb11b");
             this.rb10 = json.getString("rb10");
             this.rb11 = json.getString("rb11");
             this.rb12 = json.getString("rb12");
@@ -794,7 +794,7 @@ public class Mwra extends BaseObservable implements Observable {
                 .put("rb07", rb07)
                 .put("rb08", rb08)
                 .put("rb09", rb09)
-                .put("rb010",rb10)
+                .put("rb10",rb10)
                 .put("rb11",rb11)
                 .put("rb11a",rb11a)
                 .put("rb11b",rb11b)

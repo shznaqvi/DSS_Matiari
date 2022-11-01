@@ -73,7 +73,8 @@ interface MwraDao {
         {
             val tempMwra = Mwra()
             return tempMwra
-
+        } else {
+            mwra.sCHydrate(mwra.sc)
         }
         return mwra
     }
