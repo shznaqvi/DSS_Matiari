@@ -51,8 +51,8 @@ interface MwraDao {
 
     @Query("SELECT Count(*) AS mwraCount" +
             " FROM " + MWRATable.TABLE_NAME +
-            " WHERE " + MWRATable.COLUMN_UUID + " LIKE :uid "  )
-    fun getMWRACountBYUUID(uid: String) : Int
+            " WHERE " + MWRATable.COLUMN_UUID + " LIKE :uid AND " + MWRATable.COLUMN_REGROUND + " LIKE :regRound"  )
+    fun getMWRACountBYUUID(uid: String, regRound: String) : Int
 
 
     @Query("SELECT * FROM " + MWRATable.TABLE_NAME + " WHERE "

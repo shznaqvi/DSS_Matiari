@@ -387,6 +387,7 @@ public class SectionCActivity extends AppCompatActivity {
         }*/
 
         mwra.populateMetaFollowups();
+        mwra.setRb07("");
 
         long rowId = 0;
         try {

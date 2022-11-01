@@ -85,7 +85,7 @@ public class HouseholdAdapter extends RecyclerView.Adapter<HouseholdAdapter.View
 
         DatabaseHelper db = MainApp.appInfo.dbHelper;
         //int totalMWRA = db.getMWRACountBYUUID(households.getUid());
-        int totalMWRA = DssRoomDatabase.getDbInstance().mwraDao().getMWRACountBYUUID(households.getUid());
+        int totalMWRA = DssRoomDatabase.getDbInstance().mwraDao().getMWRACountBYUUID(households.getUid(), "1");
 
         try {
             hhNo.setText(getStringFromJson(households.getSA(), "ra07") + "-" + getStringFromJson(households.getSA(), "ra09"));

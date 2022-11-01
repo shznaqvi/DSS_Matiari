@@ -210,7 +210,7 @@ public class FPMwraActivity extends AppCompatActivity {
 
         //int newMwra = db.getMWRACountBYUUID(fpHouseholds.getUid());
 
-        int newMwra = DssRoomDatabase.getDbInstance().mwraDao().getMWRACountBYUUID(households.getUid());
+        int newMwra = DssRoomDatabase.getDbInstance().mwraDao().getMWRACountBYUUID(households.getUid(), "1");
 
 
         // int newMwra = mwraCount - followUpsScheMWRAList.size();

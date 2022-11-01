@@ -92,7 +92,8 @@ interface HouseholdsDao {
         return household
     }
 
-    @Query("SELECT * FROM " + HouseholdTable.TABLE_NAME + " ORDER BY " + HouseholdTable.COLUMN_ID + " DESC")
+    @Query("SELECT * FROM " + HouseholdTable.TABLE_NAME + " ORDER BY "
+            + HouseholdTable.COLUMN_ID + " DESC")
     fun getAllHouseholds(): List<Households>
 
 }
