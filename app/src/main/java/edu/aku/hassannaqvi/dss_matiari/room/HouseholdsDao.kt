@@ -35,11 +35,18 @@ interface HouseholdsDao {
             " GROUP BY " + HouseholdTable.COLUMN_VILLAGE_CODE)
     fun getMaxStructure(uc : String, vCode : String) : Int
 
-    @Throws(JSONException::class)
     @Query("SELECT * FROM " + HouseholdTable.TABLE_NAME + " WHERE " + HouseholdTable.COLUMN_UC_CODE + " LIKE :uc AND "
             + HouseholdTable.COLUMN_VILLAGE_CODE + " LIKE :village AND " + HouseholdTable.COLUMN_REGROUND + " = :regRound ORDER BY "
             + HouseholdTable.COLUMN_ID + " ASC")
-    fun getHouseholdBYVillage(uc: String, village: String, regRound: String): List<Households>
+    fun getHouseholdBYVillage_internal(uc: String, village: String, regRound: String): List<Households>
+
+    fun getHouseholdBYVillage(uc: String, village: String, regRound: String): List<Households> {
+        val householdsList = getHouseholdBYVillage_internal(uc, village, regRound)
+        householdsList.forEach {
+            it.s1Hydrate(it.sa)
+        }
+        return householdsList
+    }
 
     @Query("SELECT " + "MAX(" + HouseholdTable.COLUMN_HOUSEHOLD_NO + ") AS " + HouseholdTable.COLUMN_HOUSEHOLD_NO +
             " FROM " + HouseholdTable.TABLE_NAME +
@@ -60,7 +67,9 @@ interface HouseholdsDao {
             "%04d",
             hdssidSplit[2].toInt())
 
-        return getHouseholdByHDSSIDASC_internal(hdssid, newHDSSID)
+        val household = getHouseholdByHDSSIDASC_internal(hdssid, newHDSSID)
+        household?.s1Hydrate(household.sa)
+        return household
     }
 
     @Query("SELECT * FROM " + HouseholdTable.TABLE_NAME + " WHERE " + HouseholdTable.COLUMN_HDSSID + " LIKE :hdssid OR "
@@ -89,7 +98,7 @@ interface HouseholdsDao {
 
             return tempHousehold
         }else{
-            household.s1Hydrate(household.sAtoString())
+            household.s1Hydrate(household.sa)
         }
         return household
     }

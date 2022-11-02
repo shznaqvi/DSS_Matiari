@@ -99,16 +99,16 @@ public class MwraActivity extends AppCompatActivity {
         db = MainApp.appInfo.dbHelper;
         MainApp.mwraList = new ArrayList<>();
         Log.d(TAG, "onCreate: mwralist " + mwraList.size());
-        try {
+//        try {
 
             //MainApp.mwraList = db.getAllMWRAByHH(selectedUC, MainApp.households.getVillageCode(), MainApp.households.getStructureNo(), MainApp.households.getHhNo());
 
-            mwraList = Objects.requireNonNull(DssRoomDatabase.getDbInstance()).mwraDao().getAllMWRAByHH(selectedUC, MainApp.households.getVillageCode(), MainApp.households.getStructureNo(), MainApp.households.getHhNo(), "1");
-        } catch (JSONException e) {
-            e.printStackTrace();
-            Toast.makeText(this, "JSONException: " + e.getMessage(), Toast.LENGTH_SHORT).show();
-            Log.d(TAG, "onCreate (JSONException): " + e.getMessage());
-        }
+            mwraList = DssRoomDatabase.getDbInstance().mwraDao().getAllMWRAByHH(selectedUC, MainApp.households.getVillageCode(), MainApp.households.getStructureNo(), MainApp.households.getHhNo(), "1");
+//        } catch (JSONException e) {
+//            e.printStackTrace();
+//            Toast.makeText(this, "JSONException: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+//            Log.d(TAG, "onCreate (JSONException): " + e.getMessage());
+//        }
 
 
 

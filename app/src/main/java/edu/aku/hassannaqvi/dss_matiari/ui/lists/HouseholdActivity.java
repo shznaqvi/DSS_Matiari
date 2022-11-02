@@ -78,15 +78,15 @@ public class HouseholdActivity extends AppCompatActivity {
         MainApp.householdList = new ArrayList<>();
 
         Log.d(TAG, "onCreate: householdlist " + MainApp.householdList.size());
-        try {
+//        try {
 
 //            MainApp.householdList = db.getHouseholdBYVillage(selectedUC, MainApp.selectedVillage);
-            MainApp.householdList = Objects.requireNonNull(DssRoomDatabase.getDbInstance()).householdsDao().getHouseholdBYVillage(selectedUC, selectedVillage, "1");
-        } catch (JSONException e) {
-            e.printStackTrace();
-            Toast.makeText(this, "JSONException: " + e.getMessage(), Toast.LENGTH_SHORT).show();
-            Log.d(TAG, "onCreate (JSONException): " + e.getMessage());
-        }
+            MainApp.householdList = DssRoomDatabase.getDbInstance().householdsDao().getHouseholdBYVillage(selectedUC, selectedVillage, "1");
+//        } catch (JSONException e) {
+//            e.printStackTrace();
+//            Toast.makeText(this, "JSONException: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+//            Log.d(TAG, "onCreate (JSONException): " + e.getMessage());
+//        }
 
         hhAdapter = new HouseholdAdapter(this, MainApp.householdList);
         bi.rvHouseholds.setAdapter(hhAdapter);
