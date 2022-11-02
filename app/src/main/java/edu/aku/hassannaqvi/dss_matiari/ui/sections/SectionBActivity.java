@@ -214,7 +214,7 @@ public class SectionBActivity extends AppCompatActivity {
         });
     }
 
-    public void btnContinue(View view) {
+    public void btnContinue(View view) throws JSONException {
         if (!formValidation()) return;
         //if (MainApp.mwra.getUid().equals("") ? insertNewRecord() && insertNewFollowupRecord() : updateDB()) {
         if (MainApp.mwra.getUid().equals("") ? insertNewRecord() : updateDB()) {
@@ -227,7 +227,7 @@ public class SectionBActivity extends AppCompatActivity {
 
 
 
-    private boolean insertNewRecord() {
+    private boolean insertNewRecord() throws JSONException {
         db = MainApp.appInfo.getDbHelper();
        /* if (MainApp.households.getRa18().equals("999") && fpHouseholds.getUid().equals("")) {
             insertFpHousehold();
@@ -246,6 +246,7 @@ public class SectionBActivity extends AppCompatActivity {
         mwra.setId(rowId);
         if (rowId > 0) {
             mwra.setUid(mwra.getDeviceId() + mwra.getId());
+            mwra.setSB(mwra.sBtoString());
             DssRoomDatabase.getDbInstance().mwraDao().updateMwra(mwra);
             //db.updatesMWRAColumn(TableContracts.MWRATable.COLUMN_UID, mwra.getUid());
             return true;
@@ -256,7 +257,7 @@ public class SectionBActivity extends AppCompatActivity {
     }
 
 
-    private boolean insertNewFollowupRecord() {
+    /*private boolean insertNewFollowupRecord() {
         db = MainApp.appInfo.getDbHelper();
         //followups.populateMeta();
         long rowId = 0;
@@ -281,7 +282,7 @@ public class SectionBActivity extends AppCompatActivity {
             Toast.makeText(this, "Updating Database... ERROR!", Toast.LENGTH_SHORT).show();
             return false;
         }
-    }
+    }*/
 
 
 
@@ -301,15 +302,16 @@ public class SectionBActivity extends AppCompatActivity {
             // concate last char from uid to alter and create new unique uid
 
             mwra.setDeviceId(mwra.getDeviceId() + "_" + mwra.getDeviceId().substring(mwra.getDeviceId().length() - 1));
-            DssRoomDatabase.getDbInstance().mwraDao().updateMwra(mwra);
+            DssRoomDatabase.getDbInstance().mwraDao().updateMwra(updateMwra);
             //db.updatesMWRAColumn(TableContracts.MWRATable.COLUMN_DEVICEID, mwra.getDeviceId());
             int repeatCount = (mwra.getDeviceId().length() - 16) / 2;
 
             // new UID
             String newUID = mwra.getDeviceId().substring(0, 16) + mwra.getId() + "_" + repeatCount;
             mwra.setUid(newUID);
+            updateMwra.setUid(newUID);
 
-            DssRoomDatabase.getDbInstance().mwraDao().updateMwra(mwra);
+            DssRoomDatabase.getDbInstance().mwraDao().updateMwra(updateMwra);
             //db.updatesMWRAColumn(TableContracts.MWRATable.COLUMN_UID, newUID);
 
 

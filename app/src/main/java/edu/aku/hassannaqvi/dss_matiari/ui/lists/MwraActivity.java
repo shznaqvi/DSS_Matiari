@@ -109,6 +109,8 @@ public class MwraActivity extends AppCompatActivity {
             Log.d(TAG, "onCreate (JSONException): " + e.getMessage());
         }
 
+
+
         fmAdapter = new MwraAdapter(this, MainApp.mwraList);
         bi.rvMembers.setAdapter(fmAdapter);
         bi.rvMembers.setLayoutManager(new LinearLayoutManager(this));

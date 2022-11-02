@@ -88,6 +88,8 @@ interface HouseholdsDao {
             updateHousehold(tempHousehold)
 
             return tempHousehold
+        }else{
+            household.s1Hydrate(household.sAtoString())
         }
         return household
     }

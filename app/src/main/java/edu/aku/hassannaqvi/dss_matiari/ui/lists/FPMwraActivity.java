@@ -44,6 +44,7 @@ import edu.aku.hassannaqvi.dss_matiari.models.Households;
 import edu.aku.hassannaqvi.dss_matiari.models.Mwra;
 import edu.aku.hassannaqvi.dss_matiari.models.OutcomeFollowups;
 import edu.aku.hassannaqvi.dss_matiari.room.DssRoomDatabase;
+import edu.aku.hassannaqvi.dss_matiari.ui.EndingActivity;
 import edu.aku.hassannaqvi.dss_matiari.ui.FPEndingActivity;
 import edu.aku.hassannaqvi.dss_matiari.ui.sections.SectionBActivity;
 
@@ -366,7 +367,7 @@ public class FPMwraActivity extends AppCompatActivity {
 
     private void proceedSelect() {
         Toast.makeText(this, "proceedSelect()", Toast.LENGTH_SHORT).show();
-            Intent i = new Intent(this, FPEndingActivity.class);
+            Intent i = new Intent(this, EndingActivity.class);
             i.setFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT);
             //if(mwraStatus.containsValue(false))
 

@@ -204,7 +204,7 @@ public class IdentificationActivity extends AppCompatActivity {
                 openIntent = new Intent(this, EndingActivity.class).putExtra("complete", false);
                 break;
             case 2:
-                openIntent = new Intent(this, FPEndingActivity.class).putExtra("complete", false);
+                openIntent = new Intent(this, EndingActivity.class).putExtra("complete", false);
 
 
 
