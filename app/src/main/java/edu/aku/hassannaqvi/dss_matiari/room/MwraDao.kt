@@ -38,6 +38,8 @@ interface MwraDao {
 
 
 
+
+    @Throws(JSONException ::class)
     @Query("SELECT * FROM " + MWRATable.TABLE_NAME + " WHERE " +
         MWRATable.COLUMN_UC_CODE + " LIKE :uc AND "
                 + MWRATable.COLUMN_VILLAGE_CODE + " LIKE :village AND "
@@ -49,7 +51,7 @@ interface MwraDao {
 
 
     @Throws(JSONException ::class)
-    fun getAllMWRAByHH(uc : String, village : String, structure : String, hhNo: String, regRound : String) : List<Mwra>
+    fun getAllMWRAByHH(uc: String, village: String, structure: String, hhNo: String, regRound: String) : List<Mwra>
     {
         val mwra = ArrayList<Mwra>()
         mwra.add(getAllMWRAByHH_internal(uc, village, structure, hhNo, regRound))

@@ -31,6 +31,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import org.json.JSONException;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 import edu.aku.hassannaqvi.dss_matiari.R;
 import edu.aku.hassannaqvi.dss_matiari.adapters.MwraAdapter;
@@ -102,7 +103,7 @@ public class MwraActivity extends AppCompatActivity {
 
             //MainApp.mwraList = db.getAllMWRAByHH(selectedUC, MainApp.households.getVillageCode(), MainApp.households.getStructureNo(), MainApp.households.getHhNo());
 
-            mwraList = DssRoomDatabase.getDbInstance().mwraDao().getAllMWRAByHH(selectedUC, MainApp.households.getVillageCode(), MainApp.households.getStructureNo(), MainApp.households.getHhNo(), "1");
+            mwraList = Objects.requireNonNull(DssRoomDatabase.getDbInstance()).mwraDao().getAllMWRAByHH(selectedUC, MainApp.households.getVillageCode(), MainApp.households.getStructureNo(), MainApp.households.getHhNo(), "1");
         } catch (JSONException e) {
             e.printStackTrace();
             Toast.makeText(this, "JSONException: " + e.getMessage(), Toast.LENGTH_SHORT).show();
