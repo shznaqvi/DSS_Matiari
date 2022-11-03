@@ -177,7 +177,7 @@ public class FPHouseholdAdapter extends RecyclerView.Adapter<FPHouseholdAdapter.
 
                     try {
                         //MainApp.fpHouseholds = db.getFPHouseholdBYHdssid(MainApp.followUpsScheHHList.get(viewHolder.getAdapterPosition()).getHdssid());
-                       households = DssRoomDatabase.getDbInstance().householdsDao().getHouseholdByHDSSIDASC(MainApp.followUpsScheHHList.get(viewHolder.getAdapterPosition()).getHdssid());
+                       households = DssRoomDatabase.getDbInstance().householdsDao().getHouseholdByHDSSIDDSC(MainApp.followUpsScheHHList.get(viewHolder.getAdapterPosition()).getHdssid(), viewHolder.getAdapterPosition());
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }

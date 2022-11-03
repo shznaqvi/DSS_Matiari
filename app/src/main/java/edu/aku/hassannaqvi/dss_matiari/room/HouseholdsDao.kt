@@ -4,6 +4,7 @@
 
 package edu.aku.hassannaqvi.dss_matiari.room
 
+import android.os.Build
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy.REPLACE
@@ -42,8 +43,10 @@ interface HouseholdsDao {
 
     fun getHouseholdBYVillage(uc: String, village: String, regRound: String): List<Households> {
         val householdsList = getHouseholdBYVillage_internal(uc, village, regRound)
-        householdsList.forEach {
-            it.s1Hydrate(it.sa)
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            householdsList.forEach {
+                it.s1Hydrate(it.sa)
+            }
         }
         return householdsList
     }
@@ -80,10 +83,7 @@ interface HouseholdsDao {
     fun getHouseholdByHDSSIDDSC(hdssid : String, position: Int = 0) : Households? {
         // Household number in DSSID was changed to 4-digits to capture more than 999 households
         val hdssidSplit = hdssid.split("-").toTypedArray()
-        val newHDSSID = hdssidSplit[0] + "-" + hdssidSplit[1] + "-" + String.format(
-            "%04d",
-            hdssidSplit[2].toInt()
-        )
+        val newHDSSID = hdssidSplit[0] + "-" + hdssidSplit[1] + "-" + String.format("%04d", hdssidSplit[2].toInt())
 
         //return getHouseholdByHDSSIDDSC_internal(hdssid, newHDSSID)
        val household = getHouseholdByHDSSIDDSC_internal(hdssid, newHDSSID)
@@ -97,9 +97,9 @@ interface HouseholdsDao {
             updateHousehold(tempHousehold)
 
             return tempHousehold
-        }else{
+        }/*else{
             household.s1Hydrate(household.sa)
-        }
+        }*/
         return household
     }
 

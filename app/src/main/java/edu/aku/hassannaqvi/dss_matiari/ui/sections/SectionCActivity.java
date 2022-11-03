@@ -200,7 +200,7 @@ public class SectionCActivity extends AppCompatActivity {
 
 
 
-    public void btnContinue(View view) {
+    public void btnContinue(View view) throws JSONException {
         if (!formValidation()) return;
         if (mwra.getUid().equals("") ? insertNewRecord() : updateDB()) {
 
@@ -380,11 +380,8 @@ public class SectionCActivity extends AppCompatActivity {
     }
 
 
-    private boolean insertNewRecord() {
+    private boolean insertNewRecord() throws JSONException {
         MainApp.outcome = new Outcome();
-        /*if (fpHouseholds.getUid().equals("")) {
-            insertFpHousehold();
-        }*/
 
         mwra.populateMetaFollowups();
         mwra.setRb07("");
@@ -402,6 +399,7 @@ public class SectionCActivity extends AppCompatActivity {
         mwra.setId(rowId);
         if (rowId > 0) {
             mwra.setUid(mwra.getDeviceId() + mwra.getId());
+            mwra.setSC(mwra.sCtoString());
             DssRoomDatabase.getDbInstance().mwraDao().updateMwra(mwra);
             //db.updatesFollowUpsColumn(TableContracts.FollowupsTable.COLUMN_UID, followups.getUid());
             return true;

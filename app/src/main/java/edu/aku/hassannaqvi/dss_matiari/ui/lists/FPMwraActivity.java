@@ -186,6 +186,10 @@ public class FPMwraActivity extends AppCompatActivity {
 
         outcomeFollowups = new OutcomeFollowups();
 
+        if (mwraDone >= followUpsScheMWRAList.size()) {
+            bi.btnContinue.setVisibility(View.VISIBLE);
+        }
+
         // Created object of Household from FollowsSche info for adding new MWRA
         //MainApp.households = new Households();
         /*MainApp.households.setRa01(fpHouseholds.getSysDate().substring(0, 10));
