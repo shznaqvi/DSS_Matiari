@@ -52,15 +52,6 @@ interface MwraDao {
     fun getAllMWRAByHH(uc: String, village: String, structure: String, hhNo: String, regRound: String) : List<Mwra>
     {
         val mwra = getAllMWRAByHH_internal(uc, village, structure, hhNo, regRound)
-//        val tempMwra = Mwra()
-//        if(mwra.size == 0)
-//        {
-//            mwra.add(tempMwra)
-//            return mwra
-//        }else{
-//            tempMwra.sBHydrate(tempMwra.sBtoString())
-//            mwra.add(tempMwra)
-//        }
         mwra.forEach {
             it.sBHydrate(it.sb)
         }
