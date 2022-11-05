@@ -13,7 +13,6 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
-
 import com.validatorcrawler.aliazaz.Validator;
 
 import org.json.JSONException;
@@ -128,7 +127,7 @@ public class SectionEActivity extends AppCompatActivity {
             Log.d(TAG, "insertNewRecord (JSONException): " + e.getMessage());
             return false;
         }
-        outcome.setId(String.valueOf(rowId));
+        outcome.setId(rowId);
         if (rowId > 0) {
             outcome.setUid(outcome.getDeviceId() + outcome.getId());
             db.updatesOutcomeColumn(TableContracts.OutcomeTable.COLUMN_UID, outcome.getUid());

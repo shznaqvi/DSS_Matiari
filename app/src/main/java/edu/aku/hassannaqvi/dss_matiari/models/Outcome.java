@@ -3,10 +3,15 @@ package edu.aku.hassannaqvi.dss_matiari.models;
 import android.database.Cursor;
 import android.util.Log;
 
+import androidx.annotation.NonNull;
 import androidx.databinding.BaseObservable;
 import androidx.databinding.Bindable;
 import androidx.databinding.Observable;
 import androidx.databinding.PropertyChangeRegistry;
+import androidx.room.ColumnInfo;
+import androidx.room.Entity;
+import androidx.room.Ignore;
+import androidx.room.PrimaryKey;
 
 import org.apache.commons.lang3.StringUtils;
 import org.json.JSONException;
@@ -18,76 +23,117 @@ import edu.aku.hassannaqvi.dss_matiari.BR;
 import edu.aku.hassannaqvi.dss_matiari.contracts.TableContracts;
 import edu.aku.hassannaqvi.dss_matiari.core.MainApp;
 
+@Entity(tableName = TableContracts.OutcomeTable.TABLE_NAME)
 public class Outcome extends BaseObservable implements Observable {
 
+
+    @Ignore
     private final String TAG = "Outcome";
     //Not saving in DB
+    @Ignore
     private final LocalDate localDate = null;
+    @Ignore
     private transient PropertyChangeRegistry propertyChangeRegistry = new PropertyChangeRegistry();
+    @Ignore
     private boolean exist = false;
+    @Ignore
     private boolean expanded;
 
     // APP VARIABLES
+    @ColumnInfo(name = TableContracts.OutcomeTable.COLUMN_PROJECT_NAME)
     private String projectName = MainApp.PROJECT_NAME;
 
     // APP VARIABLES
-    private String id = StringUtils.EMPTY;
+    @PrimaryKey @NonNull
+    @ColumnInfo(name = TableContracts.OutcomeTable.COLUMN_ID)
+    private long id = 0;
+
+    @ColumnInfo(name = TableContracts.OutcomeTable.COLUMN_UID)
     private String uid = StringUtils.EMPTY;
+
+    @ColumnInfo(name = TableContracts.OutcomeTable.COLUMN_UUID)
     private String uuid = StringUtils.EMPTY;
+
+    @ColumnInfo(name = TableContracts.OutcomeTable.COLUMN_MUID)
     private String muid = StringUtils.EMPTY;
+
+    @ColumnInfo(name = TableContracts.OutcomeTable.COLUMN_MSNO)
     private String msno = StringUtils.EMPTY;
+
+    @ColumnInfo(name = TableContracts.OutcomeTable.COLUMN_USERNAME)
     private String userName = StringUtils.EMPTY;
+
+    @ColumnInfo(name = TableContracts.OutcomeTable.COLUMN_SYSDATE)
     private String sysDate = StringUtils.EMPTY;
+
+    @ColumnInfo(name = TableContracts.OutcomeTable.COLUMN_HDSSID)
     private String hdssId = StringUtils.EMPTY;
+
+    @ColumnInfo(name = TableContracts.OutcomeTable.COLUMN_UC_CODE)
     private String ucCode = StringUtils.EMPTY;
+
+    @ColumnInfo(name = TableContracts.OutcomeTable.COLUMN_VILLAGE_CODE)
     private String villageCode = StringUtils.EMPTY;
+
+    @ColumnInfo(name = TableContracts.OutcomeTable.COLUMN_HOUSEHOLD_NO)
     private String hhNo = StringUtils.EMPTY;
+
+    @ColumnInfo(name = TableContracts.OutcomeTable.COLUMN_SNO)
     private String sno = StringUtils.EMPTY;
 
+    @ColumnInfo(name = TableContracts.OutcomeTable.COLUMN_SE)
+    private String sE = StringUtils.EMPTY;
+
+    @ColumnInfo(name = TableContracts.OutcomeTable.COLUMN_DEVICEID)
     private String deviceId = StringUtils.EMPTY;
+
+    @ColumnInfo(name = TableContracts.OutcomeTable.COLUMN_DEVICETAGID)
     private String deviceTag = StringUtils.EMPTY;
+
+    @ColumnInfo(name = TableContracts.OutcomeTable.COLUMN_APPVERSION)
     private String appver = StringUtils.EMPTY;
+
+    @ColumnInfo(name = TableContracts.OutcomeTable.COLUMN_ISTATUS)
     private String iStatus = StringUtils.EMPTY;
+
+    @Ignore
     private String iStatus96x = StringUtils.EMPTY;
+
+    @ColumnInfo(name = TableContracts.OutcomeTable.COLUMN_SYNCED)
     private String synced = StringUtils.EMPTY;
+
+    @ColumnInfo(name = TableContracts.OutcomeTable.COLUMN_SYNCED_DATE)
     private String syncDate = StringUtils.EMPTY;
 
+    @Ignore
     private String round = StringUtils.EMPTY;
+    @Ignore
     private String rb02 = StringUtils.EMPTY;
+    @Ignore
     private String rb01a = StringUtils.EMPTY;
 
+    @Ignore
     private String rc12ln = StringUtils.EMPTY;
+    @Ignore
     private String rc12nm = StringUtils.EMPTY;
+    @Ignore
     private String rc12dob = StringUtils.EMPTY;
+    @Ignore
     private String rc12 = StringUtils.EMPTY;
+    @Ignore
     private String rc13 = StringUtils.EMPTY;
+    @Ignore
     private String rc14 = StringUtils.EMPTY;
+    @Ignore
     private String rc14a = StringUtils.EMPTY;
+    @Ignore
     private String rc16 = StringUtils.EMPTY;
 
 
     public Outcome() {
 
-        /*setRound(MainApp.ROUND);
 
-        // TODO: *** THIS IS A BLUNDER *** -- DATE IN ALL LINKED TABLES COMES FROM PARENT TABLE (followups in this case)
-        setSysDate(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.ENGLISH).format(new Date().getTime()));
-        //setSysDate(MainApp.followups.getSysDate());
-        setUserName(MainApp.user.getUserName());
-        setDeviceId(MainApp.deviceid);
-        setAppver(MainApp.appInfo.getAppVersion());
-        if (MainApp.followups != null && MainApp.fpMwra != null ) {
-            setUuid(MainApp.followups.getUid());
-            setRb02(MainApp.followups.getRc02());
-            setRb01a(MainApp.fpMwra.getRa01());
-
-        }
-        setVillageCode(MainApp.selectedVillage);
-        setUcCode(MainApp.selectedUC);
-
-    }*/
     }
-
 
 
     @Bindable
@@ -111,7 +157,6 @@ public class Outcome extends BaseObservable implements Observable {
     }
 
 
-
     @Bindable
     public String getRound() {
         return round;
@@ -132,11 +177,19 @@ public class Outcome extends BaseObservable implements Observable {
     }
 
 
-    public String getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public String getSE() {
+        return sE;
+    }
+
+    public void setSE(String sE) {
+        this.sE = sE;
+    }
+
+    public void setId(long id) {
         this.id = id;
     }
 
@@ -255,19 +308,19 @@ public class Outcome extends BaseObservable implements Observable {
         this.appver = appver;
     }
 
-    public String getiStatus() {
+    public String getIStatus() {
         return iStatus;
     }
 
-    public void setiStatus(String iStatus) {
+    public void setIStatus(String iStatus) {
         this.iStatus = iStatus;
     }
 
-    public String getiStatus96x() {
+    public String getIStatus96x() {
         return iStatus96x;
     }
 
-    public void setiStatus96x(String iStatus96x) {
+    public void setIStatus96x(String iStatus96x) {
         this.iStatus96x = iStatus96x;
     }
 
@@ -380,31 +433,10 @@ public class Outcome extends BaseObservable implements Observable {
     }
 
 
-   /* private synchronized void notifyPropertyChanged(int propertyId) {
-        if (propertyChangeRegistry == null) {
-            propertyChangeRegistry = new PropertyChangeRegistry();
-        }
-        propertyChangeRegistry.notifyPropertyChanged(this, propertyId);
-    }
 
-    @Override
-    public synchronized void addOnPropertyChangedCallback(OnPropertyChangedCallback callback) {
-        if (propertyChangeRegistry == null) {
-            propertyChangeRegistry = new PropertyChangeRegistry();
-        }
-        propertyChangeRegistry.add(callback);
-
-    }
-
-    @Override
-    public synchronized void removeOnPropertyChangedCallback(OnPropertyChangedCallback callback) {
-        if (propertyChangeRegistry != null) {
-            propertyChangeRegistry.remove(callback);
-        }
-    }*/
 
     public Outcome Hydrate(Cursor cursor) throws JSONException {
-        this.id = cursor.getString(cursor.getColumnIndexOrThrow(TableContracts.OutcomeTable.COLUMN_ID));
+        this.id = cursor.getLong(cursor.getColumnIndexOrThrow(TableContracts.OutcomeTable.COLUMN_ID));
         this.uid = cursor.getString(cursor.getColumnIndexOrThrow(TableContracts.OutcomeTable.COLUMN_UID));
         this.uuid = cursor.getString(cursor.getColumnIndexOrThrow(TableContracts.OutcomeTable.COLUMN_UUID));
         this.muid = cursor.getString(cursor.getColumnIndexOrThrow(TableContracts.OutcomeTable.COLUMN_MUID));
@@ -536,24 +568,4 @@ public class Outcome extends BaseObservable implements Observable {
 
     }
 
-    /*public String calcEDD() {
-
-        Calendar cal = Calendar.getInstance();
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
-
-        try {
-            cal.setTime(sdf.parse(getRb08()));// all done
-
-            // Set EDD by default
-            cal.add(Calendar.DAY_OF_YEAR, 7);
-            cal.add(Calendar.MONTH, 9);
-
-            return sdf.format(cal.getTime());
-
-        } catch (ParseException e) {
-            e.printStackTrace();
-            return e.getMessage();
-        }
-
-    }
-*/}
+ }

@@ -8,12 +8,12 @@ import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.sharedPref;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 
+import com.validatorcrawler.aliazaz.Validator;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
-import com.validatorcrawler.aliazaz.Validator;
 
 import org.json.JSONException;
 
@@ -168,10 +168,10 @@ public class SectionFActivity extends AppCompatActivity {
     }
 
     private boolean insertNewRecord() {
-        if (fpHouseholds.getUid().equals("")) {
+        /*if (fpHouseholds.getUid().equals("")) {
             insertFpHousehold();
         }
-
+*/
         outcomeFollowups.populateMeta();
 
         long rowId = 0;

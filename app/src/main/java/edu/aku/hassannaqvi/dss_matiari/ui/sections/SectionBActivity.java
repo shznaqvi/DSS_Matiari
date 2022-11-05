@@ -362,29 +362,5 @@ public class SectionBActivity extends AppCompatActivity {
         return true;
     }
 
-    private boolean insertFpHousehold() {
-        db = MainApp.appInfo.getDbHelper();
-        long rowId = 0;
-        try {
-            rowId = db.addFpHousehold(fpHouseholds);
-        } catch (JSONException e) {
-            e.printStackTrace();
-            Toast.makeText(this, "JSONException(FPHouseholds): " + e.getMessage(), Toast.LENGTH_SHORT).show();
-            Log.d(TAG, "insertNewRecord (JSONException): " + e.getMessage());
-            return false;
-        }
-        fpHouseholds.setId(String.valueOf(rowId));
-        if (rowId > 0) {
-            fpHouseholds.setUid(fpHouseholds.getDeviceId() + fpHouseholds.getId());
 
-            // This not a mistake. It is done on purpose
-            households.setUid(fpHouseholds.getDeviceId() + fpHouseholds.getId());
-
-            db.updatesFPHouseholdsColumn(TableContracts.FPHouseholdTable.COLUMN_UID, fpHouseholds.getUid());
-            return true;
-        } else {
-            Toast.makeText(this, "Updating Database... ERROR!", Toast.LENGTH_SHORT).show();
-            return false;
-        }
-    }
 }

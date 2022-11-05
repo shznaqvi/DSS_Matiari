@@ -95,12 +95,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
 //        Log.d(TAG, "onCreate(users): " + SQL_CREATE_USERS);
 //        db.execSQL(SQL_CREATE_USERS);
-        db.execSQL(SQL_CREATE_HOUSEHOLDS);
-        db.execSQL(SQL_CREATE_FP_HOUSEHOLDS);
+        //db.execSQL(SQL_CREATE_HOUSEHOLDS);
+        //db.execSQL(SQL_CREATE_FP_HOUSEHOLDS);
 //        db.execSQL(CreateTable.SQL_CREATE_MAXHHNO);
-        db.execSQL(SQL_CREATE_MWRA);
-        db.execSQL(SQL_CREATE_FOLLOWUPS);
-        db.execSQL(SQL_CREATE_PREGNANCY);
+        //db.execSQL(SQL_CREATE_MWRA);
+        //db.execSQL(SQL_CREATE_FOLLOWUPS);
+        //db.execSQL(SQL_CREATE_PREGNANCY);
         db.execSQL(SQL_CREATE_OUTCOME);
         db.execSQL(SQL_CREATE_VERSIONAPP);
 //        db.execSQL(SQL_CREATE_VILLAGES);
@@ -148,7 +148,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
     //Addition in DB
-    public Long addHousehold(Households households) throws JSONException {
+    /*public Long addHousehold(Households households) throws JSONException {
 
         // Gets the data repository in write mode
         SQLiteDatabase db = this.getWritableDatabase(DATABASE_PASSWORD);
@@ -206,7 +206,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 MWRATable.COLUMN_NAME_NULLABLE,
                 values);
         return newRowId;
-    }
+    }*/
 
     public Long addFpHousehold(FPHouseholds fpHouseholds) throws JSONException {
         SQLiteDatabase db = this.getWritableDatabase(DATABASE_PASSWORD);
@@ -235,7 +235,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return newRowId;
     }
 
-    public Long addFollowup(Followups followups) throws JSONException {
+    /*public Long addFollowup(Followups followups) throws JSONException {
         SQLiteDatabase db = this.getWritableDatabase(DATABASE_PASSWORD);
         ContentValues values = new ContentValues();
         values.put(FollowupsTable.COLUMN_PROJECT_NAME, followups.getProjectName());
@@ -264,7 +264,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 FollowupsTable.COLUMN_NAME_NULLABLE,
                 values);
         return newRowId;
-    }
+    }*/
 
 
     public Long addOutcomeFollowup(OutcomeFollowups followups) throws JSONException {
@@ -299,7 +299,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return newRowId;
     }
 
-    public Long addPregnancy(Pregnancy pregnancy) throws JSONException {
+    /*public Long addPregnancy(Pregnancy pregnancy) throws JSONException {
         SQLiteDatabase db = this.getWritableDatabase(DATABASE_PASSWORD);
         ContentValues values = new ContentValues();
         values.put(TableContracts.PregnancyTable.COLUMN_PROJECT_NAME, pregnancy.getProjectName());
@@ -324,7 +324,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 TableContracts.PregnancyTable.COLUMN_NAME_NULLABLE,
                 values);
         return newRowId;
-    }
+    }*/
 
     public Long addOutcome(Outcome outcome) throws JSONException {
         SQLiteDatabase db = this.getWritableDatabase(DATABASE_PASSWORD);
@@ -342,7 +342,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         values.put(TableContracts.OutcomeTable.COLUMN_SNO, outcome.getSno());
         values.put(TableContracts.OutcomeTable.COLUMN_HOUSEHOLD_NO, outcome.getHhNo());
         values.put(TableContracts.OutcomeTable.COLUMN_SE, outcome.sEtoString());
-        values.put(TableContracts.OutcomeTable.COLUMN_ISTATUS, outcome.getiStatus());
+        values.put(TableContracts.OutcomeTable.COLUMN_ISTATUS, outcome.getIStatus());
         values.put(TableContracts.OutcomeTable.COLUMN_DEVICETAGID, outcome.getDeviceTag());
         values.put(TableContracts.OutcomeTable.COLUMN_DEVICEID, outcome.getDeviceId());
         values.put(TableContracts.OutcomeTable.COLUMN_APPVERSION, outcome.getAppver());
@@ -392,7 +392,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
 
-    public ArrayList<Households> getHouseholdsByDate(String sysdate) {
+    /*public ArrayList<Households> getHouseholdsByDate(String sysdate) {
 
         SQLiteDatabase db = this.getReadableDatabase(DATABASE_PASSWORD);
         Cursor c = null;
@@ -435,7 +435,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         return allHouseholds;
     }
-
+*/
     public ArrayList<Households> getUnclosedHouseholds() {
 
         SQLiteDatabase db = this.getReadableDatabase(DATABASE_PASSWORD);
@@ -574,7 +574,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
 
-    public int updatesHouseholdColumn(String column, String value) {
+    /*public int updatesHouseholdColumn(String column, String value) {
         SQLiteDatabase db = this.getWritableDatabase(DATABASE_PASSWORD);
 
         ContentValues values = new ContentValues();
@@ -587,9 +587,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 values,
                 selection,
                 selectionArgs);
-    }
+    }*/
 
-    public int updatesMWRAColumn(String column, String value) {
+    /*public int updatesMWRAColumn(String column, String value) {
         SQLiteDatabase db = this.getWritableDatabase(DATABASE_PASSWORD);
 
         ContentValues values = new ContentValues();
@@ -602,9 +602,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 values,
                 selection,
                 selectionArgs);
-    }
+    }*/
 
-    public int updatesFollowUpsScheColumn(String column, String value) {
+    /*public int updatesFollowUpsScheColumn(String column, String value) {
         SQLiteDatabase db = this.getWritableDatabase(DATABASE_PASSWORD);
 
         ContentValues values = new ContentValues();
@@ -617,7 +617,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 values,
                 selection,
                 selectionArgs);
-    }
+    }*/
 
     public int updatesFollowUpsColumn(String column, String value) {
         SQLiteDatabase db = this.getWritableDatabase(DATABASE_PASSWORD);
@@ -714,7 +714,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 selectionArgs);
     }*/
 
-    public int updateEnding() {
+    /*public int updateEnding() {
         SQLiteDatabase db = this.getReadableDatabase(DATABASE_PASSWORD);
 
         // New value for one column
@@ -728,7 +728,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return db.update(TableContracts.HouseholdTable.TABLE_NAME,
                 values,
                 selection,
-                selectionArgs);
+         */       selectionArgs);
     }
 
 
