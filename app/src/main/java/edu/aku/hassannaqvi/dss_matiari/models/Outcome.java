@@ -44,7 +44,7 @@ public class Outcome extends BaseObservable implements Observable {
     private String projectName = MainApp.PROJECT_NAME;
 
     // APP VARIABLES
-    @PrimaryKey @NonNull
+    @PrimaryKey(autoGenerate = true) @NonNull
     @ColumnInfo(name = TableContracts.OutcomeTable.COLUMN_ID)
     long id = 0;
 
