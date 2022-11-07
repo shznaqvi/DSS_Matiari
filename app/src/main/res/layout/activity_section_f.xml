@@ -81,7 +81,7 @@
                                 android:text="@string/rc12ln" />
 
                             <TextView
-                                android:id="@+id/rc12ln"
+                                android:id="@+id/rc01"
                                 style="@style/quesNum"
                                 android:layout_width="0dp"
                                 android:layout_height="match_parent"
@@ -333,13 +333,13 @@
                         </LinearLayout>
 
                         <RadioGroup
-                            android:id="@+id/rc12"
+                            android:id="@+id/rc04"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:orientation="horizontal">
 
                             <RadioButton
-                                android:id="@+id/rc1201"
+                                android:id="@+id/rc0401"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
@@ -348,7 +348,7 @@
                                 android:text="@string/rc1201" />
 
                             <RadioButton
-                                android:id="@+id/rc1202"
+                                android:id="@+id/rc0402"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
@@ -358,7 +358,7 @@
 
 
                             <RadioButton
-                                android:id="@+id/rc1203"
+                                android:id="@+id/rc0403"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
@@ -404,13 +404,13 @@
                         </LinearLayout>
 
                         <RadioGroup
-                            android:id="@+id/rc13"
+                            android:id="@+id/rc05"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:orientation="horizontal">
 
                             <RadioButton
-                                android:id="@+id/rc1301"
+                                android:id="@+id/rc0501"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
@@ -419,7 +419,7 @@
                                 android:text="@string/rc1301" />
 
                             <RadioButton
-                                android:id="@+id/rc1302"
+                                android:id="@+id/rc0502"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
@@ -471,7 +471,7 @@
                             android:orientation="horizontal">
 
                             <io.blackbox_vision.datetimepickeredittext.view.DatePickerEditText
-                                android:id="@+id/rc14"
+                                android:id="@+id/rc06"
                                 style="@style/textInput"
                                 android:layout_width="0dp"
                                 android:layout_height="match_parent"
@@ -487,7 +487,7 @@
                                 app:theme="@style/DatePickerEditTextDialogTheme" />
 
                             <CheckBox
-                                android:id="@+id/rc1401check"
+                                android:id="@+id/rc0601check"
                                 android:layout_width="wrap_content"
                                 android:layout_height="match_parent"
                                 android:backgroundTint="@color/lightPink"
@@ -533,7 +533,7 @@
                         </LinearLayout>
 
                         <EditText
-                            android:id="@+id/rc14a"
+                            android:id="@+id/rc07"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:digits="abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ ,.\/"

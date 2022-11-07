@@ -77,24 +77,6 @@ public class OutcomeFollowups extends BaseObservable implements Observable {
 
     public OutcomeFollowups() {
 
-        /*setRound(MainApp.ROUND);
-
-        // TODO: *** THIS IS A BLUNDER *** -- DATE IN ALL LINKED TABLES COMES FROM PARENT TABLE (followups in this case)
-        //setSysDate(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.ENGLISH).format(new Date().getTime()));
-        setSysDate(MainApp.followups.getSysDate());
-        setUserName(MainApp.user.getUserName());
-        setDeviceId(MainApp.deviceid);
-        setAppver(MainApp.appInfo.getAppVersion());
-        if (MainApp.households != null) {
-            //TODO: Why is this household uid, this should be followup uid
-            setUuid(MainApp.households.getUid());
-            //setRb02(MainApp.fpMwra.getRb02());
-
-            //setRb01a(MainApp.mwra.getRb01a());
-
-        }
-        setVillageCode(MainApp.selectedVillage);
-        setUcCode(MainApp.selectedUC);*/
 
     }
 
@@ -324,7 +306,7 @@ public class OutcomeFollowups extends BaseObservable implements Observable {
 
     public void setRb04(String rb04) {
         this.rb04 = rb04;
-        notifyChange(BR.rc12dob);
+        notifyChange(BR.rb04);
     }
 
     @Bindable

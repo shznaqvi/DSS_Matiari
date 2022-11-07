@@ -46,7 +46,7 @@ public class Outcome extends BaseObservable implements Observable {
     // APP VARIABLES
     @PrimaryKey @NonNull
     @ColumnInfo(name = TableContracts.OutcomeTable.COLUMN_ID)
-    private long id = 0;
+    long id = 0;
 
     @ColumnInfo(name = TableContracts.OutcomeTable.COLUMN_UID)
     private String uid = StringUtils.EMPTY;
@@ -113,21 +113,19 @@ public class Outcome extends BaseObservable implements Observable {
     private String rb01a = StringUtils.EMPTY;
 
     @Ignore
-    private String rc12ln = StringUtils.EMPTY;
+    private String rc01 = StringUtils.EMPTY;
     @Ignore
-    private String rc12nm = StringUtils.EMPTY;
+    private String rc02 = StringUtils.EMPTY;
     @Ignore
-    private String rc12dob = StringUtils.EMPTY;
+    private String rc03 = StringUtils.EMPTY;
     @Ignore
-    private String rc12 = StringUtils.EMPTY;
+    private String rc04 = StringUtils.EMPTY;
     @Ignore
-    private String rc13 = StringUtils.EMPTY;
+    private String rc05 = StringUtils.EMPTY;
     @Ignore
-    private String rc14 = StringUtils.EMPTY;
+    private String rc06 = StringUtils.EMPTY;
     @Ignore
-    private String rc14a = StringUtils.EMPTY;
-    @Ignore
-    private String rc16 = StringUtils.EMPTY;
+    private String rc07 = StringUtils.EMPTY;
 
 
     public Outcome() {
@@ -349,88 +347,79 @@ public class Outcome extends BaseObservable implements Observable {
     }
 
     @Bindable
-    public String getRc12dob() {
-        return rc12dob;
+    public String getRc03() {
+        return rc03;
     }
 
-    public void setRc12dob(String rc12dob) {
-        this.rc12dob = rc12dob;
-        notifyPropertyChanged(BR.rc12dob);
-    }
-
-    @Bindable
-    public String getRc12ln() {
-        return rc12ln;
-    }
-
-    public void setRc12ln(String rc12ln) {
-        this.rc12ln = rc12ln;
-        this.sno = rc12ln;
-        notifyPropertyChanged(BR.rc12ln);
+    public void setRc03(String rc03) {
+        this.rc03 = rc03;
+        notifyPropertyChanged(BR.rc01);
     }
 
     @Bindable
-    public String getRc12nm() {
-        return rc12nm;
+    public String getRc01() {
+        return rc01;
     }
 
-    public void setRc12nm(String rc12nm) {
-        this.rc12nm = rc12nm;
-        notifyPropertyChanged(BR.rc12nm);
-    }
-
-    @Bindable
-    public String getRc12() {
-        return rc12;
+    public void setRc01(String rc01) {
+        this.rc01 = rc01;
+        this.sno = rc01;
+        notifyPropertyChanged(BR.rc01);
     }
 
     @Bindable
-    public String getRc13() {
-        return rc13;
+    public String getRc02() {
+        return rc02;
     }
 
-
-    public void setRc12(String rc12) {
-        this.rc12 = rc12;
-        notifyPropertyChanged(BR.rc12);
-    }
-
-    public void setRc13(String rc13) {
-        this.rc13 = rc13;
-        setRc14(rc13.equals("1") ? this.rc14 : "");
-        notifyPropertyChanged(BR.rc13);
-    }
-
-    public void setRc14(String rc14) {
-        this.rc14 = rc14;
-        notifyPropertyChanged(BR.rc14);
+    public void setRc02(String rc02) {
+        this.rc02 = rc02;
+        notifyPropertyChanged(BR.rc02);
     }
 
     @Bindable
-    public String getRc14() {
-        return rc14;
+    public String getRc04() {
+        return rc04;
     }
 
     @Bindable
-    public String getRc14a() {
-        return rc14a;
+    public String getRc05() {
+        return rc05;
     }
 
-    public void setRc14a(String rc14a) {
-        this.rc14a = rc14a;
-        setRc16(rc14a.equals("1") ? "" : this.rc16);
-        notifyPropertyChanged(BR.rc14a);
+
+    public void setRc04(String rc04) {
+        this.rc04 = rc04;
+        notifyPropertyChanged(BR.rc04);
+    }
+
+    public void setRc05(String rc05) {
+        this.rc05 = rc05;
+        setRc06(rc05.equals("1") ? this.rc06 : "");
+        notifyPropertyChanged(BR.rc05);
+    }
+
+    public void setRc06(String rc06) {
+        this.rc06 = rc06;
+        notifyPropertyChanged(BR.rc06);
     }
 
     @Bindable
-    public String getRc16() {
-        return rc16;
+    public String getRc06() {
+        return rc06;
     }
 
-    public void setRc16(String rc16) {
-        this.rc16 = rc16;
-        notifyPropertyChanged(BR.rc16);
+    @Bindable
+    public String getRc07() {
+        return rc07;
     }
+
+    public void setRc07(String rc07) {
+        this.rc07 = rc07;
+        notifyPropertyChanged(BR.rc07);
+    }
+
+
 
 
 
@@ -468,14 +457,13 @@ public class Outcome extends BaseObservable implements Observable {
             this.round = json.getString("ROUND");
             this.rb02 = json.getString("rb02");
             this.rb01a = json.getString("rb01a");
-            this.rc12ln = json.getString("rc12ln");
-            this.rc12nm = json.getString("rc12nm");
-            this.rc12dob = json.has("rc12dob") ? json.getString("rc12dob") : "";
-            this.rc12 = json.getString("rc12");
-            this.rc13 = json.getString("rc13");
-            this.rc14 = json.getString("rc14");
-            this.rc14a = json.getString("rc14a");
-            this.rc16 = json.getString("rc16");
+            this.rc01 = json.getString("rc01");
+            this.rc02 = json.getString("rc02");
+            this.rc03 = json.has("rc03") ? json.getString("rc03") : "";
+            this.rc04 = json.getString("rc04");
+            this.rc05 = json.getString("rc05");
+            this.rc06 = json.getString("rc06");
+            this.rc07 = json.getString("rc07");
 
 
         }
@@ -490,14 +478,14 @@ public class Outcome extends BaseObservable implements Observable {
                 .put("ROUND", round)
                 .put("rb02", rb02)
                 .put("rb01a", rb01a)
-                .put("rc12ln", rc12ln)
-                .put("rc12nm", rc12nm)
-                .put("rc12dob", rc12dob)
-                .put("rc12", rc12)
-                .put("rc13", rc13)
-                .put("rc14", rc14)
-                .put("rc14a", rc14a)
-                .put("rc16", rc16);
+                .put("rc01", rc01)
+                .put("rc02", rc02)
+                .put("rc03", rc03)
+                .put("rc04", rc04)
+                .put("rc05", rc05)
+                .put("rc06", rc06)
+                .put("rc07", rc07);
+
 
         return json.toString();
     }
@@ -545,16 +533,16 @@ public class Outcome extends BaseObservable implements Observable {
     }
 
     public void populateMeta() {
-        MainApp.outcome.setUuid(MainApp.followups.getUid());
-        MainApp.outcome.setMuid(MainApp.followups.getUid().split("_")[0]);
-        MainApp.outcome.setMsno(MainApp.followups.getRc01());
-        MainApp.outcome.setSysDate(MainApp.followups.getSysDate());
-        MainApp.outcome.setRb02(MainApp.followups.getRc02());
-        MainApp.outcome.setRb01a(MainApp.followups.getRc01a());
-        MainApp.outcome.setRound(MainApp.followups.getFRound());
-        MainApp.outcome.setUcCode(MainApp.fpHouseholds.getUcCode());
-        MainApp.outcome.setVillageCode(MainApp.fpHouseholds.getVillageCode());
-        MainApp.outcome.setHhNo(MainApp.fpHouseholds.getHhNo());
+        MainApp.outcome.setUuid(MainApp.mwra.getUid());
+        MainApp.outcome.setMuid(MainApp.mwra.getUid().split("_")[0]);
+        MainApp.outcome.setMsno(MainApp.mwra.getRb01());
+        MainApp.outcome.setSysDate(MainApp.mwra.getSysDate());
+        MainApp.outcome.setRb02(MainApp.mwra.getRb02());
+        MainApp.outcome.setRb01a(MainApp.mwra.getRb01a());
+        MainApp.outcome.setRound(MainApp.mwra.getFRound());
+        MainApp.outcome.setUcCode(MainApp.households.getUcCode());
+        MainApp.outcome.setVillageCode(MainApp.households.getVillageCode());
+        MainApp.outcome.setHhNo(MainApp.households.getHhNo());
         MainApp.outcome.setSno(String.valueOf(MainApp.childCount));
 
         // TODO: set MWRA ID from downloaded data
@@ -562,7 +550,7 @@ public class Outcome extends BaseObservable implements Observable {
         MainApp.outcome.setUserName(MainApp.user.getUserName());
 
         MainApp.outcome.setDeviceId(MainApp.deviceid);
-        MainApp.outcome.setHdssId(MainApp.fpHouseholds.getHdssId());
+        MainApp.outcome.setHdssId(MainApp.households.getHdssId());
         MainApp.outcome.setAppver(MainApp.versionName + "." + MainApp.versionCode);
         //MainApp.outcome.setRb01a(MainApp.fpMwra.getRa01());
 

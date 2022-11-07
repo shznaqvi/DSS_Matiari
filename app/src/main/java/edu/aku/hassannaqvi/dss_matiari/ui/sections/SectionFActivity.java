@@ -74,7 +74,7 @@ public class SectionFActivity extends AppCompatActivity {
         {
             String date = toBlackVisionDate(outcomeFollowups.getRb04());
 
-            bi.rc14.setMinDate(date);
+            bi.rc06.setMinDate(date);
         }
 
 

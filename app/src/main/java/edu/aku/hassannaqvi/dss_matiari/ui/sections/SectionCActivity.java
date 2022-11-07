@@ -70,7 +70,8 @@ public class SectionCActivity extends AppCompatActivity {
             mwra.setRb03(MainApp.fpMwra.getRb03());
             mwra.setRb06(MainApp.fpMwra.getRb06());
             mwra.setRb06(MainApp.fpMwra.getRb06());
-            mwra.setRb07(MainApp.fpMwra.getRb07());
+            //mwra.setRb07(MainApp.fpMwra.getRb07());
+            mwra.setPrePreg(MainApp.fpMwra.getRb07());
             mwra.setHdssId(MainApp.fpMwra.getHdssid());
             mwra.setHhNo(MainApp.fpMwra.getHhNo());
 
@@ -132,7 +133,7 @@ public class SectionCActivity extends AppCompatActivity {
             Calendar cal = Calendar.getInstance();
 
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
-            cal.setTime(sdf.parse(followups.getRc01a()));// all done
+            cal.setTime(sdf.parse(mwra.getRb01a()));// all done
 
             sdf = new SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH);
 
@@ -183,7 +184,7 @@ public class SectionCActivity extends AppCompatActivity {
 
             // Date of Death from Date of Deliver(RC10)
             sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
-            cal.setTime(sdf.parse(followups.getRc10()));// all done
+            cal.setTime(sdf.parse(mwra.getRb13()));// all done
             sdf = new SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH);
             String minDOD = sdf.format(cal.getTime());
 
@@ -211,13 +212,13 @@ public class SectionCActivity extends AppCompatActivity {
                     // Married in Previous Round
                     case "1":
                         // Pregnant
-                        if (mwra.getRb07().equals("1")) {
+                        if (mwra.getPrePreg().equals("1")) {
                             // If pregnancy continued
                             if (bi.rb1201.isChecked()) {
                                 setResult(RESULT_OK);
                                 //finish();
                             } else {  // If Pregnancy ended
-                                if (bi.rb1201.isChecked()) // If Live Birth
+                                if (bi.rb1401.isChecked()) // If Live Birth
                                 {
                                     Intent forwardIntent = new Intent(this, SectionEActivity.class).putExtra("complete", true);
                                     forwardIntent.setFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT);
@@ -247,7 +248,7 @@ public class SectionCActivity extends AppCompatActivity {
                     // Divorced
                     case "2":
                         // Pregnant
-                        if (mwra.getRb07().equals("1")) {
+                        if (mwra.getPrePreg().equals("1")) {
 
                             if (bi.rb1201.isChecked()) {  // If Pregnancy Continued
                                 setResult(RESULT_OK);
@@ -284,7 +285,7 @@ public class SectionCActivity extends AppCompatActivity {
                     // Widow
                     case "3":
                         // Pregnant
-                        if (mwra.getRb07().equals("1")) {
+                        if (mwra.getPrePreg().equals("1")) {
                             if (bi.rb1201.isChecked()) {  // If Pregnancy Continued
                                 setResult(RESULT_OK);
                                 //finish();
@@ -319,7 +320,7 @@ public class SectionCActivity extends AppCompatActivity {
                     // Separated
                     case "5":
                         // Pregnant
-                        if (mwra.getRb07().equals("1")) {
+                        if (mwra.getPrePreg().equals("1")) {
 
                             if (bi.rb1201.isChecked()) {  // If Pregnancy Continued
                                 setResult(RESULT_OK);
@@ -384,7 +385,7 @@ public class SectionCActivity extends AppCompatActivity {
         MainApp.outcome = new Outcome();
 
         mwra.populateMetaFollowups();
-        mwra.setRb07("");
+
 
         long rowId = 0;
         try {

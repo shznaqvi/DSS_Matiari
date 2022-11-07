@@ -1,6 +1,7 @@
 package edu.aku.hassannaqvi.dss_matiari.ui.sections;
 
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.followups;
+import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.mwra;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.outcome;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.outcomeFollowups;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.sharedPref;
@@ -24,6 +25,7 @@ import edu.aku.hassannaqvi.dss_matiari.database.DatabaseHelper;
 
 import edu.aku.hassannaqvi.dss_matiari.databinding.ActivitySectionEBinding;
 import edu.aku.hassannaqvi.dss_matiari.models.Outcome;
+import edu.aku.hassannaqvi.dss_matiari.room.DssRoomDatabase;
 
 public class SectionEActivity extends AppCompatActivity {
 
@@ -41,7 +43,8 @@ public class SectionEActivity extends AppCompatActivity {
         db = MainApp.appInfo.dbHelper;
 
         try {
-            outcome = db.getOutComeBYID(String.valueOf(++MainApp.childCount));
+            //outcome = db.getOutComeBYID(String.valueOf(++MainApp.childCount));
+            outcome = DssRoomDatabase.getDbInstance().OutcomeDao().getOutcomeBYID(MainApp.mwra.getUid().split("-")[0], String.valueOf(++MainApp.childCount));
         } catch (JSONException e) {
             e.printStackTrace();
             Toast.makeText(this, "JSONException(Outcome): " + e.getMessage(), Toast.LENGTH_SHORT).show();
@@ -51,15 +54,15 @@ public class SectionEActivity extends AppCompatActivity {
         MainApp.ROUND = MainApp.fpMwra.getFRound();
 
 
-        outcome.setRc12dob(followups.getRc10());
-        outcome.setRc12ln(outcome.getRc12ln().isEmpty() ? String.valueOf(MainApp.childCount) : outcome.getRc12ln());
+        outcome.setRc03(mwra.getRb13());
+        outcome.setRc01(outcome.getRc01().isEmpty() ? String.valueOf(MainApp.childCount) : outcome.getRc01());
 
         bi.setOutcome(outcome);
         //setImmersive(true);
 
 
 
-            // Followups data
+          /*  // Followups data
             outcomeFollowups.setUuid(followups.getUid());
             outcomeFollowups.setMuid(outcome.getMuid());
             outcomeFollowups.setUcCode(followups.getUcCode());
@@ -74,22 +77,22 @@ public class SectionEActivity extends AppCompatActivity {
             outcomeFollowups.setDeviceId(MainApp.deviceid);
             outcomeFollowups.setHdssId(followups.getHdssId());
             outcomeFollowups.setAppver(MainApp.versionName + "." + MainApp.versionCode);
-
+*/
 
         bi.btnContinue.setText(outcome.getUid().equals("") ? "Save" : "Update");
 
 
-        String date = toBlackVisionDate(followups.getRc10());
+        String date = toBlackVisionDate(mwra.getRb13());
 
-        bi.rc14.setMinDate(date);
+        bi.rc06.setMinDate(date);
 
 
     }
 
-    public void btnContinue(View view) {
+    public void btnContinue(View view) throws JSONException {
         if (!formValidation()) return;
         //if(outcome.getUid().equals("") ? !insertNewRecord()) return;
-        if(!insertNewFollowupRecord()) return;
+        //if(!insertNewFollowupRecord()) return;
 
         if(outcome.getUid().equals("") ? insertNewRecord() : updateDB())
         {
@@ -115,12 +118,13 @@ public class SectionEActivity extends AppCompatActivity {
 
     }
 
-    private boolean insertNewRecord() {
+    private boolean insertNewRecord() throws JSONException {
            outcome.populateMeta();
 
         long rowId = 0;
         try {
-            rowId = db.addOutcome(outcome);
+            //rowId = db.addOutcome(outcome);
+            rowId = DssRoomDatabase.getDbInstance().OutcomeDao().addOutcome(outcome);
         } catch (JSONException e) {
             e.printStackTrace();
             Toast.makeText(this, "JSONException(Outcomes): " + e.getMessage(), Toast.LENGTH_SHORT).show();
@@ -130,7 +134,9 @@ public class SectionEActivity extends AppCompatActivity {
         outcome.setId(rowId);
         if (rowId > 0) {
             outcome.setUid(outcome.getDeviceId() + outcome.getId());
-            db.updatesOutcomeColumn(TableContracts.OutcomeTable.COLUMN_UID, outcome.getUid());
+            outcome.setSE(outcome.sEtoString());
+            DssRoomDatabase.getDbInstance().OutcomeDao().updateOutcome(outcome);
+            //db.updatesOutcomeColumn(TableContracts.OutcomeTable.COLUMN_UID, outcome.getUid());
             return true;
         } else {
             Toast.makeText(this, "Updating Database... ERROR!", Toast.LENGTH_SHORT).show();
@@ -168,18 +174,15 @@ public class SectionEActivity extends AppCompatActivity {
     private boolean updateDB() {
         int updcount = 0;
         try {
-            updcount = db.updatesOutcomeColumn(TableContracts.OutcomeTable.COLUMN_SE, outcome.sEtoString());
-            // Also reset Synced flag and alter UID
-            // db.updatesMWRAColumn(TableContracts.MWRATable.COLUMN_SYNCED, null);
-            // concate last char from uid to alter and create new unique uid
+            //updcount = db.updatesOutcomeColumn(TableContracts.OutcomeTable.COLUMN_SE, outcome.sEtoString());
+            Outcome updatedOutcome = outcome;
+            updatedOutcome.setSE(outcome.sEtoString());
+            updcount = DssRoomDatabase.getDbInstance().OutcomeDao().updateOutcome(outcome);
 
             outcome.setDeviceId(outcome.getDeviceId() + "_" + outcome.getDeviceId().substring(outcome.getDeviceId().length() - 1));
-            db.updatesOutcomeColumn(TableContracts.OutcomeTable.COLUMN_DEVICEID, outcome.getDeviceId());
-            /*int repeatCount = (outcome.getDeviceId().length() - 16) / 2;
-            // new UID
-            String newUID = followups.getDeviceId().substring(0, 16) + followups.getId() + "_" + repeatCount;
-            followups.setUid(newUID);*/
-            //db.updatesFollowUpsColumn(TableContracts.FollowupsTable.COLUMN_UID, newUID);
+            updatedOutcome.setDeviceId(outcome.getDeviceId());
+            updatedOutcome.setIStatus(outcome.getIStatus());
+            DssRoomDatabase.getDbInstance().OutcomeDao().updateOutcome(updatedOutcome);
 
 
         } catch (JSONException e) {
@@ -200,13 +203,6 @@ public class SectionEActivity extends AppCompatActivity {
         MainApp.totalChildCount =0;
         MainApp.childCount --;
         setResult(RESULT_CANCELED);
-/*        if (followups.getRc05().equals("2") || followups.getRc05().equals("3")) {
-            if (!formValidation()) return;
-            setResult(RESULT_OK);
-            insertNewRecord();
-            updateDB();
-            startActivity(new Intent(this, WRAEndingActivity.class).addFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT).putExtra("complete", false));
-        }*/
         finish();
 
     }
@@ -217,11 +213,6 @@ public class SectionEActivity extends AppCompatActivity {
     }
 
 
-        String originalFormat = "yyyy-MM-dd";
-        String blackBoxFormat = "dd/MM/yyyy";
-
-        String originalDate = "2020-06-23";
-        String newDate = toBlackVisionDate(originalDate);
 
     public static String toBlackVisionDate(String currentDate) {
         String newDate = currentDate;

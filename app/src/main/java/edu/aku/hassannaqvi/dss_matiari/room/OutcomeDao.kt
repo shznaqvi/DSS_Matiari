@@ -1,9 +1,7 @@
 package edu.aku.hassannaqvi.dss_matiari.room
 
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy
-import androidx.room.Update
+import androidx.room.*
+import edu.aku.hassannaqvi.dss_matiari.contracts.TableContracts
 import edu.aku.hassannaqvi.dss_matiari.models.Outcome
 import org.json.JSONException
 import kotlin.jvm.Throws
@@ -23,6 +21,29 @@ interface OutcomeDao {
 
     @Update(onConflict = OnConflictStrategy.REPLACE)
     fun updateOutcome(outcome: Outcome) : Int
+
+
+    @Query("SELECT * FROM " + TableContracts.OutcomeTable.TABLE_NAME + " WHERE "
+            + TableContracts.OutcomeTable.COLUMN_MUID + " LIKE :muid AND "
+            + TableContracts.OutcomeTable.COLUMN_SNO + " LIKE :sno ORDER BY "
+            + TableContracts.OutcomeTable.COLUMN_ID + " ASC" )
+    fun getOutcomeByID_internal(muid : String, sno : String) : Outcome?
+
+
+    @Throws(JSONException ::class)
+    fun getOutcomeBYID(muid: String, sno: String) : Outcome?{
+        val outcome = getOutcomeByID_internal(muid, sno)
+        if(outcome == null)
+        {
+            val tempOutcome = Outcome()
+            return tempOutcome
+        }else{
+            outcome.sEHydrate(outcome.se)
+        }
+        return outcome
+    }
+
+
 
 
 }

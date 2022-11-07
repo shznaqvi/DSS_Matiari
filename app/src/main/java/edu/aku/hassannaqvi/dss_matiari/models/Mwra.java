@@ -3,6 +3,7 @@ package edu.aku.hassannaqvi.dss_matiari.models;
 import static java.util.concurrent.TimeUnit.MILLISECONDS;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.PROJECT_NAME;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.mwra;
+import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.permissionCheck;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.position;
 
 import android.database.Cursor;
@@ -163,6 +164,9 @@ public class Mwra extends BaseObservable implements Observable {
     private String rb15 = StringUtils.EMPTY;
     @Ignore
     private long ageInMonths;
+
+    @Ignore
+    private String prePreg = "";
 
 
     public Mwra() {
@@ -434,6 +438,14 @@ public class Mwra extends BaseObservable implements Observable {
 
     public void setSC(String sC) {
         this.sC = sC;
+    }
+
+    public String getPrePreg() {
+        return prePreg;
+    }
+
+    public void setPrePreg(String prePreg) {
+        this.prePreg = prePreg;
     }
 
     public PropertyChangeRegistry getPropertyChangeRegistry() {
@@ -753,6 +765,7 @@ public class Mwra extends BaseObservable implements Observable {
             this.rb03 = json.getString("rb03");
             this.rb04 = json.getString("rb04");
             this.rb05 = json.getString("rb05");
+            this.prePreg = json.getString("prePreg");
             this.rb06 = json.getString("rb06");
             this.rb07 = json.getString("rb07");
             this.rb08 = json.getString("rb08");
@@ -806,6 +819,7 @@ public class Mwra extends BaseObservable implements Observable {
                 .put("rb04", rb04)
                 .put("rb05", rb05)
                 .put("rb06", rb06)
+                .put("prePreg", prePreg)
                 .put("rb07", rb07)
                 .put("rb08", rb08)
                 .put("rb09", rb09)

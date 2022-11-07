@@ -728,8 +728,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return db.update(TableContracts.HouseholdTable.TABLE_NAME,
                 values,
                 selection,
-         */       selectionArgs);
-    }
+                selectionArgs);
+    }*/
 
 
     public int syncVersionApp(JSONObject VersionList) throws JSONException {

@@ -618,7 +618,7 @@
                     <androidx.cardview.widget.CardView
                         android:id="@+id/fldGrpCVrb07"
                         style="@style/cardView"
-                        android:visibility='@{followups.rb07.equals(``) ? View.GONE : View.VISIBLE}'>
+                        android:visibility='@{followups.prePreg.equals(``) ? View.GONE : View.VISIBLE}'>
 
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -657,9 +657,9 @@
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
-                                android:checked='@{followups.rb07.equals("1")}'
+                                android:checked='@{followups.prePreg.equals("1")}'
                                 android:enabled="false"
-                                android:onClick='@{()->followups.setRb07("1")}'
+                                android:onClick='@{()->followups.setPrePreg("1")}'
                                 android:text="@string/rc0701" />
 
                             <RadioButton
@@ -667,9 +667,9 @@
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
-                                android:checked='@{followups.rb07.equals("2")}'
+                                android:checked='@{followups.prePreg.equals("2")}'
                                 android:enabled="false"
-                                android:onClick='@{()->followups.setRb07("2") + rb06.clearCheck() + rb12.clearCheck() + rb14.clearCheck() + rb15.clearCheck()}'
+                                android:onClick='@{()->followups.setPrePreg("2") + rb06.clearCheck() + rb12.clearCheck() + rb14.clearCheck() + rb15.clearCheck()}'
                                 android:text="@string/rc0702" />
                         </RadioGroup>
                     </LinearLayout>
@@ -779,7 +779,7 @@
                         <androidx.cardview.widget.CardView
                             android:id="@+id/fldGrpCVrb05"
                             style="@style/cardView"
-                            android:visibility="@{followups.rb07.equals(`1`) ? View.VISIBLE : View.GONE}">
+                            android:visibility="@{followups.prePreg.equals(`1`) ? View.VISIBLE : View.GONE}">
 
                             <LinearLayout
                                 android:layout_width="match_parent"
@@ -845,7 +845,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:orientation="vertical"
-                                android:visibility="@{followups.rb07.equals(`1`) ? View.VISIBLE : View.GONE}">
+                                android:visibility="@{followups.prePreg.equals(`1`) ? View.VISIBLE : View.GONE}">
 
 
                                 <!-- rc09 Radio   -->

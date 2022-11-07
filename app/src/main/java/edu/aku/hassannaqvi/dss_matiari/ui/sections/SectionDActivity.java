@@ -148,7 +148,8 @@ public class SectionDActivity extends AppCompatActivity {
             //updcount = db.updatesFollowUpsColumn(TableContracts.FollowupsTable.COLUMN_SC, followups.sCtoString())
              Mwra updatedFollowups = mwra;
                         updatedFollowups.setSC(mwra.sCtoString());
-                        updcount = DssRoomDatabase.getDbInstance().mwraDao().updateMwra(mwra);;
+                        updcount = DssRoomDatabase.getDbInstance().mwraDao().updateMwra(mwra);
+
 
 
         } catch (JSONException e) {
