@@ -142,7 +142,7 @@ dependencies {
     implementation 'com.karumi:dexter:6.2.3'
 
     // for Debug Database
-    debugImplementation 'com.amitshekhar.android:debug-db:1.0.6'
+//    debugImplementation 'com.amitshekhar.android:debug-db:1.0.6'
 
     // Sqlcipher
     implementation "net.zetetic:android-database-sqlcipher:4.5.0"
@@ -160,4 +160,11 @@ dependencies {
     implementation 'com.scottyab:rootbeer-lib:0.1.0'
 
     implementation 'com.google.guava:guava:29.0-android'
+
+    // Flipper
+    debugImplementation 'com.facebook.flipper:flipper:0.173.0'
+    debugImplementation 'com.facebook.soloader:soloader:0.10.4'
+
+    releaseImplementation 'com.facebook.flipper:flipper-noop:0.173.0'
 }
+
