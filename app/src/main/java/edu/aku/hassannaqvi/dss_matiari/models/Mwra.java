@@ -119,6 +119,10 @@ public class Mwra extends BaseObservable implements Observable {
     @ColumnInfo(name = MWRATable.COLUMN_SC)
     private String sC = StringUtils.EMPTY;
 
+    @ColumnInfo(name = MWRATable.COLUMN_SD)
+    private String sD = StringUtils.EMPTY;
+
+
     private String round = StringUtils.EMPTY;
     @Ignore
     private String rb01a = StringUtils.EMPTY;
@@ -440,6 +444,14 @@ public class Mwra extends BaseObservable implements Observable {
         this.sC = sC;
     }
 
+    public String getSD() {
+        return sD;
+    }
+
+    public void setSD(String sD) {
+        this.sD = sD;
+    }
+
     public String getPrePreg() {
         return prePreg;
     }
@@ -727,6 +739,7 @@ public class Mwra extends BaseObservable implements Observable {
 
         sBHydrate(cursor.getString(cursor.getColumnIndexOrThrow(MWRATable.COLUMN_SB)));
         sCHydrate(cursor.getString(cursor.getColumnIndexOrThrow(MWRATable.COLUMN_SC)));
+        sDHydrate(cursor.getString(cursor.getColumnIndexOrThrow(MWRATable.COLUMN_SD)));
         return this;
     }
 
@@ -836,6 +849,33 @@ public class Mwra extends BaseObservable implements Observable {
     }
 
 
+    public String SDtoString() throws JSONException {
+        JSONObject json = new JSONObject();
+
+
+        json.put("rb07", rb07)
+                .put("rb08", rb08)
+                .put("rb09", rb09);
+
+        return json.toString();
+    }
+
+    public void sDHydrate(String string) throws JSONException {
+        Log.d(TAG, "s3Hydrate: " + string);
+        if (string != null) {
+
+            JSONObject json = null;
+            json = new JSONObject(string);
+            this.rb07 = json.getString("rb07");
+            this.rb08 = json.getString("rb08");
+            this.rb09 = json.getString("rb09");
+
+
+        }
+    }
+
+
+
     public JSONObject toJSONObject() throws JSONException {
 
         JSONObject json = new JSONObject();
@@ -859,6 +899,7 @@ public class Mwra extends BaseObservable implements Observable {
         json.put(MWRATable.COLUMN_APPVERSION, this.appver);
         json.put(MWRATable.COLUMN_SB, new JSONObject(sBtoString()));
         json.put(MWRATable.COLUMN_SC, new JSONObject(sCtoString()));
+        json.put(MWRATable.COLUMN_SD, new JSONObject(SDtoString()));
         return json;
 
     }

@@ -18,6 +18,8 @@ import com.validatorcrawler.aliazaz.Validator;
 
 import org.json.JSONException;
 
+import java.util.regex.Pattern;
+
 import edu.aku.hassannaqvi.dss_matiari.R;
 import edu.aku.hassannaqvi.dss_matiari.contracts.TableContracts;
 import edu.aku.hassannaqvi.dss_matiari.core.MainApp;
@@ -44,7 +46,8 @@ public class SectionEActivity extends AppCompatActivity {
 
         try {
             //outcome = db.getOutComeBYID(String.valueOf(++MainApp.childCount));
-            outcome = DssRoomDatabase.getDbInstance().OutcomeDao().getOutcomeBYID(MainApp.mwra.getUid().split("-")[0], String.valueOf(++MainApp.childCount));
+            String muid = mwra.getUid().split(Pattern.quote("-"))[0];
+            outcome = DssRoomDatabase.getDbInstance().OutcomeDao().getOutcomeBYID(muid, String.valueOf(++MainApp.childCount));
         } catch (JSONException e) {
             e.printStackTrace();
             Toast.makeText(this, "JSONException(Outcome): " + e.getMessage(), Toast.LENGTH_SHORT).show();

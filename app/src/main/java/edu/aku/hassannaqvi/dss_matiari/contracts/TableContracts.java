@@ -51,6 +51,7 @@ public class TableContracts {
         public static final String COLUMN_SNO = "sNo";
         public static final String COLUMN_SB = "s2";
         public static final String COLUMN_SC = "s3";
+        public static final String COLUMN_SD = "s4";
         public static final String COLUMN_DEVICEID = "deviceid";
         public static final String COLUMN_DEVICETAGID = "devicetagid";
         public static final String COLUMN_SYNCED = "synced";
