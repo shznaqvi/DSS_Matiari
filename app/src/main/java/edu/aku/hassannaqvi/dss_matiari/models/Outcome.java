@@ -110,6 +110,8 @@ public class Outcome extends BaseObservable implements Observable {
     @Ignore
     private String rb02 = StringUtils.EMPTY;
     @Ignore
+    private String rb03 = StringUtils.EMPTY;
+    @Ignore
     private String rb01a = StringUtils.EMPTY;
 
     @Ignore
@@ -353,7 +355,18 @@ public class Outcome extends BaseObservable implements Observable {
 
     public void setRc03(String rc03) {
         this.rc03 = rc03;
-        notifyPropertyChanged(BR.rc01);
+        notifyPropertyChanged(BR.rc03);
+    }
+
+
+    @Bindable
+    public String getRb03() {
+        return rb03;
+    }
+
+    public void setRb03(String rb03) {
+        this.rb03 = rb03;
+        notifyPropertyChanged(BR.rb03);
     }
 
     @Bindable
@@ -366,6 +379,8 @@ public class Outcome extends BaseObservable implements Observable {
         this.sno = rc01;
         notifyPropertyChanged(BR.rc01);
     }
+
+
 
     @Bindable
     public String getRc02() {

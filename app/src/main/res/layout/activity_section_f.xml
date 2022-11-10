@@ -13,7 +13,7 @@
         <!--MWRA outcome-->
         <variable
             name="outcome"
-            type="edu.aku.hassannaqvi.dss_matiari.models.OutcomeFollowups" />
+            type="edu.aku.hassannaqvi.dss_matiari.models.Outcome" />
 
         <!--        <variable
                     name="callback"
@@ -87,14 +87,14 @@
                                 android:layout_height="match_parent"
                                 android:layout_weight="1"
                                 android:gravity="center"
-                                android:text="@={outcome.rc12ln}" />
+                                android:text="@={outcome.rc01}" />
 
 
                             <TextView
                                 style="@style/quesNum"
                                 android:layout_width="wrap_content"
                                 android:layout_height="match_parent"
-                                android:text="@string/Q_rc12"
+                                android:text="@string/Q_rc01"
                                 android:visibility="gone" />
 
 
@@ -139,10 +139,10 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginBottom="0dp"
-                            android:enabled="@{outcome.rc01a.equals(``)}"
+                            android:enabled="@{outcome.rb01a.equals(``)}"
                             android:gravity="center"
                             android:hint="YYYY-MM-DD"
-                            android:text="@={outcome.rc01a}"
+                            android:text="@={outcome.rb01a}"
                             app:dateFormat="yyyy-MM-dd"
                             app:maxDate="CR_DATE"
                             app:theme="@style/DatePickerEditTextDialogTheme" />
@@ -171,23 +171,15 @@
                                 android:layout_weight="1"
                                 android:text="@string/rc12nm" />
 
-
-                            <!--<TextView
-                                style="@style/quesNum"
-                                android:layout_width="wrap_content"
-                                android:layout_height="match_parent"
-                                android:text="@string/Q_rc12nm" />
--->
-
                         </LinearLayout>
 
                         <EditText
-                            android:id="@+id/rb02"
+                            android:id="@+id/rc02"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:digits="abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ"
                             android:inputType="textPersonName|textCapWords"
-                            android:text="@={outcome.rb02}" />
+                            android:text="@={outcome.rc02}" />
 
 
                     </LinearLayout>
@@ -217,12 +209,6 @@
                                 android:text="Mother's Name" />
 
 
-                            <!--<TextView
-                                style="@style/quesNum"
-                                android:layout_width="wrap_content"
-                                android:layout_height="match_parent"
-                                android:text="@string/Q_rc12nm" />
--->
 
                         </LinearLayout>
 
@@ -272,29 +258,17 @@
 
                         </LinearLayout>
 
-                        <!--<io.blackbox_vision.datetimepickeredittext.view.DatePickerEditText
-                            android:id="@+id/rc12dob"
-                            style="@style/textInput"
-                            android:layout_width="0dp"
-                            android:layout_height="match_parent"
-                            android:layout_marginBottom="0dp"
-                            android:layout_weight="1"
-                            android:enabled="false"
-                            android:gravity="center"
-                            android:hint="YYYY-MM-DD"
-                            android:text="@={outcome.rc12dob}"
-                            app:dateFormat="yyyy-MM-dd"
-                            />-->
+
 
                         <EditText
-                            android:id="@+id/rb04"
+                            android:id="@+id/rc03"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:enabled="false"
                             android:textColor="@color/colorPrimary"
                             android:gravity="center_horizontal|center_vertical"
                             android:inputType="textPersonName|textCapWords"
-                            android:text="@={outcome.rb04}" />
+                            android:text="@={outcome.rc03}" />
 
 
                     </LinearLayout>
@@ -343,8 +317,8 @@
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
-                                android:checked='@{outcome.rc12.equals("1")}'
-                                android:onClick='@{()->outcome.setRc12("1")}'
+                                android:checked='@{outcome.rc04.equals("1")}'
+                                android:onClick='@{()->outcome.setRc04("1")}'
                                 android:text="@string/rc1201" />
 
                             <RadioButton
@@ -352,8 +326,8 @@
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
-                                android:checked='@{outcome.rc12.equals("2")}'
-                                android:onClick='@{()->outcome.setRc12("2")}'
+                                android:checked='@{outcome.rc04.equals("2")}'
+                                android:onClick='@{()->outcome.setRc04("2")}'
                                 android:text="@string/rc1202" />
 
 
@@ -362,8 +336,8 @@
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
-                                android:checked='@{outcome.rc12.equals("3")}'
-                                android:onClick='@{()->outcome.setRc12("3")}'
+                                android:checked='@{outcome.rc04.equals("3")}'
+                                android:onClick='@{()->outcome.setRc04("3")}'
                                 android:text="@string/rc1203" />
 
                         </RadioGroup>
@@ -398,7 +372,7 @@
                                 style="@style/quesNum"
                                 android:layout_width="wrap_content"
                                 android:layout_height="match_parent"
-                                android:text="@string/Q_rc13" />
+                                android:text="@string/Q_rc05" />
 
 
                         </LinearLayout>
@@ -414,8 +388,8 @@
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
-                                android:checked='@{outcome.rc13.equals("1")}'
-                                android:onClick='@{()->outcome.setRc13("1")}'
+                                android:checked='@{outcome.rc05.equals("1")}'
+                                android:onClick='@{()->outcome.setRc05("1")}'
                                 android:text="@string/rc1301" />
 
                             <RadioButton
@@ -423,8 +397,8 @@
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
-                                android:checked='@{outcome.rc13.equals("2")}'
-                                android:onClick='@{()->outcome.setRc13("2")}'
+                                android:checked='@{outcome.rc05.equals("2")}'
+                                android:onClick='@{()->outcome.setRc05("2")}'
                                 android:text="@string/rc1302" />
 
                         </RadioGroup>
@@ -437,7 +411,7 @@
                 <androidx.cardview.widget.CardView
                     android:id="@+id/fldGrpCVrc14"
                     style="@style/cardView"
-                    android:visibility="@{outcome.rc13.equals(`1`) ? View.GONE : View.VISIBLE}">
+                    android:visibility="@{outcome.rc05.equals(`1`) ? View.GONE : View.VISIBLE}">
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -460,7 +434,7 @@
                                 style="@style/quesNum"
                                 android:layout_width="wrap_content"
                                 android:layout_height="match_parent"
-                                android:text="@string/Q_rc14" />
+                                android:text="@string/Q_rc06" />
 
 
                         </LinearLayout>
@@ -478,10 +452,10 @@
                                 android:layout_marginBottom="0dp"
                                 android:layout_weight="1"
                                 android:datePickerMode="spinner"
-                                android:enabled="@{!outcome.rc14.equals(`98`)}"
+                                android:enabled="@{!outcome.rc06.equals(`98`)}"
                                 android:gravity="center"
                                 android:hint="YYYY-MM-DD"
-                                android:text="@={outcome.rc14}"
+                                android:text="@={outcome.rc06}"
                                 app:dateFormat="yyyy-MM-dd"
                                 app:maxDate="CR_DATE"
                                 app:theme="@style/DatePickerEditTextDialogTheme" />
@@ -491,8 +465,8 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="match_parent"
                                 android:backgroundTint="@color/lightPink"
-                                android:checked='@{outcome.rc14.equals("98")}'
-                                android:onClick="@{()->outcome.setRc14(outcome.rc14.equals(`98`)?``:`98`)}"
+                                android:checked='@{outcome.rc06.equals("98")}'
+                                android:onClick="@{()->outcome.setRc06(outcome.rc06.equals(`98`)?``:`98`)}"
                                 android:tag="-1"
                                 android:text="@string/dkn"
                                 android:textColor="@color/redDark"
@@ -504,7 +478,7 @@
                 <androidx.cardview.widget.CardView
                     android:id="@+id/fldGrpCVrc05b"
                     style="@style/cardView"
-                    android:visibility="@{outcome.rc13.equals(`1`) ? View.GONE : View.VISIBLE}">
+                    android:visibility="@{outcome.rc05.equals(`1`) ? View.GONE : View.VISIBLE}">
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -527,7 +501,7 @@
                                 style="@style/quesNum"
                                 android:layout_width="wrap_content"
                                 android:layout_height="match_parent"
-                                android:text="@string/Q_rc14a" />
+                                android:text="@string/Q_rc07" />
 
 
                         </LinearLayout>
@@ -540,7 +514,7 @@
                             android:enabled="true"
                             android:hint="@string/rc05b"
                             android:inputType="text"
-                            android:text="@={outcome.rc14a}" />
+                            android:text="@={outcome.rc07}" />
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
 
