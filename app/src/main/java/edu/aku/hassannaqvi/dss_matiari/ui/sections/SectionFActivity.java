@@ -64,7 +64,7 @@ public class SectionFActivity extends AppCompatActivity {
         }
 
         bi.setFpHouseholds(MainApp.fpHouseholds);
-        bi.setOutcome(outcomeFollowups);
+//        bi.setOutcome(outcomeFollowups);
 
         setImmersive(true);
 

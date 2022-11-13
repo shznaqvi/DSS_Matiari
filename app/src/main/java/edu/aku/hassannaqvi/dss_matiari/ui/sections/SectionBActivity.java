@@ -140,8 +140,8 @@ public class SectionBActivity extends AppCompatActivity {
             Log.d(TAG, "onCreate: " + maxLMP);
 
             // DOB
-            bi.rb04.setMaxDate(maxDob);
-            bi.rb04.setMinDate(minDob);
+//            bi.rb04.setMaxDate(maxDob);
+//            bi.rb04.setMinDate(minDob);
 
             // LMP
             bi.rb08.setMaxDate(maxLMP);
@@ -174,7 +174,7 @@ public class SectionBActivity extends AppCompatActivity {
 
             }
         });
-        bi.rb04.addTextChangedListener(new TextWatcher() {
+        /*bi.rb04.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
@@ -211,7 +211,7 @@ public class SectionBActivity extends AppCompatActivity {
 
                 }
             }
-        });
+        });*/
     }
 
     public void btnContinue(View view) throws JSONException {
