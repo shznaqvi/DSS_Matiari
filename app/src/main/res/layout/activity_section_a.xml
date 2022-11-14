@@ -30,7 +30,7 @@
             android:background="@color/colorPrimary"
             android:minHeight="?attr/actionBarSize"
             android:theme="@style/ToolbarTheme"
-            app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+            app:popupTheme="@style/ThemeOverlay.MaterialComponents.Light"
             app:subtitleTextAppearance="@style/Toolbar.SubtitleText"
             app:title="@string/demographicinformation_mainheading"
             app:titleTextAppearance="@style/Toolbar.TitleText" />
@@ -45,9 +45,13 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
                 <!-- ra01  Input   -->
-                <androidx.cardview.widget.CardView
+                <com.google.android.material.card.MaterialCardView
                     android:id="@+id/fldGrpCVra01"
-                    style="@style/cardView">
+                    style="@style/cardView"
+                    app:cardCornerRadius="6dp"
+                    app:cardElevation="2dp"
+                    app:strokeWidth="1dp"
+                    app:strokeColor="@color/colorPrimary">
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -61,6 +65,7 @@
                             android:orientation="horizontal">
 
                             <TextView
+                                style="@style/labels"
                                 android:layout_width="0dp"
                                 android:layout_height="match_parent"
                                 android:layout_weight="1"
@@ -86,9 +91,9 @@
                             app:dateFormat="yyyy-MM-dd"
                             android:enabled="@{household.ra01.equals(``)}"
                             app:maxDate="CR_DATE"
-                            app:theme="@style/DatePickerEditTextDialogTheme" />
+                            app:theme="@style/MaterialCalendarTheme" />
                     </LinearLayout>
-                </androidx.cardview.widget.CardView>
+                </com.google.android.material.card.MaterialCardView>
 
                 <!-- ra04  Input   -->
                 <androidx.cardview.widget.CardView
@@ -216,6 +221,7 @@
                                 android:layout_height="match_parent"
                                 android:layout_weight="1"
                                 android:hint="@string/ra08"
+                                android:layout_margin="8dp"
                                 android:inputType="textPostalAddress|textCapWords"
                                 android:text="@={household.ra08}" />
 
@@ -251,7 +257,6 @@
                                 android:layout_width="0dp"
                                 android:layout_height="match_parent"
                                 android:layout_weight="1"
-                                android:background="@color/colorPrimaryLight"
                                 android:gravity="center"
                                 android:text="@string/ra09"
                                 android:textColor="@color/colorAccent"
@@ -264,8 +269,8 @@
                             android:id="@+id/ra09"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:background="@color/colorAccentLight"
                             android:gravity="center"
+                            android:layout_margin="8dp"
                             android:padding="8dp"
                             android:text="@={household.ra09}"
                             android:textColor="@color/colorPrimary"
@@ -459,6 +464,7 @@
                             android:id="@+id/ra22"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:layout_margin="8dp"
                             android:digits="abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ"
                             android:gravity="center"
                             android:text="@={household.ra22}" />
@@ -498,6 +504,7 @@
 
                         <EditText
                             android:id="@+id/ra21"
+                            android:layout_margin="8dp"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:hint="@string/ra21"
@@ -542,6 +549,7 @@
                             android:id="@+id/ra14"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:layout_margin="8dp"
                             android:digits="abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ"
                             android:hint="@string/ra14"
                             android:inputType="textPersonName|textCapWords"
@@ -584,6 +592,8 @@
                             android:id="@+id/ra19"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:layout_margin="8dp"
+
                             android:digits="abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ"
                             android:hint="@string/ra19"
                             android:inputType="textPersonName|textCapWords"
@@ -625,6 +635,7 @@
                         <EditText
                             android:id="@+id/ra15"
                             android:layout_width="match_parent"
+                            android:layout_margin="8dp"
                             android:layout_height="wrap_content"
                             android:digits="abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ"
                             android:hint="@string/ra15"
@@ -822,7 +833,6 @@
                                 android:layout_width="0dp"
                                 android:layout_height="match_parent"
                                 android:layout_weight="1"
-
                                 android:text="@string/ra17_a" />
 
                             <com.edittextpicker.aliazaz.EditTextPicker
@@ -831,6 +841,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
                                 android:gravity="center"
+                                android:layout_margin="2dp"
                                 android:hint="@string/a17_1"
                                 android:inputType="number"
                                 android:maxLength="2"
@@ -845,6 +856,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
                                 android:gravity="center"
+                                android:layout_margin="2dp"
                                 android:hint="@string/a17_2"
                                 android:inputType="number"
                                 android:maxLength="2"
@@ -860,6 +872,7 @@
                                 android:layout_weight="1"
                                 android:gravity="center"
                                 android:hint="@string/a17_3"
+                                android:layout_margin="2dp"
                                 android:inputType="number"
                                 android:maxLength="2"
                                 android:text="@={household.ra17_a3}"
@@ -890,6 +903,7 @@
                                 android:layout_weight="1"
                                 android:gravity="center"
                                 android:hint="@string/a17_1"
+                                android:layout_margin="2dp"
                                 android:inputType="number"
                                 android:maxLength="2"
                                 android:text="@={household.ra17_b1}"
@@ -904,6 +918,7 @@
                                 android:layout_weight="1"
                                 android:gravity="center"
                                 android:hint="@string/a17_2"
+                                android:layout_margin="2dp"
                                 android:inputType="number"
                                 android:maxLength="2"
                                 android:text="@={household.ra17_b2}"
@@ -917,6 +932,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
                                 android:gravity="center"
+                                android:layout_margin="2dp"
                                 android:hint="@string/a17_3"
                                 android:inputType="number"
                                 android:maxLength="2"
@@ -947,6 +963,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
                                 android:gravity="center"
+                                android:layout_margin="2dp"
                                 android:hint="@string/a17_1"
                                 android:inputType="number"
                                 android:maxLength="2"
@@ -962,6 +979,7 @@
                                 android:layout_weight="1"
                                 android:gravity="center"
                                 android:hint="@string/a17_2"
+                                android:layout_margin="2dp"
                                 android:inputType="number"
                                 android:maxLength="2"
                                 android:text="@={household.ra17_c2}"
@@ -977,6 +995,7 @@
                                 android:layout_weight="1"
                                 android:gravity="center"
                                 android:hint="@string/a17_3"
+                                android:layout_margin="2dp"
                                 android:inputType="number"
                                 android:maxLength="2"
                                 android:text="@={household.ra17_c3}"
@@ -1008,6 +1027,7 @@
                                 android:gravity="center"
                                 android:hint="@string/a17_1"
                                 android:inputType="number"
+                                android:layout_margin="2dp"
                                 android:maxLength="2"
                                 android:text="@={household.ra17_d1}"
                                 app:maxValue="20"
@@ -1021,6 +1041,7 @@
                                 android:layout_weight="1"
                                 android:gravity="center"
                                 android:hint="@string/a17_2"
+                                android:layout_margin="2dp"
                                 android:inputType="number"
                                 android:maxLength="2"
                                 android:text="@={household.ra17_d2}"
@@ -1035,6 +1056,7 @@
                                 android:layout_weight="1"
                                 android:gravity="center"
                                 android:hint="@string/a17_3"
+                                android:layout_margin="2dp"
                                 android:inputType="number"
                                 android:maxLength="2"
                                 android:text="@={household.ra17_d3}"
@@ -1226,6 +1248,7 @@
                             android:layout_height="wrap_content"
                             android:gravity="center"
                             android:hint="##"
+                            android:layout_margin="8dp"
                             android:enabled="false"
                             android:inputType="number"
                             android:text="@={household.ra18}"
@@ -1252,39 +1275,38 @@
                         android:gravity="start"
                         android:orientation="horizontal">
 
-                        <Button
+                        <androidx.appcompat.widget.AppCompatButton
                             android:id="@+id/btn_locked"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="end"
                             android:layout_marginStart="12dp"
-                            android:background="@color/colorPrimaryLightOverlay"
+                            android:backgroundTint="@color/colorPrimaryLightOverlay"
                             android:drawableStart="@drawable/ic_close"
                             android:onClick="btnContinue"
-                            android:paddingEnd="8dp"
                             android:text="Discontinue"
                             android:textColor="@color/colorPrimaryDark" />
                     </LinearLayout>
 
-                    <Button
+                    <androidx.appcompat.widget.AppCompatButton
                         android:id="@+id/btn_End"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="12dp"
-                        android:background="@color/gray"
+                        android:backgroundTint="@color/colorAccent"
                         android:onClick="btnEnd"
                         android:text="Cancel"
                         android:textColor="@color/white" />
 
-                    <Button
+                    <androidx.appcompat.widget.AppCompatButton
                         android:id="@+id/btn_Continue"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="12dp"
-                        android:background="@color/colorAccent"
+                        android:backgroundTint="@color/colorPrimary"
                         android:onClick="btnContinue"
                         android:text="Save"
-                        android:textColor="@color/black" />
+                        android:textColor="@color/white" />
 
                 </LinearLayout>
             </LinearLayout>

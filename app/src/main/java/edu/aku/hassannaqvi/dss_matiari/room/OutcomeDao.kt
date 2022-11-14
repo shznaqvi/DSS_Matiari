@@ -2,6 +2,7 @@ package edu.aku.hassannaqvi.dss_matiari.room
 
 import androidx.room.*
 import edu.aku.hassannaqvi.dss_matiari.contracts.TableContracts
+import edu.aku.hassannaqvi.dss_matiari.models.Mwra
 import edu.aku.hassannaqvi.dss_matiari.models.Outcome
 import org.json.JSONException
 import kotlin.jvm.Throws
@@ -39,6 +40,32 @@ interface OutcomeDao {
             return tempOutcome
         }else{
             outcome.sEHydrate(outcome.se)
+        }
+        return outcome
+    }
+
+    @Query("SELECT * FROM " + TableContracts.OutcomeTable.TABLE_NAME + " WHERE "
+            + TableContracts.OutcomeTable.COLUMN_UUID + " LIKE :uuid AND "
+            + TableContracts.OutcomeTable.COLUMN_SNO + " LIKE :rb01 AND "
+            + TableContracts.OutcomeTable.COLUMN_MUID + " LIKE :muid AND "
+            + TableContracts.OutcomeTable.COLUMN_ROUND + " LIKE :fround AND " +
+            TableContracts.OutcomeTable.COLUMN_REGROUND + " LIKE :regRound ORDER BY "
+            + TableContracts.OutcomeTable.COLUMN_ID + " ASC"
+    )
+    fun getOutcomeFollowupsBySno_internal(uuid: String, rb01: String, muid: String, fround: String, regRound: String) : Outcome?
+
+
+    @Throws(JSONException ::class)
+    fun getOutcomeFollowupsBySno(uuid: String, rb01: String, muid: String, fround: String) : Outcome?
+    {
+        val outcome = getOutcomeFollowupsBySno_internal(uuid, rb01, muid, fround, "")
+        if(outcome == null)
+        {
+            val tempOutcome = Outcome()
+            return tempOutcome
+        } else {
+            outcome.sEHydrate(outcome.se)
+
         }
         return outcome
     }

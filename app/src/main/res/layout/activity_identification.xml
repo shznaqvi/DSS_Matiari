@@ -247,7 +247,7 @@
                         android:backgroundTint="@color/colorAccent"
                         android:onClick="btnContinue"
                         android:text="Save"
-                        android:textColor="@color/black" />
+                        android:textColor="@color/white" />
                 </LinearLayout>
             </LinearLayout>
         </ScrollView>

@@ -27,10 +27,10 @@
             style="@null"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/colorPrimary"
+            android:background="#673AB7"
             android:minHeight="?attr/actionBarSize"
             android:theme="@style/ToolbarTheme"
-            app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+            app:popupTheme="@style/ThemeOverlay.MaterialComponents.Light"
             app:subtitleTextAppearance="@style/Toolbar.SubtitleText"
             app:title="@string/demographicinformation_mainheading"
             app:titleTextAppearance="@style/Toolbar.TitleText" />
@@ -114,7 +114,7 @@
                 </com.google.android.material.card.MaterialCardView>
 
                 <com.google.android.material.card.MaterialCardView
-                    android:id="@+id/fldGrpCVra01"
+                    android:id="@+id/fldGrpCVra08"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
@@ -169,7 +169,7 @@
                         android:layout_height="wrap_content"
                         android:orientation="horizontal">
 
-                        <com.google.android.material.textfield.TextInputLayout
+                        <!--<com.google.android.material.textfield.TextInputLayout
                             android:id="@+id/outlinedTextField"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
@@ -186,6 +186,18 @@
                                 />
 
                         </com.google.android.material.textfield.TextInputLayout>
+-->
+
+                        <EditText
+                            style="@style/textInput"
+                            android:id="@+id/ra08"
+                            android:layout_width="0dp"
+                            android:layout_margin="8dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:hint="@string/ra08"
+                            android:inputType="textPostalAddress|textCapWords"
+                            android:text="@={household.ra08}" />
 
                         <com.google.android.material.checkbox.MaterialCheckBox
                             android:id="@+id/rb08check"
@@ -284,7 +296,7 @@
 
 
                 <!-- ra08  Input   -->
-                <androidx.cardview.widget.CardView
+                <!--<androidx.cardview.widget.CardView
                     android:id="@+id/fldGrpCVra08"
                     style="@style/cardView">
 
@@ -339,7 +351,7 @@
                                 android:textColor="@color/redDark" />
                         </LinearLayout>
                     </LinearLayout>
-                </androidx.cardview.widget.CardView>
+                </androidx.cardview.widget.CardView>-->
 
                 <!-- ra09  Input   -->
                 <androidx.cardview.widget.CardView
@@ -370,7 +382,8 @@
                         </LinearLayout>
 
                         <TextView
-                            style="@style/labelsHead"
+                            style="@style/textInput"
+                            android:layout_margin="8dp"
                             android:id="@+id/ra09"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -565,8 +578,9 @@
                         </LinearLayout>
 
                         <TextView
-                            style="@style/labelsHead"
+                            style="@style/textInput"
                             android:id="@+id/ra22"
+                            android:layout_margin="8dp"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:digits="abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ"

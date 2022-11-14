@@ -131,6 +131,9 @@ public class TableContracts {
         public static final String COLUMN_VILLAGE_CODE = "villageCode";
         public static final String COLUMN_HOUSEHOLD_NO = "hhNo";
         public static final String COLUMN_SNO = "sno";
+        public static final String COLUMN_REGROUND = "regRound";
+        public static final String COLUMN_FROUND = "fRound";
+        public static final String COLUMN_ROUND = "round";
         public static final String COLUMN_SE = "s5";
 
         public static final String COLUMN_DEVICEID = "deviceid";

@@ -105,8 +105,15 @@ public class Outcome extends BaseObservable implements Observable {
     @ColumnInfo(name = TableContracts.OutcomeTable.COLUMN_SYNCED_DATE)
     private String syncDate = StringUtils.EMPTY;
 
-    @Ignore
+    @ColumnInfo(name = TableContracts.OutcomeTable.COLUMN_ROUND)
     private String round = StringUtils.EMPTY;
+
+    @ColumnInfo(name = TableContracts.OutcomeTable.COLUMN_REGROUND)
+    private String regRound = StringUtils.EMPTY;
+
+    @ColumnInfo(name = TableContracts.OutcomeTable.COLUMN_FROUND)
+    private String fRound = StringUtils.EMPTY;
+
     @Ignore
     private String rb02 = StringUtils.EMPTY;
     @Ignore
@@ -129,12 +136,10 @@ public class Outcome extends BaseObservable implements Observable {
     @Ignore
     private String rc07 = StringUtils.EMPTY;
 
-
     public Outcome() {
 
 
     }
-
 
     @Bindable
     public String getRb02() {
@@ -348,6 +353,22 @@ public class Outcome extends BaseObservable implements Observable {
         this.exist = exist;
     }
 
+    public String getRegRound() {
+        return regRound;
+    }
+
+    public void setRegRound(String regRound) {
+        this.regRound = regRound;
+    }
+
+    public String getFRound() {
+        return fRound;
+    }
+
+    public void setFRound(String fRound) {
+        this.fRound = fRound;
+    }
+
     @Bindable
     public String getRc03() {
         return rc03;
@@ -450,6 +471,9 @@ public class Outcome extends BaseObservable implements Observable {
         this.hdssId = cursor.getString(cursor.getColumnIndexOrThrow(TableContracts.OutcomeTable.COLUMN_HDSSID));
         this.ucCode = cursor.getString(cursor.getColumnIndexOrThrow(TableContracts.OutcomeTable.COLUMN_UC_CODE));
         this.villageCode = cursor.getString(cursor.getColumnIndexOrThrow(TableContracts.OutcomeTable.COLUMN_VILLAGE_CODE));
+        this.regRound = cursor.getString(cursor.getColumnIndexOrThrow(TableContracts.OutcomeTable.COLUMN_REGROUND));
+        this.fRound = cursor.getString(cursor.getColumnIndexOrThrow(TableContracts.OutcomeTable.COLUMN_FROUND));
+        this.round = cursor.getString(cursor.getColumnIndexOrThrow(TableContracts.OutcomeTable.COLUMN_ROUND));
         this.sno = cursor.getString(cursor.getColumnIndexOrThrow(TableContracts.OutcomeTable.COLUMN_SNO));
         this.hhNo = cursor.getString(cursor.getColumnIndexOrThrow(TableContracts.OutcomeTable.COLUMN_HOUSEHOLD_NO));
         this.deviceId = cursor.getString(cursor.getColumnIndexOrThrow(TableContracts.OutcomeTable.COLUMN_DEVICEID));
@@ -521,6 +545,9 @@ public class Outcome extends BaseObservable implements Observable {
         json.put(TableContracts.OutcomeTable.COLUMN_SYSDATE, this.sysDate);
         json.put(TableContracts.OutcomeTable.COLUMN_HDSSID, this.hdssId);
         json.put(TableContracts.OutcomeTable.COLUMN_UC_CODE, this.ucCode);
+        json.put(TableContracts.OutcomeTable.COLUMN_REGROUND, this.regRound);
+        json.put(TableContracts.OutcomeTable.COLUMN_FROUND, this.fRound);
+        json.put(TableContracts.OutcomeTable.COLUMN_ROUND, this.round);
         json.put(TableContracts.OutcomeTable.COLUMN_VILLAGE_CODE, this.villageCode);
         json.put(TableContracts.OutcomeTable.COLUMN_SNO, this.sno);
         json.put(TableContracts.OutcomeTable.COLUMN_HOUSEHOLD_NO, this.hhNo);
@@ -567,6 +594,8 @@ public class Outcome extends BaseObservable implements Observable {
         MainApp.outcome.setDeviceId(MainApp.deviceid);
         MainApp.outcome.setHdssId(MainApp.households.getHdssId());
         MainApp.outcome.setAppver(MainApp.versionName + "." + MainApp.versionCode);
+        MainApp.outcome.setRegRound("1");
+        MainApp.outcome.setFRound("1");
         //MainApp.outcome.setRb01a(MainApp.fpMwra.getRa01());
 
     }

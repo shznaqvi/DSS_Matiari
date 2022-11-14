@@ -20,18 +20,6 @@
         android:orientation="vertical">
 
 
-        <!--        &lt;!&ndash; CUSTOM TOOLBAR &ndash;&gt;
-                <androidx.appcompat.widget.Toolbar
-                    android:id="@+id/toolbar"
-                    style="@null"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@color/colorPrimary"
-                    android:minHeight="?attr/actionBarSize"
-                    android:theme="@style/ToolbarTheme"
-                    app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-                    app:subtitleTextAppearance="@style/Toolbar.SubtitleText"
-                    app:titleTextAppearance="@style/Toolbar.TitleText" />-->
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -141,7 +129,7 @@
                     android:layout_alignEnd="@id/fmHeading"
                     android:layout_centerInParent="true"
                     android:layout_gravity="end|bottom"
-                    android:backgroundTint="@android:color/transparent"
+                    android:backgroundTint="@color/colorPrimaryDark"
                     android:src="@drawable/ic_home_add" />
             </RelativeLayout>
 

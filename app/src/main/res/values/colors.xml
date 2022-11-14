@@ -4,8 +4,8 @@
     <color name="colorPrimary">#3949AB</color>
     <color name="colorPrimaryLight">#9FA8DA</color>
     <color name="colorPrimaryDark">#283593</color>
-    <color name="colorAccent">#D81B60</color>
-    <color name="colorAccentLight">#F48FB1</color>
+    <color name="colorAccent">#D81B2B</color>
+    <color name="colorAccentLight">#F698A0</color>
 
     <color name="colorPrimaryOverlay">#7f3949AB</color>
     <color name="colorPrimaryLightOverlay">#7f9FA8DA</color>
@@ -31,9 +31,10 @@
 
     <color name="purple_200">#FFBB86FC</color>
     <color name="purple_500">#FF6200EE</color>
-    <color name="purple_700">#FF3700B3</color>
+    <color name="purple_700">#6480FF</color>
     <color name="teal_200">#FF03DAC5</color>
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="textviewColor">#ABB9F8</color>
 </resources>

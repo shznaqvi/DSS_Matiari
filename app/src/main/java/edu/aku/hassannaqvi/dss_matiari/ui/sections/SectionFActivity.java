@@ -2,6 +2,7 @@ package edu.aku.hassannaqvi.dss_matiari.ui.sections;
 
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.fpHouseholds;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.fpMwra;
+import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.outcome;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.outcomeFollowups;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.sharedPref;
 
@@ -27,6 +28,7 @@ import edu.aku.hassannaqvi.dss_matiari.contracts.TableContracts;
 import edu.aku.hassannaqvi.dss_matiari.core.MainApp;
 import edu.aku.hassannaqvi.dss_matiari.database.DatabaseHelper;
 import edu.aku.hassannaqvi.dss_matiari.databinding.ActivitySectionFBinding;
+import edu.aku.hassannaqvi.dss_matiari.room.DssRoomDatabase;
 
 public class SectionFActivity extends AppCompatActivity {
 
@@ -45,13 +47,14 @@ public class SectionFActivity extends AppCompatActivity {
         MainApp.ROUND = MainApp.fpMwra.getFRound();
 
         try {
-            outcomeFollowups = db.getOutcomeFollowupsBySno(MainApp.fpMwra.getRb01(), MainApp.fpMwra.getFRound(), fpMwra.getMuid());
+            //outcome = db.getOutcomeFollowupsBySno(MainApp.fpMwra.getRb01(), MainApp.fpMwra.getFRound(), fpMwra.getMuid());
+            outcome = DssRoomDatabase.getDbInstance().OutcomeDao().getOutcomeFollowupsBySno(MainApp.households.getUid(), fpMwra.getRb01(), fpMwra.getMuid(), fpMwra.getFRound());
         } catch (JSONException e) {
             e.printStackTrace();
             Toast.makeText(this, "JSONException(Followups): " + e.getMessage(), Toast.LENGTH_SHORT).show();
         }
 
-        if (outcomeFollowups.getUid().equals("")) {
+        /*if (outcomeFollowups.getUid().equals("")) {
             outcomeFollowups.setRc12ln(MainApp.fpMwra.getRb01());
             outcomeFollowups.setRb02(MainApp.fpMwra.getRb02());
             MainApp.outcomeFollowups.setRb03(MainApp.fpMwra.getRb03());
@@ -65,6 +68,9 @@ public class SectionFActivity extends AppCompatActivity {
 
         bi.setFpHouseholds(MainApp.fpHouseholds);
 //        bi.setOutcome(outcomeFollowups);
+*/
+        //bi.setFpHouseholds(MainApp.fpHouseholds);
+        bi.setOutcome(outcome);
 
         setImmersive(true);
 
@@ -87,7 +93,7 @@ public class SectionFActivity extends AppCompatActivity {
             Calendar cal = Calendar.getInstance();
 
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
-            cal.setTime(sdf.parse(outcomeFollowups.getRc01a()));// all done
+            cal.setTime(sdf.parse(outcome.getRb01a()));// all done
 
             sdf = new SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH);
 
@@ -138,7 +144,7 @@ public class SectionFActivity extends AppCompatActivity {
 
             // Date of Death from Date of Deliver(RC10)
             sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
-            cal.setTime(sdf.parse(outcomeFollowups.getRc14()));// all done
+            cal.setTime(sdf.parse(outcome.getRc06()));// all done
             sdf = new SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH);
             String minDOD = sdf.format(cal.getTime());
 
@@ -154,7 +160,7 @@ public class SectionFActivity extends AppCompatActivity {
         }
     }
 
-    public void btnContinue(View view) {
+    public void btnContinue(View view) throws JSONException {
         if (!formValidation()) return;
         if (outcomeFollowups.getUid().equals("") ? insertNewRecord() : updateDB()) {
 
@@ -167,26 +173,29 @@ public class SectionFActivity extends AppCompatActivity {
         }
     }
 
-    private boolean insertNewRecord() {
+    private boolean insertNewRecord() throws JSONException {
         /*if (fpHouseholds.getUid().equals("")) {
             insertFpHousehold();
         }
 */
-        outcomeFollowups.populateMeta();
+        outcome.populateMeta();
 
         long rowId = 0;
         try {
-            rowId = db.addOutcomeFollowup(outcomeFollowups);
+            //rowId = db.addOutcomeFollowup(outcomeFollowups);
+            rowId = DssRoomDatabase.getDbInstance().OutcomeDao().addOutcome(outcome);
         } catch (JSONException e) {
             e.printStackTrace();
             Toast.makeText(this, "JSONException(Followups): " + e.getMessage(), Toast.LENGTH_SHORT).show();
             Log.d(TAG, "insertNewRecord (JSONException): " + e.getMessage());
             return false;
         }
-        outcomeFollowups.setId(String.valueOf(rowId));
+        outcome.setId(rowId);
         if (rowId > 0) {
-            outcomeFollowups.setUid(outcomeFollowups.getDeviceId() + outcomeFollowups.getId());
-            db.updateOutcomeFollouwps(TableContracts.OutcomeFollowupTable.COLUMN_UID, outcomeFollowups.getUid());
+            outcome.setUid(outcome.getDeviceId() + outcome.getId());
+            outcome.setSE(outcome.sEtoString());
+            DssRoomDatabase.getDbInstance().OutcomeDao().updateOutcome(outcome);
+            //db.updateOutcomeFollouwps(TableContracts.OutcomeFollowupTable.COLUMN_UID, outcomeFollowups.getUid());
             return true;
         } else {
             Toast.makeText(this, "Updating Database... ERROR!", Toast.LENGTH_SHORT).show();
