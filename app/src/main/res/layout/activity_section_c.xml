@@ -96,7 +96,7 @@
                             android:text="@={fpHouseholds.ra01}"
                             app:dateFormat="yyyy-MM-dd"
                             app:maxDate="CR_DATE"
-                            app:theme="@style/DatePickerEditTextDialogTheme" />
+                            app:theme="@style/MaterialCalendarTheme" />
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
 
@@ -188,7 +188,7 @@
                             android:text="@={followups.rb01a}"
                             app:dateFormat="yyyy-MM-dd"
                             app:maxDate="CR_DATE"
-                            app:theme="@style/DatePickerEditTextDialogTheme" />
+                            app:theme="@style/MaterialCalendarTheme" />
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
                 <!-- rc02  Input   -->
@@ -557,7 +557,7 @@
                             android:text="@={followups.rb11a}"
                             app:dateFormat="yyyy-MM-dd"
                             app:maxDate="CR_DATE"
-                            app:theme="@style/DatePickerEditTextDialogTheme" />
+                            app:theme="@style/MaterialCalendarTheme" />
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
 
@@ -978,7 +978,7 @@
                                             android:text="@={followups.rb13}"
                                             app:dateFormat="yyyy-MM-dd"
                                             app:maxDate="CR_DATE"
-                                            app:theme="@style/DatePickerEditTextDialogTheme" />
+                                            app:theme="@style/MaterialCalendarTheme" />
 
                                         <CheckBox
                                             android:id="@+id/rb13check"

@@ -169,7 +169,7 @@
 
 
                         <EditText
-                            android:id="@+id/rc03"
+                            android:id="@+id/rb04"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:enabled="false"
@@ -366,7 +366,7 @@
                                 android:text="@={outcome.rc06}"
                                 app:dateFormat="yyyy-MM-dd"
                                 app:maxDate="CR_DATE"
-                                app:theme="@style/DatePickerEditTextDialogTheme" />
+                                app:theme="@style/MaterialCalendarTheme" />
 
                             <CheckBox
                                 android:id="@+id/rc0601check"

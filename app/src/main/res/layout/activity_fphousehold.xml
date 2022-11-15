@@ -20,29 +20,15 @@
         android:orientation="vertical">
 
 
-        <!--        &lt;!&ndash; CUSTOM TOOLBAR &ndash;&gt;
-                <androidx.appcompat.widget.Toolbar
-                    android:id="@+id/toolbar"
-                    style="@null"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@color/colorPrimary"
-                    android:minHeight="?attr/actionBarSize"
-                    android:theme="@style/ToolbarTheme"
-                    app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-                    app:subtitleTextAppearance="@style/Toolbar.SubtitleText"
-                    app:titleTextAppearance="@style/Toolbar.TitleText" />-->
-
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginTop="24dp"
-                android:background="@drawable/top_round_shape"
+                android:background="@drawable/app_bg_gray"
                 android:elevation="1dp"
                 android:gravity="center_horizontal"
                 android:orientation="vertical"
@@ -162,15 +148,21 @@
                     android:layout_height="wrap_content"
                     android:layout_alignEnd="@id/fmHeading"
                     android:layout_centerInParent="true"
-                    android:layout_gravity="end|bottom"
-                    android:backgroundTint="@android:color/transparent"
-                    android:src="@drawable/ic_home_add" />
+                    android:layout_gravity="center_vertical|center_horizontal"
+                    android:background="@drawable/ic_home"
+                    android:backgroundTint="@color/colorPrimaryDark"
+                    android:elevation="6dp"
+                    android:src="@drawable/ic_home_add"
+                    app:backgroundTint="@color/white"
+                    app:tint="@color/white"
+                    app:borderWidth="1dp"
+                    app:elevation="6dp"/>
             </RelativeLayout>
 
             <LinearLayout
                 android:id="@+id/navigation"
                 android:layout_width="match_parent"
-                android:layout_height="56dp"
+                android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"
                 android:layout_marginBottom="56dp"
                 android:background="@color/whiteOverlay"

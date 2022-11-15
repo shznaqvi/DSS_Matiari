@@ -134,7 +134,7 @@
                             android:text="@={mwra.rb01a}"
                             app:dateFormat="yyyy-MM-dd"
                             app:maxDate="CR_DATE"
-                            app:theme="@style/DatePickerEditTextDialogTheme" />
+                            app:theme="@style/MaterialCalendarTheme" />
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
                 <!-- rc02  Input   -->
@@ -216,7 +216,7 @@
                             android:orientation="horizontal">
 
                             <io.blackbox_vision.datetimepickeredittext.view.DatePickerEditText
-                                android:id="@+id/rc03"
+                                android:id="@+id/rb04"
                                 style="@style/textInput"
                                 android:layout_width="0dp"
                                 android:layout_height="match_parent"
@@ -229,7 +229,7 @@
                                 android:text="@={mwra.rb04}"
                                 app:dateFormat="yyyy-MM-dd"
                                 app:maxDate="CR_DATE"
-                                app:theme="@style/DatePickerEditTextDialogTheme" />
+                                app:theme="@style/MaterialCalendarTheme" />
 
                             <CheckBox
                                 android:id="@+id/rb04check"
@@ -523,7 +523,7 @@
                             android:hint="YYYY-MM-DD"
                             android:text="@={mwra.rb08}"
                             app:dateFormat="yyyy-MM-dd"
-                            app:theme="@style/DatePickerEditTextDialogTheme" />
+                            app:theme="@style/MaterialCalendarTheme" />
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
 
@@ -571,7 +571,7 @@
                             android:hint="YYYY-MM-DD"
                             android:text="@={mwra.rb09}"
                             app:dateFormat="yyyy-MM-dd"
-                            app:theme="@style/DatePickerEditTextDialogTheme" />
+                            app:theme="@style/MaterialCalendarTheme" />
 
 
                     </LinearLayout>
