@@ -56,6 +56,8 @@ public class MwraAdapter extends RecyclerView.Adapter<MwraAdapter.ViewHolder> {
         TextView fMaritalStatus = viewHolder.fMatitalStatus;
         ImageView indicator = viewHolder.indicator;
         TextView secStatus = viewHolder.secStatus;
+        TextView secDob = viewHolder.secDob;
+        TextView secGender = viewHolder.secGender;
 
         String pregStatus = mwra.getRb07().equals("1") ? "Pregnant" : "Not Pregnant";
 
@@ -96,7 +98,9 @@ public class MwraAdapter extends RecyclerView.Adapter<MwraAdapter.ViewHolder> {
                 break;
         }
 
-        fAge.setText(wifeOrDaughter + mwra.getRb03() + " | " + mwra.getRb05() + "y  ");
+        fAge.setText(wifeOrDaughter + mwra.getRb03());
+        secDob.setText(mwra.getRb05() + " Y");
+        secGender.setText("Female");
 
         if (mwra.getRb07().equals("1")) {
             secStatus.setBackgroundColor(ContextCompat.getColor(mContext, R.color.redLight));
@@ -150,6 +154,8 @@ public class MwraAdapter extends RecyclerView.Adapter<MwraAdapter.ViewHolder> {
         private final TextView secStatus;
         private final ImageView fmRow;
         private final ImageView indicator;
+        private final TextView secDob;
+        private final TextView secGender;
 
 
         public ViewHolder(View v) {
@@ -158,6 +164,9 @@ public class MwraAdapter extends RecyclerView.Adapter<MwraAdapter.ViewHolder> {
             fAge = v.findViewById(R.id.hh05);
             fMatitalStatus = v.findViewById(R.id.hh06);
             secStatus = v.findViewById(R.id.secStatus);
+            secDob = v.findViewById(R.id.secDob);
+            secGender = v.findViewById(R.id.secGender);
+
             fmRow = v.findViewById(R.id.fmRow);
             indicator = v.findViewById(R.id.indicator);
 

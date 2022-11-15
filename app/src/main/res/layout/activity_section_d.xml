@@ -148,6 +148,7 @@
                                 android:layout_height="wrap_content"
                                 android:gravity="center"
                                 android:hint="YYYY-MM-DD"
+                                android:layout_margin="8dp"
                                 android:text="@={followups.rb08}"
                                 app:dateFormat="yyyy-MM-dd"
                                 app:maxDate="CR_DATE"
@@ -194,6 +195,7 @@
                                 android:layout_weight="1"
                                 android:enabled="false"
                                 android:gravity="center"
+                                android:layout_margin="8dp"
                                 android:hint="YYYY-MM-DD"
                                 android:text="@={followups.rb09}"
                                 app:dateFormat="yyyy-MM-dd"
@@ -216,25 +218,25 @@
                     android:gravity="end"
                     android:orientation="horizontal">
 
-                    <Button
+                    <androidx.appcompat.widget.AppCompatButton
                         android:id="@+id/btn_End"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="12dp"
-                        android:background="@color/gray"
+                        android:backgroundTint="@color/colorAccent"
                         android:onClick="btnEnd"
                         android:text="Cancel"
                         android:textColor="@color/white" />
 
-                    <Button
+                    <androidx.appcompat.widget.AppCompatButton
                         android:id="@+id/btn_Continue"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="12dp"
-                        android:background="@color/colorAccent"
+                        android:backgroundTint="@color/colorPrimary"
                         android:onClick="btnContinue"
                         android:text="Save"
-                        android:textColor="@color/black" />
+                        android:textColor="@color/white" />
                 </LinearLayout>
 
 

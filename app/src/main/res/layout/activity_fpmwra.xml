@@ -29,13 +29,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginTop="24dp"
-                android:background="@drawable/top_round_shape"
+                android:background="@drawable/app_bg_gray"
                 android:elevation="1dp"
                 android:gravity="center_horizontal"
                 android:orientation="vertical"
                 android:paddingTop="56dp">
 
-       <!--         <View
+                <!--         <View
                     android:layout_width="match_parent"
                     android:layout_height="2dp"
                     android:background="@color/grayLight" />-->
@@ -66,25 +66,25 @@
                         android:drawableStart="@drawable/ic_members"
                         android:drawablePadding="8dp"
                         android:gravity="center_vertical"
-                        android:padding="8dp"
                         android:onClick="toggleNewMwraList"
+                        android:padding="8dp"
                         android:text="TEXT"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Widget.ActionBar.Subtitle"
                         android:visibility="gone"
-                        tools:visibility="visible"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Widget.ActionBar.Subtitle" />
+                        tools:visibility="visible" />
 
                     <TextView
                         android:id="@+id/newMwraList"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center_vertical"
-                        android:paddingStart="64dp"
                         android:includeFontPadding="false"
+                        android:paddingStart="64dp"
                         android:paddingTop="2dp"
                         android:paddingBottom="2dp"
                         android:text="Note: Newly added females will show in next followup"
-                        android:visibility="gone"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Widget.ActionBar.Subtitle" />
+                        android:textAppearance="@style/TextAppearance.AppCompat.Widget.ActionBar.Subtitle"
+                        android:visibility="gone" />
                 </LinearLayout>
 
                 <View
@@ -166,28 +166,26 @@
                 android:orientation="horizontal"
                 app:elevation="50dp">
 
-                <Button
+                <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/btn_End"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="12dp"
-                    android:background="@drawable/button_shape_red"
-                    android:drawableTint="#ea0000"
+                    android:backgroundTint="@color/colorAccent"
                     android:onClick="BtnEnd"
                     android:text="Cancel"
                     android:textColor="@color/white" />
 
-                <Button
+                <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/btn_Continue"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="12dp"
-                    android:background="@drawable/button_shape_green"
-                    android:drawableTint="#00ea00"
+                    android:backgroundTint="@color/green"
                     android:onClick="btnContinue"
                     android:text="Save"
                     android:textColor="@color/white"
-                    android:visibility="invisible" />
+                    android:visibility="visible" />
 
             </LinearLayout>
         </RelativeLayout>

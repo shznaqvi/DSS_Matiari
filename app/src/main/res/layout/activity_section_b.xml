@@ -78,6 +78,7 @@
                         </LinearLayout>
 
                         <com.edittextpicker.aliazaz.EditTextPicker
+                            style="@style/labelsHead"
                             android:id="@+id/rb01"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -170,6 +171,7 @@
 
                         <EditText
                             android:id="@+id/rc02"
+                            android:layout_margin="8dp"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:digits="abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ"
@@ -585,25 +587,25 @@
                     android:gravity="end"
                     android:orientation="horizontal">
 
-                    <Button
+                    <androidx.appcompat.widget.AppCompatButton
                         android:id="@+id/btn_End"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="12dp"
-                        android:background="@color/gray"
+                        android:backgroundTint="@color/colorAccent"
                         android:onClick="btnEnd"
                         android:text="Cancel"
                         android:textColor="@color/white" />
 
-                    <Button
+                    <androidx.appcompat.widget.AppCompatButton
                         android:id="@+id/btn_Continue"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="12dp"
-                        android:background="@color/colorAccent"
+                        android:backgroundTint="@color/colorPrimary"
                         android:onClick="btnContinue"
                         android:text="Save"
-                        android:textColor="@color/black" />
+                        android:textColor="@color/white" />
                 </LinearLayout>
             </LinearLayout>
         </ScrollView>

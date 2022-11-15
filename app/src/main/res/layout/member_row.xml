@@ -13,7 +13,12 @@
         style="@style/cardView"
         android:layout_margin="2dp"
         android:background="?android:attr/selectableItemBackground"
-        android:paddingBottom="0dp">
+        android:paddingBottom="0dp"
+        app:cardCornerRadius="6dp"
+        app:cardElevation="2dp"
+        app:strokeWidth="1dp"
+        app:strokeColor="@color/colorAccent"
+        >
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -55,7 +60,7 @@
                         android:layout_height="wrap_content"
                         android:orientation="horizontal">
 
-                        <TextView
+                        <com.google.android.material.textview.MaterialTextView
                             android:id="@+id/hh02"
                             android:layout_width="0dp"
                             android:layout_weight="1"
@@ -66,7 +71,7 @@
                             android:textSize="16sp"
                             android:textStyle="bold" />
 
-                        <TextView
+                        <com.google.android.material.textview.MaterialTextView
                             android:id="@+id/hh05"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -82,7 +87,7 @@
                         android:orientation="horizontal"
                         android:id="@+id/mstatus">
 
-                        <TextView
+                        <com.google.android.material.textview.MaterialTextView
                             android:id="@+id/hh06"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
@@ -90,7 +95,7 @@
                             android:includeFontPadding="false"
                             android:text="Marital Status" />
 
-                        <TextView
+                        <com.google.android.material.textview.MaterialTextView
                             android:id="@+id/secStatus"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -113,16 +118,16 @@
                         android:layout_height="wrap_content"
                         android:orientation="horizontal">
 
-                        <TextView
+                        <com.google.android.material.textview.MaterialTextView
                             android:id="@+id/rb04"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:includeFontPadding="false"
-                            android:text="Date of Birth"
+                            android:text="Age"
                             />
 
-                        <TextView
+                        <com.google.android.material.textview.MaterialTextView
                             android:id="@+id/secDob"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -135,7 +140,7 @@
                             android:paddingEnd="12dp"
                             android:paddingBottom="2dp"
                             android:text="DOB"
-                            android:textColor="@color/white"
+                            android:textColor="@color/blackOverlay"
                             android:textSize="11dp"
                             android:textStyle="italic|normal" />
                     </LinearLayout>
@@ -145,7 +150,7 @@
                         android:layout_height="wrap_content"
                         android:orientation="horizontal">
 
-                        <TextView
+                        <com.google.android.material.textview.MaterialTextView
                             android:id="@+id/rc04"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
@@ -153,7 +158,7 @@
                             android:includeFontPadding="false"
                             android:text="Gender" />
 
-                        <TextView
+                        <com.google.android.material.textview.MaterialTextView
                             android:id="@+id/secGender"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -166,7 +171,7 @@
                             android:paddingEnd="12dp"
                             android:paddingBottom="2dp"
                             android:text="Gender"
-                            android:textColor="@color/white"
+                            android:textColor="@color/blackOverlay"
                             android:textSize="11dp"
                             android:textStyle="italic|normal" />
                     </LinearLayout>

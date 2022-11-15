@@ -89,7 +89,7 @@
                             android:src="@drawable/ic_members_done"
                             android:visibility="gone"
                             tools:visibility="visible"
-                            app:tint="@color/colorAccent" />
+                            android:tint="@color/green" />
 
                     </LinearLayout>
 

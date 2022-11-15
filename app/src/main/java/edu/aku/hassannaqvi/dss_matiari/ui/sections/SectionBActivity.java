@@ -210,7 +210,7 @@ public class SectionBActivity extends AppCompatActivity {
                     }
 
                 }
-            }+
+            }
         });
     }
 

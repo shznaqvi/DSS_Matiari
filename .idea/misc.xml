@@ -87,8 +87,10 @@
         <entry key="..\:/Users/gul.sanober/StudioProjects/DSS_Matiari/app/src/main/res/drawable/ic_close.xml" value="0.1865" />
         <entry key="..\:/Users/gul.sanober/StudioProjects/DSS_Matiari/app/src/main/res/drawable/ic_home.xml" value="0.1865" />
         <entry key="..\:/Users/gul.sanober/StudioProjects/DSS_Matiari/app/src/main/res/drawable/ic_home_add.xml" value="0.1865" />
+        <entry key="..\:/Users/gul.sanober/StudioProjects/DSS_Matiari/app/src/main/res/drawable/ic_members_done.xml" value="0.1865" />
         <entry key="..\:/Users/gul.sanober/StudioProjects/DSS_Matiari/app/src/main/res/drawable/ic_person_add.xml" value="0.1865" />
         <entry key="..\:/Users/gul.sanober/StudioProjects/DSS_Matiari/app/src/main/res/drawable/top_round_shape.xml" value="0.1865" />
+        <entry key="..\:/Users/gul.sanober/StudioProjects/DSS_Matiari/app/src/main/res/layout/activity_ending.xml" value="0.1" />
         <entry key="..\:/Users/gul.sanober/StudioProjects/DSS_Matiari/app/src/main/res/layout/activity_fp_ending.xml" value="0.38359375" />
         <entry key="..\:/Users/gul.sanober/StudioProjects/DSS_Matiari/app/src/main/res/layout/activity_fphousehold.xml" value="0.3671875" />
         <entry key="..\:/Users/gul.sanober/StudioProjects/DSS_Matiari/app/src/main/res/layout/activity_fpmwra.xml" value="0.33842946490618486" />
@@ -104,12 +106,13 @@
         <entry key="..\:/Users/gul.sanober/StudioProjects/DSS_Matiari/app/src/main/res/layout/activity_section_cx.xml" value="0.5" />
         <entry key="..\:/Users/gul.sanober/StudioProjects/DSS_Matiari/app/src/main/res/layout/activity_section_cx_2.xml" value="0.9" />
         <entry key="..\:/Users/gul.sanober/StudioProjects/DSS_Matiari/app/src/main/res/layout/activity_section_d.xml" value="0.27025641025641023" />
-        <entry key="..\:/Users/gul.sanober/StudioProjects/DSS_Matiari/app/src/main/res/layout/activity_section_e.xml" value="0.1" />
-        <entry key="..\:/Users/gul.sanober/StudioProjects/DSS_Matiari/app/src/main/res/layout/activity_section_f.xml" value="0.1" />
+        <entry key="..\:/Users/gul.sanober/StudioProjects/DSS_Matiari/app/src/main/res/layout/activity_section_e.xml" value="0.18" />
+        <entry key="..\:/Users/gul.sanober/StudioProjects/DSS_Matiari/app/src/main/res/layout/activity_section_f.xml" value="0.25" />
         <entry key="..\:/Users/gul.sanober/StudioProjects/DSS_Matiari/app/src/main/res/layout/activity_section_outcome.xml" value="0.35" />
         <entry key="..\:/Users/gul.sanober/StudioProjects/DSS_Matiari/app/src/main/res/layout/activity_sync.xml" value="0.14739583333333334" />
         <entry key="..\:/Users/gul.sanober/StudioProjects/DSS_Matiari/app/src/main/res/layout/activity_wra_ending.xml" value="0.5" />
-        <entry key="..\:/Users/gul.sanober/StudioProjects/DSS_Matiari/app/src/main/res/layout/household_row.xml" value="0.22" />
+        <entry key="..\:/Users/gul.sanober/StudioProjects/DSS_Matiari/app/src/main/res/layout/household_row.xml" value="0.1" />
+        <entry key="..\:/Users/gul.sanober/StudioProjects/DSS_Matiari/app/src/main/res/layout/member_row.xml" value="0.33" />
         <entry key="..\:/Users/gul.sanober/StudioProjects/DSS_Matiari/app/src/main/res/layout/recycler_view_item.xml" value="0.3671875" />
         <entry key="..\:/Users/gul.sanober/StudioProjects/DSS_Matiari/app/src/main/res/layout/recycler_view_item_1.xml" value="0.3671875" />
         <entry key="..\:/Users/hassan.naqvi/StudioProjects/DSS_Matiari/app/src/main/res/drawable-v24/ic_username.xml" value="0.15416666666666667" />

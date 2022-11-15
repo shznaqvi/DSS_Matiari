@@ -212,15 +212,15 @@
                     android:orientation="horizontal">
 
 
-                    <Button
+                    <androidx.appcompat.widget.AppCompatButton
                         android:id="@+id/btn_End"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="12dp"
-                        android:background="@color/colorAccent"
+                        android:background="@color/green"
                         android:onClick="btnEnd"
                         android:text="Save"
-                        android:textColor="@color/black" />
+                        android:textColor="@color/white" />
                 </LinearLayout>
 
             </LinearLayout>

@@ -60,7 +60,7 @@
                     android:visibility="gone" />
 
                 <androidx.cardview.widget.CardView
-                    android:id="@+id/fldGrpCVrc1201ln"
+                    android:id="@+id/fldGrpCVrb01"
                     style="@style/cardView">
 
                     <LinearLayout
@@ -81,26 +81,29 @@
                                 android:text="@string/rc12ln" />
 
                             <TextView
-                                android:id="@+id/rc01"
-                                style="@style/quesNum"
-                                android:layout_width="0dp"
-                                android:layout_height="match_parent"
-                                android:layout_weight="1"
-                                android:gravity="center"
-                                android:text="@={outcome.rc01}" />
-
-
-                            <TextView
                                 style="@style/quesNum"
                                 android:layout_width="wrap_content"
                                 android:layout_height="match_parent"
-                                android:text="@string/Q_rc01"
-                                android:visibility="gone" />
+                                android:text="@string/Q_rc01" />
 
 
                         </LinearLayout>
 
-
+                        <com.edittextpicker.aliazaz.EditTextPicker
+                            style="@style/labelsHead"
+                            android:id="@+id/rc01"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:enabled="false"
+                            android:gravity="center_vertical|center_horizontal"
+                            android:hint="@string/rc12ln"
+                            android:layout_margin="8dp"
+                            android:inputType="number"
+                            android:maxLength="1"
+                            android:text="@={outcome.rc01}"
+                            app:maxValue="10"
+                            app:minValue="1"
+                            app:type="range" />
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
 
@@ -171,12 +174,21 @@
                                 android:layout_weight="1"
                                 android:text="@string/rc12nm" />
 
+                            <TextView
+                                style="@style/quesNum"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:text="@string/Q_rb02" />
+
+
                         </LinearLayout>
 
                         <EditText
+                            style="@style/labelsHead"
                             android:id="@+id/rc02"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:layout_margin="8dp"
                             android:digits="abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ"
                             android:inputType="textPersonName|textCapWords"
                             android:text="@={outcome.rc02}" />
@@ -208,14 +220,23 @@
                                 android:layout_weight="1"
                                 android:text="Mother's Name" />
 
+                            <TextView
+                                style="@style/quesNum"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:text="@string/Q_rb03" />
+
+
 
 
                         </LinearLayout>
 
                         <EditText
+                            style="@style/labelsHead"
                             android:id="@+id/rb03"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:layout_margin="8dp"
                             android:digits="abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ"
                             android:inputType="textPersonName|textCapWords"
                             android:text="@={outcome.rb03}" />
@@ -253,7 +274,7 @@
                                 style="@style/quesNum"
                                 android:layout_width="wrap_content"
                                 android:layout_height="match_parent"
-                                android:text="@string/Q_rc12dob" />
+                                android:text="@string/Q_rb04" />
 
 
                         </LinearLayout>
@@ -261,10 +282,12 @@
 
 
                         <EditText
+                            style="@style/labelsHead"
                             android:id="@+id/rb04"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:enabled="false"
+                            android:layout_margin="8dp"
                             android:textColor="@color/colorPrimary"
                             android:gravity="center_horizontal|center_vertical"
                             android:inputType="textPersonName|textCapWords"
@@ -301,7 +324,7 @@
                                 style="@style/quesNum"
                                 android:layout_width="wrap_content"
                                 android:layout_height="match_parent"
-                                android:text="@string/Q_rc12" />
+                                android:text="@string/Q_rc04" />
 
 
                         </LinearLayout>
@@ -510,6 +533,7 @@
                             android:id="@+id/rc07"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:layout_margin="8dp"
                             android:digits="abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ ,.\/"
                             android:enabled="true"
                             android:hint="@string/rc05b"
@@ -528,25 +552,25 @@
                     android:gravity="end"
                     android:orientation="horizontal">
 
-                    <Button
+                    <androidx.appcompat.widget.AppCompatButton
                         android:id="@+id/btn_End"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="12dp"
-                        android:background="@color/gray"
+                        android:backgroundTint="@color/colorAccent"
                         android:onClick="btnEnd"
                         android:text="Cancel"
                         android:textColor="@color/white" />
 
-                    <Button
+                    <androidx.appcompat.widget.AppCompatButton
                         android:id="@+id/btn_Continue"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="12dp"
-                        android:background="@color/colorAccent"
+                        android:backgroundTint="@color/colorPrimary"
                         android:onClick="btnContinue"
                         android:text="Save"
-                        android:textColor="@color/black" />
+                        android:textColor="@color/white" />
                 </LinearLayout>
 
 
