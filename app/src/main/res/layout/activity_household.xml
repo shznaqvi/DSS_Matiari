@@ -106,9 +106,9 @@
                     android:elevation="6dp"
                     android:src="@drawable/ic_home_add"
                     app:backgroundTint="@color/white"
-                    app:tint="@color/white"
                     app:borderWidth="1dp"
-                    app:elevation="6dp" />
+                    app:elevation="6dp"
+                    app:tint="@color/white" />
             </RelativeLayout>
 
             <LinearLayout

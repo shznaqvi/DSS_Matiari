@@ -101,7 +101,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         //db.execSQL(SQL_CREATE_MWRA);
         //db.execSQL(SQL_CREATE_FOLLOWUPS);
         //db.execSQL(SQL_CREATE_PREGNANCY);
-        db.execSQL(SQL_CREATE_OUTCOME);
+        //db.execSQL(SQL_CREATE_OUTCOME);
         db.execSQL(SQL_CREATE_VERSIONAPP);
 //        db.execSQL(SQL_CREATE_VILLAGES);
 //        db.execSQL(SQL_CREATE_FOLLOWUPSCHE);
@@ -208,7 +208,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return newRowId;
     }*/
 
-    public Long addFpHousehold(FPHouseholds fpHouseholds) throws JSONException {
+    /*public Long addFpHousehold(FPHouseholds fpHouseholds) throws JSONException {
         SQLiteDatabase db = this.getWritableDatabase(DATABASE_PASSWORD);
         ContentValues values = new ContentValues();
         values.put(FPHouseholdTable.COLUMN_PROJECT_NAME, fpHouseholds.getProjectName());
@@ -233,7 +233,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 FPHouseholdTable.COLUMN_NAME_NULLABLE,
                 values);
         return newRowId;
-    }
+    }*/
 
     /*public Long addFollowup(Followups followups) throws JSONException {
         SQLiteDatabase db = this.getWritableDatabase(DATABASE_PASSWORD);
@@ -326,7 +326,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return newRowId;
     }*/
 
-    public Long addOutcome(Outcome outcome) throws JSONException {
+    /*public Long addOutcome(Outcome outcome) throws JSONException {
         SQLiteDatabase db = this.getWritableDatabase(DATABASE_PASSWORD);
         ContentValues values = new ContentValues();
         values.put(TableContracts.OutcomeTable.COLUMN_PROJECT_NAME, outcome.getProjectName());
@@ -353,7 +353,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 TableContracts.OutcomeTable.COLUMN_NAME_NULLABLE,
                 values);
         return newRowId;
-    }
+    }*/
 
 
     /*
@@ -537,7 +537,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return allFC;
     }
 */
-    public ArrayList<Cursor> getDatabaseManagerData(String Query) {
+    /*public ArrayList<Cursor> getDatabaseManagerData(String Query) {
         //get writable database
         SQLiteDatabase sqlDB = this.getWritableDatabase(DATABASE_PASSWORD);
         String[] columns = new String[]{"message"};
@@ -571,7 +571,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             alc.set(1, Cursor2);
             return alc;
         }
-    }
+    }*/
 
 
     /*public int updatesHouseholdColumn(String column, String value) {
@@ -950,7 +950,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return allVil;
     }
 
-    public Collection<Villages> getVillageUc() {
+    /*public Collection<Villages> getVillageUc() {
         SQLiteDatabase db = this.getReadableDatabase(DATABASE_PASSWORD);
         Cursor c = null;
         String[] columns = {
@@ -987,7 +987,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.close();
 
         return allVil;
-    }
+    }*/
 
     //get UnSyncedTables
     public JSONArray getUnsyncedHouseholds() throws JSONException {
@@ -1389,7 +1389,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
 
-    public Collection<Villages> getVillageByUc(String ucCode) {
+    /*public Collection<Villages> getVillageByUc(String ucCode) {
         SQLiteDatabase db = this.getReadableDatabase(DATABASE_PASSWORD);
         Cursor c = null;
         String[] columns = {
@@ -1425,7 +1425,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.close();
 
         return allVil;
-    }
+    }*/
 
     public List<String> getLMS(int age, int gender, String catA, String catB) {
         SQLiteDatabase db = this.getReadableDatabase(DATABASE_PASSWORD);
@@ -1505,7 +1505,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return insertCount;
     }
 
-    public Households getHouseholdByHDSSID(String hdssid) throws JSONException {
+    /*public Households getHouseholdByHDSSID(String hdssid) throws JSONException {
 
         // Household number in DSSID was changed to 4-digits to capture more than 999 households
         String[] hdssidSplit = hdssid.split("-");
@@ -1545,7 +1545,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.close();
 
         return households;
-    }
+    }*/
 
     public Households getHouseholdByUID(String uid) throws JSONException {
         SQLiteDatabase db = this.getReadableDatabase(DATABASE_PASSWORD);
@@ -1583,7 +1583,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
 
-    public List<Mwra> getAllMWRAByHH(String uc, String village, String structure, String hhNo) throws JSONException {
+    /*public List<Mwra> getAllMWRAByHH(String uc, String village, String structure, String hhNo) throws JSONException {
         // Household number in DSSID was changed to 4-digits to capture more than 999 households
         String newhhNo = hhNo;
         if (hhNo.length() == 3) {
@@ -1630,9 +1630,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.close();
 
         return mwraByHH;
-    }
+    }*/
 
-    public List<FollowUpsSche> getAllfollowupsScheByHH(String village, String ucCode, String hhNo) {
+    /*public List<FollowUpsSche> getAllfollowupsScheByHH(String village, String ucCode, String hhNo) {
 
         // Household number in DSSID was changed to 4-digits to capture more than 999 households
         String newhhNo = hhNo;
@@ -1680,9 +1680,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.close();
 
         return followupsByHH;
-    }
+    }*/
 
-    public int getMaxStructure(String uc, String vCode) {
+    /*public int getMaxStructure(String uc, String vCode) {
         SQLiteDatabase db = this.getReadableDatabase(DATABASE_PASSWORD);
         Cursor c = db.rawQuery(
                 "SELECT " +
@@ -1698,9 +1698,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         }
         Log.d(TAG, "getMaxHHNo: " + maxHHno);
         return Math.round(maxHHno);
-    }
+    }*/
 
-    public int getMaxHouseholdNo(String ucCode, String vCode) {
+    /*public int getMaxHouseholdNo(String ucCode, String vCode) {
         SQLiteDatabase db = this.getReadableDatabase(DATABASE_PASSWORD);
         Cursor c = db.rawQuery(
                 "SELECT " +
@@ -1716,9 +1716,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         }
         Log.d(TAG, "getMaxHHNo: " + maxHHno);
         return Math.round(maxHHno);
-    }
+    }*/
 
-    public int getMaxHHNoByVillage(String ucCode, String vCode) {
+    /*public int getMaxHHNoByVillage(String ucCode, String vCode) {
         SQLiteDatabase db = this.getReadableDatabase(DATABASE_PASSWORD);
         Cursor c = null;
         String[] columns = {MaxHhnoTable.COLUMN_MAX_HHNO};
@@ -1753,9 +1753,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         Log.d(TAG, "getMaxHHNo: " + maxHHno);
         return Math.round(maxHHno);
-    }
+    }*/
 
-    public int getMaxMWRSNoBYHH(String ucCode, String vCode, String hhNo) {
+    /*public int getMaxMWRSNoBYHH(String ucCode, String vCode, String hhNo) {
         // Household number in DSSID was changed to 4-digits to capture more than 999 households
         String newhhNo = hhNo;
 
@@ -1783,10 +1783,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         }
         Log.d(TAG, "getMaxHHNo: " + maxHHno);
         return Math.round(maxHHno);
-    }
+    }*/
 
 
-    public int getMaxHHNoFromFolloupsSche(String ucCode, String vCode) {
+    /*public int getMaxHHNoFromFolloupsSche(String ucCode, String vCode) {
         SQLiteDatabase db = this.getReadableDatabase(DATABASE_PASSWORD);
         Cursor c = db.rawQuery(
                 "SELECT " +
@@ -1803,16 +1803,16 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         }
         Log.d(TAG, "getMaxHHNo: " + maxHHno);
         return Math.round(maxHHno);
-    }
+    }*/
 
-    public int getMaxMWRANoBYHHFromFolloupsSche(String uc, String vCode, String hhNo) {
+    /*public int getMaxMWRANoBYHHFromFolloupsSche(String uc, String vCode, String hhNo) {
         // Household number in DSSID was changed to 4-digits to capture more than 999 households
         String newhhNo = hhNo;
         if (hhNo.length() < 4) {
             newhhNo = String.format("%04d", Integer.parseInt(hhNo));
-        }/* else {
+        }*//* else {
             newhhNo = String.format("%03d", Integer.parseInt(hhNo));
-        }*/
+        }*//*
         SQLiteDatabase db = this.getReadableDatabase(DATABASE_PASSWORD);
         Cursor c = db.rawQuery(
                 "SELECT " +
@@ -1830,9 +1830,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         }
         Log.d(TAG, "getMaxHHNo: " + maxHHno);
         return Math.round(maxHHno);
-    }
+    }*/
 
-    public List<Households> getHouseholdBYStructure(String uc, String village, String structure) throws JSONException {
+    /*public List<Households> getHouseholdBYStructure(String uc, String village, String structure) throws JSONException {
         SQLiteDatabase db = this.getReadableDatabase(DATABASE_PASSWORD);
         Cursor c = null;
         String[] columns = null;
@@ -1867,9 +1867,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.close();
 
         return householdByHH;
-    }
+    }*/
 
-    public List<Households> getHouseholdBYVillage(String uc, String village) throws JSONException {
+    /*public List<Households> getHouseholdBYVillage(String uc, String village) throws JSONException {
         SQLiteDatabase db = this.getReadableDatabase(DATABASE_PASSWORD);
         Cursor c = null;
         String[] columns = null;
@@ -1906,10 +1906,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.close();
 
         return householdByHH;
-    }
+    }*/
 
 
-    public List<FollowUpsSche> getFollowUpsScheHHBYVillage(String uc, String village, String hhead) {
+    /*public List<FollowUpsSche> getFollowUpsScheHHBYVillage(String uc, String village, String hhead) {
         SQLiteDatabase db = this.getReadableDatabase(DATABASE_PASSWORD);
         Cursor c = null;
         String[] columns = {
@@ -1970,9 +1970,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.close();
 
         return followUpsSches;
-    }
+    }*/
 
-    public FPHouseholds getFPHouseholdBYHdssid(String hdssid) throws JSONException {
+    /*public FPHouseholds getFPHouseholdBYHdssid(String hdssid) throws JSONException {
 
         // Household number in DSSID was changed to 4-digits to capture more than 999 households
         String[] hdssidSplit = hdssid.split("-");
@@ -2014,7 +2014,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.close();
 
         return fpHousholds;
-    }
+    }*/
 
     public int getMWRACountBYUUID(String uid) {
         SQLiteDatabase db = this.getReadableDatabase(DATABASE_PASSWORD);
@@ -2055,7 +2055,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 */
 
-    public int getHouseholdCountByVillage(String villagecode) {
+    /*public int getHouseholdCountByVillage(String villagecode) {
         SQLiteDatabase db = this.getReadableDatabase(DATABASE_PASSWORD);
         Cursor c = db.rawQuery(
                 "SELECT Count(*) AS hhCount" +
@@ -2072,7 +2072,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         }
         // Log.d(TAG, "getMaxHHNo: " + mwraCount);
         return hhCount;
-    }
+    }*/
 
 
     // Added in UserDao
@@ -2093,7 +2093,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return users;
     }
 */
-    public OutcomeFollowups getOutcomeFollowupsBySno(String rb01, String fRound, String muid) throws JSONException {
+   /* public OutcomeFollowups getOutcomeFollowupsBySno(String rb01, String fRound, String muid) throws JSONException {
         SQLiteDatabase db = this.getReadableDatabase(DATABASE_PASSWORD);
         Cursor c = null;
         String[] columns = null;
@@ -2131,9 +2131,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.close();
 
         return fp;
-    }
+    }*/
 
-    public Followups getFollowupsBySno(String rb01, String fRound) throws JSONException {
+    /*public Followups getFollowupsBySno(String rb01, String fRound) throws JSONException {
         SQLiteDatabase db = this.getReadableDatabase(DATABASE_PASSWORD);
         Cursor c = null;
         String[] columns = null;
@@ -2170,9 +2170,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.close();
 
         return followup;
-    }
+    }*/
 
-    public Outcome getOutcomesBySno(String rb01) throws JSONException {
+    /*public Outcome getOutcomesBySno(String rb01) throws JSONException {
         SQLiteDatabase db = this.getReadableDatabase(DATABASE_PASSWORD);
         Cursor c = null;
         String[] columns = null;
@@ -2209,10 +2209,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         //db.close();
 
         return outcome;
-    }
+    }*/
 
 
-    public Outcome getOutComeBYID(String sno) throws JSONException {
+    /*public Outcome getOutComeBYID(String sno) throws JSONException {
 
         SQLiteDatabase db = this.getReadableDatabase(DATABASE_PASSWORD);
         Cursor c = null;
@@ -2250,10 +2250,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         //db.close();
 
         return outcome;
-    }
+    }*/
 
 
-    public Outcome getChildByUUid(String pSNo) throws JSONException {
+    /*public Outcome getChildByUUid(String pSNo) throws JSONException {
         SQLiteDatabase db = this.getReadableDatabase(DATABASE_PASSWORD);
         Cursor c;
         String[] columns = null;
@@ -2289,7 +2289,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.close();
 
         return outcome;
-    }
+    }*/
 
 
 

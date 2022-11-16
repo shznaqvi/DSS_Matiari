@@ -1,8 +1,6 @@
 package edu.aku.hassannaqvi.dss_matiari.ui.lists;
 
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.followUpsScheMWRAList;
-import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.followups;
-import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.fpHouseholds;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.fpMwra;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.households;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.mwra;
@@ -10,7 +8,7 @@ import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.mwraCount;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.mwraDone;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.mwraStatus;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.outcomeFollowups;
-import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.selectedFemale;
+import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.selectedMember;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.selectedHhNO;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.selectedUC;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.selectedVillage;
@@ -27,7 +25,6 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.room.RoomDatabase;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -35,17 +32,13 @@ import org.json.JSONException;
 
 import edu.aku.hassannaqvi.dss_matiari.R;
 import edu.aku.hassannaqvi.dss_matiari.adapters.FpMwraAdapter;
-import edu.aku.hassannaqvi.dss_matiari.contracts.TableContracts;
 import edu.aku.hassannaqvi.dss_matiari.core.MainApp;
 import edu.aku.hassannaqvi.dss_matiari.database.DatabaseHelper;
 import edu.aku.hassannaqvi.dss_matiari.databinding.ActivityFpmwraBinding;
-import edu.aku.hassannaqvi.dss_matiari.models.Followups;
-import edu.aku.hassannaqvi.dss_matiari.models.Households;
 import edu.aku.hassannaqvi.dss_matiari.models.Mwra;
 import edu.aku.hassannaqvi.dss_matiari.models.OutcomeFollowups;
 import edu.aku.hassannaqvi.dss_matiari.room.DssRoomDatabase;
 import edu.aku.hassannaqvi.dss_matiari.ui.EndingActivity;
-import edu.aku.hassannaqvi.dss_matiari.ui.FPEndingActivity;
 import edu.aku.hassannaqvi.dss_matiari.ui.sections.SectionBActivity;
 
 
@@ -290,18 +283,18 @@ public class FPMwraActivity extends AppCompatActivity {
         if (requestCode == 2) {
             if (resultCode == Activity.RESULT_OK) {
                 // Followups fp = followupsList.get(selectedFemale);
-                if (followUpsScheMWRAList.get(selectedFemale).getfpDoneDt().equals(""))
+                if (followUpsScheMWRAList.get(selectedMember).getfpDoneDt().equals(""))
                     // followupsList.add(followups);
                     mwraDone++;
 
 
                 //followUpsScheMWRAList.get(selectedFemale).setfpDoneDt(followups.getSysDate());
-                followUpsScheMWRAList.get(selectedFemale).setfpDoneDt(mwra.getSysDate());
+                followUpsScheMWRAList.get(selectedMember).setfpDoneDt(mwra.getSysDate());
 
-                fmAdapter.notifyItemChanged(selectedFemale);
+                fmAdapter.notifyItemChanged(selectedMember);
 
 
-                fpMwra.setfpDoneDt(followUpsScheMWRAList.get(selectedFemale).setfpDoneDt(mwra.getSysDate()));
+                fpMwra.setfpDoneDt(followUpsScheMWRAList.get(selectedMember).setfpDoneDt(mwra.getSysDate()));
                 DssRoomDatabase.getDbInstance().FollowUpsScheDao().updateFollowupsSche(fpMwra);
                 //db.updatesFollowUpsScheColumn(TableContracts.TableFollowUpsSche.COLUMN_DONE_DATE, followups.getSysDate());
                 if (mwraDone >= followUpsScheMWRAList.size()) {
@@ -309,12 +302,12 @@ public class FPMwraActivity extends AppCompatActivity {
                 }
                 //checkCompleteFm();
                 //fmAdapter.notifyItemChanged(selectedFemale);
-                Toast.makeText(this, "Followup for " + followUpsScheMWRAList.get(selectedFemale).getRb02() + " has been saved.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Followup for " + followUpsScheMWRAList.get(selectedMember).getRb02() + " has been saved.", Toast.LENGTH_SHORT).show();
 
             }
             if (resultCode == Activity.RESULT_CANCELED) {
                 // Write your code if there's no result
-                Toast.makeText(this, "Followup for " + followUpsScheMWRAList.get(selectedFemale).getRb02() + " was not saved.2", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Followup for " + followUpsScheMWRAList.get(selectedMember).getRb02() + " was not saved.2", Toast.LENGTH_SHORT).show();
             }
         }
         if (requestCode == 3) {

@@ -94,7 +94,7 @@ public class MainApp extends Application {
     public static int childCount = 0;
     public static int totalChildCount = 0;
     public static boolean fmComplete;
-    public static int selectedFemale;
+    public static int selectedMember;
     public static int selectedFpFemale;
     public static int selectedHousehold;
     public static int selectedFpHousehold;

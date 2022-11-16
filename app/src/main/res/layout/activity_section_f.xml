@@ -132,7 +132,7 @@
                                 style="@style/quesNum"
                                 android:layout_width="wrap_content"
                                 android:layout_height="match_parent"
-                                android:text="@string/Q_rc01a" />
+                                android:text="@string/Q_rb01a" />
 
                         </LinearLayout>
 
@@ -178,7 +178,7 @@
                                 style="@style/quesNum"
                                 android:layout_width="wrap_content"
                                 android:layout_height="match_parent"
-                                android:text="@string/Q_rb02" />
+                                android:text="@string/Q_rc02" />
 
 
                         </LinearLayout>
@@ -224,7 +224,7 @@
                                 style="@style/quesNum"
                                 android:layout_width="wrap_content"
                                 android:layout_height="match_parent"
-                                android:text="@string/Q_rb03" />
+                                android:text="@string/Q_rb02" />
 
 
 
@@ -233,13 +233,13 @@
 
                         <EditText
                             style="@style/labelsHead"
-                            android:id="@+id/rb03"
+                            android:id="@+id/rb02"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_margin="8dp"
                             android:digits="abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ"
                             android:inputType="textPersonName|textCapWords"
-                            android:text="@={outcome.rb03}" />
+                            android:text="@={outcome.rb02}" />
 
 
                     </LinearLayout>
@@ -274,7 +274,7 @@
                                 style="@style/quesNum"
                                 android:layout_width="wrap_content"
                                 android:layout_height="match_parent"
-                                android:text="@string/Q_rb04" />
+                                android:text="@string/Q_rc03" />
 
 
                         </LinearLayout>
@@ -283,7 +283,7 @@
 
                         <EditText
                             style="@style/labelsHead"
-                            android:id="@+id/rb04"
+                            android:id="@+id/rc03"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:enabled="false"

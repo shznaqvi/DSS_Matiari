@@ -44,19 +44,18 @@
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
 
-                    <TextView
-                        android:id="@+id/villageCode"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:background="@color/colorPrimaryLightOverlay"
-                        android:drawablePadding="8dp"
-                        android:gravity="center_vertical|center_horizontal"
-                        android:onClick="toggleNewMwraList"
-                        android:padding="8dp"
-                        android:text="TEXT"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Widget.ActionBar.Subtitle"
-                        android:textColor="@color/colorAccent"
-                        android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/villageCode"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/colorPrimaryLightOverlay"
+                    android:gravity="center_vertical|center_horizontal"
+                    android:onClick="toggleNewMwraList"
+                    android:text="TEXT"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Widget.ActionBar.Subtitle"
+                    android:textColor="@color/colorAccent"
+                    android:textSize="16sp" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -67,36 +66,45 @@
                             android:id="@+id/hhead"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:hint="Head of Household"
-                            android:importantForAutofill="no" />
+                            android:layout_weight="4"
+                            android:hint="Household Number"
+                            android:gravity="center_vertical"
+                            android:layout_margin="0dp"
+                            android:layout_gravity="center">
+
+                        </EditText>
 
                         <Button
-                            android:layout_width="56dp"
+                            android:layout_width="0dp"
                             android:layout_height="match_parent"
-                            android:drawableStart="@drawable/search"
-                            android:onClick="filterForms" />
+                            android:layout_weight="0.7"
+                            android:drawableTop="@drawable/search"
+                            android:onClick="filterForms"
+                            android:src="@drawable/search"
+                            app:tint="@color/white" />
+
                     </LinearLayout>
 
-                    <TextView
-                        android:id="@+id/newHouseholds"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:drawableStart="@drawable/ic_members"
-                        android:drawablePadding="8dp"
-                        android:gravity="center_vertical"
-                        android:onClick="toggleNewMwraList"
-                        android:padding="8dp"
-                        android:text="TEXT"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Widget.ActionBar.Subtitle"
-                        android:visibility="gone" />
+                <TextView
+                    android:id="@+id/newHouseholds"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:drawableStart="@drawable/ic_members"
+                    android:drawablePadding="8dp"
+                    android:gravity="center_vertical"
+                    android:onClick="toggleNewMwraList"
+                    android:padding="8dp"
+                    android:text="TEXT"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Widget.ActionBar.Subtitle"
+                    android:visibility="gone"
+                    tools:visibility="visible" />
+
                 </LinearLayout>
 
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="2dp"
                     android:background="@color/grayLight"
-
                     android:padding="8dp" />
 
                 <androidx.recyclerview.widget.RecyclerView

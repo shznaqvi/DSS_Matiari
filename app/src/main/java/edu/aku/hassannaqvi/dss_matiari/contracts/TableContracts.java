@@ -47,7 +47,7 @@ public class TableContracts {
         public static final String COLUMN_STRUCTURE_NO = "structureNo";
         public static final String COLUMN_ROUND = "round";
         public static final String COLUMN_REGROUND = "regRound";
-        public static final String COLUMN_FROUND = "fRound";
+        //public static final String COLUMN_FROUND = "fRound";
         public static final String COLUMN_SNO = "sNo";
         public static final String COLUMN_SB = "s2";
         public static final String COLUMN_SC = "s3";
@@ -132,7 +132,7 @@ public class TableContracts {
         public static final String COLUMN_HOUSEHOLD_NO = "hhNo";
         public static final String COLUMN_SNO = "sno";
         public static final String COLUMN_REGROUND = "regRound";
-        public static final String COLUMN_FROUND = "fRound";
+        //public static final String COLUMN_FROUND = "fRound";
         public static final String COLUMN_ROUND = "round";
         public static final String COLUMN_SE = "s5";
 

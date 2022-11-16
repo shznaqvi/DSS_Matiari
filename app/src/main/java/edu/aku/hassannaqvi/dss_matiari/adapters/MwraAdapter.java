@@ -119,7 +119,7 @@ public class MwraAdapter extends RecyclerView.Adapter<MwraAdapter.ViewHolder> {
 
             intent.putExtra("position", position);
 
-            MainApp.selectedFemale = position;
+            MainApp.selectedMember = position;
 
             intent.putExtra("position", position);
 

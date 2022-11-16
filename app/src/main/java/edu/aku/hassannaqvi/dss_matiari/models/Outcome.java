@@ -1,5 +1,7 @@
 package edu.aku.hassannaqvi.dss_matiari.models;
 
+import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.PROJECT_NAME;
+
 import android.database.Cursor;
 import android.util.Log;
 
@@ -111,9 +113,9 @@ public class Outcome extends BaseObservable implements Observable {
     @ColumnInfo(name = TableContracts.OutcomeTable.COLUMN_REGROUND)
     private String regRound = StringUtils.EMPTY;
 
-    @ColumnInfo(name = TableContracts.OutcomeTable.COLUMN_FROUND)
+    /*@ColumnInfo(name = TableContracts.OutcomeTable.COLUMN_FROUND)
     private String fRound = StringUtils.EMPTY;
-
+*/
     @Ignore
     private String rb02 = StringUtils.EMPTY;
     @Ignore
@@ -361,14 +363,14 @@ public class Outcome extends BaseObservable implements Observable {
         this.regRound = regRound;
     }
 
-    public String getFRound() {
+   /* public String getFRound() {
         return fRound;
     }
 
     public void setFRound(String fRound) {
         this.fRound = fRound;
     }
-
+*/
     @Bindable
     public String getRc03() {
         return rc03;
@@ -472,7 +474,7 @@ public class Outcome extends BaseObservable implements Observable {
         this.ucCode = cursor.getString(cursor.getColumnIndexOrThrow(TableContracts.OutcomeTable.COLUMN_UC_CODE));
         this.villageCode = cursor.getString(cursor.getColumnIndexOrThrow(TableContracts.OutcomeTable.COLUMN_VILLAGE_CODE));
         this.regRound = cursor.getString(cursor.getColumnIndexOrThrow(TableContracts.OutcomeTable.COLUMN_REGROUND));
-        this.fRound = cursor.getString(cursor.getColumnIndexOrThrow(TableContracts.OutcomeTable.COLUMN_FROUND));
+        //this.fRound = cursor.getString(cursor.getColumnIndexOrThrow(TableContracts.OutcomeTable.COLUMN_FROUND));
         this.round = cursor.getString(cursor.getColumnIndexOrThrow(TableContracts.OutcomeTable.COLUMN_ROUND));
         this.sno = cursor.getString(cursor.getColumnIndexOrThrow(TableContracts.OutcomeTable.COLUMN_SNO));
         this.hhNo = cursor.getString(cursor.getColumnIndexOrThrow(TableContracts.OutcomeTable.COLUMN_HOUSEHOLD_NO));
@@ -546,7 +548,7 @@ public class Outcome extends BaseObservable implements Observable {
         json.put(TableContracts.OutcomeTable.COLUMN_HDSSID, this.hdssId);
         json.put(TableContracts.OutcomeTable.COLUMN_UC_CODE, this.ucCode);
         json.put(TableContracts.OutcomeTable.COLUMN_REGROUND, this.regRound);
-        json.put(TableContracts.OutcomeTable.COLUMN_FROUND, this.fRound);
+        //json.put(TableContracts.OutcomeTable.COLUMN_FROUND, this.fRound);
         json.put(TableContracts.OutcomeTable.COLUMN_ROUND, this.round);
         json.put(TableContracts.OutcomeTable.COLUMN_VILLAGE_CODE, this.villageCode);
         json.put(TableContracts.OutcomeTable.COLUMN_SNO, this.sno);
@@ -581,23 +583,54 @@ public class Outcome extends BaseObservable implements Observable {
         MainApp.outcome.setSysDate(MainApp.mwra.getSysDate());
         MainApp.outcome.setRb02(MainApp.mwra.getRb02());
         MainApp.outcome.setRb01a(MainApp.mwra.getRb01a());
-        MainApp.outcome.setRound(MainApp.mwra.getFRound());
+        MainApp.outcome.setRound(MainApp.mwra.getRound());
         MainApp.outcome.setUcCode(MainApp.households.getUcCode());
         MainApp.outcome.setVillageCode(MainApp.households.getVillageCode());
         MainApp.outcome.setHhNo(MainApp.households.getHhNo());
         MainApp.outcome.setSno(String.valueOf(MainApp.childCount));
-
-        // TODO: set MWRA ID from downloaded data
-        //   MainApp.followups.setMWRAID(households.getHhNo());
         MainApp.outcome.setUserName(MainApp.user.getUserName());
-
         MainApp.outcome.setDeviceId(MainApp.deviceid);
         MainApp.outcome.setHdssId(MainApp.households.getHdssId());
         MainApp.outcome.setAppver(MainApp.versionName + "." + MainApp.versionCode);
         MainApp.outcome.setRegRound("1");
-        MainApp.outcome.setFRound("1");
+        //MainApp.outcome.setFRound("0");
         //MainApp.outcome.setRb01a(MainApp.fpMwra.getRa01());
 
     }
+
+
+    public void populateMetaFollowups() {
+        MainApp.outcome.setUserName(MainApp.user.getUserName());
+        MainApp.outcome.setDeviceId(MainApp.deviceid);
+        MainApp.outcome.setAppver(MainApp.versionName + "." + MainApp.versionCode);
+
+        // From Households
+        MainApp.outcome.setSysDate(MainApp.households.getSysDate());
+        MainApp.outcome.setUuid(MainApp.households.getUid());
+
+
+        // From FollowupsSche - Outcome
+        MainApp.outcome.setHdssId(MainApp.fpMwra.getHdssid());
+        MainApp.outcome.setUcCode(MainApp.fpMwra.getUcCode());
+        MainApp.outcome.setVillageCode(MainApp.fpMwra.getVillageCode());
+        MainApp.outcome.setHhNo(MainApp.fpMwra.getHhNo());
+        MainApp.outcome.setRound(MainApp.fpMwra.getFRound());
+        MainApp.outcome.setSno(MainApp.fpMwra.getRb01());
+        MainApp.outcome.setRc01(MainApp.fpMwra.getRb01());  // Line number of child
+        MainApp.outcome.setRc02(MainApp.fpMwra.getRb02());  // Name of child
+        MainApp.outcome.setRb02(MainApp.fpMwra.getRb03());  // Name of mother
+        MainApp.outcome.setMuid(MainApp.fpMwra.getMuid().split("_")[0]);
+        MainApp.outcome.setRc03(MainApp.fpMwra.getRb04());  // Date of Birth of child
+        setRegRound("");
+
+    }
+
+
+
+
+
+
+
+
 
  }

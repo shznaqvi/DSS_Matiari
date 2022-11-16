@@ -28,6 +28,7 @@ import edu.aku.hassannaqvi.dss_matiari.contracts.TableContracts;
 import edu.aku.hassannaqvi.dss_matiari.core.MainApp;
 import edu.aku.hassannaqvi.dss_matiari.database.DatabaseHelper;
 import edu.aku.hassannaqvi.dss_matiari.databinding.ActivitySectionFBinding;
+import edu.aku.hassannaqvi.dss_matiari.models.Outcome;
 import edu.aku.hassannaqvi.dss_matiari.room.DssRoomDatabase;
 
 public class SectionFActivity extends AppCompatActivity {
@@ -54,31 +55,21 @@ public class SectionFActivity extends AppCompatActivity {
             Toast.makeText(this, "JSONException(Followups): " + e.getMessage(), Toast.LENGTH_SHORT).show();
         }
 
-        /*if (outcomeFollowups.getUid().equals("")) {
-            outcomeFollowups.setRc12ln(MainApp.fpMwra.getRb01());
-            outcomeFollowups.setRb02(MainApp.fpMwra.getRb02());
-            MainApp.outcomeFollowups.setRb03(MainApp.fpMwra.getRb03());
-            outcomeFollowups.setRb04(MainApp.fpMwra.getRb04());
-            outcomeFollowups.setRc12(MainApp.fpMwra.getRc12());
-            outcomeFollowups.setHdssId(MainApp.fpMwra.getHdssid());
-            outcomeFollowups.setHhNo(MainApp.fpMwra.getHhNo());
-            outcomeFollowups.setMuid(fpMwra.getMuid());
-
+        assert outcome != null;
+        if(outcome.getUid().equals(""))
+        {
+            outcome.populateMetaFollowups();
         }
 
-        bi.setFpHouseholds(MainApp.fpHouseholds);
-//        bi.setOutcome(outcomeFollowups);
-*/
-        //bi.setFpHouseholds(MainApp.fpHouseholds);
         bi.setOutcome(outcome);
 
         setImmersive(true);
 
-        bi.btnContinue.setText(outcomeFollowups.getUid().equals("") ? "Save" : "Update");
+        bi.btnContinue.setText(outcome.getUid().equals("") ? "Save" : "Update");
 
         if(!MainApp.fpMwra.getRb04().equals("98") && !MainApp.fpMwra.getRb04().equals(""))
         {
-            String date = toBlackVisionDate(outcomeFollowups.getRb04());
+            String date = toBlackVisionDate(fpMwra.getRb04());
 
             bi.rc06.setMinDate(date);
         }
@@ -162,7 +153,7 @@ public class SectionFActivity extends AppCompatActivity {
 
     public void btnContinue(View view) throws JSONException {
         if (!formValidation()) return;
-        if (outcomeFollowups.getUid().equals("") ? insertNewRecord() : updateDB()) {
+        if (outcome.getUid().equals("") ? insertNewRecord() : updateDB()) {
 
             if(updateDB()) {
                 setResult(RESULT_OK);
@@ -174,11 +165,7 @@ public class SectionFActivity extends AppCompatActivity {
     }
 
     private boolean insertNewRecord() throws JSONException {
-        /*if (fpHouseholds.getUid().equals("")) {
-            insertFpHousehold();
-        }
-*/
-        outcome.populateMeta();
+        outcome.populateMetaFollowups();
 
         long rowId = 0;
         try {
@@ -203,42 +190,27 @@ public class SectionFActivity extends AppCompatActivity {
         }
     }
 
-    private boolean insertFpHousehold() {
-        long rowId = 0;
-        try {
-            rowId = db.addFpHousehold(fpHouseholds);
-        } catch (JSONException e) {
-            e.printStackTrace();
-            Toast.makeText(this, "JSONException(FPHouseholds): " + e.getMessage(), Toast.LENGTH_SHORT).show();
-            Log.d(TAG, "insertNewRecord (JSONException): " + e.getMessage());
-            return false;
-        }
-        fpHouseholds.setId(String.valueOf(rowId));
-        if (rowId > 0) {
-            fpHouseholds.setUid(fpHouseholds.getDeviceId() + fpHouseholds.getId());
-            db.updatesFPHouseholdsColumn(TableContracts.FPHouseholdTable.COLUMN_UID, fpHouseholds.getUid());
-            return true;
-        } else {
-            Toast.makeText(this, "Updating Database... ERROR!", Toast.LENGTH_SHORT).show();
-            return false;
-        }
-    }
 
     private boolean updateDB() {
         int updcount = 0;
         try {
-            updcount = db.updateOutcomeFollouwps(TableContracts.OutcomeFollowupTable.COLUMN_SE, outcomeFollowups.sEtoString());
+            //updcount = db.updateOutcomeFollouwps(TableContracts.OutcomeFollowupTable.COLUMN_SE, outcomeFollowups.sEtoString());
             // Also reset Synced flag and alter UID
-            // db.updatesMWRAColumn(TableContracts.MWRATable.COLUMN_SYNCED, null);
-            // concate last char from uid to alter and create new unique uid
+            Outcome updatedOutcome = outcome;
+            updatedOutcome.setSE(outcome.sEtoString());
+            updcount = DssRoomDatabase.getDbInstance().OutcomeDao().updateOutcome(outcome);
 
-            outcomeFollowups.setDeviceId(outcomeFollowups.getDeviceId() + "_" + outcomeFollowups.getDeviceId().substring(outcomeFollowups.getDeviceId().length() - 1));
-            db.updateOutcomeFollouwps(TableContracts.OutcomeFollowupTable.COLUMN_DEVICEID, outcomeFollowups.getDeviceId());
-            int repeatCount = (outcomeFollowups.getDeviceId().length() - 16) / 2;
+            outcome.setDeviceId(outcome.getDeviceId() + "_" + outcome.getDeviceId().substring(outcome.getDeviceId().length() - 1));
+            updatedOutcome.setDeviceId(outcome.getDeviceId());
+            updatedOutcome.setIStatus(outcome.getIStatus());
+            DssRoomDatabase.getDbInstance().OutcomeDao().updateOutcome(updatedOutcome);
+            //db.updateOutcomeFollouwps(TableContracts.OutcomeFollowupTable.COLUMN_DEVICEID, outcomeFollowups.getDeviceId());
+            int repeatCount = (outcome.getDeviceId().length() - 16) / 2;
             // new UID
-            String newUID = outcomeFollowups.getDeviceId().substring(0, 16) + outcomeFollowups.getId() + "_" + repeatCount;
-            outcomeFollowups.setUid(newUID);
-            db.updateOutcomeFollouwps(TableContracts.OutcomeFollowupTable.COLUMN_UID, newUID);
+            String newUID = outcome.getDeviceId().substring(0, 16) + outcome.getId() + "_" + repeatCount;
+            updatedOutcome.setUid(newUID);
+            DssRoomDatabase.getDbInstance().OutcomeDao().updateOutcome(updatedOutcome);
+            //db.updateOutcomeFollouwps(TableContracts.OutcomeFollowupTable.COLUMN_UID, newUID);
 
 
         } catch (JSONException e) {
@@ -257,13 +229,6 @@ public class SectionFActivity extends AppCompatActivity {
 
     public void btnEnd(View view) {
         setResult(RESULT_CANCELED);
-/*        if (followups.getRc05().equals("2") || followups.getRc05().equals("3")) {
-            if (!formValidation()) return;
-            setResult(RESULT_OK);
-            insertNewRecord();
-            updateDB();
-            startActivity(new Intent(this, WRAEndingActivity.class).addFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT).putExtra("complete", false));
-        }*/
         finish();
 
     }

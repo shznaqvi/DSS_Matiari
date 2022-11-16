@@ -4,6 +4,7 @@ import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.households;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.selectedUC;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.selectedVillage;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -21,8 +22,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import org.json.JSONException;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 
 import edu.aku.hassannaqvi.dss_matiari.R;
 import edu.aku.hassannaqvi.dss_matiari.core.MainApp;
@@ -39,6 +42,7 @@ public class FPHouseholdAdapter extends RecyclerView.Adapter<FPHouseholdAdapter.
     private static final String TAG = "CustomAdapter";
     private final Context mContext;
     private final List<FollowUpsSche> followUpsScheList;
+    private final List<FollowUpsSche> backupItems = new ArrayList<>();
     private final int mExpandedPosition = -1;
     private final int completeCount;
     private final DatabaseHelper db;
@@ -53,14 +57,34 @@ public class FPHouseholdAdapter extends RecyclerView.Adapter<FPHouseholdAdapter.
      */
     public FPHouseholdAdapter(Context mContext, List<FollowUpsSche> fpHouseholds) {
         this.followUpsScheList = fpHouseholds;
+        backupItems.clear();
+        backupItems.addAll(fpHouseholds);
         this.mContext = mContext;
         completeCount = 0;
         MainApp.fmComplete = false;
 
         db = MainApp.appInfo.dbHelper;
 
+    }
 
 
+    // Add filter
+    @SuppressLint("NotifyDataSetChanged")
+    public void filter(String query) {
+        if (query.equals("")) {
+            // Show original list
+            followUpsScheList.clear();
+            followUpsScheList.addAll(backupItems);
+            notifyDataSetChanged();
+        } else {
+            followUpsScheList.clear();
+            for (FollowUpsSche followUpsSche: backupItems) {
+                if (followUpsSche.getHdssid().contains(query) || followUpsSche.getRa14().toLowerCase().contains(query)) {
+                    followUpsScheList.add(followUpsSche);
+                }
+            }
+            notifyDataSetChanged();
+        }
     }
 
     @Override

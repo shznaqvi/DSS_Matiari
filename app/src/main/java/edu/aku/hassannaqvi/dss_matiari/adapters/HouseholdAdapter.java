@@ -1,5 +1,6 @@
 package edu.aku.hassannaqvi.dss_matiari.adapters;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -20,11 +21,13 @@ import com.google.gson.JsonObject;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import edu.aku.hassannaqvi.dss_matiari.R;
 import edu.aku.hassannaqvi.dss_matiari.core.MainApp;
 import edu.aku.hassannaqvi.dss_matiari.database.DatabaseHelper;
+import edu.aku.hassannaqvi.dss_matiari.models.FollowUpsSche;
 import edu.aku.hassannaqvi.dss_matiari.models.Households;
 import edu.aku.hassannaqvi.dss_matiari.room.DssRoomDatabase;
 import edu.aku.hassannaqvi.dss_matiari.ui.sections.SectionAActivity;
@@ -34,6 +37,7 @@ public class HouseholdAdapter extends RecyclerView.Adapter<HouseholdAdapter.View
     private static final String TAG = "CustomAdapter";
     private final Context mContext;
     private final List<Households> households;
+    private final List<Households> backupItems = new ArrayList<>();
     private final int mExpandedPosition = -1;
     private final int completeCount;
 
@@ -44,10 +48,31 @@ public class HouseholdAdapter extends RecyclerView.Adapter<HouseholdAdapter.View
      */
     public HouseholdAdapter(Context mContext, List<Households> households) {
         this.households = households;
+        backupItems.clear();
+        backupItems.addAll(households);
         this.mContext = mContext;
         completeCount = 0;
         MainApp.fmComplete = false;
 
+    }
+
+    // Add filter
+    @SuppressLint("NotifyDataSetChanged")
+    public void filter(String query) {
+        if (query.equals("")) {
+            // Show original list
+            households.clear();
+            households.addAll(backupItems);
+            notifyDataSetChanged();
+        } else {
+            households.clear();
+            for (Households household: backupItems) {
+                if (household.getHdssId().contains(query)) {
+                    households.add(household);
+                }
+            }
+            notifyDataSetChanged();
+        }
     }
 
 

@@ -10,8 +10,12 @@ import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.selectedVillage;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.result.ActivityResult;
@@ -78,6 +82,8 @@ public class FPHouseholdActivity extends AppCompatActivity {
 
         Log.d(TAG, "onCreate: followUpsScheHHList " + MainApp.followUpsScheHHList.size());
 
+        initSearchFilter();
+
 
         //MainApp.followUpsScheHHList = db.getFollowUpsScheHHBYVillage(selectedUC, selectedVillage, "");
         MainApp.followUpsScheHHList = DssRoomDatabase.getDbInstance().FollowUpsScheDao().getFollowUpsScheHHBYVillage(selectedUC, selectedVillage, "");
@@ -103,6 +109,8 @@ public class FPHouseholdActivity extends AppCompatActivity {
 
 
     }
+
+
 
 
     public void filterForms(View view) {
@@ -205,6 +213,33 @@ public class FPHouseholdActivity extends AppCompatActivity {
         super.onBackPressed();
         finish();
 
+    }
+
+    private void initSearchFilter(){
+        bi.hhead.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                hhAdapter.filter(s.toString());
+            }
+        });
+
+        bi.hhead.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                hhAdapter.filter(v.getText().toString());
+                return true;
+            }
+        });
     }
 
 }

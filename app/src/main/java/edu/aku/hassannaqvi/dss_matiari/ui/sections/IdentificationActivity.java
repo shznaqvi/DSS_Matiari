@@ -25,6 +25,7 @@ import edu.aku.hassannaqvi.dss_matiari.databinding.ActivityIdentificationBinding
 import edu.aku.hassannaqvi.dss_matiari.models.FPHouseholds;
 import edu.aku.hassannaqvi.dss_matiari.models.Followups;
 import edu.aku.hassannaqvi.dss_matiari.models.Households;
+import edu.aku.hassannaqvi.dss_matiari.models.Mwra;
 import edu.aku.hassannaqvi.dss_matiari.models.Outcome;
 import edu.aku.hassannaqvi.dss_matiari.models.OutcomeFollowups;
 import edu.aku.hassannaqvi.dss_matiari.models.Villages;
@@ -65,16 +66,13 @@ public class IdentificationActivity extends AppCompatActivity {
             case 1:
                 bi.btnContinue.setText("Open Household List");
                 MainApp.households = new Households();
-                MainApp.followups = new Followups();
-                MainApp.fpHouseholds = new FPHouseholds();
                 openIntent = new Intent(this,  HouseholdActivity.class);
                 break;
             case 2:
                 bi.btnContinue.setText("Open Followups List");
                 MainApp.households = new Households();
-                MainApp.fpHouseholds = new FPHouseholds();
-                MainApp.followups = new Followups();
-                MainApp.outcomeFollowups = new OutcomeFollowups();
+                MainApp.mwra = new Mwra();
+                MainApp.outcome = new Outcome();
                 openIntent = new Intent(this, FPHouseholdActivity.class);
                 break;
 

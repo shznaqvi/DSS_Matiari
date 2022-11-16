@@ -184,26 +184,26 @@ public class FpMwraAdapter extends RecyclerView.Adapter<FpMwraAdapter.ViewHolder
 
             if(followUpsSche.getMemberType().equals("1")) {
                 MainApp.fpMwra = MainApp.followUpsScheMWRAList.get(viewHolder.getAdapterPosition());
-                MainApp.mwra.populateMetaFollowups(viewHolder.getAdapterPosition());
+                MainApp.mwra.populateMetaFollowups();
 
                 Intent intent = new Intent(mContext, SectionCActivity.class);
 
                 intent.putExtra("position", viewHolder.getAdapterPosition());
 
-                MainApp.selectedFemale = viewHolder.getAdapterPosition();
+                MainApp.selectedMember = viewHolder.getAdapterPosition();
 
                 intent.putExtra("position", viewHolder.getAdapterPosition());
 
                 ((Activity) mContext).startActivityForResult(intent, 2);
             }else{
                 MainApp.fpMwra = MainApp.followUpsScheMWRAList.get(viewHolder.getAdapterPosition());
-                MainApp.outcomeFollowups.populateMeta();
+                MainApp.outcome.populateMetaFollowups();
 
                 Intent intent = new Intent(mContext, SectionFActivity.class);
 
                 intent.putExtra("position", viewHolder.getAdapterPosition());
 
-                MainApp.selectedFemale = viewHolder.getAdapterPosition();
+                MainApp.selectedMember = viewHolder.getAdapterPosition();
 
                 intent.putExtra("position", viewHolder.getAdapterPosition());
 

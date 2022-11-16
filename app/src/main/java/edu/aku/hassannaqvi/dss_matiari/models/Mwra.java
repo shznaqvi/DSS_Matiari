@@ -109,9 +109,9 @@ public class Mwra extends BaseObservable implements Observable {
     @ColumnInfo(name = MWRATable.COLUMN_REGROUND)
     private String regRound = StringUtils.EMPTY;
 
-    @ColumnInfo(name = MWRATable.COLUMN_FROUND)
+    /*@ColumnInfo(name = MWRATable.COLUMN_FROUND)
     private String fRound = StringUtils.EMPTY;
-
+*/
     // SECTION VARIABLES / Registration Variables
     @ColumnInfo(name = MWRATable.COLUMN_SB)
     private String sB = StringUtils.EMPTY;
@@ -202,11 +202,11 @@ public class Mwra extends BaseObservable implements Observable {
         setVillageCode(MainApp.selectedVillage);
         setUcCode(MainApp.selectedUC);
         setRegRound(MainApp.households.getRegRound());
-        setFRound("");
+        //setFRound("");
         //setSNo(MainApp.followUpsScheHHList.get(position).getRb01());
     }
 
-    public void populateMetaFollowups(int position) {
+    /*public void populateMetaFollowups(int position) {
 
         setSysDate(MainApp.households.getSysDate());
         setUuid(MainApp.households.getUid());  // not applicable in Form table
@@ -218,23 +218,40 @@ public class Mwra extends BaseObservable implements Observable {
         setVillageCode(MainApp.selectedVillage);
         setUcCode(MainApp.selectedUC);
         setSNo(MainApp.followUpsScheHHList.get(position).getRb01());
-        setFRound("1");
         setRegRound("");
-    }
+    }*/
 
     public void populateMetaFollowups() {
 
-        setSysDate(MainApp.households.getSysDate());
-        setUuid(MainApp.households.getUid());  // not applicable in Form table
         setUserName(MainApp.user.getUserName());
         setDeviceId(MainApp.deviceid);
         setAppver(MainApp.appInfo.getAppVersion());
+
+        setSysDate(MainApp.households.getSysDate());
+        setUuid(MainApp.households.getUid());  // not applicable in Form table
         setProjectName(PROJECT_NAME);
-        setRound(MainApp.ROUND);
-        setVillageCode(MainApp.selectedVillage);
-        setUcCode(MainApp.selectedUC);
-        setFRound("1");
         setRegRound("");
+
+        // From FollowupsSche - MWRA
+
+        mwra.setHdssId(MainApp.fpMwra.getHdssid());
+        mwra.setUcCode(MainApp.fpMwra.getUcCode());
+        mwra.setVillageCode(MainApp.fpMwra.getVillageCode());
+        mwra.setHhNo(MainApp.fpMwra.getHhNo());
+        mwra.setRound(MainApp.fpMwra.getFRound());
+        mwra.setSNo(MainApp.fpMwra.getRb01());
+        mwra.setRb01(MainApp.fpMwra.getRb01());  // Line number of MWRA
+        mwra.setRb02(MainApp.fpMwra.getRb02());  // Name of MWRA
+        mwra.setRb03(MainApp.fpMwra.getRb03()); // Husband / Father Name
+        mwra.setRb04(MainApp.fpMwra.getRb04()); // DOB
+        mwra.setRb05(MainApp.fpMwra.getRb05());     // Age in Years
+        mwra.setPrePreg(MainApp.fpMwra.getRb07());
+        mwra.setRb06(MainApp.fpMwra.getRb06());
+
+
+
+
+
     }
 
 
@@ -292,13 +309,13 @@ public class Mwra extends BaseObservable implements Observable {
         this.regRound = regRound;
     }
 
-    public String getFRound() {
+    /*public String getFRound() {
         return fRound;
     }
 
     public void setFRound(String fRound) {
         this.fRound = fRound;
-    }
+    }*/
 
     public String getUserName() {
         return userName;
@@ -728,6 +745,7 @@ public class Mwra extends BaseObservable implements Observable {
         this.ucCode = cursor.getString(cursor.getColumnIndexOrThrow(MWRATable.COLUMN_UC_CODE));
         this.villageCode = cursor.getString(cursor.getColumnIndexOrThrow(MWRATable.COLUMN_VILLAGE_CODE));
         this.structureNo = cursor.getString(cursor.getColumnIndexOrThrow(MWRATable.COLUMN_STRUCTURE_NO));
+        this.regRound = cursor.getString(cursor.getColumnIndexOrThrow(MWRATable.COLUMN_REGROUND));
         this.sNo = cursor.getString(cursor.getColumnIndexOrThrow(MWRATable.COLUMN_SNO));
         this.hhNo = cursor.getString(cursor.getColumnIndexOrThrow(MWRATable.COLUMN_HOUSEHOLD_NO));
         this.deviceId = cursor.getString(cursor.getColumnIndexOrThrow(MWRATable.COLUMN_DEVICEID));
@@ -780,10 +798,10 @@ public class Mwra extends BaseObservable implements Observable {
             this.rb05 = json.getString("rb05");
             this.prePreg = json.getString("prePreg");
             this.rb06 = json.getString("rb06");
-            this.rb07 = json.getString("rb07");
+            /*this.rb07 = json.getString("rb07");
             this.rb08 = json.getString("rb08");
             this.rb09 = json.getString("rb09");
-            this.rb03a = json.getString("rb03a");
+            */this.rb03a = json.getString("rb03a");
             this.rb03b = json.getString("rb03b");
             this.rb11a = json.getString("rb11a");
             this.rb11b = json.getString("rb11b");
@@ -833,10 +851,10 @@ public class Mwra extends BaseObservable implements Observable {
                 .put("rb05", rb05)
                 .put("rb06", rb06)
                 .put("prePreg", prePreg)
-                .put("rb07", rb07)
+                /*.put("rb07", rb07)
                 .put("rb08", rb08)
                 .put("rb09", rb09)
-                .put("rb10",rb10)
+                */.put("rb10",rb10)
                 .put("rb11",rb11)
                 .put("rb11a",rb11a)
                 .put("rb11b",rb11b)
@@ -892,6 +910,7 @@ public class Mwra extends BaseObservable implements Observable {
         json.put(MWRATable.COLUMN_VILLAGE_CODE, this.villageCode);
         json.put(MWRATable.COLUMN_STRUCTURE_NO, this.structureNo);
         json.put(MWRATable.COLUMN_SNO, this.sNo);
+        json.put(MWRATable.COLUMN_REGROUND, this.regRound);
         json.put(MWRATable.COLUMN_HOUSEHOLD_NO, this.hhNo);
         json.put(MWRATable.COLUMN_DEVICEID, this.deviceId);
         json.put(MWRATable.COLUMN_DEVICETAGID, this.deviceTag);

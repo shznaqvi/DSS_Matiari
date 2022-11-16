@@ -4,7 +4,7 @@ import static android.content.Intent.FLAG_ACTIVITY_CLEAR_TOP;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.mwra;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.mwraCount;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.mwraList;
-import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.selectedFemale;
+import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.selectedMember;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.selectedHhNO;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.selectedUC;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.selectedVillage;
@@ -28,10 +28,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
-import org.json.JSONException;
-
 import java.util.ArrayList;
-import java.util.Objects;
 
 import edu.aku.hassannaqvi.dss_matiari.R;
 import edu.aku.hassannaqvi.dss_matiari.adapters.MwraAdapter;
@@ -147,7 +144,7 @@ public class MwraActivity extends AppCompatActivity {
         mwra.init();
         if (MainApp.mwraList.size() > 0) {
             //MainApp.fm.get(Integer.parseInt(String.valueOf(MainApp.selectedFemale))).setStatus("1");
-            fmAdapter.notifyItemChanged(Integer.parseInt(String.valueOf(selectedFemale)));
+            fmAdapter.notifyItemChanged(Integer.parseInt(String.valueOf(selectedMember)));
         }
 
 
@@ -237,11 +234,11 @@ public class MwraActivity extends AppCompatActivity {
             if (resultCode == Activity.RESULT_OK) {
                 //   mwraList.get(selectedFemale).setExpanded(false);
                 checkCompleteFm();
-                fmAdapter.notifyItemChanged(selectedFemale);
+                fmAdapter.notifyItemChanged(selectedMember);
             }
             if (resultCode == Activity.RESULT_CANCELED) {
                 // Write your code if there's no result
-                Toast.makeText(this, "Information for " + mwraList.get(selectedFemale).getRb02() + " was not saved.4", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Information for " + mwraList.get(selectedMember).getRb02() + " was not saved.4", Toast.LENGTH_SHORT).show();
             }
         }
     }

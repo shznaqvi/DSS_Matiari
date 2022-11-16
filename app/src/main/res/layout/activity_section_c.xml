@@ -280,7 +280,7 @@
 
                         <EditText
                             style="@style/labelsHead"
-                            android:id="@+id/rb03"
+                            android:id="@+id/rb02"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:enabled="false"

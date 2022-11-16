@@ -164,9 +164,8 @@ public class Followups extends BaseObservable implements Observable {
         MainApp.followups.setRb06(MainApp.fpMwra.getRb06());
         MainApp.followups.setPrePreg(MainApp.fpMwra.getRb07());
 
-
-
     }
+
 
     @Bindable
     public String getFRound() {

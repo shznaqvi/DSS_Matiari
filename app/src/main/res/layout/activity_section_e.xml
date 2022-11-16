@@ -174,7 +174,7 @@
 
                         <EditText
                             style="@style/labelsHead"
-                            android:id="@+id/rb04"
+                            android:id="@+id/rc03"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:enabled="false"

@@ -23,7 +23,6 @@ import net.sqlcipher.database.SupportFactory
         Villages ::class,
         FollowUpsSche ::class,
         MaxHhno ::class,
-        Followups ::class,
         Outcome ::class
 
     ]
@@ -38,7 +37,6 @@ abstract class DssRoomDatabase : RoomDatabase() {
     abstract fun VillagesDao(): VillagesDao
     abstract fun FollowUpsScheDao(): FollowUpsScheDao
     abstract fun MaxHHNoDao() : MaxHHNoDao
-    abstract fun FollowupsDao() : FollowupsDao
     abstract fun OutcomeDao() : OutcomeDao
 
 

@@ -1,11 +1,10 @@
 package edu.aku.hassannaqvi.dss_matiari.ui.sections;
 
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.followUpsScheHHList;
-import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.followups;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.households;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.mwra;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.mwraStatus;
-import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.selectedFemale;
+import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.selectedMember;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.sharedPref;
 
 import android.content.Intent;
@@ -31,7 +30,6 @@ import edu.aku.hassannaqvi.dss_matiari.R;
 import edu.aku.hassannaqvi.dss_matiari.core.MainApp;
 import edu.aku.hassannaqvi.dss_matiari.database.DatabaseHelper;
 import edu.aku.hassannaqvi.dss_matiari.databinding.ActivitySectionCBinding;
-import edu.aku.hassannaqvi.dss_matiari.databinding.ActivitySectionEBinding;
 import edu.aku.hassannaqvi.dss_matiari.models.Mwra;
 import edu.aku.hassannaqvi.dss_matiari.models.Outcome;
 import edu.aku.hassannaqvi.dss_matiari.room.DssRoomDatabase;
@@ -65,7 +63,8 @@ public class SectionCActivity extends AppCompatActivity {
 
         assert mwra != null;
         if (mwra.getUid().equals("")) {
-            mwra.setRb01(MainApp.fpMwra.getRb01());
+            mwra.populateMetaFollowups();
+            /*mwra.setRb01(MainApp.fpMwra.getRb01());
             MainApp.mwra.setRb02(MainApp.fpMwra.getRb02());
             mwra.setRb03(MainApp.fpMwra.getRb03());
             mwra.setRb06(MainApp.fpMwra.getRb06());
@@ -73,7 +72,7 @@ public class SectionCActivity extends AppCompatActivity {
             //mwra.setRb07(MainApp.fpMwra.getRb07());
             mwra.setPrePreg(MainApp.fpMwra.getRb07());
             mwra.setHdssId(MainApp.fpMwra.getHdssid());
-            mwra.setHhNo(MainApp.fpMwra.getHhNo());
+            mwra.setHhNo(MainApp.fpMwra.getHhNo());*/
 
         }
 
@@ -116,9 +115,9 @@ public class SectionCActivity extends AppCompatActivity {
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 if(bi.rb1004.isChecked())
                 {
-                    mwraStatus.put(followUpsScheHHList.get(selectedFemale).getMuid(), false);
+                    mwraStatus.put(followUpsScheHHList.get(selectedMember).getMuid(), false);
                 }else{
-                    mwraStatus.remove(followUpsScheHHList.get(selectedFemale).getMuid());
+                    mwraStatus.remove(followUpsScheHHList.get(selectedMember).getMuid());
                 }
    }
         });
