@@ -6,10 +6,6 @@
 
         <import type="android.view.View" />
 
-        <variable
-            name="fpHouseholds"
-            type="edu.aku.hassannaqvi.dss_matiari.models.FPHouseholds" />
-
         <!--MWRA outcome-->
         <variable
             name="outcome"
@@ -237,6 +233,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_margin="8dp"
+                            android:enabled="false"
                             android:digits="abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ"
                             android:inputType="textPersonName|textCapWords"
                             android:text="@={outcome.rb02}" />

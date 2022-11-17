@@ -8,12 +8,8 @@ package edu.aku.hassannaqvi.dss_matiari.room
 import androidx.room.*
 import edu.aku.hassannaqvi.dss_matiari.contracts.TableContracts
 import edu.aku.hassannaqvi.dss_matiari.models.FollowUpsSche
-import edu.aku.hassannaqvi.dss_matiari.models.Followups
-import edu.aku.hassannaqvi.dss_matiari.models.Households
-import edu.aku.hassannaqvi.dss_matiari.models.Mwra
 import org.json.JSONArray
 import org.json.JSONException
-import org.json.JSONObject
 import kotlin.jvm.Throws
 
 @Dao

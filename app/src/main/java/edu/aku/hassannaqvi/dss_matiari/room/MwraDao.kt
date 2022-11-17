@@ -1,14 +1,9 @@
 package edu.aku.hassannaqvi.dss_matiari.room
 
 import androidx.room.*
-import edu.aku.hassannaqvi.dss_matiari.contracts.TableContracts
 import edu.aku.hassannaqvi.dss_matiari.contracts.TableContracts.MWRATable
-import edu.aku.hassannaqvi.dss_matiari.contracts.TableContracts.TableFollowUpsSche
-import edu.aku.hassannaqvi.dss_matiari.core.MainApp
-import edu.aku.hassannaqvi.dss_matiari.models.Followups
 import edu.aku.hassannaqvi.dss_matiari.models.Mwra
 import org.json.JSONException
-import org.json.JSONObject
 import kotlin.jvm.Throws
 
 //

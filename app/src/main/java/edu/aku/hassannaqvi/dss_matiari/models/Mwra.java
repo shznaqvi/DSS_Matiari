@@ -206,20 +206,6 @@ public class Mwra extends BaseObservable implements Observable {
         //setSNo(MainApp.followUpsScheHHList.get(position).getRb01());
     }
 
-    /*public void populateMetaFollowups(int position) {
-
-        setSysDate(MainApp.households.getSysDate());
-        setUuid(MainApp.households.getUid());  // not applicable in Form table
-        setUserName(MainApp.user.getUserName());
-        setDeviceId(MainApp.deviceid);
-        setAppver(MainApp.appInfo.getAppVersion());
-        setProjectName(PROJECT_NAME);
-        setRound(MainApp.ROUND);
-        setVillageCode(MainApp.selectedVillage);
-        setUcCode(MainApp.selectedUC);
-        setSNo(MainApp.followUpsScheHHList.get(position).getRb01());
-        setRegRound("");
-    }*/
 
     public void populateMetaFollowups() {
 

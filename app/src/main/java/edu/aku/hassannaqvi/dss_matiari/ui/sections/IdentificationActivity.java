@@ -22,16 +22,12 @@ import edu.aku.hassannaqvi.dss_matiari.R;
 import edu.aku.hassannaqvi.dss_matiari.core.MainApp;
 import edu.aku.hassannaqvi.dss_matiari.database.DatabaseHelper;
 import edu.aku.hassannaqvi.dss_matiari.databinding.ActivityIdentificationBinding;
-import edu.aku.hassannaqvi.dss_matiari.models.FPHouseholds;
-import edu.aku.hassannaqvi.dss_matiari.models.Followups;
 import edu.aku.hassannaqvi.dss_matiari.models.Households;
 import edu.aku.hassannaqvi.dss_matiari.models.Mwra;
 import edu.aku.hassannaqvi.dss_matiari.models.Outcome;
-import edu.aku.hassannaqvi.dss_matiari.models.OutcomeFollowups;
 import edu.aku.hassannaqvi.dss_matiari.models.Villages;
 import edu.aku.hassannaqvi.dss_matiari.room.DssRoomDatabase;
 import edu.aku.hassannaqvi.dss_matiari.ui.EndingActivity;
-import edu.aku.hassannaqvi.dss_matiari.ui.FPEndingActivity;
 import edu.aku.hassannaqvi.dss_matiari.ui.lists.FPHouseholdActivity;
 import edu.aku.hassannaqvi.dss_matiari.ui.lists.HouseholdActivity;
 

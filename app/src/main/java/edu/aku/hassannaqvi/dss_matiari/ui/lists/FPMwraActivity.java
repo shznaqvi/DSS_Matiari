@@ -36,7 +36,6 @@ import edu.aku.hassannaqvi.dss_matiari.core.MainApp;
 import edu.aku.hassannaqvi.dss_matiari.database.DatabaseHelper;
 import edu.aku.hassannaqvi.dss_matiari.databinding.ActivityFpmwraBinding;
 import edu.aku.hassannaqvi.dss_matiari.models.Mwra;
-import edu.aku.hassannaqvi.dss_matiari.models.OutcomeFollowups;
 import edu.aku.hassannaqvi.dss_matiari.room.DssRoomDatabase;
 import edu.aku.hassannaqvi.dss_matiari.ui.EndingActivity;
 import edu.aku.hassannaqvi.dss_matiari.ui.sections.SectionBActivity;

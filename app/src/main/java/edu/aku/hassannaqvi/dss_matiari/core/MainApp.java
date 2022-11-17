@@ -29,13 +29,10 @@ import java.util.List;
 
 import edu.aku.hassannaqvi.dss_matiari.BuildConfig;
 import edu.aku.hassannaqvi.dss_matiari.R;
-import edu.aku.hassannaqvi.dss_matiari.models.FPHouseholds;
 import edu.aku.hassannaqvi.dss_matiari.models.FollowUpsSche;
-import edu.aku.hassannaqvi.dss_matiari.models.Followups;
 import edu.aku.hassannaqvi.dss_matiari.models.Households;
 import edu.aku.hassannaqvi.dss_matiari.models.Mwra;
 import edu.aku.hassannaqvi.dss_matiari.models.Outcome;
-import edu.aku.hassannaqvi.dss_matiari.models.OutcomeFollowups;
 import edu.aku.hassannaqvi.dss_matiari.models.Users;
 import edu.aku.hassannaqvi.dss_matiari.room.DssRoomDatabase;
 
