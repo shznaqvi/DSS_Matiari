@@ -6,6 +6,11 @@
 
         <import type="android.view.View" />
 
+        <!--FPHouseholds-->
+        <variable
+            name="fpHouseholds"
+            type="edu.aku.hassannaqvi.dss_matiari.models.Households" />
+
         <!--MWRA Followups-->
         <variable
             name="followups"

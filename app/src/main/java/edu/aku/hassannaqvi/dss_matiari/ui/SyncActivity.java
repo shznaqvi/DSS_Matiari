@@ -192,7 +192,7 @@ public class SyncActivity extends AppCompatActivity {
                     bi.errMessage.setVisibility(View.VISIBLE);
                 }
 
-                try {
+                /*try {
                     // FpHouseholds
                     MainApp.uploadData.add(db.getUnsyncedFPHouseholds());
                     uploadTables.add(new SyncModel(TableContracts.FPHouseholdTable.TABLE_NAME));
@@ -203,7 +203,7 @@ public class SyncActivity extends AppCompatActivity {
                     Log.d(TAG, "JSONException(FPHousehold): " + e.getMessage());
                     bi.errMessage.setText(bi.errMessage.getText() + "\nERROR - JSONException(FPHousehold): " + e.getMessage());
                     bi.errMessage.setVisibility(View.VISIBLE);
-                }
+                }*/
 
 
                 try {

@@ -46,7 +46,6 @@ public class FPHouseholdAdapter extends RecyclerView.Adapter<FPHouseholdAdapter.
     private final int mExpandedPosition = -1;
     private final int completeCount;
     private final DatabaseHelper db;
-    //private FPHouseholds fpHouseholds;
     private Households fpHouseholds;
     HashMap<Integer, Integer> totalMwraMap = new HashMap<>();
 
@@ -72,6 +71,7 @@ public class FPHouseholdAdapter extends RecyclerView.Adapter<FPHouseholdAdapter.
     @SuppressLint("NotifyDataSetChanged")
     public void filter(String query) {
         if (query.equals("")) {
+
             // Show original list
             followUpsScheList.clear();
             followUpsScheList.addAll(backupItems);
@@ -115,7 +115,6 @@ public class FPHouseholdAdapter extends RecyclerView.Adapter<FPHouseholdAdapter.
         }
 
         //int tempMWRA = db.getMaxMWRANoBYHHFromFolloupsSche(followUpsSche.getUcCode(), followUpsSche.getVillageCode(), followUpsSche.getHhNo());
-        //int tempMWRA = DssRoomDatabase.getDbInstance().FollowUpsScheDao().getMaxMWRANoBYHHFromFolloupsSche(followUpsSche.getUcCode(), followUpsSche.getVillageCode(), followUpsSche.getHhNo());
         int tempMWRA = DssRoomDatabase.getDbInstance().FollowUpsScheDao().getMWRACountBYHHFromFolloupsSche(followUpsSche.getUcCode(), followUpsSche.getVillageCode(), followUpsSche.getHhNo());
         totalMwraMap.put(pos, tempMWRA);
 
@@ -236,7 +235,6 @@ public class FPHouseholdAdapter extends RecyclerView.Adapter<FPHouseholdAdapter.
                                     Toast.makeText(mContext, "Follow-Up for this household has been locked", Toast.LENGTH_LONG).show();
                                 }
 
-                                //  mContext.startActivity(new Intent(mContext, SectionAActivity.class));
                             } catch (JSONException e) {
                                 e.printStackTrace();
                                 Toast.makeText(mContext, "JSONException(households):" + e.getMessage(), Toast.LENGTH_SHORT).show();

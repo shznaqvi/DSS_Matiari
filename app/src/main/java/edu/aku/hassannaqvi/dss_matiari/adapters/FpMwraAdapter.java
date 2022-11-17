@@ -87,7 +87,6 @@ public class FpMwraAdapter extends RecyclerView.Adapter<FpMwraAdapter.ViewHolder
         MainApp.fmComplete = completeCount == MainApp.mwraCount;
 
         fName.setText(followUpsSche.getRb02());
-        //fAge.setText(mwra.getRb05() + "y | " + mwra.getRc03());
         String marStatus = "";
         String wifeOrDaughter = "";
         if(followUpsSche.getMemberType().equals("1")) {

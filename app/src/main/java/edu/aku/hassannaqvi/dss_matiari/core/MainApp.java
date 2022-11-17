@@ -107,10 +107,10 @@ public class MainApp extends Application {
     public static String selectedHhNO = "0000";
     public static String leaderCode;
     public static String selectedUC = "00";
-    public static Followups followups;
-    public static OutcomeFollowups outcomeFollowups;
+    //public static Followups followups;
+    //public static OutcomeFollowups outcomeFollowups;
     public static Outcome outcome;
-    public static FPHouseholds fpHouseholds;
+    //public static FPHouseholds fpHouseholds;
     public static FollowUpsSche fpMwra;
     public static int totalOutcomes;
     public static int outcomeCounter = 0;

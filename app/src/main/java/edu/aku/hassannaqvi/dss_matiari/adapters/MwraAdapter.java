@@ -48,8 +48,9 @@ public class MwraAdapter extends RecyclerView.Adapter<MwraAdapter.ViewHolder> {
     public void onBindViewHolder(ViewHolder viewHolder, int position1) {
         int position = viewHolder.getAdapterPosition();
         Log.d(TAG, "Element " + position + " set.");
-        Mwra mwra = this.mwras.get(position);        // Get element from your dataset at this position and replace the contents of the view
-        // with that element
+
+        // Get element from your dataset at this position and replace the contents of the view with that element
+        Mwra mwra = this.mwras.get(position);
 
         TextView fName = viewHolder.fName;
         TextView fAge = viewHolder.fAge;
@@ -59,15 +60,12 @@ public class MwraAdapter extends RecyclerView.Adapter<MwraAdapter.ViewHolder> {
         TextView secDob = viewHolder.secDob;
         TextView secGender = viewHolder.secGender;
 
-        String pregStatus = mwra.getRb07().equals("1") ? "Pregnant" : "Not Pregnant";
-
         MainApp.fmComplete = completeCount == MainApp.mwraCount;
 
-        fName.setText(mwra.getRb02());
-        //fAge.setText(mwra.getRb05() + "y | " + mwra.getRc03());
+        // Set values in item
+        String pregStatus = "";
         String marStatus = "";
         String wifeOrDaughter = "";
-
 
         switch (mwra.getRb06()) {
             case "1":
@@ -98,19 +96,23 @@ public class MwraAdapter extends RecyclerView.Adapter<MwraAdapter.ViewHolder> {
                 break;
         }
 
+        if (mwra.getRb07().equals("1")) {
+            pregStatus = "Pregnant";
+            secStatus.setBackgroundColor(ContextCompat.getColor(mContext, R.color.redLight));
+            indicator.setImageDrawable(ContextCompat.getDrawable(mContext, R.drawable.ic_baseline_pregnant_woman_24));
+        }else {
+            pregStatus = "Not Pregnant";
+        }
+
+        fName.setText(mwra.getRb02());
         fAge.setText(wifeOrDaughter + mwra.getRb03());
         secDob.setText(mwra.getRb05() + " Y");
         secGender.setText("Female");
-
-        if (mwra.getRb07().equals("1")) {
-            secStatus.setBackgroundColor(ContextCompat.getColor(mContext, R.color.redLight));
-            indicator.setImageDrawable(ContextCompat.getDrawable(mContext, R.drawable.ic_baseline_pregnant_woman_24));
-
-        }
         fMaritalStatus.setText(marStatus);
         secStatus.setText(pregStatus);
 
 
+        // On Item Click
         viewHolder.itemView.setOnClickListener(v -> {
             // Get the current state of the item
 
@@ -124,7 +126,6 @@ public class MwraAdapter extends RecyclerView.Adapter<MwraAdapter.ViewHolder> {
             intent.putExtra("position", position);
 
             ((Activity) mContext).startActivityForResult(intent, 2);
-
 
         });
 
@@ -176,6 +177,8 @@ public class MwraAdapter extends RecyclerView.Adapter<MwraAdapter.ViewHolder> {
             return fName;
         }
     }
+
+
 
 
 }

@@ -147,32 +147,7 @@ public class SectionEActivity extends AppCompatActivity {
         }
     }
 
-    private boolean insertNewFollowupRecord() {
-        db = MainApp.appInfo.getDbHelper();
-        //followups.populateMeta();
-        long rowId = 0;
-        try {
-            rowId = db.addOutcomeFollowup(outcomeFollowups);
-        } catch (JSONException e) {
-            e.printStackTrace();
-            Toast.makeText(this, "JSONException(OutcomeFollowups): " + e.getMessage(), Toast.LENGTH_SHORT).show();
-            Log.d(TAG, "insertNewRecord (JSONException): " + e.getMessage());
-            return false;
-        }
-        outcomeFollowups.setId(String.valueOf(rowId));
-        if (rowId > 0) {
-            outcomeFollowups.setUid(outcomeFollowups.getDeviceId() + outcomeFollowups.getId());
 
-            // This not a mistake. It is done on purpose
-            //households.setUid(fpHouseholds.getDeviceId() + fpHouseholds.getId());
-
-            db.updateOutcomeFollouwps(TableContracts.OutcomeFollowupTable.COLUMN_UID, outcomeFollowups.getUid());
-            return true;
-        } else {
-            Toast.makeText(this, "Updating Database... ERROR!", Toast.LENGTH_SHORT).show();
-            return false;
-        }
-    }
 
     private boolean updateDB() {
         int updcount = 0;

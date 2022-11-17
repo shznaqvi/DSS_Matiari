@@ -1,6 +1,5 @@
 package edu.aku.hassannaqvi.dss_matiari.ui.sections;
 
-import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.fpHouseholds;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.households;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.sharedPref;
 

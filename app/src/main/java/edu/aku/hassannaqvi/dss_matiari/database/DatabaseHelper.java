@@ -2,7 +2,6 @@ package edu.aku.hassannaqvi.dss_matiari.database;
 
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.IBAHC;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.PROJECT_NAME;
-import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.outcomeFollowups;
 import static edu.aku.hassannaqvi.dss_matiari.database.CreateTable.SQL_ALTER_ADD_DOB;
 import static edu.aku.hassannaqvi.dss_matiari.database.CreateTable.SQL_ALTER_ADD_GENDER;
 import static edu.aku.hassannaqvi.dss_matiari.database.CreateTable.SQL_ALTER_ADD_MEMBER_TYPE;
@@ -254,7 +253,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }*/
 
 
-    public Long addOutcomeFollowup(OutcomeFollowups followups) throws JSONException {
+    /*public Long addOutcomeFollowup(OutcomeFollowups followups) throws JSONException {
         SQLiteDatabase db = this.getWritableDatabase(DATABASE_PASSWORD);
         ContentValues values = new ContentValues();
         values.put(TableContracts.OutcomeFollowupTable.COLUMN_PROJECT_NAME, followups.getProjectName());
@@ -284,7 +283,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 TableContracts.OutcomeFollowupTable.COLUMN_NAME_NULLABLE,
                 values);
         return newRowId;
-    }
+    }*/
 
     /*public Long addPregnancy(Pregnancy pregnancy) throws JSONException {
         SQLiteDatabase db = this.getWritableDatabase(DATABASE_PASSWORD);
@@ -606,7 +605,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 selectionArgs);
     }*/
 
-    public int updatesFollowUpsColumn(String column, String value) {
+    /*public int updatesFollowUpsColumn(String column, String value) {
         SQLiteDatabase db = this.getWritableDatabase(DATABASE_PASSWORD);
 
         ContentValues values = new ContentValues();
@@ -619,9 +618,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 values,
                 selection,
                 selectionArgs);
-    }
+    }*/
 
-    public int updateOutcomeFollouwps(String column, String value) {
+    /*public int updateOutcomeFollouwps(String column, String value) {
         SQLiteDatabase db = this.getWritableDatabase(DATABASE_PASSWORD);
 
         ContentValues values = new ContentValues();
@@ -634,9 +633,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 values,
                 selection,
                 selectionArgs);
-    }
+    }*/
 
-    public int updatesFPHouseholdsColumn(String column, String value) {
+    /*public int updatesFPHouseholdsColumn(String column, String value) {
         SQLiteDatabase db = this.getWritableDatabase(DATABASE_PASSWORD);
 
         ContentValues values = new ContentValues();
@@ -649,7 +648,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 values,
                 selection,
                 selectionArgs);
-    }
+    }*/
 
 /*    public int updatesPregnancyColumn(String column, String value) {
         SQLiteDatabase db = this.getWritableDatabase(DATABASE_PASSWORD);
@@ -666,7 +665,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 selectionArgs);
     }*/
 
-    public int updatesOutcomeColumn(String column, String value) {
+    /*public int updatesOutcomeColumn(String column, String value) {
         SQLiteDatabase db = this.getWritableDatabase(DATABASE_PASSWORD);
 
         ContentValues values = new ContentValues();
@@ -679,7 +678,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 values,
                 selection,
                 selectionArgs);
-    }
+    }*/
 
 
   /*  public int updateTemp(String assessNo, String temp) {
@@ -719,7 +718,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }*/
 
 
-    public int syncVersionApp(JSONObject VersionList) throws JSONException {
+    /*public int syncVersionApp(JSONObject VersionList) throws JSONException {
         SQLiteDatabase db = this.getWritableDatabase(DATABASE_PASSWORD);
         db.delete(VersionTable.TABLE_NAME, null, null);
         long count = 0;
@@ -741,7 +740,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
 
         return (int) count;
-    }
+    }*/
 
     // Added in MaxHHNoDAIO
 
@@ -1026,7 +1025,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
 
-    public JSONArray getUnsyncedFPHouseholds() throws JSONException {
+    /*public JSONArray getUnsyncedFPHouseholds() throws JSONException {
         SQLiteDatabase db = this.getReadableDatabase(DATABASE_PASSWORD);
         Cursor c = null;
         String[] columns = null;
@@ -1055,9 +1054,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 orderBy                    // The sort order
         );
         while (c.moveToNext()) {
-            /** WorkManager Upload
+            *//** WorkManager Upload
              /*Households fc = new Households();
-             allFC.add(fc.Hydrate(c));*/
+             allFC.add(fc.Hydrate(c));*//*
             Log.d(TAG, "getUnsyncedFPHouseholds: " + c.getCount());
             FPHouseholds households = new FPHouseholds();
             allHouseholds.put(households.Hydrate(c).toJSONObject());
@@ -1072,7 +1071,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         Log.d(TAG, "getUnsyncedFPHouseholds: " + allHouseholds.toString().length());
         Log.d(TAG, "getUnsyncedFPHouseholds: " + allHouseholds);
         return allHouseholds;
-    }
+    }*/
 
 
     public JSONArray getUnsyncedOutcomes() throws JSONException {
@@ -1181,8 +1180,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         );
         while (c.moveToNext()) {
             Log.d(TAG, "getUnsyncedFollowups: " + c.getCount());
-            Followups Followups = new Followups();
-            allFollowups.put(Followups.Hydrate(c).toJSONObject());
+            //Followups Followups = new Followups();
+            //allFollowups.put(Followups.Hydrate(c).toJSONObject());
         }
 
         c.close();
@@ -1220,8 +1219,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         );
         while (c.moveToNext()) {
             Log.d(TAG, "getUnsyncedFollowups: " + c.getCount());
-            OutcomeFollowups Followups = new OutcomeFollowups();
-            allFollowups.put(Followups.Hydrate(c).toJSONObject());
+            //OutcomeFollowups Followups = new OutcomeFollowups();
+            //allFollowups.put(Followups.Hydrate(c).toJSONObject());
         }
 
         c.close();
