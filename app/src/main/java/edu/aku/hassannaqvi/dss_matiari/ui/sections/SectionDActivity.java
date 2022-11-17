@@ -1,6 +1,6 @@
 package edu.aku.hassannaqvi.dss_matiari.ui.sections;
 
-import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.followups;
+
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.mwra;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.sharedPref;
 

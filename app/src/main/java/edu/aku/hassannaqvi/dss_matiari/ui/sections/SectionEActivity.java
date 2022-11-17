@@ -1,9 +1,9 @@
 package edu.aku.hassannaqvi.dss_matiari.ui.sections;
 
-import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.followups;
+
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.mwra;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.outcome;
-import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.outcomeFollowups;
+
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.sharedPref;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -64,24 +64,6 @@ public class SectionEActivity extends AppCompatActivity {
         //setImmersive(true);
 
 
-
-          /*  // Followups data
-            outcomeFollowups.setUuid(followups.getUid());
-            outcomeFollowups.setMuid(outcome.getMuid());
-            outcomeFollowups.setUcCode(followups.getUcCode());
-            outcomeFollowups.setVillageCode(followups.getVillageCode());
-            outcomeFollowups.setMuid(followups.getFmuid());
-            //MainApp.followups.setStructureNo(households.getStructureNo());
-            outcomeFollowups.setSno(outcome.getSno());
-            outcomeFollowups.setRound("0");
-            outcomeFollowups.setHhNo(followups.getHhNo());
-            outcomeFollowups.setUserName(MainApp.user.getUserName());
-            outcomeFollowups.setSysDate(followups.getSysDate());
-            outcomeFollowups.setDeviceId(MainApp.deviceid);
-            outcomeFollowups.setHdssId(followups.getHdssId());
-            outcomeFollowups.setAppver(MainApp.versionName + "." + MainApp.versionCode);
-*/
-
         bi.btnContinue.setText(outcome.getUid().equals("") ? "Save" : "Update");
 
 
@@ -94,9 +76,6 @@ public class SectionEActivity extends AppCompatActivity {
 
     public void btnContinue(View view) throws JSONException {
         if (!formValidation()) return;
-        //if(outcome.getUid().equals("") ? !insertNewRecord()) return;
-        //if(!insertNewFollowupRecord()) return;
-
         if(outcome.getUid().equals("") ? insertNewRecord() : updateDB())
         {
                 if (MainApp.totalChildCount > MainApp.childCount) {

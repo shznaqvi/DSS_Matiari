@@ -77,11 +77,13 @@ public class FpMwraAdapter extends RecyclerView.Adapter<FpMwraAdapter.ViewHolder
             String curPregStatus = DssRoomDatabase.getDbInstance().mwraDao().getFollowupsBySno(MainApp.households.getUid(), followUpsSche.getRb01(), followUpsSche.getFRound()).getRb07();
             if (!curPregStatus.equals("")) {
                 pregStatus = curPregStatus.equals("1") ? "Pregnant" : " Not Pregnant ";
+
             }
         } catch (JSONException e) {
             e.printStackTrace();
             Toast.makeText(mContext, "JSONException(Followups): " + e.getMessage(), Toast.LENGTH_SHORT).show();
         }
+
 
 
         MainApp.fmComplete = completeCount == MainApp.mwraCount;

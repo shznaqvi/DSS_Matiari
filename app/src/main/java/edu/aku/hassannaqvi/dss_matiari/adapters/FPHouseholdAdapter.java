@@ -66,7 +66,6 @@ public class FPHouseholdAdapter extends RecyclerView.Adapter<FPHouseholdAdapter.
 
     }
 
-
     // Add filter
     @SuppressLint("NotifyDataSetChanged")
     public void filter(String query) {
