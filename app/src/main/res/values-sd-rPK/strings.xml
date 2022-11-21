@@ -12,8 +12,8 @@
     <string name="pregnancy_mainheading">حمل جي معلومات</string>
     <string name="outcome_mainheading">ٻار جي معلومات</string>
     <string name="app_name">DSS مٹیاری</string>
-    <string name="btnSync">Download Data</string>
-    <string name="btnUpload">Upload Data</string>
+    <string name="btnSync">ڊائون لوڊ ڊيٽا</string>
+    <string name="btnUpload">اپلوڊ ڊيٽا</string>
     <string name="prompt_email">Email</string>
     <string name="prompt_password">Password</string>
     <string name="action_sign_in">Login</string>
@@ -229,6 +229,22 @@
     <string name="rc0903">حمل ضايع</string>
     <string name="rc0904">ڪوڙو حمل</string>
     <string name="rb01a">داخل ٿيڻ جي تاريخ</string>
+
+    <string name="signin">سائن ان</string>
+    <string name="btnLogin">لاگ ان</string>
+    <string name="change_language">ٻولي تبديل ڪرڻ لاءِ ڪلڪ ڪريو</string>
+    <string name="english">English</string>
+    <string name="sindhi">سنڌي</string>
+    <string name="btnDownloadUserData">ڊائون لوڊ ڊيٽا ڪريو</string>
+    <string name="downloadDataDesc">لاگ ان ٿيڻ کان پهريان مهرباني ڪري ڊيٽا ڊائون لوڊ ڪريو</string>
+    <string name="password">پاسورڊ</string>
+    <string name="username">يوزر نالو</string>
+    <string name="app_name_short">مٽياري DSS</string>
+    <string name="round_2">مرحلو 2</string>
+    <string name="select_team_leader">نھنجي ٽيم جي اڳواڻ کي چونڊيو</string>
+    <string name="go_back">واپس وڃو</string>
+    <string name="identification">سڃاڻپ</string>
+    <string name="section">سيڪشن</string>
 
 
 </resources>

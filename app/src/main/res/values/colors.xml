@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <color name="colorPrimary">#3949AB</color>
-    <color name="colorPrimaryLight">#9FA8DA</color>
-    <color name="colorPrimaryDark">#283593</color>
+    <color name="colorPrimary">#4F3F9A</color>
+    <color name="colorPrimaryLight">#12413380</color>
+    <color name="colorPrimaryDark">#433683</color>
     <color name="colorAccent">#D81B2B</color>
     <color name="colorAccentLight">#F698A0</color>
 
@@ -37,4 +37,8 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="textviewColor">#ABB9F8</color>
+
+    <color name="colorSecondary">#C42016</color>
+    <color name="colorSecondaryDark">#AF1B12</color>
+    <color name="grayOverlay">#7f7f7f7f</color>
 </resources>

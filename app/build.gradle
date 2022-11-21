@@ -156,6 +156,8 @@ dependencies {
     kapt "androidx.room:room-compiler:$room_version"
     implementation 'com.wajahatkarim:roomexplorer:1.0.1'
 
+    implementation 'androidx.recyclerview:recyclerview:1.2.1'
+
 
     //Rooted
     implementation 'com.scottyab:rootbeer-lib:0.1.0'
@@ -169,5 +171,9 @@ dependencies {
     debugImplementation 'com.facebook.soloader:soloader:0.10.4'
 
     releaseImplementation 'com.facebook.flipper:flipper-noop:0.173.0'
+
+    // For Responsiveness
+    implementation 'com.intuit.sdp:sdp-android:1.0.6'
+    implementation 'com.intuit.ssp:ssp-android:1.1.0'
 }
 

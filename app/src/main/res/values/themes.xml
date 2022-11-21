@@ -1,29 +1,31 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Theme.dss_matiari" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+    <!--    <style name="Theme.dss_matiari" parent="Theme.MaterialComponents.DayNight.NoActionBar">-->
+    <style name="Theme.dss_matiari" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryVariant">#9BAAFD</item>
+        <item name="colorPrimaryVariant">#5961a9</item>
         <item name="colorOnPrimary">@color/white</item>
         <!-- Secondary brand color. -->
-        <item name="colorSecondary">#EF5276</item>
-        <item name="cardViewStyle">@style/CardView.Light</item>
-        <item name="colorSecondaryVariant">#EF868F</item>
+        <item name="colorSecondary">@color/colorSecondary</item>
+        <item name="colorSecondaryVariant">#EC4B41</item>
         <item name="colorOnSecondary">@color/black</item>
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
+        <item name="cardViewStyle">@style/CardView.Light</item>
     </style>
 
-    <style name="AppThemeEnglish1" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+    <!--    <style name="AppThemeEnglish1" parent="Theme.MaterialComponents.DayNight.NoActionBar">-->
+    <style name="AppThemeEnglish1" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="fontFamily">@font/roboto</item>
         <item name="android:layoutDirection">ltr</item>
-        <item name="colorPrimary">#3949AB</item>
+        <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">#D81B2B</item>
+        <item name="colorAccent">@color/colorAccent</item>
         <item name="android:spinnerStyle">@style/spinner</item>
         <item name="android:actionBarStyle">@style/topBarStyle</item>
-        <item name="android:textViewStyle">@style/labels</item>
+        <!--        <item name="android:textViewStyle">@style/labels</item>-->
         <item name="editTextStyle">@style/textInput</item>
         <item name="radioButtonStyle">@style/radiobutton</item>
         <item name="checkboxStyle">@style/checkbox</item>
@@ -36,28 +38,43 @@
         <item name="android:enterFadeDuration">600</item>
         <item name="android:exitFadeDuration">200</item>
         <item name="android:animateLayoutChanges">true</item>
+        <item name="android:actionOverflowButtonStyle">@style/MyActionButtonOverflow</item>
+    </style>
+
+    <style name="AppBackground">
+        <item name="android:background">@drawable/bg_10</item>
+    </style>
+
+    <style name="AppBackgroundForm">
+        <item name="android:background">@drawable/bg</item>
     </style>
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light">
         <item name="android:textColorSecondary">@android:color/white</item>
     </style>
+
+    <style name="MyActionButtonOverflow" parent="android:style/Widget.Holo.ActionButton.Overflow">
+        <item name="android:color">@color/white</item>
+    </style>
+
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
+    <!--    <style name="AppTheme" parent="Theme.MaterialComponents.Light.NoActionBar">-->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="fontFamily">@font/roboto</item>
         <item name="android:layoutDirection">ltr</item>
         <item name="android:actionBarStyle">@style/topBarStyle</item>
     </style>
 
-    <style name="AppThemeUrdu" parent="Theme.MaterialComponents.Light.NoActionBar">
-
+    <!--    <style name="AppThemeUrdu" parent="Theme.MaterialComponents.Light.NoActionBar">-->
+    <style name="AppThemeUrdu" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="android:fontFamily">@font/urdu_nastaleeq</item>
         <item name="android:layoutDirection">rtl</item>
-        <item name="colorPrimary">#3949AB</item>
-        <item name="colorPrimaryDark">#283593</item>
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
         <item name="android:spinnerStyle">@style/spinner</item>
         <item name="android:actionBarStyle">@style/topBarStyle</item>
-        <item name="android:textViewStyle">@style/labels</item>
+        <!--        <item name="android:textViewStyle">@style/labels</item>-->
         <item name="editTextStyle">@style/textInput</item>
         <item name="radioButtonStyle">@style/radiobutton</item>
         <item name="checkboxStyle">@style/checkbox</item>
@@ -77,7 +94,8 @@
         <item name="android:padding">24dp</item>
     </style>
 
-    <style name="topBarStyle" parent="Theme.MaterialComponents.Light.NoActionBar">
+    <!--    <style name="topBarStyle" parent="Theme.MaterialComponents.Light.NoActionBar">-->
+    <style name="topBarStyle" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="android:textColorSecondary">@color/white</item>
         <item name="android:background">@color/colorPrimary</item>
         <item name="android:typeface">sans</item>
@@ -91,10 +109,10 @@
     <style name="cardView">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_marginTop">8dp</item>
-        <item name="android:layout_marginStart">24dp</item>
-        <item name="android:layout_marginEnd">24dp</item>
-        <item name="android:layout_marginBottom">8dp</item>
+        <item name="android:layout_marginTop">@dimen/_3sdp</item>
+        <item name="android:layout_marginStart">@dimen/_10sdp</item>
+        <item name="android:layout_marginEnd">@dimen/_10sdp</item>
+        <item name="android:layout_marginBottom">@dimen/_3sdp</item>
         <item name="android:paddingStart">16dp</item>
         <item name="android:paddingEnd">16dp</item>
         <item name="android:paddingTop">8dp</item>
@@ -107,14 +125,17 @@
     </style>
 
     <style name="quesNum">
-        <item name="android:textColor">@color/colorPrimaryDark</item>
-        <item name="android:background">@drawable/all_round_corners</item>
+        <item name="android:layout_weight">0.101</item>
+        <!--        <item name="android:background">@drawable/all_round_corners</item>-->
+        <item name="android:background">@color/colorPrimary</item>
+        <item name="android:textColor">@color/white</item>
         <item name="android:textAllCaps">true</item>
-        <item name="android:layout_margin">8dp</item>
-        <item name="android:textSize">16sp</item>
-        <item name="android:gravity">start</item>
+        <!--        <item name="android:layout_margin">8dp</item>-->
+        <item name="android:textSize">@dimen/_8ssp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:gravity">center</item>
         <item name="android:fontFamily">@font/roboto</item>
-        <item name="android:textAppearance">@style/TextAppearance.AppCompat.Subhead</item>
+        <!--        <item name="android:textAppearance">@style/TextAppearance.AppCompat.Subhead</item>-->
         <item name="android:typeface">sans</item>
     </style>
 
@@ -131,16 +152,18 @@
     <style name="labels" parent="@android:style/TextAppearance.Widget.TextView">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:textSize">16sp</item>
+        <item name="android:textSize">@dimen/_8ssp</item>
+        <item name="android:layout_weight">1</item>
         <item name="android:gravity">center_vertical</item>
         <item name="android:textColor">#B5000000</item>
         <item name="android:textStyle">bold</item>
-        <item name="android:backgroundTint">@color/textviewColor</item>
-
+        <!--        <item name="android:backgroundTint">@color/textviewColor</item>-->
+        <item name="android:background">@color/textviewColor</item>
         <item name="android:fontFamily">@font/roboto</item>
-        <item name="android:paddingStart">14dp</item>
-        <item name="android:paddingEnd">4dp</item>
-        <item name="android:paddingTop">4dp</item>
+        <item name="android:paddingStart">@dimen/_10sdp</item>
+        <item name="android:paddingEnd">@dimen/_10sdp</item>
+        <item name="android:paddingTop">@dimen/_4sdp</item>
+        <item name="android:paddingBottom">@dimen/_4sdp</item>
         <item name="android:textAppearance">@style/TextAppearance.AppCompat.Medium</item>
     </style>
 
@@ -281,18 +304,44 @@
         <item name="android:textColor">@color/colorPrimary</item>
     </style>
 
-    <style name="MaterialCalendarTheme" parent="ThemeOverlay.MaterialComponents.MaterialCalendar">
-        <!-- Buttons -->    <item name="buttonBarPositiveButtonStyle">@style/TextButton</item>
-        <item name="buttonBarNegativeButtonStyle">@style/TextButton</item></style>
-    <style name="TextButton" parent="Widget.MaterialComponents.Button.TextButton.Dialog">
-    <item name="android:textColor">@color/white</item>
-        <item name="backgroundTint">@color/colorPrimaryDark</item></style>
+    <!--    <style name="MaterialCalendarTheme" parent="ThemeOverlay.MaterialComponents.MaterialCalendar">-->
+    <!--        &lt;!&ndash; Buttons &ndash;&gt;-->
+    <!--        <item name="buttonBarPositiveButtonStyle">@style/TextButton</item>-->
+    <!--        <item name="buttonBarNegativeButtonStyle">@style/TextButton</item>-->
+    <!--    </style>-->
+
+    <!--    <style name="TextButton" parent="Widget.MaterialComponents.Button.TextButton.Dialog">-->
+    <!--        <item name="android:textColor">@color/white</item>-->
+    <!--        <item name="backgroundTint">@color/colorPrimaryDark</item>-->
+    <!--    </style>-->
+
+    <style name="MaterialCalendarTheme" parent="Theme.AppCompat.Light.Dialog">
+        <!-- Buttons -->
+        <!--        <item name="android:background">@color/white</item>-->
+        <!--        <item name="buttonBarPositiveButtonStyle">@style/TextButton</item>-->
+        <!--        <item name="buttonBarNegativeButtonStyle">@style/TextButton</item>-->
+        <!-- this is new -->
+        <item name="colorAccent">@color/colorSecondary</item>
+
+        <item name="android:datePickerStyle">@style/TextButton</item>
+        <item name="android:colorAccent">@color/colorSecondaryDark</item>
+    </style>
+
+    <style name="TextButton" parent="@android:style/Widget.Material.Light.DatePicker">
+        <!--        <item name="android:textColor">@color/white</item>-->
+        <!--        <item name="backgroundTint">@color/colorPrimaryDark</item>-->
+        <item name="android:headerBackground">@color/colorSecondary</item>
+        <item name="android:calendarTextColor">@color/colorSecondaryDark</item>
+        <item name="android:dayOfWeekBackground">@color/colorSecondaryDark</item>
+        <item name="android:yearListSelectorColor">@color/colorAccentLight</item>
+        <item name="android:datePickerMode">calendar</item>
+    </style>
 
     <style name="DatePickerStyle" parent="Widget.AppCompat.EditText">
         <item name="android:layout_gravity">center_horizontal|center_vertical</item>
         <item name="android:textColor">@color/colorPrimaryDark</item>
         <item name="android:selectableItemBackgroundBorderless">@color/colorPrimaryDark</item>
-        <item name="colorControlHighlight">@color/colorAccentLight</item>
+        <item name="colorControlHighlight">@color/colorAccent</item>
     </style>
 
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
@@ -311,7 +360,7 @@
     <style name="Summary_Layout" parent="Theme.AppCompat.Light.DarkActionBar" />
 
 
-    <style name="DatePickerEditTextDialogTheme" parent="Theme.MaterialComponents.Light.Dialog">
+    <style name="DatePickerEditTextDialogTheme" parent="Theme.AppCompat.Light.Dialog">
         <!-- this is new -->
         <item name="colorAccent">@color/colorAccent</item>
 
@@ -325,7 +374,9 @@
         <item name="android:dayOfWeekBackground">@color/colorPrimaryDark</item>
         <item name="android:yearListSelectorColor">@color/colorAccent</item>
         <item name="android:firstDayOfWeek">2</item>
-        <item name="android:buttonBarNegativeButtonStyle">@style/DatePickerTheme.ButtonBarNegativeButtonStyle</item>
+        <item name="android:buttonBarNegativeButtonStyle">
+            @style/DatePickerTheme.ButtonBarNegativeButtonStyle
+        </item>
         <item name="android:datePickerMode">calendar</item>
 
     </style>

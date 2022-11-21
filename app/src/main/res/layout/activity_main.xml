@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
@@ -16,10 +17,10 @@
     </data>
 
     <LinearLayout
+        style="@style/AppBackground"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:animateLayoutChanges="true"
-        android:background="@drawable/app_bg_gray"
         android:orientation="vertical">
 
 
@@ -28,175 +29,299 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:layoutDirection="ltr"
+            android:layout_marginStart="@dimen/_minus12sdp"
+            android:layout_marginEnd="@dimen/_minus12sdp"
+            android:background="@drawable/capsule"
+            android:backgroundTint="@color/colorPrimary"
+            android:paddingStart="@dimen/_25sdp"
+            android:paddingEnd="@dimen/_20sdp"
             android:textAlignment="center"
-
+            android:textStyle="bold"
             app:layout_scrollFlags="scroll|enterAlways"
             app:popupTheme="@style/AppTheme.PopupOverlay"
-            app:titleTextColor="@color/grayDark" />
+            app:title="@string/main_menu"
+            app:titleTextColor="@color/white" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_1sdp"
+            android:background="@color/grayLight" />
 
 
-        <ImageView
-            android:layout_width="180dp"
-            android:layout_height="180dp"
-            android:layout_gravity="center_horizontal"
-            android:layout_margin="12dp"
-            android:src="@drawable/app_icon" />
+        <!--        <ImageView-->
+        <!--            android:layout_width="@dimen/_75sdp"-->
+        <!--            android:layout_height="@dimen/_75sdp"-->
+        <!--            android:layout_gravity="center_horizontal"-->
+        <!--            android:src="@drawable/app_icon_5" />-->
 
-<TextView
-    android:id="@+id/syncStatus"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_marginStart="24dp"
-    android:layout_marginEnd="24dp"
-    android:layout_marginBottom="24dp" />
+        <!--        <TextView-->
+        <!--            android:id="@+id/syncStatus"-->
+        <!--            android:layout_width="match_parent"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:layout_marginStart="24dp"-->
+        <!--            android:layout_marginEnd="24dp"-->
+        <!--            android:layout_marginBottom="24dp" />-->
+
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_15sdp"
+            android:layout_marginTop="@dimen/_15sdp"
+            android:layout_marginEnd="@dimen/_15sdp">
+
+            <ImageView
+                android:id="@+id/appLogoIV"
+                android:layout_width="@dimen/_75sdp"
+                android:layout_height="@dimen/_75sdp"
+                android:layout_centerHorizontal="true"
+                android:elevation="@dimen/_6sdp"
+                android:src="@drawable/app_icon_5"
+                tools:ignore="ContentDescription" />
 
             <LinearLayout
+                android:id="@+id/mainScreenLayout"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginTop="32dp"
-                android:background="@drawable/top_round_shape"
-                android:elevation="1dp"
+                android:layout_below="@+id/appLogoIV"
+                android:layout_marginTop="@dimen/_minus30sdp"
+                android:background="@drawable/bg_rounded_white_bordered_2"
+                android:elevation="@dimen/_5sdp"
                 android:gravity="center_horizontal"
-                android:orientation="vertical"
-                android:paddingStart="72dp"
-                android:paddingTop="48dp"
-                android:paddingEnd="72dp">
+                android:orientation="vertical">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bg_rounded_white_bordered_2"
+                    android:backgroundTint="@color/colorPrimary"
+                    android:orientation="horizontal"
+                    android:paddingTop="@dimen/_6sdp"
+                    android:paddingBottom="@dimen/_6sdp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentStart="true"
+                        android:layout_marginStart="@dimen/_20sdp"
+                        android:text="@string/app_name_short"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/_11ssp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginEnd="@dimen/_30sdp"
+                        android:text="@string/round_2"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/_11ssp"
+                        android:textStyle="bold" />
+
+                </RelativeLayout>
 
                 <TextView
                     android:id="@+id/username"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="start"
-                    android:layout_margin="4dp"
-                    android:padding="4dp"
-                    android:textAppearance="@style/MaterialAlertDialog.MaterialComponents.Title.Panel"
+                    android:layout_marginStart="@dimen/_15sdp"
+                    android:layout_marginTop="@dimen/_15sdp"
+                    android:text="Welcome"
                     android:textColor="@color/colorPrimary"
-                    android:textSize="16sp" />
+                    android:textSize="@dimen/_10ssp"
+                    android:textStyle="bold" />
 
-                <androidx.cardview.widget.CardView
+                <RelativeLayout
+                    android:id="@+id/openForm"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="24dp"
-                    android:layout_marginTop="24dp"
-                    android:layout_marginEnd="24dp"
-                    android:padding="12dp"
-                    app:cardCornerRadius="24dp"
+                    android:layout_marginStart="@dimen/_15sdp"
+                    android:layout_marginTop="@dimen/_15sdp"
+                    android:layout_marginEnd="@dimen/_15sdp"
+                    android:background="@drawable/bg_rounded_app_sec_color_bordered"
+                    android:clickable="true"
+                    android:elevation="@dimen/_3sdp"
+                    android:onClick="sectionPress"
+                    android:orientation="horizontal"
+                    android:padding="@dimen/_12sdp">
 
-                    >
+                    <ImageView
+                        android:id="@+id/mwraIV"
+                        android:layout_width="@dimen/_20sdp"
+                        android:layout_height="@dimen/_25sdp"
+                        android:layout_centerVertical="true"
+                        android:background="@drawable/new_form" />
 
                     <LinearLayout
-                        android:id="@+id/openForm"
+                        android:id="@+id/mwraTitleLayout"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:clickable="true"
-                        android:onClick="sectionPress"
-                        android:orientation="horizontal">
-
-                        <LinearLayout
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_margin="12dp"
-                            android:layout_weight="1"
-                            android:orientation="vertical">
-
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:background="@color/white"
-                                android:drawableStart="@drawable/new_form"
-                                android:drawablePadding="12dp"
-                                android:gravity="center_vertical"
-                                android:minWidth="460dp"
-                                android:text="@string/open_mwra_registration_form"
-                                android:textColor="@color/colorAccent"
-                                android:textSize="16dp" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginStart="36dp"
-                                android:gravity="center_horizontal|center_vertical"
-                                android:text="Open to enter new registration fpHouseholds"
-                                android:textColor="@color/gray"
-                                android:textSize="14sp" />
-                        </LinearLayout>
+                        android:layout_centerVertical="true"
+                        android:layout_marginStart="@dimen/_8sdp"
+                        android:layout_toStartOf="@+id/mwraArrowIV"
+                        android:layout_toEndOf="@+id/mwraIV"
+                        android:orientation="vertical">
 
                         <TextView
+                            android:id="@+id/mwraTitleTV"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_margin="12dp"
-                            android:background="@drawable/ic_item_right_arrow"
-                            android:gravity="center_horizontal|center_vertical"
+                            android:text="@string/open_mwra_registration_form"
                             android:textColor="@color/colorAccent"
-                            android:textSize="24dp" />
+                            android:textSize="@dimen/_10ssp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/mwraDescTV"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="center_horizontal|center_vertical"
+                            android:text="Open to enter new registration fpHouseholds"
+                            android:textColor="@color/gray"
+                            android:textSize="@dimen/_7sdp" />
 
                     </LinearLayout>
-                </androidx.cardview.widget.CardView>
 
-                <androidx.cardview.widget.CardView
+                    <TextView
+                        android:id="@+id/mwraArrowIV"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
+                        android:background="@drawable/ic_item_right_arrow"
+                        android:backgroundTint="@color/colorAccent"
+                        android:gravity="center_horizontal|center_vertical"
+                        android:textColor="@color/colorAccent"
+                        android:textSize="24dp" />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/openFollowup"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="24dp"
-                    android:layout_marginTop="24dp"
-                    android:layout_marginEnd="24dp"
-                    android:padding="12dp"
-                    app:cardCornerRadius="24dp"
+                    android:layout_marginStart="@dimen/_15sdp"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:layout_marginEnd="@dimen/_15sdp"
+                    android:background="@drawable/bg_rounded_app_color_bordered"
+                    android:clickable="true"
+                    android:elevation="@dimen/_3sdp"
+                    android:onClick="sectionPress"
+                    android:orientation="horizontal"
+                    android:padding="@dimen/_12sdp"
+                    android:paddingStart="@dimen/_14sdp"
+                    tools:ignore="RtlSymmetry">
 
-                    >
+                    <ImageView
+                        android:id="@+id/followupIV"
+                        android:layout_width="@dimen/_16sdp"
+                        android:layout_height="@dimen/_21sdp"
+                        android:layout_centerVertical="true"
+                        android:background="@drawable/repeat_followups" />
 
                     <LinearLayout
-                        android:id="@+id/openFollowup"
+                        android:id="@+id/followupTitleLayout"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:clickable="true"
-                        android:onClick="sectionPress"
-                        android:orientation="horizontal">
-
-                        <LinearLayout
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_margin="12dp"
-                            android:layout_weight="1"
-                            android:orientation="vertical">
-
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:background="@color/white"
-                                android:drawableStart="@drawable/repeat_followups"
-                                android:drawablePadding="12dp"
-                                android:gravity="center_vertical"
-                                android:minWidth="460dp"
-                                android:text="@string/open_followup_form"
-                                android:textColor="@color/colorPrimary"
-                                android:textSize="16dp" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginStart="36dp"
-                                android:gravity="center_horizontal|center_vertical"
-                                android:text="Open to enter WRA followups"
-                                android:textColor="@color/gray"
-                                android:textSize="14sp" />
-                        </LinearLayout>
+                        android:layout_centerVertical="true"
+                        android:layout_marginStart="@dimen/_10sdp"
+                        android:layout_toStartOf="@+id/followupArrowIV"
+                        android:layout_toEndOf="@+id/followupIV"
+                        android:orientation="vertical">
 
                         <TextView
+                            android:id="@+id/followupTitleTV"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_margin="12dp"
-                            android:background="@drawable/ic_item_right_arrow"
-                            android:backgroundTint="@color/colorPrimary"
+                            android:text="@string/open_followup_form"
+                            android:textColor="@color/colorPrimary"
+                            android:textSize="@dimen/_10ssp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/followupDescTV"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
                             android:gravity="center_horizontal|center_vertical"
-                            android:textColor="@color/colorAccent"
-                            android:textSize="24dp" />
+                            android:text="Open to enter WRA followups"
+                            android:textColor="@color/gray"
+                            android:textSize="@dimen/_7sdp" />
 
                     </LinearLayout>
-                </androidx.cardview.widget.CardView>
+
+                    <TextView
+                        android:id="@+id/followupArrowIV"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
+                        android:background="@drawable/ic_item_right_arrow"
+                        android:backgroundTint="@color/colorPrimary"
+                        android:gravity="center_horizontal|center_vertical"
+                        android:textColor="@color/colorAccent"
+                        android:textSize="24dp" />
+
+                </RelativeLayout>
+
+                <!--                <androidx.cardview.widget.CardView-->
+                <!--                    android:layout_width="match_parent"-->
+                <!--                    android:layout_height="wrap_content"-->
+                <!--                    android:layout_marginStart="24dp"-->
+                <!--                    android:layout_marginTop="24dp"-->
+                <!--                    android:layout_marginEnd="24dp"-->
+                <!--                    android:padding="12dp"-->
+                <!--                    app:cardCornerRadius="24dp">-->
+
+                <!--                    <LinearLayout-->
+                <!--                        android:id="@+id/openFollowup"-->
+                <!--                        android:layout_width="match_parent"-->
+                <!--                        android:layout_height="wrap_content"-->
+                <!--                        android:clickable="true"-->
+                <!--                        android:onClick="sectionPress"-->
+                <!--                        android:orientation="horizontal">-->
+
+                <!--                        <LinearLayout-->
+                <!--                            android:layout_width="0dp"-->
+                <!--                            android:layout_height="wrap_content"-->
+                <!--                            android:layout_margin="12dp"-->
+                <!--                            android:layout_weight="1"-->
+                <!--                            android:orientation="vertical">-->
+
+                <!--                            <TextView-->
+                <!--                                android:layout_width="match_parent"-->
+                <!--                                android:layout_height="wrap_content"-->
+                <!--                                android:background="@color/white"-->
+                <!--                                android:drawableStart="@drawable/repeat_followups"-->
+                <!--                                android:drawablePadding="12dp"-->
+                <!--                                android:gravity="center_vertical"-->
+                <!--                                android:minWidth="460dp"-->
+                <!--                                android:text="@string/open_followup_form"-->
+                <!--                                android:textColor="@color/colorPrimary"-->
+                <!--                                android:textSize="16dp" />-->
+
+                <!--                            <TextView-->
+                <!--                                android:layout_width="wrap_content"-->
+                <!--                                android:layout_height="wrap_content"-->
+                <!--                                android:layout_marginStart="36dp"-->
+                <!--                                android:gravity="center_horizontal|center_vertical"-->
+                <!--                                android:text="Open to enter WRA followups"-->
+                <!--                                android:textColor="@color/gray"-->
+                <!--                                android:textSize="14sp" />-->
+                <!--                        </LinearLayout>-->
+
+                <!--                        <TextView-->
+                <!--                            android:layout_width="wrap_content"-->
+                <!--                            android:layout_height="wrap_content"-->
+                <!--                            android:layout_margin="12dp"-->
+                <!--                            android:background="@drawable/ic_item_right_arrow"-->
+                <!--                            android:backgroundTint="@color/colorPrimary"-->
+                <!--                            android:gravity="center_horizontal|center_vertical"-->
+                <!--                            android:textColor="@color/colorAccent"-->
+                <!--                            android:textSize="24dp" />-->
+
+                <!--                    </LinearLayout>-->
+                <!--                </androidx.cardview.widget.CardView>-->
 
                 <!--<LinearLayout
                     android:id="@+id/adminView"
@@ -366,13 +491,13 @@
                 android:id="@+id/adminView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
+                android:layout_above="@+id/syncStatus"
                 android:layout_marginStart="12dp"
                 android:layout_marginTop="12dp"
                 android:layout_marginEnd="12dp"
                 android:layout_marginBottom="12dp"
                 android:background="@color/grayLight"
-                android:elevation="2dp"
+                android:elevation="@dimen/_5sdp"
                 android:orientation="vertical"
                 android:padding="12dp"
                 android:visibility="@{mainapp.admin?View.VISIBLE:View.GONE}">
@@ -391,8 +516,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="12dp"
                     android:gravity="center_horizontal"
-                    android:visibility="visible"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    android:visibility="visible">
 
                     <TextView
                         android:id="@+id/ident"
@@ -452,11 +577,11 @@
                 </LinearLayout>
 
                 <LinearLayout
-                    android:visibility="gone"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center_horizontal"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    android:visibility="gone">
 
                     <TextView
                         android:id="@+id/sec4"
@@ -507,23 +632,34 @@
                 </LinearLayout>
             </LinearLayout>
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:layout_marginStart="64dp"
-                android:layout_marginEnd="64dp"
-                android:background="@drawable/capsule"
-                android:elevation="1dp"
-                android:fontFamily="@font/open_sans_condensed_light"
-                android:gravity="center_horizontal|center_vertical"
-                android:minHeight="56dp"
-                android:radius="10dp"
-                android:text="MAIN SCREEN"
-                android:textColor="@color/white"
-                android:textSize="32dp"
-                android:textStyle="bold" />
+            <!--            <TextView-->
+            <!--                android:layout_width="match_parent"-->
+            <!--                android:layout_height="wrap_content"-->
+            <!--                android:layout_centerHorizontal="true"-->
+            <!--                android:layout_marginStart="64dp"-->
+            <!--                android:layout_marginEnd="64dp"-->
+            <!--                android:background="@drawable/capsule"-->
+            <!--                android:elevation="@dimen/_5sdp"-->
+            <!--                android:fontFamily="@font/open_sans_condensed_light"-->
+            <!--                android:gravity="center_horizontal|center_vertical"-->
+            <!--                android:minHeight="56dp"-->
+            <!--                android:radius="10dp"-->
+            <!--                android:text="MAIN SCREEN"-->
+            <!--                android:textColor="@color/white"-->
+            <!--                android:textSize="32dp"-->
+            <!--                android:textStyle="bold" />-->
 
+
+            <TextView
+                android:id="@+id/syncStatus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/mainScreenLayout"
+                android:layout_centerHorizontal="true"
+                android:layout_marginBottom="@dimen/_10sdp"
+                android:elevation="@dimen/_5sdp"
+                android:gravity="center_horizontal"
+                android:text="Downloaded\nUploaded" />
 
         </RelativeLayout>
     </LinearLayout>

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg"
+    tools:context=".ui.SplashActivity">
+
+    <ImageView
+        android:id="@+id/appLogoIV"
+        android:layout_width="@dimen/_90sdp"
+        android:layout_height="@dimen/_90sdp"
+        android:layout_above="@+id/appTitleTV"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/_minus10sdp"
+        android:background="@drawable/app_icon_4"
+        tools:ignore="ContentDescription" />
+
+    <TextView
+        android:id="@+id/appTitleTV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:background="@android:color/transparent"
+        android:gravity="center"
+        android:text="@string/app_name_short"
+        android:textColor="@color/grayDark"
+        android:textSize="@dimen/_23ssp" />
+
+    <TextView
+        android:id="@+id/appSubTitleTV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/appTitleTV"
+        android:layout_centerHorizontal="true"
+        android:background="@android:color/transparent"
+        android:gravity="center"
+        android:text="@string/round_2"
+        android:textColor="@color/grayDark"
+        android:textSize="@dimen/_18ssp"
+        android:textStyle="bold" />
+
+
+</RelativeLayout>

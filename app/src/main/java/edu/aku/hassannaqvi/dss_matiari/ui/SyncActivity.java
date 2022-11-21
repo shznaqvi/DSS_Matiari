@@ -90,8 +90,8 @@ public class SyncActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         bi = DataBindingUtil.setContentView(this, R.layout.activity_sync);
         bi.setCallback(this);
-        setSupportActionBar(bi.toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+//        setSupportActionBar(bi.toolbar);
+//        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         db = MainApp.appInfo.getDbHelper();
         uploadTables = new ArrayList<>();
@@ -890,5 +890,9 @@ public class SyncActivity extends AppCompatActivity {
         long toSeconds = TimeUnit.MILLISECONDS.toSeconds(timeElapsed - (toMinutes * 60 * 1000));
 
         return toMinutes > 0 ? toMinutes + "m " + toSeconds + "s" : toSeconds > 0 ? TimeUnit.MILLISECONDS.toSeconds(timeElapsed) + "s" : timeElapsed + "ms";
+    }
+
+    public void btnContinue(View view) {
+        finish();
     }
 }

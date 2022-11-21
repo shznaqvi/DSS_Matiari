@@ -29,6 +29,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 import androidx.databinding.DataBindingUtil;
 
 import com.karumi.dexter.Dexter;
@@ -126,18 +127,18 @@ public class LoginActivity extends AppCompatActivity {
                         Manifest.permission.INTERNET,
                         Manifest.permission.READ_PHONE_STATE
                 ).withListener(new MultiplePermissionsListener() {
-            @Override
-            public void onPermissionsChecked(MultiplePermissionsReport report) {
-                if (report.areAllPermissionsGranted()) {
-                    MainApp.permissionCheck = true;
-                }
-            }
+                    @Override
+                    public void onPermissionsChecked(MultiplePermissionsReport report) {
+                        if (report.areAllPermissionsGranted()) {
+                            MainApp.permissionCheck = true;
+                        }
+                    }
 
-            @Override
-            public void onPermissionRationaleShouldBeShown(List<PermissionRequest> permissions, PermissionToken token) {
-                token.continuePermissionRequest();
-            }
-        }).check();
+                    @Override
+                    public void onPermissionRationaleShouldBeShown(List<PermissionRequest> permissions, PermissionToken token) {
+                        token.continuePermissionRequest();
+                    }
+                }).check();
         bi = DataBindingUtil.setContentView(this, R.layout.activity_login);
 
 
@@ -159,7 +160,8 @@ public class LoginActivity extends AppCompatActivity {
         leaderNames = new ArrayList<>();
         leaderCodes = new ArrayList<>();
 
-        leaderNames.add("...");
+//        leaderNames.add("...");
+        leaderNames.add(getString(R.string.select_team_leader));
         leaderNames.add("Test Team Leader");
         leaderCodes.add("...");
         leaderCodes.add("testteamleader");
@@ -237,10 +239,12 @@ public class LoginActivity extends AppCompatActivity {
         //TODO implement
         if (bi.password.getTransformationMethod() == null) {
             bi.password.setTransformationMethod(new PasswordTransformationMethod());
-            bi.password.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_lock_close, 0, 0, 0);
+//            bi.password.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_lock_close, 0, 0, 0);
+            bi.showPassword.setBackground(ContextCompat.getDrawable(this, R.drawable.ic_locked));
         } else {
             bi.password.setTransformationMethod(null);
-            bi.password.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_lock_open, 0, 0, 0);
+//            bi.password.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_lock_open, 0, 0, 0);
+            bi.showPassword.setBackground(ContextCompat.getDrawable(this, R.drawable.ic_unlocked));
         }
     }
 
@@ -270,51 +274,51 @@ public class LoginActivity extends AppCompatActivity {
             startActivity(iLogin);
 
         } else {*/
-            // Store values at the time of the login attempt.
-            String username = bi.username.getText().toString();
-            String password = bi.password.getText().toString();
+        // Store values at the time of the login attempt.
+        String username = bi.username.getText().toString();
+        String password = bi.password.getText().toString();
 
-            boolean cancel = false;
-            View focusView = null;
+        boolean cancel = false;
+        View focusView = null;
 
-            // Check for a valid password, if the user entered one.
-            if (password.length() < 8) {
-                bi.password.setError("Invalid Password");
-                focusView = bi.password;
-                return;
-            }
+        // Check for a valid password, if the user entered one.
+        if (password.length() < 8) {
+            bi.password.setError("Invalid Password");
+            focusView = bi.password;
+            return;
+        }
 
-            // Check for a valid username address.
-            if (TextUtils.isEmpty(username)) {
-                bi.username.setError("Username is required.");
-                focusView = bi.username;
-                return;
-            }
+        // Check for a valid username address.
+        if (TextUtils.isEmpty(username)) {
+            bi.username.setError("Username is required.");
+            focusView = bi.username;
+            return;
+        }
 
-            if (bi.teamleader.getSelectedItemPosition() == 0) {
-                TextView errorText = (TextView) bi.teamleader.getSelectedView();
-                errorText.setError("");
-                errorText.setTextColor(Color.RED);//just to highlight that this is an error
-                errorText.setText("Select your team leader");//changes the selected item text to this
-                return;
-            }
+        if (bi.teamleader.getSelectedItemPosition() == 0) {
+            TextView errorText = (TextView) bi.teamleader.getSelectedView();
+            errorText.setError("");
+            errorText.setTextColor(Color.RED);//just to highlight that this is an error
+            errorText.setText("Select your team leader");//changes the selected item text to this
+            return;
+        }
 
-            if ((username.equals("dmu@aku") && password.equals("aku?dmu"))
-                    || (username.equals("test1234") && password.equals("test1234"))
-                    || db.doLogin(username, password)
-            ) {
-                MainApp.admin = username.contains("@") || username.contains("test1234");
-                MainApp.user.setUserName(username);
-                MainApp.leaderCode = leaderCodes.get(bi.teamleader.getSelectedItemPosition());
+        if ((username.equals("dmu@aku") && password.equals("aku?dmu"))
+                || (username.equals("test1234") && password.equals("test1234"))
+                || db.doLogin(username, password)
+        ) {
+            MainApp.admin = username.contains("@") || username.contains("test1234");
+            MainApp.user.setUserName(username);
+            MainApp.leaderCode = leaderCodes.get(bi.teamleader.getSelectedItemPosition());
 
 
-                Intent iLogin = new Intent(edu.aku.hassannaqvi.dss_matiari.ui.LoginActivity.this, MainActivity.class);
-                startActivity(iLogin);
-            } else {
-                bi.password.setError("Incorrect Username or Password");
-                bi.password.requestFocus();
-                Toast.makeText(edu.aku.hassannaqvi.dss_matiari.ui.LoginActivity.this, username + " " + password, Toast.LENGTH_SHORT).show();
-            }
+            Intent iLogin = new Intent(edu.aku.hassannaqvi.dss_matiari.ui.LoginActivity.this, MainActivity.class);
+            startActivity(iLogin);
+        } else {
+            bi.password.setError("Incorrect Username or Password");
+            bi.password.requestFocus();
+            Toast.makeText(edu.aku.hassannaqvi.dss_matiari.ui.LoginActivity.this, username + " " + password, Toast.LENGTH_SHORT).show();
+        }
 
 
     }

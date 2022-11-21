@@ -32,7 +32,7 @@
     <string name="check_pending_forms">CHECK PENDING FORMS</string>
     <string name="open_new_form">OPEN NEW FORM</string>
     <string name="records_summary">Records Summary</string>
-    <string name="main_menu">Main Menu</string>
+    <string name="main_menu">MAIN MENU</string>
     <string name="only_for_testing">ONLY FOR TESTING</string>
     <string name="database">Database</string>
     <string name="no"> No </string>
@@ -346,6 +346,23 @@
     <string name="Q_rb01a" translatable="false">RB01A</string>
     <string name="Q_rc01a" translatable="false">RC01A</string>
     <string name="rc01a">Date of Follow-up</string>
+
+    <string name="signin">Sign In</string>
+    <string name="btnLogin">Login</string>
+    <string name="change_language">Click to change language</string>
+    <string name="english">English</string>
+    <string name="sindhi">سنڌي</string>
+    <string name="btnDownloadUserData">Download User Data</string>
+    <string name="downloadDataDesc">Please download the data before login</string>
+    <string name="password">Password</string>
+    <string name="username">Username</string>
+    <string name="app_name_short">DSS Matiari</string>
+    <string name="round_2">ROUND 2</string>
+    <string name="select_team_leader">Select your team leader</string>
+    <string name="data_sync_activity">DATA SYNC ACTIVITY</string>
+    <string name="go_back">Go Back</string>
+    <string name="identification">Identification</string>
+    <string name="section">Section</string>
 
     <!--    <string name="rc09_info">DD/MM/YYYY</string>-->
     <!--    <string name="rc1001">ها </string>-->

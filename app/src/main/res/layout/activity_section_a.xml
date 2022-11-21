@@ -1,4 +1,4 @@
- <layout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
@@ -15,25 +15,48 @@
     </data>
 
     <LinearLayout
+        style="@style/AppBackgroundForm"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/app_bg_gray"
         android:orientation="vertical">
 
 
         <!-- CUSTOM TOOLBAR -->
+        <!--        <androidx.appcompat.widget.Toolbar-->
+        <!--            android:id="@+id/toolbar"-->
+        <!--            style="@null"-->
+        <!--            android:layout_width="match_parent"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:background="@color/colorPrimary"-->
+        <!--            android:minHeight="?attr/actionBarSize"-->
+        <!--            android:theme="@style/ToolbarTheme"-->
+        <!--            app:popupTheme="@style/ThemeOverlay.MaterialComponents.Light"-->
+        <!--            app:subtitleTextAppearance="@style/Toolbar.SubtitleText"-->
+        <!--            app:title="@string/demographicinformation_mainheading"-->
+        <!--            app:titleTextAppearance="@style/Toolbar.TitleText" />-->
+
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
-            style="@null"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/colorPrimary"
-            android:minHeight="?attr/actionBarSize"
-            android:theme="@style/ToolbarTheme"
-            app:popupTheme="@style/ThemeOverlay.MaterialComponents.Light"
-            app:subtitleTextAppearance="@style/Toolbar.SubtitleText"
+            android:layout_height="?attr/actionBarSize"
+            android:layout_marginStart="@dimen/_minus12sdp"
+            android:layout_marginEnd="@dimen/_minus12sdp"
+            android:background="@drawable/capsule"
+            android:backgroundTint="@color/colorPrimary"
+            android:paddingStart="@dimen/_25sdp"
+            android:paddingEnd="@dimen/_20sdp"
+            android:textAlignment="center"
+            android:textStyle="bold"
+            app:layout_scrollFlags="scroll|enterAlways"
+            app:popupTheme="@style/AppTheme.PopupOverlay"
             app:title="@string/demographicinformation_mainheading"
-            app:titleTextAppearance="@style/Toolbar.TitleText" />
+            app:titleTextColor="@color/white" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_1sdp"
+            android:layout_marginBottom="@dimen/_7sdp"
+            android:background="@color/grayLight" />
 
         <ScrollView
             android:layout_width="match_parent"
@@ -45,13 +68,14 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
                 <!-- ra01  Input   -->
-                <com.google.android.material.card.MaterialCardView
+                <!--                <com.google.android.material.card.MaterialCardView-->
+                <androidx.cardview.widget.CardView
                     android:id="@+id/fldGrpCVra01"
                     style="@style/cardView"
                     app:cardCornerRadius="6dp"
                     app:cardElevation="2dp"
-                    app:strokeWidth="1dp"
-                    app:strokeColor="@color/colorPrimary">
+                    app:strokeColor="@color/colorPrimary"
+                    app:strokeWidth="1dp">
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -85,21 +109,21 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginBottom="0dp"
+                            android:enabled="@{household.ra01.equals(``)}"
                             android:gravity="center"
                             android:hint="YYYY-MM-DD"
                             android:text="@={household.ra01}"
                             app:dateFormat="yyyy-MM-dd"
-                            android:enabled="@{household.ra01.equals(``)}"
                             app:maxDate="CR_DATE"
                             app:theme="@style/MaterialCalendarTheme" />
                     </LinearLayout>
-                </com.google.android.material.card.MaterialCardView>
+                </androidx.cardview.widget.CardView>
 
                 <!-- ra04  Input   -->
                 <androidx.cardview.widget.CardView
                     android:id="@+id/fldGrpCVra04"
-                    android:visibility="gone"
-                    style="@style/cardView">
+                    style="@style/cardView"
+                    android:visibility="gone">
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -140,8 +164,8 @@
                 <!-- ra05  Input   -->
                 <androidx.cardview.widget.CardView
                     android:id="@+id/fldGrpCVra05"
-                    android:visibility="gone"
-                    style="@style/cardView">
+                    style="@style/cardView"
+                    android:visibility="gone">
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -195,6 +219,7 @@
                             android:orientation="horizontal">
 
                             <TextView
+                                style="@style/labels"
                                 android:layout_width="0dp"
                                 android:layout_height="match_parent"
                                 android:layout_weight="1"
@@ -219,9 +244,9 @@
                                 android:id="@+id/ra08"
                                 android:layout_width="0dp"
                                 android:layout_height="match_parent"
+                                android:layout_margin="8dp"
                                 android:layout_weight="1"
                                 android:hint="@string/ra08"
-                                android:layout_margin="8dp"
                                 android:inputType="textPostalAddress|textCapWords"
                                 android:text="@={household.ra08}" />
 
@@ -254,10 +279,12 @@
                             android:orientation="horizontal">
 
                             <TextView
+                                style="@style/labels"
                                 android:layout_width="0dp"
                                 android:layout_height="match_parent"
                                 android:layout_weight="1"
-                                android:gravity="center"
+                                android:background="@color/colorAccentLightOverlay"
+                                android:gravity="start"
                                 android:text="@string/ra09"
                                 android:textColor="@color/colorAccent"
                                 android:textStyle="bold" />
@@ -265,12 +292,12 @@
                         </LinearLayout>
 
                         <TextView
-                            style="@style/labelsHead"
                             android:id="@+id/ra09"
+                            style="@style/labelsHead"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:gravity="center"
                             android:layout_margin="8dp"
+                            android:gravity="center"
                             android:padding="8dp"
                             android:text="@={household.ra09}"
                             android:textColor="@color/colorPrimary"
@@ -445,6 +472,7 @@
                             android:orientation="horizontal">
 
                             <TextView
+                                style="@style/labels"
                                 android:layout_width="0dp"
                                 android:layout_height="match_parent"
                                 android:layout_weight="1"
@@ -460,8 +488,8 @@
                         </LinearLayout>
 
                         <TextView
-                            style="@style/labelsHead"
                             android:id="@+id/ra22"
+                            style="@style/labelsHead"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_margin="8dp"
@@ -488,6 +516,7 @@
                             android:orientation="horizontal">
 
                             <TextView
+                                style="@style/labels"
                                 android:layout_width="0dp"
                                 android:layout_height="match_parent"
                                 android:layout_weight="1"
@@ -504,9 +533,9 @@
 
                         <EditText
                             android:id="@+id/ra21"
-                            android:layout_margin="8dp"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:layout_margin="8dp"
                             android:hint="@string/ra21"
                             android:inputType="textPostalAddress|textCapWords"
 
@@ -531,6 +560,7 @@
                             android:orientation="horizontal">
 
                             <TextView
+                                style="@style/labels"
                                 android:layout_width="0dp"
                                 android:layout_height="match_parent"
                                 android:layout_weight="1"
@@ -574,6 +604,7 @@
                             android:orientation="horizontal">
 
                             <TextView
+                                style="@style/labels"
                                 android:layout_width="0dp"
                                 android:layout_height="match_parent"
                                 android:layout_weight="1"
@@ -618,6 +649,7 @@
                             android:orientation="horizontal">
 
                             <TextView
+                                style="@style/labels"
                                 android:layout_width="0dp"
                                 android:layout_height="match_parent"
                                 android:layout_weight="1"
@@ -635,8 +667,8 @@
                         <EditText
                             android:id="@+id/ra15"
                             android:layout_width="match_parent"
-                            android:layout_margin="8dp"
                             android:layout_height="wrap_content"
+                            android:layout_margin="8dp"
                             android:digits="abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ"
                             android:hint="@string/ra15"
                             android:inputType="textPersonName|textCapWords"
@@ -662,6 +694,7 @@
                             android:orientation="horizontal">
 
                             <TextView
+                                style="@style/labels"
                                 android:layout_width="0dp"
                                 android:layout_height="match_parent"
                                 android:layout_weight="1"
@@ -701,6 +734,7 @@
                             android:orientation="horizontal">
 
                             <TextView
+                                style="@style/labels"
                                 android:layout_width="0dp"
                                 android:layout_height="match_parent"
                                 android:layout_weight="1"
@@ -759,6 +793,7 @@
                             android:orientation="horizontal">
 
                             <TextView
+                                style="@style/labels"
                                 android:layout_width="0dp"
                                 android:layout_height="match_parent"
                                 android:layout_weight="1"
@@ -839,9 +874,9 @@
                                 android:id="@+id/ra17_a1"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
+                                android:layout_margin="2dp"
                                 android:layout_weight="1"
                                 android:gravity="center"
-                                android:layout_margin="2dp"
                                 android:hint="@string/a17_1"
                                 android:inputType="number"
                                 android:maxLength="2"
@@ -854,9 +889,9 @@
                                 android:id="@+id/ra17_a2"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
+                                android:layout_margin="2dp"
                                 android:layout_weight="1"
                                 android:gravity="center"
-                                android:layout_margin="2dp"
                                 android:hint="@string/a17_2"
                                 android:inputType="number"
                                 android:maxLength="2"
@@ -869,10 +904,10 @@
                                 android:id="@+id/ra17_a3"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
+                                android:layout_margin="2dp"
                                 android:layout_weight="1"
                                 android:gravity="center"
                                 android:hint="@string/a17_3"
-                                android:layout_margin="2dp"
                                 android:inputType="number"
                                 android:maxLength="2"
                                 android:text="@={household.ra17_a3}"
@@ -900,10 +935,10 @@
                                 android:id="@+id/ra17_b1"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
+                                android:layout_margin="2dp"
                                 android:layout_weight="1"
                                 android:gravity="center"
                                 android:hint="@string/a17_1"
-                                android:layout_margin="2dp"
                                 android:inputType="number"
                                 android:maxLength="2"
                                 android:text="@={household.ra17_b1}"
@@ -915,10 +950,10 @@
                                 android:id="@+id/ra17_b2"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
+                                android:layout_margin="2dp"
                                 android:layout_weight="1"
                                 android:gravity="center"
                                 android:hint="@string/a17_2"
-                                android:layout_margin="2dp"
                                 android:inputType="number"
                                 android:maxLength="2"
                                 android:text="@={household.ra17_b2}"
@@ -930,9 +965,9 @@
                                 android:id="@+id/ra17_b3"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
+                                android:layout_margin="2dp"
                                 android:layout_weight="1"
                                 android:gravity="center"
-                                android:layout_margin="2dp"
                                 android:hint="@string/a17_3"
                                 android:inputType="number"
                                 android:maxLength="2"
@@ -961,9 +996,9 @@
                                 android:id="@+id/ra17_c1"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
+                                android:layout_margin="2dp"
                                 android:layout_weight="1"
                                 android:gravity="center"
-                                android:layout_margin="2dp"
                                 android:hint="@string/a17_1"
                                 android:inputType="number"
                                 android:maxLength="2"
@@ -976,10 +1011,10 @@
                                 android:id="@+id/ra17_c2"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
+                                android:layout_margin="2dp"
                                 android:layout_weight="1"
                                 android:gravity="center"
                                 android:hint="@string/a17_2"
-                                android:layout_margin="2dp"
                                 android:inputType="number"
                                 android:maxLength="2"
                                 android:text="@={household.ra17_c2}"
@@ -992,10 +1027,10 @@
                                 android:id="@+id/ra17_c3"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
+                                android:layout_margin="2dp"
                                 android:layout_weight="1"
                                 android:gravity="center"
                                 android:hint="@string/a17_3"
-                                android:layout_margin="2dp"
                                 android:inputType="number"
                                 android:maxLength="2"
                                 android:text="@={household.ra17_c3}"
@@ -1023,11 +1058,11 @@
                                 android:id="@+id/ra17_d1"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
+                                android:layout_margin="2dp"
                                 android:layout_weight="1"
                                 android:gravity="center"
                                 android:hint="@string/a17_1"
                                 android:inputType="number"
-                                android:layout_margin="2dp"
                                 android:maxLength="2"
                                 android:text="@={household.ra17_d1}"
                                 app:maxValue="20"
@@ -1038,10 +1073,10 @@
                                 android:id="@+id/ra17_d2"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
+                                android:layout_margin="2dp"
                                 android:layout_weight="1"
                                 android:gravity="center"
                                 android:hint="@string/a17_2"
-                                android:layout_margin="2dp"
                                 android:inputType="number"
                                 android:maxLength="2"
                                 android:text="@={household.ra17_d2}"
@@ -1053,10 +1088,10 @@
                                 android:id="@+id/ra17_d3"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
+                                android:layout_margin="2dp"
                                 android:layout_weight="1"
                                 android:gravity="center"
                                 android:hint="@string/a17_3"
-                                android:layout_margin="2dp"
                                 android:inputType="number"
                                 android:maxLength="2"
                                 android:text="@={household.ra17_d3}"
@@ -1227,6 +1262,7 @@
                             android:orientation="horizontal">
 
                             <TextView
+                                style="@style/labels"
                                 android:layout_width="0dp"
                                 android:layout_height="match_parent"
                                 android:layout_weight="1"
@@ -1246,10 +1282,10 @@
                             style="@style/labelsHead"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:gravity="center"
-                            android:hint="##"
                             android:layout_margin="8dp"
                             android:enabled="false"
+                            android:gravity="center"
+                            android:hint="##"
                             android:inputType="number"
                             android:text="@={household.ra18}"
                             app:maxValue="9"
@@ -1258,57 +1294,124 @@
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
 
-
                 <!--EndButton LinearLayout-->
                 <LinearLayout
+                    android:id="@+id/buttonsLayout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="24dp"
-                    android:gravity="end"
-                    android:orientation="horizontal">
+                    android:layout_margin="@dimen/_10sdp"
+                    android:gravity="center_horizontal"
+                    android:orientation="horizontal"
+                    android:weightSum="1">
 
-                    <LinearLayout
+                    <Button
+                        android:id="@+id/btn_locked"
                         android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="0dp"
-                        android:layout_weight="1"
-                        android:gravity="start"
-                        android:orientation="horizontal">
-
-                        <androidx.appcompat.widget.AppCompatButton
-                            android:id="@+id/btn_locked"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="end"
-                            android:layout_marginStart="12dp"
-                            android:backgroundTint="@color/colorPrimaryLightOverlay"
-                            android:drawableStart="@drawable/ic_close"
-                            android:onClick="btnContinue"
-                            android:text="Discontinue"
-                            android:textColor="@color/colorPrimaryDark" />
-                    </LinearLayout>
-
-                    <androidx.appcompat.widget.AppCompatButton
-                        android:id="@+id/btn_End"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="12dp"
-                        android:backgroundTint="@color/colorAccent"
-                        android:onClick="btnEnd"
-                        android:text="Cancel"
-                        android:textColor="@color/white" />
-
-                    <androidx.appcompat.widget.AppCompatButton
-                        android:id="@+id/btn_Continue"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="12dp"
-                        android:backgroundTint="@color/colorPrimary"
+                        android:layout_height="match_parent"
+                        android:layout_marginEnd="@dimen/_3sdp"
+                        android:layout_weight="0.4"
+                        android:background="@drawable/bg_rounded_app_sec_color_filled"
+                        android:backgroundTint="@color/colorSecondary"
+                        android:drawableStart="@drawable/ic_close"
+                        android:elevation="@dimen/_2sdp"
                         android:onClick="btnContinue"
+                        android:paddingStart="@dimen/_10sdp"
+                        android:paddingEnd="@dimen/_10sdp"
+                        android:text="Discontinue"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/_9ssp"
+                        android:textStyle="bold" />
+
+                    <View
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="0.1" />
+
+                    <Button
+                        android:id="@+id/btn_End"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginEnd="@dimen/_3sdp"
+                        android:layout_weight="0.25"
+                        android:background="@drawable/bg_rounded_white"
+                        android:backgroundTint="@color/gray"
+                        android:elevation="@dimen/_2sdp"
+                        android:onClick="btnEnd"
+                        android:paddingStart="@dimen/_10sdp"
+                        android:paddingEnd="@dimen/_10sdp"
+                        android:text="Cancel"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/_9ssp"
+                        android:textStyle="bold" />
+
+                    <Button
+                        android:id="@+id/btn_Continue"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginStart="@dimen/_3sdp"
+                        android:layout_weight="0.25"
+                        android:background="@drawable/bg_rounded_app_color_filled"
+                        android:elevation="@dimen/_2sdp"
+                        android:onClick="btnContinue"
+                        android:paddingStart="@dimen/_10sdp"
+                        android:paddingEnd="@dimen/_10sdp"
                         android:text="Save"
-                        android:textColor="@color/white" />
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/_9ssp"
+                        android:textStyle="bold" />
 
                 </LinearLayout>
+
+                <!--EndButton LinearLayout-->
+                <!--                <LinearLayout-->
+                <!--                    android:layout_width="match_parent"-->
+                <!--                    android:layout_height="wrap_content"-->
+                <!--                    android:layout_margin="24dp"-->
+                <!--                    android:gravity="end"-->
+                <!--                    android:orientation="horizontal">-->
+
+                <!--                    <LinearLayout-->
+                <!--                        android:layout_width="0dp"-->
+                <!--                        android:layout_height="wrap_content"-->
+                <!--                        android:layout_margin="0dp"-->
+                <!--                        android:layout_weight="1"-->
+                <!--                        android:gravity="start"-->
+                <!--                        android:orientation="horizontal">-->
+
+                <!--                        <androidx.appcompat.widget.AppCompatButton-->
+                <!--                            android:id="@+id/btn_locked"-->
+                <!--                            android:layout_width="wrap_content"-->
+                <!--                            android:layout_height="wrap_content"-->
+                <!--                            android:layout_gravity="end"-->
+                <!--                            android:layout_marginStart="12dp"-->
+                <!--                            android:backgroundTint="@color/colorPrimaryLightOverlay"-->
+                <!--                            android:drawableStart="@drawable/ic_close"-->
+                <!--                            android:onClick="btnContinue"-->
+                <!--                            android:text="Discontinue"-->
+                <!--                            android:textColor="@color/colorPrimaryDark" />-->
+                <!--                    </LinearLayout>-->
+
+                <!--                    <androidx.appcompat.widget.AppCompatButton-->
+                <!--                        android:id="@+id/btn_End"-->
+                <!--                        android:layout_width="wrap_content"-->
+                <!--                        android:layout_height="wrap_content"-->
+                <!--                        android:layout_marginStart="12dp"-->
+                <!--                        android:backgroundTint="@color/colorAccent"-->
+                <!--                        android:onClick="btnEnd"-->
+                <!--                        android:text="Cancel"-->
+                <!--                        android:textColor="@color/white" />-->
+
+                <!--                    <androidx.appcompat.widget.AppCompatButton-->
+                <!--                        android:id="@+id/btn_Continue"-->
+                <!--                        android:layout_width="wrap_content"-->
+                <!--                        android:layout_height="wrap_content"-->
+                <!--                        android:layout_marginStart="12dp"-->
+                <!--                        android:backgroundTint="@color/colorPrimary"-->
+                <!--                        android:onClick="btnContinue"-->
+                <!--                        android:text="Save"-->
+                <!--                        android:textColor="@color/white" />-->
+
+                <!--                </LinearLayout>-->
             </LinearLayout>
         </ScrollView>
     </LinearLayout>

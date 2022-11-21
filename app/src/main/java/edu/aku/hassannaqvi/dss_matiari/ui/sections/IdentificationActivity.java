@@ -156,7 +156,8 @@ public class IdentificationActivity extends AppCompatActivity {
 
                     int maxHHno = DssRoomDatabase.getDbInstance().householdsDao().getMaxStructure(selectedUC, vCode) +1;
 
-                    bi.btnContinue.setBackgroundTintList(ContextCompat.getColorStateList(IdentificationActivity.this, R.color.colorAccent));
+//                    bi.btnContinue.setBackgroundTintList(ContextCompat.getColorStateList(IdentificationActivity.this, R.color.colorAccent));
+                    bi.btnContinue.setBackgroundTintList(ContextCompat.getColorStateList(IdentificationActivity.this, R.color.colorPrimary));
                     bi.btnContinue.setEnabled(true);
 
                     bi.ra10.setText(String.valueOf(maxHHno));
