@@ -109,7 +109,7 @@ interface HouseholdsDao {
     // upload function
 
     @Query("SELECT * FROM " + HouseholdTable.TABLE_NAME + " WHERE " + HouseholdTable.COLUMN_SYNCED
-            + " is null AND (" + HouseholdTable.COLUMN_ISTATUS  + " = 1 OR "
+            + " is \'\' AND (" + HouseholdTable.COLUMN_ISTATUS  + " = 1 OR "
             + HouseholdTable.COLUMN_VISIT_NO + " > 2) ORDER BY " + HouseholdTable.COLUMN_ID + " ASC")
     fun getUnsyncedHousehols_internal() : List<Households>
 

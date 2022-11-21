@@ -168,30 +168,30 @@ public class SyncActivity extends AppCompatActivity {
                     bi.errMessage.setVisibility(View.VISIBLE);
 
                 }
-                try {
-                    // MWRA
-                    MainApp.uploadData.add(db.getUnsyncedMWRA());
-                    uploadTables.add(new SyncModel(MWRATable.TABLE_NAME));
-
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                    Toast.makeText(this, "JSONException(MWRA): " + e.getMessage(), Toast.LENGTH_LONG).show();
-                    Log.d(TAG, "JSONException(MWRA): " + e.getMessage());
-                    bi.errMessage.setText(bi.errMessage.getText() + "\nERROR - JSONException(MWRA): " + e.getMessage());
-                    bi.errMessage.setVisibility(View.VISIBLE);
-                }
-                try {
-                    // Followups
-                    MainApp.uploadData.add(db.getUnsyncedFollowups());
-                    uploadTables.add(new SyncModel(TableContracts.FollowupsTable.TABLE_NAME));
-
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                    Toast.makeText(this, "JSONException(Followups): " + e.getMessage(), Toast.LENGTH_LONG).show();
-                    Log.d(TAG, "JSONException(Followups): " + e.getMessage());
-                    bi.errMessage.setText(bi.errMessage.getText() + "\nERROR - JSONException(Followups): " + e.getMessage());
-                    bi.errMessage.setVisibility(View.VISIBLE);
-                }
+//                try {
+//                    // MWRA
+//                    MainApp.uploadData.add(db.getUnsyncedMWRA());
+//                    uploadTables.add(new SyncModel(MWRATable.TABLE_NAME));
+//
+//                } catch (JSONException e) {
+//                    e.printStackTrace();
+//                    Toast.makeText(this, "JSONException(MWRA): " + e.getMessage(), Toast.LENGTH_LONG).show();
+//                    Log.d(TAG, "JSONException(MWRA): " + e.getMessage());
+//                    bi.errMessage.setText(bi.errMessage.getText() + "\nERROR - JSONException(MWRA): " + e.getMessage());
+//                    bi.errMessage.setVisibility(View.VISIBLE);
+//                }
+//                try {
+//                    // Followups
+//                    MainApp.uploadData.add(db.getUnsyncedFollowups());
+//                    uploadTables.add(new SyncModel(TableContracts.FollowupsTable.TABLE_NAME));
+//
+//                } catch (JSONException e) {
+//                    e.printStackTrace();
+//                    Toast.makeText(this, "JSONException(Followups): " + e.getMessage(), Toast.LENGTH_LONG).show();
+//                    Log.d(TAG, "JSONException(Followups): " + e.getMessage());
+//                    bi.errMessage.setText(bi.errMessage.getText() + "\nERROR - JSONException(Followups): " + e.getMessage());
+//                    bi.errMessage.setVisibility(View.VISIBLE);
+//                }
 
                 /*try {
                     // FpHouseholds
@@ -207,31 +207,31 @@ public class SyncActivity extends AppCompatActivity {
                 }*/
 
 
-                try {
-                    // Outcome
-                    MainApp.uploadData.add(db.getUnsyncedOutcomes());
-                    uploadTables.add(new SyncModel(TableContracts.OutcomeTable.TABLE_NAME));
+//                try {
+//                    // Outcome
+//                    MainApp.uploadData.add(db.getUnsyncedOutcomes());
+//                    uploadTables.add(new SyncModel(TableContracts.OutcomeTable.TABLE_NAME));
+//
+//                } catch (JSONException e) {
+//                    e.printStackTrace();
+//                    Toast.makeText(this, "JSONException(Outcome): " + e.getMessage(), Toast.LENGTH_LONG).show();
+//                    Log.d(TAG, "JSONException(Outcome): " + e.getMessage());
+//                    bi.errMessage.setText(bi.errMessage.getText() + "\nERROR - JSONException(Outcome): " + e.getMessage());
+//                    bi.errMessage.setVisibility(View.VISIBLE);
+//                }
 
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                    Toast.makeText(this, "JSONException(Outcome): " + e.getMessage(), Toast.LENGTH_LONG).show();
-                    Log.d(TAG, "JSONException(Outcome): " + e.getMessage());
-                    bi.errMessage.setText(bi.errMessage.getText() + "\nERROR - JSONException(Outcome): " + e.getMessage());
-                    bi.errMessage.setVisibility(View.VISIBLE);
-                }
-
-                try {
-                    //Outcome Followups
-                    MainApp.uploadData.add(db.getUnsyncedOutcomeFollowups());
-                    uploadTables.add(new SyncModel(TableContracts.OutcomeFollowupTable.TABLE_NAME));
-
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                    Toast.makeText(this, "JSONException(Outcome Followups): " + e.getMessage(), Toast.LENGTH_LONG).show();
-                    Log.d(TAG, "JSONException(Followups): " + e.getMessage());
-                    bi.errMessage.setText(bi.errMessage.getText() + "\nERROR - JSONException(Outcome Followups): " + e.getMessage());
-                    bi.errMessage.setVisibility(View.VISIBLE);
-                }
+//                try {
+//                    //Outcome Followups
+//                    MainApp.uploadData.add(db.getUnsyncedOutcomeFollowups());
+//                    uploadTables.add(new SyncModel(TableContracts.OutcomeFollowupTable.TABLE_NAME));
+//
+//                } catch (JSONException e) {
+//                    e.printStackTrace();
+//                    Toast.makeText(this, "JSONException(Outcome Followups): " + e.getMessage(), Toast.LENGTH_LONG).show();
+//                    Log.d(TAG, "JSONException(Followups): " + e.getMessage());
+//                    bi.errMessage.setText(bi.errMessage.getText() + "\nERROR - JSONException(Outcome Followups): " + e.getMessage());
+//                    bi.errMessage.setVisibility(View.VISIBLE);
+//                }
 
                 MainApp.downloadData = new String[uploadData.size()];
                 setAdapter(uploadTables);
