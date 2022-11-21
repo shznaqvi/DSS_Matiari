@@ -1,5 +1,7 @@
 package edu.aku.hassannaqvi.dss_matiari.models;
 
+import androidx.room.Entity;
+
 import org.apache.commons.lang3.StringUtils;
 
 public class SyncModel {

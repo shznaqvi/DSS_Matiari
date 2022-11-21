@@ -135,7 +135,6 @@ public class FPMwraActivity extends AppCompatActivity {
         MainApp.households.setHdssId(households.getHdssId());
         MainApp.households.setVisitNo(households.getVisitNo());
         households.setRegRound("0");
-        households.setFRound(households.getFRound());
         MainApp.households.setRa18("999");
 
         //int newMwra = db.getMWRACountBYUUID(fpHouseholds.getUid());

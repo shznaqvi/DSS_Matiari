@@ -5,7 +5,7 @@ import android.provider.BaseColumns;
 public class TableContracts {
 
     public static abstract class HouseholdTable implements BaseColumns {
-        public static final String TABLE_NAME = "households";
+        public static final String TABLE_NAME = "households_new";
         public static final String COLUMN_NAME_NULLABLE = "NULLHACK";
         public static final String COLUMN_PROJECT_NAME = "projectName";
         public static final String COLUMN_ID = "_id";
@@ -21,7 +21,7 @@ public class TableContracts {
         public static final String COLUMN_SA = "s1";
         public static final String COLUMN_MUID = "muid";
         public static final String COLUMN_REGROUND = "regRound";
-        public static final String COLUMN_FROUND = "fRound";
+        //public static final String COLUMN_FROUND = "fRound";
 
         public static final String COLUMN_DEVICEID = "deviceid";
         public static final String COLUMN_DEVICETAGID = "devicetagid";
@@ -32,7 +32,7 @@ public class TableContracts {
     }
 
     public static abstract class MWRATable implements BaseColumns {
-        public static final String TABLE_NAME = "MWRA";
+        public static final String TABLE_NAME = "MWRA_new";
         public static final String COLUMN_NAME_NULLABLE = "NULLHACK";
         public static final String COLUMN_PROJECT_NAME = "projectName";
         public static final String COLUMN_ID = "_id";
@@ -116,7 +116,7 @@ public class TableContracts {
     }
 
     public static abstract class OutcomeTable implements BaseColumns {
-        public static final String TABLE_NAME = "outcome";
+        public static final String TABLE_NAME = "outcome_new";
         public static final String COLUMN_NAME_NULLABLE = "NULLHACK";
         public static final String COLUMN_PROJECT_NAME = "projectName";
         public static final String COLUMN_ID = "_id";

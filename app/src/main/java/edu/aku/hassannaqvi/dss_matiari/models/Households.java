@@ -15,6 +15,8 @@ import androidx.room.Entity;
 import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
+import com.google.gson.Gson;
+
 import org.apache.commons.lang3.StringUtils;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -122,8 +124,6 @@ public class Households extends BaseObservable implements Observable {
     @ColumnInfo(name = HouseholdTable.COLUMN_REGROUND)
     private String regRound = StringUtils.EMPTY;
 
-    @ColumnInfo(name = HouseholdTable.COLUMN_FROUND)
-    private String fRound = StringUtils.EMPTY;
 
     // APP VARIABLES
     @ColumnInfo(name = HouseholdTable.COLUMN_PROJECT_NAME)
@@ -226,7 +226,6 @@ public class Households extends BaseObservable implements Observable {
         setRound(MainApp.followUpsScheHHList.get(position).getFRound());
         setMuid(MainApp.followUpsScheHHList.get(position).getMuid());
         setRa01(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.ENGLISH).format(new Date().getTime()));
-        setFRound("1");
         setRegRound("");
 
 
@@ -304,14 +303,6 @@ public class Households extends BaseObservable implements Observable {
 
     public void setRegRound(String regRound) {
         this.regRound = regRound;
-    }
-
-    public String getFRound() {
-        return fRound;
-    }
-
-    public void setFRound(String fRound) {
-        this.fRound = fRound;
     }
 
     public String getUcCode() {
@@ -910,6 +901,7 @@ public class Households extends BaseObservable implements Observable {
     }
 
     public Households Hydrate(Cursor cursor) throws JSONException {
+
         this.id = cursor.getLong(cursor.getColumnIndexOrThrow(HouseholdTable.COLUMN_ID));
         this.uid = cursor.getString(cursor.getColumnIndexOrThrow(HouseholdTable.COLUMN_UID));
         this.userName = cursor.getString(cursor.getColumnIndexOrThrow(HouseholdTable.COLUMN_USERNAME));
@@ -921,7 +913,6 @@ public class Households extends BaseObservable implements Observable {
         this.structureNo = cursor.getString(cursor.getColumnIndexOrThrow(HouseholdTable.COLUMN_STRUCTURE_NO));
         this.visitNo = cursor.getString(cursor.getColumnIndexOrThrow(HouseholdTable.COLUMN_VISIT_NO));
         this.regRound = cursor.getString(cursor.getColumnIndexOrThrow(HouseholdTable.COLUMN_REGROUND));
-        this.fRound = cursor.getString(cursor.getColumnIndexOrThrow(HouseholdTable.COLUMN_FROUND));
 
         this.deviceId = cursor.getString(cursor.getColumnIndexOrThrow(HouseholdTable.COLUMN_DEVICEID));
         this.deviceTag = cursor.getString(cursor.getColumnIndexOrThrow(HouseholdTable.COLUMN_DEVICETAGID));
@@ -1056,7 +1047,6 @@ public class Households extends BaseObservable implements Observable {
         json.put(HouseholdTable.COLUMN_ISTATUS, this.iStatus);
         json.put(HouseholdTable.COLUMN_APPVERSION, this.appver);
         json.put(HouseholdTable.COLUMN_REGROUND, this.regRound);
-        json.put(HouseholdTable.COLUMN_FROUND, this.fRound);
         //  json.put(HouseholdTable.COLUMN_SYNCED, this.synced);
         //  json.put(HouseholdTable.COLUMN_SYNCED_DATE, this.syncDate);
 

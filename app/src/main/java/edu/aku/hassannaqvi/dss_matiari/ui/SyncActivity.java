@@ -157,7 +157,8 @@ public class SyncActivity extends AppCompatActivity {
                 MainApp.uploadData.clear();
                 try {
                     // Forms
-                    MainApp.uploadData.add(db.getUnsyncedHouseholds());
+                    //MainApp.uploadData.add(db.getUnsyncedHouseholds());
+                    uploadData.add(DssRoomDatabase.getDbInstance().householdsDao().getUnsyncedHouseholds());
                     uploadTables.add(new SyncModel(HouseholdTable.TABLE_NAME));
                 } catch (JSONException e) {
                     e.printStackTrace();

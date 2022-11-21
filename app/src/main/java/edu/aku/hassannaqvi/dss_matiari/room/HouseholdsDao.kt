@@ -5,17 +5,16 @@
 package edu.aku.hassannaqvi.dss_matiari.room
 
 import android.os.Build
-import androidx.room.Dao
-import androidx.room.Insert
+import androidx.room.*
 import androidx.room.OnConflictStrategy.REPLACE
-import androidx.room.Query
-import androidx.room.Update
 import edu.aku.hassannaqvi.dss_matiari.contracts.TableContracts
 import edu.aku.hassannaqvi.dss_matiari.contracts.TableContracts.HouseholdTable
 import edu.aku.hassannaqvi.dss_matiari.contracts.TableContracts.MWRATable
 import edu.aku.hassannaqvi.dss_matiari.core.MainApp
+import edu.aku.hassannaqvi.dss_matiari.core.MainApp.households
 import edu.aku.hassannaqvi.dss_matiari.core.MainApp.mwraCount
 import edu.aku.hassannaqvi.dss_matiari.models.Households
+import org.json.JSONArray
 import org.json.JSONException
 
 @Dao
@@ -106,5 +105,34 @@ interface HouseholdsDao {
     @Query("SELECT * FROM " + HouseholdTable.TABLE_NAME + " ORDER BY "
             + HouseholdTable.COLUMN_ID + " DESC")
     fun getAllHouseholds(): List<Households>
+
+    // upload function
+
+    @Query("SELECT * FROM " + HouseholdTable.TABLE_NAME + " WHERE " + HouseholdTable.COLUMN_SYNCED
+            + " is null AND (" + HouseholdTable.COLUMN_ISTATUS  + " = 1 OR "
+            + HouseholdTable.COLUMN_VISIT_NO + " > 2) ORDER BY " + HouseholdTable.COLUMN_ID + " ASC")
+    fun getUnsyncedHousehols_internal() : List<Households>
+
+    @kotlin.jvm.Throws(JSONException :: class)
+    fun getUnsyncedHouseholds() : JSONArray?
+    {
+        val allHouseholds = getUnsyncedHousehols_internal()
+
+        val jsonHouseholds = JSONArray()
+        for (i in allHouseholds)
+        {
+
+            jsonHouseholds.put(i.toJSONObject())
+
+        }
+
+        return jsonHouseholds
+
+
+
+    }
+
+
+
 
 }
