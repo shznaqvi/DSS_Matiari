@@ -546,7 +546,7 @@ public class SyncActivity extends AppCompatActivity {
                                 // DatabaseHelper db = new DatabaseHelper(SyncActivity.this); // Database Helper
 
                                 Method method = null;
-                                for (Method method1 : db.getClass().getDeclaredMethods()) {
+                                for (Method method1 : DssRoomDatabase.getDbInstance().getClass().getDeclaredMethods()) {
 
                                     Log.d(TAG, "onChanged Methods: " + method1.getName());
                                     /**
@@ -571,10 +571,10 @@ public class SyncActivity extends AppCompatActivity {
                                         JSONObject jsonObject = new JSONObject(json.getString(i));
                                         Log.d(TAG, "onChanged: " + json.getString(i));
                                         if (jsonObject.getString("status").equals("1") && jsonObject.getString("error").equals("0")) {
-                                            method.invoke(db, jsonObject.getString("id"));
+                                            method.invoke(DssRoomDatabase.getDbInstance(), jsonObject.getString("id"));
                                             sSynced++;
                                         } else if (jsonObject.getString("status").equals("2") && jsonObject.getString("error").equals("0")) {
-                                            method.invoke(db, jsonObject.getString("id"));
+                                            method.invoke(DssRoomDatabase.getDbInstance(), jsonObject.getString("id"));
                                             sDuplicate++;
                                         } else {
                                             sSyncedError.append("\nError: ").append(jsonObject.getString("message"));

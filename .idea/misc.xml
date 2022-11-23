@@ -1,8 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="BuildAttributionWarningsFilter">
-    <option name="noGCSettingWarning" value="true" />
-  </component>
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
@@ -16,12 +13,8 @@
         <entry key="..\:/Android Office Work/DSS_Matiari/app/src/main/res/layout/activity_mwra.xml" value="0.35625" />
         <entry key="..\:/Android Office Work/DSS_Matiari/app/src/main/res/layout/activity_section_a.xml" value="0.35625" />
         <entry key="..\:/Android Office Work/DSS_Matiari/app/src/main/res/layout/activity_section_b.xml" value="0.32083333333333336" />
-        <entry key="..\:/Android Office Work/DSS_Matiari/app/src/main/res/layout/activity_section_c.xml" value="0.3375" />
         <entry key="..\:/Android Office Work/DSS_Matiari/app/src/main/res/layout/activity_section_cx.xml" value="0.3225" />
-        <entry key="..\:/Android Office Work/DSS_Matiari/app/src/main/res/layout/activity_section_d.xml" value="0.3375" />
-        <entry key="..\:/Android Office Work/DSS_Matiari/app/src/main/res/layout/activity_section_e.xml" value="0.3375" />
         <entry key="..\:/Android Office Work/DSS_Matiari/app/src/main/res/layout/activity_wra_ending.xml" value="0.2775" />
-        <entry key="..\:/Android Office Work/DSS_Matiari/app/src/main/res/layout/household_row.xml" value="0.35625" />
         <entry key="..\:/Android/DSS_Matiari/app/src/main/res/drawable-v24/ic_alert_24.xml" value="0.5875" />
         <entry key="..\:/Android/DSS_Matiari/app/src/main/res/drawable-v24/ic_girl.xml" value="0.5875" />
         <entry key="..\:/Android/DSS_Matiari/app/src/main/res/drawable-v24/ic_lock_close.xml" value="0.5875" />
@@ -59,52 +52,6 @@
         <entry key="..\:/Android/DSS_Matiari/app/src/main/res/layout/pendingform_layout.xml" value="0.56328125" />
         <entry key="..\:/Android/DSS_Matiari/app/src/main/res/layout/sync_list_adapter.xml" value="0.5" />
         <entry key="..\:/Android/DSS_Matiari/app/src/main/res/menu/item_menu.xml" value="0.56328125" />
-        <entry key="..\:/OmarShoaib/Projects/DSS_Matiari/app/src/main/res/drawable/bg_circle_white_filled.xml" value="0.199" />
-        <entry key="..\:/OmarShoaib/Projects/DSS_Matiari/app/src/main/res/drawable/bg_rounded_app_color_bordered.xml" value="0.199" />
-        <entry key="..\:/OmarShoaib/Projects/DSS_Matiari/app/src/main/res/drawable/bg_rounded_app_color_bordered_2.xml" value="0.1" />
-        <entry key="..\:/OmarShoaib/Projects/DSS_Matiari/app/src/main/res/drawable/bg_rounded_app_color_filled.xml" value="0.1295" />
-        <entry key="..\:/OmarShoaib/Projects/DSS_Matiari/app/src/main/res/drawable/bg_rounded_app_sec_color_border_only.xml" value="0.1995" />
-        <entry key="..\:/OmarShoaib/Projects/DSS_Matiari/app/src/main/res/drawable/bg_rounded_app_sec_color_bordered.xml" value="0.1" />
-        <entry key="..\:/OmarShoaib/Projects/DSS_Matiari/app/src/main/res/drawable/bg_rounded_app_sec_color_filled.xml" value="0.126" />
-        <entry key="..\:/OmarShoaib/Projects/DSS_Matiari/app/src/main/res/drawable/bg_rounded_border.xml" value="0.1995" />
-        <entry key="..\:/OmarShoaib/Projects/DSS_Matiari/app/src/main/res/drawable/bg_rounded_corner_app_sec_color_filled.xml" value="0.1" />
-        <entry key="..\:/OmarShoaib/Projects/DSS_Matiari/app/src/main/res/drawable/bg_rounded_grey_bordered.xml" value="0.1995" />
-        <entry key="..\:/OmarShoaib/Projects/DSS_Matiari/app/src/main/res/drawable/bg_rounded_half_left_app_color_filled.xml" value="0.1025" />
-        <entry key="..\:/OmarShoaib/Projects/DSS_Matiari/app/src/main/res/drawable/bg_rounded_left_top_app_color_filled.xml" value="0.1" />
-        <entry key="..\:/OmarShoaib/Projects/DSS_Matiari/app/src/main/res/drawable/bg_rounded_orange_bordered.xml" value="0.199" />
-        <entry key="..\:/OmarShoaib/Projects/DSS_Matiari/app/src/main/res/drawable/bg_rounded_orange_filled.xml" value="0.199" />
-        <entry key="..\:/OmarShoaib/Projects/DSS_Matiari/app/src/main/res/drawable/bg_rounded_top_app_color_filled.xml" value="0.199" />
-        <entry key="..\:/OmarShoaib/Projects/DSS_Matiari/app/src/main/res/drawable/bg_rounded_white.xml" value="0.1025" />
-        <entry key="..\:/OmarShoaib/Projects/DSS_Matiari/app/src/main/res/drawable/bg_rounded_white_bordered_2.xml" value="0.1" />
-        <entry key="..\:/OmarShoaib/Projects/DSS_Matiari/app/src/main/res/drawable/bg_toggle_button.xml" value="0.1025" />
-        <entry key="..\:/OmarShoaib/Projects/DSS_Matiari/app/src/main/res/drawable/gradient_1.xml" value="0.2545" />
-        <entry key="..\:/OmarShoaib/Projects/DSS_Matiari/app/src/main/res/drawable/ic_arrow.xml" value="0.2085" />
-        <entry key="..\:/OmarShoaib/Projects/DSS_Matiari/app/src/main/res/drawable/ic_baseline_pending_actions_24.xml" value="0.196" />
-        <entry key="..\:/OmarShoaib/Projects/DSS_Matiari/app/src/main/res/drawable/ic_close.xml" value="0.1735" />
-        <entry key="..\:/OmarShoaib/Projects/DSS_Matiari/app/src/main/res/drawable/ic_home.xml" value="0.219" />
-        <entry key="..\:/OmarShoaib/Projects/DSS_Matiari/app/src/main/res/drawable/ic_menu.xml" value="0.2195" />
-        <entry key="..\:/OmarShoaib/Projects/DSS_Matiari/app/src/main/res/layout/activity_fphousehold.xml" value="0.15" />
-        <entry key="..\:/OmarShoaib/Projects/DSS_Matiari/app/src/main/res/layout/activity_fpmwra.xml" value="0.12" />
-        <entry key="..\:/OmarShoaib/Projects/DSS_Matiari/app/src/main/res/layout/activity_household.xml" value="0.1" />
-        <entry key="..\:/OmarShoaib/Projects/DSS_Matiari/app/src/main/res/layout/activity_identification.xml" value="0.18" />
-        <entry key="..\:/OmarShoaib/Projects/DSS_Matiari/app/src/main/res/layout/activity_login.xml" value="0.14" />
-        <entry key="..\:/OmarShoaib/Projects/DSS_Matiari/app/src/main/res/layout/activity_main.xml" value="0.1" />
-        <entry key="..\:/OmarShoaib/Projects/DSS_Matiari/app/src/main/res/layout/activity_mwra.xml" value="0.1" />
-        <entry key="..\:/OmarShoaib/Projects/DSS_Matiari/app/src/main/res/layout/activity_section_a.xml" value="0.12" />
-        <entry key="..\:/OmarShoaib/Projects/DSS_Matiari/app/src/main/res/layout/activity_section_b.xml" value="0.18" />
-        <entry key="..\:/OmarShoaib/Projects/DSS_Matiari/app/src/main/res/layout/activity_section_c.xml" value="0.1" />
-        <entry key="..\:/OmarShoaib/Projects/DSS_Matiari/app/src/main/res/layout/activity_section_d.xml" value="0.16" />
-        <entry key="..\:/OmarShoaib/Projects/DSS_Matiari/app/src/main/res/layout/activity_section_e.xml" value="0.18333333333333332" />
-        <entry key="..\:/OmarShoaib/Projects/DSS_Matiari/app/src/main/res/layout/activity_section_f.xml" value="0.1" />
-        <entry key="..\:/OmarShoaib/Projects/DSS_Matiari/app/src/main/res/layout/activity_splash.xml" value="0.1" />
-        <entry key="..\:/OmarShoaib/Projects/DSS_Matiari/app/src/main/res/layout/activity_sync.xml" value="0.12" />
-        <entry key="..\:/OmarShoaib/Projects/DSS_Matiari/app/src/main/res/layout/household_row.xml" value="0.25" />
-        <entry key="..\:/OmarShoaib/Projects/DSS_Matiari/app/src/main/res/layout/member_row.xml" value="0.125" />
-        <entry key="..\:/OmarShoaib/Projects/DSS_Matiari/app/src/main/res/layout/pendingform_layout.xml" value="0.18333333333333332" />
-        <entry key="..\:/OmarShoaib/Projects/DSS_Matiari/app/src/main/res/layout/recycler_view_item.xml" value="0.1" />
-        <entry key="..\:/OmarShoaib/Projects/DSS_Matiari/app/src/main/res/layout/recycler_view_item_1.xml" value="0.125" />
-        <entry key="..\:/OmarShoaib/Projects/DSS_Matiari/app/src/main/res/layout/sync_list_adapter.xml" value="0.1" />
-        <entry key="..\:/OmarShoaib/Projects/DSS_Matiari/app/src/main/res/menu/item_menu.xml" value="0.125" />
         <entry key="..\:/Users/Wajahat Karim/StudioProjects/DSS_Matiari/app/src/main/res/drawable/ic_baby.xml" value="0.20729166666666668" />
         <entry key="..\:/Users/Wajahat Karim/StudioProjects/DSS_Matiari/app/src/main/res/drawable/ic_baseline_baby.xml" value="0.20729166666666668" />
         <entry key="..\:/Users/Wajahat Karim/StudioProjects/DSS_Matiari/app/src/main/res/drawable/ic_baseline_pregnant_woman_24.xml" value="0.20729166666666668" />
@@ -122,42 +69,6 @@
         <entry key="..\:/Users/Wajahat Karim/StudioProjects/DSS_Matiari/app/src/main/res/layout/activity_sync.xml" value="0.15625" />
         <entry key="..\:/Users/Wajahat Karim/StudioProjects/DSS_Matiari/app/src/main/res/layout/household_row.xml" value="0.268" />
         <entry key="..\:/Users/Wajahat Karim/StudioProjects/DSS_Matiari/app/src/main/res/layout/member_row.xml" value="0.3" />
-        <entry key="..\:/Users/gul.sanober/StudioProjects/DSS_Matiari/app/src/main/res/drawable/all_round_corners.xml" value="0.1865" />
-        <entry key="..\:/Users/gul.sanober/StudioProjects/DSS_Matiari/app/src/main/res/drawable/all_round_corners_stroke.xml" value="0.1865" />
-        <entry key="..\:/Users/gul.sanober/StudioProjects/DSS_Matiari/app/src/main/res/drawable/bg_circle_white_filled.xml" value="0.1865" />
-        <entry key="..\:/Users/gul.sanober/StudioProjects/DSS_Matiari/app/src/main/res/drawable/bg_rounded_app_color_bordered.xml" value="0.1" />
-        <entry key="..\:/Users/gul.sanober/StudioProjects/DSS_Matiari/app/src/main/res/drawable/bottom.xml" value="0.1865" />
-        <entry key="..\:/Users/gul.sanober/StudioProjects/DSS_Matiari/app/src/main/res/drawable/button_shape_green.xml" value="0.1" />
-        <entry key="..\:/Users/gul.sanober/StudioProjects/DSS_Matiari/app/src/main/res/drawable/button_shape_red.xml" value="0.1" />
-        <entry key="..\:/Users/gul.sanober/StudioProjects/DSS_Matiari/app/src/main/res/drawable/capsule.xml" value="0.1865" />
-        <entry key="..\:/Users/gul.sanober/StudioProjects/DSS_Matiari/app/src/main/res/drawable/ic_close.xml" value="0.1865" />
-        <entry key="..\:/Users/gul.sanober/StudioProjects/DSS_Matiari/app/src/main/res/drawable/ic_home.xml" value="0.1865" />
-        <entry key="..\:/Users/gul.sanober/StudioProjects/DSS_Matiari/app/src/main/res/drawable/ic_home_add.xml" value="0.1865" />
-        <entry key="..\:/Users/gul.sanober/StudioProjects/DSS_Matiari/app/src/main/res/drawable/ic_person_add.xml" value="0.1865" />
-        <entry key="..\:/Users/gul.sanober/StudioProjects/DSS_Matiari/app/src/main/res/drawable/top_round_shape.xml" value="0.1865" />
-        <entry key="..\:/Users/gul.sanober/StudioProjects/DSS_Matiari/app/src/main/res/layout/activity_fp_ending.xml" value="0.38359375" />
-        <entry key="..\:/Users/gul.sanober/StudioProjects/DSS_Matiari/app/src/main/res/layout/activity_fphousehold.xml" value="0.3671875" />
-        <entry key="..\:/Users/gul.sanober/StudioProjects/DSS_Matiari/app/src/main/res/layout/activity_fpmwra.xml" value="0.33842946490618486" />
-        <entry key="..\:/Users/gul.sanober/StudioProjects/DSS_Matiari/app/src/main/res/layout/activity_household.xml" value="0.2754844144903117" />
-        <entry key="..\:/Users/gul.sanober/StudioProjects/DSS_Matiari/app/src/main/res/layout/activity_identification.xml" value="0.1953125" />
-        <entry key="..\:/Users/gul.sanober/StudioProjects/DSS_Matiari/app/src/main/res/layout/activity_login.xml" value="0.25280898876404495" />
-        <entry key="..\:/Users/gul.sanober/StudioProjects/DSS_Matiari/app/src/main/res/layout/activity_main.xml" value="0.75" />
-        <entry key="..\:/Users/gul.sanober/StudioProjects/DSS_Matiari/app/src/main/res/layout/activity_mwra.xml" value="0.23746701846965698" />
-        <entry key="..\:/Users/gul.sanober/StudioProjects/DSS_Matiari/app/src/main/res/layout/activity_section_a.xml" value="0.28662420382165604" />
-        <entry key="..\:/Users/gul.sanober/StudioProjects/DSS_Matiari/app/src/main/res/layout/activity_section_a_new.xml" value="0.24583333333333332" />
-        <entry key="..\:/Users/gul.sanober/StudioProjects/DSS_Matiari/app/src/main/res/layout/activity_section_b.xml" value="0.1953125" />
-        <entry key="..\:/Users/gul.sanober/StudioProjects/DSS_Matiari/app/src/main/res/layout/activity_section_c.xml" value="0.26871794871794874" />
-        <entry key="..\:/Users/gul.sanober/StudioProjects/DSS_Matiari/app/src/main/res/layout/activity_section_cx.xml" value="0.5" />
-        <entry key="..\:/Users/gul.sanober/StudioProjects/DSS_Matiari/app/src/main/res/layout/activity_section_cx_2.xml" value="0.9" />
-        <entry key="..\:/Users/gul.sanober/StudioProjects/DSS_Matiari/app/src/main/res/layout/activity_section_d.xml" value="0.27025641025641023" />
-        <entry key="..\:/Users/gul.sanober/StudioProjects/DSS_Matiari/app/src/main/res/layout/activity_section_e.xml" value="0.1" />
-        <entry key="..\:/Users/gul.sanober/StudioProjects/DSS_Matiari/app/src/main/res/layout/activity_section_f.xml" value="0.1" />
-        <entry key="..\:/Users/gul.sanober/StudioProjects/DSS_Matiari/app/src/main/res/layout/activity_section_outcome.xml" value="0.35" />
-        <entry key="..\:/Users/gul.sanober/StudioProjects/DSS_Matiari/app/src/main/res/layout/activity_sync.xml" value="0.14739583333333334" />
-        <entry key="..\:/Users/gul.sanober/StudioProjects/DSS_Matiari/app/src/main/res/layout/activity_wra_ending.xml" value="0.5" />
-        <entry key="..\:/Users/gul.sanober/StudioProjects/DSS_Matiari/app/src/main/res/layout/household_row.xml" value="0.22" />
-        <entry key="..\:/Users/gul.sanober/StudioProjects/DSS_Matiari/app/src/main/res/layout/recycler_view_item.xml" value="0.3671875" />
-        <entry key="..\:/Users/gul.sanober/StudioProjects/DSS_Matiari/app/src/main/res/layout/recycler_view_item_1.xml" value="0.3671875" />
         <entry key="..\:/Users/hassan.naqvi/StudioProjects/DSS_Matiari/app/src/main/res/drawable-v24/ic_username.xml" value="0.15416666666666667" />
         <entry key="..\:/Users/hassan.naqvi/StudioProjects/DSS_Matiari/app/src/main/res/layout/activity_ending.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/hassan.naqvi/StudioProjects/DSS_Matiari/app/src/main/res/layout/activity_fp.xml" value="0.35260416666666666" />
@@ -180,13 +91,10 @@
         <entry key="..\:/Users/hassan.naqvi/StudioProjects/DSS_Matiari/app/src/main/res/layout/member_row.xml" value="0.1921875" />
         <entry key="..\:/Users/hassan.naqvi/StudioProjects/DSS_Matiari/app/src/main/res/layout/recycler_view_item_1.xml" value="0.284375" />
         <entry key="..\:/Users/hassan.naqvi/StudioProjects/DSS_Matiari/app/src/main/res/layout/sync_list_adapter.xml" value="0.52375" />
-        <entry key="..\:/Users/hp/AndroidStudioProjects/DSS_Matiari/app/src/main/res/layout/activity_section_c.xml" value="0.18177083333333333" />
-        <entry key="..\:/Users/hp/AndroidStudioProjects/DSS_Matiari/app/src/main/res/layout/activity_section_cx.xml" value="0.264" />
-        <entry key="..\:/Users/hp/AndroidStudioProjects/DSS_Matiari/app/src/main/res/layout/pendingform_layout.xml" value="0.2" />
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="11" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_16_PREVIEW" project-jdk-name="11" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">

@@ -53,6 +53,7 @@ import edu.aku.hassannaqvi.dss_matiari.models.Users;
 import edu.aku.hassannaqvi.dss_matiari.models.VersionApp;
 import edu.aku.hassannaqvi.dss_matiari.models.Villages;
 import edu.aku.hassannaqvi.dss_matiari.models.ZStandard;
+import edu.aku.hassannaqvi.dss_matiari.room.DssRoomDatabase;
 
 
 
@@ -1233,8 +1234,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
     //update SyncedTables
-    public void updateSyncedhouseholds(String id) {
-        SQLiteDatabase db = this.getReadableDatabase(DATABASE_PASSWORD);
+    public void updateSyncedhhss(String id) {
+
+        Households updatedHouseholds = new Households();
+        updatedHouseholds.setSynced("1");
+        updatedHouseholds.setSyncDate(new Date().toString());
+        DssRoomDatabase.getDbInstance().householdsDao().updateHousehold(updatedHouseholds);
+        /*SQLiteDatabase db = this.getReadableDatabase(DATABASE_PASSWORD);
 
 // New value for one column
         ContentValues values = new ContentValues();
@@ -1249,7 +1255,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 HouseholdTable.TABLE_NAME,
                 values,
                 where,
-                whereArgs);
+                whereArgs);*/
     }
 
     public void updateSyncedMWRA(String id) {

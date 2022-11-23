@@ -6,6 +6,7 @@ package edu.aku.hassannaqvi.dss_matiari.room
 
 import android.content.Context
 import androidx.room.*
+import androidx.room.RoomDatabase
 import androidx.room.migration.Migration
 import androidx.sqlite.db.SupportSQLiteDatabase
 import edu.aku.hassannaqvi.dss_matiari.core.MainApp
