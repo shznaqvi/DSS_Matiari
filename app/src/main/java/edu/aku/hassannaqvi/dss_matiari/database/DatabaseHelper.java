@@ -2,11 +2,13 @@ package edu.aku.hassannaqvi.dss_matiari.database;
 
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.IBAHC;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.PROJECT_NAME;
+import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.followups;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.outcomeFollowups;
 import static edu.aku.hassannaqvi.dss_matiari.database.CreateTable.SQL_ALTER_ADD_DOB;
 import static edu.aku.hassannaqvi.dss_matiari.database.CreateTable.SQL_ALTER_ADD_GENDER;
 import static edu.aku.hassannaqvi.dss_matiari.database.CreateTable.SQL_ALTER_ADD_MEMBER_TYPE;
 import static edu.aku.hassannaqvi.dss_matiari.database.CreateTable.SQL_ALTER_ADD_MUID;
+import static edu.aku.hassannaqvi.dss_matiari.database.CreateTable.SQL_ALTER_ADD_MUID_FPHOUSEHOLDS;
 import static edu.aku.hassannaqvi.dss_matiari.database.CreateTable.SQL_ALTER_ADD_RA01;
 import static edu.aku.hassannaqvi.dss_matiari.database.CreateTable.SQL_ALTER_ADD_RC15;
 import static edu.aku.hassannaqvi.dss_matiari.database.CreateTable.SQL_ALTER_FOLLOWUPSCHE;
@@ -83,7 +85,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public static final String DATABASE_COPY2 = PROJECT_NAME + "_copy.db";
     public static final String DATABASE_PASSWORD = IBAHC;
     private final String TAG = "DatabaseHelper";
-    private static final int DATABASE_VERSION = 3;
+    private static final int DATABASE_VERSION = 4;
     private static final String SQL_DELETE_OUTCOME_FOLLOWUPS = "DROP TABLE IF EXISTS " + TableContracts.OutcomeFollowupTable.TABLE_NAME;
 
 
@@ -129,6 +131,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                     executeSafeQuery(db, SQL_ALTER_ADD_MUID);
                     executeSafeQuery(db, SQL_ALTER_ADD_RA01);
                     executeSafeQuery(db, SQL_ALTER_ADD_RC15);
+
+                case 3:
+                    executeSafeQuery(db, SQL_ALTER_ADD_MUID_FPHOUSEHOLDS);
+
             }
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -220,6 +226,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         values.put(FPHouseholdTable.COLUMN_DEVICEID, fpHouseholds.getDeviceId());
         values.put(FPHouseholdTable.COLUMN_APPVERSION, fpHouseholds.getAppver());
         values.put(FPHouseholdTable.COLUMN_FP_ROUND, fpHouseholds.getFround());
+        values.put(FPHouseholdTable.COLUMN_MUID, fpHouseholds.getMuid());
         values.put(FPHouseholdTable.COLUMN_VISIT_NO, fpHouseholds.getVisitNo());
 
         long newRowId;
@@ -248,7 +255,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         values.put(FollowupsTable.COLUMN_VISIT_NO, followups.getVisitNo());
         values.put(FollowupsTable.COLUMN_SC, followups.sCtoString());
         //values.put(FollowupsTable.COLUMN_SD, followups.sDtoString());
-        values.put(FollowupsTable.COLUMN_ISTATUS, followups.getiStatus());
+        values.put(FollowupsTable.COLUMN_ISTATUS, followups.getRc04());
         values.put(FollowupsTable.COLUMN_DEVICETAGID, followups.getDeviceTag());
         values.put(FollowupsTable.COLUMN_DEVICEID, followups.getDeviceId());
         values.put(FollowupsTable.COLUMN_APPVERSION, followups.getAppver());
@@ -1158,7 +1165,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         Cursor c = null;
         String[] columns = null;
         String whereClause;
-        whereClause = FollowupsTable.COLUMN_SYNCED + " is null ";
+        whereClause = FollowupsTable.COLUMN_SYNCED + " is null AND (" +
+                TableContracts.FPHouseholdTable.COLUMN_ISTATUS + " !=  4) ";
 
         String[] whereArgs = null;
 
@@ -1621,7 +1629,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         // Household number in DSSID was changed to 4-digits to capture more than 999 households
         String newhhNo = hhNo;
-        if (hhNo.length() == 3) {
+        if (hhNo.length() < 4) {
             newhhNo = String.format("%04d", Integer.parseInt(hhNo));
         } else {
             newhhNo = String.format("%03d", Integer.parseInt(hhNo));
@@ -1746,9 +1754,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         if (hhNo.length() < 4) {
             newhhNo = String.format("%04d", Integer.parseInt(hhNo));
-        } /*else {
-            newhhNo = String.format("%04d", Integer.parseInt(hhNo));
-        }*/
+        }
 
         SQLiteDatabase db = this.getReadableDatabase(DATABASE_PASSWORD);
         Cursor c = db.rawQuery(
@@ -2022,6 +2028,25 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return mwraCount;
     }
 
+    /*public int getMWRACountBYSNO(String hdssid) {
+        SQLiteDatabase db = this.getReadableDatabase(DATABASE_PASSWORD);
+        Cursor c = db.rawQuery(
+                "SELECT Count(*) AS mwraCount" +
+
+                        " FROM " + TableFollowUpsSche.TABLE_NAME +
+                        " WHERE " + TableFollowUpsSche.COLUMN_RB01 + " != ''"
+
+                ,
+                new String[]{hdssid});
+        float maxHHno = 0;
+        int mwraCount = 0;
+        while (c.moveToNext()) {
+            mwraCount = c.getInt(c.getColumnIndexOrThrow("mwraCount"));
+        }
+        // Log.d(TAG, "getMaxHHNo: " + mwraCount);
+        return mwraCount;
+    }
+*/
 
     public int getHouseholdCountByVillage(String villagecode) {
         SQLiteDatabase db = this.getReadableDatabase(DATABASE_PASSWORD);
@@ -2059,17 +2084,18 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return users;
     }
 
-    public OutcomeFollowups getOutcomeFollowupsBySno(String rb01, String fRound) throws JSONException {
+    public OutcomeFollowups getOutcomeFollowupsBySno(String rb01, String fRound, String muid) throws JSONException {
         SQLiteDatabase db = this.getReadableDatabase(DATABASE_PASSWORD);
         Cursor c = null;
         String[] columns = null;
 
         String whereClause;
-        whereClause = OutcomeTable.COLUMN_UUID + "=? AND " +
+        whereClause = TableContracts.OutcomeFollowupTable.COLUMN_UUID + "=? AND " +
                 TableContracts.OutcomeFollowupTable.COLUMN_SNO + "=? AND " +
+                TableContracts.OutcomeFollowupTable.COLUMN_MUID + "=? AND " +
                 TableContracts.OutcomeFollowupTable.COLUMN_FP_ROUND + "=? ";
 
-        String[] whereArgs = {MainApp.fpHouseholds.getUid(), rb01, fRound};
+        String[] whereArgs = {MainApp.fpHouseholds.getUid(), rb01, muid, fRound};
 
         String groupBy = null;
         String having = null;
@@ -2137,9 +2163,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return followup;
     }
 
-
-    public Outcome getOutComeBYID(String sno) throws JSONException {
-
+    public Outcome getOutcomesBySno(String rb01) throws JSONException {
         SQLiteDatabase db = this.getReadableDatabase(DATABASE_PASSWORD);
         Cursor c = null;
         String[] columns = null;
@@ -2149,7 +2173,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 OutcomeTable.COLUMN_MUID + "=? AND " +
                 OutcomeTable.COLUMN_SNO + "=? ";
 
-        String[] whereArgs = {MainApp.fpHouseholds.getUid(), MainApp.followups.getUid().split("_")[0], sno};
+        String[] whereArgs = {MainApp.followups.getUid(), MainApp.followups.getFmuid(), rb01};
 
         String groupBy = null;
         String having = null;
@@ -2173,7 +2197,48 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         c.close();
 
-        db.close();
+        //db.close();
+
+        return outcome;
+    }
+
+
+    public Outcome getOutComeBYID(String sno) throws JSONException {
+
+        SQLiteDatabase db = this.getReadableDatabase(DATABASE_PASSWORD);
+        Cursor c = null;
+        String[] columns = null;
+
+        String whereClause;
+        whereClause =
+                OutcomeTable.COLUMN_MUID + "=? AND " +
+                        OutcomeTable.COLUMN_SNO + "=? ";
+
+        String[] whereArgs = {MainApp.followups.getUid().split("_")[0], sno};
+
+        String groupBy = null;
+        String having = null;
+
+        String orderBy = OutcomeTable.COLUMN_ID + " ASC";
+
+        Outcome outcome = new Outcome();
+
+        c = db.query(
+                OutcomeTable.TABLE_NAME,  // The table to query
+                columns,                   // The columns to return
+                whereClause,               // The columns for the WHERE clause
+                whereArgs,                 // The values for the WHERE clause
+                groupBy,                   // don't group the rows
+                having,                    // don't filter by row groups
+                orderBy                    // The sort order
+        );
+        while (c.moveToNext()) {
+            outcome = new Outcome().Hydrate(c);
+        }
+
+        c.close();
+
+        //db.close();
 
         return outcome;
     }

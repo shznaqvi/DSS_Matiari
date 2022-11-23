@@ -8,7 +8,7 @@ object CreateTable {
     const val DATABASE_NAME = "$PROJECT_NAME.db"
     const val DATABASE_COPY = "${PROJECT_NAME}_copy.db"
     const val DATABASE_COPY2 = "${PROJECT_NAME}_copy.db"
-    const val DATABASE_VERSION = 2
+    const val DATABASE_VERSION = 3
 
     const val SQL_CREATE_HOUSEHOLDS = ("CREATE TABLE "
             + HouseholdTable.TABLE_NAME + "("
@@ -236,6 +236,7 @@ object CreateTable {
             + FPHouseholdTable.COLUMN_HOUSEHOLD_NO + " TEXT,"
             + FPHouseholdTable.COLUMN_STRUCTURE_NO + " TEXT,"
             + FPHouseholdTable.COLUMN_FP_ROUND + " TEXT,"
+            + FPHouseholdTable.COLUMN_MUID + " TEXT,"
             + FPHouseholdTable.COLUMN_SA + " TEXT,"
             + FPHouseholdTable.COLUMN_VISIT_NO + " TEXT"
             + " );"
@@ -283,5 +284,9 @@ object CreateTable {
     const val SQL_ALTER_ADD_RC15 = ("ALTER TABLE "
             + TableFollowUpsSche.TABLE_NAME + " ADD COLUMN "
             + TableFollowUpsSche.COLUMN_RC15 + " TEXT;")
+
+    const val SQL_ALTER_ADD_MUID_FPHOUSEHOLDS = ("ALTER TABLE "
+            + FPHouseholdTable.TABLE_NAME + " ADD COLUMN "
+            + FPHouseholdTable.COLUMN_MUID + " TEXT;")
 
 }

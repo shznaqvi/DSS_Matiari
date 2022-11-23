@@ -17,6 +17,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
+import edu.aku.hassannaqvi.dss_matiari.BR;
 import edu.aku.hassannaqvi.dss_matiari.contracts.TableContracts;
 import edu.aku.hassannaqvi.dss_matiari.core.MainApp;
 
@@ -43,6 +44,7 @@ public class FPHouseholds extends BaseObservable implements Observable {
 
     private String visitNo = "0";
     private String fround = "";
+    private String muid = "";
     private String deviceId = StringUtils.EMPTY;
     private String deviceTag = StringUtils.EMPTY;
     private String appver = StringUtils.EMPTY;
@@ -101,6 +103,9 @@ public class FPHouseholds extends BaseObservable implements Observable {
         setVillageCode(MainApp.followUpsScheHHList.get(position).getVillageCode());
         setHhNo(MainApp.followUpsScheHHList.get(position).getHhNo());
         setFround(MainApp.followUpsScheHHList.get(position).getfRound());
+        setMuid(MainApp.followUpsScheHHList.get(position).getMuid());
+        setRa01(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.ENGLISH).format(new Date().getTime()));
+
 
 
     }
@@ -379,6 +384,14 @@ public class FPHouseholds extends BaseObservable implements Observable {
         this.fround = fround;
     }
 
+    public String getMuid() {
+        return muid;
+    }
+
+    public void setMuid(String muid) {
+        this.muid = muid;
+    }
+
     @Bindable
     public String getHdssId() {
         return hdssId;
@@ -436,6 +449,7 @@ public class FPHouseholds extends BaseObservable implements Observable {
         this.structureNo = cursor.getString(cursor.getColumnIndexOrThrow(TableContracts.FPHouseholdTable.COLUMN_STRUCTURE_NO));
         this.visitNo = cursor.getString(cursor.getColumnIndexOrThrow(TableContracts.FPHouseholdTable.COLUMN_VISIT_NO));
         this.fround = cursor.getString(cursor.getColumnIndexOrThrow(TableContracts.FPHouseholdTable.COLUMN_FP_ROUND));
+        this.muid = cursor.getString(cursor.getColumnIndexOrThrow(TableContracts.FPHouseholdTable.COLUMN_MUID));
 
         this.deviceId = cursor.getString(cursor.getColumnIndexOrThrow(TableContracts.FPHouseholdTable.COLUMN_DEVICEID));
         this.deviceTag = cursor.getString(cursor.getColumnIndexOrThrow(TableContracts.FPHouseholdTable.COLUMN_DEVICETAGID));
@@ -461,6 +475,7 @@ public class FPHouseholds extends BaseObservable implements Observable {
             JSONObject json = null;
             json = new JSONObject(string);
 
+            this.ra01 = json.getString("ra01");
             this.ra01v2 = json.has("ra01v2") ? json.getString("ra01v2") : "";
             this.ra01v3 = json.has("ra01v3") ? json.getString("ra01v3") : "";
 
@@ -489,6 +504,7 @@ public class FPHouseholds extends BaseObservable implements Observable {
         json.put(TableContracts.FPHouseholdTable.COLUMN_DEVICETAGID, this.deviceTag);
         json.put(TableContracts.FPHouseholdTable.COLUMN_ISTATUS, this.iStatus);
         json.put(TableContracts.FPHouseholdTable.COLUMN_APPVERSION, this.appver);
+        json.put(TableContracts.FPHouseholdTable.COLUMN_MUID, this.muid);
         //  json.put(HouseholdTable.COLUMN_SYNCED, this.synced);
         //  json.put(HouseholdTable.COLUMN_SYNCED_DATE, this.syncDate);
 
@@ -504,6 +520,7 @@ public class FPHouseholds extends BaseObservable implements Observable {
         JSONObject json = new JSONObject();
 
         json
+                .put("ra01", ra01)
                 .put("ra01v3", ra01v3)
                 .put("ra01v2", ra01v2);
 
@@ -522,7 +539,7 @@ public class FPHouseholds extends BaseObservable implements Observable {
         this.hhNo = jsonObject.getString(TableContracts.FPHouseholdTable.COLUMN_HOUSEHOLD_NO);
         this.hdssId = jsonObject.getString(TableContracts.FPHouseholdTable.COLUMN_HDSSID);
         this.fround = jsonObject.getString(TableContracts.FPHouseholdTable.COLUMN_FP_ROUND);
-
+        this.muid = jsonObject.getString(TableContracts.FPHouseholdTable.COLUMN_MUID);
         this.deviceId = jsonObject.getString(TableContracts.FPHouseholdTable.COLUMN_DEVICEID);
         this.deviceTag = jsonObject.getString(TableContracts.FPHouseholdTable.COLUMN_DEVICETAGID);
         this.appver = jsonObject.getString(TableContracts.FPHouseholdTable.COLUMN_APPVERSION);

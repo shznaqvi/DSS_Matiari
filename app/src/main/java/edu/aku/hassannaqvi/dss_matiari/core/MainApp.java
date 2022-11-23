@@ -16,6 +16,7 @@ import net.sqlcipher.database.SQLiteDatabase;
 import org.json.JSONArray;
 
 import java.io.File;
+import java.util.HashMap;
 import java.util.List;
 
 import edu.aku.hassannaqvi.dss_matiari.BuildConfig;
@@ -32,7 +33,7 @@ import edu.aku.hassannaqvi.dss_matiari.models.Users;
 
 public class MainApp extends Application {
 
-    public static final String PROJECT_NAME = "HDSS_MATIARI_R1";
+    public static final String PROJECT_NAME = "HDSS_MATIARI_R2";
     public static final String DIST_ID = null;
     public static final String SYNC_LOGIN = "sync_login";
     public static final String _IP = "https://pedres2.aku.edu/";// .LIVE server
@@ -108,6 +109,7 @@ public class MainApp extends Application {
     public static int totalOutcomes;
     public static int outcomeCounter = 0;
     public static int mwraDone = 0;
+    public static HashMap<String, Boolean> mwraStatus = new HashMap<>();
     private static final String TAG = "MainApp";
 //    public static int TRATS = 8;
     public static String IBAHC = "";

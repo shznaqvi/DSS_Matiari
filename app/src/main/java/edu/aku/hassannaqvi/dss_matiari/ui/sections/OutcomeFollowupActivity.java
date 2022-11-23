@@ -48,7 +48,7 @@ public class OutcomeFollowupActivity extends AppCompatActivity {
         MainApp.ROUND = MainApp.fpMwra.getfRound();
 
         try {
-            outcomeFollowups = db.getOutcomeFollowupsBySno(MainApp.fpMwra.getRb01(), MainApp.fpMwra.getfRound());
+            outcomeFollowups = db.getOutcomeFollowupsBySno(MainApp.fpMwra.getRb01(), MainApp.fpMwra.getfRound(), fpMwra.getMuid());
         } catch (JSONException e) {
             e.printStackTrace();
             Toast.makeText(this, "JSONException(Followups): " + e.getMessage(), Toast.LENGTH_SHORT).show();

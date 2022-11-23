@@ -2,6 +2,7 @@ package edu.aku.hassannaqvi.dss_matiari.ui;
 
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.followups;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.fpHouseholds;
+import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.mwraStatus;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -50,15 +51,16 @@ public class FPEndingActivity extends AppCompatActivity {
         //bi.hhStatus.setText(bi.hhStatus.getText()+" "+(Integer.parseInt(MainApp.households.getVisitNo())+1));
 
         db = MainApp.appInfo.dbHelper;
-        visitCount = Integer.parseInt(MainApp.households.getVisitNo());
-        boolean complete = getIntent().getBooleanExtra("complete", false);
+        visitCount = Integer.parseInt(fpHouseholds.getVisitNo());
+
+        boolean complete = getIntent().getBooleanExtra("complete", mwraStatus.isEmpty());
         boolean noWRA = getIntent().getBooleanExtra("noWRA", false);
-/*        boolean refused = getIntent().getBooleanExtra("refused", false);
-        boolean locked = getIntent().getBooleanExtra("locked", false);*/
+        boolean refused = getIntent().getBooleanExtra("refused", false);
+        boolean locked = getIntent().getBooleanExtra("locked", false);
 
         bi.istatusa.setEnabled(complete);
         bi.istatusb.setEnabled(!complete);
-        bi.istatusc.setEnabled(!complete);
+        bi.istatusc.setEnabled(refused);
         bi.istatuse.setEnabled(noWRA);
         bi.istatusd.setEnabled(true); // Always TRUE
 
