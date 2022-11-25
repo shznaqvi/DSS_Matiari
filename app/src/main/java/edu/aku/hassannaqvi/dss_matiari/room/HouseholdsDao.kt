@@ -5,17 +5,17 @@
 package edu.aku.hassannaqvi.dss_matiari.room
 
 import android.os.Build
-import androidx.room.*
+import androidx.room.Dao
+import androidx.room.Insert
 import androidx.room.OnConflictStrategy.REPLACE
-import edu.aku.hassannaqvi.dss_matiari.contracts.TableContracts
+import androidx.room.Query
+import androidx.room.Update
 import edu.aku.hassannaqvi.dss_matiari.contracts.TableContracts.HouseholdTable
-import edu.aku.hassannaqvi.dss_matiari.contracts.TableContracts.MWRATable
 import edu.aku.hassannaqvi.dss_matiari.core.MainApp
-import edu.aku.hassannaqvi.dss_matiari.core.MainApp.households
-import edu.aku.hassannaqvi.dss_matiari.core.MainApp.mwraCount
 import edu.aku.hassannaqvi.dss_matiari.models.Households
 import org.json.JSONArray
 import org.json.JSONException
+import java.util.*
 
 @Dao
 interface HouseholdsDao {
@@ -128,9 +128,31 @@ interface HouseholdsDao {
 
         return jsonHouseholds
 
-
-
     }
+
+
+
+
+    @Query("SELECT * FROM " + HouseholdTable.TABLE_NAME
+            + " WHERE " + HouseholdTable.COLUMN_ID + " LIKE :id ")
+    fun updateSyncedhhs_interal(id: String?) : Households
+
+
+    fun updateSyncedhhs(id: String?) : Households
+    {
+        val synhouseholds = updateSyncedhhs_interal(id)
+
+        if(synhouseholds != null)
+        {
+            synhouseholds.synced = "1"
+            synhouseholds.syncDate = Date().toString()
+
+        }
+
+        return synhouseholds
+    }
+
+
 
 
 

@@ -2,6 +2,7 @@ package edu.aku.hassannaqvi.dss_matiari.database;
 
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.IBAHC;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.PROJECT_NAME;
+import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.households;
 import static edu.aku.hassannaqvi.dss_matiari.database.CreateTable.SQL_ALTER_ADD_DOB;
 import static edu.aku.hassannaqvi.dss_matiari.database.CreateTable.SQL_ALTER_ADD_GENDER;
 import static edu.aku.hassannaqvi.dss_matiari.database.CreateTable.SQL_ALTER_ADD_MEMBER_TYPE;
@@ -22,6 +23,8 @@ import android.database.Cursor;
 import android.database.MatrixCursor;
 import android.database.SQLException;
 import android.util.Log;
+
+import androidx.room.RoomDatabase;
 
 import net.sqlcipher.database.SQLiteDatabase;
 import net.sqlcipher.database.SQLiteOpenHelper;
@@ -1234,13 +1237,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
     //update SyncedTables
-    public void updateSyncedhhss(String id) {
+    public void updateSyncedhhs(String id) {
 
-        Households updatedHouseholds = new Households();
-        updatedHouseholds.setSynced("1");
-        updatedHouseholds.setSyncDate(new Date().toString());
-        DssRoomDatabase.getDbInstance().householdsDao().updateHousehold(updatedHouseholds);
-        /*SQLiteDatabase db = this.getReadableDatabase(DATABASE_PASSWORD);
+        SQLiteDatabase db = this.getReadableDatabase(DATABASE_PASSWORD);
 
 // New value for one column
         ContentValues values = new ContentValues();
@@ -1255,7 +1254,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 HouseholdTable.TABLE_NAME,
                 values,
                 where,
-                whereArgs);*/
+                whereArgs);
     }
 
     public void updateSyncedMWRA(String id) {
