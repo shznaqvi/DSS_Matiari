@@ -135,10 +135,10 @@ interface HouseholdsDao {
 
     @Query("SELECT * FROM " + HouseholdTable.TABLE_NAME
             + " WHERE " + HouseholdTable.COLUMN_ID + " LIKE :id ")
-    fun updateSyncedhhs_interal(id: String?) : Households
+    fun updateSyncedhhs_interal(id: String?) : Households?
 
 
-    fun updateSyncedhhs(id: String?) : Households
+    fun updateSyncedhhs(id: String?) : Households?
     {
         val synhouseholds = updateSyncedhhs_interal(id)
 
@@ -146,7 +146,7 @@ interface HouseholdsDao {
         {
             synhouseholds.synced = "1"
             synhouseholds.syncDate = Date().toString()
-
+            updateHousehold(synhouseholds)
         }
 
         return synhouseholds
