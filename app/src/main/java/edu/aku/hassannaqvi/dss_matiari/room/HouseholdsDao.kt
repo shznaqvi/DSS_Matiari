@@ -106,30 +106,6 @@ interface HouseholdsDao {
             + HouseholdTable.COLUMN_ID + " DESC")
     fun getAllHouseholds(): List<Households>
 
-    // upload function
-
-    @Query("SELECT * FROM " + HouseholdTable.TABLE_NAME + " WHERE " + HouseholdTable.COLUMN_SYNCED
-            + " is \'\' AND (" + HouseholdTable.COLUMN_ISTATUS  + " = 1 OR "
-            + HouseholdTable.COLUMN_VISIT_NO + " > 2) ORDER BY " + HouseholdTable.COLUMN_ID + " ASC")
-    fun getUnsyncedHousehols_internal() : List<Households>
-
-    @kotlin.jvm.Throws(JSONException :: class)
-    fun getUnsyncedHouseholds() : JSONArray?
-    {
-        val allHouseholds = getUnsyncedHousehols_internal()
-
-        val jsonHouseholds = JSONArray()
-        for (i in allHouseholds)
-        {
-
-            jsonHouseholds.put(i.toJSONObject())
-
-        }
-
-        return jsonHouseholds
-
-    }
-
 
 
 
@@ -150,6 +126,23 @@ interface HouseholdsDao {
         }
 
         return synhouseholds
+    }
+    @Query("SELECT * FROM " + HouseholdTable.TABLE_NAME +" WHERE "
+            + HouseholdTable.COLUMN_UID + " LIKE :uid ORDER BY "
+            + HouseholdTable.COLUMN_ID + " ASC")
+    fun getHouseholdByUID_internal(uid: String) : Households?
+
+
+    @kotlin.jvm.Throws(JSONException::class)
+    fun getHouseholdByUID(uid: String) : Households?
+    {
+        val newHousehols = getHouseholdByUID_internal(uid)
+        if(newHousehols == null)
+        {
+            val temHouseholds = Households()
+            temHouseholds.Hydrate(newHousehols)
+        }
+        return newHousehols
     }
 
 

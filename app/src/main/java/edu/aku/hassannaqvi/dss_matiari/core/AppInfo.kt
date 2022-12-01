@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.pm.PackageManager
 import android.provider.Settings
 import edu.aku.hassannaqvi.dss_matiari.database.DatabaseHelper
+import edu.aku.hassannaqvi.dss_matiari.room.DssRoomDatabase
 import org.apache.commons.lang3.StringUtils
 import java.text.SimpleDateFormat
 import java.util.*
@@ -26,7 +27,7 @@ class AppInfo {
         get() = versionName.split(".").first().toInt() > 0
 
 
-    lateinit var dbHelper: DatabaseHelper
+    lateinit var dbHelper: DssRoomDatabase.Companion
 
     constructor(context: Context) {
         try {
@@ -37,7 +38,7 @@ class AppInfo {
             appVersion = "$versionName.$versionCode"
             tagName = getTagName(context)
             synchronized(this) {
-                dbHelper = DatabaseHelper(context)
+                dbHelper = dbHelper(context)
             }
         } catch (e: PackageManager.NameNotFoundException) {
             e.printStackTrace()

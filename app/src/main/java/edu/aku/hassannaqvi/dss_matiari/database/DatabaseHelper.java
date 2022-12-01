@@ -1118,7 +1118,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
 
-    public JSONArray getUnsyncedMWRA() throws JSONException {
+    /*public JSONArray getUnsyncedMWRA() throws JSONException {
         SQLiteDatabase db = this.getReadableDatabase(DATABASE_PASSWORD);
         Cursor c = null;
         String[] columns = null;
@@ -1155,9 +1155,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         Log.d(TAG, "getUnsyncedMWRA: " + allMwra.toString().length());
         Log.d(TAG, "getUnsyncedMWRA: " + allMwra);
         return allMwra;
-    }
+    }*/
 
-    public JSONArray getUnsyncedFollowups() throws JSONException {
+    /*public JSONArray getUnsyncedFollowups() throws JSONException {
         SQLiteDatabase db = this.getReadableDatabase(DATABASE_PASSWORD);
         Cursor c = null;
         String[] columns = null;
@@ -1195,9 +1195,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         Log.d(TAG, "getUnsyncedFollowups: " + allFollowups.toString().length());
         Log.d(TAG, "getUnsyncedFollowups: " + allFollowups);
         return allFollowups;
-    }
+    }*/
 
-    public JSONArray getUnsyncedOutcomeFollowups() throws JSONException {
+    /*public JSONArray getUnsyncedOutcomeFollowups() throws JSONException {
         SQLiteDatabase db = this.getReadableDatabase(DATABASE_PASSWORD);
         Cursor c = null;
         String[] columns = null;
@@ -1234,9 +1234,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         Log.d(TAG, "getUnsyncedOutcomeFollowups: " + allFollowups.toString().length());
         Log.d(TAG, "getUnsyncedOutcomeFollowups: " + allFollowups);
         return allFollowups;
-    }
+    }*/
 
-    //update SyncedTables
+    /*//update SyncedTables
     public void updateSyncedhhs(String id) {
 
         SQLiteDatabase db = this.getReadableDatabase(DATABASE_PASSWORD);
@@ -1332,7 +1332,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 values,
                 where,
                 whereArgs);
-    }
+    }*/
 
 
     public ArrayList<Cursor> getData(String Query) {
@@ -1954,7 +1954,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         while (c.moveToNext()) {
 
             followUpsSches.add(new FollowUpsSche().Hydrate(c));
-        }
+        }fc.get(holder.getAdapterPosition()).getUid()
 
         c.close();
 
