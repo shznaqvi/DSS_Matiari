@@ -546,7 +546,7 @@ public class SyncActivity extends AppCompatActivity {
                                 // DatabaseHelper db = new DatabaseHelper(SyncActivity.this); // Database Helper
 
                                 Method method = null;
-                                for (Method method1 : DssRoomDatabase.getDbInstance().householdsDao().getClass().getDeclaredMethods()) {
+                                for (Method method1 : DssRoomDatabase.getDbInstance().syncFunctionsDao().getClass().getDeclaredMethods()) {
 
                                     Log.d(TAG, "onChanged Methods: " + method1.getName());
                                     /**

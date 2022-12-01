@@ -39,6 +39,7 @@ abstract class DssRoomDatabase : RoomDatabase() {
     abstract fun FollowUpsScheDao(): FollowUpsScheDao
     abstract fun MaxHHNoDao() : MaxHHNoDao
     abstract fun OutcomeDao() : OutcomeDao
+    abstract fun syncFunctionsDao() : SyncFunctionsDao
 
 
     companion object {
