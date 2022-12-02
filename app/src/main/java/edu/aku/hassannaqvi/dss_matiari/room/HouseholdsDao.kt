@@ -109,7 +109,7 @@ interface HouseholdsDao {
 
 
 
-    @Query("SELECT * FROM " + HouseholdTable.TABLE_NAME
+    /*@Query("SELECT * FROM " + HouseholdTable.TABLE_NAME
             + " WHERE " + HouseholdTable.COLUMN_ID + " LIKE :id ")
     fun updateSyncedhhs_interal(id: String?) : Households?
 
@@ -126,7 +126,7 @@ interface HouseholdsDao {
         }
 
         return synhouseholds
-    }
+    }*/
     @Query("SELECT * FROM " + HouseholdTable.TABLE_NAME +" WHERE "
             + HouseholdTable.COLUMN_UID + " LIKE :uid ORDER BY "
             + HouseholdTable.COLUMN_ID + " ASC")

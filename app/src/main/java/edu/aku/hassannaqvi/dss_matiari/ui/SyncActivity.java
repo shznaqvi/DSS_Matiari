@@ -158,7 +158,7 @@ public class SyncActivity extends AppCompatActivity {
                 try {
                     // Forms
                     //MainApp.uploadData.add(db.getUnsyncedHouseholds());
-                    uploadData.add(DssRoomDatabase.getDbInstance().householdsDao().getUnsyncedHouseholds());
+                    uploadData.add(DssRoomDatabase.getDbInstance().syncFunctionsDao().getUnsyncedHouseholds());
                     uploadTables.add(new SyncModel(HouseholdTable.TABLE_NAME));
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -168,18 +168,18 @@ public class SyncActivity extends AppCompatActivity {
                     bi.errMessage.setVisibility(View.VISIBLE);
 
                 }
-//                try {
-//                    // MWRA
-//                    MainApp.uploadData.add(db.getUnsyncedMWRA());
-//                    uploadTables.add(new SyncModel(MWRATable.TABLE_NAME));
-//
-//                } catch (JSONException e) {
-//                    e.printStackTrace();
-//                    Toast.makeText(this, "JSONException(MWRA): " + e.getMessage(), Toast.LENGTH_LONG).show();
-//                    Log.d(TAG, "JSONException(MWRA): " + e.getMessage());
-//                    bi.errMessage.setText(bi.errMessage.getText() + "\nERROR - JSONException(MWRA): " + e.getMessage());
-//                    bi.errMessage.setVisibility(View.VISIBLE);
-//                }
+                try {
+                    // MWRA
+                    MainApp.uploadData.add(DssRoomDatabase.getDbInstance().syncFunctionsDao().getUnsyncedMwras());
+                    uploadTables.add(new SyncModel(MWRATable.TABLE_NAME));
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    Toast.makeText(this, "JSONException(MWRA): " + e.getMessage(), Toast.LENGTH_LONG).show();
+                    Log.d(TAG, "JSONException(MWRA): " + e.getMessage());
+                    bi.errMessage.setText(bi.errMessage.getText() + "\nERROR - JSONException(MWRA): " + e.getMessage());
+                    bi.errMessage.setVisibility(View.VISIBLE);
+                }
 //                try {
 //                    // Followups
 //                    MainApp.uploadData.add(db.getUnsyncedFollowups());
@@ -207,18 +207,18 @@ public class SyncActivity extends AppCompatActivity {
                 }*/
 
 
-//                try {
-//                    // Outcome
-//                    MainApp.uploadData.add(db.getUnsyncedOutcomes());
-//                    uploadTables.add(new SyncModel(TableContracts.OutcomeTable.TABLE_NAME));
-//
-//                } catch (JSONException e) {
-//                    e.printStackTrace();
-//                    Toast.makeText(this, "JSONException(Outcome): " + e.getMessage(), Toast.LENGTH_LONG).show();
-//                    Log.d(TAG, "JSONException(Outcome): " + e.getMessage());
-//                    bi.errMessage.setText(bi.errMessage.getText() + "\nERROR - JSONException(Outcome): " + e.getMessage());
-//                    bi.errMessage.setVisibility(View.VISIBLE);
-//                }
+                try {
+                    // Outcome
+                    MainApp.uploadData.add(DssRoomDatabase.getDbInstance().syncFunctionsDao().getUnsyncedOutcome());
+                    uploadTables.add(new SyncModel(TableContracts.OutcomeTable.TABLE_NAME));
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    Toast.makeText(this, "JSONException(Outcome): " + e.getMessage(), Toast.LENGTH_LONG).show();
+                    Log.d(TAG, "JSONException(Outcome): " + e.getMessage());
+                    bi.errMessage.setText(bi.errMessage.getText() + "\nERROR - JSONException(Outcome): " + e.getMessage());
+                    bi.errMessage.setVisibility(View.VISIBLE);
+                }
 
 //                try {
 //                    //Outcome Followups

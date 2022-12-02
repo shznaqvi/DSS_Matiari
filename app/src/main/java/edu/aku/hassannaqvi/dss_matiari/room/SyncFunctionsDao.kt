@@ -19,7 +19,7 @@ import java.util.*
 interface SyncFunctionsDao {
 
 
-    // upload function
+    // Household Upload Functions
 
     @Query("SELECT * FROM " + TableContracts.HouseholdTable.TABLE_NAME + " WHERE " + TableContracts.HouseholdTable.COLUMN_SYNCED
             + " is \'\' AND (" + TableContracts.HouseholdTable.COLUMN_ISTATUS  + " = 1 OR "
@@ -62,7 +62,7 @@ interface SyncFunctionsDao {
         synced.syncDate = Date().toString()
         return synced
     }
-
+//************************************************************************************************************
 
     // MWRA
 
@@ -103,7 +103,7 @@ interface SyncFunctionsDao {
         synced.syncDate = Date().toString()
         return synced
     }
-
+//****************************************************************************************************************
 
     // Outcome
 
