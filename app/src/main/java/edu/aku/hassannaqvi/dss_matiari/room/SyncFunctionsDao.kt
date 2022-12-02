@@ -43,11 +43,7 @@ interface SyncFunctionsDao {
 
     }
 
-
-
     // Households
-
-
 
     @Query("SELECT * FROM " + TableContracts.HouseholdTable.TABLE_NAME
             + " WHERE " + TableContracts.HouseholdTable.COLUMN_ID + " LIKE :id ")
