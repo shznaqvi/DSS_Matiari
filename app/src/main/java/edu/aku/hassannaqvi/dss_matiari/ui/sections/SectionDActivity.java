@@ -35,7 +35,7 @@ public class SectionDActivity extends AppCompatActivity {
 
     private static final String TAG = "SectionCx2Activity";
     ActivitySectionDBinding bi;
-    private DatabaseHelper db;
+    private DssRoomDatabase db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

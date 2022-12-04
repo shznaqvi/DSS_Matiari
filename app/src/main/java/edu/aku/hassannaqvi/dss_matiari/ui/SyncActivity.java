@@ -72,7 +72,7 @@ import edu.aku.hassannaqvi.dss_matiari.workers.PhotoUploadWorker2;
 public class SyncActivity extends AppCompatActivity {
     private static final String TAG = "SyncActivity";
     final Handler handler = new Handler();
-    DatabaseHelper db;
+    DssRoomDatabase db;
     SyncListAdapter syncListAdapter;
     ActivitySyncBinding bi;
     List<SyncModel> uploadTables;
@@ -105,7 +105,7 @@ public class SyncActivity extends AppCompatActivity {
         listActivityCreated = true;
         uploadlistActivityCreated = true;
 
-        db = new DatabaseHelper(this);
+        //db = new DatabaseHelper(this);
         //dbBackup(this);
 /*        OneTimeWorkRequest JSONWorker =
                 new OneTimeWorkRequest.Builder(ReadJSONWorker.class)
@@ -571,10 +571,10 @@ public class SyncActivity extends AppCompatActivity {
                                         JSONObject jsonObject = new JSONObject(json.getString(i));
                                         Log.d(TAG, "onChanged: " + json.getString(i));
                                         if (jsonObject.getString("status").equals("1") && jsonObject.getString("error").equals("0")) {
-                                            method.invoke(DssRoomDatabase.getDbInstance().householdsDao(), jsonObject.getString("id"));
+                                            method.invoke(DssRoomDatabase.getDbInstance().syncFunctionsDao(), jsonObject.getString("id"));
                                             sSynced++;
                                         } else if (jsonObject.getString("status").equals("2") && jsonObject.getString("error").equals("0")) {
-                                            method.invoke(DssRoomDatabase.getDbInstance().householdsDao(), jsonObject.getString("id"));
+                                            method.invoke(DssRoomDatabase.getDbInstance().syncFunctionsDao(), jsonObject.getString("id"));
                                             sDuplicate++;
                                         } else {
                                             sSyncedError.append("\nError: ").append(jsonObject.getString("message"));

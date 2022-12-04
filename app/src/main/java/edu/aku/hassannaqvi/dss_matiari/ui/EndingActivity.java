@@ -31,7 +31,7 @@ public class EndingActivity extends AppCompatActivity {
     private static final String TAG = "EndingActivity";
     ActivityEndingBinding bi;
     int sectionMainCheck;
-    private DatabaseHelper db;
+    private DssRoomDatabase db;
     int visitCount;
 
     @Override

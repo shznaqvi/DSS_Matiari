@@ -45,7 +45,7 @@ public class FPHouseholdAdapter extends RecyclerView.Adapter<FPHouseholdAdapter.
     private final List<FollowUpsSche> backupItems = new ArrayList<>();
     private final int mExpandedPosition = -1;
     private final int completeCount;
-    private final DatabaseHelper db;
+    private final DssRoomDatabase db;
     private Households fpHouseholds;
     HashMap<Integer, Integer> totalMwraMap = new HashMap<>();
 
@@ -107,14 +107,14 @@ public class FPHouseholdAdapter extends RecyclerView.Adapter<FPHouseholdAdapter.
         try {
             // These quick fixes are making this code a mess.
             //this.fpHouseholds = db.getHouseholdByHDSSID(followUpsSche.getHdssid());
-            this.fpHouseholds = DssRoomDatabase.getDbInstance().householdsDao().getHouseholdByHDSSIDDSC(followUpsSche.getHdssid(), viewHolder.getAdapterPosition());
+            this.fpHouseholds = db.householdsDao().getHouseholdByHDSSIDDSC(followUpsSche.getHdssid(), viewHolder.getAdapterPosition());
 
         } catch (JSONException e) {
             e.printStackTrace();
         }
 
         //int tempMWRA = db.getMaxMWRANoBYHHFromFolloupsSche(followUpsSche.getUcCode(), followUpsSche.getVillageCode(), followUpsSche.getHhNo());
-        int tempMWRA = DssRoomDatabase.getDbInstance().FollowUpsScheDao().getMWRACountBYHHFromFolloupsSche(followUpsSche.getUcCode(), followUpsSche.getVillageCode(), followUpsSche.getHhNo());
+        int tempMWRA = db.FollowUpsScheDao().getMWRACountBYHHFromFolloupsSche(followUpsSche.getUcCode(), followUpsSche.getVillageCode(), followUpsSche.getHhNo());
         totalMwraMap.put(pos, tempMWRA);
 
 
@@ -199,7 +199,7 @@ public class FPHouseholdAdapter extends RecyclerView.Adapter<FPHouseholdAdapter.
 
                     try {
                         //MainApp.fpHouseholds = db.getFPHouseholdBYHdssid(MainApp.followUpsScheHHList.get(viewHolder.getAdapterPosition()).getHdssid());
-                       households = DssRoomDatabase.getDbInstance().householdsDao().getHouseholdByHDSSIDDSC(MainApp.followUpsScheHHList.get(viewHolder.getAdapterPosition()).getHdssid(), viewHolder.getAdapterPosition());
+                       households = db.householdsDao().getHouseholdByHDSSIDDSC(MainApp.followUpsScheHHList.get(viewHolder.getAdapterPosition()).getHdssid(), viewHolder.getAdapterPosition());
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
@@ -215,7 +215,7 @@ public class FPHouseholdAdapter extends RecyclerView.Adapter<FPHouseholdAdapter.
                         } else if(!followUpsSche.getiStatus().equals("1") || currentMWRA == 0) {
                             try {
                                 //MainApp.households = db.getHouseholdByHDSSID(followUpsSche.getHdssid());
-                                households = DssRoomDatabase.getDbInstance().householdsDao().getHouseholdByHDSSIDASC(followUpsSche.getHdssid());
+                                households = db.householdsDao().getHouseholdByHDSSIDASC(followUpsSche.getHdssid());
 
                                 if (MainApp.households == null) {
                                     MainApp.households = new Households();

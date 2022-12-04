@@ -34,7 +34,7 @@ public class SectionFActivity extends AppCompatActivity {
 
     private static final String TAG = "OutcomeFollowupActivity";
     ActivitySectionFBinding bi;
-    private DatabaseHelper db;
+    private DssRoomDatabase db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

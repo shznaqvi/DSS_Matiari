@@ -39,7 +39,7 @@ public class FpMwraAdapter extends RecyclerView.Adapter<FpMwraAdapter.ViewHolder
     private final List<FollowUpsSche> followupsSche;
     private final int mExpandedPosition = -1;
     private final int completeCount;
-    private final DatabaseHelper db;
+    private final DssRoomDatabase db;
 
     /**
      * Initialize the dataset of the Adapter.

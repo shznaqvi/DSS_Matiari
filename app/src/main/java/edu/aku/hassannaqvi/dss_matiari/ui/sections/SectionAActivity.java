@@ -37,7 +37,7 @@ public class SectionAActivity extends AppCompatActivity {
 
     private static final String TAG = "SectionAActivity";
     ActivitySectionABinding bi;
-    private DatabaseHelper db;
+    private DssRoomDatabase db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -176,7 +176,7 @@ public class SectionAActivity extends AppCompatActivity {
 
 
     private boolean updateDB() {
-        DatabaseHelper db = MainApp.appInfo.getDbHelper();
+        //DssRoomDatabase db = MainApp.appInfo.getDbHelper();
         DssRoomDatabase dssdb = DssRoomDatabase.getDbInstance();
         int updcount = 0;
         try {

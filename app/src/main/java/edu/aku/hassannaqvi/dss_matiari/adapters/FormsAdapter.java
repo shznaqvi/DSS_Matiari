@@ -31,7 +31,7 @@ import edu.aku.hassannaqvi.dss_matiari.ui.sections.SectionAActivity;
  */
 public class FormsAdapter extends RecyclerView.Adapter<FormsAdapter.ViewHolder> {
     Context c;
-    DatabaseHelper db;
+    DssRoomDatabase db;
     private List<Households> fc = Collections.emptyList();
 
     // Provide a suitable constructor (depends on the kind of dataset)
@@ -122,7 +122,7 @@ public class FormsAdapter extends RecyclerView.Adapter<FormsAdapter.ViewHolder> 
         holder.fathername.setText(fc.get(holder.getAdapterPosition()).getVisitNo() + " visits");
 
         //int totalMWRA = db.getMWRACountBYUUID(fc.get(holder.getAdapterPosition()).getUid());
-        int totalMWRA = DssRoomDatabase.getDbInstance().mwraDao().getMWRACountBYUUID(fc.get(holder.getAdapterPosition()).getUid(),"1");
+        int totalMWRA = db.mwraDao().getMWRACountBYUUID(fc.get(holder.getAdapterPosition()).getUid(),"1");
         holder.hhno.setText(totalMWRA + " MWRA(s)");
 
         holder.itemView.setOnClickListener(v -> {
@@ -131,7 +131,7 @@ public class FormsAdapter extends RecyclerView.Adapter<FormsAdapter.ViewHolder> 
             try {
                 //MainApp.households = db.getHouseholdByUID(MainApp.householdList.get(holder.getAdapterPosition()).getUid());
 
-                MainApp.households = DssRoomDatabase.getDbInstance().householdsDao().getHouseholdByUID(MainApp.householdList.get(holder.getAbsoluteAdapterPosition()).getUid())
+                MainApp.households = db.householdsDao().getHouseholdByUID(MainApp.householdList.get(holder.getAbsoluteAdapterPosition()).getUid());
 
                 //MainApp.households.setVisitNo(String.valueOf(Integer.parseInt(MainApp.households.getVisitNo())+1));
                 if (!MainApp.households.getIStatus().equals("1") && Integer.parseInt(MainApp.households.getVisitNo()) < 3) {

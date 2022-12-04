@@ -40,7 +40,7 @@ public class SectionBActivity extends AppCompatActivity {
 
     private static final String TAG = "SectionBActivity";
     ActivitySectionBBinding bi;
-    private DatabaseHelper db;
+    private DssRoomDatabase db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

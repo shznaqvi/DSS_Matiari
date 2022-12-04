@@ -27,7 +27,7 @@ class AppInfo {
         get() = versionName.split(".").first().toInt() > 0
 
 
-    lateinit var dbHelper: DatabaseHelper
+    lateinit var dbHelper: DssRoomDatabase
 
     constructor(context: Context) {
         try {
@@ -38,7 +38,7 @@ class AppInfo {
             appVersion = "$versionName.$versionCode"
             tagName = getTagName(context)
             synchronized(this) {
-                dbHelper = DatabaseHelper(context)
+                dbHelper = DssRoomDatabase.dbInstance!!
             }
         } catch (e: PackageManager.NameNotFoundException) {
             e.printStackTrace()
