@@ -108,7 +108,7 @@ public class HouseholdAdapter extends RecyclerView.Adapter<HouseholdAdapter.View
                 break;
         }
 
-        DatabaseHelper db = MainApp.appInfo.dbHelper;
+        DssRoomDatabase db = MainApp.appInfo.dbHelper;
         //int totalMWRA = db.getMWRACountBYUUID(households.getUid());
         int totalMWRA = DssRoomDatabase.getDbInstance().mwraDao().getMWRACountBYUUID(households.getUid(), "1");
 

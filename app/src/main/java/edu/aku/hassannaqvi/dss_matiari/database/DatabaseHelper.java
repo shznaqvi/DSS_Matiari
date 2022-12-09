@@ -394,7 +394,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     /*
      * Functions that dealing with table data
      * */
-    public boolean doLogin(String username, String password) {
+    /*public boolean doLogin(String username, String password) {
         SQLiteDatabase db = this.getReadableDatabase(DATABASE_PASSWORD);
         Cursor c = null;
         String[] columns = null;
@@ -424,7 +424,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         MainApp.user = loggedInUser;
         return c.getCount() > 0;
-    }
+    }*/
 
 
     /*public ArrayList<Households> getHouseholdsByDate(String sysdate) {

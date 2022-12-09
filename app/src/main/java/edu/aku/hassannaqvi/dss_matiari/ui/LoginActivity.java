@@ -79,7 +79,7 @@ public class LoginActivity extends AppCompatActivity {
     ActivityLoginBinding bi;
     Spinner spinnerDistrict;
     String DirectoryName;
-    DatabaseHelper db;
+    DssRoomDatabase db;
     ArrayList<String> leaderNames;
     ArrayList<String> leaderCodes;
     int attemptCounter = 0;
@@ -305,7 +305,7 @@ public class LoginActivity extends AppCompatActivity {
 
         if ((username.equals("dmu@aku") && password.equals("aku?dmu"))
                 || (username.equals("test1234") && password.equals("test1234"))
-                || db.doLogin(username, password)
+                || db.usersDao().doLogin(username, password)
         ) {
             MainApp.admin = username.contains("@") || username.contains("test1234");
             MainApp.user.setUserName(username);
