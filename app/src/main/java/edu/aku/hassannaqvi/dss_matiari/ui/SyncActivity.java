@@ -163,7 +163,7 @@ public class SyncActivity extends AppCompatActivity {
                 try {
                     // Forms
                     //MainApp.uploadData.add(db.getUnsyncedHouseholds());
-                    uploadData.add(DssRoomDatabase.getDbInstance().syncFunctionsDao().getUnsyncedHouseholds());
+                    uploadData.add(db.syncFunctionsDao().getUnsyncedHouseholds());
                     uploadTables.add(new SyncModel(HouseholdTable.TABLE_NAME));
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -175,7 +175,7 @@ public class SyncActivity extends AppCompatActivity {
                 }
                 try {
                     // MWRA
-                    MainApp.uploadData.add(DssRoomDatabase.getDbInstance().syncFunctionsDao().getUnsyncedMwras());
+                    MainApp.uploadData.add(db.syncFunctionsDao().getUnsyncedMwras());
                     uploadTables.add(new SyncModel(MWRATable.TABLE_NAME));
 
                 } catch (JSONException e) {
@@ -189,7 +189,7 @@ public class SyncActivity extends AppCompatActivity {
 
                 try {
                     // Outcome
-                    MainApp.uploadData.add(DssRoomDatabase.getDbInstance().syncFunctionsDao().getUnsyncedOutcome());
+                    MainApp.uploadData.add(db.syncFunctionsDao().getUnsyncedOutcome());
                     uploadTables.add(new SyncModel(TableContracts.OutcomeTable.TABLE_NAME));
 
                 } catch (JSONException e) {

@@ -3,6 +3,7 @@ package edu.aku.hassannaqvi.dss_matiari.room
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
+import androidx.room.Update
 import edu.aku.hassannaqvi.dss_matiari.contracts.TableContracts
 import edu.aku.hassannaqvi.dss_matiari.models.*
 import org.json.JSONArray
@@ -56,6 +57,8 @@ interface SyncFunctionsDao {
 
         synced.synced = "1"
         synced.syncDate = Date().toString()
+        DssRoomDatabase.dbInstance?.householdsDao()?.updateHousehold(synced)
+
         return synced
     }
 //************************************************************************************************************
@@ -97,6 +100,7 @@ interface SyncFunctionsDao {
 
         synced.synced = "1"
         synced.syncDate = Date().toString()
+        DssRoomDatabase.dbInstance?.mwraDao()?.updateMwra(synced)
         return synced
     }
 //****************************************************************************************************************
@@ -137,6 +141,7 @@ interface SyncFunctionsDao {
 
         synced.synced = "1"
         synced.syncDate = Date().toString()
+        DssRoomDatabase.dbInstance?.OutcomeDao()?.updateOutcome(synced)
         return synced
     }
 
