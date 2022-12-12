@@ -155,6 +155,7 @@ public class Households extends BaseObservable implements Observable {
     @ColumnInfo(name = HouseholdTable.COLUMN_HOUSEHOLD_NO)
     private String hhNo = StringUtils.EMPTY;
 
+
     @ColumnInfo(name = HouseholdTable.COLUMN_STRUCTURE_NO)
     private String structureNo = StringUtils.EMPTY;
 

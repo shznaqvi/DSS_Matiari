@@ -64,7 +64,6 @@ import javax.crypto.spec.SecretKeySpec;
 import edu.aku.hassannaqvi.dss_matiari.R;
 import edu.aku.hassannaqvi.dss_matiari.core.AppInfo;
 import edu.aku.hassannaqvi.dss_matiari.core.MainApp;
-import edu.aku.hassannaqvi.dss_matiari.database.DatabaseHelper;
 import edu.aku.hassannaqvi.dss_matiari.databinding.ActivityLoginBinding;
 import edu.aku.hassannaqvi.dss_matiari.models.Users;
 import edu.aku.hassannaqvi.dss_matiari.room.DssRoomDatabase;
@@ -169,7 +168,7 @@ public class LoginActivity extends AppCompatActivity {
 
         //Collection<Users> teamleaders = db.getTeamleaders();
 
-        Collection<Users> teamleaders = DssRoomDatabase.getDbInstance().usersDao().getTeamLeaders();
+        Collection<Users> teamleaders = db.usersDao().getTeamLeaders();
         for (Users u : teamleaders) {
             leaderNames.add(u.getFullname());
             leaderCodes.add(u.getUserName());

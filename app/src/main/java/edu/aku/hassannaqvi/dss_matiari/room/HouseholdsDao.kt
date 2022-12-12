@@ -16,6 +16,7 @@ import edu.aku.hassannaqvi.dss_matiari.models.Households
 import org.json.JSONArray
 import org.json.JSONException
 import java.util.*
+import kotlin.collections.ArrayList
 
 @Dao
 interface HouseholdsDao {
@@ -50,7 +51,7 @@ interface HouseholdsDao {
         return householdsList
     }
 
-    @Query("SELECT " + "MAX(" + HouseholdTable.COLUMN_HOUSEHOLD_NO + ") AS " + HouseholdTable.COLUMN_HOUSEHOLD_NO +
+    @Query("SELECT " + "MAX( CAST(" + HouseholdTable.COLUMN_HOUSEHOLD_NO + " AS INT)) AS " + HouseholdTable.COLUMN_HOUSEHOLD_NO +
             " FROM " + HouseholdTable.TABLE_NAME +
             " WHERE " + HouseholdTable.COLUMN_UC_CODE + " LIKE :ucCode AND "
             + HouseholdTable.COLUMN_VILLAGE_CODE + " LIKE :vCode AND " + HouseholdTable.COLUMN_REGROUND + " LIKE :regRound " +
@@ -107,26 +108,6 @@ interface HouseholdsDao {
     fun getAllHouseholds(): List<Households>
 
 
-
-
-    /*@Query("SELECT * FROM " + HouseholdTable.TABLE_NAME
-            + " WHERE " + HouseholdTable.COLUMN_ID + " LIKE :id ")
-    fun updateSyncedhhs_interal(id: String?) : Households?
-
-
-    fun updateSyncedhhs(id: String?) : Households?
-    {
-        val synhouseholds = updateSyncedhhs_interal(id)
-
-        if(synhouseholds != null)
-        {
-            synhouseholds.synced = "1"
-            synhouseholds.syncDate = Date().toString()
-            updateHousehold(synhouseholds)
-        }
-
-        return synhouseholds
-    }*/
     @Query("SELECT * FROM " + HouseholdTable.TABLE_NAME +" WHERE "
             + HouseholdTable.COLUMN_UID + " LIKE :uid ORDER BY "
             + HouseholdTable.COLUMN_ID + " ASC")
@@ -146,6 +127,23 @@ interface HouseholdsDao {
     }
 
 
+    @Query("SELECT " + HouseholdTable.COLUMN_ID + ", "
+            + HouseholdTable.COLUMN_UID + ", "
+            + HouseholdTable.COLUMN_SYSDATE + ", "
+            + HouseholdTable.COLUMN_USERNAME + ", "
+            + HouseholdTable.COLUMN_ISTATUS + ", "
+            + HouseholdTable.COLUMN_SYNCED + ", "
+            + HouseholdTable.COLUMN_VISIT_NO + ", "
+            + HouseholdTable.COLUMN_STRUCTURE_NO + ", "
+            + HouseholdTable.COLUMN_VILLAGE_CODE + ", "
+            + HouseholdTable.COLUMN_UC_CODE + ", "
+            + HouseholdTable.COLUMN_HOUSEHOLD_NO
+            + " FROM " + HouseholdTable.TABLE_NAME + " WHERE "
+            + HouseholdTable.COLUMN_ISTATUS + " = '1' AND "
+            + HouseholdTable.COLUMN_VISIT_NO + " < 3 ORDER BY "
+            + HouseholdTable.COLUMN_ID + " ASC"
+    )
+    fun getUnclosedHouseholds() : List<Households>
 
 
 

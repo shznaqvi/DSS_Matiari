@@ -24,7 +24,6 @@ import java.util.Locale;
 import edu.aku.hassannaqvi.dss_matiari.R;
 import edu.aku.hassannaqvi.dss_matiari.contracts.TableContracts;
 import edu.aku.hassannaqvi.dss_matiari.core.MainApp;
-import edu.aku.hassannaqvi.dss_matiari.database.DatabaseHelper;
 import edu.aku.hassannaqvi.dss_matiari.databinding.ActivitySectionDBinding;
 import edu.aku.hassannaqvi.dss_matiari.databinding.ActivitySectionFBinding;
 import edu.aku.hassannaqvi.dss_matiari.models.Mwra;
@@ -44,6 +43,18 @@ public class SectionDActivity extends AppCompatActivity {
         setTheme(lang.equals("1") ? R.style.AppThemeEnglish1 : R.style.AppThemeUrdu);
         bi = DataBindingUtil.setContentView(this, R.layout.activity_section_d);
         db = MainApp.appInfo.dbHelper;
+
+        if (mwra.getUid().equals("")) {
+            //mwra.populateMetaFollowups();
+            try {
+                mwra.sDHydrate(mwra.SDtoString());
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+
+        }
+
 
         bi.setFollowups(mwra);
 
@@ -148,7 +159,7 @@ public class SectionDActivity extends AppCompatActivity {
             //updcount = db.updatesFollowUpsColumn(TableContracts.FollowupsTable.COLUMN_SC, followups.sCtoString())
              Mwra updatedFollowups = mwra;
                         updatedFollowups.setSD(mwra.SDtoString());
-                        updcount = DssRoomDatabase.getDbInstance().mwraDao().updateMwra(mwra);
+                        updcount = db.mwraDao().updateMwra(mwra);
 
 
 

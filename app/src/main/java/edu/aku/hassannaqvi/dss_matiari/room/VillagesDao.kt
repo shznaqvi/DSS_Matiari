@@ -16,33 +16,6 @@ import kotlin.jvm.Throws
 @Dao
 interface VillagesDao {
 
-    @Throws(JSONException ::class)
-    fun syncVillages(villagesList: JSONArray) : Int{
-        var insertCount =0
-        deleteVillagesTable()
-
-        for(i in 0 until villagesList.length()){
-            val jsonObjectVillages = villagesList.optJSONObject(i)
-
-            val village = Villages()
-            village.Sync(jsonObjectVillages)
-
-            val rowId = insertVillages(village)
-            if(rowId != -1L)
-                insertCount++
-
-        }
-
-        return insertCount
-
-    }
-
-    @Insert
-    fun insertVillages(village: Villages) : Long
-
-    @Query("DELETE FROM " + TableContracts.TableVillage.TABLE_NAME)
-    fun deleteVillagesTable()
-
     @Query("SELECT " + TableContracts.TableVillage.COLUMN_VILLAGE_NAME + "," + TableContracts.TableVillage.COLUMN_VILLAGE_CODE
             + " FROM " + TableContracts.TableVillage.TABLE_NAME
             + " WHERE " + TableContracts.TableVillage.COLUMN_UC_CODE

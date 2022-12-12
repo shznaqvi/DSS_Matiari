@@ -108,6 +108,15 @@ interface FollowUpsScheDao {
             " GROUP BY " + TableContracts.TableFollowUpsSche.COLUMN_HOUSEHOLD_NO)
     fun getMWRACountBYHHFromFolloupsSche(uc : String, vCode : String, hhNo: String) : Int
 
+    @Query("SELECT Count(*) AS childCount FROM " + TableContracts.TableFollowUpsSche.TABLE_NAME + " WHERE "
+            + TableContracts.TableFollowUpsSche.COLUMN_RB01 + " is not null AND "
+            + TableContracts.TableFollowUpsSche.COLUMN_UC_CODE + " LIKE :uc AND "
+            + TableContracts.TableFollowUpsSche.COLUMN_VILLAGE_CODE + " LIKE :vCode AND ( " +
+            TableContracts.TableFollowUpsSche.COLUMN_HOUSEHOLD_NO + " LIKE :hhNo " + ") AND " +
+            TableContracts.TableFollowUpsSche.COLUMN_MEMBERTYPE + " = 2 " +
+            " GROUP BY " + TableContracts.TableFollowUpsSche.COLUMN_HOUSEHOLD_NO)
+    fun getChildCountBYHHFromFolloupsSche(uc : String, vCode : String, hhNo: String) : Int
+
 
 
 

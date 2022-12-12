@@ -23,7 +23,6 @@ import java.util.regex.Pattern;
 import edu.aku.hassannaqvi.dss_matiari.R;
 import edu.aku.hassannaqvi.dss_matiari.contracts.TableContracts;
 import edu.aku.hassannaqvi.dss_matiari.core.MainApp;
-import edu.aku.hassannaqvi.dss_matiari.database.DatabaseHelper;
 
 import edu.aku.hassannaqvi.dss_matiari.databinding.ActivitySectionEBinding;
 import edu.aku.hassannaqvi.dss_matiari.models.Outcome;
@@ -47,7 +46,7 @@ public class SectionEActivity extends AppCompatActivity {
         try {
             //outcome = db.getOutComeBYID(String.valueOf(++MainApp.childCount));
             String[] muid = mwra.getUid().split("_");
-            outcome = DssRoomDatabase.getDbInstance().OutcomeDao().getOutcomeBYID(muid[0], String.valueOf(++MainApp.childCount));
+            outcome = db.OutcomeDao().getOutcomeBYID(muid[0], String.valueOf(++MainApp.childCount));
         } catch (JSONException e) {
             e.printStackTrace();
             Toast.makeText(this, "JSONException(Outcome): " + e.getMessage(), Toast.LENGTH_SHORT).show();
@@ -60,12 +59,19 @@ public class SectionEActivity extends AppCompatActivity {
         outcome.setRc03(mwra.getRb13());
         outcome.setRc01(outcome.getRc01().isEmpty() ? String.valueOf(MainApp.childCount) : outcome.getRc01());
 
-        bi.setOutcome(outcome);
-        //setImmersive(true);
+        if (outcome.getUid().equals("")) {
+            //mwra.populateMetaFollowups();
+            try {
+                outcome.sEHydrate(outcome.sEtoString());
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
 
+        }
+
+        bi.setOutcome(outcome);
 
         bi.btnContinue.setText(outcome.getUid().equals("") ? "Save" : "Update");
-
 
         String date = toBlackVisionDate(mwra.getRb13());
 
@@ -106,7 +112,7 @@ public class SectionEActivity extends AppCompatActivity {
         long rowId = 0;
         try {
             //rowId = db.addOutcome(outcome);
-            rowId = DssRoomDatabase.getDbInstance().OutcomeDao().addOutcome(outcome);
+            rowId = db.OutcomeDao().addOutcome(outcome);
         } catch (JSONException e) {
             e.printStackTrace();
             Toast.makeText(this, "JSONException(Outcomes): " + e.getMessage(), Toast.LENGTH_SHORT).show();
@@ -117,7 +123,7 @@ public class SectionEActivity extends AppCompatActivity {
         if (rowId > 0) {
             outcome.setUid(outcome.getDeviceId() + outcome.getId());
             outcome.setSE(outcome.sEtoString());
-            DssRoomDatabase.getDbInstance().OutcomeDao().updateOutcome(outcome);
+            db.OutcomeDao().updateOutcome(outcome);
             //db.updatesOutcomeColumn(TableContracts.OutcomeTable.COLUMN_UID, outcome.getUid());
             return true;
         } else {
@@ -134,12 +140,12 @@ public class SectionEActivity extends AppCompatActivity {
             //updcount = db.updatesOutcomeColumn(TableContracts.OutcomeTable.COLUMN_SE, outcome.sEtoString());
             Outcome updatedOutcome = outcome;
             updatedOutcome.setSE(outcome.sEtoString());
-            updcount = DssRoomDatabase.getDbInstance().OutcomeDao().updateOutcome(outcome);
+            updcount = db.OutcomeDao().updateOutcome(outcome);
 
             outcome.setDeviceId(outcome.getDeviceId() + "_" + outcome.getDeviceId().substring(outcome.getDeviceId().length() - 1));
             updatedOutcome.setDeviceId(outcome.getDeviceId());
             updatedOutcome.setIStatus(outcome.getIStatus());
-            DssRoomDatabase.getDbInstance().OutcomeDao().updateOutcome(updatedOutcome);
+            db.OutcomeDao().updateOutcome(updatedOutcome);
 
 
         } catch (JSONException e) {

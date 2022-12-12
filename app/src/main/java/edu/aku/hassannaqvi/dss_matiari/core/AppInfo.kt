@@ -1,10 +1,13 @@
 package edu.aku.hassannaqvi.dss_matiari.core
 
 import android.content.Context
+import android.content.pm.ApplicationInfo
 import android.content.pm.PackageManager
+import android.os.Bundle
 import android.provider.Settings
 import edu.aku.hassannaqvi.dss_matiari.database.DatabaseHelper
 import edu.aku.hassannaqvi.dss_matiari.room.DssRoomDatabase
+import net.sqlcipher.database.SQLiteDatabase
 import org.apache.commons.lang3.StringUtils
 import java.text.SimpleDateFormat
 import java.util.*
@@ -37,9 +40,10 @@ class AppInfo {
             deviceID = Settings.Secure.getString(context.contentResolver, Settings.Secure.ANDROID_ID)
             appVersion = "$versionName.$versionCode"
             tagName = getTagName(context)
-            synchronized(this) {
+            setupDatabase(context)
+            /*synchronized(this) {
                 dbHelper = DssRoomDatabase.dbInstance!!
-            }
+            }*/
         } catch (e: PackageManager.NameNotFoundException) {
             e.printStackTrace()
         }
@@ -66,5 +70,37 @@ class AppInfo {
 
     fun getAppInfo(): String {
         return """Ver. $versionName.$versionCode ( Last Updated: ${SimpleDateFormat("dd MMM. yyyy", Locale.ENGLISH).format(Date(getInfo().installedOn))} )"""
+    }
+
+    private fun setupDatabase(context: Context) {
+        synchronized(this) {
+            dbHelper = if (DssRoomDatabase.dbInstance != null)
+                DssRoomDatabase.dbInstance!!
+            else {
+                initSecure(context)
+                DssRoomDatabase.dbInstance!!
+            }
+        }
+    }
+
+    private fun initSecure(context: Context) = context.apply {
+        // Initialize SQLCipher library
+        SQLiteDatabase.loadLibs(this);
+
+        try {
+            val ai: ApplicationInfo = getPackageManager().getApplicationInfo(getPackageName(), PackageManager.GET_META_DATA);
+            val bundle: Bundle = ai.metaData;
+            val trats: Int = bundle.getInt("YEK_TRATS");
+            //IBAHC = bundle.getString("YEK_REVRES").substring(TRATS, TRATS + 16);
+            val ibahc: String? = bundle.getString("YEK_REVRES");
+
+            // Room DB
+            if (ibahc != null) {
+                DssRoomDatabase.init(this, ibahc)
+            };
+
+        } catch (e: PackageManager.NameNotFoundException) {
+            e.printStackTrace();
+        }
     }
 }

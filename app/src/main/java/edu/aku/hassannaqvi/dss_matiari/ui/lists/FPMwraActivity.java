@@ -44,7 +44,7 @@ public class FPMwraActivity extends AppCompatActivity {
 
     private static final String TAG = "FPMwraActivity";
     ActivityFpmwraBinding bi;
-    DatabaseHelper db;
+    DssRoomDatabase db;
     private FpMwraAdapter fmAdapter;
 
 
@@ -62,7 +62,7 @@ public class FPMwraActivity extends AppCompatActivity {
         try {
 
             //followUpsScheMWRAList = db.getAllfollowupsScheByHH(fpHouseholds.getVillageCode(), fpHouseholds.getUcCode(), fpHouseholds.getHhNo());
-            followUpsScheMWRAList = DssRoomDatabase.getDbInstance().FollowUpsScheDao().getAllfollowupsScheByHH(households.getVillageCode(), households.getUcCode(), households.getHhNo());
+            followUpsScheMWRAList = db.FollowUpsScheDao().getAllfollowupsScheByHH(households.getVillageCode(), households.getUcCode(), households.getHhNo());
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -77,7 +77,7 @@ public class FPMwraActivity extends AppCompatActivity {
             try {
                 //fupStatus = db.getFollowupsBySno(followUpsScheMWRAList.get(i).getRb01(), followUpsScheMWRAList.get(i).getFRound()).getSysDate();
 
-                Mwra tempMwra = DssRoomDatabase.getDbInstance().mwraDao().getFollowupsBySno(households.getUid(), followUpsScheMWRAList.get(i).getRb01(), followUpsScheMWRAList.get(i).getFRound());
+                Mwra tempMwra = db.mwraDao().getFollowupsBySno(households.getUid(), followUpsScheMWRAList.get(i).getRb01(), followUpsScheMWRAList.get(i).getFRound());
                 fupStatus = tempMwra.getSysDate();
                 followUpsScheMWRAList.get(i).setfpDoneDt(fupStatus);
                 if (!fupStatus.equals("")) {
@@ -139,7 +139,7 @@ public class FPMwraActivity extends AppCompatActivity {
 
         //int newMwra = db.getMWRACountBYUUID(fpHouseholds.getUid());
 
-        int newMwra = DssRoomDatabase.getDbInstance().mwraDao().getMWRACountBYUUID(households.getUid(), "1");
+        int newMwra = db.mwraDao().getMWRACountBYUUID(households.getUid(), "1");
 
         if (newMwra > 0) {
             mwraCount = mwraCount + newMwra;
@@ -159,8 +159,8 @@ public class FPMwraActivity extends AppCompatActivity {
         //int maxMWRA = db.getMaxMWRSNoBYHH(selectedUC, selectedVillage, selectedHhNO);
         //int maxFpMWRA = db.getMaxMWRANoBYHHFromFolloupsSche(selectedUC, selectedVillage, selectedHhNO);
 
-        int maxMWRA = DssRoomDatabase.getDbInstance().mwraDao().getMaxMWRSNoBYHH(selectedUC, selectedVillage, selectedHhNO);
-        int maxFpMWRA = DssRoomDatabase.getDbInstance().FollowUpsScheDao().getMaxMWRANoBYHHFromFolloupsSche(selectedUC, selectedVillage, selectedHhNO);
+        int maxMWRA = db.mwraDao().getMaxMWRSNoBYHH(selectedUC, selectedVillage, selectedHhNO);
+        int maxFpMWRA = db.FollowUpsScheDao().getMaxMWRANoBYHHFromFolloupsSche(selectedUC, selectedVillage, selectedHhNO);
         mwraCount = Math.max(maxMWRA, maxFpMWRA);
         MainApp.households.setRa18("999");
 
@@ -205,7 +205,7 @@ public class FPMwraActivity extends AppCompatActivity {
 
 
                 fpMwra.setfpDoneDt(followUpsScheMWRAList.get(selectedMember).setfpDoneDt(mwra.getSysDate()));
-                DssRoomDatabase.getDbInstance().FollowUpsScheDao().updateFollowupsSche(fpMwra);
+                db.FollowUpsScheDao().updateFollowupsSche(fpMwra);
                 //db.updatesFollowUpsScheColumn(TableContracts.TableFollowUpsSche.COLUMN_DONE_DATE, followups.getSysDate());
                 if (mwraDone >= followUpsScheMWRAList.size()) {
                     bi.btnContinue.setVisibility(View.VISIBLE);

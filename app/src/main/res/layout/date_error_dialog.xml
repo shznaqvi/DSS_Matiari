@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    style="@style/cardView"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center_horizontal|center_vertical"
+    app:cardCornerRadius="12dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal|center_vertical"
+        android:background="@color/colorPrimaryDark"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="10dp"
+            android:text="Date &amp; Time is invalid"
+            android:textColor="@android:color/white"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <ImageView
+            android:layout_width="168dp"
+            android:layout_height="168dp"
+            android:layout_gravity="center_horizontal|center_vertical"
+            android:src="@drawable/ic_date_error" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_margin="10dp"
+                android:layout_weight="2"
+                android:gravity="center"
+                android:text="Your device date is invalid! Adjust date &amp; time and try again."
+                android:textColor="@android:color/white"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/txtDia"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="10dp"
+            android:gravity="center_vertical|center_horizontal"
+            android:text="Your device date &amp; time is:"
+            android:textColor="@color/grayLight"
+            android:textSize="13sp"
+            android:textStyle="bold" />
+
+
+        <Button
+            android:id="@+id/btnYes"
+            style="@null"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="2dp"
+            android:background="@color/colorAccent"
+            android:clickable="true"
+            android:includeFontPadding="false"
+            android:paddingStart="24dp"
+            android:paddingEnd="24dp"
+            android:radius="5dp"
+            android:text="ADJUST DATE"
+            android:textColor="@color/colorPrimaryDark"
+            android:textStyle="bold"
+            android:theme="@style/AppTheme" />
+
+
+    </LinearLayout>
+</androidx.cardview.widget.CardView>

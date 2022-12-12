@@ -18,37 +18,10 @@ import kotlin.math.max
 @Dao
 interface MaxHHNoDao {
 
-    @Throws(JSONException::class)
-    fun syncMaxHHNo(maxhhNoList : JSONArray) : Int{
-        var insertCount =0
-        deleteMaxHHNoTable()
-
-        for (i in 0 until maxhhNoList.length())
-        {
-            val jsonObjectMaxHhno = maxhhNoList.optJSONObject(i)
-
-            val maxHhno = MaxHhno()
-            maxHhno.sync(jsonObjectMaxHhno)
-
-            val rowId = insertMaxHHNo(maxHhno)
-            if(rowId != -1L)
-                insertCount++
-        }
-
-
-        return insertCount
-    }
-
-    @Insert
-    fun insertMaxHHNo(maxHhno: MaxHhno) : Long
-
-    @Query("DELETE FROM " + TableContracts.MaxHhnoTable.TABLE_NAME)
-    fun deleteMaxHHNoTable()
-
-    @Query("SELECT " + TableContracts.MaxHhnoTable.COLUMN_MAX_HHNO + " FROM "
-            + TableContracts.MaxHhnoTable.TABLE_NAME +
+    @Query("SELECT " + "MAX( CAST(" + TableContracts.MaxHhnoTable.COLUMN_MAX_HHNO + " AS INT)) AS " + TableContracts.MaxHhnoTable.COLUMN_MAX_HHNO +
+            " FROM " + TableContracts.MaxHhnoTable.TABLE_NAME +
             " WHERE " + TableContracts.MaxHhnoTable.COLUMN_UC_CODE + " LIKE :ucCode AND "
-            + TableContracts.MaxHhnoTable.COLUMN_VILLAGE_CODE + " LIKE :vCode ORDER BY "
-            + TableContracts.MaxHhnoTable.COLUMN_ID + " ASC")
+            + TableContracts.MaxHhnoTable.COLUMN_VILLAGE_CODE + " LIKE :vCode "  +
+            "ORDER BY " + TableContracts.MaxHhnoTable.COLUMN_ID + " ASC")
     fun getMaxHHNoByVillage(ucCode : String, vCode : String) : Int
 }

@@ -1,14 +1,14 @@
 package edu.aku.hassannaqvi.dss_matiari.room
 
 import androidx.room.Dao
+import androidx.room.Insert
 import androidx.room.Query
 import edu.aku.hassannaqvi.dss_matiari.contracts.TableContracts
-import edu.aku.hassannaqvi.dss_matiari.models.Households
-import edu.aku.hassannaqvi.dss_matiari.models.Mwra
-import edu.aku.hassannaqvi.dss_matiari.models.Outcome
+import edu.aku.hassannaqvi.dss_matiari.models.*
 import org.json.JSONArray
 import org.json.JSONException
 import java.util.*
+import kotlin.jvm.Throws
 
 //
 // Created by gul.sanober on 12/1/2022.
@@ -91,7 +91,7 @@ interface SyncFunctionsDao {
     fun updateQueryMWRA(id: String?) : Mwra
 
 
-    fun updateSyncedMWRA(id: String?) : Mwra
+    fun updateSyncedMWRAs(id: String?) : Mwra
     {
         val synced = updateQueryMWRA(id)
 
@@ -131,7 +131,7 @@ interface SyncFunctionsDao {
     fun updateQueryOutcome(id: String?) : Outcome
 
 
-    fun updateSyncedOutcome(id: String?) : Outcome
+    fun updateSyncedoutcomes(id: String?) : Outcome
     {
         val synced = updateQueryOutcome(id)
 
@@ -139,6 +139,125 @@ interface SyncFunctionsDao {
         synced.syncDate = Date().toString()
         return synced
     }
+
+
+
+
+
+
+
+    /******************* DOWNLOAD DATA FUNCTIONS */
+
+    @Throws(JSONException ::class)
+    fun syncvillages(villagesList: JSONArray) : Int{
+        var insertCount =0
+        deleteVillagesTable()
+
+        for(i in 0 until villagesList.length()){
+            val jsonObjectVillages = villagesList.optJSONObject(i)
+
+            val village = Villages()
+            village.Sync(jsonObjectVillages)
+
+            val rowId = insertVillages(village)
+            if(rowId != -1L)
+                insertCount++
+
+        }
+
+        return insertCount
+
+    }
+
+    @Insert
+    fun insertVillages(village: Villages) : Long
+
+    @Query("DELETE FROM " + TableContracts.TableVillage.TABLE_NAME)
+    fun deleteVillagesTable()
+
+    // Users
+
+    @Throws(JSONException::class)
+    fun syncusers(usersList: JSONArray): Int {
+        var insertCount = 0
+        deleteUsersTable()
+        for(i in 0 until usersList.length()) {
+            val jsonObjectUser = usersList.optJSONObject(i)
+
+            val user = Users()
+            user.sync(jsonObjectUser)
+
+            val rowId = insertUser(user)
+            if (rowId != -1L)
+                insertCount++
+        }
+        return insertCount
+    }
+
+    @Insert
+    fun insertUser(user: Users): Long
+
+    @Query("DELETE FROM " + TableContracts.UsersTable.TABLE_NAME)
+    fun deleteUsersTable()
+
+    // Followupsche
+
+    @Throws(JSONException ::class)
+    fun synchhFolloupsList(followUpsScheList: JSONArray) : Int {
+        var insertCount =0
+        deleteFollowupsScheTable()
+
+        for(i in 0 until followUpsScheList.length()) {
+            val jsonObjectFollowUpsSche = followUpsScheList.optJSONObject(i)
+
+            val followUpsSche = FollowUpsSche()
+            followUpsSche.Sync(jsonObjectFollowUpsSche)
+
+            val rowId = insertFollowupsSche(followUpsSche)
+
+            if(rowId != 1L)
+                insertCount++
+        }
+
+        return insertCount
+    }
+
+    @Insert
+    fun insertFollowupsSche(followUpsSche: FollowUpsSche) : Long
+
+
+    @Query("DELETE FROM " + TableContracts.TableFollowUpsSche.TABLE_NAME)
+    fun deleteFollowupsScheTable()
+
+    // Sync Max Household
+
+    @Throws(JSONException::class)
+    fun syncmaxhhno(maxhhNoList : JSONArray) : Int{
+        var insertCount =0
+        deleteMaxHHNoTable()
+
+        for (i in 0 until maxhhNoList.length())
+        {
+            val jsonObjectMaxHhno = maxhhNoList.optJSONObject(i)
+
+            val maxHhno = MaxHhno()
+            maxHhno.sync(jsonObjectMaxHhno)
+
+            val rowId = insertMaxHHNo(maxHhno)
+            if(rowId != -1L)
+                insertCount++
+        }
+
+
+        return insertCount
+    }
+
+    @Insert
+    fun insertMaxHHNo(maxHhno: MaxHhno) : Long
+
+    @Query("DELETE FROM " + TableContracts.MaxHhnoTable.TABLE_NAME)
+    fun deleteMaxHHNoTable()
+
 
 
 

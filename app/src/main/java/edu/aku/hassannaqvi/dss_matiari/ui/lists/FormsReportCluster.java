@@ -20,10 +20,11 @@ import edu.aku.hassannaqvi.dss_matiari.R;
 import edu.aku.hassannaqvi.dss_matiari.adapters.FormsAdapter;
 import edu.aku.hassannaqvi.dss_matiari.core.MainApp;
 import edu.aku.hassannaqvi.dss_matiari.database.DatabaseHelper;
+import edu.aku.hassannaqvi.dss_matiari.room.DssRoomDatabase;
 
 
 public class FormsReportCluster extends AppCompatActivity {
-    DatabaseHelper db;
+    DssRoomDatabase db;
     String sysdateToday = new SimpleDateFormat("dd-MM-yy").format(new Date());
     TextView dtFilter;
     Toolbar toolbar;
@@ -49,7 +50,7 @@ public class FormsReportCluster extends AppCompatActivity {
         db = MainApp.appInfo.dbHelper;
 
         // specify an adapter (see also next example)
-        MainApp.householdList = db.getUnclosedHouseholds();
+        MainApp.householdList = db.householdsDao().getUnclosedHouseholds();
         formsAdapter = new FormsAdapter(MainApp.householdList, this);
         recyclerView.setAdapter(formsAdapter);
         setSupportActionBar(toolbar);
@@ -61,7 +62,7 @@ public class FormsReportCluster extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        MainApp.householdList = db.getUnclosedHouseholds();
+        MainApp.householdList = db.householdsDao().getUnclosedHouseholds();
         formsAdapter = new FormsAdapter(MainApp.householdList, this);
         recyclerView.setAdapter(formsAdapter);
         /* formsAdapter.notifyDataSetChanged();*/
@@ -72,7 +73,7 @@ public class FormsReportCluster extends AppCompatActivity {
     public void filterForms(View view) {
         Toast.makeText(this, "updated", Toast.LENGTH_SHORT).show();
         //fc = db.getUnclosedForms(dtFilter.getText().toString());
-        MainApp.householdList = db.getUnclosedHouseholds();
+        MainApp.householdList = db.householdsDao().getUnclosedHouseholds();
         formsAdapter = new FormsAdapter(MainApp.householdList, this);
         formsAdapter.notifyDataSetChanged();
         recyclerView.setAdapter(formsAdapter);
@@ -85,7 +86,7 @@ public class FormsReportCluster extends AppCompatActivity {
         // check if the request code is same as what is passed  here it is 2
         if (requestCode == 2) {
             if (resultCode == Activity.RESULT_OK) {
-                MainApp.householdList = db.getUnclosedHouseholds();
+                MainApp.householdList = db.householdsDao().getUnclosedHouseholds();
                 formsAdapter.notifyDataSetChanged();
                 Toast.makeText(this, "Results updated", Toast.LENGTH_SHORT).show();
             }

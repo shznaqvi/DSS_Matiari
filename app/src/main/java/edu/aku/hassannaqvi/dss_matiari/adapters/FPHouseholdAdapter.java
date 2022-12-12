@@ -115,6 +115,7 @@ public class FPHouseholdAdapter extends RecyclerView.Adapter<FPHouseholdAdapter.
 
         //int tempMWRA = db.getMaxMWRANoBYHHFromFolloupsSche(followUpsSche.getUcCode(), followUpsSche.getVillageCode(), followUpsSche.getHhNo());
         int tempMWRA = db.FollowUpsScheDao().getMWRACountBYHHFromFolloupsSche(followUpsSche.getUcCode(), followUpsSche.getVillageCode(), followUpsSche.getHhNo());
+        int childCount = db.FollowUpsScheDao().getChildCountBYHHFromFolloupsSche(followUpsSche.getUcCode(), followUpsSche.getVillageCode(), followUpsSche.getHhNo());
         totalMwraMap.put(pos, tempMWRA);
 
 
@@ -186,7 +187,7 @@ public class FPHouseholdAdapter extends RecyclerView.Adapter<FPHouseholdAdapter.
 
 
 
-        mwraCount.setText(tempMWRA + " Women | " + pregStatus);
+        mwraCount.setText(tempMWRA + " Women | " + pregStatus + " | " + childCount + " Children");
         secStatus.setText(hhStatus);
         imgStatus.setVisibility(fpHouseholds.getIStatus().equals("1") || Integer.parseInt(fpHouseholds.getVisitNo()) > 2 ? View.VISIBLE : View.GONE);
         secStatus.setBackgroundColor(ContextCompat.getColor(mContext, R.color.grayDark));

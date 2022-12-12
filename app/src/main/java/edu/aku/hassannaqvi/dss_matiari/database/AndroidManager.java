@@ -2,6 +2,7 @@ package edu.aku.hassannaqvi.dss_matiari.database;
 
 //all required import files
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -33,6 +34,7 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 
 import edu.aku.hassannaqvi.dss_matiari.core.MainApp;
+import edu.aku.hassannaqvi.dss_matiari.room.DssRoomDatabase;
 
 public class AndroidManager extends Activity implements OnItemClickListener {
 
@@ -59,7 +61,7 @@ public class AndroidManager extends Activity implements OnItemClickListener {
 
 
         //in the below line Change the text 'yourCustomSqlHelper' with your custom sqlitehelper class name
-        dbm = MainApp.appInfo.dbHelper;
+        //dbm = MainApp.appInfo.dbHelper;
 
         mainscrollview = new ScrollView(AndroidManager.this);
 
@@ -381,6 +383,7 @@ public class AndroidManager extends Activity implements OnItemClickListener {
                         //the spinnertable has the 3 items to drop , delete , add row to the table selected by the user
                         //here we handle the 3 operations.
                         spinnertable.setOnItemSelectedListener((new OnItemSelectedListener() {
+                            @SuppressLint("ResourceType")
                             @Override
                             public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
 
@@ -710,6 +713,7 @@ public class AndroidManager extends Activity implements OnItemClickListener {
     }
 
     //displays alert dialog from which use can update or delete a row
+    @SuppressLint("ResourceType")
     public void updateDeletePopup(int row) {
         Cursor c2 = indexInfo.maincursor;
         // a spinner which gives options to update or delete the row which user has selected

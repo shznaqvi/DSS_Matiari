@@ -47,7 +47,7 @@ public class FPHouseholdActivity extends AppCompatActivity {
 
     private static final String TAG = "FPHouseholdActivity";
     ActivityFphouseholdBinding bi;
-    DatabaseHelper db;
+    DssRoomDatabase db;
     private FPHouseholdAdapter hhAdapter;
     public ActivityResultLauncher<Intent> MemberInfoLauncher = registerForActivityResult(
             new ActivityResultContracts.StartActivityForResult(),
@@ -86,7 +86,7 @@ public class FPHouseholdActivity extends AppCompatActivity {
 
 
         //MainApp.followUpsScheHHList = db.getFollowUpsScheHHBYVillage(selectedUC, selectedVillage, "");
-        MainApp.followUpsScheHHList = DssRoomDatabase.getDbInstance().FollowUpsScheDao().getFollowUpsScheHHBYVillage(selectedUC, selectedVillage, "");
+        MainApp.followUpsScheHHList = db.FollowUpsScheDao().getFollowUpsScheHHBYVillage(selectedUC, selectedVillage, "");
 
         bi.villageCode.setText("List of " + selectedUC + "-" + selectedVillage);
 
@@ -117,7 +117,7 @@ public class FPHouseholdActivity extends AppCompatActivity {
         Toast.makeText(this, "updated", Toast.LENGTH_SHORT).show();
 
         //MainApp.followUpsScheHHList = db.getFollowUpsScheHHBYVillage(selectedUC, selectedVillage, bi.hhead.getText().toString());
-        MainApp.followUpsScheHHList = DssRoomDatabase.getDbInstance().FollowUpsScheDao().getFollowUpsScheHHBYVillage(selectedUC, selectedVillage, bi.hhead.getText().toString());
+        MainApp.followUpsScheHHList = db.FollowUpsScheDao().getFollowUpsScheHHBYVillage(selectedUC, selectedVillage, bi.hhead.getText().toString());
         hhAdapter = new FPHouseholdAdapter(this, MainApp.followUpsScheHHList);
         hhAdapter.notifyDataSetChanged();
         bi.rvHouseholds.setAdapter(hhAdapter);
@@ -145,8 +145,8 @@ public class FPHouseholdActivity extends AppCompatActivity {
 
         //int maxHH = db.getMaxHouseholdNo(selectedUC, selectedVillage);      // From Households table on device
         //int maxHHNo = db.getMaxHHNoByVillage(selectedUC, selectedVillage);  // From Max Household numbers fetched from server
-        int maxHH = DssRoomDatabase.getDbInstance().householdsDao().getMaxHouseholdNo(selectedUC, selectedVillage, "");     // From Households table on device
-        int maxHHNo = DssRoomDatabase.getDbInstance().MaxHHNoDao().getMaxHHNoByVillage(selectedUC, selectedVillage);     // From Max Household numbers fetched from server
+        int maxHH = db.householdsDao().getMaxHouseholdNo(selectedUC, selectedVillage, "");     // From Households table on device
+        int maxHHNo = db.MaxHHNoDao().getMaxHHNoByVillage(selectedUC, selectedVillage);     // From Max Household numbers fetched from server
         int maxHHFinal = Math.max(maxHH, maxHHNo);
         MainApp.households.setUcCode(selectedUC);
         MainApp.households.setVillageCode(selectedVillage);
@@ -193,7 +193,7 @@ public class FPHouseholdActivity extends AppCompatActivity {
                 MainApp.households = new Households();
                 try {
                     //MainApp.households = db.getHouseholdByHDSSID(hdssid);
-                    MainApp.households = DssRoomDatabase.getDbInstance().householdsDao().getHouseholdByHDSSIDASC(hdssid);
+                    MainApp.households = db.householdsDao().getHouseholdByHDSSIDASC(hdssid);
                 } catch (JSONException e) {
                     e.printStackTrace();
                     Toast.makeText(this, "JSONException: " + e.getMessage(), Toast.LENGTH_SHORT).show();

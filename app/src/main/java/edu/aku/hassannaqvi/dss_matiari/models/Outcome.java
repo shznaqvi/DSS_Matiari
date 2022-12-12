@@ -495,7 +495,6 @@ public class Outcome extends BaseObservable implements Observable {
 
             JSONObject json = null;
             json = new JSONObject(string);
-            this.round = json.getString("ROUND");
             this.rb02 = json.getString("rb02");
             this.rb01a = json.getString("rb01a");
             this.rc01 = json.getString("rc01");
@@ -516,7 +515,6 @@ public class Outcome extends BaseObservable implements Observable {
 
 
         json
-                .put("ROUND", round)
                 .put("rb02", rb02)
                 .put("rb01a", rb01a)
                 .put("rc01", rc01)

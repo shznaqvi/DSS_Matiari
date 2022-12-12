@@ -25,7 +25,6 @@ import java.util.Locale;
 import edu.aku.hassannaqvi.dss_matiari.R;
 import edu.aku.hassannaqvi.dss_matiari.contracts.TableContracts;
 import edu.aku.hassannaqvi.dss_matiari.core.MainApp;
-import edu.aku.hassannaqvi.dss_matiari.database.DatabaseHelper;
 import edu.aku.hassannaqvi.dss_matiari.databinding.ActivitySectionFBinding;
 import edu.aku.hassannaqvi.dss_matiari.models.Outcome;
 import edu.aku.hassannaqvi.dss_matiari.room.DssRoomDatabase;
@@ -48,7 +47,7 @@ public class SectionFActivity extends AppCompatActivity {
 
         try {
             //outcome = db.getOutcomeFollowupsBySno(MainApp.fpMwra.getRb01(), MainApp.fpMwra.getFRound(), fpMwra.getMuid());
-            outcome = DssRoomDatabase.getDbInstance().OutcomeDao().getOutcomeFollowupsBySno(MainApp.households.getUid(), fpMwra.getRb01(), fpMwra.getMuid(), fpMwra.getFRound());
+            outcome = db.OutcomeDao().getOutcomeFollowupsBySno(MainApp.households.getUid(), fpMwra.getRb01(), fpMwra.getMuid(), fpMwra.getFRound());
         } catch (JSONException e) {
             e.printStackTrace();
             Toast.makeText(this, "JSONException(Followups): " + e.getMessage(), Toast.LENGTH_SHORT).show();
@@ -58,6 +57,11 @@ public class SectionFActivity extends AppCompatActivity {
         if(outcome.getUid().equals(""))
         {
             outcome.populateMetaFollowups();
+            try {
+                outcome.sEHydrate(outcome.sEtoString());
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
         }
 
         bi.setOutcome(outcome);
@@ -169,7 +173,7 @@ public class SectionFActivity extends AppCompatActivity {
         long rowId = 0;
         try {
             //rowId = db.addOutcomeFollowup(outcomeFollowups);
-            rowId = DssRoomDatabase.getDbInstance().OutcomeDao().addOutcome(outcome);
+            rowId = db.OutcomeDao().addOutcome(outcome);
         } catch (JSONException e) {
             e.printStackTrace();
             Toast.makeText(this, "JSONException(Followups): " + e.getMessage(), Toast.LENGTH_SHORT).show();
@@ -180,7 +184,7 @@ public class SectionFActivity extends AppCompatActivity {
         if (rowId > 0) {
             outcome.setUid(outcome.getDeviceId() + outcome.getId());
             outcome.setSE(outcome.sEtoString());
-            DssRoomDatabase.getDbInstance().OutcomeDao().updateOutcome(outcome);
+            db.OutcomeDao().updateOutcome(outcome);
             //db.updateOutcomeFollouwps(TableContracts.OutcomeFollowupTable.COLUMN_UID, outcomeFollowups.getUid());
             return true;
         } else {
@@ -197,18 +201,18 @@ public class SectionFActivity extends AppCompatActivity {
             // Also reset Synced flag and alter UID
             Outcome updatedOutcome = outcome;
             updatedOutcome.setSE(outcome.sEtoString());
-            updcount = DssRoomDatabase.getDbInstance().OutcomeDao().updateOutcome(outcome);
+            updcount = db.OutcomeDao().updateOutcome(outcome);
 
             outcome.setDeviceId(outcome.getDeviceId() + "_" + outcome.getDeviceId().substring(outcome.getDeviceId().length() - 1));
             updatedOutcome.setDeviceId(outcome.getDeviceId());
             updatedOutcome.setIStatus(outcome.getIStatus());
-            DssRoomDatabase.getDbInstance().OutcomeDao().updateOutcome(updatedOutcome);
+            db.OutcomeDao().updateOutcome(updatedOutcome);
             //db.updateOutcomeFollouwps(TableContracts.OutcomeFollowupTable.COLUMN_DEVICEID, outcomeFollowups.getDeviceId());
             int repeatCount = (outcome.getDeviceId().length() - 16) / 2;
             // new UID
             String newUID = outcome.getDeviceId().substring(0, 16) + outcome.getId() + "_" + repeatCount;
             updatedOutcome.setUid(newUID);
-            DssRoomDatabase.getDbInstance().OutcomeDao().updateOutcome(updatedOutcome);
+            db.OutcomeDao().updateOutcome(updatedOutcome);
             //db.updateOutcomeFollouwps(TableContracts.OutcomeFollowupTable.COLUMN_UID, newUID);
 
 

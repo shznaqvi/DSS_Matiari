@@ -25,6 +25,7 @@ import javax.net.ssl.HttpsURLConnection;
 import edu.aku.hassannaqvi.dss_matiari.R;
 import edu.aku.hassannaqvi.dss_matiari.core.MainApp;
 import edu.aku.hassannaqvi.dss_matiari.database.DatabaseHelper;
+import edu.aku.hassannaqvi.dss_matiari.room.DssRoomDatabase;
 
 
 public class ReadJSONWorker extends Worker {
@@ -32,7 +33,7 @@ public class ReadJSONWorker extends Worker {
     private final String TAG = "DataWorkerEN()";
     HttpsURLConnection urlConnection;
     private int length;
-    private DatabaseHelper db;
+    private DssRoomDatabase db;
 
     public ReadJSONWorker(@NonNull Context context, @NonNull WorkerParameters workerParams) {
         super(context, workerParams);
@@ -74,7 +75,7 @@ public class ReadJSONWorker extends Worker {
 
             //String json = result.toString();
             /*if (json.length() > 0) {*/
-            displayNotification(nTitle, "Data Size: " + result.length());
+            displayNotification(nTitle, "Data Sise: " + result.length());
 
 
             // JSONArray jsonArray = new JSONArray(json);
@@ -90,13 +91,13 @@ public class ReadJSONWorker extends Worker {
                     .build();
 
             db = MainApp.appInfo.dbHelper;
-            try {
+           /* try {
                 //    Log.d(TAG, "doWork: JSON: "+result);
                 db.syncZStandard(new JSONArray(result.toString()));
                 return Result.success(data);
             } catch (JSONException e) {
                 e.printStackTrace();
-            }
+            }*/
 
 
             //displayNotification(nTitle, "Uploaded successfully");

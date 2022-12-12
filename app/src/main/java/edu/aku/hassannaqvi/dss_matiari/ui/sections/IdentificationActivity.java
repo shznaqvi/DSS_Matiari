@@ -20,7 +20,6 @@ import java.util.Collection;
 
 import edu.aku.hassannaqvi.dss_matiari.R;
 import edu.aku.hassannaqvi.dss_matiari.core.MainApp;
-import edu.aku.hassannaqvi.dss_matiari.database.DatabaseHelper;
 import edu.aku.hassannaqvi.dss_matiari.databinding.ActivityIdentificationBinding;
 import edu.aku.hassannaqvi.dss_matiari.models.Households;
 import edu.aku.hassannaqvi.dss_matiari.models.Mwra;
@@ -36,7 +35,7 @@ public class IdentificationActivity extends AppCompatActivity {
     private static final String TAG = "IdentificationActivity";
     ActivityIdentificationBinding bi;
     private Intent openIntent;
-    private DatabaseHelper db;
+    private DssRoomDatabase db;
     private ArrayList<String> ucNames;
     private ArrayList<String> ucCodes;
     private ArrayList<String> villageNames;
@@ -80,7 +79,7 @@ public class IdentificationActivity extends AppCompatActivity {
     private void populateSpinner() {
 
 //        Collection<Villages> uc = db.getVillageUc();
-        Collection<Villages> uc = DssRoomDatabase.getDbInstance().VillagesDao().getVillageUc();
+        Collection<Villages> uc = db.VillagesDao().getVillageUc();
         ucNames = new ArrayList<>();
         ucCodes = new ArrayList<>();
 
@@ -114,7 +113,7 @@ public class IdentificationActivity extends AppCompatActivity {
 
                 if (position == 0) return;
                 //Collection<Villages> village = db.getVillageByUc(ucCodes.get(position));
-                Collection<Villages> village = DssRoomDatabase.getDbInstance().VillagesDao().getVillageByUc(ucCodes.get(position));
+                Collection<Villages> village = db.VillagesDao().getVillageByUc(ucCodes.get(position));
                 villageNames = new ArrayList<>();
                 villageCodes = new ArrayList<>();
                 villageNames.add("...");
@@ -154,7 +153,7 @@ public class IdentificationActivity extends AppCompatActivity {
 
                     //int maxHHno = db.getMaxStructure(selectedUC, vCode) + 1;
 
-                    int maxHHno = DssRoomDatabase.getDbInstance().householdsDao().getMaxStructure(selectedUC, vCode) +1;
+                    int maxHHno = db.householdsDao().getMaxStructure(selectedUC, vCode) +1;
 
 //                    bi.btnContinue.setBackgroundTintList(ContextCompat.getColorStateList(IdentificationActivity.this, R.color.colorAccent));
                     bi.btnContinue.setBackgroundTintList(ContextCompat.getColorStateList(IdentificationActivity.this, R.color.colorPrimary));

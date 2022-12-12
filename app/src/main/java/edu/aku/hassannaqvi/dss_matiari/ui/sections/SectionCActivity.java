@@ -28,7 +28,6 @@ import java.util.Locale;
 
 import edu.aku.hassannaqvi.dss_matiari.R;
 import edu.aku.hassannaqvi.dss_matiari.core.MainApp;
-import edu.aku.hassannaqvi.dss_matiari.database.DatabaseHelper;
 import edu.aku.hassannaqvi.dss_matiari.databinding.ActivitySectionCBinding;
 import edu.aku.hassannaqvi.dss_matiari.models.Mwra;
 import edu.aku.hassannaqvi.dss_matiari.models.Outcome;
@@ -55,7 +54,7 @@ public class SectionCActivity extends AppCompatActivity {
 
         try {
             //followups = db.getFollowupsBySno(MainApp.fpMwra.getRb01(), MainApp.fpMwra.getFRound());
-            mwra = DssRoomDatabase.getDbInstance().mwraDao().getFollowupsBySno(MainApp.households.getUid(), MainApp.fpMwra.getRb01(), MainApp.fpMwra.getFRound());
+            mwra = db.mwraDao().getFollowupsBySno(MainApp.households.getUid(), MainApp.fpMwra.getRb01(), MainApp.fpMwra.getFRound());
         } catch (JSONException e) {
             e.printStackTrace();
             Toast.makeText(this, "JSONException(Followups): " + e.getMessage(), Toast.LENGTH_SHORT).show();
@@ -64,15 +63,12 @@ public class SectionCActivity extends AppCompatActivity {
         assert mwra != null;
         if (mwra.getUid().equals("")) {
             mwra.populateMetaFollowups();
-            /*mwra.setRb01(MainApp.fpMwra.getRb01());
-            MainApp.mwra.setRb02(MainApp.fpMwra.getRb02());
-            mwra.setRb03(MainApp.fpMwra.getRb03());
-            mwra.setRb06(MainApp.fpMwra.getRb06());
-            mwra.setRb06(MainApp.fpMwra.getRb06());
-            //mwra.setRb07(MainApp.fpMwra.getRb07());
-            mwra.setPrePreg(MainApp.fpMwra.getRb07());
-            mwra.setHdssId(MainApp.fpMwra.getHdssid());
-            mwra.setHhNo(MainApp.fpMwra.getHhNo());*/
+            try {
+                mwra.sCHydrate(mwra.sCtoString());
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
 
         }
 
@@ -389,7 +385,7 @@ public class SectionCActivity extends AppCompatActivity {
         long rowId = 0;
         try {
             //rowId = db.addFollowup(followups);
-            rowId = DssRoomDatabase.getDbInstance().mwraDao().addMwra(mwra);
+            rowId = db.mwraDao().addMwra(mwra);
         } catch (JSONException e) {
             e.printStackTrace();
             Toast.makeText(this, "JSONException(Followups): " + e.getMessage(), Toast.LENGTH_SHORT).show();
@@ -400,7 +396,7 @@ public class SectionCActivity extends AppCompatActivity {
         if (rowId > 0) {
             mwra.setUid(mwra.getDeviceId() + mwra.getId());
             mwra.setSC(mwra.sCtoString());
-            DssRoomDatabase.getDbInstance().mwraDao().updateMwra(mwra);
+            db.mwraDao().updateMwra(mwra);
             //db.updatesFollowUpsColumn(TableContracts.FollowupsTable.COLUMN_UID, followups.getUid());
             return true;
         } else {
@@ -417,7 +413,7 @@ public class SectionCActivity extends AppCompatActivity {
 
             Mwra updatedFollowups = mwra;
             updatedFollowups.setSC(mwra.sCtoString());
-            updcount = DssRoomDatabase.getDbInstance().mwraDao().updateMwra(mwra);
+            updcount = db.mwraDao().updateMwra(mwra);
 
             mwra.setDeviceId(mwra.getDeviceId() + "_" + mwra.getDeviceId().substring(mwra.getDeviceId().length() - 1));
 
@@ -425,13 +421,13 @@ public class SectionCActivity extends AppCompatActivity {
             updatedFollowups.setIStatus(mwra.getIStatus());
             //db.updatesFollowUpsColumn(TableContracts.FollowupsTable.COLUMN_DEVICEID, followups.getDeviceId());
             //db.updatesFollowUpsColumn(TableContracts.FollowupsTable.COLUMN_ISTATUS, followups.getRc04());
-            DssRoomDatabase.getDbInstance().mwraDao().updateMwra(updatedFollowups);
+            db.mwraDao().updateMwra(updatedFollowups);
             int repeatCount = (mwra.getDeviceId().length() - 16) / 2;
             // new UID
             String newUID = mwra.getDeviceId().substring(0, 16) + mwra.getId() + "_" + repeatCount;
             mwra.setUid(newUID);
             updatedFollowups.setUid(newUID);
-            DssRoomDatabase.getDbInstance().mwraDao().updateMwra(updatedFollowups);
+            db.mwraDao().updateMwra(updatedFollowups);
             //db.updatesFollowUpsColumn(TableContracts.FollowupsTable.COLUMN_UID, newUID);
 
 

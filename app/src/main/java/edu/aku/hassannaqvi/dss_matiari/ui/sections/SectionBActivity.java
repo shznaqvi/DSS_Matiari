@@ -31,7 +31,6 @@ import java.util.concurrent.TimeUnit;
 import edu.aku.hassannaqvi.dss_matiari.R;
 import edu.aku.hassannaqvi.dss_matiari.contracts.TableContracts;
 import edu.aku.hassannaqvi.dss_matiari.core.MainApp;
-import edu.aku.hassannaqvi.dss_matiari.database.DatabaseHelper;
 import edu.aku.hassannaqvi.dss_matiari.databinding.ActivitySectionBBinding;
 import edu.aku.hassannaqvi.dss_matiari.models.Mwra;
 import edu.aku.hassannaqvi.dss_matiari.room.DssRoomDatabase;
@@ -66,22 +65,6 @@ public class SectionBActivity extends AppCompatActivity {
             MainApp.mwra.setDeviceId(MainApp.deviceid);
             MainApp.mwra.setHdssId(households.getHdssId());
             MainApp.mwra.setAppver(MainApp.versionName + "." + MainApp.versionCode);
-
-
-            // Followups data
-            /*MainApp.followups.setUuid(households.getUid());
-            MainApp.followups.setUcCode(households.getUcCode());
-            MainApp.followups.setVillageCode(households.getVillageCode());
-            //MainApp.followups.setStructureNo(households.getStructureNo());
-            followups.setSNo(mwra.getRb01());
-            followups.setFRound("0");
-            MainApp.followups.setHhNo(households.getHhNo());
-            MainApp.followups.setUserName(MainApp.user.getUserName());
-            MainApp.followups.setSysDate(households.getSysDate());
-            MainApp.followups.setDeviceId(MainApp.deviceid);
-            MainApp.followups.setHdssId(households.getHdssId());
-            MainApp.followups.setAppver(MainApp.versionName + "." + MainApp.versionCode);*/
-
 
         }
 
@@ -234,7 +217,7 @@ public class SectionBActivity extends AppCompatActivity {
         long rowId = 0;
         try {
             //rowId = db.addMWRA(mwra);
-            rowId = DssRoomDatabase.getDbInstance().mwraDao().addMwra(mwra);
+            rowId = db.mwraDao().addMwra(mwra);
         } catch (JSONException e) {
             e.printStackTrace();
             Toast.makeText(this, "JSONException: " + e.getMessage(), Toast.LENGTH_SHORT).show();
@@ -245,7 +228,7 @@ public class SectionBActivity extends AppCompatActivity {
         if (rowId > 0) {
             mwra.setUid(mwra.getDeviceId() + mwra.getId());
             mwra.setSB(mwra.sBtoString());
-            DssRoomDatabase.getDbInstance().mwraDao().updateMwra(mwra);
+            db.mwraDao().updateMwra(mwra);
             //db.updatesMWRAColumn(TableContracts.MWRATable.COLUMN_UID, mwra.getUid());
             return true;
         } else {
@@ -255,36 +238,6 @@ public class SectionBActivity extends AppCompatActivity {
     }
 
 
-    /*private boolean insertNewFollowupRecord() {
-        db = MainApp.appInfo.getDbHelper();
-        //followups.populateMeta();
-        long rowId = 0;
-        try {
-            rowId = db.addFollowup(followups);
-        } catch (JSONException e) {
-            e.printStackTrace();
-            Toast.makeText(this, "JSONException(FPHouseholds): " + e.getMessage(), Toast.LENGTH_SHORT).show();
-            Log.d(TAG, "insertNewRecord (JSONException): " + e.getMessage());
-            return false;
-        }
-        followups.setId(rowId);
-        if (rowId > 0) {
-            followups.setUid(followups.getDeviceId() + followups.getId());
-
-            // This not a mistake. It is done on purpose
-            //households.setUid(fpHouseholds.getDeviceId() + fpHouseholds.getId());
-
-            db.updatesFollowUpsColumn(TableContracts.FollowupsTable.COLUMN_UID, followups.getUid());
-            return true;
-        } else {
-            Toast.makeText(this, "Updating Database... ERROR!", Toast.LENGTH_SHORT).show();
-            return false;
-        }
-    }*/
-
-
-
-
     private boolean updateDB() {
         int updcount = 0;
         try {
@@ -292,7 +245,7 @@ public class SectionBActivity extends AppCompatActivity {
             updateMwra.setSB(mwra.sBtoString());
             // Also reset Synced flag and alter UID
             updateMwra.setSynced(null);
-            updcount = DssRoomDatabase.getDbInstance().mwraDao().updateMwra(updateMwra);
+            updcount = db.mwraDao().updateMwra(updateMwra);
 
             //updcount = db.updatesMWRAColumn(TableContracts.MWRATable.COLUMN_SB, mwra.sBtoString());
             //db.updatesMWRAColumn(TableContracts.MWRATable.COLUMN_SYNCED, null);
@@ -300,7 +253,7 @@ public class SectionBActivity extends AppCompatActivity {
             // concate last char from uid to alter and create new unique uid
 
             mwra.setDeviceId(mwra.getDeviceId() + "_" + mwra.getDeviceId().substring(mwra.getDeviceId().length() - 1));
-            DssRoomDatabase.getDbInstance().mwraDao().updateMwra(updateMwra);
+            db.mwraDao().updateMwra(updateMwra);
             //db.updatesMWRAColumn(TableContracts.MWRATable.COLUMN_DEVICEID, mwra.getDeviceId());
             int repeatCount = (mwra.getDeviceId().length() - 16) / 2;
 
@@ -309,7 +262,7 @@ public class SectionBActivity extends AppCompatActivity {
             mwra.setUid(newUID);
             updateMwra.setUid(newUID);
 
-            DssRoomDatabase.getDbInstance().mwraDao().updateMwra(updateMwra);
+            db.mwraDao().updateMwra(updateMwra);
             //db.updatesMWRAColumn(TableContracts.MWRATable.COLUMN_UID, newUID);
 
 

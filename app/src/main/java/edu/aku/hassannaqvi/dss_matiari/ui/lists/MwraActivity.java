@@ -45,7 +45,7 @@ public class MwraActivity extends AppCompatActivity {
 
     private static final String TAG = "MwraActivity";
     ActivityMwraBinding bi;
-    DatabaseHelper db;
+    DssRoomDatabase db;
     private MwraAdapter fmAdapter;
     ActivityResultLauncher<Intent> MemberInfoLauncher = registerForActivityResult(
             new ActivityResultContracts.StartActivityForResult(),
@@ -100,7 +100,7 @@ public class MwraActivity extends AppCompatActivity {
 
             //MainApp.mwraList = db.getAllMWRAByHH(selectedUC, MainApp.households.getVillageCode(), MainApp.households.getStructureNo(), MainApp.households.getHhNo());
 
-            mwraList = DssRoomDatabase.getDbInstance().mwraDao().getAllMWRAByHH(selectedUC, MainApp.households.getVillageCode(), MainApp.households.getStructureNo(), MainApp.households.getHhNo(), "1");
+            mwraList = db.mwraDao().getAllMWRAByHH(selectedUC, MainApp.households.getVillageCode(), MainApp.households.getStructureNo(), MainApp.households.getHhNo(), "1");
 //        } catch (JSONException e) {
 //            e.printStackTrace();
 //            Toast.makeText(this, "JSONException: " + e.getMessage(), Toast.LENGTH_SHORT).show();
@@ -190,9 +190,9 @@ public class MwraActivity extends AppCompatActivity {
         //   finish();
 
         //int maxMWRA = db.getMaxMWRSNoBYHH(selectedUC, selectedVillage, selectedHhNO);
-        int maxMWRA = DssRoomDatabase.getDbInstance().mwraDao().getMaxMWRSNoBYHH(selectedUC, selectedVillage, selectedHhNO);
+        int maxMWRA = db.mwraDao().getMaxMWRSNoBYHH(selectedUC, selectedVillage, selectedHhNO);
         //int maxFpMWRA = db.getMaxMWRANoBYHHFromFolloupsSche(selectedUC, selectedVillage, selectedHhNO);
-        int maxFpMWRA = DssRoomDatabase.getDbInstance().FollowUpsScheDao().getMaxMWRANoBYHHFromFolloupsSche(selectedUC, selectedVillage, selectedHhNO);
+        int maxFpMWRA = db.FollowUpsScheDao().getMaxMWRANoBYHHFromFolloupsSche(selectedUC, selectedVillage, selectedHhNO);
         mwraCount = Math.max(maxMWRA, maxFpMWRA);
         MemberInfoLauncher.launch(intent);
     }

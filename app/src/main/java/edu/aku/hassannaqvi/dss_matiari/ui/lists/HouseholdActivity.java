@@ -42,7 +42,7 @@ public class HouseholdActivity extends AppCompatActivity {
 
     private static final String TAG = "HouseholdActivity";
     ActivityHouseholdBinding bi;
-    DatabaseHelper db;
+    DssRoomDatabase db;
     private HouseholdAdapter hhAdapter;
     ActivityResultLauncher<Intent> MemberInfoLauncher = registerForActivityResult(
             new ActivityResultContracts.StartActivityForResult(),
@@ -81,7 +81,7 @@ public class HouseholdActivity extends AppCompatActivity {
 //        try {
 
 //            MainApp.householdList = db.getHouseholdBYVillage(selectedUC, MainApp.selectedVillage);
-            MainApp.householdList = DssRoomDatabase.getDbInstance().householdsDao().getHouseholdBYVillage(selectedUC, selectedVillage, "1");
+            MainApp.householdList = db.householdsDao().getHouseholdBYVillage(selectedUC, selectedVillage, "1");
 //        } catch (JSONException e) {
 //            e.printStackTrace();
 //            Toast.makeText(this, "JSONException: " + e.getMessage(), Toast.LENGTH_SHORT).show();
@@ -134,8 +134,8 @@ public class HouseholdActivity extends AppCompatActivity {
         // Increment Household Number by 1 (New Method)
         //int maxHH = db.getMaxHouseholdNo(selectedUC, selectedVillage);      // From Households table on device
         //int maxHHNo = db.getMaxHHNoByVillage(selectedUC, selectedVillage);  // From Max Household numbers fetched from server
-        int maxHH = DssRoomDatabase.getDbInstance().householdsDao().getMaxHouseholdNo(selectedUC, selectedVillage, "1");
-        int maxHHNo = DssRoomDatabase.getDbInstance().MaxHHNoDao().getMaxHHNoByVillage(selectedUC, selectedVillage);
+        int maxHH = db.householdsDao().getMaxHouseholdNo(selectedUC, selectedVillage, "1");
+        int maxHHNo = db.MaxHHNoDao().getMaxHHNoByVillage(selectedUC, selectedVillage);
         int maxHHFinal = Math.max(maxHH, maxHHNo);
         MainApp.households.setUcCode(selectedUC);
         MainApp.households.setVillageCode(selectedVillage);
@@ -180,7 +180,7 @@ public class HouseholdActivity extends AppCompatActivity {
                 MainApp.households = new Households();
                 try {
                     //MainApp.households = db.getHouseholdByHDSSID(hdssid);
-                    MainApp.households = DssRoomDatabase.getDbInstance().householdsDao().getHouseholdByHDSSIDASC(hdssid);
+                    MainApp.households = db.householdsDao().getHouseholdByHDSSIDASC(hdssid);
                 } catch (JSONException e) {
                     e.printStackTrace();
                     Toast.makeText(this, "JSONException: " + e.getMessage(), Toast.LENGTH_SHORT).show();

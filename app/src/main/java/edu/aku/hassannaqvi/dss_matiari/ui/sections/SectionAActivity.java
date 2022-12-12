@@ -26,7 +26,6 @@ import java.util.Locale;
 import edu.aku.hassannaqvi.dss_matiari.R;
 import edu.aku.hassannaqvi.dss_matiari.contracts.TableContracts;
 import edu.aku.hassannaqvi.dss_matiari.core.MainApp;
-import edu.aku.hassannaqvi.dss_matiari.database.DatabaseHelper;
 import edu.aku.hassannaqvi.dss_matiari.databinding.ActivitySectionABinding;
 import edu.aku.hassannaqvi.dss_matiari.models.Households;
 import edu.aku.hassannaqvi.dss_matiari.room.DssRoomDatabase;
@@ -88,20 +87,6 @@ public class SectionAActivity extends AppCompatActivity {
             }
         });
 
-        /*if(fpHouseholds != null) {
-            // FP Households Data
-            fpHouseholds.setHhNo(households.getHhNo());
-            fpHouseholds.setUcCode(households.getUcCode());
-            fpHouseholds.setVillageCode(households.getVillageCode());
-            fpHouseholds.setDeviceId(MainApp.deviceid);
-            fpHouseholds.setUserName(MainApp.user.getUserName());
-            fpHouseholds.setFround("0");
-
-            fpHouseholds.setSysDate(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.ENGLISH).format(new Date().getTime()));
-            fpHouseholds.setHdssId(households.getUcCode() + "-" + households.getVillageCode() + "-" + households.getHhNo());
-            fpHouseholds.setStructureNo(households.getRa10());
-        }*/
-
     }
 
     public void btnContinue(View view) {
@@ -151,7 +136,7 @@ public class SectionAActivity extends AppCompatActivity {
         long rowId = 0;
         try {
             //rowId = db.addHousehold(households);
-            rowId = DssRoomDatabase.getDbInstance().householdsDao().addHousehold(households);
+            rowId = db.householdsDao().addHousehold(households);
         } catch (Exception e) {
             e.printStackTrace();
             return false;
@@ -159,7 +144,7 @@ public class SectionAActivity extends AppCompatActivity {
         households.setId(rowId);
         if (rowId > 0) {
             households.setUid(households.getDeviceId() + households.getId());
-            DssRoomDatabase.getDbInstance().householdsDao().updateHousehold(households);
+            db.householdsDao().updateHousehold(households);
 //            db.updatesHouseholdColumn(TableContracts.HouseholdTable.COLUMN_UID, households.getUid());
             /*if (fpHouseholds != null && fpHouseholds.getUid().equals("")) {
                 insertFpHousehold();
@@ -177,13 +162,12 @@ public class SectionAActivity extends AppCompatActivity {
 
     private boolean updateDB() {
         //DssRoomDatabase db = MainApp.appInfo.getDbHelper();
-        DssRoomDatabase dssdb = DssRoomDatabase.getDbInstance();
         int updcount = 0;
         try {
 //            updcount = db.updatesHouseholdColumn(TableContracts.HouseholdTable.COLUMN_SA, households.sAtoString());
             Households updatedHousehold = households;
             updatedHousehold.setSA(households.sAtoString());
-            updcount = dssdb.householdsDao().updateHousehold(updatedHousehold);
+            updcount = db.householdsDao().updateHousehold(updatedHousehold);
         } catch (JSONException e) {
             e.printStackTrace();
             Toast.makeText(this, "JSONException: " + e.getMessage(), Toast.LENGTH_SHORT).show();

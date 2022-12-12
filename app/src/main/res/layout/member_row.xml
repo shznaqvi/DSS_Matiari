@@ -124,13 +124,13 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:includeFontPadding="false"
-                            android:text="Age"
+                            android:text="Date of Birth"
                             />
 
                         <com.google.android.material.textview.MaterialTextView
                             android:id="@+id/secDob"
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
+                            android:layout_height="match_parent"
                             android:layout_gravity="end"
                             android:background="@color/grayLight"
                             android:gravity="center_vertical|center_horizontal"
@@ -161,7 +161,7 @@
                         <com.google.android.material.textview.MaterialTextView
                             android:id="@+id/secGender"
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
+                            android:layout_height="match_parent"
                             android:layout_gravity="end"
                             android:background="@color/grayLight"
                             android:gravity="center_vertical|center_horizontal"
