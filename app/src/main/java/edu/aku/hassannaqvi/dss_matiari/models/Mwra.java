@@ -721,29 +721,29 @@ public class Mwra extends BaseObservable implements Observable {
         }
     }
 
-    public Mwra Hydrate(Cursor cursor) throws JSONException {
-        this.id = cursor.getLong(cursor.getColumnIndexOrThrow(MWRATable.COLUMN_ID));
-        this.uid = cursor.getString(cursor.getColumnIndexOrThrow(MWRATable.COLUMN_UID));
-        this.uuid = cursor.getString(cursor.getColumnIndexOrThrow(MWRATable.COLUMN_UUID));
-        this.userName = cursor.getString(cursor.getColumnIndexOrThrow(MWRATable.COLUMN_USERNAME));
-        this.sysDate = cursor.getString(cursor.getColumnIndexOrThrow(MWRATable.COLUMN_SYSDATE));
-        this.hdssId = cursor.getString(cursor.getColumnIndexOrThrow(MWRATable.COLUMN_HDSSID));
-        this.ucCode = cursor.getString(cursor.getColumnIndexOrThrow(MWRATable.COLUMN_UC_CODE));
-        this.villageCode = cursor.getString(cursor.getColumnIndexOrThrow(MWRATable.COLUMN_VILLAGE_CODE));
-        this.structureNo = cursor.getString(cursor.getColumnIndexOrThrow(MWRATable.COLUMN_STRUCTURE_NO));
-        this.regRound = cursor.getString(cursor.getColumnIndexOrThrow(MWRATable.COLUMN_REGROUND));
-        this.sNo = cursor.getString(cursor.getColumnIndexOrThrow(MWRATable.COLUMN_SNO));
-        this.hhNo = cursor.getString(cursor.getColumnIndexOrThrow(MWRATable.COLUMN_HOUSEHOLD_NO));
-        this.deviceId = cursor.getString(cursor.getColumnIndexOrThrow(MWRATable.COLUMN_DEVICEID));
-        this.deviceTag = cursor.getString(cursor.getColumnIndexOrThrow(MWRATable.COLUMN_DEVICETAGID));
-        this.appver = cursor.getString(cursor.getColumnIndexOrThrow(MWRATable.COLUMN_APPVERSION));
-        this.iStatus = cursor.getString(cursor.getColumnIndexOrThrow(MWRATable.COLUMN_ISTATUS));
-        this.synced = cursor.getString(cursor.getColumnIndexOrThrow(MWRATable.COLUMN_SYNCED));
-        this.syncDate = cursor.getString(cursor.getColumnIndexOrThrow(MWRATable.COLUMN_SYNCED_DATE));
+    public Mwra Hydrate(Mwra mwra) throws JSONException {
+        this.id = mwra.id;
+        this.uid = mwra.uid;
+        this.uuid = mwra.uuid;
+        this.userName = mwra.userName;
+        this.sysDate = mwra.sysDate;;
+        this.hdssId = mwra.hdssId;
+        this.ucCode = mwra.ucCode;
+        this.villageCode = mwra.villageCode;
+        this.structureNo = mwra.structureNo;
+        this.regRound = mwra.regRound;
+        this.sNo = mwra.sNo;
+        this.hhNo = mwra.hhNo;
+        this.deviceId = mwra.deviceId;
+        this.deviceTag = mwra.deviceTag;
+        this.appver = mwra.appver;
+        this.iStatus = mwra.iStatus;
+        this.synced = mwra.synced;
+        this.syncDate = mwra.syncDate;
 
-        sBHydrate(cursor.getString(cursor.getColumnIndexOrThrow(MWRATable.COLUMN_SB)));
-        sCHydrate(cursor.getString(cursor.getColumnIndexOrThrow(MWRATable.COLUMN_SC)));
-        sDHydrate(cursor.getString(cursor.getColumnIndexOrThrow(MWRATable.COLUMN_SD)));
+        sBHydrate(mwra.sB);
+        sCHydrate(mwra.sC);
+        sDHydrate(mwra.sD);
         return this;
     }
 

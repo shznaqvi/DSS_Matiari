@@ -901,29 +901,27 @@ public class Households extends BaseObservable implements Observable {
         }
     }
 
-    public Households Hydrate(Cursor cursor) throws JSONException {
+    public Households Hydrate(Households households) throws JSONException {
 
-        this.id = cursor.getLong(cursor.getColumnIndexOrThrow(HouseholdTable.COLUMN_ID));
-        this.uid = cursor.getString(cursor.getColumnIndexOrThrow(HouseholdTable.COLUMN_UID));
-        this.userName = cursor.getString(cursor.getColumnIndexOrThrow(HouseholdTable.COLUMN_USERNAME));
-        this.sysDate = cursor.getString(cursor.getColumnIndexOrThrow(HouseholdTable.COLUMN_SYSDATE));
-        this.hdssId = cursor.getString(cursor.getColumnIndexOrThrow(HouseholdTable.COLUMN_HDSSID));
-        this.ucCode = cursor.getString(cursor.getColumnIndexOrThrow(HouseholdTable.COLUMN_UC_CODE));
-        this.villageCode = cursor.getString(cursor.getColumnIndexOrThrow(HouseholdTable.COLUMN_VILLAGE_CODE));
-        this.hhNo = cursor.getString(cursor.getColumnIndexOrThrow(HouseholdTable.COLUMN_HOUSEHOLD_NO));
-        this.structureNo = cursor.getString(cursor.getColumnIndexOrThrow(HouseholdTable.COLUMN_STRUCTURE_NO));
-        this.visitNo = cursor.getString(cursor.getColumnIndexOrThrow(HouseholdTable.COLUMN_VISIT_NO));
-        this.regRound = cursor.getString(cursor.getColumnIndexOrThrow(HouseholdTable.COLUMN_REGROUND));
+        this.id = households.id;
+        this.uid = households.uid;
+        this.userName = households.userName;
+        this.sysDate = households.sysDate;
+        this.hdssId = households.hdssId;
+        this.ucCode = households.ucCode;
+        this.villageCode = households.villageCode;
+        this.hhNo = households.hhNo;
+        this.structureNo = households.structureNo;
+        this.visitNo = households.visitNo;
+        this.regRound = households.regRound;
+        this.deviceId = households.deviceId;
+        this.deviceTag =households.deviceTag;
+        this.appver = households.appver;
+        this.iStatus =households.iStatus;
+        this.synced = households.synced;
+        this.syncDate = households.syncDate;
 
-        this.deviceId = cursor.getString(cursor.getColumnIndexOrThrow(HouseholdTable.COLUMN_DEVICEID));
-        this.deviceTag = cursor.getString(cursor.getColumnIndexOrThrow(HouseholdTable.COLUMN_DEVICETAGID));
-        this.appver = cursor.getString(cursor.getColumnIndexOrThrow(HouseholdTable.COLUMN_APPVERSION));
-        this.iStatus = cursor.getString(cursor.getColumnIndexOrThrow(HouseholdTable.COLUMN_ISTATUS));
-        this.synced = cursor.getString(cursor.getColumnIndexOrThrow(HouseholdTable.COLUMN_SYNCED));
-        this.syncDate = cursor.getString(cursor.getColumnIndexOrThrow(HouseholdTable.COLUMN_SYNCED_DATE));
-
-        s1Hydrate(cursor.getString(cursor.getColumnIndexOrThrow(HouseholdTable.COLUMN_SA)));
-
+        s1Hydrate(households.sA);
 
         return this;
     }

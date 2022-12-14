@@ -462,30 +462,29 @@ public class Outcome extends BaseObservable implements Observable {
 
 
 
-    public Outcome Hydrate(Cursor cursor) throws JSONException {
-        this.id = cursor.getLong(cursor.getColumnIndexOrThrow(TableContracts.OutcomeTable.COLUMN_ID));
-        this.uid = cursor.getString(cursor.getColumnIndexOrThrow(TableContracts.OutcomeTable.COLUMN_UID));
-        this.uuid = cursor.getString(cursor.getColumnIndexOrThrow(TableContracts.OutcomeTable.COLUMN_UUID));
-        this.muid = cursor.getString(cursor.getColumnIndexOrThrow(TableContracts.OutcomeTable.COLUMN_MUID));
-        this.msno = cursor.getString(cursor.getColumnIndexOrThrow(TableContracts.OutcomeTable.COLUMN_MSNO));
-        this.userName = cursor.getString(cursor.getColumnIndexOrThrow(TableContracts.OutcomeTable.COLUMN_USERNAME));
-        this.sysDate = cursor.getString(cursor.getColumnIndexOrThrow(TableContracts.OutcomeTable.COLUMN_SYSDATE));
-        this.hdssId = cursor.getString(cursor.getColumnIndexOrThrow(TableContracts.OutcomeTable.COLUMN_HDSSID));
-        this.ucCode = cursor.getString(cursor.getColumnIndexOrThrow(TableContracts.OutcomeTable.COLUMN_UC_CODE));
-        this.villageCode = cursor.getString(cursor.getColumnIndexOrThrow(TableContracts.OutcomeTable.COLUMN_VILLAGE_CODE));
-        this.regRound = cursor.getString(cursor.getColumnIndexOrThrow(TableContracts.OutcomeTable.COLUMN_REGROUND));
-        //this.fRound = cursor.getString(cursor.getColumnIndexOrThrow(TableContracts.OutcomeTable.COLUMN_FROUND));
-        this.round = cursor.getString(cursor.getColumnIndexOrThrow(TableContracts.OutcomeTable.COLUMN_ROUND));
-        this.sno = cursor.getString(cursor.getColumnIndexOrThrow(TableContracts.OutcomeTable.COLUMN_SNO));
-        this.hhNo = cursor.getString(cursor.getColumnIndexOrThrow(TableContracts.OutcomeTable.COLUMN_HOUSEHOLD_NO));
-        this.deviceId = cursor.getString(cursor.getColumnIndexOrThrow(TableContracts.OutcomeTable.COLUMN_DEVICEID));
-        this.deviceTag = cursor.getString(cursor.getColumnIndexOrThrow(TableContracts.OutcomeTable.COLUMN_DEVICETAGID));
-        this.appver = cursor.getString(cursor.getColumnIndexOrThrow(TableContracts.OutcomeTable.COLUMN_APPVERSION));
-        this.iStatus = cursor.getString(cursor.getColumnIndexOrThrow(TableContracts.OutcomeTable.COLUMN_ISTATUS));
-        this.synced = cursor.getString(cursor.getColumnIndexOrThrow(TableContracts.OutcomeTable.COLUMN_SYNCED));
-        this.syncDate = cursor.getString(cursor.getColumnIndexOrThrow(TableContracts.OutcomeTable.COLUMN_SYNCED_DATE));
+    public Outcome Hydrate(Outcome outcome) throws JSONException {
+        this.id = outcome.id;
+        this.uid = outcome.uid;
+        this.uuid = outcome.uuid;
+        this.muid = outcome.muid;
+        this.msno = outcome.msno;
+        this.userName = outcome.msno;
+        this.sysDate = outcome.msno;
+        this.hdssId = outcome.msno;
+        this.ucCode = outcome.msno;
+        this.villageCode = outcome.msno;
+        this.regRound = outcome.msno;
+        this.round = outcome.msno;
+        this.sno = outcome.msno;
+        this.hhNo = outcome.msno;
+        this.deviceId = outcome.msno;
+        this.deviceTag = outcome.msno;
+        this.appver = outcome.msno;
+        this.iStatus = outcome.msno;
+        this.synced = outcome.msno;
+        this.syncDate = outcome.msno;
 
-        sEHydrate(cursor.getString(cursor.getColumnIndexOrThrow(TableContracts.OutcomeTable.COLUMN_SE)));
+        sEHydrate(outcome.sE);
         return this;
     }
 
