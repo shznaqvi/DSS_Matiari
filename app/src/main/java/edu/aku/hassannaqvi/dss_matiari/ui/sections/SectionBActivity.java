@@ -32,6 +32,7 @@ import edu.aku.hassannaqvi.dss_matiari.R;
 import edu.aku.hassannaqvi.dss_matiari.contracts.TableContracts;
 import edu.aku.hassannaqvi.dss_matiari.core.MainApp;
 import edu.aku.hassannaqvi.dss_matiari.databinding.ActivitySectionBBinding;
+import edu.aku.hassannaqvi.dss_matiari.models.Households;
 import edu.aku.hassannaqvi.dss_matiari.models.Mwra;
 import edu.aku.hassannaqvi.dss_matiari.room.DssRoomDatabase;
 
@@ -94,9 +95,9 @@ public class SectionBActivity extends AppCompatActivity {
             Log.d(TAG, "onCreate: " + minDob);
 
             // Set maxDob date to 50 years back from DOV
-            cal.add(Calendar.YEAR, -18);
+            cal.add(Calendar.YEAR, -14);
             String maxDob = sdf.format(cal.getTime());
-            cal.add(Calendar.YEAR, +18); // Calender reset to DOV
+            cal.add(Calendar.YEAR, +14); // Calender reset to DOV
             Log.d(TAG, "onCreate: " + maxDob);
 
 
@@ -229,6 +230,9 @@ public class SectionBActivity extends AppCompatActivity {
             mwra.setUid(mwra.getDeviceId() + mwra.getId());
             mwra.setSB(mwra.sBtoString());
             db.mwraDao().updateMwra(mwra);
+            households.setRa18(mwra.getRb01());
+            households.setSA(households.sAtoString());
+            db.householdsDao().updateHousehold(households);
             //db.updatesMWRAColumn(TableContracts.MWRATable.COLUMN_UID, mwra.getUid());
             return true;
         } else {

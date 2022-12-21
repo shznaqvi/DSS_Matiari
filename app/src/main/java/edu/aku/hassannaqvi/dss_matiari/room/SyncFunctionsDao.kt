@@ -36,6 +36,7 @@ interface SyncFunctionsDao {
         for (i in allForms)
         {
 
+            i.Hydrate(i)
             jsonArray.put(i.toJSONObject())
 
         }
@@ -80,6 +81,7 @@ interface SyncFunctionsDao {
         for (i in allForms)
         {
 
+            i.Hydrate(i)
             jsonArray.put(i.toJSONObject())
 
         }
@@ -121,6 +123,7 @@ interface SyncFunctionsDao {
         for (i in allForms)
         {
 
+            i.Hydrate(i)
             jsonArray.put(i.toJSONObject())
 
         }
@@ -151,7 +154,7 @@ interface SyncFunctionsDao {
 
 
 
-    /******************* DOWNLOAD DATA FUNCTIONS */
+    /******************* DOWNLOAD DATA FUNCTIONS******************************************* */
 
     @Throws(JSONException ::class)
     fun syncvillages(villagesList: JSONArray) : Int{

@@ -458,10 +458,6 @@ public class Outcome extends BaseObservable implements Observable {
     }
 
 
-
-
-
-
     public Outcome Hydrate(Outcome outcome) throws JSONException {
         this.id = outcome.id;
         this.uid = outcome.uid;

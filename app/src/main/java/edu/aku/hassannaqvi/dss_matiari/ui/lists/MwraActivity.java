@@ -186,7 +186,7 @@ public class MwraActivity extends AppCompatActivity {
     private void addMoreFemale() {
         MainApp.mwra = new Mwra();
         mwra.init();
-        Intent intent = new Intent(this, SectionBActivity.class);
+
         //   finish();
 
         //int maxMWRA = db.getMaxMWRSNoBYHH(selectedUC, selectedVillage, selectedHhNO);
@@ -194,6 +194,8 @@ public class MwraActivity extends AppCompatActivity {
         //int maxFpMWRA = db.getMaxMWRANoBYHHFromFolloupsSche(selectedUC, selectedVillage, selectedHhNO);
         int maxFpMWRA = db.FollowUpsScheDao().getMaxMWRANoBYHHFromFolloupsSche(selectedUC, selectedVillage, selectedHhNO);
         mwraCount = Math.max(maxMWRA, maxFpMWRA);
+
+        Intent intent = new Intent(this, SectionBActivity.class);
         MemberInfoLauncher.launch(intent);
     }
 

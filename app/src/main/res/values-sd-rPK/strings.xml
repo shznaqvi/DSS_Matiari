@@ -79,7 +79,7 @@
     <string name="ra17_d">۔49 سالن کان وڌيڪ</string>
     <string name="ra17_d1">مرد</string>
     <string name="ra17_d2">عورتون</string>
-    <string name="ra18">۔18 کان 49 سال جي عمر جون عورتون جی تعداد</string>
+    <string name="ra18">۔14 کان 49 سال جي عمر جون عورتون جی تعداد</string>
     <string name="rb_uc">يونين ڪائونسل</string>
     <string name="rb_vil">ڳوٺ  </string>
     <string name="rb_hno">گھر جو نمبر </string>
@@ -98,13 +98,13 @@
     <string name="ra14">گھر جي سربراه جو نالو</string>
     <string name="ra13d">ٻيو ڪجھ وضا حت ڪريو</string>
     <string name="ra17">گھر جا پاتي</string>
-    <string name="ra20"> ڇا هن گهر ۾ 18_49 سالن جون عورتون موجود آهن</string>
+    <string name="ra20"> ڇا هن گهر ۾ 14_49 سالن جون عورتون موجود آهن</string>
     <string name="ra20_a">ها</string>
     <string name="ra20_b"> نه </string>
     <string name="ra10">سڃاڻپ جي آء ڊي </string>
     <string name="ra11b">بند پيل يا ڪو به اهل جواٻ ڏيندر موجود نه آهي</string>
     <string name="ra11c">انڪار ڪيو</string>
-    <string name="ra11e">۔18 ۽ 49 سالن جي وچ ۾ ڪا به عورت ناهي </string>
+    <string name="ra11e">۔14 ۽ 49 سالن جي وچ ۾ ڪا به عورت ناهي </string>
     <string name="ra11d">ٻيو ڪجھ وضا حت ڪريو</string>
     <string name="ra1201">مڪمل</string>
     <string name="ra13a">مڪمل</string>

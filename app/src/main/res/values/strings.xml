@@ -81,7 +81,7 @@
     <string name="ra11a">Completed</string>
     <string name="ra11b">Locked / no eligible respondent </string>
     <string name="ra11c">Refused </string>
-    <string name="ra11e">No WRA 18 – 49 </string>
+    <string name="ra11e">No WRA 14 – 49 </string>
     <string name="ra11d">Other (specify)</string>
     <string name="ra12">Household Visit Status</string>
     <string name="ra1201">Completed</string>
@@ -99,12 +99,12 @@
     <string name="ra17">Family Members</string>
     <string name="ra17_a">0 to 04 Years</string>
     <string name="ra17_b">05 to 17 Years</string>
-    <string name="a17_c">18 to 49 Years </string>
+    <string name="a17_c">14 to 49 Years </string>
     <string name="ra17_d">&gt;49 Years</string>
 
-    <string name="ra18">No. of Women aged 18 – 49 years</string>
+    <string name="ra18">No. of Women aged 14 – 49 years</string>
     <string name="ra19">Caste</string>
-    <string name="ra20">Does this household have women aged 18–49 years?</string>
+    <string name="ra20">Does this household have women aged 14–49 years?</string>
     <string name="ra20_a">Yes</string>
     <string name="ra20_b">No</string>
     <string name="rb_uc">Union council </string>
@@ -317,8 +317,8 @@
     <string name="a17_3">Transgender</string>
     <string name="title_wra_dialog_remain" translatable="false">Proceed?</string>
     <string name="title_wra_dialog_complete" translatable="false">Add More?</string>
-    <string name="message_wra_dialog_addmore" translatable="false">You have already entered %1$s women between 18 – 49. \n\nWould you like to add more women?</string>
-    <string name="message_wra_dialog_proceeed" translatable="false">You have entered only %1$s of %2$s women between 18 – 49 in the household. \n\nAre you sure you want to close this household?</string>
+    <string name="message_wra_dialog_addmore" translatable="false">You have already entered %1$s women between 14 – 49. \n\nWould you like to add more women?</string>
+    <string name="message_wra_dialog_proceeed" translatable="false">You have entered only %1$s of %2$s women between 14 – 49 in the household. \n\nAre you sure you want to close this household?</string>
     <string name="ra16_a">yes</string>
     <string name="ra16_b">no</string>
     <string name="ra17_a1">male</string>

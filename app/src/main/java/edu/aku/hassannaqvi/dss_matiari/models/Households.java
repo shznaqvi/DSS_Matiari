@@ -570,7 +570,6 @@ public class Households extends BaseObservable implements Observable {
 
     public void setRa08(String ra08) {
         this.ra08 = ra08;
-
         notifyChange(BR.ra08);
     }
 
