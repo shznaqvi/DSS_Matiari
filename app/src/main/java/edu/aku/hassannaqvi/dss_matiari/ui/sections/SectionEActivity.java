@@ -11,6 +11,8 @@ import androidx.databinding.DataBindingUtil;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
@@ -18,6 +20,10 @@ import com.validatorcrawler.aliazaz.Validator;
 
 import org.json.JSONException;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Locale;
 import java.util.regex.Pattern;
 
 import edu.aku.hassannaqvi.dss_matiari.R;
@@ -27,6 +33,8 @@ import edu.aku.hassannaqvi.dss_matiari.core.MainApp;
 import edu.aku.hassannaqvi.dss_matiari.databinding.ActivitySectionEBinding;
 import edu.aku.hassannaqvi.dss_matiari.models.Outcome;
 import edu.aku.hassannaqvi.dss_matiari.room.DssRoomDatabase;
+import edu.aku.hassannaqvi.dss_matiari.ui.EndingActivity;
+import edu.aku.hassannaqvi.dss_matiari.ui.lists.MwraActivity;
 
 public class SectionEActivity extends AppCompatActivity {
 
@@ -43,6 +51,8 @@ public class SectionEActivity extends AppCompatActivity {
         bi = DataBindingUtil.setContentView(this, R.layout.activity_section_e);
         db = MainApp.appInfo.dbHelper;
 
+        setDateRanges();
+
         try {
             //outcome = db.getOutComeBYID(String.valueOf(++MainApp.childCount));
             String[] muid = mwra.getUid().split("_");
@@ -52,11 +62,23 @@ public class SectionEActivity extends AppCompatActivity {
             Toast.makeText(this, "JSONException(Outcome): " + e.getMessage(), Toast.LENGTH_SHORT).show();
         }
 
+        if(mwra.getRegRound().equals(""))
+        {
+            MainApp.ROUND = MainApp.fpMwra.getFRound();
+            outcome.setRc03(mwra.getRb13());
+            String date = toBlackVisionDate(mwra.getRb13());
+            bi.rc06.setMinDate(date);
+            bi.rc03.setVisibility(View.VISIBLE);
+            bi.rc03dob.setVisibility(View.GONE);
+            bi.rc03dob.setText("");
 
-        MainApp.ROUND = MainApp.fpMwra.getFRound();
+        }else{
+            MainApp.ROUND = mwra.getRound();
+            bi.rc03dob.setVisibility(View.VISIBLE);
+            bi.rc03.setVisibility(View.GONE);
+        }
 
 
-        outcome.setRc03(mwra.getRb13());
         outcome.setRc01(outcome.getRc01().isEmpty() ? String.valueOf(MainApp.childCount) : outcome.getRc01());
 
         if (outcome.getUid().equals("")) {
@@ -69,13 +91,33 @@ public class SectionEActivity extends AppCompatActivity {
 
         }
 
+        bi.rc03dob.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+                String date = toBlackVisionDate(bi.rc03dob.getText().toString());
+
+                bi.rc06.setMinDate(date);
+
+            }
+        });
+
+
         bi.setOutcome(outcome);
 
         bi.btnContinue.setText(outcome.getUid().equals("") ? "Save" : "Update");
 
-        String date = toBlackVisionDate(mwra.getRb13());
 
-        bi.rc06.setMinDate(date);
 
 
     }
@@ -91,12 +133,20 @@ public class SectionEActivity extends AppCompatActivity {
                     finish();
                     startActivity(new Intent(this, SectionEActivity.class).addFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT).putExtra("complete", true));
 
-                } else {
+                } else if(mwra.getRegRound().equals("")) {
                     MainApp.childCount = 0;
                     MainApp.totalChildCount = 0;
                     setResult(RESULT_OK);
                     finish();
                     startActivity(new Intent(this, SectionDActivity.class).addFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT).putExtra("complete", true));
+
+                }else{
+                    MainApp.childCount = 0;
+                    MainApp.totalChildCount = 0;
+                    setResult(RESULT_OK);
+                    finish();
+                    startActivity(new Intent(this, MwraActivity.class).addFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT).putExtra("complete", true));
+
                 }
 
             } else {
@@ -185,5 +235,62 @@ public class SectionEActivity extends AppCompatActivity {
     }
 
 
+    private void setDateRanges() {
+        try {
+            Calendar cal = Calendar.getInstance();
+
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
+            cal.setTime(sdf.parse(mwra.getRb01a()));// all done
+
+            sdf = new SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH);
+
+            // Set MinDob date to 50 years back from DOV
+            cal.add(Calendar.MONTH, -3);
+            String minDob = sdf.format(cal.getTime());
+            cal.add(Calendar.MONTH, +3); // Calender reset to DOV
+            Log.d(TAG, "onCreate: " + minDob);
+
+            // Set maxDob date to 50 years back from DOV
+            //cal.add(Calendar.YEAR, -14);
+            //String maxDob = sdf.format(cal.getTime());
+            //cal.add(Calendar.YEAR, +14); // Calender reset to DOV
+            //Log.d(TAG, "onCreate: " + maxDob);
+
+
+            // Set MinLMP date to 2 months back from DOV
+            //cal.add(Calendar.MONTH, -9);
+            //String minLMP = sdf.format(cal.getTime());
+            //cal.add(Calendar.MONTH, +9); // Calender reset to DOV
+            //Log.d(TAG, "onCreate: " + minLMP);
+
+            // Set MaxLMP same as DOV
+            //String maxLMP = sdf.format(cal.getTime());
+            //Log.d(TAG, "onCreate: " + maxLMP);
+
+            // Set MinEDD same as DOV
+            //String minEDD = sdf.format(cal.getTime());
+            //Log.d(TAG, "onCreate: " + minEDD);
+
+            // Set MaxEDD to 9 months from DOV
+            //cal.add(Calendar.MONTH, +9);
+            //String maxEDD = sdf.format(cal.getTime());
+            //cal.add(Calendar.MONTH, -9);
+            //Log.d(TAG, "onCreate: " + maxLMP);
+
+            // DOB
+            bi.rc03dob.setMinDate(minDob);
+
+            // LMP
+            //bi.rb08.setMaxDate(maxLMP);
+            //bi.rb08.setMinDate(minLMP);
+
+            // EDD
+            //bi.rb09.setMaxDate(maxEDD);
+            //bi.rb09.setMinDate(minEDD);
+
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+    }
 
 }

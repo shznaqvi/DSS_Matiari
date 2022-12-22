@@ -145,6 +145,9 @@ public class Mwra extends BaseObservable implements Observable {
     @Ignore
     private String rb09 = StringUtils.EMPTY;
 
+    @Ignore
+    private String rb09a = StringUtils.EMPTY;
+
     // Followup Variables
     @Ignore
     private String rb03a = StringUtils.EMPTY;
@@ -233,10 +236,6 @@ public class Mwra extends BaseObservable implements Observable {
         mwra.setRb05(MainApp.fpMwra.getRb05());     // Age in Years
         mwra.setPrePreg(MainApp.fpMwra.getRb07());
         mwra.setRb06(MainApp.fpMwra.getRb06());
-
-
-
-
 
     }
 
@@ -598,6 +597,17 @@ public class Mwra extends BaseObservable implements Observable {
         notifyChange(BR.rb09);
     }
 
+
+    @Bindable
+    public String getRb09a() {
+        return rb09a;
+    }
+
+    public void setRb09a(String rb09a) {
+        this.rb09a = rb09a;
+        notifyChange(BR.rb09a);
+    }
+
     @Bindable
     public String getRb03a() {
         return rb03a;
@@ -765,6 +775,7 @@ public class Mwra extends BaseObservable implements Observable {
             this.rb07 = json.getString("rb07");
             this.rb08 = json.getString("rb08");
             this.rb09 = json.getString("rb09");
+            this.rb09a = json.getString("rb09a");
 
         }
     }
@@ -817,7 +828,8 @@ public class Mwra extends BaseObservable implements Observable {
                 .put("rb06", rb06)
                 .put("rb07", rb07)
                 .put("rb08", rb08)
-                .put("rb09", rb09);
+                .put("rb09", rb09)
+                .put("rb09a", rb09a);
 
         return json.toString();
     }

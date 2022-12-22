@@ -455,7 +455,7 @@
                 </androidx.cardview.widget.CardView>
 
 
-                <!-- rc07  Radio   -->
+                <!-- rb07  Radio   -->
                 <androidx.cardview.widget.CardView
                     android:id="@+id/fldGrpCVrb07"
                     style="@style/cardView"
@@ -612,6 +612,68 @@
 
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
+
+                <!-- rb07  Radio   -->
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/fldGrpCVrb10"
+                    style="@style/cardView"
+                    android:visibility='@{mwra.Rb06.equals(`4`)? View.GONE : View.VISIBLE}'>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/bottom"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                style="@style/labels"
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:text="@string/rb09a" />
+
+                            <TextView
+                                style="@style/quesNum"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:text="@string/Q_rb09a" />
+
+
+                        </LinearLayout>
+
+                        <RadioGroup
+                            android:id="@+id/rb09a"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <RadioButton
+                                android:id="@+id/rb09a01"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:checked='@{mwra.getRb09a().equals("1")}'
+                                android:onClick='@{()->mwra.setRb09a("1")}'
+                                android:text="@string/ra16_a" />
+
+                            <RadioButton
+                                android:id="@+id/rb09a02"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:checked='@{mwra.getRb09a().equals("2")}'
+                                android:onClick='@{()->mwra.setRb09a("2")}'
+                                android:text="@string/ra16_b" />
+                        </RadioGroup>
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+
+
 
                 <!--EndButton LinearLayout-->
                 <LinearLayout

@@ -6,6 +6,7 @@ import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.mwraCount;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.sharedPref;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -34,6 +35,7 @@ import edu.aku.hassannaqvi.dss_matiari.core.MainApp;
 import edu.aku.hassannaqvi.dss_matiari.databinding.ActivitySectionBBinding;
 import edu.aku.hassannaqvi.dss_matiari.models.Households;
 import edu.aku.hassannaqvi.dss_matiari.models.Mwra;
+import edu.aku.hassannaqvi.dss_matiari.models.Outcome;
 import edu.aku.hassannaqvi.dss_matiari.room.DssRoomDatabase;
 
 public class SectionBActivity extends AppCompatActivity {
@@ -200,8 +202,20 @@ public class SectionBActivity extends AppCompatActivity {
         if (!formValidation()) return;
         //if (MainApp.mwra.getUid().equals("") ? insertNewRecord() && insertNewFollowupRecord() : updateDB()) {
         if (MainApp.mwra.getUid().equals("") ? insertNewRecord() : updateDB()) {
-            setResult(RESULT_OK);
-            finish();
+
+            if(bi.rb09a01.isChecked())
+            {
+                MainApp.outcome = new Outcome();
+                Intent forwardIntent = new Intent(this, SectionEActivity.class).putExtra("complete", true);
+                forwardIntent.setFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT);
+                setResult(RESULT_OK, forwardIntent);
+                finish();
+                startActivity(forwardIntent);
+            }else{
+                setResult(RESULT_OK);
+                finish();
+            }
+
         } else {
             Toast.makeText(this, "Failed to Update Database!", Toast.LENGTH_SHORT).show();
         }

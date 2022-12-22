@@ -133,6 +133,7 @@
     <string name="rb08_info">DD/MM/YYYY</string>
     <string name="rb09">EDD Date [auto-calculated]</string>
     <string name="rb09_info">DD/MM/YYYY</string>
+    <string name="rb09a">Have you delivered a baby in the past three months? </string>
 
     <string name="rc01">Unique WRA#</string>
     <string name="rc02">Name of Women</string>
@@ -257,6 +258,7 @@
     <string name='Q_rb07' translatable="false">rb07</string>
     <string name='Q_rb08' translatable="false">rb08</string>
     <string name='Q_rb09' translatable="false">rb09</string>
+    <string name='Q_rb09a' translatable="false">rb09a</string>
     <string name='Q_rb10' translatable="false">rb10</string>
     <string name='Q_rb11' translatable="false">rb11</string>
     <string name='Q_rb11a' translatable="false">rb11a</string>
