@@ -46,7 +46,7 @@ public class FollowUpsSche implements Observable {
     private String ra01 = StringUtils.EMPTY; // Date of First Visit
 
     @ColumnInfo(name = TableFollowUpsSche.COLUMN_RA08)
-    private String ra08 = StringUtils.EMPTY; // Para
+    private String ra08 = StringUtils.EMPTY; // Mohalla
 
     @ColumnInfo(name = TableFollowUpsSche.COLUMN_RA14)
     private String ra14 = StringUtils.EMPTY; // Head of Household
@@ -70,16 +70,16 @@ public class FollowUpsSche implements Observable {
     private String rb04 = StringUtils.EMPTY; // DOB
 
     @ColumnInfo(name = TableFollowUpsSche.COLUMN_RC12)
-    private String rc12 = StringUtils.EMPTY; // Gender
+    private String rc12 = StringUtils.EMPTY; // Gender Will be rc04 in new View
 
     @ColumnInfo(name = TableFollowUpsSche.COLUMN_RC15)
-    private String rc15 = StringUtils.EMPTY;   // Current pregnancy Status
+    private String rc15 = StringUtils.EMPTY;   // Current pregnancy Status --- rb07
 
     @ColumnInfo(name = TableFollowUpsSche.COLUMN_RB05)
     private String rb05 = StringUtils.EMPTY;  // Age in years
 
     @ColumnInfo(name = TableFollowUpsSche.COLUMN_RB07)
-    private String rb07 = StringUtils.EMPTY;  // Pregnancy Status
+    private String rb07 = StringUtils.EMPTY;  // Previous pregnancy status will be is prePregnancy
 
     @ColumnInfo(name = TableFollowUpsSche.COLUMN_RB06)
     private String rb06 = StringUtils.EMPTY; // Marital Status

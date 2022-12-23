@@ -133,7 +133,8 @@
     <string name="rb08_info">DD/MM/YYYY</string>
     <string name="rb09">EDD Date [auto-calculated]</string>
     <string name="rb09_info">DD/MM/YYYY</string>
-    <string name="rb09a">Have you delivered a baby in the past three months? </string>
+    <string name="rb09a">Have you delivered an alive baby in the past three months? </string>
+    <string name="rb09b">Status of Unreported Pregnancy Outcome </string>
 
     <string name="rc01">Unique WRA#</string>
     <string name="rc02">Name of Women</string>
@@ -232,7 +233,7 @@
     <string name='Q_ra11' translatable="false">ra11</string>
     <string name='Q_ra12' translatable="false">ra12</string>
     <string name='Q_ra13' translatable="false">ra13</string>
-    <string name='Q_ra14' translatable="false">ra13</string>
+    <string name='Q_ra14' translatable="false">ra14</string>
     <string name='Q_ra15' translatable="false">ra15</string>
     <string name='Q_ra16' translatable="false">ra16</string>
     <string name='Q_ra17' translatable="false">ra17</string>
@@ -240,8 +241,8 @@
     <string name='Q_ra17_b' translatable="false">ra17_b</string>
     <string name='Q_ra17_d' translatable="false">ra17_d</string>
     <string name='Q_ra18' translatable="false">ra18</string>
-    <string name='Q_ra19' translatable="false">ra14</string>
-    <string name='Q_ra20' translatable="false">ra16</string>
+    <string name='Q_ra19' translatable="false">ra19</string>
+    <string name='Q_ra20' translatable="false">ra20</string>
     <string name="Q_ra21" translatable="false">RA21</string>
     <string name='Q_rb_hno' translatable="false">rb_hno</string>
     <string name='Q_rb_sid' translatable="false">rb_sid</string>
@@ -259,6 +260,7 @@
     <string name='Q_rb08' translatable="false">rb08</string>
     <string name='Q_rb09' translatable="false">rb09</string>
     <string name='Q_rb09a' translatable="false">rb09a</string>
+    <string name='Q_rb09b' translatable="false">rb09b</string>
     <string name='Q_rb10' translatable="false">rb10</string>
     <string name='Q_rb11' translatable="false">rb11</string>
     <string name='Q_rb11a' translatable="false">rb11a</string>
@@ -341,7 +343,7 @@
     <string name="identification_mainheading">Identification Section</string>
     <string name="ra21">Detail Address with land mark</string>
     <string name="ra22">Household ID</string>
-    <string name="Q_ra22" translatable="false">RA11</string>
+    <string name="Q_ra22" translatable="false">RA22</string>
     <string name="rb09hint">Press button to calculate EDD &gt;&gt;&gt;</string>
     <string name="age_groups">Age Groups</string>
     <string name="rb01a">Date of Enrollment</string>

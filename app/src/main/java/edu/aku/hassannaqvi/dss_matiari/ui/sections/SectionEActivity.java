@@ -68,28 +68,23 @@ public class SectionEActivity extends AppCompatActivity {
             outcome.setRc03(mwra.getRb13());
             String date = toBlackVisionDate(mwra.getRb13());
             bi.rc06.setMinDate(date);
-            bi.rc03.setVisibility(View.VISIBLE);
-            bi.rc03dob.setVisibility(View.GONE);
-            bi.rc03dob.setText("");
+            bi.rc03dob.setEnabled(false);
 
-        }else{
+        }else if(outcome.getUid().equals("")){
             MainApp.ROUND = mwra.getRound();
-            bi.rc03dob.setVisibility(View.VISIBLE);
-            bi.rc03.setVisibility(View.GONE);
-        }
+            bi.rc03dob.setEnabled(true);
 
+        }else if(!outcome.getUid().equals(""))
+        {
+            MainApp.ROUND = mwra.getRound();
+            bi.rc03dob.setEnabled(false);
+        }
 
         outcome.setRc01(outcome.getRc01().isEmpty() ? String.valueOf(MainApp.childCount) : outcome.getRc01());
 
-        if (outcome.getUid().equals("")) {
-            //mwra.populateMetaFollowups();
-            try {
-                outcome.sEHydrate(outcome.sEtoString());
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
+        bi.setOutcome(outcome);
+        bi.btnContinue.setText(outcome.getUid().equals("") ? "Save" : "Update");
 
-        }
 
         bi.rc03dob.addTextChangedListener(new TextWatcher() {
             @Override
@@ -111,14 +106,6 @@ public class SectionEActivity extends AppCompatActivity {
 
             }
         });
-
-
-        bi.setOutcome(outcome);
-
-        bi.btnContinue.setText(outcome.getUid().equals("") ? "Save" : "Update");
-
-
-
 
     }
 
@@ -145,7 +132,6 @@ public class SectionEActivity extends AppCompatActivity {
                     MainApp.totalChildCount = 0;
                     setResult(RESULT_OK);
                     finish();
-                    startActivity(new Intent(this, MwraActivity.class).addFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT).putExtra("complete", true));
 
                 }
 

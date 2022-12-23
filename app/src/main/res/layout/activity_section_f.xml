@@ -200,7 +200,7 @@
                         </LinearLayout>
 
                         <EditText
-                            android:id="@+id/rc02"
+                            android:id="@+id/rb02"
                             style="@style/labelsHead"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -247,7 +247,7 @@
                         </LinearLayout>
 
                         <EditText
-                            android:id="@+id/rb02"
+                            android:id="@+id/rb03"
                             style="@style/labelsHead"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"

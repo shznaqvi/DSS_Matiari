@@ -13,6 +13,7 @@ import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -76,6 +77,20 @@ public class SectionBActivity extends AppCompatActivity {
 
         db = MainApp.appInfo.dbHelper;
         bi.btnContinue.setText(MainApp.mwra.getUid().equals("") ? "Save" : "Update");
+
+        bi.rb09b.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                if(bi.rb09b01.isChecked())
+                {
+                    MainApp.totalChildCount = 1;
+                }else if(bi.rb09b02.isChecked()){
+                    MainApp.totalChildCount = 2;
+                }else{
+                    MainApp.totalChildCount = 3;
+                }
+            }
+        });
 
 
 
@@ -205,7 +220,7 @@ public class SectionBActivity extends AppCompatActivity {
 
             if(bi.rb09a01.isChecked())
             {
-                MainApp.outcome = new Outcome();
+                //MainApp.outcome = new Outcome();
                 Intent forwardIntent = new Intent(this, SectionEActivity.class).putExtra("complete", true);
                 forwardIntent.setFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT);
                 setResult(RESULT_OK, forwardIntent);

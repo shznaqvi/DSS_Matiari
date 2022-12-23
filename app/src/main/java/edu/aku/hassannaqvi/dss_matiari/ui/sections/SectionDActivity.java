@@ -44,7 +44,7 @@ public class SectionDActivity extends AppCompatActivity {
         bi = DataBindingUtil.setContentView(this, R.layout.activity_section_d);
         db = MainApp.appInfo.dbHelper;
 
-        if (mwra.getUid().equals("")) {
+        if (!mwra.getUid().equals("")) {
             //mwra.populateMetaFollowups();
             try {
                 mwra.sDHydrate(mwra.SDtoString());
@@ -140,7 +140,6 @@ public class SectionDActivity extends AppCompatActivity {
 
     public void btnContinue(View view) {
         if (!formValidation()) return;
-
         if(updateDB()){
             setResult(RESULT_OK);
             //startActivity(new Intent(this, FPEndingActivity.class).addFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT).putExtra("complete", MainApp.mwraFlag));
