@@ -15,6 +15,7 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
+import android.widget.Switch;
 import android.widget.Toast;
 import com.validatorcrawler.aliazaz.Validator;
 
@@ -62,7 +63,40 @@ public class SectionEActivity extends AppCompatActivity {
             Toast.makeText(this, "JSONException(Outcome): " + e.getMessage(), Toast.LENGTH_SHORT).show();
         }
 
-        if(mwra.getRegRound().equals(""))
+
+        // Registration
+        switch (mwra.getRegRound())
+        {
+            case "1":
+                // New outcome restration
+                if(outcome.getUid().equals(""))
+                {
+                    MainApp.ROUND = mwra.getRound();
+                    bi.rc03dob.setEnabled(true);
+                }else{
+                    MainApp.ROUND = mwra.getRound();
+                    bi.rc03dob.setEnabled(false);
+                }
+                // Followup
+            case "":
+                if(mwra.getRb13().equals(""))
+                {
+                    if(outcome.getUid().equals("")) {
+                        MainApp.ROUND = mwra.getRound();
+                        bi.rc03dob.setEnabled(true);
+                    }else{
+                        MainApp.ROUND = mwra.getRound();
+                        bi.rc03dob.setEnabled(false);
+                    }
+                }else {
+                    MainApp.ROUND = MainApp.fpMwra.getFRound();
+                    outcome.setRc03(mwra.getRb13());
+                    String date = toBlackVisionDate(mwra.getRb13());
+                    bi.rc06.setMinDate(date);
+                    bi.rc03dob.setEnabled(false);
+                }
+        }
+        /*if(mwra.getRegRound().equals(""))
         {
             MainApp.ROUND = MainApp.fpMwra.getFRound();
             outcome.setRc03(mwra.getRb13());
@@ -78,7 +112,7 @@ public class SectionEActivity extends AppCompatActivity {
         {
             MainApp.ROUND = mwra.getRound();
             bi.rc03dob.setEnabled(false);
-        }
+        }*/
 
         outcome.setRc01(outcome.getRc01().isEmpty() ? String.valueOf(MainApp.childCount) : outcome.getRc01());
 

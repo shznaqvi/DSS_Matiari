@@ -136,6 +136,9 @@
     <string name="rb09a">Have you delivered an alive baby in the past three months? </string>
     <string name="rb09b">Status of Unreported Pregnancy Outcome </string>
 
+    <string name="rb16">Have you delivered an alive baby during the duration from our last visit and today? </string>
+    <string name="rb17">Status of Unreported Pregnancy Outcome </string>
+
     <string name="rc01">Unique WRA#</string>
     <string name="rc02">Name of Women</string>
     <string name="rc03">Husband/Father Name</string>
@@ -269,6 +272,8 @@
     <string name='Q_rb13' translatable="false">rb13</string>
     <string name='Q_rb14' translatable="false">rb14</string>
     <string name='Q_rb15' translatable="false">rb15</string>
+    <string name='Q_rb16' translatable="false">rb16</string>
+    <string name='Q_rb17' translatable="false">rb17</string>
 
     <string name='Q_rc01' translatable="false">rc01</string>
     <string name='Q_rc02' translatable="false">rc02</string>

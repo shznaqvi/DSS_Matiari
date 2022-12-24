@@ -60,8 +60,7 @@ public class SectionCActivity extends AppCompatActivity {
             Toast.makeText(this, "JSONException(Followups): " + e.getMessage(), Toast.LENGTH_SHORT).show();
         }
 
-        assert mwra != null;
-        if (mwra.getUid().equals("")) {
+        /*if (mwra.getRegRound().equals("") && !mwra.getUid().equals("")) {
             mwra.populateMetaFollowups();
             try {
                 mwra.sCHydrate(mwra.sCtoString());
@@ -69,11 +68,11 @@ public class SectionCActivity extends AppCompatActivity {
                 e.printStackTrace();
             }
 
-
-        }
+*/
+        //}
 
         //bi.setFpHouseholds(MainApp.fpHouseholds);
-        bi.setFollowups(MainApp.mwra);
+        bi.setFollowups(mwra);
 
         setImmersive(true);
 
@@ -116,6 +115,21 @@ public class SectionCActivity extends AppCompatActivity {
                     mwraStatus.remove(followUpsScheHHList.get(selectedMember).getMuid());
                 }
    }
+        });
+
+        bi.rb17.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup radioGroup, int i) {
+                if(bi.rb1701.isChecked())
+                {
+                    MainApp.totalChildCount = 1;
+                }else if(bi.rb1702.isChecked())
+                {
+                    MainApp.totalChildCount = 2;
+                }else if(bi.rb1703.isChecked()){
+                    MainApp.totalChildCount = 3;
+                }
+            }
         });
 
 
@@ -203,7 +217,6 @@ public class SectionCActivity extends AppCompatActivity {
             if(bi.rb1001.isChecked()) {
 
                 switch (mwra.getRb06()) {
-
                     // Married in Previous Round
                     case "1":
                         // Pregnant
@@ -228,18 +241,22 @@ public class SectionCActivity extends AppCompatActivity {
                                     //finish();
                                 }
                             }
-                        } else {   // Not Pregnant
+                        } else if(mwra.getPrePreg().equals("2") && bi.rb1601.isChecked()) {   // Not Pregnant
+                            Intent forwardIntent = new Intent(this, SectionEActivity.class).putExtra("complete", true);
+                            forwardIntent.setFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT);
+                            setResult(RESULT_OK, forwardIntent);
+                            startActivity(forwardIntent);
+
+                        }else if (mwra.getPrePreg().equals("2") && bi.rb1602.isChecked()){
                             Intent forwardIntent = new Intent(this, SectionDActivity.class).putExtra("complete", true);
                             forwardIntent.setFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT);
                             setResult(RESULT_OK, forwardIntent);
                             startActivity(forwardIntent);
-                            //finish();
+
                         }
 
                         break;
-
                     //finish();
-
                     // Divorced
                     case "2":
                         // Pregnant
@@ -261,8 +278,12 @@ public class SectionCActivity extends AppCompatActivity {
                                 }
                             }
                         } else {      // Not Pregnant
-                            // Marital status changed
-                            if (bi.rb1401.isChecked()) {
+                            if(bi.rb1601.isChecked()){
+                                Intent forwardIntent = new Intent(this, SectionEActivity.class).putExtra("complete", true);
+                                forwardIntent.setFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT);
+                                setResult(RESULT_OK, forwardIntent);
+                                startActivity(forwardIntent);
+                            }else if (bi.rb1401.isChecked()) {        // Marital status changed
                                 Intent forwardIntent = new Intent(this, SectionDActivity.class).putExtra("complete", true);
                                 forwardIntent.setFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT);
                                 setResult(RESULT_OK, forwardIntent);
@@ -304,7 +325,13 @@ public class SectionCActivity extends AppCompatActivity {
                                 setResult(RESULT_OK, forwardIntent);
                                 startActivity(forwardIntent);
                                 //finish();
-                            } else {
+                            } else if(bi.rb1601.isChecked()) {
+                                Intent forwardIntent = new Intent(this, SectionEActivity.class).putExtra("complete", true);
+                                forwardIntent.setFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT);
+                                setResult(RESULT_OK, forwardIntent);
+                                startActivity(forwardIntent);
+                            }
+                            else {
                                 setResult(RESULT_OK);
                                 //finish();
                             }
@@ -340,7 +367,14 @@ public class SectionCActivity extends AppCompatActivity {
                                 setResult(RESULT_OK, forwardIntent);
                                 startActivity(forwardIntent);
                                 //finish();
-                            } else {
+                            } else if(bi.rb1601.isChecked())
+                            {
+                                Intent forwardIntent = new Intent(this, SectionEActivity.class).putExtra("complete", true);
+                                forwardIntent.setFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT);
+                                setResult(RESULT_OK, forwardIntent);
+                                startActivity(forwardIntent);
+                            }
+                            else {
                                 setResult(RESULT_OK);
                                 //finish();
                             }

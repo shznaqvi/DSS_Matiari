@@ -171,6 +171,12 @@ public class Mwra extends BaseObservable implements Observable {
     @Ignore
     private String rb15 = StringUtils.EMPTY;
     @Ignore
+    private String rb16 = StringUtils.EMPTY;
+    @Ignore
+    private String rb17 = StringUtils.EMPTY;
+
+
+    @Ignore
     private long ageInMonths;
 
     @Ignore
@@ -719,6 +725,26 @@ public class Mwra extends BaseObservable implements Observable {
         notifyChange(BR.rb15);
     }
 
+    @Bindable
+    public String getRb16() {
+        return rb16;
+    }
+
+    public void setRb16(String rb16) {
+        this.rb16 = rb16;
+        notifyChange(BR.rb16);
+    }
+    @Bindable
+    public String getRb17() {
+        return rb17;
+    }
+
+    public void setRb17(String rb17) {
+        this.rb17 = rb17;
+        notifyChange(BR.rb17);
+    }
+
+
     private synchronized void notifyChange(int propertyId) {
         if (propertyChangeRegistry == null) {
             propertyChangeRegistry = new PropertyChangeRegistry();
@@ -820,6 +846,8 @@ public class Mwra extends BaseObservable implements Observable {
             this.rb13 = json.getString("rb13");
             this.rb14 = json.getString("rb14");
             this.rb15 = json.getString("rb15");
+            this.rb16 = json.getString("rb16");
+            this.rb17 = json.getString("rb17");
 
 
         }
@@ -873,7 +901,10 @@ public class Mwra extends BaseObservable implements Observable {
                 .put("rb12",rb12)
                 .put("rb13",rb13)
                 .put("rb14",rb14)
-                .put("rb15",rb15);
+                .put("rb15",rb15)
+                .put("rb16",rb16)
+                .put("rb17",rb17)
+        ;
 
         return json.toString();
     }
