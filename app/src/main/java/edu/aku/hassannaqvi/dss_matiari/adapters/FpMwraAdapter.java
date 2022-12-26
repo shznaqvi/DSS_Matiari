@@ -19,6 +19,8 @@ import org.json.JSONException;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.Period;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -85,9 +87,10 @@ public class FpMwraAdapter extends RecyclerView.Adapter<FpMwraAdapter.ViewHolder
         }
 
 
-
+        // MWRA Count
         MainApp.fmComplete = completeCount == MainApp.mwraCount;
 
+        // Name
         fName.setText(followUpsSche.getRb02());
         String marStatus = "";
         String wifeOrDaughter = "";
@@ -100,6 +103,7 @@ public class FpMwraAdapter extends RecyclerView.Adapter<FpMwraAdapter.ViewHolder
 
         indicator.setBackgroundColor(!followUpsSche.getfpDoneDt().equals("") ? ContextCompat.getColor(mContext, R.color.greenLight) : ContextCompat.getColor(mContext, R.color.colorAccent));
 
+        // Marital Status
         switch (followUpsSche.getRb06()) {
             case "1":
                 marStatus = "Married";
@@ -126,18 +130,40 @@ public class FpMwraAdapter extends RecyclerView.Adapter<FpMwraAdapter.ViewHolder
                 break;
         }
 
+        // Age according to system date
+
+
+
+
 
         if(followUpsSche.getMemberType().equals("1")) {
 
-            fAge.setText(marStatus + " | " + followUpsSche.getRb05() + "y  ");
+            // Age
+            int daysdiff  = MainApp.mwra.CalculateAge(followUpsSche.getRa01());
+            int years = daysdiff /365;
+
+            if(!followUpsSche.getRb05().equals("")) {
+                int actualAge = Integer.parseInt(followUpsSche.getRb05()) + years;
+                fAge.setText(marStatus + " | " + actualAge  + "y  ");
+            }
+
+
+
             secStatus.setBackgroundColor(followUpsSche.getRb07().equals("1") ? ContextCompat.getColor(mContext, R.color.redLight) : ContextCompat.getColor(mContext, R.color.grayLight));
             indicator.setImageDrawable(followUpsSche.getRb07().equals("1") ? ContextCompat.getDrawable(mContext, R.drawable.ic_baseline_pregnant_woman_24) : ContextCompat.getDrawable(mContext, R.drawable.ic_girl));
 
         }else{
-
+            // Calculate age from DOB of child
             indicator.setImageDrawable(ContextCompat.getDrawable(mContext, R.drawable.ic_baby));
 
-            try {
+            int days = MainApp.mwra.CalculateAge(followUpsSche.getRb04());
+
+            double months = days/30.41;
+
+            fAge.setText(months + "m");
+
+
+            /*try {
                 SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
 
                 Date date = sdf.parse(followUpsSche.getRb04());
@@ -168,7 +194,7 @@ public class FpMwraAdapter extends RecyclerView.Adapter<FpMwraAdapter.ViewHolder
             Log.d(TAG, "CaluculateAge: " + e.getMessage());
             e.printStackTrace();
 
-        }
+        }*/
 
         }
         fMaritalStatus.setText(wifeOrDaughter + followUpsSche.getRb03());
@@ -263,6 +289,8 @@ public class FpMwraAdapter extends RecyclerView.Adapter<FpMwraAdapter.ViewHolder
             return fName;
         }
     }
+
+
 
 
 

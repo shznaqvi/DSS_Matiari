@@ -1017,6 +1017,55 @@ public class Mwra extends BaseObservable implements Observable {
         }
     }
 
+    public int CalculateAge(String dateOfVisit) {
+
+        int noOfDays = 0;
+
+
+        try {
+            SimpleDateFormat df = new SimpleDateFormat("yyyy MM dd", Locale.ENGLISH);
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
+
+            //String dateOfReg = dateOfVisit;
+
+            String dateofReg = dateOfVisit.substring(9,19);
+
+            // set current Date
+            Calendar cur = Calendar.getInstance();
+            cur.setTime(cur.getTime());// all done
+
+            // Registration Date
+            Calendar calendar = Calendar.getInstance();
+            calendar.setTime(sdf.parse(dateofReg));
+
+
+            // set Date of birth
+            long millis = cur.getTimeInMillis() - calendar.getTimeInMillis();
+            calendar.setTimeInMillis(millis);
+
+
+            Calendar c = Calendar.getInstance();
+
+            c.setTimeInMillis(millis);
+            int years = c.get(Calendar.YEAR) - 1970;
+            int tMonth = c.get(Calendar.MONTH);
+            int tDay = c.get(Calendar.DAY_OF_MONTH);
+
+            noOfDays = tDay;
+
+
+            Log.d(TAG, "CaluculateAge: Y-" + years + " M-" + tMonth + " D-" + tDay);
+
+
+        } catch (ParseException e) {
+            Log.d(TAG, "CaluculateAge: " + e.getMessage());
+            e.printStackTrace();
+
+        }
+
+        return noOfDays;
+    }
+
 
     public String calcEDD() {
 

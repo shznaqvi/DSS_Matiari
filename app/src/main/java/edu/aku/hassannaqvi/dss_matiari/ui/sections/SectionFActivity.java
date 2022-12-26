@@ -53,16 +53,11 @@ public class SectionFActivity extends AppCompatActivity {
             Toast.makeText(this, "JSONException(Followups): " + e.getMessage(), Toast.LENGTH_SHORT).show();
         }
 
-        assert outcome != null;
-        if(outcome.getUid().equals(""))
+        if(outcome.getRegRound().equals(""))
         {
             outcome.populateMetaFollowups();
-            try {
-                outcome.sEHydrate(outcome.sEtoString());
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
         }
+
 
         bi.setOutcome(outcome);
 

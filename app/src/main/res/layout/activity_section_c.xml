@@ -963,6 +963,14 @@
                                                     android:onClick='@{()->followups.setRb14("4")}'
                                                     android:text="@string/rc0904" />
 
+                                                <RadioButton
+                                                    android:id="@+id/rb1405"
+                                                    android:layout_width="match_parent"
+                                                    android:layout_height="wrap_content"
+                                                    android:checked='@{followups.rb14.equals("5")}'
+                                                    android:onClick='@{()->followups.setRb14("5")}'
+                                                    android:text="@string/rc0905" />
+
 
                                             </RadioGroup>
                                         </LinearLayout>

@@ -64,6 +64,7 @@ public class SectionEActivity extends AppCompatActivity {
         }
 
 
+
         // Registration
         switch (mwra.getRegRound())
         {
@@ -79,22 +80,36 @@ public class SectionEActivity extends AppCompatActivity {
                 }
                 // Followup
             case "":
+
+                //for unreported outcome in followup
                 if(mwra.getRb13().equals(""))
                 {
-                    if(outcome.getUid().equals("")) {
+                    // new Registration
+                    if(outcome.getUid().equals(""))
+                    {
                         MainApp.ROUND = mwra.getRound();
                         bi.rc03dob.setEnabled(true);
                     }else{
                         MainApp.ROUND = mwra.getRound();
                         bi.rc03dob.setEnabled(false);
                     }
-                }else {
-                    MainApp.ROUND = MainApp.fpMwra.getFRound();
-                    outcome.setRc03(mwra.getRb13());
-                    String date = toBlackVisionDate(mwra.getRb13());
-                    bi.rc06.setMinDate(date);
-                    bi.rc03dob.setEnabled(false);
+
+                }else{
+                    if(outcome.getUid().equals(""))
+                    {
+                        MainApp.ROUND = MainApp.fpMwra.getFRound();
+                        outcome.setRc03(mwra.getRb13());
+                        String date = toBlackVisionDate(mwra.getRb13());
+                        bi.rc06.setMinDate(date);
+                        bi.rc03dob.setEnabled(false);
+                    }else{
+                        MainApp.ROUND = mwra.getRound();
+                        bi.rc03dob.setEnabled(false);
+                    }
+
                 }
+
+
         }
         /*if(mwra.getRegRound().equals(""))
         {

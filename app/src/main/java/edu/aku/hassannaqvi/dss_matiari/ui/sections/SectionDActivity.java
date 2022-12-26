@@ -44,7 +44,17 @@ public class SectionDActivity extends AppCompatActivity {
         bi = DataBindingUtil.setContentView(this, R.layout.activity_section_d);
         db = MainApp.appInfo.dbHelper;
 
-        if (!mwra.getUid().equals("")) {
+        try {
+            //followups = db.getFollowupsBySno(MainApp.fpMwra.getRb01(), MainApp.fpMwra.getFRound());
+            mwra = db.mwraDao().getFollowupsBySno(MainApp.households.getUid(), MainApp.fpMwra.getRb01(), MainApp.fpMwra.getFRound());
+        } catch (JSONException e) {
+            e.printStackTrace();
+            Toast.makeText(this, "JSONException(Followups): " + e.getMessage(), Toast.LENGTH_SHORT).show();
+        }
+
+
+
+        if (mwra.getRegRound().equals("") && !mwra.getUid().equals("")) {
             //mwra.populateMetaFollowups();
             try {
                 mwra.sDHydrate(mwra.SDtoString());

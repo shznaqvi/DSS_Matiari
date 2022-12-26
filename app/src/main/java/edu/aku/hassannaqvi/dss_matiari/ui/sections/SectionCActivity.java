@@ -60,18 +60,11 @@ public class SectionCActivity extends AppCompatActivity {
             Toast.makeText(this, "JSONException(Followups): " + e.getMessage(), Toast.LENGTH_SHORT).show();
         }
 
-        /*if (mwra.getRegRound().equals("") && !mwra.getUid().equals("")) {
+        if(mwra.getRegRound().equals(""))
+        {
             mwra.populateMetaFollowups();
-            try {
-                mwra.sCHydrate(mwra.sCtoString());
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
+        }
 
-*/
-        //}
-
-        //bi.setFpHouseholds(MainApp.fpHouseholds);
         bi.setFollowups(mwra);
 
         setImmersive(true);
