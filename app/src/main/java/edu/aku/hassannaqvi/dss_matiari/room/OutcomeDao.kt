@@ -38,9 +38,9 @@ interface OutcomeDao {
         {
             val tempOutcome = Outcome()
             return tempOutcome
-        }else{
+        }/*else{
             outcome.sEHydrate(outcome.se)
-        }
+        }*/
         return outcome
     }
 
@@ -63,10 +63,10 @@ interface OutcomeDao {
         {
             val tempOutcome = Outcome()
             return tempOutcome
-        } else {
+        } /*else {
             outcome.sEHydrate(outcome.se)
 
-        }
+        }*/
         return outcome
     }
 

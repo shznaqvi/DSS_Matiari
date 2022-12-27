@@ -53,6 +53,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
+                    android:id="@+id/item"
                     android:padding="8dp">
 
                     <LinearLayout
@@ -108,7 +109,7 @@
                             android:paddingEnd="12dp"
                             android:paddingBottom="2dp"
                             android:text="Status"
-                            android:textColor="@color/white"
+                            android:textColor="@color/black"
                             android:textSize="11dp"
                             android:textStyle="italic|normal" />
                     </LinearLayout>

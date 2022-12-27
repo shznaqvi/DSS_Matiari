@@ -208,7 +208,7 @@
                     android:textColor="@color/white"
                     android:textSize="@dimen/_9ssp"
                     android:textStyle="bold"
-                    android:visibility="visible" />
+                    android:visibility="gone" />
 
             </LinearLayout>
 

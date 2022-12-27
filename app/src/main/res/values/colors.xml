@@ -6,6 +6,7 @@
     <color name="colorPrimaryDark">#433683</color>
     <color name="colorAccent">#D81B2B</color>
     <color name="colorAccentLight">#F698A0</color>
+    <color name="colorLightRed">#FF004A</color>
 
     <color name="colorPrimaryOverlay">#7f3949AB</color>
     <color name="colorPrimaryLightOverlay">#7f9FA8DA</color>

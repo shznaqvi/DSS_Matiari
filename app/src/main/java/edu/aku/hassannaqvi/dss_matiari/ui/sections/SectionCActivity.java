@@ -1,6 +1,7 @@
 package edu.aku.hassannaqvi.dss_matiari.ui.sections;
 
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.followUpsScheHHList;
+import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.fpMwra;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.households;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.mwra;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.mwraStatus;
@@ -48,7 +49,6 @@ public class SectionCActivity extends AppCompatActivity {
         bi = DataBindingUtil.setContentView(this, R.layout.activity_section_c);
         db = MainApp.appInfo.dbHelper;
 
-
         // Set Round Number from followups data
         MainApp.ROUND = MainApp.fpMwra.getFRound();
 
@@ -60,43 +60,45 @@ public class SectionCActivity extends AppCompatActivity {
             Toast.makeText(this, "JSONException(Followups): " + e.getMessage(), Toast.LENGTH_SHORT).show();
         }
 
-        if(mwra.getRegRound().equals(""))
+        if(mwra.getUid() != null)
         {
-            mwra.populateMetaFollowups();
-        }
-
-        bi.setFollowups(mwra);
-
-        setImmersive(true);
-
-        bi.btnContinue.setText(MainApp.mwra.getUid().equals("") ? "Save" : "Update");
-
-        bi.rb15.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(RadioGroup group, int checkedId) {
-                if(bi.rb1501.isChecked())
-                {
-                    MainApp.totalChildCount = 1;
-                }else if(bi.rb1502.isChecked()){
-                    MainApp.totalChildCount = 2;
-                }else if (bi.rb1503.isChecked())
-                {
-                    MainApp.totalChildCount = 3;
-                }
-
+            if(mwra.getRegRound().equals(""))
+            {
+                mwra.populateMetaFollowups();
             }
 
-        });
+            try {
+                mwra.sCHydrate(mwra.getSC());
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+
+        int daysdiff  = MainApp.mwra.CalculateAge(fpMwra.getRa01());
+        int years = daysdiff/365;
+        int actualAge = 0;
+
+        if(!fpMwra.getRb05().equals("")) {
+            actualAge = Integer.parseInt(fpMwra.getRb05()) + years;
+        }
+
 
         if(!MainApp.households.getVisitNo().equals("") && Integer.parseInt(households.getVisitNo()) == 2)
         {
             bi.rb1008.setEnabled(true);
             bi.rb1004.setEnabled(false);
             bi.rb1004.setChecked(false);
-        }else{
+        }else {
             bi.rb1008.setEnabled(false);
             bi.rb1004.setEnabled(true);
         }
+
+        setImmersive(true);
+        bi.setFollowups(mwra);
+
+        bi.btnContinue.setText(MainApp.mwra.getUid().equals("") ? "Save" : "Update");
+
+        /********************************On Click Listeners******************************/
 
         bi.rb10.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
@@ -123,6 +125,23 @@ public class SectionCActivity extends AppCompatActivity {
                     MainApp.totalChildCount = 3;
                 }
             }
+        });
+
+        bi.rb15.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                if(bi.rb1501.isChecked())
+                {
+                    MainApp.totalChildCount = 1;
+                }else if(bi.rb1502.isChecked()){
+                    MainApp.totalChildCount = 2;
+                }else if (bi.rb1503.isChecked())
+                {
+                    MainApp.totalChildCount = 3;
+                }
+
+            }
+
         });
 
 

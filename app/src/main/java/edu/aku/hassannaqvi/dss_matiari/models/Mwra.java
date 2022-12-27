@@ -240,10 +240,13 @@ public class Mwra extends BaseObservable implements Observable {
         mwra.setRb02(MainApp.fpMwra.getRb02());  // Name of MWRA
         mwra.setRb03(MainApp.fpMwra.getRb03()); // Husband / Father Name
         mwra.setRb04(MainApp.fpMwra.getRb04()); // DOB
-        mwra.setRb05(MainApp.fpMwra.getRb05());     // Age in Years
         mwra.setPrePreg(MainApp.fpMwra.getRb07());
         mwra.setRb06(MainApp.fpMwra.getRb06());
 
+        int daysdiff  = CalculateAge(MainApp.fpMwra.getRa01());
+        int years = daysdiff/365;
+        int actualAge = Integer.parseInt(MainApp.fpMwra.getRb05()) + years;
+        mwra.setRb05(String.valueOf(actualAge));     // Age in Years
     }
 
 

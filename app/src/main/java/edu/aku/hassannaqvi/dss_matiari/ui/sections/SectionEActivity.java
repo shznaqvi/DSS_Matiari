@@ -63,6 +63,15 @@ public class SectionEActivity extends AppCompatActivity {
             Toast.makeText(this, "JSONException(Outcome): " + e.getMessage(), Toast.LENGTH_SHORT).show();
         }
 
+        if(outcome.getUid() != null)
+        {
+            try {
+                outcome.sEHydrate(outcome.getSE());
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+
 
 
         // Registration
@@ -111,23 +120,6 @@ public class SectionEActivity extends AppCompatActivity {
 
 
         }
-        /*if(mwra.getRegRound().equals(""))
-        {
-            MainApp.ROUND = MainApp.fpMwra.getFRound();
-            outcome.setRc03(mwra.getRb13());
-            String date = toBlackVisionDate(mwra.getRb13());
-            bi.rc06.setMinDate(date);
-            bi.rc03dob.setEnabled(false);
-
-        }else if(outcome.getUid().equals("")){
-            MainApp.ROUND = mwra.getRound();
-            bi.rc03dob.setEnabled(true);
-
-        }else if(!outcome.getUid().equals(""))
-        {
-            MainApp.ROUND = mwra.getRound();
-            bi.rc03dob.setEnabled(false);
-        }*/
 
         outcome.setRc01(outcome.getRc01().isEmpty() ? String.valueOf(MainApp.childCount) : outcome.getRc01());
 

@@ -3,6 +3,7 @@ package edu.aku.hassannaqvi.dss_matiari.adapters;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -70,6 +71,7 @@ public class FpMwraAdapter extends RecyclerView.Adapter<FpMwraAdapter.ViewHolder
         ImageView indicator = viewHolder.indicator;
         TextView secStatus = viewHolder.secStatus;
         LinearLayout mStatus = viewHolder.mstatus;
+        LinearLayout item = viewHolder.item;
 
         TextView secDob = viewHolder.secDob;
         TextView secGender = viewHolder.secGender;
@@ -132,22 +134,24 @@ public class FpMwraAdapter extends RecyclerView.Adapter<FpMwraAdapter.ViewHolder
 
         // Age according to system date
 
-
-
-
-
         if(followUpsSche.getMemberType().equals("1")) {
 
             // Age
             int daysdiff  = MainApp.mwra.CalculateAge(followUpsSche.getRa01());
-            int years = daysdiff /365;
+            int years = daysdiff/365;
+            int actualAge = 0;
 
             if(!followUpsSche.getRb05().equals("")) {
-                int actualAge = Integer.parseInt(followUpsSche.getRb05()) + years;
+                actualAge = Integer.parseInt(followUpsSche.getRb05()) + years;
                 fAge.setText(marStatus + " | " + actualAge  + "y  ");
             }
 
-
+            if(actualAge > 47) {
+                viewHolder.itemView.setBackgroundColor(Color.parseColor("#AF1B12"));
+                viewHolder.secStatus.setText("OverAge");
+            }else{
+                viewHolder.itemView.setBackgroundColor(Color.parseColor("#ffffff"));
+            }
 
             secStatus.setBackgroundColor(followUpsSche.getRb07().equals("1") ? ContextCompat.getColor(mContext, R.color.redLight) : ContextCompat.getColor(mContext, R.color.grayLight));
             indicator.setImageDrawable(followUpsSche.getRb07().equals("1") ? ContextCompat.getDrawable(mContext, R.drawable.ic_baseline_pregnant_woman_24) : ContextCompat.getDrawable(mContext, R.drawable.ic_girl));
@@ -156,45 +160,14 @@ public class FpMwraAdapter extends RecyclerView.Adapter<FpMwraAdapter.ViewHolder
             // Calculate age from DOB of child
             indicator.setImageDrawable(ContextCompat.getDrawable(mContext, R.drawable.ic_baby));
 
-            int days = MainApp.mwra.CalculateAge(followUpsSche.getRb04());
+            if(!followUpsSche.getRb04().equals("")) {
+                int days = MainApp.mwra.CalculateAge(followUpsSche.getRb04());
 
-            double months = days/30.41;
+                double months = days / 30.41;
 
-            fAge.setText(months + "m");
+                fAge.setText(months + "m");
+            }
 
-
-            /*try {
-                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
-
-                Date date = sdf.parse(followUpsSche.getRb04());
-
-                // set current Date
-                Calendar cur = Calendar.getInstance();
-                cur.setTime(cur.getTime());// all done
-
-                // set DOB
-                Calendar cal = Calendar.getInstance();
-                cal.setTime(date);
-
-                long millis = cur.getTimeInMillis() - cal.getTimeInMillis();
-                cal.setTimeInMillis(millis);
-
-                Calendar c = Calendar.getInstance();
-
-                c.setTimeInMillis(millis);
-                int tYear = c.get(Calendar.YEAR) - 1970;
-                int tMonth = c.get(Calendar.MONTH);
-                int months = tMonth+tYear*12;
-                //int tDay = c.get(Calendar.DAY_OF_MONTH);
-
-                fAge.setText(months +"m");
-
-
-        } catch (ParseException e) {
-            Log.d(TAG, "CaluculateAge: " + e.getMessage());
-            e.printStackTrace();
-
-        }*/
 
         }
         fMaritalStatus.setText(wifeOrDaughter + followUpsSche.getRb03());
@@ -218,6 +191,7 @@ public class FpMwraAdapter extends RecyclerView.Adapter<FpMwraAdapter.ViewHolder
                 MainApp.selectedMember = viewHolder.getAdapterPosition();
 
                 intent.putExtra("position", viewHolder.getAdapterPosition());
+
 
                 ((Activity) mContext).startActivityForResult(intent, 2);
             }else{
@@ -269,6 +243,7 @@ public class FpMwraAdapter extends RecyclerView.Adapter<FpMwraAdapter.ViewHolder
         private final ImageView fmRow;
         private final ImageView indicator;
         private final LinearLayout mstatus;
+        private final LinearLayout item;
 
 
         public ViewHolder(View v) {
@@ -282,6 +257,7 @@ public class FpMwraAdapter extends RecyclerView.Adapter<FpMwraAdapter.ViewHolder
             fmRow = v.findViewById(R.id.fmRow);
             indicator = v.findViewById(R.id.indicator);
             mstatus = v.findViewById(R.id.mstatus);
+            item = v.findViewById(R.id.item);
 
         }
 

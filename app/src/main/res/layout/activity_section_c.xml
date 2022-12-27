@@ -481,6 +481,15 @@
                                 android:text="@string/rc0408" />
 
 
+                            <RadioButton
+                                android:id="@+id/rb1009"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:checked='@{followups.rb10.equals("9")}'
+                                android:onClick='@{()->followups.setRb10("9") + rb11.clearCheck() + rb12.clearCheck() + rb14.clearCheck() + rb15.clearCheck()}'
+                                android:text="@string/rc0409" />
+
+
                         </RadioGroup>
 
                     </LinearLayout>
