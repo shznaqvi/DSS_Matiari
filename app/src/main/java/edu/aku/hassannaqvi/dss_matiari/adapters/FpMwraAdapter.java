@@ -71,7 +71,6 @@ public class FpMwraAdapter extends RecyclerView.Adapter<FpMwraAdapter.ViewHolder
         ImageView indicator = viewHolder.indicator;
         TextView secStatus = viewHolder.secStatus;
         LinearLayout mStatus = viewHolder.mstatus;
-        LinearLayout item = viewHolder.item;
 
         TextView secDob = viewHolder.secDob;
         TextView secGender = viewHolder.secGender;
@@ -146,7 +145,7 @@ public class FpMwraAdapter extends RecyclerView.Adapter<FpMwraAdapter.ViewHolder
                 fAge.setText(marStatus + " | " + actualAge  + "y  ");
             }
 
-            if(actualAge > 47) {
+            if(actualAge > 49) {
                 viewHolder.itemView.setBackgroundColor(Color.parseColor("#AF1B12"));
                 viewHolder.secStatus.setText("OverAge");
             }else{
@@ -243,7 +242,6 @@ public class FpMwraAdapter extends RecyclerView.Adapter<FpMwraAdapter.ViewHolder
         private final ImageView fmRow;
         private final ImageView indicator;
         private final LinearLayout mstatus;
-        private final LinearLayout item;
 
 
         public ViewHolder(View v) {
@@ -257,7 +255,6 @@ public class FpMwraAdapter extends RecyclerView.Adapter<FpMwraAdapter.ViewHolder
             fmRow = v.findViewById(R.id.fmRow);
             indicator = v.findViewById(R.id.indicator);
             mstatus = v.findViewById(R.id.mstatus);
-            item = v.findViewById(R.id.item);
 
         }
 

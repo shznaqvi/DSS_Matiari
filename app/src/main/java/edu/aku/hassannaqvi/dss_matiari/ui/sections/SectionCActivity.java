@@ -80,7 +80,10 @@ public class SectionCActivity extends AppCompatActivity {
 
         if(!fpMwra.getRb05().equals("")) {
             actualAge = Integer.parseInt(fpMwra.getRb05()) + years;
+            bi.rb05.setText(String.valueOf(actualAge));
         }
+
+        bi.rb1009.setEnabled(actualAge > 49);
 
 
         if(!MainApp.households.getVisitNo().equals("") && Integer.parseInt(households.getVisitNo()) == 2)
