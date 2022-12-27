@@ -174,11 +174,8 @@ public class Mwra extends BaseObservable implements Observable {
     private String rb16 = StringUtils.EMPTY;
     @Ignore
     private String rb17 = StringUtils.EMPTY;
-
-
     @Ignore
     private long ageInMonths;
-
     @Ignore
     private String prePreg = "";
 
