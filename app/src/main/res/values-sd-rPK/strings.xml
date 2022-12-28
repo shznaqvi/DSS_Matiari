@@ -137,6 +137,9 @@
     <string name="rb09">متوقع ويم جي تاريخ</string>
     <string name="rb09_info">DD/MM/YYYY</string>
     <string name="rb09a">ڇا توهان گذريل ٽن مهينن ۾ ٻار کي جنم ڏنو آهي؟</string>
+    <string name="rb09b">حمل جو نتيجو</string>
+    <string name="rb16">ڇا توهان اسان جي آخري دوري ۽ اڄ جي عرصي دوران هڪ زنده ٻار کي جنم ڏنو آهي؟</string>
+    <string name="rb17">حمل جو نتيجو</string>
 
 
     <string name="rc01">عورت جو سڃاڻپ نمبر</string>
@@ -154,6 +157,7 @@
     <string name="rc0406">شادي ڪري ٻي ڳوٺ هلي وئي</string>
     <string name="rc0407">وفات ڪري وئي</string>
     <string name="rc0408">ٽي وزٽ کان پوء انٽرويو نه ٿي سگھيو</string>
+    <string name="rc0409">عمر کان مٿي</string>
     <string name="rc05"> موجوده حيثيت </string>
     <string name="rc0501">زنده</string>
     <string name="rc0502">مئل</string>

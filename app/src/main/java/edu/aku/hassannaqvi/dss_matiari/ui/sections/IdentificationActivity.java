@@ -106,8 +106,8 @@ public class IdentificationActivity extends AppCompatActivity {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
                 bi.ra07.setAdapter(null);
-                bi.ra10.setText(null);
-                bi.ra10.setEnabled(false);
+                /*bi.ra10.setText(null);
+                bi.ra10.setEnabled(false);*/
                 bi.btnContinue.setBackgroundTintList(ContextCompat.getColorStateList(IdentificationActivity.this, R.color.gray));
                 bi.btnContinue.setEnabled(false);
 
@@ -147,7 +147,7 @@ public class IdentificationActivity extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
-                bi.ra10.setText(null);
+                //bi.ra10.setText(null);
                 if (position != 0) {
                     String vCode = villageCodes.get(bi.ra07.getSelectedItemPosition());
 
@@ -159,9 +159,9 @@ public class IdentificationActivity extends AppCompatActivity {
                     bi.btnContinue.setBackgroundTintList(ContextCompat.getColorStateList(IdentificationActivity.this, R.color.colorPrimary));
                     bi.btnContinue.setEnabled(true);
 
-                    bi.ra10.setText(String.valueOf(maxHHno));
+                    //bi.ra10.setText(String.valueOf(maxHHno));
                     if (position == 0) return;
-                    bi.ra10.setEnabled(true);
+                    //bi.ra10.setEnabled(true);
 
                 }
 

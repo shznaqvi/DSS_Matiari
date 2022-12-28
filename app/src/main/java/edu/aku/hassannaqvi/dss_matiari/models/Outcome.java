@@ -118,9 +118,9 @@ public class Outcome extends BaseObservable implements Observable {
 */
     @Ignore
     private String rb02 = StringUtils.EMPTY;
-    @Ignore
+    /*@Ignore
     private String rb03 = StringUtils.EMPTY;
-    @Ignore
+    */@Ignore
     private String rb01a = StringUtils.EMPTY;
 
     @Ignore
@@ -382,7 +382,7 @@ public class Outcome extends BaseObservable implements Observable {
     }
 
 
-    @Bindable
+    /*@Bindable
     public String getRb03() {
         return rb03;
     }
@@ -390,7 +390,7 @@ public class Outcome extends BaseObservable implements Observable {
     public void setRb03(String rb03) {
         this.rb03 = rb03;
         notifyPropertyChanged(BR.rb03);
-    }
+    }*/
 
     @Bindable
     public String getRc01() {

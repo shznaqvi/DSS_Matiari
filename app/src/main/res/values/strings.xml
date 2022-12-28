@@ -155,7 +155,7 @@
     <string name="rc0406">Married and moved to another village </string>
     <string name="rc0407">Death </string>
     <string name="rc0408">Interview Not done after 3 visits</string>
-    <string name="rc0409">OVERAGE</string>
+    <string name="rc0409">Over Age</string>
     <string name="rc05">Current Status</string>
     <string name="rc0501">Live</string>
     <string name="rc0502">Death</string>
@@ -228,12 +228,12 @@
     <string name='Q_ra01' translatable="false">ra01</string>
     <string name='Q_ra02' translatable="false">ra02</string>
     <string name='Q_ra03' translatable="false">ra03</string>
-    <string name='Q_ra04' translatable="false">ra05</string>
-    <string name='Q_ra05' translatable="false">ra06</string>
-    <string name='Q_ra06' translatable="false">ra07</string>
-    <string name='Q_ra07' translatable="false">ra08</string>
-    <string name='Q_ra08' translatable="false">ra09</string>
-    <string name='Q_ra09' translatable="false">ra10</string>
+    <string name='Q_ra04' translatable="false">ra04</string>
+    <string name='Q_ra05' translatable="false">ra05</string>
+    <string name='Q_ra06' translatable="false">ra06</string>
+    <string name='Q_ra07' translatable="false">ra07</string>
+    <string name='Q_ra08' translatable="false">ra08</string>
+    <string name='Q_ra09' translatable="false">ra09</string>
     <string name='Q_ra10' translatable="false">ra10</string>
     <string name='Q_ra11' translatable="false">ra11</string>
     <string name='Q_ra12' translatable="false">ra12</string>
@@ -276,6 +276,8 @@
     <string name='Q_rb15' translatable="false">rb15</string>
     <string name='Q_rb16' translatable="false">rb16</string>
     <string name='Q_rb17' translatable="false">rb17</string>
+    <string name='Q_rb18' translatable="false">rb18</string>
+    <string name='Q_rb19' translatable="false">rb19</string>
 
     <string name='Q_rc01' translatable="false">rc01</string>
     <string name='Q_rc02' translatable="false">rc02</string>

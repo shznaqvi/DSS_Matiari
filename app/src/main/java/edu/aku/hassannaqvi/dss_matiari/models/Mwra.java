@@ -158,10 +158,10 @@ public class Mwra extends BaseObservable implements Observable {
     private String rb10 = StringUtils.EMPTY;
     @Ignore
     private String rb11 = StringUtils.EMPTY;
-    @Ignore
+    /*@Ignore
     private String rb11a = StringUtils.EMPTY;
     @Ignore
-    private String rb11b = StringUtils.EMPTY;
+    private String rb11b = StringUtils.EMPTY;*/
     @Ignore
     private String rb12 = StringUtils.EMPTY;
     @Ignore
@@ -174,6 +174,11 @@ public class Mwra extends BaseObservable implements Observable {
     private String rb16 = StringUtils.EMPTY;
     @Ignore
     private String rb17 = StringUtils.EMPTY;
+    @Ignore
+    private String rb18 = StringUtils.EMPTY;
+    @Ignore
+    private String rb19 = StringUtils.EMPTY;
+
     @Ignore
     private long ageInMonths;
     @Ignore
@@ -240,9 +245,9 @@ public class Mwra extends BaseObservable implements Observable {
         mwra.setPrePreg(MainApp.fpMwra.getRb07());
         mwra.setRb06(MainApp.fpMwra.getRb06());
 
-        int daysdiff  = CalculateAge(MainApp.fpMwra.getRa01());
-        int years = daysdiff/365;
-        int actualAge = Integer.parseInt(MainApp.fpMwra.getRb05()) + years;
+        long daysdiff  = CalculateAge(MainApp.fpMwra.getRa01());
+        long years = daysdiff/365;
+        long actualAge = Integer.parseInt(MainApp.fpMwra.getRb05()) + years;
         mwra.setRb05(String.valueOf(actualAge));     // Age in Years
     }
 
@@ -605,7 +610,7 @@ public class Mwra extends BaseObservable implements Observable {
     }
 
 
-    @Bindable
+    /*@Bindable
     public String getRb09a() {
         return rb09a;
     }
@@ -623,7 +628,7 @@ public class Mwra extends BaseObservable implements Observable {
     public void setRb09b(String rb09b) {
         this.rb09b = rb09b;
         notifyChange(BR.rb09b);
-    }
+    }*/
 
     @Bindable
     public String getRb03a() {
@@ -665,7 +670,7 @@ public class Mwra extends BaseObservable implements Observable {
         notifyChange(BR.rb11);
     }
 
-    @Bindable
+    /*@Bindable
     public String getRb11a() {
         return rb11a;
     }
@@ -683,7 +688,7 @@ public class Mwra extends BaseObservable implements Observable {
     public void setRb11b(String rb11b) {
         this.rb11b = rb11b;
         notifyChange(BR.rb11b);
-    }
+    }*/
 
     @Bindable
     public String getRb12() {
@@ -745,6 +750,30 @@ public class Mwra extends BaseObservable implements Observable {
     }
 
 
+    @Bindable
+    public String getRb18() {
+        return rb18;
+    }
+
+    public void setRb18(String rb18) {
+        this.rb18 = rb18;
+        notifyChange(BR.rb18);
+    }
+
+    @Bindable
+    public String getRb19() {
+        return rb19;
+    }
+
+    public void setRb19(String rb19) {
+        this.rb19 = rb19;
+        notifyChange(BR.rb19);
+    }
+
+
+
+
+
     private synchronized void notifyChange(int propertyId) {
         if (propertyChangeRegistry == null) {
             propertyChangeRegistry = new PropertyChangeRegistry();
@@ -791,13 +820,14 @@ public class Mwra extends BaseObservable implements Observable {
         sBHydrate(mwra.sB);
         sCHydrate(mwra.sC);
         sDHydrate(mwra.sD);
+
         return this;
     }
 
 
     public void sBHydrate(String string) throws JSONException {
         Log.d(TAG, "s2Hydrate: " + string);
-        if (string != null) {
+        if (string != null && !string.equals("")) {
 
             JSONObject json = null;
             json = new JSONObject(string);
@@ -812,15 +842,15 @@ public class Mwra extends BaseObservable implements Observable {
             this.rb07 = json.getString("rb07");
             this.rb08 = json.getString("rb08");
             this.rb09 = json.getString("rb09");
-            this.rb09a = json.getString("rb09a");
-            this.rb09b = json.getString("rb09b");
+            this.rb18 = json.getString("rb18");
+            this.rb19 = json.getString("rb19");
 
         }
     }
 
     public void sCHydrate(String string) throws JSONException {
         Log.d(TAG, "s3Hydrate: " + string);
-        if (string != null) {
+        if (string != null && !string.equals("")) {
 
             JSONObject json = null;
             json = new JSONObject(string);
@@ -838,8 +868,8 @@ public class Mwra extends BaseObservable implements Observable {
             this.rb09 = json.getString("rb09");
             */this.rb03a = json.getString("rb03a");
             this.rb03b = json.getString("rb03b");
-            this.rb11a = json.getString("rb11a");
-            this.rb11b = json.getString("rb11b");
+            /*this.rb11a = json.getString("rb11a");
+            this.rb11b = json.getString("rb11b");*/
             this.rb10 = json.getString("rb10");
             this.rb11 = json.getString("rb11");
             this.rb12 = json.getString("rb12");
@@ -848,6 +878,8 @@ public class Mwra extends BaseObservable implements Observable {
             this.rb15 = json.getString("rb15");
             this.rb16 = json.getString("rb16");
             this.rb17 = json.getString("rb17");
+            this.rb17 = json.getString("rb18");
+            this.rb17 = json.getString("rb19");
 
 
         }
@@ -869,8 +901,8 @@ public class Mwra extends BaseObservable implements Observable {
                 .put("rb07", rb07)
                 .put("rb08", rb08)
                 .put("rb09", rb09)
-                .put("rb09a", rb09a)
-                .put("rb09b", rb09b)
+                .put("rb18", rb18)
+                .put("rb19", rb19)
         ;
 
         return json.toString();
@@ -896,14 +928,14 @@ public class Mwra extends BaseObservable implements Observable {
                 .put("rb09", rb09)
                 */.put("rb10",rb10)
                 .put("rb11",rb11)
-                .put("rb11a",rb11a)
-                .put("rb11b",rb11b)
                 .put("rb12",rb12)
                 .put("rb13",rb13)
                 .put("rb14",rb14)
                 .put("rb15",rb15)
                 .put("rb16",rb16)
                 .put("rb17",rb17)
+                .put("rb18",rb18)
+                .put("rb19",rb19)
         ;
 
         return json.toString();
@@ -923,7 +955,7 @@ public class Mwra extends BaseObservable implements Observable {
 
     public void sDHydrate(String string) throws JSONException {
         Log.d(TAG, "s3Hydrate: " + string);
-        if (string != null) {
+        if (string != null && !string.equals("")) {
 
             JSONObject json = null;
             json = new JSONObject(string);
@@ -951,7 +983,7 @@ public class Mwra extends BaseObservable implements Observable {
         json.put(MWRATable.COLUMN_HDSSID, this.hdssId);
         json.put(MWRATable.COLUMN_UC_CODE, this.ucCode);
         json.put(MWRATable.COLUMN_VILLAGE_CODE, this.villageCode);
-        json.put(MWRATable.COLUMN_STRUCTURE_NO, this.structureNo);
+        //json.put(MWRATable.COLUMN_STRUCTURE_NO, this.structureNo);
         json.put(MWRATable.COLUMN_SNO, this.sNo);
         json.put(MWRATable.COLUMN_REGROUND, this.regRound);
         json.put(MWRATable.COLUMN_HOUSEHOLD_NO, this.hhNo);
@@ -1017,9 +1049,10 @@ public class Mwra extends BaseObservable implements Observable {
         }
     }
 
-    public int CalculateAge(String dateOfVisit) {
+    public long CalculateAge(String dateOfVisit) {
 
-        int noOfDays = 0;
+        long noOfDays = 0;
+        String dateofReg = "";
 
 
         try {
@@ -1028,7 +1061,12 @@ public class Mwra extends BaseObservable implements Observable {
 
             //String dateOfReg = dateOfVisit;
 
-            String dateofReg = dateOfVisit.substring(9,19);
+            if(dateOfVisit.length() > 10) {
+                dateofReg = dateOfVisit.substring(9, 19);
+            }else
+            {
+                dateofReg = dateOfVisit;
+            }
 
             // set current Date
             Calendar cur = Calendar.getInstance();
@@ -1047,14 +1085,14 @@ public class Mwra extends BaseObservable implements Observable {
             Calendar c = Calendar.getInstance();
 
             c.setTimeInMillis(millis);
-            int years = c.get(Calendar.YEAR) - 1970;
-            int tMonth = c.get(Calendar.MONTH);
-            int tDay = c.get(Calendar.DAY_OF_MONTH);
+            long tYear = MILLISECONDS.toDays(millis) / 365;
+            long tMonth = (MILLISECONDS.toDays(millis) - (tYear * 365)) / 30;
+            long tDay = MILLISECONDS.toDays(millis);
 
             noOfDays = tDay;
 
 
-            Log.d(TAG, "CaluculateAge: Y-" + years + " M-" + tMonth + " D-" + tDay);
+            Log.d(TAG, "CaluculateAge: Y-" + tYear + " M-" + tMonth + " D-" + tDay);
 
 
         } catch (ParseException e) {

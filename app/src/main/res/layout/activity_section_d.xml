@@ -238,7 +238,7 @@
                         android:layout_marginEnd="@dimen/_3sdp"
                         android:layout_weight="0.5"
                         android:background="@drawable/bg_rounded_white"
-                        android:backgroundTint="@color/gray"
+                        android:backgroundTint="@color/redDark"
                         android:elevation="@dimen/_2sdp"
                         android:onClick="btnEnd"
                         android:paddingStart="@dimen/_10sdp"

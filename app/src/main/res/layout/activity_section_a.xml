@@ -482,20 +482,20 @@
                                 style="@style/quesNum"
                                 android:layout_width="wrap_content"
                                 android:layout_height="match_parent"
-                                android:text="@string/Q_ra22" />
+                                android:text="@string/Q_ra10" />
 
 
                         </LinearLayout>
 
                         <TextView
-                            android:id="@+id/ra22"
+                            android:id="@+id/ra10"
                             style="@style/labelsHead"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_margin="8dp"
                             android:digits="abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ"
                             android:gravity="center"
-                            android:text="@={household.ra22}" />
+                            android:text="@={household.ra10}" />
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
 
@@ -1311,7 +1311,7 @@
                         android:layout_marginEnd="@dimen/_3sdp"
                         android:layout_weight="0.4"
                         android:background="@drawable/bg_rounded_app_sec_color_filled"
-                        android:backgroundTint="@color/colorSecondary"
+                        android:backgroundTint="@color/grayDark1"
                         android:drawableStart="@drawable/ic_close"
                         android:elevation="@dimen/_2sdp"
                         android:onClick="btnContinue"
@@ -1334,7 +1334,7 @@
                         android:layout_marginEnd="@dimen/_3sdp"
                         android:layout_weight="0.25"
                         android:background="@drawable/bg_rounded_white"
-                        android:backgroundTint="@color/gray"
+                        android:backgroundTint="@color/redDark"
                         android:elevation="@dimen/_2sdp"
                         android:onClick="btnEnd"
                         android:paddingStart="@dimen/_10sdp"

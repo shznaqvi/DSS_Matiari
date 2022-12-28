@@ -132,7 +132,7 @@ public class SectionDActivity extends AppCompatActivity {
 
             // Date of Death from Date of Deliver(RC10)
             sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
-            cal.setTime(sdf.parse(mwra.getRb11a()));// all done
+            cal.setTime(sdf.parse(mwra.getRb12()));// all done
             sdf = new SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH);
             String minDOD = sdf.format(cal.getTime());
 

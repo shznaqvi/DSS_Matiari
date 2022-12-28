@@ -12,6 +12,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.CompoundButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
@@ -74,12 +75,12 @@ public class SectionCActivity extends AppCompatActivity {
             }
         }
 
-        int daysdiff  = MainApp.mwra.CalculateAge(fpMwra.getRa01());
-        int years = daysdiff/365;
-        int actualAge = 0;
+        long daysdiff  = MainApp.mwra.CalculateAge(fpMwra.getRa01());
+        long years = daysdiff/365;
+        long actualAge = 0;
 
         if(!fpMwra.getRb05().equals("")) {
-            actualAge = Integer.parseInt(fpMwra.getRb05()) + years;
+            actualAge = Long.parseLong(fpMwra.getRb05()) + years;
             bi.rb05.setText(String.valueOf(actualAge));
         }
 
@@ -130,21 +131,39 @@ public class SectionCActivity extends AppCompatActivity {
             }
         });
 
-        bi.rb15.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+        bi.rb17.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
-                if(bi.rb1501.isChecked())
+                if(bi.rb1701.isChecked() || bi.rb1605.isChecked())
                 {
                     MainApp.totalChildCount = 1;
-                }else if(bi.rb1502.isChecked()){
+                }else if(bi.rb1702.isChecked() && !bi.rb1605.isChecked()){
                     MainApp.totalChildCount = 2;
-                }else if (bi.rb1503.isChecked())
+                }else if (bi.rb1703.isChecked())
                 {
                     MainApp.totalChildCount = 3;
                 }
 
             }
 
+        });
+
+        bi.rb1605.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(isChecked)
+                {
+                    bi.rb1701.setEnabled(false);
+                    bi.rb1701.setChecked(false);
+                    bi.rb1703.setEnabled(false);
+                    bi.rb1703.setChecked(false);
+                    bi.rb1702.setEnabled(true);
+                }else{
+                    bi.rb1701.setEnabled(true);
+                    bi.rb1703.setEnabled(true);
+                    bi.rb1702.setEnabled(true);
+                }
+            }
         });
 
 
@@ -237,11 +256,11 @@ public class SectionCActivity extends AppCompatActivity {
                         // Pregnant
                         if (mwra.getPrePreg().equals("1")) {
                             // If pregnancy continued
-                            if (bi.rb1201.isChecked()) {
+                            if (bi.rb1401.isChecked()) {
                                 setResult(RESULT_OK);
                                 //finish();
                             } else {  // If Pregnancy ended
-                                if (bi.rb1401.isChecked()) // If Live Birth
+                                if (bi.rb1601.isChecked() || bi.rb1605.isChecked()) // If Live Birth
                                 {
                                     Intent forwardIntent = new Intent(this, SectionEActivity.class).putExtra("complete", true);
                                     forwardIntent.setFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT);
@@ -256,13 +275,13 @@ public class SectionCActivity extends AppCompatActivity {
                                     //finish();
                                 }
                             }
-                        } else if(mwra.getPrePreg().equals("2") && bi.rb1601.isChecked()) {   // Not Pregnant
+                        } else if(mwra.getPrePreg().equals("2") && bi.rb1801.isChecked()) {   // Not Pregnant
                             Intent forwardIntent = new Intent(this, SectionEActivity.class).putExtra("complete", true);
                             forwardIntent.setFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT);
                             setResult(RESULT_OK, forwardIntent);
                             startActivity(forwardIntent);
 
-                        }else if (mwra.getPrePreg().equals("2") && bi.rb1602.isChecked()){
+                        }else if (mwra.getPrePreg().equals("2") && bi.rb1802.isChecked()){
                             Intent forwardIntent = new Intent(this, SectionDActivity.class).putExtra("complete", true);
                             forwardIntent.setFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT);
                             setResult(RESULT_OK, forwardIntent);
@@ -277,11 +296,11 @@ public class SectionCActivity extends AppCompatActivity {
                         // Pregnant
                         if (mwra.getPrePreg().equals("1")) {
 
-                            if (bi.rb1201.isChecked()) {  // If Pregnancy Continued
+                            if (bi.rb1401.isChecked()) {  // If Pregnancy Continued
                                 setResult(RESULT_OK);
                                 //finish();
                             } else {     // If Pregnancy ended
-                                if (bi.rb1401.isChecked()) {    // Live Birth
+                                if (bi.rb1601.isChecked() || bi.rb1605.isChecked()) {    // Live Birth
                                     Intent forwardIntent = new Intent(this, SectionEActivity.class).putExtra("complete", true);
                                     forwardIntent.setFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT);
                                     setResult(RESULT_OK, forwardIntent);
@@ -293,12 +312,12 @@ public class SectionCActivity extends AppCompatActivity {
                                 }
                             }
                         } else {      // Not Pregnant
-                            if(bi.rb1601.isChecked()){
+                            if(bi.rb1801.isChecked()){
                                 Intent forwardIntent = new Intent(this, SectionEActivity.class).putExtra("complete", true);
                                 forwardIntent.setFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT);
                                 setResult(RESULT_OK, forwardIntent);
                                 startActivity(forwardIntent);
-                            }else if (bi.rb1401.isChecked()) {        // Marital status changed
+                            }else if (bi.rb0601.isChecked()) {        // Marital status changed
                                 Intent forwardIntent = new Intent(this, SectionDActivity.class).putExtra("complete", true);
                                 forwardIntent.setFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT);
                                 setResult(RESULT_OK, forwardIntent);
@@ -317,11 +336,11 @@ public class SectionCActivity extends AppCompatActivity {
                     case "3":
                         // Pregnant
                         if (mwra.getPrePreg().equals("1")) {
-                            if (bi.rb1201.isChecked()) {  // If Pregnancy Continued
+                            if (bi.rb1401.isChecked()) {  // If Pregnancy Continued
                                 setResult(RESULT_OK);
                                 //finish();
                             } else {     // If Pregnancy ended
-                                if (bi.rb1401.isChecked()) {    // Live Birth
+                                if (bi.rb1601.isChecked() || bi.rb1605.isChecked()) {    // Live Birth
                                     Intent forwardIntent = new Intent(this, SectionEActivity.class).putExtra("complete", true);
                                     forwardIntent.setFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT);
                                     setResult(RESULT_OK, forwardIntent);
@@ -340,7 +359,7 @@ public class SectionCActivity extends AppCompatActivity {
                                 setResult(RESULT_OK, forwardIntent);
                                 startActivity(forwardIntent);
                                 //finish();
-                            } else if(bi.rb1601.isChecked()) {
+                            } else if(bi.rb1801.isChecked()) {
                                 Intent forwardIntent = new Intent(this, SectionEActivity.class).putExtra("complete", true);
                                 forwardIntent.setFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT);
                                 setResult(RESULT_OK, forwardIntent);
@@ -359,11 +378,11 @@ public class SectionCActivity extends AppCompatActivity {
                         // Pregnant
                         if (mwra.getPrePreg().equals("1")) {
 
-                            if (bi.rb1201.isChecked()) {  // If Pregnancy Continued
+                            if (bi.rb1401.isChecked()) {  // If Pregnancy Continued
                                 setResult(RESULT_OK);
                                 //finish();
                             } else {     // If Pregnancy ended
-                                if (bi.rb1401.isChecked()) {    // Live Birth
+                                if (bi.rb1601.isChecked() || bi.rb1605.isChecked()) {    // Live Birth
                                     Intent forwardIntent = new Intent(this, SectionEActivity.class).putExtra("complete", true);
                                     forwardIntent.setFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT);
                                     setResult(RESULT_OK, forwardIntent);
@@ -382,7 +401,7 @@ public class SectionCActivity extends AppCompatActivity {
                                 setResult(RESULT_OK, forwardIntent);
                                 startActivity(forwardIntent);
                                 //finish();
-                            } else if(bi.rb1601.isChecked())
+                            } else if(bi.rb1801.isChecked())
                             {
                                 Intent forwardIntent = new Intent(this, SectionEActivity.class).putExtra("complete", true);
                                 forwardIntent.setFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT);

@@ -174,7 +174,7 @@
 
         <item name="android:textStyle">bold</item>
         <!--<item name="android:layout_marginTop">24dp</item>-->
-        <item name="android:textColor">@color/colorPrimary</item>
+        <item name="android:textColor">@color/colorSecondary</item>
         <item name="android:fontFamily">@font/roboto</item>
         <item name="android:gravity">center</item>
         <item name="android:paddingStart">15dp</item>

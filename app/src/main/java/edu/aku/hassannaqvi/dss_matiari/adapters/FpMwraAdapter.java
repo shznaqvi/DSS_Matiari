@@ -136,12 +136,12 @@ public class FpMwraAdapter extends RecyclerView.Adapter<FpMwraAdapter.ViewHolder
         if(followUpsSche.getMemberType().equals("1")) {
 
             // Age
-            int daysdiff  = MainApp.mwra.CalculateAge(followUpsSche.getRa01());
-            int years = daysdiff/365;
-            int actualAge = 0;
+            long daysdiff  = MainApp.mwra.CalculateAge(followUpsSche.getRa01());
+            long years = daysdiff/365;
+            long actualAge = 0;
 
             if(!followUpsSche.getRb05().equals("")) {
-                actualAge = Integer.parseInt(followUpsSche.getRb05()) + years;
+                actualAge = Long.parseLong(followUpsSche.getRb05()) + years;
                 fAge.setText(marStatus + " | " + actualAge  + "y  ");
             }
 
@@ -160,9 +160,9 @@ public class FpMwraAdapter extends RecyclerView.Adapter<FpMwraAdapter.ViewHolder
             indicator.setImageDrawable(ContextCompat.getDrawable(mContext, R.drawable.ic_baby));
 
             if(!followUpsSche.getRb04().equals("")) {
-                int days = MainApp.mwra.CalculateAge(followUpsSche.getRb04());
+                long days = MainApp.mwra.CalculateAge(followUpsSche.getRb04());
 
-                double months = days / 30.41;
+                long months = days/30;
 
                 fAge.setText(months + "m");
             }
