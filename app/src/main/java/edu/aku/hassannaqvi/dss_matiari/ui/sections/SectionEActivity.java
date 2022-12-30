@@ -221,7 +221,7 @@ public class SectionEActivity extends AppCompatActivity {
 
             outcome.setDeviceId(outcome.getDeviceId() + "_" + outcome.getDeviceId().substring(outcome.getDeviceId().length() - 1));
             updatedOutcome.setDeviceId(outcome.getDeviceId());
-            updatedOutcome.setIStatus(outcome.getIStatus());
+            //updatedOutcome.setIStatus(outcome.getIStatus());
             db.OutcomeDao().updateOutcome(updatedOutcome);
 
 

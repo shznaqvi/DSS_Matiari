@@ -95,11 +95,11 @@ public class Outcome extends BaseObservable implements Observable {
     @ColumnInfo(name = TableContracts.OutcomeTable.COLUMN_APPVERSION)
     private String appver = StringUtils.EMPTY;
 
-    @ColumnInfo(name = TableContracts.OutcomeTable.COLUMN_ISTATUS)
+    /*@ColumnInfo(name = TableContracts.OutcomeTable.COLUMN_ISTATUS)
     private String iStatus = StringUtils.EMPTY;
 
     @Ignore
-    private String iStatus96x = StringUtils.EMPTY;
+    private String iStatus96x = StringUtils.EMPTY;*/
 
     @ColumnInfo(name = TableContracts.OutcomeTable.COLUMN_SYNCED)
     private String synced = StringUtils.EMPTY;
@@ -315,7 +315,7 @@ public class Outcome extends BaseObservable implements Observable {
         this.appver = appver;
     }
 
-    public String getIStatus() {
+    /*public String getIStatus() {
         return iStatus;
     }
 
@@ -329,7 +329,7 @@ public class Outcome extends BaseObservable implements Observable {
 
     public void setIStatus96x(String iStatus96x) {
         this.iStatus96x = iStatus96x;
-    }
+    }*/
 
     public String getSynced() {
         return synced;
@@ -476,7 +476,7 @@ public class Outcome extends BaseObservable implements Observable {
         this.deviceId = outcome.msno;
         this.deviceTag = outcome.msno;
         this.appver = outcome.msno;
-        this.iStatus = outcome.msno;
+        //this.iStatus = outcome.msno;
         this.synced = outcome.msno;
         this.syncDate = outcome.msno;
 
@@ -486,12 +486,12 @@ public class Outcome extends BaseObservable implements Observable {
 
     public void sEHydrate(String string) throws JSONException {
         Log.d(TAG, "s5Hydrate: " + string);
-        if (string != null) {
+        if (string != null && !string.equals("")) {
 
             JSONObject json = null;
             json = new JSONObject(string);
             this.rb02 = json.getString("rb02");
-            this.rb01a = json.getString("rb01a");
+            this.rb01a = json.getString("rc01a");
             this.rc01 = json.getString("rc01");
             this.rc02 = json.getString("rc02");
             this.rc03 = json.has("rc03") ? json.getString("rc03") : "";
@@ -511,7 +511,7 @@ public class Outcome extends BaseObservable implements Observable {
 
         json
                 .put("rb02", rb02)
-                .put("rb01a", rb01a)
+                .put("rc01a", rb01a)
                 .put("rc01", rc01)
                 .put("rc02", rc02)
                 .put("rc03", rc03)
@@ -547,8 +547,8 @@ public class Outcome extends BaseObservable implements Observable {
         json.put(TableContracts.OutcomeTable.COLUMN_SNO, this.sno);
         json.put(TableContracts.OutcomeTable.COLUMN_HOUSEHOLD_NO, this.hhNo);
         json.put(TableContracts.OutcomeTable.COLUMN_DEVICEID, this.deviceId);
-        json.put(TableContracts.OutcomeTable.COLUMN_DEVICETAGID, this.deviceTag);
-        json.put(TableContracts.OutcomeTable.COLUMN_ISTATUS, this.iStatus);
+        //json.put(TableContracts.OutcomeTable.COLUMN_DEVICETAGID, this.deviceTag);
+        //json.put(TableContracts.OutcomeTable.COLUMN_ISTATUS, this.iStatus);
         json.put(TableContracts.OutcomeTable.COLUMN_APPVERSION, this.appver);
         //  json.put(MWRATable.COLUMN_SYNCED, this.synced);
         //  json.put(MWRATable.COLUMN_SYNCED_DATE, this.syncDate);

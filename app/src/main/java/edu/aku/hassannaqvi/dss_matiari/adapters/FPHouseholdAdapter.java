@@ -25,11 +25,9 @@ import org.json.JSONException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Locale;
 
 import edu.aku.hassannaqvi.dss_matiari.R;
 import edu.aku.hassannaqvi.dss_matiari.core.MainApp;
-import edu.aku.hassannaqvi.dss_matiari.database.DatabaseHelper;
 import edu.aku.hassannaqvi.dss_matiari.models.FollowUpsSche;
 import edu.aku.hassannaqvi.dss_matiari.models.Households;
 import edu.aku.hassannaqvi.dss_matiari.room.DssRoomDatabase;
@@ -78,7 +76,7 @@ public class FPHouseholdAdapter extends RecyclerView.Adapter<FPHouseholdAdapter.
         } else {
             followUpsScheList.clear();
             for (FollowUpsSche followUpsSche: backupItems) {
-                if (followUpsSche.getHdssid().contains(query) || followUpsSche.getRa14().toLowerCase().contains(query)) {
+                if (followUpsSche.getHdssid().contains(query) || followUpsSche.getRa12().toLowerCase().contains(query)) {
                     followUpsScheList.add(followUpsSche);
                 }
             }
@@ -107,7 +105,7 @@ public class FPHouseholdAdapter extends RecyclerView.Adapter<FPHouseholdAdapter.
         try {
             // These quick fixes are making this code a mess.
             //this.fpHouseholds = db.getHouseholdByHDSSID(followUpsSche.getHdssid());
-            this.fpHouseholds = db.householdsDao().getHouseholdByHDSSIDDSC(followUpsSche.getHdssid(), viewHolder.getAdapterPosition());
+            this.fpHouseholds = db.householdsDao().getHouseholdByHDSSIDDSC(MainApp.followUpsScheHHList.get(viewHolder.getAdapterPosition()).getHdssid(), viewHolder.getAdapterPosition());
 
         } catch (JSONException e) {
             e.printStackTrace();
@@ -176,7 +174,7 @@ public class FPHouseholdAdapter extends RecyclerView.Adapter<FPHouseholdAdapter.
         }else{
             if(followUpsSche.getiStatus().equals("1")){
                 prvStatus.setVisibility(View.GONE);
-                hhHead.setText(followUpsSche.getRa14());
+                hhHead.setText(followUpsSche.getRa12());
                 hhHead.setVisibility(View.VISIBLE);
             }else{
                 hhHead.setVisibility(View.GONE);
@@ -200,7 +198,7 @@ public class FPHouseholdAdapter extends RecyclerView.Adapter<FPHouseholdAdapter.
 
                     try {
                         //MainApp.fpHouseholds = db.getFPHouseholdBYHdssid(MainApp.followUpsScheHHList.get(viewHolder.getAdapterPosition()).getHdssid());
-                       households = db.householdsDao().getHouseholdByHDSSIDDSC(MainApp.followUpsScheHHList.get(viewHolder.getAdapterPosition()).getHdssid(), viewHolder.getAdapterPosition());
+                       households = db.householdsDao().getSelectedHouseholdByHDSSID(MainApp.followUpsScheHHList.get(viewHolder.getAdapterPosition()).getHdssid(), viewHolder.getAdapterPosition());
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
@@ -292,7 +290,7 @@ public class FPHouseholdAdapter extends RecyclerView.Adapter<FPHouseholdAdapter.
         public ViewHolder(View v, Context c) {
             super(v);
             hhNo = v.findViewById(R.id.ra09);
-            hhHead = v.findViewById(R.id.ra14);
+            hhHead = v.findViewById(R.id.ra12);
             mwraCount = v.findViewById(R.id.mwraCount);
             secStatus = v.findViewById(R.id.secStatus);
             prvStatus = v.findViewById(R.id.prvStatus);

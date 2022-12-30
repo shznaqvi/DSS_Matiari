@@ -78,13 +78,13 @@ public class SectionBActivity extends AppCompatActivity {
         db = MainApp.appInfo.dbHelper;
         bi.btnContinue.setText(MainApp.mwra.getUid().equals("") ? "Save" : "Update");
 
-        bi.rb09b.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+        bi.rb19.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
-                if(bi.rb09b01.isChecked())
+                if(bi.rb1901.isChecked())
                 {
                     MainApp.totalChildCount = 1;
-                }else if(bi.rb09b02.isChecked()){
+                }else if(bi.rb1902.isChecked()){
                     MainApp.totalChildCount = 2;
                 }else{
                     MainApp.totalChildCount = 3;
@@ -218,7 +218,7 @@ public class SectionBActivity extends AppCompatActivity {
         //if (MainApp.mwra.getUid().equals("") ? insertNewRecord() && insertNewFollowupRecord() : updateDB()) {
         if (MainApp.mwra.getUid().equals("") ? insertNewRecord() : updateDB()) {
 
-            if(bi.rb09a01.isChecked())
+            if(bi.rb1801.isChecked())
             {
                 //MainApp.outcome = new Outcome();
                 Intent forwardIntent = new Intent(this, SectionEActivity.class).putExtra("complete", true);

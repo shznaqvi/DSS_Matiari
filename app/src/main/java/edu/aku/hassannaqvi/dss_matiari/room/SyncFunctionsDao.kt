@@ -211,7 +211,7 @@ interface SyncFunctionsDao {
     // Followupsche
 
     @Throws(JSONException ::class)
-    fun synchhFolloupsList(followUpsScheList: JSONArray) : Int {
+    fun synchhfuplist_view(followUpsScheList: JSONArray) : Int {
         var insertCount =0
         deleteFollowupsScheTable()
 

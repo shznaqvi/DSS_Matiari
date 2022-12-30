@@ -60,14 +60,14 @@ public class SectionAActivity extends AppCompatActivity {
             bi.rb08check.setVisibility(View.GONE);
 
 
-        bi.ra20.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+        bi.ra15.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
-                if (bi.ra2001.isChecked()) {
+                if (bi.ra1501.isChecked()) {
                     bi.ra17C2.setMinvalue(1);
                     bi.ra17C2.setMaxvalue(20);
                 }
-                else if (bi.ra2002.isChecked()) {
+                else if (bi.ra1502.isChecked()) {
                     bi.ra17C2.setMinvalue(0);
                     bi.ra17C2.setMaxvalue(0);
                 }
@@ -92,10 +92,10 @@ public class SectionAActivity extends AppCompatActivity {
     public void btnContinue(View view) {
 
         if (view.getId() == bi.btnLocked.getId()) {
+            bi.ra12.setTag("-1");
+            bi.ra13.setTag("-1");
             bi.ra14.setTag("-1");
-            bi.ra19.setTag("-1");
             bi.ra15.setTag("-1");
-            bi.ra20.setTag("-1");
             bi.ra17A1.setTag("-1");
             bi.ra17B1.setTag("-1");
             bi.ra17C1.setTag("-1");
@@ -113,7 +113,7 @@ public class SectionAActivity extends AppCompatActivity {
         if (updateDB()) {
 
             setResult(RESULT_OK);
-            if (households.getRa20().equals("1")) {
+            if (households.getRa15().equals("1")) {
                 finish();
                 startActivity(new Intent(this, MwraActivity.class)
                         .setFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT));

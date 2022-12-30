@@ -9,7 +9,7 @@ import static edu.aku.hassannaqvi.dss_matiari.database.CreateTable.SQL_ALTER_ADD
 import static edu.aku.hassannaqvi.dss_matiari.database.CreateTable.SQL_ALTER_ADD_MUID;
 import static edu.aku.hassannaqvi.dss_matiari.database.CreateTable.SQL_ALTER_ADD_MUID_FPHOUSEHOLDS;
 import static edu.aku.hassannaqvi.dss_matiari.database.CreateTable.SQL_ALTER_ADD_RA01;
-import static edu.aku.hassannaqvi.dss_matiari.database.CreateTable.SQL_ALTER_ADD_RC15;
+//import static edu.aku.hassannaqvi.dss_matiari.database.CreateTable.SQL_ALTER_ADD_RC15;
 import static edu.aku.hassannaqvi.dss_matiari.database.CreateTable.SQL_ALTER_FOLLOWUPSCHE;
 //import static edu.aku.hassannaqvi.dss_matiari.database.CreateTable.SQL_CREATE_FOLLOWUPSCHE;
 import static edu.aku.hassannaqvi.dss_matiari.database.CreateTable.SQL_CREATE_OUTCOME_FOLLOWUPS;
@@ -516,7 +516,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             households.setIStatus(c.getString(c.getColumnIndexOrThrow(HouseholdTable.COLUMN_ISTATUS)));
             households.setSynced(c.getString(c.getColumnIndexOrThrow(HouseholdTable.COLUMN_SYNCED)));
             households.setVisitNo(c.getString(c.getColumnIndexOrThrow(HouseholdTable.COLUMN_VISIT_NO)));
-            households.setStructureNo(c.getString(c.getColumnIndexOrThrow(HouseholdTable.COLUMN_STRUCTURE_NO)));
+            //households.setStructureNo(c.getString(c.getColumnIndexOrThrow(HouseholdTable.COLUMN_STRUCTURE_NO)));
             households.setVillageCode(c.getString(c.getColumnIndexOrThrow(HouseholdTable.COLUMN_VILLAGE_CODE)));
             households.setUcCode(c.getString(c.getColumnIndexOrThrow(TableContracts.HouseholdTable.COLUMN_UC_CODE)));
             households.setHhNo(c.getString(c.getColumnIndexOrThrow(HouseholdTable.COLUMN_HOUSEHOLD_NO)));

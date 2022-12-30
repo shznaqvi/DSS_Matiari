@@ -486,7 +486,7 @@ public class SectionCActivity extends AppCompatActivity {
             mwra.setDeviceId(mwra.getDeviceId() + "_" + mwra.getDeviceId().substring(mwra.getDeviceId().length() - 1));
 
             updatedFollowups.setDeviceId(mwra.getDeviceId());
-            updatedFollowups.setIStatus(mwra.getIStatus());
+            //updatedFollowups.setIStatus(mwra.getIStatus());
             //db.updatesFollowUpsColumn(TableContracts.FollowupsTable.COLUMN_DEVICEID, followups.getDeviceId());
             //db.updatesFollowUpsColumn(TableContracts.FollowupsTable.COLUMN_ISTATUS, followups.getRc04());
             db.mwraDao().updateMwra(updatedFollowups);

@@ -105,7 +105,17 @@ public class Households extends BaseObservable implements Observable {
     @Ignore
     private String ra18 = "";
     @Ignore
-    private String ra19 = "";
+    private String ra19a = "";
+    @Ignore
+    private String ra19ax = "";
+    @Ignore
+    private String ra19b = "";
+    @Ignore
+    private String ra19bx = "";
+    @Ignore
+    private String ra19c = "";
+    @Ignore
+    private String ra19cx = "";
     @Ignore
     private String ra20 = "";
     @Ignore
@@ -113,8 +123,8 @@ public class Households extends BaseObservable implements Observable {
     @Ignore
     private String ra22 = "";
 
-    @ColumnInfo(name = HouseholdTable.COLUMN_MUID)
-    private String muid = StringUtils.EMPTY;
+    /*@ColumnInfo(name = HouseholdTable.COLUMN_MUID)
+    private String muid = StringUtils.EMPTY;*/
 
     @Ignore
     private transient PropertyChangeRegistry propertyChangeRegistry = new PropertyChangeRegistry();
@@ -185,6 +195,7 @@ public class Households extends BaseObservable implements Observable {
     @ColumnInfo(name = HouseholdTable.COLUMN_SYNCED_DATE)
     private String syncDate = StringUtils.EMPTY;
 
+
     // SECTION VARIABLES
     @ColumnInfo(name = HouseholdTable.COLUMN_SA)
     String sA = StringUtils.EMPTY;
@@ -218,14 +229,20 @@ public class Households extends BaseObservable implements Observable {
         //   setUuid(MainApp.form.getUid());  // not applicable in Form table
         setAppver(MainApp.appInfo.getAppVersion());
         setProjectName(PROJECT_NAME);
-        setRa06(MainApp.followUpsScheHHList.get(position).getUcCode());
+        //setRa06(MainApp.followUpsScheHHList.get(position).getUcCode());
         setHdssId(MainApp.followUpsScheHHList.get(position).getHdssid());
         setUcCode(MainApp.followUpsScheHHList.get(position).getUcCode());
         setVillageCode(MainApp.followUpsScheHHList.get(position).getVillageCode());
         setHhNo(MainApp.followUpsScheHHList.get(position).getHhNo());
+
         setRa09(MainApp.followUpsScheHHList.get(position).getHhNo());
+
+        setRa08(MainApp.followUpsScheHHList.get(position).getRa08());
+        setRa10(MainApp.followUpsScheHHList.get(position).getHdssid());
+        setRa12(MainApp.followUpsScheHHList.get(position).getRa12());
         setRound(MainApp.followUpsScheHHList.get(position).getFRound());
-        setMuid(MainApp.followUpsScheHHList.get(position).getMuid());
+
+        //setMuid(MainApp.followUpsScheHHList.get(position).getMuid());
         setRa01(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.ENGLISH).format(new Date().getTime()));
         setRegRound("");
 
@@ -424,39 +441,72 @@ public class Households extends BaseObservable implements Observable {
         this.sA = sA;
     }
 
-    public String getMuid() {
-        return muid;
+    @Bindable
+    public String getRa19a() {
+        return ra19a;
     }
 
-    public void setMuid(String muid) {
-        this.muid = muid;
+    public void setRa19a(String ra19a) {
+        this.ra19a = ra19a;
+        setIStatus(ra19a);
+        notifyPropertyChanged(BR.ra19a);
     }
 
-    public void resetHousehold() {
-        setRa01("");
-        setRa09("");
-        setRa11("");
-        setRa12("");
-        setRa13("");
-        setRa11x("");
-        setRa12x("");
-        setRa13x("");
-        setRa14("");
-        setRa15("");
-        setRa16("");
-        setRa17_a1("");
-        setRa17_b1("");
-        setRa17_c1("");
-        setRa17_d1("");
-        setRa17_a2("");
-        setRa17_b2("");
-        setRa17_c2("");
-        setRa17_d2("");
-        setRa18("");
-        setRa19("");
-        setRa20("");
-        setSA("");
+    @Bindable
+    public String getRa19ax() {
+        return ra19ax;
     }
+
+    public void setRa19ax(String ra19ax) {
+        this.ra19ax = ra19ax;
+        setIStatus96x(ra19ax);
+        notifyPropertyChanged(BR.ra19ax);
+    }
+
+    @Bindable
+    public String getRa19b() {
+        return ra19b;
+    }
+
+    public void setRa19b(String ra19b) {
+        this.ra19b = ra19b;
+        setIStatus(ra19b);
+        notifyPropertyChanged(BR.ra19b);
+    }
+
+    @Bindable
+    public String getRa19bx() {
+        return ra19bx;
+    }
+
+    public void setRa19bx(String ra19bx) {
+        this.ra19bx = ra19bx;
+        setIStatus96x(ra19bx);
+        notifyPropertyChanged(BR.ra19bx);
+    }
+
+    @Bindable
+    public String getRa19c() {
+        return ra19c;
+    }
+
+    public void setRa19c(String ra19c) {
+        this.ra19c = ra19c;
+        setIStatus(ra19c);
+        notifyPropertyChanged(BR.ra19c);
+    }
+
+    @Bindable
+    public String getRa19cx() {
+        return ra19cx;
+    }
+
+    public void setRa19cx(String ra19cx) {
+        this.ra19cx = ra19cx;
+        setIStatus96x(ra19cx);
+        notifyPropertyChanged(BR.ra19cx);
+    }
+
 
 
     @Bindable
@@ -601,19 +651,10 @@ public class Households extends BaseObservable implements Observable {
 
     public void setRa11(String ra11) {
         this.ra11 = ra11;
-        setIStatus(ra11);
+        //setIStatus(ra11);
         notifyChange(BR.ra11);
     }
 
-    @Bindable
-    public String getRa11x() {
-        return ra11x;
-    }
-
-    public void setRa11x(String ra11x) {
-        this.ra11x = ra11x;
-        notifyChange(BR.ra11x);
-    }
 
     @Bindable
     public String getRa12() {
@@ -622,19 +663,10 @@ public class Households extends BaseObservable implements Observable {
 
     public void setRa12(String ra12) {
         this.ra12 = ra12;
-        setIStatus(ra12);
+        //setIStatus(ra12);
         notifyChange(BR.ra12);
     }
 
-    @Bindable
-    public String getRa12x() {
-        return ra12x;
-    }
-
-    public void setRa12x(String ra12x) {
-        this.ra12x = ra12x;
-        notifyChange(BR.ra12x);
-    }
 
     @Bindable
     public String getRa13() {
@@ -643,18 +675,8 @@ public class Households extends BaseObservable implements Observable {
 
     public void setRa13(String ra13) {
         this.ra13 = ra13;
-        setIStatus(ra13);
+        //setIStatus(ra13);
         notifyChange(BR.ra13);
-    }
-
-    @Bindable
-    public String getRa13x() {
-        return ra13x;
-    }
-
-    public void setRa13x(String ra13x) {
-        this.ra13x = ra13x;
-        notifyChange(BR.ra13x);
     }
 
 
@@ -678,15 +700,7 @@ public class Households extends BaseObservable implements Observable {
         notifyChange(BR.ra15);
     }
 
-    @Bindable
-    public String getRa16() {
-        return ra16;
-    }
 
-    public void setRa16(String ra16) {
-        this.ra16 = ra16;
-        notifyChange(BR.ra16);
-    }
 
     @Bindable
     public String getRa17_a1() {
@@ -820,16 +834,6 @@ public class Households extends BaseObservable implements Observable {
     }
 
     @Bindable
-    public String getRa19() {
-        return ra19;
-    }
-
-    public void setRa19(String ra19) {
-        this.ra19 = ra19;
-        notifyChange(BR.ra19);
-    }
-
-    @Bindable
     public String getRa20() {
         return ra20;
     }
@@ -849,16 +853,6 @@ public class Households extends BaseObservable implements Observable {
         this.ra21 = ra21;
         notifyChange(BR.ra21);
     }
-
-   /* @Bindable
-    public String getRa22() {
-        return ra22;
-    }
-
-    public void setRa22(String ra22) {
-        this.ra22 = ra22;
-        notifyChange(BR.ra22);
-    }*/
 
     @Bindable
     public String getHdssId() {
@@ -926,7 +920,7 @@ public class Households extends BaseObservable implements Observable {
 
     public void s1Hydrate(String string) throws JSONException {
 
-        if (string != null) {
+        if (string != null && !string.equals("")) {
 
             JSONObject json = null;
             json = new JSONObject(string);
@@ -934,9 +928,9 @@ public class Households extends BaseObservable implements Observable {
             this.ra01 = json.getString("ra01");
             this.ra01v2 = json.has("ra01v2") ? json.getString("ra01v2") : "";
             this.ra01v3 = json.has("ra01v3") ? json.getString("ra01v3") : "";
-            this.ra02 = json.getString("ra02");
+            //this.ra02 = json.getString("ra02");
             this.ra04 = json.getString("ra04");
-            this.ra03 = json.getString("ra03");
+//            this.ra03 = json.getString("ra03");
             this.ra05 = json.getString("ra05");
             this.ra07 = json.getString("ra07");
             this.ra06 = json.getString("ra06");
@@ -944,11 +938,8 @@ public class Households extends BaseObservable implements Observable {
             this.ra09 = json.getString("ra09");
             this.ra10 = json.getString("ra10");
             this.ra11 = json.getString("ra11");
-            this.ra11x = json.getString("ra11x");
             this.ra12 = json.getString("ra12");
-            this.ra12x = json.getString("ra12x");
             this.ra13 = json.getString("ra13");
-            this.ra13x = json.getString("ra13x");
             this.ra14 = json.getString("ra14");
             this.ra15 = json.getString("ra15");
             //this.ra16 = json.getString("ra16");
@@ -966,9 +957,13 @@ public class Households extends BaseObservable implements Observable {
             this.ra17_d3 = json.getString("ra17_d3");
 
             this.ra18 = json.getString("ra18");
-            this.ra19 = json.getString("ra19");
-            this.ra20 = json.getString("ra20");
-            this.ra21 = json.getString("ra21");
+
+            this.ra19a = json.getString("ra19a");
+            this.ra19ax = json.getString("ra19ax");
+            this.ra19b = json.getString("ra19b");
+            this.ra19bx = json.getString("ra19bx");
+            this.ra19c = json.getString("ra19c");
+            this.ra19cx = json.getString("ra19cx");
             //this.ra22 = json.getString("ra22");
 
 
@@ -983,9 +978,7 @@ public class Households extends BaseObservable implements Observable {
                 .put("ra01v3", ra01v3)
                 .put("ra01v2", ra01v2)
                 .put("ROUND", round)
-                .put("ra02", ra02)
                 .put("ra04", ra04)
-                .put("ra03", ra03)
                 .put("ra05", ra05)
                 .put("ra07", ra07)
                 .put("ra06", ra06)
@@ -993,11 +986,8 @@ public class Households extends BaseObservable implements Observable {
                 .put("ra09", ra09)
                 .put("ra10", ra10)
                 .put("ra11", ra11)
-                .put("ra11x", ra11x)
                 .put("ra12", ra12)
-                .put("ra12x", ra12x)
                 .put("ra13", ra13)
-                .put("ra13x", ra13x)
                 .put("ra14", ra14)
                 .put("ra15", ra15)
                 //.put("ra16", ra16)
@@ -1014,9 +1004,13 @@ public class Households extends BaseObservable implements Observable {
                 .put("ra17_c3", ra17_c3)
                 .put("ra17_d3", ra17_d3)
                 .put("ra18", ra18)
-                .put("ra19", ra19)
-                .put("ra20", ra20)
-                .put("ra21", ra21)
+                .put("ra19a", ra19a)
+                .put("ra19ax", ra19ax)
+                .put("ra19b", ra19b)
+                .put("ra19bx", ra19bx)
+                .put("ra19c", ra19c)
+                .put("ra19cx", ra19cx)
+
         ;
 
         return json.toString();
@@ -1040,7 +1034,7 @@ public class Households extends BaseObservable implements Observable {
         //json.put(HouseholdTable.COLUMN_STRUCTURE_NO, this.structureNo);
         json.put(HouseholdTable.COLUMN_VISIT_NO, this.visitNo);
         json.put(HouseholdTable.COLUMN_DEVICEID, this.deviceId);
-        json.put(HouseholdTable.COLUMN_DEVICETAGID, this.deviceTag);
+        //json.put(HouseholdTable.COLUMN_DEVICETAGID, this.deviceTag);
         json.put(HouseholdTable.COLUMN_ISTATUS, this.iStatus);
         json.put(HouseholdTable.COLUMN_APPVERSION, this.appver);
         json.put(HouseholdTable.COLUMN_REGROUND, this.regRound);

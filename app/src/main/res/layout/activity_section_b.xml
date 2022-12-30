@@ -21,20 +21,6 @@
         android:orientation="vertical">
 
 
-        <!-- CUSTOM TOOLBAR -->
-        <!--        <androidx.appcompat.widget.Toolbar-->
-        <!--            android:id="@+id/toolbar"-->
-        <!--            style="@null"-->
-        <!--            android:layout_width="match_parent"-->
-        <!--            android:layout_height="wrap_content"-->
-        <!--            android:background="@color/colorPrimary"-->
-        <!--            android:minHeight="?attr/actionBarSize"-->
-        <!--            android:theme="@style/ToolbarTheme"-->
-        <!--            app:popupTheme="@style/ThemeOverlay.AppCompat.Light"-->
-        <!--            app:subtitleTextAppearance="@style/Toolbar.SubtitleText"-->
-        <!--            app:title="@string/demographicinformation_mainheading"-->
-        <!--            app:titleTextAppearance="@style/Toolbar.TitleText" />-->
-
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
@@ -206,6 +192,65 @@
                             android:text="@={mwra.rb02}" />
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
+
+                <!-- rc03  Input   -->
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/fldGrpCVrb03a"
+                    style="@style/cardView">
+                    <!--android:visibility='@{followups.rc06.equals("4")? View.GONE : View.VISIBLE}'-->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/bottom"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                style="@style/labels"
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:text="@string/rc03a" />
+
+                            <TextView
+                                style="@style/quesNum"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:text="@string/Q_rb03a" />
+
+                        </LinearLayout>
+
+                        <com.edittextpicker.aliazaz.EditTextPicker
+                            android:id="@+id/rb03a"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="8dp"
+                            android:digits="0123456789"
+                            android:enabled="true"
+                            android:hint="@string/rc03a"
+                            android:inputType="phone"
+                            android:maxLength="11"
+                            android:text="@={mwra.rb03a}" />
+
+                        <com.edittextpicker.aliazaz.EditTextPicker
+                            android:id="@+id/rc03b"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="8dp"
+                            android:digits="0123456789"
+                            android:hint="@string/rc03a"
+                            android:enabled="true"
+                            android:inputType="phone"
+                            android:maxLength="11"
+                            android:tag="-1"
+                            android:text="@={mwra.rb03b}" />
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+
 
                 <!-- rb04  Input   -->
                 <androidx.cardview.widget.CardView
@@ -397,7 +442,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:checked='@{mwra.rb06.equals("4")}'
-                                android:onClick='@{()->mwra.setRb06("4") + rb09a.clearCheck() + rb09b.clearCheck()}'
+                                android:onClick='@{()->mwra.setRb06("4") + rb18.clearCheck() + rb19.clearCheck()}'
                                 android:text="@string/rb0604" />
                         </RadioGroup>
                     </LinearLayout>
@@ -595,7 +640,6 @@
 
                         </LinearLayout>
 
-
                         <io.blackbox_vision.datetimepickeredittext.view.DatePickerEditText
                             android:id="@+id/rb09"
                             style="@style/labelsHead"
@@ -613,7 +657,7 @@
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
 
-                <!-- rb09a  Radio   -->
+                <!-- rb18  Radio   -->
                 <androidx.cardview.widget.CardView
                     android:id="@+id/fldGrpCVrb09a"
                     style="@style/cardView"
@@ -635,7 +679,7 @@
                                 android:layout_width="0dp"
                                 android:layout_height="match_parent"
                                 android:layout_weight="1"
-                                android:text="@string/rb09a" />
+                                android:text="@string/rb18" />
 
                             <TextView
                                 style="@style/quesNum"
@@ -647,13 +691,13 @@
                         </LinearLayout>
 
                         <RadioGroup
-                            android:id="@+id/rb09a"
+                            android:id="@+id/rb18"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:orientation="horizontal">
 
                             <RadioButton
-                                android:id="@+id/rb09a01"
+                                android:id="@+id/rb1801"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
@@ -662,18 +706,18 @@
                                 android:text="@string/ra16_a" />
 
                             <RadioButton
-                                android:id="@+id/rb09a02"
+                                android:id="@+id/rb1802"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
                                 android:checked='@{mwra.getRb18().equals("2")}'
-                                android:onClick='@{()->mwra.setRb18("2") + rb09b.clearCheck()}'
+                                android:onClick='@{()->mwra.setRb18("2") + rb19.clearCheck()}'
                                 android:text="@string/ra16_b" />
                         </RadioGroup>
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
 
-                <!-- Rb09b-->
+                <!-- Rb19-->
                 <androidx.cardview.widget.CardView
                     android:id="@+id/fldGrpCVrc11"
                     style="@style/cardView"
@@ -695,25 +739,25 @@
                                 android:layout_width="0dp"
                                 android:layout_height="match_parent"
                                 android:layout_weight="1"
-                                android:text="@string/rb09b" />
+                                android:text="@string/rb19" />
 
                             <TextView
                                 style="@style/quesNum"
                                 android:layout_width="wrap_content"
                                 android:layout_height="match_parent"
-                                android:text="@string/Q_rb09b" />
+                                android:text="@string/Q_rb19" />
 
 
                         </LinearLayout>
 
                         <RadioGroup
-                            android:id="@+id/rb09b"
+                            android:id="@+id/rb19"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:orientation="vertical">
 
                             <RadioButton
-                                android:id="@+id/rb09b01"
+                                android:id="@+id/rb1901"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:checked='@{mwra.rb19.equals("1")}'
@@ -721,7 +765,7 @@
                                 android:text="@string/rc1101" />
 
                             <RadioButton
-                                android:id="@+id/rb09b02"
+                                android:id="@+id/rb1902"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:checked='@{mwra.rb19.equals("2")}'
@@ -729,13 +773,61 @@
                                 android:text="@string/rc1102" />
 
                             <RadioButton
-                                android:id="@+id/rb09b03"
+                                android:id="@+id/rb1903"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:checked='@{mwra.rb19.equals("3")}'
                                 android:onClick='@{()->mwra.setRb19("3")}'
                                 android:text="@string/rc1103" />
                         </RadioGroup>
+
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+
+                <!--Rb20-->
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/fldGrpCVrb20"
+                    style="@style/cardView"
+                    android:visibility='@{mwra.rb18.equals(`1`) ? View.VISIBLE : View.GONE}'>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/bottom"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                style="@style/labels"
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:text="@string/rb20" />
+
+                            <TextView
+                                style="@style/quesNum"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:text="@string/Q_rb20" />
+
+                        </LinearLayout>
+
+                        <EditText
+                            android:id="@+id/rb20"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:enabled="true"
+                            android:gravity="center"
+                            android:hint="##"
+                            android:text="@={mwra.rb20}"
+                            app:dateFormat="yyyy-MM-dd"
+                            app:theme="@style/MaterialCalendarTheme" />
+
 
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
@@ -787,34 +879,6 @@
 
                 </LinearLayout>
 
-                <!--EndButton LinearLayout-->
-                <!--                <LinearLayout-->
-                <!--                    android:layout_width="match_parent"-->
-                <!--                    android:layout_height="wrap_content"-->
-                <!--                    android:layout_margin="24dp"-->
-                <!--                    android:gravity="end"-->
-                <!--                    android:orientation="horizontal">-->
-
-                <!--                    <androidx.appcompat.widget.AppCompatButton-->
-                <!--                        android:id="@+id/btn_End"-->
-                <!--                        android:layout_width="wrap_content"-->
-                <!--                        android:layout_height="wrap_content"-->
-                <!--                        android:layout_marginStart="12dp"-->
-                <!--                        android:backgroundTint="@color/colorAccent"-->
-                <!--                        android:onClick="btnEnd"-->
-                <!--                        android:text="Cancel"-->
-                <!--                        android:textColor="@color/white" />-->
-
-                <!--                    <androidx.appcompat.widget.AppCompatButton-->
-                <!--                        android:id="@+id/btn_Continue"-->
-                <!--                        android:layout_width="wrap_content"-->
-                <!--                        android:layout_height="wrap_content"-->
-                <!--                        android:layout_marginStart="12dp"-->
-                <!--                        android:backgroundTint="@color/colorPrimary"-->
-                <!--                        android:onClick="btnContinue"-->
-                <!--                        android:text="Save"-->
-                <!--                        android:textColor="@color/white" />-->
-                <!--                </LinearLayout>-->
             </LinearLayout>
         </ScrollView>
     </LinearLayout>

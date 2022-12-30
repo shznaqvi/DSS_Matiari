@@ -95,10 +95,10 @@ public class Mwra extends BaseObservable implements Observable {
     @ColumnInfo(name = MWRATable.COLUMN_APPVERSION)
     private String appver = StringUtils.EMPTY;
 
-    @ColumnInfo(name = MWRATable.COLUMN_ISTATUS)
+   /* @ColumnInfo(name = MWRATable.COLUMN_ISTATUS)
     private String iStatus = StringUtils.EMPTY;
 
-    private String iStatus96x = StringUtils.EMPTY;
+    private String iStatus96x = StringUtils.EMPTY;*/
 
     @ColumnInfo(name = MWRATable.COLUMN_SYNCED)
     private String synced = StringUtils.EMPTY;
@@ -144,10 +144,6 @@ public class Mwra extends BaseObservable implements Observable {
     private String rb08 = StringUtils.EMPTY;
     @Ignore
     private String rb09 = StringUtils.EMPTY;
-    @Ignore
-    private String rb09a = StringUtils.EMPTY;
-    @Ignore
-    private String rb09b = StringUtils.EMPTY;
 
     // Followup Variables
     @Ignore
@@ -178,6 +174,8 @@ public class Mwra extends BaseObservable implements Observable {
     private String rb18 = StringUtils.EMPTY;
     @Ignore
     private String rb19 = StringUtils.EMPTY;
+    @Ignore
+    private String rb20 = StringUtils.EMPTY;
 
     @Ignore
     private long ageInMonths;
@@ -402,7 +400,7 @@ public class Mwra extends BaseObservable implements Observable {
         this.appver = appver;
     }
 
-    public String getIStatus() {
+    /*public String getIStatus() {
         return iStatus;
     }
 
@@ -416,7 +414,7 @@ public class Mwra extends BaseObservable implements Observable {
 
     public void setIStatus96x(String iStatus96x) {
         this.iStatus96x = iStatus96x;
-    }
+    }*/
 
     public String getSynced() {
         return synced;
@@ -610,25 +608,6 @@ public class Mwra extends BaseObservable implements Observable {
     }
 
 
-    /*@Bindable
-    public String getRb09a() {
-        return rb09a;
-    }
-
-    public void setRb09a(String rb09a) {
-        this.rb09a = rb09a;
-        notifyChange(BR.rb09a);
-    }
-
-    @Bindable
-    public String getRb09b() {
-        return rb09b;
-    }
-
-    public void setRb09b(String rb09b) {
-        this.rb09b = rb09b;
-        notifyChange(BR.rb09b);
-    }*/
 
     @Bindable
     public String getRb03a() {
@@ -670,25 +649,6 @@ public class Mwra extends BaseObservable implements Observable {
         notifyChange(BR.rb11);
     }
 
-    /*@Bindable
-    public String getRb11a() {
-        return rb11a;
-    }
-
-    public void setRb11a(String rb11a) {
-        this.rb11a = rb11a;
-        notifyChange(BR.rb11a);
-    }
-
-    @Bindable
-    public String getRb11b() {
-        return rb11b;
-    }
-
-    public void setRb11b(String rb11b) {
-        this.rb11b = rb11b;
-        notifyChange(BR.rb11b);
-    }*/
 
     @Bindable
     public String getRb12() {
@@ -770,6 +730,18 @@ public class Mwra extends BaseObservable implements Observable {
         notifyChange(BR.rb19);
     }
 
+    @Bindable
+    public String getRb20() {
+        return rb20;
+    }
+
+    public void setRb20(String rb20) {
+        this.rb20 = rb20;
+        notifyChange(BR.rb20);
+    }
+
+
+
 
 
 
@@ -813,7 +785,7 @@ public class Mwra extends BaseObservable implements Observable {
         this.deviceId = mwra.deviceId;
         this.deviceTag = mwra.deviceTag;
         this.appver = mwra.appver;
-        this.iStatus = mwra.iStatus;
+        //this.iStatus = mwra.iStatus;
         this.synced = mwra.synced;
         this.syncDate = mwra.syncDate;
 
@@ -836,6 +808,8 @@ public class Mwra extends BaseObservable implements Observable {
             this.round = json.getString("ROUND");
             this.rb02 = json.getString("rb02");
             this.rb03 = json.getString("rb03");
+            this.rb03a = json.getString("rb03a");
+            this.rb03b = json.getString("rb03b");
             this.rb04 = json.getString("rb04");
             this.rb05 = json.getString("rb05");
             this.rb06 = json.getString("rb06");
@@ -844,6 +818,8 @@ public class Mwra extends BaseObservable implements Observable {
             this.rb09 = json.getString("rb09");
             this.rb18 = json.getString("rb18");
             this.rb19 = json.getString("rb19");
+            this.rb20 = json.getString("rb20");
+
 
         }
     }
@@ -863,13 +839,8 @@ public class Mwra extends BaseObservable implements Observable {
             this.rb05 = json.getString("rb05");
             this.prePreg = json.getString("prePreg");
             this.rb06 = json.getString("rb06");
-            /*this.rb07 = json.getString("rb07");
-            this.rb08 = json.getString("rb08");
-            this.rb09 = json.getString("rb09");
-            */this.rb03a = json.getString("rb03a");
+            this.rb03a = json.getString("rb03a");
             this.rb03b = json.getString("rb03b");
-            /*this.rb11a = json.getString("rb11a");
-            this.rb11b = json.getString("rb11b");*/
             this.rb10 = json.getString("rb10");
             this.rb11 = json.getString("rb11");
             this.rb12 = json.getString("rb12");
@@ -878,8 +849,9 @@ public class Mwra extends BaseObservable implements Observable {
             this.rb15 = json.getString("rb15");
             this.rb16 = json.getString("rb16");
             this.rb17 = json.getString("rb17");
-            this.rb17 = json.getString("rb18");
-            this.rb17 = json.getString("rb19");
+            this.rb18 = json.getString("rb18");
+            this.rb19 = json.getString("rb19");
+            this.rb20 = json.getString("rb20");
 
 
         }
@@ -895,6 +867,8 @@ public class Mwra extends BaseObservable implements Observable {
                 .put("ROUND", round)
                 .put("rb02", rb02)
                 .put("rb03", rb03)
+                .put("rb03a", rb03a)
+                .put("rb03b", rb03b)
                 .put("rb04", rb04)
                 .put("rb05", rb05)
                 .put("rb06", rb06)
@@ -903,6 +877,7 @@ public class Mwra extends BaseObservable implements Observable {
                 .put("rb09", rb09)
                 .put("rb18", rb18)
                 .put("rb19", rb19)
+                .put("rb20", rb20)
         ;
 
         return json.toString();
@@ -923,10 +898,7 @@ public class Mwra extends BaseObservable implements Observable {
                 .put("rb05", rb05)
                 .put("rb06", rb06)
                 .put("prePreg", prePreg)
-                /*.put("rb07", rb07)
-                .put("rb08", rb08)
-                .put("rb09", rb09)
-                */.put("rb10",rb10)
+                .put("rb10",rb10)
                 .put("rb11",rb11)
                 .put("rb12",rb12)
                 .put("rb13",rb13)
@@ -936,6 +908,7 @@ public class Mwra extends BaseObservable implements Observable {
                 .put("rb17",rb17)
                 .put("rb18",rb18)
                 .put("rb19",rb19)
+                .put("rb20",rb20)
         ;
 
         return json.toString();
@@ -983,13 +956,12 @@ public class Mwra extends BaseObservable implements Observable {
         json.put(MWRATable.COLUMN_HDSSID, this.hdssId);
         json.put(MWRATable.COLUMN_UC_CODE, this.ucCode);
         json.put(MWRATable.COLUMN_VILLAGE_CODE, this.villageCode);
-        //json.put(MWRATable.COLUMN_STRUCTURE_NO, this.structureNo);
         json.put(MWRATable.COLUMN_SNO, this.sNo);
         json.put(MWRATable.COLUMN_REGROUND, this.regRound);
         json.put(MWRATable.COLUMN_HOUSEHOLD_NO, this.hhNo);
         json.put(MWRATable.COLUMN_DEVICEID, this.deviceId);
-        json.put(MWRATable.COLUMN_DEVICETAGID, this.deviceTag);
-        json.put(MWRATable.COLUMN_ISTATUS, this.iStatus);
+        //json.put(MWRATable.COLUMN_DEVICETAGID, this.deviceTag);
+        //json.put(MWRATable.COLUMN_ISTATUS, this.iStatus);
         json.put(MWRATable.COLUMN_APPVERSION, this.appver);
         json.put(MWRATable.COLUMN_SB, new JSONObject(sBtoString()));
         json.put(MWRATable.COLUMN_SC, new JSONObject(sCtoString()));

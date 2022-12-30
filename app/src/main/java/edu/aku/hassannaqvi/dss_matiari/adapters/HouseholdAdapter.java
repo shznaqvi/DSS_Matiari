@@ -15,9 +15,6 @@ import android.widget.Toast;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.gson.Gson;
-import com.google.gson.JsonObject;
-
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -26,8 +23,6 @@ import java.util.List;
 
 import edu.aku.hassannaqvi.dss_matiari.R;
 import edu.aku.hassannaqvi.dss_matiari.core.MainApp;
-import edu.aku.hassannaqvi.dss_matiari.database.DatabaseHelper;
-import edu.aku.hassannaqvi.dss_matiari.models.FollowUpsSche;
 import edu.aku.hassannaqvi.dss_matiari.models.Households;
 import edu.aku.hassannaqvi.dss_matiari.room.DssRoomDatabase;
 import edu.aku.hassannaqvi.dss_matiari.ui.sections.SectionAActivity;
@@ -179,7 +174,7 @@ public class HouseholdAdapter extends RecyclerView.Adapter<HouseholdAdapter.View
         public ViewHolder(View v) {
             super(v);
             hhNo = v.findViewById(R.id.ra09);
-            hhHead = v.findViewById(R.id.ra14);
+            hhHead = v.findViewById(R.id.ra12);
             mwraCount = v.findViewById(R.id.mwraCount);
             secStatus = v.findViewById(R.id.secStatus);
             imgStatus = v.findViewById(R.id.imgStatus);

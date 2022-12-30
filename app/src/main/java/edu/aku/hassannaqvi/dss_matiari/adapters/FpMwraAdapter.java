@@ -18,18 +18,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import org.json.JSONException;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.Period;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
-import java.util.Locale;
 
 import edu.aku.hassannaqvi.dss_matiari.R;
 import edu.aku.hassannaqvi.dss_matiari.core.MainApp;
-import edu.aku.hassannaqvi.dss_matiari.database.DatabaseHelper;
 import edu.aku.hassannaqvi.dss_matiari.models.FollowUpsSche;
 import edu.aku.hassannaqvi.dss_matiari.room.DssRoomDatabase;
 import edu.aku.hassannaqvi.dss_matiari.ui.sections.SectionFActivity;
@@ -172,7 +164,7 @@ public class FpMwraAdapter extends RecyclerView.Adapter<FpMwraAdapter.ViewHolder
         fMaritalStatus.setText(wifeOrDaughter + followUpsSche.getRb03());
         secStatus.setText(pregStatus);
         secDob.setText(followUpsSche.getRb04());
-        secGender.setText(followUpsSche.getRc12().equals("2") ? " Female" : "male");
+        secGender.setText(followUpsSche.getRc04().equals("2") ? " Female" : "male");
 
 
         viewHolder.itemView.setOnClickListener(v -> {

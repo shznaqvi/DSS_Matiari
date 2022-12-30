@@ -133,8 +133,9 @@
     <string name="rb08_info">DD/MM/YYYY</string>
     <string name="rb09">EDD Date [auto-calculated]</string>
     <string name="rb09_info">DD/MM/YYYY</string>
-    <string name="rb09a">Have you delivered an alive baby in the past three months? </string>
-    <string name="rb09b">Status of Unreported Pregnancy Outcome </string>
+    <string name="rb18">Have you delivered an alive baby in the past three months? </string>
+    <string name="rb19">Status of Unreported Pregnancy Outcome </string>
+    <string name="rb20">Gestational Age (in weeks)</string>
 
     <string name="rb16">Have you delivered an alive baby during the duration from our last visit and today? </string>
     <string name="rb17">Status of Unreported Pregnancy Outcome </string>
@@ -278,6 +279,7 @@
     <string name='Q_rb17' translatable="false">rb17</string>
     <string name='Q_rb18' translatable="false">rb18</string>
     <string name='Q_rb19' translatable="false">rb19</string>
+    <string name='Q_rb20' translatable="false">rb20</string>
 
     <string name='Q_rc01' translatable="false">rc01</string>
     <string name='Q_rc02' translatable="false">rc02</string>
@@ -332,16 +334,16 @@
     <string name="title_wra_dialog_complete" translatable="false">Add More?</string>
     <string name="message_wra_dialog_addmore" translatable="false">You have already entered %1$s women between 14 – 49. \n\nWould you like to add more women?</string>
     <string name="message_wra_dialog_proceeed" translatable="false">You have entered only %1$s of %2$s women between 14 – 49 in the household. \n\nAre you sure you want to close this household?</string>
-    <string name="ra16_a">yes</string>
-    <string name="ra16_b">no</string>
-    <string name="ra17_a1">male</string>
-    <string name="ra17_a2">female</string>
-    <string name="ra17_b1">male</string>
-    <string name="a17_c1">male</string>
-    <string name="ra17_d1">male</string>
-    <string name="ra17_b2">female</string>
-    <string name="a17_c2">female</string>
-    <string name="ra17_d2">female</string>
+    <string name="ra16_a">Yes</string>
+    <string name="ra16_b">No</string>
+    <string name="ra17_a1">Male</string>
+    <string name="ra17_a2">Female</string>
+    <string name="ra17_b1">Male</string>
+    <string name="a17_c1">Male</string>
+    <string name="ra17_d1">Male</string>
+    <string name="ra17_b2">Female</string>
+    <string name="a17_c2">Female</string>
+    <string name="ra17_d2">Female</string>
     <!--    <string name="rb03">marital status</string>
         <string name="rb03_a">married</string>
         <string name="rb03_b">divorbed</string>

@@ -48,8 +48,8 @@ public class FollowUpsSche implements Observable {
     @ColumnInfo(name = TableFollowUpsSche.COLUMN_RA08)
     private String ra08 = StringUtils.EMPTY; // Mohalla
 
-    @ColumnInfo(name = TableFollowUpsSche.COLUMN_RA14)
-    private String ra14 = StringUtils.EMPTY; // Head of Household
+    @ColumnInfo(name = TableFollowUpsSche.COLUMN_RA12)
+    private String ra12 = StringUtils.EMPTY; // Head of Household
 
     @ColumnInfo(name = TableFollowUpsSche.COLUMN_RA18)
     private String ra18 = StringUtils.EMPTY; // No. of MWRA in the household
@@ -69,12 +69,12 @@ public class FollowUpsSche implements Observable {
     @ColumnInfo(name = TableFollowUpsSche.COLUMN_RB04)
     private String rb04 = StringUtils.EMPTY; // DOB
 
-    @ColumnInfo(name = TableFollowUpsSche.COLUMN_RC12)
-    private String rc12 = StringUtils.EMPTY; // Gender Will be rc04 in new View
+    @ColumnInfo(name = TableFollowUpsSche.COLUMN_RC04)
+    private String rc04 = StringUtils.EMPTY; // Gender Will be rc04 in new View
 
-    @ColumnInfo(name = TableFollowUpsSche.COLUMN_RC15)
+   /* @ColumnInfo(name = TableFollowUpsSche.COLUMN_RC15)
     private String rc15 = StringUtils.EMPTY;   // Current pregnancy Status --- rb07
-
+*/
     @ColumnInfo(name = TableFollowUpsSche.COLUMN_RB05)
     private String rb05 = StringUtils.EMPTY;  // Age in years
 
@@ -167,12 +167,12 @@ public class FollowUpsSche implements Observable {
         this.ra08 = ra08;
     }
 
-    public String getRa14() {
-        return ra14;
+    public String getRa12() {
+        return ra12;
     }
 
-    public void setRa14(String ra14) {
-        this.ra14 = ra14;
+    public void setRa12(String ra12) {
+        this.ra12 = ra12;
     }
 
     public String getRa18() {
@@ -257,22 +257,22 @@ public class FollowUpsSche implements Observable {
         this.rb04 = rb04;
     }
 
-    public String getRc12() {
-        return rc12;
+    public String getRc04() {
+        return rc04;
     }
 
-    public void setRc12(String rc12) {
-        this.rc12 = rc12;
+    public void setRc04(String rc04) {
+        this.rc04 = rc04;
     }
 
 
-    public String getRc15() {
+    /*public String getRc15() {
         return rc15;
     }
 
     public void setRc15(String rc15) {
         this.rc15 = rc15;
-    }
+    }*/
 
     public String getMemberType() {
         return memberType;
@@ -314,7 +314,7 @@ public class FollowUpsSche implements Observable {
         this.hdssid = jsonObject.getString(TableFollowUpsSche.COLUMN_HDSSID);
         this.ra01 = jsonObject.getString(TableFollowUpsSche.COLUMN_RA01);
         this.ra08 = jsonObject.getString(TableFollowUpsSche.COLUMN_RA08);
-        this.ra14 = jsonObject.getString(TableFollowUpsSche.COLUMN_RA14);
+        this.ra12 = jsonObject.getString(TableFollowUpsSche.COLUMN_RA12);
         this.ra18 = jsonObject.getString(TableFollowUpsSche.COLUMN_RA18);
         this.fRound = jsonObject.getString(TableFollowUpsSche.COLUMN_FROUND);
         this.istatus = jsonObject.getString(TableFollowUpsSche.COLUMN_ISTATUS);
@@ -322,8 +322,8 @@ public class FollowUpsSche implements Observable {
         this.rb02 = jsonObject.getString(TableFollowUpsSche.COLUMN_RB02);
         this.rb03 = jsonObject.getString(TableFollowUpsSche.COLUMN_RB03);
         this.rb04 = jsonObject.getString(TableFollowUpsSche.COLUMN_RB04);
-        this.rc12 = jsonObject.getString(TableFollowUpsSche.COLUMN_RC12);
-        this.rc15 = jsonObject.getString(TableFollowUpsSche.COLUMN_RC15);
+        this.rc04 = jsonObject.getString(TableFollowUpsSche.COLUMN_RC04);
+        //this.rc15 = jsonObject.getString(TableFollowUpsSche.COLUMN_RC15);
         this.rb05 = jsonObject.getString(TableFollowUpsSche.COLUMN_RB05);
         this.rb07 = jsonObject.getString(TableFollowUpsSche.COLUMN_RB07);
         this.rb06 = jsonObject.getString(TableFollowUpsSche.COLUMN_RB06);
@@ -340,7 +340,7 @@ public class FollowUpsSche implements Observable {
         this.hdssid = cursor.getString(cursor.getColumnIndexOrThrow(TableFollowUpsSche.COLUMN_HDSSID));
         this.ra01 = cursor.getString(cursor.getColumnIndexOrThrow(TableFollowUpsSche.COLUMN_RA01));
         this.ra08 = cursor.getString(cursor.getColumnIndexOrThrow(TableFollowUpsSche.COLUMN_RA08));
-        this.ra14 = cursor.getString(cursor.getColumnIndexOrThrow(TableFollowUpsSche.COLUMN_RA14));
+        this.ra12 = cursor.getString(cursor.getColumnIndexOrThrow(TableFollowUpsSche.COLUMN_RA12));
         this.ra18 = cursor.getString(cursor.getColumnIndexOrThrow(TableFollowUpsSche.COLUMN_RA18));
         this.fRound = cursor.getString(cursor.getColumnIndexOrThrow(TableFollowUpsSche.COLUMN_FROUND));
         this.fpDoneDt = cursor.getString(cursor.getColumnIndexOrThrow(TableFollowUpsSche.COLUMN_DONE_DATE));
@@ -349,11 +349,11 @@ public class FollowUpsSche implements Observable {
         this.rb02 = cursor.getString(cursor.getColumnIndexOrThrow(TableFollowUpsSche.COLUMN_RB02));
         this.rb03 = cursor.getString(cursor.getColumnIndexOrThrow(TableFollowUpsSche.COLUMN_RB03));
         this.rb04 = cursor.getString(cursor.getColumnIndexOrThrow(TableFollowUpsSche.COLUMN_RB04));
-        this.rc12 = cursor.getString(cursor.getColumnIndexOrThrow(TableFollowUpsSche.COLUMN_RC12));
+        this.rc04 = cursor.getString(cursor.getColumnIndexOrThrow(TableFollowUpsSche.COLUMN_RC04));
         this.rb05 = cursor.getString(cursor.getColumnIndexOrThrow(TableFollowUpsSche.COLUMN_RB05));
         this.rb07 = cursor.getString(cursor.getColumnIndexOrThrow(TableFollowUpsSche.COLUMN_RB07));
         this.rb06 = cursor.getString(cursor.getColumnIndexOrThrow(TableFollowUpsSche.COLUMN_RB06));
-        this.rc15 = cursor.getString(cursor.getColumnIndexOrThrow(TableFollowUpsSche.COLUMN_RC15));
+        //this.rc15 = cursor.getString(cursor.getColumnIndexOrThrow(TableFollowUpsSche.COLUMN_RC15));
         this.memberType = cursor.getString(cursor.getColumnIndexOrThrow(TableFollowUpsSche.COLUMN_MEMBERTYPE));
 
 

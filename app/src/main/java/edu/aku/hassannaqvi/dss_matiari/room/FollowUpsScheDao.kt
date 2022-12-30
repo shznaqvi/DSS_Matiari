@@ -15,7 +15,7 @@ import kotlin.jvm.Throws
 @Dao
 interface FollowUpsScheDao {
 
-    @Throws(JSONException ::class)
+    /*@Throws(JSONException ::class)
     fun syncFollowUpsSche(followUpsScheList: JSONArray) : Int {
         var insertCount =0
         deleteFollowupsScheTable()
@@ -40,7 +40,7 @@ interface FollowUpsScheDao {
 
 
     @Query("DELETE FROM " + TableContracts.TableFollowUpsSche.TABLE_NAME)
-    fun deleteFollowupsScheTable()
+    fun deleteFollowupsScheTable()*/
 
 
     @Update(onConflict = OnConflictStrategy.REPLACE)
@@ -66,7 +66,7 @@ interface FollowUpsScheDao {
             + TableContracts.TableFollowUpsSche.COLUMN_MUID + ", "
             + TableContracts.TableFollowUpsSche.COLUMN_RA01 + ", "
             + TableContracts.TableFollowUpsSche.COLUMN_RA08 + ", "
-            + TableContracts.TableFollowUpsSche.COLUMN_RA14 + ", "
+            + TableContracts.TableFollowUpsSche.COLUMN_RA12 + ", "
             + TableContracts.TableFollowUpsSche.COLUMN_RA18 + ", "
             + TableContracts.TableFollowUpsSche.COLUMN_FROUND + ", "
             + TableContracts.TableFollowUpsSche.COLUMN_DONE_DATE + ", "
@@ -75,8 +75,7 @@ interface FollowUpsScheDao {
             + TableContracts.TableFollowUpsSche.COLUMN_RB02 + ", "
             + TableContracts.TableFollowUpsSche.COLUMN_RB03 + ", "
             + TableContracts.TableFollowUpsSche.COLUMN_RB04 + ", "
-            + TableContracts.TableFollowUpsSche.COLUMN_RC12 + ", "
-            + TableContracts.TableFollowUpsSche.COLUMN_RC15 + ", "
+            + TableContracts.TableFollowUpsSche.COLUMN_RC04 + ", "
             + TableContracts.TableFollowUpsSche.COLUMN_RB05 + ", "
             + TableContracts.TableFollowUpsSche.COLUMN_RB06 + ", "
             + TableContracts.TableFollowUpsSche.COLUMN_MEMBERTYPE + ", "
@@ -84,7 +83,7 @@ interface FollowUpsScheDao {
         " FROM " + TableContracts.TableFollowUpsSche.TABLE_NAME
                 + " WHERE " + TableContracts.TableFollowUpsSche.COLUMN_UC_CODE + " LIKE :uc AND "
                 + TableContracts.TableFollowUpsSche.COLUMN_VILLAGE_CODE + " LIKE :village AND " +
-            TableContracts.TableFollowUpsSche.COLUMN_RA14 + " LIKE '%' || :hhead || '%' GROUP BY "
+            TableContracts.TableFollowUpsSche.COLUMN_RA12 + " LIKE '%' || :hhead || '%' GROUP BY "
             + TableContracts.TableFollowUpsSche.COLUMN_HDSSID
     + " ORDER BY " + TableContracts.TableFollowUpsSche.COLUMN_ID + " ASC ")
     fun getFollowUpsScheHHBYVillage(uc : String, village: String, hhead : String) : List<FollowUpsSche>

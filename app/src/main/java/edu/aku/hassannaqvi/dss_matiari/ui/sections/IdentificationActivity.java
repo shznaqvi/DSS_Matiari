@@ -153,7 +153,7 @@ public class IdentificationActivity extends AppCompatActivity {
 
                     //int maxHHno = db.getMaxStructure(selectedUC, vCode) + 1;
 
-                    int maxHHno = db.householdsDao().getMaxStructure(selectedUC, vCode) +1;
+                    //int maxHHno = db.householdsDao().getMaxStructure(selectedUC, vCode) +1;
 
 //                    bi.btnContinue.setBackgroundTintList(ContextCompat.getColorStateList(IdentificationActivity.this, R.color.colorAccent));
                     bi.btnContinue.setBackgroundTintList(ContextCompat.getColorStateList(IdentificationActivity.this, R.color.colorPrimary));

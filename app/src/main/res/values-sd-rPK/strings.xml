@@ -136,10 +136,11 @@
     <string name="rb08_info">DD/MM/YYYY</string>
     <string name="rb09">متوقع ويم جي تاريخ</string>
     <string name="rb09_info">DD/MM/YYYY</string>
-    <string name="rb09a">ڇا توهان گذريل ٽن مهينن ۾ ٻار کي جنم ڏنو آهي؟</string>
-    <string name="rb09b">حمل جو نتيجو</string>
+    <string name="rb18">ڇا توهان گذريل ٽن مهينن ۾ ٻار کي جنم ڏنو آهي؟</string>
+    <string name="rb19">حمل جو نتيجو</string>
     <string name="rb16">ڇا توهان اسان جي آخري دوري ۽ اڄ جي عرصي دوران هڪ زنده ٻار کي جنم ڏنو آهي؟</string>
     <string name="rb17">حمل جو نتيجو</string>
+    <string name="rb20">حمل جي عمر (هفتن ۾)</string>
 
 
     <string name="rc01">عورت جو سڃاڻپ نمبر</string>

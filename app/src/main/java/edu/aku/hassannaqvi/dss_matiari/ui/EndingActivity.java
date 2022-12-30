@@ -80,7 +80,7 @@ public class EndingActivity extends AppCompatActivity {
 
         switch (visitCount) {
             case 1:
-                MainApp.households.setRa11(
+                MainApp.households.setRa19a(
                         bi.istatusa.isChecked() ? "1" :
                                 bi.istatusb.isChecked() ? "2" :
                                         bi.istatusc.isChecked() ? "3" :
@@ -88,10 +88,10 @@ public class EndingActivity extends AppCompatActivity {
                                                         bi.istatusd.isChecked() ? "96" :
                                                                 "-1"
                 );
-                MainApp.households.setRa11x(bi.istatusdx.getText().toString());
+                MainApp.households.setRa19ax(bi.istatusdx.getText().toString());
                 break;
             case 2:
-                MainApp.households.setRa12(
+                MainApp.households.setRa19b(
                         bi.istatusa.isChecked() ? "1" :
                                 bi.istatusb.isChecked() ? "2" :
                                         bi.istatusc.isChecked() ? "3" :
@@ -100,11 +100,11 @@ public class EndingActivity extends AppCompatActivity {
                                                                 "-1"
 
                 );
-                MainApp.households.setRa12x(bi.istatusdx.getText().toString());
+                MainApp.households.setRa19bx(bi.istatusdx.getText().toString());
                 MainApp.households.setRa01v2(bi.ra01v2.getText().toString());
                 break;
             case 3:
-                MainApp.households.setRa13(
+                MainApp.households.setRa19c(
                         bi.istatusa.isChecked() ? "1" :
                                 bi.istatusb.isChecked() ? "2" :
                                         bi.istatusc.isChecked() ? "3" :
@@ -113,7 +113,7 @@ public class EndingActivity extends AppCompatActivity {
                                                                 "-1"
 
                 );
-                MainApp.households.setRa13x(bi.istatusdx.getText().toString());
+                MainApp.households.setRa19cx(bi.istatusdx.getText().toString());
                 MainApp.households.setRa01v3(bi.ra01v3.getText().toString());
                 break;
 
