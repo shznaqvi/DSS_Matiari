@@ -182,6 +182,9 @@ public class Mwra extends BaseObservable implements Observable {
     @Ignore
     private String prePreg = "";
 
+    @Ignore
+    private String preMaritalStaus = "";
+
 
     public Mwra() {
 
@@ -311,6 +314,14 @@ public class Mwra extends BaseObservable implements Observable {
     public void setFRound(String fRound) {
         this.fRound = fRound;
     }*/
+
+    public String getPreMaritalStaus() {
+        return preMaritalStaus;
+    }
+
+    public void setPreMaritalStaus(String preMaritalStaus) {
+        this.preMaritalStaus = preMaritalStaus;
+    }
 
     public String getUserName() {
         return userName;
@@ -564,10 +575,13 @@ public class Mwra extends BaseObservable implements Observable {
 
     public void setRb06(String rb06) {
         this.rb06 = rb06;
-        Log.d(TAG, "setRc06: " + this.rb06);
+        Log.d(TAG, "setRb06: " + this.rb06);
         setRb07(this.rb06.equals("4") ? "" : this.rb07);
+        this.preMaritalStaus = rb06;
         notifyChange(BR.rb06);
     }
+
+
 
     @Bindable
     public String getRb07() {
@@ -578,7 +592,7 @@ public class Mwra extends BaseObservable implements Observable {
         this.rb07 = rb07;
         setRb08(this.rb07.equals("1") ? this.rb08 : "");
         setRb09(this.rb07.equals("1") ? this.rb09 : "");
-        Log.d(TAG, "setRc07: " + this.rb07);
+        Log.d(TAG, "setRb07: " + this.rb07);
         notifyChange(BR.rb07);
     }
 
@@ -739,8 +753,6 @@ public class Mwra extends BaseObservable implements Observable {
         this.rb20 = rb20;
         notifyChange(BR.rb20);
     }
-
-
 
 
 

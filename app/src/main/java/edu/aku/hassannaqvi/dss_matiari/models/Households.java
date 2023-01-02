@@ -229,20 +229,19 @@ public class Households extends BaseObservable implements Observable {
         //   setUuid(MainApp.form.getUid());  // not applicable in Form table
         setAppver(MainApp.appInfo.getAppVersion());
         setProjectName(PROJECT_NAME);
-        //setRa06(MainApp.followUpsScheHHList.get(position).getUcCode());
         setHdssId(MainApp.followUpsScheHHList.get(position).getHdssid());
         setUcCode(MainApp.followUpsScheHHList.get(position).getUcCode());
         setVillageCode(MainApp.followUpsScheHHList.get(position).getVillageCode());
         setHhNo(MainApp.followUpsScheHHList.get(position).getHhNo());
-
-        setRa09(MainApp.followUpsScheHHList.get(position).getHhNo());
-
-        setRa08(MainApp.followUpsScheHHList.get(position).getRa08());
-        setRa10(MainApp.followUpsScheHHList.get(position).getHdssid());
-        setRa12(MainApp.followUpsScheHHList.get(position).getRa12());
-        setRound(MainApp.followUpsScheHHList.get(position).getFRound());
-
-        //setMuid(MainApp.followUpsScheHHList.get(position).getMuid());
+        setRa09(MainApp.followUpsScheHHList.get(position).getHhNo());       // Household Number
+        setRa08(MainApp.followUpsScheHHList.get(position).getRa08());       // Muhalla
+        setRa10(MainApp.followUpsScheHHList.get(position).getHdssid());     //  Household ID
+        setRa12(MainApp.followUpsScheHHList.get(position).getRa12());       // Name of head of household
+        setRound(MainApp.followUpsScheHHList.get(position).getFRound());    // Round
+        setRa04(MainApp.leaderCode);
+        setRa05(MainApp.leaderCode);
+        setRa06(MainApp.selectedUC);
+        setRa07(MainApp.selectedVillage);
         setRa01(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.ENGLISH).format(new Date().getTime()));
         setRegRound("");
 

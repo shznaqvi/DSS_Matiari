@@ -103,6 +103,14 @@ public class FPHouseholdAdapter extends RecyclerView.Adapter<FPHouseholdAdapter.
 
 
         try {
+            //MainApp.fpHouseholds = db.getFPHouseholdBYHdssid(MainApp.followUpsScheHHList.get(viewHolder.getAdapterPosition()).getHdssid());
+            households = db.householdsDao().getHouseholdByHDSSIDASC(MainApp.followUpsScheHHList.get(viewHolder.getAdapterPosition()).getHdssid());
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+
+        try {
             // These quick fixes are making this code a mess.
             //this.fpHouseholds = db.getHouseholdByHDSSID(followUpsSche.getHdssid());
             this.fpHouseholds = db.householdsDao().getHouseholdByHDSSIDDSC(MainApp.followUpsScheHHList.get(viewHolder.getAdapterPosition()).getHdssid(), viewHolder.getAdapterPosition());
@@ -118,7 +126,7 @@ public class FPHouseholdAdapter extends RecyclerView.Adapter<FPHouseholdAdapter.
 
 
 
-        String hhStatus = "";
+        String hhStatus;
         switch (fpHouseholds.getIStatus()) {
             case "1":
                 hhStatus = "Complete";
@@ -141,7 +149,7 @@ public class FPHouseholdAdapter extends RecyclerView.Adapter<FPHouseholdAdapter.
                 break;
         }
 
-        String hhPrvStatus = "";
+        String hhPrvStatus;
         switch (followUpsSche.getiStatus()) {
             case "1":
                 hhPrvStatus = "Complete";
@@ -195,6 +203,8 @@ public class FPHouseholdAdapter extends RecyclerView.Adapter<FPHouseholdAdapter.
                 @Override
                 public void onClick(View v) {
                     // Get the current state of the item
+
+                    //fpHouseholds = new Households();
 
                     try {
                         //MainApp.fpHouseholds = db.getFPHouseholdBYHdssid(MainApp.followUpsScheHHList.get(viewHolder.getAdapterPosition()).getHdssid());

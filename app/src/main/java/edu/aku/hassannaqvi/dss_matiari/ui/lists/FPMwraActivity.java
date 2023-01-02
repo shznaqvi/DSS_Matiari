@@ -135,11 +135,14 @@ public class FPMwraActivity extends AppCompatActivity {
         MainApp.households.setHdssId(households.getHdssId());
         MainApp.households.setVisitNo(households.getVisitNo());
         households.setRegRound("");
-        MainApp.households.setRa18("999");
+        //MainApp.households.setRa18(households.getRa18());
 
         //int newMwra = db.getMWRACountBYUUID(fpHouseholds.getUid());
 
         int newMwra = db.mwraDao().getMWRACountBYUUID(households.getUid(), "1");
+        int maxMWRA = db.mwraDao().getMaxMWRSNoBYHH(selectedUC, selectedVillage, selectedHhNO);
+        int maxFpMWRA = db.FollowUpsScheDao().getMaxMWRANoBYHHFromFolloupsSche(selectedUC, selectedVillage, selectedHhNO);
+        mwraCount = Math.max(maxMWRA, maxFpMWRA);
 
         if (newMwra > 0) {
             mwraCount = mwraCount + newMwra;
@@ -148,6 +151,8 @@ public class FPMwraActivity extends AppCompatActivity {
             bi.newMwraList.setVisibility(View.VISIBLE);
 
         }
+
+        households.setRa18(String.valueOf(mwraCount));
 
     }
     private void addMoreFemale() {
@@ -162,7 +167,7 @@ public class FPMwraActivity extends AppCompatActivity {
         int maxMWRA = db.mwraDao().getMaxMWRSNoBYHH(selectedUC, selectedVillage, selectedHhNO);
         int maxFpMWRA = db.FollowUpsScheDao().getMaxMWRANoBYHHFromFolloupsSche(selectedUC, selectedVillage, selectedHhNO);
         mwraCount = Math.max(maxMWRA, maxFpMWRA);
-        MainApp.households.setRa18("999");
+        MainApp.households.setRa18(String.valueOf(mwraCount));
 
 
         MainApp.mwra = new Mwra();

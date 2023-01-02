@@ -167,6 +167,7 @@ public class SectionCActivity extends AppCompatActivity {
         });
 
 
+
     }
 
     private void setDateRanges() {
@@ -481,7 +482,7 @@ public class SectionCActivity extends AppCompatActivity {
 
             Mwra updatedFollowups = mwra;
             updatedFollowups.setSC(mwra.sCtoString());
-            updcount = db.mwraDao().updateMwra(mwra);
+            updcount = db.mwraDao().updateMwra(updatedFollowups);
 
             mwra.setDeviceId(mwra.getDeviceId() + "_" + mwra.getDeviceId().substring(mwra.getDeviceId().length() - 1));
 

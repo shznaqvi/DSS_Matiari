@@ -33,6 +33,7 @@ public class EndingActivity extends AppCompatActivity {
     int sectionMainCheck;
     private DssRoomDatabase db;
     int visitCount;
+    Households updatedHousehold;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,7 +73,7 @@ public class EndingActivity extends AppCompatActivity {
         }
     }
 
-    private void saveDraft() {
+    private void saveDraft() throws JSONException {
 
         visitCount++;
 
@@ -117,12 +118,17 @@ public class EndingActivity extends AppCompatActivity {
                 MainApp.households.setRa01v3(bi.ra01v3.getText().toString());
                 break;
 
+
+
         }
+
+        updatedHousehold = households;
+        updatedHousehold.setSA(households.sAtoString());
         // households.setEndTime(new SimpleDateFormat("dd-MM-yy HH:mm", Locale.ENGLISH).format(new Date().getTime()));
     }
 
 
-    public void btnEnd(View view) {
+    public void btnEnd(View view) throws JSONException {
         if (!formValidation()) return;
         saveDraft();
         if (UpdateDB()) {
@@ -144,13 +150,13 @@ public class EndingActivity extends AppCompatActivity {
         //db.updatesHouseholdColumn(TableContracts.HouseholdTable.COLUMN_ISTATUS, MainApp.households.getIStatus());
         //db.updatesHouseholdColumn(TableContracts.HouseholdTable.COLUMN_VISIT_NO, MainApp.households.getVisitNo());
         try {
-            Households updatedHousehold = households;
+            //Households updatedHousehold = households;
             updatedHousehold.setIStatus(households.getIStatus());
             updatedHousehold.setVisitNo(households.getVisitNo());
             updatedHousehold.setIStatus96x(households.getIStatus96x());
             updatedHousehold.setSA(households.sAtoString());
 
-            updcount = db.householdsDao().updateHousehold(households);
+            updcount = db.householdsDao().updateHousehold(updatedHousehold);
             //updcount = db.updatesHouseholdColumn(TableContracts.HouseholdTable.COLUMN_SA, MainApp.households.sAtoString());
 
 
