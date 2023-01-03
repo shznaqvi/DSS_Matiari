@@ -45,6 +45,7 @@ public class FPHouseholdAdapter extends RecyclerView.Adapter<FPHouseholdAdapter.
     private final int completeCount;
     private final DssRoomDatabase db;
     private Households fpHouseholds;
+    private Households households;
     HashMap<Integer, Integer> totalMwraMap = new HashMap<>();
 
     /**
@@ -104,7 +105,7 @@ public class FPHouseholdAdapter extends RecyclerView.Adapter<FPHouseholdAdapter.
 
         try {
             //MainApp.fpHouseholds = db.getFPHouseholdBYHdssid(MainApp.followUpsScheHHList.get(viewHolder.getAdapterPosition()).getHdssid());
-            households = db.householdsDao().getHouseholdByHDSSIDASC(MainApp.followUpsScheHHList.get(viewHolder.getAdapterPosition()).getHdssid());
+            this.households = db.householdsDao().getHouseholdByHDSSIDASC(MainApp.followUpsScheHHList.get(viewHolder.getAdapterPosition()).getHdssid());
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -130,15 +131,19 @@ public class FPHouseholdAdapter extends RecyclerView.Adapter<FPHouseholdAdapter.
         switch (fpHouseholds.getIStatus()) {
             case "1":
                 hhStatus = "Complete";
+                secStatus.setVisibility(View.VISIBLE);
                 break;
             case "2":
                 hhStatus = "Locked";
+                secStatus.setVisibility(View.VISIBLE);
                 break;
             case "3":
                 hhStatus = "Refused";
+                secStatus.setVisibility(View.VISIBLE);
                 break;
             case "4":
                 hhStatus = "No WRA";
+                secStatus.setVisibility(View.VISIBLE);
                 break;
             case "":
                 hhStatus = "       ";
@@ -204,19 +209,21 @@ public class FPHouseholdAdapter extends RecyclerView.Adapter<FPHouseholdAdapter.
                 public void onClick(View v) {
                     // Get the current state of the item
 
-                    //fpHouseholds = new Households();
 
                     try {
                         //MainApp.fpHouseholds = db.getFPHouseholdBYHdssid(MainApp.followUpsScheHHList.get(viewHolder.getAdapterPosition()).getHdssid());
-                       households = db.householdsDao().getSelectedHouseholdByHDSSID(MainApp.followUpsScheHHList.get(viewHolder.getAdapterPosition()).getHdssid(), viewHolder.getAdapterPosition());
+                       MainApp.households = db.householdsDao().getSelectedHouseholdByHDSSID(MainApp.followUpsScheHHList.get(viewHolder.getAdapterPosition()).getHdssid(), viewHolder.getAdapterPosition());
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
 
-                    if (fpHouseholds.getUid().equals(""))
-                        fpHouseholds.populateMeta(viewHolder.getAdapterPosition());
 
-                    if (!fpHouseholds.getIStatus().equals("1") && Integer.parseInt(fpHouseholds.getVisitNo()) < 3) {
+                    if (MainApp.households.getUid().equals("")) {
+                        MainApp.households.populateMeta(viewHolder.getAdapterPosition());
+                    }
+
+
+                    if (!MainApp.households.getIStatus().equals("1") && Integer.parseInt(MainApp.households.getVisitNo()) < 3) {
 
                         int currentMWRA = totalMwraMap.containsKey(pos) ? totalMwraMap.get(pos) : 0;
                         if (followUpsSche.getiStatus().equals("1") && currentMWRA > 0) {
@@ -224,7 +231,7 @@ public class FPHouseholdAdapter extends RecyclerView.Adapter<FPHouseholdAdapter.
                         } else if(!followUpsSche.getiStatus().equals("1") || currentMWRA == 0) {
                             try {
                                 //MainApp.households = db.getHouseholdByHDSSID(followUpsSche.getHdssid());
-                                households = db.householdsDao().getHouseholdByHDSSIDASC(followUpsSche.getHdssid());
+                                MainApp.households = db.householdsDao().getHouseholdByHDSSIDASC(followUpsSche.getHdssid());
 
                                 if (MainApp.households == null) {
                                     MainApp.households = new Households();

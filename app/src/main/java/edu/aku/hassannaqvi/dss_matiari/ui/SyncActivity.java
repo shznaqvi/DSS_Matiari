@@ -192,6 +192,7 @@ public class SyncActivity extends AppCompatActivity {
                     MainApp.uploadData.add(db.syncFunctionsDao().getUnsyncedOutcome());
                     uploadTables.add(new SyncModel(TableContracts.OutcomeTable.TABLE_NAME));
 
+
                 } catch (JSONException e) {
                     e.printStackTrace();
                     Toast.makeText(this, "JSONException(Outcome): " + e.getMessage(), Toast.LENGTH_LONG).show();

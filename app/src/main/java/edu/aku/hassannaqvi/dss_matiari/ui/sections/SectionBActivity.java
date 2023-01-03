@@ -52,7 +52,7 @@ public class SectionBActivity extends AppCompatActivity {
         setTheme(lang.equals("1") ? R.style.AppThemeEnglish1 : R.style.AppThemeUrdu);
         bi = DataBindingUtil.setContentView(this, R.layout.activity_section_b);
         bi.setCallback(this);
-        bi.setMwra(mwra);
+
 
         setListener();
 
@@ -72,6 +72,7 @@ public class SectionBActivity extends AppCompatActivity {
 
         }
 
+        bi.setMwra(mwra);
         setTitle(R.string.marriedwomenregistration_mainheading);
         setImmersive(true);
 

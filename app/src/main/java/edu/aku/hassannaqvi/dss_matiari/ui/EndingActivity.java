@@ -33,7 +33,7 @@ public class EndingActivity extends AppCompatActivity {
     int sectionMainCheck;
     private DssRoomDatabase db;
     int visitCount;
-    Households updatedHousehold;
+    //Households updatedHousehold;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -122,8 +122,7 @@ public class EndingActivity extends AppCompatActivity {
 
         }
 
-        updatedHousehold = households;
-        updatedHousehold.setSA(households.sAtoString());
+
         // households.setEndTime(new SimpleDateFormat("dd-MM-yy HH:mm", Locale.ENGLISH).format(new Date().getTime()));
     }
 
@@ -150,7 +149,18 @@ public class EndingActivity extends AppCompatActivity {
         //db.updatesHouseholdColumn(TableContracts.HouseholdTable.COLUMN_ISTATUS, MainApp.households.getIStatus());
         //db.updatesHouseholdColumn(TableContracts.HouseholdTable.COLUMN_VISIT_NO, MainApp.households.getVisitNo());
         try {
-            //Households updatedHousehold = households;
+            Households updatedHousehold = households;
+
+            if(visitCount == 1)
+            {
+                updatedHousehold.setRa19a(households.getRa19a());
+            }else if(visitCount == 2)
+            {
+                updatedHousehold.setRa19b(households.getRa19b());
+            }else if(visitCount == 3)
+            {
+                updatedHousehold.setRa19c(households.getRa19c());
+            }
             updatedHousehold.setIStatus(households.getIStatus());
             updatedHousehold.setVisitNo(households.getVisitNo());
             updatedHousehold.setIStatus96x(households.getIStatus96x());

@@ -200,7 +200,7 @@ public class MwraActivity extends AppCompatActivity {
     }
 
     public void btnContinue(View view) {
-        if (MainApp.mwraList.size() < Integer.parseInt(MainApp.households.getRa18())) {
+        if (MainApp.mwraList.size() < Integer.parseInt(MainApp.households.getRa17_c2())) {
             displayProceedDialog();
         } else {
             proceedSelect();
@@ -246,30 +246,36 @@ public class MwraActivity extends AppCompatActivity {
     }
 
     private void displayAddMoreDialog() {
-        new AlertDialog.Builder(this)
-                .setTitle(R.string.title_wra_dialog_complete)
-                .setMessage(String.format(getString(R.string.message_wra_dialog_addmore), MainApp.households.getRa18()))
+        if(mwraList.size() < Integer.parseInt(MainApp.households.getRa17_c2()))
+        {
+            addMoreFemale();
 
-                // Specifying a listener allows you to take an action before dismissing the dialog.
-                // The dialog is automatically dismissed when a dialog button is clicked.
-                .setPositiveButton(R.string.ra20_a, new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-                        // Continue with delete operation
-                        addMoreFemale();
-                    }
-                })
+        }else {
+            new AlertDialog.Builder(this)
+                    .setTitle(R.string.title_wra_dialog_complete)
+                    .setMessage(String.format(getString(R.string.message_wra_dialog_addmore), MainApp.households.getRa18()))
 
-                // A null listener allows the button to dismiss the dialog and take no further action.
-                .setNegativeButton(R.string.ra20_b, null)
-                .setIcon(R.drawable.ic_warning_24)
-                .show();
+                    // Specifying a listener allows you to take an action before dismissing the dialog.
+                    // The dialog is automatically dismissed when a dialog button is clicked.
+                    .setPositiveButton(R.string.ra20_a, new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            // Continue with delete operation
+                            addMoreFemale();
+                        }
+                    })
+
+                    // A null listener allows the button to dismiss the dialog and take no further action.
+                    .setNegativeButton(R.string.ra20_b, null)
+                    .setIcon(R.drawable.ic_warning_24)
+                    .show();
+        }
 
     }
 
     private void displayProceedDialog() {
         new AlertDialog.Builder(this)
                 .setTitle(R.string.title_wra_dialog_remain)
-                .setMessage(String.format(getString(R.string.message_wra_dialog_proceeed), MainApp.mwraList.size() + "", MainApp.households.getRa18()))
+                .setMessage(String.format(getString(R.string.message_wra_dialog_proceeed), MainApp.mwraList.size() + "", MainApp.households.getRa17_c2()))
 
                 // Specifying a listener allows you to take an action before dismissing the dialog.
                 // The dialog is automatically dismissed when a dialog button is clicked.

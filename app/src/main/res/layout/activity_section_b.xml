@@ -361,7 +361,7 @@
                             android:maxLength="2"
                             android:text="@={mwra.rb05}"
                             app:maxValue="49"
-                            app:minValue="18"
+                            app:minValue="14"
                             app:type="range" />
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>

@@ -72,13 +72,11 @@ public class SectionEActivity extends AppCompatActivity {
             }
         }
 
-
-
         // Registration
         switch (mwra.getRegRound())
         {
             case "1":
-                // New outcome restration
+                // New outcome registration
                 if(outcome.getUid().equals(""))
                 {
                     MainApp.ROUND = mwra.getRound();
@@ -89,9 +87,8 @@ public class SectionEActivity extends AppCompatActivity {
                 }
                 // Followup
             case "":
-
                 //for unreported outcome in followup
-                if(mwra.getRb13().equals(""))
+                if(mwra.getRb15().equals(""))
                 {
                     // new Registration
                     if(outcome.getUid().equals(""))
@@ -107,8 +104,8 @@ public class SectionEActivity extends AppCompatActivity {
                     if(outcome.getUid().equals(""))
                     {
                         MainApp.ROUND = MainApp.fpMwra.getFRound();
-                        outcome.setRc03(mwra.getRb13());
-                        String date = toBlackVisionDate(mwra.getRb13());
+                        outcome.setRc03(mwra.getRb15());
+                        String date = toBlackVisionDate(mwra.getRb15());
                         bi.rc06.setMinDate(date);
                         bi.rc03dob.setEnabled(false);
                     }else{
@@ -142,7 +139,6 @@ public class SectionEActivity extends AppCompatActivity {
             public void afterTextChanged(Editable s) {
 
                 String date = toBlackVisionDate(bi.rc03dob.getText().toString());
-
                 bi.rc06.setMinDate(date);
 
             }
