@@ -116,16 +116,16 @@ public class SectionCActivity extends AppCompatActivity {
    }
         });
 
-        bi.rb17.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+        bi.rb19.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
-                if(bi.rb1701.isChecked())
+                if(bi.rb1901.isChecked())
                 {
                     MainApp.totalChildCount = 1;
-                }else if(bi.rb1702.isChecked())
+                }else if(bi.rb1902.isChecked())
                 {
                     MainApp.totalChildCount = 2;
-                }else if(bi.rb1703.isChecked()){
+                }else if(bi.rb1903.isChecked()){
                     MainApp.totalChildCount = 3;
                 }
             }

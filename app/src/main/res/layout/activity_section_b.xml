@@ -816,13 +816,15 @@
 
                         </LinearLayout>
 
-                        <EditText
+                        <com.edittextpicker.aliazaz.EditTextPicker
                             android:id="@+id/rb20"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:enabled="true"
                             android:gravity="center"
+                            app:maxValue="41"
+                            app:minValue="28"
                             android:hint="##"
                             android:text="@={mwra.rb20}"
                             app:dateFormat="yyyy-MM-dd"

@@ -1363,7 +1363,7 @@
                                             android:inputType="number"
                                             android:maxLength="2"
                                             app:maxValue="28"
-                                            app:minValue="42"
+                                            app:minValue="41"
                                             android:hint="##"
                                             android:text="@={followups.rb20}" />
 

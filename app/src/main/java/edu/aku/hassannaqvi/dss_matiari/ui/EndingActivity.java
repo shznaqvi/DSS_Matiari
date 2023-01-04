@@ -154,12 +154,15 @@ public class EndingActivity extends AppCompatActivity {
             if(visitCount == 1)
             {
                 updatedHousehold.setRa19a(households.getRa19a());
+                updatedHousehold.setRa19ax(households.getRa19ax());
             }else if(visitCount == 2)
             {
                 updatedHousehold.setRa19b(households.getRa19b());
+                updatedHousehold.setRa19bx(households.getRa19bx());
             }else if(visitCount == 3)
             {
                 updatedHousehold.setRa19c(households.getRa19c());
+                updatedHousehold.setRa19cx(households.getRa19cx());
             }
             updatedHousehold.setIStatus(households.getIStatus());
             updatedHousehold.setVisitNo(households.getVisitNo());
