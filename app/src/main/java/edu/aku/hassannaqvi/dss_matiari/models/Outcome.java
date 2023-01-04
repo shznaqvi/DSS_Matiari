@@ -614,6 +614,7 @@ public class Outcome extends BaseObservable implements Observable {
         MainApp.outcome.setRb02(MainApp.fpMwra.getRb03());  // Name of mother
         MainApp.outcome.setMuid(MainApp.fpMwra.getMuid().split("_")[0]);
         MainApp.outcome.setRc03(MainApp.fpMwra.getRb04());  // Date of Birth of child
+        MainApp.outcome.setMsno(MainApp.fpMwra.getMsno());
         setRegRound("");
 
     }

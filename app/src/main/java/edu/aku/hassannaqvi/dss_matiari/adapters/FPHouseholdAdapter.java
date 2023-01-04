@@ -181,7 +181,7 @@ public class FPHouseholdAdapter extends RecyclerView.Adapter<FPHouseholdAdapter.
 
         if(tempMWRA == 0)
         {
-            hhHead.setVisibility(View.GONE);
+            hhHead.setVisibility(View.VISIBLE);
             prvStatus.setText("NO WRA");
             prvStatus.setVisibility(View.VISIBLE);
         }else{

@@ -106,6 +106,10 @@ public class SectionBActivity extends AppCompatActivity {
 
             sdf = new SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH);
 
+            // Set MinDob date to 2 months back from DOV
+            cal.add(Calendar.MONTH, -2);
+            String minDOV = sdf.format(cal.getTime());
+
             // Set MinDob date to 50 years back from DOV
             cal.add(Calendar.YEAR, -50);
             String minDob = sdf.format(cal.getTime());
@@ -150,6 +154,7 @@ public class SectionBActivity extends AppCompatActivity {
             // EDD
             bi.rb09.setMaxDate(maxEDD);
             bi.rb09.setMinDate(minEDD);
+
 
         } catch (ParseException e) {
             e.printStackTrace();

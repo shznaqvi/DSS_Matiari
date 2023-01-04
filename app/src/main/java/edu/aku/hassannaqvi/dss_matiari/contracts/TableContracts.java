@@ -285,6 +285,7 @@ public class TableContracts {
         public static final String COLUMN_RB03 = "rb03"; // Age
         public static final String COLUMN_RB04 = "rb04"; // DOB
         public static final String COLUMN_RC04 = "rc04"; // Gender
+        public static final String COLUMN_MSNO = "msno";
         //public static final String COLUMN_RC15 = "rc15"; // Gender
         public static final String COLUMN_RB05 = "rb05"; // Husband or Father
         public static final String COLUMN_RB07 = "rb07";  // Pregnancy Status
