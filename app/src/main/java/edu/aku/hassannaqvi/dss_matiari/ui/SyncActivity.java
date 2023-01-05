@@ -217,20 +217,24 @@ public class SyncActivity extends AppCompatActivity {
                 bi.pBar.setVisibility(View.GONE);
                 downloadTables.clear();
                 boolean sync_flag = getIntent().getBooleanExtra("login", false);
+                // set select and filter to default, set again with the table in case of special requirements
+                String select = " * ";
+                String filter = " colflag is null ";
+
                 if (sync_flag) {
-                    String select = null;
-                    String filter = " colflag is null or colflag is '' ";
+                    select = " * ";
+                    filter = " colflag is null or colflag = '' ";
                     downloadTables.add(new SyncModel(UsersTable.TABLE_NAME, select, filter));
                     downloadTables.add(new SyncModel(VersionTable.TABLE_NAME));
                     downloadTables.add(new SyncModel(TableVillage.TABLE_NAME, select, filter));
                     //   downloadTables.add(new SyncModel(TableContracts.TableFollowUpsSche.TABLE_NAME));
                 } else {
                     // Set tables to DOWNLOAD
-                    String select = null;
+                    select =  " * ";
 
                     //String filter = " uccode = '05' and  DATEADD(MONTH,3,ra01) between DATEADD(DAY,-1,GETDATE()) AND GETDATE()";
                     // TODO: backdate limit removed (get all followups that are due upto now
-                    String filter = " DATEADD(MONTH,2,ra01) between ra01 AND GETDATE() ";
+                    filter = " DATEADD(MONTH,2,ra01) between ra01 AND GETDATE() ";
                     downloadTables.add(new SyncModel(TableContracts.TableFollowUpsSche.TABLE_NAME, select, filter));
                     downloadTables.add(new SyncModel(TableContracts.MaxHhnoTable.TABLE_NAME));
 

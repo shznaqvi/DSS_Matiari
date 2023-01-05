@@ -467,6 +467,7 @@
                                 android:id="@+id/rb1001"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
+                                android:enabled="@{!followups.rb10.equals(`9`)}"
                                 android:checked='@{followups.rb10.equals("1")}'
                                 android:onClick='@{()->followups.setRb10("1")}'
                                 android:text="@string/rc0401" />
@@ -475,6 +476,7 @@
                                 android:id="@+id/rb1002"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
+                                android:enabled="@{!followups.rb10.equals(`9`)}"
                                 android:checked='@{followups.rb10.equals("2")}'
                                 android:onClick='@{()->followups.setRb10("2") + rb11.clearCheck() + rb14.clearCheck() + rb16.clearCheck() + rb17.clearCheck() + rb18.clearCheck() + rb19.clearCheck()}'
                                 android:text="@string/rc0402" />
@@ -483,6 +485,7 @@
                                 android:id="@+id/rb1003"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
+                                android:enabled="@{!followups.rb10.equals(`9`)}"
                                 android:checked='@{followups.rb10.equals("3")}'
                                 android:onClick='@{()->followups.setRb10("3") + rb11.clearCheck() + rb14.clearCheck() + rb16.clearCheck() + rb17.clearCheck() + rb18.clearCheck() + rb19.clearCheck()}'
                                 android:text="@string/rc0403" />
@@ -492,6 +495,7 @@
                                 android:id="@+id/rb1004"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
+                                android:enabled="@{!followups.rb10.equals(`9`)}"
                                 android:checked='@{followups.rb10.equals("4")}'
                                 android:onClick='@{()->followups.setRb10("4") + rb11.clearCheck() + rb14.clearCheck() + rb16.clearCheck() + rb17.clearCheck() + rb18.clearCheck() + rb19.clearCheck()}'
                                 android:text="@string/rc0404" />
@@ -500,6 +504,7 @@
                                 android:id="@+id/rb1005"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
+                                android:enabled="@{!followups.rb10.equals(`9`)}"
                                 android:checked='@{followups.rb10.equals("5")}'
                                 android:onClick='@{()->followups.setRb10("5") + rb11.clearCheck() + rb14.clearCheck() + rb16.clearCheck() + rb17.clearCheck() + rb18.clearCheck() + rb19.clearCheck()}'
                                 android:text="@string/rc0405" />
@@ -508,6 +513,7 @@
                                 android:id="@+id/rb1006"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
+                                android:enabled="@{!followups.rb10.equals(`9`)}"
                                 android:checked='@{followups.rb10.equals("6")}'
                                 android:onClick='@{()->followups.setRb10("6") + rb11.clearCheck() + rb06.clearCheck() + rb14.clearCheck() + rb16.clearCheck() + rb17.clearCheck() + rb16.clearCheck() + rb18.clearCheck() + rb19.clearCheck()}'
                                 android:text="@string/rc0406" />
@@ -516,6 +522,7 @@
                                 android:id="@+id/rb1007"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
+                                android:enabled="@{!followups.rb10.equals(`9`)}"
                                 android:checked='@{followups.rb10.equals("7")}'
                                 android:onClick='@{()->followups.setRb10("7") + rb11.clearCheck() + rb16.clearCheck() + rb17.clearCheck() + rb18.clearCheck() + rb19.clearCheck()}'
                                 android:text="@string/rc0407" />
@@ -525,6 +532,7 @@
                                 android:id="@+id/rb1008"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
+                                android:enabled="@{!followups.rb10.equals(`9`)}"
                                 android:checked='@{followups.rb10.equals("8")}'
                                 android:onClick='@{()->followups.setRb10("8") + rb11.clearCheck() + rb14.clearCheck() + rb16.clearCheck() + rb17.clearCheck() + rb18.clearCheck() + rb19.clearCheck()}'
                                 android:text="@string/rc0408" />
@@ -594,6 +602,7 @@
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:layout_weight="1"
+                                    android:enabled="@{!followups.rb10.equals(`7`)}"
                                     android:checked='@{followups.rb11.equals("1")}'
                                     android:onClick='@{()->followups.setRb11("1")}'
                                     android:text="@string/rc0501" />
@@ -1362,8 +1371,8 @@
                                             android:gravity="center"
                                             android:inputType="number"
                                             android:maxLength="2"
-                                            app:maxValue="28"
-                                            app:minValue="41"
+                                            app:maxValue="41"
+                                            app:minValue="28"
                                             android:hint="##"
                                             android:text="@={followups.rb20}" />
 

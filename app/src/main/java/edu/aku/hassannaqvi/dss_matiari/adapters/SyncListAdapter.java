@@ -1,6 +1,7 @@
 package edu.aku.hassannaqvi.dss_matiari.adapters;
 
 import android.graphics.Color;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,7 +16,8 @@ import edu.aku.hassannaqvi.dss_matiari.R;
 import edu.aku.hassannaqvi.dss_matiari.databinding.SyncListAdapterBinding;
 import edu.aku.hassannaqvi.dss_matiari.models.SyncModel;
 
-public class SyncListAdapter extends RecyclerView.Adapter<edu.aku.hassannaqvi.dss_matiari.adapters.SyncListAdapter.SyncListViewHolder> {
+public class SyncListAdapter extends RecyclerView.Adapter<SyncListAdapter.SyncListViewHolder> {
+    private static final String TAG = "SyncListAdapter";
     List<SyncModel> synclist;
     SyncListViewHolder holder;
 
@@ -75,9 +77,14 @@ public class SyncListAdapter extends RecyclerView.Adapter<edu.aku.hassannaqvi.ds
 
         public void bindUser(SyncModel model) {
             binding.statusColor.setBackgroundColor(checkStatus(model.getstatusID()));
-            binding.tvTableName.setText(model.gettableName().toUpperCase());
-            binding.tvStatus.setText(model.getstatus());
-            binding.tvInfo.setText(model.getInfo());
+            String tableName = model.getTableTitle().toUpperCase();
+
+            binding.tvTableName.setText(tableName);
+            binding.tvStatus.setText(model.getInfo());
+            binding.tvMsg.setText(model.getmessage());
+            Log.d(TAG, "bindUser: " + tableName + " - " + model.getmessage());
+            if (tableName.contains("VERSION") && model.getmessage().contains("New"))
+                binding.tvMsg.setTextColor(Color.RED);
             binding.tvMsg.setText(model.getmessage());
             if (model.getstatusID() == 1 || model.getstatusID() == 3 || model.getstatusID() == 4) {
                 binding.pb.setVisibility(View.GONE);

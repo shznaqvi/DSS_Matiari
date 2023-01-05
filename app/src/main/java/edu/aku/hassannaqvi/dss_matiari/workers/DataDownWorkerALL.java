@@ -72,7 +72,7 @@ public class DataDownWorkerALL extends Worker {
         uploadTable = workerParams.getInputData().getString("table");
         position = workerParams.getInputData().getInt("position", -2);
         uploadColumns = workerParams.getInputData().getString("select");
-        uploadWhere = workerParams.getInputData().getString("where");
+        uploadWhere = workerParams.getInputData().getString("filter");
 
     }
 

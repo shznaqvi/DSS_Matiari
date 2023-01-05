@@ -93,8 +93,6 @@ public class SectionBActivity extends AppCompatActivity {
             }
         });
 
-
-
     }
 
     private void setDateRanges() {
@@ -102,6 +100,7 @@ public class SectionBActivity extends AppCompatActivity {
             Calendar cal = Calendar.getInstance();
 
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
+            //cal.setTime(sdf.parse(new Date().toString()));
             cal.setTime(sdf.parse(mwra.getRb01a()));// all done
 
             sdf = new SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH);

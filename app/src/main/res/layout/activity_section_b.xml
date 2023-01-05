@@ -603,6 +603,7 @@
                             android:hint="YYYY-MM-DD"
                             android:text="@={mwra.rb08}"
                             app:dateFormat="yyyy-MM-dd"
+                            app:maxDate="CR_DATE"
                             app:theme="@style/MaterialCalendarTheme" />
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>

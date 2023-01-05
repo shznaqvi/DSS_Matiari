@@ -140,7 +140,7 @@ public class HouseholdActivity extends AppCompatActivity {
         MainApp.households.setUcCode(selectedUC);
         MainApp.households.setVillageCode(selectedVillage);
         MainApp.households.setRa09(String.valueOf(maxHHFinal + 1));
-        MainApp.selectedHhNO = String.valueOf(maxHHFinal + 1);
+        MainApp.selectedHhNO = MainApp.households.getRa09();
 
         // Launch activity for results.
         Intent intent = new Intent(this, SectionAActivity.class);
