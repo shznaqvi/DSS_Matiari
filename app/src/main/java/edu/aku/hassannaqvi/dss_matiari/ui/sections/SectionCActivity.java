@@ -87,7 +87,7 @@ public class SectionCActivity extends AppCompatActivity {
         bi.rb1009.setEnabled(actualAge > 49);
 
 
-        if(!MainApp.households.getVisitNo().equals("") && Integer.parseInt(households.getVisitNo()) == 2)
+        if(!MainApp.households.getVisitNo().equals("") && Integer.parseInt(households.getVisitNo()) < 2)
         {
             bi.rb1008.setEnabled(true);
             bi.rb1004.setEnabled(false);
@@ -181,6 +181,13 @@ public class SectionCActivity extends AppCompatActivity {
 
             sdf = new SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH);
 
+            Calendar cal2 = Calendar.getInstance();
+            //SimpleDateFormat sdf2 = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
+            cal2.setTime(sdf.parse(fpMwra.getRa01()));// all done
+
+            String minDD = sdf.format(cal2);
+            bi.rb21.setMinDate(minDD);
+
           /*  // Set MinDob date to 50 years back from DOV
             cal.add(Calendar.YEAR, -50);
             String minDob = sdf.format(cal.getTime());
@@ -213,6 +220,7 @@ public class SectionCActivity extends AppCompatActivity {
             String maxEDD = sdf.format(cal.getTime());
             cal.add(Calendar.MONTH, -9);
             Log.d(TAG, "onCreate: " + maxLMP);
+
 
           /*  // DOB
             bi.rb04.setMaxDate(maxDob);

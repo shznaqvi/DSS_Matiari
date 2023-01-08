@@ -178,6 +178,9 @@ public class Mwra extends BaseObservable implements Observable {
     private String rb20 = StringUtils.EMPTY;
 
     @Ignore
+    private String rb21 = StringUtils.EMPTY;
+
+    @Ignore
     private long ageInMonths;
     @Ignore
     private String prePreg = "";
@@ -229,7 +232,7 @@ public class Mwra extends BaseObservable implements Observable {
         setSysDate(MainApp.households.getSysDate());
         setUuid(MainApp.households.getUid());  // not applicable in Form table
         setProjectName(PROJECT_NAME);
-        setRegRound("");
+        setRegRound("null");
 
         // From FollowupsSche - MWRA
 
@@ -754,6 +757,16 @@ public class Mwra extends BaseObservable implements Observable {
         notifyChange(BR.rb20);
     }
 
+    @Bindable
+    public String getRb21() {
+        return rb21;
+    }
+
+    public void setRb21(String rb21) {
+        this.rb21 = rb21;
+        notifyChange(BR.rb21);
+    }
+
 
 
 
@@ -831,6 +844,7 @@ public class Mwra extends BaseObservable implements Observable {
             this.rb18 = json.getString("rb18");
             this.rb19 = json.getString("rb19");
             this.rb20 = json.getString("rb20");
+            this.rb21 = json.getString("rb21");
 
 
         }
@@ -864,6 +878,7 @@ public class Mwra extends BaseObservable implements Observable {
             this.rb18 = json.getString("rb18");
             this.rb19 = json.getString("rb19");
             this.rb20 = json.getString("rb20");
+            this.rb21 = json.getString("rb21");
 
 
         }
@@ -890,6 +905,7 @@ public class Mwra extends BaseObservable implements Observable {
                 .put("rb18", rb18)
                 .put("rb19", rb19)
                 .put("rb20", rb20)
+                .put("rb21", rb21)
         ;
 
         return json.toString();
@@ -921,6 +937,7 @@ public class Mwra extends BaseObservable implements Observable {
                 .put("rb18",rb18)
                 .put("rb19",rb19)
                 .put("rb20",rb20)
+                .put("rb21", rb21)
         ;
 
         return json.toString();

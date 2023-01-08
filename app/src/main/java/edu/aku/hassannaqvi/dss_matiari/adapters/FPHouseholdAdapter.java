@@ -226,7 +226,7 @@ public class FPHouseholdAdapter extends RecyclerView.Adapter<FPHouseholdAdapter.
                     if (!MainApp.households.getIStatus().equals("1") && Integer.parseInt(MainApp.households.getVisitNo()) < 3) {
 
                         int currentMWRA = totalMwraMap.containsKey(pos) ? totalMwraMap.get(pos) : 0;
-                        if (followUpsSche.getiStatus().equals("1") && currentMWRA > 0) {
+                        if (!followUpsSche.getiStatus().equals("4") && currentMWRA > 0) {
                             editHousehold(viewHolder.getAdapterPosition());
                         } else if(!followUpsSche.getiStatus().equals("1") || currentMWRA == 0) {
                             try {

@@ -103,6 +103,12 @@ public class SectionBActivity extends AppCompatActivity {
             //cal.setTime(sdf.parse(new Date().toString()));
             cal.setTime(sdf.parse(mwra.getRb01a()));// all done
 
+            Calendar cal2 = Calendar.getInstance();
+            cal2.setTime(sdf.parse(new Date().toString()));
+            cal2.add(Calendar.MONTH, -3);
+            String DD = sdf.format(cal2.getTime());
+            bi.rb21.setMinDate(DD);
+
             sdf = new SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH);
 
             // Set MinDob date to 2 months back from DOV

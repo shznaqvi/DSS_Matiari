@@ -243,7 +243,7 @@ public class Households extends BaseObservable implements Observable {
         setRa06(MainApp.selectedUC);
         setRa07(MainApp.selectedVillage);
         setRa01(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.ENGLISH).format(new Date().getTime()));
-        setRegRound("");
+        setRegRound("null");
 
 
     }

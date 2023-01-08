@@ -149,7 +149,7 @@
     <string name="rc04">Visit Status</string>
     <!--    <string name="rc0401">Complete</string>-->
     <string name="rc0401">Available</string>
-    <string name="rc0402">Migration Out </string>
+    <string name="rc0402">Temporary Migrated </string>
     <string name="rc0403">Refused </string>
     <string name="rc0404">Not Available/Lock  </string>
     <string name="rc0405">Married and moved to another HH in this village </string>
@@ -280,6 +280,7 @@
     <string name='Q_rb18' translatable="false">rb18</string>
     <string name='Q_rb19' translatable="false">rb19</string>
     <string name='Q_rb20' translatable="false">rb20</string>
+    <string name='Q_rb21' translatable="false">rb21</string>
 
     <string name='Q_rc01' translatable="false">rc01</string>
     <string name='Q_rc02' translatable="false">rc02</string>

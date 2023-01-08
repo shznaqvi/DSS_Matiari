@@ -72,7 +72,7 @@ interface MwraDao {
     @Throws(JSONException ::class)
     fun getFollowupsBySno(uuid: String, rb01: String, fround: String) : Mwra?
     {
-        val mwra = getFollowupsBySno_internal(uuid, rb01, fround, "")
+        val mwra = getFollowupsBySno_internal(uuid, rb01, fround, "null")
         if(mwra == null)
         {
             val tempMwra = Mwra()

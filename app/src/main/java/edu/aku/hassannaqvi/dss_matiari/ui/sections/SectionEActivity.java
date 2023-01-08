@@ -80,13 +80,13 @@ public class SectionEActivity extends AppCompatActivity {
                 if(outcome.getUid().equals(""))
                 {
                     MainApp.ROUND = mwra.getRound();
-                    bi.rc03dob.setEnabled(true);
+                    bi.rc03dob.setText(mwra.getRb21());
                 }else{
                     MainApp.ROUND = mwra.getRound();
                     bi.rc03dob.setEnabled(false);
                 }
                 // Followup
-            case "":
+            case "null":
                 //for unreported outcome in followup
                 if(mwra.getRb15().equals(""))
                 {
@@ -94,10 +94,10 @@ public class SectionEActivity extends AppCompatActivity {
                     if(outcome.getUid().equals(""))
                     {
                         MainApp.ROUND = mwra.getRound();
-                        bi.rc03dob.setEnabled(true);
+                        outcome.setRc03(mwra.getRb21());
                     }else{
                         MainApp.ROUND = mwra.getRound();
-                        bi.rc03dob.setEnabled(false);
+
                     }
 
                 }else{
@@ -138,7 +138,7 @@ public class SectionEActivity extends AppCompatActivity {
             @Override
             public void afterTextChanged(Editable s) {
 
-                String date = toBlackVisionDate(bi.rc03dob.getText().toString());
+                String date = bi.rc03dob.getText().toString();
                 bi.rc06.setMinDate(date);
 
             }
@@ -301,7 +301,7 @@ public class SectionEActivity extends AppCompatActivity {
             //Log.d(TAG, "onCreate: " + maxLMP);
 
             // DOB
-            bi.rc03dob.setMinDate(minDob);
+            //bi.rc03dob.setMinDate(minDob);
 
             // LMP
             //bi.rb08.setMaxDate(maxLMP);

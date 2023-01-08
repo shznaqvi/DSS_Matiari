@@ -175,7 +175,7 @@
 
                         </LinearLayout>
 
-                        <io.blackbox_vision.datetimepickeredittext.view.DatePickerEditText
+                        <EditText
                             android:id="@+id/rc03dob"
                             style="@style/textInput"
                             android:layout_width="match_parent"
@@ -184,12 +184,10 @@
                             android:layout_weight="1"
                             android:datePickerMode="spinner"
                             android:gravity="center"
-                            android:enabled="true"
+                            android:enabled="false"
                             android:hint="YYYY-MM-DD"
                             android:text="@={outcome.rc03}"
-                            app:dateFormat="yyyy-MM-dd"
-                            app:maxDate="CR_DATE"
-                            app:theme="@style/MaterialCalendarTheme" />
+                            />
 
 
                        <!-- <EditText
