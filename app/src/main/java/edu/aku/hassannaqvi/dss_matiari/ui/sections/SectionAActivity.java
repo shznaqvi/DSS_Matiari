@@ -1,6 +1,7 @@
 package edu.aku.hassannaqvi.dss_matiari.ui.sections;
 
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.households;
+import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.mwra;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.sharedPref;
 
 import android.content.Intent;
@@ -19,7 +20,9 @@ import com.validatorcrawler.aliazaz.Validator;
 
 import org.json.JSONException;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
@@ -45,6 +48,10 @@ public class SectionAActivity extends AppCompatActivity {
         setTheme(lang.equals("1") ? R.style.AppThemeEnglish1 : R.style.AppThemeUrdu);
         bi = DataBindingUtil.setContentView(this, R.layout.activity_section_a);
         bi.setCallback(this);
+
+        String date = toBlackVisionDate("2023-01-01");
+        bi.ra01.setMinDate(date);
+
         bi.setHousehold(households);
 
         setTitle(R.string.demographicinformation_mainheading);
@@ -196,6 +203,13 @@ public class SectionAActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         finish();
+    }
+
+    public static String toBlackVisionDate(String currentDate) {
+        String newDate = currentDate;
+        String[] oldDateParts = currentDate.split("-");
+        newDate = oldDateParts[2] + "/" + oldDateParts[1] + "/" + oldDateParts[0];
+        return newDate;
     }
 
 

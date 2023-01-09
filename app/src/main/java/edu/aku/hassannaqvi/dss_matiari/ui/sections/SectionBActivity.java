@@ -53,6 +53,8 @@ public class SectionBActivity extends AppCompatActivity {
         bi = DataBindingUtil.setContentView(this, R.layout.activity_section_b);
         bi.setCallback(this);
 
+        String date = toBlackVisionDate("2023-01-01");
+        bi.rb01a.setMinDate(date);
 
         setListener();
 
@@ -97,6 +99,8 @@ public class SectionBActivity extends AppCompatActivity {
 
     private void setDateRanges() {
         try {
+
+
             Calendar cal = Calendar.getInstance();
 
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
@@ -104,7 +108,6 @@ public class SectionBActivity extends AppCompatActivity {
             cal.setTime(sdf.parse(mwra.getRb01a()));// all done
 
             sdf = new SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH);
-
             // Set MinDob date to 50 years back from DOV
             cal.add(Calendar.YEAR, -50);
             String minDob = sdf.format(cal.getTime());
@@ -351,6 +354,13 @@ public class SectionBActivity extends AppCompatActivity {
             e.printStackTrace();
         }
         return true;
+    }
+
+    public static String toBlackVisionDate(String currentDate) {
+        String newDate = currentDate;
+        String[] oldDateParts = currentDate.split("-");
+        newDate = oldDateParts[2] + "/" + oldDateParts[1] + "/" + oldDateParts[0];
+        return newDate;
     }
 
 

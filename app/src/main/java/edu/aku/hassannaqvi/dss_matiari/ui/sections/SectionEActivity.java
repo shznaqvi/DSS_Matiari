@@ -81,6 +81,9 @@ public class SectionEActivity extends AppCompatActivity {
                 {
                     MainApp.ROUND = mwra.getRound();
                     bi.rc03dob.setText(mwra.getRb21());
+                    outcome.setRc03(mwra.getRb21());
+                    String date = toBlackVisionDate(mwra.getRb21());
+                    bi.rc06.setMinDate(date);
                 }else{
                     MainApp.ROUND = mwra.getRound();
                     bi.rc03dob.setEnabled(false);
@@ -95,6 +98,8 @@ public class SectionEActivity extends AppCompatActivity {
                     {
                         MainApp.ROUND = mwra.getRound();
                         outcome.setRc03(mwra.getRb21());
+                        String date = toBlackVisionDate(mwra.getRb21());
+                        bi.rc06.setMinDate(date);
                     }else{
                         MainApp.ROUND = mwra.getRound();
 
@@ -157,7 +162,7 @@ public class SectionEActivity extends AppCompatActivity {
                     finish();
                     startActivity(new Intent(this, SectionEActivity.class).addFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT).putExtra("complete", true));
 
-                } else if(mwra.getRegRound().equals("")) {
+                } else if(mwra.getRegRound().equals("") || mwra.getPrePreg().equals("2")) {
                     MainApp.childCount = 0;
                     MainApp.totalChildCount = 0;
                     setResult(RESULT_OK);

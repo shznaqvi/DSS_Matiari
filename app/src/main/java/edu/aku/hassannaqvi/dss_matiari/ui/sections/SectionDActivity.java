@@ -44,6 +44,8 @@ public class SectionDActivity extends AppCompatActivity {
         bi = DataBindingUtil.setContentView(this, R.layout.activity_section_d);
         db = MainApp.appInfo.dbHelper;
 
+        setDateRanges();
+
 
         if(mwra.getUid() != null)
         {
@@ -54,15 +56,12 @@ public class SectionDActivity extends AppCompatActivity {
             }
         }
 
-
-       /* if (mwra.getRegRound().equals("") && !mwra.getUid().equals("")) {
-            //mwra.populateMetaFollowups();
-            try {
-                mwra.sDHydrate(mwra.SDtoString());
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
+        /*if(!mwra.getRb21().equals(""))
+        {
+            String date = toBlackVisionDate(mwra.getRb21());
+            bi.rb08.setMinDate(date);
         }*/
+
 
 
         bi.setFollowups(mwra);
@@ -85,24 +84,13 @@ public class SectionDActivity extends AppCompatActivity {
 
             sdf = new SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH);
 
-          /*  // Set MinDob date to 50 years back from DOV
-            cal.add(Calendar.YEAR, -50);
-            String minDob = sdf.format(cal.getTime());
-            cal.add(Calendar.YEAR, +50); // Calender reset to DOV
-            Log.d(TAG, "onCreate: " + minDob);
 
-            // Set maxDob date to 50 years back from DOV
-            cal.add(Calendar.YEAR, -18);
-            String maxDob = sdf.format(cal.getTime());
-            cal.add(Calendar.YEAR, +18); // Calender reset to DOV
-            Log.d(TAG, "onCreate: " + maxDob);
+                // Set MinLMP date to 2 months back from DOV
+                cal.add(Calendar.MONTH, -9);
+                String minLMP = sdf.format(cal.getTime());
+                cal.add(Calendar.MONTH, +7); // Calender reset to DOV
+                Log.d(TAG, "onCreate: " + minLMP);
 
-*/
-            // Set MinLMP date to 2 months back from DOV
-            cal.add(Calendar.MONTH, -9);
-            String minLMP = sdf.format(cal.getTime());
-            cal.add(Calendar.MONTH, +9); // Calender reset to DOV
-            Log.d(TAG, "onCreate: " + minLMP);
 
             // Set MaxLMP same as DOV
             String maxLMP = sdf.format(cal.getTime());
@@ -195,6 +183,13 @@ public class SectionDActivity extends AppCompatActivity {
         setDateRanges();
         return Validator.emptyCheckingContainer(this, bi.GrpName);
 
+    }
+
+    public static String toBlackVisionDate(String currentDate) {
+        String newDate = currentDate;
+        String[] oldDateParts = currentDate.split("-");
+        newDate = oldDateParts[2] + "/" + oldDateParts[1] + "/" + oldDateParts[0];
+        return newDate;
     }
 
 

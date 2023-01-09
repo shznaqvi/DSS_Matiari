@@ -43,6 +43,8 @@ public class SectionFActivity extends AppCompatActivity {
         bi = DataBindingUtil.setContentView(this, R.layout.activity_section_f);
         db = MainApp.appInfo.dbHelper;
 
+        setDateRanges();
+
         MainApp.ROUND = MainApp.fpMwra.getFRound();
 
         try {

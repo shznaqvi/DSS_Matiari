@@ -583,6 +583,8 @@ public class Mwra extends BaseObservable implements Observable {
         Log.d(TAG, "setRb06: " + this.rb06);
         setRb07(this.rb06.equals("4") ? "" : this.rb07);
         setRb15(this.rb06.equals("4") ? "" : this.rb15);
+        setRb20(this.rb06.equals("4") ? "" : this.rb20);
+        setRb21(this.rb06.equals("4") ? "" : this.rb21);
         this.preMaritalStaus = rb06;
         notifyChange(BR.rb06);
     }

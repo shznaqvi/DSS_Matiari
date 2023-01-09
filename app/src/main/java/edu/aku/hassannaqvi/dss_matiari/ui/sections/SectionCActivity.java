@@ -10,6 +10,8 @@ import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.sharedPref;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.CompoundButton;
@@ -49,6 +51,9 @@ public class SectionCActivity extends AppCompatActivity {
         setTheme(lang.equals("1") ? R.style.AppThemeEnglish1 : R.style.AppThemeUrdu);
         bi = DataBindingUtil.setContentView(this, R.layout.activity_section_c);
         db = MainApp.appInfo.dbHelper;
+
+        String date = toBlackVisionDate("2023-01-01");
+        bi.rb01a.setMinDate(date);
 
         // Set Round Number from followups data
         MainApp.ROUND = MainApp.fpMwra.getFRound();
@@ -125,6 +130,24 @@ public class SectionCActivity extends AppCompatActivity {
         bi.btnContinue.setText(MainApp.mwra.getUid().equals("") ? "Save" : "Update");
 
         /********************************On Click Listeners******************************/
+
+        bi.rb01a.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                setDateRanges();
+
+            }
+        });
 
         bi.rb1004.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -206,30 +229,10 @@ public class SectionCActivity extends AppCompatActivity {
 
             sdf = new SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH);
 
-            Calendar cal2 = Calendar.getInstance();
-            //SimpleDateFormat sdf2 = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
-            cal2.setTime(sdf.parse(fpMwra.getRa01()));// all done
-
-            String minDD = sdf.format(cal2);
-            bi.rb21.setMinDate(minDD);
-
-          /*  // Set MinDob date to 50 years back from DOV
-            cal.add(Calendar.YEAR, -50);
-            String minDob = sdf.format(cal.getTime());
-            cal.add(Calendar.YEAR, +50); // Calender reset to DOV
-            Log.d(TAG, "onCreate: " + minDob);
-
-            // Set maxDob date to 50 years back from DOV
-            cal.add(Calendar.YEAR, -18);
-            String maxDob = sdf.format(cal.getTime());
-            cal.add(Calendar.YEAR, +18); // Calender reset to DOV
-            Log.d(TAG, "onCreate: " + maxDob);
-
-*/
             // Set MinLMP date to 2 months back from DOV
             cal.add(Calendar.MONTH, -9);
             String minLMP = sdf.format(cal.getTime());
-            cal.add(Calendar.MONTH, +9); // Calender reset to DOV
+            cal.add(Calendar.MONTH, +7); // Calender reset to DOV
             Log.d(TAG, "onCreate: " + minLMP);
 
             // Set MaxLMP same as DOV
@@ -246,30 +249,17 @@ public class SectionCActivity extends AppCompatActivity {
             cal.add(Calendar.MONTH, -9);
             Log.d(TAG, "onCreate: " + maxLMP);
 
+            cal.add(Calendar.MONTH, +3);
+            String maxDD = sdf.format(cal.getTime());
+            cal.add(Calendar.MONTH, -3);
+            String DD = sdf.format(cal.getTime());
 
-          /*  // DOB
-            bi.rb04.setMaxDate(maxDob);
-            bi.rb04.setMinDate(minDob);*/
-
-            // LMP
-            /*bi.rc16.setMaxDate(maxLMP);
-            bi.rc16.setMinDate(minLMP);
-
-            // EDD
-            bi.rc17.setMaxDate(maxEDD);
-            bi.rc17.setMinDate(minEDD);*/
-
+            bi.rb21.setMinDate(DD);
             // Date of Death from Date of Deliver(RC10)
             sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
             cal.setTime(sdf.parse(mwra.getRb13()));// all done
             sdf = new SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH);
             String minDOD = sdf.format(cal.getTime());
-
-            // Single
-            /*bi.rc1401.setMinDate(minDOD);
-            bi.rc1402.setMinDate(minDOD);
-            bi.rc1403.setMinDate(minDOD)*/;
-
 
         } catch (ParseException e) {
             e.printStackTrace();
@@ -557,6 +547,13 @@ public class SectionCActivity extends AppCompatActivity {
         setDateRanges();
         return Validator.emptyCheckingContainer(this, bi.GrpName);
 
+    }
+
+    public static String toBlackVisionDate(String currentDate) {
+        String newDate = currentDate;
+        String[] oldDateParts = currentDate.split("-");
+        newDate = oldDateParts[2] + "/" + oldDateParts[1] + "/" + oldDateParts[0];
+        return newDate;
     }
 
 

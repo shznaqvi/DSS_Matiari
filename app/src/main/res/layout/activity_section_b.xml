@@ -231,6 +231,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_margin="8dp"
+                            android:tag="-1"
                             android:digits="abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ"
                             android:hint="@string/rb22"
                             android:inputType="textPersonName|textCapWords"
@@ -591,6 +592,7 @@
                             android:id="@+id/rb23"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:tag="-1"
                             android:digits="abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ"
                             android:inputType="textPersonName|textCapWords"
                             android:text="@={mwra.rb23}" />

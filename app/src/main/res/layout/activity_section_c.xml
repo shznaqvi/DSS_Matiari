@@ -302,6 +302,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_margin="8dp"
+                            android:tag="-1"
                             android:digits="abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ"
                             android:hint="@string/rb22"
                             android:inputType="textPersonName|textCapWords"
@@ -409,6 +410,7 @@
                             android:id="@+id/rb23"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:tag="-1"
                             android:digits="abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ"
                             android:inputType="textPersonName|textCapWords"
                             android:text="@={followups.rb23}" />
@@ -1294,7 +1296,7 @@
                                 <androidx.cardview.widget.CardView
                                     android:id="@+id/fldGrpCVrb09a"
                                     style="@style/cardView"
-                                    android:visibility='@{followups.prePreg.equals(`2`) ? View.VISIBLE : View.GONE}'>
+                                    android:visibility='@{!followups.rb06.equals(`4`) ? View.VISIBLE : View.GONE}'>
 
                                     <LinearLayout
                                         android:layout_width="match_parent"
