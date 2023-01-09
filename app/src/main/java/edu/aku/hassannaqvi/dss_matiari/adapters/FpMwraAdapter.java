@@ -48,6 +48,8 @@ public class FpMwraAdapter extends RecyclerView.Adapter<FpMwraAdapter.ViewHolder
         MainApp.fmComplete = false;
 
         db = MainApp.appInfo.dbHelper;
+
+
     }
 
 

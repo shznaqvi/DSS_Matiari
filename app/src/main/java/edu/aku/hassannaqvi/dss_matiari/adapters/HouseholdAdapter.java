@@ -19,10 +19,13 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import edu.aku.hassannaqvi.dss_matiari.R;
 import edu.aku.hassannaqvi.dss_matiari.core.MainApp;
+import edu.aku.hassannaqvi.dss_matiari.models.FollowUpsSche;
 import edu.aku.hassannaqvi.dss_matiari.models.Households;
 import edu.aku.hassannaqvi.dss_matiari.room.DssRoomDatabase;
 import edu.aku.hassannaqvi.dss_matiari.ui.sections.SectionAActivity;
@@ -48,6 +51,13 @@ public class HouseholdAdapter extends RecyclerView.Adapter<HouseholdAdapter.View
         this.mContext = mContext;
         completeCount = 0;
         MainApp.fmComplete = false;
+
+        Collections.sort(households, new Comparator<Households>() {
+            @Override
+            public int compare(Households o1, Households o2) {
+                return o1.getHdssId().compareTo(o2.getHdssId());
+            }
+        });
 
     }
 

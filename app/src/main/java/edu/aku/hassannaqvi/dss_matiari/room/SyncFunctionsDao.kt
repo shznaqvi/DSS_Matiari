@@ -159,7 +159,7 @@ interface SyncFunctionsDao {
     @Throws(JSONException ::class)
     fun syncvillages(villagesList: JSONArray) : Int{
         var insertCount =0
-        deleteVillagesTable()
+        deleteAllVillages()
 
         for(i in 0 until villagesList.length()){
             val jsonObjectVillages = villagesList.optJSONObject(i)
@@ -181,7 +181,9 @@ interface SyncFunctionsDao {
     fun insertVillages(village: Villages) : Long
 
     @Query("DELETE FROM " + TableContracts.TableVillage.TABLE_NAME)
-    fun deleteVillagesTable()
+    fun deleteAllVillages()
+
+
 
     // Users
 

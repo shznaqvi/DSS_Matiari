@@ -103,17 +103,7 @@ public class SectionBActivity extends AppCompatActivity {
             //cal.setTime(sdf.parse(new Date().toString()));
             cal.setTime(sdf.parse(mwra.getRb01a()));// all done
 
-            Calendar cal2 = Calendar.getInstance();
-            cal2.setTime(sdf.parse(new Date().toString()));
-            cal2.add(Calendar.MONTH, -3);
-            String DD = sdf.format(cal2.getTime());
-            bi.rb21.setMinDate(DD);
-
             sdf = new SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH);
-
-            // Set MinDob date to 2 months back from DOV
-            cal.add(Calendar.MONTH, -2);
-            String minDOV = sdf.format(cal.getTime());
 
             // Set MinDob date to 50 years back from DOV
             cal.add(Calendar.YEAR, -50);
@@ -131,9 +121,8 @@ public class SectionBActivity extends AppCompatActivity {
             // Set MinLMP date to 2 months back from DOV
             cal.add(Calendar.MONTH, -9);
             String minLMP = sdf.format(cal.getTime());
-            cal.add(Calendar.MONTH, +9); // Calender reset to DOV
             Log.d(TAG, "onCreate: " + minLMP);
-
+            cal.add(Calendar.MONTH, +7); // Calender reset to DOV
             // Set MaxLMP same as DOV
             String maxLMP = sdf.format(cal.getTime());
             Log.d(TAG, "onCreate: " + maxLMP);
@@ -148,6 +137,11 @@ public class SectionBActivity extends AppCompatActivity {
             cal.add(Calendar.MONTH, -9);
             Log.d(TAG, "onCreate: " + maxLMP);
 
+            cal.add(Calendar.MONTH, +3);
+            String maxDD = sdf.format(cal.getTime());
+            cal.add(Calendar.MONTH, -3);
+            String DD = sdf.format(cal.getTime());
+
             // DOB
             bi.rb04.setMaxDate(maxDob);
             bi.rb04.setMinDate(minDob);
@@ -159,6 +153,8 @@ public class SectionBActivity extends AppCompatActivity {
             // EDD
             bi.rb09.setMaxDate(maxEDD);
             bi.rb09.setMinDate(minEDD);
+
+            bi.rb21.setMinDate(DD);
 
 
         } catch (ParseException e) {

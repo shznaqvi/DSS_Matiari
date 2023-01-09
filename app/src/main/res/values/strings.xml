@@ -114,9 +114,14 @@
     <string name="rb_ufn">Unique Family Number</string>
     <string name="rb01">Unique WRA#</string>
     <string name="rb02">Name of Women</string>
+    <string name="rb22">Name of Women (In NIC) </string>
     <string name="rb03">Husband/Father Name</string>
+    <string name="rb23">Husband/Father Name (In NIC) </string>
     <string name="rb03h">Husband Name</string>
     <string name="rb03f">Father Name</string>
+
+    <string name="rb23h">Husband Name (In NIC) </string>
+    <string name="rb23f">Father Name (In NIC) </string>
     <string name="rb04">Date of Birth</string>
     <string name="rb04_info">DD/MM/YYYY Use 98/98/9998 if not known</string>
     <string name="rb05">Age in years</string>
@@ -257,7 +262,9 @@
     <string name='Q_rb_vil' translatable="false">rb_vil</string>
     <string name='Q_rb01' translatable="false">rb01</string>
     <string name='Q_rb02' translatable="false">rb02</string>
+    <string name='Q_rb22' translatable="false">rb22</string>
     <string name='Q_rb03' translatable="false">rb03</string>
+    <string name='Q_rb23' translatable="false">rb23</string>
     <string name='Q_rb03a' translatable="false">rb03a</string>
     <string name='Q_rb04' translatable="false">rb04</string>
     <string name='Q_rb05' translatable="false">rb05</string>

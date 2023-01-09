@@ -190,6 +190,53 @@
                             android:hint="@string/rb02"
                             android:inputType="textPersonName|textCapWords"
                             android:text="@={mwra.rb02}" />
+
+
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/fldGrpCVrb22"
+                    style="@style/cardView">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/bottom"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                style="@style/labels"
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:text="@string/rb22" />
+
+                            <TextView
+                                style="@style/quesNum"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:text="@string/Q_rb22" />
+
+
+                        </LinearLayout>
+
+                        <EditText
+                            android:id="@+id/rb22"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="8dp"
+                            android:digits="abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+                            android:hint="@string/rb22"
+                            android:inputType="textPersonName|textCapWords"
+                            android:text="@={mwra.rb22}" />
+
+
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
 
@@ -496,6 +543,58 @@
                             android:digits="abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ"
                             android:inputType="textPersonName|textCapWords"
                             android:text="@={mwra.rb03}" />
+
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/fldGrpCVrb23"
+                    style="@style/cardView">
+                    <!--android:visibility='@{mwra.Rb06.equals("4")? View.GONE : View.VISIBLE}'-->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/bottom"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                style="@style/labels"
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:text="@string/rb23h"
+                                android:visibility='@{mwra.Rb06.equals("4")? View.GONE : View.VISIBLE}' />
+
+                            <TextView
+                                style="@style/labels"
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:text="@string/rb23f"
+                                android:visibility='@{mwra.Rb06.equals("4")? View.VISIBLE : View.GONE}' />
+
+                            <TextView
+                                style="@style/quesNum"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:text="@string/Q_rb23" />
+
+
+                        </LinearLayout>
+
+                        <EditText
+                            android:id="@+id/rb23"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:digits="abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+                            android:inputType="textPersonName|textCapWords"
+                            android:text="@={mwra.rb23}" />
+
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
 
@@ -826,6 +925,7 @@
                             android:gravity="center"
                             app:maxValue="41"
                             app:minValue="28"
+                            app:type="range"
                             android:hint="##"
                             android:text="@={mwra.rb20}"
                             app:dateFormat="yyyy-MM-dd"

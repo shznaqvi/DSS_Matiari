@@ -138,7 +138,7 @@ public class SectionEActivity extends AppCompatActivity {
             @Override
             public void afterTextChanged(Editable s) {
 
-                String date = bi.rc03dob.getText().toString();
+                String date = toBlackVisionDate(bi.rc03dob.getText().toString());
                 bi.rc06.setMinDate(date);
 
             }

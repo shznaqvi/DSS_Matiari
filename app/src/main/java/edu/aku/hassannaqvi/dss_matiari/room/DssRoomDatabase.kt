@@ -6,9 +6,9 @@ package edu.aku.hassannaqvi.dss_matiari.room
 
 import android.content.Context
 import androidx.room.*
-import androidx.room.RoomDatabase
 import androidx.room.migration.Migration
 import androidx.sqlite.db.SupportSQLiteDatabase
+import androidx.sqlite.db.SupportSQLiteOpenHelper
 import edu.aku.hassannaqvi.dss_matiari.core.MainApp
 import edu.aku.hassannaqvi.dss_matiari.models.*
 import net.sqlcipher.database.SQLiteDatabase
@@ -75,4 +75,6 @@ abstract class DssRoomDatabase : RoomDatabase() {
             }
         }
     }
+
+
 }

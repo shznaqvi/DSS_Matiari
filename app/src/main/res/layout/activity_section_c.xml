@@ -266,6 +266,51 @@
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
 
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/fldGrpCVrb22"
+                    style="@style/cardView">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/bottom"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                style="@style/labels"
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:text="@string/rb22" />
+
+                            <TextView
+                                style="@style/quesNum"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:text="@string/Q_rb22" />
+
+
+                        </LinearLayout>
+
+                        <EditText
+                            android:id="@+id/rb22"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="8dp"
+                            android:digits="abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+                            android:hint="@string/rb22"
+                            android:inputType="textPersonName|textCapWords"
+                            android:text="@={followups.rb22}" />
+
+
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+
                 <!-- rc03  Input   -->
                 <androidx.cardview.widget.CardView
                     android:id="@+id/fldGrpCVrb03"
@@ -319,6 +364,60 @@
                             android:text="@={followups.rb03}" />
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/fldGrpCVrb23"
+                    style="@style/cardView">
+                    <!--android:visibility='@{mwra.Rb06.equals("4")? View.GONE : View.VISIBLE}'-->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/bottom"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                style="@style/labels"
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:text="@string/rb23h"
+                                android:visibility='@{followups.Rb06.equals("4")? View.GONE : View.VISIBLE}' />
+
+                            <TextView
+                                style="@style/labels"
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:text="@string/rb23f"
+                                android:visibility='@{followups.Rb06.equals("4")? View.VISIBLE : View.GONE}' />
+
+                            <TextView
+                                style="@style/quesNum"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:text="@string/Q_rb23" />
+
+
+                        </LinearLayout>
+
+                        <EditText
+                            android:id="@+id/rb23"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:digits="abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+                            android:inputType="textPersonName|textCapWords"
+                            android:text="@={followups.rb23}" />
+
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+
+
+
 
                 <androidx.cardview.widget.CardView
                     android:id="@+id/fldGrpCVrbAge"
@@ -467,7 +566,6 @@
                                 android:id="@+id/rb1001"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:enabled="@{!followups.rb10.equals(`9`)}"
                                 android:checked='@{followups.rb10.equals("1")}'
                                 android:onClick='@{()->followups.setRb10("1")}'
                                 android:text="@string/rc0401" />
@@ -476,7 +574,6 @@
                                 android:id="@+id/rb1002"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:enabled="@{!followups.rb10.equals(`9`)}"
                                 android:checked='@{followups.rb10.equals("2")}'
                                 android:onClick='@{()->followups.setRb10("2") + rb11.clearCheck() + rb14.clearCheck() + rb16.clearCheck() + rb17.clearCheck() + rb18.clearCheck() + rb19.clearCheck()}'
                                 android:text="@string/rc0402" />
@@ -485,7 +582,6 @@
                                 android:id="@+id/rb1003"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:enabled="@{!followups.rb10.equals(`9`)}"
                                 android:checked='@{followups.rb10.equals("3")}'
                                 android:onClick='@{()->followups.setRb10("3") + rb11.clearCheck() + rb14.clearCheck() + rb16.clearCheck() + rb17.clearCheck() + rb18.clearCheck() + rb19.clearCheck()}'
                                 android:text="@string/rc0403" />
@@ -495,7 +591,6 @@
                                 android:id="@+id/rb1004"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:enabled="@{!followups.rb10.equals(`9`)}"
                                 android:checked='@{followups.rb10.equals("4")}'
                                 android:onClick='@{()->followups.setRb10("4") + rb11.clearCheck() + rb14.clearCheck() + rb16.clearCheck() + rb17.clearCheck() + rb18.clearCheck() + rb19.clearCheck()}'
                                 android:text="@string/rc0404" />
@@ -504,7 +599,6 @@
                                 android:id="@+id/rb1005"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:enabled="@{!followups.rb10.equals(`9`)}"
                                 android:checked='@{followups.rb10.equals("5")}'
                                 android:onClick='@{()->followups.setRb10("5") + rb11.clearCheck() + rb14.clearCheck() + rb16.clearCheck() + rb17.clearCheck() + rb18.clearCheck() + rb19.clearCheck()}'
                                 android:text="@string/rc0405" />
@@ -513,7 +607,6 @@
                                 android:id="@+id/rb1006"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:enabled="@{!followups.rb10.equals(`9`)}"
                                 android:checked='@{followups.rb10.equals("6")}'
                                 android:onClick='@{()->followups.setRb10("6") + rb11.clearCheck() + rb06.clearCheck() + rb14.clearCheck() + rb16.clearCheck() + rb17.clearCheck() + rb16.clearCheck() + rb18.clearCheck() + rb19.clearCheck()}'
                                 android:text="@string/rc0406" />
@@ -522,7 +615,6 @@
                                 android:id="@+id/rb1007"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:enabled="@{!followups.rb10.equals(`9`)}"
                                 android:checked='@{followups.rb10.equals("7")}'
                                 android:onClick='@{()->followups.setRb10("7") + rb11.clearCheck() + rb16.clearCheck() + rb17.clearCheck() + rb18.clearCheck() + rb19.clearCheck()}'
                                 android:text="@string/rc0407" />
@@ -532,8 +624,6 @@
                                 android:id="@+id/rb1008"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:enabled="@{!followups.rb10.equals(`9`)}"
-                                android:checked='@{followups.rb10.equals("8")}'
                                 android:onClick='@{()->followups.setRb10("8") + rb11.clearCheck() + rb14.clearCheck() + rb16.clearCheck() + rb17.clearCheck() + rb18.clearCheck() + rb19.clearCheck()}'
                                 android:text="@string/rc0408" />
 
@@ -559,7 +649,7 @@
                     android:orientation="vertical"
                     android:visibility="@{followups.rb10.equals(`1`) || followups.rb10.equals(`7`) ? View.VISIBLE : View.GONE}">
 
-                    <!-- rc05  Input   -->
+                    <!-- rb11  Input   -->
                     <androidx.cardview.widget.CardView
                         android:id="@+id/fldGrpCVrc05"
                         style="@style/cardView">
@@ -723,7 +813,7 @@
                     android:orientation="vertical"
                     android:visibility="@{followups.rb10.equals(`1`) ? View.VISIBLE : View.GONE}">
 
-                    <!-- rc07  Radio   -->
+                    <!-- rb14  Radio   -->
                     <androidx.cardview.widget.CardView
                         android:id="@+id/fldGrpCVrb07"
                         style="@style/cardView"
@@ -794,7 +884,7 @@
                         tools:visibility="visible">
 
 
-                        <!-- rc06  Radio   -->
+                        <!-- rb06  Radio   -->
                         <androidx.cardview.widget.CardView
                             android:id="@+id/fldGrpCVrb06"
                             style="@style/cardView">
@@ -1373,6 +1463,7 @@
                                             android:maxLength="2"
                                             app:maxValue="41"
                                             app:minValue="28"
+                                            app:type="range"
                                             android:hint="##"
                                             android:text="@={followups.rb20}" />
 

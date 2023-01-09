@@ -84,10 +84,32 @@ public class SectionCActivity extends AppCompatActivity {
             bi.rb05.setText(String.valueOf(actualAge));
         }
 
-        bi.rb1009.setEnabled(actualAge > 49);
+        if(actualAge > 49)
+        {
+            bi.rb1009.setEnabled(true);
+            bi.rb1001.setEnabled(false);
+            bi.rb1002.setEnabled(false);
+            bi.rb1003.setEnabled(false);
+            //bi.rb1004.setEnabled(false);
+            bi.rb1005.setEnabled(false);
+            bi.rb1006.setEnabled(false);
+            bi.rb1007.setEnabled(false);
+            //bi.rb1008.setEnabled(false);
+        }else{
+            bi.rb1009.setEnabled(false);
+            bi.rb1001.setEnabled(true);
+            bi.rb1002.setEnabled(true);
+            bi.rb1003.setEnabled(true);
+            //bi.rb1004.setEnabled(true);
+            bi.rb1005.setEnabled(true);
+            bi.rb1006.setEnabled(true);
+            bi.rb1007.setEnabled(true);
+            //bi.rb1008.setEnabled(true);
+        }
 
 
-        if(!MainApp.households.getVisitNo().equals("") && Integer.parseInt(households.getVisitNo()) < 2)
+
+        if(!MainApp.households.getVisitNo().equals("") && Integer.parseInt(households.getVisitNo()) >= 2)
         {
             bi.rb1008.setEnabled(true);
             bi.rb1004.setEnabled(false);
@@ -104,17 +126,20 @@ public class SectionCActivity extends AppCompatActivity {
 
         /********************************On Click Listeners******************************/
 
-        bi.rb10.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+        bi.rb1004.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
-            public void onCheckedChanged(RadioGroup group, int checkedId) {
-                if(bi.rb1004.isChecked())
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(isChecked)
                 {
                     mwraStatus.put(followUpsScheHHList.get(selectedMember).getMuid(), false);
                 }else{
                     mwraStatus.remove(followUpsScheHHList.get(selectedMember).getMuid());
                 }
-   }
+            }
         });
+
+
+
 
         bi.rb19.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override

@@ -23,6 +23,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import org.json.JSONException;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 
@@ -63,7 +66,15 @@ public class FPHouseholdAdapter extends RecyclerView.Adapter<FPHouseholdAdapter.
 
         db = MainApp.appInfo.dbHelper;
 
+        Collections.sort(followUpsScheList, new Comparator<FollowUpsSche>() {
+            @Override
+            public int compare(FollowUpsSche o1, FollowUpsSche o2) {
+                return o1.getHdssid().compareTo(o2.getHdssid());
+            }
+        });
+
     }
+
 
     // Add filter
     @SuppressLint("NotifyDataSetChanged")
@@ -196,8 +207,6 @@ public class FPHouseholdAdapter extends RecyclerView.Adapter<FPHouseholdAdapter.
             }
         }
 
-
-
         mwraCount.setText(tempMWRA + " Women | " + pregStatus + " | " + childCount + " Children");
         secStatus.setText(hhStatus);
         imgStatus.setVisibility(fpHouseholds.getIStatus().equals("1") || Integer.parseInt(fpHouseholds.getVisitNo()) > 2 ? View.VISIBLE : View.GONE);
@@ -208,8 +217,6 @@ public class FPHouseholdAdapter extends RecyclerView.Adapter<FPHouseholdAdapter.
                 @Override
                 public void onClick(View v) {
                     // Get the current state of the item
-
-
                     try {
                         //MainApp.fpHouseholds = db.getFPHouseholdBYHdssid(MainApp.followUpsScheHHList.get(viewHolder.getAdapterPosition()).getHdssid());
                        MainApp.households = db.householdsDao().getSelectedHouseholdByHDSSID(MainApp.followUpsScheHHList.get(viewHolder.getAdapterPosition()).getHdssid(), viewHolder.getAdapterPosition());
@@ -221,7 +228,6 @@ public class FPHouseholdAdapter extends RecyclerView.Adapter<FPHouseholdAdapter.
                     if (MainApp.households.getUid().equals("")) {
                         MainApp.households.populateMeta(viewHolder.getAdapterPosition());
                     }
-
 
                     if (!MainApp.households.getIStatus().equals("1") && Integer.parseInt(MainApp.households.getVisitNo()) < 3) {
 

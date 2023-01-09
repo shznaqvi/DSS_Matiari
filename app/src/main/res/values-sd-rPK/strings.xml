@@ -117,7 +117,9 @@
 
     <string name="rb01">عورت جو سڃاڻپ نمبر</string>
     <string name="rb02"> عورت جو نالو</string>
+    <string name="rb22"> عورت جو نالو(In NIC)</string>
     <string name="rb03">مڙس/پيء جو نالو</string>
+    <string name="rb23">(In NIC)مڙس/پيء جو نالو</string>
     <string name="rb03h">مڙس جو نالو/ پيءُ جو نالو </string>
     <string name="rb03f">پيءُ جو نالو</string>
     <string name="rb04">ڄمڻ جي تاريخ </string>
@@ -148,6 +150,9 @@
     <string name="rc03">مڙس/پيء جو نالو</string>
     <string name="rc03h">مڙس جو نالو</string>
     <string name="rc03f">پيءُ جو نالو</string>
+
+    <string name="rb23h">مڙس جو نالو(In NIC)</string>
+    <string name="rb23f">پيءُ جو نالو(In NIC)</string>
     <string name="rc03a">رابطي جو نمبر</string>
     <string name="rc04">دوري جو نتيجو   </string>
     <string name="rc0401">موجود</string>
