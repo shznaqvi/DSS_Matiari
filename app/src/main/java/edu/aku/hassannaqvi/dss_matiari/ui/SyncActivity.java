@@ -226,7 +226,7 @@ public class SyncActivity extends AppCompatActivity {
                     filter = " colflag is null or colflag = '' ";
                     downloadTables.add(new SyncModel(UsersTable.TABLE_NAME, select, filter));
                     downloadTables.add(new SyncModel(TableVillage.TABLE_NAME, select, filter));
-                    downloadTables.add(new SyncModel(VersionTable.TABLE_NAME));
+                    //downloadTables.add(new SyncModel(VersionTable.TABLE_NAME));
                     //   downloadTables.add(new SyncModel(TableContracts.TableFollowUpsSche.TABLE_NAME));
                 } else {
                     // Set tables to DOWNLOAD

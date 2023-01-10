@@ -147,7 +147,7 @@
                                 style="@style/quesNum"
                                 android:layout_width="wrap_content"
                                 android:layout_height="match_parent"
-                                android:text="@string/Q_rb01a" />
+                                android:text="@string/Q_rc01a" />
 
                         </LinearLayout>
 

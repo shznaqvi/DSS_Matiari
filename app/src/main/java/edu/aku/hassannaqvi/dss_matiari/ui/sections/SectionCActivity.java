@@ -229,37 +229,19 @@ public class SectionCActivity extends AppCompatActivity {
 
             sdf = new SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH);
 
-            // Set MinLMP date to 2 months back from DOV
+            // Set MinEDD to 9 months from DOV
             cal.add(Calendar.MONTH, -9);
-            String minLMP = sdf.format(cal.getTime());
-            cal.add(Calendar.MONTH, +7); // Calender reset to DOV
-            Log.d(TAG, "onCreate: " + minLMP);
-
-            // Set MaxLMP same as DOV
-            String maxLMP = sdf.format(cal.getTime());
-            Log.d(TAG, "onCreate: " + maxLMP);
-
-            // Set MinEDD same as DOV
             String minEDD = sdf.format(cal.getTime());
-            Log.d(TAG, "onCreate: " + minEDD);
 
-            // Set MaxEDD to 9 months from DOV
+            // Set to DOV
             cal.add(Calendar.MONTH, +9);
-            String maxEDD = sdf.format(cal.getTime());
-            cal.add(Calendar.MONTH, -9);
-            Log.d(TAG, "onCreate: " + maxLMP);
-
-            cal.add(Calendar.MONTH, +3);
             String maxDD = sdf.format(cal.getTime());
             cal.add(Calendar.MONTH, -3);
             String DD = sdf.format(cal.getTime());
 
+
+            bi.rb15.setMinDate(minEDD);
             bi.rb21.setMinDate(DD);
-            // Date of Death from Date of Deliver(RC10)
-            sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
-            cal.setTime(sdf.parse(mwra.getRb13()));// all done
-            sdf = new SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH);
-            String minDOD = sdf.format(cal.getTime());
 
         } catch (ParseException e) {
             e.printStackTrace();
@@ -274,7 +256,7 @@ public class SectionCActivity extends AppCompatActivity {
 
             if(bi.rb1001.isChecked()) {
 
-                switch (mwra.getRb06()) {
+                switch (mwra.getPreMaritalStaus()) {
                     // Married in Previous Round
                     case "1":
                         // Pregnant
@@ -341,7 +323,7 @@ public class SectionCActivity extends AppCompatActivity {
                                 forwardIntent.setFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT);
                                 setResult(RESULT_OK, forwardIntent);
                                 startActivity(forwardIntent);
-                            }else if (bi.rb0601.isChecked()) {        // Marital status changed
+                            }else if (bi.rb0601.isChecked() || bi.rb1802.isChecked()) {        // Marital status changed
                                 Intent forwardIntent = new Intent(this, SectionDActivity.class).putExtra("complete", true);
                                 forwardIntent.setFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT);
                                 setResult(RESULT_OK, forwardIntent);
@@ -377,7 +359,7 @@ public class SectionCActivity extends AppCompatActivity {
                             }
                         } else {      // Not Pregnant
                             // Marital status changed
-                            if (bi.rb0601.isChecked()) {
+                            if (bi.rb0601.isChecked() || bi.rb1802.isChecked()) {
                                 Intent forwardIntent = new Intent(this, SectionDActivity.class).putExtra("complete", true);
                                 forwardIntent.setFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT);
                                 setResult(RESULT_OK, forwardIntent);
@@ -419,7 +401,7 @@ public class SectionCActivity extends AppCompatActivity {
                             }
                         } else {      // Not Pregnant
                             // Marital status changed
-                            if (bi.rb0601.isChecked()) {
+                            if (bi.rb0601.isChecked() || bi.rb1802.isChecked()) {
                                 Intent forwardIntent = new Intent(this, SectionDActivity.class).putExtra("complete", true);
                                 forwardIntent.setFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT);
                                 setResult(RESULT_OK, forwardIntent);
@@ -471,7 +453,7 @@ public class SectionCActivity extends AppCompatActivity {
     private boolean insertNewRecord() throws JSONException {
         MainApp.outcome = new Outcome();
 
-        mwra.populateMetaFollowups();
+       // mwra.populateMetaFollowups();
 
 
         long rowId = 0;

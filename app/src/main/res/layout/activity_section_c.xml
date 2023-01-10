@@ -705,7 +705,7 @@
                                     android:layout_height="wrap_content"
                                     android:layout_weight="1"
                                     android:checked='@{followups.rb11.equals("2")}'
-                                    android:onClick='@{()->followups.setRb11("2") + rb06.clearCheck() + rb14.clearCheck() + rb16.clearCheck() + rb17.clearCheck() + rb18.clearCheck() + rb19.clearCheck()}'
+                                    android:onClick='@{()->followups.setRb11("2") + rb14.clearCheck() + rb16.clearCheck() + rb17.clearCheck() + rb18.clearCheck() + rb19.clearCheck()}'
                                     android:text="@string/rc0502" />
 
                             </RadioGroup>
@@ -871,7 +871,7 @@
                                     android:layout_weight="1"
                                     android:checked='@{followups.prePreg.equals("2")}'
                                     android:enabled="false"
-                                    android:onClick='@{()->followups.setPrePreg("2") + rb06.clearCheck() + rb14.clearCheck() + rb16.clearCheck() + rb17.clearCheck() + rb18.clearCheck() + rb19.clearCheck()}'
+                                    android:onClick='@{()->followups.setPrePreg("2") + rb14.clearCheck() + rb16.clearCheck() + rb17.clearCheck() + rb18.clearCheck() + rb19.clearCheck()}'
                                     android:text="@string/rc0702" />
                             </RadioGroup>
                         </LinearLayout>
@@ -1290,13 +1290,14 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:id="@+id/fldGrpUnreportedPreg"
-                                android:orientation="vertical">
+                                android:orientation="vertical"
+                                android:visibility='@{!followups.rb06.equals(`4`) &amp;&amp; followups.prePreg.equals(`2`) ? View.VISIBLE : View.GONE}'>
 
                                 <!-- rb18  Radio   -->
                                 <androidx.cardview.widget.CardView
                                     android:id="@+id/fldGrpCVrb09a"
                                     style="@style/cardView"
-                                    android:visibility='@{!followups.rb06.equals(`4`) ? View.VISIBLE : View.GONE}'>
+                                    >
 
                                     <LinearLayout
                                         android:layout_width="match_parent"

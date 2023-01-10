@@ -490,7 +490,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:checked='@{mwra.rb06.equals("4")}'
-                                android:onClick='@{()->mwra.setRb06("4") + rb18.clearCheck() + rb19.clearCheck()}'
+                                android:onClick='@{()->mwra.setRb06("4") + rb18.clearCheck() + rb19.clearCheck() + rb07.clearCheck()}'
                                 android:text="@string/rb0604" />
                         </RadioGroup>
                     </LinearLayout>
@@ -600,12 +600,16 @@
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
 
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:visibility='@{mwra.Rb06.equals(`4`) ? View.GONE : View.VISIBLE}'>
 
                 <!-- rb07  Radio   -->
                 <androidx.cardview.widget.CardView
                     android:id="@+id/fldGrpCVrb07"
-                    style="@style/cardView"
-                    android:visibility='@{mwra.Rb06.equals(`4`)? View.GONE : View.VISIBLE}'>
+                    style="@style/cardView">
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -665,7 +669,7 @@
                 <androidx.cardview.widget.CardView
                     android:id="@+id/fldGrpCVrb08"
                     style="@style/cardView"
-                    android:visibility='@{mwra.Rb07.equals(`1`)? View.VISIBLE : View.GONE}'>
+                    android:visibility='@{mwra.Rb07.equals(`1`) ? View.VISIBLE : View.GONE}'>
 
                     <!--android:visibility='@{mwra.Rb06.equals("4") || mwra.Rb07.equals("2")? View.GONE : View.VISIBLE}'-->
 
@@ -759,11 +763,18 @@
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
 
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:visibility='@{mwra.Rb06.equals(`4`) ? View.GONE : View.VISIBLE}'>
+
                 <!-- rb18  Radio   -->
                 <androidx.cardview.widget.CardView
                     android:id="@+id/fldGrpCVrb09a"
-                    style="@style/cardView"
-                    android:visibility='@{mwra.Rb06.equals(`4`) ? View.GONE : View.VISIBLE}'>
+                    style="@style/cardView">
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -787,7 +798,7 @@
                                 style="@style/quesNum"
                                 android:layout_width="wrap_content"
                                 android:layout_height="match_parent"
-                                android:text="@string/Q_rb10" />
+                                android:text="@string/Q_rb18" />
 
 
                         </LinearLayout>
@@ -987,6 +998,8 @@
 
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
+
+                </LinearLayout>
 
                 <!--EndButton LinearLayout-->
                 <LinearLayout

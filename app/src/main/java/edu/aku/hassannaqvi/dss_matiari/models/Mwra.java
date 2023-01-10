@@ -252,6 +252,7 @@ public class Mwra extends BaseObservable implements Observable {
         mwra.setRb04(MainApp.fpMwra.getRb04()); // DOB
         mwra.setPrePreg(MainApp.fpMwra.getRb07());
         mwra.setRb06(MainApp.fpMwra.getRb06());
+        mwra.setPreMaritalStaus(MainApp.fpMwra.getRb06());
 
         long daysdiff  = CalculateAge(MainApp.fpMwra.getRa01());
         long years = daysdiff/365;
@@ -459,12 +460,14 @@ public class Mwra extends BaseObservable implements Observable {
         this.sD = sD;
     }
 
+    @Bindable
     public String getPrePreg() {
         return prePreg;
     }
 
     public void setPrePreg(String prePreg) {
         this.prePreg = prePreg;
+        notifyPropertyChanged(BR.prePreg);
     }
 
     public PropertyChangeRegistry getPropertyChangeRegistry() {
@@ -581,11 +584,10 @@ public class Mwra extends BaseObservable implements Observable {
     public void setRb06(String rb06) {
         this.rb06 = rb06;
         Log.d(TAG, "setRb06: " + this.rb06);
-        setRb07(this.rb06.equals("4") ? "" : this.rb07);
+        //setRb07(this.rb06.equals("4") ? "" : this.rb07);
         setRb15(this.rb06.equals("4") ? "" : this.rb15);
         setRb20(this.rb06.equals("4") ? "" : this.rb20);
         setRb21(this.rb06.equals("4") ? "" : this.rb21);
-        this.preMaritalStaus = rb06;
         notifyChange(BR.rb06);
     }
 
@@ -730,6 +732,7 @@ public class Mwra extends BaseObservable implements Observable {
 
     public void setRb16(String rb16) {
         this.rb16 = rb16;
+        setRb17(rb16.equals("5") ? "2" : this.rb17);
         notifyChange(BR.rb16);
     }
     @Bindable

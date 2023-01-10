@@ -1,6 +1,7 @@
 package edu.aku.hassannaqvi.dss_matiari.ui.sections;
 
 
+import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.dateOfVisit;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.fpMwra;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.outcome;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.sharedPref;
@@ -43,6 +44,8 @@ public class SectionFActivity extends AppCompatActivity {
         bi = DataBindingUtil.setContentView(this, R.layout.activity_section_f);
         db = MainApp.appInfo.dbHelper;
 
+        String dov = toBlackVisionDate("2023-01-01");
+        bi.rc01a.setMinDate(dov);
         setDateRanges();
 
         MainApp.ROUND = MainApp.fpMwra.getFRound();
