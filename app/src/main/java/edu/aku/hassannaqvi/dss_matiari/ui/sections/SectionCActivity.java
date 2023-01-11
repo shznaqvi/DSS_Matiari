@@ -1,5 +1,6 @@
 package edu.aku.hassannaqvi.dss_matiari.ui.sections;
 
+import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.PROJECT_NAME;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.followUpsScheHHList;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.fpMwra;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.households;
@@ -66,13 +67,37 @@ public class SectionCActivity extends AppCompatActivity {
             Toast.makeText(this, "JSONException(Followups): " + e.getMessage(), Toast.LENGTH_SHORT).show();
         }
 
-        if(mwra.getUid() != null)
-        {
-            if(mwra.getRegRound().equals(""))
-            {
-                mwra.populateMetaFollowups();
-            }
+        if (mwra.getUid().equals("")) {
+            mwra.setUserName(MainApp.user.getUserName());
+            mwra.setDeviceId(MainApp.deviceid);
+            mwra.setAppver(MainApp.appInfo.getAppVersion());
+            mwra.setSysDate(MainApp.households.getSysDate());
+            mwra.setUuid(MainApp.households.getUid());  // not applicable in Form table
+            mwra.setProjectName(PROJECT_NAME);
+            mwra.setRegRound("");
 
+            mwra.setHdssId(MainApp.fpMwra.getHdssid());
+            mwra.setHhNo(MainApp.fpMwra.getHhNo());
+            mwra.setUcCode(MainApp.fpMwra.getUcCode());
+            mwra.setVillageCode(MainApp.fpMwra.getVillageCode());
+            mwra.setRound(MainApp.fpMwra.getFRound());
+            mwra.setSNo(MainApp.fpMwra.getRb01());
+            mwra.setRb01(MainApp.fpMwra.getRb01());
+            mwra.setRb02(MainApp.fpMwra.getRb02());
+            mwra.setRb03(MainApp.fpMwra.getRb03());
+            mwra.setRb06(MainApp.fpMwra.getRb06());
+            mwra.setPreMaritalStaus(fpMwra.getRb06());
+            mwra.setPrePreg(MainApp.fpMwra.getRb07());
+            //mwra.setRb07(MainApp.fpMwra.getRb07());
+
+            long daysdiff  = mwra.CalculateAge(MainApp.fpMwra.getRa01());
+            long years = daysdiff/365;
+            long actualAge = Integer.parseInt(MainApp.fpMwra.getRb05()) + years;
+            mwra.setRb05(String.valueOf(actualAge));     // Age in Years
+
+        }
+        // For edit mode
+        if(!mwra.getUid().equals("")) {
             try {
                 mwra.sCHydrate(mwra.getSC());
             } catch (JSONException e) {
@@ -112,8 +137,6 @@ public class SectionCActivity extends AppCompatActivity {
             //bi.rb1008.setEnabled(true);
         }
 
-
-
         if(!MainApp.households.getVisitNo().equals("") && Integer.parseInt(households.getVisitNo()) >= 2)
         {
             bi.rb1008.setEnabled(true);
@@ -149,19 +172,16 @@ public class SectionCActivity extends AppCompatActivity {
             }
         });
 
-        bi.rb1004.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        bi.rb10.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if(isChecked)
-                {
+            public void onCheckedChanged(RadioGroup radioGroup, int i) {
+                if(bi.rb1004.isChecked()){
                     mwraStatus.put(followUpsScheHHList.get(selectedMember).getMuid(), false);
                 }else{
                     mwraStatus.remove(followUpsScheHHList.get(selectedMember).getMuid());
                 }
             }
         });
-
-
 
 
         bi.rb19.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {

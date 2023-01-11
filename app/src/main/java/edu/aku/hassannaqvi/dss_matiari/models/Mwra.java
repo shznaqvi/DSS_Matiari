@@ -2,6 +2,7 @@ package edu.aku.hassannaqvi.dss_matiari.models;
 
 import static java.util.concurrent.TimeUnit.MILLISECONDS;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.PROJECT_NAME;
+import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.fpMwra;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.mwra;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.permissionCheck;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.position;
@@ -236,7 +237,7 @@ public class Mwra extends BaseObservable implements Observable {
         setSysDate(MainApp.households.getSysDate());
         setUuid(MainApp.households.getUid());  // not applicable in Form table
         setProjectName(PROJECT_NAME);
-        setRegRound("null");
+        setRegRound("");
 
         // From FollowupsSche - MWRA
 
@@ -834,6 +835,7 @@ public class Mwra extends BaseObservable implements Observable {
         //this.iStatus = mwra.iStatus;
         this.synced = mwra.synced;
         this.syncDate = mwra.syncDate;
+        //this.preMaritalStaus = MainApp.fpMwra.getRb06();
 
         sBHydrate(mwra.sB);
         sCHydrate(mwra.sC);
@@ -889,6 +891,7 @@ public class Mwra extends BaseObservable implements Observable {
             this.rb04 = json.getString("rb04");
             this.rb05 = json.getString("rb05");
             this.prePreg = json.getString("prePreg");
+            this.preMaritalStaus = fpMwra.getRb06();
             this.rb06 = json.getString("rb06");
             this.rb03a = json.getString("rb03a");
             this.rb03b = json.getString("rb03b");

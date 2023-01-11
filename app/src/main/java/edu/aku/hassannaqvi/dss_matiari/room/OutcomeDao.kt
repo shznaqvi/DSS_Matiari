@@ -58,7 +58,7 @@ interface OutcomeDao {
     @Throws(JSONException ::class)
     fun getOutcomeFollowupsBySno(uuid: String, rb01: String, muid: String, fround: String) : Outcome?
     {
-        val outcome = getOutcomeFollowupsBySno_internal(uuid, rb01, muid, fround, "null")
+        val outcome = getOutcomeFollowupsBySno_internal(uuid, rb01, muid, fround, "")
         if(outcome == null)
         {
             val tempOutcome = Outcome()

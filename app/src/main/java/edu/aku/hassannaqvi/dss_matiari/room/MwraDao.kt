@@ -72,18 +72,29 @@ interface MwraDao {
     @Throws(JSONException ::class)
     fun getFollowupsBySno(uuid: String, rb01: String, fround: String) : Mwra?
     {
+        val mwra = getFollowupsBySno_internal(uuid, rb01, fround, "")
+        if(mwra == null)
+        {
+            val tempMwra = Mwra()
+            //tempMwra.Hydrate(mwra)
+            return tempMwra
+        }else{
+            return mwra
+        }
+
+    }
+
+    @Throws(JSONException ::class)
+    fun getFollowupsBySnoEmpty(uuid: String, rb01: String, fround: String) : Mwra?
+    {
         val mwra = getFollowupsBySno_internal(uuid, rb01, fround, "null")
         if(mwra == null)
         {
             val tempMwra = Mwra()
             return tempMwra
-        } /*else {
-            //mwra.sCHydrate(mwra.sc)
-            //mwra.sDHydrate(mwra.sd)
-        }*/
+        }
         return mwra
     }
-
 
 
 

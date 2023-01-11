@@ -57,7 +57,7 @@ public class SectionFActivity extends AppCompatActivity {
             e.printStackTrace();
             Toast.makeText(this, "JSONException(Followups): " + e.getMessage(), Toast.LENGTH_SHORT).show();
         }
-        if(outcome.getUid() != null)
+        if(outcome.getUid().equals(""))
         {
             try {
                 outcome.sEHydrate(outcome.getSE());

@@ -63,7 +63,7 @@ public class SectionEActivity extends AppCompatActivity {
             Toast.makeText(this, "JSONException(Outcome): " + e.getMessage(), Toast.LENGTH_SHORT).show();
         }
 
-        if(outcome.getUid() != null)
+        if(outcome.getUid() != null || outcome.getUid().equals(""))
         {
             try {
                 outcome.sEHydrate(outcome.getSE());
@@ -89,7 +89,7 @@ public class SectionEActivity extends AppCompatActivity {
                     bi.rc03dob.setEnabled(false);
                 }
                 // Followup
-            case "null":
+            case "":
                 //for unreported outcome in followup
                 if(mwra.getRb15().equals(""))
                 {

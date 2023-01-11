@@ -47,7 +47,7 @@ public class SectionDActivity extends AppCompatActivity {
         setDateRanges();
 
 
-        if(mwra.getUid() != null)
+        if(mwra.getUid() != null || mwra.getUid().equals(""))
         {
             try {
                 mwra.sDHydrate(mwra.getSD());
