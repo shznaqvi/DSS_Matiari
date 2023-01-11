@@ -56,7 +56,7 @@
             android:textStyle="bold"
             app:layout_scrollFlags="scroll|enterAlways"
             app:popupTheme="@style/AppTheme.PopupOverlay"
-            app:title="@string/marriedwomenregistration_mainheading"
+            app:title="@string/marriedwomenfollowup_mainheading"
             app:titleTextColor="@color/white" />
 
         <View
@@ -694,7 +694,7 @@
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:layout_weight="1"
-                                    android:enabled="@{!followups.rb10.equals(`7`)}"
+                                    android:enabled="false"
                                     android:checked='@{followups.rb11.equals("1")}'
                                     android:onClick='@{()->followups.setRb11("1")}'
                                     android:text="@string/rc0501" />
@@ -703,6 +703,7 @@
                                     android:id="@+id/rb1102"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
+                                    android:enabled="false"
                                     android:layout_weight="1"
                                     android:checked='@{followups.rb11.equals("2")}'
                                     android:onClick='@{()->followups.setRb11("2") + rb14.clearCheck() + rb16.clearCheck() + rb17.clearCheck() + rb18.clearCheck() + rb19.clearCheck()}'
@@ -961,7 +962,7 @@
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
                                         android:checked='@{followups.rb06.equals("4")}'
-                                        android:enabled='@{followups.prePreg.equals("")}'
+                                        android:enabled='@{followups.prePreg.equals("") &amp;&amp; followups.preMaritalStaus.equals("4")}'
                                         android:onClick='@{()->followups.setRb06("4") + rb14.clearCheck() + rb16.clearCheck() + rb17.clearCheck() + rb18.clearCheck() + rb19.clearCheck()}'
                                         android:text="@string/rc0604" />
 

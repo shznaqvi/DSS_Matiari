@@ -5,6 +5,7 @@
 package edu.aku.hassannaqvi.dss_matiari.room
 
 import androidx.room.Dao
+import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.Query
 import edu.aku.hassannaqvi.dss_matiari.contracts.TableContracts
@@ -15,6 +16,15 @@ import kotlin.jvm.Throws
 
 @Dao
 interface VillagesDao {
+
+    @Query("SELECT * FROM " + TableContracts.TableVillage.TABLE_NAME)
+    fun getAllVillages(): List<Villages>
+
+    @Delete
+    fun deleteVillage(villages: Villages)
+
+    @Query("DELETE FROM " + TableContracts.TableVillage.TABLE_NAME)
+    fun deleteVillagesTable()
 
     @Query("SELECT " + TableContracts.TableVillage.COLUMN_VILLAGE_NAME + "," + TableContracts.TableVillage.COLUMN_VILLAGE_CODE
             + " FROM " + TableContracts.TableVillage.TABLE_NAME

@@ -228,8 +228,7 @@ public class TableContracts {
     public static abstract class TableVillage implements BaseColumns {
 
         public static final String TABLE_NAME = "villages";
-
-        public static final String _ID = "id";
+        public static final String ID = "id";
         public static final String COLUMN_UCNAME = "ucname";
         public static final String COLUMN_VILLAGE_NAME = "villagename";
         public static final String COLUMN_VILLAGE_CODE = "villagecode";

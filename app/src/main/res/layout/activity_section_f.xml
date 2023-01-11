@@ -51,7 +51,7 @@
             android:textStyle="bold"
             app:layout_scrollFlags="scroll|enterAlways"
             app:popupTheme="@style/AppTheme.PopupOverlay"
-            app:title="@string/outcome_mainheading"
+            app:title="@string/outcomefup_mainheading"
             app:titleTextColor="@color/white" />
 
         <ScrollView

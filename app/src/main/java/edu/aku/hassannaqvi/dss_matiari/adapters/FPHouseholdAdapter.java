@@ -156,6 +156,10 @@ public class FPHouseholdAdapter extends RecyclerView.Adapter<FPHouseholdAdapter.
                 hhStatus = "No WRA";
                 secStatus.setVisibility(View.VISIBLE);
                 break;
+            case "96":
+                hhStatus = "Other";
+                secStatus.setVisibility(View.VISIBLE);
+                break;
             case "":
                 hhStatus = "       ";
                 secStatus.setVisibility(View.GONE);

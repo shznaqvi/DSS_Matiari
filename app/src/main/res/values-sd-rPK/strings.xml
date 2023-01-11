@@ -9,8 +9,11 @@
 
     <string name="demographicinformation_mainheading">آبادیاتی معلومات</string>
     <string name="marriedwomenregistration_mainheading">هر ۾ موجود   شادي شده عورتن جي لاءِ </string>
+    <string name="marriedwomenfollowup_mainheading"> Married Women Followup</string>
+
     <string name="pregnancy_mainheading">حمل جي معلومات</string>
     <string name="outcome_mainheading">ٻار جي معلومات</string>
+    <string name="outcomefup_mainheading">Outcome Followup Information </string>
     <string name="app_name">DSS مٹیاری</string>
     <string name="btnSync">ڊائون لوڊ ڊيٽا</string>
     <string name="btnUpload">اپلوڊ ڊيٽا</string>

@@ -9,8 +9,11 @@
 
     <string name="demographicinformation_mainheading">Demographic Information</string>
     <string name="marriedwomenregistration_mainheading">Married Women Registration</string>
+    <string name="marriedwomenfollowup_mainheading"> Married Women Followup</string>
+
     <string name="pregnancy_mainheading">Pregnancy Information (If previously pregnant)</string>
-    <string name="outcome_mainheading">Outcome Information </string>
+    <string name="outcome_mainheading">Outcome Registration Information </string>
+    <string name="outcomefup_mainheading">Outcome Followup Information </string>
 
     <string name="upd_db_form" translatable="false"> updateDB(Form):\t </string>
     <string name="upd_db_error" translatable="false"> Updating Database… ERROR! </string>

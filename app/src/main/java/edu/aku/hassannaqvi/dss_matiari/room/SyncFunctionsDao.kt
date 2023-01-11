@@ -1,14 +1,16 @@
 package edu.aku.hassannaqvi.dss_matiari.room
 
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.Query
-import androidx.room.Update
+import androidx.room.*
 import edu.aku.hassannaqvi.dss_matiari.contracts.TableContracts
 import edu.aku.hassannaqvi.dss_matiari.models.*
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.async
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import org.json.JSONArray
 import org.json.JSONException
 import java.util.*
+import java.util.logging.Handler
 import kotlin.jvm.Throws
 
 //
@@ -157,31 +159,39 @@ interface SyncFunctionsDao {
     /******************* DOWNLOAD DATA FUNCTIONS******************************************* */
 
     @Throws(JSONException ::class)
-    fun syncvillages(villagesList: JSONArray) : Int{
-        var insertCount =0
-        deleteAllVillages()
+    fun syncvillages(villagesList: JSONArray) : Int {
+        var insertCount = 0
+        deleteVillages()
+        for(i in 0 until villagesList.length()) {
+            val jsonObjectUser = villagesList.getJSONObject(i)
 
-        for(i in 0 until villagesList.length()){
-            val jsonObjectVillages = villagesList.optJSONObject(i)
-
-            val village = Villages()
-            village.Sync(jsonObjectVillages)
+            var village = Villages()
+            village.id = i.toLong()
+            village = village.Sync(jsonObjectUser)
 
             val rowId = insertVillages(village)
-            if(rowId != -1L)
+            if (rowId != -1L)
                 insertCount++
-
         }
-
         return insertCount
-
     }
 
     @Insert
     fun insertVillages(village: Villages) : Long
 
     @Query("DELETE FROM " + TableContracts.TableVillage.TABLE_NAME)
-    fun deleteAllVillages()
+    fun deleteVillages()
+
+    //@Query("DELETE FROM " + TableContracts.TableVillage.TABLE_NAME)
+    fun deleteVillagesTable() {
+        DssRoomDatabase.dbInstance?.VillagesDao()?.let { villageDao ->
+            val villagesList = villageDao.getAllVillages() ?: emptyList()
+            villagesList.forEach {
+                villageDao.deleteVillage(it)
+            }
+            villageDao.deleteVillagesTable()
+        }
+    }
 
 
 
@@ -192,7 +202,7 @@ interface SyncFunctionsDao {
         var insertCount = 0
         deleteUsersTable()
         for(i in 0 until usersList.length()) {
-            val jsonObjectUser = usersList.optJSONObject(i)
+            val jsonObjectUser = usersList.getJSONObject(i)
 
             val user = Users()
             user.sync(jsonObjectUser)
@@ -218,7 +228,7 @@ interface SyncFunctionsDao {
         deleteFollowupsScheTable()
 
         for(i in 0 until followUpsScheList.length()) {
-            val jsonObjectFollowUpsSche = followUpsScheList.optJSONObject(i)
+            val jsonObjectFollowUpsSche = followUpsScheList.getJSONObject(i)
 
             val followUpsSche = FollowUpsSche()
             followUpsSche.Sync(jsonObjectFollowUpsSche)

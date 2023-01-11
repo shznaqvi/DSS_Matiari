@@ -177,8 +177,10 @@ public class SectionCActivity extends AppCompatActivity {
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
                 if(bi.rb1004.isChecked()){
                     mwraStatus.put(followUpsScheHHList.get(selectedMember).getMuid(), false);
-                }else{
+                }else {
+                    if(!mwraStatus.isEmpty()){
                     mwraStatus.remove(followUpsScheHHList.get(selectedMember).getMuid());
+                    }
                 }
             }
         });

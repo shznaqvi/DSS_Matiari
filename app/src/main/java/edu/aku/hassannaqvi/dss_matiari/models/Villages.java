@@ -20,7 +20,7 @@ public class Villages {
     private static final String TAG = "Villages_CONTRACT";
 
     @PrimaryKey(autoGenerate = true)
-    @ColumnInfo(name = TableVillage._ID)
+    @ColumnInfo(name = TableVillage.ID)
     Long id;
 
     @ColumnInfo(name = TableVillage.COLUMN_UCNAME, defaultValue = StringUtils.EMPTY)

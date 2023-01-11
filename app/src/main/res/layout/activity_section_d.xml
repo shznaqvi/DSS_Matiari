@@ -35,7 +35,7 @@
             android:textStyle="bold"
             app:layout_scrollFlags="scroll|enterAlways"
             app:popupTheme="@style/AppTheme.PopupOverlay"
-            app:title="@string/marriedwomenregistration_mainheading"
+            app:title="@string/marriedwomenfollowup_mainheading"
             app:titleTextColor="@color/white" />
 
         <ScrollView
