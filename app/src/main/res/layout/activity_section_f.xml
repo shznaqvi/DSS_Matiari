@@ -157,7 +157,6 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginBottom="0dp"
-                            android:enabled="@{outcome.rb01a.equals(``)}"
                             android:gravity="center"
                             android:hint="YYYY-MM-DD"
                             android:text="@={outcome.rb01a}"

@@ -357,7 +357,7 @@
                                 android:paddingBottom="@dimen/_7sdp"
                                 android:text="Save"
                                 android:textColor="@color/white"
-                                android:textSize="@dimen/_9ssp"
+                                android:textSize="@dimen/_8ssp"
                                 android:textStyle="bold" />
 
                         </LinearLayout>

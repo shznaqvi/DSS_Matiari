@@ -88,7 +88,6 @@
                     android:paddingStart="@dimen/_12sdp"
                     android:paddingEnd="@dimen/_12sdp"
                     android:singleLine="true"
-                    android:text="test1234"
                     android:textColor="@color/black"
                     android:textSize="@dimen/_9ssp" />
 
@@ -126,7 +125,6 @@
                     android:paddingStart="@dimen/_12sdp"
                     android:paddingEnd="@dimen/_12sdp"
                     android:singleLine="true"
-                    android:text="test1234"
                     android:textColor="@color/black"
                     android:textSize="@dimen/_9ssp" />
 

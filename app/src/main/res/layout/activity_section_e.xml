@@ -177,12 +177,11 @@
 
                         <EditText
                             android:id="@+id/rc03dob"
-                            style="@style/textInput"
+                            style="@style/labelsHead"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginBottom="0dp"
                             android:layout_weight="1"
-                            android:datePickerMode="spinner"
                             android:gravity="center"
                             android:enabled="false"
                             android:hint="YYYY-MM-DD"
