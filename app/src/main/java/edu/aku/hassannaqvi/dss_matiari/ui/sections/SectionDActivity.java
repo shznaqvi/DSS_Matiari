@@ -88,8 +88,11 @@ public class SectionDActivity extends AppCompatActivity {
                 // Set MinLMP date to 2 months back from DOV
                 cal.add(Calendar.MONTH, -9);
                 String minLMP = sdf.format(cal.getTime());
-                cal.add(Calendar.DAY_OF_MONTH, +235); // Calender reset to DOV
+                cal.add(Calendar.MONTH, +8); // Calender reset to DOV
                 Log.d(TAG, "onCreate: " + minLMP);
+
+                // Calender set to DOV
+                cal.add(Calendar.MONTH, +1);
 
 
             // Set MaxLMP same as DOV

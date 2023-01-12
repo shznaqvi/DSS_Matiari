@@ -108,6 +108,8 @@ public class SectionBActivity extends AppCompatActivity {
             //cal.setTime(sdf.parse(new Date().toString()));
             cal.setTime(sdf.parse(mwra.getRb01a()));// all done
 
+            Calendar calDov = cal;
+
             sdf = new SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH);
             // Set MinDob date to 50 years back from DOV
             cal.add(Calendar.YEAR, -50);
@@ -126,25 +128,27 @@ public class SectionBActivity extends AppCompatActivity {
             cal.add(Calendar.MONTH, -9);
             String minLMP = sdf.format(cal.getTime());
             Log.d(TAG, "onCreate: " + minLMP);
-            cal.add(Calendar.DAY_OF_MONTH, +235); // Calender reset to DOV
+            cal.add(Calendar.MONTH, +8); // Calender reset to DOV
             // Set MaxLMP same as DOV
             String maxLMP = sdf.format(cal.getTime());
             Log.d(TAG, "onCreate: " + maxLMP);
 
+            // Set to DOV
+            cal.add(Calendar.MONTH, +1);
             // Set MinEDD same as DOV
-            String minEDD = sdf.format(cal.getTime());
-            Log.d(TAG, "onCreate: " + minEDD);
 
             // Set MaxEDD to 9 months from DOV
             cal.add(Calendar.MONTH, +9);
             String maxEDD = sdf.format(cal.getTime());
             cal.add(Calendar.MONTH, -9);
             Log.d(TAG, "onCreate: " + maxLMP);
+            String minEDD = sdf.format(cal.getTime());
+            Log.d(TAG, "onCreate: " + minEDD);
 
-            cal.add(Calendar.MONTH, +3);
-            String maxDD = sdf.format(cal.getTime());
             cal.add(Calendar.MONTH, -3);
             String DD = sdf.format(cal.getTime());
+            cal.add(Calendar.MONTH, +3);
+            String maxDD = sdf.format(cal.getTime());
 
             // DOB
             bi.rb04.setMaxDate(maxDob);
@@ -158,6 +162,7 @@ public class SectionBActivity extends AppCompatActivity {
             bi.rb09.setMaxDate(maxEDD);
             bi.rb09.setMinDate(minEDD);
 
+            bi.rb21.setMaxDate(maxDD);
             bi.rb21.setMinDate(DD);
 
 
