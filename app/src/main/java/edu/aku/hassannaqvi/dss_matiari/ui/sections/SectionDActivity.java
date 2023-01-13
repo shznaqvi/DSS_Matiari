@@ -91,13 +91,12 @@ public class SectionDActivity extends AppCompatActivity {
                 cal.add(Calendar.MONTH, +8); // Calender reset to DOV
                 Log.d(TAG, "onCreate: " + minLMP);
 
-                // Calender set to DOV
-                cal.add(Calendar.MONTH, +1);
-
-
             // Set MaxLMP same as DOV
             String maxLMP = sdf.format(cal.getTime());
             Log.d(TAG, "onCreate: " + maxLMP);
+
+            // Calender set to DOV
+            cal.add(Calendar.MONTH, +1);
 
             // Set MinEDD same as DOV
             String minEDD = sdf.format(cal.getTime());
