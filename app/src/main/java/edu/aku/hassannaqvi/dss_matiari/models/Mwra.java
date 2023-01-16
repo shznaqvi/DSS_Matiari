@@ -835,7 +835,7 @@ public class Mwra extends BaseObservable implements Observable {
         //this.iStatus = mwra.iStatus;
         this.synced = mwra.synced;
         this.syncDate = mwra.syncDate;
-        //this.preMaritalStaus = MainApp.fpMwra.getRb06();
+        this.preMaritalStaus = MainApp.fpMwra.getRb06();
 
         sBHydrate(mwra.sB);
         sCHydrate(mwra.sC);
@@ -891,7 +891,7 @@ public class Mwra extends BaseObservable implements Observable {
             this.rb04 = json.getString("rb04");
             this.rb05 = json.getString("rb05");
             this.prePreg = json.getString("prePreg");
-            this.preMaritalStaus = fpMwra.getRb06();
+            //this.preMaritalStaus = fpMwra.getRb06();
             this.rb06 = json.getString("rb06");
             this.rb03a = json.getString("rb03a");
             this.rb03b = json.getString("rb03b");
