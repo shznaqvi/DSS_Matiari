@@ -238,6 +238,7 @@ public class SectionCActivity extends AppCompatActivity {
 
 
 
+
     }
 
     private void setDateRanges() {
@@ -345,7 +346,7 @@ public class SectionCActivity extends AppCompatActivity {
                                 forwardIntent.setFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT);
                                 setResult(RESULT_OK, forwardIntent);
                                 startActivity(forwardIntent);
-                            }else if (bi.rb0601.isChecked() || bi.rb1802.isChecked()) {        // Marital status changed
+                            }else if (bi.rb0601.isChecked() || bi.rb1802.isChecked() && !mwra.getPrePreg().equals("2")) {        // Marital status changed
                                 Intent forwardIntent = new Intent(this, SectionDActivity.class).putExtra("complete", true);
                                 forwardIntent.setFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT);
                                 setResult(RESULT_OK, forwardIntent);
@@ -381,7 +382,7 @@ public class SectionCActivity extends AppCompatActivity {
                             }
                         } else {      // Not Pregnant
                             // Marital status changed
-                            if (bi.rb0601.isChecked() || bi.rb1802.isChecked()) {
+                            if (bi.rb0601.isChecked() || bi.rb1802.isChecked() && !mwra.getPrePreg().equals("2")) {
                                 Intent forwardIntent = new Intent(this, SectionDActivity.class).putExtra("complete", true);
                                 forwardIntent.setFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT);
                                 setResult(RESULT_OK, forwardIntent);
@@ -423,7 +424,7 @@ public class SectionCActivity extends AppCompatActivity {
                             }
                         } else {      // Not Pregnant
                             // Marital status changed
-                            if (bi.rb0601.isChecked() || bi.rb1802.isChecked()) {
+                            if (bi.rb0601.isChecked() || bi.rb1802.isChecked() && !mwra.getPrePreg().equals("2")) {
                                 Intent forwardIntent = new Intent(this, SectionDActivity.class).putExtra("complete", true);
                                 forwardIntent.setFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT);
                                 setResult(RESULT_OK, forwardIntent);
