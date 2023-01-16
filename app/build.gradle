@@ -169,8 +169,9 @@ dependencies {
     // Flipper
     debugImplementation 'com.facebook.flipper:flipper:0.173.0'
     debugImplementation 'com.facebook.soloader:soloader:0.10.4'
-
     releaseImplementation 'com.facebook.flipper:flipper-noop:0.173.0'
+    releaseImplementation "com.facebook.flipper:flipper-noop:0.173.0"
+    releaseImplementation "com.github.theGlenn:flipper-android-no-op:0.8.0"
 
     // For Responsiveness
     implementation 'com.intuit.sdp:sdp-android:1.0.6'
