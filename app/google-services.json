@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "405872718638",
+    "project_id": "dss-matiari",
+    "storage_bucket": "dss-matiari.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:405872718638:android:e2c9180f8816947e55c0bf",
+        "android_client_info": {
+          "package_name": "edu.aku.hassannaqvi.dss_matiari"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "405872718638-ukirh83khuofh4uap6ca948o8ejchrij.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDd-LpxoqkaZVxWdxCa4jecwOl0CJzRx3k"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "405872718638-ukirh83khuofh4uap6ca948o8ejchrij.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

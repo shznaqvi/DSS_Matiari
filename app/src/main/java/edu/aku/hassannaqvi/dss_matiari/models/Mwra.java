@@ -2,12 +2,8 @@ package edu.aku.hassannaqvi.dss_matiari.models;
 
 import static java.util.concurrent.TimeUnit.MILLISECONDS;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.PROJECT_NAME;
-import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.fpMwra;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.mwra;
-import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.permissionCheck;
-import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.position;
 
-import android.database.Cursor;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
@@ -821,7 +817,7 @@ public class Mwra extends BaseObservable implements Observable {
         this.uid = mwra.uid;
         this.uuid = mwra.uuid;
         this.userName = mwra.userName;
-        this.sysDate = mwra.sysDate;;
+        this.sysDate = mwra.sysDate;
         this.hdssId = mwra.hdssId;
         this.ucCode = mwra.ucCode;
         this.villageCode = mwra.villageCode;
@@ -835,7 +831,7 @@ public class Mwra extends BaseObservable implements Observable {
         //this.iStatus = mwra.iStatus;
         this.synced = mwra.synced;
         this.syncDate = mwra.syncDate;
-        this.preMaritalStaus = MainApp.fpMwra.getRb06();
+        //this.preMaritalStaus = MainApp.fpMwra.getRb06();
 
         sBHydrate(mwra.sB);
         sCHydrate(mwra.sC);
