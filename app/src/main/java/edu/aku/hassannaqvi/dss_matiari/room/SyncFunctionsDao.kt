@@ -1,17 +1,13 @@
 package edu.aku.hassannaqvi.dss_matiari.room
 
-import androidx.room.*
+import androidx.room.Dao
+import androidx.room.Insert
+import androidx.room.Query
 import edu.aku.hassannaqvi.dss_matiari.contracts.TableContracts
 import edu.aku.hassannaqvi.dss_matiari.models.*
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.async
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
 import org.json.JSONArray
 import org.json.JSONException
 import java.util.*
-import java.util.logging.Handler
-import kotlin.jvm.Throws
 
 //
 // Created by gul.sanober on 12/1/2022.
@@ -69,9 +65,11 @@ interface SyncFunctionsDao {
     // MWRA
 
 
-    @Query("SELECT * FROM " + TableContracts.MWRATable.TABLE_NAME
-            + " WHERE " + TableContracts.MWRATable.COLUMN_SYNCED
-            + " is \'\' ORDER BY " + TableContracts.MWRATable.COLUMN_ID + " ASC")
+    @Query(
+        "SELECT * FROM " + TableContracts.MWRATable.TABLE_NAME
+                + " WHERE " + TableContracts.MWRATable.COLUMN_SYNCED
+                + " IS \'\' OR " + TableContracts.MWRATable.COLUMN_SYNCED + " IS NULL ORDER BY " + TableContracts.MWRATable.COLUMN_ID + " ASC"
+    )
     fun getUnsyncedMWRAS_internal() : List<Mwra>
 
     @kotlin.jvm.Throws(JSONException :: class)
@@ -185,7 +183,7 @@ interface SyncFunctionsDao {
     //@Query("DELETE FROM " + TableContracts.TableVillage.TABLE_NAME)
     fun deleteVillagesTable() {
         DssRoomDatabase.dbInstance?.VillagesDao()?.let { villageDao ->
-            val villagesList = villageDao.getAllVillages() ?: emptyList()
+            val villagesList = villageDao.getAllVillages()
             villagesList.forEach {
                 villageDao.deleteVillage(it)
             }
