@@ -128,6 +128,7 @@ interface HouseholdsDao {
            val id = addHousehold(tempHousehold)
             tempHousehold.id = id
             tempHousehold.uid = MainApp.deviceid + tempHousehold.id
+            tempHousehold.sAtoString()
             updateHousehold(tempHousehold)
             return tempHousehold
         }else{

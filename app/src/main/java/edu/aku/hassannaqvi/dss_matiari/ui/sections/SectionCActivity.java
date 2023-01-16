@@ -279,7 +279,7 @@ public class SectionCActivity extends AppCompatActivity {
 
             if(bi.rb1001.isChecked()) {
 
-                switch (mwra.getPreMaritalStaus()) {
+                switch (fpMwra.getRb06()) {
                     // Married in Previous Round
                     case "1":
                         // Pregnant
@@ -494,6 +494,8 @@ public class SectionCActivity extends AppCompatActivity {
             mwra.setUid(mwra.getDeviceId() + mwra.getId());
             mwra.setSC(mwra.sCtoString());
             db.mwraDao().updateMwra(mwra);
+            households.setSA(households.sAtoString());
+            db.householdsDao().updateHousehold(households);
             //db.updatesFollowUpsColumn(TableContracts.FollowupsTable.COLUMN_UID, followups.getUid());
             return true;
         } else {
@@ -515,6 +517,8 @@ public class SectionCActivity extends AppCompatActivity {
             mwra.setDeviceId(mwra.getDeviceId() + "_" + mwra.getDeviceId().substring(mwra.getDeviceId().length() - 1));
 
             updatedFollowups.setDeviceId(mwra.getDeviceId());
+            households.setSA(households.sAtoString());
+            db.householdsDao().updateHousehold(households);
             //updatedFollowups.setIStatus(mwra.getIStatus());
             //db.updatesFollowUpsColumn(TableContracts.FollowupsTable.COLUMN_DEVICEID, followups.getDeviceId());
             //db.updatesFollowUpsColumn(TableContracts.FollowupsTable.COLUMN_ISTATUS, followups.getRc04());

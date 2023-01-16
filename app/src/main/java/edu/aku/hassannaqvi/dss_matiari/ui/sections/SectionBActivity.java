@@ -70,6 +70,7 @@ public class SectionBActivity extends AppCompatActivity {
             MainApp.mwra.setSysDate(households.getSysDate());
             MainApp.mwra.setDeviceId(MainApp.deviceid);
             MainApp.mwra.setHdssId(households.getHdssId());
+            mwra.init();
             mwra.setRegRound("1");
             MainApp.mwra.setAppver(MainApp.versionName + "." + MainApp.versionCode);
 
@@ -259,6 +260,7 @@ public class SectionBActivity extends AppCompatActivity {
        /* if (MainApp.households.getRa18().equals("999") && fpHouseholds.getUid().equals("")) {
             insertFpHousehold();
         }*/
+
         //MainApp.mwra.populateMeta();
         long rowId = 0;
         try {
