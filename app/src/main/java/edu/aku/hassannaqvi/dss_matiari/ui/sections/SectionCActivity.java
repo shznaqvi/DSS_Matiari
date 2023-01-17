@@ -90,14 +90,14 @@ public class SectionCActivity extends AppCompatActivity {
             mwra.setPrePreg(MainApp.fpMwra.getRb07());
             //mwra.setRb07(MainApp.fpMwra.getRb07());
 
-            long daysdiff  = mwra.CalculateAge(MainApp.fpMwra.getRa01());
-            long years = daysdiff/365;
+            long daysdiff = mwra.CalculateAge(MainApp.fpMwra.getRa01());
+            long years = daysdiff / 365;
             long actualAge = Integer.parseInt(MainApp.fpMwra.getRb05()) + years;
             mwra.setRb05(String.valueOf(actualAge));     // Age in Years
 
         }
         // For edit mode
-        if(!mwra.getUid().equals("")) {
+        if (!mwra.getUid().equals("")) {
             try {
                 mwra.sCHydrate(mwra.getSC());
             } catch (JSONException e) {
@@ -105,17 +105,16 @@ public class SectionCActivity extends AppCompatActivity {
             }
         }
 
-        long daysdiff  = MainApp.mwra.CalculateAge(fpMwra.getRa01());
-        long years = daysdiff/365;
+        long daysdiff = MainApp.mwra.CalculateAge(fpMwra.getRa01());
+        long years = daysdiff / 365;
         long actualAge = 0;
 
-        if(!fpMwra.getRb05().equals("")) {
+        if (!fpMwra.getRb05().equals("")) {
             actualAge = Long.parseLong(fpMwra.getRb05()) + years;
             bi.rb05.setText(String.valueOf(actualAge));
         }
 
-        if(actualAge > 49)
-        {
+        if (actualAge > 49) {
             bi.rb1009.setEnabled(true);
             bi.rb1001.setEnabled(false);
             bi.rb1002.setEnabled(false);
@@ -125,7 +124,7 @@ public class SectionCActivity extends AppCompatActivity {
             bi.rb1006.setEnabled(false);
             bi.rb1007.setEnabled(false);
             //bi.rb1008.setEnabled(false);
-        }else{
+        } else {
             bi.rb1009.setEnabled(false);
             bi.rb1001.setEnabled(true);
             bi.rb1002.setEnabled(true);
@@ -137,12 +136,11 @@ public class SectionCActivity extends AppCompatActivity {
             //bi.rb1008.setEnabled(true);
         }
 
-        if(!MainApp.households.getVisitNo().equals("") && Integer.parseInt(households.getVisitNo()) >= 2)
-        {
+        if (!MainApp.households.getVisitNo().equals("") && Integer.parseInt(households.getVisitNo()) >= 2) {
             bi.rb1008.setEnabled(true);
             bi.rb1004.setEnabled(false);
             bi.rb1004.setChecked(false);
-        }else {
+        } else {
             bi.rb1008.setEnabled(false);
             bi.rb1004.setEnabled(true);
         }
@@ -175,13 +173,17 @@ public class SectionCActivity extends AppCompatActivity {
         bi.rb10.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
-                if(bi.rb1004.isChecked()){
+                if (bi.rb1004.isChecked()) {
                     mwraStatus.put(followUpsScheHHList.get(selectedMember).getMuid(), false);
                     mwra.setRb07(fpMwra.getRb07());
-                }else {
+                    mwra.setRb06(fpMwra.getRb06());
+                    mwra.setRb04(fpMwra.getRb04());
+                } else {
                     mwra.setRb07("");
-                    if(!mwraStatus.isEmpty()){
-                    mwraStatus.remove(followUpsScheHHList.get(selectedMember).getMuid());
+                    mwra.setRb06(mwra.getRb06());
+                    mwra.setRb04(fpMwra.getRb04());
+                    if (!mwraStatus.isEmpty()) {
+                        mwraStatus.remove(followUpsScheHHList.get(selectedMember).getMuid());
 
                     }
                 }
@@ -192,13 +194,11 @@ public class SectionCActivity extends AppCompatActivity {
         bi.rb19.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
-                if(bi.rb1901.isChecked())
-                {
+                if (bi.rb1901.isChecked()) {
                     MainApp.totalChildCount = 1;
-                }else if(bi.rb1902.isChecked())
-                {
+                } else if (bi.rb1902.isChecked()) {
                     MainApp.totalChildCount = 2;
-                }else if(bi.rb1903.isChecked()){
+                } else if (bi.rb1903.isChecked()) {
                     MainApp.totalChildCount = 3;
                 }
             }
@@ -207,13 +207,11 @@ public class SectionCActivity extends AppCompatActivity {
         bi.rb17.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
-                if(bi.rb1701.isChecked() || bi.rb1605.isChecked())
-                {
+                if (bi.rb1701.isChecked() || bi.rb1605.isChecked()) {
                     MainApp.totalChildCount = 1;
-                }else if(bi.rb1702.isChecked() && !bi.rb1605.isChecked()){
+                } else if (bi.rb1702.isChecked() && !bi.rb1605.isChecked()) {
                     MainApp.totalChildCount = 2;
-                }else if (bi.rb1703.isChecked())
-                {
+                } else if (bi.rb1703.isChecked()) {
                     MainApp.totalChildCount = 3;
                 }
 
@@ -224,22 +222,19 @@ public class SectionCActivity extends AppCompatActivity {
         bi.rb1605.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if(isChecked)
-                {
+                if (isChecked) {
                     bi.rb1701.setEnabled(false);
                     bi.rb1701.setChecked(false);
                     bi.rb1703.setEnabled(false);
                     bi.rb1703.setChecked(false);
                     bi.rb1702.setEnabled(true);
-                }else{
+                } else {
                     bi.rb1701.setEnabled(true);
                     bi.rb1703.setEnabled(true);
                     bi.rb1702.setEnabled(true);
                 }
             }
         });
-
-
 
 
     }
@@ -256,7 +251,7 @@ public class SectionCActivity extends AppCompatActivity {
 
             cal.setTime(sdf.parse(mwra.getRb01a()));// all done
 
-            cal2.setTime(sdf.parse(fpMwra.getRa01().substring(9,19)));
+            cal2.setTime(sdf.parse(fpMwra.getRa01().substring(9, 19)));
 
             sdf = new SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH);
 
@@ -280,12 +275,11 @@ public class SectionCActivity extends AppCompatActivity {
     }
 
 
-
     public void btnContinue(View view) throws JSONException {
         if (!formValidation()) return;
         if (mwra.getUid().equals("") ? insertNewRecord() : updateDB()) {
 
-            if(bi.rb1001.isChecked()) {
+            if (bi.rb1001.isChecked()) {
 
                 switch (fpMwra.getRb06()) {
                     // Married in Previous Round
@@ -312,13 +306,13 @@ public class SectionCActivity extends AppCompatActivity {
                                     //finish();
                                 }
                             }
-                        } else if(mwra.getPrePreg().equals("2") && bi.rb1801.isChecked()) {   // Not Pregnant
+                        } else if (mwra.getPrePreg().equals("2") && bi.rb1801.isChecked()) {   // Not Pregnant
                             Intent forwardIntent = new Intent(this, SectionEActivity.class).putExtra("complete", true);
                             forwardIntent.setFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT);
                             setResult(RESULT_OK, forwardIntent);
                             startActivity(forwardIntent);
 
-                        }else if (mwra.getPrePreg().equals("2") && bi.rb1802.isChecked()){
+                        } else if (mwra.getPrePreg().equals("2") && bi.rb1802.isChecked()) {
                             Intent forwardIntent = new Intent(this, SectionDActivity.class).putExtra("complete", true);
                             forwardIntent.setFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT);
                             setResult(RESULT_OK, forwardIntent);
@@ -349,12 +343,12 @@ public class SectionCActivity extends AppCompatActivity {
                                 }
                             }
                         } else {      // Not Pregnant
-                            if(bi.rb1801.isChecked()){
+                            if (bi.rb1801.isChecked()) {
                                 Intent forwardIntent = new Intent(this, SectionEActivity.class).putExtra("complete", true);
                                 forwardIntent.setFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT);
                                 setResult(RESULT_OK, forwardIntent);
                                 startActivity(forwardIntent);
-                            }else if (bi.rb0601.isChecked() || bi.rb1802.isChecked() && !mwra.getPrePreg().equals("2")) {        // Marital status changed
+                            } else if (bi.rb0601.isChecked() || bi.rb1802.isChecked() && !mwra.getPrePreg().equals("2")) {        // Marital status changed
                                 Intent forwardIntent = new Intent(this, SectionDActivity.class).putExtra("complete", true);
                                 forwardIntent.setFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT);
                                 setResult(RESULT_OK, forwardIntent);
@@ -396,13 +390,12 @@ public class SectionCActivity extends AppCompatActivity {
                                 setResult(RESULT_OK, forwardIntent);
                                 startActivity(forwardIntent);
                                 //finish();
-                            } else if(bi.rb1801.isChecked()) {
+                            } else if (bi.rb1801.isChecked()) {
                                 Intent forwardIntent = new Intent(this, SectionEActivity.class).putExtra("complete", true);
                                 forwardIntent.setFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT);
                                 setResult(RESULT_OK, forwardIntent);
                                 startActivity(forwardIntent);
-                            }
-                            else {
+                            } else {
                                 setResult(RESULT_OK);
                                 //finish();
                             }
@@ -438,14 +431,12 @@ public class SectionCActivity extends AppCompatActivity {
                                 setResult(RESULT_OK, forwardIntent);
                                 startActivity(forwardIntent);
                                 //finish();
-                            } else if(bi.rb1801.isChecked())
-                            {
+                            } else if (bi.rb1801.isChecked()) {
                                 Intent forwardIntent = new Intent(this, SectionEActivity.class).putExtra("complete", true);
                                 forwardIntent.setFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT);
                                 setResult(RESULT_OK, forwardIntent);
                                 startActivity(forwardIntent);
-                            }
-                            else {
+                            } else {
                                 setResult(RESULT_OK);
                                 //finish();
                             }
@@ -471,7 +462,7 @@ public class SectionCActivity extends AppCompatActivity {
                         break;
                 }
                 finish();
-            }else{
+            } else {
                 setResult(RESULT_OK);
                 finish();
             }
@@ -484,7 +475,7 @@ public class SectionCActivity extends AppCompatActivity {
     private boolean insertNewRecord() throws JSONException {
         MainApp.outcome = new Outcome();
 
-        mwra.populateMetaFollowups();
+        //mwra.populateMetaFollowups();
 
 
         long rowId = 0;
@@ -500,6 +491,7 @@ public class SectionCActivity extends AppCompatActivity {
         mwra.setId(rowId);
         if (rowId > 0) {
             mwra.setUid(mwra.getDeviceId() + mwra.getId());
+
             mwra.setSC(mwra.sCtoString());
             db.mwraDao().updateMwra(mwra);
             households.setSA(households.sAtoString());
