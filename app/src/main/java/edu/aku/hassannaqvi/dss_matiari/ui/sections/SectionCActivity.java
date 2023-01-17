@@ -177,9 +177,12 @@ public class SectionCActivity extends AppCompatActivity {
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
                 if(bi.rb1004.isChecked()){
                     mwraStatus.put(followUpsScheHHList.get(selectedMember).getMuid(), false);
+                    mwra.setRb07(fpMwra.getRb07());
                 }else {
+                    mwra.setRb07("");
                     if(!mwraStatus.isEmpty()){
                     mwraStatus.remove(followUpsScheHHList.get(selectedMember).getMuid());
+
                     }
                 }
             }
@@ -247,8 +250,13 @@ public class SectionCActivity extends AppCompatActivity {
             // Set time from RC01a
             Calendar cal = Calendar.getInstance();
 
+            Calendar cal2 = Calendar.getInstance();
+
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
+
             cal.setTime(sdf.parse(mwra.getRb01a()));// all done
+
+            cal2.setTime(sdf.parse(fpMwra.getRa01().substring(9,19)));
 
             sdf = new SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH);
 
@@ -260,7 +268,7 @@ public class SectionCActivity extends AppCompatActivity {
             cal.add(Calendar.MONTH, +9);
             String maxDD = sdf.format(cal.getTime());
             cal.add(Calendar.MONTH, -3);
-            String DD = sdf.format(cal.getTime());
+            String DD = sdf.format(cal2.getTime());
 
 
             bi.rb15.setMinDate(minEDD);
@@ -476,7 +484,7 @@ public class SectionCActivity extends AppCompatActivity {
     private boolean insertNewRecord() throws JSONException {
         MainApp.outcome = new Outcome();
 
-       // mwra.populateMetaFollowups();
+        mwra.populateMetaFollowups();
 
 
         long rowId = 0;

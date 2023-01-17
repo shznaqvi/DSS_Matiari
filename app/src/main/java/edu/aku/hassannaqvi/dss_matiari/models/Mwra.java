@@ -2,6 +2,7 @@ package edu.aku.hassannaqvi.dss_matiari.models;
 
 import static java.util.concurrent.TimeUnit.MILLISECONDS;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.PROJECT_NAME;
+import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.households;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.mwra;
 
 import android.util.Log;
@@ -216,9 +217,16 @@ public class Mwra extends BaseObservable implements Observable {
         setAppver(MainApp.appInfo.getAppVersion());
         setProjectName(PROJECT_NAME);
         setRound(MainApp.ROUND);
-        setVillageCode(MainApp.selectedVillage);
-        setUcCode(MainApp.selectedUC);
-        setRegRound(MainApp.households.getRegRound());
+        setRegRound("1");
+       setUcCode(households.getUcCode());
+       setVillageCode(households.getVillageCode());
+       setStructureNo(households.getStructureNo());
+       setHhNo(households.getHhNo());
+       setDeviceId(MainApp.deviceid);
+       setHdssId(households.getHdssId());
+       setAppver(MainApp.versionName + "." + MainApp.versionCode);
+
+
         //setFRound("");
         //setSNo(MainApp.followUpsScheHHList.get(position).getRb01());
     }
@@ -889,6 +897,7 @@ public class Mwra extends BaseObservable implements Observable {
             //this.preMaritalStaus = json.has("preMaritalStatus") ? json.getString("preMaritalStatus") : "";
             //this.preMaritalStaus = fpMwra.getRb06();
             this.rb06 = json.getString("rb06");
+            this.rb07 = json.getString("prePreg");
             this.rb03a = json.getString("rb03a");
             this.rb03b = json.getString("rb03b");
             this.rb10 = json.getString("rb10");
@@ -953,6 +962,7 @@ public class Mwra extends BaseObservable implements Observable {
                 .put("rb04", rb04)
                 .put("rb05", rb05)
                 .put("rb06", rb06)
+                .put("rb07", prePreg)
                 .put("prePreg", prePreg)
                 //.put("preMaritalStatus", preMaritalStaus)
                 .put("rb10",rb10)
