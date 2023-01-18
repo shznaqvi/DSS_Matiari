@@ -456,7 +456,7 @@
                             style="@style/labelsHead"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:enabled="@{followups.rb04.equals(`98`)}"
+                            android:enabled="false"
                             android:gravity="center"
                             android:hint="##"
                             android:inputType="number"

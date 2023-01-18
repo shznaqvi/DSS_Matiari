@@ -561,12 +561,15 @@ public class Mwra extends BaseObservable implements Observable {
 
     public void setRb04(String rb04) {
         this.rb04 = rb04;
-        if (!this.rb04.equals("98")) {
-            setRb05(this.rb05);
-            CaluculateAge();
-        } else {
-            setRb05("");
-
+        if(regRound.equals("1"))
+        {
+            if(!this.rb04.equals("98"))
+            {
+                setRb05(this.rb05);
+                CaluculateAge();
+            }else{
+                setRb05("");
+            }
         }
         notifyChange(BR.rb04);
     }
