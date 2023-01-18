@@ -255,11 +255,13 @@ public class FPHouseholdAdapter extends RecyclerView.Adapter<FPHouseholdAdapter.
 
                                     MainApp.households.setUcCode(selectedUC);
                                     MainApp.households.setVillageCode(selectedVillage);
-                                    MainApp.households.setRa09(followUpsSche.getHhNo());
+                                    //MainApp.households.setRa09(followUpsSche.getHhNo());
                                 }
+                                MainApp.households.setRa09(followUpsSche.getHhNo());
                                 MainApp.selectedHhNO = followUpsSche.getHhNo();
                                 MainApp.position = viewHolder.getAdapterPosition();
                                 if (!MainApp.households.getIStatus().equals("1") && Integer.parseInt(MainApp.households.getVisitNo()) < 3) {
+
 
                                     Intent intent = new Intent(mContext, SectionAActivity.class);
                                     ((FPHouseholdActivity) mContext).MemberInfoLauncher.launch(intent);

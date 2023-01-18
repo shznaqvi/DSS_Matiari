@@ -52,6 +52,11 @@ public class SectionAActivity extends AppCompatActivity {
         String date = toBlackVisionDate("2023-01-01");
         bi.ra01.setMinDate(date);
 
+        if (!households.getUid().equals(""))
+        {
+            households.populateMeta();
+        }
+
         bi.setHousehold(households);
 
         setTitle(R.string.demographicinformation_mainheading);
@@ -94,6 +99,8 @@ public class SectionAActivity extends AppCompatActivity {
             }
         });
 
+
+
     }
 
     public void btnContinue(View view) {
@@ -115,7 +122,6 @@ public class SectionAActivity extends AppCompatActivity {
         }
         if (!formValidation()) return;
         if (!insertNewRecord()) return;
-
 
         if (updateDB()) {
 
