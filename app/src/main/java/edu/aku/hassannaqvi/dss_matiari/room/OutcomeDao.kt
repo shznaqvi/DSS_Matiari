@@ -23,17 +23,29 @@ interface OutcomeDao {
     @Update(onConflict = OnConflictStrategy.REPLACE)
     fun updateOutcome(outcome: Outcome) : Int
 
+    @Query("SELECT "
+            + "MAX(" + TableContracts.OutcomeTable.COLUMN_SNO + ") AS " + TableContracts.OutcomeTable.COLUMN_SNO +
+            " FROM " + TableContracts.OutcomeTable.TABLE_NAME +
+            " WHERE " + TableContracts.OutcomeTable.COLUMN_UC_CODE + " LIKE :ucCode AND "
+            + TableContracts.OutcomeTable.COLUMN_VILLAGE_CODE + " LIKE :vCode AND " +
+            TableContracts.OutcomeTable.COLUMN_HOUSEHOLD_NO + " LIKE :hhNo AND " +
+            TableContracts.OutcomeTable.COLUMN_MSNO + " LIKE :msno" +
+            " GROUP BY " + TableContracts.OutcomeTable.COLUMN_HOUSEHOLD_NO )
+    fun getMaxChildredBYMother(ucCode : String, vCode : String, hhNo : String, msno: String) : Int
+
+
 
     @Query("SELECT * FROM " + TableContracts.OutcomeTable.TABLE_NAME + " WHERE "
             + TableContracts.OutcomeTable.COLUMN_MUID + " LIKE :muid AND "
+            + TableContracts.OutcomeTable.COLUMN_MSNO + " LIKE :msno AND "
             + TableContracts.OutcomeTable.COLUMN_SNO + " LIKE :sno ORDER BY "
             + TableContracts.OutcomeTable.COLUMN_ID + " ASC" )
-    fun getOutcomeByID_internal(muid : String, sno : String) : Outcome?
+    fun getOutcomeByID_internal(muid : String, msno : String, sno : String) : Outcome?
 
 
     @Throws(JSONException ::class)
-    fun getOutcomeBYID(muid: String, sno: String) : Outcome?{
-        val outcome = getOutcomeByID_internal(muid, sno)
+    fun getOutcomeBYID(muid: String, msno: String, sno: String) : Outcome?{
+        val outcome = getOutcomeByID_internal(muid, msno, sno)
         if(outcome == null)
         {
             val tempOutcome = Outcome()

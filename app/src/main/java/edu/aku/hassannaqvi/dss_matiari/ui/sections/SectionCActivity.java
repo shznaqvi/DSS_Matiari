@@ -491,7 +491,6 @@ public class SectionCActivity extends AppCompatActivity {
         mwra.setId(rowId);
         if (rowId > 0) {
             mwra.setUid(mwra.getDeviceId() + mwra.getId());
-
             mwra.setSC(mwra.sCtoString());
             db.mwraDao().updateMwra(mwra);
             households.setSA(households.sAtoString());

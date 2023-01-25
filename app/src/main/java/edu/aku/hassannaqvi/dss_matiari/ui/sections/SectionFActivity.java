@@ -3,6 +3,7 @@ package edu.aku.hassannaqvi.dss_matiari.ui.sections;
 
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.dateOfVisit;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.fpMwra;
+import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.households;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.outcome;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.sharedPref;
 
@@ -57,7 +58,7 @@ public class SectionFActivity extends AppCompatActivity {
             e.printStackTrace();
             Toast.makeText(this, "JSONException(Followups): " + e.getMessage(), Toast.LENGTH_SHORT).show();
         }
-        if(outcome.getUid().equals(""))
+        if(!outcome.getUid().equals(""))
         {
             try {
                 outcome.sEHydrate(outcome.getSE());
@@ -193,6 +194,8 @@ public class SectionFActivity extends AppCompatActivity {
             outcome.setUid(outcome.getDeviceId() + outcome.getId());
             outcome.setSE(outcome.sEtoString());
             db.OutcomeDao().updateOutcome(outcome);
+            households.setSA(households.sAtoString());
+            db.householdsDao().updateHousehold(households);
             //db.updateOutcomeFollouwps(TableContracts.OutcomeFollowupTable.COLUMN_UID, outcomeFollowups.getUid());
             return true;
         } else {
@@ -209,6 +212,8 @@ public class SectionFActivity extends AppCompatActivity {
             // Also reset Synced flag and alter UID
             Outcome updatedOutcome = outcome;
             updatedOutcome.setSE(outcome.sEtoString());
+            households.setSA(households.sAtoString());
+            db.householdsDao().updateHousehold(households);
             updcount = db.OutcomeDao().updateOutcome(outcome);
 
             outcome.setDeviceId(outcome.getDeviceId() + "_" + outcome.getDeviceId().substring(outcome.getDeviceId().length() - 1));

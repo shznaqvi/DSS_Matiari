@@ -58,6 +58,20 @@ interface FollowUpsScheDao {
     )
     fun getMaxMWRANoBYHHFromFolloupsSche(uc : String, vCode : String, hhNo: String) : Int
 
+
+    @Query(
+        "SELECT " +
+                "MAX(" + TableContracts.TableFollowUpsSche.COLUMN_RB01 + ") AS "
+                + TableContracts.TableFollowUpsSche.COLUMN_RB01 +
+                " FROM " + TableContracts.TableFollowUpsSche.TABLE_NAME +
+                " WHERE " + TableContracts.TableFollowUpsSche.COLUMN_UC_CODE + " LIKE :uc AND "
+                + TableContracts.TableFollowUpsSche.COLUMN_VILLAGE_CODE + " LIKE :vCode AND ( " +
+                TableContracts.TableFollowUpsSche.COLUMN_HOUSEHOLD_NO + " LIKE :hhNo " + ")  AND " +
+                TableContracts.TableFollowUpsSche.COLUMN_MSNO + " LIKE :msno " +
+                " GROUP BY " + TableContracts.TableFollowUpsSche.COLUMN_HOUSEHOLD_NO
+    )
+    fun getMaxChildrenNoBYMotherFromFolloupsSche(uc : String, vCode : String, hhNo: String, msno :String) : Int
+
     @Query("SELECT " + TableContracts.TableFollowUpsSche.COLUMN_VILLAGE_CODE + ", " +
             TableContracts.TableFollowUpsSche.COLUMN_ID + ", " +
             TableContracts.TableFollowUpsSche.COLUMN_UC_CODE + ", "

@@ -1,6 +1,7 @@
 package edu.aku.hassannaqvi.dss_matiari.ui.sections;
 
 
+import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.fpMwra;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.mwra;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.outcome;
 
@@ -54,16 +55,20 @@ public class SectionEActivity extends AppCompatActivity {
 
         setDateRanges();
 
+       int maxchild = db.OutcomeDao().getMaxChildredBYMother(mwra.getUcCode(), mwra.getUcCode(), mwra.getHhNo(), mwra.getSNo());
+       int maxchildFp = db.FollowUpsScheDao().getMaxChildrenNoBYMotherFromFolloupsSche(fpMwra.getUcCode(), fpMwra.getVillageCode(), fpMwra.getHhNo(), fpMwra.getMsno());
+       MainApp.childCount = Math.max(maxchild, maxchildFp);
+
         try {
             //outcome = db.getOutComeBYID(String.valueOf(++MainApp.childCount));
             String[] muid = mwra.getUid().split("_");
-            outcome = db.OutcomeDao().getOutcomeBYID(muid[0], String.valueOf(++MainApp.childCount));
+            outcome = db.OutcomeDao().getOutcomeBYID(muid[0], mwra.getSNo(), String.valueOf(++MainApp.childCount));
         } catch (JSONException e) {
             e.printStackTrace();
             Toast.makeText(this, "JSONException(Outcome): " + e.getMessage(), Toast.LENGTH_SHORT).show();
         }
 
-        if(outcome.getUid() != null || outcome.getUid().equals(""))
+        if(outcome.getUid() != null || !outcome.getUid().equals(""))
         {
             try {
                 outcome.sEHydrate(outcome.getSE());
