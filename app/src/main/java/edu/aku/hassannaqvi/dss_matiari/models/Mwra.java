@@ -761,6 +761,7 @@ public class Mwra extends BaseObservable implements Observable {
 
     public void setRb18(String rb18) {
         this.rb18 = rb18;
+        setRb19(rb18.equals("1") ? this.rb19 : "");
         setRb20(rb18.equals("1") ? this.rb20 : "");
         setRb21(rb18.equals("1") ? this.rb21 : "");
         notifyChange(BR.rb18);

@@ -190,7 +190,6 @@ public class MainApp extends Application {
             final FlipperClient client = AndroidFlipperClient.getInstance(this);
             client.addPlugin(new InspectorFlipperPlugin(this, DescriptorMapping.withDefaults()));
             client.addPlugin(new DatabasesFlipperPlugin(this));
-
             client.start();
         }
 

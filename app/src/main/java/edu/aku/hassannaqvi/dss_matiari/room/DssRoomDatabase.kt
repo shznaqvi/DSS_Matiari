@@ -59,7 +59,7 @@ abstract class DssRoomDatabase : RoomDatabase() {
                 val factory = SupportFactory(passphrase)
 
                 dbInstance = Room.databaseBuilder(context, DssRoomDatabase::class.java, DATABASE_NAME)
-//                    .openHelperFactory(factory)
+                    //.openHelperFactory(factory)
                     .addMigrations(MIGRATION_4_5)
                     .fallbackToDestructiveMigration()
                     .allowMainThreadQueries()

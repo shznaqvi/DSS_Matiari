@@ -5,7 +5,6 @@ import android.content.pm.ApplicationInfo
 import android.content.pm.PackageManager
 import android.os.Bundle
 import android.provider.Settings
-import edu.aku.hassannaqvi.dss_matiari.database.DatabaseHelper
 import edu.aku.hassannaqvi.dss_matiari.room.DssRoomDatabase
 import net.sqlcipher.database.SQLiteDatabase
 import org.apache.commons.lang3.StringUtils
@@ -92,11 +91,12 @@ class AppInfo {
             val bundle: Bundle = ai.metaData;
             val trats: Int = bundle.getInt("YEK_TRATS");
             //IBAHC = bundle.getString("YEK_REVRES").substring(TRATS, TRATS + 16);
-            val ibahc: String? = bundle.getString("YEK_REVRES");
+            MainApp.IBAHC = bundle.getString("YEK_REVRES");
+            MainApp.IBAHC = bundle.getString("YEK_REVRES")!!.substring(trats, trats + 16)
 
             // Room DB
-            if (ibahc != null) {
-                DssRoomDatabase.init(this, ibahc)
+            if (MainApp.IBAHC != null) {
+                DssRoomDatabase.init(this, MainApp.IBAHC)
             };
 
         } catch (e: PackageManager.NameNotFoundException) {
