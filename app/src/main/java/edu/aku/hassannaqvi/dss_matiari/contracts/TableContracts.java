@@ -47,6 +47,7 @@ public class TableContracts {
         public static final String COLUMN_STRUCTURE_NO = "structureNo";
         public static final String COLUMN_ROUND = "round";
         public static final String COLUMN_REGROUND = "regRound";
+        public static final String COLUMN_CHILD_COUNT = "child_count";
         //public static final String COLUMN_FROUND = "fRound";
         public static final String COLUMN_SNO = "sNo";
         public static final String COLUMN_SB = "s2";
@@ -285,6 +286,7 @@ public class TableContracts {
         public static final String COLUMN_RB04 = "rb04"; // DOB
         public static final String COLUMN_RC04 = "rc04"; // Gender
         public static final String COLUMN_MSNO = "msno";
+        public static final String COLUMN_CHILD_COUNT = "child_count";
         //public static final String COLUMN_RC15 = "rc15"; // Gender
         public static final String COLUMN_RB05 = "rb05"; // Husband or Father
         public static final String COLUMN_RB07 = "rb07";  // Pregnancy Status

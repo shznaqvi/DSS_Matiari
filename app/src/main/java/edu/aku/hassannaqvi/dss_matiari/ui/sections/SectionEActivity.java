@@ -55,10 +55,12 @@ public class SectionEActivity extends AppCompatActivity {
 
         setDateRanges();
 
-       /*int maxchild = db.OutcomeDao().getMaxChildredBYMother(mwra.getUcCode(), mwra.getUcCode(), mwra.getHhNo(), mwra.getSNo());
-       int maxchildFp = db.FollowUpsScheDao().getMaxChildrenNoBYMotherFromFolloupsSche(fpMwra.getUcCode(), fpMwra.getVillageCode(), fpMwra.getHhNo(), fpMwra.getMsno());
-       MainApp.childCount = Math.max(maxchild, maxchildFp);
-*/
+       //int maxchild = db.OutcomeDao().getMaxChildredBYMother(mwra.getUcCode(), mwra.getUcCode(), mwra.getHhNo(), mwra.getSNo());
+       //int maxchildFp = db.FollowUpsScheDao().getMaxChildrenNoBYMotherFromFolloupsSche(fpMwra.getUcCode(), fpMwra.getVillageCode(), fpMwra.getHhNo(), fpMwra.getMsno());
+        if(fpMwra.getChild_count() != null) {
+            MainApp.childCount = Integer.parseInt(fpMwra.getChild_count());
+        }
+
         try {
             //outcome = db.getOutComeBYID(String.valueOf(++MainApp.childCount));
             String[] muid = mwra.getUid().split("_");

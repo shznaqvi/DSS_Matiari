@@ -182,6 +182,9 @@ public class Mwra extends BaseObservable implements Observable {
     @Ignore
     private String rb21 = StringUtils.EMPTY;
 
+    @ColumnInfo(name = MWRATable.COLUMN_CHILD_COUNT)
+    private String child_count = StringUtils.EMPTY;
+
     @Ignore
     private long ageInMonths;
     @Ignore
@@ -251,6 +254,7 @@ public class Mwra extends BaseObservable implements Observable {
         mwra.setHhNo(MainApp.fpMwra.getHhNo());
         mwra.setRound(MainApp.fpMwra.getFRound());
         mwra.setSNo(MainApp.fpMwra.getRb01());
+        mwra.setChild_count(MainApp.fpMwra.getChild_count());
         mwra.setRb01(MainApp.fpMwra.getRb01());  // Line number of MWRA
         mwra.setRb02(MainApp.fpMwra.getRb02());  // Name of MWRA
         mwra.setRb03(MainApp.fpMwra.getRb03()); // Husband / Father Name
@@ -463,6 +467,14 @@ public class Mwra extends BaseObservable implements Observable {
 
     public void setSD(String sD) {
         this.sD = sD;
+    }
+
+    public String getChild_count() {
+        return child_count;
+    }
+
+    public void setChild_count(String child_count) {
+        this.child_count = child_count;
     }
 
     @Bindable
@@ -837,6 +849,7 @@ public class Mwra extends BaseObservable implements Observable {
         this.regRound = mwra.regRound;
         this.sNo = mwra.sNo;
         this.hhNo = mwra.hhNo;
+        this.child_count = mwra.child_count;
         this.deviceId = mwra.deviceId;
         this.deviceTag = mwra.deviceTag;
         this.appver = mwra.appver;
@@ -944,8 +957,7 @@ public class Mwra extends BaseObservable implements Observable {
                 .put("rb18", rb18)
                 .put("rb19", rb19)
                 .put("rb20", rb20)
-                .put("rb21", rb21)
-        ;
+                .put("rb21", rb21);
 
         return json.toString();
     }
@@ -1029,6 +1041,7 @@ public class Mwra extends BaseObservable implements Observable {
         json.put(MWRATable.COLUMN_UC_CODE, this.ucCode);
         json.put(MWRATable.COLUMN_VILLAGE_CODE, this.villageCode);
         json.put(MWRATable.COLUMN_SNO, this.sNo);
+        //json.put(MWRATable.COLUMN_CHILD_COUNT, this.child_count);
         json.put(MWRATable.COLUMN_REGROUND, this.regRound);
         json.put(MWRATable.COLUMN_HOUSEHOLD_NO, this.hhNo);
         json.put(MWRATable.COLUMN_DEVICEID, this.deviceId);

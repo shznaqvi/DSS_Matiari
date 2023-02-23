@@ -88,6 +88,7 @@ public class SectionCActivity extends AppCompatActivity {
             mwra.setRb06(MainApp.fpMwra.getRb06());
             mwra.setPreMaritalStaus(fpMwra.getRb06());
             mwra.setPrePreg(MainApp.fpMwra.getRb07());
+            mwra.setChild_count(fpMwra.getChild_count());
             //mwra.setRb07(MainApp.fpMwra.getRb07());
 
             long daysdiff = mwra.CalculateAge(MainApp.fpMwra.getRa01());
