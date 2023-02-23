@@ -57,14 +57,14 @@ public class SectionEActivity extends AppCompatActivity {
 
        //int maxchild = db.OutcomeDao().getMaxChildredBYMother(mwra.getUcCode(), mwra.getUcCode(), mwra.getHhNo(), mwra.getSNo());
        //int maxchildFp = db.FollowUpsScheDao().getMaxChildrenNoBYMotherFromFolloupsSche(fpMwra.getUcCode(), fpMwra.getVillageCode(), fpMwra.getHhNo(), fpMwra.getMsno());
-        if(fpMwra.getChild_count() != null) {
-            MainApp.childCount = Integer.parseInt(fpMwra.getChild_count());
+        /*if(fpMwra.getChild_count() != null) {
+            MainApp.prevChildCount = Integer.parseInt(fpMwra.getChild_count());
         }
-
+*/
         try {
             //outcome = db.getOutComeBYID(String.valueOf(++MainApp.childCount));
             String[] muid = mwra.getUid().split("_");
-            outcome = db.OutcomeDao().getOutcomeBYID(muid[0], String.valueOf(++MainApp.childCount));
+            outcome = db.OutcomeDao().getOutcomeBYID(muid[0], String.valueOf(++MainApp.prevChildCount));
         } catch (JSONException e) {
             e.printStackTrace();
             Toast.makeText(this, "JSONException(Outcome): " + e.getMessage(), Toast.LENGTH_SHORT).show();
@@ -130,7 +130,7 @@ public class SectionEActivity extends AppCompatActivity {
 
         }
 
-        outcome.setRc01(outcome.getRc01().isEmpty() ? String.valueOf(MainApp.childCount) : outcome.getRc01());
+        outcome.setRc01(outcome.getRc01().isEmpty() ? String.valueOf(MainApp.prevChildCount) : outcome.getRc01());
 
         bi.setOutcome(outcome);
         bi.btnContinue.setText(outcome.getUid().equals("") ? "Save" : "Update");
@@ -164,20 +164,21 @@ public class SectionEActivity extends AppCompatActivity {
         {
                 if (MainApp.totalChildCount > MainApp.childCount) {
 
+                    MainApp.childCount ++;
                     outcome = new Outcome();
                     setResult(RESULT_OK);
                     finish();
                     startActivity(new Intent(this, SectionEActivity.class).addFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT).putExtra("complete", true));
 
                 } else if(mwra.getRegRound().equals("") || mwra.getPrePreg().equals("2")) {
-                    MainApp.childCount = 0;
+                    MainApp.childCount = 1;
                     MainApp.totalChildCount = 0;
                     setResult(RESULT_OK);
                     finish();
                     startActivity(new Intent(this, SectionDActivity.class).addFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT).putExtra("complete", true));
 
                 }else{
-                    MainApp.childCount = 0;
+                    MainApp.childCount = 1;
                     MainApp.totalChildCount = 0;
                     setResult(RESULT_OK);
                     finish();
@@ -250,6 +251,7 @@ public class SectionEActivity extends AppCompatActivity {
     public void btnEnd(View view) {
         MainApp.totalChildCount =0;
         MainApp.childCount --;
+        MainApp.prevChildCount--;
         setResult(RESULT_CANCELED);
         finish();
 

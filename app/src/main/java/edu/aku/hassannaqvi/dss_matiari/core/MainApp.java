@@ -93,7 +93,8 @@ public class MainApp extends Application {
     //public static List<Followups> followupsList;
     public static String hdssid;
     public static int mwraCount = 0;
-    public static int childCount = 0;
+    public static int childCount = 1;
+    public static int prevChildCount = 0;
     public static int totalChildCount = 0;
     public static boolean fmComplete;
     public static int selectedMember;

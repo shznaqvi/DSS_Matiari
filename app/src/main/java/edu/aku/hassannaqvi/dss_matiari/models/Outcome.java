@@ -315,21 +315,6 @@ public class Outcome extends BaseObservable implements Observable {
         this.appver = appver;
     }
 
-    /*public String getIStatus() {
-        return iStatus;
-    }
-
-    public void setIStatus(String iStatus) {
-        this.iStatus = iStatus;
-    }
-
-    public String getIStatus96x() {
-        return iStatus96x;
-    }
-
-    public void setIStatus96x(String iStatus96x) {
-        this.iStatus96x = iStatus96x;
-    }*/
 
     public String getSynced() {
         return synced;
@@ -380,17 +365,6 @@ public class Outcome extends BaseObservable implements Observable {
         this.rc03 = rc03;
         notifyPropertyChanged(BR.rc03);
     }
-
-
-    /*@Bindable
-    public String getRb03() {
-        return rb03;
-    }
-
-    public void setRb03(String rb03) {
-        this.rb03 = rb03;
-        notifyPropertyChanged(BR.rb03);
-    }*/
 
     @Bindable
     public String getRc01() {
@@ -580,7 +554,7 @@ public class Outcome extends BaseObservable implements Observable {
         MainApp.outcome.setUcCode(MainApp.households.getUcCode());
         MainApp.outcome.setVillageCode(MainApp.households.getVillageCode());
         MainApp.outcome.setHhNo(MainApp.households.getHhNo());
-        MainApp.outcome.setSno(String.valueOf(MainApp.childCount));
+        MainApp.outcome.setSno(String.valueOf(MainApp.prevChildCount));
         MainApp.outcome.setUserName(MainApp.user.getUserName());
         MainApp.outcome.setDeviceId(MainApp.deviceid);
         MainApp.outcome.setHdssId(MainApp.households.getHdssId());
