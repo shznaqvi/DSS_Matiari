@@ -2,6 +2,7 @@ package edu.aku.hassannaqvi.dss_matiari.ui.sections;
 
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.PROJECT_NAME;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.followUpsScheHHList;
+import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.followUpsScheMWRAList;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.fpMwra;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.households;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.mwra;
@@ -175,7 +176,7 @@ public class SectionCActivity extends AppCompatActivity {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
                 if (bi.rb1004.isChecked()) {
-                    mwraStatus.put(followUpsScheHHList.get(selectedMember).getMuid(), false);
+                    mwraStatus.put(followUpsScheMWRAList.get(selectedMember).getMuid(), false);
                     mwra.setRb07(fpMwra.getRb07());
                     mwra.setRb06(fpMwra.getRb06());
                     mwra.setRb04(fpMwra.getRb04());
@@ -184,7 +185,7 @@ public class SectionCActivity extends AppCompatActivity {
                     mwra.setRb06(mwra.getRb06());
                     mwra.setRb04(fpMwra.getRb04());
                     if (!mwraStatus.isEmpty()) {
-                        mwraStatus.remove(followUpsScheHHList.get(selectedMember).getMuid());
+                        mwraStatus.remove(followUpsScheMWRAList.get(selectedMember).getMuid());
 
                     }
                 }

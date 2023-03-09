@@ -1039,6 +1039,7 @@ public class Mwra extends BaseObservable implements Observable {
         json.put(MWRATable.COLUMN_SYSDATE, this.sysDate);
         json.put(MWRATable.COLUMN_HDSSID, this.hdssId);
         json.put(MWRATable.COLUMN_UC_CODE, this.ucCode);
+        json.put(MWRATable.COLUMN_ROUND, this.round);
         json.put(MWRATable.COLUMN_VILLAGE_CODE, this.villageCode);
         json.put(MWRATable.COLUMN_SNO, this.sNo);
         //json.put(MWRATable.COLUMN_CHILD_COUNT, this.child_count);

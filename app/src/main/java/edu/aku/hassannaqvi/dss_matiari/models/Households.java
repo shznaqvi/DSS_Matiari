@@ -923,7 +923,7 @@ public class Households extends BaseObservable implements Observable {
 
             JSONObject json = null;
             json = new JSONObject(string);
-            this.round = json.getString("ROUND");
+            this.round = json.getString("round");
             this.ra01 = json.getString("ra01");
             this.ra01v2 = json.has("ra01v2") ? json.getString("ra01v2") : "";
             this.ra01v3 = json.has("ra01v3") ? json.getString("ra01v3") : "";
@@ -976,7 +976,7 @@ public class Households extends BaseObservable implements Observable {
         json.put("ra01", ra01)
                 .put("ra01v3", ra01v3)
                 .put("ra01v2", ra01v2)
-                .put("ROUND", round)
+                .put("round", round)
                 .put("ra04", ra04)
                 .put("ra05", ra05)
                 .put("ra07", ra07)
