@@ -48,7 +48,7 @@ interface FollowUpsScheDao {
 
     @Query(
         "SELECT " +
-                "MAX(" + TableContracts.TableFollowUpsSche.COLUMN_RB01 + ") AS "
+                "MAX( CAST(" + TableContracts.TableFollowUpsSche.COLUMN_RB01 + " AS INT)) AS "
                 + TableContracts.TableFollowUpsSche.COLUMN_RB01 +
                 " FROM " + TableContracts.TableFollowUpsSche.TABLE_NAME +
                 " WHERE " + TableContracts.TableFollowUpsSche.COLUMN_UC_CODE + " LIKE :uc AND "
@@ -61,7 +61,7 @@ interface FollowUpsScheDao {
 
     @Query(
         "SELECT " +
-                "MAX(" + TableContracts.TableFollowUpsSche.COLUMN_RB01 + ") AS "
+                "MAX( CAST(" + TableContracts.TableFollowUpsSche.COLUMN_RB01 + " AS INT)) AS "
                 + TableContracts.TableFollowUpsSche.COLUMN_RB01 +
                 " FROM " + TableContracts.TableFollowUpsSche.TABLE_NAME +
                 " WHERE " + TableContracts.TableFollowUpsSche.COLUMN_UC_CODE + " LIKE :uc AND "

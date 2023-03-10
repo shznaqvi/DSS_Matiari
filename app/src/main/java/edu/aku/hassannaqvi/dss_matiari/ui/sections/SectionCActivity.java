@@ -139,6 +139,7 @@ public class SectionCActivity extends AppCompatActivity {
         }
 
         if (!MainApp.households.getVisitNo().equals("") && Integer.parseInt(households.getVisitNo()) >= 2) {
+           mwra.setRb10("");
             bi.rb1008.setEnabled(true);
             bi.rb1004.setEnabled(false);
             bi.rb1004.setChecked(false);

@@ -279,7 +279,7 @@ public class FPMwraActivity extends AppCompatActivity {
         Toast.makeText(this, "proceedSelect()", Toast.LENGTH_SHORT).show();
             Intent i = new Intent(this, EndingActivity.class);
             i.setFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT);
-            i.putExtra("complete", mwraStatus.isEmpty());
+            i.putExtra("complete", mwraStatus.isEmpty() || mwraStatus.size() < 1);
             startActivity(i);
             finish();
 

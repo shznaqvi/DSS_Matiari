@@ -23,7 +23,7 @@ interface MwraDao {
 
 
     @Query("SELECT "
-            + "MAX(" + MWRATable.COLUMN_SNO + ") AS " + MWRATable.COLUMN_SNO +
+            + "MAX( CAST(" + MWRATable.COLUMN_SNO + " AS INT)) AS " + MWRATable.COLUMN_SNO +
             " FROM " + MWRATable.TABLE_NAME +
             " WHERE " + MWRATable.COLUMN_UC_CODE + " LIKE :ucCode AND "
             + MWRATable.COLUMN_VILLAGE_CODE + " LIKE :vCode AND " +
