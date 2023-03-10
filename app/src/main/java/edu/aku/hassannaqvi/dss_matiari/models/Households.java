@@ -3,8 +3,6 @@ package edu.aku.hassannaqvi.dss_matiari.models;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.PROJECT_NAME;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.selectedUC;
 
-import android.database.Cursor;
-
 import androidx.annotation.NonNull;
 import androidx.databinding.BaseObservable;
 import androidx.databinding.Bindable;
@@ -15,8 +13,6 @@ import androidx.room.Entity;
 import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
-import com.google.gson.Gson;
-
 import org.apache.commons.lang3.StringUtils;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -24,7 +20,6 @@ import org.json.JSONObject;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
-import java.util.Objects;
 
 import edu.aku.hassannaqvi.dss_matiari.BR;
 import edu.aku.hassannaqvi.dss_matiari.contracts.TableContracts.HouseholdTable;
@@ -63,21 +58,21 @@ public class Households extends BaseObservable implements Observable {
     @Ignore
     private String ra11 = "";
     @Ignore
-    private String ra11x = "";
+    private final String ra11x = "";
     @Ignore
     private String ra12 = "";
     @Ignore
-    private String ra12x = "";
+    private final String ra12x = "";
     @Ignore
     private String ra13 = "";
     @Ignore
-    private String ra13x = "";
+    private final String ra13x = "";
     @Ignore
     private String ra14 = "";
     @Ignore
     private String ra15 = "";
     @Ignore
-    private String ra16 = "";
+    private final String ra16 = "";
     @Ignore
     private String ra17_a1 = "";
     @Ignore
@@ -121,7 +116,7 @@ public class Households extends BaseObservable implements Observable {
     @Ignore
     private String ra21 = "";
     @Ignore
-    private String ra22 = "";
+    private final String ra22 = "";
 
     /*@ColumnInfo(name = HouseholdTable.COLUMN_MUID)
     private String muid = StringUtils.EMPTY;*/
@@ -913,7 +908,6 @@ public class Households extends BaseObservable implements Observable {
         this.syncDate = households.syncDate;
 
         s1Hydrate(households.sA);
-
         return this;
     }
 
@@ -954,9 +948,7 @@ public class Households extends BaseObservable implements Observable {
             this.ra17_b3 = json.getString("ra17_b3");
             this.ra17_c3 = json.getString("ra17_c3");
             this.ra17_d3 = json.getString("ra17_d3");
-
             this.ra18 = json.getString("ra18");
-
             this.ra19a = json.getString("ra19a");
             this.ra19ax = json.getString("ra19ax");
             this.ra19b = json.getString("ra19b");
@@ -964,8 +956,6 @@ public class Households extends BaseObservable implements Observable {
             this.ra19c = json.getString("ra19c");
             this.ra19cx = json.getString("ra19cx");
             //this.ra22 = json.getString("ra22");
-
-
         }
     }
 
@@ -1008,9 +998,7 @@ public class Households extends BaseObservable implements Observable {
                 .put("ra19b", ra19b)
                 .put("ra19bx", ra19bx)
                 .put("ra19c", ra19c)
-                .put("ra19cx", ra19cx)
-
-        ;
+                .put("ra19cx", ra19cx);
 
         return json.toString();
     }
@@ -1019,8 +1007,6 @@ public class Households extends BaseObservable implements Observable {
     public JSONObject toJSONObject() throws JSONException {
 
         JSONObject json = new JSONObject();
-
-
         json.put(HouseholdTable.COLUMN_ID, this.id);
         json.put(HouseholdTable.COLUMN_PROJECT_NAME, this.projectName);
         json.put(HouseholdTable.COLUMN_UID, this.uid);
@@ -1042,13 +1028,6 @@ public class Households extends BaseObservable implements Observable {
 
         json.put(HouseholdTable.COLUMN_SA, new JSONObject(sAtoString()));
         //Log.d(TAG, "toJSONObject: "+new JSONObject(s2toString()));
-
-
         return json;
-
     }
-
-
-
-
 }

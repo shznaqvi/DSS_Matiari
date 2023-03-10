@@ -873,7 +873,7 @@ public class Mwra extends BaseObservable implements Observable {
             json = new JSONObject(string);
             this.rb01 = json.getString("rb01");
             this.rb01a = json.getString("rb01a");
-            this.round = json.getString("ROUND");
+//            this.round = json.getString("round");
             this.rb02 = json.getString("rb02");
             this.rb22 = json.getString("rb22");
             this.rb03 = json.getString("rb03");
@@ -890,8 +890,6 @@ public class Mwra extends BaseObservable implements Observable {
             this.rb19 = json.getString("rb19");
             this.rb20 = json.getString("rb20");
             this.rb21 = json.getString("rb21");
-
-
         }
     }
 
@@ -903,7 +901,7 @@ public class Mwra extends BaseObservable implements Observable {
             json = new JSONObject(string);
             this.rb01 = json.getString("rb01");
             this.rb01a = json.getString("rb01a");
-            this.round = json.getString("ROUND");
+//            this.round = json.getString("round");
             this.rb02 = json.getString("rb02");
             this.rb22 = json.getString("rb22");
             this.rb03 = json.getString("rb03");
@@ -929,8 +927,6 @@ public class Mwra extends BaseObservable implements Observable {
             this.rb19 = json.getString("rb19");
             this.rb20 = json.getString("rb20");
             this.rb21 = json.getString("rb21");
-
-
         }
     }
 
@@ -938,10 +934,9 @@ public class Mwra extends BaseObservable implements Observable {
     public String sBtoString() throws JSONException {
         JSONObject json = new JSONObject();
 
-
         json.put("rb01", rb01)
                 .put("rb01a", rb01a)
-                .put("ROUND", round)
+//                .put("ROUND", round)
                 .put("rb02", rb02)
                 .put("rb22", rb22)
                 .put("rb03", rb03)
@@ -968,7 +963,7 @@ public class Mwra extends BaseObservable implements Observable {
 
         json.put("rb01", rb01)
                 .put("rb01a", rb01a)
-                .put("ROUND", round)
+//                .put("ROUND", round)
                 .put("rb02", rb02)
                 .put("rb22", rb22)
                 .put("rb03", rb03)
@@ -1002,7 +997,6 @@ public class Mwra extends BaseObservable implements Observable {
     public String SDtoString() throws JSONException {
         JSONObject json = new JSONObject();
 
-
         json.put("rb07", rb07)
                 .put("rb08", rb08)
                 .put("rb09", rb09);
@@ -1027,10 +1021,7 @@ public class Mwra extends BaseObservable implements Observable {
 
 
     public JSONObject toJSONObject() throws JSONException {
-
         JSONObject json = new JSONObject();
-
-
         json.put(MWRATable.COLUMN_ID, this.id);
         json.put(MWRATable.COLUMN_PROJECT_NAME, this.projectName);
         json.put(MWRATable.COLUMN_UID, this.uid);
@@ -1066,7 +1057,6 @@ public class Mwra extends BaseObservable implements Observable {
         this.expanded = expanded;
         notifyChange(BR.expanded);
     }
-
 
     private void CaluculateAge() {
 
@@ -1161,7 +1151,6 @@ public class Mwra extends BaseObservable implements Observable {
 
         return noOfDays;
     }
-
 
     public String calcEDD() {
 
