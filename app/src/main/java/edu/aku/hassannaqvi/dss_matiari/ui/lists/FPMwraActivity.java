@@ -7,6 +7,7 @@ import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.mwra;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.mwraCount;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.mwraDone;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.mwraStatus;
+import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.selectedFpHousehold;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.selectedMember;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.selectedHhNO;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.selectedUC;
@@ -279,7 +280,20 @@ public class FPMwraActivity extends AppCompatActivity {
         Toast.makeText(this, "proceedSelect()", Toast.LENGTH_SHORT).show();
             Intent i = new Intent(this, EndingActivity.class);
             i.setFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT);
-            i.putExtra("complete", mwraStatus.isEmpty() || mwraStatus.size() < 1);
+            Boolean flag = true;
+            if(mwraStatus.size() == 0 || mwraStatus.isEmpty())
+            {
+                flag = true;
+            }else {
+                mwraStatus.size();
+                if(mwraStatus.containsKey(MainApp.followUpsScheHHList.get(selectedFpHousehold).getHdssid()))
+                {
+                    flag = false;
+                }else{
+                    flag = true;
+                }
+            }
+            i.putExtra("complete", flag);
             startActivity(i);
             finish();
 

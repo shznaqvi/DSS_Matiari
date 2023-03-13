@@ -121,7 +121,7 @@ public class MainApp extends Application {
     public static int totalOutcomes;
     public static int outcomeCounter = 0;
     public static int mwraDone = 0;
-    public static HashMap<String, Boolean> mwraStatus = new HashMap<>();
+    public static HashMap<String[], Boolean> mwraStatus;
     private static final String TAG = "MainApp";
 //    public static int TRATS = 8;
     public static String IBAHC = "";

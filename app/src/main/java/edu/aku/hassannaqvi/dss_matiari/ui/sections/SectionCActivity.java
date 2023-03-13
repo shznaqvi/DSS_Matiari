@@ -7,6 +7,7 @@ import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.fpMwra;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.households;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.mwra;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.mwraStatus;
+import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.selectedFpHousehold;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.selectedMember;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.sharedPref;
 
@@ -31,6 +32,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
+import java.util.Objects;
 
 import edu.aku.hassannaqvi.dss_matiari.R;
 import edu.aku.hassannaqvi.dss_matiari.core.MainApp;
@@ -177,7 +179,7 @@ public class SectionCActivity extends AppCompatActivity {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
                 if (bi.rb1004.isChecked()) {
-                    mwraStatus.put(followUpsScheMWRAList.get(selectedMember).getMuid(), false);
+                    mwraStatus.put(new String[]{fpMwra.getMuid(), fpMwra.getHdssid()}, false);
                     mwra.setRb07(fpMwra.getRb07());
                     mwra.setRb06(fpMwra.getRb06());
                     mwra.setRb04(fpMwra.getRb04());
@@ -186,7 +188,7 @@ public class SectionCActivity extends AppCompatActivity {
                     mwra.setRb06(mwra.getRb06());
                     mwra.setRb04(fpMwra.getRb04());
                     if (!mwraStatus.isEmpty()) {
-                        mwraStatus.remove(followUpsScheMWRAList.get(selectedMember).getMuid());
+                        mwraStatus.remove(new String[]{fpMwra.getMuid(), fpMwra.getHdssid()});
 
                     }
                 }
