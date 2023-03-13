@@ -179,7 +179,15 @@ public class SectionCActivity extends AppCompatActivity {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
                 if (bi.rb1004.isChecked()) {
-                    mwraStatus.put(new String[]{fpMwra.getMuid(), fpMwra.getHdssid()}, false);
+                    boolean isAvailable = false;
+                    for(String[] arr : mwraStatus.keySet()) {
+                        if (arr[0].equals(fpMwra.getMuid()) && arr[1].equals(fpMwra.getHdssid())) {
+                            isAvailable = true;
+                        }
+                    }
+                    if (!isAvailable) {
+                        mwraStatus.put(new String[]{fpMwra.getMuid(), fpMwra.getHdssid()}, false);
+                    }
                     mwra.setRb07(fpMwra.getRb07());
                     mwra.setRb06(fpMwra.getRb06());
                     mwra.setRb04(fpMwra.getRb04());
@@ -188,9 +196,42 @@ public class SectionCActivity extends AppCompatActivity {
                     mwra.setRb06(mwra.getRb06());
                     mwra.setRb04(fpMwra.getRb04());
                     if (!mwraStatus.isEmpty()) {
-                        mwraStatus.remove(new String[]{fpMwra.getMuid(), fpMwra.getHdssid()});
+                        for(String[] arr : mwraStatus.keySet()) {
+                            if (arr[0].equals(fpMwra.getMuid()) && arr[1].equals(fpMwra.getHdssid())) {
+                                mwraStatus.remove(arr);
+                                break;
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                            }
+                        }
                     }
+                    int a = 0;
+                    a++;
+                    a++;
                 }
             }
         });

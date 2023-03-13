@@ -286,11 +286,10 @@ public class FPMwraActivity extends AppCompatActivity {
                 flag = true;
             }else {
                 mwraStatus.size();
-                if(mwraStatus.containsKey(MainApp.followUpsScheHHList.get(selectedFpHousehold).getHdssid()))
-                {
-                    flag = false;
-                }else{
-                    flag = true;
+                String houseId = MainApp.followUpsScheHHList.get(selectedFpHousehold).getHdssid();
+                for(String[] arr : mwraStatus.keySet()) {
+                    flag = !arr[1].equals(houseId);
+                    break;
                 }
             }
             i.putExtra("complete", flag);

@@ -78,7 +78,7 @@ public class FPHouseholdActivity extends AppCompatActivity {
 
         db = MainApp.appInfo.dbHelper;
         MainApp.followUpsScheHHList = new ArrayList<>();
-        MainApp.mwraStatus = new HashMap<String[], Boolean>();
+        //MainApp.mwraStatus = new HashMap<String[], Boolean>();
 
 
         Log.d(TAG, "onCreate: followUpsScheHHList " + MainApp.followUpsScheHHList.size());
