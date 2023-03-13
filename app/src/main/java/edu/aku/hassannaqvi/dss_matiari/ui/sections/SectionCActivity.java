@@ -200,38 +200,9 @@ public class SectionCActivity extends AppCompatActivity {
                             if (arr[0].equals(fpMwra.getMuid()) && arr[1].equals(fpMwra.getHdssid())) {
                                 mwraStatus.remove(arr);
                                 break;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
                             }
                         }
                     }
-                    int a = 0;
-                    a++;
-                    a++;
                 }
             }
         });
