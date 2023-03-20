@@ -178,11 +178,12 @@ public class SectionCActivity extends AppCompatActivity {
         bi.rb10.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
+                boolean isAvailable = false;
                 if (bi.rb1004.isChecked()) {
-                    boolean isAvailable = false;
                     for(String[] arr : mwraStatus.keySet()) {
                         if (arr[0].equals(fpMwra.getMuid()) && arr[1].equals(fpMwra.getHdssid())) {
                             isAvailable = true;
+                            break;
                         }
                     }
                     if (!isAvailable) {
