@@ -23,6 +23,7 @@ import edu.aku.hassannaqvi.dss_matiari.core.MainApp;
 import edu.aku.hassannaqvi.dss_matiari.database.DatabaseHelper;
 import edu.aku.hassannaqvi.dss_matiari.databinding.ActivityEndingBinding;
 import edu.aku.hassannaqvi.dss_matiari.models.Households;
+import edu.aku.hassannaqvi.dss_matiari.models.Mwra;
 import edu.aku.hassannaqvi.dss_matiari.room.DssRoomDatabase;
 
 
@@ -150,6 +151,7 @@ public class EndingActivity extends AppCompatActivity {
         //db.updatesHouseholdColumn(TableContracts.HouseholdTable.COLUMN_VISIT_NO, MainApp.households.getVisitNo());
         try {
             Households updatedHousehold = households;
+            Mwra updatedMwra = MainApp.mwra;
 
             if(visitCount == 1)
             {
@@ -165,6 +167,7 @@ public class EndingActivity extends AppCompatActivity {
                 updatedHousehold.setRa19cx(households.getRa19cx());
             }
             updatedHousehold.setIStatus(households.getIStatus());
+
             updatedHousehold.setVisitNo(households.getVisitNo());
             updatedHousehold.setIStatus96x(households.getIStatus96x());
             updatedHousehold.setSA(households.sAtoString());

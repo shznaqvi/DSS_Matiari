@@ -61,7 +61,7 @@ abstract class DssRoomDatabase : RoomDatabase() {
                 dbInstance = Room.databaseBuilder(context, DssRoomDatabase::class.java, DATABASE_NAME)
                     //.openHelperFactory(factory)
                     .addMigrations(MIGRATION_4_5)
-//                    .addMigrations(MIGRATION_6_7)
+                    //.addMigrations(MIGRATION_5_6)
                     .fallbackToDestructiveMigration()
                     .allowMainThreadQueries()
                     .build()
@@ -69,15 +69,15 @@ abstract class DssRoomDatabase : RoomDatabase() {
             }
         }
 
-        private val MIGRATION_4_5 = object : Migration(4, 5) {
+        private val MIGRATION_4_5 = object : Migration(5, 6) {
             override fun migrate(database: SupportSQLiteDatabase) {
-                // Since we didn’t alter the table, there’s nothing else
-                // to do here.
 
                 database.execSQL("ALTER TABLE 'hhfuplist_view' ADD COLUMN 'child_count' TEXT")
                 database.execSQL("ALTER TABLE 'mwras' ADD COLUMN 'child_count' TEXT")
             }
         }
+
+
 
 
     }

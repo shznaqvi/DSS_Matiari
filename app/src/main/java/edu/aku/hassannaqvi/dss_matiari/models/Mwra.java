@@ -93,11 +93,6 @@ public class Mwra extends BaseObservable implements Observable {
     @ColumnInfo(name = MWRATable.COLUMN_APPVERSION)
     private String appver = StringUtils.EMPTY;
 
-   /* @ColumnInfo(name = MWRATable.COLUMN_ISTATUS)
-    private String iStatus = StringUtils.EMPTY;
-
-    private String iStatus96x = StringUtils.EMPTY;*/
-
     @ColumnInfo(name = MWRATable.COLUMN_SYNCED)
     private String synced = StringUtils.EMPTY;
 
@@ -228,6 +223,7 @@ public class Mwra extends BaseObservable implements Observable {
        setDeviceId(MainApp.deviceid);
        setHdssId(households.getHdssId());
        setAppver(MainApp.versionName + "." + MainApp.versionCode);
+       //setIstatus(households.getIStatus());
 
 
         //setFRound("");
@@ -486,6 +482,7 @@ public class Mwra extends BaseObservable implements Observable {
         this.prePreg = prePreg;
         notifyPropertyChanged(BR.prePreg);
     }
+
 
     public PropertyChangeRegistry getPropertyChangeRegistry() {
         return propertyChangeRegistry;
@@ -1038,7 +1035,7 @@ public class Mwra extends BaseObservable implements Observable {
         json.put(MWRATable.COLUMN_HOUSEHOLD_NO, this.hhNo);
         json.put(MWRATable.COLUMN_DEVICEID, this.deviceId);
         //json.put(MWRATable.COLUMN_DEVICETAGID, this.deviceTag);
-        //json.put(MWRATable.COLUMN_ISTATUS, this.iStatus);
+        //json.put(MWRATable.COLUMN_ISTATUS, this.istatus);
         json.put(MWRATable.COLUMN_APPVERSION, this.appver);
         json.put(MWRATable.COLUMN_SB, new JSONObject(sBtoString()));
         json.put(MWRATable.COLUMN_SC, new JSONObject(sCtoString()));
