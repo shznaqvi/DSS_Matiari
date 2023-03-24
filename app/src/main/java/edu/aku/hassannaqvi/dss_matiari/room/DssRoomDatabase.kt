@@ -43,7 +43,7 @@ abstract class DssRoomDatabase : RoomDatabase() {
 
 
     companion object {
-        const val DATABASE_VERSION = 5
+        const val DATABASE_VERSION = 6
         const val DATABASE_NAME = MainApp.PROJECT_NAME + "1.db"
 
         @Volatile @JvmStatic
@@ -61,7 +61,7 @@ abstract class DssRoomDatabase : RoomDatabase() {
                 dbInstance = Room.databaseBuilder(context, DssRoomDatabase::class.java, DATABASE_NAME)
                     //.openHelperFactory(factory)
                     .addMigrations(MIGRATION_4_5)
-                    //.addMigrations(MIGRATION_5_6)
+                    .addMigrations(MIGRATION_5_6)
                     .fallbackToDestructiveMigration()
                     .allowMainThreadQueries()
                     .build()
@@ -69,11 +69,18 @@ abstract class DssRoomDatabase : RoomDatabase() {
             }
         }
 
-        private val MIGRATION_4_5 = object : Migration(5, 6) {
+        private val MIGRATION_4_5 = object : Migration(4, 5) {
             override fun migrate(database: SupportSQLiteDatabase) {
 
                 database.execSQL("ALTER TABLE 'hhfuplist_view' ADD COLUMN 'child_count' TEXT")
                 database.execSQL("ALTER TABLE 'mwras' ADD COLUMN 'child_count' TEXT")
+            }
+        }
+
+        private val MIGRATION_5_6 = object : Migration(5, 6) {
+            override fun migrate(database: SupportSQLiteDatabase) {
+
+                database.execSQL("ALTER TABLE 'mwras' ADD COLUMN 'istatus' TEXT")
             }
         }
 

@@ -65,8 +65,10 @@ interface SyncFunctionsDao {
     // MWRA
 
 
-    @Query("SELECT * FROM mwras, hhs WHERE mwras.hdssid LIKE hhs.hdssid AND mwras.synced is \'\' " +
-            "AND hhs.istatus = 1 ORDER BY mwras._id ASC ")
+    /*@Query("SELECT * FROM mwras, hhs WHERE mwras.hdssid LIKE hhs.hdssid AND mwras.synced is \'\' " +
+            "AND hhs.istatus = 1 ORDER BY mwras._id ASC ")*/
+    @Query("SELECT * FROM " + TableContracts.MWRATable.TABLE_NAME + " WHERE " + TableContracts.MWRATable.COLUMN_SYNCED
+            + " is \'\' AND (" + TableContracts.MWRATable.COLUMN_ISTATUS  + "  != 4 ) ORDER BY " + TableContracts.MWRATable.COLUMN_ID + " ASC")
     fun getUnsyncedMWRAS_internal() : List<Mwra>
 
     @kotlin.jvm.Throws(JSONException :: class)

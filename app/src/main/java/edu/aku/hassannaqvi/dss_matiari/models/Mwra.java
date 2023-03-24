@@ -155,6 +155,7 @@ public class Mwra extends BaseObservable implements Observable {
     private String rb11a = StringUtils.EMPTY;
     @Ignore
     private String rb11b = StringUtils.EMPTY;*/
+
     @Ignore
     private String rb12 = StringUtils.EMPTY;
     @Ignore
@@ -179,6 +180,9 @@ public class Mwra extends BaseObservable implements Observable {
 
     @ColumnInfo(name = MWRATable.COLUMN_CHILD_COUNT)
     private String child_count = StringUtils.EMPTY;
+
+    @ColumnInfo(name = MWRATable.COLUMN_ISTATUS)
+    private String istatus = StringUtils.EMPTY;
 
     @Ignore
     private long ageInMonths;
@@ -483,6 +487,13 @@ public class Mwra extends BaseObservable implements Observable {
         notifyPropertyChanged(BR.prePreg);
     }
 
+    public String getIstatus() {
+        return istatus;
+    }
+
+    public void setIstatus(String istatus) {
+        this.istatus = istatus;
+    }
 
     public PropertyChangeRegistry getPropertyChangeRegistry() {
         return propertyChangeRegistry;
@@ -683,8 +694,7 @@ public class Mwra extends BaseObservable implements Observable {
         setRb16(rb10.equals("1") ? this.rb16 : "");
         setRb17(rb10.equals("1") ? this.rb17 : "");
 
-
-
+        setIstatus(rb10);
         notifyChange(BR.rb10);
     }
 
@@ -850,7 +860,7 @@ public class Mwra extends BaseObservable implements Observable {
         this.deviceId = mwra.deviceId;
         this.deviceTag = mwra.deviceTag;
         this.appver = mwra.appver;
-        //this.iStatus = mwra.iStatus;
+        this.istatus = mwra.istatus;
         this.synced = mwra.synced;
         this.syncDate = mwra.syncDate;
 
