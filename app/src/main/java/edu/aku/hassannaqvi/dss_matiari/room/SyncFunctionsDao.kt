@@ -277,6 +277,35 @@ interface SyncFunctionsDao {
 
 
 
+    // HHS
+
+    @Throws(JSONException ::class)
+    fun synchhs_view(hhsList: JSONArray) : Int {
+        var insertCount =0
+        deleteHhsTable()
+
+        for(i in 0 until hhsList.length()) {
+            val jsonObject = hhsList.getJSONObject(i)
+
+            val obj = Hhs()
+            obj.Sync(jsonObject)
+
+            val rowId = insertHhsTable(obj)
+
+            if(rowId != 1L)
+                insertCount++
+        }
+
+        return insertCount
+    }
+
+    @Insert
+    fun insertHhsTable(hhs: Hhs) : Long
+
+
+    @Query("DELETE FROM " + TableContracts.TableHHS.TABLE_NAME)
+    fun deleteHhsTable()
+
 
 
 
