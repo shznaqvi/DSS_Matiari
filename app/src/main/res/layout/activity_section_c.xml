@@ -15,10 +15,6 @@
         <variable
             name="followups"
             type="edu.aku.hassannaqvi.dss_matiari.models.Mwra" />
-
-        <!--        <variable
-                    name="callback"
-                    type="edu.aku.hassannaqvi.dss_matiari.ui.sections.SectionC1Activityy" />-->
     </data>
 
     <LinearLayout
@@ -27,20 +23,6 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-
-        <!-- CUSTOM TOOLBAR -->
-        <!--        <androidx.appcompat.widget.Toolbar-->
-        <!--            android:id="@+id/toolbar"-->
-        <!--            style="@null"-->
-        <!--            android:layout_width="match_parent"-->
-        <!--            android:layout_height="wrap_content"-->
-        <!--            android:background="@color/colorPrimary"-->
-        <!--            android:minHeight="?attr/actionBarSize"-->
-        <!--            android:theme="@style/ToolbarTheme"-->
-        <!--            app:popupTheme="@style/ThemeOverlay.AppCompat.Light"-->
-        <!--            app:subtitleTextAppearance="@style/Toolbar.SubtitleText"-->
-        <!--            app:title="@string/marriedwomenregistration_mainheading"-->
-        <!--            app:titleTextAppearance="@style/Toolbar.TitleText" />-->
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
