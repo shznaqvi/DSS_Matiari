@@ -35,6 +35,7 @@ import java.util.Locale;
 import edu.aku.hassannaqvi.dss_matiari.BuildConfig;
 import edu.aku.hassannaqvi.dss_matiari.R;
 import edu.aku.hassannaqvi.dss_matiari.models.FollowUpsSche;
+import edu.aku.hassannaqvi.dss_matiari.models.Hhs;
 import edu.aku.hassannaqvi.dss_matiari.models.Households;
 import edu.aku.hassannaqvi.dss_matiari.models.Mwra;
 import edu.aku.hassannaqvi.dss_matiari.models.Outcome;
@@ -104,6 +105,7 @@ public class MainApp extends Application {
     public static int mwraCountComplete = 0;
     public static List<Households> householdList;
     public static List<FollowUpsSche> followUpsScheHHList; // Followups - Households List
+    public static List<Hhs> hhsList;
     public static List<FollowUpsSche> followUpsScheMWRAList; // Followups - MWRAs List
     public static int householdCount = 0;
     public static int householdCountComplete = 0;
