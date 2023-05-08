@@ -227,11 +227,9 @@ public class FPHouseholdAdapter extends RecyclerView.Adapter<FPHouseholdAdapter.
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
-
-
-                    if (MainApp.households.getUid().equals("")) {
+                    //if (MainApp.households.getUid().equals("")) {
                         MainApp.households.populateMeta(viewHolder.getAdapterPosition());
-                    }
+                    //}
 
                     if (!MainApp.households.getIStatus().equals("1") && Integer.parseInt(MainApp.households.getVisitNo()) < 3) {
 
@@ -278,7 +276,7 @@ public class FPHouseholdAdapter extends RecyclerView.Adapter<FPHouseholdAdapter.
     }
 
     private void editHousehold(int position) {
-        Intent intent = new Intent(mContext, SectionAActivity.class);
+        Intent intent = new Intent(mContext, FPMwraActivity.class);
         intent.putExtra("position", position);
         MainApp.selectedFpHousehold = position;
         MainApp.selectedHhNO = MainApp.followUpsScheHHList.get(position).getHhNo();

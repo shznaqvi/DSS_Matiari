@@ -59,7 +59,7 @@ public class SectionAActivity extends AppCompatActivity {
             households.populateMeta();
             bi.btnContinue.setVisibility(View.VISIBLE);
         }else{
-            if(households.getRegRound().equals("")) {
+            /*if(households.getRegRound().equals("")) {
                 bi.btnContinue.setVisibility(View.GONE);
                 bi.btnUpdate.setVisibility(View.VISIBLE);
                 households.setRa08(MainApp.hhsList.get(MainApp.selectedFpHousehold).getRa08());
@@ -82,7 +82,7 @@ public class SectionAActivity extends AppCompatActivity {
                 } else {
                     households.setRa15("2");
                 }
-            }
+            }*/
 
         }
 
@@ -204,10 +204,6 @@ public class SectionAActivity extends AppCompatActivity {
         if (rowId > 0) {
             households.setUid(households.getDeviceId() + households.getId());
             db.householdsDao().updateHousehold(households);
-//            db.updatesHouseholdColumn(TableContracts.HouseholdTable.COLUMN_UID, households.getUid());
-            /*if (fpHouseholds != null && fpHouseholds.getUid().equals("")) {
-                insertFpHousehold();
-            }*/
             return true;
         } else {
             Toast.makeText(this, "Updating Database... ERROR!", Toast.LENGTH_SHORT).show();
