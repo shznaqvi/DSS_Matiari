@@ -194,6 +194,8 @@ public class FPMwraActivity extends AppCompatActivity {
     public void BtnEnd(View view) {
         setResult(RESULT_CANCELED);
         finish();
+        startActivity(new Intent(this, FPHouseholdActivity.class));
+
 
     }
 

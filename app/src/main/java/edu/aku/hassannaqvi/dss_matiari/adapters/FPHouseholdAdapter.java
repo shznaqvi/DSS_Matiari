@@ -37,6 +37,7 @@ import edu.aku.hassannaqvi.dss_matiari.room.DssRoomDatabase;
 import edu.aku.hassannaqvi.dss_matiari.ui.lists.FPHouseholdActivity;
 import edu.aku.hassannaqvi.dss_matiari.ui.lists.FPMwraActivity;
 import edu.aku.hassannaqvi.dss_matiari.ui.sections.SectionAActivity;
+import edu.aku.hassannaqvi.dss_matiari.ui.sections.SectionAFupctivity;
 
 
 public class FPHouseholdAdapter extends RecyclerView.Adapter<FPHouseholdAdapter.ViewHolder> {
@@ -276,7 +277,7 @@ public class FPHouseholdAdapter extends RecyclerView.Adapter<FPHouseholdAdapter.
     }
 
     private void editHousehold(int position) {
-        Intent intent = new Intent(mContext, FPMwraActivity.class);
+        Intent intent = new Intent(mContext, SectionAFupctivity.class);
         intent.putExtra("position", position);
         MainApp.selectedFpHousehold = position;
         MainApp.selectedHhNO = MainApp.followUpsScheHHList.get(position).getHhNo();

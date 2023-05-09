@@ -17,15 +17,20 @@
         <entry key="..\:/Android Office Work/DSS_Matiari/app/src/main/res/layout/activity_wra_ending.xml" value="0.2775" />
         <entry key="..\:/Android Projects/DSS_Matiari/app/src/main/res/drawable-v24/ic_data_entry.xml" value="0.1865" />
         <entry key="..\:/Android Projects/DSS_Matiari/app/src/main/res/drawable/bg_rounded_app_color_filled.xml" value="0.176" />
+        <entry key="..\:/Android Projects/DSS_Matiari/app/src/main/res/drawable/bg_rounded_white_filled.xml" value="0.1555" />
         <entry key="..\:/Android Projects/DSS_Matiari/app/src/main/res/drawable/ic_baseline_add_circle_24.xml" value="0.176" />
         <entry key="..\:/Android Projects/DSS_Matiari/app/src/main/res/drawable/ic_baseline_add_minus_24.xml" value="0.176" />
         <entry key="..\:/Android Projects/DSS_Matiari/app/src/main/res/drawable/ic_minus_sign_in_a_circle_svgrepo_com.xml" value="0.176" />
         <entry key="..\:/Android Projects/DSS_Matiari/app/src/main/res/drawable/ic_minus_svgrepo_com.xml" value="0.176" />
         <entry key="..\:/Android Projects/DSS_Matiari/app/src/main/res/layout/activity_ending.xml" value="0.25416666666666665" />
+        <entry key="..\:/Android Projects/DSS_Matiari/app/src/main/res/layout/activity_fphousehold.xml" value="0.22083333333333333" />
         <entry key="..\:/Android Projects/DSS_Matiari/app/src/main/res/layout/activity_fpmwra.xml" value="0.2760416666666667" />
+        <entry key="..\:/Android Projects/DSS_Matiari/app/src/main/res/layout/activity_household.xml" value="0.22083333333333333" />
         <entry key="..\:/Android Projects/DSS_Matiari/app/src/main/res/layout/activity_identification.xml" value="0.5" />
+        <entry key="..\:/Android Projects/DSS_Matiari/app/src/main/res/layout/activity_login.xml" value="0.22083333333333333" />
+        <entry key="..\:/Android Projects/DSS_Matiari/app/src/main/res/layout/activity_main.xml" value="0.2864583333333333" />
         <entry key="..\:/Android Projects/DSS_Matiari/app/src/main/res/layout/activity_section_a.xml" value="0.33575317604355714" />
-        <entry key="..\:/Android Projects/DSS_Matiari/app/src/main/res/layout/activity_section_a_fup.xml" value="0.16197916666666667" />
+        <entry key="..\:/Android Projects/DSS_Matiari/app/src/main/res/layout/activity_section_a_fup.xml" value="0.31833333333333336" />
         <entry key="..\:/Android Projects/DSS_Matiari/app/src/main/res/layout/activity_section_b.xml" value="0.3069182389937107" />
         <entry key="..\:/Android Projects/DSS_Matiari/app/src/main/res/layout/activity_section_c.xml" value="0.32083333333333336" />
         <entry key="..\:/Android Projects/DSS_Matiari/app/src/main/res/layout/activity_section_d.xml" value="0.34564102564102567" />
@@ -33,7 +38,7 @@
         <entry key="..\:/Android Projects/DSS_Matiari/app/src/main/res/layout/activity_section_f.xml" value="0.5670103092783505" />
         <entry key="..\:/Android Projects/DSS_Matiari/app/src/main/res/layout/activity_section_outcome.xml" value="0.2604166666666667" />
         <entry key="..\:/Android Projects/DSS_Matiari/app/src/main/res/layout/date_error_dialog.xml" value="0.2552083333333333" />
-        <entry key="..\:/Android Projects/DSS_Matiari/app/src/main/res/layout/household_row.xml" value="0.9" />
+        <entry key="..\:/Android Projects/DSS_Matiari/app/src/main/res/layout/household_row.xml" value="0.22083333333333333" />
         <entry key="..\:/Android Projects/DSS_Matiari/app/src/main/res/layout/member_row.xml" value="0.33424657534246577" />
         <entry key="..\:/Android Projects/DSS_Matiari/app/src/main/res/layout/recycler_view_item.xml" value="0.24479166666666666" />
         <entry key="..\:/Android/DSS_Matiari/app/src/main/res/drawable-v24/ic_alert_24.xml" value="0.5875" />

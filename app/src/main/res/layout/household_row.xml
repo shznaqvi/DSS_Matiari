@@ -60,7 +60,6 @@
                         android:layout_height="wrap_content"
                         android:orientation="horizontal">
 
-                        <!--                        <com.google.android.material.textview.MaterialTextView-->
                         <TextView
                             android:id="@+id/ra09"
                             android:layout_width="wrap_content"
@@ -71,7 +70,7 @@
                             android:textSize="@dimen/_9ssp"
                             android:textStyle="bold" />
 
-                        <!--                        <com.google.android.material.textview.MaterialTextView-->
+
                         <TextView
                             android:id="@+id/hh05"
                             android:layout_width="0dp"

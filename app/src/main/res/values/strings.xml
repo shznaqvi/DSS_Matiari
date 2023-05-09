@@ -389,6 +389,7 @@
     <string name="go_back">Go Back</string>
     <string name="identification">Identification</string>
     <string name="section">Section</string>
+    <string name="updateFMData">Please Click Here to Update Family Members data</string>
 
     <!--    <string name="rc09_info">DD/MM/YYYY</string>-->
     <!--    <string name="rc1001">ها </string>-->
