@@ -1020,22 +1020,6 @@
                         android:textSize="@dimen/_9ssp"
                         android:textStyle="bold" />
 
-                    <Button
-                        android:id="@+id/btn_update"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_marginStart="@dimen/_3sdp"
-                        android:layout_weight="0.25"
-                        android:visibility="gone"
-                        android:background="@drawable/bg_rounded_app_color_filled"
-                        android:elevation="@dimen/_2sdp"
-                        android:onClick="btnUpdateHH"
-                        android:paddingStart="@dimen/_10sdp"
-                        android:paddingEnd="@dimen/_10sdp"
-                        android:text="Update"
-                        android:textColor="@color/white"
-                        android:textSize="@dimen/_9ssp"
-                        android:textStyle="bold" />
 
                 </LinearLayout>
 
