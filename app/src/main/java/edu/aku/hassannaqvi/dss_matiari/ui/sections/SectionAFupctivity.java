@@ -57,6 +57,7 @@ public class SectionAFupctivity extends AppCompatActivity {
             bi.btnContinue.setVisibility(View.VISIBLE);
         }else{
             if(households.getRegRound().equals("")) {
+                households.populateMeta(MainApp.selectedFpHousehold);
                 bi.btnContinue.setVisibility(View.GONE);
                 bi.btnUpdate.setVisibility(View.VISIBLE);
                 households.setRa08(MainApp.hhsList.get(MainApp.selectedFpHousehold).getRa08());
@@ -138,7 +139,6 @@ public class SectionAFupctivity extends AppCompatActivity {
         }
 
     }
-
 
 
     public void btnContinue(View view) {
