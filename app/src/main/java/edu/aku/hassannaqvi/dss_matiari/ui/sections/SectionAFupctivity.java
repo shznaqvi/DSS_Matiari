@@ -81,7 +81,6 @@ public class SectionAFupctivity extends AppCompatActivity {
                     households.setRa15("2");
                 }
             }
-
         }
 
         bi.setHousehold(households);

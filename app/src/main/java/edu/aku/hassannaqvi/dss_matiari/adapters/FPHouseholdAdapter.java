@@ -8,6 +8,7 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,6 +19,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
+import androidx.core.graphics.drawable.DrawableCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import org.json.JSONException;
@@ -97,6 +99,7 @@ public class FPHouseholdAdapter extends RecyclerView.Adapter<FPHouseholdAdapter.
         }
     }
 
+    @SuppressLint("UseCompatLoadingForDrawables")
     @Override
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int position) {
 
@@ -198,6 +201,7 @@ public class FPHouseholdAdapter extends RecyclerView.Adapter<FPHouseholdAdapter.
         if(tempMWRA == 0)
         {
             hhHead.setVisibility(View.VISIBLE);
+            imgStatus.setVisibility(View.GONE);
             prvStatus.setText("NO WRA");
             prvStatus.setVisibility(View.VISIBLE);
         }else{
@@ -214,8 +218,42 @@ public class FPHouseholdAdapter extends RecyclerView.Adapter<FPHouseholdAdapter.
 
         mwraCount.setText(tempMWRA + " Women | " + pregStatus + " | " + childCount + " Children");
         secStatus.setText(hhStatus);
-        imgStatus.setVisibility(fpHouseholds.getIStatus().equals("1") || Integer.parseInt(fpHouseholds.getVisitNo()) > 2 ? View.VISIBLE : View.GONE);
+
+        if(fpHouseholds.getIStatus().equals("1") || Integer.parseInt(fpHouseholds.getVisitNo()) > 2) {
+            imgStatus.setVisibility(View.VISIBLE);
+            imgStatus.setImageDrawable(mContext.getResources().getDrawable(R.drawable.ic_members_done));
+            DrawableCompat.setTint(DrawableCompat.wrap(imgStatus.getDrawable()), ContextCompat.getColor(mContext, R.color.green));
+        }else if (tempMWRA > 0){
+            imgStatus.setVisibility(View.VISIBLE);
+            imgStatus.setImageDrawable(mContext.getResources().getDrawable(R.drawable.ic_person_edit));
+        }
+        //imgStatus.setVisibility(fpHouseholds.getIStatus().equals("1") || Integer.parseInt(fpHouseholds.getVisitNo()) > 2 ? View.VISIBLE : View.GONE);
         secStatus.setBackgroundColor(ContextCompat.getColor(mContext, R.color.grayDark));
+
+        if(!fpHouseholds.getIStatus().equals("1"))
+        {
+            imgStatus.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    try {
+                        //MainApp.fpHouseholds = db.getFPHouseholdBYHdssid(MainApp.followUpsScheHHList.get(viewHolder.getAdapterPosition()).getHdssid());
+                        MainApp.households = db.householdsDao().getSelectedHouseholdByHDSSID(MainApp.followUpsScheHHList.get(viewHolder.getAdapterPosition()).getHdssid(), viewHolder.getAdapterPosition());
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                    //if (MainApp.households.getUid().equals("")) {
+                    MainApp.households.populateMeta(viewHolder.getAdapterPosition());
+
+                    Intent intent = new Intent(mContext, SectionAFupctivity.class);
+                    intent.putExtra("position", position);
+                    MainApp.selectedFpHousehold = position;
+                    MainApp.selectedHhNO = MainApp.followUpsScheHHList.get(position).getHhNo();
+                    intent.putExtra("position", position);
+
+                    ((Activity) mContext).startActivityForResult(intent, 2);
+                }
+            });
+        }
 
         if (!fpHouseholds.getIStatus().equals("1")) {
             viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
@@ -277,7 +315,7 @@ public class FPHouseholdAdapter extends RecyclerView.Adapter<FPHouseholdAdapter.
     }
 
     private void editHousehold(int position) {
-        Intent intent = new Intent(mContext, SectionAFupctivity.class);
+        Intent intent = new Intent(mContext, FPMwraActivity.class);
         intent.putExtra("position", position);
         MainApp.selectedFpHousehold = position;
         MainApp.selectedHhNO = MainApp.followUpsScheHHList.get(position).getHhNo();

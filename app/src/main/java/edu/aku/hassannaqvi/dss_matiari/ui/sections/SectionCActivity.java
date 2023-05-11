@@ -92,6 +92,7 @@ public class SectionCActivity extends AppCompatActivity {
             mwra.setPreMaritalStaus(fpMwra.getRb06());
             mwra.setPrePreg(MainApp.fpMwra.getRb07());
             mwra.setChild_count(fpMwra.getChild_count());
+            mwra.setPregnum(fpMwra.getPregCount());
             //mwra.setRb07(MainApp.fpMwra.getRb07());
 
             long daysdiff = mwra.CalculateAge(MainApp.fpMwra.getRa01());
@@ -118,37 +119,48 @@ public class SectionCActivity extends AppCompatActivity {
             bi.rb05.setText(String.valueOf(actualAge));
         }
 
+
         if (actualAge > 49) {
             bi.rb1009.setEnabled(true);
             bi.rb1001.setEnabled(false);
             bi.rb1002.setEnabled(false);
             bi.rb1003.setEnabled(false);
-            //bi.rb1004.setEnabled(false);
+            bi.rb1004.setEnabled(false);
             bi.rb1005.setEnabled(false);
             bi.rb1006.setEnabled(false);
             bi.rb1007.setEnabled(false);
-            //bi.rb1008.setEnabled(false);
-        } else {
+            bi.rb1008.setEnabled(false);
+        } else if (actualAge < 49 && Integer.parseInt(households.getVisitNo()) <=1) {
             bi.rb1009.setEnabled(false);
             bi.rb1001.setEnabled(true);
             bi.rb1002.setEnabled(true);
             bi.rb1003.setEnabled(true);
-            //bi.rb1004.setEnabled(true);
+            bi.rb1004.setEnabled(true);
             bi.rb1005.setEnabled(true);
             bi.rb1006.setEnabled(true);
             bi.rb1007.setEnabled(true);
-            //bi.rb1008.setEnabled(true);
+            bi.rb1008.setEnabled(false);
+        }else if(Integer.parseInt(households.getVisitNo()) <=2){
+            bi.rb1009.setEnabled(false);
+            bi.rb1001.setEnabled(true);
+            bi.rb1002.setEnabled(true);
+            bi.rb1003.setEnabled(true);
+            bi.rb1004.setEnabled(false);
+            bi.rb1005.setEnabled(true);
+            bi.rb1006.setEnabled(true);
+            bi.rb1007.setEnabled(true);
+            bi.rb1008.setEnabled(true);
         }
 
-        if (!MainApp.households.getVisitNo().equals("") && Integer.parseInt(households.getVisitNo()) >= 2) {
+        /*if (!MainApp.households.getVisitNo().equals("") && Integer.parseInt(households.getVisitNo()) >= 2) {
            mwra.setRb10("");
             bi.rb1008.setEnabled(true);
             bi.rb1004.setEnabled(false);
             bi.rb1004.setChecked(false);
-        } else {
+        } else{
             bi.rb1008.setEnabled(false);
             bi.rb1004.setEnabled(true);
-        }
+        }*/
 
         setImmersive(true);
         bi.setFollowups(mwra);

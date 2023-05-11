@@ -936,6 +936,7 @@ public class Mwra extends BaseObservable implements Observable {
             this.rb19 = json.getString("rb19");
             this.rb20 = json.getString("rb20");
             this.rb21 = json.getString("rb21");
+            this.pregnum = json.getString("pregnum");
         }
     }
 
@@ -998,6 +999,7 @@ public class Mwra extends BaseObservable implements Observable {
                 .put("rb19",rb19)
                 .put("rb20",rb20)
                 .put("rb21", rb21)
+                .put("pregnum", pregnum);
 
         ;
 

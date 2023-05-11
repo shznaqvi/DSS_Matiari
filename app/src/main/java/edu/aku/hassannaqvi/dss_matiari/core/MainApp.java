@@ -115,6 +115,7 @@ public class MainApp extends Application {
     public static String selectedHhNO = "0000";
     public static String leaderCode;
     public static String selectedUC = "00";
+    //public static boolean updateFMClicked = false;
     //public static Followups followups;
     //public static OutcomeFollowups outcomeFollowups;
     public static Outcome outcome;
