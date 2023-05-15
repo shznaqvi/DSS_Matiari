@@ -6,6 +6,7 @@
     <string name="open_mwra_followup_form">OPEN MWRA FOLLOWUP FORM</string>
     <string name="open_onhold_form">UPDATE ONHOLD FORM</string>
     <string name="open_followup_form">OPEN FOLLOW-UP FORM</string>
+    <string name="folder_not_created" translatable="false"> Folder Not Created </string>
 
     <string name="demographicinformation_mainheading">Demographic Information</string>
     <string name="marriedwomenregistration_mainheading">Married Women Registration</string>
@@ -389,6 +390,7 @@
     <string name="go_back">Go Back</string>
     <string name="identification">Identification</string>
     <string name="section">Section</string>
+    <string name="file_not_found">File not found</string>
 
     <!--    <string name="rc09_info">DD/MM/YYYY</string>-->
     <!--    <string name="rc1001">ها </string>-->

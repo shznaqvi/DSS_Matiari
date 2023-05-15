@@ -5,10 +5,11 @@
 package edu.aku.hassannaqvi.dss_matiari.room
 
 import android.content.Context
-import androidx.room.*
+import androidx.room.Database
+import androidx.room.Room
+import androidx.room.RoomDatabase
 import androidx.room.migration.Migration
 import androidx.sqlite.db.SupportSQLiteDatabase
-import androidx.sqlite.db.SupportSQLiteOpenHelper
 import edu.aku.hassannaqvi.dss_matiari.core.MainApp
 import edu.aku.hassannaqvi.dss_matiari.models.*
 import net.sqlcipher.database.SQLiteDatabase
@@ -45,6 +46,7 @@ abstract class DssRoomDatabase : RoomDatabase() {
     companion object {
         const val DATABASE_VERSION = 6
         const val DATABASE_NAME = MainApp.PROJECT_NAME + "1.db"
+        const val DATABASE_COPY = MainApp.PROJECT_NAME + "1_copy.db"
 
         @Volatile @JvmStatic
         var dbInstance: DssRoomDatabase? = null

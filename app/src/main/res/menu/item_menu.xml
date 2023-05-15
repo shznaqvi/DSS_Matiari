@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <group>
         <item
@@ -21,5 +22,11 @@
         android:id="@+id/formsReportCluster"
         android:title="Pending Households"
         android:visible="false" />
+    <item
+        android:id="@+id/sendDB"
+        android:title="Send DB"
+        android:titleCondensed="Email database"
+        android:visible="true"
+        app:showAsAction="collapseActionView" />
 
 </menu>
