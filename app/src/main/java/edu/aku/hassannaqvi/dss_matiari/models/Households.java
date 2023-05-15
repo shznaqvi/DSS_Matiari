@@ -244,7 +244,7 @@ public class Households extends BaseObservable implements Observable {
     }
 
 
-    public Households(Households households) {
+    /*public Households(Households households) {
 
         setUserName(households.getUserName());
         setDeviceId(households.getDeviceId());
@@ -257,7 +257,7 @@ public class Households extends BaseObservable implements Observable {
         setRound(households.getRound());
         setRegRound("1");
 
-    }
+    }*/
 
 
     public String getProjectName() {

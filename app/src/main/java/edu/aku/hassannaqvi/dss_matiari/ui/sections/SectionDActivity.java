@@ -7,6 +7,7 @@ import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.sharedPref;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.CompoundButton;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -47,20 +48,13 @@ public class SectionDActivity extends AppCompatActivity {
         setDateRanges();
 
 
-        if(mwra.getUid() != null || mwra.getUid().equals(""))
-        {
+        if (mwra.getUid() != null || mwra.getUid().equals("")) {
             try {
                 mwra.sDHydrate(mwra.getSD());
             } catch (JSONException e) {
                 e.printStackTrace();
             }
         }
-
-        /*if(!mwra.getRb21().equals(""))
-        {
-            String date = toBlackVisionDate(mwra.getRb21());
-            bi.rb08.setMinDate(date);
-        }*/
 
 
 
@@ -71,6 +65,19 @@ public class SectionDActivity extends AppCompatActivity {
 
         bi.btnContinue.setText(mwra.getUid().equals("") ? "Save" : "Update");
 
+
+        bi.rb0701.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(isChecked)
+                {
+                    int pregNum = Integer.parseInt(MainApp.fpMwra.getPregCount()) +1;
+                    mwra.setPregnum(String.valueOf(pregNum));
+                }else{
+                    mwra.setPregnum(MainApp.fpMwra.getPregCount());
+                }
+            }
+        });
     }
 
     private void setDateRanges() {
@@ -85,11 +92,11 @@ public class SectionDActivity extends AppCompatActivity {
             sdf = new SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH);
 
 
-                // Set MinLMP date to 2 months back from DOV
-                cal.add(Calendar.MONTH, -9);
-                String minLMP = sdf.format(cal.getTime());
-                cal.add(Calendar.MONTH, +8); // Calender reset to DOV
-                Log.d(TAG, "onCreate: " + minLMP);
+            // Set MinLMP date to 2 months back from DOV
+            cal.add(Calendar.MONTH, -9);
+            String minLMP = sdf.format(cal.getTime());
+            cal.add(Calendar.MONTH, +8); // Calender reset to DOV
+            Log.d(TAG, "onCreate: " + minLMP);
 
             // Set MaxLMP same as DOV
             String maxLMP = sdf.format(cal.getTime());
@@ -108,10 +115,6 @@ public class SectionDActivity extends AppCompatActivity {
             cal.add(Calendar.MONTH, -9);
             Log.d(TAG, "onCreate: " + maxLMP);
 
-          /*  // DOB
-            bi.rb04.setMaxDate(maxDob);
-            bi.rb04.setMinDate(minDob);*/
-
             // LMP
             bi.rb08.setMaxDate(maxLMP);
             bi.rb08.setMinDate(minLMP);
@@ -126,11 +129,6 @@ public class SectionDActivity extends AppCompatActivity {
             sdf = new SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH);
             String minDOD = sdf.format(cal.getTime());
 
-            // Single
-            /*bi.rc1401.setMinDate(minDOD);
-            bi.rc1402.setMinDate(minDOD);
-            bi.rc1403.setMinDate(minDOD)*/;
-
 
         } catch (ParseException e) {
             e.printStackTrace();
@@ -139,7 +137,7 @@ public class SectionDActivity extends AppCompatActivity {
 
     public void btnContinue(View view) {
         if (!formValidation()) return;
-        if(updateDB()){
+        if (updateDB()) {
             setResult(RESULT_OK);
             //startActivity(new Intent(this, FPEndingActivity.class).addFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT).putExtra("complete", MainApp.mwraFlag));
             finish();
@@ -155,10 +153,9 @@ public class SectionDActivity extends AppCompatActivity {
         try {
 
             //updcount = db.updatesFollowUpsColumn(TableContracts.FollowupsTable.COLUMN_SC, followups.sCtoString())
-             Mwra updatedFollowups = mwra;
-                        updatedFollowups.setSD(mwra.SDtoString());
-                        updcount = db.mwraDao().updateMwra(mwra);
-
+            Mwra updatedFollowups = mwra;
+            updatedFollowups.setSD(mwra.SDtoString());
+            updcount = db.mwraDao().updateMwra(mwra);
 
 
         } catch (JSONException e) {

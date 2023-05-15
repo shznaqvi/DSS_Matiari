@@ -2,6 +2,7 @@ package edu.aku.hassannaqvi.dss_matiari.ui;
 
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.households;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -25,6 +26,7 @@ import edu.aku.hassannaqvi.dss_matiari.databinding.ActivityEndingBinding;
 import edu.aku.hassannaqvi.dss_matiari.models.Households;
 import edu.aku.hassannaqvi.dss_matiari.models.Mwra;
 import edu.aku.hassannaqvi.dss_matiari.room.DssRoomDatabase;
+import edu.aku.hassannaqvi.dss_matiari.ui.lists.FPHouseholdActivity;
 
 
 public class EndingActivity extends AppCompatActivity {
@@ -134,8 +136,8 @@ public class EndingActivity extends AppCompatActivity {
         if (UpdateDB()) {
             setResult(RESULT_OK);
             finish();
-            //Intent i = new Intent(this, MainActivity.class);
-            // startActivity(i);
+            Intent i = new Intent(this, FPHouseholdActivity.class);
+            startActivity(i);
             Toast.makeText(this, "Entry Complete", Toast.LENGTH_SHORT).show();
 
         } else {

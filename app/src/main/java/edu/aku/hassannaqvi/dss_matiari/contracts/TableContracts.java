@@ -263,6 +263,38 @@ public class TableContracts {
         public static final String COLUMN_MAX_HHNO = "maxhhno";
     }
 
+    public static abstract class TableHHS implements BaseColumns {
+
+        public static final String TABLE_NAME = "hhs_view";
+
+        public static final String COLUMN_ID = "id";
+        public static final String COLUMN_VILLAGE_CODE = "villageCode";
+        public static final String COLUMN_UC_CODE = "ucCode";
+        public static final String COLUMN_HOUSEHOLD_NO = "hhNo";
+        public static final String COLUMN_HDSSID = "hdssid";
+        public static final String COLUMN_VISITNO = "visitNo";
+        public static final String COLUMN_RA01 = "ra01"; // Date of First Visit
+        public static final String COLUMN_RA08 = "ra08"; // Para
+        public static final String COLUMN_RA12 = "ra12";
+        public static final String COLUMN_ROUND = "round";
+        public static final String COLUMN_RA17_A1 = "ra17_a1";
+        public static final String COLUMN_RA17_A2 = "ra17_a2";
+        public static final String COLUMN_RA17_A3 = "ra17_a3";
+        public static final String COLUMN_RA17_B1 = "ra17_b1";
+        public static final String COLUMN_RA17_B2 = "ra17_b2";
+        public static final String COLUMN_RA17_B3 = "ra17_b3";
+        public static final String COLUMN_RA17_C1 = "ra17_c1";
+        public static final String COLUMN_RA17_C2 = "ra17_c2";
+        public static final String COLUMN_RA17_C3 = "ra17_c3";
+        public static final String COLUMN_RA17_D1 = "ra17_d1";
+        public static final String COLUMN_RA17_D2 = "ra17_d2";
+        public static final String COLUMN_RA17_D3 = "ra17_d3";
+        public static final String COLUMN_RA05 = "ra05";
+        public static final String COLUMN_RA18 = "ra18"; // No. of MWRA in the household
+
+
+    }
+
     public static abstract class TableFollowUpsSche implements BaseColumns {
 
         public static final String TABLE_NAME = "hhfuplist_view";
@@ -287,6 +319,7 @@ public class TableContracts {
         public static final String COLUMN_RC04 = "rc04"; // Gender
         public static final String COLUMN_MSNO = "msno";
         public static final String COLUMN_CHILD_COUNT = "child_count";
+        public static final String COLUMN_PREG_COUNT = "pregnum";
         //public static final String COLUMN_RC15 = "rc15"; // Gender
         public static final String COLUMN_RB05 = "rb05"; // Husband or Father
         public static final String COLUMN_RB07 = "rb07";  // Pregnancy Status

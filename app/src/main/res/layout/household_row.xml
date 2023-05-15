@@ -60,7 +60,6 @@
                         android:layout_height="wrap_content"
                         android:orientation="horizontal">
 
-                        <!--                        <com.google.android.material.textview.MaterialTextView-->
                         <TextView
                             android:id="@+id/ra09"
                             android:layout_width="wrap_content"
@@ -71,7 +70,7 @@
                             android:textSize="@dimen/_9ssp"
                             android:textStyle="bold" />
 
-                        <!--                        <com.google.android.material.textview.MaterialTextView-->
+
                         <TextView
                             android:id="@+id/hh05"
                             android:layout_width="0dp"
@@ -82,12 +81,12 @@
                             android:textColor="@color/gray"
                             android:textStyle="italic" />
 
+
                         <androidx.appcompat.widget.AppCompatImageView
                             android:id="@+id/imgStatus"
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
-                            android:src="@drawable/ic_members_done"
-                            android:tint="@color/green"
+                            android:src="@drawable/ic_person_edit"
                             android:visibility="gone"
                             tools:visibility="visible" />
 

@@ -218,6 +218,9 @@ public class MwraActivity extends AppCompatActivity {
             startActivity(i);
             finish();
         } else {
+            Intent i = new Intent(this, FPHouseholdActivity.class);
+            i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            startActivity(i);
             setResult(RESULT_OK);
             finish();
         }

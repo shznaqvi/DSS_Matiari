@@ -35,6 +35,7 @@ import java.util.Locale;
 import edu.aku.hassannaqvi.dss_matiari.BuildConfig;
 import edu.aku.hassannaqvi.dss_matiari.R;
 import edu.aku.hassannaqvi.dss_matiari.models.FollowUpsSche;
+import edu.aku.hassannaqvi.dss_matiari.models.Hhs;
 import edu.aku.hassannaqvi.dss_matiari.models.Households;
 import edu.aku.hassannaqvi.dss_matiari.models.Mwra;
 import edu.aku.hassannaqvi.dss_matiari.models.Outcome;
@@ -44,7 +45,7 @@ import edu.aku.hassannaqvi.dss_matiari.room.DssRoomDatabase;
 
 public class MainApp extends Application {
 
-    public static final String PROJECT_NAME = "HDSS_MATIARI_R3";
+    public static final String PROJECT_NAME = "HDSS_MATIARI_R4";
     public static final String DIST_ID = null;
     public static final String SYNC_LOGIN = "sync_login";
     public static final String _IP = "https://pedres2.aku.edu/";// .LIVE server
@@ -87,7 +88,7 @@ public class MainApp extends Application {
     //    public static long TWO_MINUTES = 1000 * 60 * 2;
     public static boolean permissionCheck = false;
     public static int idType = 0;
-    public static String ROUND = "3";
+    public static String ROUND = "4";
 
     public static List<Mwra> mwraList;
     //public static List<Followups> followupsList;
@@ -104,6 +105,7 @@ public class MainApp extends Application {
     public static int mwraCountComplete = 0;
     public static List<Households> householdList;
     public static List<FollowUpsSche> followUpsScheHHList; // Followups - Households List
+    public static List<Hhs> hhsList;
     public static List<FollowUpsSche> followUpsScheMWRAList; // Followups - MWRAs List
     public static int householdCount = 0;
     public static int householdCountComplete = 0;
@@ -113,6 +115,7 @@ public class MainApp extends Application {
     public static String selectedHhNO = "0000";
     public static String leaderCode;
     public static String selectedUC = "00";
+    //public static boolean updateFMClicked = false;
     //public static Followups followups;
     //public static OutcomeFollowups outcomeFollowups;
     public static Outcome outcome;

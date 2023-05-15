@@ -384,13 +384,14 @@
     <string name="password">Password</string>
     <string name="username">Username</string>
     <string name="app_name_short">DSS Matiari</string>
-    <string name="round_2">ROUND 3</string>
+    <string name="round_2">ROUND 4</string>
     <string name="select_team_leader">Select your team leader</string>
     <string name="data_sync_activity">DATA SYNC ACTIVITY</string>
     <string name="go_back">Go Back</string>
     <string name="identification">Identification</string>
     <string name="section">Section</string>
     <string name="file_not_found">File not found</string>
+    <string name="updateFMData">Please Click Here to Update Family Members data</string>
 
     <!--    <string name="rc09_info">DD/MM/YYYY</string>-->
     <!--    <string name="rc1001">ها </string>-->

@@ -4,6 +4,7 @@ import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.households;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.mwra;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.sharedPref;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -33,6 +34,7 @@ import edu.aku.hassannaqvi.dss_matiari.databinding.ActivitySectionABinding;
 import edu.aku.hassannaqvi.dss_matiari.models.Households;
 import edu.aku.hassannaqvi.dss_matiari.room.DssRoomDatabase;
 import edu.aku.hassannaqvi.dss_matiari.ui.EndingActivity;
+import edu.aku.hassannaqvi.dss_matiari.ui.lists.FPMwraActivity;
 import edu.aku.hassannaqvi.dss_matiari.ui.lists.MwraActivity;
 
 public class SectionAActivity extends AppCompatActivity {
@@ -52,11 +54,10 @@ public class SectionAActivity extends AppCompatActivity {
         String date = toBlackVisionDate("2023-01-01");
         bi.ra01.setMinDate(date);
 
-        if (!households.getUid().equals(""))
+        if (households.getUid().equals(""))
         {
             households.populateMeta();
         }
-
         bi.setHousehold(households);
 
         setTitle(R.string.demographicinformation_mainheading);
@@ -99,9 +100,10 @@ public class SectionAActivity extends AppCompatActivity {
             }
         });
 
-
-
     }
+
+
+
 
     public void btnContinue(View view) {
 
@@ -158,10 +160,6 @@ public class SectionAActivity extends AppCompatActivity {
         if (rowId > 0) {
             households.setUid(households.getDeviceId() + households.getId());
             db.householdsDao().updateHousehold(households);
-//            db.updatesHouseholdColumn(TableContracts.HouseholdTable.COLUMN_UID, households.getUid());
-            /*if (fpHouseholds != null && fpHouseholds.getUid().equals("")) {
-                insertFpHousehold();
-            }*/
             return true;
         } else {
             Toast.makeText(this, "Updating Database... ERROR!", Toast.LENGTH_SHORT).show();

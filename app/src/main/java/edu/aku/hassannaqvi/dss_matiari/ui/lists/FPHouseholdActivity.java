@@ -78,6 +78,7 @@ public class FPHouseholdActivity extends AppCompatActivity {
 
         db = MainApp.appInfo.dbHelper;
         MainApp.followUpsScheHHList = new ArrayList<>();
+        MainApp.hhsList = new ArrayList<>();
         //MainApp.mwraStatus = new HashMap<String[], Boolean>();
 
 
@@ -88,6 +89,7 @@ public class FPHouseholdActivity extends AppCompatActivity {
 
         //MainApp.followUpsScheHHList = db.getFollowUpsScheHHBYVillage(selectedUC, selectedVillage, "");
         MainApp.followUpsScheHHList = db.FollowUpsScheDao().getFollowUpsScheHHBYVillage(selectedUC, selectedVillage, "");
+        MainApp.hhsList = db.HhsDao().getHhsBYVillage(selectedUC, selectedVillage, "");
 
         bi.villageCode.setText("List of " + selectedUC + "-" + selectedVillage);
 
@@ -119,6 +121,7 @@ public class FPHouseholdActivity extends AppCompatActivity {
 
         //MainApp.followUpsScheHHList = db.getFollowUpsScheHHBYVillage(selectedUC, selectedVillage, bi.hhead.getText().toString());
         MainApp.followUpsScheHHList = db.FollowUpsScheDao().getFollowUpsScheHHBYVillage(selectedUC, selectedVillage, bi.hhead.getText().toString());
+        MainApp.hhsList = db.HhsDao().getHhsBYVillage(selectedUC, selectedVillage, bi.hhead.getText().toString());
         hhAdapter = new FPHouseholdAdapter(this, MainApp.followUpsScheHHList);
         hhAdapter.notifyDataSetChanged();
         bi.rvHouseholds.setAdapter(hhAdapter);

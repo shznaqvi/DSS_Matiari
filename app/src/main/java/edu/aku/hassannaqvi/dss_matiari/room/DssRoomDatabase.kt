@@ -25,8 +25,8 @@ import net.sqlcipher.database.SupportFactory
         Villages ::class,
         FollowUpsSche ::class,
         MaxHhno ::class,
-        Outcome ::class
-
+        Outcome ::class,
+        Hhs ::class
     ]
 )
 
@@ -41,10 +41,11 @@ abstract class DssRoomDatabase : RoomDatabase() {
     abstract fun MaxHHNoDao() : MaxHHNoDao
     abstract fun OutcomeDao() : OutcomeDao
     abstract fun syncFunctionsDao() : SyncFunctionsDao
+    abstract fun HhsDao() : HhsDao
 
 
     companion object {
-        const val DATABASE_VERSION = 6
+        const val DATABASE_VERSION = 7
         const val DATABASE_NAME = MainApp.PROJECT_NAME + "1.db"
         const val DATABASE_COPY = MainApp.PROJECT_NAME + "1_copy.db"
 
@@ -64,6 +65,7 @@ abstract class DssRoomDatabase : RoomDatabase() {
                     //.openHelperFactory(factory)
                     .addMigrations(MIGRATION_4_5)
                     .addMigrations(MIGRATION_5_6)
+                    .addMigrations(MIGRATION_6_7)
                     .fallbackToDestructiveMigration()
                     .allowMainThreadQueries()
                     .build()
@@ -85,6 +87,39 @@ abstract class DssRoomDatabase : RoomDatabase() {
                 database.execSQL("ALTER TABLE 'mwras' ADD COLUMN 'istatus' TEXT")
             }
         }
+
+        private val MIGRATION_6_7 = object : Migration(6, 7) {
+            override fun migrate(database: SupportSQLiteDatabase) {
+
+                database.execSQL("ALTER TABLE 'hhfuplist_view' ADD COLUMN 'pregnum' TEXT")
+                database.execSQL("CREATE TABLE IF NOT EXISTS 'hhs_view' ('id' LONG, " +
+                        "'ucCode' TEXT, " +
+                        "'villageCode' TEXT, " +
+                        "'hhNo' TEXT, " +
+                        "'hdssid' TEXT, " +
+                        "'round' TEXT, " +
+                        "'ra01' TEXT, " +
+                        "'ra08' TEXT, " +
+                        "'ra12' TEXT, " +
+                        "'ra05' TEXT, " +
+                        "'ra18' TEXT, " +
+                        "'ra17_a1' TEXT, " +
+                        "'ra17_a2' TEXT, " +
+                        "'ra17_a3' TEXT, " +
+                        "'ra17_b1' TEXT, " +
+                        "'ra17_b2' TEXT, " +
+                        "'ra17_b3' TEXT, " +
+                        "'ra17_c1' TEXT, " +
+                        "'ra17_c2' TEXT, " +
+                        "'ra17_c3' TEXT, " +
+                        "'ra17_d1' TEXT, " +
+                        "'ra17_d2' TEXT, " +
+                        "'ra17_d3' TEXT, " +
+                        "PRIMARY KEY('id'))");
+            }
+        }
+
+
 
 
 

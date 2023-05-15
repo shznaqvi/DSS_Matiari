@@ -12,6 +12,7 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.RadioGroup;
 import android.widget.Toast;
@@ -62,19 +63,6 @@ public class SectionBActivity extends AppCompatActivity {
         if (mwra.getRb01().equals("")) {
             mwra.setRb01(String.valueOf(mwraCount + 1));
             mwra.populateMeta();
-            /*MainApp.mwra.setUuid(households.getUid());
-            MainApp.mwra.setUcCode(households.getUcCode());
-            MainApp.mwra.setVillageCode(households.getVillageCode());
-            MainApp.mwra.setStructureNo(households.getStructureNo());
-            MainApp.mwra.setHhNo(households.getHhNo());
-            MainApp.mwra.setUserName(MainApp.user.getUserName());
-            MainApp.mwra.setSysDate(households.getSysDate());
-            MainApp.mwra.setDeviceId(MainApp.deviceid);
-            MainApp.mwra.setHdssId(households.getHdssId());
-            mwra.init();
-            mwra.setRegRound("1");
-            MainApp.mwra.setAppver(MainApp.versionName + "." + MainApp.versionCode)*/;
-
         }
 
         bi.setMwra(mwra);
@@ -84,6 +72,15 @@ public class SectionBActivity extends AppCompatActivity {
         db = MainApp.appInfo.dbHelper;
         bi.btnContinue.setText(MainApp.mwra.getUid().equals("") ? "Save" : "Update");
 
+
+        bi.rb18.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup radioGroup, int i) {
+                if(bi.rb1801.isChecked()){
+                    mwra.setPregnum(String.valueOf(Integer.parseInt(mwra.getPregnum()) +1));
+                }
+            }
+        });
         bi.rb19.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
@@ -94,6 +91,18 @@ public class SectionBActivity extends AppCompatActivity {
                     MainApp.totalChildCount = 2;
                 }else{
                     MainApp.totalChildCount = 3;
+                }
+            }
+        });
+
+        bi.rb0701.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(isChecked)
+                {
+                    mwra.setPregnum("1");
+                }else{
+                    mwra.setPregnum("0");
                 }
             }
         });
