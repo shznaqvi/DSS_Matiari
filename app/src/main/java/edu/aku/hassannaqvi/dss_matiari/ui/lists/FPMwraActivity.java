@@ -58,6 +58,7 @@ public class FPMwraActivity extends AppCompatActivity {
 
         db = MainApp.appInfo.dbHelper;
         mwraDone = 0;
+        MainApp.prevChildCount = 0;
         bi.hdssid.setText(households.getHdssId());
 
         try {
@@ -123,6 +124,7 @@ public class FPMwraActivity extends AppCompatActivity {
         Toast.makeText(this, "Activity Resumed!", Toast.LENGTH_SHORT).show();
 
         mwra = new Mwra();
+        MainApp.prevChildCount = 0;
 
         if (mwraDone >= followUpsScheMWRAList.size()) {
             bi.btnContinue.setVisibility(View.VISIBLE);

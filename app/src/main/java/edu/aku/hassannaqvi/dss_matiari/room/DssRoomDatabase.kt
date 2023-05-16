@@ -90,6 +90,8 @@ abstract class DssRoomDatabase : RoomDatabase() {
             override fun migrate(database: SupportSQLiteDatabase) {
 
                 database.execSQL("ALTER TABLE 'hhfuplist_view' ADD COLUMN 'pregnum' TEXT")
+                database.execSQL("ALTER TABLE 'hhfuplist_view' ADD COLUMN 'rb22' TEXT")
+                database.execSQL("ALTER TABLE 'hhfuplist_view' ADD COLUMN 'rb23' TEXT")
                 database.execSQL("CREATE TABLE IF NOT EXISTS 'hhs_view' ('id' LONG, " +
                         "'ucCode' TEXT, " +
                         "'villageCode' TEXT, " +

@@ -320,6 +320,8 @@ public class TableContracts {
         public static final String COLUMN_MSNO = "msno";
         public static final String COLUMN_CHILD_COUNT = "child_count";
         public static final String COLUMN_PREG_COUNT = "pregnum";
+        public static final String COLUMN_RB22 = "rb22";
+        public static final String COLUMN_RB23 = "rb23";
         //public static final String COLUMN_RC15 = "rc15"; // Gender
         public static final String COLUMN_RB05 = "rb05"; // Husband or Father
         public static final String COLUMN_RB07 = "rb07";  // Pregnancy Status

@@ -263,6 +263,8 @@ public class Mwra extends BaseObservable implements Observable {
         mwra.setRb06(MainApp.fpMwra.getRb06());
         mwra.setPreMaritalStaus(MainApp.fpMwra.getRb06());
         mwra.setPregnum(MainApp.fpMwra.getPregCount());
+        mwra.setRb22(MainApp.fpMwra.getRb22());
+        mwra.setRb23(MainApp.fpMwra.getRb23());
 
         long daysdiff  = CalculateAge(MainApp.fpMwra.getRa01());
         long years = daysdiff/365;
