@@ -567,7 +567,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:checked='@{followups.rb10.equals("3")}'
-                                android:onClick='@{()->followups.setRb10("3") + rb11.clearCheck() + rb14.clearCheck() + rb16.clearCheck() + rb17.clearCheck() + rb18.clearCheck() + rb19.clearCheck()}'
+                                android:onClick='@{()->followups.setRb10("3") + rb14.clearCheck() + rb16.clearCheck() + rb17.clearCheck() + rb18.clearCheck() + rb19.clearCheck()}'
                                 android:text="@string/rc0403" />
 
 
@@ -576,7 +576,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:checked='@{followups.rb10.equals("4")}'
-                                android:onClick='@{()->followups.setRb10("4") + rb11.clearCheck() + rb14.clearCheck() + rb16.clearCheck() + rb17.clearCheck() + rb18.clearCheck() + rb19.clearCheck()}'
+                                android:onClick='@{()->followups.setRb10("4") + rb14.clearCheck() + rb16.clearCheck() + rb17.clearCheck() + rb18.clearCheck() + rb19.clearCheck()}'
                                 android:text="@string/rc0404" />
 
                             <RadioButton
@@ -584,7 +584,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:checked='@{followups.rb10.equals("5")}'
-                                android:onClick='@{()->followups.setRb10("5") + rb11.clearCheck() + rb14.clearCheck() + rb16.clearCheck() + rb17.clearCheck() + rb18.clearCheck() + rb19.clearCheck()}'
+                                android:onClick='@{()->followups.setRb10("5")+ rb14.clearCheck() + rb16.clearCheck() + rb17.clearCheck() + rb18.clearCheck() + rb19.clearCheck()}'
                                 android:text="@string/rc0405" />
 
                             <RadioButton
@@ -592,7 +592,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:checked='@{followups.rb10.equals("6")}'
-                                android:onClick='@{()->followups.setRb10("6") + rb11.clearCheck() + rb06.clearCheck() + rb14.clearCheck() + rb16.clearCheck() + rb17.clearCheck() + rb16.clearCheck() + rb18.clearCheck() + rb19.clearCheck()}'
+                                android:onClick='@{()->followups.setRb10("6") + rb06.clearCheck() + rb14.clearCheck() + rb16.clearCheck() + rb17.clearCheck() + rb16.clearCheck() + rb18.clearCheck() + rb19.clearCheck()}'
                                 android:text="@string/rc0406" />
 
                             <RadioButton
@@ -600,7 +600,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:checked='@{followups.rb10.equals("7")}'
-                                android:onClick='@{()->followups.setRb10("7") + rb11.clearCheck() + rb16.clearCheck() + rb17.clearCheck() + rb18.clearCheck() + rb19.clearCheck()}'
+                                android:onClick='@{()->followups.setRb10("7") + rb16.clearCheck() + rb17.clearCheck() + rb18.clearCheck() + rb19.clearCheck()}'
                                 android:text="@string/rc0407" />
 
 
@@ -608,7 +608,7 @@
                                 android:id="@+id/rb1008"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:onClick='@{()->followups.setRb10("8") + rb11.clearCheck() + rb14.clearCheck() + rb16.clearCheck() + rb17.clearCheck() + rb18.clearCheck() + rb19.clearCheck()}'
+                                android:onClick='@{()->followups.setRb10("8") + rb14.clearCheck() + rb16.clearCheck() + rb17.clearCheck() + rb18.clearCheck() + rb19.clearCheck()}'
                                 android:text="@string/rc0408" />
 
 
@@ -617,7 +617,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:checked='@{followups.rb10.equals("9")}'
-                                android:onClick='@{()->followups.setRb10("9") + rb11.clearCheck() + rb14.clearCheck() + rb16.clearCheck() + rb17.clearCheck() + rb18.clearCheck() + rb19.clearCheck()}'
+                                android:onClick='@{()->followups.setRb10("9")  + rb14.clearCheck() + rb16.clearCheck() + rb17.clearCheck() + rb18.clearCheck() + rb19.clearCheck()}'
                                 android:text="@string/rc0409" />
 
 
@@ -1274,7 +1274,7 @@
                                 android:layout_height="wrap_content"
                                 android:id="@+id/fldGrpUnreportedPreg"
                                 android:orientation="vertical"
-                                android:visibility='@{!followups.rb06.equals(`4`) &amp;&amp; followups.prePreg.equals(`2`) ? View.VISIBLE : View.GONE}'>
+                                android:visibility='@{!followups.rb06.equals(`4`) &amp;&amp; (followups.prePreg.equals(`2`) || followups.prePreg.equals(``)) ? View.VISIBLE : View.GONE}'>
 
                                 <!-- rb18  Radio   -->
                                 <androidx.cardview.widget.CardView

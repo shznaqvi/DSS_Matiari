@@ -699,7 +699,7 @@ public class Mwra extends BaseObservable implements Observable {
 
     public void setRb10(String rb10) {
         this.rb10 = rb10;
-        setRb11(rb10.equals("1") ? "1" : rb10.equals("7") ? "2" : "");
+        setRb11(rb10.equals("7") ? "2" : "1");
         setRb14(rb10.equals("1") ? this.rb14 : "");
         setRb15(rb10.equals("1") ? this.rb15 : "");
         setRb16(rb10.equals("1") ? this.rb16 : "");
