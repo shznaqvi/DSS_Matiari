@@ -235,6 +235,7 @@ public class SectionCActivity extends AppCompatActivity {
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 if (bi.rb1701.isChecked() || bi.rb1605.isChecked()) {
                     MainApp.totalChildCount = 1;
+                    mwra.setPregnum(String.valueOf(Integer.parseInt(fpMwra.getPregCount())+1));
                 } else if (bi.rb1702.isChecked() && !bi.rb1605.isChecked()) {
                     MainApp.totalChildCount = 2;
                 } else if (bi.rb1703.isChecked()) {

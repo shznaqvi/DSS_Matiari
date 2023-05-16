@@ -4,15 +4,21 @@ import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.sharedPref;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.FileProvider;
 import androidx.databinding.DataBindingUtil;
 
 import com.wajahatkarim3.roomexplorer.RoomExplorer;
+
+import java.io.File;
 
 import edu.aku.hassannaqvi.dss_matiari.R;
 import edu.aku.hassannaqvi.dss_matiari.core.MainApp;
@@ -112,6 +118,9 @@ public class MainActivity extends AppCompatActivity {
             case R.id.checkOpenForms:
                 intent = new Intent(MainActivity.this, FormsReportCluster.class);
                 break;
+            case R.id.sendDB:
+                sendEmail();
+                return true;
             case R.id.dbm:
                 startActivity(new Intent(this, AndroidManager.class));
         }
@@ -123,6 +132,33 @@ public class MainActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.item_menu, menu);
         return super.onCreateOptionsMenu(menu);
+    }
+
+    // Email database to specified email address as attachment
+    private void sendEmail() {
+        Intent emailIntent = new Intent(Intent.ACTION_SEND);
+        emailIntent.setType("text/plain");
+        emailIntent.putExtra(Intent.EXTRA_CC, new String[]{"omar.shoaib@aku.edu", "hussain.siddiqui@aku.edu", "gul.sanober@aku.edu"});
+        emailIntent.putExtra(Intent.EXTRA_EMAIL, new String[]{"kiran.sajid@aku.edu"});
+        emailIntent.putExtra(Intent.EXTRA_SUBJECT, "DSS Matiari Database - For Issue Monitoring");
+        emailIntent.putExtra(Intent.EXTRA_TEXT, "DSS Matiari database upload from the device which has issues while uploading the data." +
+                "This is just for testing/checking purpose.");
+        File file = LoginActivity.dbBackup(MainActivity.this);
+        if (file == null || !file.exists() || !file.canRead()) {
+            Toast.makeText(this, getString(R.string.file_not_found), Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        Uri uri;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            emailIntent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+            uri = FileProvider.getUriForFile(this, "edu.aku.hassannaqvi.dss_matiari.fileProvider", file);
+        } else {
+            uri = Uri.fromFile(file);
+        }
+        emailIntent.putExtra(Intent.EXTRA_STREAM, uri);
+        emailIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+        startActivity(Intent.createChooser(emailIntent, "Pick an email provider"));
     }
 
 }
