@@ -1,6 +1,8 @@
 package edu.aku.hassannaqvi.dss_matiari.adapters;
 
+import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.hhsList;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.households;
+import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.position;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.selectedUC;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.selectedVillage;
 
@@ -34,6 +36,7 @@ import java.util.List;
 import edu.aku.hassannaqvi.dss_matiari.R;
 import edu.aku.hassannaqvi.dss_matiari.core.MainApp;
 import edu.aku.hassannaqvi.dss_matiari.models.FollowUpsSche;
+import edu.aku.hassannaqvi.dss_matiari.models.Hhs;
 import edu.aku.hassannaqvi.dss_matiari.models.Households;
 import edu.aku.hassannaqvi.dss_matiari.room.DssRoomDatabase;
 import edu.aku.hassannaqvi.dss_matiari.ui.lists.FPHouseholdActivity;
@@ -52,6 +55,7 @@ public class FPHouseholdAdapter extends RecyclerView.Adapter<FPHouseholdAdapter.
     private final DssRoomDatabase db;
     private Households fpHouseholds;
     private Households households;
+    private Households hhs;
     HashMap<Integer, Integer> totalMwraMap = new HashMap<>();
 
     /**
@@ -104,7 +108,8 @@ public class FPHouseholdAdapter extends RecyclerView.Adapter<FPHouseholdAdapter.
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int position) {
 
         Log.d(TAG, "Element " + viewHolder.getAdapterPosition() + " set.");
-        FollowUpsSche followUpsSche = this.followUpsScheList.get(viewHolder.getAdapterPosition());        // Get element from your dataset at this position and replace the contents of the view
+        FollowUpsSche followUpsSche = this.followUpsScheList.get(viewHolder.getAdapterPosition());// Get element from your dataset at this position and replace the contents of the view
+
         // with that element
         int pos = viewHolder.getAdapterPosition();
 
@@ -121,6 +126,7 @@ public class FPHouseholdAdapter extends RecyclerView.Adapter<FPHouseholdAdapter.
         try {
             //MainApp.fpHouseholds = db.getFPHouseholdBYHdssid(MainApp.followUpsScheHHList.get(viewHolder.getAdapterPosition()).getHdssid());
             this.households = db.householdsDao().getHouseholdByHDSSIDASC(MainApp.followUpsScheHHList.get(viewHolder.getAdapterPosition()).getHdssid());
+            //this.hhs = db.householdsDao().getHouseholdByHDSSIDASC(hhsList.get(viewHolder.getAdapterPosition()).getHdssid());
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -238,11 +244,21 @@ public class FPHouseholdAdapter extends RecyclerView.Adapter<FPHouseholdAdapter.
                     try {
                         //MainApp.fpHouseholds = db.getFPHouseholdBYHdssid(MainApp.followUpsScheHHList.get(viewHolder.getAdapterPosition()).getHdssid());
                         MainApp.households = db.householdsDao().getSelectedHouseholdByHDSSID(MainApp.followUpsScheHHList.get(viewHolder.getAdapterPosition()).getHdssid(), viewHolder.getAdapterPosition());
+
+
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
+
+                    for(int i=0; i<=hhsList.size(); i++) {
+                        if (MainApp.households.getHdssId().equals(hhsList.get(i).getHdssid())) {
+                            MainApp.selectHHsHousehold = i;
+                            break;
+                        }
+                    }
                     //if (MainApp.households.getUid().equals("")) {
                     MainApp.households.populateMeta(viewHolder.getAdapterPosition());
+                    MainApp.households.updateFMData(MainApp.selectHHsHousehold);
 
                     Intent intent = new Intent(mContext, SectionAFupctivity.class);
                     intent.putExtra("position", position);
@@ -314,11 +330,13 @@ public class FPHouseholdAdapter extends RecyclerView.Adapter<FPHouseholdAdapter.
         }
     }
 
+
+
     private void editHousehold(int position) {
         Intent intent = new Intent(mContext, FPMwraActivity.class);
         intent.putExtra("position", position);
         MainApp.selectedFpHousehold = position;
-        MainApp.households.updateFMData();
+        //MainApp.households.updateFMData();
         MainApp.selectedHhNO = MainApp.followUpsScheHHList.get(position).getHhNo();
         intent.putExtra("position", position);
 

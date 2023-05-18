@@ -102,6 +102,7 @@ public class MainApp extends Application {
     public static int selectedFpFemale;
     public static int selectedHousehold;
     public static int selectedFpHousehold;
+    public static int selectHHsHousehold;
     public static int mwraCountComplete = 0;
     public static List<Households> householdList;
     public static List<FollowUpsSche> followUpsScheHHList; // Followups - Households List
