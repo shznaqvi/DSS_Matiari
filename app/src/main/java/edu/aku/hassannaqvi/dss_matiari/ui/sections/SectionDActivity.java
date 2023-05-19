@@ -71,10 +71,8 @@ public class SectionDActivity extends AppCompatActivity {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if(isChecked)
                 {
-                    int pregNum = Integer.parseInt(MainApp.fpMwra.getPregCount()) +1;
+                    int pregNum = Integer.parseInt(mwra.getPregnum()) +1;
                     mwra.setPregnum(String.valueOf(pregNum));
-                }else{
-                    mwra.setPregnum(MainApp.fpMwra.getPregCount());
                 }
             }
         });
