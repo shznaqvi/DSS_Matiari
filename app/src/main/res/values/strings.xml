@@ -145,6 +145,11 @@
     <string name="rb18">Have you delivered an alive baby in the past three months? </string>
     <string name="rb19">Status of Unreported Pregnancy Outcome </string>
     <string name="rb20">Gestational Age (in weeks)</string>
+    <string name="rb24">Have you undergone an ultrasound examination?</string>
+    <string name="rb2401">Yes (Based on ultrasound report)</string>
+    <string name="rb2402">No</string>
+    <string name="rb2403">Recall (No ultrasound report)</string>
+    <string name="rb25">Date of Ultrasound</string>
 
     <string name="rb16">Have you delivered an alive baby during the duration from our last visit and today? </string>
     <string name="rb17">Status of Unreported Pregnancy Outcome </string>
@@ -292,6 +297,8 @@
     <string name='Q_rb19' translatable="false">rb19</string>
     <string name='Q_rb20' translatable="false">rb20</string>
     <string name='Q_rb21' translatable="false">rb21</string>
+    <string name='Q_rb24' translatable="false">rb24</string>
+    <string name='Q_rb25' translatable="false">rb25</string>
 
     <string name='Q_rc01' translatable="false">rc01</string>
     <string name='Q_rc02' translatable="false">rc02</string>

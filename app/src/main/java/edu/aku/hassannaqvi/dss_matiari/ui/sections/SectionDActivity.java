@@ -5,6 +5,8 @@ import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.mwra;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.sharedPref;
 
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.CompoundButton;
@@ -76,6 +78,24 @@ public class SectionDActivity extends AppCompatActivity {
                 }
             }
         });
+
+        bi.rb08.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+                setDateRanges();
+            }
+        });
     }
 
     private void setDateRanges() {
@@ -121,11 +141,16 @@ public class SectionDActivity extends AppCompatActivity {
             bi.rb09.setMaxDate(maxEDD);
             bi.rb09.setMinDate(minEDD);
 
-            // Date of Death from Date of Deliver(RC10)
-            sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
-            cal.setTime(sdf.parse(mwra.getRb12()));// all done
+            Calendar lmpCal = Calendar.getInstance();
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
+            lmpCal.setTime(simpleDateFormat.parse(mwra.getRb08()));
             sdf = new SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH);
-            String minDOD = sdf.format(cal.getTime());
+            String dov = sdf.format(cal.getTime());
+            String lmp = sdf.format(lmpCal.getTime());
+
+            bi.rb25.setMinDate(lmp);
+            bi.rb25.setMaxDate(dov);
+
 
 
         } catch (ParseException e) {

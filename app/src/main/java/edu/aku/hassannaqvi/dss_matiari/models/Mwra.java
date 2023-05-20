@@ -102,10 +102,6 @@ public class Mwra extends BaseObservable implements Observable {
     @ColumnInfo(name = MWRATable.COLUMN_REGROUND)
     private String regRound = StringUtils.EMPTY;
 
-    /*@ColumnInfo(name = MWRATable.COLUMN_FROUND)
-    private String fRound = StringUtils.EMPTY;
-*/
-    // SECTION VARIABLES / Registration Variables
     @ColumnInfo(name = MWRATable.COLUMN_SB)
     private String sB = StringUtils.EMPTY;
 
@@ -151,10 +147,6 @@ public class Mwra extends BaseObservable implements Observable {
     private String rb10 = StringUtils.EMPTY;
     @Ignore
     private String rb11 = StringUtils.EMPTY;
-    /*@Ignore
-    private String rb11a = StringUtils.EMPTY;
-    @Ignore
-    private String rb11b = StringUtils.EMPTY;*/
 
     @Ignore
     private String rb12 = StringUtils.EMPTY;
@@ -174,9 +166,13 @@ public class Mwra extends BaseObservable implements Observable {
     private String rb19 = StringUtils.EMPTY;
     @Ignore
     private String rb20 = StringUtils.EMPTY;
-
     @Ignore
     private String rb21 = StringUtils.EMPTY;
+
+    @Ignore
+    private String rb24 = StringUtils.EMPTY;
+    @Ignore
+    private String rb25 = StringUtils.EMPTY;
 
     @Ignore
     private String pregnum = StringUtils.EMPTY;
@@ -524,6 +520,27 @@ public class Mwra extends BaseObservable implements Observable {
     }
 
     @Bindable
+    public String getRb24() {
+        return rb24;
+    }
+
+    public void setRb24(String rb24) {
+        this.rb24 = rb24;
+        setRb25(rb24.equals("1") ? this.rb25 : "");
+        notifyChange(BR.rb24);
+    }
+
+    @Bindable
+    public String getRb25() {
+        return rb25;
+    }
+
+    public void setRb25(String rb25) {
+        this.rb25 = rb25;
+        notifyChange(BR.rb25);
+    }
+
+    @Bindable
     public String getRb01() {
         return rb01;
     }
@@ -627,6 +644,7 @@ public class Mwra extends BaseObservable implements Observable {
         setRb15(this.rb06.equals("4") ? "" : this.rb15);
         setRb20(this.rb06.equals("4") ? "" : this.rb20);
         setRb21(this.rb06.equals("4") ? "" : this.rb21);
+
         notifyChange(BR.rb06);
     }
 
@@ -641,6 +659,7 @@ public class Mwra extends BaseObservable implements Observable {
         this.rb07 = rb07;
         setRb08(this.rb07.equals("1") ? this.rb08 : "");
         setRb09(this.rb07.equals("1") ? this.rb09 : "");
+        setRb24(this.rb07.equals("1") ? this.rb24 : "");
         Log.d(TAG, "setRb07: " + this.rb07);
         notifyChange(BR.rb07);
     }
@@ -669,8 +688,6 @@ public class Mwra extends BaseObservable implements Observable {
         this.rb09 = rb09;
         notifyChange(BR.rb09);
     }
-
-
 
     @Bindable
     public String getRb03a() {
@@ -903,6 +920,8 @@ public class Mwra extends BaseObservable implements Observable {
             this.rb19 = json.getString("rb19");
             this.rb20 = json.getString("rb20");
             this.rb21 = json.getString("rb21");
+            this.rb24 = json.getString(("rb24"));
+            this.rb25 = json.getString(("rb25"));
             this.pregnum = json.getString("pregnum");
         }
     }
@@ -965,6 +984,8 @@ public class Mwra extends BaseObservable implements Observable {
                 .put("rb19", rb19)
                 .put("rb20", rb20)
                 .put("rb21", rb21)
+                .put("rb24", rb24)
+                .put("rb25", rb25)
                 .put("pregnum", pregnum);
 
         return json.toString();
@@ -1015,6 +1036,8 @@ public class Mwra extends BaseObservable implements Observable {
         json.put("rb07", rb07)
                 .put("rb08", rb08)
                 .put("rb09", rb09)
+                .put("rb24", rb24)
+                .put("rb25", rb25)
                 .put("pregnum", pregnum)
         ;
 
@@ -1030,6 +1053,8 @@ public class Mwra extends BaseObservable implements Observable {
             this.rb07 = json.getString("rb07");
             this.rb08 = json.getString("rb08");
             this.rb09 = json.getString("rb09");
+            this.rb24 = json.getString("rb24");
+            this.rb25 = json.getString("rb25");
             this.pregnum = json.getString("pregnum");
 
 

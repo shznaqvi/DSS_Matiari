@@ -147,7 +147,11 @@
     <string name="rb16">ڇا توهان اسان جي آخري دوري ۽ اڄ جي عرصي دوران هڪ زنده ٻار کي جنم ڏنو آهي؟</string>
     <string name="rb17">حمل جو نتيجو</string>
     <string name="rb20">حمل جي عمر (هفتن ۾)</string>
-
+    <string name="rb24"> ڇا توهان الٽراسائونڊ ڪرايو آهي؟</string>
+    <string name="rb2401">ها</string>
+    <string name="rb2402">نه</string>
+    <string name="rb2403">يادگيرو(الٽراسائونڊ رپورٽ موجود نه آهي)</string>
+    <string name="rb25">الٽراسائونڊ جي تاريخ</string>
 
     <string name="rc01">عورت جو سڃاڻپ نمبر</string>
     <string name="rc02"> عورت جو نالو</string>

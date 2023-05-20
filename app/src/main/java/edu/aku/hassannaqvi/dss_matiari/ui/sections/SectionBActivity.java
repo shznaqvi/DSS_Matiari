@@ -29,6 +29,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
+import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 
 import edu.aku.hassannaqvi.dss_matiari.R;
@@ -117,9 +118,7 @@ public class SectionBActivity extends AppCompatActivity {
 
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
             //cal.setTime(sdf.parse(new Date().toString()));
-            cal.setTime(sdf.parse(mwra.getRb01a()));// all done
-
-            Calendar calDov = cal;
+            cal.setTime(Objects.requireNonNull(sdf.parse(mwra.getRb01a())));// all done
 
             sdf = new SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH);
             // Set MinDob date to 50 years back from DOV
@@ -175,6 +174,17 @@ public class SectionBActivity extends AppCompatActivity {
 
             bi.rb21.setMaxDate(maxDD);
             bi.rb21.setMinDate(DD);
+
+
+            Calendar lmpCal = Calendar.getInstance();
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
+            lmpCal.setTime(simpleDateFormat.parse(mwra.getRb08()));
+            sdf = new SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH);
+            String dov = sdf.format(cal.getTime());
+            String lmp = sdf.format(lmpCal.getTime());
+
+            bi.rb25.setMinDate(lmp);
+            bi.rb25.setMaxDate(dov);
 
 
         } catch (ParseException e) {
@@ -236,6 +246,23 @@ public class SectionBActivity extends AppCompatActivity {
                     }
 
                 }
+            }
+        });
+
+        bi.rb08.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                setDateRanges();
             }
         });
     }
