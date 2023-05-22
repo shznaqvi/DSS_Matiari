@@ -161,7 +161,6 @@ public class FpMwraAdapter extends RecyclerView.Adapter<FpMwraAdapter.ViewHolder
                 fAge.setText(months + "m");
             }
 
-
         }
         fMaritalStatus.setText(wifeOrDaughter + followUpsSche.getRb03());
         secStatus.setText(pregStatus);
@@ -203,7 +202,6 @@ public class FpMwraAdapter extends RecyclerView.Adapter<FpMwraAdapter.ViewHolder
                 ((Activity) mContext).startActivityForResult(intent, 2);
 
             }
-
 
         });
 
