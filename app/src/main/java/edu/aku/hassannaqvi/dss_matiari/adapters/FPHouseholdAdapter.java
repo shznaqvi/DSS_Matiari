@@ -206,11 +206,11 @@ public class FPHouseholdAdapter extends RecyclerView.Adapter<FPHouseholdAdapter.
 
         hhNo.setText(followUpsSche.getVillageCode() + "-" + followUpsSche.getHhNo());
 
-        if(tempMWRA == 0)
+        if(tempMWRA == 0 && childCount == 0)
         {
             hhHead.setVisibility(View.VISIBLE);
             imgStatus.setVisibility(View.GONE);
-            prvStatus.setText("NO WRA");
+            prvStatus.setText("NO WRA AND NO CHILD");
             prvStatus.setVisibility(View.VISIBLE);
         }else{
             if(followUpsSche.getiStatus().equals("1")){
@@ -292,9 +292,10 @@ public class FPHouseholdAdapter extends RecyclerView.Adapter<FPHouseholdAdapter.
 
                         int currentMWRA = totalMwraMap.containsKey(pos) ? totalMwraMap.get(pos) : 0;
                         int currentChild = totalChildMap.containsKey(pos) ? totalChildMap.get(pos) : 0;
-                        if (!followUpsSche.getiStatus().equals("4") && (currentMWRA > 0 )) {
+                        //if (!followUpsSche.getiStatus().equals("4") && (currentMWRA > 0 || currentChild > 0)) {
+                        if(currentMWRA > 0 || currentChild > 0){
                             editHousehold(viewHolder.getAdapterPosition());
-                        } else if(!followUpsSche.getiStatus().equals("1") || currentMWRA == 0) {
+                        } else if(!followUpsSche.getiStatus().equals("1") || (currentMWRA == 0 && currentChild == 0)) {
                             try {
                                 //MainApp.households = db.getHouseholdByHDSSID(followUpsSche.getHdssid());
                                 MainApp.households = db.householdsDao().getHouseholdByHDSSIDASC(followUpsSche.getHdssid());

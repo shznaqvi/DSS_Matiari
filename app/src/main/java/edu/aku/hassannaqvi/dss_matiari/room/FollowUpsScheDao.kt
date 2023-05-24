@@ -106,6 +106,7 @@ interface FollowUpsScheDao {
     @Query("SELECT * FROM " + TableContracts.TableFollowUpsSche.TABLE_NAME + " WHERE "
             + TableContracts.TableFollowUpsSche.COLUMN_VILLAGE_CODE + " LIKE :village AND "
             + TableContracts.TableFollowUpsSche.COLUMN_UC_CODE + " LIKE :ucCode AND "
+            + TableContracts.TableFollowUpsSche.COLUMN_RB01 + " != 'null' AND "
             + TableContracts.TableFollowUpsSche.COLUMN_HOUSEHOLD_NO + " LIKE :hhNo ORDER BY "
             + TableContracts.TableFollowUpsSche.COLUMN_ID + " ASC"
     )

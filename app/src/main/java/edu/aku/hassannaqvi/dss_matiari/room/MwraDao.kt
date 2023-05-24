@@ -61,7 +61,7 @@ interface MwraDao {
 
     @Query("SELECT * FROM " + MWRATable.TABLE_NAME + " WHERE "
             + MWRATable.COLUMN_UUID + " LIKE :uuid AND "
-            + MWRATable.COLUMN_SNO + " LIKE :rb01 AND "
+            + MWRATable.COLUMN_SNO + " LIKE :rb01 AND " + MWRATable.COLUMN_SNO + " != 'null' AND "
             + MWRATable.COLUMN_ROUND + " LIKE :fround AND " +
             MWRATable.COLUMN_REGROUND + " LIKE :regRound ORDER BY "
             + MWRATable.COLUMN_ID + " ASC"
