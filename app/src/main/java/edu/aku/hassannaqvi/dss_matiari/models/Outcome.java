@@ -137,6 +137,8 @@ public class Outcome extends BaseObservable implements Observable {
     private String rc06 = StringUtils.EMPTY;
     @Ignore
     private String rc07 = StringUtils.EMPTY;
+    @Ignore
+    private String rc08 = StringUtils.EMPTY;
 
     public Outcome() {
 
@@ -431,6 +433,18 @@ public class Outcome extends BaseObservable implements Observable {
         notifyPropertyChanged(BR.rc07);
     }
 
+    @Bindable
+    public String getRc08() {
+        return rc08;
+    }
+
+    public void setRc08(String rc08) {
+        this.rc08 = rc08;
+        setRc05(rc08.equals("1") ? this.rc05 : "");
+        setRc06(rc08.equals("1") ? this.rc06 : "");
+        setRc07(rc08.equals("1") ? this.rc07 : "");
+        notifyPropertyChanged(BR.rc08);
+    }
 
     public Outcome Hydrate(Outcome outcome) throws JSONException {
         this.id = outcome.id;
@@ -473,6 +487,7 @@ public class Outcome extends BaseObservable implements Observable {
             this.rc05 = json.getString("rc05");
             this.rc06 = json.getString("rc06");
             this.rc07 = json.getString("rc07");
+            this.rc08 = json.has("rc08") ? json.getString("rc08") : "";
 
 
         }
@@ -492,7 +507,9 @@ public class Outcome extends BaseObservable implements Observable {
                 .put("rc04", rc04)
                 .put("rc05", rc05)
                 .put("rc06", rc06)
-                .put("rc07", rc07);
+                .put("rc07", rc07)
+                .put("rc08", rc08)
+        ;
 
 
         return json.toString();

@@ -10,6 +10,7 @@ import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.CompoundButton;
+import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -68,13 +69,18 @@ public class SectionDActivity extends AppCompatActivity {
         bi.btnContinue.setText(mwra.getUid().equals("") ? "Save" : "Update");
 
 
-        bi.rb0701.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        bi.rb07.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            int prePregNum = Integer.parseInt(mwra.getPregnum());
+            int currentPregNum = Integer.parseInt(mwra.getPregnum());
+
+
             @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if(isChecked)
-                {
-                    int pregNum = Integer.parseInt(mwra.getPregnum()) +1;
-                    mwra.setPregnum(String.valueOf(pregNum));
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                if(bi.rb0701.isChecked()){
+                    currentPregNum ++;
+                    mwra.setPregnum(String.valueOf(currentPregNum));
+                }else{
+                    mwra.setPregnum(String.valueOf(prePregNum));
                 }
             }
         });
@@ -160,6 +166,9 @@ public class SectionDActivity extends AppCompatActivity {
 
     public void btnContinue(View view) {
         if (!formValidation()) return;
+        if (mwra.getRb07().equals("1")) {
+            mwra.setPregnum(String.valueOf(Integer.parseInt(mwra.getPregnum()) + 1));
+        }
         if (updateDB()) {
             setResult(RESULT_OK);
             //startActivity(new Intent(this, FPEndingActivity.class).addFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT).putExtra("complete", MainApp.mwraFlag));

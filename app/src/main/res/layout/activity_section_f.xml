@@ -387,8 +387,92 @@
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
 
+            <!-- rc04 Radio-->
+            <androidx.cardview.widget.CardView
+                android:id="@+id/fldGrpCVstatus"
+                style="@style/cardView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
-                <androidx.cardview.widget.CardView
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/bottom"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            style="@style/labels"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:text="@string/rc04" />
+
+                        <TextView
+                            style="@style/quesNum"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:text="@string/Q_rc08" />
+                    </LinearLayout>
+
+
+                    <RadioGroup
+                        android:id="@+id/rb10"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <RadioButton
+                            android:id="@+id/rc0801"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:checked='@{outcome.rc08.equals("1")}'
+                            android:onClick='@{()->outcome.setRc08("1")}'
+                            android:text="@string/rc0401" />
+
+                        <RadioButton
+                            android:id="@+id/rc0802"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:checked='@{outcome.rc08.equals("2")}'
+                            android:onClick='@{()->outcome.setRc08("2") + rc05.clearCheck()}'
+                            android:text="@string/rc0402" />
+
+                        <RadioButton
+                            android:id="@+id/rb1003"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:checked='@{outcome.rc08.equals("3")}'
+                            android:onClick='@{()->outcome.setRc08("3") + rc05.clearCheck()}'
+                            android:text="@string/rc0403" />
+
+
+                        <RadioButton
+                            android:id="@+id/rb1004"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:checked='@{outcome.rc08.equals("4")}'
+                            android:onClick='@{()->outcome.setRc08("4") + rc05.clearCheck()}'
+                            android:text="@string/rc0404" />
+
+
+                    </RadioGroup>
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="@{outcome.rc08.equals(`1`) ? View.VISIBLE : View.GONE}">
+
+            <androidx.cardview.widget.CardView
                     android:id="@+id/fldGrpCVrc1301"
                     style="@style/cardView">
 
@@ -562,6 +646,8 @@
                             android:text="@={outcome.rc07}" />
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
+
+            </LinearLayout>
 
                 <!--EndButton LinearLayout-->
                 <LinearLayout

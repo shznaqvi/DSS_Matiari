@@ -226,7 +226,7 @@ public class Mwra extends BaseObservable implements Observable {
        setDeviceId(MainApp.deviceid);
        setHdssId(households.getHdssId());
        setAppver(MainApp.versionName + "." + MainApp.versionCode);
-       setPregnum("0");
+       //setPregnum("0");
 
     }
 
@@ -472,9 +472,11 @@ public class Mwra extends BaseObservable implements Observable {
         return child_count;
     }
 
+    @Bindable
     public void setChild_count(String child_count) {
         this.child_count = child_count;
     }
+
 
     public String getPregnum() {
         return pregnum;

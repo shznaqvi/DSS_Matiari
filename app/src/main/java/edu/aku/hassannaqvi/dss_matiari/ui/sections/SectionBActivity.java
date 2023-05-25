@@ -46,6 +46,8 @@ public class SectionBActivity extends AppCompatActivity {
     private static final String TAG = "SectionBActivity";
     ActivitySectionBBinding bi;
     private DssRoomDatabase db;
+    int prePregNum = 0;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,6 +59,7 @@ public class SectionBActivity extends AppCompatActivity {
 
         String date = toBlackVisionDate("2023-01-01");
         bi.rb01a.setMinDate(date);
+
 
         setListener();
 
@@ -70,43 +73,39 @@ public class SectionBActivity extends AppCompatActivity {
         setTitle(R.string.marriedwomenregistration_mainheading);
         setImmersive(true);
 
+
         db = MainApp.appInfo.dbHelper;
         bi.btnContinue.setText(MainApp.mwra.getUid().equals("") ? "Save" : "Update");
 
 
+        /*prePregNum = Integer.parseInt(mwra.getPregnum());
         bi.rb18.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            //int currentPregNum = Integer.parseInt(mwra.getPregnum());
+
             @Override
-            public void onCheckedChanged(RadioGroup radioGroup, int i) {
-                if(bi.rb1801.isChecked()){
-                    mwra.setPregnum(String.valueOf(Integer.parseInt(mwra.getPregnum()) +1));
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                if (bi.rb1801.isChecked()) {
+                    prePregNum = Integer.parseInt(mwra.getPregnum()) + 1;
+                    //mwra.setPregnum(String.valueOf(Integer.parseInt(mwra.getPregnum())+1));
+                } else {
+                    prePregNum = Integer.parseInt(mwra.getPregnum()) - 1;
                 }
             }
         });
+        */
         bi.rb19.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
-                if(bi.rb1901.isChecked())
-                {
+                if (bi.rb1901.isChecked()) {
                     MainApp.totalChildCount = 1;
-                }else if(bi.rb1902.isChecked()){
+                } else if (bi.rb1902.isChecked()) {
                     MainApp.totalChildCount = 2;
-                }else{
+                } else {
                     MainApp.totalChildCount = 3;
                 }
             }
         });
 
-        bi.rb0701.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if(isChecked)
-                {
-                    mwra.setPregnum("1");
-                }else{
-                    mwra.setPregnum("0");
-                }
-            }
-        });
 
     }
 
@@ -272,15 +271,23 @@ public class SectionBActivity extends AppCompatActivity {
         //if (MainApp.mwra.getUid().equals("") ? insertNewRecord() && insertNewFollowupRecord() : updateDB()) {
         if (MainApp.mwra.getUid().equals("") ? insertNewRecord() : updateDB()) {
 
-            if(bi.rb1801.isChecked())
-            {
+            mwra.setPregnum("0");
+            if (mwra.getRb07().equals("1")) {
+                mwra.setPregnum(String.valueOf(Integer.parseInt(mwra.getPregnum()) + 1));
+            }
+
+            if (mwra.getRb18().equals("1")) {
+                mwra.setPregnum(String.valueOf(Integer.parseInt(mwra.getPregnum()) + 1));
+            }
+
+            if (bi.rb1801.isChecked()) {
                 //MainApp.outcome = new Outcome();
                 Intent forwardIntent = new Intent(this, SectionEActivity.class).putExtra("complete", true);
                 forwardIntent.setFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT);
                 setResult(RESULT_OK, forwardIntent);
                 finish();
                 startActivity(forwardIntent);
-            }else{
+            } else {
                 setResult(RESULT_OK);
                 finish();
             }
@@ -289,7 +296,6 @@ public class SectionBActivity extends AppCompatActivity {
             Toast.makeText(this, "Failed to Update Database!", Toast.LENGTH_SHORT).show();
         }
     }
-
 
 
     private boolean insertNewRecord() throws JSONException {

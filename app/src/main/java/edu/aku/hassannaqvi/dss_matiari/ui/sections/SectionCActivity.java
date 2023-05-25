@@ -121,10 +121,8 @@ public class SectionCActivity extends AppCompatActivity {
             bi.rb05.setText(String.valueOf(actualAge));
         }
 
-        if(actualAge <= 49)
-        {
-            if(Integer.parseInt(households.getVisitNo()) < 2)
-            {
+        if (actualAge <= 49) {
+            if (Integer.parseInt(households.getVisitNo()) < 2) {
                 bi.rb1001.setEnabled(true);
                 bi.rb1002.setEnabled(true);
                 bi.rb1003.setEnabled(true);
@@ -134,7 +132,7 @@ public class SectionCActivity extends AppCompatActivity {
                 bi.rb1007.setEnabled(true);
                 bi.rb1008.setEnabled(false);
                 bi.rb1009.setEnabled(false);
-            }else if(Integer.parseInt(households.getVisitNo()) >=2){
+            } else if (Integer.parseInt(households.getVisitNo()) >= 2) {
                 bi.rb1001.setEnabled(true);
                 bi.rb1002.setEnabled(true);
                 bi.rb1003.setEnabled(true);
@@ -145,7 +143,7 @@ public class SectionCActivity extends AppCompatActivity {
                 bi.rb1008.setEnabled(true);
                 bi.rb1009.setEnabled(false);
             }
-        }else{
+        } else {
             bi.rb1001.setEnabled(false);
             bi.rb1002.setEnabled(false);
             bi.rb1003.setEnabled(false);
@@ -188,7 +186,7 @@ public class SectionCActivity extends AppCompatActivity {
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
                 boolean isAvailable = false;
                 if (bi.rb1004.isChecked()) {
-                    for(String[] arr : mwraStatus.keySet()) {
+                    for (String[] arr : mwraStatus.keySet()) {
                         if (arr[0].equals(fpMwra.getMuid()) && arr[1].equals(fpMwra.getHdssid())) {
                             isAvailable = true;
                             break;
@@ -205,7 +203,7 @@ public class SectionCActivity extends AppCompatActivity {
                     mwra.setRb06(mwra.getRb06());
                     mwra.setRb04(fpMwra.getRb04());
                     if (!mwraStatus.isEmpty()) {
-                        for(String[] arr : mwraStatus.keySet()) {
+                        for (String[] arr : mwraStatus.keySet()) {
                             if (arr[0].equals(fpMwra.getMuid()) && arr[1].equals(fpMwra.getHdssid())) {
                                 mwraStatus.remove(arr);
                                 break;
@@ -245,14 +243,6 @@ public class SectionCActivity extends AppCompatActivity {
 
         });
 
-        bi.rb18.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(RadioGroup group, int checkedId) {
-                if(bi.rb1801.isChecked()){
-                    mwra.setPregnum(String.valueOf(Integer.parseInt(mwra.getPregnum())+1));
-                }
-            }
-        });
 
         bi.rb1605.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -314,6 +304,10 @@ public class SectionCActivity extends AppCompatActivity {
         if (!formValidation()) return;
         if (mwra.getUid().equals("") ? insertNewRecord() : updateDB()) {
 
+            if (mwra.getRb18().equals("1")) {
+                mwra.setPregnum(String.valueOf(Integer.parseInt(mwra.getPregnum()) + 1));
+            }
+
             if (bi.rb1001.isChecked()) {
 
                 switch (fpMwra.getRb06()) {
@@ -328,11 +322,11 @@ public class SectionCActivity extends AppCompatActivity {
                             } else {  // If Pregnancy ended
                                 if (bi.rb1601.isChecked() || bi.rb1605.isChecked()) // If Live Birth
                                 {
-                                 if(!fpMwra.getChild_count().equals("null")){
-                                    MainApp.prevChildCount = Integer.parseInt(fpMwra.getChild_count());
-                                 }else{
-                                     MainApp.prevChildCount = 0;
-                                 }
+                                    if (!fpMwra.getChild_count().equals("null")) {
+                                        MainApp.prevChildCount = Integer.parseInt(fpMwra.getChild_count());
+                                    } else {
+                                        MainApp.prevChildCount = 0;
+                                    }
                                     Intent forwardIntent = new Intent(this, SectionEActivity.class).putExtra("complete", true);
                                     forwardIntent.setFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT);
                                     setResult(RESULT_OK, forwardIntent);
@@ -347,9 +341,9 @@ public class SectionCActivity extends AppCompatActivity {
                                 }
                             }
                         } else if (mwra.getPrePreg().equals("2") && bi.rb1801.isChecked()) {   // Not Pregnant
-                            if(!fpMwra.getChild_count().equals("null")){
+                            if (!fpMwra.getChild_count().equals("null")) {
                                 MainApp.prevChildCount = Integer.parseInt(fpMwra.getChild_count());
-                            }else{
+                            } else {
                                 MainApp.prevChildCount = 0;
                             }
                             Intent forwardIntent = new Intent(this, SectionEActivity.class).putExtra("complete", true);
@@ -377,9 +371,9 @@ public class SectionCActivity extends AppCompatActivity {
                                 //finish();
                             } else {     // If Pregnancy ended
                                 if (bi.rb1601.isChecked() || bi.rb1605.isChecked()) {    // Live Birth
-                                    if(!fpMwra.getChild_count().equals("null")){
+                                    if (!fpMwra.getChild_count().equals("null")) {
                                         MainApp.prevChildCount = Integer.parseInt(fpMwra.getChild_count());
-                                    }else{
+                                    } else {
                                         MainApp.prevChildCount = 0;
                                     }
                                     Intent forwardIntent = new Intent(this, SectionEActivity.class).putExtra("complete", true);
@@ -394,9 +388,9 @@ public class SectionCActivity extends AppCompatActivity {
                             }
                         } else {      // Not Pregnant
                             if (bi.rb1801.isChecked()) {
-                                if(!fpMwra.getChild_count().equals("null")){
+                                if (!fpMwra.getChild_count().equals("null")) {
                                     MainApp.prevChildCount = Integer.parseInt(fpMwra.getChild_count());
-                                }else{
+                                } else {
                                     MainApp.prevChildCount = 0;
                                 }
                                 Intent forwardIntent = new Intent(this, SectionEActivity.class).putExtra("complete", true);
@@ -427,9 +421,9 @@ public class SectionCActivity extends AppCompatActivity {
                                 //finish();
                             } else {     // If Pregnancy ended
                                 if (bi.rb1601.isChecked() || bi.rb1605.isChecked()) {    // Live Birth
-                                    if(!fpMwra.getChild_count().equals("null")){
+                                    if (!fpMwra.getChild_count().equals("null")) {
                                         MainApp.prevChildCount = Integer.parseInt(fpMwra.getChild_count());
-                                    }else{
+                                    } else {
                                         MainApp.prevChildCount = 0;
                                     }
                                     Intent forwardIntent = new Intent(this, SectionEActivity.class).putExtra("complete", true);
@@ -451,9 +445,9 @@ public class SectionCActivity extends AppCompatActivity {
                                 startActivity(forwardIntent);
                                 //finish();
                             } else if (bi.rb1801.isChecked()) {
-                                if(!fpMwra.getChild_count().equals("null")){
+                                if (!fpMwra.getChild_count().equals("null")) {
                                     MainApp.prevChildCount = Integer.parseInt(fpMwra.getChild_count());
-                                }else{
+                                } else {
                                     MainApp.prevChildCount = 0;
                                 }
                                 Intent forwardIntent = new Intent(this, SectionEActivity.class).putExtra("complete", true);
@@ -478,9 +472,9 @@ public class SectionCActivity extends AppCompatActivity {
                                 //finish();
                             } else {     // If Pregnancy ended
                                 if (bi.rb1601.isChecked() || bi.rb1605.isChecked()) {    // Live Birth
-                                    if(!fpMwra.getChild_count().equals("null")){
+                                    if (!fpMwra.getChild_count().equals("null")) {
                                         MainApp.prevChildCount = Integer.parseInt(fpMwra.getChild_count());
-                                    }else{
+                                    } else {
                                         MainApp.prevChildCount = 0;
                                     }
                                     Intent forwardIntent = new Intent(this, SectionEActivity.class).putExtra("complete", true);
@@ -502,9 +496,9 @@ public class SectionCActivity extends AppCompatActivity {
                                 startActivity(forwardIntent);
                                 //finish();
                             } else if (bi.rb1801.isChecked()) {
-                                if(!fpMwra.getChild_count().equals("null")){
+                                if (!fpMwra.getChild_count().equals("null")) {
                                     MainApp.prevChildCount = Integer.parseInt(fpMwra.getChild_count());
-                                }else{
+                                } else {
                                     MainApp.prevChildCount = 0;
                                 }
                                 Intent forwardIntent = new Intent(this, SectionEActivity.class).putExtra("complete", true);
