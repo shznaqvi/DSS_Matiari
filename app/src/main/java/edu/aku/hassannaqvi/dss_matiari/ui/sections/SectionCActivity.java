@@ -304,8 +304,10 @@ public class SectionCActivity extends AppCompatActivity {
         if (!formValidation()) return;
         if (mwra.getUid().equals("") ? insertNewRecord() : updateDB()) {
 
+            mwra.setPregnum("0");
             if (mwra.getRb18().equals("1")) {
-                mwra.setPregnum(String.valueOf(Integer.parseInt(mwra.getPregnum()) + 1));
+                mwra.setPregnum(String.valueOf(Integer.parseInt(fpMwra.getPregCount()) + 1));
+                MainApp.pregcount = Integer.parseInt(mwra.getPregnum());
             }
 
             if (bi.rb1001.isChecked()) {
@@ -515,15 +517,22 @@ public class SectionCActivity extends AppCompatActivity {
                     //finish();
                     case "4": // Unmarried in previous round
                         // if get married in current round
-                        if (!bi.rb0604.isChecked()) {
+                        if (!bi.rb0604.isChecked() && bi.rb1802.isChecked()) {
                             Intent forwardIntent = new Intent(this, SectionDActivity.class).putExtra("complete", true);
                             forwardIntent.setFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT);
                             setResult(RESULT_OK, forwardIntent);
                             startActivity(forwardIntent);
                             //finish();
 
-                            // if still unmarried
-                        } else if (bi.rb0604.isChecked()) {
+                            // Delivered baby within last 3 months
+                        }else if(!bi.rb0604.isChecked() && bi.rb1801.isChecked()){
+                            MainApp.prevChildCount = 0;
+                            Intent forwardIntent = new Intent(this, SectionEActivity.class).putExtra("complete", true);
+                            forwardIntent.setFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT);
+                            setResult(RESULT_OK, forwardIntent);
+                            startActivity(forwardIntent);
+                        }// if still unmarried
+                        else if (bi.rb0604.isChecked()) {
                             setResult(RESULT_OK);
                             //finish();
                         }

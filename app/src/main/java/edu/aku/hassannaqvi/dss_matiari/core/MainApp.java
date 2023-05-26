@@ -108,6 +108,7 @@ public class MainApp extends Application {
     public static List<FollowUpsSche> followUpsScheHHList; // Followups - Households List
     public static List<Hhs> hhsList;
     public static List<FollowUpsSche> followUpsScheMWRAList; // Followups - MWRAs List
+    public static int pregcount= 0;
     public static int householdCount = 0;
     public static int householdCountComplete = 0;
     public static String previousAddress = "";

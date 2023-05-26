@@ -69,22 +69,6 @@ public class SectionDActivity extends AppCompatActivity {
         bi.btnContinue.setText(mwra.getUid().equals("") ? "Save" : "Update");
 
 
-        bi.rb07.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-            int prePregNum = Integer.parseInt(mwra.getPregnum());
-            int currentPregNum = Integer.parseInt(mwra.getPregnum());
-
-
-            @Override
-            public void onCheckedChanged(RadioGroup group, int checkedId) {
-                if(bi.rb0701.isChecked()){
-                    currentPregNum ++;
-                    mwra.setPregnum(String.valueOf(currentPregNum));
-                }else{
-                    mwra.setPregnum(String.valueOf(prePregNum));
-                }
-            }
-        });
-
         bi.rb08.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -166,8 +150,11 @@ public class SectionDActivity extends AppCompatActivity {
 
     public void btnContinue(View view) {
         if (!formValidation()) return;
+
         if (mwra.getRb07().equals("1")) {
             mwra.setPregnum(String.valueOf(Integer.parseInt(mwra.getPregnum()) + 1));
+        }else{
+            mwra.setPregnum(String.valueOf(MainApp.pregcount));
         }
         if (updateDB()) {
             setResult(RESULT_OK);
@@ -186,6 +173,7 @@ public class SectionDActivity extends AppCompatActivity {
 
             //updcount = db.updatesFollowUpsColumn(TableContracts.FollowupsTable.COLUMN_SC, followups.sCtoString())
             Mwra updatedFollowups = mwra;
+            updatedFollowups.setSC(mwra.sCtoString());
             updatedFollowups.setSD(mwra.SDtoString());
             updcount = db.mwraDao().updateMwra(mwra);
 

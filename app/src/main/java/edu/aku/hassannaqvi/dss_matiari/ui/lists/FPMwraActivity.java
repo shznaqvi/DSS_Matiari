@@ -59,6 +59,7 @@ public class FPMwraActivity extends AppCompatActivity {
         db = MainApp.appInfo.dbHelper;
         mwraDone = 0;
         MainApp.prevChildCount = 0;
+        MainApp.pregcount = 0;
         bi.hdssid.setText(households.getHdssId());
 
         try {
