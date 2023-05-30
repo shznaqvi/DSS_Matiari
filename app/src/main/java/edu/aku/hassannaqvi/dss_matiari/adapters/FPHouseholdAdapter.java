@@ -284,8 +284,15 @@ public class FPHouseholdAdapter extends RecyclerView.Adapter<FPHouseholdAdapter.
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
+                    for(int i=0; i<=hhsList.size(); i++) {
+                        if (MainApp.households.getHdssId().equals(hhsList.get(i).getHdssid())) {
+                            MainApp.selectHHsHousehold = i;
+                            break;
+                        }
+                    }
                     //if (MainApp.households.getUid().equals("")) {
                         MainApp.households.populateMeta(viewHolder.getAdapterPosition());
+                        MainApp.households.updateFMData(MainApp.selectHHsHousehold);
                     //}
 
                     if (!MainApp.households.getIStatus().equals("1") && Integer.parseInt(MainApp.households.getVisitNo()) < 3) {

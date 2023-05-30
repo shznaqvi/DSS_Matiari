@@ -78,21 +78,6 @@ public class SectionBActivity extends AppCompatActivity {
         bi.btnContinue.setText(MainApp.mwra.getUid().equals("") ? "Save" : "Update");
 
 
-        /*prePregNum = Integer.parseInt(mwra.getPregnum());
-        bi.rb18.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-            //int currentPregNum = Integer.parseInt(mwra.getPregnum());
-
-            @Override
-            public void onCheckedChanged(RadioGroup group, int checkedId) {
-                if (bi.rb1801.isChecked()) {
-                    prePregNum = Integer.parseInt(mwra.getPregnum()) + 1;
-                    //mwra.setPregnum(String.valueOf(Integer.parseInt(mwra.getPregnum())+1));
-                } else {
-                    prePregNum = Integer.parseInt(mwra.getPregnum()) - 1;
-                }
-            }
-        });
-        */
         bi.rb19.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
@@ -278,6 +263,10 @@ public class SectionBActivity extends AppCompatActivity {
 
             if (mwra.getRb18().equals("1")) {
                 mwra.setPregnum(String.valueOf(Integer.parseInt(mwra.getPregnum()) + 1));
+            }
+
+            if(mwra.getRb07().equals("2") && mwra.getRb18().equals("2")){
+                mwra.setPregnum("0");
             }
 
             if (bi.rb1801.isChecked()) {

@@ -304,9 +304,12 @@ public class SectionCActivity extends AppCompatActivity {
         if (!formValidation()) return;
         if (mwra.getUid().equals("") ? insertNewRecord() : updateDB()) {
 
-            mwra.setPregnum("0");
+            //mwra.setPregnum("0");
             if (mwra.getRb18().equals("1")) {
                 mwra.setPregnum(String.valueOf(Integer.parseInt(fpMwra.getPregCount()) + 1));
+                MainApp.pregcount = Integer.parseInt(mwra.getPregnum());
+            }else{
+                mwra.setPregnum(fpMwra.getPregCount());
                 MainApp.pregcount = Integer.parseInt(mwra.getPregnum());
             }
 
