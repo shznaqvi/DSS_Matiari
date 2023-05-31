@@ -318,8 +318,7 @@ public class FPHouseholdAdapter extends RecyclerView.Adapter<FPHouseholdAdapter.
                                 MainApp.selectedHhNO = followUpsSche.getHhNo();
                                 MainApp.position = viewHolder.getAdapterPosition();
                                 if (!MainApp.households.getIStatus().equals("1") && Integer.parseInt(MainApp.households.getVisitNo()) < 3) {
-
-
+                                    MainApp.households.populateMeta(viewHolder.getLayoutPosition());
                                     Intent intent = new Intent(mContext, SectionAActivity.class);
                                     ((FPHouseholdActivity) mContext).MemberInfoLauncher.launch(intent);
                                 } else {

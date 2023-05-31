@@ -268,6 +268,8 @@ public class SectionBActivity extends AppCompatActivity {
             if(mwra.getRb07().equals("2") && mwra.getRb18().equals("2")){
                 mwra.setPregnum("0");
             }
+            mwra.setSB(mwra.sBtoString());
+            db.mwraDao().updateMwra(mwra);
 
             if (bi.rb1801.isChecked()) {
                 //MainApp.outcome = new Outcome();

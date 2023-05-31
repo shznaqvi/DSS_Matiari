@@ -313,6 +313,8 @@ public class SectionCActivity extends AppCompatActivity {
                 MainApp.pregcount = Integer.parseInt(mwra.getPregnum());
             }
 
+            //db.mwraDao().updateMwra(mwra);
+
             if (bi.rb1001.isChecked()) {
 
                 switch (fpMwra.getRb06()) {
