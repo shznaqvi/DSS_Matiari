@@ -60,7 +60,7 @@ public class SectionAFupctivity extends AppCompatActivity {
                 households.populateMeta(MainApp.selectedFpHousehold);
                 bi.btnContinue.setVisibility(View.GONE);
                 bi.btnUpdate.setVisibility(View.VISIBLE);
-                households.updateFMData(MainApp.selectedFpHousehold);
+                households.updateFMData(MainApp.selectHHsHousehold);
             }
         }
 
