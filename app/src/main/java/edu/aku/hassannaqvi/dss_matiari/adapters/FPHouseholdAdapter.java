@@ -206,10 +206,9 @@ public class FPHouseholdAdapter extends RecyclerView.Adapter<FPHouseholdAdapter.
 
         hhNo.setText(followUpsSche.getVillageCode() + "-" + followUpsSche.getHhNo());
 
-        if(tempMWRA == 0 && childCount == 0)
-        {
+        if(tempMWRA == 0 && childCount == 0) {
             hhHead.setVisibility(View.VISIBLE);
-            imgStatus.setVisibility(View.GONE);
+            imgStatus.setVisibility(View.VISIBLE);
             prvStatus.setText("NO WRA AND NO CHILD");
             prvStatus.setVisibility(View.VISIBLE);
         }else{
@@ -218,6 +217,7 @@ public class FPHouseholdAdapter extends RecyclerView.Adapter<FPHouseholdAdapter.
                 hhHead.setText(followUpsSche.getRa12());
                 hhHead.setVisibility(View.VISIBLE);
             }else{
+                imgStatus.setVisibility(View.VISIBLE);
                 hhHead.setVisibility(View.GONE);
                 prvStatus.setText(hhPrvStatus);
                 prvStatus.setVisibility(View.VISIBLE);

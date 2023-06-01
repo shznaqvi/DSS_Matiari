@@ -46,7 +46,7 @@
         <entry key="..\:/Android Projects/DSS_Matiari/app/src/main/res/layout/activity_section_f.xml" value="0.33305578684429643" />
         <entry key="..\:/Android Projects/DSS_Matiari/app/src/main/res/layout/activity_section_outcome.xml" value="0.2604166666666667" />
         <entry key="..\:/Android Projects/DSS_Matiari/app/src/main/res/layout/date_error_dialog.xml" value="0.2552083333333333" />
-        <entry key="..\:/Android Projects/DSS_Matiari/app/src/main/res/layout/household_row.xml" value="0.3925925925925926" />
+        <entry key="..\:/Android Projects/DSS_Matiari/app/src/main/res/layout/household_row.xml" value="0.33" />
         <entry key="..\:/Android Projects/DSS_Matiari/app/src/main/res/layout/member_row.xml" value="0.33424657534246577" />
         <entry key="..\:/Android Projects/DSS_Matiari/app/src/main/res/layout/recycler_view_item.xml" value="0.24479166666666666" />
         <entry key="..\:/Android Projects/DSS_Matiari/app/src/main/res/layout/recycler_view_item_1.xml" value="0.35625" />
@@ -132,7 +132,7 @@
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_16_PREVIEW" project-jdk-name="11" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_16" project-jdk-name="11" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">

@@ -57,13 +57,14 @@
 
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="@dimen/_20sdp"
                         android:orientation="horizontal">
 
                         <TextView
                             android:id="@+id/ra09"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
                             android:includeFontPadding="false"
                             android:text="Household Number"
                             android:textColor="@color/grayDark"
@@ -120,13 +121,14 @@
                             android:letterSpacing="0.24"
                             android:paddingStart="12dp"
                             android:paddingTop="2dp"
-                            android:paddingEnd="12dp"
+                            android:paddingEnd="15dp"
                             android:paddingBottom="2dp"
                             android:text="Status"
                             android:textColor="@color/white"
                             android:textSize="11dp"
                             android:textStyle="italic|normal"
-                            android:visibility="gone" />
+                            android:visibility="gone"
+                            tools:visibility="visible"/>
 
                     </LinearLayout>
 
