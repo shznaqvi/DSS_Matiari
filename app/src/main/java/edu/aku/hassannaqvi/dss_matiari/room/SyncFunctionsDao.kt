@@ -1,8 +1,6 @@
 package edu.aku.hassannaqvi.dss_matiari.room
 
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.Query
+import androidx.room.*
 import edu.aku.hassannaqvi.dss_matiari.contracts.TableContracts
 import edu.aku.hassannaqvi.dss_matiari.models.*
 import org.json.JSONArray
@@ -216,6 +214,9 @@ interface SyncFunctionsDao {
 
     @Query("DELETE FROM " + TableContracts.UsersTable.TABLE_NAME)
     fun deleteUsersTable()
+
+    @Update(onConflict =  OnConflictStrategy.REPLACE)
+    fun updateUser(user: Users): Int
 
     // Followupsche
 

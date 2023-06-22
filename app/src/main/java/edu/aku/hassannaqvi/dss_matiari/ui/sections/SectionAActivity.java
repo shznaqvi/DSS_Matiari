@@ -102,9 +102,6 @@ public class SectionAActivity extends AppCompatActivity {
 
     }
 
-
-
-
     public void btnContinue(View view) {
 
         if (view.getId() == bi.btnLocked.getId()) {
@@ -167,10 +164,6 @@ public class SectionAActivity extends AppCompatActivity {
         }
     }
 
-
-
-
-
     private boolean updateDB() {
         //DssRoomDatabase db = MainApp.appInfo.getDbHelper();
         int updcount = 0;
@@ -192,7 +185,6 @@ public class SectionAActivity extends AppCompatActivity {
             return false;
         }
     }
-
 
     public void btnEnd(View view) {
         setResult(RESULT_CANCELED);
@@ -216,5 +208,10 @@ public class SectionAActivity extends AppCompatActivity {
         return newDate;
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        MainApp.lockScreen(this);
+    }
 
 }

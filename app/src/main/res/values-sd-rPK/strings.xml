@@ -7,6 +7,8 @@
     <string name="open_onhold_form">UPDATE ONHOLD FORM</string>
     <string name="open_followup_form">OPEN FOLLOW-UP FORM</string>
     <string name="folder_not_created" translatable="false"> Folder Not Created </string>
+    <string name="invalid_password"> Invalid Password </string>
+    <string name="username_required"> Username is required. </string>
 
     <string name="demographicinformation_mainheading">آبادیاتی معلومات</string>
     <string name="marriedwomenregistration_mainheading">هر ۾ موجود   شادي شده عورتن جي لاءِ </string>
@@ -265,6 +267,7 @@
     <string name="identification">سڃاڻپ</string>
     <string name="section">سيڪشن</string>
     <string name="file_not_found">File not found</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 
 </resources>
