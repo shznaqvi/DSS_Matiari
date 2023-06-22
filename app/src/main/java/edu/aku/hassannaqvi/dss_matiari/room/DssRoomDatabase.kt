@@ -26,7 +26,8 @@ import net.sqlcipher.database.SupportFactory
         FollowUpsSche ::class,
         MaxHhno ::class,
         Outcome ::class,
-        Hhs ::class
+        Hhs ::class,
+        EntryLog ::class
     ]
 )
 
@@ -42,10 +43,11 @@ abstract class DssRoomDatabase : RoomDatabase() {
     abstract fun OutcomeDao() : OutcomeDao
     abstract fun syncFunctionsDao() : SyncFunctionsDao
     abstract fun HhsDao() : HhsDao
+    abstract fun EntryLogDao() : EntryLogDao
 
 
     companion object {
-        const val DATABASE_VERSION = 7
+        const val DATABASE_VERSION = 10
         const val DATABASE_NAME = MainApp.PROJECT_NAME + "1.db"
         const val DATABASE_COPY = MainApp.PROJECT_NAME + "1_copy.db"
 
@@ -120,6 +122,8 @@ abstract class DssRoomDatabase : RoomDatabase() {
                         "PRIMARY KEY('id'))");
             }
         }
+
+
 
 
 

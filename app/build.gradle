@@ -13,7 +13,7 @@ android {
     buildFeatures {
         dataBinding true
     }
-    compileSdkVersion 31
+    compileSdkVersion 32
     buildToolsVersion '31.0.0'
 
     Properties versionProps = new Properties()
@@ -157,7 +157,7 @@ dependencies {
     // Room
     def room_version = "2.4.3"
     implementation "androidx.room:room-runtime:$room_version"
-    kapt "androidx.room:room-compiler:$room_version"
+    kapt("androidx.room:room-compiler:$room_version")
     implementation 'com.wajahatkarim:roomexplorer:1.0.1'
 
     implementation 'androidx.recyclerview:recyclerview:1.2.1'

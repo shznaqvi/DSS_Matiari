@@ -1,8 +1,6 @@
 package edu.aku.hassannaqvi.dss_matiari.room
 
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.Query
+import androidx.room.*
 import edu.aku.hassannaqvi.dss_matiari.contracts.TableContracts
 import edu.aku.hassannaqvi.dss_matiari.models.*
 import org.json.JSONArray
@@ -20,9 +18,11 @@ interface SyncFunctionsDao {
 
     // Household Upload Functions
 
-    @Query("SELECT * FROM " + TableContracts.HouseholdTable.TABLE_NAME + " WHERE " + TableContracts.HouseholdTable.COLUMN_SYNCED
+    @Query("SELECT * FROM " + TableContracts.HouseholdTable.TABLE_NAME + " WHERE "
+            + TableContracts.HouseholdTable.COLUMN_SYNCED
             + " is \'\' AND (" + TableContracts.HouseholdTable.COLUMN_ISTATUS  + " = 1 OR "
-            + TableContracts.HouseholdTable.COLUMN_VISIT_NO + " > 2) ORDER BY " + TableContracts.HouseholdTable.COLUMN_ID + " ASC")
+            + TableContracts.HouseholdTable.COLUMN_VISIT_NO + " > 2) ORDER BY "
+            + TableContracts.HouseholdTable.COLUMN_ID + " ASC")
     fun getUnsyncedHousehols_internal() : List<Households>
 
     @kotlin.jvm.Throws(JSONException :: class)
@@ -67,8 +67,10 @@ interface SyncFunctionsDao {
 
     /*@Query("SELECT * FROM mwras, hhs WHERE mwras.hdssid LIKE hhs.hdssid AND mwras.synced is \'\' " +
             "AND hhs.istatus = 1 ORDER BY mwras._id ASC ")*/
-    @Query("SELECT * FROM " + TableContracts.MWRATable.TABLE_NAME + " WHERE " + TableContracts.MWRATable.COLUMN_SYNCED
-            + " is \'\' AND (" + TableContracts.MWRATable.COLUMN_ISTATUS  + "  != 4 ) ORDER BY " + TableContracts.MWRATable.COLUMN_ID + " ASC")
+    @Query("SELECT * FROM " + TableContracts.MWRATable.TABLE_NAME + " WHERE "
+            + TableContracts.MWRATable.COLUMN_SYNCED
+            + " is \'\' AND (" + TableContracts.MWRATable.COLUMN_ISTATUS
+            + "  != 4 ) ORDER BY " + TableContracts.MWRATable.COLUMN_ID + " ASC")
     fun getUnsyncedMWRAS_internal() : List<Mwra>
 
     @kotlin.jvm.Throws(JSONException :: class)
@@ -110,7 +112,8 @@ interface SyncFunctionsDao {
 
     @Query("SELECT * FROM " + TableContracts.OutcomeTable.TABLE_NAME
             + " WHERE " + TableContracts.OutcomeTable.COLUMN_SYNCED
-            + " is \'\' ORDER BY " + TableContracts.OutcomeTable.COLUMN_ID + " ASC")
+            + " is \'\' AND (" + TableContracts.OutcomeTable.COLUMN_ISTATUS
+            + " != 4 ) ORDER BY " + TableContracts.OutcomeTable.COLUMN_ID + " ASC")
     fun getUnsyncedOutcome_internal() : List<Outcome>
 
     @kotlin.jvm.Throws(JSONException :: class)
@@ -216,6 +219,9 @@ interface SyncFunctionsDao {
 
     @Query("DELETE FROM " + TableContracts.UsersTable.TABLE_NAME)
     fun deleteUsersTable()
+
+    @Update(onConflict =  OnConflictStrategy.REPLACE)
+    fun updateUser(user: Users): Int
 
     // Followupsche
 

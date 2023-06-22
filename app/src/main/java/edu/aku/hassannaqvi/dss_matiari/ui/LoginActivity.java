@@ -9,6 +9,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
+import android.database.sqlite.SQLiteException;
 import android.graphics.Color;
 import android.location.LocationManager;
 import android.net.ConnectivityManager;
@@ -37,6 +38,8 @@ import com.karumi.dexter.PermissionToken;
 import com.karumi.dexter.listener.PermissionRequest;
 import com.karumi.dexter.listener.multi.MultiplePermissionsListener;
 
+import org.json.JSONException;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -47,6 +50,7 @@ import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
+import java.security.spec.InvalidKeySpecException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -61,9 +65,11 @@ import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
 
 import edu.aku.hassannaqvi.dss_matiari.R;
+import edu.aku.hassannaqvi.dss_matiari.contracts.TableContracts;
 import edu.aku.hassannaqvi.dss_matiari.core.AppInfo;
 import edu.aku.hassannaqvi.dss_matiari.core.MainApp;
 import edu.aku.hassannaqvi.dss_matiari.databinding.ActivityLoginBinding;
+import edu.aku.hassannaqvi.dss_matiari.models.EntryLog;
 import edu.aku.hassannaqvi.dss_matiari.models.Users;
 import edu.aku.hassannaqvi.dss_matiari.room.DssRoomDatabase;
 
@@ -80,6 +86,8 @@ public class LoginActivity extends AppCompatActivity {
     DssRoomDatabase db;
     ArrayList<String> leaderNames;
     ArrayList<String> leaderCodes;
+    String username = "";
+    String password = "";
     int attemptCounter = 0;
     private int countryCode;
 
@@ -263,65 +271,96 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void attemptLogin(View view) {
-
-        MainApp.user = new Users();
+        if (!username.equals(bi.username.getText().toString())) {
+            attemptCounter = 0;
+        }
         attemptCounter++;
         // Reset errors.
         bi.username.setError(null);
         bi.password.setError(null);
-        Toast.makeText(this, String.valueOf(attemptCounter), Toast.LENGTH_SHORT).show();
-   /*     if (attemptCounter == 7) {
-            Intent iLogin = new Intent(edu.aku.hassannaqvi.dss_matiari.ui.LoginActivity.this, MainActivity.class);
-            startActivity(iLogin);
+        //bi.as1q01.setError(null);
+        // Toast.makeText(this, String.valueOf(attemptCounter), Toast.LENGTH_SHORT).show();
+        if (attemptCounter > 5) {
+            bi.username.setError("This user has been blocked.");
+            Toast.makeText(this, "This user has been blocked.", Toast.LENGTH_LONG).show();
 
-        } else {*/
-        // Store values at the time of the login attempt.
-        String username = bi.username.getText().toString();
-        String password = bi.password.getText().toString();
-
-        boolean cancel = false;
-        View focusView = null;
-
-        // Check for a valid password, if the user entered one.
-        if (password.length() < 8) {
-            bi.password.setError("Invalid Password");
-            focusView = bi.password;
-            return;
-        }
-
-        // Check for a valid username address.
-        if (TextUtils.isEmpty(username)) {
-            bi.username.setError("Username is required.");
-            focusView = bi.username;
-            return;
-        }
-
-        if (bi.teamleader.getSelectedItemPosition() == 0) {
-            TextView errorText = (TextView) bi.teamleader.getSelectedView();
-            errorText.setError("");
-            errorText.setTextColor(Color.RED);//just to highlight that this is an error
-            errorText.setText("Select your team leader");//changes the selected item text to this
-            return;
-        }
-
-        if ((username.equals("dmu@aku") && password.equals("aku?dmu"))
-                || (username.equals("test1234") && password.equals("test1234"))
-                || db.usersDao().doLogin(username, password)
-        ) {
-            MainApp.admin = username.contains("@") || username.contains("test1234");
-            MainApp.user.setUserName(username);
-            MainApp.leaderCode = leaderCodes.get(bi.teamleader.getSelectedItemPosition());
-
-
-            Intent iLogin = new Intent(edu.aku.hassannaqvi.dss_matiari.ui.LoginActivity.this, MainActivity.class);
-            startActivity(iLogin);
         } else {
-            bi.password.setError("Incorrect Username or Password");
-            bi.password.requestFocus();
-            Toast.makeText(edu.aku.hassannaqvi.dss_matiari.ui.LoginActivity.this, username + " " + password, Toast.LENGTH_SHORT).show();
+            // Store values at the time of the login attempt.
+            username = bi.username.getText().toString();
+            password = bi.password.getText().toString();
+
+            boolean cancel = false;
+            View focusView = null;
+
+            // Check for a valid password, if the user entered one.
+            if (password.length() < 8) {
+                bi.password.setError(getString(R.string.invalid_password));
+                focusView = bi.password;
+                return;
+            }
+
+            // Check for a valid username address.
+            if (TextUtils.isEmpty(username)) {
+                bi.username.setError(getString(R.string.username_required));
+                focusView = bi.username;
+                return;
+            }
+
+            // UserName and Password cannot be same
+            if (username.equals(password)) {
+                bi.username.setError("Username and Password cannot be same.");
+                focusView = bi.username;
+                return;
+            }
+
+            //if(!Validator.emptySpinner(this, bi.countrySwitch)) return;
+            /*if (bi.countrySwitch.getSelectedItemPosition() == 0) {
+                bi.as1q01.setError(getString(R.string.as1q01));
+                return;
+            }*/
+
+            try {
+                if ((username.equals("dmu@aku") && password.equals("aku?dmu"))
+                        || (username.equals("test1234") && password.equals("test1234"))
+                        || db.usersDao().doLogin(username, password)
+                ) {
+
+                    MainApp.user.setUserName(username);
+                    MainApp.admin = username.contains("@") || username.contains("test1234");
+                    //MainApp.superuser = MainApp.user.getDesignation().equals("Supervisor");
+                    Intent iLogin = null;
+                    if (MainApp.admin) {
+                        recordEntry("Successful Login (Admin)");
+                        iLogin = new Intent(LoginActivity.this, MainActivity.class);
+                        startActivity(iLogin);
+                    } else if (MainApp.user.getEnabled().equals("1")) {
+                        if (!MainApp.user.getNewUser().equals("1")) {
+                            recordEntry("Successful Login");
+                            iLogin = new Intent(LoginActivity.this, MainActivity.class);
+                            startActivity(iLogin);
+                        } else if (MainApp.user.getNewUser().equals("1")) {
+                            recordEntry("First Login");
+                            iLogin = new Intent(LoginActivity.this, ChangePasswordActivity.class);
+                            startActivity(iLogin);
+                        }
+                    } else {
+                        recordEntry("Inactive User (Disabled)");
+                        Toast.makeText(this, "This user is inactive.", Toast.LENGTH_SHORT).show();
+                    }
+                } else {
+                    recordEntry("Failed Login: Incorrect username or password");
+                    bi.password.setError(getString(R.string.incorrect_username_or_password));
+                    bi.password.requestFocus();
+                    //  Toast.makeText(LoginActivity.this, username + " " + password, Toast.LENGTH_SHORT).show();
+                }
+
+            } catch (IllegalArgumentException e) {
+                e.printStackTrace();
+                Toast.makeText(this, "IllegalArgumentException(UserAuth):" + e.getMessage(), Toast.LENGTH_SHORT).show();
+
+            }
+
         }
-
-
     }
 
     public String computeHash(String input) throws NoSuchAlgorithmException, UnsupportedEncodingException {
@@ -434,6 +473,33 @@ public class LoginActivity extends AppCompatActivity {
         }
 
         changeLanguage(Integer.parseInt(sharedPref.getString("lang", "0")));
+    }
+
+    private void recordEntry(String entryType) {
+
+        EntryLog entryLog = new EntryLog();
+        entryLog.setProjectName(PROJECT_NAME);
+        entryLog.setUserName(username);
+        entryLog.setEntryDate(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.ENGLISH).format(new Date().getTime()));
+        entryLog.setAppver(MainApp.appInfo.getAppVersion());
+        entryLog.setEntryType(entryType);
+        entryLog.setDeviceId(MainApp.deviceid);
+        Long rowId = null;
+        try {
+
+            rowId = db.EntryLogDao().addEntryLog(entryLog);
+        } catch (SQLiteException | JSONException e) {
+            Toast.makeText(this, "SQLiteException(EntryLog)" + entryLog, Toast.LENGTH_SHORT).show();
+        }
+        if (rowId != -1) {
+            entryLog.setId(rowId);
+            entryLog.setUid(entryLog.getDeviceId() + entryLog.getId());
+            db.EntryLogDao().updateEntryLog(entryLog);
+        } else {
+            Toast.makeText(this, R.string.upd_db_error, Toast.LENGTH_SHORT).show();
+
+        }
+
     }
 }
 

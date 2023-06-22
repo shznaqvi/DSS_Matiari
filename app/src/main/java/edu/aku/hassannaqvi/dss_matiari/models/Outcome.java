@@ -95,11 +95,11 @@ public class Outcome extends BaseObservable implements Observable {
     @ColumnInfo(name = TableContracts.OutcomeTable.COLUMN_APPVERSION)
     private String appver = StringUtils.EMPTY;
 
-    /*@ColumnInfo(name = TableContracts.OutcomeTable.COLUMN_ISTATUS)
+    @ColumnInfo(name = TableContracts.OutcomeTable.COLUMN_ISTATUS)
     private String iStatus = StringUtils.EMPTY;
 
     @Ignore
-    private String iStatus96x = StringUtils.EMPTY;*/
+    private String iStatus96x = StringUtils.EMPTY;
 
     @ColumnInfo(name = TableContracts.OutcomeTable.COLUMN_SYNCED)
     private String synced = StringUtils.EMPTY;
@@ -317,6 +317,25 @@ public class Outcome extends BaseObservable implements Observable {
         this.appver = appver;
     }
 
+    @Bindable
+    public String getIStatus() {
+        return iStatus;
+    }
+
+    public void setIStatus(String iStatus) {
+        this.iStatus = iStatus;
+        notifyPropertyChanged(BR.iStatus);
+    }
+
+    @Bindable
+    public String getiStatus96x() {
+        return iStatus96x;
+    }
+
+    public void setiStatus96x(String iStatus96x) {
+        this.iStatus96x = iStatus96x;
+        notifyPropertyChanged(BR.iStatus96x);
+    }
 
     public String getSynced() {
         return synced;
@@ -443,6 +462,7 @@ public class Outcome extends BaseObservable implements Observable {
         setRc05(rc08.equals("1") ? this.rc05 : "");
         setRc06(rc08.equals("1") ? this.rc06 : "");
         setRc07(rc08.equals("1") ? this.rc07 : "");
+        setIStatus(rc08);
         notifyPropertyChanged(BR.rc08);
     }
 
@@ -539,7 +559,7 @@ public class Outcome extends BaseObservable implements Observable {
         json.put(TableContracts.OutcomeTable.COLUMN_HOUSEHOLD_NO, this.hhNo);
         json.put(TableContracts.OutcomeTable.COLUMN_DEVICEID, this.deviceId);
         //json.put(TableContracts.OutcomeTable.COLUMN_DEVICETAGID, this.deviceTag);
-        //json.put(TableContracts.OutcomeTable.COLUMN_ISTATUS, this.iStatus);
+        json.put(TableContracts.OutcomeTable.COLUMN_ISTATUS, this.iStatus);
         json.put(TableContracts.OutcomeTable.COLUMN_APPVERSION, this.appver);
         //  json.put(MWRATable.COLUMN_SYNCED, this.synced);
         //  json.put(MWRATable.COLUMN_SYNCED_DATE, this.syncDate);
@@ -610,13 +630,4 @@ public class Outcome extends BaseObservable implements Observable {
         setRegRound("");
 
     }
-
-
-
-
-
-
-
-
-
  }
