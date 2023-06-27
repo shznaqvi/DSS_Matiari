@@ -52,4 +52,20 @@ interface HhsDao {
             + " ORDER BY " + TableHHS.COLUMN_ID + " ASC")
     fun getHhsBYVillage(uc : String, village: String, hhead : String) : List<Hhs>
 
+    /* NEW STRUCT */
+
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    fun addAllData(list: Array<Hhs?>?)
+
+    @Query("DELETE FROM hhs_view")
+    fun deleteAll()
+
+    @Transaction
+    fun reinsert(list: Array<Hhs?>?) {
+        deleteAll()
+        addAllData(list)
+    }
+
+
+
 }

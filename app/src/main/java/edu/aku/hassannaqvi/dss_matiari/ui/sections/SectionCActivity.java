@@ -71,7 +71,7 @@ public class SectionCActivity extends AppCompatActivity {
         }
 
         if (mwra.getUid().equals("")) {
-            mwra.setUserName(MainApp.user.getUserName());
+            mwra.setUserName(MainApp.user.getUsername());
             mwra.setDeviceId(MainApp.deviceid);
             mwra.setAppver(MainApp.appInfo.getAppVersion());
             mwra.setSysDate(MainApp.households.getSysDate());

@@ -1,10 +1,9 @@
 package edu.aku.hassannaqvi.dss_matiari.room
 
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.Query
+import androidx.room.*
 import edu.aku.hassannaqvi.dss_matiari.contracts.TableContracts
 import edu.aku.hassannaqvi.dss_matiari.models.MaxHhno
+import edu.aku.hassannaqvi.dss_matiari.models.Villages
 import org.json.JSONArray
 import org.json.JSONException
 import kotlin.jvm.Throws
@@ -24,4 +23,19 @@ interface MaxHHNoDao {
             + TableContracts.MaxHhnoTable.COLUMN_VILLAGE_CODE + " LIKE :vCode "  +
             "ORDER BY " + TableContracts.MaxHhnoTable.COLUMN_ID + " ASC")
     fun getMaxHHNoByVillage(ucCode : String, vCode : String) : Int
+
+    /* NEW STRUCT */
+
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    fun addAllData(list: Array<MaxHhno?>?)
+
+    @Query("DELETE FROM maxhhno")
+    fun deleteAll()
+
+    @Transaction
+    fun reinsert(list: Array<MaxHhno?>?) {
+        deleteAll()
+        addAllData(list)
+    }
+
 }

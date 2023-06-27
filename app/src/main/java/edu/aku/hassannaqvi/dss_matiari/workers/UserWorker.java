@@ -223,7 +223,8 @@ public class UserWorker extends Worker {
 
         try {
             if (serverURL == null) {
-                url = new URL(MainApp._HOST_URL + MainApp._USER_URL);
+//                url = new URL(MainApp._HOST_URL + MainApp._USER_URL);
+                url = new URL(MainApp._HOST_URL_2 + MainApp._USER_URL);
             } else {
                 url = serverURL;
             }
@@ -264,7 +265,7 @@ public class UserWorker extends Worker {
 
                 JSONObject jsonParam = new JSONObject();
 
-                jsonParam.put("userName", MainApp.user.getUserName());
+                jsonParam.put("userName", MainApp.user.getUsername());
                 jsonParam.put("oldPassword", MainApp.user.getPassword());
                 jsonParam.put("newPassword", newPassword);
                 //Log.d(TAG, "doWork: " + uploadData);

@@ -25,11 +25,9 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.UnsupportedEncodingException;
 import java.security.InvalidAlgorithmParameterException;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
-import java.security.spec.InvalidKeySpecException;
 
 import javax.crypto.BadPaddingException;
 import javax.crypto.IllegalBlockSizeException;
@@ -39,7 +37,6 @@ import edu.aku.hassannaqvi.dss_matiari.R;
 import edu.aku.hassannaqvi.dss_matiari.core.CipherSecure;
 import edu.aku.hassannaqvi.dss_matiari.core.MainApp;
 import edu.aku.hassannaqvi.dss_matiari.databinding.ActivityChangePasswordBinding;
-import edu.aku.hassannaqvi.dss_matiari.models.Users;
 import edu.aku.hassannaqvi.dss_matiari.room.DssRoomDatabase;
 import edu.aku.hassannaqvi.dss_matiari.workers.UserWorker;
 
@@ -176,10 +173,6 @@ public class ChangePasswordActivity extends AppCompatActivity {
         } catch (NoSuchAlgorithmException e) {
             e.printStackTrace();
             Toast.makeText(this, "NoSuchAlgorithmException(UserAuth):" + e.getMessage(), Toast.LENGTH_SHORT).show();
-        } catch (InvalidKeySpecException e) {
-            e.printStackTrace();
-            Toast.makeText(this, "InvalidKeySpecException(UserAuth):" + e.getMessage(), Toast.LENGTH_SHORT).show();
-
         } catch (InvalidKeyException e) {
             e.printStackTrace();
             Toast.makeText(this, "InvalidKeyException(UserAuth):" + e.getMessage(), Toast.LENGTH_SHORT).show();
@@ -206,22 +199,12 @@ public class ChangePasswordActivity extends AppCompatActivity {
 
     private boolean formValidation() {
 
-        try {
-            if (!checkPassword(bi.passwordOld.getText().toString(), MainApp.user.getPasswordEnc())) {
-                bi.passwordOld.setError("Old password do not match.");
-                Toast.makeText(this, "Old password do not match.", Toast.LENGTH_SHORT).show();
-                return false;
-            } else {
-                bi.passwordOld.setError(null);
-
-            }
-        } catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
-            Toast.makeText(this, "NoSuchAlgorithmException(UserAuth.checkPassword): " + e.getMessage(), Toast.LENGTH_SHORT).show();
-
-        } catch (InvalidKeySpecException e) {
-            e.printStackTrace();
-            Toast.makeText(this, "InvalidKeySpecException(UserAuth.checkPassword): " + e.getMessage(), Toast.LENGTH_SHORT).show();
+        if (!checkPassword(bi.passwordOld.getText().toString(), MainApp.user.getPasswordEnc())) {
+            bi.passwordOld.setError("Old password do not match.");
+            Toast.makeText(this, "Old password do not match.", Toast.LENGTH_SHORT).show();
+            return false;
+        } else {
+            bi.passwordOld.setError(null);
 
         }
 
@@ -258,16 +241,11 @@ public class ChangePasswordActivity extends AppCompatActivity {
         boolean isValid = true;
 
         // Check not same as previous
-        try {
-            if (checkPassword(password, MainApp.user.getPassword())) {
-                System.out.println("Password is same as previous.");
-                bi.password1.setError("Password must not be same as previous.");
-                isValid = false;
-            }
-        } catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
-        } catch (InvalidKeySpecException e) {
-            e.printStackTrace();
+
+        if (checkPassword(password, MainApp.user.getPassword())) {
+            System.out.println("Password is same as previous.");
+            bi.password1.setError("Password must not be same as previous.");
+            isValid = false;
         }
 
         // Check password length
@@ -294,7 +272,7 @@ public class ChangePasswordActivity extends AppCompatActivity {
         }
 
         // Check same username and password
-        if (password.matches(MainApp.user.getUserName())) {
+        if (password.matches(MainApp.user.getUsername())) {
             System.out.println("Username and Password cannot be same");
             bi.password1.setError("Username and Password cannot be same");
             isValid = false;

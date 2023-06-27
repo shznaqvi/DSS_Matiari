@@ -119,6 +119,11 @@ public class Households extends BaseObservable implements Observable {
     @Ignore
     private final String ra22 = "";
 
+    // For local use
+    // This is used for resolving data while posting
+    @ColumnInfo(defaultValue = "0")
+    private transient boolean isError;
+
     /*@ColumnInfo(name = HouseholdTable.COLUMN_MUID)
     private String muid = StringUtils.EMPTY;*/
 
@@ -205,7 +210,7 @@ public class Households extends BaseObservable implements Observable {
 
         setRound(MainApp.ROUND);
         setSysDate(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.ENGLISH).format(new Date().getTime()));
-        setUserName(MainApp.user.getUserName());
+        setUserName(MainApp.user.getUsername());
         setDeviceId(MainApp.deviceid);
         setAppver(MainApp.appInfo.getAppVersion());
         setAppver(MainApp.appInfo.getAppVersion());
@@ -220,7 +225,7 @@ public class Households extends BaseObservable implements Observable {
     public void populateMeta(int position) {
 
         setSysDate(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.ENGLISH).format(new Date().getTime()));
-        setUserName(MainApp.user.getUserName());
+        setUserName(MainApp.user.getUsername());
         setDeviceId(MainApp.deviceid);
         //   setUuid(MainApp.form.getUid());  // not applicable in Form table
         setAppver(MainApp.appInfo.getAppVersion());
@@ -855,6 +860,14 @@ public class Households extends BaseObservable implements Observable {
     public void setRa21(String ra21) {
         this.ra21 = ra21;
         notifyChange(BR.ra21);
+    }
+
+    public boolean isError() {
+        return isError;
+    }
+
+    public void setError(boolean error) {
+        isError = error;
     }
 
     @Bindable

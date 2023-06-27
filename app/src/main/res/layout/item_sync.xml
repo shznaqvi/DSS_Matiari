@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+    </data>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:backgroundTint="@android:color/transparent"
+        app:cardCornerRadius="@dimen/_4sdp"
+        app:cardElevation="0dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_rounded_gray_bordered"
+            android:orientation="horizontal">
+
+            <View
+                android:id="@+id/statusColorView"
+                android:layout_width="@dimen/_10sdp"
+                android:layout_height="match_parent"
+                android:background="@color/red_color" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/_8sdp"
+                android:layout_marginEnd="@dimen/_10sdp"
+                android:layout_marginBottom="@dimen/_8sdp">
+
+                <TextView
+                    android:id="@+id/tableNameTV"
+                    style="@style/Theme.AppStructure.BoldText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginEnd="@dimen/_10sdp"
+                    android:layout_toStartOf="@+id/statusTV"
+                    android:textColor="@color/primary_color"
+                    tools:text="Table Name" />
+
+                <TextView
+                    android:id="@+id/sectionTV"
+                    style="@style/Theme.AppStructure.SmallRegularText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/tableNameTV"
+                    android:layout_alignStart="@+id/tableNameTV"
+                    android:layout_alignParentStart="true"
+                    android:layout_toStartOf="@+id/statusTV"
+                    android:textColor="@color/light_gray_color"
+                    tools:text="Section Name" />
+
+                <TextView
+                    android:id="@+id/statusTV"
+                    style="@style/Theme.AppStructure.SmallRegularText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    tools:text="Status" />
+
+                <View
+                    android:id="@+id/divider"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_1sdp"
+                    android:layout_below="@+id/sectionTV"
+                    android:layout_marginTop="@dimen/_2sdp"
+                    android:layout_marginEnd="@dimen/_10sdp"
+                    android:layout_toStartOf="@+id/loading"
+                    android:background="@color/lighter_gray_color" />
+
+                <TextView
+                    android:id="@+id/messageTV"
+                    style="@style/Theme.AppStructure.SmallRegularText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/divider"
+                    android:layout_marginTop="@dimen/_2sdp"
+                    tools:text="Results:    " />
+
+                <ProgressBar
+                    android:id="@+id/loading"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:indeterminate="true"
+                    android:indeterminateTint="@color/primary_color_dark"
+                    android:indeterminateTintMode="src_atop" />
+
+            </RelativeLayout>
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+</layout>

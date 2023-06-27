@@ -3,7 +3,6 @@
  */
 package edu.aku.hassannaqvi.dss_matiari.room
 
-import android.content.ContentValues
 import androidx.room.*
 import edu.aku.hassannaqvi.dss_matiari.contracts.TableContracts
 import edu.aku.hassannaqvi.dss_matiari.core.MainApp
@@ -37,6 +36,20 @@ interface UsersDao {
         }
         return false
 
+    }
+
+    /* NEW STRUCT */
+
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    fun addAllData(list: Array<Users>)
+
+    @Query("DELETE FROM users")
+    fun deleteAll()
+
+    @Transaction
+    fun reinsert(list: Array<Users>) {
+        deleteAll()
+        addAllData(list)
     }
 
     /*fun updatePassword(hashedPassword: String): Int{

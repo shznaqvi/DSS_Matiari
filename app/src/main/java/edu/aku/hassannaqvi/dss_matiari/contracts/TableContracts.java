@@ -21,6 +21,7 @@ public class TableContracts {
         public static final String COLUMN_SA = "s1";
         public static final String COLUMN_MUID = "muid";
         public static final String COLUMN_REGROUND = "regRound";
+        public static final String IS_ERROR = "isError";
         //public static final String COLUMN_FROUND = "fRound";
 
         public static final String COLUMN_DEVICEID = "deviceid";
@@ -59,6 +60,7 @@ public class TableContracts {
         public static final String COLUMN_SYNCED_DATE = "synced_date";
         public static final String COLUMN_APPVERSION = "appversion";
         public static final String COLUMN_ISTATUS = "istatus";
+        public static final String IS_ERROR = "isError";
     }
 
 
@@ -143,6 +145,7 @@ public class TableContracts {
         public static final String COLUMN_SYNCED_DATE = "synced_date";
         public static final String COLUMN_APPVERSION = "appversion";
         public static final String COLUMN_ISTATUS = "istatus";
+        public static final String IS_ERROR = "isError";
     }
 
 

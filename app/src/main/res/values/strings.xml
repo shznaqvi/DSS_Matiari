@@ -24,6 +24,45 @@
     <string name="backPress" translatable="false"> Back Press Not Allowed </string>
     <string name="invalid_response" translatable="false"> Invalid Response </string>
 
+    <!-- NEW STRUCT -->
+    <string name="network_error">No Internet!</string>
+    <string name="network_error_desc">Please check your internet connection and try again</string>
+    <string name="need_permission">Need Permission!</string>
+    <string name="need_permission_desc">The app needs permission to use this feature</string>
+    <string name="goto_settings">GOTO SETTINGS</string>
+    <string name="incorrect_device_date">APP DATE ERROR_Incorrect device date_%s_%s</string>
+    <string name="incorrect_device_date_desc">Your device date is\n%s\n\nServer date &amp; time is\n%s</string>
+    <string name="invalid_date">Invalid Date!</string>
+    <string name="date_error_popup_desc">Your device date is invalid! Adjust date &amp; time and try again.</string>
+    <string name="adjust_date">Adjust Date</string>
+    <string name="updated_version">Please download the updated version of the app\nVer. %s.%d</string>
+    <string name="download_data">Download Data</string>
+    <string name="upload_data">Upload Data</string>
+    <string name="upload_photos">Upload Photos</string>
+    <string name="sync_upload_duplicate">Duplicate photo</string>
+    <string name="sync_upload_success">Total: %d | Synced: %d | Duplicates: %d \n\nMessage: %s</string>
+    <string name="successful">Successful</string>
+    <string name="process_failed">Process Failed</string>
+    <string name="sync_error">Error: %s</string>
+    <string name="sync_download_success">Received: %d</string>
+    <string name="no_new_records_to_upload">No new records to upload</string>
+    <string name="status">Status: %s</string>
+    <string name="change_pass">Change Password</string>
+    <string name="change_pass_desc">Your new password must be different from previous password</string>
+    <string name="old_password">Old Password</string>
+    <string name="new_password">New Password</string>
+    <string name="confirm_password">Confirm Password</string>
+    <string name="username_pass_same">Username and Password cannot be same</string>
+    <string name="incorrect_old_password">Incorrect old password</string>
+    <string name="current_previous_password_cannot_same">Password cannot not be same as previous.</string>
+    <string name="password_creation_criteria">Password must have both alphabets and numbers</string>
+    <string name="secured_pass_not_generated">Secured password not generated</string>
+    <string name="password_reset_successful">Password has been reset successfully</string>
+    <string name="somethings_not_right">Something\'s not right. Please try again.</string>
+    <string name="field_empty_error">Input field cannot be empty</string>
+    <string name="invalid_password_new">Password must be >%d characters</string>
+    <string name="password_not_matched">Password did not match</string>
+    <string name="reset_password">Reset Password</string>
 
     <string name="btnSync">Download Data</string>
     <string name="btnUpload">Upload Data</string>

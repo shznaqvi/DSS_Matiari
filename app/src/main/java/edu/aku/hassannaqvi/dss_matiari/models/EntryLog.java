@@ -9,6 +9,7 @@ import androidx.databinding.BaseObservable;
 import androidx.databinding.Bindable;
 import androidx.databinding.Observable;
 import androidx.databinding.PropertyChangeRegistry;
+import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
@@ -48,6 +49,11 @@ public class EntryLog extends BaseObservable implements Observable {
     private String synced = StringUtils.EMPTY;
     private String syncDate = StringUtils.EMPTY;
 
+    // For local use
+    // This is used for resolving data while posting
+    @ColumnInfo(defaultValue = "0")
+    private transient boolean isError;
+
     public EntryLog() {
 
 
@@ -58,7 +64,7 @@ public class EntryLog extends BaseObservable implements Observable {
 
         setProjectName(PROJECT_NAME);
         setUuid(MainApp.households.getUid());  // not applicable in Form table
-        setUserName(MainApp.user.getUserName());
+        setUserName(MainApp.user.getUsername());
         setSysDate(MainApp.households.getSysDate());
         setEntryDate(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.ENGLISH).format(new Date().getTime()));
 //        setPsuCode(MainApp.form.getPsuCode());
@@ -203,6 +209,14 @@ public class EntryLog extends BaseObservable implements Observable {
 
     public void setSyncDate(String syncDate) {
         this.syncDate = syncDate;
+    }
+
+    public boolean isError() {
+        return isError;
+    }
+
+    public void setError(boolean error) {
+        isError = error;
     }
 
     public EntryLog Hydrate(Cursor cursor) throws JSONException {

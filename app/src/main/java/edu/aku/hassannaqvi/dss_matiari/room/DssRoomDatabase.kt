@@ -5,15 +5,18 @@
 package edu.aku.hassannaqvi.dss_matiari.room
 
 import android.content.Context
-import androidx.room.Database
-import androidx.room.Room
-import androidx.room.RoomDatabase
+import androidx.room.*
 import androidx.room.migration.Migration
 import androidx.sqlite.db.SupportSQLiteDatabase
+import com.google.gson.Gson
+import com.google.gson.GsonBuilder
 import edu.aku.hassannaqvi.dss_matiari.core.MainApp
 import edu.aku.hassannaqvi.dss_matiari.models.*
+import edu.aku.hassannaqvi.dss_matiari.newstruct.dao.GeneralDao
+import edu.aku.hassannaqvi.dss_matiari.newstruct.models.SyncModelNew
 import net.sqlcipher.database.SQLiteDatabase
 import net.sqlcipher.database.SupportFactory
+import java.lang.reflect.Type
 
 
 @Database(
@@ -30,7 +33,8 @@ import net.sqlcipher.database.SupportFactory
         EntryLog ::class
     ]
 )
-
+/* NEW STRUCT */
+@TypeConverters(SyncModelNew.ResponseDate.DataConverter::class)
 
 abstract class DssRoomDatabase : RoomDatabase() {
 
@@ -45,6 +49,8 @@ abstract class DssRoomDatabase : RoomDatabase() {
     abstract fun HhsDao() : HhsDao
     abstract fun EntryLogDao() : EntryLogDao
 
+    /* NEW STRUCT */
+    abstract fun GeneralDao() : GeneralDao
 
     companion object {
         const val DATABASE_VERSION = 10
@@ -122,15 +128,26 @@ abstract class DssRoomDatabase : RoomDatabase() {
                         "PRIMARY KEY('id'))");
             }
         }
-
-
-
-
-
-
-
-
     }
 
+    /* NEW STRUCT */
+
+    // Type converter used to save JsonObject in a single column
+    open class BaseConverter<T>(private val type: Type) {
+        private val gson: Gson
+        @TypeConverter
+        fun fromData(data: T): String {
+            return gson.toJson(data, type)
+        }
+
+        @TypeConverter
+        fun toData(json: String?): T {
+            return gson.fromJson(json, type)
+        }
+
+        init {
+            gson = GsonBuilder().serializeNulls().create()
+        }
+    }
 
 }

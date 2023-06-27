@@ -42,4 +42,32 @@
     <color name="colorSecondary">#C42016</color>
     <color name="colorSecondaryDark">#AF1B12</color>
     <color name="grayOverlay">#7f7f7f7f</color>
+
+    <!-- NEW -->
+
+    <color name="primary_color">#4F3F9A</color>
+    <color name="primary_color_light">#12413380</color>
+    <color name="primary_color_dark">#433683</color>
+    <color name="primary_color_accent">#D81B2B</color>
+
+    <color name="secondary_color">#7f3949AB</color>
+    <color name="secondary_color_light">#7f9FA8DA</color>
+    <color name="secondary_color_dark">#7f283593</color>
+    <color name="secondary_color_accent">#7fD81B60</color>
+
+    <color name="background_color">#FFFFFF</color>
+    <color name="status_bar_color">#005A50</color>
+    <color name="appbar_color">@color/primary_color_dark</color>
+
+    <color name="text_color">#2C2C2C</color>
+    <color name="disabled_text_color">#8E8E8E</color>
+    <color name="hint_color">#B9B9B9</color>
+    <color name="edittext_color">#FFFFFF</color>
+    <color name="edittext_disabled_color">#E6E6E6</color>
+    <color name="edittext_border_color">#979797</color>
+    <color name="red_color">#B10827</color>
+    <color name="gray_overlay">#7f7f7f7f</color>
+    <color name="light_gray_color">#8B8B8B</color>
+    <color name="lighter_gray_color">#EFEFEF</color>
+
 </resources>

@@ -29,13 +29,8 @@ import net.sqlcipher.database.SQLiteDatabase;
 import org.json.JSONArray;
 
 import java.io.File;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Locale;
 
 import edu.aku.hassannaqvi.dss_matiari.BuildConfig;
 import edu.aku.hassannaqvi.dss_matiari.R;
@@ -45,6 +40,8 @@ import edu.aku.hassannaqvi.dss_matiari.models.Households;
 import edu.aku.hassannaqvi.dss_matiari.models.Mwra;
 import edu.aku.hassannaqvi.dss_matiari.models.Outcome;
 import edu.aku.hassannaqvi.dss_matiari.models.Users;
+import edu.aku.hassannaqvi.dss_matiari.newstruct.global.AppConstants;
+import edu.aku.hassannaqvi.dss_matiari.newstruct.models.AppInfoNew;
 import edu.aku.hassannaqvi.dss_matiari.room.DssRoomDatabase;
 import edu.aku.hassannaqvi.dss_matiari.ui.LockActivity;
 
@@ -97,6 +94,10 @@ public class MainApp extends Application {
     public static int idType = 0;
     public static String ROUND = "4";
 
+    /* NEW STRUCT */
+    public static AppInfoNew appInfoNew;
+    public static final String _HOST_URL_2 = MainApp._IP + "/dss_matiari/api2/";// .TEST server;
+
     public static List<Mwra> mwraList;
     //public static List<Followups> followupsList;
     public static String hdssid;
@@ -115,7 +116,7 @@ public class MainApp extends Application {
     public static List<FollowUpsSche> followUpsScheHHList; // Followups - Households List
     public static List<Hhs> hhsList;
     public static List<FollowUpsSche> followUpsScheMWRAList; // Followups - MWRAs List
-    public static int pregcount= 0;
+    public static int pregcount = 0;
     public static int householdCount = 0;
     public static int householdCountComplete = 0;
     public static String previousAddress = "";
@@ -135,7 +136,7 @@ public class MainApp extends Application {
     public static int mwraDone = 0;
     public static HashMap<String[], Boolean> mwraStatus = new HashMap<>();
     private static final String TAG = "MainApp";
-//    public static int TRATS = 8;
+    //    public static int TRATS = 8;
     public static String IBAHC = "";
     public static int position;
     public static CountDownTimer timer;
@@ -248,6 +249,17 @@ public class MainApp extends Application {
             client.start();
         }
 
+        /* NEW STRUCT */
+        // Prepare encryption KEY
+        try {
+            ApplicationInfo ai = this.getPackageManager().getApplicationInfo(this.getPackageName(),
+                    PackageManager.GET_META_DATA);
+            Bundle bundle = ai.metaData;
+            AppConstants.TRATS = bundle.getInt("YEK_TRATS");
+            AppConstants.IBAHC = bundle.getString("YEK_REVRES");
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+        }
     }
 
     private void initSecure() {
@@ -270,9 +282,6 @@ public class MainApp extends Application {
             e.printStackTrace();
         }
     }
-
-
-
 
 
 }

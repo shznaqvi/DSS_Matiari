@@ -25,6 +25,8 @@ import edu.aku.hassannaqvi.dss_matiari.core.MainApp;
 import edu.aku.hassannaqvi.dss_matiari.database.AndroidManager;
 import edu.aku.hassannaqvi.dss_matiari.databinding.ActivityMainBinding;
 import edu.aku.hassannaqvi.dss_matiari.models.Households;
+import edu.aku.hassannaqvi.dss_matiari.newstruct.activity.SyncNewAC;
+import edu.aku.hassannaqvi.dss_matiari.newstruct.global.AppConstants;
 import edu.aku.hassannaqvi.dss_matiari.room.DssRoomDatabase;
 import edu.aku.hassannaqvi.dss_matiari.ui.lists.FormsReportCluster;
 import edu.aku.hassannaqvi.dss_matiari.ui.sections.IdentificationActivity;
@@ -107,7 +109,11 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = null;
         switch (item.getItemId()) {
             case R.id.onSync:
-                intent = new Intent(MainActivity.this, SyncActivity.class);
+//                intent = new Intent(MainActivity.this, SyncActivity.class);
+                // IS_LOGIN = To differentiate before and after login download
+                // For after login sync data download
+                AppConstants.IS_LOGIN = true;
+                AppConstants.gotoActivity(this, SyncNewAC.class, false);
                 break;
  /*            case R.id.checkOpenForms:
                 intent = new Intent(MainActivity.this, PendingFormsActivity.class);

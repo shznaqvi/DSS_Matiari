@@ -90,7 +90,7 @@ public class IdentificationActivity extends AppCompatActivity {
             ucNames.add(u.getUcname());
             ucCodes.add(u.getUccode());
         }
-        if (MainApp.user.getUserName().contains("test") || MainApp.user.getUserName().contains("dmu")) {
+        if (MainApp.user.getUsername().contains("test") || MainApp.user.getUsername().contains("dmu")) {
             ucNames.add("Test UC 9");
             ucNames.add("Test UC 8");
             ucNames.add("Test UC 7");
@@ -123,7 +123,7 @@ public class IdentificationActivity extends AppCompatActivity {
                     villageNames.add(v.getVillagename());
                     villageCodes.add(v.getVillagecode());
                 }
-                if (MainApp.user.getUserName().contains("test") || MainApp.user.getUserName().contains("dmu")) {
+                if (MainApp.user.getUsername().contains("test") || MainApp.user.getUsername().contains("dmu")) {
 
                     villageNames.add("Test Village 1 " + ucNames.get(position));
                     villageNames.add("Test Village 1 " + ucNames.get(position));

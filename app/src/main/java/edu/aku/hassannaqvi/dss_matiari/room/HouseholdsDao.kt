@@ -5,18 +5,15 @@
 package edu.aku.hassannaqvi.dss_matiari.room
 
 import android.os.Build
-import androidx.room.Dao
-import androidx.room.Insert
+import androidx.room.*
 import androidx.room.OnConflictStrategy.REPLACE
-import androidx.room.Query
-import androidx.room.Update
 import edu.aku.hassannaqvi.dss_matiari.contracts.TableContracts.HouseholdTable
 import edu.aku.hassannaqvi.dss_matiari.core.MainApp
 import edu.aku.hassannaqvi.dss_matiari.models.Households
-import org.json.JSONArray
+import edu.aku.hassannaqvi.dss_matiari.newstruct.global.DateUtils
+import edu.aku.hassannaqvi.dss_matiari.newstruct.models.SyncModelNew
 import org.json.JSONException
 import java.util.*
-import kotlin.collections.ArrayList
 
 @Dao
 interface HouseholdsDao {
@@ -176,7 +173,8 @@ interface HouseholdsDao {
                 + HouseholdTable.COLUMN_STRUCTURE_NO + ", "
                 + HouseholdTable.COLUMN_VILLAGE_CODE + ", "
                 + HouseholdTable.COLUMN_UC_CODE + ", "
-                + HouseholdTable.COLUMN_HOUSEHOLD_NO
+                + HouseholdTable.COLUMN_HOUSEHOLD_NO + ", "
+                + HouseholdTable.IS_ERROR
                 + " FROM " + HouseholdTable.TABLE_NAME + " WHERE "
                 + HouseholdTable.COLUMN_ISTATUS + " = '1' AND "
                 + HouseholdTable.COLUMN_VISIT_NO + " < 3 ORDER BY "
@@ -184,5 +182,38 @@ interface HouseholdsDao {
     )
     fun getUnclosedHouseholds(): List<Households>
 
+    /* NEW STRUCT */
+
+    @Query("SELECT * FROM hhs WHERE _uid IN (:uIds)")
+    abstract fun getAllUnSyncedDataByUIds(uIds: List<String?>?): MutableList<Households?>?
+
+    // This query is only used for updating sync list
+    // id = rowId
+    @Query("SELECT * FROM hhs WHERE _id = :id")
+    fun getDataById(id: Int): Households
+
+    // Update sync status as success
+    fun updateSyncSuccess(responses: List<SyncModelNew.WebResponse>?) {
+        if (responses != null && responses.size > 0 && responses[0].error === 0) {
+            val syncedDate: String = DateUtils.getCurrentDateTime()
+            val synced = "1"
+            for (i in responses.indices) {
+                val forms: Households = getDataById(responses[i].getId())
+                forms.syncDate = syncedDate
+                forms.synced = synced
+                forms.isError = false
+                updateHousehold(forms)
+            }
+        }
+    }
+
+    // Update error status while uploading
+    fun updateSyncError(list: List<Households>) {
+        for (i in list.indices) {
+            val obj: Households = list[i]
+            obj.isError = true
+            updateHousehold(obj)
+        }
+    }
 
 }

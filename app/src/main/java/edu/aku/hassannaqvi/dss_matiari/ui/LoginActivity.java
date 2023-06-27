@@ -71,6 +71,9 @@ import edu.aku.hassannaqvi.dss_matiari.core.MainApp;
 import edu.aku.hassannaqvi.dss_matiari.databinding.ActivityLoginBinding;
 import edu.aku.hassannaqvi.dss_matiari.models.EntryLog;
 import edu.aku.hassannaqvi.dss_matiari.models.Users;
+import edu.aku.hassannaqvi.dss_matiari.newstruct.activity.ChangePassNewAC;
+import edu.aku.hassannaqvi.dss_matiari.newstruct.activity.SyncNewAC;
+import edu.aku.hassannaqvi.dss_matiari.newstruct.global.AppConstants;
 import edu.aku.hassannaqvi.dss_matiari.room.DssRoomDatabase;
 
 public class LoginActivity extends AppCompatActivity {
@@ -199,7 +202,7 @@ public class LoginActivity extends AppCompatActivity {
         Collection<Users> teamleaders = db.usersDao().getTeamLeaders();
         for (Users u : teamleaders) {
             leaderNames.add(u.getFullname());
-            leaderCodes.add(u.getUserName());
+            leaderCodes.add(u.getUsername());
         }
 
         // Apply the adapter to the spinner
@@ -264,7 +267,11 @@ public class LoginActivity extends AppCompatActivity {
                 getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
         if (networkInfo != null && networkInfo.isConnected()) {
-            startActivity(new Intent(this, edu.aku.hassannaqvi.dss_matiari.ui.SyncActivity.class).putExtra("login", true));
+//            startActivity(new Intent(this, edu.aku.hassannaqvi.dss_matiari.ui.SyncActivity.class).putExtra("login", true));
+            // IS_LOGIN = To differentiate before and after login download
+            // For before login sync data download
+            AppConstants.IS_LOGIN = false;
+            AppConstants.gotoActivity(this, SyncNewAC.class, false);
         } else {
             Toast.makeText(this, "No network connection available.", Toast.LENGTH_SHORT).show();
         }
@@ -325,7 +332,7 @@ public class LoginActivity extends AppCompatActivity {
                         || db.usersDao().doLogin(username, password)
                 ) {
 
-                    MainApp.user.setUserName(username);
+                    MainApp.user.setUsername(username);
                     MainApp.admin = username.contains("@") || username.contains("test1234");
                     //MainApp.superuser = MainApp.user.getDesignation().equals("Supervisor");
                     Intent iLogin = null;
@@ -340,8 +347,9 @@ public class LoginActivity extends AppCompatActivity {
                             startActivity(iLogin);
                         } else if (MainApp.user.getNewUser().equals("1")) {
                             recordEntry("First Login");
-                            iLogin = new Intent(LoginActivity.this, ChangePasswordActivity.class);
-                            startActivity(iLogin);
+//                            iLogin = new Intent(LoginActivity.this, ChangePasswordActivity.class);
+//                            startActivity(iLogin);
+                            AppConstants.gotoActivity(this, ChangePassNewAC.class, false);
                         }
                     } else {
                         recordEntry("Inactive User (Disabled)");

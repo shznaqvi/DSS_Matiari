@@ -8,7 +8,7 @@ plugins {
     id 'com.google.firebase.crashlytics'
 }
 
-android {
+/*android {
 
     buildFeatures {
         dataBinding true
@@ -78,10 +78,10 @@ android {
                 // def outputFile = new File("$outputDir/$outputFileName")
                 variant.packageApplicationProvider.get().outputDirectory = new File("$outputDir")
                 output.outputFileName = outputFileName
-                /*  if (outputFileName != null && outputFileName.endsWith('.apk')) {
+                *//*  if (outputFileName != null && outputFileName.endsWith('.apk')) {
                       //output.outputFileName = outputFileName
                       output.outputFileName = new File("${project.buildDir.absolutePath}/outputs/apk/", "${outputDir}-${versionMajor}.${versionMinor}.${versionPatch}-${outputFileName}")
-                  }*/
+                  }*//*
 
             }
         }
@@ -101,6 +101,105 @@ android {
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility "1.8"
+    }
+}*/
+
+/* NEW STRUCT */
+
+android {
+    namespace 'edu.aku.hassannaqvi.dss_matiari'
+    compileSdk 32
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        // Flag to enable support for the new language APIs
+//        coreLibraryDesugaringEnabled true
+
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    buildFeatures {
+        dataBinding true
+        viewBinding true
+    }
+
+    // For dynamic version change on build
+    Properties versionProps = new Properties()
+    def versionPropsFile = file('version.properties')
+
+    //Create a version properties file and add required properties with default values
+    if (!versionPropsFile.exists()) {
+        versionProps['VERSION_NUMBER'] = "1"
+        versionProps['VERSION_BUILD'] = "0"
+        versionProps['VERSION_PATCH'] = "0"
+        versionProps.store(versionPropsFile.newWriter(), null)
+    }
+
+    // Read existing
+    if (versionPropsFile.canRead()) {
+        versionProps = new Properties()
+        versionProps.load(new FileInputStream(versionPropsFile))
+
+        def value = 0
+        def versionType = "D"
+
+        def runTasks = gradle.startParameter.taskNames
+        if ('assemble' in runTasks || ':app:assembleRelease' in runTasks || 'aR' in runTasks) {
+            value = 1
+            versionType = "R"
+        }
+
+        def versionNumber = versionProps['VERSION_NUMBER'].toInteger()
+        def versionBuild = versionProps['VERSION_BUILD'].toInteger() + 1
+        def versionPatch = versionProps['VERSION_PATCH'].toInteger() + value
+
+        versionProps['VERSION_NUMBER'] = versionNumber.toString()
+        versionProps['VERSION_BUILD'] = versionBuild.toString()
+        versionProps['VERSION_PATCH'] = versionPatch.toString()
+
+        versionProps.store(versionPropsFile.newWriter(), null)
+
+        defaultConfig {
+            applicationId "edu.aku.hassannaqvi.dss_matiari"
+            minSdk 22
+            targetSdk 32
+            versionCode versionBuild
+            versionName "${versionNumber}.${versionPatch}${versionType}"
+
+            testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+            // Change this key when certificate will update on server
+            buildConfigField "String", "CERT_KEY", "\"sha256/Mt8PYrwhBQY4VjT8sYcyvPwmbXKsO+WmPrPrs85VGSg=\""
+            buildConfigField "String", "CERT_KEY_BACKUP", "\"sha256/RQeZkB42znUfsDIIFWIRiYEcKl7nHwNFwWCrnMMJbVc=\""
+
+            // For writing room db schema
+            javaCompileOptions {
+                annotationProcessorOptions {
+                    arguments += ["room.schemaLocation": "$projectDir/schemas".toString()]
+                }
+            }
+        }
+
+        applicationVariants.all { variant ->
+            variant.outputs.each { output ->
+
+                def appName = rootProject.name
+                def date = new Date()
+                def formattedDate = date.format('yyyy_MM_dd')
+
+                def outputFileName = "${appName}_${formattedDate}_${versionType}v${versionBuild}.apk"
+                def defaultOutputDir = variant.packageApplicationProvider.get().outputDirectory
+                output.outputFileName = new File("$defaultOutputDir/$outputFileName").name
+            }
+        }
+
+    } else {
+        throw new GradleException("Could not read version.properties!")
     }
 }
 
@@ -189,6 +288,21 @@ dependencies {
     implementation 'com.google.firebase:firebase-crashlytics'
     implementation 'com.google.firebase:firebase-analytics'
 
+    /* NEW STRUCT */
+
+    // For Web Service Call
+    implementation 'com.squareup.retrofit2:retrofit:2.9.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
+    implementation 'com.squareup.retrofit2:converter-scalars:2.1.0'
+
+    // For Web Service Logging
+    implementation 'com.squareup.okhttp3:logging-interceptor:4.4.1'
+
+    // For SnackBar
+    implementation 'com.github.matecode:Snacky:1.1.5'
+
+    // For Loading
+    implementation 'com.github.ybq:Android-SpinKit:1.4.0'
 
 }
 

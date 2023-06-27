@@ -435,5 +435,88 @@
         <item name="android:textColor">@color/colorPrimary</item>
     </style>
 
+    <!-- NEW STRUCT -->
+
+    <!-- Custom Action Bar -->
+    <style name="Theme.AppStructure.Toolbar" parent="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+        <item name="colorControlActivated">@color/white</item>
+        <item name="android:textColor">@color/text_color</item>
+        <!--        <item name="android:textColorHint">@color/toolbar_hint</item>-->
+        <!--        <item name="colorAccent">@color/white</item>-->
+    </style>
+
+    <!-- Background -->
+    <style name="Theme.AppStructure.Background" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <item name="android:background">@drawable/app_bg</item>
+    </style>
+
+    <!-- EditText Theme -->
+    <style name="Theme.AppStructure.EditTextStyle" parent="@android:style/Widget.EditText">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:paddingStart">@dimen/_10sdp</item>
+        <item name="android:paddingEnd">@dimen/_10sdp</item>
+        <item name="android:background">@drawable/edittext_selector</item>
+        <item name="android:textColor">@color/text_selector</item>
+        <item name="android:minHeight">@dimen/field_height</item>
+        <item name="android:digits">
+            AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz0123456789,.-
+        </item>
+        <item name="android:textColorHint">@color/hint_color</item>
+        <item name="android:textSize">@dimen/text_size_regular</item>
+        <item name="android:textCursorDrawable">@null</item>
+        <item name="android:drawablePadding">@dimen/_10sdp</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:maxLines">1</item>
+    </style>
+
+    <!-- Regular Text -->
+    <style name="Theme.AppStructure.RegularText" parent="@style/Widget.AppCompat.TextView">
+        <item name="android:textStyle">normal</item>
+        <item name="android:textSize">@dimen/text_size_regular</item>
+        <item name="android:textColor">@color/text_color</item>
+        <item name="android:ellipsize">end</item>
+    </style>
+
+    <!-- Bold Text -->
+    <style name="Theme.AppStructure.BoldText" parent="@style/Widget.AppCompat.TextView">
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">@dimen/text_size_regular</item>
+        <item name="android:textColor">@color/text_color</item>
+        <item name="android:ellipsize">end</item>
+    </style>
+
+    <!-- Title Regular Text -->
+    <style name="Theme.AppStructure.TitleRegularText" parent="@style/Widget.AppCompat.TextView">
+        <item name="android:textStyle">normal</item>
+        <item name="android:textSize">@dimen/text_size_title</item>
+        <item name="android:textColor">@color/text_color</item>
+        <item name="android:ellipsize">end</item>
+    </style>
+
+    <!-- Title Bold Text -->
+    <style name="Theme.AppStructure.TitleBoldText" parent="@style/Widget.AppCompat.TextView">
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">@dimen/text_size_title</item>
+        <item name="android:textColor">@color/text_color</item>
+        <item name="android:ellipsize">end</item>
+    </style>
+
+    <!-- Small Regular Text -->
+    <style name="Theme.AppStructure.SmallRegularText" parent="@style/Widget.AppCompat.TextView">
+        <item name="android:textStyle">normal</item>
+        <item name="android:textSize">@dimen/text_size_small</item>
+        <item name="android:textColor">@color/text_color</item>
+        <item name="android:ellipsize">end</item>
+    </style>
+
+    <!-- Small Bold Text -->
+    <style name="Theme.AppStructure.SmallBoldText" parent="@style/Widget.AppCompat.TextView">
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">@dimen/text_size_small</item>
+        <item name="android:textColor">@color/text_color</item>
+        <item name="android:ellipsize">end</item>
+    </style>
+
 
 </resources>

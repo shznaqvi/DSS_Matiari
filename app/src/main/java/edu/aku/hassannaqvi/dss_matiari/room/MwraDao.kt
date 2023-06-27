@@ -1,8 +1,12 @@
 package edu.aku.hassannaqvi.dss_matiari.room
 
 import androidx.room.*
+import edu.aku.hassannaqvi.dss_matiari.contracts.TableContracts
 import edu.aku.hassannaqvi.dss_matiari.contracts.TableContracts.MWRATable
+import edu.aku.hassannaqvi.dss_matiari.models.Households
 import edu.aku.hassannaqvi.dss_matiari.models.Mwra
+import edu.aku.hassannaqvi.dss_matiari.newstruct.global.DateUtils
+import edu.aku.hassannaqvi.dss_matiari.newstruct.models.SyncModelNew
 import org.json.JSONException
 import kotlin.jvm.Throws
 
@@ -96,8 +100,38 @@ interface MwraDao {
         return mwra
     }
 
+    /* NEW STRUCT */
 
+    @Query("SELECT * FROM MWRAs WHERE _uid IN (:uIds)")
+    abstract fun getAllUnSyncedDataByUIds(uIds: List<String?>?): MutableList<Mwra?>?
 
+    // This query is only used for updating sync list
+    // id = rowId
+    @Query("SELECT * FROM MWRAs WHERE _id = :id")
+    fun getDataById(id: Int): Mwra
 
+    // Update sync status as success
+    fun updateSyncSuccess(responses: List<SyncModelNew.WebResponse>?) {
+        if (responses != null && responses.size > 0 && responses[0].error === 0) {
+            val syncedDate: String = DateUtils.getCurrentDateTime()
+            val synced = "1"
+            for (i in responses.indices) {
+                val forms: Mwra = getDataById(responses[i].getId())
+                forms.syncDate = syncedDate
+                forms.synced = synced
+                forms.isError = false
+                updateMwra(forms)
+            }
+        }
+    }
+
+    // Update error status while uploading
+    fun updateSyncError(list: List<Mwra>) {
+        for (i in list.indices) {
+            val obj: Mwra = list[i]
+            obj.isError = true
+            updateMwra(obj)
+        }
+    }
 
 }

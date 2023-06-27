@@ -12,9 +12,6 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 
-import java.security.NoSuchAlgorithmException;
-import java.security.spec.InvalidKeySpecException;
-
 import edu.aku.hassannaqvi.dss_matiari.R;
 import edu.aku.hassannaqvi.dss_matiari.core.MainApp;
 import edu.aku.hassannaqvi.dss_matiari.databinding.ActivityLockBinding;
@@ -36,16 +33,10 @@ public class LockActivity extends AppCompatActivity {
 
     public void attemptUnlock(View view) {
 
-        try {
-            if (checkPassword(bi.passwordLock.getText().toString(), MainApp.user.getPassword())) {
-                finish();
-            } else {
-                bi.passwordLock.setError("Password did not match");
-            }
-        } catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
-        } catch (InvalidKeySpecException e) {
-            e.printStackTrace();
+        if (checkPassword(bi.passwordLock.getText().toString(), MainApp.user.getPassword())) {
+            finish();
+        } else {
+            bi.passwordLock.setError("Password did not match");
         }
     }
 

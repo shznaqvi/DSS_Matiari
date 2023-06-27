@@ -5,4 +5,18 @@
     <dimen name="border_radius">@dimen/_4sdp</dimen>
     <dimen name="border_radius_2">@dimen/_25sdp</dimen>
     <dimen name="field_min_height">@dimen/_22sdp</dimen>
+
+    <!-- NEW -->
+
+<!--    <dimen name="border_radius">@dimen/_5sdp</dimen>-->
+    <dimen name="text_size_small">@dimen/_7ssp</dimen>
+    <dimen name="text_size_regular">@dimen/_8ssp</dimen>
+    <dimen name="text_size_title">@dimen/_10ssp</dimen>
+    <dimen name="main_padding">@dimen/_5sdp</dimen>
+    <dimen name="card_elevation">@dimen/_3sdp</dimen>
+    <dimen name="chip_height">@dimen/_23sdp</dimen>
+    <dimen name="radiobutton_height">@dimen/_20sdp</dimen>
+    <dimen name="field_height">@dimen/_28sdp</dimen>
+    <dimen name="button_height">@dimen/_28sdp</dimen>
+
 </resources>

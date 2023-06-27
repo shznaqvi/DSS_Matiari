@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_250sdp"
+        android:elevation="@dimen/_5sdp"
+        android:gravity="center"
+        android:paddingStart="@dimen/_20sdp"
+        android:paddingEnd="@dimen/_20sdp"
+        tools:ignore="UselessParent">
+
+        <ImageView
+            android:id="@+id/appLogoIV"
+            android:layout_width="@dimen/_65sdp"
+            android:layout_height="@dimen/_65sdp"
+            android:layout_alignTop="@+id/loginLayout"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/_minus30sdp"
+            android:background="@drawable/ic_date_error"
+            android:elevation="@dimen/_1sdp"
+            android:padding="@dimen/_2sdp"
+            tools:ignore="ContentDescription" />
+
+        <TextView
+            android:id="@+id/titleTV"
+            style="@style/Theme.AppStructure.TitleBoldText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/appLogoIV"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/_7sdp"
+            android:elevation="@dimen/_1sdp"
+            android:gravity="center"
+            android:text="@string/invalid_date"
+            android:textColor="@color/red_color" />
+
+        <RelativeLayout
+            android:id="@+id/loginLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_rounded_wf_red_bordered"
+            android:gravity="center_horizontal"
+            android:paddingStart="@dimen/_15sdp"
+            android:paddingTop="@dimen/_15sdp"
+            android:paddingEnd="@dimen/_15sdp"
+            android:paddingBottom="@dimen/_17sdp">
+
+            <TextView
+                android:id="@+id/descTV"
+                style="@style/Theme.AppStructure.RegularText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="@dimen/_50sdp"
+                android:gravity="center"
+                android:text="@string/date_error_popup_desc" />
+
+            <TextView
+                android:id="@+id/dateTV"
+                style="@style/Theme.AppStructure.SmallBoldText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/descTV"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="@dimen/_14sdp"
+                android:gravity="center"
+                android:text="Your device date &amp; time is:"
+                android:textColor="@color/disabled_text_color" />
+
+            <Button
+                android:id="@+id/btnYes"
+                android:layout_width="@dimen/_100sdp"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/dateTV"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="@dimen/_14sdp"
+                android:alpha="0.7"
+                android:backgroundTint="@color/red_color"
+                android:text="@string/adjust_date"
+                app:backgroundTint="@null" />
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+</RelativeLayout>

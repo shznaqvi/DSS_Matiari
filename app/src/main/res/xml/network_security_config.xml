@@ -6,11 +6,16 @@
         <trust-anchors>
             <certificates src="@raw/pedres2_aku_edu" />
         </trust-anchors>
-        <pin-set expiration="2023-03-08">
+        <pin-set expiration="2024-02-18">
             <pin digest="SHA-256">Mt8PYrwhBQY4VjT8sYcyvPwmbXKsO+WmPrPrs85VGSg=</pin>
             <!-- backup pin -->
             <pin digest="SHA-256">RQeZkB42znUfsDIIFWIRiYEcKl7nHwNFwWCrnMMJbVc=</pin>
         </pin-set>
 
+    </domain-config>
+
+    <!-- FOR TESTING SERVER - WITHOUT HTTPS -->
+    <domain-config cleartextTrafficPermitted="true">
+        <domain includeSubdomains="true">cls-pae-fp51764</domain>
     </domain-config>
 </network-security-config>

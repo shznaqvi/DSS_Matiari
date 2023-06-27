@@ -22,7 +22,6 @@
         android:roundIcon="@drawable/app_icon"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
-        android:usesCleartextTraffic="true"
         tools:replace="android:allowBackup">
         <activity
             android:name=".ui.SplashActivity"
@@ -87,8 +86,18 @@
         <activity
             android:name=".ui.SyncActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+
+        <!-- NEW STRUCT -->
+        <activity
+            android:name=".newstruct.activity.SyncNewAC"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+
         <activity
             android:name=".ui.ChangePasswordActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+
+        <activity
+            android:name=".newstruct.activity.ChangePassNewAC"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity
             android:name=".ui.MainActivity"

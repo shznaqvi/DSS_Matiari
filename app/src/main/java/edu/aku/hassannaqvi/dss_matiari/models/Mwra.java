@@ -191,6 +191,10 @@ public class Mwra extends BaseObservable implements Observable {
     @Ignore
     private String preMaritalStaus = "";
 
+    // For local use
+    // This is used for resolving data while posting
+    @ColumnInfo(defaultValue = "0")
+    private transient boolean isError;
 
     public Mwra() {
 
@@ -199,7 +203,7 @@ public class Mwra extends BaseObservable implements Observable {
     public void init() {
         setRound(MainApp.ROUND);
         setSysDate(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.ENGLISH).format(new Date().getTime()));
-        setUserName(MainApp.user.getUserName());
+        setUserName(MainApp.user.getUsername());
         setDeviceId(MainApp.deviceid);
         setAppver(MainApp.appInfo.getAppVersion());
         if (MainApp.households != null) {
@@ -213,7 +217,7 @@ public class Mwra extends BaseObservable implements Observable {
 
         setSysDate(MainApp.households.getSysDate());
         setUuid(MainApp.households.getUid());  // not applicable in Form table
-        setUserName(MainApp.user.getUserName());
+        setUserName(MainApp.user.getUsername());
         setDeviceId(MainApp.deviceid);
         setAppver(MainApp.appInfo.getAppVersion());
         setProjectName(PROJECT_NAME);
@@ -233,7 +237,7 @@ public class Mwra extends BaseObservable implements Observable {
 
     public void populateMetaFollowups() {
 
-        setUserName(MainApp.user.getUserName());
+        setUserName(MainApp.user.getUsername());
         setDeviceId(MainApp.deviceid);
         setAppver(MainApp.appInfo.getAppVersion());
 
@@ -329,6 +333,14 @@ public class Mwra extends BaseObservable implements Observable {
 
     public void setPreMaritalStaus(String preMaritalStaus) {
         this.preMaritalStaus = preMaritalStaus;
+    }
+
+    public boolean isError() {
+        return isError;
+    }
+
+    public void setError(boolean error) {
+        isError = error;
     }
 
     public String getUserName() {

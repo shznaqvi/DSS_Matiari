@@ -140,6 +140,11 @@ public class Outcome extends BaseObservable implements Observable {
     @Ignore
     private String rc08 = StringUtils.EMPTY;
 
+    // For local use
+    // This is used for resolving data while posting
+    @ColumnInfo(defaultValue = "0")
+    private transient boolean isError;
+
     public Outcome() {
 
 
@@ -466,6 +471,14 @@ public class Outcome extends BaseObservable implements Observable {
         notifyPropertyChanged(BR.rc08);
     }
 
+    public boolean isError() {
+        return isError;
+    }
+
+    public void setError(boolean error) {
+        isError = error;
+    }
+
     public Outcome Hydrate(Outcome outcome) throws JSONException {
         this.id = outcome.id;
         this.uid = outcome.uid;
@@ -592,7 +605,7 @@ public class Outcome extends BaseObservable implements Observable {
         MainApp.outcome.setVillageCode(MainApp.households.getVillageCode());
         MainApp.outcome.setHhNo(MainApp.households.getHhNo());
         MainApp.outcome.setSno(String.valueOf(MainApp.prevChildCount));
-        MainApp.outcome.setUserName(MainApp.user.getUserName());
+        MainApp.outcome.setUserName(MainApp.user.getUsername());
         MainApp.outcome.setDeviceId(MainApp.deviceid);
         MainApp.outcome.setHdssId(MainApp.households.getHdssId());
         MainApp.outcome.setAppver(MainApp.versionName + "." + MainApp.versionCode);
@@ -604,7 +617,7 @@ public class Outcome extends BaseObservable implements Observable {
 
 
     public void populateMetaFollowups() {
-        MainApp.outcome.setUserName(MainApp.user.getUserName());
+        MainApp.outcome.setUserName(MainApp.user.getUsername());
         MainApp.outcome.setDeviceId(MainApp.deviceid);
         MainApp.outcome.setAppver(MainApp.versionName + "." + MainApp.versionCode);
 

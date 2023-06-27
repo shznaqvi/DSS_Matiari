@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".activity.ChangePassAC">
+
+    <data>
+
+        <import type="android.view.View" />
+
+    </data>
+
+    <RelativeLayout
+        style="@style/Theme.AppStructure.Background"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layoutDirection="ltr">
+
+        <androidx.cardview.widget.CardView
+            style="@style/cardView"
+            android:layout_width="@dimen/_200sdp"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:background="@color/white">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:padding="@dimen/_8sdp">
+
+                <TextView
+                    style="@style/Theme.AppStructure.TitleBoldText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/change_pass"
+                    android:textColor="@color/primary_color_dark" />
+
+                <TextView
+                    style="@style/Theme.AppStructure.SmallRegularText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/change_pass_desc" />
+
+                <RelativeLayout
+                    android:id="@+id/oldPassLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:background="@drawable/bg_rounded_app_bordered">
+
+                    <EditText
+                        android:id="@+id/oldPassET"
+                        style="@style/Theme.AppStructure.EditTextStyle"
+                        android:layout_toStartOf="@+id/oldPassIV"
+                        android:background="@null"
+                        android:hint="@string/old_password"
+                        android:imeOptions="actionNext"
+                        android:inputType="textPassword"
+                        android:singleLine="true"
+                        android:textColor="@color/primary_color"
+                        tools:ignore="Autofill" />
+
+                    <ImageView
+                        android:id="@+id/oldPassIV"
+                        android:layout_width="@dimen/_18sdp"
+                        android:layout_height="@dimen/_18sdp"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginEnd="@dimen/_5sdp"
+                        android:background="@drawable/ic_locked"
+                        android:onClick="togglePassVisibility"
+                        tools:ignore="ContentDescription" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/newPassLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:background="@drawable/bg_rounded_app_bordered">
+
+                    <EditText
+                        android:id="@+id/newPassET"
+                        style="@style/Theme.AppStructure.EditTextStyle"
+                        android:layout_toStartOf="@+id/newPassIV"
+                        android:background="@null"
+                        android:hint="@string/new_password"
+                        android:imeOptions="actionNext"
+                        android:inputType="textPassword"
+                        android:singleLine="true"
+                        android:textColor="@color/primary_color"
+                        tools:ignore="Autofill" />
+
+                    <ImageView
+                        android:id="@+id/newPassIV"
+                        android:layout_width="@dimen/_18sdp"
+                        android:layout_height="@dimen/_18sdp"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginEnd="@dimen/_5sdp"
+                        android:background="@drawable/ic_locked"
+                        android:onClick="togglePassVisibility"
+                        tools:ignore="ContentDescription" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/confirmPassLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:background="@drawable/bg_rounded_app_bordered">
+
+                    <EditText
+                        android:id="@+id/confirmPassET"
+                        style="@style/Theme.AppStructure.EditTextStyle"
+                        android:layout_toStartOf="@+id/confirmPassIV"
+                        android:background="@null"
+                        android:hint="@string/confirm_password"
+                        android:imeOptions="actionDone"
+                        android:inputType="textPassword"
+                        android:singleLine="true"
+                        android:textColor="@color/primary_color"
+                        tools:ignore="Autofill" />
+
+                    <ImageView
+                        android:id="@+id/confirmPassIV"
+                        android:layout_width="@dimen/_18sdp"
+                        android:layout_height="@dimen/_18sdp"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginEnd="@dimen/_5sdp"
+                        android:background="@drawable/ic_locked"
+                        android:onClick="togglePassVisibility"
+                        tools:ignore="ContentDescription" />
+                </RelativeLayout>
+
+                <Button
+                    android:id="@+id/resetPassBtn"
+                    style="@style/button"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:onClick="attemptReset"
+                    android:radius="5dp"
+                    android:text="@string/reset_password" />
+
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+    </RelativeLayout>
+</layout>

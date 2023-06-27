@@ -1,0 +1,755 @@
+{
+  "formatVersion": 1,
+  "database": {
+    "version": 4,
+    "identityHash": "8d775dd83d679e20a5d67a02dc98010d",
+    "entities": [
+      {
+        "tableName": "households",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`muid` TEXT, `regRound` TEXT, `fRound` TEXT, `projectName` TEXT, `_id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `_uid` TEXT, `username` TEXT, `sysdate` TEXT, `hdssid` TEXT, `ucCode` TEXT, `villageCode` TEXT, `hhNo` TEXT, `structureNo` TEXT, `visitNo` TEXT, `deviceid` TEXT, `devicetagid` TEXT, `appversion` TEXT, `endTime` TEXT, `istatus` TEXT, `synced` TEXT, `synced_date` TEXT, `s1` TEXT)",
+        "fields": [
+          {
+            "fieldPath": "muid",
+            "columnName": "muid",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "regRound",
+            "columnName": "regRound",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "fRound",
+            "columnName": "fRound",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "projectName",
+            "columnName": "projectName",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "id",
+            "columnName": "_id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "uid",
+            "columnName": "_uid",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "userName",
+            "columnName": "username",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "sysDate",
+            "columnName": "sysdate",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "hdssId",
+            "columnName": "hdssid",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "ucCode",
+            "columnName": "ucCode",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "villageCode",
+            "columnName": "villageCode",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "hhNo",
+            "columnName": "hhNo",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "structureNo",
+            "columnName": "structureNo",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "visitNo",
+            "columnName": "visitNo",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "deviceId",
+            "columnName": "deviceid",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "deviceTag",
+            "columnName": "devicetagid",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "appver",
+            "columnName": "appversion",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "endTime",
+            "columnName": "endTime",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "iStatus",
+            "columnName": "istatus",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "synced",
+            "columnName": "synced",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "syncDate",
+            "columnName": "synced_date",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "sA",
+            "columnName": "s1",
+            "affinity": "TEXT",
+            "notNull": false
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "_id"
+          ],
+          "autoGenerate": true
+        },
+        "indices": [],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "MWRA",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`projectName` TEXT, `_id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `_uid` TEXT, `_uuid` TEXT, `username` TEXT, `sysdate` TEXT, `hdssid` TEXT, `ucCode` TEXT, `villageCode` TEXT, `hhNo` TEXT, `structureNo` TEXT, `sNo` TEXT, `deviceid` TEXT, `devicetagid` TEXT, `appversion` TEXT, `istatus` TEXT, `iStatus96x` TEXT, `synced` TEXT, `synced_date` TEXT, `regRound` TEXT, `s2` TEXT, `s3` TEXT, `s4` TEXT, `round` TEXT)",
+        "fields": [
+          {
+            "fieldPath": "projectName",
+            "columnName": "projectName",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "id",
+            "columnName": "_id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "uid",
+            "columnName": "_uid",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "uuid",
+            "columnName": "_uuid",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "userName",
+            "columnName": "username",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "sysDate",
+            "columnName": "sysdate",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "hdssId",
+            "columnName": "hdssid",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "ucCode",
+            "columnName": "ucCode",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "villageCode",
+            "columnName": "villageCode",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "hhNo",
+            "columnName": "hhNo",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "structureNo",
+            "columnName": "structureNo",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "sNo",
+            "columnName": "sNo",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "deviceId",
+            "columnName": "deviceid",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "deviceTag",
+            "columnName": "devicetagid",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "appver",
+            "columnName": "appversion",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "iStatus",
+            "columnName": "istatus",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "iStatus96x",
+            "columnName": "iStatus96x",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "synced",
+            "columnName": "synced",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "syncDate",
+            "columnName": "synced_date",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "regRound",
+            "columnName": "regRound",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "sB",
+            "columnName": "s2",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "sC",
+            "columnName": "s3",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "sD",
+            "columnName": "s4",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "round",
+            "columnName": "round",
+            "affinity": "TEXT",
+            "notNull": false
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "_id"
+          ],
+          "autoGenerate": true
+        },
+        "indices": [],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "users",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`_id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL DEFAULT 0, `username` TEXT DEFAULT '', `password` TEXT DEFAULT '', `full_name` TEXT DEFAULT '', `designation` TEXT NOT NULL DEFAULT '')",
+        "fields": [
+          {
+            "fieldPath": "userID",
+            "columnName": "_id",
+            "affinity": "INTEGER",
+            "notNull": true,
+            "defaultValue": "0"
+          },
+          {
+            "fieldPath": "userName",
+            "columnName": "username",
+            "affinity": "TEXT",
+            "notNull": false,
+            "defaultValue": "''"
+          },
+          {
+            "fieldPath": "password",
+            "columnName": "password",
+            "affinity": "TEXT",
+            "notNull": false,
+            "defaultValue": "''"
+          },
+          {
+            "fieldPath": "fullname",
+            "columnName": "full_name",
+            "affinity": "TEXT",
+            "notNull": false,
+            "defaultValue": "''"
+          },
+          {
+            "fieldPath": "designation",
+            "columnName": "designation",
+            "affinity": "TEXT",
+            "notNull": true,
+            "defaultValue": "''"
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "_id"
+          ],
+          "autoGenerate": true
+        },
+        "indices": [],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "villages",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT, `ucname` TEXT DEFAULT '', `villagename` TEXT DEFAULT '', `villagecode` TEXT DEFAULT '', `uccode` TEXT DEFAULT '')",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "ucname",
+            "columnName": "ucname",
+            "affinity": "TEXT",
+            "notNull": false,
+            "defaultValue": "''"
+          },
+          {
+            "fieldPath": "villagename",
+            "columnName": "villagename",
+            "affinity": "TEXT",
+            "notNull": false,
+            "defaultValue": "''"
+          },
+          {
+            "fieldPath": "villagecode",
+            "columnName": "villagecode",
+            "affinity": "TEXT",
+            "notNull": false,
+            "defaultValue": "''"
+          },
+          {
+            "fieldPath": "uccode",
+            "columnName": "uccode",
+            "affinity": "TEXT",
+            "notNull": false,
+            "defaultValue": "''"
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "id"
+          ],
+          "autoGenerate": true
+        },
+        "indices": [],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "hhFolloupsList",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `ucCode` TEXT, `villageCode` TEXT, `hhNo` TEXT, `hdssid` TEXT, `_muid` TEXT, `ra01` TEXT, `ra08` TEXT, `ra14` TEXT, `ra18` TEXT, `fRound` TEXT, `rb01` TEXT, `rb02` TEXT, `rb03` TEXT, `rb04` TEXT, `rc12` TEXT, `rc15` TEXT, `rb05` TEXT, `rb07` TEXT, `rb06` TEXT, `memberType` TEXT, `istatus` TEXT, `fpDoneDt` TEXT)",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "ucCode",
+            "columnName": "ucCode",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "villageCode",
+            "columnName": "villageCode",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "hhNo",
+            "columnName": "hhNo",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "hdssid",
+            "columnName": "hdssid",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "muid",
+            "columnName": "_muid",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "ra01",
+            "columnName": "ra01",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "ra08",
+            "columnName": "ra08",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "ra14",
+            "columnName": "ra14",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "ra18",
+            "columnName": "ra18",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "fRound",
+            "columnName": "fRound",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "rb01",
+            "columnName": "rb01",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "rb02",
+            "columnName": "rb02",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "rb03",
+            "columnName": "rb03",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "rb04",
+            "columnName": "rb04",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "rc12",
+            "columnName": "rc12",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "rc15",
+            "columnName": "rc15",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "rb05",
+            "columnName": "rb05",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "rb07",
+            "columnName": "rb07",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "rb06",
+            "columnName": "rb06",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "memberType",
+            "columnName": "memberType",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "istatus",
+            "columnName": "istatus",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "fpDoneDt",
+            "columnName": "fpDoneDt",
+            "affinity": "TEXT",
+            "notNull": false
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "id"
+          ],
+          "autoGenerate": true
+        },
+        "indices": [],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "maxhhno",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`_id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL DEFAULT 0, `ucCode` TEXT DEFAULT '', `maxhhno` TEXT DEFAULT '', `villageCode` TEXT DEFAULT '')",
+        "fields": [
+          {
+            "fieldPath": "ID",
+            "columnName": "_id",
+            "affinity": "INTEGER",
+            "notNull": true,
+            "defaultValue": "0"
+          },
+          {
+            "fieldPath": "uccode",
+            "columnName": "ucCode",
+            "affinity": "TEXT",
+            "notNull": false,
+            "defaultValue": "''"
+          },
+          {
+            "fieldPath": "maxHhno",
+            "columnName": "maxhhno",
+            "affinity": "TEXT",
+            "notNull": false,
+            "defaultValue": "''"
+          },
+          {
+            "fieldPath": "villageCode",
+            "columnName": "villageCode",
+            "affinity": "TEXT",
+            "notNull": false,
+            "defaultValue": "''"
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "_id"
+          ],
+          "autoGenerate": true
+        },
+        "indices": [],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "outcome",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`projectName` TEXT, `_id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `_uid` TEXT, `_uuid` TEXT, `_muid` TEXT, `msno` TEXT, `username` TEXT, `sysdate` TEXT, `hdssid` TEXT, `ucCode` TEXT, `villageCode` TEXT, `hhNo` TEXT, `sno` TEXT, `s5` TEXT, `deviceid` TEXT, `devicetagid` TEXT, `appversion` TEXT, `istatus` TEXT, `synced` TEXT, `synced_date` TEXT, `round` TEXT, `regRound` TEXT)",
+        "fields": [
+          {
+            "fieldPath": "projectName",
+            "columnName": "projectName",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "id",
+            "columnName": "_id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "uid",
+            "columnName": "_uid",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "uuid",
+            "columnName": "_uuid",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "muid",
+            "columnName": "_muid",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "msno",
+            "columnName": "msno",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "userName",
+            "columnName": "username",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "sysDate",
+            "columnName": "sysdate",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "hdssId",
+            "columnName": "hdssid",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "ucCode",
+            "columnName": "ucCode",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "villageCode",
+            "columnName": "villageCode",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "hhNo",
+            "columnName": "hhNo",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "sno",
+            "columnName": "sno",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "sE",
+            "columnName": "s5",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "deviceId",
+            "columnName": "deviceid",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "deviceTag",
+            "columnName": "devicetagid",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "appver",
+            "columnName": "appversion",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "iStatus",
+            "columnName": "istatus",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "synced",
+            "columnName": "synced",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "syncDate",
+            "columnName": "synced_date",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "round",
+            "columnName": "round",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "regRound",
+            "columnName": "regRound",
+            "affinity": "TEXT",
+            "notNull": false
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "_id"
+          ],
+          "autoGenerate": true
+        },
+        "indices": [],
+        "foreignKeys": []
+      }
+    ],
+    "views": [],
+    "setupQueries": [
+      "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '8d775dd83d679e20a5d67a02dc98010d')"
+    ]
+  }
+}
