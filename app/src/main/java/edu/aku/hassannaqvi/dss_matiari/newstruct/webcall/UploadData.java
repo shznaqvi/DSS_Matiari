@@ -124,12 +124,12 @@ public class UploadData {
             SyncModelNew syncModel = (SyncModelNew) UPLOAD_TABLES.keySet().toArray()[i];
             boolean isMainTable = Boolean.TRUE.equals(UPLOAD_TABLES.get(syncModel));
             if (isMainTable) {
-                SimpleSQLiteQuery syncedQuery = new SimpleSQLiteQuery("SELECT uid FROM " + syncModel.getTable() +
-                        " WHERE ((synced IS '' OR synced IS null) AND (syncDate IS '' OR syncDate IS null)" +
+                SimpleSQLiteQuery syncedQuery = new SimpleSQLiteQuery("SELECT _uid FROM " + syncModel.getTable() +
+                        " WHERE ((synced IS '' OR synced IS null) AND (synced_date IS '' OR synced_date IS null)" +
                         " AND (iStatus != '' OR iStatus != null)) OR isError IS 1");
                 List<String> uIdsList = new ArrayList<>();
                 uIdsHM.put(syncModel.getTable(), uIdsList);
-                uIdsList = appDatabase.GeneralDao().getUnsyncedDataUIds(syncedQuery);
+                uIdsList = appDatabase.syncFunctionsDao().getUnsyncedDataUIds(syncedQuery);
                 if (uIdsList != null && uIdsList.size() > 0) {
                     Objects.requireNonNull(uIdsHM.get(syncModel.getTable())).addAll(uIdsList);
                 }
@@ -144,6 +144,7 @@ public class UploadData {
         tableName = ((SyncModelNew) UPLOAD_TABLES.keySet().toArray()[1]).getTable();
         List<Households> list1 = appDatabase.householdsDao().getAllUnSyncedDataByUIds(iFormCompletedUIds);
         if (list1 != null && list1.size() > 0) {
+            String json = gson.toJson(list1);
             postData = prepareUploadData(tableName, gson.toJson(list1));
             webCall.call(webAPI.uploadEncData(postData), AppConstants.UPLOAD_DATA, tableName, ++index, list1.size(), iFormCompletedUIds, IS_CALL_ENCRYPTED);
         } else
@@ -152,6 +153,7 @@ public class UploadData {
         tableName = ((SyncModelNew) UPLOAD_TABLES.keySet().toArray()[2]).getTable();
         List<Mwra> list1_2 = appDatabase.mwraDao().getAllUnSyncedDataByUIds(iFormCompletedUIds);
         if (list1_2 != null && list1_2.size() > 0) {
+            String json = gson.toJson(list1_2);
             postData = prepareUploadData(tableName, gson.toJson(list1_2));
             webCall.call(webAPI.uploadEncData(postData), AppConstants.UPLOAD_DATA, tableName, ++index, list1_2.size(), iFormCompletedUIds, IS_CALL_ENCRYPTED);
         } else
@@ -160,6 +162,7 @@ public class UploadData {
         tableName = ((SyncModelNew) UPLOAD_TABLES.keySet().toArray()[3]).getTable();
         List<Outcome> list1_3 = appDatabase.OutcomeDao().getAllUnSyncedDataByUIds(iFormCompletedUIds);
         if (list1_3 != null && list1_3.size() > 0) {
+            String json = gson.toJson(list1_3);
             postData = prepareUploadData(tableName, gson.toJson(list1));
             webCall.call(webAPI.uploadEncData(postData), AppConstants.UPLOAD_DATA, tableName, ++index, list1_3.size(), iFormCompletedUIds, IS_CALL_ENCRYPTED);
         } else

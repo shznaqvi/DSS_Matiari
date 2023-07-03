@@ -7,11 +7,14 @@ import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
+import com.google.gson.annotations.SerializedName;
+
 import org.apache.commons.lang3.StringUtils;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import edu.aku.hassannaqvi.dss_matiari.contracts.TableContracts.TableFollowUpsSche;
+import edu.aku.hassannaqvi.dss_matiari.newstruct.models.SyncModelNew;
 
 /**
  * Author: Hassan.naqvi
@@ -33,17 +36,19 @@ public class FollowUpsSche implements Observable {
     @ColumnInfo(name = TableFollowUpsSche.COLUMN_VILLAGE_CODE)
     private String villageCode = StringUtils.EMPTY;
 
+    @SerializedName("hhno")
     @ColumnInfo(name = TableFollowUpsSche.COLUMN_HOUSEHOLD_NO)
     private String hhNo = StringUtils.EMPTY;
 
     @ColumnInfo(name = TableFollowUpsSche.COLUMN_HDSSID)
     private String hdssid = StringUtils.EMPTY;
 
+    @SerializedName("_muid")
     @ColumnInfo(name = TableFollowUpsSche.COLUMN_MUID)
     private String muid = StringUtils.EMPTY;
 
     @ColumnInfo(name = TableFollowUpsSche.COLUMN_RA01)
-    private String ra01 = StringUtils.EMPTY; // Date of First Visit
+    private SyncModelNew.ResponseDate ra01; // Date of First Visit
 
     @ColumnInfo(name = TableFollowUpsSche.COLUMN_RA08)
     private String ra08 = StringUtils.EMPTY; // Mohalla
@@ -97,6 +102,7 @@ public class FollowUpsSche implements Observable {
     @ColumnInfo(name = TableFollowUpsSche.COLUMN_DONE_DATE)
     private String fpDoneDt = StringUtils.EMPTY ;  // followup-done date
 
+    @SerializedName("pregnum")
     @ColumnInfo(name = TableFollowUpsSche.COLUMN_PREG_COUNT)
     private String pregCount = StringUtils.EMPTY ;  // Pregnancies Count
 
@@ -164,11 +170,11 @@ public class FollowUpsSche implements Observable {
         this.hdssid = hdssid;
     }
 
-    public String getRa01() {
+    public SyncModelNew.ResponseDate getRa01() {
         return ra01;
     }
 
-    public void setRa01(String ra01) {
+    public void setRa01(SyncModelNew.ResponseDate ra01) {
         this.ra01 = ra01;
     }
 
@@ -357,7 +363,7 @@ public class FollowUpsSche implements Observable {
         this.muid = jsonObject.getString(TableFollowUpsSche.COLUMN_MUID);
         this.hhNo = jsonObject.getString(TableFollowUpsSche.COLUMN_HOUSEHOLD_NO);
         this.hdssid = jsonObject.getString(TableFollowUpsSche.COLUMN_HDSSID);
-        this.ra01 = jsonObject.getString(TableFollowUpsSche.COLUMN_RA01);
+        //this.ra01 = jsonObject.getJSONObject(TableFollowUpsSche.COLUMN_RA01);
         this.ra08 = jsonObject.getString(TableFollowUpsSche.COLUMN_RA08);
         this.ra12 = jsonObject.getString(TableFollowUpsSche.COLUMN_RA12);
         this.ra18 = jsonObject.getString(TableFollowUpsSche.COLUMN_RA18);
@@ -388,7 +394,7 @@ public class FollowUpsSche implements Observable {
         this.muid = cursor.getString(cursor.getColumnIndexOrThrow(TableFollowUpsSche.COLUMN_MUID));
         this.hhNo = cursor.getString(cursor.getColumnIndexOrThrow(TableFollowUpsSche.COLUMN_HOUSEHOLD_NO));
         this.hdssid = cursor.getString(cursor.getColumnIndexOrThrow(TableFollowUpsSche.COLUMN_HDSSID));
-        this.ra01 = cursor.getString(cursor.getColumnIndexOrThrow(TableFollowUpsSche.COLUMN_RA01));
+        //this.ra01 = cursor.get(cursor.getColumnIndexOrThrow(TableFollowUpsSche.COLUMN_RA01));
         this.ra08 = cursor.getString(cursor.getColumnIndexOrThrow(TableFollowUpsSche.COLUMN_RA08));
         this.ra12 = cursor.getString(cursor.getColumnIndexOrThrow(TableFollowUpsSche.COLUMN_RA12));
         this.ra18 = cursor.getString(cursor.getColumnIndexOrThrow(TableFollowUpsSche.COLUMN_RA18));

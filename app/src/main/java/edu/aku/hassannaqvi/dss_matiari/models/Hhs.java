@@ -12,6 +12,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import edu.aku.hassannaqvi.dss_matiari.contracts.TableContracts.TableHHS;
+import edu.aku.hassannaqvi.dss_matiari.newstruct.models.SyncModelNew;
 
 /**
  * Author: gul.sanober
@@ -39,7 +40,7 @@ public class Hhs implements Observable {
     private String hdssid = StringUtils.EMPTY;
 
     @ColumnInfo(name = TableHHS.COLUMN_RA01)
-    private String ra01 = StringUtils.EMPTY; // Date of First Visit
+    private SyncModelNew.ResponseDate ra01; // Date of First Visit
 
     @ColumnInfo(name = TableHHS.COLUMN_RA08)
     private String ra08 = StringUtils.EMPTY; // Mohalla
@@ -143,11 +144,11 @@ public class Hhs implements Observable {
         this.hdssid = hdssid;
     }
 
-    public String getRa01() {
+    public SyncModelNew.ResponseDate getRa01() {
         return ra01;
     }
 
-    public void setRa01(String ra01) {
+    public void setRa01(SyncModelNew.ResponseDate ra01) {
         this.ra01 = ra01;
     }
 
@@ -292,7 +293,7 @@ public class Hhs implements Observable {
         this.villageCode = jsonObject.getString(TableHHS.COLUMN_VILLAGE_CODE);
         this.hhNo = jsonObject.getString(TableHHS.COLUMN_HOUSEHOLD_NO);
         this.hdssid = jsonObject.getString(TableHHS.COLUMN_HDSSID);
-        this.ra01 = jsonObject.getString(TableHHS.COLUMN_RA01);
+        //this.ra01 = jsonObject.getString(TableHHS.COLUMN_RA01);
         this.ra08 = jsonObject.getString(TableHHS.COLUMN_RA08);
         this.ra12 = jsonObject.getString(TableHHS.COLUMN_RA12);
         this.ra18 = jsonObject.getString(TableHHS.COLUMN_RA18);
@@ -320,7 +321,7 @@ public class Hhs implements Observable {
         this.villageCode = cursor.getString(cursor.getColumnIndexOrThrow(TableHHS.COLUMN_VILLAGE_CODE));
         this.hhNo = cursor.getString(cursor.getColumnIndexOrThrow(TableHHS.COLUMN_HOUSEHOLD_NO));
         this.hdssid = cursor.getString(cursor.getColumnIndexOrThrow(TableHHS.COLUMN_HDSSID));
-        this.ra01 = cursor.getString(cursor.getColumnIndexOrThrow(TableHHS.COLUMN_RA01));
+        //this.ra01 = cursor.getString(cursor.getColumnIndexOrThrow(TableHHS.COLUMN_RA01));
         this.ra08 = cursor.getString(cursor.getColumnIndexOrThrow(TableHHS.COLUMN_RA08));
         this.ra12 = cursor.getString(cursor.getColumnIndexOrThrow(TableHHS.COLUMN_RA12));
         this.ra18 = cursor.getString(cursor.getColumnIndexOrThrow(TableHHS.COLUMN_RA18));

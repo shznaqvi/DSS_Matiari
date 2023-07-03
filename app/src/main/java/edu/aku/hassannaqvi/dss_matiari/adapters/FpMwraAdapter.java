@@ -132,7 +132,7 @@ public class FpMwraAdapter extends RecyclerView.Adapter<FpMwraAdapter.ViewHolder
             if (followUpsSche.getMemberType().equals("1")) {
 
                 // Age
-                long daysdiff = MainApp.mwra.CalculateAge(followUpsSche.getRa01());
+                long daysdiff = MainApp.mwra.CalculateAge(followUpsSche.getRa01().getDate());
                 long years = daysdiff / 365;
                 long actualAge = 0;
 

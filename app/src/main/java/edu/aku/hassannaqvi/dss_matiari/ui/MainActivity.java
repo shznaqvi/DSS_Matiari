@@ -104,7 +104,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    @Override
+    /*@Override
     public boolean onOptionsItemSelected(MenuItem item) {
         Intent intent = null;
         switch (item.getItemId()) {
@@ -113,14 +113,15 @@ public class MainActivity extends AppCompatActivity {
                 // IS_LOGIN = To differentiate before and after login download
                 // For after login sync data download
                 AppConstants.IS_LOGIN = true;
-                AppConstants.gotoActivity(this, SyncNewAC.class, false);
+                //AppConstants.gotoActivity(this, SyncNewAC.class, false);
+                startActivity(new Intent(this, SyncNewAC.class));
                 break;
- /*            case R.id.checkOpenForms:
+ *//*            case R.id.checkOpenForms:
                 intent = new Intent(MainActivity.this, PendingFormsActivity.class);
                 break;
             case R.id.formsReportDate:
                 intent = new Intent(MainActivity.this, FormsReportDate.class);
-                break;*/
+                break;*//*
             case R.id.checkOpenForms:
                 intent = new Intent(MainActivity.this, FormsReportCluster.class);
                 break;
@@ -133,7 +134,24 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
         return super.onOptionsItemSelected(item);
     }
+*/
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int menuItemId = item.getItemId();
+        if (menuItemId == R.id.onSync) {
+            // IS_LOGIN = To differentiate before and after login download
+            // For after login sync data download
+            AppConstants.IS_LOGIN = true;
+            AppConstants.gotoActivity(this, SyncNewAC.class, false);
+/*        } else if (menuItemId == R.id.changePassword) {
+            AppConstants.gotoActivity(activity, ChangePassAC.class, false);*/
+        } else if (menuItemId == R.id.sendDB) {
+            sendEmail();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.item_menu, menu);

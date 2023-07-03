@@ -149,13 +149,13 @@ interface FollowUpsScheDao {
     /* NEW STRUCT */
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    fun addAllData(list: Array<FollowUpsSche?>?)
+    fun addAllData(list: Array<FollowUpsSche>)
 
     @Query("DELETE FROM hhfuplist_view")
     fun deleteAll()
 
     @Transaction
-    fun reinsert(list: Array<FollowUpsSche?>?) {
+    fun reinsert(list: Array<FollowUpsSche>) {
         deleteAll()
         addAllData(list)
     }

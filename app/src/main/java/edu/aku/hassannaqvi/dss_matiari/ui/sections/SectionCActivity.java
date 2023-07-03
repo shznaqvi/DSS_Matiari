@@ -97,7 +97,7 @@ public class SectionCActivity extends AppCompatActivity {
             mwra.setRb23(fpMwra.getRb23());
             //mwra.setRb07(MainApp.fpMwra.getRb07());
 
-            long daysdiff = mwra.CalculateAge(MainApp.fpMwra.getRa01());
+            long daysdiff = mwra.CalculateAge(MainApp.fpMwra.getRa01().getDate());
             long years = daysdiff / 365;
             long actualAge = Integer.parseInt(MainApp.fpMwra.getRb05()) + years;
             mwra.setRb05(String.valueOf(actualAge));     // Age in Years
@@ -112,7 +112,7 @@ public class SectionCActivity extends AppCompatActivity {
             }
         }
 
-        long daysdiff = MainApp.mwra.CalculateAge(fpMwra.getRa01());
+        long daysdiff = MainApp.mwra.CalculateAge(fpMwra.getRa01().getDate());
         long years = daysdiff / 365;
         long actualAge = 0;
 
@@ -276,7 +276,8 @@ public class SectionCActivity extends AppCompatActivity {
 
             cal.setTime(sdf.parse(mwra.getRb01a()));// all done
 
-            cal2.setTime(sdf.parse(fpMwra.getRa01().substring(9, 19)));
+            //cal2.setTime(sdf.parse(fpMwra.getRa01().substring(9, 19)));
+            cal2.setTime(sdf.parse(fpMwra.getRa01().getDate()));
 
             sdf = new SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH);
 

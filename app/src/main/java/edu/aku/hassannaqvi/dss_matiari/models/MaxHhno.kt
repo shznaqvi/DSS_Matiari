@@ -4,6 +4,7 @@ import android.database.Cursor
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import com.google.gson.annotations.SerializedName
 import edu.aku.hassannaqvi.dss_matiari.contracts.TableContracts.MaxHhnoTable
 import org.apache.commons.lang3.StringUtils
 import org.json.JSONException
@@ -23,12 +24,14 @@ class MaxHhno {
         defaultValue = "0")
     var ID: Long = 0
 
+    @SerializedName("ucCode")
     @ColumnInfo(
         name = MaxHhnoTable.COLUMN_UC_CODE,
         defaultValue = StringUtils.EMPTY
     )
     var uccode: String? = StringUtils.EMPTY
 
+    @SerializedName("maxhhno")
     @ColumnInfo(
         name = MaxHhnoTable.COLUMN_MAX_HHNO,
         defaultValue = StringUtils.EMPTY

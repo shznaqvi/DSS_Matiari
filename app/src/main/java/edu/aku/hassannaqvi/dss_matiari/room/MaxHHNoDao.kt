@@ -27,13 +27,13 @@ interface MaxHHNoDao {
     /* NEW STRUCT */
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    fun addAllData(list: Array<MaxHhno?>?)
+    fun addAllData(list: Array<MaxHhno>)
 
     @Query("DELETE FROM maxhhno")
     fun deleteAll()
 
     @Transaction
-    fun reinsert(list: Array<MaxHhno?>?) {
+    fun reinsert(list: Array<MaxHhno>) {
         deleteAll()
         addAllData(list)
     }

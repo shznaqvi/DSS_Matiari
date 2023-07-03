@@ -60,9 +60,11 @@ public class DownloadData {
 
     // Downloadable tables after login
     public static List<String> DT_AFTER_LOGIN = new ArrayList<String>() {{
-        add(TableContracts.TableFollowUpsSche.TABLE_NAME);
         add(TableContracts.TableHHS.TABLE_NAME);
+        add(TableContracts.TableFollowUpsSche.TABLE_NAME);
         add(TableContracts.MaxHhnoTable.TABLE_NAME);
+
+
     }};
 
     /**
@@ -109,13 +111,13 @@ public class DownloadData {
             webCall.call(webAPI.downloadEncData(CryptoUtil.encrypt(gson.toJson(s2))), AppConstants.DOWNLOAD_DATA, DT_BEFORE_LOGIN.get(2), ++index, 0, IS_CALL_ENCRYPTED);
         } else {
             // After Login tables download
-            SyncModelNew s0 = new SyncModelNew(DT_AFTER_LOGIN.get(0), select, "AND DATEADD(MONTH,2,ra01) between ra01 AND GETDATE() ", check);
+            SyncModelNew s0 = new SyncModelNew(DT_AFTER_LOGIN.get(0), select, "DATEADD(MONTH,2,ra01) between ra01 AND GETDATE() ", check);
             webCall.call(webAPI.downloadEncData(CryptoUtil.encrypt(gson.toJson(s0))), AppConstants.DOWNLOAD_DATA, DT_AFTER_LOGIN.get(0), ++index, 0, IS_CALL_ENCRYPTED);
 
-            SyncModelNew s1 = new SyncModelNew(DT_AFTER_LOGIN.get(1), select, "AND DATEADD(MONTH,2,ra01) between ra01 AND GETDATE()", check);
+            SyncModelNew s1 = new SyncModelNew(DT_AFTER_LOGIN.get(1), select, "DATEADD(MONTH,2,ra01) between ra01 AND GETDATE()", check);
             webCall.call(webAPI.downloadEncData(CryptoUtil.encrypt(gson.toJson(s1))), AppConstants.DOWNLOAD_DATA, DT_AFTER_LOGIN.get(1), ++index, 0, IS_CALL_ENCRYPTED);
 
-            SyncModelNew s2 = new SyncModelNew(DT_AFTER_LOGIN.get(2), select, "", check);
+            SyncModelNew s2 = new SyncModelNew(DT_AFTER_LOGIN.get(2), select);
             webCall.call(webAPI.downloadEncData(CryptoUtil.encrypt(gson.toJson(s2))), AppConstants.DOWNLOAD_DATA, DT_AFTER_LOGIN.get(2), ++index, 0, IS_CALL_ENCRYPTED);
         }
     }
@@ -177,6 +179,10 @@ public class DownloadData {
                 appDatabase.usersDao().reinsert(users);
             } else if (tag.equals(TableContracts.TableVillage.TABLE_NAME)) {
                 Villages[] villages = gson.fromJson(jsonResponse, Villages[].class);
+                for (Villages village : villages) {
+                    village.setVillagecode(village.getVillagecode().substring(1));
+                    village.setUccode(String.format("0%s", village.getUccode()));
+                }
                 // Update sync list view
                 SyncModelNew syncModel = getUpdatedSyncDownloadItem(activity, syncTablesList.get(index), villages.length, AppConstants.RESPONSE_SUCCESS, null);
                 syncTablesList.set(index, syncModel);

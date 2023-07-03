@@ -1,6 +1,7 @@
 package edu.aku.hassannaqvi.dss_matiari.room
 
 import androidx.room.*
+import androidx.sqlite.db.SupportSQLiteQuery
 import edu.aku.hassannaqvi.dss_matiari.contracts.TableContracts
 import edu.aku.hassannaqvi.dss_matiari.models.*
 import org.json.JSONArray
@@ -313,6 +314,8 @@ interface SyncFunctionsDao {
     fun deleteHhsTable()
 
 
+    @RawQuery
+    fun getUnsyncedDataUIds(query: SupportSQLiteQuery): List<String>
 
 
 }

@@ -182,7 +182,8 @@ public class IdentificationActivity extends AppCompatActivity {
         if (!formValidation()) return;
 
         MainApp.selectedUC = ucCodes.get(bi.ra06.getSelectedItemPosition());
-                MainApp.selectedVillage = villageCodes.get(bi.ra07.getSelectedItemPosition());
+        MainApp.selectedVillage = villageCodes.get(bi.ra07.getSelectedItemPosition());
+                //MainApp.selectedVillage = MainApp.selectedVillage.substring(1,4);
 
 
         finish();

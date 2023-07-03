@@ -17,6 +17,8 @@ import androidx.room.Entity;
 import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
+import com.google.gson.annotations.SerializedName;
+
 import org.apache.commons.lang3.StringUtils;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -35,14 +37,14 @@ import edu.aku.hassannaqvi.dss_matiari.core.MainApp;
 public class Mwra extends BaseObservable implements Observable {
 
     @Ignore
-    public String TAG = "MWRA";
+    public transient String TAG = "MWRA";
     //Not saving in DB
     @Ignore
     private transient PropertyChangeRegistry propertyChangeRegistry = new PropertyChangeRegistry();
     @Ignore
-    private boolean exist = false;
+    private transient boolean exist = false;
     @Ignore
-    private boolean expanded;
+    private transient boolean expanded;
 
     // APP VARIABLES
     @ColumnInfo(name = MWRATable.COLUMN_PROJECT_NAME)
@@ -50,22 +52,28 @@ public class Mwra extends BaseObservable implements Observable {
 
     // APP VARIABLES
 
+    @SerializedName("_id")
     @PrimaryKey(autoGenerate = true) @NonNull
     @ColumnInfo(name = MWRATable.COLUMN_ID)
     long id = 0;
 
+    @SerializedName("_uid")
     @ColumnInfo(name = MWRATable.COLUMN_UID)
     private String uid = StringUtils.EMPTY;
 
+    @SerializedName("_uuid")
     @ColumnInfo(name = MWRATable.COLUMN_UUID)
     private String uuid = StringUtils.EMPTY;
 
+    @SerializedName("username")
     @ColumnInfo(name = MWRATable.COLUMN_USERNAME)
     private String userName = StringUtils.EMPTY;
 
+    @SerializedName("sysdate")
     @ColumnInfo(name = MWRATable.COLUMN_SYSDATE)
     private String sysDate = StringUtils.EMPTY;
 
+    @SerializedName("hdssid")
     @ColumnInfo(name = MWRATable.COLUMN_HDSSID)
     private String hdssId = StringUtils.EMPTY;
 
@@ -79,38 +87,46 @@ public class Mwra extends BaseObservable implements Observable {
     private String hhNo = StringUtils.EMPTY;
 
     @ColumnInfo(name = MWRATable.COLUMN_STRUCTURE_NO)
-    private String structureNo = StringUtils.EMPTY;
+    private transient String structureNo = StringUtils.EMPTY;
 
     @ColumnInfo(name = MWRATable.COLUMN_SNO)
     private String sNo = StringUtils.EMPTY;
 
+    @SerializedName("deviceid")
     @ColumnInfo(name = MWRATable.COLUMN_DEVICEID)
     private String deviceId = StringUtils.EMPTY;
 
+    @SerializedName("devicetagid")
     @ColumnInfo(name = MWRATable.COLUMN_DEVICETAGID)
-    private String deviceTag = StringUtils.EMPTY;
+    private transient String deviceTag = StringUtils.EMPTY;
 
+    @SerializedName("appversion")
     @ColumnInfo(name = MWRATable.COLUMN_APPVERSION)
     private String appver = StringUtils.EMPTY;
+
+
 
     @ColumnInfo(name = MWRATable.COLUMN_SYNCED)
     private String synced = StringUtils.EMPTY;
 
+    @SerializedName("synced_date")
     @ColumnInfo(name = MWRATable.COLUMN_SYNCED_DATE)
-    private String syncDate = StringUtils.EMPTY;
+    private transient String syncDate = StringUtils.EMPTY;
 
     @ColumnInfo(name = MWRATable.COLUMN_REGROUND)
     private String regRound = StringUtils.EMPTY;
 
+    @SerializedName("s2")
     @ColumnInfo(name = MWRATable.COLUMN_SB)
-    private String sB = StringUtils.EMPTY;
+    private transient String sB = StringUtils.EMPTY;
 
+    @SerializedName("s3")
     @ColumnInfo(name = MWRATable.COLUMN_SC)
-    private String sC = StringUtils.EMPTY;
+    private transient String sC = StringUtils.EMPTY;
 
+    @SerializedName("s4")
     @ColumnInfo(name = MWRATable.COLUMN_SD)
-    private String sD = StringUtils.EMPTY;
-
+    private transient String sD = StringUtils.EMPTY;
 
     private String round = StringUtils.EMPTY;
     @Ignore
@@ -178,18 +194,19 @@ public class Mwra extends BaseObservable implements Observable {
     private String pregnum = StringUtils.EMPTY;
 
     @ColumnInfo(name = MWRATable.COLUMN_CHILD_COUNT)
-    private String child_count = StringUtils.EMPTY;
+    private transient String child_count = StringUtils.EMPTY;
 
+    @SerializedName("istatus")
     @ColumnInfo(name = MWRATable.COLUMN_ISTATUS)
-    private String istatus = StringUtils.EMPTY;
+    private transient String istatus = StringUtils.EMPTY;
 
     @Ignore
-    private long ageInMonths;
+    private transient long ageInMonths;
     @Ignore
     private String prePreg = "";
 
     @Ignore
-    private String preMaritalStaus = "";
+    private transient String preMaritalStaus = "";
 
     // For local use
     // This is used for resolving data while posting
@@ -266,7 +283,7 @@ public class Mwra extends BaseObservable implements Observable {
         mwra.setRb22(MainApp.fpMwra.getRb22());
         mwra.setRb23(MainApp.fpMwra.getRb23());
 
-        long daysdiff  = CalculateAge(MainApp.fpMwra.getRa01());
+        long daysdiff  = CalculateAge(MainApp.fpMwra.getRa01().getDate());
         long years = daysdiff/365;
         long actualAge = Integer.parseInt(MainApp.fpMwra.getRb05()) + years;
         mwra.setRb05(String.valueOf(actualAge));     // Age in Years

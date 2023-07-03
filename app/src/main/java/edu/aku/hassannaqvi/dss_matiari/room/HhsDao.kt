@@ -55,13 +55,13 @@ interface HhsDao {
     /* NEW STRUCT */
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    fun addAllData(list: Array<Hhs?>?)
+    fun addAllData(list: Array<Hhs>)
 
     @Query("DELETE FROM hhs_view")
     fun deleteAll()
 
     @Transaction
-    fun reinsert(list: Array<Hhs?>?) {
+    fun reinsert(list: Array<Hhs>) {
         deleteAll()
         addAllData(list)
     }
