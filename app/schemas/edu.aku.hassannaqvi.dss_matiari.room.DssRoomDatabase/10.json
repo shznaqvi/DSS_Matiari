@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "database": {
     "version": 10,
-    "identityHash": "ecd9e128d1ce4f63422dbde9ca3dccd0",
+    "identityHash": "5e45e100cbc9267f4a56ef0cf0a90828",
     "entities": [
       {
         "tableName": "hhs",
@@ -946,7 +946,7 @@
       },
       {
         "tableName": "EntryLog",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `uid` TEXT, `projectName` TEXT, `uuid` TEXT, `userName` TEXT, `sysDate` TEXT, `entryDate` TEXT, `hhid` TEXT, `appver` TEXT, `iStatus` TEXT, `iStatus96x` TEXT, `entryType` TEXT, `deviceId` TEXT, `synced` TEXT, `syncDate` TEXT, `isError` INTEGER NOT NULL DEFAULT 0)",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `uid` TEXT, `projectName` TEXT, `uuid` TEXT, `userName` TEXT, `sysDate` TEXT, `entryDate` TEXT, `hhid` TEXT, `appver` TEXT, `iStatus` TEXT, `entryType` TEXT, `deviceId` TEXT, `synced` TEXT, `syncDate` TEXT, `isError` INTEGER NOT NULL DEFAULT 0)",
         "fields": [
           {
             "fieldPath": "id",
@@ -1009,12 +1009,6 @@
             "notNull": false
           },
           {
-            "fieldPath": "iStatus96x",
-            "columnName": "iStatus96x",
-            "affinity": "TEXT",
-            "notNull": false
-          },
-          {
             "fieldPath": "entryType",
             "columnName": "entryType",
             "affinity": "TEXT",
@@ -1059,7 +1053,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'ecd9e128d1ce4f63422dbde9ca3dccd0')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '5e45e100cbc9267f4a56ef0cf0a90828')"
     ]
   }
 }

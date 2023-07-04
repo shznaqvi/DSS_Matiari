@@ -14,6 +14,8 @@ import androidx.room.Entity;
 import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
+import com.google.gson.annotations.SerializedName;
+
 import org.apache.commons.lang3.StringUtils;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -130,30 +132,33 @@ public class Households extends BaseObservable implements Observable {
     @Ignore
     private transient PropertyChangeRegistry propertyChangeRegistry = new PropertyChangeRegistry();
     @Ignore
-    private boolean exist = false;
+    private transient boolean exist = false;
 
     @ColumnInfo(name = HouseholdTable.COLUMN_REGROUND)
     private String regRound = StringUtils.EMPTY;
-
 
     // APP VARIABLES
     @ColumnInfo(name = HouseholdTable.COLUMN_PROJECT_NAME)
     private String projectName = MainApp.PROJECT_NAME;
 
-    @PrimaryKey(autoGenerate = true)
-    @NonNull
+    @PrimaryKey(autoGenerate = true) @NonNull
+    @SerializedName("_id")
     @ColumnInfo(name = HouseholdTable.COLUMN_ID)
     long id = 0;
 
+    @SerializedName("_uid")
     @ColumnInfo(name = HouseholdTable.COLUMN_UID)
     private String uid = StringUtils.EMPTY;
 
+    @SerializedName("username")
     @ColumnInfo(name = HouseholdTable.COLUMN_USERNAME)
     private String userName = StringUtils.EMPTY;
 
+    @SerializedName("sysdate")
     @ColumnInfo(name = HouseholdTable.COLUMN_SYSDATE)
     private String sysDate = StringUtils.EMPTY;
 
+    @SerializedName("hdssid")
     @ColumnInfo(name = HouseholdTable.COLUMN_HDSSID)
     private String hdssId = StringUtils.EMPTY;
 
@@ -168,36 +173,40 @@ public class Households extends BaseObservable implements Observable {
 
 
     @ColumnInfo(name = HouseholdTable.COLUMN_STRUCTURE_NO)
-    private String structureNo = StringUtils.EMPTY;
+    private transient String structureNo = StringUtils.EMPTY;
 
     @ColumnInfo(name = HouseholdTable.COLUMN_VISIT_NO)
     private String visitNo = "0";
 
+    @SerializedName("deviceid")
     @ColumnInfo(name = HouseholdTable.COLUMN_DEVICEID)
     private String deviceId = StringUtils.EMPTY;
 
     @ColumnInfo(name = HouseholdTable.COLUMN_DEVICETAGID)
-    private String deviceTag = StringUtils.EMPTY;
+    private transient String deviceTag = StringUtils.EMPTY;
 
+    @SerializedName("appversion")
     @ColumnInfo(name = HouseholdTable.COLUMN_APPVERSION)
     private String appver = StringUtils.EMPTY;
 
     private String endTime = StringUtils.EMPTY;
 
+    @SerializedName("istatus")
     @ColumnInfo(name = HouseholdTable.COLUMN_ISTATUS)
     String iStatus = StringUtils.EMPTY;
 
     @Ignore
-    String iStatus96x = StringUtils.EMPTY;
+    transient String  iStatus96x = StringUtils.EMPTY;
 
     @ColumnInfo(name = HouseholdTable.COLUMN_SYNCED)
     private String synced = StringUtils.EMPTY;
 
     @ColumnInfo(name = HouseholdTable.COLUMN_SYNCED_DATE)
-    private String syncDate = StringUtils.EMPTY;
+    private transient String syncDate = StringUtils.EMPTY;
 
 
     // SECTION VARIABLES
+    @SerializedName("s1")
     @ColumnInfo(name = HouseholdTable.COLUMN_SA)
     String sA = StringUtils.EMPTY;
 
@@ -944,7 +953,7 @@ public class Households extends BaseObservable implements Observable {
             this.ra01v2 = json.has("ra01v2") ? json.getString("ra01v2") : "";
             this.ra01v3 = json.has("ra01v3") ? json.getString("ra01v3") : "";
             //this.ra02 = json.getString("ra02");
-            this.ra04 = json.getString("ra04");
+            this.ra04 = json.has("ra04") ? json.getString("ra04") : "";
 //            this.ra03 = json.getString("ra03");
             this.ra05 = json.getString("ra05");
             this.ra07 = json.getString("ra07");

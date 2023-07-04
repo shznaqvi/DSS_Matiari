@@ -152,6 +152,30 @@ interface SyncFunctionsDao {
     }
 
 
+    /**************** EntryLog********************/
+
+    @Query("SELECT * FROM " + TableContracts.EntryLogTable.TABLE_NAME + " WHERE "
+            + TableContracts.EntryLogTable.COLUMN_SYNCED
+            + " is \'\' ORDER BY  id ASC")
+    fun getUnsyncedEntryLog_internal() : List<EntryLog>
+
+    @kotlin.jvm.Throws(JSONException :: class)
+    fun getUnsyncedEntryLog() : JSONArray?
+    {
+        val allForms = getUnsyncedEntryLog_internal()
+
+        val jsonArray = JSONArray()
+        for (i in allForms)
+        {
+
+            i.Hydrate(i)
+            jsonArray.put(i.toJSONObject())
+
+        }
+
+        return jsonArray
+
+    }
 
 
 

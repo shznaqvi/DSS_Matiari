@@ -25,6 +25,7 @@ class Users {
     var username: String = StringUtils.EMPTY
     var password: String = StringUtils.EMPTY
     var passwordEnc: String = StringUtils.EMPTY
+    @SerializedName("full_name")
     var fullname: String = StringUtils.EMPTY
     var enabled: String = StringUtils.EMPTY
     //var pwdExpiry: String = StringUtils.EMPTY

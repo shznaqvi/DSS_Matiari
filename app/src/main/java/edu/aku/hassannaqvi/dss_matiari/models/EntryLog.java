@@ -13,6 +13,8 @@ import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
+import com.google.gson.annotations.SerializedName;
+
 import org.apache.commons.lang3.StringUtils;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -32,20 +34,41 @@ public class EntryLog extends BaseObservable implements Observable {
     private final transient PropertyChangeRegistry propertyChangeRegistry = new PropertyChangeRegistry();
 
     @PrimaryKey(autoGenerate = true) @NonNull
+    @SerializedName("_id")
     private long id;
+
+    @SerializedName("_uid")
     private String uid = StringUtils.EMPTY;
     // APP VARIABLES
     private String projectName = PROJECT_NAME;
+
+    @SerializedName("_uuid")
     private String uuid = StringUtils.EMPTY;
+
+    @SerializedName("username")
     private String userName = StringUtils.EMPTY;
+
+    @SerializedName("sysdate")
     private String sysDate = StringUtils.EMPTY;
+
     private String entryDate = StringUtils.EMPTY;
+
     private String hhid = StringUtils.EMPTY;
+
+    @SerializedName("appversion")
     private String appver = StringUtils.EMPTY;            //
+
+    @SerializedName("istatus")
     private String iStatus = StringUtils.EMPTY;
-    private String iStatus96x = StringUtils.EMPTY;        //
+
+    private transient String iStatus96x = StringUtils.EMPTY;        //
+
+    @SerializedName("entry_type")
     private String entryType = StringUtils.EMPTY;
+
+    @SerializedName("deviceid")
     private String deviceId = StringUtils.EMPTY;
+
     private String synced = StringUtils.EMPTY;
     private String syncDate = StringUtils.EMPTY;
 
@@ -219,22 +242,22 @@ public class EntryLog extends BaseObservable implements Observable {
         isError = error;
     }
 
-    public EntryLog Hydrate(Cursor cursor) throws JSONException {
-        this.id = cursor.getLong(cursor.getColumnIndexOrThrow(EntryLogTable.COLUMN_ID));
-        this.uid = cursor.getString(cursor.getColumnIndexOrThrow(EntryLogTable.COLUMN_UID));
-        this.uuid = cursor.getString(cursor.getColumnIndexOrThrow(EntryLogTable.COLUMN_UUID));
-        this.projectName = cursor.getString(cursor.getColumnIndexOrThrow(EntryLogTable.COLUMN_PROJECT_NAME));
-        this.hhid = cursor.getString(cursor.getColumnIndexOrThrow(EntryLogTable.COLUMN_HHID));
-        this.userName = cursor.getString(cursor.getColumnIndexOrThrow(EntryLogTable.COLUMN_USERNAME));
-        this.sysDate = cursor.getString(cursor.getColumnIndexOrThrow(EntryLogTable.COLUMN_SYSDATE));
-        this.entryDate = cursor.getString(cursor.getColumnIndexOrThrow(EntryLogTable.COLUMN_ENTRY_DATE));
-        this.entryType = cursor.getString(cursor.getColumnIndexOrThrow(EntryLogTable.COLUMN_ENTRY_TYPE));
-        this.deviceId = cursor.getString(cursor.getColumnIndexOrThrow(EntryLogTable.COLUMN_DEVICEID));
-        this.appver = cursor.getString(cursor.getColumnIndexOrThrow(EntryLogTable.COLUMN_APPVERSION));
-        this.iStatus = cursor.getString(cursor.getColumnIndexOrThrow(EntryLogTable.COLUMN_ISTATUS));
-        this.iStatus96x = cursor.getString(cursor.getColumnIndexOrThrow(EntryLogTable.COLUMN_ISTATUS96x));
-        this.synced = cursor.getString(cursor.getColumnIndexOrThrow(EntryLogTable.COLUMN_SYNCED));
-        this.syncDate = cursor.getString(cursor.getColumnIndexOrThrow(EntryLogTable.COLUMN_SYNC_DATE));
+    public EntryLog Hydrate(EntryLog entryLog) throws JSONException {
+        this.id = entryLog.id;
+        this.uid = entryLog.uid;
+        this.uuid = entryLog.uuid;
+        this.projectName = entryLog.projectName;
+        this.hhid = entryLog.hhid;
+        this.userName = entryLog.userName;
+        this.sysDate = entryLog.sysDate;
+        this.entryDate = entryLog.entryDate;
+        this.entryType = entryLog.entryType;
+        this.deviceId = entryLog.deviceId;
+        this.appver = entryLog.appver;
+        this.iStatus = entryLog.iStatus;
+        this.iStatus96x = entryLog.iStatus96x;
+        this.synced = entryLog.synced;
+        this.syncDate = entryLog.syncDate;
 
         return this;
     }

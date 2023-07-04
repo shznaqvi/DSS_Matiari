@@ -12,7 +12,7 @@ import edu.aku.hassannaqvi.dss_matiari.models.Users
 @Dao
 interface UsersDao {
 
-    @Query("SELECT * FROM users WHERE " + TableContracts.UsersTable.COLUMN_DESIGNATION + " like '%team%' ")
+    @Query("SELECT * FROM users WHERE " + TableContracts.UsersTable.COLUMN_DESIGNATION + " like '%Team Leader%' ")
     fun getTeamLeaders() : List<Users>
 
     @Query("SELECT * FROM users WHERE username = :username")

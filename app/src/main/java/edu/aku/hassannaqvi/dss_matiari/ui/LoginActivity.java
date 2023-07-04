@@ -2,6 +2,7 @@ package edu.aku.hassannaqvi.dss_matiari.ui;
 
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.PROJECT_NAME;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.editor;
+import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.leaderCode;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.sharedPref;
 
 import android.Manifest;
@@ -22,6 +23,7 @@ import android.text.method.PasswordTransformationMethod;
 import android.util.Base64;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.CompoundButton;
 import android.widget.Spinner;
@@ -207,6 +209,19 @@ public class LoginActivity extends AppCompatActivity {
 
         // Apply the adapter to the spinner
         bi.teamleader.setAdapter(new ArrayAdapter(LoginActivity.this, R.layout.custom_spinner, leaderNames));
+
+        bi.teamleader.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                MainApp.leaderCode = leaderCodes.get(position);
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
     }
 
     @Override

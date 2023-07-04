@@ -15,6 +15,8 @@ import androidx.room.Entity;
 import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
+import com.google.gson.annotations.SerializedName;
+
 import org.apache.commons.lang3.StringUtils;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -30,44 +32,51 @@ public class Outcome extends BaseObservable implements Observable {
 
 
     @Ignore
-    private final String TAG = "Outcome";
+    private transient final String TAG = "Outcome";
     //Not saving in DB
     @Ignore
-    private final LocalDate localDate = null;
+    private transient final LocalDate localDate = null;
     @Ignore
     private transient PropertyChangeRegistry propertyChangeRegistry = new PropertyChangeRegistry();
     @Ignore
-    private boolean exist = false;
+    private transient boolean exist = false;
     @Ignore
-    private boolean expanded;
+    private transient boolean expanded;
 
     // APP VARIABLES
     @ColumnInfo(name = TableContracts.OutcomeTable.COLUMN_PROJECT_NAME)
     private String projectName = MainApp.PROJECT_NAME;
 
     // APP VARIABLES
+    @SerializedName("_id")
     @PrimaryKey(autoGenerate = true) @NonNull
     @ColumnInfo(name = TableContracts.OutcomeTable.COLUMN_ID)
     long id = 0;
 
+    @SerializedName("_uid")
     @ColumnInfo(name = TableContracts.OutcomeTable.COLUMN_UID)
     private String uid = StringUtils.EMPTY;
 
+    @SerializedName("_uuid")
     @ColumnInfo(name = TableContracts.OutcomeTable.COLUMN_UUID)
     private String uuid = StringUtils.EMPTY;
 
+    @SerializedName("_muid")
     @ColumnInfo(name = TableContracts.OutcomeTable.COLUMN_MUID)
     private String muid = StringUtils.EMPTY;
 
     @ColumnInfo(name = TableContracts.OutcomeTable.COLUMN_MSNO)
     private String msno = StringUtils.EMPTY;
 
+    @SerializedName("username")
     @ColumnInfo(name = TableContracts.OutcomeTable.COLUMN_USERNAME)
     private String userName = StringUtils.EMPTY;
 
+    @SerializedName("sysdate")
     @ColumnInfo(name = TableContracts.OutcomeTable.COLUMN_SYSDATE)
     private String sysDate = StringUtils.EMPTY;
 
+    @SerializedName("hdssid")
     @ColumnInfo(name = TableContracts.OutcomeTable.COLUMN_HDSSID)
     private String hdssId = StringUtils.EMPTY;
 
@@ -83,29 +92,33 @@ public class Outcome extends BaseObservable implements Observable {
     @ColumnInfo(name = TableContracts.OutcomeTable.COLUMN_SNO)
     private String sno = StringUtils.EMPTY;
 
+    @SerializedName("s5")
     @ColumnInfo(name = TableContracts.OutcomeTable.COLUMN_SE)
     private String sE = StringUtils.EMPTY;
 
+    @SerializedName("deviceid")
     @ColumnInfo(name = TableContracts.OutcomeTable.COLUMN_DEVICEID)
     private String deviceId = StringUtils.EMPTY;
 
     @ColumnInfo(name = TableContracts.OutcomeTable.COLUMN_DEVICETAGID)
-    private String deviceTag = StringUtils.EMPTY;
+    private transient String deviceTag = StringUtils.EMPTY;
 
+    @SerializedName("appversion")
     @ColumnInfo(name = TableContracts.OutcomeTable.COLUMN_APPVERSION)
     private String appver = StringUtils.EMPTY;
 
+    @SerializedName("istatus")
     @ColumnInfo(name = TableContracts.OutcomeTable.COLUMN_ISTATUS)
-    private String iStatus = StringUtils.EMPTY;
+    private transient String iStatus = StringUtils.EMPTY;
 
     @Ignore
-    private String iStatus96x = StringUtils.EMPTY;
+    private transient String iStatus96x = StringUtils.EMPTY;
 
     @ColumnInfo(name = TableContracts.OutcomeTable.COLUMN_SYNCED)
     private String synced = StringUtils.EMPTY;
 
     @ColumnInfo(name = TableContracts.OutcomeTable.COLUMN_SYNCED_DATE)
-    private String syncDate = StringUtils.EMPTY;
+    private transient String syncDate = StringUtils.EMPTY;
 
     @ColumnInfo(name = TableContracts.OutcomeTable.COLUMN_ROUND)
     private String round = StringUtils.EMPTY;
@@ -572,7 +585,7 @@ public class Outcome extends BaseObservable implements Observable {
         json.put(TableContracts.OutcomeTable.COLUMN_HOUSEHOLD_NO, this.hhNo);
         json.put(TableContracts.OutcomeTable.COLUMN_DEVICEID, this.deviceId);
         //json.put(TableContracts.OutcomeTable.COLUMN_DEVICETAGID, this.deviceTag);
-        json.put(TableContracts.OutcomeTable.COLUMN_ISTATUS, this.iStatus);
+        //json.put(TableContracts.OutcomeTable.COLUMN_ISTATUS, this.iStatus);
         json.put(TableContracts.OutcomeTable.COLUMN_APPVERSION, this.appver);
         //  json.put(MWRATable.COLUMN_SYNCED, this.synced);
         //  json.put(MWRATable.COLUMN_SYNCED_DATE, this.syncDate);

@@ -136,8 +136,8 @@ public class EndingActivity extends AppCompatActivity {
         if (UpdateDB()) {
             setResult(RESULT_OK);
             finish();
-            Intent i = new Intent(this, FPHouseholdActivity.class);
-            startActivity(i);
+            //Intent i = new Intent(this, FPHouseholdActivity.class);
+            //startActivity(i);
             Toast.makeText(this, "Entry Complete", Toast.LENGTH_SHORT).show();
 
         } else {

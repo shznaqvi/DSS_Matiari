@@ -19,10 +19,12 @@ import androidx.recyclerview.widget.RecyclerView;
 import org.json.JSONException;
 
 import java.util.List;
+import java.util.Objects;
 
 import edu.aku.hassannaqvi.dss_matiari.R;
 import edu.aku.hassannaqvi.dss_matiari.core.MainApp;
 import edu.aku.hassannaqvi.dss_matiari.models.FollowUpsSche;
+import edu.aku.hassannaqvi.dss_matiari.newstruct.global.AppConstants;
 import edu.aku.hassannaqvi.dss_matiari.room.DssRoomDatabase;
 import edu.aku.hassannaqvi.dss_matiari.ui.sections.SectionFActivity;
 import edu.aku.hassannaqvi.dss_matiari.ui.sections.SectionCActivity;
@@ -68,10 +70,14 @@ public class FpMwraAdapter extends RecyclerView.Adapter<FpMwraAdapter.ViewHolder
 
         TextView secDob = viewHolder.secDob;
         TextView secGender = viewHolder.secGender;
-        String pregStatus = followUpsSche.getRb07().equals("1") ? "PW" : "  ";
+        String pregStatus = "";
+        if(!AppConstants.isEmpty(followUpsSche.getRb07())) {
+            pregStatus = followUpsSche.getRb07().equals("1") ? "PW" : "  ";
+        }
+
         try {
             //String curPregStatus = db.getFollowupsBySno(followUpsSche.getRb01(), followUpsSche.getFRound()).getRc07();
-                String curPregStatus = db.mwraDao().getFollowupsBySno(MainApp.households.getUid(), followUpsSche.getRb01(), followUpsSche.getFRound()).getRb07();
+                String curPregStatus = Objects.requireNonNull(db.mwraDao().getFollowupsBySno(MainApp.households.getUid(), followUpsSche.getRb01(), followUpsSche.getFRound())).getRb07();
                 if (!curPregStatus.equals("")) {
                     pregStatus = curPregStatus.equals("1") ? "Pregnant" : " Not Pregnant ";
                 }
