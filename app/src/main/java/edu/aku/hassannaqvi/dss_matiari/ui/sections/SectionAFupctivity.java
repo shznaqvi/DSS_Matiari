@@ -142,10 +142,9 @@ public class SectionAFupctivity extends AppCompatActivity {
         if (!insertNewRecord()) return;
 
         if (updateDB()) {
-
+            finish();
             setResult(RESULT_OK);
             if (households.getRa15().equals("1")) {
-                finish();
                 startActivity(new Intent(this, FPMwraActivity.class)
                         .setFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT));
             } else {

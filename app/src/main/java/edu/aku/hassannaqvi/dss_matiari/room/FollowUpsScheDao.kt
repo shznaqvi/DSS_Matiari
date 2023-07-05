@@ -13,34 +13,6 @@ import edu.aku.hassannaqvi.dss_matiari.newstruct.models.SyncModelNew
 @Dao
 interface FollowUpsScheDao {
 
-    /*@Throws(JSONException ::class)
-    fun syncFollowUpsSche(followUpsScheList: JSONArray) : Int {
-        var insertCount =0
-        deleteFollowupsScheTable()
-
-        for(i in 0 until followUpsScheList.length()) {
-            val jsonObjectFollowUpsSche = followUpsScheList.optJSONObject(i)
-
-            val followUpsSche = FollowUpsSche()
-            followUpsSche.Sync(jsonObjectFollowUpsSche)
-
-            val rowId = insertFollowupsSche(followUpsSche)
-
-            if(rowId != 1L)
-                insertCount++
-        }
-
-        return insertCount
-    }
-
-    @Insert
-    fun insertFollowupsSche(followUpsSche: FollowUpsSche) : Long
-
-
-    @Query("DELETE FROM " + TableContracts.TableFollowUpsSche.TABLE_NAME)
-    fun deleteFollowupsScheTable()*/
-
-
     @Update(onConflict = OnConflictStrategy.REPLACE)
     fun updateFollowupsSche(followUpsSche: FollowUpsSche): Int
 

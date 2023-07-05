@@ -111,10 +111,13 @@ interface SyncFunctionsDao {
 
     // Outcome
 
-    @Query("SELECT * FROM " + TableContracts.OutcomeTable.TABLE_NAME
+    /*@Query("SELECT * FROM " + TableContracts.OutcomeTable.TABLE_NAME
             + " WHERE " + TableContracts.OutcomeTable.COLUMN_SYNCED
             + " is \'\' AND (" + TableContracts.OutcomeTable.COLUMN_ISTATUS
-            + " != 4 ) ORDER BY " + TableContracts.OutcomeTable.COLUMN_ID + " ASC")
+            + " != 4 ) ORDER BY " + TableContracts.OutcomeTable.COLUMN_ID + " ASC")*/
+
+    @Query("SELECT * FROM outcomes, hhs WHERE outcomes.hdssid LIKE hhs.hdssid AND outcomes.synced is \'\' " +
+           "AND hhs.istatus = 1 ORDER BY outcomes._id ASC ")
     fun getUnsyncedOutcome_internal() : List<Outcome>
 
     @kotlin.jvm.Throws(JSONException :: class)
