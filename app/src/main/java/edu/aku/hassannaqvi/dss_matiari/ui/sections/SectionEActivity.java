@@ -287,47 +287,16 @@ public class SectionEActivity extends AppCompatActivity {
             cal.add(Calendar.MONTH, +3); // Calender reset to DOV
             Log.d(TAG, "onCreate: " + minDob);
 
-            // Set maxDob date to 50 years back from DOV
-            //cal.add(Calendar.YEAR, -14);
-            //String maxDob = sdf.format(cal.getTime());
-            //cal.add(Calendar.YEAR, +14); // Calender reset to DOV
-            //Log.d(TAG, "onCreate: " + maxDob);
-
-
-            // Set MinLMP date to 2 months back from DOV
-            //cal.add(Calendar.MONTH, -9);
-            //String minLMP = sdf.format(cal.getTime());
-            //cal.add(Calendar.MONTH, +9); // Calender reset to DOV
-            //Log.d(TAG, "onCreate: " + minLMP);
-
-            // Set MaxLMP same as DOV
-            //String maxLMP = sdf.format(cal.getTime());
-            //Log.d(TAG, "onCreate: " + maxLMP);
-
-            // Set MinEDD same as DOV
-            //String minEDD = sdf.format(cal.getTime());
-            //Log.d(TAG, "onCreate: " + minEDD);
-
-            // Set MaxEDD to 9 months from DOV
-            //cal.add(Calendar.MONTH, +9);
-            //String maxEDD = sdf.format(cal.getTime());
-            //cal.add(Calendar.MONTH, -9);
-            //Log.d(TAG, "onCreate: " + maxLMP);
-
-            // DOB
-            //bi.rc03dob.setMinDate(minDob);
-
-            // LMP
-            //bi.rb08.setMaxDate(maxLMP);
-            //bi.rb08.setMinDate(minLMP);
-
-            // EDD
-            //bi.rb09.setMaxDate(maxEDD);
-            //bi.rb09.setMinDate(minEDD);
 
         } catch (ParseException e) {
             e.printStackTrace();
         }
     }
 
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        MainApp.lockScreen(this);
+    }
 }

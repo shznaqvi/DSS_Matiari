@@ -648,5 +648,10 @@ public class SectionCActivity extends AppCompatActivity {
         return newDate;
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        MainApp.lockScreen(this);
+    }
 
 }

@@ -279,4 +279,5 @@ public class ChangePasswordActivity extends AppCompatActivity {
         }
         return isValid;
     }
+
 }

@@ -96,18 +96,8 @@ public class MwraActivity extends AppCompatActivity {
         db = MainApp.appInfo.dbHelper;
         MainApp.mwraList = new ArrayList<>();
         Log.d(TAG, "onCreate: mwralist " + mwraList.size());
-//        try {
 
-            //MainApp.mwraList = db.getAllMWRAByHH(selectedUC, MainApp.households.getVillageCode(), MainApp.households.getStructureNo(), MainApp.households.getHhNo());
-
-            mwraList = db.mwraDao().getAllMWRAByHH(selectedUC, MainApp.households.getVillageCode(), MainApp.households.getStructureNo(), MainApp.households.getHhNo(), "1");
-//        } catch (JSONException e) {
-//            e.printStackTrace();
-//            Toast.makeText(this, "JSONException: " + e.getMessage(), Toast.LENGTH_SHORT).show();
-//            Log.d(TAG, "onCreate (JSONException): " + e.getMessage());
-//        }
-
-
+        mwraList = db.mwraDao().getAllMWRAByHH(selectedUC, MainApp.households.getVillageCode(), MainApp.households.getStructureNo(), MainApp.households.getHhNo(), "1");
 
         fmAdapter = new MwraAdapter(this, MainApp.mwraList);
         bi.rvMembers.setAdapter(fmAdapter);
@@ -120,7 +110,6 @@ public class MwraActivity extends AppCompatActivity {
             public void onClick(View view) {
 
                 if (!MainApp.households.getIStatus().equals("1")) {
-                    //     Toast.makeText(MwraActivity.this, "Opening Mwra Households", Toast.LENGTH_LONG).show();
                     addFemale();
                 } else {
                     Toast.makeText(MwraActivity.this, "This households has been locked. You cannot add new members to locked forms", Toast.LENGTH_LONG).show();
@@ -137,37 +126,28 @@ public class MwraActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
+        MainApp.lockScreen(this);
         Toast.makeText(this, "Activity Resumed!", Toast.LENGTH_SHORT).show();
         mwraCount = Math.round(MainApp.mwraList.size());
 
         MainApp.mwra = new Mwra();
         mwra.init();
         if (MainApp.mwraList.size() > 0) {
-            //MainApp.fm.get(Integer.parseInt(String.valueOf(MainApp.selectedFemale))).setStatus("1");
             fmAdapter.notifyItemChanged(Integer.parseInt(String.valueOf(selectedMember)));
         }
 
 
         checkCompleteFm();
 
-        // bi.fab.setClickable(!MainApp.households.getiStatus().equals("1"));
-      /* bi.completedmember.setText(mwraList.size()+ " MWRAs added");
-        bi.totalmember.setText(MainApp.mwraTotal+ " M completed");*/
     }
 
     private void checkCompleteFm() {
-        //     if (!MainApp.households.getIStatus().equals("1")) {
+
         int compCount = mwraList.size();
 
         MainApp.mwraCountComplete = compCount;
         bi.btnContinue.setVisibility(mwraCount > 0 ? View.VISIBLE : View.GONE);
-        //   bi.btnContinue.setVisibility(compCount == mwraCount && !households.getiStatus().equals("1")? View.VISIBLE : View.GONE);
-     /*   bi.btnContinue.setVisibility(compCount >= mwraCount ? View.VISIBLE : View.GONE);
-        bi.btnContinue.setEnabled(bi.btnContinue.getVisibility()==View.VISIBLE);*/
 
-        //  } else {
-        //       Toast.makeText(this, "Households has been completed or locked", Toast.LENGTH_LONG).show();
-        //   }
     }
 
     public void addFemale() {
@@ -187,11 +167,7 @@ public class MwraActivity extends AppCompatActivity {
         MainApp.mwra = new Mwra();
         mwra.init();
 
-        //   finish();
-
-        //int maxMWRA = db.getMaxMWRSNoBYHH(selectedUC, selectedVillage, selectedHhNO);
         int maxMWRA = db.mwraDao().getMaxMWRSNoBYHH(selectedUC, selectedVillage, selectedHhNO);
-        //int maxFpMWRA = db.getMaxMWRANoBYHHFromFolloupsSche(selectedUC, selectedVillage, selectedHhNO);
         int maxFpMWRA = db.FollowUpsScheDao().getMaxMWRANoBYHHFromFolloupsSche(selectedUC, selectedVillage, selectedHhNO);
         mwraCount = Math.max(maxMWRA, maxFpMWRA);
 
@@ -224,17 +200,12 @@ public class MwraActivity extends AppCompatActivity {
             setResult(RESULT_OK);
             finish();
         }
-
-        //startActivity(new Intent(this, MainActivity.class));
-        /*   } else {
-               Toast.makeText(this, "Failed to Update Database!", Toast.LENGTH_SHORT).show()
-           }*/
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        // check if the request code is same as what is passed  here it is 2
+
         if (requestCode == 2) {
             if (resultCode == Activity.RESULT_OK) {
                 //   mwraList.get(selectedFemale).setExpanded(false);

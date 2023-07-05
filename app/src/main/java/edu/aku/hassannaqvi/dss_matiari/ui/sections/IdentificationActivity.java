@@ -205,12 +205,16 @@ public class IdentificationActivity extends AppCompatActivity {
 
         }
 
-
     }
-
 
     private boolean formValidation() {
         return Validator.emptyCheckingContainer(this, bi.GrpName);
     }
 
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        MainApp.lockScreen(this);
+    }
 }

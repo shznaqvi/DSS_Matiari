@@ -93,6 +93,10 @@
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
 
         <activity
+            android:name=".ui.LockActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+
+        <activity
             android:name=".ui.ChangePasswordActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
 

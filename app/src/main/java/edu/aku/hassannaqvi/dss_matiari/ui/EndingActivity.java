@@ -149,8 +149,6 @@ public class EndingActivity extends AppCompatActivity {
     private boolean UpdateDB() {
         int updcount = 0;
 
-        //db.updatesHouseholdColumn(TableContracts.HouseholdTable.COLUMN_ISTATUS, MainApp.households.getIStatus());
-        //db.updatesHouseholdColumn(TableContracts.HouseholdTable.COLUMN_VISIT_NO, MainApp.households.getVisitNo());
         try {
             Households updatedHousehold = households;
             Mwra updatedMwra = MainApp.mwra;
@@ -196,6 +194,12 @@ public class EndingActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         Toast.makeText(getApplicationContext(), "Back Press Not Allowed", Toast.LENGTH_LONG).show();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        MainApp.lockScreen(this);
     }
 
 }
