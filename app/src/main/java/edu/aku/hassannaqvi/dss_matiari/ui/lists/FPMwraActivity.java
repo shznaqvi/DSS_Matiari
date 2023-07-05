@@ -8,8 +8,8 @@ import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.mwraCount;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.mwraDone;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.mwraStatus;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.selectedFpHousehold;
-import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.selectedMember;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.selectedHhNO;
+import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.selectedMember;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.selectedUC;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.selectedVillage;
 
@@ -33,7 +33,6 @@ import org.json.JSONException;
 import edu.aku.hassannaqvi.dss_matiari.R;
 import edu.aku.hassannaqvi.dss_matiari.adapters.FpMwraAdapter;
 import edu.aku.hassannaqvi.dss_matiari.core.MainApp;
-import edu.aku.hassannaqvi.dss_matiari.database.DatabaseHelper;
 import edu.aku.hassannaqvi.dss_matiari.databinding.ActivityFpmwraBinding;
 import edu.aku.hassannaqvi.dss_matiari.models.Mwra;
 import edu.aku.hassannaqvi.dss_matiari.room.DssRoomDatabase;
@@ -303,9 +302,9 @@ public class FPMwraActivity extends AppCompatActivity {
                     } else flag = true;
                 }
             }
-            i.putExtra("complete", flag);
-            startActivity(i);
-            finish();
+        i.putExtra("complete", flag);
+        finish();
+        startActivity(i);
 
     }
 

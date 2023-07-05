@@ -5,15 +5,10 @@ import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.sharedPref;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
-import android.widget.CompoundButton;
-import android.widget.CompoundButton.OnCheckedChangeListener;
-import android.widget.EditText;
-import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -31,7 +26,6 @@ import edu.aku.hassannaqvi.dss_matiari.models.Households;
 import edu.aku.hassannaqvi.dss_matiari.room.DssRoomDatabase;
 import edu.aku.hassannaqvi.dss_matiari.ui.EndingActivity;
 import edu.aku.hassannaqvi.dss_matiari.ui.lists.FPMwraActivity;
-import edu.aku.hassannaqvi.dss_matiari.ui.lists.MwraActivity;
 
 public class SectionAFupctivity extends AppCompatActivity {
 
@@ -111,6 +105,7 @@ public class SectionAFupctivity extends AppCompatActivity {
         if (updateDB()) {
 
             setResult(RESULT_OK);
+            finish();
             Intent intent = new Intent(this, FPMwraActivity.class);
             ((Activity) this).startActivityForResult(intent, 2);
 
@@ -119,7 +114,6 @@ public class SectionAFupctivity extends AppCompatActivity {
         }
 
     }
-
 
     public void btnContinue(View view) {
 
@@ -182,10 +176,6 @@ public class SectionAFupctivity extends AppCompatActivity {
         }
     }
 
-
-
-
-
     private boolean updateDB() {
         //DssRoomDatabase db = MainApp.appInfo.getDbHelper();
         int updcount = 0;
@@ -207,7 +197,6 @@ public class SectionAFupctivity extends AppCompatActivity {
             return false;
         }
     }
-
 
     public void btnEnd(View view) {
         setResult(RESULT_CANCELED);
@@ -272,6 +261,4 @@ public class SectionAFupctivity extends AppCompatActivity {
         super.onResume();
         MainApp.lockScreen(this);
     }
-
-
 }

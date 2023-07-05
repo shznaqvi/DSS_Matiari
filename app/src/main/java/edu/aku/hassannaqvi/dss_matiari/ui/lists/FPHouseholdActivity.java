@@ -31,7 +31,6 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import org.json.JSONException;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 import edu.aku.hassannaqvi.dss_matiari.R;
 import edu.aku.hassannaqvi.dss_matiari.adapters.FPHouseholdAdapter;
@@ -113,9 +112,6 @@ public class FPHouseholdActivity extends AppCompatActivity {
 
     }
 
-
-
-
     public void filterForms(View view) {
         Toast.makeText(this, "updated", Toast.LENGTH_SHORT).show();
 
@@ -127,7 +123,6 @@ public class FPHouseholdActivity extends AppCompatActivity {
         bi.rvHouseholds.setAdapter(hhAdapter);
 
     }
-
 
     @Override
     protected void onResume() {
