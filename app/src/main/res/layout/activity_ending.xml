@@ -7,7 +7,7 @@
 
         <variable
             name="household"
-            type="edu.aku.hassannaqvi.dss_matiari.models.Households" />
+            type="edu.aku.hassannaqvi.dss_matiari.models.Households.SA" />
 
         <variable
             name="callback"

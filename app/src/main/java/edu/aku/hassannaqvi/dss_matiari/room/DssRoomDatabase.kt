@@ -33,8 +33,9 @@ import java.lang.reflect.Type
         EntryLog ::class
     ]
 )
+
 /* NEW STRUCT */
-@TypeConverters(SyncModelNew.ResponseDate.DataConverter::class)
+@TypeConverters(SyncModelNew.ResponseDate.DataConverter::class, Households.SA.DataConverter::class)
 
 abstract class DssRoomDatabase : RoomDatabase() {
 

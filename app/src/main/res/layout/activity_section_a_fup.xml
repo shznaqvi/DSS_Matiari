@@ -8,7 +8,7 @@
 
         <variable
             name="household"
-            type="edu.aku.hassannaqvi.dss_matiari.models.Households" />
+            type="edu.aku.hassannaqvi.dss_matiari.models.Households.SA" />
 
         <variable
             name="callback"
@@ -21,20 +21,6 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-
-        <!-- CUSTOM TOOLBAR -->
-        <!--        <androidx.appcompat.widget.Toolbar-->
-        <!--            android:id="@+id/toolbar"-->
-        <!--            style="@null"-->
-        <!--            android:layout_width="match_parent"-->
-        <!--            android:layout_height="wrap_content"-->
-        <!--            android:background="@color/colorPrimary"-->
-        <!--            android:minHeight="?attr/actionBarSize"-->
-        <!--            android:theme="@style/ToolbarTheme"-->
-        <!--            app:popupTheme="@style/ThemeOverlay.MaterialComponents.Light"-->
-        <!--            app:subtitleTextAppearance="@style/Toolbar.SubtitleText"-->
-        <!--            app:title="@string/demographicinformation_mainheading"-->
-        <!--            app:titleTextAppearance="@style/Toolbar.TitleText" />-->
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"

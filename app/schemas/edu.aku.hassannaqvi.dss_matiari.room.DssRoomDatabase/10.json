@@ -2,11 +2,11 @@
   "formatVersion": 1,
   "database": {
     "version": 10,
-    "identityHash": "5e45e100cbc9267f4a56ef0cf0a90828",
+    "identityHash": "3d8ea758c1ba7cc8d965d35ed537a48d",
     "entities": [
       {
         "tableName": "hhs",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`isError` INTEGER NOT NULL DEFAULT 0, `regRound` TEXT, `projectName` TEXT, `_id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `_uid` TEXT, `username` TEXT, `sysdate` TEXT, `hdssid` TEXT, `ucCode` TEXT, `villageCode` TEXT, `hhNo` TEXT, `structureNo` TEXT, `visitNo` TEXT, `deviceid` TEXT, `devicetagid` TEXT, `appversion` TEXT, `endTime` TEXT, `istatus` TEXT, `synced` TEXT, `synced_date` TEXT, `s1` TEXT)",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`isError` INTEGER NOT NULL DEFAULT 0, `regRound` TEXT, `projectName` TEXT, `_id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `_uid` TEXT, `username` TEXT, `sysdate` TEXT, `hdssid` TEXT, `ucCode` TEXT, `villageCode` TEXT, `hhNo` TEXT, `structureNo` TEXT, `visitNo` TEXT, `deviceid` TEXT, `devicetagid` TEXT, `appversion` TEXT, `endTime` TEXT, `istatus` TEXT, `synced` TEXT, `synced_date` TEXT, `round` TEXT, `sA` TEXT)",
         "fields": [
           {
             "fieldPath": "isError",
@@ -130,8 +130,14 @@
             "notNull": false
           },
           {
+            "fieldPath": "round",
+            "columnName": "round",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
             "fieldPath": "sA",
-            "columnName": "s1",
+            "columnName": "sA",
             "affinity": "TEXT",
             "notNull": false
           }
@@ -1053,7 +1059,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '5e45e100cbc9267f4a56ef0cf0a90828')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '3d8ea758c1ba7cc8d965d35ed537a48d')"
     ]
   }
 }

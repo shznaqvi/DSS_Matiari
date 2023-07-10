@@ -50,7 +50,7 @@ interface HouseholdsDao {
         val householdsList = getHouseholdBYVillage_internal(uc, village, regRound)
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             householdsList.forEach {
-                it.s1Hydrate(it.sa)
+                //it.s1Hydrate(it.sa)
             }
         }
         return householdsList
@@ -81,7 +81,7 @@ interface HouseholdsDao {
         )
 
         val household = getHouseholdByHDSSIDASC_internal(hdssid, newHDSSID)
-        household?.s1Hydrate(household.sa)
+        //household?.s1Hydrate(household.sa)
         return household
     }
 
@@ -125,11 +125,11 @@ interface HouseholdsDao {
            val id = addHousehold(tempHousehold)
             tempHousehold.id = id
             tempHousehold.uid = MainApp.deviceid + tempHousehold.id
-            tempHousehold.sAtoString()
+            //tempHousehold.sAtoString()
             updateHousehold(tempHousehold)
             return tempHousehold
         }else{
-            household.s1Hydrate(household.sa)
+            //household.s1Hydrate(household.sa)
             return household
         }
 
@@ -156,7 +156,7 @@ interface HouseholdsDao {
         val newHousehols = getHouseholdByUID_internal(uid)
         if (newHousehols == null) {
             val temHouseholds = Households()
-            temHouseholds.Hydrate(newHousehols)
+            //temHouseholds.Hydrate(newHousehols)
         }
         return newHousehols
     }

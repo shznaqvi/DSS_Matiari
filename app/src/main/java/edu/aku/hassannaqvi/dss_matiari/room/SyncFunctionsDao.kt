@@ -32,13 +32,13 @@ interface SyncFunctionsDao {
         val allForms = getUnsyncedHousehols_internal()
 
         val jsonArray = JSONArray()
-        for (i in allForms)
+        /*for (i in allForms)
         {
 
             i.Hydrate(i)
             jsonArray.put(i.toJSONObject())
 
-        }
+        }*/
 
         return jsonArray
 

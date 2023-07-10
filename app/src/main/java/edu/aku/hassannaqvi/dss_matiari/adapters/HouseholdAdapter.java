@@ -117,12 +117,8 @@ public class HouseholdAdapter extends RecyclerView.Adapter<HouseholdAdapter.View
         //int totalMWRA = db.getMWRACountBYUUID(households.getUid());
         int totalMWRA = db.mwraDao().getMWRACountBYUUID(households.getUid(), "1");
 
-        try {
-            hhNo.setText(getStringFromJson(households.getSA(), "ra07") + "-" + getStringFromJson(households.getSA(), "ra09"));
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        hhHead.setText(households.getRa14());
+        hhNo.setText(households.getSA().getRa07() + "-" + households.getSA().getRa09());
+        hhHead.setText(households.getSA().getRa14());
         mwraCount.setText(totalMWRA + " Women");
         secStatus.setText(hhStatus);
         imgStatus.setVisibility(households.getIStatus().equals("1") || Integer.parseInt(households.getVisitNo()) > 2 ? View.VISIBLE : View.GONE);

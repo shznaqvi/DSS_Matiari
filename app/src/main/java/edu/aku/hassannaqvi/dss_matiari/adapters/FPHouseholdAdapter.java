@@ -314,7 +314,7 @@ public class FPHouseholdAdapter extends RecyclerView.Adapter<FPHouseholdAdapter.
                                     MainApp.households.setVillageCode(selectedVillage);
                                     //MainApp.households.setRa09(followUpsSche.getHhNo());
                                 }
-                                MainApp.households.setRa09(followUpsSche.getHhNo());
+                                MainApp.households.getSA().setRa09(followUpsSche.getHhNo());
                                 MainApp.selectedHhNO = followUpsSche.getHhNo();
                                 MainApp.position = viewHolder.getAdapterPosition();
                                 if (!MainApp.households.getIStatus().equals("1") && Integer.parseInt(MainApp.households.getVisitNo()) < 3) {

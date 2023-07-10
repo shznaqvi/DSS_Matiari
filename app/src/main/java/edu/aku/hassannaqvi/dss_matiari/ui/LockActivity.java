@@ -33,7 +33,7 @@ public class LockActivity extends AppCompatActivity {
 
     public void attemptUnlock(View view) {
 
-        if (checkPassword(bi.passwordLock.getText().toString(), MainApp.user.getPassword())) {
+        if (checkPassword(bi.passwordLock.getText().toString(), MainApp.user.getPasswordEnc())) {
             finish();
         } else {
             bi.passwordLock.setError("Password did not match");

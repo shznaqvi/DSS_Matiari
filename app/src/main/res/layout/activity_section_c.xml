@@ -9,7 +9,7 @@
         <!--FPHouseholds-->
         <variable
             name="fpHouseholds"
-            type="edu.aku.hassannaqvi.dss_matiari.models.Households" />
+            type="edu.aku.hassannaqvi.dss_matiari.models.Households.SA" />
 
         <!--MWRA Followups-->
         <variable

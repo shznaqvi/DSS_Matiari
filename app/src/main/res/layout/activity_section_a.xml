@@ -7,7 +7,7 @@
 
         <variable
             name="household"
-            type="edu.aku.hassannaqvi.dss_matiari.models.Households" />
+            type="edu.aku.hassannaqvi.dss_matiari.models.Households.SA" />
 
         <variable
             name="callback"
@@ -1023,56 +1023,6 @@
 
                 </LinearLayout>
 
-                <!--EndButton LinearLayout-->
-                <!--                <LinearLayout-->
-                <!--                    android:layout_width="match_parent"-->
-                <!--                    android:layout_height="wrap_content"-->
-                <!--                    android:layout_margin="24dp"-->
-                <!--                    android:gravity="end"-->
-                <!--                    android:orientation="horizontal">-->
-
-                <!--                    <LinearLayout-->
-                <!--                        android:layout_width="0dp"-->
-                <!--                        android:layout_height="wrap_content"-->
-                <!--                        android:layout_margin="0dp"-->
-                <!--                        android:layout_weight="1"-->
-                <!--                        android:gravity="start"-->
-                <!--                        android:orientation="horizontal">-->
-
-                <!--                        <androidx.appcompat.widget.AppCompatButton-->
-                <!--                            android:id="@+id/btn_locked"-->
-                <!--                            android:layout_width="wrap_content"-->
-                <!--                            android:layout_height="wrap_content"-->
-                <!--                            android:layout_gravity="end"-->
-                <!--                            android:layout_marginStart="12dp"-->
-                <!--                            android:backgroundTint="@color/colorPrimaryLightOverlay"-->
-                <!--                            android:drawableStart="@drawable/ic_close"-->
-                <!--                            android:onClick="btnContinue"-->
-                <!--                            android:text="Discontinue"-->
-                <!--                            android:textColor="@color/colorPrimaryDark" />-->
-                <!--                    </LinearLayout>-->
-
-                <!--                    <androidx.appcompat.widget.AppCompatButton-->
-                <!--                        android:id="@+id/btn_End"-->
-                <!--                        android:layout_width="wrap_content"-->
-                <!--                        android:layout_height="wrap_content"-->
-                <!--                        android:layout_marginStart="12dp"-->
-                <!--                        android:backgroundTint="@color/colorAccent"-->
-                <!--                        android:onClick="btnEnd"-->
-                <!--                        android:text="Cancel"-->
-                <!--                        android:textColor="@color/white" />-->
-
-                <!--                    <androidx.appcompat.widget.AppCompatButton-->
-                <!--                        android:id="@+id/btn_Continue"-->
-                <!--                        android:layout_width="wrap_content"-->
-                <!--                        android:layout_height="wrap_content"-->
-                <!--                        android:layout_marginStart="12dp"-->
-                <!--                        android:backgroundTint="@color/colorPrimary"-->
-                <!--                        android:onClick="btnContinue"-->
-                <!--                        android:text="Save"-->
-                <!--                        android:textColor="@color/white" />-->
-
-                <!--                </LinearLayout>-->
             </LinearLayout>
         </ScrollView>
     </LinearLayout>

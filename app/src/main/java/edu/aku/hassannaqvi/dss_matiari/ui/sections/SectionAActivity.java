@@ -21,17 +21,21 @@ import com.validatorcrawler.aliazaz.Validator;
 
 import org.json.JSONException;
 
+import java.text.Format;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
+import java.util.Objects;
 
 import edu.aku.hassannaqvi.dss_matiari.R;
 import edu.aku.hassannaqvi.dss_matiari.contracts.TableContracts;
 import edu.aku.hassannaqvi.dss_matiari.core.MainApp;
 import edu.aku.hassannaqvi.dss_matiari.databinding.ActivitySectionABinding;
 import edu.aku.hassannaqvi.dss_matiari.models.Households;
+import edu.aku.hassannaqvi.dss_matiari.newstruct.global.AppConstants;
+import edu.aku.hassannaqvi.dss_matiari.newstruct.global.SharedPrefs;
 import edu.aku.hassannaqvi.dss_matiari.room.DssRoomDatabase;
 import edu.aku.hassannaqvi.dss_matiari.ui.EndingActivity;
 import edu.aku.hassannaqvi.dss_matiari.ui.lists.FPMwraActivity;
@@ -42,6 +46,8 @@ public class SectionAActivity extends AppCompatActivity {
     private static final String TAG = "SectionAActivity";
     ActivitySectionABinding bi;
     private DssRoomDatabase db;
+
+    private Households.SA sA;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,12 +60,18 @@ public class SectionAActivity extends AppCompatActivity {
         String date = toBlackVisionDate("2023-01-01");
         bi.ra01.setMinDate(date);
 
-        if (households.getUid().equals(""))
+        // Init for for the first time
+        Households.initMeta();
+        sA = new Households.SA();
+        bi.setHousehold(households);
+
+
+        /*if (households.getUid().equals(""))
         {
             households.populateMeta();
         }
         bi.setHousehold(households);
-
+*/
         setTitle(R.string.demographicinformation_mainheading);
         setImmersive(true);
 
@@ -69,7 +81,7 @@ public class SectionAActivity extends AppCompatActivity {
         bi.btnContinue.setText(households.getUid().equals("") ? "Save" : "Update");
 
         // Add same as previous check box for Mohalla
-        if (MainApp.previousAddress.trim().equals("") || !households.getRa08().equals(""))
+        if (MainApp.previousAddress.trim().equals("") || !households.getSA().getRa08().equals(""))
             bi.rb08check.setVisibility(View.GONE);
 
 
@@ -102,7 +114,33 @@ public class SectionAActivity extends AppCompatActivity {
 
     }
 
-    public void btnContinue(View view) {
+    public void btnContinue(View view) throws JSONException {
+        if (!formValidation()) return;
+
+        // New form
+        // If 'Edit form' option is selected
+            // Check data in db
+            Households form = db.householdsDao().getHouseholdByHDSSIDASC(sA.getRa10());
+            if (form != null) {
+                // wraId found
+                households = form;
+                if (households.getSA().getRa15().equals("1")) {
+                    finish();
+                    Households.saveMainData(sA.getRa10(), sA);
+                    startActivity(new Intent(this, MwraActivity.class)
+                            .setFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT));
+                } else {
+                    finish();
+                    Households.saveMainData(sA.getRa10(), sA);
+                    startActivity(new Intent(this, EndingActivity.class)
+                            .setFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT)
+                            .putExtra("noWRA", true));
+                }
+        }
+
+    }
+
+/*    public void btnContinue(View view) {
 
         if (view.getId() == bi.btnLocked.getId()) {
             bi.ra12.setTag("-1");
@@ -125,7 +163,7 @@ public class SectionAActivity extends AppCompatActivity {
         if (updateDB()) {
 
             setResult(RESULT_OK);
-            if (households.getRa15().equals("1")) {
+            if (households.getSA().getRa15().equals("1")) {
                 finish();
                 startActivity(new Intent(this, MwraActivity.class)
                         .setFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT));
@@ -139,9 +177,9 @@ public class SectionAActivity extends AppCompatActivity {
         } else {
             Toast.makeText(this, "Failed to Update Database!", Toast.LENGTH_SHORT).show();
         }
-    }
+    }*/
 
-    private boolean insertNewRecord() {
+    /*private boolean insertNewRecord() {
 
         if (!MainApp.households.getUid().equals("")) return true;
         MainApp.households.populateMeta();
@@ -184,7 +222,7 @@ public class SectionAActivity extends AppCompatActivity {
             Toast.makeText(this, "Updating Database... ERROR!", Toast.LENGTH_SHORT).show();
             return false;
         }
-    }
+    }*/
 
     public void btnEnd(View view) {
         setResult(RESULT_CANCELED);
