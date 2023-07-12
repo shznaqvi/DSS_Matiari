@@ -43,9 +43,6 @@ public class Households extends BaseObservable implements Observable {
     @ColumnInfo(defaultValue = "0")
     private transient boolean isError;
 
-    /*@ColumnInfo(name = HouseholdTable.COLUMN_MUID)
-    private String muid = StringUtils.EMPTY;*/
-
     @Ignore
     private transient PropertyChangeRegistry propertyChangeRegistry = new PropertyChangeRegistry();
     @Ignore
@@ -123,20 +120,16 @@ public class Households extends BaseObservable implements Observable {
 
     private String round = "";
 
-    /*// SECTION VARIABLES
-    @SerializedName("s1")
-    @ColumnInfo(name = HouseholdTable.COLUMN_SA)
-    String sA = StringUtils.EMPTY;
-    */
     @SerializedName("s1")
     private SA sA;
-
 
     public Households() {
 
     }
 
     public static void initMeta() {
+
+        households = new Households();
 
         households.setRound(MainApp.ROUND);
         households.setSysDate(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.ENGLISH).format(new Date().getTime()));
@@ -145,27 +138,17 @@ public class Households extends BaseObservable implements Observable {
         households.setAppver(MainApp.appInfo.getAppVersion());
         households.setAppver(MainApp.appInfo.getAppVersion());
         households.setUcCode(MainApp.selectedUC);
-        households.sA.setRa06(MainApp.selectedUC);
-        households.sA.setRa07(MainApp.selectedVillage);
-        households.sA.setRa04(MainApp.leaderCode);
-        households.sA.setRa05(MainApp.leaderCode);
+        households.setVillageCode(MainApp.selectedVillage);
         households.setRegRound("1");
     }
 
     public void populateMeta() {
 
-        setRound(MainApp.ROUND);
-        setSysDate(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.ENGLISH).format(new Date().getTime()));
-        setUserName(MainApp.user.getUsername());
-        setDeviceId(MainApp.deviceid);
-        setAppver(MainApp.appInfo.getAppVersion());
-        setAppver(MainApp.appInfo.getAppVersion());
-        setUcCode(MainApp.selectedUC);
         households.sA.setRa06(MainApp.selectedUC);
         households.sA.setRa07(MainApp.selectedVillage);
         households.sA.setRa04(MainApp.leaderCode);
         households.sA.setRa05(MainApp.leaderCode);
-        setRegRound("1");
+
     }
 
     public void populateMeta(int position) {
@@ -222,7 +205,7 @@ public class Households extends BaseObservable implements Observable {
     /*FOR IDENTIFICATION INFORMATION - CLUSTER-WISE*/
     // Save data in db
     public static void saveMainData(String hdssId, SA sa) throws JSONException {
-        HouseholdsDao householdsDao = DssRoomDatabase.getDbInstance().householdsDao();
+        HouseholdsDao householdsDao = Objects.requireNonNull(DssRoomDatabase.getDbInstance()).householdsDao();
         Households form = householdsDao.getHouseholdByHDSSIDASC(hdssId);
         if (form != null) {
             households = form;
@@ -427,7 +410,6 @@ public class Households extends BaseObservable implements Observable {
     }
 
 
-    @Bindable
     public String getHdssId() {
         return hdssId;
     }
@@ -438,7 +420,7 @@ public class Households extends BaseObservable implements Observable {
         String newHDSSID = hdssidSplit[0] + "-" + hdssidSplit[1] + "-" + String.format("%04d", Integer.parseInt(hdssidSplit[2]));
 
         this.hdssId = newHDSSID;
-        households.sA.setRa10(hdssId);
+
     }
 
 
@@ -531,6 +513,19 @@ public class Households extends BaseObservable implements Observable {
             return Objects.requireNonNull(DssRoomDatabase.getDbInstance()).householdsDao().updateHousehold(households);
         }
 
+        public void populateMeta() {
+
+            setRa06(MainApp.selectedUC);
+            setRa07(MainApp.selectedVillage);
+            setRa04(MainApp.leaderCode);
+            setRa05(MainApp.leaderCode);
+            setRa09(households.getHhNo());
+            setRa10(households.getHdssId());
+
+        }
+
+
+
         // Get section object by parsing json
         public static SA getData() {
             return households.getSA();
@@ -567,8 +562,6 @@ public class Households extends BaseObservable implements Observable {
             notifyPropertyChanged(BR.ra01v3);
         }
 
-
-
         @Bindable
         public String getRa02() {
             return ra02;
@@ -585,7 +578,7 @@ public class Households extends BaseObservable implements Observable {
         }
 
         public void setRa04(String ra04) {
-            this.ra04 = ra04;
+            this.ra04 = MainApp.leaderCode;
             notifyPropertyChanged(BR.ra04);
         }
 
@@ -615,8 +608,8 @@ public class Households extends BaseObservable implements Observable {
         }
 
         public void setRa07(String ra07) {
+            //this.ra07 = ra07;
             this.ra07 = ra07;
-            households.setVillageCode(this.ra07);
             notifyPropertyChanged(BR.ra07);
         }
 
@@ -646,8 +639,8 @@ public class Households extends BaseObservable implements Observable {
         }
 
         public void setRa09(String ra09) {
-            this.ra09 = String.format("%04d", Integer.parseInt(ra09));
-            households.setHhNo(this.ra09);
+            this.ra09 = ra09;
+            //households.setHhNo(this.ra09);
             notifyPropertyChanged(BR.ra09);
         }
 
@@ -657,6 +650,7 @@ public class Households extends BaseObservable implements Observable {
         }
 
         public void setRa10(String ra10) {
+            //this.ra10 = ra10;
             this.ra10 = ra10;
             notifyPropertyChanged(BR.ra10);
         }

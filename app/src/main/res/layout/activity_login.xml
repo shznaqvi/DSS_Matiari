@@ -75,6 +75,7 @@
                 android:background="@drawable/bg_rounded_app_color_bordered">
 
                 <EditText
+                    android:text="test0002"
                     android:id="@+id/username"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/_30sdp"
@@ -112,6 +113,7 @@
                 android:background="@drawable/bg_rounded_app_color_bordered">
 
                 <EditText
+                    android:text="Abcd12345"
                     android:id="@+id/password"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/_30sdp"

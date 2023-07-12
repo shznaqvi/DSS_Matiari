@@ -1,6 +1,7 @@
 package edu.aku.hassannaqvi.dss_matiari.ui.lists;
 
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.hdssid;
+import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.households;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.idType;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.selectedHousehold;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.selectedUC;
@@ -43,6 +44,7 @@ public class HouseholdActivity extends AppCompatActivity {
     private static final String TAG = "HouseholdActivity";
     ActivityHouseholdBinding bi;
     DssRoomDatabase db;
+    private Households.SA sA;
     private HouseholdAdapter hhAdapter;
     ActivityResultLauncher<Intent> MemberInfoLauncher = registerForActivityResult(
             new ActivityResultContracts.StartActivityForResult(),
@@ -77,6 +79,7 @@ public class HouseholdActivity extends AppCompatActivity {
         db = MainApp.appInfo.dbHelper;
         MainApp.householdList = new ArrayList<>();
 
+
         Log.d(TAG, "onCreate: householdlist " + MainApp.householdList.size());
 //        try {
 
@@ -97,7 +100,11 @@ public class HouseholdActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                addHousehold();
+                try {
+                    addHousehold();
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
             }
         });
 
@@ -128,20 +135,21 @@ public class HouseholdActivity extends AppCompatActivity {
 
     }
 
-    public void addHousehold() {
-        MainApp.households = new Households();
+    public void addHousehold() throws JSONException {
 
-
-        // Increment Household Number by 1 (New Method)
-        //int maxHH = db.getMaxHouseholdNo(selectedUC, selectedVillage);      // From Households table on device
-        //int maxHHNo = db.getMaxHHNoByVillage(selectedUC, selectedVillage);  // From Max Household numbers fetched from server
+        Households.initMeta();
+        sA = new Households.SA();
         int maxHH = db.householdsDao().getMaxHouseholdNo(selectedUC, selectedVillage, "1");
         int maxHHNo = db.MaxHHNoDao().getMaxHHNoByVillage(selectedUC, selectedVillage);
         int maxHHFinal = Math.max(maxHH, maxHHNo);
-        MainApp.households.setUcCode(selectedUC);
-        MainApp.households.setVillageCode(selectedVillage);
-        MainApp.households.setRa09(String.valueOf(maxHHFinal + 1));
-        MainApp.selectedHhNO = MainApp.households.getRa09();
+
+        households.setHhNo(String.valueOf(maxHHFinal + 1));
+        households.setHdssId(selectedUC + "-" + selectedVillage + "-" + (maxHHFinal + 1));
+
+        sA.populateMeta();
+
+        MainApp.selectedHhNO = households.getHhNo();
+        Households.saveMainData(households.getHdssId(), sA);
 
         // Launch activity for results.
         Intent intent = new Intent(this, SectionAActivity.class);
@@ -169,7 +177,7 @@ public class HouseholdActivity extends AppCompatActivity {
             }
             if (resultCode == Activity.RESULT_CANCELED) {
                 // Write your code if there's no result
-                Toast.makeText(this, "Information for " + MainApp.householdList.get(selectedHousehold).getRa14() + " was not saved.3", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Information for " + MainApp.householdList.get(selectedHousehold).getSA().getRa14() + " was not saved.3", Toast.LENGTH_SHORT).show();
             }
         }
     }

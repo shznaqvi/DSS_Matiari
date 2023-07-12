@@ -577,7 +577,7 @@ public class SectionCActivity extends AppCompatActivity {
             mwra.setUid(mwra.getDeviceId() + mwra.getId());
             mwra.setSC(mwra.sCtoString());
             db.mwraDao().updateMwra(mwra);
-            households.setSA(households.sAtoString());
+            //households.setSA(households.sAtoString());
             db.householdsDao().updateHousehold(households);
             //db.updatesFollowUpsColumn(TableContracts.FollowupsTable.COLUMN_UID, followups.getUid());
             return true;
@@ -600,7 +600,7 @@ public class SectionCActivity extends AppCompatActivity {
             mwra.setDeviceId(mwra.getDeviceId() + "_" + mwra.getDeviceId().substring(mwra.getDeviceId().length() - 1));
 
             updatedFollowups.setDeviceId(mwra.getDeviceId());
-            households.setSA(households.sAtoString());
+            //households.setSA(households.sAtoString());
             db.householdsDao().updateHousehold(households);
             //updatedFollowups.setIStatus(mwra.getIStatus());
             //db.updatesFollowUpsColumn(TableContracts.FollowupsTable.COLUMN_DEVICEID, followups.getDeviceId());

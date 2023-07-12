@@ -194,7 +194,7 @@ public class SectionFActivity extends AppCompatActivity {
             outcome.setUid(outcome.getDeviceId() + outcome.getId());
             outcome.setSE(outcome.sEtoString());
             db.OutcomeDao().updateOutcome(outcome);
-            households.setSA(households.sAtoString());
+            //households.setSA(households.sAtoString());
             db.householdsDao().updateHousehold(households);
             //db.updateOutcomeFollouwps(TableContracts.OutcomeFollowupTable.COLUMN_UID, outcomeFollowups.getUid());
             return true;
@@ -212,7 +212,7 @@ public class SectionFActivity extends AppCompatActivity {
             // Also reset Synced flag and alter UID
             Outcome updatedOutcome = outcome;
             updatedOutcome.setSE(outcome.sEtoString());
-            households.setSA(households.sAtoString());
+            //households.setSA(households.sAtoString());
             db.householdsDao().updateHousehold(households);
             updcount = db.OutcomeDao().updateOutcome(outcome);
 

@@ -311,8 +311,8 @@ public class SectionBActivity extends AppCompatActivity {
             mwra.setUid(mwra.getDeviceId() + mwra.getId());
             mwra.setSB(mwra.sBtoString());
             db.mwraDao().updateMwra(mwra);
-            households.setRa18(mwra.getRb01());
-            households.setSA(households.sAtoString());
+            households.getSA().setRa18(mwra.getRb01());
+            //households.setSA(households.sAtoString());
             db.householdsDao().updateHousehold(households);
             //db.updatesMWRAColumn(TableContracts.MWRATable.COLUMN_UID, mwra.getUid());
             return true;
@@ -379,7 +379,7 @@ public class SectionBActivity extends AppCompatActivity {
     private boolean compareTwoDate(EditText et, int month, String msg) {
         try {
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-            Date dateDOV = sdf.parse(households.getRa01());
+            Date dateDOV = sdf.parse(households.getSA().getRa01());
             Calendar calendarDOV1 = Calendar.getInstance();
             Calendar calendarDOV2 = Calendar.getInstance();
             calendarDOV1.setTime(dateDOV);

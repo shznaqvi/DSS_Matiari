@@ -6,8 +6,12 @@
         <import type="android.view.View" />
 
         <variable
-            name="household"
+            name="sA"
             type="edu.aku.hassannaqvi.dss_matiari.models.Households.SA" />
+
+        <variable
+            name="household"
+            type="edu.aku.hassannaqvi.dss_matiari.models.Households" />
 
         <variable
             name="callback"
@@ -109,10 +113,10 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginBottom="0dp"
-                            android:enabled="@{household.ra01.equals(``)}"
+                            android:enabled="@{sA.ra01.equals(``)}"
                             android:gravity="center"
                             android:hint="YYYY-MM-DD"
-                            android:text="@={household.ra01}"
+                            android:text="@={sA.ra01}"
                             app:dateFormat="yyyy-MM-dd"
                             app:maxDate="CR_DATE"
                             app:theme="@style/MaterialCalendarTheme" />
@@ -156,7 +160,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:hint="@string/ra04"
-                            android:text="@={household.ra04}" />
+                            android:text="@={sA.ra04}" />
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
 
@@ -197,7 +201,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:hint="@string/ra05"
-                            android:text="@={household.ra05}" />
+                            android:text="@={sA.ra05}" />
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
 
@@ -248,7 +252,7 @@
                                 android:layout_weight="1"
                                 android:hint="@string/ra08"
                                 android:inputType="textPostalAddress|textCapWords"
-                                android:text="@={household.ra08}" />
+                                android:text="@={sA.ra08}" />
 
                             <androidx.appcompat.widget.AppCompatCheckBox
                                 android:id="@+id/rb08check"
@@ -299,7 +303,7 @@
                             android:layout_margin="8dp"
                             android:gravity="center"
                             android:padding="8dp"
-                            android:text="@={household.ra09}"
+                            android:text="@={sA.ra09}"
                             android:textColor="@color/colorPrimary"
                             android:textStyle="bold" />
                     </LinearLayout>
@@ -346,7 +350,7 @@
                             android:layout_margin="8dp"
                             android:digits="abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ"
                             android:gravity="center"
-                            android:text="@={household.ra10}" />
+                            android:text="@={sA.ra10}" />
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
 
@@ -389,7 +393,7 @@
                             android:layout_margin="8dp"
                             android:hint="@string/ra21"
                             android:inputType="textPostalAddress|textCapWords"
-                            android:text="@={household.ra11}" />
+                            android:text="@={sA.ra11}" />
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
 
@@ -432,7 +436,7 @@
                             android:digits="abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ"
                             android:hint="@string/ra14"
                             android:inputType="textPersonName|textCapWords"
-                            android:text="@={household.ra12}" />
+                            android:text="@={sA.ra12}" />
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
 
@@ -475,7 +479,7 @@
                             android:digits="abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ"
                             android:hint="@string/ra19"
                             android:inputType="textPersonName|textCapWords"
-                            android:text="@={household.ra13}" />
+                            android:text="@={sA.ra13}" />
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
 
@@ -518,7 +522,7 @@
                             android:digits="abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ"
                             android:hint="@string/ra15"
                             android:inputType="textPersonName|textCapWords"
-                            android:text="@={household.ra14}" />
+                            android:text="@={sA.ra14}" />
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
 
@@ -564,8 +568,8 @@
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
-                                android:checked='@{household.getRa15().equals("1")}'
-                                android:onClick='@{()->household.setRa15("1")}'
+                                android:checked='@{sA.getRa15().equals("1")}'
+                                android:onClick='@{()->sA.setRa15("1")}'
                                 android:text="@string/ra20_a" />
 
                             <RadioButton
@@ -573,8 +577,8 @@
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
-                                android:checked='@{household.getRa15().equals("2")}'
-                                android:onClick='@{()->household.setRa15("2")}'
+                                android:checked='@{sA.getRa15().equals("2")}'
+                                android:onClick='@{()->sA.setRa15("2")}'
                                 android:text="@string/ra20_b" />
                         </RadioGroup>
                     </LinearLayout>
@@ -683,7 +687,7 @@
                                 android:hint="@string/a17_1"
                                 android:inputType="number"
                                 android:maxLength="2"
-                                android:text="@={household.ra17_a1}"
+                                android:text="@={sA.ra17_a1}"
                                 app:maxValue="20"
                                 app:minValue="0"
                                 app:type="range" />
@@ -698,7 +702,7 @@
                                 android:hint="@string/a17_2"
                                 android:inputType="number"
                                 android:maxLength="2"
-                                android:text="@={household.ra17_a2}"
+                                android:text="@={sA.ra17_a2}"
                                 app:maxValue="20"
                                 app:minValue="0"
                                 app:type="range" />
@@ -713,7 +717,7 @@
                                 android:hint="@string/a17_3"
                                 android:inputType="number"
                                 android:maxLength="2"
-                                android:text="@={household.ra17_a3}"
+                                android:text="@={sA.ra17_a3}"
                                 app:maxValue="20"
                                 app:minValue="0"
                                 app:type="range" />
@@ -743,7 +747,7 @@
                                 android:hint="@string/a17_1"
                                 android:inputType="number"
                                 android:maxLength="2"
-                                android:text="@={household.ra17_b1}"
+                                android:text="@={sA.ra17_b1}"
                                 app:maxValue="20"
                                 app:minValue="0"
                                 app:type="range" />
@@ -758,7 +762,7 @@
                                 android:hint="@string/a17_2"
                                 android:inputType="number"
                                 android:maxLength="2"
-                                android:text="@={household.ra17_b2}"
+                                android:text="@={sA.ra17_b2}"
                                 app:maxValue="20"
                                 app:minValue="0"
                                 app:type="range" />
@@ -773,7 +777,7 @@
                                 android:hint="@string/a17_3"
                                 android:inputType="number"
                                 android:maxLength="2"
-                                android:text="@={household.ra17_b3}"
+                                android:text="@={sA.ra17_b3}"
                                 app:maxValue="20"
                                 app:minValue="0"
                                 app:type="range" />
@@ -803,7 +807,7 @@
                                 android:hint="@string/a17_1"
                                 android:inputType="number"
                                 android:maxLength="2"
-                                android:text="@={household.ra17_c1}"
+                                android:text="@={sA.ra17_c1}"
                                 app:maxValue="20"
                                 app:minValue="0"
                                 app:type="range" />
@@ -818,7 +822,7 @@
                                 android:hint="@string/a17_2"
                                 android:inputType="number"
                                 android:maxLength="2"
-                                android:text="@={household.ra17_c2}"
+                                android:text="@={sA.ra17_c2}"
                                 app:maxValue="20"
                                 app:minValue="0"
                                 app:type="range" />
@@ -833,7 +837,7 @@
                                 android:hint="@string/a17_3"
                                 android:inputType="number"
                                 android:maxLength="2"
-                                android:text="@={household.ra17_c3}"
+                                android:text="@={sA.ra17_c3}"
                                 app:maxValue="20"
                                 app:minValue="0"
                                 app:type="range" />
@@ -864,7 +868,7 @@
                                 android:hint="@string/a17_1"
                                 android:inputType="number"
                                 android:maxLength="2"
-                                android:text="@={household.ra17_d1}"
+                                android:text="@={sA.ra17_d1}"
                                 app:maxValue="20"
                                 app:minValue="0"
                                 app:type="range" />
@@ -879,7 +883,7 @@
                                 android:hint="@string/a17_2"
                                 android:inputType="number"
                                 android:maxLength="2"
-                                android:text="@={household.ra17_d2}"
+                                android:text="@={sA.ra17_d2}"
                                 app:maxValue="20"
                                 app:minValue="0"
                                 app:type="range" />
@@ -894,7 +898,7 @@
                                 android:hint="@string/a17_3"
                                 android:inputType="number"
                                 android:maxLength="2"
-                                android:text="@={household.ra17_d3}"
+                                android:text="@={sA.ra17_d3}"
                                 app:maxValue="20"
                                 app:minValue="0"
                                 app:type="range" />
@@ -908,7 +912,7 @@
                 <androidx.cardview.widget.CardView
                     android:id="@+id/fldGrpCVra18"
                     style="@style/cardView"
-                    android:visibility="@{household.ra15.equals(`2`) ? View.GONE : View.VISIBLE}">
+                    android:visibility="@{sA.ra15.equals(`2`) ? View.GONE : View.VISIBLE}">
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -947,7 +951,7 @@
                             android:gravity="center"
                             android:hint="##"
                             android:inputType="number"
-                            android:text="@={household.ra18}"
+                            android:text="@={sA.ra18}"
                             app:maxValue="9"
                             app:minValue="0"
                             app:type="range" />

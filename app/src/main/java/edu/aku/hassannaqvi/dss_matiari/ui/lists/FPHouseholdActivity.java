@@ -1,6 +1,7 @@
 package edu.aku.hassannaqvi.dss_matiari.ui.lists;
 
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.hdssid;
+import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.households;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.idType;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.position;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.selectedFpHousehold;
@@ -47,6 +48,7 @@ public class FPHouseholdActivity extends AppCompatActivity {
     private static final String TAG = "FPHouseholdActivity";
     ActivityFphouseholdBinding bi;
     DssRoomDatabase db;
+    private Households.SA sA;
     private FPHouseholdAdapter hhAdapter;
     public ActivityResultLauncher<Intent> MemberInfoLauncher = registerForActivityResult(
             new ActivityResultContracts.StartActivityForResult(),
@@ -77,6 +79,10 @@ public class FPHouseholdActivity extends AppCompatActivity {
 
         db = MainApp.appInfo.dbHelper;
         MainApp.followUpsScheHHList = new ArrayList<>();
+
+        Households.initMeta();
+        sA = new Households.SA();
+        
         MainApp.hhsList = new ArrayList<>();
         //MainApp.mwraStatus = new HashMap<String[], Boolean>();
 
@@ -104,7 +110,11 @@ public class FPHouseholdActivity extends AppCompatActivity {
             public void onClick(View view) {
 
                 //TODO: Add new Household
-                addHousehold();
+                try {
+                    addHousehold();
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
 
             }
         });
@@ -140,7 +150,7 @@ public class FPHouseholdActivity extends AppCompatActivity {
 
     }
 
-    public void addHousehold() {
+    public void addHousehold() throws JSONException {
         MainApp.households = new Households();
 
         //int maxHH = db.getMaxHouseholdNo(selectedUC, selectedVillage);      // From Households table on device
@@ -148,10 +158,14 @@ public class FPHouseholdActivity extends AppCompatActivity {
         int maxHH = db.householdsDao().getMaxHouseholdNo(selectedUC, selectedVillage, "");     // From Households table on device
         int maxHHNo = db.MaxHHNoDao().getMaxHHNoByVillage(selectedUC, selectedVillage);     // From Max Household numbers fetched from server
         int maxHHFinal = Math.max(maxHH, maxHHNo);
-        MainApp.households.setUcCode(selectedUC);
-        MainApp.households.setVillageCode(selectedVillage);
-        MainApp.households.setRa09(String.valueOf(maxHHFinal + 1));
-        MainApp.selectedHhNO = String.valueOf(maxHHFinal + 1);
+        households.setHhNo(String.valueOf(maxHHFinal + 1));
+        households.setHdssId(selectedUC + "-" + selectedVillage + "-" + (maxHHFinal + 1));
+        MainApp.households.getSA().setRa09(String.valueOf(maxHHFinal + 1));
+
+        sA.populateMeta();
+
+        MainApp.selectedHhNO = households.getHhNo();
+        Households.saveMainData(households.getHdssId(), sA);
         // Launch activity for results.
         Intent intent = new Intent(this, SectionAActivity.class);
         MemberInfoLauncher.launch(intent);

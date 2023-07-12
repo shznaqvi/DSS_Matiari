@@ -236,6 +236,8 @@ public class MainApp extends Application {
                 .apply();
         deviceid = Settings.Secure.getString(getContentResolver(), Settings.Secure.ANDROID_ID);
 
+        AppConstants.DEVICE_ID = Settings.Secure.getString(getContentResolver(), Settings.Secure.ANDROID_ID);
+
         initSecure();
 
         toneGen1 = new ToneGenerator(AudioManager.STREAM_MUSIC, 100);

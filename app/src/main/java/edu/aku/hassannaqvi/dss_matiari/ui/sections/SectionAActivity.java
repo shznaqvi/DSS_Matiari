@@ -61,9 +61,14 @@ public class SectionAActivity extends AppCompatActivity {
         bi.ra01.setMinDate(date);
 
         // Init for for the first time
-        Households.initMeta();
+        /*Households.initMeta();
         sA = new Households.SA();
-        bi.setHousehold(households);
+        bi.setHousehold(sA);*/
+
+
+        sA = Households.SA.getData();
+        sA = sA == null ? new Households.SA() : sA;
+        bi.setSA(sA);
 
 
         /*if (households.getUid().equals(""))
@@ -120,18 +125,18 @@ public class SectionAActivity extends AppCompatActivity {
         // New form
         // If 'Edit form' option is selected
             // Check data in db
-            Households form = db.householdsDao().getHouseholdByHDSSIDASC(sA.getRa10());
+            Households form = db.householdsDao().getHouseholdByHDSSIDASC(households.getHdssId());
             if (form != null) {
                 // wraId found
                 households = form;
-                if (households.getSA().getRa15().equals("1")) {
+                if (sA.getRa15().equals("1")) {
                     finish();
-                    Households.saveMainData(sA.getRa10(), sA);
+                    Households.saveMainData(households.getHdssId(), sA);
                     startActivity(new Intent(this, MwraActivity.class)
                             .setFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT));
                 } else {
                     finish();
-                    Households.saveMainData(sA.getRa10(), sA);
+                    Households.saveMainData(households.getHdssId(), sA);
                     startActivity(new Intent(this, EndingActivity.class)
                             .setFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT)
                             .putExtra("noWRA", true));

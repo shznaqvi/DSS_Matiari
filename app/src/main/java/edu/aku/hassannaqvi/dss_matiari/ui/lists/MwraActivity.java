@@ -118,7 +118,7 @@ public class MwraActivity extends AppCompatActivity {
             }
         });
 
-        if (!MainApp.households.getRa18().equals("999")) {
+        if (!MainApp.households.getSA().getRa18().equals("999")) {
             bi.btnContinue.setVisibility(View.GONE);
         }
     }
@@ -153,7 +153,7 @@ public class MwraActivity extends AppCompatActivity {
     public void addFemale() {
 
 
-        if (MainApp.mwraList.size() >= Integer.parseInt(MainApp.households.getRa18())) {
+        if (MainApp.mwraList.size() >= Integer.parseInt(MainApp.households.getSA().getRa18())) {
             displayAddMoreDialog();
         } else {
             addMoreFemale();
@@ -176,7 +176,7 @@ public class MwraActivity extends AppCompatActivity {
     }
 
     public void btnContinue(View view) {
-        if (MainApp.mwraList.size() < Integer.parseInt(MainApp.households.getRa17_c2())) {
+        if (MainApp.mwraList.size() < Integer.parseInt(MainApp.households.getSA().getRa17_c2())) {
             displayProceedDialog();
         } else {
             proceedSelect();
@@ -186,7 +186,7 @@ public class MwraActivity extends AppCompatActivity {
     }
 
     public void BtnEnd(View view) {
-        if (!MainApp.households.getRa18().equals("999")) {
+        if (!MainApp.households.getSA().getRa18().equals("999")) {
 
             Intent i = new Intent(this, EndingActivity.class);
             i.setFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT);
@@ -220,14 +220,14 @@ public class MwraActivity extends AppCompatActivity {
     }
 
     private void displayAddMoreDialog() {
-        if(mwraList.size() < Integer.parseInt(MainApp.households.getRa17_c2()))
+        if(mwraList.size() < Integer.parseInt(MainApp.households.getSA().getRa17_c2()))
         {
             addMoreFemale();
 
         }else {
             new AlertDialog.Builder(this)
                     .setTitle(R.string.title_wra_dialog_complete)
-                    .setMessage(String.format(getString(R.string.message_wra_dialog_addmore), MainApp.households.getRa18()))
+                    .setMessage(String.format(getString(R.string.message_wra_dialog_addmore), MainApp.households.getSA().getRa18()))
 
                     // Specifying a listener allows you to take an action before dismissing the dialog.
                     // The dialog is automatically dismissed when a dialog button is clicked.
@@ -249,7 +249,7 @@ public class MwraActivity extends AppCompatActivity {
     private void displayProceedDialog() {
         new AlertDialog.Builder(this)
                 .setTitle(R.string.title_wra_dialog_remain)
-                .setMessage(String.format(getString(R.string.message_wra_dialog_proceeed), MainApp.mwraList.size() + "", MainApp.households.getRa17_c2()))
+                .setMessage(String.format(getString(R.string.message_wra_dialog_proceeed), MainApp.mwraList.size() + "", MainApp.households.getSA().getRa17_c2()))
 
                 // Specifying a listener allows you to take an action before dismissing the dialog.
                 // The dialog is automatically dismissed when a dialog button is clicked.

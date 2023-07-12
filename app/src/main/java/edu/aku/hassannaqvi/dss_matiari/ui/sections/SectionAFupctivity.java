@@ -26,6 +26,7 @@ import edu.aku.hassannaqvi.dss_matiari.models.Households;
 import edu.aku.hassannaqvi.dss_matiari.room.DssRoomDatabase;
 import edu.aku.hassannaqvi.dss_matiari.ui.EndingActivity;
 import edu.aku.hassannaqvi.dss_matiari.ui.lists.FPMwraActivity;
+import edu.aku.hassannaqvi.dss_matiari.ui.lists.MwraActivity;
 
 public class SectionAFupctivity extends AppCompatActivity {
 
@@ -33,6 +34,8 @@ public class SectionAFupctivity extends AppCompatActivity {
     ActivitySectionAFupBinding bi;
     private DssRoomDatabase db;
     private boolean updateFMClicked = false;
+
+    private Households.SA sA;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +47,11 @@ public class SectionAFupctivity extends AppCompatActivity {
 
         String date = toBlackVisionDate("2023-01-01");
         bi.ra01.setMinDate(date);
+
+        // Init for for the first time
+        Households.initMeta();
+        sA = new Households.SA();
+        bi.setHousehold(sA);
 
         if (households.getUid().equals(""))
         {
@@ -58,7 +66,7 @@ public class SectionAFupctivity extends AppCompatActivity {
             }
         }
 
-        bi.setHousehold(households);
+        bi.setHousehold(sA);
 
         setTitle(R.string.demographicinformation_mainheading);
         setImmersive(true);
@@ -95,7 +103,7 @@ public class SectionAFupctivity extends AppCompatActivity {
 
     }
 
-    public void btnUpdateHH(View view){
+    /*public void btnUpdateHH(View view){
 
         if(updateFMClicked) {
             if (!formValidation()) return;
@@ -113,9 +121,60 @@ public class SectionAFupctivity extends AppCompatActivity {
             Toast.makeText(this, "Failed to Update Database!", Toast.LENGTH_SHORT).show();
         }
 
+    }*/
+
+    public void btnUpdateHH(View view) throws JSONException {
+
+        if(updateFMClicked) {
+            if (!formValidation()) return;
+
+            // New form
+            // If 'Edit form' option is selected
+            // Check data in db
+            Households form = db.householdsDao().getHouseholdByHDSSIDASC(sA.getRa10());
+            if (form != null) {
+                // wraId found
+                households = form;
+                setResult(RESULT_OK);
+                finish();
+                Households.saveMainData(sA.getRa10(), sA);
+                Intent intent = new Intent(this, FPMwraActivity.class);
+                ((Activity) this).startActivityForResult(intent, 2);
+
+            }
+        }
+
+
     }
 
-    public void btnContinue(View view) {
+    public void btnContinue(View view) throws JSONException {
+
+        //if(updateFMClicked) {
+            if (!formValidation()) return;
+
+            // New form
+            // If 'Edit form' option is selected
+            // Check data in db
+            Households form = db.householdsDao().getHouseholdByHDSSIDASC(sA.getRa10());
+            if (form != null) {
+                // wraId found
+                households = form;
+                setResult(RESULT_OK);
+                finish();
+                Households.saveMainData(sA.getRa10(), sA);
+                Intent intent = new Intent(this, FPMwraActivity.class);
+                ((Activity) this).startActivityForResult(intent, 2);
+
+            }
+        //}
+
+
+    }
+
+
+
+
+    /*public void btnContinue(View view) {
 
         if (view.getId() == bi.btnLocked.getId()) {
             //bi.ra12.setTag("-1");
@@ -138,7 +197,7 @@ public class SectionAFupctivity extends AppCompatActivity {
         if (updateDB()) {
             finish();
             setResult(RESULT_OK);
-            if (households.getRa15().equals("1")) {
+            if (households.getSA().getRa15().equals("1")) {
                 startActivity(new Intent(this, FPMwraActivity.class)
                         .setFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT));
             } else {
@@ -151,9 +210,9 @@ public class SectionAFupctivity extends AppCompatActivity {
         } else {
             Toast.makeText(this, "Failed to Update Database!", Toast.LENGTH_SHORT).show();
         }
-    }
+    }*/
 
-    private boolean insertNewRecord() {
+    /*private boolean insertNewRecord() {
 
         if (!MainApp.households.getUid().equals("")) return true;
         MainApp.households.populateMeta();
@@ -197,7 +256,7 @@ public class SectionAFupctivity extends AppCompatActivity {
             return false;
         }
     }
-
+*/
     public void btnEnd(View view) {
         setResult(RESULT_CANCELED);
         finish();

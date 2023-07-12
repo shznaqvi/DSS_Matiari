@@ -134,7 +134,7 @@ public class FPMwraActivity extends AppCompatActivity {
             bi.btnContinue.setVisibility(View.VISIBLE);
         }
 
-        households.setRa01(households.getSysDate().substring(0, 10));
+        households.getSA().setRa01(households.getSysDate().substring(0, 10));
         MainApp.households.setUcCode(households.getUcCode());
         MainApp.households.setVillageCode(households.getVillageCode());
         MainApp.households.setHhNo(households.getHhNo());
@@ -159,7 +159,7 @@ public class FPMwraActivity extends AppCompatActivity {
 
         }
 
-        households.setRa18(String.valueOf(mwraCount));
+        households.getSA().setRa18(String.valueOf(mwraCount));
 
     }
     private void addMoreFemale() {
@@ -174,7 +174,7 @@ public class FPMwraActivity extends AppCompatActivity {
         int maxMWRA = db.mwraDao().getMaxMWRSNoBYHH(selectedUC, selectedVillage, selectedHhNO);
         int maxFpMWRA = db.FollowUpsScheDao().getMaxMWRANoBYHHFromFolloupsSche(selectedUC, selectedVillage, selectedHhNO);
         mwraCount = Math.max(maxMWRA, maxFpMWRA);
-        MainApp.households.setRa18(String.valueOf(mwraCount));
+        MainApp.households.getSA().setRa18(String.valueOf(mwraCount));
 
 
         MainApp.mwra = new Mwra();
@@ -245,7 +245,7 @@ public class FPMwraActivity extends AppCompatActivity {
     private void displayAddMoreDialog() {
         new AlertDialog.Builder(this)
                 .setTitle(R.string.title_wra_dialog_complete)
-                .setMessage(String.format(getString(R.string.message_wra_dialog_addmore), MainApp.households.getRa18()))
+                .setMessage(String.format(getString(R.string.message_wra_dialog_addmore), MainApp.households.getSA().getRa18()))
 
                 // Specifying a listener allows you to take an action before dismissing the dialog.
                 // The dialog is automatically dismissed when a dialog button is clicked.
@@ -266,7 +266,7 @@ public class FPMwraActivity extends AppCompatActivity {
     private void displayProceedDialog() {
         new AlertDialog.Builder(this)
                 .setTitle(R.string.title_wra_dialog_remain)
-                .setMessage(String.format(getString(R.string.message_wra_dialog_proceeed), MainApp.mwraList.size() + "", MainApp.households.getRa18()))
+                .setMessage(String.format(getString(R.string.message_wra_dialog_proceeed), MainApp.mwraList.size() + "", MainApp.households.getSA().getRa18()))
 
                 // Specifying a listener allows you to take an action before dismissing the dialog.
                 // The dialog is automatically dismissed when a dialog button is clicked.
