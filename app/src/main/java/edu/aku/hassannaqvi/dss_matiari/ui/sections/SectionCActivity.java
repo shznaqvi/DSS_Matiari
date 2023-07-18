@@ -95,9 +95,8 @@ public class SectionCActivity extends AppCompatActivity {
             mwra.setPregnum(fpMwra.getPregCount());
             mwra.setRb22(fpMwra.getRb22());
             mwra.setRb23(fpMwra.getRb23());
-            //mwra.setRb07(MainApp.fpMwra.getRb07());
 
-            long daysdiff = mwra.CalculateAge(MainApp.fpMwra.getRa01().getDate());
+            long daysdiff = mwra.CalculateAge(MainApp.fpMwra.getReg_date());
             long years = daysdiff / 365;
             long actualAge = Integer.parseInt(MainApp.fpMwra.getRb05()) + years;
             mwra.setRb05(String.valueOf(actualAge));     // Age in Years
@@ -112,7 +111,7 @@ public class SectionCActivity extends AppCompatActivity {
             }
         }
 
-        long daysdiff = MainApp.mwra.CalculateAge(fpMwra.getRa01().getDate());
+        long daysdiff = MainApp.mwra.CalculateAge(fpMwra.getReg_date());
         long years = daysdiff / 365;
         long actualAge = 0;
 
@@ -349,7 +348,7 @@ public class SectionCActivity extends AppCompatActivity {
                                 }
                             }
                         } else if (mwra.getPrePreg().equals("2") && bi.rb1801.isChecked()) {   // Not Pregnant
-                            if (!fpMwra.getChild_count().equals("null")) {
+                            if (fpMwra.getChild_count() != null) {
                                 MainApp.prevChildCount = Integer.parseInt(fpMwra.getChild_count());
                             } else {
                                 MainApp.prevChildCount = 0;
@@ -379,7 +378,7 @@ public class SectionCActivity extends AppCompatActivity {
                                 //finish();
                             } else {     // If Pregnancy ended
                                 if (bi.rb1601.isChecked() || bi.rb1605.isChecked()) {    // Live Birth
-                                    if (!fpMwra.getChild_count().equals("null")) {
+                                    if (fpMwra.getChild_count() != null) {
                                         MainApp.prevChildCount = Integer.parseInt(fpMwra.getChild_count());
                                     } else {
                                         MainApp.prevChildCount = 0;
@@ -396,7 +395,7 @@ public class SectionCActivity extends AppCompatActivity {
                             }
                         } else {      // Not Pregnant
                             if (bi.rb1801.isChecked()) {
-                                if (!fpMwra.getChild_count().equals("null")) {
+                                if (fpMwra.getChild_count() != null) {
                                     MainApp.prevChildCount = Integer.parseInt(fpMwra.getChild_count());
                                 } else {
                                     MainApp.prevChildCount = 0;
@@ -429,7 +428,7 @@ public class SectionCActivity extends AppCompatActivity {
                                 //finish();
                             } else {     // If Pregnancy ended
                                 if (bi.rb1601.isChecked() || bi.rb1605.isChecked()) {    // Live Birth
-                                    if (!fpMwra.getChild_count().equals("null")) {
+                                    if (fpMwra.getChild_count() != null) {
                                         MainApp.prevChildCount = Integer.parseInt(fpMwra.getChild_count());
                                     } else {
                                         MainApp.prevChildCount = 0;
@@ -453,7 +452,7 @@ public class SectionCActivity extends AppCompatActivity {
                                 startActivity(forwardIntent);
                                 //finish();
                             } else if (bi.rb1801.isChecked()) {
-                                if (!fpMwra.getChild_count().equals("null")) {
+                                if (fpMwra.getChild_count() != null) {
                                     MainApp.prevChildCount = Integer.parseInt(fpMwra.getChild_count());
                                 } else {
                                     MainApp.prevChildCount = 0;
@@ -480,7 +479,7 @@ public class SectionCActivity extends AppCompatActivity {
                                 //finish();
                             } else {     // If Pregnancy ended
                                 if (bi.rb1601.isChecked() || bi.rb1605.isChecked()) {    // Live Birth
-                                    if (!fpMwra.getChild_count().equals("null")) {
+                                    if (fpMwra.getChild_count() != null) {
                                         MainApp.prevChildCount = Integer.parseInt(fpMwra.getChild_count());
                                     } else {
                                         MainApp.prevChildCount = 0;
@@ -504,7 +503,7 @@ public class SectionCActivity extends AppCompatActivity {
                                 startActivity(forwardIntent);
                                 //finish();
                             } else if (bi.rb1801.isChecked()) {
-                                if (!fpMwra.getChild_count().equals("null")) {
+                                if (fpMwra.getChild_count() != null) {
                                     MainApp.prevChildCount = Integer.parseInt(fpMwra.getChild_count());
                                 } else {
                                     MainApp.prevChildCount = 0;
@@ -559,9 +558,6 @@ public class SectionCActivity extends AppCompatActivity {
     private boolean insertNewRecord() throws JSONException {
         MainApp.outcome = new Outcome();
 
-        //mwra.populateMetaFollowups();
-
-
         long rowId = 0;
         try {
             //rowId = db.addFollowup(followups);
@@ -591,7 +587,6 @@ public class SectionCActivity extends AppCompatActivity {
     private boolean updateDB() {
         int updcount = 0;
         try {
-            //updcount = db.updatesFollowUpsColumn(TableContracts.FollowupsTable.COLUMN_SC, followups.sCtoString());
 
             Mwra updatedFollowups = mwra;
             updatedFollowups.setSC(mwra.sCtoString());
@@ -602,17 +597,14 @@ public class SectionCActivity extends AppCompatActivity {
             updatedFollowups.setDeviceId(mwra.getDeviceId());
             households.setSA(households.sAtoString());
             db.householdsDao().updateHousehold(households);
-            //updatedFollowups.setIStatus(mwra.getIStatus());
-            //db.updatesFollowUpsColumn(TableContracts.FollowupsTable.COLUMN_DEVICEID, followups.getDeviceId());
-            //db.updatesFollowUpsColumn(TableContracts.FollowupsTable.COLUMN_ISTATUS, followups.getRc04());
             db.mwraDao().updateMwra(updatedFollowups);
             int repeatCount = (mwra.getDeviceId().length() - 16) / 2;
+
             // new UID
             String newUID = mwra.getDeviceId().substring(0, 16) + mwra.getId() + "_" + repeatCount;
             mwra.setUid(newUID);
             updatedFollowups.setUid(newUID);
             db.mwraDao().updateMwra(updatedFollowups);
-            //db.updatesFollowUpsColumn(TableContracts.FollowupsTable.COLUMN_UID, newUID);
 
 
         } catch (JSONException e) {

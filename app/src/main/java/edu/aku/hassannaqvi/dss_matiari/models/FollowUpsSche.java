@@ -112,6 +112,9 @@ public class FollowUpsSche implements Observable {
     @ColumnInfo(name = TableFollowUpsSche.COLUMN_RB23)
     private String rb23 = StringUtils.EMPTY ;  // Pregnancies Count
 
+    @SerializedName("reg_date")
+    private String reg_date = StringUtils.EMPTY;
+
 
     @Override
     public void addOnPropertyChangedCallback(OnPropertyChangedCallback callback) {
@@ -357,6 +360,14 @@ public class FollowUpsSche implements Observable {
         this.rb23 = rb23;
     }
 
+    public String getReg_date() {
+        return reg_date;
+    }
+
+    public void setReg_date(String reg_date) {
+        this.reg_date = reg_date;
+    }
+
     public FollowUpsSche Sync(JSONObject jsonObject) throws JSONException {
         this.ucCode = jsonObject.getString(TableFollowUpsSche.COLUMN_UC_CODE);
         this.villageCode = jsonObject.getString(TableFollowUpsSche.COLUMN_VILLAGE_CODE);
@@ -383,6 +394,7 @@ public class FollowUpsSche implements Observable {
         this.pregCount = jsonObject.getString(TableFollowUpsSche.COLUMN_PREG_COUNT);
         this.rb22 = jsonObject.getString(TableFollowUpsSche.COLUMN_RB22);
         this.rb23 = jsonObject.getString(TableFollowUpsSche.COLUMN_RB23);
+        this.reg_date = jsonObject.getString(TableFollowUpsSche.COLUMN_REG_DATE);
 
 
         return this;
@@ -415,6 +427,7 @@ public class FollowUpsSche implements Observable {
         this.pregCount = cursor.getString(cursor.getColumnIndexOrThrow(TableFollowUpsSche.COLUMN_PREG_COUNT));
         this.rb22 = cursor.getString(cursor.getColumnIndexOrThrow(TableFollowUpsSche.COLUMN_RB22));
         this.rb23 = cursor.getString(cursor.getColumnIndexOrThrow(TableFollowUpsSche.COLUMN_RB23));
+        this.reg_date = cursor.getString(cursor.getColumnIndexOrThrow(TableFollowUpsSche.COLUMN_REG_DATE));
 
         return this;
     }

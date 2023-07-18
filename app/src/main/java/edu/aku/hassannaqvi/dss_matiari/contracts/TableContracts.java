@@ -334,6 +334,7 @@ public class TableContracts {
         public static final String COLUMN_RB07 = "rb07";  // Pregnancy Status
         public static final String COLUMN_RB06 = "rb06";  // Marital Status
         public static final String COLUMN_MEMBERTYPE = "memberType";  // Marital Status
+        public static final String COLUMN_REG_DATE = "reg_date";
     }
 
 
