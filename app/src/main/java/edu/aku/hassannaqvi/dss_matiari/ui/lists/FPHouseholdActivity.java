@@ -7,6 +7,7 @@ import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.selectedFpHousehold;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.selectedUC;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.selectedVillage;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -51,6 +52,7 @@ public class FPHouseholdActivity extends AppCompatActivity {
     public ActivityResultLauncher<Intent> MemberInfoLauncher = registerForActivityResult(
             new ActivityResultContracts.StartActivityForResult(),
             new ActivityResultCallback<ActivityResult>() {
+                @SuppressLint("NotifyDataSetChanged")
                 @Override
                 public void onActivityResult(ActivityResult result) {
                     if (result.getResultCode() == Activity.RESULT_OK) {
@@ -58,6 +60,7 @@ public class FPHouseholdActivity extends AppCompatActivity {
                         Intent data = result.getData();
 
                         hhAdapter.notifyItemChanged(position);
+                        hhAdapter.notifyDataSetChanged();
 
                     }
                     if (result.getResultCode() == Activity.RESULT_CANCELED) {
@@ -112,6 +115,7 @@ public class FPHouseholdActivity extends AppCompatActivity {
 
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     public void filterForms(View view) {
         Toast.makeText(this, "updated", Toast.LENGTH_SHORT).show();
 
@@ -124,10 +128,12 @@ public class FPHouseholdActivity extends AppCompatActivity {
 
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     @Override
     protected void onResume() {
         super.onResume();
         MainApp.lockScreen(this);
+        hhAdapter.notifyDataSetChanged();
         Toast.makeText(this, "Activity Resumed!", Toast.LENGTH_SHORT).show();
 
     }
@@ -170,6 +176,7 @@ public class FPHouseholdActivity extends AppCompatActivity {
         finish();
 
     }
+    @SuppressLint("NotifyDataSetChanged")
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -177,6 +184,7 @@ public class FPHouseholdActivity extends AppCompatActivity {
         if (requestCode == 2) {
             if (resultCode == Activity.RESULT_OK) {
                 checkCompleteFm();
+                hhAdapter.notifyDataSetChanged();
                 hhAdapter.notifyItemChanged(selectedFpHousehold);
             }
             if (resultCode == Activity.RESULT_CANCELED) {

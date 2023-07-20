@@ -329,7 +329,7 @@ public class SectionCActivity extends AppCompatActivity {
                             } else {  // If Pregnancy ended
                                 if (bi.rb1601.isChecked() || bi.rb1605.isChecked()) // If Live Birth
                                 {
-                                    if (!fpMwra.getChild_count().equals("null")) {
+                                    if (fpMwra.getChild_count() != null) {
                                         MainApp.prevChildCount = Integer.parseInt(fpMwra.getChild_count());
                                     } else {
                                         MainApp.prevChildCount = 0;

@@ -341,7 +341,6 @@ public class FPHouseholdAdapter extends RecyclerView.Adapter<FPHouseholdAdapter.
     }
 
 
-
     private void editHousehold(int position) {
         Intent intent = new Intent(mContext, FPMwraActivity.class);
         intent.putExtra("position", position);

@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "database": {
     "version": 10,
-    "identityHash": "5e45e100cbc9267f4a56ef0cf0a90828",
+    "identityHash": "369b865c3b94b6b8ef2de2717856a6c6",
     "entities": [
       {
         "tableName": "hhs",
@@ -423,7 +423,7 @@
       },
       {
         "tableName": "hhfuplist_view",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `ucCode` TEXT, `villageCode` TEXT, `hhno` TEXT, `hdssid` TEXT, `_muid` TEXT, `ra01` TEXT, `ra08` TEXT, `ra12` TEXT, `ra18` TEXT, `fRound` TEXT, `rb01` TEXT, `rb02` TEXT, `rb03` TEXT, `rb04` TEXT, `rc04` TEXT, `msno` TEXT, `child_count` TEXT, `rb05` TEXT, `rb07` TEXT, `rb06` TEXT, `memberType` TEXT, `istatus` TEXT, `fup_targetDt` TEXT, `pregnum` TEXT, `rb22` TEXT, `rb23` TEXT)",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `ucCode` TEXT, `villageCode` TEXT, `hhno` TEXT, `hdssid` TEXT, `_muid` TEXT, `ra01` TEXT, `ra08` TEXT, `ra12` TEXT, `ra18` TEXT, `fRound` TEXT, `rb01` TEXT, `rb02` TEXT, `rb03` TEXT, `rb04` TEXT, `rc04` TEXT, `msno` TEXT, `child_count` TEXT, `rb05` TEXT, `rb07` TEXT, `rb06` TEXT, `memberType` TEXT, `istatus` TEXT, `fup_targetDt` TEXT, `pregnum` TEXT, `rb22` TEXT, `rb23` TEXT, `reg_date` TEXT)",
         "fields": [
           {
             "fieldPath": "id",
@@ -584,6 +584,12 @@
           {
             "fieldPath": "rb23",
             "columnName": "rb23",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "reg_date",
+            "columnName": "reg_date",
             "affinity": "TEXT",
             "notNull": false
           }
@@ -1053,7 +1059,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '5e45e100cbc9267f4a56ef0cf0a90828')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '369b865c3b94b6b8ef2de2717856a6c6')"
     ]
   }
 }
