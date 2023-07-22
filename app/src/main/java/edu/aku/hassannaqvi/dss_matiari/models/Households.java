@@ -261,18 +261,18 @@ public class Households extends BaseObservable implements Observable {
     public void updateFMData(int position){
         households.setRa08(MainApp.hhsList.get(position).getRa08());
         households.setRa12(MainApp.hhsList.get(position).getRa12());
-        households.setRa17_a1(MainApp.hhsList.get(position).getRa17_a1().equals("null") ? "0" : MainApp.hhsList.get(position).getRa17_a1());
-        households.setRa17_b1(MainApp.hhsList.get(position).getRa17_b1().equals("null") ? "0" : MainApp.hhsList.get(position).getRa17_b1());
-        households.setRa17_c1(MainApp.hhsList.get(position).getRa17_c1().equals("null") ? "0" : MainApp.hhsList.get(position).getRa17_c1());
-        households.setRa17_d1(MainApp.hhsList.get(position).getRa17_d1().equals("null") ? "0" : MainApp.hhsList.get(position).getRa17_d1());
-        households.setRa17_a2(MainApp.hhsList.get(position).getRa17_a2().equals("null") ? "0" : MainApp.hhsList.get(position).getRa17_a2());
-        households.setRa17_b2(MainApp.hhsList.get(position).getRa17_b2().equals("null") ? "0" : MainApp.hhsList.get(position).getRa17_b2());
-        households.setRa17_c2(MainApp.hhsList.get(position).getRa17_c2().equals("null") ? "0" : MainApp.hhsList.get(position).getRa17_c2());
-        households.setRa17_d2(MainApp.hhsList.get(position).getRa17_d2().equals("null") ? "0" : MainApp.hhsList.get(position).getRa17_d2());
-        households.setRa17_a3(MainApp.hhsList.get(position).getRa17_a3().equals("null") ? "0" : MainApp.hhsList.get(position).getRa17_a3());
-        households.setRa17_b3(MainApp.hhsList.get(position).getRa17_b3().equals("null") ? "0" : MainApp.hhsList.get(position).getRa17_b3());
-        households.setRa17_c3(MainApp.hhsList.get(position).getRa17_c3().equals("null") ? "0" : MainApp.hhsList.get(position).getRa17_c3());
-        households.setRa17_d3(MainApp.hhsList.get(position).getRa17_d3().equals("null") ? "0" : MainApp.hhsList.get(position).getRa17_d3());
+        households.setRa17_a1(MainApp.hhsList.get(position).getRa17_a1() == null ? "0" : MainApp.hhsList.get(position).getRa17_a1());
+        households.setRa17_b1(MainApp.hhsList.get(position).getRa17_b1() == null ? "0" : MainApp.hhsList.get(position).getRa17_b1());
+        households.setRa17_c1(MainApp.hhsList.get(position).getRa17_c1() == null ? "0" : MainApp.hhsList.get(position).getRa17_c1());
+        households.setRa17_d1(MainApp.hhsList.get(position).getRa17_d1() == null ? "0" : MainApp.hhsList.get(position).getRa17_d1());
+        households.setRa17_a2(MainApp.hhsList.get(position).getRa17_a2() == null ? "0" : MainApp.hhsList.get(position).getRa17_a2());
+        households.setRa17_b2(MainApp.hhsList.get(position).getRa17_b2() == null ? "0" : MainApp.hhsList.get(position).getRa17_b2());
+        households.setRa17_c2(MainApp.hhsList.get(position).getRa17_c2() == null ? "0" : MainApp.hhsList.get(position).getRa17_c2());
+        households.setRa17_d2(MainApp.hhsList.get(position).getRa17_d2() == null ? "0" : MainApp.hhsList.get(position).getRa17_d2());
+        households.setRa17_a3(MainApp.hhsList.get(position).getRa17_a3() == null ? "0" : MainApp.hhsList.get(position).getRa17_a3());
+        households.setRa17_b3(MainApp.hhsList.get(position).getRa17_b3() == null ? "0" : MainApp.hhsList.get(position).getRa17_b3());
+        households.setRa17_c3(MainApp.hhsList.get(position).getRa17_c3() == null ? "0" : MainApp.hhsList.get(position).getRa17_c3());
+        households.setRa17_d3(MainApp.hhsList.get(position).getRa17_d3() == null ? "0" : MainApp.hhsList.get(position).getRa17_d3());
         households.setRa18(MainApp.followUpsScheHHList.get(MainApp.selectedFpHousehold).getRa18());
 
         if (Integer.parseInt(households.getRa18()) > 0) {
