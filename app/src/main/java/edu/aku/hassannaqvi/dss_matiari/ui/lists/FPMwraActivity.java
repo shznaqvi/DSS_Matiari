@@ -79,7 +79,7 @@ public class FPMwraActivity extends AppCompatActivity {
             try {
                 //fupStatus = db.getFollowupsBySno(followUpsScheMWRAList.get(i).getRb01(), followUpsScheMWRAList.get(i).getFRound()).getSysDate();
 
-                if(!followUpsScheMWRAList.get(i).getRb01().equals("null")) {
+                if(followUpsScheMWRAList.get(i).getRb01() != null) {
 
                     Mwra tempMwra = db.mwraDao().getFollowupsBySno(households.getUid(), followUpsScheMWRAList.get(i).getRb01(), followUpsScheMWRAList.get(i).getFRound());
                     fupStatus = tempMwra.getSysDate();
