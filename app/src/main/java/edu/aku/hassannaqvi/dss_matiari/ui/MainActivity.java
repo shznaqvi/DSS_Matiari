@@ -144,8 +144,8 @@ public class MainActivity extends AppCompatActivity {
             // For after login sync data download
             AppConstants.IS_LOGIN = true;
             AppConstants.gotoActivity(this, SyncNewAC.class, false);
-/*        } else if (menuItemId == R.id.changePassword) {
-            AppConstants.gotoActivity(activity, ChangePassAC.class, false);*/
+       } else if (menuItemId == R.id.checkOpenForms) {
+            AppConstants.gotoActivity(this, FormsReportCluster.class, false);
         } else if (menuItemId == R.id.sendDB) {
             sendEmail();
             return true;
