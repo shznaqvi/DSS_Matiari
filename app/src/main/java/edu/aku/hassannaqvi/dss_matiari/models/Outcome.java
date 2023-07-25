@@ -117,6 +117,7 @@ public class Outcome extends BaseObservable implements Observable {
     @ColumnInfo(name = TableContracts.OutcomeTable.COLUMN_SYNCED)
     private String synced = StringUtils.EMPTY;
 
+    @SerializedName("synced_date")
     @ColumnInfo(name = TableContracts.OutcomeTable.COLUMN_SYNCED_DATE)
     private transient String syncDate = StringUtils.EMPTY;
 
