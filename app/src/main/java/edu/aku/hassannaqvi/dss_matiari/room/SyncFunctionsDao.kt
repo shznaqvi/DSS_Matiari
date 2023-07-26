@@ -120,8 +120,8 @@ interface SyncFunctionsDao {
         val mwras = getUnsyncedMWRAS_internal()
         val allOutcomes = getUnsyncedOutcome_internal()
         val toSyncOutcomes = arrayListOf<Outcome>()
-        mwras.forEach { mwra ->
-            val mwraOutcomes = allOutcomes.filter { it.uuid == mwra.uid }
+        mwras.forEach { mwra  ->
+            val mwraOutcomes = allOutcomes.filter { it.hdssId == mwra.hdssId && it.msno == mwra.sNo}
             toSyncOutcomes.addAll(mwraOutcomes)
         }
         return toSyncOutcomes
