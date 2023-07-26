@@ -105,12 +105,12 @@ interface OutcomeDao {
     fun getDataById(id: Int): Outcome
 
     // Update sync status as success
-    fun updateSyncSuccess(responses: List<SyncModelNew.WebResponse>?) {
-        if (responses != null && responses.size > 0 && responses[0].error === 0) {
+    fun updateSyncSuccess(responses: List<SyncModelNew.WebResponse>) {
+        if (responses.size > 0 && responses[0].error == 0) {
             val syncedDate: String = DateUtils.getCurrentDateTime()
             val synced = "1"
             for (i in responses.indices) {
-                val forms: Outcome = getDataById(responses[i].getId())
+                val forms: Outcome = getDataById(responses[i].id)
                 forms.syncDate = syncedDate
                 forms.synced = synced
                 forms.isError = false

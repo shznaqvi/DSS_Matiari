@@ -185,7 +185,7 @@ interface HouseholdsDao {
     /* NEW STRUCT */
 
     @Query("SELECT * FROM hhs WHERE _uid IN (:uIds)")
-    abstract fun getAllUnSyncedDataByUIds(uIds: List<String?>?): MutableList<Households?>?
+    abstract fun getAllUnSyncedDataByUIds(uIds: List<String>): MutableList<Households>
 
     // This query is only used for updating sync list
     // id = rowId

@@ -49,7 +49,7 @@ public class Outcome extends BaseObservable implements Observable {
 
     // APP VARIABLES
     @SerializedName("_id")
-    @PrimaryKey(autoGenerate = true) @NonNull
+    @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = TableContracts.OutcomeTable.COLUMN_ID)
     long id = 0;
 
@@ -481,7 +481,7 @@ public class Outcome extends BaseObservable implements Observable {
         setRc05(rc08.equals("1") ? this.rc05 : "");
         setRc06(rc08.equals("1") ? this.rc06 : "");
         setRc07(rc08.equals("1") ? this.rc07 : "");
-        setIStatus(rc08);
+        //setIStatus(rc08);
         notifyPropertyChanged(BR.rc08);
     }
 

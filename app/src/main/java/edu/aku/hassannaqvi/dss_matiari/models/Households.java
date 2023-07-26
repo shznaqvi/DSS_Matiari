@@ -2,6 +2,7 @@ package edu.aku.hassannaqvi.dss_matiari.models;
 
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.PROJECT_NAME;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.households;
+import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.selectedFpHousehold;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.selectedUC;
 
 import androidx.annotation.NonNull;
@@ -273,7 +274,7 @@ public class Households extends BaseObservable implements Observable {
         households.setRa17_b3(MainApp.hhsList.get(position).getRa17_b3() == null ? "0" : MainApp.hhsList.get(position).getRa17_b3());
         households.setRa17_c3(MainApp.hhsList.get(position).getRa17_c3() == null ? "0" : MainApp.hhsList.get(position).getRa17_c3());
         households.setRa17_d3(MainApp.hhsList.get(position).getRa17_d3() == null ? "0" : MainApp.hhsList.get(position).getRa17_d3());
-        households.setRa18(MainApp.followUpsScheHHList.get(MainApp.selectedFpHousehold).getRa18());
+        households.setRa18(MainApp.followUpsScheHHList.get(selectedFpHousehold).getRa18());
 
         if (Integer.parseInt(households.getRa18()) > 0) {
             households.setRa15("1");

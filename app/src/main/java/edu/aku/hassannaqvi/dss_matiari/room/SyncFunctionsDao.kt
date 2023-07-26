@@ -46,7 +46,7 @@ interface SyncFunctionsDao {
 
     // Households
 
-    @Query("SELECT * FROM " + TableContracts.HouseholdTable.TABLE_NAME
+  /*  @Query("SELECT * FROM " + TableContracts.HouseholdTable.TABLE_NAME
             + " WHERE " + TableContracts.HouseholdTable.COLUMN_ID + " LIKE :id ")
     fun updateQueryhhs(id: String?) : Households
 
@@ -60,7 +60,7 @@ interface SyncFunctionsDao {
         DssRoomDatabase.dbInstance?.householdsDao()?.updateHousehold(synced)
 
         return synced
-    }
+    }*/
 //************************************************************************************************************
 
     // MWRA
@@ -93,7 +93,7 @@ interface SyncFunctionsDao {
     }
 
 
-    @Query("SELECT * FROM " + TableContracts.MWRATable.TABLE_NAME
+    /*@Query("SELECT * FROM " + TableContracts.MWRATable.TABLE_NAME
             + " WHERE " + TableContracts.MWRATable.COLUMN_ID + " LIKE :id ")
     fun updateQueryMWRA(id: String?) : Mwra
 
@@ -106,25 +106,19 @@ interface SyncFunctionsDao {
         synced.syncDate = Date().toString()
         DssRoomDatabase.dbInstance?.mwraDao()?.updateMwra(synced)
         return synced
-    }
+    }*/
 //****************************************************************************************************************
 
     // Outcome
 
-    /*@Query("SELECT * FROM " + TableContracts.OutcomeTable.TABLE_NAME
-            + " WHERE " + TableContracts.OutcomeTable.COLUMN_SYNCED
-            + " is \'\' AND (" + TableContracts.OutcomeTable.COLUMN_ISTATUS
-            + " != 4 ) ORDER BY " + TableContracts.OutcomeTable.COLUMN_ID + " ASC")*/
-
     @Query("SELECT * FROM outcomes, hhs WHERE outcomes.hdssid LIKE hhs.hdssid AND outcomes.synced is \'\' " +
-           "AND hhs.istatus = 1 ORDER BY outcomes._id ASC ")
+            "AND hhs.istatus = 1 ")
     fun getUnsyncedOutcome_internal() : List<Outcome>
 
     @kotlin.jvm.Throws(JSONException :: class)
     fun getUnsyncedOutcome() : JSONArray?
     {
         val allForms = getUnsyncedOutcome_internal()
-
         val jsonArray = JSONArray()
         for (i in allForms)
         {
@@ -139,7 +133,7 @@ interface SyncFunctionsDao {
     }
 
 
-    @Query("SELECT * FROM " + TableContracts.OutcomeTable.TABLE_NAME
+    /*@Query("SELECT * FROM " + TableContracts.OutcomeTable.TABLE_NAME
             + " WHERE " + TableContracts.OutcomeTable.COLUMN_ID + " LIKE :id ")
     fun updateQueryOutcome(id: String?) : Outcome
 
@@ -152,7 +146,7 @@ interface SyncFunctionsDao {
         synced.syncDate = Date().toString()
         DssRoomDatabase.dbInstance?.OutcomeDao()?.updateOutcome(synced)
         return synced
-    }
+    }*/
 
 
     /**************** EntryLog********************/
@@ -179,9 +173,6 @@ interface SyncFunctionsDao {
         return jsonArray
 
     }
-
-
-
 
 
     /******************* DOWNLOAD DATA FUNCTIONS******************************************* */

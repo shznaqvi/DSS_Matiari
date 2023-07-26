@@ -1,6 +1,7 @@
 package edu.aku.hassannaqvi.dss_matiari.ui;
 
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.households;
+import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.outcome;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -25,6 +26,7 @@ import edu.aku.hassannaqvi.dss_matiari.database.DatabaseHelper;
 import edu.aku.hassannaqvi.dss_matiari.databinding.ActivityEndingBinding;
 import edu.aku.hassannaqvi.dss_matiari.models.Households;
 import edu.aku.hassannaqvi.dss_matiari.models.Mwra;
+import edu.aku.hassannaqvi.dss_matiari.models.Outcome;
 import edu.aku.hassannaqvi.dss_matiari.room.DssRoomDatabase;
 import edu.aku.hassannaqvi.dss_matiari.ui.lists.FPHouseholdActivity;
 
@@ -151,6 +153,7 @@ public class EndingActivity extends AppCompatActivity {
 
         try {
             Households updatedHousehold = households;
+            Outcome updatedOutcome = outcome;
             Mwra updatedMwra = MainApp.mwra;
 
             if(visitCount == 1)
@@ -167,13 +170,14 @@ public class EndingActivity extends AppCompatActivity {
                 updatedHousehold.setRa19cx(households.getRa19cx());
             }
             updatedHousehold.setIStatus(households.getIStatus());
+            updatedOutcome.setIStatus(households.getIStatus());
 
             updatedHousehold.setVisitNo(households.getVisitNo());
             updatedHousehold.setIStatus96x(households.getIStatus96x());
             updatedHousehold.setSA(households.sAtoString());
 
+            db.OutcomeDao().updateOutcome(updatedOutcome);
             updcount = db.householdsDao().updateHousehold(updatedHousehold);
-            //updcount = db.updatesHouseholdColumn(TableContracts.HouseholdTable.COLUMN_SA, MainApp.households.sAtoString());
 
 
         } catch (JSONException e) {
