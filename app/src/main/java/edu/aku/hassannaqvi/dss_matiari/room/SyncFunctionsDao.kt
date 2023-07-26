@@ -110,15 +110,27 @@ interface SyncFunctionsDao {
 //****************************************************************************************************************
 
     // Outcome
+    @Query("SELECT * FROM " + TableContracts.OutcomeTable.TABLE_NAME + " WHERE "
+            + TableContracts.OutcomeTable.COLUMN_SYNCED
+            + " is \'\' ORDER BY " + TableContracts.OutcomeTable.COLUMN_ID + " ASC")
 
-    @Query("SELECT * FROM outcomes, hhs WHERE outcomes.hdssid LIKE hhs.hdssid AND outcomes.synced is \'\' " +
-            "AND hhs.istatus = 1 ")
     fun getUnsyncedOutcome_internal() : List<Outcome>
+
+    private fun getUnsycedAdjustedOutcomes_internal() : List<Outcome> {
+        val mwras = getUnsyncedMWRAS_internal()
+        val allOutcomes = getUnsyncedOutcome_internal()
+        val toSyncOutcomes = arrayListOf<Outcome>()
+        mwras.forEach { mwra ->
+            val mwraOutcomes = allOutcomes.filter { it.uuid == mwra.uid }
+            toSyncOutcomes.addAll(mwraOutcomes)
+        }
+        return toSyncOutcomes
+    }
 
     @kotlin.jvm.Throws(JSONException :: class)
     fun getUnsyncedOutcome() : JSONArray?
     {
-        val allForms = getUnsyncedOutcome_internal()
+        val allForms = getUnsycedAdjustedOutcomes_internal()
         val jsonArray = JSONArray()
         for (i in allForms)
         {
