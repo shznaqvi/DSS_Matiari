@@ -92,7 +92,7 @@
     <string name="btnResetPassword" translatable="false">Reset Password</string>
     <string name="oldPassword" translatable="false">Old Password</string>
     <string name="newPassword" translatable="false">New Password</string>
-    <string name="invalid_password"> Invalid Password </string>
+    <string name="invalid_password"> Invalid Credentials </string>
     <string name="username_required"> Username is required. </string>
     <string name="nav">Not Available </string>
     <string name="ref"> Refused </string>
