@@ -20,8 +20,8 @@ interface SyncFunctionsDao {
     // Household Upload Functions
 
     @Query("SELECT * FROM " + TableContracts.HouseholdTable.TABLE_NAME + " WHERE "
-            + TableContracts.HouseholdTable.COLUMN_SYNCED
-            + " is \'\' AND (" + TableContracts.HouseholdTable.COLUMN_ISTATUS  + " = 1 OR "
+            + (TableContracts.HouseholdTable.COLUMN_SYNCED
+            + " is \'\' OR " + TableContracts.HouseholdTable.COLUMN_SYNCED +" is NULL ") + " AND (" + TableContracts.HouseholdTable.COLUMN_ISTATUS  + " = 1 OR "
             + TableContracts.HouseholdTable.COLUMN_VISIT_NO + " > 2) ORDER BY "
             + TableContracts.HouseholdTable.COLUMN_ID + " ASC")
     fun getUnsyncedHousehols_internal() : List<Households>
@@ -69,8 +69,8 @@ interface SyncFunctionsDao {
     /*@Query("SELECT * FROM mwras, hhs WHERE mwras.hdssid LIKE hhs.hdssid AND mwras.synced is \'\' " +
             "AND hhs.istatus = 1 ORDER BY mwras._id ASC ")*/
     @Query("SELECT * FROM " + TableContracts.MWRATable.TABLE_NAME + " WHERE "
-            + TableContracts.MWRATable.COLUMN_SYNCED
-            + " is \'\' AND (" + TableContracts.MWRATable.COLUMN_ISTATUS
+            + (TableContracts.MWRATable.COLUMN_SYNCED
+            + " is \'\' OR " + TableContracts.MWRATable.COLUMN_SYNCED +" is NULL ") + " AND (" + TableContracts.MWRATable.COLUMN_ISTATUS
             + "  != 4 ) ORDER BY " + TableContracts.MWRATable.COLUMN_ID + " ASC")
     fun getUnsyncedMWRAS_internal() : List<Mwra>
 
@@ -111,8 +111,8 @@ interface SyncFunctionsDao {
 
     // Outcome
     @Query("SELECT * FROM " + TableContracts.OutcomeTable.TABLE_NAME + " WHERE "
-            + TableContracts.OutcomeTable.COLUMN_SYNCED
-            + " is \'\' ORDER BY " + TableContracts.OutcomeTable.COLUMN_ID + " ASC")
+            + (TableContracts.OutcomeTable.COLUMN_SYNCED
+            + " is \'\' OR " + TableContracts.OutcomeTable.COLUMN_SYNCED +" is NULL ") + " ORDER BY " + TableContracts.OutcomeTable.COLUMN_ID + " ASC")
 
     fun getUnsyncedOutcome_internal() : List<Outcome>
 

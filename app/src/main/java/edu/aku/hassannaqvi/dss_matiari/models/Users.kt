@@ -8,8 +8,10 @@ import com.google.gson.annotations.SerializedName
 import edu.aku.hassannaqvi.dss_matiari.contracts.TableContracts.UsersTable
 import edu.aku.hassannaqvi.dss_matiari.newstruct.models.SyncModelNew
 import org.apache.commons.lang3.StringUtils
+import org.jetbrains.annotations.NotNull
 import org.json.JSONException
 import org.json.JSONObject
+import javax.annotation.Nullable
 
 /**
  * Created by hassan.naqvi on 11/30/2016.
@@ -22,6 +24,10 @@ class Users {
         defaultValue = "0"
     )
     var userID: Long = 0
+    @ColumnInfo(
+        name = UsersTable.COLUMN_USERNAME,
+        defaultValue = ""
+    )
     var username: String = StringUtils.EMPTY
     var password: String = StringUtils.EMPTY
     var passwordEnc: String = StringUtils.EMPTY
