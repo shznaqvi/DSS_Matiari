@@ -44,40 +44,31 @@ interface SyncFunctionsDao {
 
     }
 
-    // Households
-
-  /*  @Query("SELECT * FROM " + TableContracts.HouseholdTable.TABLE_NAME
-            + " WHERE " + TableContracts.HouseholdTable.COLUMN_ID + " LIKE :id ")
-    fun updateQueryhhs(id: String?) : Households
-
-
-    fun updateSyncedhhs(id: String?) : Households
-    {
-        val synced = updateQueryhhs(id)
-
-        synced.synced = "1"
-        synced.syncDate = Date().toString()
-        DssRoomDatabase.dbInstance?.householdsDao()?.updateHousehold(synced)
-
-        return synced
-    }*/
 //************************************************************************************************************
 
     // MWRA
 
-
-    /*@Query("SELECT * FROM mwras, hhs WHERE mwras.hdssid LIKE hhs.hdssid AND mwras.synced is \'\' " +
-            "AND hhs.istatus = 1 ORDER BY mwras._id ASC ")*/
     @Query("SELECT * FROM " + TableContracts.MWRATable.TABLE_NAME + " WHERE "
             + (TableContracts.MWRATable.COLUMN_SYNCED
             + " is \'\' OR " + TableContracts.MWRATable.COLUMN_SYNCED +" is NULL ") + " AND (" + TableContracts.MWRATable.COLUMN_ISTATUS
             + "  != 4 ) ORDER BY " + TableContracts.MWRATable.COLUMN_ID + " ASC")
     fun getUnsyncedMWRAS_internal() : List<Mwra>
 
+    private fun getUnsycedAdjustedMWRAS_internal() : List<Mwra> {
+        val hhs = getUnsyncedHousehols_internal()
+        val allMwras = getUnsyncedMWRAS_internal()
+        val toSyncMwras = arrayListOf<Mwra>()
+        hhs.forEach { hhs  ->
+            val mwras = allMwras.filter { it.hdssId == hhs.hdssId && it.uuid == hhs.uid}
+            toSyncMwras.addAll(mwras)
+        }
+        return toSyncMwras
+    }
+
     @kotlin.jvm.Throws(JSONException :: class)
     fun getUnsyncedMwras() : JSONArray?
     {
-        val allForms = getUnsyncedMWRAS_internal()
+        val allForms = getUnsycedAdjustedMWRAS_internal()
 
         val jsonArray = JSONArray()
         for (i in allForms)
@@ -92,21 +83,6 @@ interface SyncFunctionsDao {
 
     }
 
-
-    /*@Query("SELECT * FROM " + TableContracts.MWRATable.TABLE_NAME
-            + " WHERE " + TableContracts.MWRATable.COLUMN_ID + " LIKE :id ")
-    fun updateQueryMWRA(id: String?) : Mwra
-
-
-    fun updateSyncedMWRAs(id: String?) : Mwra
-    {
-        val synced = updateQueryMWRA(id)
-
-        synced.synced = "1"
-        synced.syncDate = Date().toString()
-        DssRoomDatabase.dbInstance?.mwraDao()?.updateMwra(synced)
-        return synced
-    }*/
 //****************************************************************************************************************
 
     // Outcome
