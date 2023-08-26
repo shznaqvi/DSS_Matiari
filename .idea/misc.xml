@@ -3,9 +3,11 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Android Office Work/DSS_Matiari/app/src/main/res/drawable/bg_alert.xml" value="0.2415" />
         <entry key="..\:/Android Office Work/DSS_Matiari/app/src/main/res/layout/activity_fphousehold.xml" value="0.23125" />
         <entry key="..\:/Android Office Work/DSS_Matiari/app/src/main/res/layout/activity_fpmwra.xml" value="0.371875" />
         <entry key="..\:/Android Office Work/DSS_Matiari/app/src/main/res/layout/activity_login.xml" value="0.23541666666666666" />
+        <entry key="..\:/Android Office Work/DSS_Matiari/app/src/main/res/layout/view_alert.xml" value="0.371875" />
         <entry key="..\:/Android Office Work/DSS_Matiari/app/src/main/res/menu/item_menu.xml" value="0.315" />
         <entry key="..\:/Android Projects/DSS_Matiari/app/src/main/res/layout/activity_household.xml" value="0.23125" />
         <entry key="..\:/Android Projects/DSS_Matiari/app/src/main/res/layout/activity_identification.xml" value="0.23125" />

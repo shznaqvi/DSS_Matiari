@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mainLayout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bg_alert"
+    android:layoutDirection="ltr"
+    app:cardBackgroundColor="@android:color/transparent"
+    app:cardElevation="@dimen/_5sdp">
+
+    <RelativeLayout
+        android:id="@+id/subLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_rounded_white_filled"
+        android:padding="@dimen/_15sdp">
+
+        <TextView
+            android:id="@+id/titleTV"
+            style="@style/Theme.AppStructure.TitleBoldText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            tools:text="Success!" />
+
+        <TextView
+            android:id="@+id/messageTV"
+            style="@style/Theme.AppStructure.RegularText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/titleTV"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:background="@android:color/transparent"
+            tools:text="Your form has been saved successfully" />
+
+        <LinearLayout
+            android:id="@+id/buttonLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/messageTV"
+            android:layout_marginTop="@dimen/_15sdp"
+            android:gravity="end"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/negBtn"
+                style="?android:attr/buttonBarButtonStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/_20sdp"
+                android:backgroundTint="@android:color/transparent"
+                android:padding="@dimen/_5sdp"
+                android:text="@string/cancel"
+                android:textColor="#b4b4b4"
+                android:textSize="@dimen/text_size_regular"
+                android:textStyle="bold" />
+
+            <Button
+                android:id="@+id/posBtn"
+                style="?android:attr/buttonBarButtonStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@android:color/transparent"
+                android:padding="@dimen/_5sdp"
+                android:text="@string/ok"
+                android:textColor="@color/primary_color"
+                android:textSize="@dimen/text_size_regular"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+
+</androidx.cardview.widget.CardView>

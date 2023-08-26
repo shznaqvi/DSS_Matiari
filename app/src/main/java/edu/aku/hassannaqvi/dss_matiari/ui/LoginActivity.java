@@ -63,6 +63,7 @@ import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
 
 import edu.aku.hassannaqvi.dss_matiari.R;
+import edu.aku.hassannaqvi.dss_matiari.core.AlertPopup;
 import edu.aku.hassannaqvi.dss_matiari.core.AppInfo;
 import edu.aku.hassannaqvi.dss_matiari.core.MainApp;
 import edu.aku.hassannaqvi.dss_matiari.databinding.ActivityLoginBinding;
@@ -368,8 +369,12 @@ public class LoginActivity extends AppCompatActivity {
                     }
                 } else {
                     recordEntry("Failed Login: Incorrect username or password");
-                    bi.password.setError(getString(R.string.incorrect_username_or_password));
-                    bi.password.requestFocus();
+                    /*bi.password.setError(getString(R.string.incorrect_username_or_password));
+                    bi.password.requestFocus();*/
+                    AlertPopup.alert(this, getString(R.string.login_failed),
+                            String.format(getString(R.string.attempt_no),
+                                    ++attemptCounter, getString(R.string.incorrect_username_or_password)),
+                            AppConstants.TYPE_ERROR);
                     //  Toast.makeText(LoginActivity.this, username + " " + password, Toast.LENGTH_SHORT).show();
                 }
 
