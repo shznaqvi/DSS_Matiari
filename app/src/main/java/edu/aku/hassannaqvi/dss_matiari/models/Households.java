@@ -33,94 +33,93 @@ import edu.aku.hassannaqvi.dss_matiari.core.MainApp;
 public class Households extends BaseObservable implements Observable {
 
     @Ignore
-    private String round = "";
+    private String round = StringUtils.EMPTY;
     @Ignore
-    private String ra01 = "";
+    private String ra01 = StringUtils.EMPTY;
     @Ignore
-    private String ra01v2 = "";
+    private String ra01v2 = StringUtils.EMPTY;
     @Ignore
-
-    private String ra01v3 = "";
+    private String ra01v3 = StringUtils.EMPTY;
     @Ignore
-    private String ra02 = "";
+    private String ra02 = StringUtils.EMPTY;
     @Ignore
-    private String ra04 = "";
+    private String ra04 = StringUtils.EMPTY;
     @Ignore
-    private String ra03 = "";
+    private String ra03 = StringUtils.EMPTY;
     @Ignore
-    private String ra05 = "";
+    private String ra05 = StringUtils.EMPTY;
     @Ignore
-    private String ra07 = "";
+    private String ra07 = StringUtils.EMPTY;
     @Ignore
-    private String ra06 = "";
+    private String ra06 = StringUtils.EMPTY;
     @Ignore
-    private String ra08 = "";
+    private String ra08 = StringUtils.EMPTY;
     @Ignore
-    private String ra09 = "";
+    private String ra09 = StringUtils.EMPTY;
     @Ignore
-    private String ra10 = "";
+    private String ra10 = StringUtils.EMPTY;
     @Ignore
-    private String ra11 = "";
+    private String ra11 = StringUtils.EMPTY;
     @Ignore
-    private final String ra11x = "";
+    private final String ra11x = StringUtils.EMPTY;
     @Ignore
-    private String ra12 = "";
+    private String ra12 = StringUtils.EMPTY;
     @Ignore
-    private final String ra12x = "";
+    private final String ra12x = StringUtils.EMPTY;
     @Ignore
-    private String ra13 = "";
+    private String ra13 = StringUtils.EMPTY;
     @Ignore
-    private final String ra13x = "";
+    private final String ra13x = StringUtils.EMPTY;
     @Ignore
-    private String ra14 = "";
+    private String ra14 = StringUtils.EMPTY;
     @Ignore
-    private String ra15 = "";
+    private String ra15 = StringUtils.EMPTY;
     @Ignore
-    private final String ra16 = "";
+    private final String ra16 = StringUtils.EMPTY;
     @Ignore
-    private String ra17_a1 = "";
+    private String ra17_a1 = StringUtils.EMPTY;
     @Ignore
-    private String ra17_b1 = "";
+    private String ra17_b1 = StringUtils.EMPTY;
     @Ignore
-    private String ra17_c1 = "";
+    private String ra17_c1 = StringUtils.EMPTY;
     @Ignore
-    private String ra17_d1 = "";
+    private String ra17_d1 = StringUtils.EMPTY;
     @Ignore
-    private String ra17_a2 = "";
+    private String ra17_a2 = StringUtils.EMPTY;
     @Ignore
-    private String ra17_b2 = "";
+    private String ra17_b2 = StringUtils.EMPTY;
     @Ignore
-    private String ra17_c2 = "";
+    private String ra17_c2 = StringUtils.EMPTY;
     @Ignore
-    private String ra17_d2 = "";
+    private String ra17_d2 = StringUtils.EMPTY;
     @Ignore
-    private String ra17_a3 = "";
+    private String ra17_a3 = StringUtils.EMPTY;
     @Ignore
-    private String ra17_b3 = "";
+    private String ra17_b3 = StringUtils.EMPTY;
     @Ignore
-    private String ra17_c3 = "";
+    private String ra17_c3 = StringUtils.EMPTY;
     @Ignore
-    private String ra17_d3 = "";
+    private String ra17_d3 = StringUtils.EMPTY;
     @Ignore
-    private String ra18 = "";
+    private String ra18 = StringUtils.EMPTY;
     @Ignore
-    private String ra19a = "";
+    private String ra19a = StringUtils.EMPTY;
     @Ignore
-    private String ra19ax = "";
+    private String ra19ax = StringUtils.EMPTY;
     @Ignore
-    private String ra19b = "";
+    private String ra19b = StringUtils.EMPTY;
     @Ignore
-    private String ra19bx = "";
+    private String ra19bx = StringUtils.EMPTY;
     @Ignore
-    private String ra19c = "";
+    private String ra19c = StringUtils.EMPTY;
     @Ignore
-    private String ra19cx = "";
+    private String ra19cx = StringUtils.EMPTY;
     @Ignore
-    private String ra20 = "";
+    private String ra20 = StringUtils.EMPTY;
     @Ignore
-    private String ra21 = "";
+    private String ra21 = StringUtils.EMPTY;
     @Ignore
-    private final String ra22 = "";
+    private final String ra22 = StringUtils.EMPTY;
 
     // For local use
     // This is used for resolving data while posting
