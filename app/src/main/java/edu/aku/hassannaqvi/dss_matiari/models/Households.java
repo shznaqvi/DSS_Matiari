@@ -118,7 +118,7 @@ public class Households extends BaseObservable implements Observable {
     @ColumnInfo(name = HouseholdTable.COLUMN_SYNCED_DATE)
     private transient String syncDate = StringUtils.EMPTY;
 
-    private String round = "";
+    private String round = StringUtils.EMPTY;
 
     @SerializedName("s1")
     private SA sA;
@@ -455,49 +455,49 @@ public class Households extends BaseObservable implements Observable {
 
     public static class SA extends BaseObservable{
 
-        private String ra01 = "";
-        private String ra01v2 = "";
-        private String ra01v3 = "";
-        private String ra02 = "";
-        private String ra04 = "";
-        private String ra03 = "";
-        private String ra05 = "";
-        private String ra07 = "";
-        private String ra06 = "";
-        private String ra08 = "";
-        private String ra09 = "";
-        private String ra10 = "";
-        private String ra11 = "";
-        private final String ra11x = "";
-        private String ra12 = "";
-        private final String ra12x = "";
-        private String ra13 = "";
-        private final String ra13x = "";
-        private String ra14 = "";
-        private String ra15 = "";
-        private final String ra16 = "";
-        private String ra17_a1 = "";
-        private String ra17_b1 = "";
-        private String ra17_c1 = "";
-        private String ra17_d1 = "";
-        private String ra17_a2 = "";
-        private String ra17_b2 = "";
-        private String ra17_c2 = "";
-        private String ra17_d2 = "";
-        private String ra17_a3 = "";
-        private String ra17_b3 = "";
-        private String ra17_c3 = "";
-        private String ra17_d3 = "";
-        private String ra18 = "";
-        private String ra19a = "";
-        private String ra19ax = "";
-        private String ra19b = "";
-        private String ra19bx = "";
-        private String ra19c = "";
-        private String ra19cx = "";
-        private String ra20 = "";
-        private String ra21 = "";
-        private final String ra22 = "";
+        private String ra01 = StringUtils.EMPTY;
+        private String ra01v2 = StringUtils.EMPTY;
+        private String ra01v3 = StringUtils.EMPTY;
+        private String ra02 = StringUtils.EMPTY;
+        private String ra04 = StringUtils.EMPTY;
+        private String ra03 = StringUtils.EMPTY;
+        private String ra05 = StringUtils.EMPTY;
+        private String ra07 = StringUtils.EMPTY;
+        private String ra06 = StringUtils.EMPTY;
+        private String ra08 = StringUtils.EMPTY;
+        private String ra09 = StringUtils.EMPTY;
+        private String ra10 = StringUtils.EMPTY;
+        private String ra11 = StringUtils.EMPTY;
+        private final String ra11x = StringUtils.EMPTY;
+        private String ra12 = StringUtils.EMPTY;
+        private final String ra12x = StringUtils.EMPTY;
+        private String ra13 = StringUtils.EMPTY;
+        private final String ra13x = StringUtils.EMPTY;
+        private String ra14 = StringUtils.EMPTY;
+        private String ra15 = StringUtils.EMPTY;
+        private final String ra16 = StringUtils.EMPTY;
+        private String ra17_a1 = StringUtils.EMPTY;
+        private String ra17_b1 = StringUtils.EMPTY;
+        private String ra17_c1 = StringUtils.EMPTY;
+        private String ra17_d1 = StringUtils.EMPTY;
+        private String ra17_a2 = StringUtils.EMPTY;
+        private String ra17_b2 = StringUtils.EMPTY;
+        private String ra17_c2 = StringUtils.EMPTY;
+        private String ra17_d2 = StringUtils.EMPTY;
+        private String ra17_a3 = StringUtils.EMPTY;
+        private String ra17_b3 = StringUtils.EMPTY;
+        private String ra17_c3 = StringUtils.EMPTY;
+        private String ra17_d3 = StringUtils.EMPTY;
+        private String ra18 = StringUtils.EMPTY;
+        private String ra19a = StringUtils.EMPTY;
+        private String ra19ax = StringUtils.EMPTY;
+        private String ra19b = StringUtils.EMPTY;
+        private String ra19bx = StringUtils.EMPTY;
+        private String ra19c = StringUtils.EMPTY;
+        private String ra19cx = StringUtils.EMPTY;
+        private String ra20 = StringUtils.EMPTY;
+        private String ra21 = StringUtils.EMPTY;
+        private final String ra22 = StringUtils.EMPTY;
 
         // This class is used to parse the object to save in room db
         public static class DataConverter extends DssRoomDatabase.BaseConverter<SA> {

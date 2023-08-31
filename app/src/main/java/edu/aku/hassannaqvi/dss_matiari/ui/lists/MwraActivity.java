@@ -214,7 +214,7 @@ public class MwraActivity extends AppCompatActivity {
             }
             if (resultCode == Activity.RESULT_CANCELED) {
                 // Write your code if there's no result
-                Toast.makeText(this, "Information for " + mwraList.get(selectedMember).getRb02() + " was not saved.4", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Information for " + mwraList.get(selectedMember).getsB().getRb02() + " was not saved.4", Toast.LENGTH_SHORT).show();
             }
         }
     }

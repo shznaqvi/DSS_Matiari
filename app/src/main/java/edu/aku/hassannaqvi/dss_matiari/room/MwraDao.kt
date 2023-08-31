@@ -36,8 +36,6 @@ interface MwraDao {
     fun getMaxMWRSNoBYHH(ucCode : String, vCode : String, hhNo : String) : Int
 
 
-
-
     @Query("SELECT * FROM " + MWRATable.TABLE_NAME + " WHERE " +
         MWRATable.COLUMN_UC_CODE + " LIKE :uc AND "
                 + MWRATable.COLUMN_VILLAGE_CODE + " LIKE :village AND "
@@ -52,10 +50,12 @@ interface MwraDao {
     {
         val mwra = getAllMWRAByHH_internal(uc, village, structure, hhNo, regRound)
         mwra.forEach {
-            it.sBHydrate(it.sb)
+            //it.sBHydrate(it.sb)
         }
         return mwra
     }
+
+
 
     @Query("SELECT Count(*) AS mwraCount" +
             " FROM " + MWRATable.TABLE_NAME +

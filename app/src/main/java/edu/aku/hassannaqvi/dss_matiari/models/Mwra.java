@@ -28,32 +28,26 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
+import java.util.Objects;
 
 import edu.aku.hassannaqvi.dss_matiari.BR;
 import edu.aku.hassannaqvi.dss_matiari.contracts.TableContracts.MWRATable;
 import edu.aku.hassannaqvi.dss_matiari.core.MainApp;
+import edu.aku.hassannaqvi.dss_matiari.newstruct.global.AppConstants;
+import edu.aku.hassannaqvi.dss_matiari.room.DssRoomDatabase;
+import edu.aku.hassannaqvi.dss_matiari.room.HouseholdsDao;
+import edu.aku.hassannaqvi.dss_matiari.room.MwraDao;
 
 @Entity(tableName = MWRATable.TABLE_NAME)
 public class Mwra extends BaseObservable implements Observable {
-
-    @Ignore
-    public transient String TAG = "MWRA";
-    //Not saving in DB
-    @Ignore
-    private transient PropertyChangeRegistry propertyChangeRegistry = new PropertyChangeRegistry();
-    @Ignore
-    private transient boolean exist = false;
-    @Ignore
-    private transient boolean expanded;
 
     // APP VARIABLES
     @ColumnInfo(name = MWRATable.COLUMN_PROJECT_NAME)
     private String projectName = PROJECT_NAME;
 
-    // APP VARIABLES
-
     @SerializedName("_id")
-    @PrimaryKey(autoGenerate = true) @NonNull
+    @PrimaryKey(autoGenerate = true)
+    @NonNull
     @ColumnInfo(name = MWRATable.COLUMN_ID)
     long id = 0;
 
@@ -105,7 +99,6 @@ public class Mwra extends BaseObservable implements Observable {
     private String appver = StringUtils.EMPTY;
 
 
-
     @ColumnInfo(name = MWRATable.COLUMN_SYNCED)
     private String synced = StringUtils.EMPTY;
 
@@ -116,83 +109,6 @@ public class Mwra extends BaseObservable implements Observable {
     @ColumnInfo(name = MWRATable.COLUMN_REGROUND)
     private String regRound = StringUtils.EMPTY;
 
-    @SerializedName("s2")
-    @ColumnInfo(name = MWRATable.COLUMN_SB)
-    private transient String sB = StringUtils.EMPTY;
-
-    @SerializedName("s3")
-    @ColumnInfo(name = MWRATable.COLUMN_SC)
-    private transient String sC = StringUtils.EMPTY;
-
-    @SerializedName("s4")
-    @ColumnInfo(name = MWRATable.COLUMN_SD)
-    private transient String sD = StringUtils.EMPTY;
-
-    private String round = StringUtils.EMPTY;
-    @Ignore
-    private String rb01a = StringUtils.EMPTY;
-    @Ignore
-    private String rb01 = StringUtils.EMPTY;
-    @Ignore
-    private String rb02 = StringUtils.EMPTY;
-    @Ignore
-    private String rb22 = StringUtils.EMPTY;
-    @Ignore
-    private String rb03 = StringUtils.EMPTY;
-    @Ignore
-    private String rb23 = StringUtils.EMPTY;
-    @Ignore
-    private String rb04 = StringUtils.EMPTY;
-    @Ignore
-    private String rb05 = StringUtils.EMPTY;
-    @Ignore
-    private String rb06 = StringUtils.EMPTY;
-    @Ignore
-    private String rb07 = StringUtils.EMPTY;
-    @Ignore
-    private String rb08 = StringUtils.EMPTY;
-    @Ignore
-    private String rb09 = StringUtils.EMPTY;
-
-    // Followup Variables
-    @Ignore
-    private String rb03a = StringUtils.EMPTY;
-    @Ignore
-    private String rb03b = StringUtils.EMPTY;
-    @Ignore
-    private String rb10 = StringUtils.EMPTY;
-    @Ignore
-    private String rb11 = StringUtils.EMPTY;
-
-    @Ignore
-    private String rb12 = StringUtils.EMPTY;
-    @Ignore
-    private String rb13 = StringUtils.EMPTY;
-    @Ignore
-    private String rb14 = StringUtils.EMPTY;
-    @Ignore
-    private String rb15 = StringUtils.EMPTY;
-    @Ignore
-    private String rb16 = StringUtils.EMPTY;
-    @Ignore
-    private String rb17 = StringUtils.EMPTY;
-    @Ignore
-    private String rb18 = StringUtils.EMPTY;
-    @Ignore
-    private String rb19 = StringUtils.EMPTY;
-    @Ignore
-    private String rb20 = StringUtils.EMPTY;
-    @Ignore
-    private String rb21 = StringUtils.EMPTY;
-
-    @Ignore
-    private String rb24 = StringUtils.EMPTY;
-    @Ignore
-    private String rb25 = StringUtils.EMPTY;
-
-    @Ignore
-    private String pregnum = StringUtils.EMPTY;
-
     @ColumnInfo(name = MWRATable.COLUMN_CHILD_COUNT)
     private transient String child_count = StringUtils.EMPTY;
 
@@ -200,13 +116,27 @@ public class Mwra extends BaseObservable implements Observable {
     @ColumnInfo(name = MWRATable.COLUMN_ISTATUS)
     private transient String istatus = StringUtils.EMPTY;
 
-    @Ignore
-    private transient long ageInMonths;
-    @Ignore
-    private String prePreg = "";
+
+    private String round = StringUtils.EMPTY;
+
+    @SerializedName("s2")
+    private SB sB;
+
+    @SerializedName("s3")
+    private SC sC;
+
+    @SerializedName("s4")
+    private SD sD;
 
     @Ignore
-    private transient String preMaritalStaus = "";
+    private String pregnum = StringUtils.EMPTY;
+
+
+    @Ignore
+    private String prePreg = StringUtils.EMPTY;
+
+    @Ignore
+    private transient String preMaritalStaus = StringUtils.EMPTY;
 
     // For local use
     // This is used for resolving data while posting
@@ -240,14 +170,14 @@ public class Mwra extends BaseObservable implements Observable {
         setProjectName(PROJECT_NAME);
         setRound(MainApp.ROUND);
         setRegRound("1");
-       setUcCode(households.getUcCode());
-       setVillageCode(households.getVillageCode());
-       setStructureNo(households.getStructureNo());
-       setHhNo(households.getHhNo());
-       setDeviceId(MainApp.deviceid);
-       setHdssId(households.getHdssId());
-       setAppver(MainApp.versionName + "." + MainApp.versionCode);
-       //setPregnum("0");
+        setUcCode(households.getUcCode());
+        setVillageCode(households.getVillageCode());
+        setStructureNo(households.getStructureNo());
+        setHhNo(households.getHhNo());
+        setDeviceId(MainApp.deviceid);
+        setHdssId(households.getHdssId());
+        setAppver(MainApp.versionName + "." + MainApp.versionCode);
+        //setPregnum("0");
 
     }
 
@@ -272,23 +202,37 @@ public class Mwra extends BaseObservable implements Observable {
         mwra.setRound(MainApp.fpMwra.getFRound());
         mwra.setSNo(MainApp.fpMwra.getRb01());
         mwra.setChild_count(MainApp.fpMwra.getChild_count());
-        mwra.setRb01(MainApp.fpMwra.getRb01());  // Line number of MWRA
-        mwra.setRb02(MainApp.fpMwra.getRb02());  // Name of MWRA
-        mwra.setRb03(MainApp.fpMwra.getRb03()); // Husband / Father Name
-        mwra.setRb04(MainApp.fpMwra.getRb04()); // DOB
+        mwra.getsC().setRb01(MainApp.fpMwra.getRb01());  // Line number of MWRA
+        mwra.getsC().setRb02(MainApp.fpMwra.getRb02());  // Name of MWRA
+        mwra.getsC().setRb03(MainApp.fpMwra.getRb03()); // Husband / Father Name
+        mwra.getsC().setRb04(MainApp.fpMwra.getRb04()); // DOB
         mwra.setPrePreg(MainApp.fpMwra.getRb07());
-        mwra.setRb06(MainApp.fpMwra.getRb06());
+        mwra.getsC().setRb06(MainApp.fpMwra.getRb06());
         mwra.setPreMaritalStaus(MainApp.fpMwra.getRb06());
         mwra.setPregnum(MainApp.fpMwra.getPregCount());
-        mwra.setRb22(MainApp.fpMwra.getRb22());
-        mwra.setRb23(MainApp.fpMwra.getRb23());
+        mwra.getsC().setRb22(MainApp.fpMwra.getRb22());
+        mwra.getsC().setRb23(MainApp.fpMwra.getRb23());
 
-        long daysdiff  = CalculateAge(MainApp.fpMwra.getRa01().getDate());
-        long years = daysdiff/365;
+        long daysdiff = CalculateAge(MainApp.fpMwra.getRa01().getDate());
+        long years = daysdiff / 365;
         long actualAge = Integer.parseInt(MainApp.fpMwra.getRb05()) + years;
-        mwra.setRb05(String.valueOf(actualAge));     // Age in Years
+        mwra.getsC().setRb05(String.valueOf(actualAge));     // Age in Years
     }
 
+
+    /*FOR IDENTIFICATION INFORMATION - CLUSTER-WISE*/
+    // Save data in db
+    public static void saveMainDataReg(String uuid, String sNo) throws JSONException {
+        MwraDao mwraDao = Objects.requireNonNull(DssRoomDatabase.getDbInstance()).mwraDao();
+        Mwra form = mwraDao.getAllMWRAByHH(households.getUcCode(), households.getVillageCode(), households.get);
+        if (form != null) {
+            households = form;
+        } else {
+            households.setUid(AppConstants.generateUid());
+            households.setId(householdsDao.addHousehold(households));
+            Households.SA.saveData(sa);
+        }
+    }
 
 
     @Bindable
@@ -298,7 +242,7 @@ public class Mwra extends BaseObservable implements Observable {
 
     public void setRound(String round) {
         this.round = round;
-        notifyChange(BR.round);
+        notifyPropertyChanged(BR.round);
     }
 
 
@@ -465,35 +409,27 @@ public class Mwra extends BaseObservable implements Observable {
         this.syncDate = syncDate;
     }
 
-    public boolean isExist() {
-        return exist;
-    }
-
-    public void setExist(boolean exist) {
-        this.exist = exist;
-    }
-
-    public String getSB() {
+    public SB getsB() {
         return sB;
     }
 
-    public void setSB(String sB) {
+    public void setsB(SB sB) {
         this.sB = sB;
     }
 
-    public String getSC() {
+    public SC getsC() {
         return sC;
     }
 
-    public void setSC(String sC) {
+    public void setsC(SC sC) {
         this.sC = sC;
     }
 
-    public String getSD() {
+    public SD getsD() {
         return sD;
     }
 
-    public void setSD(String sD) {
+    public void setsD(SD sD) {
         this.sD = sD;
     }
 
@@ -533,24 +469,758 @@ public class Mwra extends BaseObservable implements Observable {
         this.istatus = istatus;
     }
 
-    public PropertyChangeRegistry getPropertyChangeRegistry() {
-        return propertyChangeRegistry;
+
+    /**
+     * SECTION B - MWRA Registration
+     */
+
+    public static class SB extends BaseObservable {
+
+        private String rb01a = StringUtils.EMPTY;
+        private String rb01 = StringUtils.EMPTY;
+        private String rb02 = StringUtils.EMPTY;
+        private String rb22 = StringUtils.EMPTY;
+        private String rb03 = StringUtils.EMPTY;
+        private String rb23 = StringUtils.EMPTY;
+        private String rb03a = StringUtils.EMPTY;
+        private String rb03b = StringUtils.EMPTY;
+        private String rb04 = StringUtils.EMPTY;
+        private String rb05 = StringUtils.EMPTY;
+        private String rb06 = StringUtils.EMPTY;
+        private String rb07 = StringUtils.EMPTY;
+        private String rb08 = StringUtils.EMPTY;
+        private String rb09 = StringUtils.EMPTY;
+        private String rb18 = StringUtils.EMPTY;
+        private String rb19 = StringUtils.EMPTY;
+        private String rb20 = StringUtils.EMPTY;
+        private String rb21 = StringUtils.EMPTY;
+        private String rb24 = StringUtils.EMPTY;
+        private String rb25 = StringUtils.EMPTY;
+        private String pregnum = StringUtils.EMPTY;
+        private long ageInMonths;
+
+
+        @Bindable
+        public String getRb01() {
+            return rb01;
+        }
+
+        public void setRb01(String rb01) {
+            this.rb01 = rb01;
+            //this.sNo = rb01;
+            notifyPropertyChanged(BR.rb01);
+        }
+
+        @Bindable
+        public String getRb01a() {
+            return rb01a;
+        }
+
+        public void setRb01a(String ra01) {
+            this.rb01a = ra01;
+            notifyPropertyChanged(BR.ra01);
+        }
+
+        @Bindable
+        public String getRb02() {
+            return rb02;
+        }
+
+        public void setRb02(String rb02) {
+            this.rb02 = rb02;
+            notifyPropertyChanged(BR.rb02);
+        }
+
+        @Bindable
+        public String getRb22() {
+            return rb22;
+        }
+
+        public void setRb22(String rb22) {
+            this.rb22 = rb22;
+            notifyPropertyChanged(BR.rb22);
+        }
+
+        @Bindable
+        public String getRb03() {
+            return rb03;
+        }
+
+        public void setRb03(String rb03) {
+            this.rb03 = rb03;
+            notifyPropertyChanged(BR.rb03);
+        }
+
+
+        @Bindable
+        public String getRb23() {
+            return rb23;
+        }
+
+        public void setRb23(String rb23) {
+            this.rb23 = rb23;
+            notifyPropertyChanged(BR.rb23);
+        }
+
+        @Bindable
+        public String getRb03a() {
+            return rb03a;
+        }
+
+        public void setRb03a(String rb03a) {
+            this.rb03a = rb03a;
+            notifyPropertyChanged(BR.rb03a);
+        }
+
+        @Bindable
+        public String getRb03b() {
+            return rb03b;
+        }
+
+        public void setRb03b(String rb03b) {
+            this.rb03b = rb03b;
+            notifyPropertyChanged(BR.rb03b);
+        }
+
+        @Bindable
+        public String getRb04() {
+            return rb04;
+        }
+
+        public void setRb04(String rb04) {
+            this.rb04 = rb04;
+            if (mwra.regRound.equals("1")) {
+                if (!this.rb04.equals("98")) {
+                    setRb05(this.rb05);
+                    CaluculateAge();
+                } else {
+                    setRb05("");
+                }
+            }
+            notifyPropertyChanged(BR.rb04);
+        }
+
+        @Bindable
+        public String getRb05() {
+            return rb05;
+        }
+
+        public void setRb05(String rb05) {
+            this.rb05 = rb05;
+            notifyPropertyChanged(BR.rb05);
+        }
+
+        @Bindable
+        public String getRb06() {
+            return rb06;
+        }
+
+        public void setRb06(String rb06) {
+            this.rb06 = rb06;
+            //setRb15(this.rb06.equals("4") ? "" : this.rb15);
+            setRb20(this.rb06.equals("4") ? "" : this.rb20);
+            setRb21(this.rb06.equals("4") ? "" : this.rb21);
+
+            notifyPropertyChanged(BR.rb06);
+        }
+
+
+        @Bindable
+        public String getRb07() {
+            return rb07;
+        }
+
+        public void setRb07(String rb07) {
+            this.rb07 = rb07;
+            setRb08(this.rb07.equals("1") ? this.rb08 : "");
+            setRb09(this.rb07.equals("1") ? this.rb09 : "");
+            setRb24(this.rb07.equals("1") ? this.rb24 : "");
+            notifyPropertyChanged(BR.rb07);
+        }
+
+        @Bindable
+        public String getRb08() {
+            return rb08;
+        }
+
+        public void setRb08(String rb08) {
+            this.rb08 = rb08;
+            if (!this.rb08.equals("")) {
+                setRb09(calcEDD());
+            } else {
+                setRb09("");
+            }
+            notifyPropertyChanged(BR.rb08);
+        }
+
+        @Bindable
+        public String getRb09() {
+            return rb09;
+        }
+
+        public void setRb09(String rb09) {
+            this.rb09 = rb09;
+            notifyPropertyChanged(BR.rb09);
+        }
+
+        @Bindable
+        public String getRb18() {
+            return rb18;
+        }
+
+        public void setRb18(String rb18) {
+            this.rb18 = rb18;
+            setRb19(rb18.equals("1") ? this.rb19 : "");
+            setRb20(rb18.equals("1") ? this.rb20 : "");
+            setRb21(rb18.equals("1") ? this.rb21 : "");
+            notifyPropertyChanged(BR.rb18);
+        }
+
+        @Bindable
+        public String getRb19() {
+            return rb19;
+        }
+
+        public void setRb19(String rb19) {
+            this.rb19 = rb19;
+            notifyPropertyChanged(BR.rb19);
+        }
+
+        @Bindable
+        public String getRb20() {
+            return rb20;
+        }
+
+        public void setRb20(String rb20) {
+            this.rb20 = rb20;
+            notifyPropertyChanged(BR.rb20);
+        }
+
+        @Bindable
+        public String getRb21() {
+            return rb21;
+        }
+
+        public void setRb21(String rb21) {
+            this.rb21 = rb21;
+            notifyPropertyChanged(BR.rb21);
+        }
+
+        @Bindable
+        public String getRb24() {
+            return rb24;
+        }
+
+        public void setRb24(String rb24) {
+            this.rb24 = rb24;
+            setRb25(rb24.equals("1") ? this.rb25 : "");
+            notifyPropertyChanged(BR.rb24);
+        }
+
+        @Bindable
+        public String getRb25() {
+            return rb25;
+        }
+
+        public void setRb25(String rb25) {
+            this.rb25 = rb25;
+            notifyPropertyChanged(BR.rb25);
+        }
+
+        private void CaluculateAge() {
+
+
+            setRb05("");
+
+
+            try {
+                Calendar cal = Calendar.getInstance();
+                Calendar cur = Calendar.getInstance();
+
+
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
+                cal.setTime(Objects.requireNonNull(sdf.parse(getRb01a())));// all done
+
+
+                //long millis = System.currentTimeMillis() - cal.getTimeInMillis();
+                long millis = cur.getTimeInMillis() - cal.getTimeInMillis();
+                cal.setTimeInMillis(millis);
+
+
+                this.ageInMonths = MILLISECONDS.toDays(millis) / 30;
+                long tYear = MILLISECONDS.toDays(millis) / 365;
+                long tMonth = (MILLISECONDS.toDays(millis) - (tYear * 365)) / 30;
+                long tDay = MILLISECONDS.toDays(millis) - ((tYear * 365) + (tMonth * 30));
+
+                setRb05(String.valueOf(tYear));
+
+
+            } catch (ParseException e) {
+                e.printStackTrace();
+
+            }
+        }
+
+        public String calcEDD() {
+
+            Calendar cal = Calendar.getInstance();
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
+
+            try {
+                cal.setTime(sdf.parse(getRb08()));// all done
+
+                // Set EDD by default
+                cal.add(Calendar.DAY_OF_YEAR, 7);
+                cal.add(Calendar.MONTH, 9);
+
+                return sdf.format(cal.getTime());
+
+            } catch (ParseException e) {
+                e.printStackTrace();
+                return e.getMessage();
+            }
+
+        }
+
     }
 
-    public void setPropertyChangeRegistry(PropertyChangeRegistry propertyChangeRegistry) {
-        this.propertyChangeRegistry = propertyChangeRegistry;
+    /**
+     * SECTION C - MWRA Followup
+     */
+
+    public static class SC extends BaseObservable {
+
+        private String rb01a = StringUtils.EMPTY;
+        private String rb01 = StringUtils.EMPTY;
+        private String rb02 = StringUtils.EMPTY;
+        private String rb22 = StringUtils.EMPTY;
+        private String rb03 = StringUtils.EMPTY;
+        private String rb23 = StringUtils.EMPTY;
+        private String rb03a = StringUtils.EMPTY;
+        private String rb03b = StringUtils.EMPTY;
+        private String rb04 = StringUtils.EMPTY;
+        private String rb05 = StringUtils.EMPTY;
+        private String rb06 = StringUtils.EMPTY;
+        private String rb07 = StringUtils.EMPTY;
+        private String rb10 = StringUtils.EMPTY;
+        private String rb11 = StringUtils.EMPTY;
+        private String rb12 = StringUtils.EMPTY;
+        private String rb13 = StringUtils.EMPTY;
+        private String rb14 = StringUtils.EMPTY;
+        private String rb15 = StringUtils.EMPTY;
+        private String rb16 = StringUtils.EMPTY;
+        private String rb17 = StringUtils.EMPTY;
+        private String rb18 = StringUtils.EMPTY;
+        private String rb19 = StringUtils.EMPTY;
+        private String rb20 = StringUtils.EMPTY;
+        private String rb21 = StringUtils.EMPTY;
+        private long ageInMonths;
+
+        @Bindable
+        public String getRb01() {
+            return rb01;
+        }
+
+        public void setRb01(String rb01) {
+            this.rb01 = rb01;
+            //this.sNo = rb01;
+            notifyPropertyChanged(BR.rb01);
+        }
+
+        @Bindable
+        public String getRb01a() {
+            return rb01a;
+        }
+
+        public void setRb01a(String ra01) {
+            this.rb01a = ra01;
+            notifyPropertyChanged(BR.ra01);
+        }
+
+        @Bindable
+        public String getRb02() {
+            return rb02;
+        }
+
+        public void setRb02(String rb02) {
+            this.rb02 = rb02;
+            notifyPropertyChanged(BR.rb02);
+        }
+
+        @Bindable
+        public String getRb22() {
+            return rb22;
+        }
+
+        public void setRb22(String rb22) {
+            this.rb22 = rb22;
+            notifyPropertyChanged(BR.rb22);
+        }
+
+        @Bindable
+        public String getRb03() {
+            return rb03;
+        }
+
+        public void setRb03(String rb03) {
+            this.rb03 = rb03;
+            notifyPropertyChanged(BR.rb03);
+        }
+
+        @Bindable
+        public String getRb23() {
+            return rb23;
+        }
+
+        public void setRb23(String rb23) {
+            this.rb23 = rb23;
+            notifyPropertyChanged(BR.rb23);
+        }
+
+        @Bindable
+        public String getRb03a() {
+            return rb03a;
+        }
+
+        public void setRb03a(String rb03a) {
+            this.rb03a = rb03a;
+            notifyPropertyChanged(BR.rb03a);
+        }
+
+        @Bindable
+        public String getRb03b() {
+            return rb03b;
+        }
+
+        public void setRb03b(String rb03b) {
+            this.rb03b = rb03b;
+            notifyPropertyChanged(BR.rb03b);
+        }
+
+        @Bindable
+        public String getRb04() {
+            return rb04;
+        }
+
+        public void setRb04(String rb04) {
+            this.rb04 = rb04;
+            if (mwra.regRound.equals("1")) {
+                if (!this.rb04.equals("98")) {
+                    setRb05(this.rb05);
+                    CaluculateAge();
+                } else {
+                    setRb05("");
+                }
+            }
+            notifyPropertyChanged(BR.rb04);
+        }
+
+        @Bindable
+        public String getRb05() {
+            return rb05;
+        }
+
+        public void setRb05(String rb05) {
+            this.rb05 = rb05;
+            notifyPropertyChanged(BR.rb05);
+        }
+
+        @Bindable
+        public String getRb06() {
+            return rb06;
+        }
+
+        public void setRb06(String rb06) {
+            this.rb06 = rb06;
+            setRb15(this.rb06.equals("4") ? "" : this.rb15);
+            setRb20(this.rb06.equals("4") ? "" : this.rb20);
+            setRb21(this.rb06.equals("4") ? "" : this.rb21);
+
+            notifyPropertyChanged(BR.rb06);
+        }
+
+
+        @Bindable
+        public String getRb07() {
+            return rb07;
+        }
+
+        public void setRb07(String rb07) {
+            this.rb07 = rb07;
+            notifyPropertyChanged(BR.rb07);
+        }
+
+
+        @Bindable
+        public String getRb10() {
+            return rb10;
+        }
+
+        public void setRb10(String rb10) {
+            this.rb10 = rb10;
+            setRb11(rb10.equals("7") ? "2" : "1");
+            setRb14(rb10.equals("1") ? this.rb14 : "");
+            setRb15(rb10.equals("1") ? this.rb15 : "");
+            setRb16(rb10.equals("1") ? this.rb16 : "");
+            setRb17(rb10.equals("1") ? this.rb17 : "");
+
+            mwra.setIstatus(rb10);
+            notifyPropertyChanged(BR.rb10);
+        }
+
+        @Bindable
+        public String getRb11() {
+            return rb11;
+        }
+
+        public void setRb11(String rb11) {
+            this.rb11 = rb11;
+            setRb12(rb11.equals("1") ? this.rb12 : "");
+            setRb13(rb11.equals("1") ? this.rb13 : "");
+
+            notifyPropertyChanged(BR.rb11);
+        }
+
+
+        @Bindable
+        public String getRb12() {
+            return rb12;
+        }
+
+        public void setRb12(String rb12) {
+            this.rb12 = rb12;
+            notifyPropertyChanged(BR.rb12);
+        }
+
+        @Bindable
+        public String getRb13() {
+            return rb13;
+        }
+
+        public void setRb13(String rb13) {
+            this.rb13 = rb13;
+            notifyPropertyChanged(BR.rb13);
+        }
+
+        @Bindable
+        public String getRb14() {
+            return rb14;
+        }
+
+        public void setRb14(String rb14) {
+            this.rb14 = rb14;
+            notifyPropertyChanged(BR.rb14);
+        }
+
+        @Bindable
+        public String getRb15() {
+            return rb15;
+        }
+
+        public void setRb15(String rb15) {
+            this.rb15 = rb15;
+            notifyPropertyChanged(BR.rb15);
+        }
+
+        @Bindable
+        public String getRb16() {
+            return rb16;
+        }
+
+        public void setRb16(String rb16) {
+            this.rb16 = rb16;
+            setRb17(rb16.equals("5") ? "2" : this.rb17);
+            notifyPropertyChanged(BR.rb16);
+        }
+
+        @Bindable
+        public String getRb17() {
+            return rb17;
+        }
+
+        public void setRb17(String rb17) {
+            this.rb17 = rb17;
+            notifyPropertyChanged(BR.rb17);
+        }
+
+
+        @Bindable
+        public String getRb18() {
+            return rb18;
+        }
+
+        public void setRb18(String rb18) {
+            this.rb18 = rb18;
+            setRb19(rb18.equals("1") ? this.rb19 : "");
+            setRb20(rb18.equals("1") ? this.rb20 : "");
+            setRb21(rb18.equals("1") ? this.rb21 : "");
+            notifyPropertyChanged(BR.rb18);
+        }
+
+        @Bindable
+        public String getRb19() {
+            return rb19;
+        }
+
+        public void setRb19(String rb19) {
+            this.rb19 = rb19;
+            notifyPropertyChanged(BR.rb19);
+        }
+
+        @Bindable
+        public String getRb20() {
+            return rb20;
+        }
+
+        public void setRb20(String rb20) {
+            this.rb20 = rb20;
+            notifyPropertyChanged(BR.rb20);
+        }
+
+        @Bindable
+        public String getRb21() {
+            return rb21;
+        }
+
+        public void setRb21(String rb21) {
+            this.rb21 = rb21;
+            notifyPropertyChanged(BR.rb21);
+        }
+
+        private void CaluculateAge() {
+
+
+            setRb05("");
+
+
+            try {
+                Calendar cal = Calendar.getInstance();
+                Calendar cur = Calendar.getInstance();
+
+
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
+                cal.setTime(Objects.requireNonNull(sdf.parse(getRb01a())));// all done
+
+
+                //long millis = System.currentTimeMillis() - cal.getTimeInMillis();
+                long millis = cur.getTimeInMillis() - cal.getTimeInMillis();
+                cal.setTimeInMillis(millis);
+
+
+                this.ageInMonths = MILLISECONDS.toDays(millis) / 30;
+                long tYear = MILLISECONDS.toDays(millis) / 365;
+                long tMonth = (MILLISECONDS.toDays(millis) - (tYear * 365)) / 30;
+                long tDay = MILLISECONDS.toDays(millis) - ((tYear * 365) + (tMonth * 30));
+
+                setRb05(String.valueOf(tYear));
+
+
+            } catch (ParseException e) {
+                e.printStackTrace();
+
+            }
+        }
+
+
     }
 
 
-    public long getAgeInMonths() {
-        return ageInMonths;
+    /**
+     * SECTION D - Pregnancy
+     */
+
+    public static class SD extends BaseObservable {
+
+        private String rb07 = StringUtils.EMPTY;
+        private String rb08 = StringUtils.EMPTY;
+        private String rb09 = StringUtils.EMPTY;
+        private String rb24 = StringUtils.EMPTY;
+        private String rb25 = StringUtils.EMPTY;
+
+        @Bindable
+        public String getRb07() {
+            return rb07;
+        }
+
+        public void setRb07(String rb07) {
+            this.rb07 = rb07;
+            setRb08(this.rb07.equals("1") ? this.rb08 : "");
+            setRb09(this.rb07.equals("1") ? this.rb09 : "");
+            setRb24(this.rb07.equals("1") ? this.rb24 : "");
+            notifyPropertyChanged(BR.rb07);
+        }
+
+        @Bindable
+        public String getRb08() {
+            return rb08;
+        }
+
+        public void setRb08(String rb08) {
+            this.rb08 = rb08;
+            if (!this.rb08.equals("")) {
+                setRb09(calcEDD());
+            } else {
+                setRb09("");
+            }
+            notifyPropertyChanged(BR.rb08);
+        }
+
+        @Bindable
+        public String getRb09() {
+            return rb09;
+        }
+
+        public void setRb09(String rb09) {
+            this.rb09 = rb09;
+            notifyPropertyChanged(BR.rb09);
+        }
+
+        @Bindable
+        public String getRb24() {
+            return rb24;
+        }
+
+        public void setRb24(String rb24) {
+            this.rb24 = rb24;
+            setRb25(rb24.equals("1") ? this.rb25 : "");
+            notifyPropertyChanged(BR.rb24);
+        }
+
+        @Bindable
+        public String getRb25() {
+            return rb25;
+        }
+
+        public void setRb25(String rb25) {
+            this.rb25 = rb25;
+            notifyPropertyChanged(BR.rb25);
+        }
+
+        public String calcEDD() {
+
+            Calendar cal = Calendar.getInstance();
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
+
+            try {
+                cal.setTime(Objects.requireNonNull(sdf.parse(getRb08())));// all done
+
+                // Set EDD by default
+                cal.add(Calendar.DAY_OF_YEAR, 7);
+                cal.add(Calendar.MONTH, 9);
+
+                return sdf.format(cal.getTime());
+
+            } catch (ParseException e) {
+                e.printStackTrace();
+                return e.getMessage();
+            }
+
+        }
+
+
     }
 
-    public void setAgeInMonths(long ageInMonths) {
-        this.ageInMonths = ageInMonths;
-    }
-
-    @Bindable
+    /*@Bindable
     public String getRb24() {
         return rb24;
     }
@@ -571,154 +1241,7 @@ public class Mwra extends BaseObservable implements Observable {
         notifyChange(BR.rb25);
     }
 
-    @Bindable
-    public String getRb01() {
-        return rb01;
-    }
 
-    public void setRb01(String rb01) {
-        this.rb01 = rb01;
-        this.sNo = rb01;
-        notifyChange(BR.rb01);
-    }
-
-    @Bindable
-    public String getRb01a() {
-        return rb01a;
-    }
-
-    public void setRb01a(String ra01) {
-        this.rb01a = ra01;
-        notifyChange(BR.ra01);
-    }
-
-    @Bindable
-    public String getRb02() {
-        return rb02;
-    }
-
-    public void setRb02(String rb02) {
-        this.rb02 = rb02;
-        notifyChange(BR.rb02);
-    }
-
-    @Bindable
-    public String getRb22() {
-        return rb22;
-    }
-
-    public void setRb22(String rb22) {
-        this.rb22 = rb22;
-        notifyChange(BR.rb22);
-    }
-
-    @Bindable
-    public String getRb03() {
-        return rb03;
-    }
-
-    public void setRb03(String rb03) {
-        this.rb03 = rb03;
-        notifyChange(BR.rb03);
-    }
-
-
-    @Bindable
-    public String getRb23() {
-        return rb23;
-    }
-
-    public void setRb23(String rb23) {
-        this.rb23 = rb23;
-        notifyChange(BR.rb23);
-    }
-
-    @Bindable
-    public String getRb04() {
-        return rb04;
-    }
-
-    public void setRb04(String rb04) {
-        this.rb04 = rb04;
-        if(regRound.equals("1"))
-        {
-            if(!this.rb04.equals("98"))
-            {
-                setRb05(this.rb05);
-                CaluculateAge();
-            }else{
-                setRb05("");
-            }
-        }
-        notifyChange(BR.rb04);
-    }
-
-    @Bindable
-    public String getRb05() {
-        return rb05;
-    }
-
-    public void setRb05(String rb05) {
-        this.rb05 = rb05;
-        notifyChange(BR.rb05);
-    }
-
-    @Bindable
-    public String getRb06() {
-        return rb06;
-    }
-
-    public void setRb06(String rb06) {
-        this.rb06 = rb06;
-        Log.d(TAG, "setRb06: " + this.rb06);
-        //setRb07(this.rb06.equals("4") ? "" : this.rb07);
-        setRb15(this.rb06.equals("4") ? "" : this.rb15);
-        setRb20(this.rb06.equals("4") ? "" : this.rb20);
-        setRb21(this.rb06.equals("4") ? "" : this.rb21);
-
-        notifyChange(BR.rb06);
-    }
-
-
-
-    @Bindable
-    public String getRb07() {
-        return rb07;
-    }
-
-    public void setRb07(String rb07) {
-        this.rb07 = rb07;
-        setRb08(this.rb07.equals("1") ? this.rb08 : "");
-        setRb09(this.rb07.equals("1") ? this.rb09 : "");
-        setRb24(this.rb07.equals("1") ? this.rb24 : "");
-        Log.d(TAG, "setRb07: " + this.rb07);
-        notifyChange(BR.rb07);
-    }
-
-    @Bindable
-    public String getRb08() {
-        return rb08;
-    }
-
-    public void setRb08(String rb08) {
-        this.rb08 = rb08;
-        if (!this.rb08.equals("")) {
-            setRb09(calcEDD());
-        } else {
-            setRb09("");
-        }
-        notifyChange(BR.rb08);
-    }
-
-    @Bindable
-    public String getRb09() {
-        return rb09;
-    }
-
-    public void setRb09(String rb09) {
-        this.rb09 = rb09;
-        notifyChange(BR.rb09);
-    }
 
     @Bindable
     public String getRb03a() {
@@ -896,9 +1419,9 @@ public class Mwra extends BaseObservable implements Observable {
         if (propertyChangeRegistry != null) {
             propertyChangeRegistry.remove(callback);
         }
-    }
+    }*/
 
-    public Mwra Hydrate(Mwra mwra) throws JSONException {
+    /*public Mwra Hydrate(Mwra mwra) throws JSONException {
         this.id = mwra.id;
         this.uid = mwra.uid;
         this.uuid = mwra.uuid;
@@ -919,15 +1442,15 @@ public class Mwra extends BaseObservable implements Observable {
         this.synced = mwra.synced;
         this.syncDate = mwra.syncDate;
 
-        sBHydrate(mwra.sB);
+        //sBHydrate(mwra.sB);
         sCHydrate(mwra.sC);
         sDHydrate(mwra.sD);
 
         return this;
-    }
+    }*/
 
 
-    public void sBHydrate(String string) throws JSONException {
+    /*public void sBHydrate(String string) throws JSONException {
         Log.d(TAG, "s2Hydrate: " + string);
         if (string != null && !string.equals("")) {
 
@@ -955,9 +1478,9 @@ public class Mwra extends BaseObservable implements Observable {
             this.rb25 = json.getString(("rb25"));
             this.pregnum = json.getString("pregnum");
         }
-    }
+    }*/
 
-    public void sCHydrate(String string) throws JSONException {
+    /*public void sCHydrate(String string) throws JSONException {
         Log.d(TAG, "s3Hydrate: " + string);
         if (string != null && !string.equals("")) {
 
@@ -990,10 +1513,10 @@ public class Mwra extends BaseObservable implements Observable {
             this.rb21 = json.getString("rb21");
             this.pregnum = json.getString("pregnum");
         }
-    }
+    }*/
 
 
-    public String sBtoString() throws JSONException {
+    /*public String sBtoString() throws JSONException {
         JSONObject json = new JSONObject();
 
         json.put("rb01", rb01)
@@ -1130,9 +1653,9 @@ public class Mwra extends BaseObservable implements Observable {
     public void setExpanded(boolean expanded) {
         this.expanded = expanded;
         notifyChange(BR.expanded);
-    }
+    }*/
 
-    private void CaluculateAge() {
+    /*private void CaluculateAge() {
 
 
         setRb05("");
@@ -1157,19 +1680,19 @@ public class Mwra extends BaseObservable implements Observable {
             long tMonth = (MILLISECONDS.toDays(millis) - (tYear * 365)) / 30;
             long tDay = MILLISECONDS.toDays(millis) - ((tYear * 365) + (tMonth * 30));
 
-            Log.d(TAG, "CaluculateAge: Y-" + tYear + " M-" + tMonth + " D-" + tDay);
-               /* setH231d(String.valueOf(tDay));
-                setH231m(String.valueOf(tMonth));*/
+            //Log.d(TAG, "CaluculateAge: Y-" + tYear + " M-" + tMonth + " D-" + tDay);
+               *//* setH231d(String.valueOf(tDay));
+                setH231m(String.valueOf(tMonth));*//*
 
             setRb05(String.valueOf(tYear));
 
 
         } catch (ParseException e) {
-            Log.d(TAG, "CaluculateAge: " + e.getMessage());
+            //Log.d(TAG, "CaluculateAge: " + e.getMessage());
             e.printStackTrace();
 
         }
-    }
+    }*/
 
     public long CalculateAge(String dateOfVisit) {
 
@@ -1183,10 +1706,9 @@ public class Mwra extends BaseObservable implements Observable {
 
             //String dateOfReg = dateOfVisit;
 
-            if(dateOfVisit.length() > 10) {
+            if (dateOfVisit.length() > 10) {
                 dateofReg = dateOfVisit.substring(9, 19);
-            }else
-            {
+            } else {
                 dateofReg = dateOfVisit;
             }
 
@@ -1214,11 +1736,11 @@ public class Mwra extends BaseObservable implements Observable {
             noOfDays = tDay;
 
 
-            Log.d(TAG, "CaluculateAge: Y-" + tYear + " M-" + tMonth + " D-" + tDay);
+            //Log.d(TAG, "CaluculateAge: Y-" + tYear + " M-" + tMonth + " D-" + tDay);
 
 
         } catch (ParseException e) {
-            Log.d(TAG, "CaluculateAge: " + e.getMessage());
+            //Log.d(TAG, "CaluculateAge: " + e.getMessage());
             e.printStackTrace();
 
         }
@@ -1226,7 +1748,7 @@ public class Mwra extends BaseObservable implements Observable {
         return noOfDays;
     }
 
-    public String calcEDD() {
+    /*public String calcEDD() {
 
         Calendar cal = Calendar.getInstance();
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
@@ -1245,5 +1767,5 @@ public class Mwra extends BaseObservable implements Observable {
             return e.getMessage();
         }
 
-    }
+    }*/
 }

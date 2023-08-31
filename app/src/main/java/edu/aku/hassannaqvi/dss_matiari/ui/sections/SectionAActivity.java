@@ -60,23 +60,11 @@ public class SectionAActivity extends AppCompatActivity {
         String date = toBlackVisionDate("2023-01-01");
         bi.ra01.setMinDate(date);
 
-        // Init for for the first time
-        /*Households.initMeta();
-        sA = new Households.SA();
-        bi.setHousehold(sA);*/
-
 
         sA = Households.SA.getData();
         sA = sA == null ? new Households.SA() : sA;
         bi.setSA(sA);
 
-
-        /*if (households.getUid().equals(""))
-        {
-            households.populateMeta();
-        }
-        bi.setHousehold(households);
-*/
         setTitle(R.string.demographicinformation_mainheading);
         setImmersive(true);
 
