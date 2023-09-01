@@ -132,6 +132,9 @@
     <string name="ra11b">Locked / no eligible respondent </string>
     <string name="ra11c">Refused </string>
     <string name="ra11e">No WRA 14 – 49 </string>
+    <string name="ra11f">Migrated out </string>
+    <string name="ra11g">Permanently Refused</string>
+    <string name="ra11h">Permanently Migrated out</string>
     <string name="ra11d">Other (specify)</string>
     <string name="ra12">Household Visit Status</string>
     <string name="ra1201">Completed</string>

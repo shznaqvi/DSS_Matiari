@@ -91,6 +91,9 @@ public class EndingActivity extends AppCompatActivity {
                                 bi.istatusb.isChecked() ? "2" :
                                         bi.istatusc.isChecked() ? "3" :
                                                 bi.istatuse.isChecked() ? "4" :
+                                                        bi.istatusf.isChecked() ? "5" :
+                                                                bi.istatusg.isChecked() ? "6" :
+                                                                        bi.istatush.isChecked() ? "7" :
                                                         bi.istatusd.isChecked() ? "96" :
                                                                 "-1"
                 );
@@ -102,6 +105,9 @@ public class EndingActivity extends AppCompatActivity {
                                 bi.istatusb.isChecked() ? "2" :
                                         bi.istatusc.isChecked() ? "3" :
                                                 bi.istatuse.isChecked() ? "4" :
+                                                        bi.istatusf.isChecked() ? "5" :
+                                                                bi.istatusg.isChecked() ? "6" :
+                                                                        bi.istatush.isChecked() ? "7" :
                                                         bi.istatusd.isChecked() ? "96" :
                                                                 "-1"
 
@@ -115,6 +121,9 @@ public class EndingActivity extends AppCompatActivity {
                                 bi.istatusb.isChecked() ? "2" :
                                         bi.istatusc.isChecked() ? "3" :
                                                 bi.istatuse.isChecked() ? "4" :
+                                                        bi.istatusf.isChecked() ? "5" :
+                                                                bi.istatusg.isChecked() ? "6" :
+                                                                        bi.istatush.isChecked() ? "7" :
                                                         bi.istatusd.isChecked() ? "96" :
                                                                 "-1"
 
