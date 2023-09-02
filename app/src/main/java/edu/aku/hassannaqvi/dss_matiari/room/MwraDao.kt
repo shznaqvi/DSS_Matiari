@@ -25,7 +25,6 @@ interface MwraDao {
     @Update(onConflict =  OnConflictStrategy.REPLACE)
     fun updateMwra(mwra: Mwra) : Int
 
-
     @Query("SELECT "
             + "MAX( CAST(" + MWRATable.COLUMN_SNO + " AS INT)) AS " + MWRATable.COLUMN_SNO +
             " FROM " + MWRATable.TABLE_NAME +
@@ -34,9 +33,6 @@ interface MwraDao {
             MWRATable.COLUMN_HOUSEHOLD_NO + " LIKE :hhNo" +
             " GROUP BY " + MWRATable.COLUMN_HOUSEHOLD_NO )
     fun getMaxMWRSNoBYHH(ucCode : String, vCode : String, hhNo : String) : Int
-
-
-
 
     @Query("SELECT * FROM " + MWRATable.TABLE_NAME + " WHERE " +
         MWRATable.COLUMN_UC_CODE + " LIKE :uc AND "

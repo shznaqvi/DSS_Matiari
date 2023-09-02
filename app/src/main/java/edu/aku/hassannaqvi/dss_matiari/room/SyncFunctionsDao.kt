@@ -19,11 +19,7 @@ interface SyncFunctionsDao {
 
     // Household Upload Functions
 
-    @Query("SELECT * FROM " + TableContracts.HouseholdTable.TABLE_NAME + " WHERE "
-            + (TableContracts.HouseholdTable.COLUMN_SYNCED
-            + " is \'\' OR " + TableContracts.HouseholdTable.COLUMN_SYNCED +" is NULL ") + " AND (" + TableContracts.HouseholdTable.COLUMN_ISTATUS  + " = 1 OR "
-            + TableContracts.HouseholdTable.COLUMN_VISIT_NO + " > 2) ORDER BY "
-            + TableContracts.HouseholdTable.COLUMN_ID + " ASC")
+    @Query("SELECT * FROM hhs WHERE (synced is \'\' OR synced is NULL) AND (istatus = 1 OR visitNo > 2) ORDER BY _id ASC" )
     fun getUnsyncedHousehols_internal() : List<Households>
 
     @kotlin.jvm.Throws(JSONException :: class)
@@ -48,17 +44,14 @@ interface SyncFunctionsDao {
 
     // MWRA
 
-    @Query("SELECT * FROM " + TableContracts.MWRATable.TABLE_NAME + " WHERE "
-            + (TableContracts.MWRATable.COLUMN_SYNCED
-            + " is \'\' OR " + TableContracts.MWRATable.COLUMN_SYNCED +" is NULL ") + " AND (" + TableContracts.MWRATable.COLUMN_ISTATUS
-            + "  != 4 ) ORDER BY " + TableContracts.MWRATable.COLUMN_ID + " ASC")
+    @Query("SELECT * FROM MWRAs WHERE (synced is '' OR synced is NULL) AND (istatus != 4) ORDER BY _id ASC ")
     fun getUnsyncedMWRAS_internal() : List<Mwra>
 
     private fun getUnsycedAdjustedMWRAS_internal() : List<Mwra> {
-        val hhs = getUnsyncedHousehols_internal()
+        val hhsSync = getUnsyncedHousehols_internal()
         val allMwras = getUnsyncedMWRAS_internal()
         val toSyncMwras = arrayListOf<Mwra>()
-        hhs.forEach { hhs  ->
+        hhsSync.forEach { hhs  ->
             val mwras = allMwras.filter { it.hdssId == hhs.hdssId && it.uuid == hhs.uid}
             toSyncMwras.addAll(mwras)
         }
@@ -86,10 +79,8 @@ interface SyncFunctionsDao {
 //****************************************************************************************************************
 
     // Outcome
-    @Query("SELECT * FROM " + TableContracts.OutcomeTable.TABLE_NAME + " WHERE "
-            + (TableContracts.OutcomeTable.COLUMN_SYNCED
-            + " is \'\' OR " + TableContracts.OutcomeTable.COLUMN_SYNCED +" is NULL ") + " ORDER BY " + TableContracts.OutcomeTable.COLUMN_ID + " ASC")
 
+    @Query("SELECT * FROM outcomes WHERE synced is '' OR synced is NULL ORDER BY _id ASC")
     fun getUnsyncedOutcome_internal() : List<Outcome>
 
     private fun getUnsycedAdjustedOutcomes_internal() : List<Outcome> {
@@ -121,27 +112,12 @@ interface SyncFunctionsDao {
     }
 
 
-    /*@Query("SELECT * FROM " + TableContracts.OutcomeTable.TABLE_NAME
-            + " WHERE " + TableContracts.OutcomeTable.COLUMN_ID + " LIKE :id ")
-    fun updateQueryOutcome(id: String?) : Outcome
-
-
-    fun updateSyncedoutcomes(id: String?) : Outcome
-    {
-        val synced = updateQueryOutcome(id)
-
-        synced.synced = "1"
-        synced.syncDate = Date().toString()
-        DssRoomDatabase.dbInstance?.OutcomeDao()?.updateOutcome(synced)
-        return synced
-    }*/
-
 
     /**************** EntryLog********************/
 
     @Query("SELECT * FROM " + TableContracts.EntryLogTable.TABLE_NAME + " WHERE "
             + TableContracts.EntryLogTable.COLUMN_SYNCED
-            + " is \'\' ORDER BY  id ASC")
+            + " is \'\' OR synced is NULL ORDER BY  id ASC")
     fun getUnsyncedEntryLog_internal() : List<EntryLog>
 
     @kotlin.jvm.Throws(JSONException :: class)
