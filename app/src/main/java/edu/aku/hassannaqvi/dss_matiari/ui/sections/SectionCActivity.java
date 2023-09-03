@@ -1,6 +1,7 @@
 package edu.aku.hassannaqvi.dss_matiari.ui.sections;
 
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.PROJECT_NAME;
+import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.allMwraRefusedOrMigrated;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.followUpsScheHHList;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.followUpsScheMWRAList;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.fpMwra;
@@ -184,6 +185,7 @@ public class SectionCActivity extends AppCompatActivity {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
                 boolean isAvailable = false;
+                boolean isMigratedOrRefused = false;
                 if (bi.rb1004.isChecked()) {
                     for (String[] arr : mwraStatus.keySet()) {
                         if (arr[0].equals(fpMwra.getMuid()) && arr[1].equals(fpMwra.getHdssid())) {
@@ -209,6 +211,33 @@ public class SectionCActivity extends AppCompatActivity {
                             }
                         }
                     }
+                }
+
+                // Put status of Migrated or Refused in its HashMap
+
+                if (bi.rb1002.isChecked() || bi.rb1003.isChecked()) {
+                    for (String[] arr : allMwraRefusedOrMigrated.keySet()) {
+                        if (arr[0].equals(fpMwra.getMuid()) && arr[1].equals(fpMwra.getHdssid())) {
+                            isMigratedOrRefused = true;
+                            break;
+                        }
+                    }
+                    if (!isMigratedOrRefused) {
+                        allMwraRefusedOrMigrated.put(new String[]{fpMwra.getMuid(), fpMwra.getHdssid()}, false);
+                    }
+                }else {
+                        mwra.setRb07("");
+                        mwra.setRb06(mwra.getRb06());
+                        mwra.setRb04(fpMwra.getRb04());
+                        if (!allMwraRefusedOrMigrated.isEmpty()) {
+                            for (String[] arr : allMwraRefusedOrMigrated.keySet()) {
+                                if (arr[0].equals(fpMwra.getMuid()) && arr[1].equals(fpMwra.getHdssid())) {
+                                    allMwraRefusedOrMigrated.remove(arr);
+                                    break;
+                                }
+                            }
+                    }
+
                 }
             }
         });
@@ -308,7 +337,7 @@ public class SectionCActivity extends AppCompatActivity {
             if (mwra.getRb18().equals("1")) {
                 mwra.setPregnum(String.valueOf(Integer.parseInt(fpMwra.getPregCount()) + 1));
                 MainApp.pregcount = Integer.parseInt(mwra.getPregnum());
-            }else{
+            } else {
                 mwra.setPregnum(fpMwra.getPregCount());
                 MainApp.pregcount = Integer.parseInt(mwra.getPregnum());
             }
@@ -530,7 +559,7 @@ public class SectionCActivity extends AppCompatActivity {
                             //finish();
 
                             // Delivered baby within last 3 months
-                        }else if(!bi.rb0604.isChecked() && bi.rb1801.isChecked()){
+                        } else if (!bi.rb0604.isChecked() && bi.rb1801.isChecked()) {
                             MainApp.prevChildCount = 0;
                             Intent forwardIntent = new Intent(this, SectionEActivity.class).putExtra("complete", true);
                             forwardIntent.setFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT);

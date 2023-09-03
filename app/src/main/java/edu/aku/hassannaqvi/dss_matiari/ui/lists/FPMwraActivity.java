@@ -1,5 +1,7 @@
 package edu.aku.hassannaqvi.dss_matiari.ui.lists;
 
+import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.allMwraRefusedOrMigrated;
+import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.fmComplete;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.followUpsScheMWRAList;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.fpMwra;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.households;
@@ -79,7 +81,7 @@ public class FPMwraActivity extends AppCompatActivity {
             try {
                 //fupStatus = db.getFollowupsBySno(followUpsScheMWRAList.get(i).getRb01(), followUpsScheMWRAList.get(i).getFRound()).getSysDate();
 
-                if(followUpsScheMWRAList.get(i).getRb01() != null) {
+                if (followUpsScheMWRAList.get(i).getRb01() != null) {
 
                     Mwra tempMwra = db.mwraDao().getFollowupsBySno(households.getUid(), followUpsScheMWRAList.get(i).getRb01(), followUpsScheMWRAList.get(i).getFRound());
                     fupStatus = tempMwra.getSysDate();
@@ -162,6 +164,7 @@ public class FPMwraActivity extends AppCompatActivity {
         households.setRa18(String.valueOf(mwraCount));
 
     }
+
     private void addMoreFemale() {
 
         if (mwraDone < followUpsScheMWRAList.size()) {
@@ -286,23 +289,38 @@ public class FPMwraActivity extends AppCompatActivity {
 
     private void proceedSelect() {
         Toast.makeText(this, "proceedSelect()", Toast.LENGTH_SHORT).show();
-            Intent i = new Intent(this, EndingActivity.class);
-            i.setFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT);
-            Boolean flag = true;
-            if(mwraStatus.size() == 0 || mwraStatus.isEmpty())
-            {
-                flag = true;
-            }else {
-                mwraStatus.size();
-                String houseId = MainApp.followUpsScheHHList.get(selectedFpHousehold).getHdssid();
-                for(String[] arr : mwraStatus.keySet()) {
-                    if (arr[1].equals(houseId)) {
-                        flag = false;
-                        break;
-                    } else flag = true;
-                }
+        Intent i = new Intent(this, EndingActivity.class);
+        i.setFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT);
+        Boolean flag = false;
+        Boolean refusedOrMigrated = false;
+        if ((mwraStatus.size() == 0 || mwraStatus.isEmpty()) && (allMwraRefusedOrMigrated.size() == 0 || allMwraRefusedOrMigrated.isEmpty())) {
+            flag = true;
+            refusedOrMigrated = false;
+        } else if (mwraStatus.size() > 0) {
+            mwraStatus.size();
+            String houseId = MainApp.followUpsScheHHList.get(selectedFpHousehold).getHdssid();
+            for (String[] arr : mwraStatus.keySet()) {
+                if (arr[1].equals(houseId)) {
+                    flag = false;
+                    break;
+                } else
+                    flag = true;
             }
-        i.putExtra("complete", flag);
+        } else if(allMwraRefusedOrMigrated.size() == mwraDone) {
+            refusedOrMigrated = true;
+        }
+
+        if(!refusedOrMigrated)
+        {
+            i.putExtra("complete", flag);
+        }else{
+            i.putExtra("refused", refusedOrMigrated);
+            i.putExtra("complete", false);
+        }
+        /*if (allMwraRefusedOrMigrated.size() > 0) {
+            i.putExtra("refused", refusedOrMigrated);
+        }
+        i.putExtra("complete", flag);*/
         finish();
         startActivity(i);
 

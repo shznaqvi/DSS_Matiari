@@ -1,5 +1,6 @@
 package edu.aku.hassannaqvi.dss_matiari.ui;
 
+import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.allMwraRefusedOrMigrated;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.households;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.outcome;
 
@@ -53,14 +54,21 @@ public class EndingActivity extends AppCompatActivity {
         db = MainApp.appInfo.dbHelper;
         visitCount = Integer.parseInt(MainApp.households.getVisitNo());
         boolean complete = getIntent().getBooleanExtra("complete", false);
+        boolean refusedOrMigrated = getIntent().getBooleanExtra("refused", false);
         boolean noWRA = getIntent().getBooleanExtra("noWRA", false);
 
         bi.istatusa.setEnabled(complete);
         bi.istatusb.setEnabled(!complete);
         bi.istatusc.setEnabled(!complete);
-        bi.istatusf.setEnabled(!complete);
+        if(!complete && refusedOrMigrated) {
+            bi.istatusf.setEnabled(true);
+            bi.istatush.setEnabled(true);
+        }else{
+            bi.istatusf.setEnabled(false);
+            bi.istatush.setEnabled(false);
+        }
         bi.istatusg.setEnabled(!complete);
-        bi.istatush.setEnabled(!complete);
+
         bi.istatuse.setEnabled(noWRA);
         bi.istatusd.setEnabled(true); // Always TRUE
 
@@ -150,6 +158,7 @@ public class EndingActivity extends AppCompatActivity {
         if (UpdateDB()) {
             setResult(RESULT_OK);
             finish();
+            allMwraRefusedOrMigrated.clear();
             //Intent i = new Intent(this, FPHouseholdActivity.class);
             //startActivity(i);
             Toast.makeText(this, "Entry Complete", Toast.LENGTH_SHORT).show();

@@ -127,7 +127,6 @@ public class SectionEActivity extends AppCompatActivity {
 
                 }
 
-
         }
 
         outcome.setRc01(outcome.getRc01().isEmpty() ? String.valueOf(MainApp.prevChildCount) : outcome.getRc01());
@@ -155,6 +154,8 @@ public class SectionEActivity extends AppCompatActivity {
 
             }
         });
+
+
 
     }
 

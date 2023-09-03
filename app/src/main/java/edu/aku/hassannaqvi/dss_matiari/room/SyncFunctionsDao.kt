@@ -111,8 +111,6 @@ interface SyncFunctionsDao {
 
     }
 
-
-
     /**************** EntryLog********************/
 
     @Query("SELECT * FROM " + TableContracts.EntryLogTable.TABLE_NAME + " WHERE "
