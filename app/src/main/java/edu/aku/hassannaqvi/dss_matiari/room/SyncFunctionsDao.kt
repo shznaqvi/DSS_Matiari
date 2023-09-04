@@ -110,7 +110,6 @@ interface SyncFunctionsDao {
         return jsonArray
 
     }
-
     /**************** EntryLog********************/
 
     @Query("SELECT * FROM " + TableContracts.EntryLogTable.TABLE_NAME + " WHERE "
@@ -135,8 +134,6 @@ interface SyncFunctionsDao {
         return jsonArray
 
     }
-
-
     /******************* DOWNLOAD DATA FUNCTIONS******************************************* */
 
     @Throws(JSONException ::class)
@@ -173,8 +170,6 @@ interface SyncFunctionsDao {
             villageDao.deleteVillagesTable()
         }
     }
-
-
 
     // Users
 
