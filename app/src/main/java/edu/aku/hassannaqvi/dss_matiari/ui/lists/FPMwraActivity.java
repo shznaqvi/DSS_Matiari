@@ -310,17 +310,18 @@ public class FPMwraActivity extends AppCompatActivity {
             refusedOrMigrated = true;
         }
 
-        if(!refusedOrMigrated)
+
+        if(!refusedOrMigrated && mwraStatus.size() > 0)
         {
             i.putExtra("complete", flag);
-        }else{
+        }else if(refusedOrMigrated){
             i.putExtra("refused", refusedOrMigrated);
             i.putExtra("complete", false);
+        }else if(!refusedOrMigrated && mwraStatus.size() == 0)
+        {
+            i.putExtra("complete", true);
         }
-        /*if (allMwraRefusedOrMigrated.size() > 0) {
-            i.putExtra("refused", refusedOrMigrated);
-        }
-        i.putExtra("complete", flag);*/
+
         finish();
         startActivity(i);
 
