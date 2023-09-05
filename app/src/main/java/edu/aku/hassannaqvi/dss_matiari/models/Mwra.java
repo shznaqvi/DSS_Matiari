@@ -2,6 +2,7 @@ package edu.aku.hassannaqvi.dss_matiari.models;
 
 import static java.util.concurrent.TimeUnit.MILLISECONDS;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.PROJECT_NAME;
+import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.hdssid;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.households;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.mwra;
 
@@ -18,6 +19,7 @@ import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
 import com.google.gson.annotations.SerializedName;
+import com.google.gson.reflect.TypeToken;
 
 import org.apache.commons.lang3.StringUtils;
 import org.json.JSONException;
@@ -222,15 +224,29 @@ public class Mwra extends BaseObservable implements Observable {
 
     /*FOR IDENTIFICATION INFORMATION - CLUSTER-WISE*/
     // Save data in db
-    public static void saveMainDataReg(String uuid, String sNo) throws JSONException {
+    public static void saveMainDataReg(String uuid, String hdssId, String sNo, String regRound, SB sB) throws JSONException {
         MwraDao mwraDao = Objects.requireNonNull(DssRoomDatabase.getDbInstance()).mwraDao();
-        Mwra form = mwraDao.getAllMWRAByHH(households.getUcCode(), households.getVillageCode(), households.get);
+        Mwra form = mwraDao.getMwraByUUId(uuid, hdssId, sNo, regRound);
         if (form != null) {
-            households = form;
+            mwra = form;
         } else {
-            households.setUid(AppConstants.generateUid());
-            households.setId(householdsDao.addHousehold(households));
-            Households.SA.saveData(sa);
+            mwra.setUid(AppConstants.generateUid());
+            mwra.setId(mwraDao.addMwra(mwra));
+            Mwra.SB.saveData(sB);
+        }
+    }
+
+    /*FOR IDENTIFICATION INFORMATION - CLUSTER-WISE*/
+    // Save data in db
+    public static void saveMainDataFup(String uuid, String hdssId, String sNo, String regRound, SC sC) throws JSONException {
+        MwraDao mwraDao = Objects.requireNonNull(DssRoomDatabase.getDbInstance()).mwraDao();
+        Mwra form = mwraDao.getMwraByUUId(uuid, hdssId, sNo, regRound);
+        if (form != null) {
+            mwra = form;
+        } else {
+            mwra.setUid(AppConstants.generateUid());
+            mwra.setId(mwraDao.addMwra(mwra));
+            Mwra.SC.saveData(sC);
         }
     }
 
@@ -499,6 +515,26 @@ public class Mwra extends BaseObservable implements Observable {
         private String pregnum = StringUtils.EMPTY;
         private long ageInMonths;
 
+        // Save section object as json object in db
+        public static void saveData(Mwra.SB data) {
+            mwra.setsB(data);
+            Objects.requireNonNull(DssRoomDatabase.getDbInstance()).mwraDao().updateMwra(mwra);
+        }
+
+        // Get section object by parsing json
+        public static Mwra.SB getData() {
+            return mwra.getsB();
+        }
+
+        // This class is used to parse the object to save in room db
+        public static class DataConverter extends DssRoomDatabase.BaseConverter<Mwra.SB> {
+            public DataConverter() {
+                super(new TypeToken<Mwra.SB>() {
+                }.getType());
+            }
+        }
+
+        // Getters & Setters
 
         @Bindable
         public String getRb01() {
@@ -550,7 +586,6 @@ public class Mwra extends BaseObservable implements Observable {
             this.rb03 = rb03;
             notifyPropertyChanged(BR.rb03);
         }
-
 
         @Bindable
         public String getRb23() {
@@ -623,7 +658,6 @@ public class Mwra extends BaseObservable implements Observable {
 
             notifyPropertyChanged(BR.rb06);
         }
-
 
         @Bindable
         public String getRb07() {
@@ -815,6 +849,28 @@ public class Mwra extends BaseObservable implements Observable {
         private String rb20 = StringUtils.EMPTY;
         private String rb21 = StringUtils.EMPTY;
         private long ageInMonths;
+
+        // Save section object as json object in db
+        public static void saveData(Mwra.SC data) {
+            mwra.setsC(data);
+            Objects.requireNonNull(DssRoomDatabase.getDbInstance()).mwraDao().updateMwra(mwra);
+        }
+
+        // Get section object by parsing json
+        public static Mwra.SC getData() {
+            return mwra.getsC();
+        }
+
+        // This class is used to parse the object to save in room db
+        public static class DataConverter extends DssRoomDatabase.BaseConverter<Mwra.SC> {
+            public DataConverter() {
+                super(new TypeToken<Mwra.SC>() {
+                }.getType());
+            }
+        }
+
+
+        // Getters & Setters
 
         @Bindable
         public String getRb01() {
@@ -1124,7 +1180,6 @@ public class Mwra extends BaseObservable implements Observable {
 
     }
 
-
     /**
      * SECTION D - Pregnancy
      */
@@ -1136,6 +1191,27 @@ public class Mwra extends BaseObservable implements Observable {
         private String rb09 = StringUtils.EMPTY;
         private String rb24 = StringUtils.EMPTY;
         private String rb25 = StringUtils.EMPTY;
+
+        // Save section object as json object in db
+        public static void saveData(Mwra.SD data) {
+            mwra.setsD(data);
+            Objects.requireNonNull(DssRoomDatabase.getDbInstance()).mwraDao().updateMwra(mwra);
+        }
+
+        // Get section object by parsing json
+        public static Mwra.SD getData() {
+            return mwra.getsD();
+        }
+
+        // This class is used to parse the object to save in room db
+        public static class DataConverter extends DssRoomDatabase.BaseConverter<Mwra.SD> {
+            public DataConverter() {
+                super(new TypeToken<Mwra.SD>() {
+                }.getType());
+            }
+        }
+
+        // Getters & Setters
 
         @Bindable
         public String getRb07() {

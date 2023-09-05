@@ -47,6 +47,9 @@ public class SectionCActivity extends AppCompatActivity {
     ActivitySectionCBinding bi;
     private DssRoomDatabase db;
 
+    private Mwra.SC sC;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,6 +64,12 @@ public class SectionCActivity extends AppCompatActivity {
 
         // Set Round Number from followups data
         MainApp.ROUND = MainApp.fpMwra.getFRound();
+
+        mwra.populateMetaFollowups();
+
+        sC = new Mwra.SC();
+        mwra.setsC(sC);
+
 
         try {
             //followups = db.getFollowupsBySno(MainApp.fpMwra.getRb01(), MainApp.fpMwra.getFRound());
@@ -85,32 +94,32 @@ public class SectionCActivity extends AppCompatActivity {
             mwra.setVillageCode(MainApp.fpMwra.getVillageCode());
             mwra.setRound(MainApp.fpMwra.getFRound());
             mwra.setSNo(MainApp.fpMwra.getRb01());
-            mwra.setRb01(MainApp.fpMwra.getRb01());
-            mwra.setRb02(MainApp.fpMwra.getRb02());
-            mwra.setRb03(MainApp.fpMwra.getRb03());
-            mwra.setRb06(MainApp.fpMwra.getRb06());
+            sC.setRb01(MainApp.fpMwra.getRb01());
+            sC.setRb02(MainApp.fpMwra.getRb02());
+            sC.setRb03(MainApp.fpMwra.getRb03());
+            sC.setRb06(MainApp.fpMwra.getRb06());
             mwra.setPreMaritalStaus(fpMwra.getRb06());
             mwra.setPrePreg(MainApp.fpMwra.getRb07());
             mwra.setChild_count(fpMwra.getChild_count());
             mwra.setPregnum(fpMwra.getPregCount());
-            mwra.setRb22(fpMwra.getRb22());
-            mwra.setRb23(fpMwra.getRb23());
+            sC.setRb22(fpMwra.getRb22());
+            sC.setRb23(fpMwra.getRb23());
             //mwra.setRb07(MainApp.fpMwra.getRb07());
 
             long daysdiff = mwra.CalculateAge(MainApp.fpMwra.getRa01().getDate());
             long years = daysdiff / 365;
             long actualAge = Integer.parseInt(MainApp.fpMwra.getRb05()) + years;
-            mwra.setRb05(String.valueOf(actualAge));     // Age in Years
+            sC.setRb05(String.valueOf(actualAge));     // Age in Years
 
         }
         // For edit mode
-        if (!mwra.getUid().equals("")) {
+        /*if (!mwra.getUid().equals("")) {
             try {
                 mwra.sCHydrate(mwra.getSC());
             } catch (JSONException e) {
                 e.printStackTrace();
             }
-        }
+        }*/
 
         long daysdiff = MainApp.mwra.CalculateAge(fpMwra.getRa01().getDate());
         long years = daysdiff / 365;
@@ -157,7 +166,7 @@ public class SectionCActivity extends AppCompatActivity {
 
 
         setImmersive(true);
-        bi.setFollowups(mwra);
+        bi.setFollowups(sC);
 
         bi.btnContinue.setText(MainApp.mwra.getUid().equals("") ? "Save" : "Update");
 
@@ -195,13 +204,13 @@ public class SectionCActivity extends AppCompatActivity {
                     if (!isAvailable) {
                         mwraStatus.put(new String[]{fpMwra.getMuid(), fpMwra.getHdssid()}, false);
                     }
-                    mwra.setRb07(fpMwra.getRb07());
-                    mwra.setRb06(fpMwra.getRb06());
-                    mwra.setRb04(fpMwra.getRb04());
+                    sC.setRb07(fpMwra.getRb07());
+                    sC.setRb06(fpMwra.getRb06());
+                    sC.setRb04(fpMwra.getRb04());
                 } else {
-                    mwra.setRb07("");
-                    mwra.setRb06(mwra.getRb06());
-                    mwra.setRb04(fpMwra.getRb04());
+                    sC.setRb07("");
+                    sC.setRb06(sC.getRb06());
+                    sC.setRb04(fpMwra.getRb04());
                     if (!mwraStatus.isEmpty()) {
                         for (String[] arr : mwraStatus.keySet()) {
                             if (arr[0].equals(fpMwra.getMuid()) && arr[1].equals(fpMwra.getHdssid())) {
@@ -274,7 +283,7 @@ public class SectionCActivity extends AppCompatActivity {
 
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
 
-            cal.setTime(sdf.parse(mwra.getRb01a()));// all done
+            cal.setTime(sdf.parse(sC.getRb01a()));// all done
 
             //cal2.setTime(sdf.parse(fpMwra.getRa01().substring(9, 19)));
             cal2.setTime(sdf.parse(fpMwra.getRa01().getDate()));
@@ -300,13 +309,25 @@ public class SectionCActivity extends AppCompatActivity {
         }
     }
 
+    public void btnContinue(View view) throws JSONException{
+        if (!formValidation()) return;
+
+        Mwra mwra = db.mwraDao().getFollowupsBySno(households.getUid(), sC.getRb01(), fpMwra.getFRound());
+
+        if(mwra != null)
+        {
+            MainApp.mwra = mwra;
+        }
+
+    }
+
 
     public void btnContinue(View view) throws JSONException {
         if (!formValidation()) return;
         if (mwra.getUid().equals("") ? insertNewRecord() : updateDB()) {
 
             //mwra.setPregnum("0");
-            if (mwra.getRb18().equals("1")) {
+            if (sC.getRb18().equals("1")) {
                 mwra.setPregnum(String.valueOf(Integer.parseInt(fpMwra.getPregCount()) + 1));
                 MainApp.pregcount = Integer.parseInt(mwra.getPregnum());
             }else{
@@ -556,7 +577,7 @@ public class SectionCActivity extends AppCompatActivity {
     }
 
 
-    private boolean insertNewRecord() throws JSONException {
+    /*private boolean insertNewRecord() throws JSONException {
         MainApp.outcome = new Outcome();
 
         //mwra.populateMetaFollowups();
@@ -628,7 +649,7 @@ public class SectionCActivity extends AppCompatActivity {
             return false;
         }
     }
-
+*/
     public void btnEnd(View view) {
         setResult(RESULT_CANCELED);
         finish();

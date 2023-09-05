@@ -48,6 +48,8 @@ public class SectionBActivity extends AppCompatActivity {
     private DssRoomDatabase db;
     int prePregNum = 0;
 
+    private Mwra.SB sB;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,16 +62,20 @@ public class SectionBActivity extends AppCompatActivity {
         String date = toBlackVisionDate("2023-01-01");
         bi.rb01a.setMinDate(date);
 
+        MainApp.mwra.populateMeta();
+        sB = new Mwra.SB();
+        mwra.setsB(sB);
+        bi.setMwra(sB);
 
         setListener();
 
-        // set default model values if new mwra
+        /*// set default model values if new mwra
         if (mwra.getRb01().equals("")) {
             mwra.setRb01(String.valueOf(mwraCount + 1));
             mwra.populateMeta();
         }
 
-        bi.setMwra(mwra);
+        bi.setMwra(mwra);*/
         setTitle(R.string.marriedwomenregistration_mainheading);
         setImmersive(true);
 
@@ -102,7 +108,7 @@ public class SectionBActivity extends AppCompatActivity {
 
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
             //cal.setTime(sdf.parse(new Date().toString()));
-            cal.setTime(Objects.requireNonNull(sdf.parse(mwra.getRb01a())));// all done
+            cal.setTime(Objects.requireNonNull(sdf.parse(sB.getRb01a())));// all done
 
             sdf = new SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH);
             // Set MinDob date to 50 years back from DOV
@@ -162,7 +168,7 @@ public class SectionBActivity extends AppCompatActivity {
 
             Calendar lmpCal = Calendar.getInstance();
             SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
-            lmpCal.setTime(simpleDateFormat.parse(mwra.getRb08()));
+            lmpCal.setTime(simpleDateFormat.parse(sB.getRb08()));
             sdf = new SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH);
             String dov = sdf.format(cal.getTime());
             String lmp = sdf.format(lmpCal.getTime());
@@ -208,7 +214,7 @@ public class SectionBActivity extends AppCompatActivity {
 
             @Override
             public void afterTextChanged(Editable s) {
-                if (!mwra.getRb04().equalsIgnoreCase("") && !mwra.getRb04().equals("98")) {
+                if (!sB.getRb04().equalsIgnoreCase("") && !sB.getRb04().equals("98")) {
                     try {
                         Calendar cur = Calendar.getInstance(); // DOV
                         Calendar cal = Calendar.getInstance(); // DOB
@@ -216,8 +222,8 @@ public class SectionBActivity extends AppCompatActivity {
 
                         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
 
-                        cur.setTime(sdf.parse(mwra.getRb01a())); // DOV
-                        cal.setTime(sdf.parse(mwra.getRb04())); // DOB
+                        cur.setTime(sdf.parse(sB.getRb01a())); // DOV
+                        cal.setTime(sdf.parse(sB.getRb04())); // DOB
 
 
                         long yearsinMillisec = cur.getTimeInMillis() - cal.getTimeInMillis();
@@ -251,24 +257,62 @@ public class SectionBActivity extends AppCompatActivity {
         });
     }
 
-    public void btnContinue(View view) throws JSONException {
+
+    public void btnContinue(View view) throws JSONException{
+        if (!formValidation()) return;
+        // New form
+        // If 'Edit form' option is selected
+        // Check data in db
+         Mwra mwra = db.mwraDao().getMwraByUUId(households.getUid(), households.getHdssId(), sB.getRb01(), households.getRegRound());
+         if(mwra != null){
+             MainApp.mwra = mwra;
+             mwra.setPregnum("0");
+             if (sB.getRb07().equals("1")) {
+                 mwra.setPregnum(String.valueOf(Integer.parseInt(mwra.getPregnum()) + 1));
+             }
+
+             if (sB.getRb18().equals("1")) {
+                 mwra.setPregnum(String.valueOf(Integer.parseInt(mwra.getPregnum()) + 1));
+             }
+
+             if(sB.getRb07().equals("2") && sB.getRb18().equals("2")){
+                 mwra.setPregnum("0");
+             }
+
+             if(bi.rb1801.isChecked())
+             {
+                 Intent forwardIntent = new Intent(this, SectionEActivity.class).putExtra("complete", true);
+                 forwardIntent.setFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT);
+                 setResult(RESULT_OK, forwardIntent);
+                 finish();
+                 Mwra.saveMainDataReg(households.getUid(), households.getHdssId(), sB.getRb01(), households.getRegRound(), sB);
+                 startActivity(forwardIntent);
+             } else {
+                 setResult(RESULT_OK);
+                 finish();
+             }
+
+         }
+    }
+
+   /* public void btnContinue(View view) throws JSONException {
         if (!formValidation()) return;
         //if (MainApp.mwra.getUid().equals("") ? insertNewRecord() && insertNewFollowupRecord() : updateDB()) {
         if (MainApp.mwra.getUid().equals("") ? insertNewRecord() : updateDB()) {
 
             mwra.setPregnum("0");
-            if (mwra.getRb07().equals("1")) {
+            if (sB.getRb07().equals("1")) {
                 mwra.setPregnum(String.valueOf(Integer.parseInt(mwra.getPregnum()) + 1));
             }
 
-            if (mwra.getRb18().equals("1")) {
+            if (sB.getRb18().equals("1")) {
                 mwra.setPregnum(String.valueOf(Integer.parseInt(mwra.getPregnum()) + 1));
             }
 
-            if(mwra.getRb07().equals("2") && mwra.getRb18().equals("2")){
+            if(sB.getRb07().equals("2") && sB.getRb18().equals("2")){
                 mwra.setPregnum("0");
             }
-            mwra.setSB(mwra.sBtoString());
+            mwra.setsB(sB);
             db.mwraDao().updateMwra(mwra);
 
             if (bi.rb1801.isChecked()) {
@@ -291,9 +335,9 @@ public class SectionBActivity extends AppCompatActivity {
 
     private boolean insertNewRecord() throws JSONException {
         db = MainApp.appInfo.getDbHelper();
-       /* if (MainApp.households.getRa18().equals("999") && fpHouseholds.getUid().equals("")) {
+       *//* if (MainApp.households.getRa18().equals("999") && fpHouseholds.getUid().equals("")) {
             insertFpHousehold();
-        }*/
+        }*//*
 
         //MainApp.mwra.populateMeta();
         long rowId = 0;
@@ -363,7 +407,7 @@ public class SectionBActivity extends AppCompatActivity {
             Toast.makeText(this, "Updating Database... ERROR!", Toast.LENGTH_SHORT).show();
             return false;
         }
-    }
+    }*/
 
     public void btnEnd(View view) {
         setResult(Activity.RESULT_CANCELED);

@@ -54,6 +54,8 @@ interface MwraDao {
         }
         return mwra
     }
+    @Query("SELECT * FROM mwras where _uuid = :uuid AND hdssid = :hdssid AND sNo = :sNo AND regRound = :regRound ORDER BY _id ASC")
+    fun getMwraByUUId(uuid : String, hdssid : String, sNo : String, regRound: String) : Mwra
 
 
 

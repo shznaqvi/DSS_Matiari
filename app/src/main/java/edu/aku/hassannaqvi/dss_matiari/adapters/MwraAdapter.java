@@ -67,7 +67,7 @@ public class MwraAdapter extends RecyclerView.Adapter<MwraAdapter.ViewHolder> {
         String marStatus = "";
         String wifeOrDaughter = "";
 
-        switch (mwra.getRb06()) {
+        switch (mwra.getsB().getRb06()) {
             case "1":
                 marStatus = "Married";
                 indicator.setBackgroundColor(ContextCompat.getColor(mContext, R.color.redDark));
@@ -96,7 +96,7 @@ public class MwraAdapter extends RecyclerView.Adapter<MwraAdapter.ViewHolder> {
                 break;
         }
 
-        if (mwra.getRb07().equals("1")) {
+        if (mwra.getsB().getRb07().equals("1")) {
             pregStatus = "Pregnant";
             secStatus.setBackgroundColor(ContextCompat.getColor(mContext, R.color.redLight));
             indicator.setImageDrawable(ContextCompat.getDrawable(mContext, R.drawable.ic_baseline_pregnant_woman_24));
@@ -104,9 +104,9 @@ public class MwraAdapter extends RecyclerView.Adapter<MwraAdapter.ViewHolder> {
             pregStatus = "Not Pregnant";
         }
 
-        fName.setText(mwra.getRb02());
-        fAge.setText(wifeOrDaughter + mwra.getRb03());
-        secDob.setText(mwra.getRb05() + " Y");
+        fName.setText(mwra.getsB().getRb02());
+        fAge.setText(wifeOrDaughter + mwra.getsB().getRb03());
+        secDob.setText(mwra.getsB().getRb05() + " Y");
         secGender.setText("Female");
         fMaritalStatus.setText(marStatus);
         secStatus.setText(pregStatus);
