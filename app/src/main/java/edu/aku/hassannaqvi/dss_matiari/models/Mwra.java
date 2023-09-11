@@ -938,7 +938,7 @@ public class Mwra extends BaseObservable implements Observable {
             this.rb02 = json.getString("rb02");
             this.rb22 = json.has("rb22") ? json.getString("rb22") : "";
             this.rb03 = json.getString("rb03");
-            this.rb23 = json.getString("rb23");
+            this.rb23 = json.has("rb23") ? json.getString("rb23") : "";
             this.rb03a = json.getString("rb03a");
             this.rb03b = json.getString("rb03b");
             this.rb04 = json.getString("rb04");
@@ -968,7 +968,7 @@ public class Mwra extends BaseObservable implements Observable {
             this.rb02 = json.getString("rb02");
             this.rb22 = json.has("rb22") ? json.getString("rb22") : "";
             this.rb03 = json.getString("rb03");
-            this.rb23 = json.getString("rb23");
+            this.rb23 = json.has("rb23") ? json.getString("rb23") : "";
             this.rb04 = json.getString("rb04");
             this.rb05 = json.getString("rb05");
             this.prePreg = json.getString("prePreg");
