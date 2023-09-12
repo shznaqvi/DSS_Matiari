@@ -22,7 +22,6 @@ import java.io.File;
 
 import edu.aku.hassannaqvi.dss_matiari.R;
 import edu.aku.hassannaqvi.dss_matiari.core.MainApp;
-import edu.aku.hassannaqvi.dss_matiari.database.AndroidManager;
 import edu.aku.hassannaqvi.dss_matiari.databinding.ActivityMainBinding;
 import edu.aku.hassannaqvi.dss_matiari.models.Households;
 import edu.aku.hassannaqvi.dss_matiari.newstruct.activity.SyncNewAC;
@@ -147,6 +146,7 @@ public class MainActivity extends AppCompatActivity {
        } else if (menuItemId == R.id.checkOpenForms) {
             AppConstants.gotoActivity(this, FormsReportCluster.class, false);
         } else if (menuItemId == R.id.sendDB) {
+            setVisible(MainApp.admin);
             sendEmail();
             return true;
         }
