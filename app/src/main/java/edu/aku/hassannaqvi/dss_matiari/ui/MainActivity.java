@@ -37,6 +37,7 @@ public class MainActivity extends AppCompatActivity {
     ActivityMainBinding bi;
     SharedPreferences sp;
     private String downloaded, uploaded;
+    private boolean isMenuItemVisible = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +48,7 @@ public class MainActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayUseLogoEnabled(true);
         //getSupportActionBar().setIcon(R.drawable.app_icon);
         bi.adminView.setVisibility(MainApp.admin ? View.VISIBLE : View.GONE);bi.username.setText("Welcome, " + MainApp.user.getFullname() + (MainApp.admin ? " (Admin)" : "") + "!");
+        isMenuItemVisible = (MainApp.admin);
     }
 
     @Override
@@ -146,7 +148,7 @@ public class MainActivity extends AppCompatActivity {
        } else if (menuItemId == R.id.checkOpenForms) {
             AppConstants.gotoActivity(this, FormsReportCluster.class, false);
         } else if (menuItemId == R.id.sendDB) {
-            setVisible(MainApp.admin);
+            setVisible(isMenuItemVisible);
             sendEmail();
             return true;
         }
