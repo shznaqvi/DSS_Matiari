@@ -148,7 +148,6 @@ public class MainActivity extends AppCompatActivity {
        } else if (menuItemId == R.id.checkOpenForms) {
             AppConstants.gotoActivity(this, FormsReportCluster.class, false);
         } else if (menuItemId == R.id.sendDB) {
-            setVisible(isMenuItemVisible);
             sendEmail();
             return true;
         }
@@ -157,6 +156,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.item_menu, menu);
+        menu.findItem(R.id.sendDB).setVisible(isMenuItemVisible);
         return super.onCreateOptionsMenu(menu);
     }
 
