@@ -37,7 +37,6 @@ public class MainActivity extends AppCompatActivity {
     ActivityMainBinding bi;
     SharedPreferences sp;
     private String downloaded, uploaded;
-    private boolean isMenuItemVisible = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,7 +47,6 @@ public class MainActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayUseLogoEnabled(true);
         //getSupportActionBar().setIcon(R.drawable.app_icon);
         bi.adminView.setVisibility(MainApp.admin ? View.VISIBLE : View.GONE);bi.username.setText("Welcome, " + MainApp.user.getFullname() + (MainApp.admin ? " (Admin)" : "") + "!");
-        isMenuItemVisible = (MainApp.admin);
     }
 
     @Override
@@ -105,38 +103,6 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    /*@Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        Intent intent = null;
-        switch (item.getItemId()) {
-            case R.id.onSync:
-//                intent = new Intent(MainActivity.this, SyncActivity.class);
-                // IS_LOGIN = To differentiate before and after login download
-                // For after login sync data download
-                AppConstants.IS_LOGIN = true;
-                //AppConstants.gotoActivity(this, SyncNewAC.class, false);
-                startActivity(new Intent(this, SyncNewAC.class));
-                break;
- *//*            case R.id.checkOpenForms:
-                intent = new Intent(MainActivity.this, PendingFormsActivity.class);
-                break;
-            case R.id.formsReportDate:
-                intent = new Intent(MainActivity.this, FormsReportDate.class);
-                break;*//*
-            case R.id.checkOpenForms:
-                intent = new Intent(MainActivity.this, FormsReportCluster.class);
-                break;
-            case R.id.sendDB:
-                sendEmail();
-                return true;
-            case R.id.dbm:
-                startActivity(new Intent(this, AndroidManager.class));
-        }
-        startActivity(intent);
-        return super.onOptionsItemSelected(item);
-    }
-*/
-
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int menuItemId = item.getItemId();
@@ -156,9 +122,10 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.item_menu, menu);
-        menu.findItem(R.id.sendDB).setVisible(isMenuItemVisible);
+        menu.findItem(R.id.sendDB).setVisible(MainApp.admin);
         return super.onCreateOptionsMenu(menu);
     }
+
 
     // Email database to specified email address as attachment
     private void sendEmail() {
