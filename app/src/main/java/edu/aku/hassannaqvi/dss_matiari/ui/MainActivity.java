@@ -119,13 +119,13 @@ public class MainActivity extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.item_menu, menu);
         menu.findItem(R.id.sendDB).setVisible(MainApp.admin);
         return super.onCreateOptionsMenu(menu);
     }
-
 
     // Email database to specified email address as attachment
     private void sendEmail() {
