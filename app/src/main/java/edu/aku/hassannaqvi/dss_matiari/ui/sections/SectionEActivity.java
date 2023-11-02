@@ -64,7 +64,7 @@ public class SectionEActivity extends AppCompatActivity {
         try {
             //outcome = db.getOutComeBYID(String.valueOf(++MainApp.childCount));
             String[] muid = mwra.getUid().split("_");
-            outcome = db.OutcomeDao().getOutcomeBYID(muid[0], String.valueOf(++MainApp.prevChildCount));
+            outcome = db.OutcomeDao().getOutcomeBYID(mwra.getHdssId(), muid[0], mwra.getSNo(), String.valueOf(++MainApp.prevChildCount));
         } catch (JSONException e) {
             e.printStackTrace();
             Toast.makeText(this, "JSONException(Outcome): " + e.getMessage(), Toast.LENGTH_SHORT).show();
