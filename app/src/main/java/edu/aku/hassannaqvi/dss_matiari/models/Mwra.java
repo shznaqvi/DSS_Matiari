@@ -1060,7 +1060,6 @@ public class Mwra extends BaseObservable implements Observable {
         return json.toString();
     }
 
-
     public String SDtoString() throws JSONException {
         JSONObject json = new JSONObject();
 
@@ -1091,8 +1090,6 @@ public class Mwra extends BaseObservable implements Observable {
 
         }
     }
-
-
 
     public JSONObject toJSONObject() throws JSONException {
         JSONObject json = new JSONObject();

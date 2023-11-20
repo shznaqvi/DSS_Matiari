@@ -151,10 +151,13 @@ public class SectionDActivity extends AppCompatActivity {
     public void btnContinue(View view) {
         if (!formValidation()) return;
 
-        if (mwra.getRb07().equals("1")) {
-            mwra.setPregnum(String.valueOf(Integer.parseInt(mwra.getPregnum()) + 1));
-        }else{
-            mwra.setPregnum(String.valueOf(MainApp.pregcount));
+
+        if(!mwra.getUid().contains("_")) {
+            if (mwra.getRb07().equals("1")) {
+                mwra.setPregnum(String.valueOf(Integer.parseInt(mwra.getPregnum()) + 1));
+            } else {
+                mwra.setPregnum(String.valueOf(MainApp.pregcount));
+            }
         }
         if (updateDB()) {
             setResult(RESULT_OK);

@@ -639,7 +639,6 @@ public class Outcome extends BaseObservable implements Observable {
         MainApp.outcome.setSysDate(MainApp.households.getSysDate());
         MainApp.outcome.setUuid(MainApp.households.getUid());
 
-
         // From FollowupsSche - Outcome
         MainApp.outcome.setHdssId(MainApp.fpMwra.getHdssid());
         MainApp.outcome.setUcCode(MainApp.fpMwra.getUcCode());

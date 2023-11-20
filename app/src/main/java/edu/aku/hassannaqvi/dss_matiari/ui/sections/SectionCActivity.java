@@ -214,7 +214,6 @@ public class SectionCActivity extends AppCompatActivity {
                 }
 
                 // Put status of Migrated or Refused in its HashMap
-
                 if (bi.rb1002.isChecked() || bi.rb1003.isChecked()) {
                     for (String[] arr : allMwraRefusedOrMigrated.keySet()) {
                         if (arr[0].equals(fpMwra.getMuid()) && arr[1].equals(fpMwra.getHdssid())) {
@@ -225,17 +224,17 @@ public class SectionCActivity extends AppCompatActivity {
                     if (!isMigratedOrRefused) {
                         allMwraRefusedOrMigrated.put(new String[]{fpMwra.getMuid(), fpMwra.getHdssid()}, false);
                     }
-                }else {
-                        mwra.setRb07("");
-                        mwra.setRb06(mwra.getRb06());
-                        mwra.setRb04(fpMwra.getRb04());
-                        if (!allMwraRefusedOrMigrated.isEmpty()) {
-                            for (String[] arr : allMwraRefusedOrMigrated.keySet()) {
-                                if (arr[0].equals(fpMwra.getMuid()) && arr[1].equals(fpMwra.getHdssid())) {
-                                    allMwraRefusedOrMigrated.remove(arr);
-                                    break;
-                                }
+                } else {
+                    mwra.setRb07("");
+                    mwra.setRb06(mwra.getRb06());
+                    mwra.setRb04(fpMwra.getRb04());
+                    if (!allMwraRefusedOrMigrated.isEmpty()) {
+                        for (String[] arr : allMwraRefusedOrMigrated.keySet()) {
+                            if (arr[0].equals(fpMwra.getMuid()) && arr[1].equals(fpMwra.getHdssid())) {
+                                allMwraRefusedOrMigrated.remove(arr);
+                                break;
                             }
+                        }
                     }
 
                 }
@@ -271,7 +270,6 @@ public class SectionCActivity extends AppCompatActivity {
 
         });
 
-
         bi.rb1605.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -288,7 +286,6 @@ public class SectionCActivity extends AppCompatActivity {
                 }
             }
         });
-
 
     }
 
@@ -334,12 +331,15 @@ public class SectionCActivity extends AppCompatActivity {
         if (mwra.getUid().equals("") ? insertNewRecord() : updateDB()) {
 
             //mwra.setPregnum("0");
-            if (mwra.getRb18().equals("1")) {
-                mwra.setPregnum(String.valueOf(Integer.parseInt(fpMwra.getPregCount()) + 1));
-                MainApp.pregcount = Integer.parseInt(mwra.getPregnum());
-            } else {
-                mwra.setPregnum(fpMwra.getPregCount());
-                MainApp.pregcount = Integer.parseInt(mwra.getPregnum());
+
+            if (!mwra.getUid().contains("_")) {
+                if (mwra.getRb18().equals("1")) {
+                    mwra.setPregnum(String.valueOf(Integer.parseInt(fpMwra.getPregCount()) + 1));
+                    MainApp.pregcount = Integer.parseInt(mwra.getPregnum());
+                } else {
+                    mwra.setPregnum(fpMwra.getPregCount());
+                    MainApp.pregcount = Integer.parseInt(mwra.getPregnum());
+                }
             }
 
             //db.mwraDao().updateMwra(mwra);

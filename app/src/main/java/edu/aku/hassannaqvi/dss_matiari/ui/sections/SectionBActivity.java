@@ -256,17 +256,20 @@ public class SectionBActivity extends AppCompatActivity {
         //if (MainApp.mwra.getUid().equals("") ? insertNewRecord() && insertNewFollowupRecord() : updateDB()) {
         if (MainApp.mwra.getUid().equals("") ? insertNewRecord() : updateDB()) {
 
-            mwra.setPregnum("0");
-            if (mwra.getRb07().equals("1")) {
-                mwra.setPregnum(String.valueOf(Integer.parseInt(mwra.getPregnum()) + 1));
-            }
-
-            if (mwra.getRb18().equals("1")) {
-                mwra.setPregnum(String.valueOf(Integer.parseInt(mwra.getPregnum()) + 1));
-            }
-
-            if(mwra.getRb07().equals("2") && mwra.getRb18().equals("2")){
+            if(!mwra.getUid().contains("_")) {
                 mwra.setPregnum("0");
+                if (mwra.getRb07().equals("1")) {
+                    mwra.setPregnum(String.valueOf(Integer.parseInt(mwra.getPregnum()) + 1));
+                }
+
+                if (mwra.getRb18().equals("1")) {
+                    mwra.setPregnum(String.valueOf(Integer.parseInt(mwra.getPregnum()) + 1));
+                }
+
+                if(mwra.getRb07().equals("2") && mwra.getRb18().equals("2")){
+                    mwra.setPregnum("0");
+            }
+
             }
             mwra.setSB(mwra.sBtoString());
             db.mwraDao().updateMwra(mwra);
