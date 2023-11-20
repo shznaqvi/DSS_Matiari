@@ -234,9 +234,9 @@ public class SectionCActivity extends AppCompatActivity {
                         allMwraRefusedOrMigrated.put(new String[]{fpMwra.getMuid(), fpMwra.getHdssid()}, false);
                     }
                 } else {
-                    mwra.setRb07("");
-                    mwra.setRb06(mwra.getRb06());
-                    mwra.setRb04(fpMwra.getRb04());
+                    sC.setRb07("");
+                    sC.setRb06(sC.getRb06());
+                    sC.setRb04(fpMwra.getRb04());
                     if (!allMwraRefusedOrMigrated.isEmpty()) {
                         for (String[] arr : allMwraRefusedOrMigrated.keySet()) {
                             if (arr[0].equals(fpMwra.getMuid()) && arr[1].equals(fpMwra.getHdssid())) {
@@ -347,7 +347,7 @@ public class SectionCActivity extends AppCompatActivity {
     }
 
 
-    public void btnContinue(View view) throws JSONException {
+    /*public void btnContinue(View view) throws JSONException {
         if (!formValidation()) return;
         if (mwra.getUid().equals("") ? insertNewRecord() : updateDB()) {
 
@@ -602,7 +602,7 @@ public class SectionCActivity extends AppCompatActivity {
         } else {
             Toast.makeText(this, "Failed to Update Database!", Toast.LENGTH_SHORT).show();
         }
-    }
+    }*/
 
 
     /*private boolean insertNewRecord() throws JSONException {
