@@ -181,6 +181,25 @@
                                 android:text="@string/ra11e" />
 
                             <RadioButton
+                                android:id="@+id/istatusf"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:visibility="gone"
+                                android:text="@string/ra11f" />
+
+                            <RadioButton
+                                android:id="@+id/istatusg"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="@string/ra11g" />
+                            <RadioButton
+                                android:id="@+id/istatush"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:visibility="gone"
+                                android:text="@string/ra11h" />
+
+                            <RadioButton
                                 android:id="@+id/istatusd"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"

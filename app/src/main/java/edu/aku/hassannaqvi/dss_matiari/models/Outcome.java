@@ -49,7 +49,7 @@ public class Outcome extends BaseObservable implements Observable {
 
     // APP VARIABLES
     @SerializedName("_id")
-    @PrimaryKey(autoGenerate = true) @NonNull
+    @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = TableContracts.OutcomeTable.COLUMN_ID)
     long id = 0;
 
@@ -117,6 +117,7 @@ public class Outcome extends BaseObservable implements Observable {
     @ColumnInfo(name = TableContracts.OutcomeTable.COLUMN_SYNCED)
     private String synced = StringUtils.EMPTY;
 
+    @SerializedName("synced_date")
     @ColumnInfo(name = TableContracts.OutcomeTable.COLUMN_SYNCED_DATE)
     private transient String syncDate = StringUtils.EMPTY;
 
@@ -480,7 +481,7 @@ public class Outcome extends BaseObservable implements Observable {
         setRc05(rc08.equals("1") ? this.rc05 : "");
         setRc06(rc08.equals("1") ? this.rc06 : "");
         setRc07(rc08.equals("1") ? this.rc07 : "");
-        setIStatus(rc08);
+        //setIStatus(rc08);
         notifyPropertyChanged(BR.rc08);
     }
 
@@ -637,7 +638,6 @@ public class Outcome extends BaseObservable implements Observable {
         // From Households
         MainApp.outcome.setSysDate(MainApp.households.getSysDate());
         MainApp.outcome.setUuid(MainApp.households.getUid());
-
 
         // From FollowupsSche - Outcome
         MainApp.outcome.setHdssId(MainApp.fpMwra.getHdssid());

@@ -25,7 +25,6 @@ interface MwraDao {
     @Update(onConflict =  OnConflictStrategy.REPLACE)
     fun updateMwra(mwra: Mwra) : Int
 
-
     @Query("SELECT "
             + "MAX( CAST(" + MWRATable.COLUMN_SNO + " AS INT)) AS " + MWRATable.COLUMN_SNO +
             " FROM " + MWRATable.TABLE_NAME +

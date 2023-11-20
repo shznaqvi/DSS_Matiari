@@ -426,7 +426,7 @@
                         android:layout_height="wrap_content">
 
                         <RadioButton
-                            android:id="@+id/rc0801"
+                            android:id="@+id/rb1001"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:checked='@{outcome.rc08.equals("1")}'
@@ -434,7 +434,7 @@
                             android:text="@string/rc0401" />
 
                         <RadioButton
-                            android:id="@+id/rc0802"
+                            android:id="@+id/rb1002"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:checked='@{outcome.rc08.equals("2")}'

@@ -304,15 +304,28 @@ public class SectionBActivity extends AppCompatActivity {
             if (sB.getRb07().equals("1")) {
                 mwra.setPregnum(String.valueOf(Integer.parseInt(mwra.getPregnum()) + 1));
             }
+            if(!mwra.getUid().contains("_")) {
+                mwra.setPregnum("0");
+                if (mwra.getRb07().equals("1")) {
+                    mwra.setPregnum(String.valueOf(Integer.parseInt(mwra.getPregnum()) + 1));
+                }
 
             if (sB.getRb18().equals("1")) {
                 mwra.setPregnum(String.valueOf(Integer.parseInt(mwra.getPregnum()) + 1));
             }
+                if (mwra.getRb18().equals("1")) {
+                    mwra.setPregnum(String.valueOf(Integer.parseInt(mwra.getPregnum()) + 1));
+                }
 
             if(sB.getRb07().equals("2") && sB.getRb18().equals("2")){
                 mwra.setPregnum("0");
+                if(mwra.getRb07().equals("2") && mwra.getRb18().equals("2")){
+                    mwra.setPregnum("0");
             }
             mwra.setsB(sB);
+
+            }
+            mwra.setSB(mwra.sBtoString());
             db.mwraDao().updateMwra(mwra);
 
             if (bi.rb1801.isChecked()) {

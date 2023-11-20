@@ -70,4 +70,9 @@
     <color name="light_gray_color">#8B8B8B</color>
     <color name="lighter_gray_color">#EFEFEF</color>
 
+    <color name="success_color">#27A605</color>
+    <color name="error_color">#ca0a2e</color>
+    <color name="warning_color">#ca720a</color>
+    <color name="info_color">#0a6eca</color>
+
 </resources>

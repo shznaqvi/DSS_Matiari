@@ -26,7 +26,7 @@
         android:id="@+id/sendDB"
         android:title="Send DB"
         android:titleCondensed="Email database"
-        android:visible="true"
+        android:visible="false"
         app:showAsAction="collapseActionView" />
 
 </menu>

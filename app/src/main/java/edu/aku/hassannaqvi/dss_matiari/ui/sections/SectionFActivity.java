@@ -1,9 +1,12 @@
 package edu.aku.hassannaqvi.dss_matiari.ui.sections;
 
 
+import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.allMwraRefusedOrMigrated;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.dateOfVisit;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.fpMwra;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.households;
+import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.mwra;
+import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.mwraStatus;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.outcome;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.sharedPref;
 
@@ -14,6 +17,7 @@ import com.validatorcrawler.aliazaz.Validator;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.RadioGroup;
 import android.widget.Toast;
 
 
@@ -85,6 +89,38 @@ public class SectionFActivity extends AppCompatActivity {
 
             bi.rc06.setMinDate(date);
         }
+
+
+        bi.rb10.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup radioGroup, int i) {
+                boolean isMigratedOrRefused = false;
+                // Put status of Migrated or Refused in its HashMap
+
+                if (bi.rb1002.isChecked() || bi.rb1003.isChecked()) {
+                    for (String[] arr : allMwraRefusedOrMigrated.keySet()) {
+                        if (arr[0].equals(fpMwra.getMuid()) && arr[1].equals(fpMwra.getHdssid())) {
+                            isMigratedOrRefused = true;
+                            break;
+                        }
+                    }
+                    if (!isMigratedOrRefused) {
+                        allMwraRefusedOrMigrated.put(new String[]{fpMwra.getMuid(), fpMwra.getHdssid()}, false);
+                    }
+                }else {
+                    if (!allMwraRefusedOrMigrated.isEmpty()) {
+                        for (String[] arr : allMwraRefusedOrMigrated.keySet()) {
+                            if (arr[0].equals(fpMwra.getMuid()) && arr[1].equals(fpMwra.getHdssid())) {
+                                allMwraRefusedOrMigrated.remove(arr);
+                                break;
+                            }
+                        }
+                    }
+
+                }
+            }
+        });
+
 
 
     }

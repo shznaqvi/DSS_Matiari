@@ -1,6 +1,7 @@
 package edu.aku.hassannaqvi.dss_matiari.ui.sections;
 
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.PROJECT_NAME;
+import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.allMwraRefusedOrMigrated;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.followUpsScheHHList;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.followUpsScheMWRAList;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.fpMwra;
@@ -106,7 +107,7 @@ public class SectionCActivity extends AppCompatActivity {
             sC.setRb23(fpMwra.getRb23());
             //mwra.setRb07(MainApp.fpMwra.getRb07());
 
-            long daysdiff = mwra.CalculateAge(MainApp.fpMwra.getRa01().getDate());
+            long daysdiff = mwra.CalculateAge(MainApp.fpMwra.getReg_date());
             long years = daysdiff / 365;
             long actualAge = Integer.parseInt(MainApp.fpMwra.getRb05()) + years;
             sC.setRb05(String.valueOf(actualAge));     // Age in Years
@@ -121,7 +122,7 @@ public class SectionCActivity extends AppCompatActivity {
             }
         }*/
 
-        long daysdiff = MainApp.mwra.CalculateAge(fpMwra.getRa01().getDate());
+        long daysdiff = MainApp.mwra.CalculateAge(fpMwra.getReg_date());
         long years = daysdiff / 365;
         long actualAge = 0;
 
@@ -220,6 +221,32 @@ public class SectionCActivity extends AppCompatActivity {
                         }
                     }
                 }
+
+                // Put status of Migrated or Refused in its HashMap
+                if (bi.rb1002.isChecked() || bi.rb1003.isChecked()) {
+                    for (String[] arr : allMwraRefusedOrMigrated.keySet()) {
+                        if (arr[0].equals(fpMwra.getMuid()) && arr[1].equals(fpMwra.getHdssid())) {
+                            isMigratedOrRefused = true;
+                            break;
+                        }
+                    }
+                    if (!isMigratedOrRefused) {
+                        allMwraRefusedOrMigrated.put(new String[]{fpMwra.getMuid(), fpMwra.getHdssid()}, false);
+                    }
+                } else {
+                    mwra.setRb07("");
+                    mwra.setRb06(mwra.getRb06());
+                    mwra.setRb04(fpMwra.getRb04());
+                    if (!allMwraRefusedOrMigrated.isEmpty()) {
+                        for (String[] arr : allMwraRefusedOrMigrated.keySet()) {
+                            if (arr[0].equals(fpMwra.getMuid()) && arr[1].equals(fpMwra.getHdssid())) {
+                                allMwraRefusedOrMigrated.remove(arr);
+                                break;
+                            }
+                        }
+                    }
+
+                }
             }
         });
 
@@ -252,7 +279,6 @@ public class SectionCActivity extends AppCompatActivity {
 
         });
 
-
         bi.rb1605.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -269,7 +295,6 @@ public class SectionCActivity extends AppCompatActivity {
                 }
             }
         });
-
 
     }
 
@@ -327,12 +352,15 @@ public class SectionCActivity extends AppCompatActivity {
         if (mwra.getUid().equals("") ? insertNewRecord() : updateDB()) {
 
             //mwra.setPregnum("0");
-            if (sC.getRb18().equals("1")) {
-                mwra.setPregnum(String.valueOf(Integer.parseInt(fpMwra.getPregCount()) + 1));
-                MainApp.pregcount = Integer.parseInt(mwra.getPregnum());
-            }else{
-                mwra.setPregnum(fpMwra.getPregCount());
-                MainApp.pregcount = Integer.parseInt(mwra.getPregnum());
+
+            if (!mwra.getUid().contains("_")) {
+                if (mwra.getRb18().equals("1")) {
+                    mwra.setPregnum(String.valueOf(Integer.parseInt(fpMwra.getPregCount()) + 1));
+                    MainApp.pregcount = Integer.parseInt(mwra.getPregnum());
+                } else {
+                    mwra.setPregnum(fpMwra.getPregCount());
+                    MainApp.pregcount = Integer.parseInt(mwra.getPregnum());
+                }
             }
 
             //db.mwraDao().updateMwra(mwra);
@@ -351,7 +379,7 @@ public class SectionCActivity extends AppCompatActivity {
                             } else {  // If Pregnancy ended
                                 if (bi.rb1601.isChecked() || bi.rb1605.isChecked()) // If Live Birth
                                 {
-                                    if (!fpMwra.getChild_count().equals("null")) {
+                                    if (fpMwra.getChild_count() != null) {
                                         MainApp.prevChildCount = Integer.parseInt(fpMwra.getChild_count());
                                     } else {
                                         MainApp.prevChildCount = 0;
@@ -370,7 +398,7 @@ public class SectionCActivity extends AppCompatActivity {
                                 }
                             }
                         } else if (mwra.getPrePreg().equals("2") && bi.rb1801.isChecked()) {   // Not Pregnant
-                            if (!fpMwra.getChild_count().equals("null")) {
+                            if (fpMwra.getChild_count() != null) {
                                 MainApp.prevChildCount = Integer.parseInt(fpMwra.getChild_count());
                             } else {
                                 MainApp.prevChildCount = 0;
@@ -400,7 +428,7 @@ public class SectionCActivity extends AppCompatActivity {
                                 //finish();
                             } else {     // If Pregnancy ended
                                 if (bi.rb1601.isChecked() || bi.rb1605.isChecked()) {    // Live Birth
-                                    if (!fpMwra.getChild_count().equals("null")) {
+                                    if (fpMwra.getChild_count() != null) {
                                         MainApp.prevChildCount = Integer.parseInt(fpMwra.getChild_count());
                                     } else {
                                         MainApp.prevChildCount = 0;
@@ -417,7 +445,7 @@ public class SectionCActivity extends AppCompatActivity {
                             }
                         } else {      // Not Pregnant
                             if (bi.rb1801.isChecked()) {
-                                if (!fpMwra.getChild_count().equals("null")) {
+                                if (fpMwra.getChild_count() != null) {
                                     MainApp.prevChildCount = Integer.parseInt(fpMwra.getChild_count());
                                 } else {
                                     MainApp.prevChildCount = 0;
@@ -450,7 +478,7 @@ public class SectionCActivity extends AppCompatActivity {
                                 //finish();
                             } else {     // If Pregnancy ended
                                 if (bi.rb1601.isChecked() || bi.rb1605.isChecked()) {    // Live Birth
-                                    if (!fpMwra.getChild_count().equals("null")) {
+                                    if (fpMwra.getChild_count() != null) {
                                         MainApp.prevChildCount = Integer.parseInt(fpMwra.getChild_count());
                                     } else {
                                         MainApp.prevChildCount = 0;
@@ -474,7 +502,7 @@ public class SectionCActivity extends AppCompatActivity {
                                 startActivity(forwardIntent);
                                 //finish();
                             } else if (bi.rb1801.isChecked()) {
-                                if (!fpMwra.getChild_count().equals("null")) {
+                                if (fpMwra.getChild_count() != null) {
                                     MainApp.prevChildCount = Integer.parseInt(fpMwra.getChild_count());
                                 } else {
                                     MainApp.prevChildCount = 0;
@@ -501,7 +529,7 @@ public class SectionCActivity extends AppCompatActivity {
                                 //finish();
                             } else {     // If Pregnancy ended
                                 if (bi.rb1601.isChecked() || bi.rb1605.isChecked()) {    // Live Birth
-                                    if (!fpMwra.getChild_count().equals("null")) {
+                                    if (fpMwra.getChild_count() != null) {
                                         MainApp.prevChildCount = Integer.parseInt(fpMwra.getChild_count());
                                     } else {
                                         MainApp.prevChildCount = 0;
@@ -525,7 +553,7 @@ public class SectionCActivity extends AppCompatActivity {
                                 startActivity(forwardIntent);
                                 //finish();
                             } else if (bi.rb1801.isChecked()) {
-                                if (!fpMwra.getChild_count().equals("null")) {
+                                if (fpMwra.getChild_count() != null) {
                                     MainApp.prevChildCount = Integer.parseInt(fpMwra.getChild_count());
                                 } else {
                                     MainApp.prevChildCount = 0;
@@ -552,7 +580,7 @@ public class SectionCActivity extends AppCompatActivity {
                             //finish();
 
                             // Delivered baby within last 3 months
-                        }else if(!bi.rb0604.isChecked() && bi.rb1801.isChecked()){
+                        } else if (!bi.rb0604.isChecked() && bi.rb1801.isChecked()) {
                             MainApp.prevChildCount = 0;
                             Intent forwardIntent = new Intent(this, SectionEActivity.class).putExtra("complete", true);
                             forwardIntent.setFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT);
@@ -579,9 +607,6 @@ public class SectionCActivity extends AppCompatActivity {
 
     /*private boolean insertNewRecord() throws JSONException {
         MainApp.outcome = new Outcome();
-
-        //mwra.populateMetaFollowups();
-
 
         long rowId = 0;
         try {
@@ -612,7 +637,6 @@ public class SectionCActivity extends AppCompatActivity {
     private boolean updateDB() {
         int updcount = 0;
         try {
-            //updcount = db.updatesFollowUpsColumn(TableContracts.FollowupsTable.COLUMN_SC, followups.sCtoString());
 
             Mwra updatedFollowups = mwra;
             updatedFollowups.setSC(mwra.sCtoString());
@@ -623,17 +647,14 @@ public class SectionCActivity extends AppCompatActivity {
             updatedFollowups.setDeviceId(mwra.getDeviceId());
             //households.setSA(households.sAtoString());
             db.householdsDao().updateHousehold(households);
-            //updatedFollowups.setIStatus(mwra.getIStatus());
-            //db.updatesFollowUpsColumn(TableContracts.FollowupsTable.COLUMN_DEVICEID, followups.getDeviceId());
-            //db.updatesFollowUpsColumn(TableContracts.FollowupsTable.COLUMN_ISTATUS, followups.getRc04());
             db.mwraDao().updateMwra(updatedFollowups);
             int repeatCount = (mwra.getDeviceId().length() - 16) / 2;
+
             // new UID
             String newUID = mwra.getDeviceId().substring(0, 16) + mwra.getId() + "_" + repeatCount;
             mwra.setUid(newUID);
             updatedFollowups.setUid(newUID);
             db.mwraDao().updateMwra(updatedFollowups);
-            //db.updatesFollowUpsColumn(TableContracts.FollowupsTable.COLUMN_UID, newUID);
 
 
         } catch (JSONException e) {

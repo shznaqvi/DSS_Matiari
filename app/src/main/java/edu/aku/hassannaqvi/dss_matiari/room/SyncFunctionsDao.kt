@@ -19,11 +19,7 @@ interface SyncFunctionsDao {
 
     // Household Upload Functions
 
-    @Query("SELECT * FROM " + TableContracts.HouseholdTable.TABLE_NAME + " WHERE "
-            + TableContracts.HouseholdTable.COLUMN_SYNCED
-            + " is \'\' AND (" + TableContracts.HouseholdTable.COLUMN_ISTATUS  + " = 1 OR "
-            + TableContracts.HouseholdTable.COLUMN_VISIT_NO + " > 2) ORDER BY "
-            + TableContracts.HouseholdTable.COLUMN_ID + " ASC")
+    @Query("SELECT * FROM hhs WHERE (synced is \'\' OR synced is NULL) AND (istatus = 1 OR visitNo > 2) ORDER BY _id ASC" )
     fun getUnsyncedHousehols_internal() : List<Households>
 
     @kotlin.jvm.Throws(JSONException :: class)
@@ -44,40 +40,28 @@ interface SyncFunctionsDao {
 
     }
 
-    // Households
-
-    @Query("SELECT * FROM " + TableContracts.HouseholdTable.TABLE_NAME
-            + " WHERE " + TableContracts.HouseholdTable.COLUMN_ID + " LIKE :id ")
-    fun updateQueryhhs(id: String?) : Households
-
-
-    fun updateSyncedhhs(id: String?) : Households
-    {
-        val synced = updateQueryhhs(id)
-
-        synced.synced = "1"
-        synced.syncDate = Date().toString()
-        DssRoomDatabase.dbInstance?.householdsDao()?.updateHousehold(synced)
-
-        return synced
-    }
 //************************************************************************************************************
 
     // MWRA
 
-
-    /*@Query("SELECT * FROM mwras, hhs WHERE mwras.hdssid LIKE hhs.hdssid AND mwras.synced is \'\' " +
-            "AND hhs.istatus = 1 ORDER BY mwras._id ASC ")*/
-    @Query("SELECT * FROM " + TableContracts.MWRATable.TABLE_NAME + " WHERE "
-            + TableContracts.MWRATable.COLUMN_SYNCED
-            + " is \'\' AND (" + TableContracts.MWRATable.COLUMN_ISTATUS
-            + "  != 4 ) ORDER BY " + TableContracts.MWRATable.COLUMN_ID + " ASC")
+    @Query("SELECT * FROM MWRAs WHERE (synced is '' OR synced is NULL) AND (istatus != 4) ORDER BY _id ASC ")
     fun getUnsyncedMWRAS_internal() : List<Mwra>
+
+    private fun getUnsycedAdjustedMWRAS_internal() : List<Mwra> {
+        val hhsSync = getUnsyncedHousehols_internal()
+        val allMwras = getUnsyncedMWRAS_internal()
+        val toSyncMwras = arrayListOf<Mwra>()
+        hhsSync.forEach { hhs  ->
+            val mwras = allMwras.filter { it.hdssId == hhs.hdssId && it.uuid == hhs.uid}
+            toSyncMwras.addAll(mwras)
+        }
+        return toSyncMwras
+    }
 
     @kotlin.jvm.Throws(JSONException :: class)
     fun getUnsyncedMwras() : JSONArray?
     {
-        val allForms = getUnsyncedMWRAS_internal()
+        val allForms = getUnsycedAdjustedMWRAS_internal()
 
         val jsonArray = JSONArray()
         for (i in allForms)
@@ -92,39 +76,28 @@ interface SyncFunctionsDao {
 
     }
 
-
-    @Query("SELECT * FROM " + TableContracts.MWRATable.TABLE_NAME
-            + " WHERE " + TableContracts.MWRATable.COLUMN_ID + " LIKE :id ")
-    fun updateQueryMWRA(id: String?) : Mwra
-
-
-    fun updateSyncedMWRAs(id: String?) : Mwra
-    {
-        val synced = updateQueryMWRA(id)
-
-        synced.synced = "1"
-        synced.syncDate = Date().toString()
-        DssRoomDatabase.dbInstance?.mwraDao()?.updateMwra(synced)
-        return synced
-    }
 //****************************************************************************************************************
 
     // Outcome
 
-    /*@Query("SELECT * FROM " + TableContracts.OutcomeTable.TABLE_NAME
-            + " WHERE " + TableContracts.OutcomeTable.COLUMN_SYNCED
-            + " is \'\' AND (" + TableContracts.OutcomeTable.COLUMN_ISTATUS
-            + " != 4 ) ORDER BY " + TableContracts.OutcomeTable.COLUMN_ID + " ASC")*/
-
-    @Query("SELECT * FROM outcomes, hhs WHERE outcomes.hdssid LIKE hhs.hdssid AND outcomes.synced is \'\' " +
-           "AND hhs.istatus = 1 ORDER BY outcomes._id ASC ")
+    @Query("SELECT * FROM outcomes WHERE synced is '' OR synced is NULL ORDER BY _id ASC")
     fun getUnsyncedOutcome_internal() : List<Outcome>
+
+    private fun getUnsycedAdjustedOutcomes_internal() : List<Outcome> {
+        val mwras = getUnsyncedMWRAS_internal()
+        val allOutcomes = getUnsyncedOutcome_internal()
+        val toSyncOutcomes = arrayListOf<Outcome>()
+        mwras.forEach { mwra  ->
+            val mwraOutcomes = allOutcomes.filter { it.hdssId == mwra.hdssId && it.msno == mwra.sNo}
+            toSyncOutcomes.addAll(mwraOutcomes)
+        }
+        return toSyncOutcomes
+    }
 
     @kotlin.jvm.Throws(JSONException :: class)
     fun getUnsyncedOutcome() : JSONArray?
     {
-        val allForms = getUnsyncedOutcome_internal()
-
+        val allForms = getUnsycedAdjustedOutcomes_internal()
         val jsonArray = JSONArray()
         for (i in allForms)
         {
@@ -137,29 +110,11 @@ interface SyncFunctionsDao {
         return jsonArray
 
     }
-
-
-    @Query("SELECT * FROM " + TableContracts.OutcomeTable.TABLE_NAME
-            + " WHERE " + TableContracts.OutcomeTable.COLUMN_ID + " LIKE :id ")
-    fun updateQueryOutcome(id: String?) : Outcome
-
-
-    fun updateSyncedoutcomes(id: String?) : Outcome
-    {
-        val synced = updateQueryOutcome(id)
-
-        synced.synced = "1"
-        synced.syncDate = Date().toString()
-        DssRoomDatabase.dbInstance?.OutcomeDao()?.updateOutcome(synced)
-        return synced
-    }
-
-
     /**************** EntryLog********************/
 
     @Query("SELECT * FROM " + TableContracts.EntryLogTable.TABLE_NAME + " WHERE "
             + TableContracts.EntryLogTable.COLUMN_SYNCED
-            + " is \'\' ORDER BY  id ASC")
+            + " is \'\' OR synced is NULL ORDER BY  id ASC")
     fun getUnsyncedEntryLog_internal() : List<EntryLog>
 
     @kotlin.jvm.Throws(JSONException :: class)
@@ -179,11 +134,6 @@ interface SyncFunctionsDao {
         return jsonArray
 
     }
-
-
-
-
-
     /******************* DOWNLOAD DATA FUNCTIONS******************************************* */
 
     @Throws(JSONException ::class)
@@ -220,8 +170,6 @@ interface SyncFunctionsDao {
             villageDao.deleteVillagesTable()
         }
     }
-
-
 
     // Users
 

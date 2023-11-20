@@ -22,7 +22,6 @@ import java.io.File;
 
 import edu.aku.hassannaqvi.dss_matiari.R;
 import edu.aku.hassannaqvi.dss_matiari.core.MainApp;
-import edu.aku.hassannaqvi.dss_matiari.database.AndroidManager;
 import edu.aku.hassannaqvi.dss_matiari.databinding.ActivityMainBinding;
 import edu.aku.hassannaqvi.dss_matiari.models.Households;
 import edu.aku.hassannaqvi.dss_matiari.newstruct.activity.SyncNewAC;
@@ -104,38 +103,6 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    /*@Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        Intent intent = null;
-        switch (item.getItemId()) {
-            case R.id.onSync:
-//                intent = new Intent(MainActivity.this, SyncActivity.class);
-                // IS_LOGIN = To differentiate before and after login download
-                // For after login sync data download
-                AppConstants.IS_LOGIN = true;
-                //AppConstants.gotoActivity(this, SyncNewAC.class, false);
-                startActivity(new Intent(this, SyncNewAC.class));
-                break;
- *//*            case R.id.checkOpenForms:
-                intent = new Intent(MainActivity.this, PendingFormsActivity.class);
-                break;
-            case R.id.formsReportDate:
-                intent = new Intent(MainActivity.this, FormsReportDate.class);
-                break;*//*
-            case R.id.checkOpenForms:
-                intent = new Intent(MainActivity.this, FormsReportCluster.class);
-                break;
-            case R.id.sendDB:
-                sendEmail();
-                return true;
-            case R.id.dbm:
-                startActivity(new Intent(this, AndroidManager.class));
-        }
-        startActivity(intent);
-        return super.onOptionsItemSelected(item);
-    }
-*/
-
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int menuItemId = item.getItemId();
@@ -144,17 +111,19 @@ public class MainActivity extends AppCompatActivity {
             // For after login sync data download
             AppConstants.IS_LOGIN = true;
             AppConstants.gotoActivity(this, SyncNewAC.class, false);
-/*        } else if (menuItemId == R.id.changePassword) {
-            AppConstants.gotoActivity(activity, ChangePassAC.class, false);*/
+       } else if (menuItemId == R.id.checkOpenForms) {
+            AppConstants.gotoActivity(this, FormsReportCluster.class, false);
         } else if (menuItemId == R.id.sendDB) {
             sendEmail();
             return true;
         }
         return super.onOptionsItemSelected(item);
     }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.item_menu, menu);
+        menu.findItem(R.id.sendDB).setVisible(MainApp.admin);
         return super.onCreateOptionsMenu(menu);
     }
 

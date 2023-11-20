@@ -37,18 +37,18 @@ interface OutcomeDao {
 
 
     @Query(
-        "SELECT * FROM " + TableContracts.OutcomeTable.TABLE_NAME + " WHERE "
+        "SELECT * FROM " + TableContracts.OutcomeTable.TABLE_NAME + " WHERE hdssid LIKE :hdssid AND "
                 + TableContracts.OutcomeTable.COLUMN_MUID + " LIKE :muid AND "
-                /*+ TableContracts.OutcomeTable.COLUMN_MSNO + " LIKE :msno AND "*/
+                + TableContracts.OutcomeTable.COLUMN_MSNO + " LIKE :msno AND "
                 + TableContracts.OutcomeTable.COLUMN_SNO + " LIKE :sno ORDER BY "
                 + TableContracts.OutcomeTable.COLUMN_ID + " ASC"
     )
-    fun getOutcomeByID_internal(muid: String, sno: String): Outcome?
+    fun getOutcomeByID_internal(hdssid : String, muid: String, msno: String, sno: String): Outcome?
 
 
     @Throws(JSONException::class)
-    fun getOutcomeBYID(muid: String, sno: String): Outcome? {
-        val outcome = getOutcomeByID_internal(muid, sno)
+    fun getOutcomeBYID(hdssid: String, muid: String, msno: String, sno: String): Outcome? {
+        val outcome = getOutcomeByID_internal(hdssid, muid, msno, sno)
         if (outcome == null) {
             val tempOutcome = Outcome()
             return tempOutcome
@@ -105,12 +105,12 @@ interface OutcomeDao {
     fun getDataById(id: Int): Outcome
 
     // Update sync status as success
-    fun updateSyncSuccess(responses: List<SyncModelNew.WebResponse>?) {
-        if (responses != null && responses.size > 0 && responses[0].error === 0) {
+    fun updateSyncSuccess(responses: List<SyncModelNew.WebResponse>) {
+        if (responses.size > 0 && responses[0].error == 0) {
             val syncedDate: String = DateUtils.getCurrentDateTime()
             val synced = "1"
             for (i in responses.indices) {
-                val forms: Outcome = getDataById(responses[i].getId())
+                val forms: Outcome = getDataById(responses[i].id)
                 forms.syncDate = syncedDate
                 forms.synced = synced
                 forms.isError = false

@@ -319,6 +319,7 @@ public class FPHouseholdAdapter extends RecyclerView.Adapter<FPHouseholdAdapter.
                                 MainApp.position = viewHolder.getAdapterPosition();
                                 if (!MainApp.households.getIStatus().equals("1") && Integer.parseInt(MainApp.households.getVisitNo()) < 3) {
                                     MainApp.households.populateMeta(viewHolder.getLayoutPosition());
+                                    MainApp.households.setRegRound("1");
                                     Intent intent = new Intent(mContext, SectionAActivity.class);
                                     ((FPHouseholdActivity) mContext).MemberInfoLauncher.launch(intent);
                                 } else {
@@ -339,7 +340,6 @@ public class FPHouseholdAdapter extends RecyclerView.Adapter<FPHouseholdAdapter.
 
         }
     }
-
 
 
     private void editHousehold(int position) {
