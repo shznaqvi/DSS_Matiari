@@ -51,7 +51,6 @@ public class FpMwraAdapter extends RecyclerView.Adapter<FpMwraAdapter.ViewHolder
 
         db = MainApp.appInfo.dbHelper;
 
-
     }
 
 
@@ -77,7 +76,7 @@ public class FpMwraAdapter extends RecyclerView.Adapter<FpMwraAdapter.ViewHolder
 
         try {
             //String curPregStatus = db.getFollowupsBySno(followUpsSche.getRb01(), followUpsSche.getFRound()).getRc07();
-                String curPregStatus = Objects.requireNonNull(db.mwraDao().getFollowupsBySno(MainApp.households.getUid(), followUpsSche.getRb01(), followUpsSche.getFRound())).getRb07();
+                String curPregStatus = Objects.requireNonNull(db.mwraDao().getFollowupsBySno(MainApp.households.getUid(), followUpsSche.getRb01(), followUpsSche.getFRound())).getSB().getRb07();
                 if (!curPregStatus.equals("")) {
                     pregStatus = curPregStatus.equals("1") ? "Pregnant" : " Not Pregnant ";
                 }

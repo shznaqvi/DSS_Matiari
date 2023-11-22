@@ -66,7 +66,7 @@ public class IdentificationActivity extends AppCompatActivity {
             case 2:
                 bi.btnContinue.setText("Open Followups List");
                 MainApp.households = new Households();
-                MainApp.mwra = new Mwra();
+                //MainApp.mwra = new Mwra();
                 MainApp.outcome = new Outcome();
                 openIntent = new Intent(this, FPHouseholdActivity.class);
                 break;

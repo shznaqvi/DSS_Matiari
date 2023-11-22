@@ -10,7 +10,7 @@
         <!--MWRA Followups-->
         <variable
             name="followups"
-            type="edu.aku.hassannaqvi.dss_matiari.models.Mwra" />
+            type="edu.aku.hassannaqvi.dss_matiari.models.Mwra.SD" />
 
     </data>
 

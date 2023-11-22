@@ -67,8 +67,8 @@ interface SyncFunctionsDao {
         for (i in allForms)
         {
 
-            i.Hydrate(i)
-            jsonArray.put(i.toJSONObject())
+            //i.Hydrate(i)
+            //jsonArray.put(i.toJSONObject())
 
         }
 

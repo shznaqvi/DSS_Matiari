@@ -1,7 +1,6 @@
 package edu.aku.hassannaqvi.dss_matiari.ui.sections;
 
 
-import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.fpMwra;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.mwra;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.outcome;
 
@@ -16,7 +15,6 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
-import android.widget.Switch;
 import android.widget.Toast;
 import com.validatorcrawler.aliazaz.Validator;
 
@@ -26,17 +24,14 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
-import java.util.regex.Pattern;
+import java.util.Objects;
 
 import edu.aku.hassannaqvi.dss_matiari.R;
-import edu.aku.hassannaqvi.dss_matiari.contracts.TableContracts;
 import edu.aku.hassannaqvi.dss_matiari.core.MainApp;
 
 import edu.aku.hassannaqvi.dss_matiari.databinding.ActivitySectionEBinding;
 import edu.aku.hassannaqvi.dss_matiari.models.Outcome;
 import edu.aku.hassannaqvi.dss_matiari.room.DssRoomDatabase;
-import edu.aku.hassannaqvi.dss_matiari.ui.EndingActivity;
-import edu.aku.hassannaqvi.dss_matiari.ui.lists.MwraActivity;
 
 public class SectionEActivity extends AppCompatActivity {
 
@@ -87,9 +82,9 @@ public class SectionEActivity extends AppCompatActivity {
                 if(outcome.getUid().equals(""))
                 {
                     MainApp.ROUND = mwra.getRound();
-                    bi.rc03dob.setText(mwra.getRb21());
-                    outcome.setRc03(mwra.getRb21());
-                    String date = toBlackVisionDate(mwra.getRb21());
+                    bi.rc03dob.setText(mwra.getSC().getRb21());
+                    outcome.setRc03(mwra.getSC().getRb21());
+                    String date = toBlackVisionDate(mwra.getSB().getRb21());
                     bi.rc06.setMinDate(date);
                 }else{
                     MainApp.ROUND = mwra.getRound();
@@ -98,14 +93,14 @@ public class SectionEActivity extends AppCompatActivity {
                 // Followup
             case "":
                 //for unreported outcome in followup
-                if(mwra.getRb15().equals(""))
+                if(mwra.getSC().getRb15().equals(""))
                 {
                     // new Registration
                     if(outcome.getUid().equals(""))
                     {
                         MainApp.ROUND = mwra.getRound();
-                        outcome.setRc03(mwra.getRb21());
-                        String date = toBlackVisionDate(mwra.getRb21());
+                        outcome.setRc03(mwra.getSC().getRb21());
+                        String date = toBlackVisionDate(mwra.getSC().getRb21());
                         bi.rc06.setMinDate(date);
                     }else{
                         MainApp.ROUND = mwra.getRound();
@@ -116,8 +111,8 @@ public class SectionEActivity extends AppCompatActivity {
                     if(outcome.getUid().equals(""))
                     {
                         MainApp.ROUND = MainApp.fpMwra.getFRound();
-                        outcome.setRc03(mwra.getRb15());
-                        String date = toBlackVisionDate(mwra.getRb15());
+                        outcome.setRc03(mwra.getSC().getRb15());
+                        String date = toBlackVisionDate(mwra.getSC().getRb15());
                         bi.rc06.setMinDate(date);
                         bi.rc03dob.setEnabled(false);
                     }else{
@@ -278,7 +273,7 @@ public class SectionEActivity extends AppCompatActivity {
             Calendar cal = Calendar.getInstance();
 
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
-            cal.setTime(sdf.parse(mwra.getRb01a()));// all done
+            cal.setTime(Objects.requireNonNull(sdf.parse(mwra.getSC().getRb01a())));// all done
 
             sdf = new SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH);
 

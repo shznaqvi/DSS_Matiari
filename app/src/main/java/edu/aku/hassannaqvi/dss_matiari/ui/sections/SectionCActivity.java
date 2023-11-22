@@ -2,21 +2,15 @@ package edu.aku.hassannaqvi.dss_matiari.ui.sections;
 
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.PROJECT_NAME;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.allMwraRefusedOrMigrated;
-import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.followUpsScheHHList;
-import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.followUpsScheMWRAList;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.fpMwra;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.households;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.mwra;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.mwraStatus;
-import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.selectedFpHousehold;
-import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.selectedMember;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.sharedPref;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.RadioGroup;
@@ -39,7 +33,6 @@ import edu.aku.hassannaqvi.dss_matiari.R;
 import edu.aku.hassannaqvi.dss_matiari.core.MainApp;
 import edu.aku.hassannaqvi.dss_matiari.databinding.ActivitySectionCBinding;
 import edu.aku.hassannaqvi.dss_matiari.models.Mwra;
-import edu.aku.hassannaqvi.dss_matiari.models.Outcome;
 import edu.aku.hassannaqvi.dss_matiari.room.DssRoomDatabase;
 
 public class SectionCActivity extends AppCompatActivity {
@@ -69,11 +62,10 @@ public class SectionCActivity extends AppCompatActivity {
         mwra.populateMetaFollowups();
 
         sC = new Mwra.SC();
-        mwra.setsC(sC);
+        mwra.setSC(sC);
 
 
         try {
-            //followups = db.getFollowupsBySno(MainApp.fpMwra.getRb01(), MainApp.fpMwra.getFRound());
             mwra = db.mwraDao().getFollowupsBySno(MainApp.households.getUid(), MainApp.fpMwra.getRb01(), MainApp.fpMwra.getFRound());
         } catch (JSONException e) {
             e.printStackTrace();
@@ -195,6 +187,7 @@ public class SectionCActivity extends AppCompatActivity {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
                 boolean isAvailable = false;
+                boolean isMigratedOrRefused = false;
                 if (bi.rb1004.isChecked()) {
                     for (String[] arr : mwraStatus.keySet()) {
                         if (arr[0].equals(fpMwra.getMuid()) && arr[1].equals(fpMwra.getHdssid())) {
@@ -308,10 +301,10 @@ public class SectionCActivity extends AppCompatActivity {
 
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
 
-            cal.setTime(sdf.parse(sC.getRb01a()));// all done
+            cal.setTime(Objects.requireNonNull(sdf.parse(sC.getRb01a())));// all done
 
             //cal2.setTime(sdf.parse(fpMwra.getRa01().substring(9, 19)));
-            cal2.setTime(sdf.parse(fpMwra.getRa01().getDate()));
+            cal2.setTime(Objects.requireNonNull(sdf.parse(fpMwra.getRa01().getDate())));
 
             sdf = new SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH);
 

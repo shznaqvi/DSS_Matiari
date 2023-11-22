@@ -1,11 +1,7 @@
 package edu.aku.hassannaqvi.dss_matiari.models;
 
-import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.PROJECT_NAME;
-
-import android.database.Cursor;
 import android.util.Log;
 
-import androidx.annotation.NonNull;
 import androidx.databinding.BaseObservable;
 import androidx.databinding.Bindable;
 import androidx.databinding.Observable;
@@ -610,10 +606,10 @@ public class Outcome extends BaseObservable implements Observable {
     public void populateMeta() {
         MainApp.outcome.setUuid(MainApp.mwra.getUid());
         MainApp.outcome.setMuid(MainApp.mwra.getUid().split("_")[0]);
-        MainApp.outcome.setMsno(MainApp.mwra.getRb01());
+        MainApp.outcome.setMsno(MainApp.mwra.getSC().getRb01());
         MainApp.outcome.setSysDate(MainApp.mwra.getSysDate());
-        MainApp.outcome.setRb02(MainApp.mwra.getRb02());
-        MainApp.outcome.setRb01a(MainApp.mwra.getRb01a());
+        MainApp.outcome.setRb02(MainApp.mwra.getSC().getRb02());
+        MainApp.outcome.setRb01a(MainApp.mwra.getSC().getRb01a());
         MainApp.outcome.setRound(MainApp.mwra.getRound());
         MainApp.outcome.setUcCode(MainApp.households.getUcCode());
         MainApp.outcome.setVillageCode(MainApp.households.getVillageCode());

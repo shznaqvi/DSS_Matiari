@@ -40,93 +40,6 @@ public class Households extends BaseObservable implements Observable {
 
     @Ignore
     private String round = StringUtils.EMPTY;
-    @Ignore
-    private String ra01 = StringUtils.EMPTY;
-    @Ignore
-    private String ra01v2 = StringUtils.EMPTY;
-    @Ignore
-    private String ra01v3 = StringUtils.EMPTY;
-    @Ignore
-    private String ra02 = StringUtils.EMPTY;
-    @Ignore
-    private String ra04 = StringUtils.EMPTY;
-    @Ignore
-    private String ra03 = StringUtils.EMPTY;
-    @Ignore
-    private String ra05 = StringUtils.EMPTY;
-    @Ignore
-    private String ra07 = StringUtils.EMPTY;
-    @Ignore
-    private String ra06 = StringUtils.EMPTY;
-    @Ignore
-    private String ra08 = StringUtils.EMPTY;
-    @Ignore
-    private String ra09 = StringUtils.EMPTY;
-    @Ignore
-    private String ra10 = StringUtils.EMPTY;
-    @Ignore
-    private String ra11 = StringUtils.EMPTY;
-    @Ignore
-    private final String ra11x = StringUtils.EMPTY;
-    @Ignore
-    private String ra12 = StringUtils.EMPTY;
-    @Ignore
-    private final String ra12x = StringUtils.EMPTY;
-    @Ignore
-    private String ra13 = StringUtils.EMPTY;
-    @Ignore
-    private final String ra13x = StringUtils.EMPTY;
-    @Ignore
-    private String ra14 = StringUtils.EMPTY;
-    @Ignore
-    private String ra15 = StringUtils.EMPTY;
-    @Ignore
-    private final String ra16 = StringUtils.EMPTY;
-    @Ignore
-    private String ra17_a1 = StringUtils.EMPTY;
-    @Ignore
-    private String ra17_b1 = StringUtils.EMPTY;
-    @Ignore
-    private String ra17_c1 = StringUtils.EMPTY;
-    @Ignore
-    private String ra17_d1 = StringUtils.EMPTY;
-    @Ignore
-    private String ra17_a2 = StringUtils.EMPTY;
-    @Ignore
-    private String ra17_b2 = StringUtils.EMPTY;
-    @Ignore
-    private String ra17_c2 = StringUtils.EMPTY;
-    @Ignore
-    private String ra17_d2 = StringUtils.EMPTY;
-    @Ignore
-    private String ra17_a3 = StringUtils.EMPTY;
-    @Ignore
-    private String ra17_b3 = StringUtils.EMPTY;
-    @Ignore
-    private String ra17_c3 = StringUtils.EMPTY;
-    @Ignore
-    private String ra17_d3 = StringUtils.EMPTY;
-    @Ignore
-    private String ra18 = StringUtils.EMPTY;
-    @Ignore
-    private String ra19a = StringUtils.EMPTY;
-    @Ignore
-    private String ra19ax = StringUtils.EMPTY;
-    @Ignore
-    private String ra19b = StringUtils.EMPTY;
-    @Ignore
-    private String ra19bx = StringUtils.EMPTY;
-    @Ignore
-    private String ra19c = StringUtils.EMPTY;
-    @Ignore
-    private String ra19cx = StringUtils.EMPTY;
-    @Ignore
-    private String ra20 = StringUtils.EMPTY;
-    @Ignore
-    private String ra21 = StringUtils.EMPTY;
-    @Ignore
-    private final String ra22 = StringUtils.EMPTY;
-
     // For local use
     // This is used for resolving data while posting
     @ColumnInfo(defaultValue = "0")
@@ -207,7 +120,7 @@ public class Households extends BaseObservable implements Observable {
     @ColumnInfo(name = HouseholdTable.COLUMN_SYNCED_DATE)
     private transient String syncDate = StringUtils.EMPTY;
 
-    private String round = StringUtils.EMPTY;
+    //private String round = StringUtils.EMPTY;
 
     @SerializedName("s1")
     private SA sA;

@@ -46,7 +46,6 @@ public class SectionBActivity extends AppCompatActivity {
     private static final String TAG = "SectionBActivity";
     ActivitySectionBBinding bi;
     private DssRoomDatabase db;
-    int prePregNum = 0;
 
     private Mwra.SB sB;
 
@@ -59,23 +58,25 @@ public class SectionBActivity extends AppCompatActivity {
         bi = DataBindingUtil.setContentView(this, R.layout.activity_section_b);
         bi.setCallback(this);
 
+        db = MainApp.appInfo.dbHelper;
+
         String date = toBlackVisionDate("2023-01-01");
         bi.rb01a.setMinDate(date);
 
-        MainApp.mwra.populateMeta();
-        sB = new Mwra.SB();
-        mwra.setsB(sB);
+        //MainApp.mwra = db.mwraDao().getMwraByUUId(households.getUid(), households.getHdssId(), sB.getRb01(), "1");
+
+        sB = Mwra.SB.getData();
+        sB = sB == null ? new Mwra.SB() : sB;
+        if(sB.getRb01().equals("")) {
+            sB.setRb01(String.valueOf(mwraCount + 1));
+        }
         bi.setMwra(sB);
 
+
+
+
+
         setListener();
-
-        /*// set default model values if new mwra
-        if (mwra.getRb01().equals("")) {
-            mwra.setRb01(String.valueOf(mwraCount + 1));
-            mwra.populateMeta();
-        }
-
-        bi.setMwra(mwra);*/
         setTitle(R.string.marriedwomenregistration_mainheading);
         setImmersive(true);
 
@@ -102,8 +103,6 @@ public class SectionBActivity extends AppCompatActivity {
 
     private void setDateRanges() {
         try {
-
-
             Calendar cal = Calendar.getInstance();
 
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
@@ -263,36 +262,46 @@ public class SectionBActivity extends AppCompatActivity {
         // New form
         // If 'Edit form' option is selected
         // Check data in db
-         Mwra mwra = db.mwraDao().getMwraByUUId(households.getUid(), households.getHdssId(), sB.getRb01(), households.getRegRound());
-         if(mwra != null){
-             MainApp.mwra = mwra;
-             mwra.setPregnum("0");
-             if (sB.getRb07().equals("1")) {
-                 mwra.setPregnum(String.valueOf(Integer.parseInt(mwra.getPregnum()) + 1));
-             }
+         //Mwra mwra = db.mwraDao().getMwraByUUId(households.getUid(), households.getHdssId(), sB.getRb01(), households.getRegRound());
+         //if(mwra != null){
+             //MainApp.mwra = mwra;
 
-             if (sB.getRb18().equals("1")) {
-                 mwra.setPregnum(String.valueOf(Integer.parseInt(mwra.getPregnum()) + 1));
-             }
+        Mwra.saveMainDataReg(households.getUid(), households.getHdssId(), sB.getRb01(), households.getRegRound());
+        mwra.setSNo(sB.getRb01());
 
-             if(sB.getRb07().equals("2") && sB.getRb18().equals("2")){
+             if(!mwra.getUid().contains("_")) {
                  mwra.setPregnum("0");
+                 if (sB.getRb07().equals("1")) {
+                     mwra.setPregnum(String.valueOf(Integer.parseInt(mwra.getPregnum()) + 1));
+                 }
+
+                 if (sB.getRb18().equals("1")) {
+                     mwra.setPregnum(String.valueOf(Integer.parseInt(mwra.getPregnum()) + 1));
+                 }
+
+                 if (sB.getRb07().equals("2") && sB.getRb18().equals("2")) {
+                     mwra.setPregnum("0");
+                 }
              }
 
-             if(bi.rb1801.isChecked())
-             {
+
+
+             if(bi.rb1801.isChecked()) {
                  Intent forwardIntent = new Intent(this, SectionEActivity.class).putExtra("complete", true);
                  forwardIntent.setFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT);
                  setResult(RESULT_OK, forwardIntent);
                  finish();
-                 Mwra.saveMainDataReg(households.getUid(), households.getHdssId(), sB.getRb01(), households.getRegRound(), sB);
+                 //Mwra.saveMainDataReg(households.getUid(), households.getHdssId(), sB.getRb01(), households.getRegRound());
+                 //Mwra.SB.saveData(sB);
                  startActivity(forwardIntent);
              } else {
                  setResult(RESULT_OK);
                  finish();
              }
 
-         }
+        Mwra.SB.saveData(sB);
+
+         //}
     }
 
    /* public void btnContinue(View view) throws JSONException {

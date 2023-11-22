@@ -24,17 +24,6 @@ interface OutcomeDao {
     @Update(onConflict = OnConflictStrategy.REPLACE)
     fun updateOutcome(outcome: Outcome): Int
 
-    /*@Query("SELECT "
-            + "MAX(" + TableContracts.OutcomeTable.COLUMN_SNO + ") AS " + TableContracts.OutcomeTable.COLUMN_SNO +
-            " FROM " + TableContracts.OutcomeTable.TABLE_NAME +
-            " WHERE " + TableContracts.OutcomeTable.COLUMN_UC_CODE + " LIKE :ucCode AND "
-            + TableContracts.OutcomeTable.COLUMN_VILLAGE_CODE + " LIKE :vCode AND " +
-            TableContracts.OutcomeTable.COLUMN_HOUSEHOLD_NO + " LIKE :hhNo AND " +
-            TableContracts.OutcomeTable.COLUMN_MSNO + " LIKE :msno" +
-            " GROUP BY " + TableContracts.OutcomeTable.COLUMN_HOUSEHOLD_NO )
-    fun getMaxChildredBYMother(ucCode : String, vCode : String, hhNo : String, msno: String) : Int
-*/
-
 
     @Query(
         "SELECT * FROM " + TableContracts.OutcomeTable.TABLE_NAME + " WHERE hdssid LIKE :hdssid AND "

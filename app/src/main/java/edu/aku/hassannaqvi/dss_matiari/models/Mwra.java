@@ -2,17 +2,13 @@ package edu.aku.hassannaqvi.dss_matiari.models;
 
 import static java.util.concurrent.TimeUnit.MILLISECONDS;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.PROJECT_NAME;
-import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.hdssid;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.households;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.mwra;
-
-import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.databinding.BaseObservable;
 import androidx.databinding.Bindable;
 import androidx.databinding.Observable;
-import androidx.databinding.PropertyChangeRegistry;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.Ignore;
@@ -23,7 +19,6 @@ import com.google.gson.reflect.TypeToken;
 
 import org.apache.commons.lang3.StringUtils;
 import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -37,7 +32,6 @@ import edu.aku.hassannaqvi.dss_matiari.contracts.TableContracts.MWRATable;
 import edu.aku.hassannaqvi.dss_matiari.core.MainApp;
 import edu.aku.hassannaqvi.dss_matiari.newstruct.global.AppConstants;
 import edu.aku.hassannaqvi.dss_matiari.room.DssRoomDatabase;
-import edu.aku.hassannaqvi.dss_matiari.room.HouseholdsDao;
 import edu.aku.hassannaqvi.dss_matiari.room.MwraDao;
 
 @Entity(tableName = MWRATable.TABLE_NAME)
@@ -149,51 +143,61 @@ public class Mwra extends BaseObservable implements Observable {
 
     }
 
-    public void init() {
-        setRound(MainApp.ROUND);
-        setSysDate(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.ENGLISH).format(new Date().getTime()));
-        setUserName(MainApp.user.getUsername());
-        setDeviceId(MainApp.deviceid);
-        setAppver(MainApp.appInfo.getAppVersion());
+    public static void init() {
+        mwra = new Mwra();
+        MainApp.mwra.setRound(MainApp.ROUND);
+        MainApp.mwra.setSysDate(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.ENGLISH).format(new Date().getTime()));
+        MainApp.mwra.setUserName(MainApp.user.getUsername());
+        MainApp.mwra.setDeviceId(MainApp.deviceid);
+        MainApp.mwra.setAppver(MainApp.appInfo.getAppVersion());
         if (MainApp.households != null) {
-            setUuid(MainApp.households.getUid());
+            MainApp.mwra.setUuid(MainApp.households.getUid());
         }
-        setVillageCode(MainApp.selectedVillage);
-        setUcCode(MainApp.selectedUC);
+        MainApp.mwra.setVillageCode(MainApp.selectedVillage);
+        MainApp.mwra.setUcCode(MainApp.selectedUC);
+
+        MainApp.mwra.setProjectName(PROJECT_NAME);
+        MainApp.mwra.setRound(MainApp.ROUND);
+        MainApp.mwra.setRegRound("1");
+        MainApp.mwra.setStructureNo(households.getStructureNo());
+        MainApp.mwra.setHhNo(households.getHhNo());
+        MainApp.mwra.setDeviceId(MainApp.deviceid);
+        MainApp.mwra.setHdssId(households.getHdssId());
+
     }
 
-    public void populateMeta() {
+    /*public static void populateMeta() {
 
-        setSysDate(MainApp.households.getSysDate());
-        setUuid(MainApp.households.getUid());  // not applicable in Form table
-        setUserName(MainApp.user.getUsername());
-        setDeviceId(MainApp.deviceid);
-        setAppver(MainApp.appInfo.getAppVersion());
-        setProjectName(PROJECT_NAME);
-        setRound(MainApp.ROUND);
-        setRegRound("1");
-        setUcCode(households.getUcCode());
-        setVillageCode(households.getVillageCode());
-        setStructureNo(households.getStructureNo());
-        setHhNo(households.getHhNo());
-        setDeviceId(MainApp.deviceid);
-        setHdssId(households.getHdssId());
-        setAppver(MainApp.versionName + "." + MainApp.versionCode);
+        MainApp.mwra.setSysDate(MainApp.households.getSysDate());
+        MainApp.mwra.setUuid(MainApp.households.getUid());  // not applicable in Form table
+        MainApp.mwra.setUserName(MainApp.user.getUsername());
+        MainApp.mwra.setDeviceId(MainApp.deviceid);
+        MainApp.mwra.setAppver(MainApp.appInfo.getAppVersion());
+        MainApp.mwra.setProjectName(PROJECT_NAME);
+        MainApp.mwra.setRound(MainApp.ROUND);
+        MainApp.mwra.setRegRound("1");
+        MainApp.mwra.setUcCode(households.getUcCode());
+        MainApp.mwra.setVillageCode(households.getVillageCode());
+        MainApp.mwra.setStructureNo(households.getStructureNo());
+        MainApp.mwra.setHhNo(households.getHhNo());
+        MainApp.mwra.setDeviceId(MainApp.deviceid);
+        MainApp.mwra.setHdssId(households.getHdssId());
+        MainApp.mwra.setAppver(MainApp.versionName + "." + MainApp.versionCode);
         //setPregnum("0");
 
     }
+*/
 
+    public static void populateMetaFollowups() {
 
-    public void populateMetaFollowups() {
+        MainApp.mwra.setUserName(MainApp.user.getUsername());
+        MainApp.mwra.setDeviceId(MainApp.deviceid);
+        MainApp.mwra.setAppver(MainApp.appInfo.getAppVersion());
 
-        setUserName(MainApp.user.getUsername());
-        setDeviceId(MainApp.deviceid);
-        setAppver(MainApp.appInfo.getAppVersion());
-
-        setSysDate(MainApp.households.getSysDate());
-        setUuid(MainApp.households.getUid());  // not applicable in Form table
-        setProjectName(PROJECT_NAME);
-        setRegRound("");
+        MainApp.mwra.setSysDate(MainApp.households.getSysDate());
+        MainApp.mwra.setUuid(MainApp.households.getUid());  // not applicable in Form table
+        MainApp.mwra.setProjectName(PROJECT_NAME);
+        MainApp.mwra.setRegRound("");
 
         // From FollowupsSche - MWRA
 
@@ -204,35 +208,42 @@ public class Mwra extends BaseObservable implements Observable {
         mwra.setRound(MainApp.fpMwra.getFRound());
         mwra.setSNo(MainApp.fpMwra.getRb01());
         mwra.setChild_count(MainApp.fpMwra.getChild_count());
-        mwra.getsC().setRb01(MainApp.fpMwra.getRb01());  // Line number of MWRA
-        mwra.getsC().setRb02(MainApp.fpMwra.getRb02());  // Name of MWRA
-        mwra.getsC().setRb03(MainApp.fpMwra.getRb03()); // Husband / Father Name
-        mwra.getsC().setRb04(MainApp.fpMwra.getRb04()); // DOB
+        mwra.getSC().setRb01(MainApp.fpMwra.getRb01());  // Line number of MWRA
+        mwra.getSC().setRb02(MainApp.fpMwra.getRb02());  // Name of MWRA
+        mwra.getSC().setRb03(MainApp.fpMwra.getRb03()); // Husband / Father Name
+        mwra.getSC().setRb04(MainApp.fpMwra.getRb04()); // DOB
         mwra.setPrePreg(MainApp.fpMwra.getRb07());
-        mwra.getsC().setRb06(MainApp.fpMwra.getRb06());
+        mwra.getSC().setRb06(MainApp.fpMwra.getRb06());
         mwra.setPreMaritalStaus(MainApp.fpMwra.getRb06());
         mwra.setPregnum(MainApp.fpMwra.getPregCount());
-        mwra.getsC().setRb22(MainApp.fpMwra.getRb22());
-        mwra.getsC().setRb23(MainApp.fpMwra.getRb23());
+        mwra.getSC().setRb22(MainApp.fpMwra.getRb22());
+        mwra.getSC().setRb23(MainApp.fpMwra.getRb23());
 
         long daysdiff = CalculateAge(MainApp.fpMwra.getRa01().getDate());
         long years = daysdiff / 365;
         long actualAge = Integer.parseInt(MainApp.fpMwra.getRb05()) + years;
-        mwra.getsC().setRb05(String.valueOf(actualAge));     // Age in Years
+        mwra.getSC().setRb05(String.valueOf(actualAge));     // Age in Years
     }
 
 
     /*FOR IDENTIFICATION INFORMATION - CLUSTER-WISE*/
     // Save data in db
-    public static void saveMainDataReg(String uuid, String hdssId, String sNo, String regRound, SB sB) throws JSONException {
+    public static void saveMainDataReg(String uuid, String hdssId, String sNo, String regRound) throws JSONException {
         MwraDao mwraDao = Objects.requireNonNull(DssRoomDatabase.getDbInstance()).mwraDao();
         Mwra form = mwraDao.getMwraByUUId(uuid, hdssId, sNo, regRound);
         if (form != null) {
             mwra = form;
+            mwra.setDeviceId(mwra.getDeviceId() + "_" + mwra.getDeviceId().substring(mwra.getDeviceId().length() - 1));
+            int repeatCount = (mwra.getDeviceId().length() - 16) / 2;
+            // new UID
+            String newUID = mwra.getDeviceId().substring(0, 16) + mwra.getId() + "_" + repeatCount;
+            mwra.setUid(newUID);
+            Objects.requireNonNull(DssRoomDatabase.getDbInstance()).mwraDao().updateMwra(mwra);
         } else {
+            init();
             mwra.setUid(AppConstants.generateUid());
             mwra.setId(mwraDao.addMwra(mwra));
-            Mwra.SB.saveData(sB);
+
         }
     }
 
@@ -244,6 +255,7 @@ public class Mwra extends BaseObservable implements Observable {
         if (form != null) {
             mwra = form;
         } else {
+            populateMetaFollowups();
             mwra.setUid(AppConstants.generateUid());
             mwra.setId(mwraDao.addMwra(mwra));
             Mwra.SC.saveData(sC);
@@ -425,27 +437,27 @@ public class Mwra extends BaseObservable implements Observable {
         this.syncDate = syncDate;
     }
 
-    public SB getsB() {
+    public SB getSB() {
         return sB;
     }
 
-    public void setsB(SB sB) {
+    public void setSB(SB sB) {
         this.sB = sB;
     }
 
-    public SC getsC() {
+    public SC getSC() {
         return sC;
     }
 
-    public void setsC(SC sC) {
+    public void setSC(SC sC) {
         this.sC = sC;
     }
 
-    public SD getsD() {
+    public SD getSD() {
         return sD;
     }
 
-    public void setsD(SD sD) {
+    public void setSD(SD sD) {
         this.sD = sD;
     }
 
@@ -517,13 +529,13 @@ public class Mwra extends BaseObservable implements Observable {
 
         // Save section object as json object in db
         public static void saveData(Mwra.SB data) {
-            mwra.setsB(data);
+            mwra.setSB(data);
             Objects.requireNonNull(DssRoomDatabase.getDbInstance()).mwraDao().updateMwra(mwra);
         }
 
         // Get section object by parsing json
         public static Mwra.SB getData() {
-            return mwra.getsB();
+            return mwra.getSB();
         }
 
         // This class is used to parse the object to save in room db
@@ -852,13 +864,13 @@ public class Mwra extends BaseObservable implements Observable {
 
         // Save section object as json object in db
         public static void saveData(Mwra.SC data) {
-            mwra.setsC(data);
+            mwra.setSC(data);
             Objects.requireNonNull(DssRoomDatabase.getDbInstance()).mwraDao().updateMwra(mwra);
         }
 
         // Get section object by parsing json
         public static Mwra.SC getData() {
-            return mwra.getsC();
+            return mwra.getSC();
         }
 
         // This class is used to parse the object to save in room db
@@ -1194,13 +1206,13 @@ public class Mwra extends BaseObservable implements Observable {
 
         // Save section object as json object in db
         public static void saveData(Mwra.SD data) {
-            mwra.setsD(data);
+            mwra.setSD(data);
             Objects.requireNonNull(DssRoomDatabase.getDbInstance()).mwraDao().updateMwra(mwra);
         }
 
         // Get section object by parsing json
         public static Mwra.SD getData() {
-            return mwra.getsD();
+            return mwra.getSD();
         }
 
         // This class is used to parse the object to save in room db
@@ -1767,7 +1779,7 @@ public class Mwra extends BaseObservable implements Observable {
         }
     }*/
 
-    public long CalculateAge(String dateOfVisit) {
+    public static long CalculateAge(String dateOfVisit) {
 
         long noOfDays = 0;
         String dateofReg = "";

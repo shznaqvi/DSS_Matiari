@@ -40,6 +40,8 @@ public class SectionDActivity extends AppCompatActivity {
     ActivitySectionDBinding bi;
     private DssRoomDatabase db;
 
+    private Mwra.SD sD;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,17 +53,19 @@ public class SectionDActivity extends AppCompatActivity {
         setDateRanges();
 
 
-        if (mwra.getUid() != null || mwra.getUid().equals("")) {
+        /*if (mwra.getUid() != null || mwra.getUid().equals("")) {
             try {
                 mwra.sDHydrate(mwra.getSD());
             } catch (JSONException e) {
                 e.printStackTrace();
             }
-        }
+        }*/
 
+        sD = Mwra.SD.getData();
+        sD = sD == null ? new Mwra.SD() : sD;
+        bi.setFollowups(sD);
 
-
-        bi.setFollowups(mwra);
+        //bi.setFollowups(mwra);
 
         setTitle(R.string.marriedwomenregistration_mainheading);
         setImmersive(true);
@@ -95,7 +99,7 @@ public class SectionDActivity extends AppCompatActivity {
             Calendar cal = Calendar.getInstance();
 
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
-            cal.setTime(sdf.parse(mwra.getRb01a()));// all done
+            cal.setTime(sdf.parse(mwra.getSB().getRb01a()));// all done
 
             sdf = new SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH);
 
@@ -133,7 +137,7 @@ public class SectionDActivity extends AppCompatActivity {
 
             Calendar lmpCal = Calendar.getInstance();
             SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
-            lmpCal.setTime(simpleDateFormat.parse(mwra.getRb08()));
+            lmpCal.setTime(simpleDateFormat.parse(mwra.getSB().getRb08()));
             sdf = new SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH);
             String dov = sdf.format(cal.getTime());
             String lmp = sdf.format(lmpCal.getTime());
@@ -153,7 +157,7 @@ public class SectionDActivity extends AppCompatActivity {
 
 
         if(!mwra.getUid().contains("_")) {
-            if (mwra.getRb07().equals("1")) {
+            if (mwra.getSC().getRb07().equals("1")) {
                 mwra.setPregnum(String.valueOf(Integer.parseInt(mwra.getPregnum()) + 1));
             } else {
                 mwra.setPregnum(String.valueOf(MainApp.pregcount));
@@ -172,21 +176,14 @@ public class SectionDActivity extends AppCompatActivity {
 
     private boolean updateDB() {
         int updcount = 0;
-        try {
 
-            //updcount = db.updatesFollowUpsColumn(TableContracts.FollowupsTable.COLUMN_SC, followups.sCtoString())
-            Mwra updatedFollowups = mwra;
-            updatedFollowups.setSC(mwra.sCtoString());
-            updatedFollowups.setSD(mwra.SDtoString());
-            updcount = db.mwraDao().updateMwra(mwra);
+        //updcount = db.updatesFollowUpsColumn(TableContracts.FollowupsTable.COLUMN_SC, followups.sCtoString())
+        Mwra updatedFollowups = mwra;
+        //updatedFollowups.setSC(mwra.sCtoString());
+        //updatedFollowups.setSD(mwra.SDtoString());
+        updcount = db.mwraDao().updateMwra(mwra);
 
 
-        } catch (JSONException e) {
-            e.printStackTrace();
-            Toast.makeText(this, "JSONException: " + e.getMessage(), Toast.LENGTH_SHORT).show();
-            Log.d(TAG, "updateDB (JSONException): " + e.getMessage());
-            return false;
-        }
         if (updcount == 1) {
             return true;
         } else {

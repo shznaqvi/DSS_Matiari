@@ -49,7 +49,6 @@ interface MwraDao {
     {
         val mwra = getAllMWRAByHH_internal(uc, village, structure, hhNo, regRound)
         mwra.forEach {
-            //it.sBHydrate(it.sb)
         }
         return mwra
     }
@@ -81,7 +80,6 @@ interface MwraDao {
         if(mwra == null)
         {
             val tempMwra = Mwra()
-            //tempMwra.Hydrate(mwra)
             return tempMwra
         }else{
             return mwra

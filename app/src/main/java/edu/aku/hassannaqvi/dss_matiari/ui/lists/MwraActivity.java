@@ -33,7 +33,6 @@ import java.util.ArrayList;
 import edu.aku.hassannaqvi.dss_matiari.R;
 import edu.aku.hassannaqvi.dss_matiari.adapters.MwraAdapter;
 import edu.aku.hassannaqvi.dss_matiari.core.MainApp;
-import edu.aku.hassannaqvi.dss_matiari.database.DatabaseHelper;
 import edu.aku.hassannaqvi.dss_matiari.databinding.ActivityMwraBinding;
 import edu.aku.hassannaqvi.dss_matiari.models.Mwra;
 import edu.aku.hassannaqvi.dss_matiari.room.DssRoomDatabase;
@@ -130,8 +129,8 @@ public class MwraActivity extends AppCompatActivity {
         Toast.makeText(this, "Activity Resumed!", Toast.LENGTH_SHORT).show();
         mwraCount = Math.round(MainApp.mwraList.size());
 
-        MainApp.mwra = new Mwra();
-        mwra.init();
+        /*MainApp.mwra = new Mwra();
+        Mwra.init();*/
         if (MainApp.mwraList.size() > 0) {
             fmAdapter.notifyItemChanged(Integer.parseInt(String.valueOf(selectedMember)));
         }
@@ -152,7 +151,7 @@ public class MwraActivity extends AppCompatActivity {
 
     public void addFemale() {
 
-
+        Mwra.init();
         if (MainApp.mwraList.size() >= Integer.parseInt(MainApp.households.getSA().getRa18())) {
             displayAddMoreDialog();
         } else {
@@ -164,8 +163,7 @@ public class MwraActivity extends AppCompatActivity {
     }
 
     private void addMoreFemale() {
-        MainApp.mwra = new Mwra();
-        mwra.init();
+        Mwra.init();
 
         int maxMWRA = db.mwraDao().getMaxMWRSNoBYHH(selectedUC, selectedVillage, selectedHhNO);
         int maxFpMWRA = db.FollowUpsScheDao().getMaxMWRANoBYHHFromFolloupsSche(selectedUC, selectedVillage, selectedHhNO);
@@ -214,7 +212,7 @@ public class MwraActivity extends AppCompatActivity {
             }
             if (resultCode == Activity.RESULT_CANCELED) {
                 // Write your code if there's no result
-                Toast.makeText(this, "Information for " + mwraList.get(selectedMember).getsB().getRb02() + " was not saved.4", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Information for " + mwraList.get(selectedMember).getSB().getRb02() + " was not saved.4", Toast.LENGTH_SHORT).show();
             }
         }
     }
