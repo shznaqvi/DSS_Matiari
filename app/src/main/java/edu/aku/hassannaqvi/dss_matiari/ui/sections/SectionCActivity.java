@@ -61,6 +61,7 @@ public class SectionCActivity extends AppCompatActivity {
 
         mwra.populateMetaFollowups();
 
+        sC = Mwra.SC.getData();
         sC = new Mwra.SC();
         mwra.setSC(sC);
 

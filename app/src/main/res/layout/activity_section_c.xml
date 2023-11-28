@@ -406,9 +406,6 @@
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
 
-
-
-
                 <androidx.cardview.widget.CardView
                     android:id="@+id/fldGrpCVrbAge"
                     style="@style/cardView">
@@ -626,7 +623,6 @@
                                 android:onClick='@{()->followups.setRb10("9")  + rb14.clearCheck() + rb16.clearCheck() + rb17.clearCheck() + rb18.clearCheck() + rb19.clearCheck()}'
                                 android:text="@string/rc0409" />
 
-
                         </RadioGroup>
 
                     </LinearLayout>
@@ -667,7 +663,6 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="match_parent"
                                     android:text="@string/Q_rb11" />
-
 
                             </LinearLayout>
 
@@ -873,7 +868,6 @@
                         android:orientation="vertical"
                         android:visibility="@{followups.rb11.equals(`2`) ? View.GONE : View.VISIBLE}"
                         tools:visibility="visible">
-
 
                         <!-- rb06  Radio   -->
                         <androidx.cardview.widget.CardView
@@ -1100,7 +1094,7 @@
                                                     android:layout_width="match_parent"
                                                     android:layout_height="wrap_content"
                                                     android:checked='@{followups.rb16.equals("3")}'
-                                                    android:onClick='@{()->followups.setRb16("3")}'
+                                                    android:onClick='@{()->followups.setRb16("3") + rb17.clearCheck()}'
                                                     android:text="@string/rc0903" />
 
                                                 <RadioButton
@@ -1108,7 +1102,7 @@
                                                     android:layout_width="match_parent"
                                                     android:layout_height="wrap_content"
                                                     android:checked='@{followups.rb16.equals("4")}'
-                                                    android:onClick='@{()->followups.setRb16("4")}'
+                                                    android:onClick='@{()->followups.setRb16("4") + rb17.clearCheck()}'
                                                     android:text="@string/rc0904" />
 
                                                 <RadioButton
@@ -1131,7 +1125,7 @@
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
                                         android:orientation="vertical"
-                                        android:visibility="@{followups.rb16.equals(`3`) || followups.rb16.equals(`4`) ? View.GONE : View.VISIBLE}">
+                                        android:visibility="@{followups.rb16.equals(`4`) ? View.GONE : View.VISIBLE}">
 
                                         <androidx.cardview.widget.CardView
                                             android:id="@+id/fldGrpCVrc10"
@@ -1153,7 +1147,7 @@
                                                         android:layout_width="0dp"
                                                         android:layout_height="match_parent"
                                                         android:layout_weight="1"
-                                                        android:text="@string/rc10" />
+                                                        android:text="@{followups.rb16.equals(`3`) ? @string/rc10_mis : @string/rc10}" />
 
                                                     <TextView
                                                         style="@style/quesNum"
@@ -1203,7 +1197,8 @@
                                         <!-- RB 17-->
                                         <androidx.cardview.widget.CardView
                                             android:id="@+id/fldGrpCVrc11"
-                                            style="@style/cardView">
+                                            style="@style/cardView"
+                                            android:visibility="@{followups.rb16.equals(`3`) || followups.rb16.equals(`4`) ? View.GONE : View.VISIBLE}">
 
                                             <LinearLayout
                                                 android:layout_width="match_parent"

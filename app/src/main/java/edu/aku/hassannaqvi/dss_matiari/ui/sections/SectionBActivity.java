@@ -63,17 +63,12 @@ public class SectionBActivity extends AppCompatActivity {
         String date = toBlackVisionDate("2023-01-01");
         bi.rb01a.setMinDate(date);
 
-        //MainApp.mwra = db.mwraDao().getMwraByUUId(households.getUid(), households.getHdssId(), sB.getRb01(), "1");
-
         sB = Mwra.SB.getData();
         sB = sB == null ? new Mwra.SB() : sB;
-        if(sB.getRb01().equals("")) {
+        if (sB.getRb01().equals("")) {
             sB.setRb01(String.valueOf(mwraCount + 1));
         }
         bi.setMwra(sB);
-
-
-
 
 
         setListener();
@@ -257,51 +252,39 @@ public class SectionBActivity extends AppCompatActivity {
     }
 
 
-    public void btnContinue(View view) throws JSONException{
+    public void btnContinue(View view) throws JSONException {
         if (!formValidation()) return;
-        // New form
-        // If 'Edit form' option is selected
-        // Check data in db
-         //Mwra mwra = db.mwraDao().getMwraByUUId(households.getUid(), households.getHdssId(), sB.getRb01(), households.getRegRound());
-         //if(mwra != null){
-             //MainApp.mwra = mwra;
-
         Mwra.saveMainDataReg(households.getUid(), households.getHdssId(), sB.getRb01(), households.getRegRound());
         mwra.setSNo(sB.getRb01());
 
-             if(!mwra.getUid().contains("_")) {
-                 mwra.setPregnum("0");
-                 if (sB.getRb07().equals("1")) {
-                     mwra.setPregnum(String.valueOf(Integer.parseInt(mwra.getPregnum()) + 1));
-                 }
+        if (!mwra.getUid().contains("_")) {
+            mwra.setPregnum("0");
+            if (sB.getRb07().equals("1")) {
+                mwra.setPregnum(String.valueOf(Integer.parseInt(mwra.getPregnum()) + 1));
+            }
 
-                 if (sB.getRb18().equals("1")) {
-                     mwra.setPregnum(String.valueOf(Integer.parseInt(mwra.getPregnum()) + 1));
-                 }
+            if (sB.getRb18().equals("1")) {
+                mwra.setPregnum(String.valueOf(Integer.parseInt(mwra.getPregnum()) + 1));
+            }
 
-                 if (sB.getRb07().equals("2") && sB.getRb18().equals("2")) {
-                     mwra.setPregnum("0");
-                 }
-             }
+            if (sB.getRb07().equals("2") && sB.getRb18().equals("2")) {
+                mwra.setPregnum("0");
+            }
+        }
 
-
-
-             if(bi.rb1801.isChecked()) {
-                 Intent forwardIntent = new Intent(this, SectionEActivity.class).putExtra("complete", true);
-                 forwardIntent.setFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT);
-                 setResult(RESULT_OK, forwardIntent);
-                 finish();
-                 //Mwra.saveMainDataReg(households.getUid(), households.getHdssId(), sB.getRb01(), households.getRegRound());
-                 //Mwra.SB.saveData(sB);
-                 startActivity(forwardIntent);
-             } else {
-                 setResult(RESULT_OK);
-                 finish();
-             }
+        if (bi.rb1801.isChecked()) {
+            Intent forwardIntent = new Intent(this, SectionEActivity.class).putExtra("complete", true);
+            forwardIntent.setFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT);
+            setResult(RESULT_OK, forwardIntent);
+            finish();
+            startActivity(forwardIntent);
+        } else {
+            setResult(RESULT_OK);
+            finish();
+        }
 
         Mwra.SB.saveData(sB);
 
-         //}
     }
 
    /* public void btnContinue(View view) throws JSONException {
