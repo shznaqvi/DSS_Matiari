@@ -201,6 +201,7 @@
 
     <string name="rc10_info">DD/MM/YYYY Use 98/98/9998 if not known</string>
     <string name="rc10"> ويم جي تاريخ</string>
+    <string name="rc10_mis"> حمل ضايع ٿيڻ جي تاريخ</string>
     <string name="rc1001">ها </string>
     <string name="rc1002">نه </string>
     <string name="rc1003">ڪوڙو حمل</string>
