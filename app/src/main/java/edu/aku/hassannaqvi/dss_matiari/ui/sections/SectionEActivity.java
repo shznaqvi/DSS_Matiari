@@ -55,16 +55,10 @@ public class SectionEActivity extends AppCompatActivity {
 
         setDateRanges();
 
-       //int maxchild = db.OutcomeDao().getMaxChildredBYMother(mwra.getUcCode(), mwra.getUcCode(), mwra.getHhNo(), mwra.getSNo());
-       //int maxchildFp = db.FollowUpsScheDao().getMaxChildrenNoBYMotherFromFolloupsSche(fpMwra.getUcCode(), fpMwra.getVillageCode(), fpMwra.getHhNo(), fpMwra.getMsno());
-        /*if(fpMwra.getChild_count() != null) {
-            MainApp.prevChildCount = Integer.parseInt(fpMwra.getChild_count());
-        }
-*/
         try {
             //outcome = db.getOutComeBYID(String.valueOf(++MainApp.childCount));
             String[] muid = mwra.getUid().split("_");
-            outcome = db.OutcomeDao().getOutcomeBYID(mwra.getHdssId(), muid[0], mwra.getSNo(), String.valueOf(++MainApp.prevChildCount));
+            outcome = db.OutcomeDao().getOutcomeBYID(mwra.getHdssId(), mwra.getSNo(), String.valueOf(++MainApp.prevChildCount));
         } catch (JSONException e) {
             e.printStackTrace();
             Toast.makeText(this, "JSONException(Outcome): " + e.getMessage(), Toast.LENGTH_SHORT).show();
