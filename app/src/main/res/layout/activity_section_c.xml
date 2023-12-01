@@ -1493,15 +1493,10 @@
                                             android:text="@={followups.rb21}"
                                             app:dateFormat="yyyy-MM-dd"
                                             app:maxDate="CR_DATE"
-                                            app:theme="@style/MaterialCalendarTheme"
-                                            />
-
+                                            app:theme="@style/MaterialCalendarTheme" />
 
                                     </LinearLayout>
                                 </androidx.cardview.widget.CardView>
-
-
-
 
                             </LinearLayout>
                         </LinearLayout>
