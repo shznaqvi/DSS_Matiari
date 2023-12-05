@@ -189,6 +189,8 @@ public class Mwra extends BaseObservable implements Observable {
     private String rb24 = StringUtils.EMPTY;
     @Ignore
     private String rb25 = StringUtils.EMPTY;
+    @Ignore
+    private String rb26 = StringUtils.EMPTY;
 
     @Ignore
     private String pregnum = StringUtils.EMPTY;
@@ -550,26 +552,7 @@ public class Mwra extends BaseObservable implements Observable {
         this.ageInMonths = ageInMonths;
     }
 
-    @Bindable
-    public String getRb24() {
-        return rb24;
-    }
 
-    public void setRb24(String rb24) {
-        this.rb24 = rb24;
-        setRb25(rb24.equals("1") ? this.rb25 : "");
-        notifyChange(BR.rb24);
-    }
-
-    @Bindable
-    public String getRb25() {
-        return rb25;
-    }
-
-    public void setRb25(String rb25) {
-        this.rb25 = rb25;
-        notifyChange(BR.rb25);
-    }
 
     @Bindable
     public String getRb01() {
@@ -623,15 +606,6 @@ public class Mwra extends BaseObservable implements Observable {
     }
 
 
-    @Bindable
-    public String getRb23() {
-        return rb23;
-    }
-
-    public void setRb23(String rb23) {
-        this.rb23 = rb23;
-        notifyChange(BR.rb23);
-    }
 
     @Bindable
     public String getRb04() {
@@ -840,9 +814,10 @@ public class Mwra extends BaseObservable implements Observable {
 
     public void setRb18(String rb18) {
         this.rb18 = rb18;
-        setRb19(rb18.equals("1") ? this.rb19 : "");
+        //setRb19(rb18.equals("1") ? this.rb19 : "");
         setRb20(rb18.equals("1") ? this.rb20 : "");
         setRb21(rb18.equals("1") ? this.rb21 : "");
+        setRb26(rb18.equals("1") ? this.rb26 : "");
         notifyChange(BR.rb18);
     }
 
@@ -875,6 +850,49 @@ public class Mwra extends BaseObservable implements Observable {
         this.rb21 = rb21;
         notifyChange(BR.rb21);
     }
+
+    @Bindable
+    public String getRb23() {
+        return rb23;
+    }
+
+    public void setRb23(String rb23) {
+        this.rb23 = rb23;
+        notifyChange(BR.rb23);
+    }
+
+    @Bindable
+    public String getRb24() {
+        return rb24;
+    }
+
+    public void setRb24(String rb24) {
+        this.rb24 = rb24;
+        setRb25(rb24.equals("1") ? this.rb25 : "");
+        notifyChange(BR.rb24);
+    }
+
+    @Bindable
+    public String getRb25() {
+        return rb25;
+    }
+
+    public void setRb25(String rb25) {
+        this.rb25 = rb25;
+        notifyChange(BR.rb25);
+    }
+
+    @Bindable
+    public String getRb26() {
+        return rb26;
+    }
+
+    public void setRb26(String rb26) {
+        this.rb26 = rb26;
+        setRb19(rb26.equals("1") || rb26.equals("5") ? this.rb19 : "");
+        notifyChange(BR.rb26);
+    }
+
 
     private synchronized void notifyChange(int propertyId) {
         if (propertyChangeRegistry == null) {
@@ -954,6 +972,7 @@ public class Mwra extends BaseObservable implements Observable {
             this.rb21 = json.getString("rb21");
             this.rb24 = json.getString(("rb24"));
             this.rb25 = json.getString(("rb25"));
+            this.rb26 = json.getString(("rb26"));
             this.pregnum = json.getString("pregnum");
         }
     }
@@ -989,6 +1008,8 @@ public class Mwra extends BaseObservable implements Observable {
             this.rb19 = json.getString("rb19");
             this.rb20 = json.getString("rb20");
             this.rb21 = json.getString("rb21");
+            this.rb21 = json.getString("rb21");
+            this.rb26 = json.getString("rb26");
             this.pregnum = json.getString("pregnum");
         }
     }
@@ -1018,6 +1039,7 @@ public class Mwra extends BaseObservable implements Observable {
                 .put("rb21", rb21)
                 .put("rb24", rb24)
                 .put("rb25", rb25)
+                .put("rb26", rb26)
                 .put("pregnum", pregnum);
 
         return json.toString();
@@ -1054,6 +1076,7 @@ public class Mwra extends BaseObservable implements Observable {
                 .put("rb19",rb19)
                 .put("rb20",rb20)
                 .put("rb21", rb21)
+                .put("rb26", rb26)
                 .put("pregnum", pregnum);
 
         ;

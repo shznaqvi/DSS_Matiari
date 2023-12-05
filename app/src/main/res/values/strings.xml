@@ -201,10 +201,10 @@
     <string name="rb25">Date of Ultrasound</string>
 
     <string name="rb26">Pregnancy Outcome </string>
-    <string name="rb2601">Pregnancy Outcome </string>
-    <string name="rb2602">Pregnancy Outcome </string>
-    <string name="rb2603">Pregnancy Outcome </string>
-    <string name="rb2605">Pregnancy Outcome </string>
+    <string name="rb2601">Live Birth  </string>
+    <string name="rb2602">Still birth  </string>
+    <string name="rb2603">Miscarriage </string>
+    <string name="rb2605">1 Live birth and still birth </string>
 
 
     <string name="rb16">Have you delivered an alive baby during the duration from our last visit and today? </string>
@@ -356,6 +356,7 @@
     <string name='Q_rb21' translatable="false">rb21</string>
     <string name='Q_rb24' translatable="false">rb24</string>
     <string name='Q_rb25' translatable="false">rb25</string>
+    <string name='Q_rb26' translatable="false">rb26</string>
 
     <string name='Q_rc01' translatable="false">rc01</string>
     <string name='Q_rc02' translatable="false">rc02</string>

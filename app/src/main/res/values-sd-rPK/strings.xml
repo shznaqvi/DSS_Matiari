@@ -107,7 +107,6 @@
     <string name="ra20"> ڇا هن گهر ۾ 14_49 سالن جون عورتون موجود آهن</string>
     <string name="ra20_a">ها</string>
     <string name="ra20_b"> نه </string>
-    <string name="ra10">سڃاڻپ جي آء ڊي </string>
     <string name="ra11b">بند پيل يا ڪو به اهل جواٻ ڏيندر موجود نه آهي</string>
     <string name="ra11c">انڪار ڪيو</string>
     <string name="ra11e">۔14 ۽ 49 سالن جي وچ ۾ ڪا به عورت ناهي </string>
@@ -157,6 +156,12 @@
     <string name="rb2402">نه</string>
     <string name="rb2403">يادگيرو(الٽراسائونڊ رپورٽ موجود نه آهي)</string>
     <string name="rb25">الٽراسائونڊ جي تاريخ</string>
+
+    <string name="rb26">Pregnancy Outcome </string>
+    <string name="rb2601">ٻار زنده ڄائو </string>
+    <string name="rb2602">ٻارمئل ڄائو  </string>
+    <string name="rb2603">حمل ضايع </string>
+    <string name="rb2605">ھڪ زنده ۽ ھڪ مئل </string>
 
     <string name="rc01">عورت جو سڃاڻپ نمبر</string>
     <string name="rc02"> عورت جو نالو</string>
@@ -253,6 +258,7 @@
     <string name="rc0902">ٻارمئل ڄائو</string>
     <string name="rc0903">حمل ضايع</string>
     <string name="rc0904">ڪوڙو حمل</string>
+    <string name="rc0905">ھڪ زنده ۽ ھڪ مئل</string>
     <string name="rb01a">داخل ٿيڻ جي تاريخ</string>
 
     <string name="signin">سائن ان</string>

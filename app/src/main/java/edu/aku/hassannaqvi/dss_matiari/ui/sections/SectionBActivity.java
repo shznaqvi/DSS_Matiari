@@ -249,6 +249,23 @@ public class SectionBActivity extends AppCompatActivity {
                 setDateRanges();
             }
         });
+
+        bi.rb2605.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    bi.rb1901.setEnabled(false);
+                    bi.rb1901.setChecked(false);
+                    bi.rb1903.setEnabled(false);
+                    bi.rb1903.setChecked(false);
+                    bi.rb1902.setEnabled(true);
+                } else {
+                    bi.rb1901.setEnabled(true);
+                    bi.rb1903.setEnabled(true);
+                    bi.rb1902.setEnabled(true);
+                }
+            }
+        });
     }
 
     public void btnContinue(View view) throws JSONException {
