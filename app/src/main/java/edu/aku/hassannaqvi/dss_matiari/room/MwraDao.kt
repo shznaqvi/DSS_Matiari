@@ -99,7 +99,7 @@ interface MwraDao {
     /* NEW STRUCT */
 
     @Query("SELECT * FROM MWRAs WHERE _uuid IN (:uIds)")
-    abstract fun getAllUnSyncedDataByUIds(uIds: List<String>): MutableList<Mwra>
+    fun getAllUnSyncedDataByUIds(uIds: List<String?>?): MutableList<Mwra?>?
 
     // This query is only used for updating sync list
     // id = rowId
