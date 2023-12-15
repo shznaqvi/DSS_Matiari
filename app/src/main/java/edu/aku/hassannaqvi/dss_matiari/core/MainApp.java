@@ -92,7 +92,7 @@ public class MainApp extends Application {
     //    public static long TWO_MINUTES = 1000 * 60 * 2;
     public static boolean permissionCheck = false;
     public static int idType = 0;
-    public static String ROUND = "5";
+    public static String ROUND = "6";
 
     /* NEW STRUCT */
     public static AppInfoNew appInfoNew;

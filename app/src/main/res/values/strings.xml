@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">DSS Matiari ROUND 5</string>
+    <string name="app_name">DSS Matiari ROUND 6</string>
 
     <string name="open_surveillance_form">OPEN SURVEILLANCE FORM</string>
     <string name="open_mwra_registration_form">OPEN MWRA REGISTRATION FORM</string>
@@ -449,7 +449,7 @@
     <string name="password">Password</string>
     <string name="username">Username</string>
     <string name="app_name_short">DSS Matiari</string>
-    <string name="round_2">ROUND 5</string>
+    <string name="round_2">ROUND 6</string>
     <string name="select_team_leader">Select your team leader</string>
     <string name="data_sync_activity">DATA SYNC ACTIVITY</string>
     <string name="go_back">Go Back</string>
