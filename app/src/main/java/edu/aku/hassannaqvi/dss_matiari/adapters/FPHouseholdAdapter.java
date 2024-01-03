@@ -1,8 +1,6 @@
 package edu.aku.hassannaqvi.dss_matiari.adapters;
 
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.hhsList;
-import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.households;
-import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.position;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.selectedUC;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.selectedVillage;
 
@@ -10,7 +8,6 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.drawable.Drawable;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -27,7 +24,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import org.json.JSONException;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
@@ -36,7 +32,6 @@ import java.util.List;
 import edu.aku.hassannaqvi.dss_matiari.R;
 import edu.aku.hassannaqvi.dss_matiari.core.MainApp;
 import edu.aku.hassannaqvi.dss_matiari.models.FollowUpsSche;
-import edu.aku.hassannaqvi.dss_matiari.models.Hhs;
 import edu.aku.hassannaqvi.dss_matiari.models.Households;
 import edu.aku.hassannaqvi.dss_matiari.room.DssRoomDatabase;
 import edu.aku.hassannaqvi.dss_matiari.ui.lists.FPHouseholdActivity;
@@ -95,7 +90,7 @@ public class FPHouseholdAdapter extends RecyclerView.Adapter<FPHouseholdAdapter.
             notifyDataSetChanged();
         } else {
             followUpsScheList.clear();
-            for (FollowUpsSche followUpsSche: backupItems) {
+            for (FollowUpsSche followUpsSche : backupItems) {
                 if (followUpsSche.getHdssid().contains(query) || followUpsSche.getRa12().toLowerCase().contains(query)) {
                     followUpsScheList.add(followUpsSche);
                 }
@@ -103,7 +98,7 @@ public class FPHouseholdAdapter extends RecyclerView.Adapter<FPHouseholdAdapter.
             notifyDataSetChanged();
         }
     }
-    
+
     @Override
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int position) {
 
@@ -147,7 +142,6 @@ public class FPHouseholdAdapter extends RecyclerView.Adapter<FPHouseholdAdapter.
         int childCount = db.FollowUpsScheDao().getChildCountBYHHFromFolloupsSche(followUpsSche.getUcCode(), followUpsSche.getVillageCode(), followUpsSche.getHhNo());
         totalMwraMap.put(pos, tempMWRA);
         totalChildMap.put(pos, childCount);
-
 
 
         String hhStatus;
@@ -206,18 +200,18 @@ public class FPHouseholdAdapter extends RecyclerView.Adapter<FPHouseholdAdapter.
 
         hhNo.setText(followUpsSche.getVillageCode() + "-" + followUpsSche.getHhNo());
 
-        if(tempMWRA == 0 && childCount == 0) {
+        if (tempMWRA == 0 && childCount == 0) {
             hhHead.setVisibility(View.VISIBLE);
             hhHead.setText(followUpsSche.getRa12());
             imgStatus.setVisibility(View.VISIBLE);
             prvStatus.setText("NO WRA AND NO CHILD");
             prvStatus.setVisibility(View.VISIBLE);
-        }else{
-            if(followUpsSche.getiStatus().equals("1")){
+        } else {
+            if (followUpsSche.getiStatus().equals("1")) {
                 prvStatus.setVisibility(View.GONE);
                 hhHead.setText(followUpsSche.getRa12());
                 hhHead.setVisibility(View.VISIBLE);
-            }else{
+            } else {
                 imgStatus.setVisibility(View.VISIBLE);
                 hhHead.setVisibility(View.GONE);
                 prvStatus.setText(hhPrvStatus);
@@ -228,19 +222,18 @@ public class FPHouseholdAdapter extends RecyclerView.Adapter<FPHouseholdAdapter.
         mwraCount.setText(tempMWRA + " Women | " + pregStatus + " | " + childCount + " Children");
         secStatus.setText(hhStatus);
 
-        if(fpHouseholds.getIStatus().equals("1") || Integer.parseInt(fpHouseholds.getVisitNo()) > 2) {
+        if (MainApp.ROUND.equals(fpHouseholds.getRound()) && (fpHouseholds.getIStatus().equals("1") || Integer.parseInt(fpHouseholds.getVisitNo()) > 2)) {
             imgStatus.setVisibility(View.VISIBLE);
             imgStatus.setImageDrawable(mContext.getResources().getDrawable(R.drawable.ic_members_done));
             DrawableCompat.setTint(DrawableCompat.wrap(imgStatus.getDrawable()), ContextCompat.getColor(mContext, R.color.green));
-        }else if (tempMWRA > 0){
+        } else if (tempMWRA > 0) {
             imgStatus.setVisibility(View.VISIBLE);
             imgStatus.setImageDrawable(mContext.getResources().getDrawable(R.drawable.ic_person_edit));
         }
         //imgStatus.setVisibility(fpHouseholds.getIStatus().equals("1") || Integer.parseInt(fpHouseholds.getVisitNo()) > 2 ? View.VISIBLE : View.GONE);
         secStatus.setBackgroundColor(ContextCompat.getColor(mContext, R.color.grayDark));
 
-        if(!fpHouseholds.getIStatus().equals("1"))
-        {
+        if (!fpHouseholds.getIStatus().equals("1")) {
             imgStatus.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -253,7 +246,7 @@ public class FPHouseholdAdapter extends RecyclerView.Adapter<FPHouseholdAdapter.
                         e.printStackTrace();
                     }
 
-                    for(int i=0; i<=hhsList.size(); i++) {
+                    for (int i = 0; i <= hhsList.size(); i++) {
                         if (MainApp.households.getHdssId().equals(hhsList.get(i).getHdssid())) {
                             MainApp.selectHHsHousehold = i;
                             break;
@@ -281,19 +274,19 @@ public class FPHouseholdAdapter extends RecyclerView.Adapter<FPHouseholdAdapter.
                     // Get the current state of the item
                     try {
                         //MainApp.fpHouseholds = db.getFPHouseholdBYHdssid(MainApp.followUpsScheHHList.get(viewHolder.getAdapterPosition()).getHdssid());
-                       MainApp.households = db.householdsDao().getSelectedHouseholdByHDSSID(MainApp.followUpsScheHHList.get(viewHolder.getLayoutPosition()).getHdssid(), viewHolder.getLayoutPosition());
+                        MainApp.households = db.householdsDao().getSelectedHouseholdByHDSSID(MainApp.followUpsScheHHList.get(viewHolder.getLayoutPosition()).getHdssid(), viewHolder.getLayoutPosition());
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
-                    for(int i=0; i<=hhsList.size(); i++) {
+                    for (int i = 0; i <= hhsList.size(); i++) {
                         if (MainApp.households.getHdssId().equals(hhsList.get(i).getHdssid())) {
                             MainApp.selectHHsHousehold = i;
                             break;
                         }
                     }
                     //if (MainApp.households.getUid().equals("")) {
-                        MainApp.households.populateMeta(viewHolder.getLayoutPosition());
-                        MainApp.households.updateFMData(MainApp.selectHHsHousehold);
+                    MainApp.households.populateMeta(viewHolder.getLayoutPosition());
+                    MainApp.households.updateFMData(MainApp.selectHHsHousehold);
                     //}
 
                     if (!MainApp.households.getIStatus().equals("1") && Integer.parseInt(MainApp.households.getVisitNo()) < 3) {
@@ -301,9 +294,9 @@ public class FPHouseholdAdapter extends RecyclerView.Adapter<FPHouseholdAdapter.
                         int currentMWRA = totalMwraMap.containsKey(pos) ? totalMwraMap.get(pos) : 0;
                         int currentChild = totalChildMap.containsKey(pos) ? totalChildMap.get(pos) : 0;
                         //if (!followUpsSche.getiStatus().equals("4") && (currentMWRA > 0 || currentChild > 0)) {
-                        if(currentMWRA > 0 || currentChild > 0){
+                        if (currentMWRA > 0 || currentChild > 0) {
                             editHousehold(viewHolder.getLayoutPosition());
-                        } else if(!followUpsSche.getiStatus().equals("1") || (currentMWRA == 0 && currentChild == 0)) {
+                        } else if (!followUpsSche.getiStatus().equals("1") || (currentMWRA == 0 && currentChild == 0)) {
                             try {
                                 //MainApp.households = db.getHouseholdByHDSSID(followUpsSche.getHdssid());
                                 MainApp.households = db.householdsDao().getHouseholdByHDSSIDASC(followUpsSche.getHdssid());
@@ -368,7 +361,6 @@ public class FPHouseholdAdapter extends RecyclerView.Adapter<FPHouseholdAdapter.
     public int getItemCount() {
         return followUpsScheList.size();
     }
-
 
 
     /**

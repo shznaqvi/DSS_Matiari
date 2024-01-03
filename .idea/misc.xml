@@ -4,9 +4,12 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Android Office Work/DSS_Matiari/app/src/main/res/drawable/bg_alert.xml" value="0.2415" />
-        <entry key="..\:/Android Office Work/DSS_Matiari/app/src/main/res/layout/activity_fphousehold.xml" value="0.23125" />
+        <entry key="..\:/Android Office Work/DSS_Matiari/app/src/main/res/drawable/ic_members_done.xml" value="0.2445" />
+        <entry key="..\:/Android Office Work/DSS_Matiari/app/src/main/res/drawable/ic_person_edit.xml" value="0.2445" />
+        <entry key="..\:/Android Office Work/DSS_Matiari/app/src/main/res/layout/activity_fphousehold.xml" value="0.371875" />
         <entry key="..\:/Android Office Work/DSS_Matiari/app/src/main/res/layout/activity_fpmwra.xml" value="0.371875" />
         <entry key="..\:/Android Office Work/DSS_Matiari/app/src/main/res/layout/activity_login.xml" value="0.23541666666666666" />
+        <entry key="..\:/Android Office Work/DSS_Matiari/app/src/main/res/layout/household_row.xml" value="0.371875" />
         <entry key="..\:/Android Office Work/DSS_Matiari/app/src/main/res/layout/view_alert.xml" value="0.371875" />
         <entry key="..\:/Android Office Work/DSS_Matiari/app/src/main/res/menu/item_menu.xml" value="0.315" />
         <entry key="..\:/Android Projects/DSS_Matiari/app/src/main/res/layout/activity_ending.xml" value="0.2225" />
@@ -37,7 +40,7 @@
     </option>
   </component>
   <component name="ExternalStorageConfigurationManager" enabled="true" />
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_16" project-jdk-name="11" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="11" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">
