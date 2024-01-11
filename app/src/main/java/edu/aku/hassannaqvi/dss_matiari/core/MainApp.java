@@ -48,7 +48,7 @@ import edu.aku.hassannaqvi.dss_matiari.ui.LockActivity;
 
 public class MainApp extends Application {
 
-    public static final String PROJECT_NAME = "HDSS_MATIARI_R5";
+    public static final String PROJECT_NAME = "HDSS_MATIARI_R6";
     public static final String DIST_ID = null;
     public static final String SYNC_LOGIN = "sync_login";
     public static final String _IP = "https://pedres2.aku.edu/";// .LIVE server
