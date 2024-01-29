@@ -524,6 +524,8 @@ public class Mwra extends BaseObservable implements Observable {
         private String rb21 = StringUtils.EMPTY;
         private String rb24 = StringUtils.EMPTY;
         private String rb25 = StringUtils.EMPTY;
+        private String rb26 = StringUtils.EMPTY;
+
         private String pregnum = StringUtils.EMPTY;
         private long ageInMonths;
 
@@ -716,9 +718,10 @@ public class Mwra extends BaseObservable implements Observable {
 
         public void setRb18(String rb18) {
             this.rb18 = rb18;
-            setRb19(rb18.equals("1") ? this.rb19 : "");
+            //setRb19(rb18.equals("1") ? this.rb19 : "");
             setRb20(rb18.equals("1") ? this.rb20 : "");
             setRb21(rb18.equals("1") ? this.rb21 : "");
+            setRb26(rb18.equals("1") ? this.rb26 : "");
             notifyPropertyChanged(BR.rb18);
         }
 
@@ -771,6 +774,17 @@ public class Mwra extends BaseObservable implements Observable {
         public void setRb25(String rb25) {
             this.rb25 = rb25;
             notifyPropertyChanged(BR.rb25);
+        }
+
+        @Bindable
+        public String getRb26() {
+            return rb26;
+        }
+
+        public void setRb26(String rb26) {
+            this.rb26 = rb26;
+            setRb19(rb26.equals("1") || rb26.equals("5") ? this.rb19 : "");
+            notifyPropertyChanged(BR.rb26);
         }
 
         private void CaluculateAge() {
@@ -860,6 +874,7 @@ public class Mwra extends BaseObservable implements Observable {
         private String rb19 = StringUtils.EMPTY;
         private String rb20 = StringUtils.EMPTY;
         private String rb21 = StringUtils.EMPTY;
+        private String rb26 = StringUtils.EMPTY;
         private long ageInMonths;
 
         // Save section object as json object in db
@@ -1120,9 +1135,10 @@ public class Mwra extends BaseObservable implements Observable {
 
         public void setRb18(String rb18) {
             this.rb18 = rb18;
-            setRb19(rb18.equals("1") ? this.rb19 : "");
+            //setRb19(rb18.equals("1") ? this.rb19 : "");
             setRb20(rb18.equals("1") ? this.rb20 : "");
             setRb21(rb18.equals("1") ? this.rb21 : "");
+            setRb26(rb18.equals("1") ? this.rb26 : "");
             notifyPropertyChanged(BR.rb18);
         }
 
@@ -1154,6 +1170,17 @@ public class Mwra extends BaseObservable implements Observable {
         public void setRb21(String rb21) {
             this.rb21 = rb21;
             notifyPropertyChanged(BR.rb21);
+        }
+
+        @Bindable
+        public String getRb26() {
+            return rb26;
+        }
+
+        public void setRb26(String rb26) {
+            this.rb26 = rb26;
+            setRb19(rb26.equals("1") || rb26.equals("5") ? this.rb19 : "");
+            notifyPropertyChanged(BR.rb26);
         }
 
         private void CaluculateAge() {
@@ -1454,6 +1481,7 @@ public class Mwra extends BaseObservable implements Observable {
         setRb19(rb18.equals("1") ? this.rb19 : "");
         setRb20(rb18.equals("1") ? this.rb20 : "");
         setRb21(rb18.equals("1") ? this.rb21 : "");
+        setRb26(rb18.equals("1") ? this.rb26 : "");
         notifyChange(BR.rb18);
     }
 

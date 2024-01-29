@@ -113,7 +113,6 @@
                 android:background="@drawable/bg_rounded_app_color_bordered">
 
                 <EditText
-                    android:text="Abcd12345"
                     android:id="@+id/password"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/_30sdp"
@@ -127,6 +126,7 @@
                     android:paddingStart="@dimen/_12sdp"
                     android:paddingEnd="@dimen/_12sdp"
                     android:singleLine="true"
+                    android:text="Test0002"
                     android:textColor="@color/black"
                     android:textSize="@dimen/_9ssp" />
 

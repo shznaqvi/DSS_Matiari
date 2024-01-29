@@ -59,14 +59,14 @@ public class SectionCActivity extends AppCompatActivity {
         // Set Round Number from followups data
         MainApp.ROUND = MainApp.fpMwra.getFRound();
 
-        mwra.populateMetaFollowups();
+        //mwra.populateMetaFollowups();
 
         sC = Mwra.SC.getData();
         sC = new Mwra.SC();
         mwra.setSC(sC);
 
 
-        try {
+        /*try {
             mwra = db.mwraDao().getFollowupsBySno(MainApp.households.getUid(), MainApp.fpMwra.getRb01(), MainApp.fpMwra.getFRound());
         } catch (JSONException e) {
             e.printStackTrace();
@@ -105,7 +105,7 @@ public class SectionCActivity extends AppCompatActivity {
             long actualAge = Integer.parseInt(MainApp.fpMwra.getRb05()) + years;
             sC.setRb05(String.valueOf(actualAge));     // Age in Years
 
-        }
+        }*/
         // For edit mode
         /*if (!mwra.getUid().equals("")) {
             try {
@@ -115,7 +115,7 @@ public class SectionCActivity extends AppCompatActivity {
             }
         }*/
 
-        long daysdiff = MainApp.mwra.CalculateAge(fpMwra.getReg_date());
+        long daysdiff = Mwra.CalculateAge(fpMwra.getReg_date());
         long years = daysdiff / 365;
         long actualAge = 0;
 
@@ -347,13 +347,25 @@ public class SectionCActivity extends AppCompatActivity {
 
     public void btnContinue(View view) throws JSONException{
         if (!formValidation()) return;
+        Mwra.saveMainDataFup(households.getUid(), households.getHdssId(), sC.getRb01(), "", sC);
+        mwra.setSNo(sC.getRb01());
 
-        Mwra mwra = db.mwraDao().getFollowupsBySno(households.getUid(), sC.getRb01(), fpMwra.getFRound());
+        if (!mwra.getUid().contains("_")) {
+            mwra.setPregnum("0");
+            if (sC.getRb07().equals("1")) {
+                mwra.setPregnum(String.valueOf(Integer.parseInt(mwra.getPregnum()) + 1));
+            }
 
-        if(mwra != null)
-        {
-            MainApp.mwra = mwra;
+            if (sC.getRb18().equals("1")) {
+                mwra.setPregnum(String.valueOf(Integer.parseInt(mwra.getPregnum()) + 1));
+            }
+
+            if (sC.getRb07().equals("2") && sC.getRb18().equals("2")) {
+                mwra.setPregnum("0");
+            }
         }
+
+
 
     }
 

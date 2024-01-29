@@ -56,8 +56,8 @@ abstract class DssRoomDatabase : RoomDatabase() {
 
     companion object {
         const val DATABASE_VERSION = 12
-        const val DATABASE_NAME = MainApp.PROJECT_NAME + "1.db"
-        const val DATABASE_COPY = MainApp.PROJECT_NAME + "1_copy.db"
+        const val DATABASE_NAME = "HDSS_MATIARI1.db"
+        const val DATABASE_COPY = "HDSS_MATIARI1_copy.db"
 
         @Volatile @JvmStatic
         var dbInstance: DssRoomDatabase? = null
