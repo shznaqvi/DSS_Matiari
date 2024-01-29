@@ -27,17 +27,16 @@ interface OutcomeDao {
 
     @Query(
         "SELECT * FROM " + TableContracts.OutcomeTable.TABLE_NAME + " WHERE hdssid LIKE :hdssid AND "
-                + TableContracts.OutcomeTable.COLUMN_MUID + " LIKE :muid AND "
                 + TableContracts.OutcomeTable.COLUMN_MSNO + " LIKE :msno AND "
                 + TableContracts.OutcomeTable.COLUMN_SNO + " LIKE :sno ORDER BY "
                 + TableContracts.OutcomeTable.COLUMN_ID + " ASC"
     )
-    fun getOutcomeByID_internal(hdssid : String, muid: String, msno: String, sno: String): Outcome?
+    fun getOutcomeByID_internal(hdssid : String, msno: String, sno: String): Outcome?
 
 
     @Throws(JSONException::class)
-    fun getOutcomeBYID(hdssid: String, muid: String, msno: String, sno: String): Outcome? {
-        val outcome = getOutcomeByID_internal(hdssid, muid, msno, sno)
+    fun getOutcomeBYID(hdssid: String,  msno: String, sno: String): Outcome? {
+        val outcome = getOutcomeByID_internal(hdssid,  msno, sno)
         if (outcome == null) {
             val tempOutcome = Outcome()
             return tempOutcome
@@ -86,7 +85,7 @@ interface OutcomeDao {
     /* NEW STRUCT */
 
     @Query("SELECT * FROM outcomes WHERE _uuid IN (:uIds)")
-    abstract fun getAllUnSyncedDataByUIds(uIds: List<String>): MutableList<Outcome>
+    abstract fun getAllUnSyncedDataByUIds(uIds: List<String?>?): MutableList<Outcome?>?
 
     // This query is only used for updating sync list
     // id = rowId

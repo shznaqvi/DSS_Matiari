@@ -84,7 +84,7 @@ public class HouseholdAdapter extends RecyclerView.Adapter<HouseholdAdapter.View
     @Override
     public void onBindViewHolder(ViewHolder viewHolder, final int posit) {
         Log.d(TAG, "Element " + viewHolder.getAdapterPosition() + " set.");
-        Households households = this.households.get(viewHolder.getAdapterPosition());        // Get element from your dataset at this position and replace the contents of the view
+        Households households = this.households.get(viewHolder.getBindingAdapterPosition());        // Get element from your dataset at this position and replace the contents of the view
         // with that element
 
         TextView hhNo = viewHolder.hhNo;
@@ -128,10 +128,10 @@ public class HouseholdAdapter extends RecyclerView.Adapter<HouseholdAdapter.View
         viewHolder.itemView.setOnClickListener(v -> {
             // Get the current state of the item
 
-            MainApp.households = MainApp.householdList.get(viewHolder.getAdapterPosition());
+            MainApp.households = MainApp.householdList.get(viewHolder.getLayoutPosition());
             if (!MainApp.households.getIStatus().equals("1") && Integer.parseInt(MainApp.households.getVisitNo()) < 3) {
 
-                editHousehold(viewHolder.getAdapterPosition());
+                editHousehold(viewHolder.getLayoutPosition());
 
             } else {
                 Toast.makeText(mContext, "This households has been locked. You cannot edit household for locked households", Toast.LENGTH_LONG).show();

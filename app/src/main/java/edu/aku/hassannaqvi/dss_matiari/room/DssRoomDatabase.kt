@@ -21,7 +21,7 @@ import java.lang.reflect.Type
 
 @Database(
     version = DssRoomDatabase.DATABASE_VERSION,
-    exportSchema = true,
+    exportSchema = false,
     entities = [
         edu.aku.hassannaqvi.dss_matiari.models.Households::class,
         Mwra :: class,
@@ -128,7 +128,7 @@ abstract class DssRoomDatabase : RoomDatabase() {
                         "'ra17_d1' TEXT, " +
                         "'ra17_d2' TEXT, " +
                         "'ra17_d3' TEXT, " +
-                        "PRIMARY KEY('id'))");
+                        "PRIMARY KEY('id'))")
             }
         }
 
@@ -143,9 +143,9 @@ abstract class DssRoomDatabase : RoomDatabase() {
                 database.execSQL("ALTER TABLE 'users' ADD COLUMN 'newUser' TEXT")
                 database.execSQL("ALTER TABLE 'users' ADD COLUMN 'fullname' TEXT")
                 database.execSQL("ALTER TABLE 'users' ADD COLUMN 'enabled' TEXT")*/
-                database.execSQL("DROP TABLE users");
-                database.execSQL("CREATE TABLE IF NOT EXISTS `users` (`_id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL DEFAULT 0, `username` TEXT DEFAULT '' NOT NULL, `password` TEXT NOT NULL, `passwordEnc` TEXT NOT NULL, `fullname` TEXT NOT NULL, `enabled` TEXT NOT NULL, `newUser` TEXT NOT NULL, `designation` TEXT NOT NULL)");
-                database.execSQL("CREATE TABLE IF NOT EXISTS `EntryLog` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `uid` TEXT, `projectName` TEXT, `uuid` TEXT, `userName` TEXT, `sysDate` TEXT, `entryDate` TEXT, `hhid` TEXT, `appver` TEXT, `iStatus` TEXT, `entryType` TEXT, `deviceId` TEXT, `synced` TEXT, `syncDate` TEXT, `isError` INTEGER NOT NULL DEFAULT 0)");
+                database.execSQL("DROP TABLE users")
+                database.execSQL("CREATE TABLE IF NOT EXISTS `users` (`_id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL DEFAULT 0, `username` TEXT DEFAULT '' NOT NULL, `password` TEXT NOT NULL, `passwordEnc` TEXT NOT NULL, `fullname` TEXT NOT NULL, `enabled` TEXT NOT NULL, `newUser` TEXT NOT NULL, `designation` TEXT NOT NULL)")
+                database.execSQL("CREATE TABLE IF NOT EXISTS `EntryLog` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `uid` TEXT, `projectName` TEXT, `uuid` TEXT, `userName` TEXT, `sysDate` TEXT, `entryDate` TEXT, `hhid` TEXT, `appver` TEXT, `iStatus` TEXT, `entryType` TEXT, `deviceId` TEXT, `synced` TEXT, `syncDate` TEXT, `isError` INTEGER NOT NULL DEFAULT 0)")
 
             }
         }

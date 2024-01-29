@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">DSS Matiari ROUND 5</string>
+    <string name="app_name">DSS Matiari ROUND 6</string>
 
     <string name="open_surveillance_form">OPEN SURVEILLANCE FORM</string>
     <string name="open_mwra_registration_form">OPEN MWRA REGISTRATION FORM</string>
@@ -126,7 +126,7 @@
     <string name="ra06">Union council </string>
     <string name="ra08">Mohalla</string>
     <string name="ra09">Household Number</string>
-    <string name="ra10">Structure ID </string>
+    <string name="ra10">Household ID</string>
     <string name="ra11">Household Visit Status</string>
     <string name="ra11a">Completed</string>
     <string name="ra11b">Locked / no eligible respondent </string>
@@ -199,6 +199,13 @@
     <string name="rb2402">No</string>
     <string name="rb2403">Recall (No ultrasound report)</string>
     <string name="rb25">Date of Ultrasound</string>
+
+    <string name="rb26">Pregnancy Outcome </string>
+    <string name="rb2601">Live Birth  </string>
+    <string name="rb2602">Still birth  </string>
+    <string name="rb2603">Miscarriage </string>
+    <string name="rb2605">1 Live birth and still birth </string>
+
 
     <string name="rb16">Have you delivered an alive baby during the duration from our last visit and today? </string>
     <string name="rb17">Status of Unreported Pregnancy Outcome </string>
@@ -349,6 +356,7 @@
     <string name='Q_rb21' translatable="false">rb21</string>
     <string name='Q_rb24' translatable="false">rb24</string>
     <string name='Q_rb25' translatable="false">rb25</string>
+    <string name='Q_rb26' translatable="false">rb26</string>
 
     <string name='Q_rc01' translatable="false">rc01</string>
     <string name='Q_rc02' translatable="false">rc02</string>
@@ -422,7 +430,7 @@
     <string name="language">Change Language</string>
     <string name="identification_mainheading">Identification Section</string>
     <string name="ra21">Detail Address with land mark</string>
-    <string name="ra22">Household ID</string>
+
     <string name="Q_ra22" translatable="false">RA22</string>
     <string name="rb09hint">Press button to calculate EDD &gt;&gt;&gt;</string>
     <string name="age_groups">Age Groups</string>
@@ -441,7 +449,7 @@
     <string name="password">Password</string>
     <string name="username">Username</string>
     <string name="app_name_short">DSS Matiari</string>
-    <string name="round_2">ROUND 5</string>
+    <string name="round_2">ROUND 6</string>
     <string name="select_team_leader">Select your team leader</string>
     <string name="data_sync_activity">DATA SYNC ACTIVITY</string>
     <string name="go_back">Go Back</string>
