@@ -95,7 +95,6 @@ public class HouseholdActivity extends AppCompatActivity {
         bi.rvHouseholds.setAdapter(hhAdapter);
         bi.rvHouseholds.setLayoutManager(new LinearLayoutManager(this));
 
-
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -107,7 +106,6 @@ public class HouseholdActivity extends AppCompatActivity {
                 }
             }
         });
-
 
     }
 
