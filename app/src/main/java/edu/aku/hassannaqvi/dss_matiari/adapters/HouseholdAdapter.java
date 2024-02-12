@@ -38,6 +38,7 @@ public class HouseholdAdapter extends RecyclerView.Adapter<HouseholdAdapter.View
     private final List<Households> backupItems = new ArrayList<>();
     private final int mExpandedPosition = -1;
     private final int completeCount;
+    private Households.SA sA;
 
     /**
      * Initialize the dataset of the Adapter.
@@ -51,6 +52,7 @@ public class HouseholdAdapter extends RecyclerView.Adapter<HouseholdAdapter.View
         this.mContext = mContext;
         completeCount = 0;
         MainApp.fmComplete = false;
+
 
         Collections.sort(households, new Comparator<Households>() {
             @Override
@@ -117,7 +119,7 @@ public class HouseholdAdapter extends RecyclerView.Adapter<HouseholdAdapter.View
         //int totalMWRA = db.getMWRACountBYUUID(households.getUid());
         int totalMWRA = db.mwraDao().getMWRACountBYUUID(households.getUid(), "1");
 
-        hhNo.setText(households.getSA().getRa07() + "-" + households.getSA().getRa09());
+        hhNo.setText(households.getVillageCode() + "-" + households.getHhNo());
         hhHead.setText(households.getSA().getRa14());
         mwraCount.setText(totalMWRA + " Women");
         secStatus.setText(hhStatus);

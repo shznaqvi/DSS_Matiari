@@ -56,12 +56,7 @@ interface HouseholdsDao {
         return householdsList
     }
 
-    @Query(
-        "SELECT " + "MAX( CAST(" + HouseholdTable.COLUMN_HOUSEHOLD_NO + " AS INT)) AS " + HouseholdTable.COLUMN_HOUSEHOLD_NO +
-                " FROM " + HouseholdTable.TABLE_NAME +
-                " WHERE " + HouseholdTable.COLUMN_UC_CODE + " LIKE :ucCode AND "
-                + HouseholdTable.COLUMN_VILLAGE_CODE + " LIKE :vCode AND " + HouseholdTable.COLUMN_REGROUND + " LIKE :regRound " +
-                "GROUP BY " + HouseholdTable.COLUMN_VILLAGE_CODE
+    @Query("SELECT MAX( CAST(hhNo AS INT)) AS hhNO FROM hhs WHERE ucCode LIKE :ucCode AND villageCode LIKE :vCode AND regRound LIKE :regRound GROUP BY villageCode"
     )
     fun getMaxHouseholdNo(ucCode: String, vCode: String, regRound: String): Int
 
@@ -85,10 +80,7 @@ interface HouseholdsDao {
         return household
     }
 
-    @Query(
-        "SELECT * FROM " + HouseholdTable.TABLE_NAME + " WHERE " + HouseholdTable.COLUMN_HDSSID + " LIKE :hdssid OR "
-                + HouseholdTable.COLUMN_HDSSID + " LIKE :newHDSSID ORDER BY " + HouseholdTable.COLUMN_ID + " DESC"
-    )
+    @Query("SELECT * FROM hhs WHERE hdssid LIKe :hdssid OR hdssid LIKE :newHDSSID ORDER BY _id DESC")
     fun getHouseholdByHDSSIDDSC_internal(hdssid: String, newHDSSID: String): Households?
 
     @Throws(JSONException::class)
@@ -97,15 +89,14 @@ interface HouseholdsDao {
         val hdssidSplit = hdssid.split("-").toTypedArray()
         val newHDSSID = hdssidSplit[0] + "-" + hdssidSplit[1] + "-" + String.format(
             "%04d",
-            hdssidSplit[2].toInt()
-        )
+            hdssidSplit[2].toInt())
 
         //return getHouseholdByHDSSIDDSC_internal(hdssid, newHDSSID)
         val household = getHouseholdByHDSSIDDSC_internal(hdssid, newHDSSID)
-        if (household == null) {
+        /*if (household == null) {
             val tempHouseholds = Households()
             return tempHouseholds
-        }
+        }*/
 
         return household
     }
@@ -119,19 +110,19 @@ interface HouseholdsDao {
             hdssidSplit[2].toInt()
         )
         val household = getHouseholdByHDSSIDDSC_internal(hdssid, newHDSSID)
-        if (household == null) {
+       /* if (household == null) {
             val tempHousehold = Households()
             tempHousehold.populateMeta(position)
-           val id = addHousehold(tempHousehold)
-            tempHousehold.id = id
-            tempHousehold.uid = MainApp.deviceid + tempHousehold.id
+           //val id = addHousehold(tempHousehold)
+            //tempHousehold.id = id
+            //tempHousehold.uid = MainApp.deviceid + tempHousehold.id
             //tempHousehold.sAtoString()
-            updateHousehold(tempHousehold)
+            //updateHousehold(tempHousehold)
             return tempHousehold
-        }else{
+        }else{*/
             //household.s1Hydrate(household.sa)
             return household
-        }
+        //}
 
     }
 
@@ -154,10 +145,10 @@ interface HouseholdsDao {
     @kotlin.jvm.Throws(JSONException::class)
     fun getHouseholdByUID(uid: String): Households? {
         val newHousehols = getHouseholdByUID_internal(uid)
-        if (newHousehols == null) {
+        /*if (newHousehols == null) {
             val temHouseholds = Households()
             //temHouseholds.Hydrate(newHousehols)
-        }
+        }*/
         return newHousehols
     }
 

@@ -113,6 +113,7 @@ public class SectionAActivity extends AppCompatActivity {
         // New form
         // If 'Edit form' option is selected
             // Check data in db
+        Households.saveMainData(households.getHdssId(), sA);
             Households form = db.householdsDao().getHouseholdByHDSSIDASC(households.getHdssId());
             if (form != null) {
                 // wraId found
@@ -229,10 +230,6 @@ public class SectionAActivity extends AppCompatActivity {
         return Validator.emptyCheckingContainer(this, bi.GrpName);
     }
 
-    @Override
-    public void onBackPressed() {
-        finish();
-    }
 
     public static String toBlackVisionDate(String currentDate) {
         String newDate = currentDate;

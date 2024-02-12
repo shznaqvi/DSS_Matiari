@@ -61,11 +61,10 @@ public class HouseholdActivity extends AppCompatActivity {
 
                         hhAdapter.notifyItemInserted(MainApp.householdList.size() - 1);
                         checkCompleteFm();
-                    }
-                    if (result.getResultCode() == Activity.RESULT_CANCELED) {
-                        Toast.makeText(HouseholdActivity.this, "No household added.", Toast.LENGTH_SHORT).show();
+                    }else if (result.getResultCode() == Activity.RESULT_CANCELED) {
+                            Toast.makeText(HouseholdActivity.this, "No household added.", Toast.LENGTH_SHORT).show();
 
-                    }
+                        }
 
                 }
             });
@@ -96,14 +95,11 @@ public class HouseholdActivity extends AppCompatActivity {
         bi.rvHouseholds.setLayoutManager(new LinearLayoutManager(this));
 
         FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                try {
-                    addHousehold();
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
+        fab.setOnClickListener(view -> {
+            try {
+                addHousehold();
+            } catch (JSONException e) {
+                e.printStackTrace();
             }
         });
 
@@ -114,6 +110,7 @@ public class HouseholdActivity extends AppCompatActivity {
         super.onResume();
         MainApp.lockScreen(this);
         Toast.makeText(this, "Activity Resumed!", Toast.LENGTH_SHORT).show();
+
         MainApp.householdCount = Math.round(MainApp.householdList.size());
 
         MainApp.households = new Households();
@@ -151,6 +148,7 @@ public class HouseholdActivity extends AppCompatActivity {
 
         // Launch activity for results.
         Intent intent = new Intent(this, SectionAActivity.class);
+        startActivity(intent);
         MemberInfoLauncher.launch(intent);
     }
 

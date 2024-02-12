@@ -126,13 +126,11 @@ public class Households extends BaseObservable implements Observable {
     private SA sA;
 
     public Households() {
-
     }
 
     public static void initMeta() {
 
         households = new Households();
-
         households.setRound(MainApp.ROUND);
         households.setSysDate(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.ENGLISH).format(new Date().getTime()));
         households.setUserName(MainApp.user.getUsername());
@@ -150,7 +148,6 @@ public class Households extends BaseObservable implements Observable {
         households.sA.setRa07(MainApp.selectedVillage);
         households.sA.setRa04(MainApp.leaderCode);
         households.sA.setRa05(MainApp.leaderCode);
-
     }
 
     public void populateMeta(int position) {
@@ -176,8 +173,6 @@ public class Households extends BaseObservable implements Observable {
         households.sA.setRa07(MainApp.selectedVillage);
         households.sA.setRa01(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.ENGLISH).format(new Date().getTime()));
         setRegRound("");
-
-
     }
 
     public void updateFMData(int position){
@@ -422,9 +417,7 @@ public class Households extends BaseObservable implements Observable {
         String newHDSSID = hdssidSplit[0] + "-" + hdssidSplit[1] + "-" + String.format("%04d", Integer.parseInt(hdssidSplit[2]));
 
         this.hdssId = newHDSSID;
-
     }
-
 
     private synchronized void notifyChange(int propertyId) {
         if (propertyChangeRegistry == null) {
@@ -439,7 +432,6 @@ public class Households extends BaseObservable implements Observable {
             propertyChangeRegistry = new PropertyChangeRegistry();
         }
         propertyChangeRegistry.add(callback);
-
     }
 
     @Override
@@ -448,8 +440,6 @@ public class Households extends BaseObservable implements Observable {
             propertyChangeRegistry.remove(callback);
         }
     }
-
-
 
     /**
      * SECTION A - IDENTIFICATION INFORMATION - CLUSTER-WISE
@@ -526,13 +516,10 @@ public class Households extends BaseObservable implements Observable {
 
         }
 
-
-
         // Get section object by parsing json
         public static SA getData() {
             return households.getSA();
         }
-
 
         @Bindable
         public String getRa01() {
@@ -924,9 +911,6 @@ public class Households extends BaseObservable implements Observable {
             this.ra21 = ra21;
             notifyPropertyChanged(BR.ra21);
         }
-
-
-
     }
 
    /* public Households Hydrate(Households households) throws JSONException {

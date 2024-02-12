@@ -4,6 +4,7 @@ import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.allMwraRefusedOrMigra
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.households;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.outcome;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -30,6 +31,7 @@ import edu.aku.hassannaqvi.dss_matiari.models.Mwra;
 import edu.aku.hassannaqvi.dss_matiari.newstruct.global.AppConstants;
 import edu.aku.hassannaqvi.dss_matiari.room.DssRoomDatabase;
 import edu.aku.hassannaqvi.dss_matiari.ui.lists.FPHouseholdActivity;
+import edu.aku.hassannaqvi.dss_matiari.ui.lists.MwraActivity;
 
 
 public class EndingActivity extends AppCompatActivity {
@@ -158,11 +160,7 @@ public class EndingActivity extends AppCompatActivity {
 
                 break;
 
-
-
-
         }
-
 
         // households.setEndTime(new SimpleDateFormat("dd-MM-yy HH:mm", Locale.ENGLISH).format(new Date().getTime()));
     }
@@ -173,6 +171,7 @@ public class EndingActivity extends AppCompatActivity {
         saveDraft();
         //if (UpdateDB()) {
             Households.SA.saveData(sA);
+            setResult(RESULT_OK);
             finish();
             allMwraRefusedOrMigrated.clear();
             //Intent i = new Intent(this, FPHouseholdActivity.class);

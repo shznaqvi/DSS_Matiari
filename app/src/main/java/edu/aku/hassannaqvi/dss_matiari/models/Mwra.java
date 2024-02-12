@@ -225,7 +225,6 @@ public class Mwra extends BaseObservable implements Observable {
         mwra.getSC().setRb05(String.valueOf(actualAge));     // Age in Years
     }
 
-
     /*FOR IDENTIFICATION INFORMATION - CLUSTER-WISE*/
     // Save data in db
     public static void saveMainDataReg(String uuid, String hdssId, String sNo, String regRound) throws JSONException {
@@ -262,7 +261,6 @@ public class Mwra extends BaseObservable implements Observable {
         }
     }
 
-
     @Bindable
     public String getRound() {
         return round;
@@ -273,7 +271,6 @@ public class Mwra extends BaseObservable implements Observable {
         notifyPropertyChanged(BR.round);
     }
 
-
     public String getProjectName() {
         return projectName;
     }
@@ -281,7 +278,6 @@ public class Mwra extends BaseObservable implements Observable {
     public void setProjectName(String projectName) {
         this.projectName = projectName;
     }
-
 
     public long getId() {
         return id;
@@ -298,7 +294,6 @@ public class Mwra extends BaseObservable implements Observable {
     public void setUid(String uid) {
         this.uid = uid;
     }
-
 
     public String getUuid() {
         return uuid;
@@ -470,7 +465,6 @@ public class Mwra extends BaseObservable implements Observable {
         this.child_count = child_count;
     }
 
-
     public String getPregnum() {
         return pregnum;
     }
@@ -496,7 +490,6 @@ public class Mwra extends BaseObservable implements Observable {
     public void setIstatus(String istatus) {
         this.istatus = istatus;
     }
-
 
     /**
      * SECTION B - MWRA Registration
@@ -525,7 +518,6 @@ public class Mwra extends BaseObservable implements Observable {
         private String rb24 = StringUtils.EMPTY;
         private String rb25 = StringUtils.EMPTY;
         private String rb26 = StringUtils.EMPTY;
-
         private String pregnum = StringUtils.EMPTY;
         private long ageInMonths;
 
@@ -789,9 +781,7 @@ public class Mwra extends BaseObservable implements Observable {
 
         private void CaluculateAge() {
 
-
             setRb05("");
-
 
             try {
                 Calendar cal = Calendar.getInstance();
@@ -813,7 +803,6 @@ public class Mwra extends BaseObservable implements Observable {
                 long tDay = MILLISECONDS.toDays(millis) - ((tYear * 365) + (tMonth * 30));
 
                 setRb05(String.valueOf(tYear));
-
 
             } catch (ParseException e) {
                 e.printStackTrace();
@@ -841,7 +830,6 @@ public class Mwra extends BaseObservable implements Observable {
             }
 
         }
-
     }
 
     /**
@@ -895,7 +883,6 @@ public class Mwra extends BaseObservable implements Observable {
                 }.getType());
             }
         }
-
 
         // Getters & Setters
 
@@ -1185,9 +1172,7 @@ public class Mwra extends BaseObservable implements Observable {
 
         private void CaluculateAge() {
 
-
             setRb05("");
-
 
             try {
                 Calendar cal = Calendar.getInstance();
@@ -1210,13 +1195,11 @@ public class Mwra extends BaseObservable implements Observable {
 
                 setRb05(String.valueOf(tYear));
 
-
             } catch (ParseException e) {
                 e.printStackTrace();
 
             }
         }
-
 
     }
 
@@ -1813,7 +1796,6 @@ public class Mwra extends BaseObservable implements Observable {
         long noOfDays = 0;
         String dateofReg = "";
 
-
         try {
             SimpleDateFormat df = new SimpleDateFormat("yyyy MM dd", Locale.ENGLISH);
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
@@ -1849,9 +1831,7 @@ public class Mwra extends BaseObservable implements Observable {
 
             noOfDays = tDay;
 
-
             //Log.d(TAG, "CaluculateAge: Y-" + tYear + " M-" + tMonth + " D-" + tDay);
-
 
         } catch (ParseException e) {
             //Log.d(TAG, "CaluculateAge: " + e.getMessage());
