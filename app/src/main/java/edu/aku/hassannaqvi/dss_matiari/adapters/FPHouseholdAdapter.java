@@ -48,6 +48,7 @@ public class FPHouseholdAdapter extends RecyclerView.Adapter<FPHouseholdAdapter.
     private final int mExpandedPosition = -1;
     private final int completeCount;
     private final DssRoomDatabase db;
+    private Households.SA sA;
     private Households fpHouseholds;
     HashMap<Integer, Integer> totalMwraMap = new HashMap<>();
     HashMap<Integer, Integer> totalChildMap = new HashMap<>();
@@ -64,6 +65,8 @@ public class FPHouseholdAdapter extends RecyclerView.Adapter<FPHouseholdAdapter.
         this.mContext = mContext;
         completeCount = 0;
         MainApp.fmComplete = false;
+        sA = new Households.SA();
+
 
         db = MainApp.appInfo.dbHelper;
 
@@ -265,7 +268,9 @@ public class FPHouseholdAdapter extends RecyclerView.Adapter<FPHouseholdAdapter.
                     }
                     //if (MainApp.households.getUid().equals("")) {
                     MainApp.households.populateMeta(viewHolder.getLayoutPosition());
-                    MainApp.households.getSA().updateFMData(MainApp.selectHHsHousehold);
+                    sA.updateFMData(MainApp.selectHHsHousehold);
+                    MainApp.households.setSA(sA);
+                    //MainApp.households.().updateFMData(MainApp.selectHHsHousehold);
                     //}
 
                     if (!MainApp.households.getIStatus().equals("1") && Integer.parseInt(MainApp.households.getVisitNo()) < 3) {
