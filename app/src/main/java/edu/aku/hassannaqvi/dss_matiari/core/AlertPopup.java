@@ -12,8 +12,8 @@ import android.widget.TextView;
 import androidx.core.content.ContextCompat;
 
 import edu.aku.hassannaqvi.dss_matiari.R;
-import edu.aku.hassannaqvi.dss_matiari.newstruct.global.AppConstants;
-import edu.aku.hassannaqvi.dss_matiari.newstruct.global.Callbacks;
+import edu.aku.hassannaqvi.dss_matiari.global.AppConstants;
+import edu.aku.hassannaqvi.dss_matiari.global.Callbacks;
 
 public class AlertPopup {
 

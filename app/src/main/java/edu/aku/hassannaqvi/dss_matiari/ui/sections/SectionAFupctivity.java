@@ -6,11 +6,9 @@ import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.sharedPref;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
@@ -23,10 +21,8 @@ import edu.aku.hassannaqvi.dss_matiari.R;
 import edu.aku.hassannaqvi.dss_matiari.core.MainApp;
 import edu.aku.hassannaqvi.dss_matiari.databinding.ActivitySectionAFupBinding;
 import edu.aku.hassannaqvi.dss_matiari.models.Households;
-import edu.aku.hassannaqvi.dss_matiari.room.DssRoomDatabase;
-import edu.aku.hassannaqvi.dss_matiari.ui.EndingActivity;
+import edu.aku.hassannaqvi.dss_matiari.database.DssRoomDatabase;
 import edu.aku.hassannaqvi.dss_matiari.ui.lists.FPMwraActivity;
-import edu.aku.hassannaqvi.dss_matiari.ui.lists.MwraActivity;
 
 public class SectionAFupctivity extends AppCompatActivity {
 
@@ -55,14 +51,14 @@ public class SectionAFupctivity extends AppCompatActivity {
 
         if (households.getUid().equals(""))
         {
-            households.populateMeta();
+            households.populateMeta(MainApp.selectedFpHousehold);
             bi.btnContinue.setVisibility(View.VISIBLE);
         }else{
             if(households.getRegRound().equals("")) {
                 households.populateMeta(MainApp.selectedFpHousehold);
                 bi.btnContinue.setVisibility(View.GONE);
                 bi.btnUpdate.setVisibility(View.VISIBLE);
-                households.updateFMData(MainApp.selectHHsHousehold);
+                households.getSA().updateFMData(MainApp.selectHHsHousehold);
             }
         }
 

@@ -1,8 +1,8 @@
 package edu.aku.hassannaqvi.dss_matiari.models;
 
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.PROJECT_NAME;
+import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.fpMwra;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.households;
-import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.selectedFpHousehold;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.selectedUC;
 
 import androidx.annotation.NonNull;
@@ -20,9 +20,7 @@ import com.google.gson.reflect.TypeToken;
 
 import org.apache.commons.lang3.StringUtils;
 import org.json.JSONException;
-import org.json.JSONObject;
 
-import java.text.Normalizer;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
@@ -31,9 +29,9 @@ import java.util.Objects;
 import edu.aku.hassannaqvi.dss_matiari.BR;
 import edu.aku.hassannaqvi.dss_matiari.contracts.TableContracts.HouseholdTable;
 import edu.aku.hassannaqvi.dss_matiari.core.MainApp;
-import edu.aku.hassannaqvi.dss_matiari.newstruct.global.AppConstants;
-import edu.aku.hassannaqvi.dss_matiari.room.DssRoomDatabase;
-import edu.aku.hassannaqvi.dss_matiari.room.HouseholdsDao;
+import edu.aku.hassannaqvi.dss_matiari.global.AppConstants;
+import edu.aku.hassannaqvi.dss_matiari.database.DssRoomDatabase;
+import edu.aku.hassannaqvi.dss_matiari.database.dao.HouseholdsDao;
 
 @Entity(tableName = HouseholdTable.TABLE_NAME)
 public class Households extends BaseObservable implements Observable {
@@ -151,7 +149,6 @@ public class Households extends BaseObservable implements Observable {
     }
 
     public void populateMeta(int position) {
-
         setSysDate(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.ENGLISH).format(new Date().getTime()));
         setUserName(MainApp.user.getUsername());
         setDeviceId(MainApp.deviceid);
@@ -162,42 +159,20 @@ public class Households extends BaseObservable implements Observable {
         setUcCode(MainApp.followUpsScheHHList.get(position).getUcCode());
         setVillageCode(MainApp.followUpsScheHHList.get(position).getVillageCode());
         setHhNo(MainApp.followUpsScheHHList.get(position).getHhNo());
-        households.sA.setRa09(MainApp.followUpsScheHHList.get(position).getHhNo());       // Household Number
+        setRound(MainApp.followUpsScheHHList.get(position).getFRound());    // Round
+        /*households.sA.setRa09(MainApp.followUpsScheHHList.get(position).getHhNo());       // Household Number
         households.sA.setRa08(MainApp.followUpsScheHHList.get(position).getRa08());       // Muhalla
         households.sA.setRa10(MainApp.followUpsScheHHList.get(position).getHdssid());     //  Household ID
         households.sA.setRa12(MainApp.followUpsScheHHList.get(position).getRa12());       // Name of head of household
-        setRound(MainApp.followUpsScheHHList.get(position).getFRound());    // Round
         households.sA.setRa04(MainApp.leaderCode);
         households.sA.setRa05(MainApp.leaderCode);
         households.sA.setRa06(MainApp.selectedUC);
         households.sA.setRa07(MainApp.selectedVillage);
-        households.sA.setRa01(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.ENGLISH).format(new Date().getTime()));
+        households.sA.setRa01(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.ENGLISH).format(new Date().getTime()));*/
         setRegRound("");
     }
 
-    public void updateFMData(int position){
-        households.sA.setRa08(MainApp.hhsList.get(position).getRa08());
-        households.sA.setRa12(MainApp.hhsList.get(position).getRa12());
-        households.sA.setRa17_a1(MainApp.hhsList.get(position).getRa17_a1().equals("null") ? "0" : MainApp.hhsList.get(position).getRa17_a1());
-        households.sA.setRa17_b1(MainApp.hhsList.get(position).getRa17_b1().equals("null") ? "0" : MainApp.hhsList.get(position).getRa17_b1());
-        households.sA.setRa17_c1(MainApp.hhsList.get(position).getRa17_c1().equals("null") ? "0" : MainApp.hhsList.get(position).getRa17_c1());
-        households.sA.setRa17_d1(MainApp.hhsList.get(position).getRa17_d1().equals("null") ? "0" : MainApp.hhsList.get(position).getRa17_d1());
-        households.sA.setRa17_a2(MainApp.hhsList.get(position).getRa17_a2().equals("null") ? "0" : MainApp.hhsList.get(position).getRa17_a2());
-        households.sA.setRa17_b2(MainApp.hhsList.get(position).getRa17_b2().equals("null") ? "0" : MainApp.hhsList.get(position).getRa17_b2());
-        households.sA.setRa17_c2(MainApp.hhsList.get(position).getRa17_c2().equals("null") ? "0" : MainApp.hhsList.get(position).getRa17_c2());
-        households.sA.setRa17_d2(MainApp.hhsList.get(position).getRa17_d2().equals("null") ? "0" : MainApp.hhsList.get(position).getRa17_d2());
-        households.sA.setRa17_a3(MainApp.hhsList.get(position).getRa17_a3().equals("null") ? "0" : MainApp.hhsList.get(position).getRa17_a3());
-        households.sA.setRa17_b3(MainApp.hhsList.get(position).getRa17_b3().equals("null") ? "0" : MainApp.hhsList.get(position).getRa17_b3());
-        households.sA.setRa17_c3(MainApp.hhsList.get(position).getRa17_c3().equals("null") ? "0" : MainApp.hhsList.get(position).getRa17_c3());
-        households.sA.setRa17_d3(MainApp.hhsList.get(position).getRa17_d3().equals("null") ? "0" : MainApp.hhsList.get(position).getRa17_d3());
-        households.sA.setRa18(MainApp.followUpsScheHHList.get(MainApp.selectedFpHousehold).getRa18());
 
-        if (Integer.parseInt(households.sA.getRa18()) > 0) {
-            households.sA.setRa15("1");
-        } else {
-            households.sA.setRa15("2");
-        }
-    }
 
     /*FOR IDENTIFICATION INFORMATION - CLUSTER-WISE*/
     // Save data in db
@@ -506,14 +481,40 @@ public class Households extends BaseObservable implements Observable {
         }
 
         public void populateMeta() {
-
-            setRa06(MainApp.selectedUC);
-            setRa07(MainApp.selectedVillage);
+            setRa01(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.ENGLISH).format(new Date().getTime()));
             setRa04(MainApp.leaderCode);
             setRa05(MainApp.leaderCode);
-            setRa09(households.getHhNo());
-            setRa10(households.getHdssId());
+            setRa06(MainApp.selectedUC);
+            setRa07(MainApp.selectedVillage);
+            setRa08(MainApp.fpMwra.getRa08());
+            setRa09(fpMwra.getHhNo());
+            setRa10(fpMwra.getHdssid());
+            setRa12(fpMwra.getRa12());
 
+        }
+
+        public void updateFMData(int position){
+            setRa08(MainApp.hhsList.get(position).getRa08());
+            setRa12(MainApp.hhsList.get(position).getRa12());
+            setRa17_a1(MainApp.hhsList.get(position).getRa17_a1().equals("null") ? "0" : MainApp.hhsList.get(position).getRa17_a1());
+            setRa17_b1(MainApp.hhsList.get(position).getRa17_b1().equals("null") ? "0" : MainApp.hhsList.get(position).getRa17_b1());
+            setRa17_c1(MainApp.hhsList.get(position).getRa17_c1().equals("null") ? "0" : MainApp.hhsList.get(position).getRa17_c1());
+            setRa17_d1(MainApp.hhsList.get(position).getRa17_d1().equals("null") ? "0" : MainApp.hhsList.get(position).getRa17_d1());
+            setRa17_a2(MainApp.hhsList.get(position).getRa17_a2().equals("null") ? "0" : MainApp.hhsList.get(position).getRa17_a2());
+            setRa17_b2(MainApp.hhsList.get(position).getRa17_b2().equals("null") ? "0" : MainApp.hhsList.get(position).getRa17_b2());
+            setRa17_c2(MainApp.hhsList.get(position).getRa17_c2().equals("null") ? "0" : MainApp.hhsList.get(position).getRa17_c2());
+            setRa17_d2(MainApp.hhsList.get(position).getRa17_d2().equals("null") ? "0" : MainApp.hhsList.get(position).getRa17_d2());
+            setRa17_a3(MainApp.hhsList.get(position).getRa17_a3().equals("null") ? "0" : MainApp.hhsList.get(position).getRa17_a3());
+            setRa17_b3(MainApp.hhsList.get(position).getRa17_b3().equals("null") ? "0" : MainApp.hhsList.get(position).getRa17_b3());
+            setRa17_c3(MainApp.hhsList.get(position).getRa17_c3().equals("null") ? "0" : MainApp.hhsList.get(position).getRa17_c3());
+            setRa17_d3(MainApp.hhsList.get(position).getRa17_d3().equals("null") ? "0" : MainApp.hhsList.get(position).getRa17_d3());
+            setRa18(MainApp.followUpsScheHHList.get(MainApp.selectedFpHousehold).getRa18());
+
+            if (Integer.parseInt(getRa18()) > 0) {
+                setRa15("1");
+            } else {
+                setRa15("2");
+            }
         }
 
         // Get section object by parsing json

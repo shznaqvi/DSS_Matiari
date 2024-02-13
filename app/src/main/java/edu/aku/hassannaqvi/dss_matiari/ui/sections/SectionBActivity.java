@@ -15,7 +15,6 @@ import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.RadioGroup;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
@@ -33,13 +32,10 @@ import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 
 import edu.aku.hassannaqvi.dss_matiari.R;
-import edu.aku.hassannaqvi.dss_matiari.contracts.TableContracts;
 import edu.aku.hassannaqvi.dss_matiari.core.MainApp;
 import edu.aku.hassannaqvi.dss_matiari.databinding.ActivitySectionBBinding;
-import edu.aku.hassannaqvi.dss_matiari.models.Households;
 import edu.aku.hassannaqvi.dss_matiari.models.Mwra;
-import edu.aku.hassannaqvi.dss_matiari.models.Outcome;
-import edu.aku.hassannaqvi.dss_matiari.room.DssRoomDatabase;
+import edu.aku.hassannaqvi.dss_matiari.database.DssRoomDatabase;
 
 public class SectionBActivity extends AppCompatActivity {
 

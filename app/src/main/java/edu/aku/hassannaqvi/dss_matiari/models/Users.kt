@@ -6,12 +6,9 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
 import edu.aku.hassannaqvi.dss_matiari.contracts.TableContracts.UsersTable
-import edu.aku.hassannaqvi.dss_matiari.newstruct.models.SyncModelNew
 import org.apache.commons.lang3.StringUtils
-import org.jetbrains.annotations.NotNull
 import org.json.JSONException
 import org.json.JSONObject
-import javax.annotation.Nullable
 
 /**
  * Created by hassan.naqvi on 11/30/2016.

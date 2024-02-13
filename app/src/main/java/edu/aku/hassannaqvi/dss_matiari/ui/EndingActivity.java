@@ -2,12 +2,9 @@ package edu.aku.hassannaqvi.dss_matiari.ui;
 
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.allMwraRefusedOrMigrated;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.households;
-import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.outcome;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -16,22 +13,16 @@ import androidx.databinding.DataBindingUtil;
 
 import com.validatorcrawler.aliazaz.Validator;
 
-import org.json.JSONException;
-
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 import edu.aku.hassannaqvi.dss_matiari.R;
-import edu.aku.hassannaqvi.dss_matiari.contracts.TableContracts;
 import edu.aku.hassannaqvi.dss_matiari.core.MainApp;
-import edu.aku.hassannaqvi.dss_matiari.database.DatabaseHelper;
 import edu.aku.hassannaqvi.dss_matiari.databinding.ActivityEndingBinding;
 import edu.aku.hassannaqvi.dss_matiari.models.Households;
-import edu.aku.hassannaqvi.dss_matiari.models.Mwra;
-import edu.aku.hassannaqvi.dss_matiari.newstruct.global.AppConstants;
-import edu.aku.hassannaqvi.dss_matiari.room.DssRoomDatabase;
+import edu.aku.hassannaqvi.dss_matiari.database.DssRoomDatabase;
 import edu.aku.hassannaqvi.dss_matiari.ui.lists.FPHouseholdActivity;
-import edu.aku.hassannaqvi.dss_matiari.ui.lists.MwraActivity;
+import edu.aku.hassannaqvi.dss_matiari.ui.lists.HouseholdActivity;
 
 
 public class EndingActivity extends AppCompatActivity {
@@ -174,8 +165,14 @@ public class EndingActivity extends AppCompatActivity {
             setResult(RESULT_OK);
             finish();
             allMwraRefusedOrMigrated.clear();
-            //Intent i = new Intent(this, FPHouseholdActivity.class);
-            //startActivity(i);
+            if(MainApp.idType == 1)
+            {
+                Intent i = new Intent(this, HouseholdActivity.class);
+                startActivity(i);
+            }else{
+                Intent i = new Intent(this, FPHouseholdActivity.class);
+                startActivity(i);
+            }
             Toast.makeText(this, "Entry Complete", Toast.LENGTH_SHORT).show();
 
 

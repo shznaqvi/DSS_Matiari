@@ -69,10 +69,8 @@ import edu.aku.hassannaqvi.dss_matiari.core.MainApp;
 import edu.aku.hassannaqvi.dss_matiari.databinding.ActivityLoginBinding;
 import edu.aku.hassannaqvi.dss_matiari.models.EntryLog;
 import edu.aku.hassannaqvi.dss_matiari.models.Users;
-import edu.aku.hassannaqvi.dss_matiari.newstruct.activity.ChangePassNewAC;
-import edu.aku.hassannaqvi.dss_matiari.newstruct.activity.SyncNewAC;
-import edu.aku.hassannaqvi.dss_matiari.newstruct.global.AppConstants;
-import edu.aku.hassannaqvi.dss_matiari.room.DssRoomDatabase;
+import edu.aku.hassannaqvi.dss_matiari.global.AppConstants;
+import edu.aku.hassannaqvi.dss_matiari.database.DssRoomDatabase;
 
 public class LoginActivity extends AppCompatActivity {
 

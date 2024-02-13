@@ -30,9 +30,9 @@ import java.util.Objects;
 import edu.aku.hassannaqvi.dss_matiari.BR;
 import edu.aku.hassannaqvi.dss_matiari.contracts.TableContracts.MWRATable;
 import edu.aku.hassannaqvi.dss_matiari.core.MainApp;
-import edu.aku.hassannaqvi.dss_matiari.newstruct.global.AppConstants;
-import edu.aku.hassannaqvi.dss_matiari.room.DssRoomDatabase;
-import edu.aku.hassannaqvi.dss_matiari.room.MwraDao;
+import edu.aku.hassannaqvi.dss_matiari.global.AppConstants;
+import edu.aku.hassannaqvi.dss_matiari.database.DssRoomDatabase;
+import edu.aku.hassannaqvi.dss_matiari.database.dao.MwraDao;
 
 @Entity(tableName = MWRATable.TABLE_NAME)
 public class Mwra extends BaseObservable implements Observable {

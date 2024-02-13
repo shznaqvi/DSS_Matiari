@@ -5,7 +5,7 @@ import android.content.pm.ApplicationInfo
 import android.content.pm.PackageManager
 import android.os.Bundle
 import android.provider.Settings
-import edu.aku.hassannaqvi.dss_matiari.room.DssRoomDatabase
+import edu.aku.hassannaqvi.dss_matiari.database.DssRoomDatabase
 import net.sqlcipher.database.SQLiteDatabase
 import org.apache.commons.lang3.StringUtils
 import java.text.SimpleDateFormat

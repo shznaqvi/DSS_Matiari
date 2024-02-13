@@ -83,13 +83,10 @@
             <!--                <category android:name="android.intent.category.LAUNCHER" />-->
             <!--            </intent-filter>-->
         </activity>
-        <activity
-            android:name=".ui.SyncActivity"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
 
         <!-- NEW STRUCT -->
         <activity
-            android:name=".newstruct.activity.SyncNewAC"
+            android:name=".ui.SyncNewAC"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
 
         <activity
@@ -97,11 +94,7 @@
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
 
         <activity
-            android:name=".ui.ChangePasswordActivity"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
-
-        <activity
-            android:name=".newstruct.activity.ChangePassNewAC"
+            android:name=".ui.ChangePassNewAC"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity
             android:name=".ui.MainActivity"

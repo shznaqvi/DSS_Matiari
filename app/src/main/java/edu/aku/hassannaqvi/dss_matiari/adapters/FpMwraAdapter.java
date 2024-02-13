@@ -25,8 +25,8 @@ import edu.aku.hassannaqvi.dss_matiari.R;
 import edu.aku.hassannaqvi.dss_matiari.core.MainApp;
 import edu.aku.hassannaqvi.dss_matiari.models.FollowUpsSche;
 import edu.aku.hassannaqvi.dss_matiari.models.Mwra;
-import edu.aku.hassannaqvi.dss_matiari.newstruct.global.AppConstants;
-import edu.aku.hassannaqvi.dss_matiari.room.DssRoomDatabase;
+import edu.aku.hassannaqvi.dss_matiari.global.AppConstants;
+import edu.aku.hassannaqvi.dss_matiari.database.DssRoomDatabase;
 import edu.aku.hassannaqvi.dss_matiari.ui.sections.SectionFActivity;
 import edu.aku.hassannaqvi.dss_matiari.ui.sections.SectionCActivity;
 
@@ -57,8 +57,8 @@ public class FpMwraAdapter extends RecyclerView.Adapter<FpMwraAdapter.ViewHolder
 
     @Override
     public void onBindViewHolder(ViewHolder viewHolder, int positio) {
-        Log.d(TAG, "Element " + viewHolder.getAdapterPosition() + " set.");
-        FollowUpsSche followUpsSche = this.followupsSche.get(viewHolder.getAdapterPosition());        // Get element from your dataset at this position and replace the contents of the view
+        Log.d(TAG, "Element " + viewHolder.getBindingAdapterPosition() + " set.");
+        FollowUpsSche followUpsSche = this.followupsSche.get(viewHolder.getBindingAdapterPosition());        // Get element from your dataset at this position and replace the contents of the view
         // with that element
 
         TextView fName = viewHolder.fName;
@@ -182,30 +182,30 @@ public class FpMwraAdapter extends RecyclerView.Adapter<FpMwraAdapter.ViewHolder
 
 
                 if (followUpsSche.getMemberType().equals("1")) {
-                    MainApp.fpMwra = MainApp.followUpsScheMWRAList.get(viewHolder.getAdapterPosition());
+                    MainApp.fpMwra = MainApp.followUpsScheMWRAList.get(viewHolder.getBindingAdapterPosition());
                     Mwra.populateMetaFollowups();
 
                     Intent intent = new Intent(mContext, SectionCActivity.class);
 
-                    intent.putExtra("position", viewHolder.getAdapterPosition());
+                    intent.putExtra("position", viewHolder.getBindingAdapterPosition());
 
-                    MainApp.selectedMember = viewHolder.getAdapterPosition();
+                    MainApp.selectedMember = viewHolder.getBindingAdapterPosition();
 
-                    intent.putExtra("position", viewHolder.getAdapterPosition());
+                    intent.putExtra("position", viewHolder.getBindingAdapterPosition());
 
 
                     ((Activity) mContext).startActivityForResult(intent, 2);
                 } else {
-                    MainApp.fpMwra = MainApp.followUpsScheMWRAList.get(viewHolder.getAdapterPosition());
+                    MainApp.fpMwra = MainApp.followUpsScheMWRAList.get(viewHolder.getBindingAdapterPosition());
                     MainApp.outcome.populateMetaFollowups();
 
                     Intent intent = new Intent(mContext, SectionFActivity.class);
 
-                    intent.putExtra("position", viewHolder.getAdapterPosition());
+                    intent.putExtra("position", viewHolder.getBindingAdapterPosition());
 
-                    MainApp.selectedMember = viewHolder.getAdapterPosition();
+                    MainApp.selectedMember = viewHolder.getBindingAdapterPosition();
 
-                    intent.putExtra("position", viewHolder.getAdapterPosition());
+                    intent.putExtra("position", viewHolder.getBindingAdapterPosition());
 
 
                     ((Activity) mContext).startActivityForResult(intent, 2);

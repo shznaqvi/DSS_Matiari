@@ -27,15 +27,14 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import org.json.JSONException;
 
 import java.util.ArrayList;
-import java.util.Objects;
 
 import edu.aku.hassannaqvi.dss_matiari.R;
 import edu.aku.hassannaqvi.dss_matiari.adapters.HouseholdAdapter;
 import edu.aku.hassannaqvi.dss_matiari.core.MainApp;
-import edu.aku.hassannaqvi.dss_matiari.database.DatabaseHelper;
 import edu.aku.hassannaqvi.dss_matiari.databinding.ActivityHouseholdBinding;
 import edu.aku.hassannaqvi.dss_matiari.models.Households;
-import edu.aku.hassannaqvi.dss_matiari.room.DssRoomDatabase;
+import edu.aku.hassannaqvi.dss_matiari.database.DssRoomDatabase;
+import edu.aku.hassannaqvi.dss_matiari.ui.MainActivity;
 import edu.aku.hassannaqvi.dss_matiari.ui.sections.SectionAActivity;
 
 
@@ -144,7 +143,9 @@ public class HouseholdActivity extends AppCompatActivity {
         sA.populateMeta();
 
         MainApp.selectedHhNO = households.getHhNo();
-        Households.saveMainData(households.getHdssId(), sA);
+        Households.SA.saveData(sA);
+
+        //Households.saveMainData(households.getHdssId(), sA);
 
         // Launch activity for results.
         Intent intent = new Intent(this, SectionAActivity.class);
@@ -154,11 +155,12 @@ public class HouseholdActivity extends AppCompatActivity {
 
     public void btnContinue(View view) {
         finish();
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
 
     }
 
     public void BtnEnd(View view) {
-
         finish();
     }
 
@@ -184,7 +186,6 @@ public class HouseholdActivity extends AppCompatActivity {
             case 1:
                 MainApp.households = new Households();
                 try {
-                    //MainApp.households = db.getHouseholdByHDSSID(hdssid);
                     MainApp.households = db.householdsDao().getHouseholdByHDSSIDASC(hdssid);
                 } catch (JSONException e) {
                     e.printStackTrace();

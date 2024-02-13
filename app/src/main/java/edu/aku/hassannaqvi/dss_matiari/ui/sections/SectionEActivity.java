@@ -31,7 +31,7 @@ import edu.aku.hassannaqvi.dss_matiari.core.MainApp;
 
 import edu.aku.hassannaqvi.dss_matiari.databinding.ActivitySectionEBinding;
 import edu.aku.hassannaqvi.dss_matiari.models.Outcome;
-import edu.aku.hassannaqvi.dss_matiari.room.DssRoomDatabase;
+import edu.aku.hassannaqvi.dss_matiari.database.DssRoomDatabase;
 
 public class SectionEActivity extends AppCompatActivity {
 

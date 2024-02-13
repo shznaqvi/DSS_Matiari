@@ -1,7 +1,6 @@
 package edu.aku.hassannaqvi.dss_matiari.ui.lists;
 
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.allMwraRefusedOrMigrated;
-import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.fmComplete;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.followUpsScheMWRAList;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.fpMwra;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.households;
@@ -37,7 +36,7 @@ import edu.aku.hassannaqvi.dss_matiari.adapters.FpMwraAdapter;
 import edu.aku.hassannaqvi.dss_matiari.core.MainApp;
 import edu.aku.hassannaqvi.dss_matiari.databinding.ActivityFpmwraBinding;
 import edu.aku.hassannaqvi.dss_matiari.models.Mwra;
-import edu.aku.hassannaqvi.dss_matiari.room.DssRoomDatabase;
+import edu.aku.hassannaqvi.dss_matiari.database.DssRoomDatabase;
 import edu.aku.hassannaqvi.dss_matiari.ui.EndingActivity;
 import edu.aku.hassannaqvi.dss_matiari.ui.sections.SectionBActivity;
 

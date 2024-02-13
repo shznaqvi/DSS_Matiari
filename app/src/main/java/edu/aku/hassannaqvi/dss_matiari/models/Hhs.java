@@ -12,7 +12,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import edu.aku.hassannaqvi.dss_matiari.contracts.TableContracts.TableHHS;
-import edu.aku.hassannaqvi.dss_matiari.newstruct.models.SyncModelNew;
 
 /**
  * Author: gul.sanober

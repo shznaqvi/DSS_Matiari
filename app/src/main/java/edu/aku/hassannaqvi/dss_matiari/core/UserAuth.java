@@ -1,7 +1,6 @@
 package edu.aku.hassannaqvi.dss_matiari.core;
 
 import android.util.Base64;
-import android.util.Log;
 
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
@@ -12,7 +11,7 @@ import java.util.Objects;
 import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.PBEKeySpec;
 
-import edu.aku.hassannaqvi.dss_matiari.newstruct.global.AppConstants;
+import edu.aku.hassannaqvi.dss_matiari.global.AppConstants;
 
 public class UserAuth {
 

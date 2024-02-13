@@ -2,11 +2,8 @@ package edu.aku.hassannaqvi.dss_matiari.ui.sections;
 
 
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.allMwraRefusedOrMigrated;
-import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.dateOfVisit;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.fpMwra;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.households;
-import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.mwra;
-import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.mwraStatus;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.outcome;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.sharedPref;
 
@@ -29,11 +26,10 @@ import java.util.Calendar;
 import java.util.Locale;
 
 import edu.aku.hassannaqvi.dss_matiari.R;
-import edu.aku.hassannaqvi.dss_matiari.contracts.TableContracts;
 import edu.aku.hassannaqvi.dss_matiari.core.MainApp;
 import edu.aku.hassannaqvi.dss_matiari.databinding.ActivitySectionFBinding;
 import edu.aku.hassannaqvi.dss_matiari.models.Outcome;
-import edu.aku.hassannaqvi.dss_matiari.room.DssRoomDatabase;
+import edu.aku.hassannaqvi.dss_matiari.database.DssRoomDatabase;
 
 public class SectionFActivity extends AppCompatActivity {
 

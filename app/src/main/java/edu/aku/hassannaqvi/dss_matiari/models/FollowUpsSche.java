@@ -14,7 +14,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import edu.aku.hassannaqvi.dss_matiari.contracts.TableContracts.TableFollowUpsSche;
-import edu.aku.hassannaqvi.dss_matiari.newstruct.models.SyncModelNew;
 
 /**
  * Author: Hassan.naqvi
