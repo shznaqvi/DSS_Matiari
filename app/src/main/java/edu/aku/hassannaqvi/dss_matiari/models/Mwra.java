@@ -2,6 +2,7 @@ package edu.aku.hassannaqvi.dss_matiari.models;
 
 import static java.util.concurrent.TimeUnit.MILLISECONDS;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.PROJECT_NAME;
+import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.fpMwra;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.households;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.mwra;
 
@@ -208,21 +209,8 @@ public class Mwra extends BaseObservable implements Observable {
         mwra.setRound(MainApp.fpMwra.getFRound());
         mwra.setSNo(MainApp.fpMwra.getRb01());
         mwra.setChild_count(MainApp.fpMwra.getChild_count());
-        mwra.getSC().setRb01(MainApp.fpMwra.getRb01());  // Line number of MWRA
-        mwra.getSC().setRb02(MainApp.fpMwra.getRb02());  // Name of MWRA
-        mwra.getSC().setRb03(MainApp.fpMwra.getRb03()); // Husband / Father Name
-        mwra.getSC().setRb04(MainApp.fpMwra.getRb04()); // DOB
-        mwra.setPrePreg(MainApp.fpMwra.getRb07());
-        mwra.getSC().setRb06(MainApp.fpMwra.getRb06());
-        mwra.setPreMaritalStaus(MainApp.fpMwra.getRb06());
-        mwra.setPregnum(MainApp.fpMwra.getPregCount());
-        mwra.getSC().setRb22(MainApp.fpMwra.getRb22());
-        mwra.getSC().setRb23(MainApp.fpMwra.getRb23());
+        mwra.setPrePreg(MainApp.fpMwra.getRb07()); // Previous pregnance status
 
-        long daysdiff = CalculateAge(MainApp.fpMwra.getRa01().getDate());
-        long years = daysdiff / 365;
-        long actualAge = Integer.parseInt(MainApp.fpMwra.getRb05()) + years;
-        mwra.getSC().setRb05(String.valueOf(actualAge));     // Age in Years
     }
 
     /*FOR IDENTIFICATION INFORMATION - CLUSTER-WISE*/
@@ -869,6 +857,24 @@ public class Mwra extends BaseObservable implements Observable {
         public static void saveData(Mwra.SC data) {
             mwra.setSC(data);
             Objects.requireNonNull(DssRoomDatabase.getDbInstance()).mwraDao().updateMwra(mwra);
+        }
+
+        public void populateMeta() {
+            setRb01(MainApp.fpMwra.getRb01());  // Line number of MWRA
+            setRb02(MainApp.fpMwra.getRb02());  // Name of MWRA
+            setRb03(MainApp.fpMwra.getRb03()); // Husband / Father Name
+            setRb04(MainApp.fpMwra.getRb04()); // DOB
+
+            setRb06(MainApp.fpMwra.getRb06()); // Marital status
+            mwra.setPreMaritalStaus(MainApp.fpMwra.getRb06());
+            mwra.setPregnum(MainApp.fpMwra.getPregCount()); // Total number of pregnancies
+            setRb22(MainApp.fpMwra.getRb22());              // Woman name in NIC
+            setRb23(MainApp.fpMwra.getRb23());              // Husband / Fathers Name in NIC
+
+            long daysdiff = CalculateAge(MainApp.fpMwra.getRa01().getDate());
+            long years = daysdiff / 365;
+            long actualAge = Integer.parseInt(MainApp.fpMwra.getRb05()) + years;
+            setRb05(String.valueOf(actualAge));     // Age in Years
         }
 
         // Get section object by parsing json

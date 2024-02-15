@@ -37,6 +37,7 @@ public class FpMwraAdapter extends RecyclerView.Adapter<FpMwraAdapter.ViewHolder
     private final List<FollowUpsSche> followupsSche;
     private final int mExpandedPosition = -1;
     private final int completeCount;
+    private Mwra.SC sc;
     private final DssRoomDatabase db;
 
     /**
@@ -71,13 +72,18 @@ public class FpMwraAdapter extends RecyclerView.Adapter<FpMwraAdapter.ViewHolder
         TextView secDob = viewHolder.secDob;
         TextView secGender = viewHolder.secGender;
         String pregStatus = "";
+        sc = new Mwra.SC();
+
         if(!AppConstants.isEmpty(followUpsSche.getRb07())) {
             pregStatus = followUpsSche.getRb07().equals("1") ? "PW" : "  ";
         }
 
-        try {
+        /*try {
             //String curPregStatus = db.getFollowupsBySno(followUpsSche.getRb01(), followUpsSche.getFRound()).getRc07();
-                String curPregStatus = Objects.requireNonNull(db.mwraDao().getFollowupsBySno(MainApp.households.getUid(), followUpsSche.getRb01(), followUpsSche.getFRound())).getSB().getRb07();
+            Mwra mwra = db.mwraDao().getFollowupsBySno(followUpsSche.getRb01(), followUpsSche.getFRound());
+            assert mwra != null;
+            mwra.getSB();
+                String curPregStatus = Objects.requireNonNull(db.mwraDao().getFollowupsBySno(followUpsSche.getRb01(), followUpsSche.getFRound())).getSC().getRb07();
                 if (!curPregStatus.equals("")) {
                     pregStatus = curPregStatus.equals("1") ? "Pregnant" : " Not Pregnant ";
                 }
@@ -86,7 +92,7 @@ public class FpMwraAdapter extends RecyclerView.Adapter<FpMwraAdapter.ViewHolder
             e.printStackTrace();
             Toast.makeText(mContext, "JSONException(Followups): " + e.getMessage(), Toast.LENGTH_SHORT).show();
         }
-
+*/
 
         // MWRA Count
         MainApp.fmComplete = completeCount == MainApp.mwraCount;
@@ -175,15 +181,15 @@ public class FpMwraAdapter extends RecyclerView.Adapter<FpMwraAdapter.ViewHolder
             secDob.setText(followUpsSche.getRb04());
             secGender.setText(followUpsSche.getRc04().equals("2") ? " Female" : "male");
 
-
-
         viewHolder.itemView.setOnClickListener(v -> {
             // Get the current state of the item
 
 
                 if (followUpsSche.getMemberType().equals("1")) {
                     MainApp.fpMwra = MainApp.followUpsScheMWRAList.get(viewHolder.getBindingAdapterPosition());
-                    Mwra.populateMetaFollowups();
+                    /*Mwra.populateMetaFollowups();
+                    sc.populateMeta();
+                    Mwra.SC.saveData(sc);*/
 
                     Intent intent = new Intent(mContext, SectionCActivity.class);
 

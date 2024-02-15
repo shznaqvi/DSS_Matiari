@@ -1,6 +1,7 @@
 package edu.aku.hassannaqvi.dss_matiari.adapters;
 
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.hhsList;
+import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.households;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.selectedUC;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.selectedVillage;
 
@@ -102,7 +103,7 @@ public class FPHouseholdAdapter extends RecyclerView.Adapter<FPHouseholdAdapter.
     @Override
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int position) {
 
-        Log.d(TAG, "Element " + viewHolder.getLayoutPosition() + " set.");
+        Log.d(TAG, "Element " + viewHolder.getBindingAdapterPosition() + " set.");
         FollowUpsSche followUpsSche = this.followUpsScheList.get(viewHolder.getBindingAdapterPosition());// Get element from your dataset at this position and replace the contents of the view
 
         // with that element
@@ -236,7 +237,10 @@ public class FPHouseholdAdapter extends RecyclerView.Adapter<FPHouseholdAdapter.
                         }
                     }
                     MainApp.households.populateMeta(viewHolder.getBindingAdapterPosition());
-                    MainApp.households.getSA().updateFMData(MainApp.selectHHsHousehold);
+                    //MainApp.households.getSA().updateFMData(MainApp.selectHHsHousehold);
+                    sA.updateFMData(MainApp.selectHHsHousehold);
+                    MainApp.households.setSA(sA);
+
 
                     Intent intent = new Intent(mContext, SectionAFupctivity.class);
                     intent.putExtra("position", position);
@@ -267,9 +271,14 @@ public class FPHouseholdAdapter extends RecyclerView.Adapter<FPHouseholdAdapter.
                         }
                     }
                     //if (MainApp.households.getUid().equals("")) {
-                    MainApp.households.populateMeta(viewHolder.getLayoutPosition());
+                    MainApp.households.populateMeta(viewHolder.getBindingAdapterPosition());
                     sA.updateFMData(MainApp.selectHHsHousehold);
                     MainApp.households.setSA(sA);
+                    try {
+                        Households.saveMainData(households.getHdssId(), sA);
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
                     //MainApp.households.().updateFMData(MainApp.selectHHsHousehold);
                     //}
 
@@ -279,7 +288,7 @@ public class FPHouseholdAdapter extends RecyclerView.Adapter<FPHouseholdAdapter.
                         int currentChild = totalChildMap.containsKey(pos) ? totalChildMap.get(pos) : 0;
                         //if (!followUpsSche.getiStatus().equals("4") && (currentMWRA > 0 || currentChild > 0)) {
                         if (currentMWRA > 0 || currentChild > 0) {
-                            editHousehold(viewHolder.getLayoutPosition());
+                            editHousehold(viewHolder.getBindingAdapterPosition());
                         } else if (!followUpsSche.getiStatus().equals("1") || (currentMWRA == 0 && currentChild == 0)) {
                             try {
                                 //MainApp.households = db.getHouseholdByHDSSID(followUpsSche.getHdssid());
@@ -294,9 +303,9 @@ public class FPHouseholdAdapter extends RecyclerView.Adapter<FPHouseholdAdapter.
                                 }
                                 MainApp.households.getSA().setRa09(followUpsSche.getHhNo());
                                 MainApp.selectedHhNO = followUpsSche.getHhNo();
-                                MainApp.position = viewHolder.getLayoutPosition();
+                                MainApp.position = viewHolder.getBindingAdapterPosition();
                                 if (!MainApp.households.getIStatus().equals("1") && Integer.parseInt(MainApp.households.getVisitNo()) < 3) {
-                                    MainApp.households.populateMeta(viewHolder.getLayoutPosition());
+                                    MainApp.households.populateMeta(viewHolder.getBindingAdapterPosition());
                                     MainApp.households.setRegRound("1");
                                     Intent intent = new Intent(mContext, SectionAActivity.class);
                                     ((FPHouseholdActivity) mContext).MemberInfoLauncher.launch(intent);

@@ -1,6 +1,7 @@
 package edu.aku.hassannaqvi.dss_matiari.ui.sections;
 
 
+import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.idType;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.mwra;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.sharedPref;
 
@@ -20,6 +21,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
+import java.util.Objects;
 
 import edu.aku.hassannaqvi.dss_matiari.R;
 import edu.aku.hassannaqvi.dss_matiari.core.MainApp;
@@ -45,15 +47,6 @@ public class SectionDActivity extends AppCompatActivity {
         db = MainApp.appInfo.dbHelper;
 
         setDateRanges();
-
-
-        /*if (mwra.getUid() != null || mwra.getUid().equals("")) {
-            try {
-                mwra.sDHydrate(mwra.getSD());
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-        }*/
 
         sD = Mwra.SD.getData();
         sD = sD == null ? new Mwra.SD() : sD;
@@ -91,12 +84,15 @@ public class SectionDActivity extends AppCompatActivity {
 
             // Set time from RC01a
             Calendar cal = Calendar.getInstance();
-
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
-            cal.setTime(sdf.parse(mwra.getSB().getRb01a()));// all done
+
+            if(MainApp.idType == 1) {
+                cal.setTime(Objects.requireNonNull(sdf.parse(mwra.getSB().getRb01a())));// all done
+            }else{
+                cal.setTime(Objects.requireNonNull(sdf.parse(mwra.getSC().getRb01a())));// all done
+            }
 
             sdf = new SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH);
-
 
             // Set MinLMP date to 2 months back from DOV
             cal.add(Calendar.MONTH, -9);
@@ -131,15 +127,15 @@ public class SectionDActivity extends AppCompatActivity {
 
             Calendar lmpCal = Calendar.getInstance();
             SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
-            lmpCal.setTime(simpleDateFormat.parse(mwra.getSB().getRb08()));
+            if(idType == 1) {
+                lmpCal.setTime(Objects.requireNonNull(simpleDateFormat.parse(mwra.getSB().getRb08())));
+            }
             sdf = new SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH);
             String dov = sdf.format(cal.getTime());
             String lmp = sdf.format(lmpCal.getTime());
 
             bi.rb25.setMinDate(lmp);
             bi.rb25.setMaxDate(dov);
-
-
 
         } catch (ParseException e) {
             e.printStackTrace();
@@ -149,7 +145,6 @@ public class SectionDActivity extends AppCompatActivity {
     public void btnContinue(View view) {
         if (!formValidation()) return;
 
-
         if(!mwra.getUid().contains("_")) {
             if (mwra.getSC().getRb07().equals("1")) {
                 mwra.setPregnum(String.valueOf(Integer.parseInt(mwra.getPregnum()) + 1));
@@ -157,14 +152,9 @@ public class SectionDActivity extends AppCompatActivity {
                 mwra.setPregnum(String.valueOf(MainApp.pregcount));
             }
         }
-        if (updateDB()) {
-            setResult(RESULT_OK);
-            //startActivity(new Intent(this, FPEndingActivity.class).addFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT).putExtra("complete", MainApp.mwraFlag));
-            finish();
-
-        } else {
-            Toast.makeText(this, "Failed to Update Database!", Toast.LENGTH_SHORT).show();
-        }
+        Mwra.SD.saveData(sD);
+        setResult(RESULT_OK);
+        finish();
     }
 
 
@@ -189,22 +179,12 @@ public class SectionDActivity extends AppCompatActivity {
     public void btnEnd(View view) {
         setResult(RESULT_CANCELED);
         finish();
-
     }
 
     private boolean formValidation() {
         setDateRanges();
         return Validator.emptyCheckingContainer(this, bi.GrpName);
-
     }
-
-    public static String toBlackVisionDate(String currentDate) {
-        String newDate = currentDate;
-        String[] oldDateParts = currentDate.split("-");
-        newDate = oldDateParts[2] + "/" + oldDateParts[1] + "/" + oldDateParts[0];
-        return newDate;
-    }
-
 
     @Override
     protected void onResume() {

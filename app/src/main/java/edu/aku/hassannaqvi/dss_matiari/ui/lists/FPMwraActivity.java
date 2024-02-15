@@ -63,8 +63,6 @@ public class FPMwraActivity extends AppCompatActivity {
         bi.hdssid.setText(households.getHdssId());
 
         try {
-
-            //followUpsScheMWRAList = db.getAllfollowupsScheByHH(fpHouseholds.getVillageCode(), fpHouseholds.getUcCode(), fpHouseholds.getHhNo());
             followUpsScheMWRAList = db.FollowUpsScheDao().getAllfollowupsScheByHH(households.getVillageCode(), households.getUcCode(), households.getHhNo());
 
         } catch (Exception e) {
@@ -78,11 +76,10 @@ public class FPMwraActivity extends AppCompatActivity {
 
             String fupStatus = "";
             try {
-                //fupStatus = db.getFollowupsBySno(followUpsScheMWRAList.get(i).getRb01(), followUpsScheMWRAList.get(i).getFRound()).getSysDate();
 
                 if (followUpsScheMWRAList.get(i).getRb01() != null) {
 
-                    Mwra tempMwra = db.mwraDao().getFollowupsBySno(households.getUid(), followUpsScheMWRAList.get(i).getRb01(), followUpsScheMWRAList.get(i).getFRound());
+                    Mwra tempMwra = db.mwraDao().getFollowupsBySno(MainApp.households.getUid(), followUpsScheMWRAList.get(i).getRb01(), followUpsScheMWRAList.get(i).getFRound());
                     fupStatus = tempMwra.getSysDate();
                     followUpsScheMWRAList.get(i).setfpDoneDt(fupStatus);
                     if (!fupStatus.equals("")) {
@@ -135,13 +132,13 @@ public class FPMwraActivity extends AppCompatActivity {
             bi.btnContinue.setVisibility(View.VISIBLE);
         }
 
-        households.getSA().setRa01(households.getSysDate().substring(0, 10));
+        /*households.getSA().setRa01(households.getSysDate().substring(0, 10));
         MainApp.households.setUcCode(households.getUcCode());
         MainApp.households.setVillageCode(households.getVillageCode());
         MainApp.households.setHhNo(households.getHhNo());
         MainApp.households.setSysDate(households.getSysDate());
         MainApp.households.setHdssId(households.getHdssId());
-        MainApp.households.setVisitNo(households.getVisitNo());
+        MainApp.households.setVisitNo(households.getVisitNo());*/
         households.setRegRound("");
         //MainApp.households.setRa18(households.getRa18());
 

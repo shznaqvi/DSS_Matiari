@@ -87,15 +87,11 @@ public class FPHouseholdActivity extends AppCompatActivity {
         sA = new Households.SA();
         
         MainApp.hhsList = new ArrayList<>();
-        //MainApp.mwraStatus = new HashMap<String[], Boolean>();
-
 
         Log.d(TAG, "onCreate: followUpsScheHHList " + MainApp.followUpsScheHHList.size());
 
         initSearchFilter();
 
-
-        //MainApp.followUpsScheHHList = db.getFollowUpsScheHHBYVillage(selectedUC, selectedVillage, "");
         MainApp.followUpsScheHHList = db.FollowUpsScheDao().getFollowUpsScheHHBYVillage(selectedUC, selectedVillage, "");
         MainApp.hhsList = db.HhsDao().getHhsBYVillage(selectedUC, selectedVillage, "");
 
@@ -122,14 +118,12 @@ public class FPHouseholdActivity extends AppCompatActivity {
             }
         });
 
-
     }
 
     @SuppressLint("NotifyDataSetChanged")
     public void filterForms(View view) {
         Toast.makeText(this, "updated", Toast.LENGTH_SHORT).show();
 
-        //MainApp.followUpsScheHHList = db.getFollowUpsScheHHBYVillage(selectedUC, selectedVillage, bi.hhead.getText().toString());
         MainApp.followUpsScheHHList = db.FollowUpsScheDao().getFollowUpsScheHHBYVillage(selectedUC, selectedVillage, bi.hhead.getText().toString());
         MainApp.hhsList = db.HhsDao().getHhsBYVillage(selectedUC, selectedVillage, bi.hhead.getText().toString());
         hhAdapter = new FPHouseholdAdapter(this, MainApp.followUpsScheHHList);
@@ -158,9 +152,6 @@ public class FPHouseholdActivity extends AppCompatActivity {
 
     public void addHousehold() throws JSONException {
         MainApp.households = new Households();
-
-        //int maxHH = db.getMaxHouseholdNo(selectedUC, selectedVillage);      // From Households table on device
-        //int maxHHNo = db.getMaxHHNoByVillage(selectedUC, selectedVillage);  // From Max Household numbers fetched from server
         int maxHH = db.householdsDao().getMaxHouseholdNo(selectedUC, selectedVillage, "");     // From Households table on device
         int maxHHNo = db.MaxHHNoDao().getMaxHHNoByVillage(selectedUC, selectedVillage);     // From Max Household numbers fetched from server
         int maxHHFinal = Math.max(maxHH, maxHHNo);
@@ -205,28 +196,6 @@ public class FPHouseholdActivity extends AppCompatActivity {
                 // Write your code if there's no result
                 Toast.makeText(this, "Information for " + MainApp.followUpsScheHHList.get(selectedFpHousehold).getRa12() + " was not saved.1", Toast.LENGTH_SHORT).show();
             }
-        }
-    }
-
-    private boolean hhExists() {
-
-        switch (idType) {
-            case 1:
-                MainApp.households = new Households();
-                try {
-                    //MainApp.households = db.getHouseholdByHDSSID(hdssid);
-                    MainApp.households = db.householdsDao().getHouseholdByHDSSIDASC(hdssid);
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                    Toast.makeText(this, "JSONException: " + e.getMessage(), Toast.LENGTH_SHORT).show();
-                    Log.d(TAG, "ProcessStart (JSONException): " + e.getMessage());
-                }
-                return MainApp.households != null;
-
-
-            default:
-                return false;
-
         }
     }
 
