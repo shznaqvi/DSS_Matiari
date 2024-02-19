@@ -30,7 +30,6 @@ public class SectionAActivity extends AppCompatActivity {
     private static final String TAG = "SectionAActivity";
     ActivitySectionABinding bi;
     private DssRoomDatabase db;
-
     private Households.SA sA;
 
     @Override
@@ -43,7 +42,6 @@ public class SectionAActivity extends AppCompatActivity {
 
         String date = toBlackVisionDate("2023-01-01");
         bi.ra01.setMinDate(date);
-
 
         sA = Households.SA.getData();
         sA = sA == null ? new Households.SA() : sA;
@@ -88,7 +86,6 @@ public class SectionAActivity extends AppCompatActivity {
                 }
             }
         });
-
     }
 
     public void btnContinue(View view) throws JSONException {
@@ -120,90 +117,6 @@ public class SectionAActivity extends AppCompatActivity {
 
     }
 
-/*    public void btnContinue(View view) {
-
-        if (view.getId() == bi.btnLocked.getId()) {
-            bi.ra12.setTag("-1");
-            bi.ra13.setTag("-1");
-            bi.ra14.setTag("-1");
-            bi.ra15.setTag("-1");
-            bi.ra17A1.setTag("-1");
-            bi.ra17B1.setTag("-1");
-            bi.ra17C1.setTag("-1");
-            bi.ra17D1.setTag("-1");
-            bi.ra17A2.setTag("-1");
-            bi.ra17B2.setTag("-1");
-            bi.ra17C2.setTag("-1");
-            bi.ra17D2.setTag("-1");
-            bi.ra18.setTag("-1");
-        }
-        if (!formValidation()) return;
-        if (!insertNewRecord()) return;
-
-        if (updateDB()) {
-
-            setResult(RESULT_OK);
-            if (households.getSA().getRa15().equals("1")) {
-                finish();
-                startActivity(new Intent(this, MwraActivity.class)
-                        .setFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT));
-            } else {
-                finish();
-                startActivity(new Intent(this, EndingActivity.class)
-                        .setFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT)
-                        .putExtra("noWRA", true));
-            }
-
-        } else {
-            Toast.makeText(this, "Failed to Update Database!", Toast.LENGTH_SHORT).show();
-        }
-    }*/
-
-    /*private boolean insertNewRecord() {
-
-        if (!MainApp.households.getUid().equals("")) return true;
-        MainApp.households.populateMeta();
-        long rowId = 0;
-        try {
-            //rowId = db.addHousehold(households);
-            rowId = db.householdsDao().addHousehold(households);
-        } catch (Exception e) {
-            e.printStackTrace();
-            return false;
-        }
-        households.setId(rowId);
-        if (rowId > 0) {
-            households.setUid(households.getDeviceId() + households.getId());
-            db.householdsDao().updateHousehold(households);
-            return true;
-        } else {
-            Toast.makeText(this, "Updating Database... ERROR!", Toast.LENGTH_SHORT).show();
-            return false;
-        }
-    }
-
-    private boolean updateDB() {
-        //DssRoomDatabase db = MainApp.appInfo.getDbHelper();
-        int updcount = 0;
-        try {
-//            updcount = db.updatesHouseholdColumn(TableContracts.HouseholdTable.COLUMN_SA, households.sAtoString());
-            Households updatedHousehold = households;
-            updatedHousehold.setSA(households.sAtoString());
-            updcount = db.householdsDao().updateHousehold(updatedHousehold);
-        } catch (JSONException e) {
-            e.printStackTrace();
-            Toast.makeText(this, "JSONException: " + e.getMessage(), Toast.LENGTH_SHORT).show();
-            Log.d(TAG, "ProcessStart (JSONException): " + e.getMessage());
-            return false;
-        }
-        if (updcount == 1) {
-            return true;
-        } else {
-            Toast.makeText(this, "Updating Database... ERROR!", Toast.LENGTH_SHORT).show();
-            return false;
-        }
-    }*/
-
     public void btnEnd(View view) {
         setResult(RESULT_CANCELED);
         finish();
@@ -213,7 +126,6 @@ public class SectionAActivity extends AppCompatActivity {
     private boolean formValidation() {
         return Validator.emptyCheckingContainer(this, bi.GrpName);
     }
-
 
     public static String toBlackVisionDate(String currentDate) {
         String newDate = currentDate;

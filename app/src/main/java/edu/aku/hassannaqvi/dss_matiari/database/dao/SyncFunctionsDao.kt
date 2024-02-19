@@ -64,13 +64,13 @@ interface SyncFunctionsDao {
         val allForms = getUnsycedAdjustedMWRAS_internal()
 
         val jsonArray = JSONArray()
-        for (i in allForms)
+        /*for (i in allForms)
         {
 
             //i.Hydrate(i)
             //jsonArray.put(i.toJSONObject())
 
-        }
+        }*/
 
         return jsonArray
 
@@ -99,14 +99,14 @@ interface SyncFunctionsDao {
     {
         val allForms = getUnsycedAdjustedOutcomes_internal()
         val jsonArray = JSONArray()
-        for (i in allForms)
+        /*for (i in allForms)
         {
 
             i.Hydrate(i)
             jsonArray.put(i.toJSONObject())
 
         }
-
+*/
         return jsonArray
 
     }

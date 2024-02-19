@@ -9,7 +9,7 @@
         <!--MWRA outcome-->
         <variable
             name="outcome"
-            type="edu.aku.hassannaqvi.dss_matiari.models.Outcome" />
+            type="edu.aku.hassannaqvi.dss_matiari.models.Outcome.SE" />
 
         <!--        <variable
                     name="callback"
@@ -21,21 +21,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
-
-
-        <!-- CUSTOM TOOLBAR -->
-        <!--        <androidx.appcompat.widget.Toolbar-->
-        <!--            android:id="@+id/toolbar"-->
-        <!--            style="@null"-->
-        <!--            android:layout_width="match_parent"-->
-        <!--            android:layout_height="wrap_content"-->
-        <!--            android:background="@color/colorPrimary"-->
-        <!--            android:minHeight="?attr/actionBarSize"-->
-        <!--            android:theme="@style/ToolbarTheme"-->
-        <!--            app:popupTheme="@style/ThemeOverlay.AppCompat.Light"-->
-        <!--            app:subtitleTextAppearance="@style/Toolbar.SubtitleText"-->
-        <!--            app:title="@string/outcome_mainheading"-->
-        <!--            app:titleTextAppearance="@style/Toolbar.TitleText" />-->
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
@@ -693,37 +678,6 @@
                         android:textStyle="bold" />
 
                 </LinearLayout>
-
-
-                <!--                &lt;!&ndash;EndButton LinearLayout&ndash;&gt;-->
-                <!--                <LinearLayout-->
-                <!--                    android:layout_width="match_parent"-->
-                <!--                    android:layout_height="wrap_content"-->
-                <!--                    android:layout_margin="24dp"-->
-                <!--                    android:gravity="end"-->
-                <!--                    android:orientation="horizontal">-->
-
-                <!--                    <androidx.appcompat.widget.AppCompatButton-->
-                <!--                        android:id="@+id/btn_End"-->
-                <!--                        android:layout_width="wrap_content"-->
-                <!--                        android:layout_height="wrap_content"-->
-                <!--                        android:layout_marginStart="12dp"-->
-                <!--                        android:backgroundTint="@color/colorAccent"-->
-                <!--                        android:onClick="btnEnd"-->
-                <!--                        android:text="Cancel"-->
-                <!--                        android:textColor="@color/white" />-->
-
-                <!--                    <androidx.appcompat.widget.AppCompatButton-->
-                <!--                        android:id="@+id/btn_Continue"-->
-                <!--                        android:layout_width="wrap_content"-->
-                <!--                        android:layout_height="wrap_content"-->
-                <!--                        android:layout_marginStart="12dp"-->
-                <!--                        android:backgroundTint="@color/colorPrimary"-->
-                <!--                        android:onClick="btnContinue"-->
-                <!--                        android:text="Save"-->
-                <!--                        android:textColor="@color/white" />-->
-                <!--                </LinearLayout>-->
-
 
             </LinearLayout>
         </ScrollView>

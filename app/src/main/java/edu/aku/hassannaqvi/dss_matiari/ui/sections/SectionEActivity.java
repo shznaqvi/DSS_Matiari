@@ -30,6 +30,7 @@ import edu.aku.hassannaqvi.dss_matiari.R;
 import edu.aku.hassannaqvi.dss_matiari.core.MainApp;
 
 import edu.aku.hassannaqvi.dss_matiari.databinding.ActivitySectionEBinding;
+import edu.aku.hassannaqvi.dss_matiari.models.Mwra;
 import edu.aku.hassannaqvi.dss_matiari.models.Outcome;
 import edu.aku.hassannaqvi.dss_matiari.database.DssRoomDatabase;
 
@@ -38,6 +39,7 @@ public class SectionEActivity extends AppCompatActivity {
     private static final String TAG = "SectionOutcomeActivity";
     ActivitySectionEBinding bi;
     private DssRoomDatabase db;
+    private Outcome.SE sE;
 
 
     @Override
@@ -51,21 +53,18 @@ public class SectionEActivity extends AppCompatActivity {
         setDateRanges();
 
         try {
-            //outcome = db.getOutComeBYID(String.valueOf(++MainApp.childCount));
-            String[] muid = mwra.getUid().split("_");
             outcome = db.OutcomeDao().getOutcomeBYID(mwra.getHdssId(), mwra.getSNo(), String.valueOf(++MainApp.prevChildCount));
         } catch (JSONException e) {
             e.printStackTrace();
             Toast.makeText(this, "JSONException(Outcome): " + e.getMessage(), Toast.LENGTH_SHORT).show();
         }
 
-        if(outcome.getUid() != null || !outcome.getUid().equals(""))
+        //Outcome.populateMeta();
+        sE = Outcome.SE.getData();
+        if(sE == null)
         {
-            try {
-                outcome.sEHydrate(outcome.getSE());
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
+            sE = new Outcome.SE();
+            sE.populateMeta();
         }
 
         // Registration
@@ -77,7 +76,7 @@ public class SectionEActivity extends AppCompatActivity {
                 {
                     MainApp.ROUND = mwra.getRound();
                     bi.rc03dob.setText(mwra.getSC().getRb21());
-                    outcome.setRc03(mwra.getSC().getRb21());
+                    sE.setRc03(mwra.getSC().getRb21());
                     String date = toBlackVisionDate(mwra.getSB().getRb21());
                     bi.rc06.setMinDate(date);
                 }else{
@@ -93,7 +92,7 @@ public class SectionEActivity extends AppCompatActivity {
                     if(outcome.getUid().equals(""))
                     {
                         MainApp.ROUND = mwra.getRound();
-                        outcome.setRc03(mwra.getSC().getRb21());
+                        sE.setRc03(mwra.getSC().getRb21());
                         String date = toBlackVisionDate(mwra.getSC().getRb21());
                         bi.rc06.setMinDate(date);
                     }else{
@@ -105,7 +104,7 @@ public class SectionEActivity extends AppCompatActivity {
                     if(outcome.getUid().equals(""))
                     {
                         MainApp.ROUND = MainApp.fpMwra.getFRound();
-                        outcome.setRc03(mwra.getSC().getRb15());
+                        sE.setRc03(mwra.getSC().getRb15());
                         String date = toBlackVisionDate(mwra.getSC().getRb15());
                         bi.rc06.setMinDate(date);
                         bi.rc03dob.setEnabled(false);
@@ -118,9 +117,9 @@ public class SectionEActivity extends AppCompatActivity {
 
         }
 
-        outcome.setRc01(outcome.getRc01().isEmpty() ? String.valueOf(MainApp.prevChildCount) : outcome.getRc01());
+        sE.setRc01(sE.getRc01().isEmpty() ? String.valueOf(MainApp.prevChildCount) : sE.getRc01());
 
-        bi.setOutcome(outcome);
+        bi.setOutcome(sE);
         bi.btnContinue.setText(outcome.getUid().equals("") ? "Save" : "Update");
 
 
@@ -144,11 +143,38 @@ public class SectionEActivity extends AppCompatActivity {
             }
         });
 
-
-
     }
 
     public void btnContinue(View view) throws JSONException {
+        if (!formValidation()) return;
+        Outcome.saveMainDataReg(mwra.getHdssId(), mwra.getSNo(), sE.getRc01(), sE);
+
+        if (MainApp.totalChildCount > MainApp.childCount) {
+
+            MainApp.childCount ++;
+            outcome = new Outcome();
+            setResult(RESULT_OK);
+            finish();
+            startActivity(new Intent(this, SectionEActivity.class).addFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT).putExtra("complete", true));
+
+        } else if(mwra.getRegRound().equals("") || mwra.getPrePreg().equals("2")) {
+            MainApp.childCount = 1;
+            MainApp.totalChildCount = 0;
+            setResult(RESULT_OK);
+            finish();
+            startActivity(new Intent(this, SectionDActivity.class).addFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT).putExtra("complete", true));
+
+        }else{
+            MainApp.childCount = 1;
+            MainApp.totalChildCount = 0;
+            setResult(RESULT_OK);
+            finish();
+
+        }
+    }
+
+
+    /*public void btnContinue(View view) throws JSONException {
         if (!formValidation()) return;
         if(outcome.getUid().equals("") ? insertNewRecord() : updateDB())
         {
@@ -180,9 +206,9 @@ public class SectionEActivity extends AppCompatActivity {
             }
 
 
-    }
+    }*/
 
-    private boolean insertNewRecord() throws JSONException {
+    /*private boolean insertNewRecord() throws JSONException {
            outcome.populateMeta();
 
         long rowId = 0;
@@ -206,11 +232,11 @@ public class SectionEActivity extends AppCompatActivity {
             Toast.makeText(this, "Updating Database... ERROR!", Toast.LENGTH_SHORT).show();
             return false;
         }
-    }
+    }*/
 
 
 
-    private boolean updateDB() {
+    /*private boolean updateDB() {
         int updcount = 0;
         try {
             //updcount = db.updatesOutcomeColumn(TableContracts.OutcomeTable.COLUMN_SE, outcome.sEtoString());
@@ -236,7 +262,7 @@ public class SectionEActivity extends AppCompatActivity {
             Toast.makeText(this, "Updating Database... ERROR!", Toast.LENGTH_SHORT).show();
             return false;
         }
-    }
+    }*/
 
     public void btnEnd(View view) {
         MainApp.totalChildCount =0;

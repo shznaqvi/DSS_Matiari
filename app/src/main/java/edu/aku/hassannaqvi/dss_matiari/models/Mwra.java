@@ -113,7 +113,6 @@ public class Mwra extends BaseObservable implements Observable {
     @ColumnInfo(name = MWRATable.COLUMN_ISTATUS)
     private transient String istatus = StringUtils.EMPTY;
 
-
     private String round = StringUtils.EMPTY;
 
     @SerializedName("s2")
@@ -167,27 +166,6 @@ public class Mwra extends BaseObservable implements Observable {
 
     }
 
-    /*public static void populateMeta() {
-
-        MainApp.mwra.setSysDate(MainApp.households.getSysDate());
-        MainApp.mwra.setUuid(MainApp.households.getUid());  // not applicable in Form table
-        MainApp.mwra.setUserName(MainApp.user.getUsername());
-        MainApp.mwra.setDeviceId(MainApp.deviceid);
-        MainApp.mwra.setAppver(MainApp.appInfo.getAppVersion());
-        MainApp.mwra.setProjectName(PROJECT_NAME);
-        MainApp.mwra.setRound(MainApp.ROUND);
-        MainApp.mwra.setRegRound("1");
-        MainApp.mwra.setUcCode(households.getUcCode());
-        MainApp.mwra.setVillageCode(households.getVillageCode());
-        MainApp.mwra.setStructureNo(households.getStructureNo());
-        MainApp.mwra.setHhNo(households.getHhNo());
-        MainApp.mwra.setDeviceId(MainApp.deviceid);
-        MainApp.mwra.setHdssId(households.getHdssId());
-        MainApp.mwra.setAppver(MainApp.versionName + "." + MainApp.versionCode);
-        //setPregnum("0");
-
-    }
-*/
 
     public static void populateMetaFollowups() {
 
@@ -213,7 +191,7 @@ public class Mwra extends BaseObservable implements Observable {
 
     }
 
-    /*FOR IDENTIFICATION INFORMATION - CLUSTER-WISE*/
+
     // Save data in db
     public static void saveMainDataReg(String uuid, String hdssId, String sNo, String regRound) throws JSONException {
         MwraDao mwraDao = Objects.requireNonNull(DssRoomDatabase.getDbInstance()).mwraDao();
@@ -231,16 +209,23 @@ public class Mwra extends BaseObservable implements Observable {
             mwra.setUid(AppConstants.generateUid());
             mwra.setId(mwraDao.addMwra(mwra));
 
+
         }
     }
 
-    /*FOR IDENTIFICATION INFORMATION - CLUSTER-WISE*/
+
     // Save data in db
     public static void saveMainDataFup(String uuid, String hdssId, String sNo, String regRound, SC sC) throws JSONException {
         MwraDao mwraDao = Objects.requireNonNull(DssRoomDatabase.getDbInstance()).mwraDao();
         Mwra form = mwraDao.getMwraByUUId(uuid, hdssId, sNo, regRound);
         if (form != null) {
             mwra = form;
+            mwra.setDeviceId(mwra.getDeviceId() + "_" + mwra.getDeviceId().substring(mwra.getDeviceId().length() - 1));
+            int repeatCount = (mwra.getDeviceId().length() - 16) / 2;
+            // new UID
+            String newUID = mwra.getDeviceId().substring(0, 16) + mwra.getId() + "_" + repeatCount;
+            mwra.setUid(newUID);
+            Objects.requireNonNull(DssRoomDatabase.getDbInstance()).mwraDao().updateMwra(mwra);
         } else {
             populateMetaFollowups();
             mwra.setUid(AppConstants.generateUid());

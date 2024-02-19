@@ -84,15 +84,12 @@ public class FPMwraActivity extends AppCompatActivity {
                     followUpsScheMWRAList.get(i).setfpDoneDt(fupStatus);
                     if (!fupStatus.equals("")) {
                         mwraDone++;
-
                     }
                 }
             } catch (JSONException e) {
 
                 Toast.makeText(this, "JSONException(Followups): " + e.getMessage(), Toast.LENGTH_SHORT).show();
             }
-
-
         }
 
         fmAdapter = new FpMwraAdapter(this, followUpsScheMWRAList);
@@ -132,17 +129,7 @@ public class FPMwraActivity extends AppCompatActivity {
             bi.btnContinue.setVisibility(View.VISIBLE);
         }
 
-        /*households.getSA().setRa01(households.getSysDate().substring(0, 10));
-        MainApp.households.setUcCode(households.getUcCode());
-        MainApp.households.setVillageCode(households.getVillageCode());
-        MainApp.households.setHhNo(households.getHhNo());
-        MainApp.households.setSysDate(households.getSysDate());
-        MainApp.households.setHdssId(households.getHdssId());
-        MainApp.households.setVisitNo(households.getVisitNo());*/
         households.setRegRound("");
-        //MainApp.households.setRa18(households.getRa18());
-
-        //int newMwra = db.getMWRACountBYUUID(fpHouseholds.getUid());
 
         int newMwra = db.mwraDao().getMWRACountBYUUID(households.getUid(), "1");
         int maxMWRA = db.mwraDao().getMaxMWRSNoBYHH(selectedUC, selectedVillage, selectedHhNO);
@@ -156,7 +143,6 @@ public class FPMwraActivity extends AppCompatActivity {
             bi.newMwraList.setVisibility(View.VISIBLE);
 
         }
-
         households.getSA().setRa18(String.valueOf(mwraCount));
 
     }
@@ -167,20 +153,13 @@ public class FPMwraActivity extends AppCompatActivity {
             Toast.makeText(FPMwraActivity.this, "Please complete followups before adding new women.", Toast.LENGTH_LONG).show();
             return;
         }
-        //int maxMWRA = db.getMaxMWRSNoBYHH(selectedUC, selectedVillage, selectedHhNO);
-        //int maxFpMWRA = db.getMaxMWRANoBYHHFromFolloupsSche(selectedUC, selectedVillage, selectedHhNO);
-
         int maxMWRA = db.mwraDao().getMaxMWRSNoBYHH(selectedUC, selectedVillage, selectedHhNO);
         int maxFpMWRA = db.FollowUpsScheDao().getMaxMWRANoBYHHFromFolloupsSche(selectedUC, selectedVillage, selectedHhNO);
         mwraCount = Math.max(maxMWRA, maxFpMWRA);
         MainApp.households.getSA().setRa18(String.valueOf(mwraCount));
 
-
         MainApp.mwra = new Mwra();
-
         startActivityForResult(new Intent(this, SectionBActivity.class), 3);
-
-
     }
 
     public void btnContinue(View view) {
@@ -192,7 +171,6 @@ public class FPMwraActivity extends AppCompatActivity {
         } else {
             proceedSelect();
         }
-
 
     }
 
@@ -219,7 +197,7 @@ public class FPMwraActivity extends AppCompatActivity {
 
                 fpMwra.setfpDoneDt(followUpsScheMWRAList.get(selectedMember).setfpDoneDt(mwra.getSysDate()));
                 db.FollowUpsScheDao().updateFollowupsSche(fpMwra);
-                //db.updatesFollowUpsScheColumn(TableContracts.TableFollowUpsSche.COLUMN_DONE_DATE, followups.getSysDate());
+
                 if (mwraDone >= followUpsScheMWRAList.size()) {
                     bi.btnContinue.setVisibility(View.VISIBLE);
                 }
@@ -229,13 +207,6 @@ public class FPMwraActivity extends AppCompatActivity {
             if (resultCode == Activity.RESULT_CANCELED) {
                 // Write your code if there's no result
                 Toast.makeText(this, "Followup for " + followUpsScheMWRAList.get(selectedMember).getRb02() + " was not saved.2", Toast.LENGTH_SHORT).show();
-            }
-        }
-        if (requestCode == 3) {
-            if (resultCode == Activity.RESULT_OK) {
-
-            }
-            if (resultCode == Activity.RESULT_CANCELED) {
             }
         }
 
@@ -305,7 +276,6 @@ public class FPMwraActivity extends AppCompatActivity {
         } else if(allMwraRefusedOrMigrated.size() == mwraDone) {
             refusedOrMigrated = true;
         }
-
 
         if(!refusedOrMigrated && mwraStatus.size() > 0)
         {

@@ -27,7 +27,7 @@
         <entry key="..\:/Android Projects/DSS_Matiari/app/src/main/res/layout/activity_section_c.xml" value="0.2168" />
         <entry key="..\:/Android Projects/DSS_Matiari/app/src/main/res/layout/activity_section_d.xml" value="0.1328125" />
         <entry key="..\:/Android Projects/DSS_Matiari/app/src/main/res/layout/activity_section_e.xml" value="0.1328125" />
-        <entry key="..\:/Android Projects/DSS_Matiari/app/src/main/res/layout/activity_section_f.xml" value="0.1328125" />
+        <entry key="..\:/Android Projects/DSS_Matiari/app/src/main/res/layout/activity_section_f.xml" value="0.40177849636216656" />
         <entry key="..\:/Android Projects/DSS_Matiari/app/src/main/res/layout/activity_sync.xml" value="0.23125" />
         <entry key="..\:/Android Projects/DSS_Matiari/app/src/main/res/layout/activity_sync_new.xml" value="0.22708333333333333" />
         <entry key="..\:/Android Projects/DSS_Matiari/app/src/main/res/layout/custom_spinner.xml" value="0.23125" />
@@ -48,7 +48,7 @@
     </option>
   </component>
   <component name="ExternalStorageConfigurationManager" enabled="true" />
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_16" project-jdk-name="11" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_16_PREVIEW" project-jdk-name="11" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">

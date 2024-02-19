@@ -44,7 +44,6 @@ public class SectionCActivity extends AppCompatActivity {
 
     private Mwra.SC sC;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -327,13 +326,15 @@ public class SectionCActivity extends AppCompatActivity {
             }
         }
 
+        Mwra.SC.saveData(sC);
+
         if (bi.rb1001.isChecked()) {
 
             switch (fpMwra.getRb06()) {
                 // Married in Previous Round
                 case "1":
                     // Pregnant
-                    if (mwra.getPrePreg().equals("1")) {
+                    if (fpMwra.getRb07().equals("1")) {
                         // If pregnancy continued
                         if (bi.rb1401.isChecked()) {
                             setResult(RESULT_OK);
@@ -359,7 +360,7 @@ public class SectionCActivity extends AppCompatActivity {
                                 //finish();
                             }
                         }
-                    } else if (mwra.getPrePreg().equals("2") && bi.rb1801.isChecked()) {   // Not Pregnant
+                    } else if (fpMwra.getRb07().equals("2") && bi.rb1801.isChecked()) {   // Not Pregnant
                         if (fpMwra.getChild_count() != null) {
                             MainApp.prevChildCount = Integer.parseInt(fpMwra.getChild_count());
                         } else {
@@ -370,7 +371,7 @@ public class SectionCActivity extends AppCompatActivity {
                         setResult(RESULT_OK, forwardIntent);
                         startActivity(forwardIntent);
 
-                    } else if (mwra.getPrePreg().equals("2") && bi.rb1802.isChecked()) {
+                    } else if (fpMwra.getRb07().equals("2") && bi.rb1802.isChecked()) {
                         Intent forwardIntent = new Intent(this, SectionDActivity.class).putExtra("complete", true);
                         forwardIntent.setFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT);
                         setResult(RESULT_OK, forwardIntent);

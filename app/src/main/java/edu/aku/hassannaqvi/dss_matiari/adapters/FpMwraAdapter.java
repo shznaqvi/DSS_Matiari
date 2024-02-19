@@ -75,7 +75,7 @@ public class FpMwraAdapter extends RecyclerView.Adapter<FpMwraAdapter.ViewHolder
         sc = new Mwra.SC();
 
         if(!AppConstants.isEmpty(followUpsSche.getRb07())) {
-            pregStatus = followUpsSche.getRb07().equals("1") ? "PW" : "  ";
+            pregStatus = followUpsSche.getRb07().equals("1") ? "Pregnant" : "Not Pregnant";
         }
 
         /*try {

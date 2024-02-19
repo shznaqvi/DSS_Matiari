@@ -36,11 +36,9 @@ interface OutcomeDao {
     @Throws(JSONException::class)
     fun getOutcomeBYID(hdssid: String,  msno: String, sno: String): Outcome? {
         val outcome = getOutcomeByID_internal(hdssid,  msno, sno)
-        if (outcome == null) {
+        /*if (outcome == null) {
             val tempOutcome = Outcome()
             return tempOutcome
-        }/*else{
-            outcome.sEHydrate(outcome.se)
         }*/
         return outcome
     }
@@ -72,10 +70,10 @@ interface OutcomeDao {
         fround: String
     ): Outcome? {
         val outcome = getOutcomeFollowupsBySno_internal(uuid, rb01, muid, fround, "")
-        if (outcome == null) {
+        /*if (outcome == null) {
             val tempOutcome = Outcome()
             return tempOutcome
-        } /*else {
+        }*/ /*else {
             outcome.sEHydrate(outcome.se)
 
         }*/

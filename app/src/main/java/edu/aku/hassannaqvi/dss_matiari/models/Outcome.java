@@ -1,7 +1,12 @@
 package edu.aku.hassannaqvi.dss_matiari.models;
 
+import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.childCount;
+import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.mwra;
+import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.outcome;
+
 import android.util.Log;
 
+import androidx.annotation.NonNull;
 import androidx.databinding.BaseObservable;
 import androidx.databinding.Bindable;
 import androidx.databinding.Observable;
@@ -12,16 +17,22 @@ import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
 import com.google.gson.annotations.SerializedName;
+import com.google.gson.reflect.TypeToken;
 
 import org.apache.commons.lang3.StringUtils;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.time.LocalDate;
+import java.util.Objects;
 
 import edu.aku.hassannaqvi.dss_matiari.BR;
 import edu.aku.hassannaqvi.dss_matiari.contracts.TableContracts;
 import edu.aku.hassannaqvi.dss_matiari.core.MainApp;
+import edu.aku.hassannaqvi.dss_matiari.database.DssRoomDatabase;
+import edu.aku.hassannaqvi.dss_matiari.database.dao.MwraDao;
+import edu.aku.hassannaqvi.dss_matiari.database.dao.OutcomeDao;
+import edu.aku.hassannaqvi.dss_matiari.global.AppConstants;
 
 @Entity(tableName = TableContracts.OutcomeTable.TABLE_NAME)
 public class Outcome extends BaseObservable implements Observable {
@@ -46,6 +57,7 @@ public class Outcome extends BaseObservable implements Observable {
     // APP VARIABLES
     @SerializedName("_id")
     @PrimaryKey(autoGenerate = true)
+    @NonNull
     @ColumnInfo(name = TableContracts.OutcomeTable.COLUMN_ID)
     long id = 0;
 
@@ -90,7 +102,7 @@ public class Outcome extends BaseObservable implements Observable {
 
     @SerializedName("s5")
     @ColumnInfo(name = TableContracts.OutcomeTable.COLUMN_SE)
-    private String sE = StringUtils.EMPTY;
+    private SE sE;
 
     @SerializedName("deviceid")
     @ColumnInfo(name = TableContracts.OutcomeTable.COLUMN_DEVICEID)
@@ -123,33 +135,6 @@ public class Outcome extends BaseObservable implements Observable {
     @ColumnInfo(name = TableContracts.OutcomeTable.COLUMN_REGROUND)
     private String regRound = StringUtils.EMPTY;
 
-    /*@ColumnInfo(name = TableContracts.OutcomeTable.COLUMN_FROUND)
-    private String fRound = StringUtils.EMPTY;
-*/
-    @Ignore
-    private String rb02 = StringUtils.EMPTY;
-    /*@Ignore
-    private String rb03 = StringUtils.EMPTY;
-    */@Ignore
-    private String rb01a = StringUtils.EMPTY;
-
-    @Ignore
-    private String rc01 = StringUtils.EMPTY;
-    @Ignore
-    private String rc02 = StringUtils.EMPTY;
-    @Ignore
-    private String rc03 = StringUtils.EMPTY;
-    @Ignore
-    private String rc04 = StringUtils.EMPTY;
-    @Ignore
-    private String rc05 = StringUtils.EMPTY;
-    @Ignore
-    private String rc06 = StringUtils.EMPTY;
-    @Ignore
-    private String rc07 = StringUtils.EMPTY;
-    @Ignore
-    private String rc08 = StringUtils.EMPTY;
-
     // For local use
     // This is used for resolving data while posting
     @ColumnInfo(defaultValue = "0")
@@ -157,38 +142,90 @@ public class Outcome extends BaseObservable implements Observable {
 
     public Outcome() {
 
+    }
+
+    public static void populateMeta() {
+        outcome = new Outcome();
+        MainApp.outcome.setUuid(MainApp.mwra.getUid());
+        MainApp.outcome.setMuid(MainApp.mwra.getUid().split("_")[0]);
+        MainApp.outcome.setMsno(MainApp.mwra.getSC().getRb01());
+        MainApp.outcome.setSysDate(MainApp.mwra.getSysDate());
+
+        MainApp.outcome.setRound(MainApp.mwra.getRound());
+        MainApp.outcome.setUcCode(MainApp.households.getUcCode());
+        MainApp.outcome.setVillageCode(MainApp.households.getVillageCode());
+        MainApp.outcome.setHhNo(MainApp.households.getHhNo());
+        MainApp.outcome.setSno(String.valueOf(MainApp.prevChildCount));
+        MainApp.outcome.setUserName(MainApp.user.getUsername());
+        MainApp.outcome.setDeviceId(MainApp.deviceid);
+        MainApp.outcome.setHdssId(MainApp.households.getHdssId());
+        MainApp.outcome.setAppver(MainApp.versionName + "." + MainApp.versionCode);
+        MainApp.outcome.setRegRound("1");
 
     }
 
-    @Bindable
-    public String getRb02() {
-        return rb02;
+    public static void populateMetaFollowups() {
+        outcome = new Outcome();
+        MainApp.outcome.setUserName(MainApp.user.getUsername());
+        MainApp.outcome.setDeviceId(MainApp.deviceid);
+        MainApp.outcome.setAppver(MainApp.versionName + "." + MainApp.versionCode);
+
+        // From Households
+        MainApp.outcome.setSysDate(MainApp.households.getSysDate());
+        MainApp.outcome.setUuid(MainApp.households.getUid());
+
+        // From FollowupsSche - Outcome
+        MainApp.outcome.setHdssId(MainApp.fpMwra.getHdssid());
+        MainApp.outcome.setUcCode(MainApp.fpMwra.getUcCode());
+        MainApp.outcome.setVillageCode(MainApp.fpMwra.getVillageCode());
+        MainApp.outcome.setHhNo(MainApp.fpMwra.getHhNo());
+        MainApp.outcome.setRound(MainApp.fpMwra.getFRound());
+        MainApp.outcome.setSno(MainApp.fpMwra.getRb01());
+        MainApp.outcome.setMuid(MainApp.fpMwra.getMuid().split("_")[0]);
+        MainApp.outcome.setMsno(MainApp.fpMwra.getMsno());
+        MainApp.outcome.setRegRound("");
+
     }
 
-    public void setRb02(String rb02) {
-        this.rb02 = rb02;
-        notifyPropertyChanged(BR.rb02);
+    public static void saveMainDataReg(String hdssId, String mSno, String childSno, SE sE) throws JSONException {
+        OutcomeDao outcomeDao = Objects.requireNonNull(DssRoomDatabase.getDbInstance()).OutcomeDao();
+        Outcome form = outcomeDao.getOutcomeBYID(hdssId, mSno, childSno);
+        if (form != null && form.getUid() != null) {
+            outcome = form;
+            outcome.setDeviceId(outcome.getDeviceId() + "_" + outcome.getDeviceId().substring(outcome.getDeviceId().length() - 1));
+            int repeatCount = (outcome.getDeviceId().length() - 16) / 2;
+            // new UID
+            String newUID = outcome.getDeviceId().substring(0, 16) + outcome.getId() + "_" + repeatCount;
+            outcome.setUid(newUID);
+            Objects.requireNonNull(DssRoomDatabase.getDbInstance()).OutcomeDao().updateOutcome(outcome);
+        } else {
+            populateMeta();
+            outcome.setUid(AppConstants.generateUid());
+            outcome.setId(outcomeDao.addOutcome(outcome));
+            Outcome.SE.saveData(sE);
+
+        }
     }
 
-    @Bindable
-    public String getRb01a() {
-        return rb01a;
-    }
+    public static void saveMainDataFup(String uuid, String mSno, String muid, String round, SE sE) throws JSONException {
+        OutcomeDao outcomeDao = Objects.requireNonNull(DssRoomDatabase.getDbInstance()).OutcomeDao();
+        Outcome form = outcomeDao.getOutcomeFollowupsBySno(uuid, mSno, muid, round);
+        if (form != null && form.getUid() != null) {
+            outcome = form;
+            outcome.setDeviceId(outcome.getDeviceId() + "_" + outcome.getDeviceId().substring(outcome.getDeviceId().length() - 1));
+            int repeatCount = (outcome.getDeviceId().length() - 16) / 2;
+            // new UID
+            String newUID = outcome.getDeviceId().substring(0, 16) + outcome.getId() + "_" + repeatCount;
+            outcome.setUid(newUID);
+            Objects.requireNonNull(DssRoomDatabase.getDbInstance()).OutcomeDao().updateOutcome(outcome);
+        } else {
+            populateMetaFollowups();
+            outcome.setUid(AppConstants.generateUid());
+            outcome.setId(outcomeDao.addOutcome(outcome));
+            Outcome.SE.saveData(sE);
 
-    public void setRb01a(String rb01a) {
-        this.rb01a = rb01a;
-        notifyPropertyChanged(BR.rb01a);
-    }
 
-
-    @Bindable
-    public String getRound() {
-        return round;
-    }
-
-    public void setRound(String round) {
-        this.round = round;
-        notifyPropertyChanged(BR.round);
+        }
     }
 
 
@@ -200,16 +237,15 @@ public class Outcome extends BaseObservable implements Observable {
         this.projectName = projectName;
     }
 
-
     public long getId() {
         return id;
     }
 
-    public String getSE() {
+    public SE getSE() {
         return sE;
     }
 
-    public void setSE(String sE) {
+    public void setSE(SE sE) {
         this.sE = sE;
     }
 
@@ -224,7 +260,6 @@ public class Outcome extends BaseObservable implements Observable {
     public void setUid(String uid) {
         this.uid = uid;
     }
-
 
     public String getUuid() {
         return uuid;
@@ -242,7 +277,6 @@ public class Outcome extends BaseObservable implements Observable {
         this.muid = muid;
     }
 
-
     public String getMsno() {
         return msno;
     }
@@ -250,7 +284,6 @@ public class Outcome extends BaseObservable implements Observable {
     public void setMsno(String msno) {
         this.msno = msno;
     }
-
 
     public String getUserName() {
         return userName;
@@ -306,6 +339,16 @@ public class Outcome extends BaseObservable implements Observable {
 
     public void setSno(String sno) {
         this.sno = sno;
+    }
+
+    @Bindable
+    public String getRound() {
+        return round;
+    }
+
+    public void setRound(String round) {
+        this.round = round;
+        notifyPropertyChanged(BR.round);
     }
 
     public String getDeviceId() {
@@ -384,103 +427,6 @@ public class Outcome extends BaseObservable implements Observable {
         this.regRound = regRound;
     }
 
-   /* public String getFRound() {
-        return fRound;
-    }
-
-    public void setFRound(String fRound) {
-        this.fRound = fRound;
-    }
-*/
-    @Bindable
-    public String getRc03() {
-        return rc03;
-    }
-
-    public void setRc03(String rc03) {
-        this.rc03 = rc03;
-        notifyPropertyChanged(BR.rc03);
-    }
-
-    @Bindable
-    public String getRc01() {
-        return rc01;
-    }
-
-    public void setRc01(String rc01) {
-        this.rc01 = rc01;
-        this.sno = rc01;
-        notifyPropertyChanged(BR.rc01);
-    }
-
-
-
-    @Bindable
-    public String getRc02() {
-        return rc02;
-    }
-
-    public void setRc02(String rc02) {
-        this.rc02 = rc02;
-        notifyPropertyChanged(BR.rc02);
-    }
-
-    @Bindable
-    public String getRc04() {
-        return rc04;
-    }
-
-    @Bindable
-    public String getRc05() {
-        return rc05;
-    }
-
-
-    public void setRc04(String rc04) {
-        this.rc04 = rc04;
-        notifyPropertyChanged(BR.rc04);
-    }
-
-    public void setRc05(String rc05) {
-        this.rc05 = rc05;
-        setRc06(rc05.equals("1") ? this.rc06 : "");
-        notifyPropertyChanged(BR.rc05);
-    }
-
-    public void setRc06(String rc06) {
-        this.rc06 = rc06;
-        notifyPropertyChanged(BR.rc06);
-    }
-
-    @Bindable
-    public String getRc06() {
-        return rc06;
-    }
-
-    @Bindable
-    public String getRc07() {
-        return rc07;
-    }
-
-    public void setRc07(String rc07) {
-        this.rc07 = rc07;
-        notifyPropertyChanged(BR.rc07);
-    }
-
-    @Bindable
-    public String getRc08() {
-        return rc08;
-    }
-
-    public void setRc08(String rc08) {
-        this.rc08 = rc08;
-        setRc05(rc08.equals("1") ? this.rc05 : "");
-        setRc06(rc08.equals("1") ? this.rc06 : "");
-        setRc07(rc08.equals("1") ? this.rc07 : "");
-        //setIStatus(rc08);
-        notifyPropertyChanged(BR.rc08);
-    }
-
     public boolean isError() {
         return isError;
     }
@@ -489,7 +435,172 @@ public class Outcome extends BaseObservable implements Observable {
         isError = error;
     }
 
-    public Outcome Hydrate(Outcome outcome) throws JSONException {
+    @Bindable
+    public boolean isExpanded() {
+        return expanded;
+    }
+
+    public void setExpanded(boolean expanded) {
+        this.expanded = expanded;
+        notifyPropertyChanged(BR.expanded);
+    }
+
+
+    public static class SE extends BaseObservable{
+
+        private String rb02 = StringUtils.EMPTY;
+        private String rb01a = StringUtils.EMPTY;
+        private String rc01 = StringUtils.EMPTY;
+        private String rc02 = StringUtils.EMPTY;
+        private String rc03 = StringUtils.EMPTY;
+        private String rc04 = StringUtils.EMPTY;
+        private String rc05 = StringUtils.EMPTY;
+        private String rc06 = StringUtils.EMPTY;
+        private String rc07 = StringUtils.EMPTY;
+        private String rc08 = StringUtils.EMPTY;
+
+        // Save section object as json object in db
+        public static void saveData(Outcome.SE data) {
+            outcome.setSE(data);
+            Objects.requireNonNull(DssRoomDatabase.getDbInstance()).OutcomeDao().updateOutcome(outcome);
+        }
+
+        // Get section object by parsing json
+        public static Outcome.SE getData() {
+            return outcome.getSE();
+        }
+
+        // This class is used to parse the object to save in room db
+        public static class DataConverter extends DssRoomDatabase.BaseConverter<Outcome.SE> {
+            public DataConverter() {
+                super(new TypeToken<Outcome.SE>() {
+                }.getType());
+            }
+        }
+
+        public void populateMeta(){
+            setRb02(MainApp.mwra.getSC().getRb02());
+            setRb01a(MainApp.mwra.getSC().getRb01a());
+        }
+
+        public void populateMetaFollowups(){
+            setRc01(MainApp.fpMwra.getRb01());  // Line number of child
+            setRc02(MainApp.fpMwra.getRb02());  // Name of child
+            setRb02(MainApp.fpMwra.getRb03());  // Name of mother
+            setRc03(MainApp.fpMwra.getRb04());  // Date of Birth of child
+            setRc04(MainApp.fpMwra.getRc04());
+        }
+
+        // Getters & Setters
+        @Bindable
+        public String getRb02() {
+            return rb02;
+        }
+
+        public void setRb02(String rb02) {
+            this.rb02 = rb02;
+            notifyPropertyChanged(BR.rb02);
+        }
+
+        @Bindable
+        public String getRb01a() {
+            return rb01a;
+        }
+
+        public void setRb01a(String rb01a) {
+            this.rb01a = rb01a;
+            notifyPropertyChanged(BR.rb01a);
+        }
+
+        @Bindable
+        public String getRc03() {
+            return rc03;
+        }
+
+        public void setRc03(String rc03) {
+            this.rc03 = rc03;
+            notifyPropertyChanged(BR.rc03);
+        }
+
+        @Bindable
+        public String getRc01() {
+            return rc01;
+        }
+
+        public void setRc01(String rc01) {
+            this.rc01 = rc01;
+            MainApp.outcome.sno = rc01;
+            notifyPropertyChanged(BR.rc01);
+        }
+
+        @Bindable
+        public String getRc02() {
+            return rc02;
+        }
+
+        public void setRc02(String rc02) {
+            this.rc02 = rc02;
+            notifyPropertyChanged(BR.rc02);
+        }
+
+        @Bindable
+        public String getRc04() {
+            return rc04;
+        }
+
+        @Bindable
+        public String getRc05() {
+            return rc05;
+        }
+
+
+        public void setRc04(String rc04) {
+            this.rc04 = rc04;
+            notifyPropertyChanged(BR.rc04);
+        }
+
+        public void setRc05(String rc05) {
+            this.rc05 = rc05;
+            setRc06(rc05.equals("1") ? this.rc06 : "");
+            notifyPropertyChanged(BR.rc05);
+        }
+
+        public void setRc06(String rc06) {
+            this.rc06 = rc06;
+            notifyPropertyChanged(BR.rc06);
+        }
+
+        @Bindable
+        public String getRc06() {
+            return rc06;
+        }
+
+        @Bindable
+        public String getRc07() {
+            return rc07;
+        }
+
+        public void setRc07(String rc07) {
+            this.rc07 = rc07;
+            notifyPropertyChanged(BR.rc07);
+        }
+
+        @Bindable
+        public String getRc08() {
+            return rc08;
+        }
+
+        public void setRc08(String rc08) {
+            this.rc08 = rc08;
+            setRc05(rc08.equals("1") ? this.rc05 : "");
+            setRc06(rc08.equals("1") ? this.rc06 : "");
+            setRc07(rc08.equals("1") ? this.rc07 : "");
+            notifyPropertyChanged(BR.rc08);
+        }
+
+    }
+
+   /* public Outcome Hydrate(Outcome outcome) throws JSONException {
         this.id = outcome.id;
         this.uid = outcome.uid;
         this.uuid = outcome.uuid;
@@ -513,9 +624,9 @@ public class Outcome extends BaseObservable implements Observable {
 
         sEHydrate(outcome.sE);
         return this;
-    }
+    }*/
 
-    public void sEHydrate(String string) throws JSONException {
+    /*public void sEHydrate(String string) throws JSONException {
         Log.d(TAG, "s5Hydrate: " + string);
         if (string != null && !string.equals("")) {
 
@@ -534,12 +645,11 @@ public class Outcome extends BaseObservable implements Observable {
 
 
         }
-    }
+    }*/
 
 
-    public String sEtoString() throws JSONException {
+    /*public String sEtoString() throws JSONException {
         JSONObject json = new JSONObject();
-
 
         json
                 .put("rb02", rb02)
@@ -556,10 +666,10 @@ public class Outcome extends BaseObservable implements Observable {
 
 
         return json.toString();
-    }
+    }*/
 
 
-    public JSONObject toJSONObject() throws JSONException {
+    /*public JSONObject toJSONObject() throws JSONException {
 
         JSONObject json = new JSONObject();
 
@@ -590,66 +700,12 @@ public class Outcome extends BaseObservable implements Observable {
         json.put(TableContracts.OutcomeTable.COLUMN_SE, new JSONObject(sEtoString()));
         return json;
 
-    }
+    }*/
 
 
-    @Bindable
-    public boolean isExpanded() {
-        return expanded;
-    }
-
-    public void setExpanded(boolean expanded) {
-        this.expanded = expanded;
-        notifyPropertyChanged(BR.expanded);
-    }
-
-    public void populateMeta() {
-        MainApp.outcome.setUuid(MainApp.mwra.getUid());
-        MainApp.outcome.setMuid(MainApp.mwra.getUid().split("_")[0]);
-        MainApp.outcome.setMsno(MainApp.mwra.getSC().getRb01());
-        MainApp.outcome.setSysDate(MainApp.mwra.getSysDate());
-        MainApp.outcome.setRb02(MainApp.mwra.getSC().getRb02());
-        MainApp.outcome.setRb01a(MainApp.mwra.getSC().getRb01a());
-        MainApp.outcome.setRound(MainApp.mwra.getRound());
-        MainApp.outcome.setUcCode(MainApp.households.getUcCode());
-        MainApp.outcome.setVillageCode(MainApp.households.getVillageCode());
-        MainApp.outcome.setHhNo(MainApp.households.getHhNo());
-        MainApp.outcome.setSno(String.valueOf(MainApp.prevChildCount));
-        MainApp.outcome.setUserName(MainApp.user.getUsername());
-        MainApp.outcome.setDeviceId(MainApp.deviceid);
-        MainApp.outcome.setHdssId(MainApp.households.getHdssId());
-        MainApp.outcome.setAppver(MainApp.versionName + "." + MainApp.versionCode);
-        MainApp.outcome.setRegRound("1");
-        //MainApp.outcome.setFRound("0");
-        //MainApp.outcome.setRb01a(MainApp.fpMwra.getRa01());
-
-    }
 
 
-    public void populateMetaFollowups() {
-        MainApp.outcome.setUserName(MainApp.user.getUsername());
-        MainApp.outcome.setDeviceId(MainApp.deviceid);
-        MainApp.outcome.setAppver(MainApp.versionName + "." + MainApp.versionCode);
 
-        // From Households
-        MainApp.outcome.setSysDate(MainApp.households.getSysDate());
-        MainApp.outcome.setUuid(MainApp.households.getUid());
 
-        // From FollowupsSche - Outcome
-        MainApp.outcome.setHdssId(MainApp.fpMwra.getHdssid());
-        MainApp.outcome.setUcCode(MainApp.fpMwra.getUcCode());
-        MainApp.outcome.setVillageCode(MainApp.fpMwra.getVillageCode());
-        MainApp.outcome.setHhNo(MainApp.fpMwra.getHhNo());
-        MainApp.outcome.setRound(MainApp.fpMwra.getFRound());
-        MainApp.outcome.setSno(MainApp.fpMwra.getRb01());
-        MainApp.outcome.setRc01(MainApp.fpMwra.getRb01());  // Line number of child
-        MainApp.outcome.setRc02(MainApp.fpMwra.getRb02());  // Name of child
-        MainApp.outcome.setRb02(MainApp.fpMwra.getRb03());  // Name of mother
-        MainApp.outcome.setMuid(MainApp.fpMwra.getMuid().split("_")[0]);
-        MainApp.outcome.setRc03(MainApp.fpMwra.getRb04());  // Date of Birth of child
-        MainApp.outcome.setMsno(MainApp.fpMwra.getMsno());
-        MainApp.outcome.setRc04(MainApp.fpMwra.getRc04());
-        setRegRound("");
 
-    }
  }

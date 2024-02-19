@@ -24,6 +24,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
+import java.util.Objects;
 
 import edu.aku.hassannaqvi.dss_matiari.R;
 import edu.aku.hassannaqvi.dss_matiari.core.MainApp;
@@ -36,6 +37,7 @@ public class SectionFActivity extends AppCompatActivity {
     private static final String TAG = "OutcomeFollowupActivity";
     ActivitySectionFBinding bi;
     private DssRoomDatabase db;
+    private  Outcome.SE sE;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,40 +54,45 @@ public class SectionFActivity extends AppCompatActivity {
         MainApp.ROUND = MainApp.fpMwra.getFRound();
 
         try {
-            //outcome = db.getOutcomeFollowupsBySno(MainApp.fpMwra.getRb01(), MainApp.fpMwra.getFRound(), fpMwra.getMuid());
             outcome = db.OutcomeDao().getOutcomeFollowupsBySno(MainApp.households.getUid(), fpMwra.getRb01(), fpMwra.getMuid(), fpMwra.getFRound());
         } catch (JSONException e) {
             e.printStackTrace();
             Toast.makeText(this, "JSONException(Followups): " + e.getMessage(), Toast.LENGTH_SHORT).show();
         }
-        if(!outcome.getUid().equals(""))
-        {
-            try {
-                outcome.sEHydrate(outcome.getSE());
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-        }
 
-        if(outcome.getRegRound().equals(""))
+        Outcome.populateMetaFollowups();
+        sE = Outcome.SE.getData();
+        if(sE == null)
         {
-            outcome.populateMetaFollowups();
+            sE = new Outcome.SE();
+            sE.populateMetaFollowups();
         }
 
 
-        bi.setOutcome(outcome);
+        bi.setOutcome(sE);
 
         setImmersive(true);
 
         bi.btnContinue.setText(outcome.getUid().equals("") ? "Save" : "Update");
 
-        if(!MainApp.fpMwra.getRb04().equals("98") && !MainApp.fpMwra.getRb04().equals(""))
+        bi.rc05.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                if(bi.rc0502.isChecked())
+                {
+                    String date = toBlackVisionDate(fpMwra.getRb04());
+                    bi.rc06.setMinDate(date);
+                }
+            }
+        });
+
+        /*if(!MainApp.fpMwra.getRb04().equals("98") && !MainApp.fpMwra.getRb04().equals(""))
         {
             String date = toBlackVisionDate(fpMwra.getRb04());
 
             bi.rc06.setMinDate(date);
         }
-
+*/
 
         bi.rb10.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
@@ -117,8 +124,6 @@ public class SectionFActivity extends AppCompatActivity {
             }
         });
 
-
-
     }
 
     private void setDateRanges() {
@@ -128,23 +133,10 @@ public class SectionFActivity extends AppCompatActivity {
             Calendar cal = Calendar.getInstance();
 
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
-            cal.setTime(sdf.parse(outcome.getRb01a()));// all done
+            cal.setTime(Objects.requireNonNull(sdf.parse(fpMwra.getRa01().getDate())));// all done
 
             sdf = new SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH);
 
-          /*  // Set MinDob date to 50 years back from DOV
-            cal.add(Calendar.YEAR, -50);
-            String minDob = sdf.format(cal.getTime());
-            cal.add(Calendar.YEAR, +50); // Calender reset to DOV
-            Log.d(TAG, "onCreate: " + minDob);
-
-            // Set maxDob date to 50 years back from DOV
-            cal.add(Calendar.YEAR, -18);
-            String maxDob = sdf.format(cal.getTime());
-            cal.add(Calendar.YEAR, +18); // Calender reset to DOV
-            Log.d(TAG, "onCreate: " + maxDob);
-
-*/
             // Set MinLMP date to 2 months back from DOV
             cal.add(Calendar.MONTH, -9);
             String minLMP = sdf.format(cal.getTime());
@@ -165,29 +157,11 @@ public class SectionFActivity extends AppCompatActivity {
             cal.add(Calendar.MONTH, -9);
             Log.d(TAG, "onCreate: " + maxLMP);
 
-          /*  // DOB
-            bi.rb04.setMaxDate(maxDob);
-            bi.rb04.setMinDate(minDob);*/
-
-            // LMP
-            /*bi.rc16.setMaxDate(maxLMP);
-            bi.rc16.setMinDate(minLMP);
-
-            // EDD
-            bi.rc17.setMaxDate(maxEDD);
-            bi.rc17.setMinDate(minEDD);*/
-
             // Date of Death from Date of Deliver(RC10)
             sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
-            cal.setTime(sdf.parse(outcome.getRc06()));// all done
+            //cal.setTime(Objects.requireNonNull(sdf.parse(sE.getRc06())));// all done
             sdf = new SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH);
             String minDOD = sdf.format(cal.getTime());
-
-            // Single
-            /*bi.rc1401.setMinDate(minDOD);
-            bi.rc1402.setMinDate(minDOD);
-            bi.rc1403.setMinDate(minDOD)*/
-            ;
 
 
         } catch (ParseException e) {
@@ -197,18 +171,13 @@ public class SectionFActivity extends AppCompatActivity {
 
     public void btnContinue(View view) throws JSONException {
         if (!formValidation()) return;
-        if (outcome.getUid().equals("") ? insertNewRecord() : updateDB()) {
+        Outcome.saveMainDataFup(households.getUid(), fpMwra.getRb01(), fpMwra.getMuid(), fpMwra.getFRound(), sE);
+        setResult(RESULT_OK);
+        finish();
 
-            if(updateDB()) {
-                setResult(RESULT_OK);
-                finish();
-            }
-        } else {
-            Toast.makeText(this, "Failed to Update Database!", Toast.LENGTH_SHORT).show();
-        }
     }
 
-    private boolean insertNewRecord() throws JSONException {
+    /*private boolean insertNewRecord() throws JSONException {
         outcome.populateMetaFollowups();
 
         long rowId = 0;
@@ -274,7 +243,7 @@ public class SectionFActivity extends AppCompatActivity {
             return false;
         }
     }
-
+*/
     public void btnEnd(View view) {
         setResult(RESULT_CANCELED);
         finish();

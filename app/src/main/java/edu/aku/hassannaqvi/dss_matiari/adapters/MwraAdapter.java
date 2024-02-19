@@ -39,10 +39,7 @@ public class MwraAdapter extends RecyclerView.Adapter<MwraAdapter.ViewHolder> {
         this.mContext = mContext;
         completeCount = 0;
         MainApp.fmComplete = false;
-
-
     }
-
 
     @Override
     public void onBindViewHolder(ViewHolder viewHolder, int position1) {

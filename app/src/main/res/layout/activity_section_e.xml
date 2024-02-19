@@ -9,7 +9,7 @@
         <!--MWRA outcome-->
         <variable
             name="outcome"
-            type="edu.aku.hassannaqvi.dss_matiari.models.Outcome" />
+            type="edu.aku.hassannaqvi.dss_matiari.models.Outcome.SE" />
     </data>
 
     <LinearLayout
