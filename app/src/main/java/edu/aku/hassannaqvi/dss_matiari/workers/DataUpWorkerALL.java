@@ -23,6 +23,7 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
 import java.net.URL;
 import java.security.InvalidAlgorithmParameterException;
 import java.security.InvalidKeyException;
@@ -314,7 +315,7 @@ public class DataUpWorkerALL extends Worker {
                 //wr.writeBytes(URLEncoder.encode(jsonParam.toString(), "utf-8"));
                 // wr.writeBytes(CipherSecure.encrypt(jsonParam.toString()));
 
-                String cipheredRequest = CipherSecure.encrypt(String.valueOf(jsonParam));
+                String cipheredRequest = CipherSecure.encryptGCM(String.valueOf(jsonParam));
                 requestLength = cipheredRequest.length();
                 wr.writeBytes(cipheredRequest);
                 longInfo("Encrypted: " + cipheredRequest);
@@ -395,7 +396,7 @@ public class DataUpWorkerALL extends Worker {
 //            urlConnection.disconnect();
         }
         try {
-            result = new StringBuilder(CipherSecure.decrypt(result.toString()));
+            result = new StringBuilder(CipherSecure.decryptGCM(result.toString()));
         } catch (NoSuchPaddingException | IllegalArgumentException | NoSuchAlgorithmException | BadPaddingException | IllegalBlockSizeException | InvalidAlgorithmParameterException | InvalidKeyException e) {
             Log.d(TAG, "doWork (Encryption Error): " + e.getMessage());
             displayNotification(nTitle, "Encryption Error: " + e.getMessage());
@@ -408,6 +409,8 @@ public class DataUpWorkerALL extends Worker {
 
             return Result.failure(data);
 
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
         }
 
         //Do something with the JSON string

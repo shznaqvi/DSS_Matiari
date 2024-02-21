@@ -228,7 +228,7 @@ public class DataDownWorkerALL extends Worker {
 
 
                 Log.d(TAG + " : " + uploadTable, "doWork: jsonTable: " + jsonTable);
-                String cipheredRequest = CipherSecure.encrypt(String.valueOf(jsonTable));
+                String cipheredRequest = CipherSecure.encryptGCM(String.valueOf(jsonTable));
                 requestLength = cipheredRequest.length();
                 wr.writeBytes(cipheredRequest);
 
@@ -256,7 +256,7 @@ public class DataDownWorkerALL extends Worker {
                     Log.d(TAG + " : " + uploadTable, "doWork: result-server: " + result);
                     Log.d(TAG, "Content Length: " + uploadTable + " response " + result.length());
                     try {
-                        result = new StringBuilder(CipherSecure.decrypt(result.toString()));
+                        result = new StringBuilder(CipherSecure.decryptGCM(result.toString()));
 
                     } catch (IllegalArgumentException e) {
                         data = new Data.Builder()

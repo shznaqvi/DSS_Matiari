@@ -279,9 +279,9 @@ public class UserWorker extends Worker {
 
 
                 //wr.writeBytes(URLEncoder.encode(jsonParam.toString(), "utf-8"));
-                wr.writeBytes(CipherSecure.encrypt(jsonParam.toString()));
+                wr.writeBytes(CipherSecure.encryptGCM(jsonParam.toString()));
 
-                String writeEnc = CipherSecure.encrypt(jsonParam.toString());
+                String writeEnc = CipherSecure.encryptGCM(jsonParam.toString());
 
                 longInfo("Encrypted: " + writeEnc);
 
@@ -349,7 +349,7 @@ public class UserWorker extends Worker {
 //            urlConnection.disconnect();
         }
         try {
-            result = new StringBuilder(CipherSecure.decrypt(result.toString()));
+            result = new StringBuilder(CipherSecure.decryptGCM(result.toString()));
         } catch (NoSuchPaddingException | NoSuchAlgorithmException | BadPaddingException | IllegalBlockSizeException | InvalidAlgorithmParameterException | InvalidKeyException e) {
             Log.d(TAG, "doWork (Encryption Error): " + e.getMessage());
             displayNotification(nTitle, "Encryption Error: " + e.getMessage());
@@ -359,6 +359,8 @@ public class UserWorker extends Worker {
 
             return Result.failure(data);
 
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
         }
         longInfo("result-server(Decrypted): " + result);
 

@@ -25,6 +25,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.UnsupportedEncodingException;
 import java.security.InvalidAlgorithmParameterException;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
@@ -168,7 +169,7 @@ public class ChangePasswordActivity extends AppCompatActivity {
                         }
                     });
 
-            Log.d(TAG, "attemptReset: " + CipherSecure.encrypt(bi.password2.getText().toString()));
+            Log.d(TAG, "attemptReset: " + CipherSecure.encryptGCM(bi.password2.getText().toString()));
 
         } catch (NoSuchAlgorithmException e) {
             e.printStackTrace();
@@ -193,6 +194,8 @@ public class ChangePasswordActivity extends AppCompatActivity {
             e.printStackTrace();
             Toast.makeText(this, "IllegalBlockSizeException(UserAuth):" + e.getMessage(), Toast.LENGTH_SHORT).show();
 
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
         }
 
     }
