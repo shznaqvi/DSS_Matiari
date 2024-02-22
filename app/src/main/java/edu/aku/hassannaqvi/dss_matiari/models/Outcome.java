@@ -145,7 +145,6 @@ public class Outcome extends BaseObservable implements Observable {
     }
 
     public static void populateMeta() {
-        outcome = new Outcome();
         MainApp.outcome.setUuid(MainApp.mwra.getUid());
         MainApp.outcome.setMuid(MainApp.mwra.getUid().split("_")[0]);
         MainApp.outcome.setMsno(MainApp.mwra.getSC().getRb01());
@@ -165,7 +164,6 @@ public class Outcome extends BaseObservable implements Observable {
     }
 
     public static void populateMetaFollowups() {
-        outcome = new Outcome();
         MainApp.outcome.setUserName(MainApp.user.getUsername());
         MainApp.outcome.setDeviceId(MainApp.deviceid);
         MainApp.outcome.setAppver(MainApp.versionName + "." + MainApp.versionCode);
@@ -190,7 +188,7 @@ public class Outcome extends BaseObservable implements Observable {
     public static void saveMainDataReg(String hdssId, String mSno, String childSno, SE sE) throws JSONException {
         OutcomeDao outcomeDao = Objects.requireNonNull(DssRoomDatabase.getDbInstance()).OutcomeDao();
         Outcome form = outcomeDao.getOutcomeBYID(hdssId, mSno, childSno);
-        if (form != null && form.getUid() != null) {
+        if (form != null && !form.getUid().equals("")) {
             outcome = form;
             outcome.setDeviceId(outcome.getDeviceId() + "_" + outcome.getDeviceId().substring(outcome.getDeviceId().length() - 1));
             int repeatCount = (outcome.getDeviceId().length() - 16) / 2;
@@ -210,7 +208,7 @@ public class Outcome extends BaseObservable implements Observable {
     public static void saveMainDataFup(String uuid, String mSno, String muid, String round, SE sE) throws JSONException {
         OutcomeDao outcomeDao = Objects.requireNonNull(DssRoomDatabase.getDbInstance()).OutcomeDao();
         Outcome form = outcomeDao.getOutcomeFollowupsBySno(uuid, mSno, muid, round);
-        if (form != null && form.getUid() != null) {
+        if (form != null && !form.getUid().equals("")) {
             outcome = form;
             outcome.setDeviceId(outcome.getDeviceId() + "_" + outcome.getDeviceId().substring(outcome.getDeviceId().length() - 1));
             int repeatCount = (outcome.getDeviceId().length() - 16) / 2;

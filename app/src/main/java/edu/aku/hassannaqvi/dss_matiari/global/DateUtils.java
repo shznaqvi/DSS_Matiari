@@ -342,4 +342,11 @@ public class DateUtils {
         return (_years * 12) + _months;
     }
 
+    public static String changeDateFormat(String currentDate) {
+        String newDate = currentDate;
+        String[] oldDateParts = currentDate.split("-");
+        newDate = oldDateParts[2].trim() + "/" + oldDateParts[1].trim() + "/" + oldDateParts[0].trim();
+        return newDate;
+    }
+
 }

@@ -16,6 +16,7 @@ import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
+
 import com.validatorcrawler.aliazaz.Validator;
 
 import org.json.JSONException;
@@ -30,7 +31,7 @@ import edu.aku.hassannaqvi.dss_matiari.R;
 import edu.aku.hassannaqvi.dss_matiari.core.MainApp;
 
 import edu.aku.hassannaqvi.dss_matiari.databinding.ActivitySectionEBinding;
-import edu.aku.hassannaqvi.dss_matiari.models.Mwra;
+import edu.aku.hassannaqvi.dss_matiari.global.DateUtils;
 import edu.aku.hassannaqvi.dss_matiari.models.Outcome;
 import edu.aku.hassannaqvi.dss_matiari.database.DssRoomDatabase;
 
@@ -50,8 +51,6 @@ public class SectionEActivity extends AppCompatActivity {
         bi = DataBindingUtil.setContentView(this, R.layout.activity_section_e);
         db = MainApp.appInfo.dbHelper;
 
-        setDateRanges();
-
         try {
             outcome = db.OutcomeDao().getOutcomeBYID(mwra.getHdssId(), mwra.getSNo(), String.valueOf(++MainApp.prevChildCount));
         } catch (JSONException e) {
@@ -59,69 +58,67 @@ public class SectionEActivity extends AppCompatActivity {
             Toast.makeText(this, "JSONException(Outcome): " + e.getMessage(), Toast.LENGTH_SHORT).show();
         }
 
-        //Outcome.populateMeta();
         sE = Outcome.SE.getData();
-        if(sE == null)
-        {
+        if (sE == null) {
             sE = new Outcome.SE();
             sE.populateMeta();
         }
+        sE.setRc01(sE.getRc01().isEmpty() ? String.valueOf(MainApp.prevChildCount) : sE.getRc01());
+
+        bi.setOutcome(sE);
+
+        initUI();
+
+    }
+
+    private void initUI() {
+
+        setDateRanges();
 
         // Registration
-        switch (mwra.getRegRound())
-        {
+        switch (mwra.getRegRound()) {
             case "1":
                 // New outcome registration
-                if(outcome.getUid().equals(""))
-                {
+                if (outcome.getUid().equals("")) {
                     MainApp.ROUND = mwra.getRound();
                     bi.rc03dob.setText(mwra.getSC().getRb21());
                     sE.setRc03(mwra.getSC().getRb21());
-                    String date = toBlackVisionDate(mwra.getSB().getRb21());
+                    String date = DateUtils.changeDateFormat(mwra.getSB().getRb21());
                     bi.rc06.setMinDate(date);
-                }else{
+                } else {
                     MainApp.ROUND = mwra.getRound();
                     bi.rc03dob.setEnabled(false);
                 }
                 // Followup
             case "":
                 //for unreported outcome in followup
-                if(mwra.getSC().getRb15().equals(""))
-                {
+                if (mwra.getSC().getRb15().equals("")) {
                     // new Registration
-                    if(outcome.getUid().equals(""))
-                    {
+                    if (outcome.getUid().equals("")) {
                         MainApp.ROUND = mwra.getRound();
                         sE.setRc03(mwra.getSC().getRb21());
-                        String date = toBlackVisionDate(mwra.getSC().getRb21());
+                        String date = DateUtils.changeDateFormat(mwra.getSC().getRb21());
                         bi.rc06.setMinDate(date);
-                    }else{
+                    } else {
                         MainApp.ROUND = mwra.getRound();
 
                     }
 
-                }else{
-                    if(outcome.getUid().equals(""))
-                    {
+                } else {
+                    if (outcome.getUid().equals("")) {
                         MainApp.ROUND = MainApp.fpMwra.getFRound();
                         sE.setRc03(mwra.getSC().getRb15());
-                        String date = toBlackVisionDate(mwra.getSC().getRb15());
+                        String date = DateUtils.changeDateFormat(mwra.getSC().getRb15());
                         bi.rc06.setMinDate(date);
                         bi.rc03dob.setEnabled(false);
-                    }else{
+                    } else {
                         MainApp.ROUND = mwra.getRound();
                         bi.rc03dob.setEnabled(false);
                     }
-
                 }
-
         }
 
-        sE.setRc01(sE.getRc01().isEmpty() ? String.valueOf(MainApp.prevChildCount) : sE.getRc01());
-
-        bi.setOutcome(sE);
         bi.btnContinue.setText(outcome.getUid().equals("") ? "Save" : "Update");
-
 
         bi.rc03dob.addTextChangedListener(new TextWatcher() {
             @Override
@@ -137,7 +134,7 @@ public class SectionEActivity extends AppCompatActivity {
             @Override
             public void afterTextChanged(Editable s) {
 
-                String date = toBlackVisionDate(bi.rc03dob.getText().toString());
+                String date = DateUtils.changeDateFormat(bi.rc03dob.getText().toString());
                 bi.rc06.setMinDate(date);
 
             }
@@ -151,20 +148,20 @@ public class SectionEActivity extends AppCompatActivity {
 
         if (MainApp.totalChildCount > MainApp.childCount) {
 
-            MainApp.childCount ++;
+            MainApp.childCount++;
             outcome = new Outcome();
             setResult(RESULT_OK);
             finish();
             startActivity(new Intent(this, SectionEActivity.class).addFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT).putExtra("complete", true));
 
-        } else if(mwra.getRegRound().equals("") || mwra.getPrePreg().equals("2")) {
+        } else if (mwra.getRegRound().equals("") || mwra.getPrePreg().equals("2")) {
             MainApp.childCount = 1;
             MainApp.totalChildCount = 0;
             setResult(RESULT_OK);
             finish();
             startActivity(new Intent(this, SectionDActivity.class).addFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT).putExtra("complete", true));
 
-        }else{
+        } else {
             MainApp.childCount = 1;
             MainApp.totalChildCount = 0;
             setResult(RESULT_OK);
@@ -173,100 +170,9 @@ public class SectionEActivity extends AppCompatActivity {
         }
     }
 
-
-    /*public void btnContinue(View view) throws JSONException {
-        if (!formValidation()) return;
-        if(outcome.getUid().equals("") ? insertNewRecord() : updateDB())
-        {
-                if (MainApp.totalChildCount > MainApp.childCount) {
-
-                    MainApp.childCount ++;
-                    outcome = new Outcome();
-                    setResult(RESULT_OK);
-                    finish();
-                    startActivity(new Intent(this, SectionEActivity.class).addFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT).putExtra("complete", true));
-
-                } else if(mwra.getRegRound().equals("") || mwra.getPrePreg().equals("2")) {
-                    MainApp.childCount = 1;
-                    MainApp.totalChildCount = 0;
-                    setResult(RESULT_OK);
-                    finish();
-                    startActivity(new Intent(this, SectionDActivity.class).addFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT).putExtra("complete", true));
-
-                }else{
-                    MainApp.childCount = 1;
-                    MainApp.totalChildCount = 0;
-                    setResult(RESULT_OK);
-                    finish();
-
-                }
-
-            } else {
-                Toast.makeText(this, "Failed to Update Database!", Toast.LENGTH_SHORT).show();
-            }
-
-
-    }*/
-
-    /*private boolean insertNewRecord() throws JSONException {
-           outcome.populateMeta();
-
-        long rowId = 0;
-        try {
-            //rowId = db.addOutcome(outcome);
-            rowId = db.OutcomeDao().addOutcome(outcome);
-        } catch (JSONException e) {
-            e.printStackTrace();
-            Toast.makeText(this, "JSONException(Outcomes): " + e.getMessage(), Toast.LENGTH_SHORT).show();
-            Log.d(TAG, "insertNewRecord (JSONException): " + e.getMessage());
-            return false;
-        }
-        outcome.setId(rowId);
-        if (rowId > 0) {
-            outcome.setUid(outcome.getDeviceId() + outcome.getId());
-            outcome.setSE(outcome.sEtoString());
-            db.OutcomeDao().updateOutcome(outcome);
-            //db.updatesOutcomeColumn(TableContracts.OutcomeTable.COLUMN_UID, outcome.getUid());
-            return true;
-        } else {
-            Toast.makeText(this, "Updating Database... ERROR!", Toast.LENGTH_SHORT).show();
-            return false;
-        }
-    }*/
-
-
-
-    /*private boolean updateDB() {
-        int updcount = 0;
-        try {
-            //updcount = db.updatesOutcomeColumn(TableContracts.OutcomeTable.COLUMN_SE, outcome.sEtoString());
-            Outcome updatedOutcome = outcome;
-            updatedOutcome.setSE(outcome.sEtoString());
-            updcount = db.OutcomeDao().updateOutcome(outcome);
-
-            outcome.setDeviceId(outcome.getDeviceId() + "_" + outcome.getDeviceId().substring(outcome.getDeviceId().length() - 1));
-            updatedOutcome.setDeviceId(outcome.getDeviceId());
-            //updatedOutcome.setIStatus(outcome.getIStatus());
-            db.OutcomeDao().updateOutcome(updatedOutcome);
-
-
-        } catch (JSONException e) {
-            e.printStackTrace();
-            Toast.makeText(this, "JSONException: " + e.getMessage(), Toast.LENGTH_SHORT).show();
-            Log.d(TAG, "updateDB (JSONException): " + e.getMessage());
-            return false;
-        }
-        if (updcount == 1) {
-            return true;
-        } else {
-            Toast.makeText(this, "Updating Database... ERROR!", Toast.LENGTH_SHORT).show();
-            return false;
-        }
-    }*/
-
     public void btnEnd(View view) {
-        MainApp.totalChildCount =0;
-        MainApp.childCount --;
+        MainApp.totalChildCount = 0;
+        MainApp.childCount--;
         MainApp.prevChildCount--;
         setResult(RESULT_CANCELED);
         finish();
@@ -276,15 +182,6 @@ public class SectionEActivity extends AppCompatActivity {
     private boolean formValidation() {
         //setDateRanges();
         return Validator.emptyCheckingContainer(this, bi.GrpName);
-    }
-
-
-
-    public static String toBlackVisionDate(String currentDate) {
-        String newDate = currentDate;
-        String[] oldDateParts = currentDate.split("-");
-        newDate = oldDateParts[2] + "/" + oldDateParts[1] + "/" + oldDateParts[0];
-        return newDate;
     }
 
 

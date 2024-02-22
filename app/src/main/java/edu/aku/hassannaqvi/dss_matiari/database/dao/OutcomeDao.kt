@@ -23,36 +23,21 @@ interface OutcomeDao {
     fun updateOutcome(outcome: Outcome): Int
 
 
-    @Query(
-        "SELECT * FROM outcomes where hdssid like :hdssid and msno like :msno and sno like :sno order by _id ASC "
-                /*+ TableContracts.OutcomeTable.TABLE_NAME + " WHERE hdssid LIKE :hdssid AND "
-                + TableContracts.OutcomeTable.COLUMN_MSNO + " LIKE :msno AND "
-                + TableContracts.OutcomeTable.COLUMN_SNO + " LIKE :sno ORDER BY "
-                + TableContracts.OutcomeTable.COLUMN_ID + " ASC"*/
-    )
+    @Query("SELECT * FROM outcomes where hdssid like :hdssid and msno like :msno and sno like :sno order by _id ASC ")
     fun getOutcomeByID_internal(hdssid : String, msno: String, sno: String): Outcome?
 
 
     @Throws(JSONException::class)
     fun getOutcomeBYID(hdssid: String,  msno: String, sno: String): Outcome? {
         val outcome = getOutcomeByID_internal(hdssid,  msno, sno)
-        /*if (outcome == null) {
+        if (outcome == null) {
             val tempOutcome = Outcome()
             return tempOutcome
-        }*/
+        }
         return outcome
     }
 
-    @Query(
-        "SELECT * FROM outcomes where _uuid like :uuid and sno like :rb01 and _muid like :muid and round like :fround and regRound like :regRound order by _id ASC "
-                /*+ TableContracts.OutcomeTable.TABLE_NAME + " WHERE "
-                + TableContracts.OutcomeTable.COLUMN_UUID + " LIKE :uuid AND "
-                + TableContracts.OutcomeTable.COLUMN_SNO + " LIKE :rb01 AND "
-                + TableContracts.OutcomeTable.COLUMN_MUID + " LIKE :muid AND "
-                + TableContracts.OutcomeTable.COLUMN_ROUND + " LIKE :fround AND " +
-                TableContracts.OutcomeTable.COLUMN_REGROUND + " LIKE :regRound ORDER BY "
-                + TableContracts.OutcomeTable.COLUMN_ID + " ASC"*/
-    )
+    @Query("SELECT * FROM outcomes where _uuid like :uuid and sno like :rb01 and _muid like :muid and round like :fround and regRound like :regRound order by _id ASC ")
     fun getOutcomeFollowupsBySno_internal(
         uuid: String,
         rb01: String,
@@ -70,13 +55,10 @@ interface OutcomeDao {
         fround: String
     ): Outcome? {
         val outcome = getOutcomeFollowupsBySno_internal(uuid, rb01, muid, fround, "")
-        /*if (outcome == null) {
+        if (outcome == null) {
             val tempOutcome = Outcome()
             return tempOutcome
-        }*/ /*else {
-            outcome.sEHydrate(outcome.se)
-
-        }*/
+        }
         return outcome
     }
 

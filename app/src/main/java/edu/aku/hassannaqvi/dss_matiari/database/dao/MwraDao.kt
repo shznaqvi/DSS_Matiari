@@ -22,24 +22,11 @@ interface MwraDao {
     @Update(onConflict =  OnConflictStrategy.REPLACE)
     fun updateMwra(mwra: Mwra) : Int
 
-    @Query("SELECT MAX( CAST(sNo AS INT)) SNO from mwras where ucCode like :ucCode and villageCode like :vCode and hhNo like :hhNo group by hhNo"
-            /*+ "MAX( CAST(" + MWRATable.COLUMN_SNO + " AS INT)) AS " + MWRATable.COLUMN_SNO +
-            " FROM " + MWRATable.TABLE_NAME +
-            " WHERE " + MWRATable.COLUMN_UC_CODE + " LIKE :ucCode AND "
-            + MWRATable.COLUMN_VILLAGE_CODE + " LIKE :vCode AND " +
-            MWRATable.COLUMN_HOUSEHOLD_NO + " LIKE :hhNo" +
-            " GROUP BY " + MWRATable.COLUMN_HOUSEHOLD_NO*/ )
+    @Query("SELECT MAX( CAST(sNo AS INT)) SNO from mwras where ucCode like :ucCode and villageCode like :vCode and hhNo like :hhNo group by hhNo")
     fun getMaxMWRSNoBYHH(ucCode : String, vCode : String, hhNo : String) : Int
 
 
-    @Query("SELECT * FROM mwras where ucCode like :uc and villageCode like :village and structureNo like :structure and hhNo like :hhNo and regRound like :regRound"
-            /*+ MWRATable.TABLE_NAME + " WHERE " +
-        MWRATable.COLUMN_UC_CODE + " LIKE :uc AND "
-                + MWRATable.COLUMN_VILLAGE_CODE + " LIKE :village AND "
-                + MWRATable.COLUMN_STRUCTURE_NO + " LIKE :structure AND (  "
-                + MWRATable.COLUMN_HOUSEHOLD_NO + " LIKE :hhNo ) AND "
-                + MWRATable.COLUMN_REGROUND + " LIKE :regRound "*/
-    )
+    @Query("SELECT * FROM mwras where ucCode like :uc and villageCode like :village and structureNo like :structure and hhNo like :hhNo and regRound like :regRound")
     fun getAllMWRAByHH_internal(uc : String, village : String, structure : String, hhNo: String, regRound : String) : List<Mwra>
 
 
@@ -55,21 +42,11 @@ interface MwraDao {
 
 
 
-    @Query("SELECT Count(*) AS mwraCount from mwras where _uuid like :uid and regRound like :regRound"
-            /*+
-            " FROM " + MWRATable.TABLE_NAME +
-            " WHERE " + MWRATable.COLUMN_UUID + " LIKE :uid AND " + MWRATable.COLUMN_REGROUND + " LIKE :regRound" */ )
+    @Query("SELECT Count(*) AS mwraCount from mwras where _uuid like :uid and regRound like :regRound")
     fun getMWRACountBYUUID(uid: String, regRound: String) : Int
 
 
-    @Query("SELECT * FROM mwras where _uuid like :uuid and sNo like :rb01 and sNo != 'null' and round like :fround and regRound like :regRound order by _id ASC "
-            /*+ MWRATable.TABLE_NAME + " WHERE "
-            + MWRATable.COLUMN_UUID + " LIKE :uuid AND "
-            + MWRATable.COLUMN_SNO + " LIKE :rb01 AND " + MWRATable.COLUMN_SNO + " != 'null' AND "
-            + MWRATable.COLUMN_ROUND + " LIKE :fround AND " +
-            MWRATable.COLUMN_REGROUND + " LIKE :regRound ORDER BY "
-            + MWRATable.COLUMN_ID + " ASC"*/
-    )
+    @Query("SELECT * FROM mwras where _uuid like :uuid and sNo like :rb01 and sNo != 'null' and round like :fround and regRound like :regRound order by _id ASC ")
     fun getFollowupsBySno_internal(uuid: String, rb01: String, fround: String, regRound: String) : Mwra?
 
 

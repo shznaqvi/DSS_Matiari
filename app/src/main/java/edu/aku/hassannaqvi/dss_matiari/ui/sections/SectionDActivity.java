@@ -46,19 +46,19 @@ public class SectionDActivity extends AppCompatActivity {
         bi = DataBindingUtil.setContentView(this, R.layout.activity_section_d);
         db = MainApp.appInfo.dbHelper;
 
-        setDateRanges();
-
         sD = Mwra.SD.getData();
         sD = sD == null ? new Mwra.SD() : sD;
         bi.setFollowups(sD);
 
-        //bi.setFollowups(mwra);
+        initUI();
+    }
 
+    private void initUI() {
+        setDateRanges();
         setTitle(R.string.marriedwomenregistration_mainheading);
         setImmersive(true);
 
         bi.btnContinue.setText(mwra.getUid().equals("") ? "Save" : "Update");
-
 
         bi.rb08.addTextChangedListener(new TextWatcher() {
             @Override
@@ -77,6 +77,7 @@ public class SectionDActivity extends AppCompatActivity {
                 setDateRanges();
             }
         });
+
     }
 
     private void setDateRanges() {
@@ -86,9 +87,9 @@ public class SectionDActivity extends AppCompatActivity {
             Calendar cal = Calendar.getInstance();
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
 
-            if(MainApp.idType == 1) {
+            if (MainApp.idType == 1) {
                 cal.setTime(Objects.requireNonNull(sdf.parse(mwra.getSB().getRb01a())));// all done
-            }else{
+            } else {
                 cal.setTime(Objects.requireNonNull(sdf.parse(mwra.getSC().getRb01a())));// all done
             }
 
@@ -127,7 +128,7 @@ public class SectionDActivity extends AppCompatActivity {
 
             Calendar lmpCal = Calendar.getInstance();
             SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
-            if(idType == 1) {
+            if (idType == 1) {
                 lmpCal.setTime(Objects.requireNonNull(simpleDateFormat.parse(mwra.getSB().getRb08())));
             }
             sdf = new SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH);
@@ -145,7 +146,7 @@ public class SectionDActivity extends AppCompatActivity {
     public void btnContinue(View view) {
         if (!formValidation()) return;
 
-        if(!mwra.getUid().contains("_")) {
+        if (!mwra.getUid().contains("_")) {
             if (mwra.getSC().getRb07().equals("1")) {
                 mwra.setPregnum(String.valueOf(Integer.parseInt(mwra.getPregnum()) + 1));
             } else {
@@ -155,25 +156,6 @@ public class SectionDActivity extends AppCompatActivity {
         Mwra.SD.saveData(sD);
         setResult(RESULT_OK);
         finish();
-    }
-
-
-    private boolean updateDB() {
-        int updcount = 0;
-
-        //updcount = db.updatesFollowUpsColumn(TableContracts.FollowupsTable.COLUMN_SC, followups.sCtoString())
-        Mwra updatedFollowups = mwra;
-        //updatedFollowups.setSC(mwra.sCtoString());
-        //updatedFollowups.setSD(mwra.SDtoString());
-        updcount = db.mwraDao().updateMwra(mwra);
-
-
-        if (updcount == 1) {
-            return true;
-        } else {
-            Toast.makeText(this, "Updating Database... ERROR!", Toast.LENGTH_SHORT).show();
-            return false;
-        }
     }
 
     public void btnEnd(View view) {

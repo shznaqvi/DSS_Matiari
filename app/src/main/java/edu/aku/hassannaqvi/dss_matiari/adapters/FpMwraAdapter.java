@@ -203,7 +203,7 @@ public class FpMwraAdapter extends RecyclerView.Adapter<FpMwraAdapter.ViewHolder
                     ((Activity) mContext).startActivityForResult(intent, 2);
                 } else {
                     MainApp.fpMwra = MainApp.followUpsScheMWRAList.get(viewHolder.getBindingAdapterPosition());
-                    MainApp.outcome.populateMetaFollowups();
+                    //MainApp.outcome.populateMetaFollowups();
 
                     Intent intent = new Intent(mContext, SectionFActivity.class);
 

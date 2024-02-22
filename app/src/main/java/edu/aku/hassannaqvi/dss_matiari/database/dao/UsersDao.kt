@@ -19,11 +19,7 @@ interface UsersDao {
     @Query("SELECT * FROM users WHERE username = :username")
     fun getUserByUsername(username: String?): Users?
 
-    @Query("SELECT * FROM users where username like :username and password like :password order by _id asc "
-            /*+ TableContracts.UsersTable.TABLE_NAME +
-            " WHERE " + TableContracts.UsersTable.COLUMN_USERNAME + " LIKE :username AND + "
-            + TableContracts.UsersTable.COLUMN_PASSWORD + " LIKE :password ORDER BY "
-            + TableContracts.UsersTable.COLUMN_ID + " ASC"*/)
+    @Query("SELECT * FROM users where username like :username and password like :password order by _id asc ")
     fun getUserByUsername_internal(username: String, password: String) : Users?
 
     fun doLogin(username: String, password: String) : Boolean

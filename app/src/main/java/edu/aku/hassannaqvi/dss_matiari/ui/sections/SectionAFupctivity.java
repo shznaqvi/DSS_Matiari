@@ -3,6 +3,7 @@ package edu.aku.hassannaqvi.dss_matiari.ui.sections;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.households;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.sharedPref;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -20,6 +21,7 @@ import org.json.JSONException;
 import edu.aku.hassannaqvi.dss_matiari.R;
 import edu.aku.hassannaqvi.dss_matiari.core.MainApp;
 import edu.aku.hassannaqvi.dss_matiari.databinding.ActivitySectionAFupBinding;
+import edu.aku.hassannaqvi.dss_matiari.global.DateUtils;
 import edu.aku.hassannaqvi.dss_matiari.models.Households;
 import edu.aku.hassannaqvi.dss_matiari.database.DssRoomDatabase;
 import edu.aku.hassannaqvi.dss_matiari.ui.lists.FPMwraActivity;
@@ -40,34 +42,37 @@ public class SectionAFupctivity extends AppCompatActivity {
         setTheme(lang.equals("1") ? R.style.AppThemeEnglish1 : R.style.AppThemeUrdu);
         bi = DataBindingUtil.setContentView(this, R.layout.activity_section_a_fup);
         bi.setCallback(this);
-
-        String date = toBlackVisionDate("2023-01-01");
-        bi.ra01.setMinDate(date);
+        db = MainApp.appInfo.dbHelper;
 
         // Init for for the first time
         Households.initMeta();
         sA = new Households.SA();
         bi.setHousehold(sA);
 
-        if (households.getUid().equals(""))
-        {
-            households.populateMeta(MainApp.selectedFpHousehold);
-            bi.btnContinue.setVisibility(View.VISIBLE);
-        }else{
-            if(households.getRegRound().equals("")) {
-                households.populateMeta(MainApp.selectedFpHousehold);
-                bi.btnContinue.setVisibility(View.GONE);
-                bi.btnUpdate.setVisibility(View.VISIBLE);
-                households.getSA().updateFMData(MainApp.selectHHsHousehold);
-            }
-        }
+        initUI();
 
-        bi.setHousehold(sA);
+    }
+
+    private void initUI() {
+
+        String date = DateUtils.changeDateFormat("2023-01-01");
+        bi.ra01.setMinDate(date);
 
         setTitle(R.string.demographicinformation_mainheading);
         setImmersive(true);
 
-        db = MainApp.appInfo.dbHelper;
+        if (households.getUid().equals("")) {
+            households.populateMeta(MainApp.selectedFpHousehold);
+            bi.btnContinue.setVisibility(View.VISIBLE);
+        } else {
+            if (households.getRegRound().equals("")) {
+                households.populateMeta(MainApp.selectedFpHousehold);
+                bi.btnContinue.setVisibility(View.GONE);
+                bi.btnUpdate.setVisibility(View.VISIBLE);
+                sA.updateFMData(MainApp.selectHHsHousehold);
+            }
+        }
+
 
         // Update text for btnContinue
         bi.btnContinue.setText(households.getUid().equals("") ? "Save" : "Update");
@@ -96,32 +101,11 @@ public class SectionAFupctivity extends AppCompatActivity {
             }
         });
 
-
     }
-
-    /*public void btnUpdateHH(View view){
-
-        if(updateFMClicked) {
-            if (!formValidation()) return;
-        }
-        if (!insertNewRecord()) return;
-
-        if (updateDB()) {
-
-            setResult(RESULT_OK);
-            finish();
-            Intent intent = new Intent(this, FPMwraActivity.class);
-            ((Activity) this).startActivityForResult(intent, 2);
-
-        } else {
-            Toast.makeText(this, "Failed to Update Database!", Toast.LENGTH_SHORT).show();
-        }
-
-    }*/
 
     public void btnUpdateHH(View view) throws JSONException {
 
-        if(updateFMClicked) {
+        if (updateFMClicked) {
             if (!formValidation()) return;
 
             // New form
@@ -139,120 +123,29 @@ public class SectionAFupctivity extends AppCompatActivity {
 
             }
         }
-
 
     }
 
     public void btnContinue(View view) throws JSONException {
-
-        //if(updateFMClicked) {
-            if (!formValidation()) return;
-
-            // New form
-            // If 'Edit form' option is selected
-            // Check data in db
-            Households form = db.householdsDao().getHouseholdByHDSSIDASC(sA.getRa10());
-            if (form != null) {
-                // wraId found
-                households = form;
-                setResult(RESULT_OK);
-                finish();
-                Households.saveMainData(sA.getRa10(), sA);
-                Intent intent = new Intent(this, FPMwraActivity.class);
-                ((Activity) this).startActivityForResult(intent, 2);
-
-            }
-        //}
-
-
-    }
-
-
-
-
-    /*public void btnContinue(View view) {
-
-        if (view.getId() == bi.btnLocked.getId()) {
-            //bi.ra12.setTag("-1");
-            //bi.ra13.setTag("-1");
-            bi.ra14.setTag("-1");
-            bi.ra15.setTag("-1");
-            bi.ra17A1.setTag("-1");
-            bi.ra17B1.setTag("-1");
-            bi.ra17C1.setTag("-1");
-            bi.ra17D1.setTag("-1");
-            bi.ra17A2.setTag("-1");
-            bi.ra17B2.setTag("-1");
-            bi.ra17C2.setTag("-1");
-            bi.ra17D2.setTag("-1");
-            bi.ra18.setTag("-1");
-        }
         if (!formValidation()) return;
-        if (!insertNewRecord()) return;
 
-        if (updateDB()) {
-            finish();
+        // New form
+        // If 'Edit form' option is selected
+        // Check data in db
+        Households form = db.householdsDao().getHouseholdByHDSSIDASC(sA.getRa10());
+        if (form != null) {
+            // wraId found
+            households = form;
             setResult(RESULT_OK);
-            if (households.getSA().getRa15().equals("1")) {
-                startActivity(new Intent(this, FPMwraActivity.class)
-                        .setFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT));
-            } else {
-                finish();
-                startActivity(new Intent(this, EndingActivity.class)
-                        .setFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT)
-                        .putExtra("noWRA", true));
-            }
+            finish();
+            Households.saveMainData(sA.getRa10(), sA);
+            Intent intent = new Intent(this, FPMwraActivity.class);
+            ((Activity) this).startActivityForResult(intent, 2);
 
-        } else {
-            Toast.makeText(this, "Failed to Update Database!", Toast.LENGTH_SHORT).show();
         }
-    }*/
 
-    /*private boolean insertNewRecord() {
-
-        if (!MainApp.households.getUid().equals("")) return true;
-        MainApp.households.populateMeta();
-        long rowId = 0;
-        try {
-            //rowId = db.addHousehold(households);
-            rowId = db.householdsDao().addHousehold(households);
-        } catch (Exception e) {
-            e.printStackTrace();
-            return false;
-        }
-        households.setId(rowId);
-        if (rowId > 0) {
-            households.setUid(households.getDeviceId() + households.getId());
-            db.householdsDao().updateHousehold(households);
-            return true;
-        } else {
-            Toast.makeText(this, "Updating Database... ERROR!", Toast.LENGTH_SHORT).show();
-            return false;
-        }
     }
 
-    private boolean updateDB() {
-        //DssRoomDatabase db = MainApp.appInfo.getDbHelper();
-        int updcount = 0;
-        try {
-//            updcount = db.updatesHouseholdColumn(TableContracts.HouseholdTable.COLUMN_SA, households.sAtoString());
-            Households updatedHousehold = households;
-            updatedHousehold.setSA(households.sAtoString());
-            updcount = db.householdsDao().updateHousehold(updatedHousehold);
-        } catch (JSONException e) {
-            e.printStackTrace();
-            Toast.makeText(this, "JSONException: " + e.getMessage(), Toast.LENGTH_SHORT).show();
-            Log.d(TAG, "ProcessStart (JSONException): " + e.getMessage());
-            return false;
-        }
-        if (updcount == 1) {
-            return true;
-        } else {
-            Toast.makeText(this, "Updating Database... ERROR!", Toast.LENGTH_SHORT).show();
-            return false;
-        }
-    }
-*/
     public void btnEnd(View view) {
         setResult(RESULT_CANCELED);
         finish();
@@ -268,32 +161,26 @@ public class SectionAFupctivity extends AppCompatActivity {
         finish();
     }
 
-    public static String toBlackVisionDate(String currentDate) {
-        String newDate = currentDate;
-        String[] oldDateParts = currentDate.split("-");
-        newDate = oldDateParts[2] + "/" + oldDateParts[1] + "/" + oldDateParts[0];
-        return newDate;
-    }
-
-    public void setOnTouchListener(TextView editText){
+    @SuppressLint("ClickableViewAccessibility")
+    public void setOnTouchListener(TextView editText) {
         editText.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 final int DRAWABLE_LEFT = 0;
                 final int DRAWABLE_RIGHT = 2;
 
-                if(event.getAction() == MotionEvent.ACTION_UP){
-                    if(event.getRawX() >= (editText.getRight() - editText.getCompoundDrawables()[DRAWABLE_RIGHT].getBounds().width())){
+                if (event.getAction() == MotionEvent.ACTION_UP) {
+                    if (event.getRawX() >= (editText.getRight() - editText.getCompoundDrawables()[DRAWABLE_RIGHT].getBounds().width())) {
                         editText.setText(String.valueOf(Integer.parseInt(editText.getText().toString()) + 1));
 
                         return true;
 
                     }
 
-                    if(event.getRawX() >= (editText.getLeft() - editText.getCompoundDrawables()[DRAWABLE_LEFT].getBounds().width())){
-                        if(!editText.getText().toString().equals("0")) {
+                    if (event.getRawX() >= (editText.getLeft() - editText.getCompoundDrawables()[DRAWABLE_LEFT].getBounds().width())) {
+                        if (!editText.getText().toString().equals("0")) {
                             editText.setText(String.valueOf(Integer.parseInt(editText.getText().toString()) - 1));
-                        }else{
+                        } else {
                             editText.setText(editText.getText().toString());
                         }
 

@@ -32,7 +32,7 @@ import java.util.Objects;
 import edu.aku.hassannaqvi.dss_matiari.R;
 import edu.aku.hassannaqvi.dss_matiari.core.MainApp;
 import edu.aku.hassannaqvi.dss_matiari.databinding.ActivitySectionCBinding;
-import edu.aku.hassannaqvi.dss_matiari.models.Households;
+import edu.aku.hassannaqvi.dss_matiari.global.DateUtils;
 import edu.aku.hassannaqvi.dss_matiari.models.Mwra;
 import edu.aku.hassannaqvi.dss_matiari.database.DssRoomDatabase;
 
@@ -52,12 +52,6 @@ public class SectionCActivity extends AppCompatActivity {
         bi = DataBindingUtil.setContentView(this, R.layout.activity_section_c);
         db = MainApp.appInfo.dbHelper;
 
-        String date = toBlackVisionDate("2023-01-01");
-        bi.rb01a.setMinDate(date);
-
-        // Set Round Number from followups data
-        MainApp.ROUND = MainApp.fpMwra.getFRound();
-
         try {
             mwra = db.mwraDao().getFollowupsBySno(MainApp.households.getUid(), MainApp.fpMwra.getRb01(), MainApp.fpMwra.getFRound());
         } catch (JSONException e) {
@@ -67,14 +61,27 @@ public class SectionCActivity extends AppCompatActivity {
 
         Mwra.populateMetaFollowups();
         sC = Mwra.SC.getData();
-        //sC = sC == null ? new Mwra.SC() : sC;
-        if(sC == null) {
+        if (sC == null) {
             sC = new Mwra.SC();
             sC.populateMeta();
         }
 
         mwra.setSC(sC);
+        bi.setFollowups(sC);
+        bi.setFollowupsMain(mwra);
 
+        initUI();
+    }
+
+    public void initUI() {
+
+        String date = DateUtils.changeDateFormat("2023-01-01");
+        bi.rb01a.setMinDate(date);
+
+        // Set Round Number from followups data
+        MainApp.ROUND = MainApp.fpMwra.getFRound();
+
+        // Calculate age of woman according to registration date
         long daysdiff = Mwra.CalculateAge(fpMwra.getReg_date());
         long years = daysdiff / 365;
         long actualAge = 0;
@@ -84,6 +91,7 @@ public class SectionCActivity extends AppCompatActivity {
             bi.rb05.setText(String.valueOf(actualAge));
         }
 
+        // Enable Overage option in VISIT status according to woman age
         if (actualAge <= 49) {
             if (Integer.parseInt(households.getVisitNo()) < 2) {
                 bi.rb1001.setEnabled(true);
@@ -118,12 +126,7 @@ public class SectionCActivity extends AppCompatActivity {
             bi.rb1009.setEnabled(true);
         }
 
-
         setImmersive(true);
-        bi.setFollowups(sC);
-        bi.setFollowupsMain(mwra);
-
-
         bi.btnContinue.setText(MainApp.mwra.getUid().equals("") ? "Save" : "Update");
 
         /********************************On Click Listeners******************************/
@@ -267,7 +270,6 @@ public class SectionCActivity extends AppCompatActivity {
                 }
             }
         });
-
     }
 
     private void setDateRanges() {
@@ -351,13 +353,11 @@ public class SectionCActivity extends AppCompatActivity {
                                 forwardIntent.setFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT);
                                 setResult(RESULT_OK, forwardIntent);
                                 startActivity(forwardIntent);
-                                //finish();
                             } else { // If not live birth
                                 Intent forwardIntent = new Intent(this, SectionDActivity.class).putExtra("complete", true);
                                 forwardIntent.setFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT);
                                 setResult(RESULT_OK, forwardIntent);
                                 startActivity(forwardIntent);
-                                //finish();
                             }
                         }
                     } else if (fpMwra.getRb07().equals("2") && bi.rb1801.isChecked()) {   // Not Pregnant
@@ -380,7 +380,7 @@ public class SectionCActivity extends AppCompatActivity {
                     }
 
                     break;
-                //finish();
+
                 // Divorced
                 case "2":
                     // Pregnant
@@ -388,7 +388,6 @@ public class SectionCActivity extends AppCompatActivity {
 
                         if (bi.rb1401.isChecked()) {  // If Pregnancy Continued
                             setResult(RESULT_OK);
-                            //finish();
                         } else {     // If Pregnancy ended
                             if (bi.rb1601.isChecked() || bi.rb1605.isChecked()) {    // Live Birth
                                 if (fpMwra.getChild_count() != null) {
@@ -400,13 +399,11 @@ public class SectionCActivity extends AppCompatActivity {
                                 forwardIntent.setFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT);
                                 setResult(RESULT_OK, forwardIntent);
                                 startActivity(forwardIntent);
-                                //finish();
                             } else {
                                 setResult(RESULT_OK);
-                                //finish();
                             }
                         }
-                    } else {      // Not Pregnant
+                    } else {      // Not Pregnant & Delivered baby in last 3 months / unreported pregnancy
                         if (bi.rb1801.isChecked()) {
                             if (fpMwra.getChild_count() != null) {
                                 MainApp.prevChildCount = Integer.parseInt(fpMwra.getChild_count());
@@ -417,20 +414,17 @@ public class SectionCActivity extends AppCompatActivity {
                             forwardIntent.setFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT);
                             setResult(RESULT_OK, forwardIntent);
                             startActivity(forwardIntent);
-                        } else if (bi.rb0601.isChecked() || bi.rb1802.isChecked() && !mwra.getPrePreg().equals("2")) {        // Marital status changed
+                            // Marital status changed
+                        } else if (bi.rb0601.isChecked() || bi.rb1802.isChecked() && !mwra.getPrePreg().equals("2")) {
                             Intent forwardIntent = new Intent(this, SectionDActivity.class).putExtra("complete", true);
                             forwardIntent.setFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT);
                             setResult(RESULT_OK, forwardIntent);
                             startActivity(forwardIntent);
-                            //finish();
                         } else {
                             setResult(RESULT_OK);
-                            //finish();
                         }
                     }
                     break;
-
-                //finish();
 
                 // Widow
                 case "3":
@@ -438,7 +432,6 @@ public class SectionCActivity extends AppCompatActivity {
                     if (mwra.getPrePreg().equals("1")) {
                         if (bi.rb1401.isChecked()) {  // If Pregnancy Continued
                             setResult(RESULT_OK);
-                            //finish();
                         } else {     // If Pregnancy ended
                             if (bi.rb1601.isChecked() || bi.rb1605.isChecked()) {    // Live Birth
                                 if (fpMwra.getChild_count() != null) {
@@ -450,10 +443,8 @@ public class SectionCActivity extends AppCompatActivity {
                                 forwardIntent.setFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT);
                                 setResult(RESULT_OK, forwardIntent);
                                 startActivity(forwardIntent);
-                                //finish();
                             } else {
                                 setResult(RESULT_OK);
-                                //finish();
                             }
                         }
                     } else {      // Not Pregnant
@@ -463,7 +454,7 @@ public class SectionCActivity extends AppCompatActivity {
                             forwardIntent.setFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT);
                             setResult(RESULT_OK, forwardIntent);
                             startActivity(forwardIntent);
-                            //finish();
+                            // Delivered baby in last 3 months / Unreported pregnancy
                         } else if (bi.rb1801.isChecked()) {
                             if (fpMwra.getChild_count() != null) {
                                 MainApp.prevChildCount = Integer.parseInt(fpMwra.getChild_count());
@@ -476,12 +467,10 @@ public class SectionCActivity extends AppCompatActivity {
                             startActivity(forwardIntent);
                         } else {
                             setResult(RESULT_OK);
-                            //finish();
                         }
                     }
                     break;
 
-                //finish();
                 // Separated
                 case "5":
                     // Pregnant
@@ -489,7 +478,6 @@ public class SectionCActivity extends AppCompatActivity {
 
                         if (bi.rb1401.isChecked()) {  // If Pregnancy Continued
                             setResult(RESULT_OK);
-                            //finish();
                         } else {     // If Pregnancy ended
                             if (bi.rb1601.isChecked() || bi.rb1605.isChecked()) {    // Live Birth
                                 if (fpMwra.getChild_count() != null) {
@@ -504,7 +492,6 @@ public class SectionCActivity extends AppCompatActivity {
                                 finish();
                             } else {
                                 setResult(RESULT_OK);
-                                //finish();
                             }
                         }
                     } else {      // Not Pregnant
@@ -514,7 +501,8 @@ public class SectionCActivity extends AppCompatActivity {
                             forwardIntent.setFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT);
                             setResult(RESULT_OK, forwardIntent);
                             startActivity(forwardIntent);
-                            //finish();
+
+                            // Delivered baby in last 3 months / Unreported pregnancy
                         } else if (bi.rb1801.isChecked()) {
                             if (fpMwra.getChild_count() != null) {
                                 MainApp.prevChildCount = Integer.parseInt(fpMwra.getChild_count());
@@ -527,12 +515,10 @@ public class SectionCActivity extends AppCompatActivity {
                             startActivity(forwardIntent);
                         } else {
                             setResult(RESULT_OK);
-                            //finish();
                         }
                     }
                     break;
 
-                //finish();
                 case "4": // Unmarried in previous round
                     // if get married in current round
                     if (!bi.rb0604.isChecked() && bi.rb1802.isChecked()) {
@@ -540,19 +526,19 @@ public class SectionCActivity extends AppCompatActivity {
                         forwardIntent.setFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT);
                         setResult(RESULT_OK, forwardIntent);
                         startActivity(forwardIntent);
-                        //finish();
 
-                        // Delivered baby within last 3 months
+                        // Delivered baby within last 3 months / Unreported pregnancy
                     } else if (!bi.rb0604.isChecked() && bi.rb1801.isChecked()) {
                         MainApp.prevChildCount = 0;
                         Intent forwardIntent = new Intent(this, SectionEActivity.class).putExtra("complete", true);
                         forwardIntent.setFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT);
                         setResult(RESULT_OK, forwardIntent);
                         startActivity(forwardIntent);
-                    }// if still unmarried
+                    }
+
+                    // if still unmarried
                     else if (bi.rb0604.isChecked()) {
                         setResult(RESULT_OK);
-                        //finish();
                     }
 
                     break;
@@ -566,7 +552,7 @@ public class SectionCActivity extends AppCompatActivity {
     }
 
 
-       public void btnEnd(View view) {
+    public void btnEnd(View view) {
         setResult(RESULT_CANCELED);
         finish();
 
@@ -576,13 +562,6 @@ public class SectionCActivity extends AppCompatActivity {
         setDateRanges();
         return Validator.emptyCheckingContainer(this, bi.GrpName);
 
-    }
-
-    public static String toBlackVisionDate(String currentDate) {
-        String newDate = currentDate;
-        String[] oldDateParts = currentDate.split("-");
-        newDate = oldDateParts[2] + "/" + oldDateParts[1] + "/" + oldDateParts[0];
-        return newDate;
     }
 
     @Override

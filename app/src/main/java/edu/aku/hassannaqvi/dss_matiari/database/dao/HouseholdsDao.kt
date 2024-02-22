@@ -44,7 +44,6 @@ interface HouseholdsDao {
         val householdsList = getHouseholdBYVillage_internal(uc, village, regRound)
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             householdsList.forEach {
-                //it.s1Hydrate(it.sa)
             }
         }
         return householdsList
@@ -63,11 +62,9 @@ interface HouseholdsDao {
         val hdssidSplit = hdssid.split("-").toTypedArray()
         val newHDSSID = hdssidSplit[0] + "-" + hdssidSplit[1] + "-" + String.format(
             "%04d",
-            hdssidSplit[2].toInt()
-        )
+            hdssidSplit[2].toInt())
 
         val household = getHouseholdByHDSSIDASC_internal(hdssid, newHDSSID)
-        //household?.s1Hydrate(household.sa)
         return household
     }
 
@@ -82,7 +79,6 @@ interface HouseholdsDao {
             "%04d",
             hdssidSplit[2].toInt())
 
-        //return getHouseholdByHDSSIDDSC_internal(hdssid, newHDSSID)
         val household = getHouseholdByHDSSIDDSC_internal(hdssid, newHDSSID)
         if (household == null) {
             val tempHouseholds = Households()
@@ -104,14 +100,8 @@ interface HouseholdsDao {
         if (household == null) {
             val tempHousehold = Households()
             tempHousehold.populateMeta(position)
-           //val id = addHousehold(tempHousehold)
-            //tempHousehold.id = id
-            //tempHousehold.uid = MainApp.deviceid + tempHousehold.id
-            //tempHousehold.sAtoString()
-            //updateHousehold(tempHousehold)
             return tempHousehold
         }else{
-            //household.s1Hydrate(household.sa)
             return household
         }
 
@@ -129,10 +119,6 @@ interface HouseholdsDao {
     @kotlin.jvm.Throws(JSONException::class)
     fun getHouseholdByUID(uid: String): Households? {
         val newHousehols = getHouseholdByUID_internal(uid)
-        /*if (newHousehols == null) {
-            val temHouseholds = Households()
-            //temHouseholds.Hydrate(newHousehols)
-        }*/
         return newHousehols
     }
 

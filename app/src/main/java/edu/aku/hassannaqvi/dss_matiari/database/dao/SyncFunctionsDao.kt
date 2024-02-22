@@ -25,17 +25,8 @@ interface SyncFunctionsDao {
     @kotlin.jvm.Throws(JSONException :: class)
     fun getUnsyncedHouseholds() : JSONArray?
     {
-        val allForms = getUnsyncedHousehols_internal()
 
         val jsonArray = JSONArray()
-        /*for (i in allForms)
-        {
-
-            i.Hydrate(i)
-            jsonArray.put(i.toJSONObject())
-
-        }*/
-
         return jsonArray
 
     }
@@ -47,31 +38,11 @@ interface SyncFunctionsDao {
     @Query("SELECT * FROM MWRAs WHERE (synced is '' OR synced is NULL) AND (istatus != 4) ORDER BY _id ASC ")
     fun getUnsyncedMWRAS_internal() : List<Mwra>
 
-    private fun getUnsycedAdjustedMWRAS_internal() : List<Mwra> {
-        val hhsSync = getUnsyncedHousehols_internal()
-        val allMwras = getUnsyncedMWRAS_internal()
-        val toSyncMwras = arrayListOf<Mwra>()
-        hhsSync.forEach { hhs  ->
-            val mwras = allMwras.filter { it.hdssId == hhs.hdssId && it.uuid == hhs.uid}
-            toSyncMwras.addAll(mwras)
-        }
-        return toSyncMwras
-    }
-
     @kotlin.jvm.Throws(JSONException :: class)
     fun getUnsyncedMwras() : JSONArray?
     {
-        val allForms = getUnsycedAdjustedMWRAS_internal()
 
         val jsonArray = JSONArray()
-        /*for (i in allForms)
-        {
-
-            //i.Hydrate(i)
-            //jsonArray.put(i.toJSONObject())
-
-        }*/
-
         return jsonArray
 
     }
@@ -83,30 +54,10 @@ interface SyncFunctionsDao {
     @Query("SELECT * FROM outcomes WHERE synced is '' OR synced is NULL ORDER BY _id ASC")
     fun getUnsyncedOutcome_internal() : List<Outcome>
 
-    private fun getUnsycedAdjustedOutcomes_internal() : List<Outcome> {
-        val mwras = getUnsyncedMWRAS_internal()
-        val allOutcomes = getUnsyncedOutcome_internal()
-        val toSyncOutcomes = arrayListOf<Outcome>()
-        mwras.forEach { mwra  ->
-            val mwraOutcomes = allOutcomes.filter { it.hdssId == mwra.hdssId && it.msno == mwra.sNo}
-            toSyncOutcomes.addAll(mwraOutcomes)
-        }
-        return toSyncOutcomes
-    }
-
     @kotlin.jvm.Throws(JSONException :: class)
     fun getUnsyncedOutcome() : JSONArray?
     {
-        val allForms = getUnsycedAdjustedOutcomes_internal()
         val jsonArray = JSONArray()
-        /*for (i in allForms)
-        {
-
-            i.Hydrate(i)
-            jsonArray.put(i.toJSONObject())
-
-        }
-*/
         return jsonArray
 
     }

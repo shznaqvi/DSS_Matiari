@@ -11,12 +11,7 @@ import edu.aku.hassannaqvi.dss_matiari.models.MaxHhno
 @Dao
 interface MaxHHNoDao {
 
-    @Query("SELECT MAX( CAST(maxhhno AS INT)) AS mmaxhhno from maxhhno where ucCode like :ucCode and villageCode like :vCode order by _id ASC  "
-            /*+ "MAX( CAST(" + TableContracts.MaxHhnoTable.COLUMN_MAX_HHNO + " AS INT)) AS " + TableContracts.MaxHhnoTable.COLUMN_MAX_HHNO +
-            " FROM " + TableContracts.MaxHhnoTable.TABLE_NAME +
-            " WHERE " + TableContracts.MaxHhnoTable.COLUMN_UC_CODE + " LIKE :ucCode AND "
-            + TableContracts.MaxHhnoTable.COLUMN_VILLAGE_CODE + " LIKE :vCode "  +
-            "ORDER BY " + TableContracts.MaxHhnoTable.COLUMN_ID + " ASC"*/)
+    @Query("SELECT MAX( CAST(maxhhno AS INT)) AS mmaxhhno from maxhhno where ucCode like :ucCode and villageCode like :vCode order by _id ASC  ")
     fun getMaxHHNoByVillage(ucCode : String, vCode : String) : Int
 
     /* NEW STRUCT */

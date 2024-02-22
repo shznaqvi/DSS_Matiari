@@ -20,6 +20,7 @@ import org.json.JSONException;
 import edu.aku.hassannaqvi.dss_matiari.R;
 import edu.aku.hassannaqvi.dss_matiari.core.MainApp;
 import edu.aku.hassannaqvi.dss_matiari.databinding.ActivitySectionABinding;
+import edu.aku.hassannaqvi.dss_matiari.global.DateUtils;
 import edu.aku.hassannaqvi.dss_matiari.models.Households;
 import edu.aku.hassannaqvi.dss_matiari.database.DssRoomDatabase;
 import edu.aku.hassannaqvi.dss_matiari.ui.EndingActivity;
@@ -39,18 +40,23 @@ public class SectionAActivity extends AppCompatActivity {
         setTheme(lang.equals("1") ? R.style.AppThemeEnglish1 : R.style.AppThemeUrdu);
         bi = DataBindingUtil.setContentView(this, R.layout.activity_section_a);
         bi.setCallback(this);
-
-        String date = toBlackVisionDate("2023-01-01");
-        bi.ra01.setMinDate(date);
+        db = MainApp.appInfo.dbHelper;
 
         sA = Households.SA.getData();
         sA = sA == null ? new Households.SA() : sA;
         bi.setSA(sA);
 
+        initUI();
+
+    }
+
+    public void initUI() {
+
         setTitle(R.string.demographicinformation_mainheading);
         setImmersive(true);
 
-        db = MainApp.appInfo.dbHelper;
+        String date = DateUtils.changeDateFormat("2023-01-01");
+        bi.ra01.setMinDate(date);
 
         // Update text for btnContinue
         bi.btnContinue.setText(households.getUid().equals("") ? "Save" : "Update");
@@ -66,8 +72,7 @@ public class SectionAActivity extends AppCompatActivity {
                 if (bi.ra1501.isChecked()) {
                     bi.ra17C2.setMinvalue(1);
                     bi.ra17C2.setMaxvalue(20);
-                }
-                else if (bi.ra1502.isChecked()) {
+                } else if (bi.ra1502.isChecked()) {
                     bi.ra17C2.setMinvalue(0);
                     bi.ra17C2.setMaxvalue(0);
                 }
@@ -86,6 +91,7 @@ public class SectionAActivity extends AppCompatActivity {
                 }
             }
         });
+
     }
 
     public void btnContinue(View view) throws JSONException {
@@ -93,26 +99,24 @@ public class SectionAActivity extends AppCompatActivity {
 
         // New form
         // If 'Edit form' option is selected
-            // Check data in db
+        // Check data in db
         Households.saveMainData(households.getHdssId(), sA);
-            Households form = db.householdsDao().getHouseholdByHDSSIDASC(households.getHdssId());
-            if (form != null) {
-                // wraId found
-                households = form;
-                if (sA.getRa15().equals("1")) {
-                    finish();
-                    //Households.saveMainData(households.getHdssId(), sA);
-                    Households.SA.saveData(sA);
-                    startActivity(new Intent(this, MwraActivity.class)
-                            .setFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT));
-                } else {
-                    finish();
-                    //Households.saveMainData(households.getHdssId(), sA);
-                    Households.SA.saveData(sA);
-                    startActivity(new Intent(this, EndingActivity.class)
-                            .setFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT)
-                            .putExtra("noWRA", true));
-                }
+        Households form = db.householdsDao().getHouseholdByHDSSIDASC(households.getHdssId());
+        if (form != null) {
+            // wraId found
+            households = form;
+            if (sA.getRa15().equals("1")) {
+                finish();
+                Households.SA.saveData(sA);
+                startActivity(new Intent(this, MwraActivity.class)
+                        .setFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT));
+            } else {
+                finish();
+                Households.SA.saveData(sA);
+                startActivity(new Intent(this, EndingActivity.class)
+                        .setFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT)
+                        .putExtra("noWRA", true));
+            }
         }
 
     }
@@ -125,13 +129,6 @@ public class SectionAActivity extends AppCompatActivity {
 
     private boolean formValidation() {
         return Validator.emptyCheckingContainer(this, bi.GrpName);
-    }
-
-    public static String toBlackVisionDate(String currentDate) {
-        String newDate = currentDate;
-        String[] oldDateParts = currentDate.split("-");
-        newDate = oldDateParts[2] + "/" + oldDateParts[1] + "/" + oldDateParts[0];
-        return newDate;
     }
 
     @Override
