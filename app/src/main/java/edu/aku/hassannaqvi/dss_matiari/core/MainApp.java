@@ -137,7 +137,7 @@ public class MainApp extends Application {
     public static HashMap<String[], Boolean> mwraStatus = new HashMap<>();
     public static HashMap<String[], Boolean> allMwraRefusedOrMigrated = new HashMap<>();
     private static final String TAG = "MainApp";
-    //    public static int TRATS = 8;
+        public static int TRATS = 8;
     public static String IBAHC = "";
     public static int position;
     public static CountDownTimer timer;
