@@ -65,7 +65,7 @@ interface OutcomeDao {
     /* NEW STRUCT */
 
     @Query("SELECT * FROM outcomes WHERE _uuid IN (:uIds)")
-    abstract fun getAllUnSyncedDataByUIds(uIds: List<String?>?): MutableList<Outcome?>?
+    abstract fun getAllUnSyncedDataByUIds(uIds: List<String>): List<Outcome>
 
     // This query is only used for updating sync list
     // id = rowId

@@ -159,7 +159,7 @@ public class FPHouseholdActivity extends AppCompatActivity {
         households.setHdssId(selectedUC + "-" + selectedVillage + "-" + (maxHHFinal + 1));
         MainApp.households.getSA().setRa09(String.valueOf(maxHHFinal + 1));
 
-        sA.populateMeta();
+        sA.populateMetaFollowups();
 
         MainApp.selectedHhNO = households.getHhNo();
         Households.saveMainData(households.getHdssId(), sA);

@@ -139,6 +139,8 @@ public class HouseholdActivity extends AppCompatActivity {
 
         households.setHhNo(String.valueOf(maxHHFinal + 1));
         households.setHdssId(selectedUC + "-" + selectedVillage + "-" + (maxHHFinal + 1));
+        sA.setRa09(households.getHhNo());
+        sA.setRa10(households.getHdssId());
 
         sA.populateMeta();
 

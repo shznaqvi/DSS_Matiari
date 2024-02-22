@@ -492,7 +492,8 @@ public class Mwra extends BaseObservable implements Observable {
         private String rb25 = StringUtils.EMPTY;
         private String rb26 = StringUtils.EMPTY;
         private String pregnum = StringUtils.EMPTY;
-        private long ageInMonths;
+
+        private transient long ageInMonths;
 
         // Save section object as json object in db
         public static void saveData(Mwra.SB data) {
@@ -836,7 +837,7 @@ public class Mwra extends BaseObservable implements Observable {
         private String rb20 = StringUtils.EMPTY;
         private String rb21 = StringUtils.EMPTY;
         private String rb26 = StringUtils.EMPTY;
-        private long ageInMonths;
+        private transient long ageInMonths;
 
         // Save section object as json object in db
         public static void saveData(Mwra.SC data) {

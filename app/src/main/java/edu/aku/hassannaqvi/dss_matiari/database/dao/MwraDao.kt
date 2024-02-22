@@ -1,11 +1,10 @@
 package edu.aku.hassannaqvi.dss_matiari.database.dao
 
 import androidx.room.*
-import edu.aku.hassannaqvi.dss_matiari.models.Mwra
 import edu.aku.hassannaqvi.dss_matiari.global.DateUtils
+import edu.aku.hassannaqvi.dss_matiari.models.Mwra
 import edu.aku.hassannaqvi.dss_matiari.models.SyncModelNew
 import org.json.JSONException
-import kotlin.jvm.Throws
 
 //
 // Created by gul.sanober on 10/12/2022.
@@ -79,7 +78,8 @@ interface MwraDao {
     /* NEW STRUCT */
 
     @Query("SELECT * FROM MWRAs WHERE _uuid IN (:uIds)")
-    fun getAllUnSyncedDataByUIds(uIds: List<String?>?): MutableList<Mwra?>?
+    fun getAllUnSyncedDataByUIds(uIds: List<String>): List<Mwra>
+
 
     // This query is only used for updating sync list
     // id = rowId

@@ -447,6 +447,7 @@ public class Outcome extends BaseObservable implements Observable {
     public static class SE extends BaseObservable{
 
         private String rb02 = StringUtils.EMPTY;
+        @SerializedName("rc01a")
         private String rb01a = StringUtils.EMPTY;
         private String rc01 = StringUtils.EMPTY;
         private String rc02 = StringUtils.EMPTY;

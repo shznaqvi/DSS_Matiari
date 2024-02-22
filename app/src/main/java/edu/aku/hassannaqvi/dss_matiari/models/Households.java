@@ -103,7 +103,7 @@ public class Households extends BaseObservable implements Observable {
     @ColumnInfo(name = HouseholdTable.COLUMN_APPVERSION)
     private String appver = StringUtils.EMPTY;
 
-    private String endTime = StringUtils.EMPTY;
+    private transient String endTime = StringUtils.EMPTY;
 
     @SerializedName("istatus")
     @ColumnInfo(name = HouseholdTable.COLUMN_ISTATUS)
@@ -134,25 +134,16 @@ public class Households extends BaseObservable implements Observable {
         households.setUserName(MainApp.user.getUsername());
         households.setDeviceId(MainApp.deviceid);
         households.setAppver(MainApp.appInfo.getAppVersion());
-        households.setAppver(MainApp.appInfo.getAppVersion());
         households.setUcCode(MainApp.selectedUC);
         households.setVillageCode(MainApp.selectedVillage);
         households.setRegRound("1");
     }
 
-    public void populateMeta() {
-
-        households.sA.setRa06(MainApp.selectedUC);
-        households.sA.setRa07(MainApp.selectedVillage);
-        households.sA.setRa04(MainApp.leaderCode);
-        households.sA.setRa05(MainApp.leaderCode);
-    }
 
     public void populateMeta(int position) {
         setSysDate(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.ENGLISH).format(new Date().getTime()));
         setUserName(MainApp.user.getUsername());
         setDeviceId(MainApp.deviceid);
-        //   setUuid(MainApp.form.getUid());  // not applicable in Form table
         setAppver(MainApp.appInfo.getAppVersion());
         setProjectName(PROJECT_NAME);
         setHdssId(MainApp.followUpsScheHHList.get(position).getHdssid());
@@ -160,15 +151,6 @@ public class Households extends BaseObservable implements Observable {
         setVillageCode(MainApp.followUpsScheHHList.get(position).getVillageCode());
         setHhNo(MainApp.followUpsScheHHList.get(position).getHhNo());
         setRound(MainApp.followUpsScheHHList.get(position).getFRound());    // Round
-        /*households.sA.setRa09(MainApp.followUpsScheHHList.get(position).getHhNo());       // Household Number
-        households.sA.setRa08(MainApp.followUpsScheHHList.get(position).getRa08());       // Muhalla
-        households.sA.setRa10(MainApp.followUpsScheHHList.get(position).getHdssid());     //  Household ID
-        households.sA.setRa12(MainApp.followUpsScheHHList.get(position).getRa12());       // Name of head of household
-        households.sA.setRa04(MainApp.leaderCode);
-        households.sA.setRa05(MainApp.leaderCode);
-        households.sA.setRa06(MainApp.selectedUC);
-        households.sA.setRa07(MainApp.selectedVillage);
-        households.sA.setRa01(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.ENGLISH).format(new Date().getTime()));*/
         setRegRound("");
     }
 
@@ -435,14 +417,14 @@ public class Households extends BaseObservable implements Observable {
         private String ra09 = StringUtils.EMPTY;
         private String ra10 = StringUtils.EMPTY;
         private String ra11 = StringUtils.EMPTY;
-        private final String ra11x = StringUtils.EMPTY;
+        private transient final String ra11x = StringUtils.EMPTY;
         private String ra12 = StringUtils.EMPTY;
-        private final String ra12x = StringUtils.EMPTY;
+        private final transient String ra12x = StringUtils.EMPTY;
         private String ra13 = StringUtils.EMPTY;
-        private final String ra13x = StringUtils.EMPTY;
+        private final transient String ra13x = StringUtils.EMPTY;
         private String ra14 = StringUtils.EMPTY;
         private String ra15 = StringUtils.EMPTY;
-        private final String ra16 = StringUtils.EMPTY;
+        private final transient String ra16 = StringUtils.EMPTY;
         private String ra17_a1 = StringUtils.EMPTY;
         private String ra17_b1 = StringUtils.EMPTY;
         private String ra17_c1 = StringUtils.EMPTY;
@@ -462,9 +444,9 @@ public class Households extends BaseObservable implements Observable {
         private String ra19bx = StringUtils.EMPTY;
         private String ra19c = StringUtils.EMPTY;
         private String ra19cx = StringUtils.EMPTY;
-        private String ra20 = StringUtils.EMPTY;
-        private String ra21 = StringUtils.EMPTY;
-        private final String ra22 = StringUtils.EMPTY;
+        private transient String ra20 = StringUtils.EMPTY;
+        private transient String ra21 = StringUtils.EMPTY;
+        private transient final String ra22 = StringUtils.EMPTY;
 
         // This class is used to parse the object to save in room db
         public static class DataConverter extends DssRoomDatabase.BaseConverter<SA> {
@@ -481,6 +463,14 @@ public class Households extends BaseObservable implements Observable {
         }
 
         public void populateMeta() {
+            setRa01(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.ENGLISH).format(new Date().getTime()));
+            setRa04(MainApp.leaderCode);
+            setRa05(MainApp.leaderCode);
+            setRa06(MainApp.selectedUC);
+            setRa07(MainApp.selectedVillage);
+        }
+
+        public void populateMetaFollowups() {
             setRa01(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.ENGLISH).format(new Date().getTime()));
             setRa04(MainApp.leaderCode);
             setRa05(MainApp.leaderCode);
@@ -914,147 +904,5 @@ public class Households extends BaseObservable implements Observable {
         }
     }
 
-   /* public Households Hydrate(Households households) throws JSONException {
 
-        this.id = households.id;
-        this.uid = households.uid;
-        this.userName = households.userName;
-        this.sysDate = households.sysDate;
-        this.hdssId = households.hdssId;
-        this.ucCode = households.ucCode;
-        this.villageCode = households.villageCode;
-        this.hhNo = households.hhNo;
-        this.structureNo = households.structureNo;
-        this.visitNo = households.visitNo;
-        this.regRound = households.regRound;
-        this.deviceId = households.deviceId;
-        this.deviceTag =households.deviceTag;
-        this.appver = households.appver;
-        this.iStatus =households.iStatus;
-        this.synced = households.synced;
-        this.syncDate = households.syncDate;
-
-        s1Hydrate(households.sA);
-        return this;
-    }
-
-    public void s1Hydrate(String string) throws JSONException {
-
-        if (string != null && !string.equals("")) {
-
-            JSONObject json = null;
-            json = new JSONObject(string);
-            this.round = json.getString("round");
-            this.ra01 = json.getString("ra01");
-            this.ra01v2 = json.has("ra01v2") ? json.getString("ra01v2") : "";
-            this.ra01v3 = json.has("ra01v3") ? json.getString("ra01v3") : "";
-            //this.ra02 = json.getString("ra02");
-            this.ra04 = json.has("ra04") ? json.getString("ra04") : "";
-//            this.ra03 = json.getString("ra03");
-            this.ra05 = json.getString("ra05");
-            this.ra07 = json.getString("ra07");
-            this.ra06 = json.getString("ra06");
-            this.ra08 = json.getString("ra08");
-            this.ra09 = json.getString("ra09");
-            this.ra10 = json.getString("ra10");
-            this.ra11 = json.getString("ra11");
-            this.ra12 = json.getString("ra12");
-            this.ra13 = json.getString("ra13");
-            this.ra14 = json.getString("ra14");
-            this.ra15 = json.getString("ra15");
-            //this.ra16 = json.getString("ra16");
-            this.ra17_a1 = json.getString("ra17_a1");
-            this.ra17_b1 = json.getString("ra17_b1");
-            this.ra17_c1 = json.getString("ra17_c1");
-            this.ra17_d1 = json.getString("ra17_d1");
-            this.ra17_a2 = json.getString("ra17_a2");
-            this.ra17_b2 = json.getString("ra17_b2");
-            this.ra17_c2 = json.getString("ra17_c2");
-            this.ra17_d2 = json.getString("ra17_d2");
-            this.ra17_a3 = json.getString("ra17_a3");
-            this.ra17_b3 = json.getString("ra17_b3");
-            this.ra17_c3 = json.getString("ra17_c3");
-            this.ra17_d3 = json.getString("ra17_d3");
-            this.ra18 = json.getString("ra18");
-            this.ra19a = json.getString("ra19a");
-            this.ra19ax = json.getString("ra19ax");
-            this.ra19b = json.getString("ra19b");
-            this.ra19bx = json.getString("ra19bx");
-            this.ra19c = json.getString("ra19c");
-            this.ra19cx = json.getString("ra19cx");
-            //this.ra22 = json.getString("ra22");
-        }
-    }
-
-
-    public String sAtoString() throws JSONException {
-        JSONObject json = new JSONObject();
-
-        json.put("ra01", ra01)
-                .put("ra01v3", ra01v3)
-                .put("ra01v2", ra01v2)
-                .put("round", round)
-                .put("ra04", ra04)
-                .put("ra05", ra05)
-                .put("ra07", ra07)
-                .put("ra06", ra06)
-                .put("ra08", ra08)
-                .put("ra09", ra09)
-                .put("ra10", ra10)
-                .put("ra11", ra11)
-                .put("ra12", ra12)
-                .put("ra13", ra13)
-                .put("ra14", ra14)
-                .put("ra15", ra15)
-                //.put("ra16", ra16)
-                .put("ra17_a1", ra17_a1)
-                .put("ra17_b1", ra17_b1)
-                .put("ra17_c1", ra17_c1)
-                .put("ra17_d1", ra17_d1)
-                .put("ra17_a2", ra17_a2)
-                .put("ra17_b2", ra17_b2)
-                .put("ra17_c2", ra17_c2)
-                .put("ra17_d2", ra17_d2)
-                .put("ra17_a3", ra17_a3)
-                .put("ra17_b3", ra17_b3)
-                .put("ra17_c3", ra17_c3)
-                .put("ra17_d3", ra17_d3)
-                .put("ra18", ra18)
-                .put("ra19a", ra19a)
-                .put("ra19ax", ra19ax)
-                .put("ra19b", ra19b)
-                .put("ra19bx", ra19bx)
-                .put("ra19c", ra19c)
-                .put("ra19cx", ra19cx);
-
-        return json.toString();
-    }
-
-
-    public JSONObject toJSONObject() throws JSONException {
-
-        JSONObject json = new JSONObject();
-        json.put(HouseholdTable.COLUMN_ID, this.id);
-        json.put(HouseholdTable.COLUMN_PROJECT_NAME, this.projectName);
-        json.put(HouseholdTable.COLUMN_UID, this.uid);
-        json.put(HouseholdTable.COLUMN_USERNAME, this.userName);
-        json.put(HouseholdTable.COLUMN_SYSDATE, this.sysDate);
-        json.put(HouseholdTable.COLUMN_HDSSID, this.hdssId);
-        json.put(HouseholdTable.COLUMN_UC_CODE, this.ucCode);
-        json.put(HouseholdTable.COLUMN_VILLAGE_CODE, this.villageCode);
-        json.put(HouseholdTable.COLUMN_HOUSEHOLD_NO, this.hhNo);
-        //json.put(HouseholdTable.COLUMN_STRUCTURE_NO, this.structureNo);
-        json.put(HouseholdTable.COLUMN_VISIT_NO, this.visitNo);
-        json.put(HouseholdTable.COLUMN_DEVICEID, this.deviceId);
-        //json.put(HouseholdTable.COLUMN_DEVICETAGID, this.deviceTag);
-        json.put(HouseholdTable.COLUMN_ISTATUS, this.iStatus);
-        json.put(HouseholdTable.COLUMN_APPVERSION, this.appver);
-        json.put(HouseholdTable.COLUMN_REGROUND, this.regRound);
-        //  json.put(HouseholdTable.COLUMN_SYNCED, this.synced);
-        //  json.put(HouseholdTable.COLUMN_SYNCED_DATE, this.syncDate);
-
-        json.put(HouseholdTable.COLUMN_SA, new JSONObject(sAtoString()));
-        //Log.d(TAG, "toJSONObject: "+new JSONObject(s2toString()));
-        return json;
-    }*/
 }

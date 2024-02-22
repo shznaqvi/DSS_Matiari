@@ -12,6 +12,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -20,6 +21,9 @@ import java.util.Objects;
 import edu.aku.hassannaqvi.dss_matiari.R;
 import edu.aku.hassannaqvi.dss_matiari.contracts.TableContracts;
 import edu.aku.hassannaqvi.dss_matiari.core.MainApp;
+import edu.aku.hassannaqvi.dss_matiari.models.Households;
+import edu.aku.hassannaqvi.dss_matiari.models.Mwra;
+import edu.aku.hassannaqvi.dss_matiari.models.Outcome;
 import edu.aku.hassannaqvi.dss_matiari.ui.SyncNewAC;
 import edu.aku.hassannaqvi.dss_matiari.adapters.SyncAdapter;
 import edu.aku.hassannaqvi.dss_matiari.global.AppConstants;
@@ -90,6 +94,23 @@ public class UploadData {
         return null;
     }
 
+    /*Prepare UPLOAD data to post*/
+    public static String prepareUploadData(String tableName, String uploadData) {
+        try {
+            // Table
+            JSONObject table = new JSONObject();
+            table.put("table", tableName);
+            JSONArray value = new JSONArray();
+            value.put(table);
+            value.put(new JSONArray(uploadData));
+            Log.e("POST_JSON", value.toString());
+            return IS_CALL_ENCRYPTED ? CryptoUtil.encrypt(value.toString()) : value.toString();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
     /**
      * POST DATA TO SERVER
      */
@@ -107,7 +128,7 @@ public class UploadData {
                 postData = prepareUploadData(tableName, postJSON);
                 webCall.call(webAPI.uploadEncData(postData), AppConstants.UPLOAD_DATA, tableName, 0, postJSON.length(), IS_CALL_ENCRYPTED);
             } else
-                iWebCallback.onFailure(tableName, activity.getString(R.string.no_new_records_to_upload), 0, 0, null);
+                iWebCallback.onFailure(tableName, activity.getString(R.string.no_new_records_to_upload), ++index, 0, null);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -135,48 +156,61 @@ public class UploadData {
 
         // Now access only those forms whose uIds are in iFormCompletedUIDs list
 
-//            List<String> iFormCompletedUIds;
+            List<String> iFormCompletedUIds = new ArrayList<>();
 
 //        iFormCompletedUIds = uIdsHM.get(TableContracts.HouseholdTable.TABLE_NAME);
 //        tableName = ((SyncModelNew) UPLOAD_TABLES.keySet().toArray()[1]).getTable();
 //        List<Households> list1 = appDatabase.householdsDao().getAllUnSyncedDataByUIds(iFormCompletedUIds);
 //        if (list1 != null && list1.size() > 0) {
-        try {
-            tableName = TableContracts.HouseholdTable.TABLE_NAME;
-            postJSON = appDatabase.syncFunctionsDao().getUnsyncedHouseholds();
+        tableName = TableContracts.HouseholdTable.TABLE_NAME;
+
+        List<Households> list1 = appDatabase.syncFunctionsDao().getUnsyncedHousehols_internal();
+        if (list1 != null && list1.size() > 0) {
+            for (int i = 0; i < list1.size(); i++) iFormCompletedUIds.add(list1.get(i).getUid());
+            postData = prepareUploadData(tableName, gson.toJson(list1));
+            webCall.call(webAPI.uploadEncData(postData), AppConstants.UPLOAD_DATA, tableName, ++index, list1.size(), iFormCompletedUIds, IS_CALL_ENCRYPTED);
+        } else
+            iWebCallback.onFailure(tableName, activity.getString(R.string.no_new_records_to_upload), ++index, 0, null);
+
+           /* postJSON = appDatabase.syncFunctionsDao().getUnsyncedHouseholds();
             if (postJSON != null && postJSON.length() > 0) {
                 postData = prepareUploadData(tableName, postJSON);
                 webCall.call(webAPI.uploadEncData(postData), AppConstants.UPLOAD_DATA, tableName, 1, postJSON.length(), IS_CALL_ENCRYPTED);
             } else
-                iWebCallback.onFailure(tableName, activity.getString(R.string.no_new_records_to_upload), 1, 0, null);
-        } catch (JSONException e) {
-            e.printStackTrace();
-            Toast.makeText(activity, e.getMessage(), Toast.LENGTH_LONG).show();
-        }
+                iWebCallback.onFailure(tableName, activity.getString(R.string.no_new_records_to_upload), 1, 0, null);*/
 
-        try {
-            tableName = TableContracts.MWRATable.TABLE_NAME;
-            postJSON = appDatabase.syncFunctionsDao().getUnsyncedMwras();
+        tableName = TableContracts.MWRATable.TABLE_NAME;
+        List<Mwra> list2 = appDatabase.syncFunctionsDao().getUnsycedAdjustedMWRAS_internal();
+        if (list2 != null && list2.size() > 0) {
+            for (int i = 0; i < list2.size(); i++) iFormCompletedUIds.add(list2.get(i).getUid());
+            postData = prepareUploadData(tableName, gson.toJson(list2));
+            webCall.call(webAPI.uploadEncData(postData), AppConstants.UPLOAD_DATA, tableName, ++index, list2.size(), iFormCompletedUIds, IS_CALL_ENCRYPTED);
+        } else
+            iWebCallback.onFailure(tableName, activity.getString(R.string.no_new_records_to_upload), ++index, 0, null);
+
+           /* postJSON = appDatabase.syncFunctionsDao().getUnsyncedMwras();
             if (postJSON != null && postJSON.length() > 0) {
                 postData = prepareUploadData(tableName, postJSON);
                 webCall.call(webAPI.uploadEncData(postData), AppConstants.UPLOAD_DATA, tableName, 2, postJSON.length(), IS_CALL_ENCRYPTED);
             } else
-                iWebCallback.onFailure(tableName, activity.getString(R.string.no_new_records_to_upload), 2, 0, null);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
+                iWebCallback.onFailure(tableName, activity.getString(R.string.no_new_records_to_upload), 2, 0, null);*/
 
-        try {
-            tableName = TableContracts.OutcomeTable.TABLE_NAME;
-            postJSON = appDatabase.syncFunctionsDao().getUnsyncedOutcome();
+        tableName = TableContracts.OutcomeTable.TABLE_NAME;
+
+        List<Outcome> list3 = appDatabase.syncFunctionsDao().getUnsycedAdjustedOutcomes_internal();
+        if (list3 != null && list3.size() > 0) {
+            for (int i = 0; i < list3.size(); i++) iFormCompletedUIds.add(list3.get(i).getUid());
+            postData = prepareUploadData(tableName, gson.toJson(list3));
+            webCall.call(webAPI.uploadEncData(postData), AppConstants.UPLOAD_DATA, tableName, ++index, list3.size(), iFormCompletedUIds, IS_CALL_ENCRYPTED);
+        } else
+            iWebCallback.onFailure(tableName, activity.getString(R.string.no_new_records_to_upload), ++index, 0, null);
+
+           /* postJSON = appDatabase.syncFunctionsDao().getUnsyncedOutcome();
             if (postJSON != null && postJSON.length() > 0) {
                 postData = prepareUploadData(tableName, postJSON);
                 webCall.call(webAPI.uploadEncData(postData), AppConstants.UPLOAD_DATA, tableName, 3, postJSON.length(), IS_CALL_ENCRYPTED);
             } else
-                iWebCallback.onFailure(tableName, activity.getString(R.string.no_new_records_to_upload), 3, 0, null);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
+                iWebCallback.onFailure(tableName, activity.getString(R.string.no_new_records_to_upload), 3, 0, null);*/
 
 
         /* ADD MORE TABLE HERE TO UPLOAD IF NECESSARY */
