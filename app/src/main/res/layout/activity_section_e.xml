@@ -433,7 +433,7 @@
                                 android:layout_width="0dp"
                                 android:layout_height="match_parent"
                                 android:layout_weight="1"
-                                android:text="@string/rc05b" />
+                                android:text="@string/rb13" />
 
                             <TextView
                                 style="@style/quesNum"
@@ -450,7 +450,7 @@
                             android:layout_margin="8dp"
                             android:digits="abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ ,.\/"
                             android:enabled="true"
-                            android:hint="@string/rc05b"
+                            android:hint="@string/rb13"
                             android:inputType="text"
                             android:text="@={outcome.rc07}" />
                     </LinearLayout>

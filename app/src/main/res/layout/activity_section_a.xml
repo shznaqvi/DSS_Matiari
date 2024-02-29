@@ -171,7 +171,7 @@
                                 android:layout_width="0dp"
                                 android:layout_height="match_parent"
                                 android:layout_weight="1"
-                                android:text="@string/ra05" />
+                                android:text="@string/ra04" />
 
                             <TextView
                                 style="@style/quesNum"
@@ -185,7 +185,7 @@
                             android:id="@+id/ra05"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:hint="@string/ra05"
+                            android:hint="@string/ra04"
                             android:text="@={sA.ra05}" />
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
@@ -360,7 +360,7 @@
                                 android:layout_width="0dp"
                                 android:layout_height="match_parent"
                                 android:layout_weight="1"
-                                android:text="@string/ra21" />
+                                android:text="@string/ra11" />
 
                             <TextView
                                 style="@style/quesNum"
@@ -376,7 +376,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_margin="8dp"
-                            android:hint="@string/ra21"
+                            android:hint="@string/ra11"
                             android:inputType="textPostalAddress|textCapWords"
                             android:text="@={sA.ra11}" />
                     </LinearLayout>
@@ -403,7 +403,7 @@
                                 android:layout_width="0dp"
                                 android:layout_height="match_parent"
                                 android:layout_weight="1"
-                                android:text="@string/ra14" />
+                                android:text="@string/ra12" />
 
                             <TextView
                                 style="@style/quesNum"
@@ -419,7 +419,7 @@
                             android:layout_height="wrap_content"
                             android:layout_margin="8dp"
                             android:digits="abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ"
-                            android:hint="@string/ra14"
+                            android:hint="@string/ra12"
                             android:inputType="textPersonName|textCapWords"
                             android:text="@={sA.ra12}" />
                     </LinearLayout>
@@ -446,7 +446,7 @@
                                 android:layout_width="0dp"
                                 android:layout_height="match_parent"
                                 android:layout_weight="1"
-                                android:text="@string/ra19" />
+                                android:text="@string/ra13" />
 
                             <TextView
                                 style="@style/quesNum"
@@ -462,7 +462,7 @@
                             android:layout_height="wrap_content"
                             android:layout_margin="8dp"
                             android:digits="abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ"
-                            android:hint="@string/ra19"
+                            android:hint="@string/ra13"
                             android:inputType="textPersonName|textCapWords"
                             android:text="@={sA.ra13}" />
                     </LinearLayout>
@@ -489,7 +489,7 @@
                                 android:layout_width="0dp"
                                 android:layout_height="match_parent"
                                 android:layout_weight="1"
-                                android:text="@string/ra15" />
+                                android:text="@string/ra14" />
 
                             <TextView
                                 style="@style/quesNum"
@@ -505,7 +505,7 @@
                             android:layout_height="wrap_content"
                             android:layout_margin="8dp"
                             android:digits="abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ"
-                            android:hint="@string/ra15"
+                            android:hint="@string/ra14"
                             android:inputType="textPersonName|textCapWords"
                             android:text="@={sA.ra14}" />
                     </LinearLayout>
@@ -532,7 +532,7 @@
                                 android:layout_width="0dp"
                                 android:layout_height="match_parent"
                                 android:layout_weight="1"
-                                android:text="@string/ra20" />
+                                android:text="@string/ra15" />
 
                             <TextView
                                 style="@style/quesNum"
@@ -555,7 +555,7 @@
                                 android:layout_weight="1"
                                 android:checked='@{sA.getRa15().equals("1")}'
                                 android:onClick='@{()->sA.setRa15("1")}'
-                                android:text="@string/ra20_a" />
+                                android:text="@string/ra15a" />
 
                             <RadioButton
                                 android:id="@+id/ra1502"
@@ -564,7 +564,7 @@
                                 android:layout_weight="1"
                                 android:checked='@{sA.getRa15().equals("2")}'
                                 android:onClick='@{()->sA.setRa15("2")}'
-                                android:text="@string/ra20_b" />
+                                android:text="@string/ra15b" />
                         </RadioGroup>
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>

@@ -145,7 +145,7 @@
                                 android:layout_width="0dp"
                                 android:layout_height="match_parent"
                                 android:layout_weight="1"
-                                android:text="@string/ra11" />
+                                android:text="@string/ra19" />
 
 
                         </LinearLayout>
@@ -160,50 +160,50 @@
                                 android:id="@+id/istatusa"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:text="@string/ra11a" />
+                                android:text="@string/ra19a" />
 
                             <RadioButton
                                 android:id="@+id/istatusb"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:text="@string/ra11b" />
+                                android:text="@string/ra19b" />
 
                             <RadioButton
                                 android:id="@+id/istatusc"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:text="@string/ra11c" />
+                                android:text="@string/ra19c" />
 
                             <RadioButton
                                 android:id="@+id/istatuse"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:text="@string/ra11e" />
+                                android:text="@string/ra19e" />
 
                             <RadioButton
                                 android:id="@+id/istatusf"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:visibility="gone"
-                                android:text="@string/ra11f" />
+                                android:text="@string/ra19f" />
 
                             <RadioButton
                                 android:id="@+id/istatusg"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:text="@string/ra11g" />
+                                android:text="@string/ra19g" />
                             <RadioButton
                                 android:id="@+id/istatush"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:visibility="gone"
-                                android:text="@string/ra11h" />
+                                android:text="@string/ra19h" />
 
                             <RadioButton
                                 android:id="@+id/istatusd"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:text="@string/ra11d" />
+                                android:text="@string/ra19d" />
 
 
                         </RadioGroup>
@@ -213,7 +213,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:digits="AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz0123456789,. "
-                            android:hint="@string/ra11d"
+                            android:hint="@string/ra19d"
                             android:tag="ra11"
                             android:text='@{istatusd.checked ? istatusdx.getText().toString() : ""}'
                             android:visibility='@{istatusd.checked ? View.VISIBLE : View.GONE}' />

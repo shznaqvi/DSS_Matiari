@@ -3,7 +3,11 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Android Projects/DSS_Matiari/app/src/main/res/layout/activity_ending.xml" value="0.2734375" />
         <entry key="..\:/Android Projects/DSS_Matiari/app/src/main/res/layout/activity_section_a.xml" value="0.2325" />
+        <entry key="..\:/Android Projects/DSS_Matiari/app/src/main/res/layout/activity_section_b.xml" value="0.2734375" />
+        <entry key="..\:/Android Projects/DSS_Matiari/app/src/main/res/layout/activity_section_c.xml" value="0.2734375" />
+        <entry key="..\:/Android Projects/DSS_Matiari/app/src/main/res/layout/activity_section_d.xml" value="0.2825" />
       </map>
     </option>
   </component>

@@ -117,49 +117,51 @@
     <string name="newHHheadname"> Name of new head of the household </string>
     <string name="ra_lon">Longitude</string>
     <string name="ra_lat">Latitude</string>
+
+    <!--HOUSEHOLED-->
     <string name="ra01">Date of visit </string>
     <string name="ra02">CHW Code  </string>
-    <string name="ra04">Team leader Code </string>
     <string name="ra03">CHW Name </string>
-    <string name="ra05">Team leader name </string>
-    <string name="ra07">Village</string>
+    <string name="ra04">Team leader name </string>
+    <string name="ra05" translatable="false">Team leader Code </string>
     <string name="ra06">Union council </string>
+    <string name="ra07">Village</string>
     <string name="ra08">Mohalla</string>
     <string name="ra09">Household Number</string>
     <string name="ra10">Household ID</string>
-    <string name="ra11">Household Visit Status</string>
-    <string name="ra11a">Completed</string>
-    <string name="ra11b">Locked / no eligible respondent </string>
-    <string name="ra11c">Refused </string>
-    <string name="ra11e">No WRA 14 – 49 </string>
-    <string name="ra11g">Temporary Migrated out </string>
-    <string name="ra11f">Permanently Refused</string>
-    <string name="ra11h">Permanently Migrated out</string>
-    <string name="ra11d">Other (specify)</string>
-    <string name="ra12">Household Visit Status</string>
-    <string name="ra1201">Completed</string>
-    <string name="ra1202">Locked / no eligible respondent </string>
-    <string name="ra1203">Refused </string>
-    <string name="ra1296">Other (specify)</string>
-    <string name="ra13">Household Visit Status</string>
-    <string name="ra13a">Completed</string>
-    <string name="ra13b">Locked / no eligible respondent </string>
-    <string name="ra13c">Refused </string>
-    <string name="ra13d">Other (specify)</string>
-    <string name="ra14">Name of Head of Household </string>
-    <string name="ra15">Name of Respondent </string>
+    <string name="ra11">Detail Address with land mark</string>
+    <string name="ra12">Name of Head of Household </string>
+    <string name="ra13">Caste</string>
+    <string name="ra14">Name of Respondent </string>
+    <string name="ra15">Does this household have women aged 14–49 years?</string>
+    <string name="ra15a">Yes</string>
+    <string name="ra15b">No</string>
     <string name="ra16">Unique Family Number</string>
     <string name="ra17">Family Members</string>
     <string name="ra17_a">0 to 04 Years</string>
     <string name="ra17_b">05 to 13 Years</string>
     <string name="a17_c">14 to 49 Years </string>
     <string name="ra17_d">&gt;49 Years</string>
-
+    <string name="ra17_a1">Male</string>
+    <string name="ra17_a2">Female</string>
+    <string name="ra17_b1">Male</string>
+    <string name="a17_c1">Male</string>
+    <string name="ra17_d1">Male</string>
+    <string name="ra17_b2">Female</string>
+    <string name="a17_c2">Female</string>
+    <string name="ra17_d2">Female</string>
     <string name="ra18">No. of Women aged 14 – 49 years</string>
-    <string name="ra19">Caste</string>
-    <string name="ra20">Does this household have women aged 14–49 years?</string>
-    <string name="ra20_a">Yes</string>
-    <string name="ra20_b">No</string>
+    <string name="ra19">Household Visit Status</string>
+    <string name="ra19a">Completed</string>
+    <string name="ra19b">Locked / no eligible respondent </string>
+    <string name="ra19c">Refused </string>
+    <string name="ra19e">No WRA 14 – 49 </string>
+    <string name="ra19g">Temporary Migrated out </string>
+    <string name="ra19f">Permanently Refused</string>
+    <string name="ra19h">Permanently Migrated out</string>
+    <string name="ra19d">Other (specify)</string>
+
+    <!-- MWRA-->
     <string name="rb_uc">Union council </string>
     <string name="rb_vil">Village</string>
     <string name="rb_hno">Household Number</string>
@@ -167,14 +169,9 @@
     <string name="rb_ufn">Unique Family Number</string>
     <string name="rb01">Unique WRA#</string>
     <string name="rb02">Name of Women</string>
-    <string name="rb22">Name of Women (In NIC) </string>
     <string name="rb03">Husband/Father Name</string>
-    <string name="rb23">Husband/Father Name (In NIC) </string>
     <string name="rb03h">Husband Name</string>
     <string name="rb03f">Father Name</string>
-
-    <string name="rb23h">Husband Name (In NIC) </string>
-    <string name="rb23f">Father Name (In NIC) </string>
     <string name="rb04">Date of Birth</string>
     <string name="rb04_info">DD/MM/YYYY Use 98/98/9998 if not known</string>
     <string name="rb05">Age in years</string>
@@ -191,24 +188,53 @@
     <string name="rb08_info">DD/MM/YYYY</string>
     <string name="rb09">EDD Date [auto-calculated]</string>
     <string name="rb09_info">DD/MM/YYYY</string>
+    <string name="rb1001">Available</string>
+    <string name="rb1002">Temporary Migrated </string>
+    <string name="rb1003">Refused </string>
+    <string name="rb1004">Not Available/Lock  </string>
+    <string name="rb1005">Married and moved to another HH in this village </string>
+    <string name="rb1006">Married and moved to another village </string>
+    <string name="rb1007">Death </string>
+    <string name="rb1008">Interview Not done after 3 visits</string>
+    <string name="rb1009">Over Age</string>
+    <string name="rb11">Current Status</string>
+    <string name="rb1101">Live</string>
+    <string name="rb1102">Death</string>
+    <string name="rb1103">Refused</string>
+    <string name="rb12">Date of Death</string>
+    <string name="rb13">Suspected cause of Death</string>
+    <string name="rb14">Is Pregnancy Continued?</string>
+    <string name="rb1401" translatable="false">Yes</string>
+    <string name="rb1402" translatable="false">No</string>
+    <string name="rb1403" translatable="false">False PW</string>
+    <string name="rb15">Date of Delivery</string>
+    <string name="rb15_mis">Date of Miscarriage / Abortion</string>
+    <string name="rb16">Pregnancy Outcome</string>
+    <string name="rb16_info">DD/MM/YYYY</string>
+    <string name="rc1601" translatable="false">Live Birth</string>
+    <string name="rb1602">Still Birth</string>
+    <string name="rb1603">Abortion / Miscarriage</string>
+    <string name="rb1604">False PW</string>
+    <string name="rb1605">One Live and one Still Birth</string>
+    <string name="rb17">Status of Unreported Pregnancy Outcome </string>
     <string name="rb18">Have you delivered an alive baby in the past three months? </string>
+    <string name="rb18a">Have you delivered an alive baby during the duration from our last visit and today? </string>
     <string name="rb19">Status of Unreported Pregnancy Outcome </string>
     <string name="rb20">Gestational Age (in weeks)</string>
+    <string name="rb22">Name of Women (In NIC) </string>
+    <string name="rb23">Husband/Father Name (In NIC) </string>
+    <string name="rb23h">Husband Name (In NIC) </string>
+    <string name="rb23f">Father Name (In NIC) </string>
     <string name="rb24">Have you undergone an ultrasound examination?</string>
     <string name="rb2401">Yes (Based on ultrasound report)</string>
     <string name="rb2402">No</string>
     <string name="rb2403">Recall (No ultrasound report)</string>
     <string name="rb25">Date of Ultrasound</string>
-
     <string name="rb26">Pregnancy Outcome </string>
     <string name="rb2601">Live Birth  </string>
     <string name="rb2602">Still birth  </string>
     <string name="rb2603">Miscarriage </string>
     <string name="rb2605">1 Live birth and still birth </string>
-
-
-    <string name="rb16">Have you delivered an alive baby during the duration from our last visit and today? </string>
-    <string name="rb17">Status of Unreported Pregnancy Outcome </string>
 
     <string name="rc01">Unique WRA#</string>
     <string name="rc02">Name of Women</string>
@@ -216,23 +242,10 @@
     <string name="rc03h">Husband / Father Name </string>
     <string name="rc03f">Father Name</string>
     <string name="rc03a">Contact  Number </string>
-    <string name="rc04">Visit Status</string>
+    <string name="rb10">Visit Status</string>
     <!--    <string name="rc0401">Complete</string>-->
-    <string name="rc0401">Available</string>
-    <string name="rc0402">Temporary Migrated </string>
-    <string name="rc0403">Refused </string>
-    <string name="rc0404">Not Available/Lock  </string>
-    <string name="rc0405">Married and moved to another HH in this village </string>
-    <string name="rc0406">Married and moved to another village </string>
-    <string name="rc0407">Death </string>
-    <string name="rc0408">Interview Not done after 3 visits</string>
-    <string name="rc0409">Over Age</string>
-    <string name="rc05">Current Status</string>
-    <string name="rc0501">Live</string>
-    <string name="rc0502">Death</string>
-    <string name="rc0503">Refused</string>
-    <string name="rc05a">Date of Death</string>
-    <string name="rc05b">Suspected cause of Death</string>
+
+
     <string name="rc06"> Current Marital Status</string>
     <string name="rc0601">Married</string>
     <string name="rc0602">Divorce</string>
@@ -243,21 +256,10 @@
     <string name="rc0701">Pregnant</string>
     <string name="rc0702">Not Pregnant</string>
 
-    <string name="rc08">Is Pregnancy Continued?</string>
-    <string name="rc0801" translatable="false">Yes</string>
-    <string name="rc0802" translatable="false">No</string>
-    <string name="rc0803" translatable="false">False PW</string>
-    <string name="rc08_info">DD/MM/YYYY</string>
-    <string name="rc09">Pregnancy Outcome</string>
-    <string name="rc09_info">DD/MM/YYYY</string>
-    <string name="rc0901" translatable="false">Live Birth</string>
-    <string name="rc0902">Still Birth</string>
-    <string name="rc0903">Abortion / Miscarriage</string>
-    <string name="rc0904">False PW</string>
-    <string name="rc0905">One Live and one Still Birth</string>
 
-    <string name="rc10">Date of Delivery</string>
-    <string name="rc10_mis">Date of Miscarriage / Abortion</string>
+
+
+
     <string name="rc1001">ها </string>
     <string name="rc1002">نه </string>
     <string name="rc1003">ڪوڙو حمل</string>
@@ -413,14 +415,7 @@
     <string name="message_wra_dialog_proceeed" translatable="false">You have entered only %1$s of %2$s women between 14 – 49 in the household. \n\nAre you sure you want to close this household?</string>
     <string name="ra16_a">Yes</string>
     <string name="ra16_b">No</string>
-    <string name="ra17_a1">Male</string>
-    <string name="ra17_a2">Female</string>
-    <string name="ra17_b1">Male</string>
-    <string name="a17_c1">Male</string>
-    <string name="ra17_d1">Male</string>
-    <string name="ra17_b2">Female</string>
-    <string name="a17_c2">Female</string>
-    <string name="ra17_d2">Female</string>
+
     <!--    <string name="rb03">marital status</string>
         <string name="rb03_a">married</string>
         <string name="rb03_b">divorbed</string>
@@ -429,7 +424,7 @@
         <string name="rb05_info">don\'t know</string>-->
     <string name="language">Change Language</string>
     <string name="identification_mainheading">Identification Section</string>
-    <string name="ra21">Detail Address with land mark</string>
+
 
     <string name="Q_ra22" translatable="false">RA22</string>
     <string name="rb09hint">Press button to calculate EDD &gt;&gt;&gt;</string>
