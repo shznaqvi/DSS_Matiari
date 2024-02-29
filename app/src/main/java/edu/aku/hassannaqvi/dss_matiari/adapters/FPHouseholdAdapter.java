@@ -275,7 +275,7 @@ public class FPHouseholdAdapter extends RecyclerView.Adapter<FPHouseholdAdapter.
                     sA.updateFMData(MainApp.selectHHsHousehold);
                     MainApp.households.setSA(sA);
                     try {
-                        Households.saveMainData(households.getHdssId(), sA);
+                        Households.saveMainData(households.getHdssId(), households.getRound(), sA);
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
@@ -292,7 +292,7 @@ public class FPHouseholdAdapter extends RecyclerView.Adapter<FPHouseholdAdapter.
                         } else if (!followUpsSche.getiStatus().equals("1") || (currentMWRA == 0 && currentChild == 0)) {
                             try {
                                 //MainApp.households = db.getHouseholdByHDSSID(followUpsSche.getHdssid());
-                                MainApp.households = db.householdsDao().getHouseholdByHDSSIDASC(followUpsSche.getHdssid());
+                                MainApp.households = db.householdsDao().getHouseholdByHDSSIDASC(followUpsSche.getHdssid(), followUpsSche.getFRound());
 
                                 if (MainApp.households == null) {
                                     MainApp.households = new Households();

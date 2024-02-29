@@ -24,21 +24,6 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-
-        <!-- CUSTOM TOOLBAR -->
-        <!--        <androidx.appcompat.widget.Toolbar-->
-        <!--            android:id="@+id/toolbar"-->
-        <!--            style="@null"-->
-        <!--            android:layout_width="match_parent"-->
-        <!--            android:layout_height="wrap_content"-->
-        <!--            android:background="@color/colorPrimary"-->
-        <!--            android:minHeight="?attr/actionBarSize"-->
-        <!--            android:theme="@style/ToolbarTheme"-->
-        <!--            app:popupTheme="@style/ThemeOverlay.MaterialComponents.Light"-->
-        <!--            app:subtitleTextAppearance="@style/Toolbar.SubtitleText"-->
-        <!--            app:title="@string/demographicinformation_mainheading"-->
-        <!--            app:titleTextAppearance="@style/Toolbar.TitleText" />-->
-
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
@@ -72,7 +57,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
                 <!-- ra01  Input   -->
-                <!--                <com.google.android.material.card.MaterialCardView-->
+
                 <androidx.cardview.widget.CardView
                     android:id="@+id/fldGrpCVra01"
                     style="@style/cardView"

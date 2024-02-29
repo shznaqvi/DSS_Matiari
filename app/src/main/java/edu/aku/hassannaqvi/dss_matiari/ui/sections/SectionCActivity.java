@@ -310,7 +310,7 @@ public class SectionCActivity extends AppCompatActivity {
 
     public void btnContinue(View view) throws JSONException {
         if (!formValidation()) return;
-        Mwra.saveMainDataFup(households.getUid(), households.getHdssId(), sC.getRb01(), "", sC);
+        Mwra.saveMainDataFup(households.getUid(), sC.getRb01(), fpMwra.getFRound(), sC);
         mwra.setSNo(sC.getRb01());
 
         if (!mwra.getUid().contains("_")) {

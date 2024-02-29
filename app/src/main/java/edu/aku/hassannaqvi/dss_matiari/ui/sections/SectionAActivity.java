@@ -100,8 +100,8 @@ public class SectionAActivity extends AppCompatActivity {
         // New form
         // If 'Edit form' option is selected
         // Check data in db
-        Households.saveMainData(households.getHdssId(), sA);
-        Households form = db.householdsDao().getHouseholdByHDSSIDASC(households.getHdssId());
+        Households.saveMainData(households.getHdssId(), households.getRound(), sA);
+        Households form = db.householdsDao().getHouseholdByHDSSIDASC(households.getHdssId(), households.getRound());
         if (form != null) {
             // wraId found
             households = form;

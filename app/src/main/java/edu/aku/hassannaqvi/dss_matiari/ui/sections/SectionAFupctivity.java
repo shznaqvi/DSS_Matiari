@@ -111,13 +111,13 @@ public class SectionAFupctivity extends AppCompatActivity {
             // New form
             // If 'Edit form' option is selected
             // Check data in db
-            Households form = db.householdsDao().getHouseholdByHDSSIDASC(sA.getRa10());
+            Households form = db.householdsDao().getHouseholdByHDSSIDASC(sA.getRa10(), households.getRound());
             if (form != null) {
                 // wraId found
                 households = form;
                 setResult(RESULT_OK);
                 finish();
-                Households.saveMainData(sA.getRa10(), sA);
+                Households.saveMainData(sA.getRa10(), households.getRound(), sA);
                 Intent intent = new Intent(this, FPMwraActivity.class);
                 ((Activity) this).startActivityForResult(intent, 2);
 
@@ -132,13 +132,13 @@ public class SectionAFupctivity extends AppCompatActivity {
         // New form
         // If 'Edit form' option is selected
         // Check data in db
-        Households form = db.householdsDao().getHouseholdByHDSSIDASC(sA.getRa10());
+        Households form = db.householdsDao().getHouseholdByHDSSIDASC(sA.getRa10(), households.getRound());
         if (form != null) {
             // wraId found
             households = form;
             setResult(RESULT_OK);
             finish();
-            Households.saveMainData(sA.getRa10(), sA);
+            Households.saveMainData(sA.getRa10(), households.getRound(), sA);
             Intent intent = new Intent(this, FPMwraActivity.class);
             ((Activity) this).startActivityForResult(intent, 2);
 

@@ -6,6 +6,7 @@ package edu.aku.hassannaqvi.dss_matiari.database.dao
 
 import android.os.Build
 import androidx.room.*
+import androidx.room.OnConflictStrategy.IGNORE
 import androidx.room.OnConflictStrategy.REPLACE
 import edu.aku.hassannaqvi.dss_matiari.contracts.TableContracts.HouseholdTable
 import edu.aku.hassannaqvi.dss_matiari.models.Households
@@ -17,7 +18,7 @@ import org.json.JSONException
 interface HouseholdsDao {
 
     @kotlin.jvm.Throws(JSONException::class)
-    @Insert
+    @Insert(onConflict = IGNORE)
     fun addHousehold(households: Households): Long
 
     @Update(onConflict = REPLACE)
@@ -53,18 +54,18 @@ interface HouseholdsDao {
     )
     fun getMaxHouseholdNo(ucCode: String, vCode: String, regRound: String): Int
 
-    @Query("SELECT * FROM hhs WHERE hdssid LIKE :hdssid OR hdssid LIKE :newHDSSID ORDER BY _id ASC")
-    fun getHouseholdByHDSSIDASC_internal(hdssid: String, newHDSSID: String): Households?
+    @Query("SELECT * FROM hhs WHERE (hdssid LIKE :hdssid OR hdssid LIKE :newHDSSID) AND round like :fround ORDER BY _id ASC")
+    fun getHouseholdByHDSSIDASC_internal(hdssid: String, newHDSSID: String, fround: String): Households?
 
     @Throws(JSONException::class)
-    fun getHouseholdByHDSSIDASC(hdssid: String): Households? {
+    fun getHouseholdByHDSSIDASC(hdssid: String, fround: String): Households? {
         // Household number in DSSID was changed to 4-digits to capture more than 999 households
         val hdssidSplit = hdssid.split("-").toTypedArray()
         val newHDSSID = hdssidSplit[0] + "-" + hdssidSplit[1] + "-" + String.format(
             "%04d",
             hdssidSplit[2].toInt())
 
-        val household = getHouseholdByHDSSIDASC_internal(hdssid, newHDSSID)
+        val household = getHouseholdByHDSSIDASC_internal(hdssid, newHDSSID, fround)
         return household
     }
 

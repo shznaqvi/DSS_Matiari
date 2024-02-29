@@ -188,7 +188,7 @@ public class HouseholdActivity extends AppCompatActivity {
             case 1:
                 MainApp.households = new Households();
                 try {
-                    MainApp.households = db.householdsDao().getHouseholdByHDSSIDASC(hdssid);
+                    MainApp.households = db.householdsDao().getHouseholdByHDSSIDASC(hdssid, households.getRound());
                 } catch (JSONException e) {
                     e.printStackTrace();
                     Toast.makeText(this, "JSONException: " + e.getMessage(), Toast.LENGTH_SHORT).show();

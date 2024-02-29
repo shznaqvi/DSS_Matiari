@@ -162,7 +162,7 @@ public class FPHouseholdActivity extends AppCompatActivity {
         sA.populateMetaFollowups();
 
         MainApp.selectedHhNO = households.getHhNo();
-        Households.saveMainData(households.getHdssId(), sA);
+        Households.saveMainData(households.getHdssId(), households.getRound(), sA);
         // Launch activity for results.
         Intent intent = new Intent(this, SectionAActivity.class);
         MemberInfoLauncher.launch(intent);

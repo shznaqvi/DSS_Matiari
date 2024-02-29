@@ -36,7 +36,6 @@ import edu.aku.hassannaqvi.dss_matiari.database.dao.HouseholdsDao;
 @Entity(tableName = HouseholdTable.TABLE_NAME)
 public class Households extends BaseObservable implements Observable {
 
-    @Ignore
     private String round = StringUtils.EMPTY;
     // For local use
     // This is used for resolving data while posting
@@ -158,9 +157,9 @@ public class Households extends BaseObservable implements Observable {
 
     /*FOR IDENTIFICATION INFORMATION - CLUSTER-WISE*/
     // Save data in db
-    public static void saveMainData(String hdssId, SA sa) throws JSONException {
+    public static void saveMainData(String hdssId, String round, SA sa) throws JSONException {
         HouseholdsDao householdsDao = Objects.requireNonNull(DssRoomDatabase.getDbInstance()).householdsDao();
-        Households form = householdsDao.getHouseholdByHDSSIDASC(hdssId);
+        Households form = householdsDao.getHouseholdByHDSSIDASC(hdssId, round);
         if (form != null) {
             households = form;
         } else {

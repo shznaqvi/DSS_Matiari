@@ -16,36 +16,18 @@ import org.json.JSONException
 @Dao
 interface SyncFunctionsDao {
 
-
-    // Household Upload Functions
+    /**************** Household ********************/
 
     @Query("SELECT * FROM hhs WHERE (synced is \'\' OR synced is NULL) AND (istatus = 1 OR visitNo > 2) ORDER BY _id ASC" )
-    fun getUnsyncedHousehols_internal() : List<Households>
+    fun getUnsyncedHousehols() : List<Households>
 
-    @kotlin.jvm.Throws(JSONException :: class)
-    fun getUnsyncedHouseholds() : JSONArray?
-    {
-        val allForms = getUnsyncedHousehols_internal()
-
-        val jsonArray = JSONArray()
-        for (i in allForms) {
-
-            jsonArray.put(i)
-        }
-
-        return jsonArray
-
-    }
-
-//************************************************************************************************************
-
-    // MWRA
+    /**************** MWRA ********************/
 
     @Query("SELECT * FROM MWRAs WHERE (synced is '' OR synced is NULL) AND (istatus != 4) ORDER BY _id ASC ")
     fun getUnsyncedMWRAS_internal() : List<Mwra>
 
-    fun getUnsycedAdjustedMWRAS_internal() : List<Mwra> {
-        val hhsSync = getUnsyncedHousehols_internal()
+    fun getUnsycedMWRAS() : List<Mwra> {
+        val hhsSync = getUnsyncedHousehols()
         val allMwras = getUnsyncedMWRAS_internal()
         val toSyncMwras = arrayListOf<Mwra>()
         hhsSync.forEach { hhs  ->
@@ -54,32 +36,12 @@ interface SyncFunctionsDao {
         }
         return toSyncMwras
     }
-
-    @kotlin.jvm.Throws(JSONException :: class)
-    fun getUnsyncedMwras() : JSONArray?
-    {
-        val allForms = getUnsycedAdjustedMWRAS_internal()
-
-        val jsonArray = JSONArray()
-        for (i in allForms)
-        {
-
-            jsonArray.put(i)
-
-        }
-
-        return jsonArray
-
-    }
-
-//****************************************************************************************************************
-
-    // Outcome
+    /**************** Outcome ********************/
 
     @Query("SELECT * FROM outcomes WHERE synced is '' OR synced is NULL ORDER BY _id ASC")
     fun getUnsyncedOutcome_internal() : List<Outcome>
 
-    fun getUnsycedAdjustedOutcomes_internal() : List<Outcome> {
+    fun getUnsycedOutcomes() : List<Outcome> {
         val mwras = getUnsyncedMWRAS_internal()
         val allOutcomes = getUnsyncedOutcome_internal()
         val toSyncOutcomes = arrayListOf<Outcome>()
@@ -90,45 +52,13 @@ interface SyncFunctionsDao {
         return toSyncOutcomes
     }
 
-    @kotlin.jvm.Throws(JSONException :: class)
-    fun getUnsyncedOutcome() : JSONArray?
-    {
-        val allForms = getUnsycedAdjustedOutcomes_internal()
-        val jsonArray = JSONArray()
-        for (i in allForms)
-        {
-
-            jsonArray.put(i)
-
-        }
-
-        return jsonArray
-
-    }
-    /**************** EntryLog********************/
+    /**************** EntryLog ********************/
 
     @Query("SELECT * FROM " + TableContracts.EntryLogTable.TABLE_NAME + " WHERE "
             + TableContracts.EntryLogTable.COLUMN_SYNCED
             + " is \'\' OR synced is NULL ORDER BY  id ASC")
-    fun getUnsyncedEntryLog_internal() : List<EntryLog>
+    fun getUnsyncedEntryLog() : List<EntryLog>
 
-    @kotlin.jvm.Throws(JSONException :: class)
-    fun getUnsyncedEntryLog() : JSONArray?
-    {
-        val allForms = getUnsyncedEntryLog_internal()
-
-        val jsonArray = JSONArray()
-        for (i in allForms)
-        {
-
-            i.Hydrate(i)
-            jsonArray.put(i.toJSONObject())
-
-        }
-
-        return jsonArray
-
-    }
     /******************* DOWNLOAD DATA FUNCTIONS******************************************* */
 
     @Throws(JSONException ::class)
@@ -155,7 +85,6 @@ interface SyncFunctionsDao {
     @Query("DELETE FROM " + TableContracts.TableVillage.TABLE_NAME)
     fun deleteVillages()
 
-    //@Query("DELETE FROM " + TableContracts.TableVillage.TABLE_NAME)
     fun deleteVillagesTable() {
         DssRoomDatabase.dbInstance?.VillagesDao()?.let { villageDao ->
             val villagesList = villageDao.getAllVillages()
@@ -279,10 +208,8 @@ interface SyncFunctionsDao {
     @Insert
     fun insertHhsTable(hhs: Hhs) : Long
 
-
     @Query("DELETE FROM " + TableContracts.TableHHS.TABLE_NAME)
     fun deleteHhsTable()
-
 
     @RawQuery
     fun getUnsyncedDataUIds(query: SupportSQLiteQuery): List<String>

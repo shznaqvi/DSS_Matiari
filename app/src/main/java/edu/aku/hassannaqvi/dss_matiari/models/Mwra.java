@@ -215,10 +215,10 @@ public class Mwra extends BaseObservable implements Observable {
 
 
     // Save data in db
-    public static void saveMainDataFup(String uuid, String hdssId, String sNo, String regRound, SC sC) throws JSONException {
+    public static void saveMainDataFup(String uuid, String sNo, String round, SC sC) throws JSONException {
         MwraDao mwraDao = Objects.requireNonNull(DssRoomDatabase.getDbInstance()).mwraDao();
-        Mwra form = mwraDao.getMwraByUUId(uuid, hdssId, sNo, regRound);
-        if (form != null) {
+        Mwra form = mwraDao.getFollowupsBySno(uuid, sNo, round);
+        if (form != null && !form.getUid().equals("")) {
             mwra = form;
             mwra.setDeviceId(mwra.getDeviceId() + "_" + mwra.getDeviceId().substring(mwra.getDeviceId().length() - 1));
             int repeatCount = (mwra.getDeviceId().length() - 16) / 2;
