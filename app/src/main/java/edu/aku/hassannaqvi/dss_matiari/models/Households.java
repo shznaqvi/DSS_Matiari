@@ -484,6 +484,8 @@ public class Households extends BaseObservable implements Observable {
 
         public void updateFMData(int position){
             setRa08(MainApp.hhsList.get(position).getRa08());
+            setRa09(households.getHhNo());
+            setRa10(households.getHdssId());
             setRa12(MainApp.hhsList.get(position).getRa12());
             setRa17_a1(MainApp.hhsList.get(position).getRa17_a1().equals("null") ? "0" : MainApp.hhsList.get(position).getRa17_a1());
             setRa17_b1(MainApp.hhsList.get(position).getRa17_b1().equals("null") ? "0" : MainApp.hhsList.get(position).getRa17_b1());

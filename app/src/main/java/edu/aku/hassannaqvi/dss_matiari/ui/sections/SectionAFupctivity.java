@@ -45,8 +45,8 @@ public class SectionAFupctivity extends AppCompatActivity {
         db = MainApp.appInfo.dbHelper;
 
         // Init for for the first time
-        Households.initMeta();
-        sA = new Households.SA();
+        sA = Households.SA.getData();
+        sA = sA == null ? new Households.SA() : sA;
         bi.setHousehold(sA);
 
         initUI();
