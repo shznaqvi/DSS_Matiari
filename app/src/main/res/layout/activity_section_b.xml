@@ -262,7 +262,7 @@
                                 android:layout_width="0dp"
                                 android:layout_height="match_parent"
                                 android:layout_weight="1"
-                                android:text="@string/rc03a" />
+                                android:text="@string/rb03a" />
 
                             <TextView
                                 style="@style/quesNum"
@@ -279,7 +279,7 @@
                             android:layout_margin="8dp"
                             android:digits="0123456789"
                             android:enabled="true"
-                            android:hint="@string/rc03a"
+                            android:hint="@string/rb03a"
                             android:inputType="phone"
                             android:maxLength="11"
                             android:text="@={mwra.rb03a}" />
@@ -291,7 +291,7 @@
                             android:layout_margin="8dp"
                             android:digits="0123456789"
                             android:enabled="true"
-                            android:hint="@string/rc03a"
+                            android:hint="@string/rb03a"
                             android:inputType="phone"
                             android:maxLength="11"
                             android:tag="-1"
@@ -938,7 +938,7 @@
                                     android:layout_weight="1"
                                     android:checked='@{mwra.getRb18().equals("1")}'
                                     android:onClick='@{()->mwra.setRb18("1")}'
-                                    android:text="@string/ra16_a" />
+                                    android:text="@string/rb1801" />
 
                                 <RadioButton
                                     android:id="@+id/rb1802"
@@ -947,7 +947,7 @@
                                     android:layout_weight="1"
                                     android:checked='@{mwra.getRb18().equals("2")}'
                                     android:onClick='@{()->mwra.setRb18("2") + rb19.clearCheck() + rb26.clearCheck()}'
-                                    android:text="@string/ra16_b" />
+                                    android:text="@string/rb1802" />
                             </RadioGroup>
                         </LinearLayout>
                     </androidx.cardview.widget.CardView>
@@ -1072,7 +1072,7 @@
                                     android:layout_weight="1"
                                     android:checked='@{mwra.rb19.equals("1")}'
                                     android:onClick='@{()->mwra.setRb19("1") }'
-                                    android:text="@string/rc1101" />
+                                    android:text="@string/rb1701" />
 
                                 <RadioButton
                                     android:id="@+id/rb1902"
@@ -1081,7 +1081,7 @@
                                     android:layout_weight="1"
                                     android:checked='@{mwra.rb19.equals("2")}'
                                     android:onClick='@{()->mwra.setRb19("2")}'
-                                    android:text="@string/rc1102" />
+                                    android:text="@string/rb1702" />
 
                                 <RadioButton
                                     android:id="@+id/rb1903"
@@ -1090,7 +1090,7 @@
                                     android:layout_weight="1"
                                     android:checked='@{mwra.rb19.equals("3")}'
                                     android:onClick='@{()->mwra.setRb19("3")}'
-                                    android:text="@string/rc1103" />
+                                    android:text="@string/rb1703" />
                             </RadioGroup>
 
                         </LinearLayout>

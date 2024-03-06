@@ -25,44 +25,44 @@
     <string name="invalid_response" translatable="false"> Invalid Response </string>
 
     <!-- NEW STRUCT -->
-    <string name="network_error">No Internet!</string>
-    <string name="network_error_desc">Please check your internet connection and try again</string>
-    <string name="need_permission">Need Permission!</string>
-    <string name="need_permission_desc">The app needs permission to use this feature</string>
-    <string name="goto_settings">GOTO SETTINGS</string>
-    <string name="incorrect_device_date">APP DATE ERROR_Incorrect device date_%s_%s</string>
-    <string name="incorrect_device_date_desc">Your device date is\n%s\n\nServer date &amp; time is\n%s</string>
-    <string name="invalid_date">Invalid Date!</string>
-    <string name="date_error_popup_desc">Your device date is invalid! Adjust date &amp; time and try again.</string>
-    <string name="adjust_date">Adjust Date</string>
-    <string name="updated_version">Please download the updated version of the app\nVer. %s.%d</string>
-    <string name="download_data">Download Data</string>
-    <string name="upload_data">Upload Data</string>
-    <string name="upload_photos">Upload Photos</string>
-    <string name="sync_upload_duplicate">Duplicate photo</string>
-    <string name="sync_upload_success">Total: %d | Synced: %d | Duplicates: %d \n\nMessage: %s</string>
-    <string name="successful">Successful</string>
-    <string name="process_failed">Process Failed</string>
-    <string name="sync_error">Error: %s</string>
-    <string name="sync_download_success">Received: %d</string>
-    <string name="no_new_records_to_upload">No new records to upload</string>
-    <string name="status">Status: %s</string>
-    <string name="change_pass">Change Password</string>
-    <string name="change_pass_desc">Your new password must be different from previous password</string>
-    <string name="old_password">Old Password</string>
-    <string name="new_password">New Password</string>
-    <string name="confirm_password">Confirm Password</string>
-    <string name="username_pass_same">Username and Password cannot be same</string>
-    <string name="incorrect_old_password">Incorrect old password</string>
-    <string name="current_previous_password_cannot_same">Password cannot not be same as previous.</string>
-    <string name="password_creation_criteria">Password must have both alphabets and numbers</string>
-    <string name="secured_pass_not_generated">Secured password not generated</string>
-    <string name="password_reset_successful">Password has been reset successfully</string>
-    <string name="somethings_not_right">Something\'s not right. Please try again.</string>
-    <string name="field_empty_error">Input field cannot be empty</string>
-    <string name="invalid_password_new">Password must be >%d characters</string>
-    <string name="password_not_matched">Password did not match</string>
-    <string name="reset_password">Reset Password</string>
+    <string name="network_error" translatable="false">No Internet!</string>
+    <string name="network_error_desc" translatable="false">Please check your internet connection and try again</string>
+    <string name="need_permission" translatable="false">Need Permission!</string>
+    <string name="need_permission_desc" translatable="false">The app needs permission to use this feature</string>
+    <string name="goto_settings" translatable="false">GOTO SETTINGS</string>
+    <string name="incorrect_device_date" translatable="false">APP DATE ERROR_Incorrect device date_%s_%s</string>
+    <string name="incorrect_device_date_desc" translatable="false">Your device date is\n%s\n\nServer date &amp; time is\n%s</string>
+    <string name="invalid_date" translatable="false">Invalid Date!</string>
+    <string name="date_error_popup_desc" translatable="false">Your device date is invalid! Adjust date &amp; time and try again.</string>
+    <string name="adjust_date" translatable="false">Adjust Date</string>
+    <string name="updated_version" translatable="false">Please download the updated version of the app\nVer. %s.%d</string>
+    <string name="download_data" translatable="false">Download Data</string>
+    <string name="upload_data" translatable="false">Upload Data</string>
+    <string name="upload_photos" translatable="false">Upload Photos</string>
+    <string name="sync_upload_duplicate" translatable="false">Duplicate photo</string>
+    <string name="sync_upload_success" translatable="false">Total: %d | Synced: %d | Duplicates: %d \n\nMessage: %s</string>
+    <string name="successful" translatable="false">Successful</string>
+    <string name="process_failed" translatable="false">Process Failed</string>
+    <string name="sync_error" translatable="false">Error: %s</string>
+    <string name="sync_download_success" translatable="false">Received: %d</string>
+    <string name="no_new_records_to_upload" translatable="false">No new records to upload</string>
+    <string name="status" translatable="false">Status: %s</string>
+    <string name="change_pass" translatable="false">Change Password</string>
+    <string name="change_pass_desc" translatable="false">Your new password must be different from previous password</string>
+    <string name="old_password" translatable="false">Old Password</string>
+    <string name="new_password" translatable="false">New Password</string>
+    <string name="confirm_password" translatable="false">Confirm Password</string>
+    <string name="username_pass_same" translatable="false">Username and Password cannot be same</string>
+    <string name="incorrect_old_password" translatable="false">Incorrect old password</string>
+    <string name="current_previous_password_cannot_same" translatable="false">Password cannot not be same as previous.</string>
+    <string name="password_creation_criteria" translatable="false">Password must have both alphabets and numbers</string>
+    <string name="secured_pass_not_generated" translatable="false">Secured password not generated</string>
+    <string name="password_reset_successful" translatable="false">Password has been reset successfully</string>
+    <string name="somethings_not_right" translatable="false">Something\'s not right. Please try again.</string>
+    <string name="field_empty_error" translatable="false">Input field cannot be empty</string>
+    <string name="invalid_password_new" translatable="false">Password must be >%d characters</string>
+    <string name="password_not_matched" translatable="false">Password did not match</string>
+    <string name="reset_password" translatable="false">Reset Password</string>
 
     <string name="btnSync">Download Data</string>
     <string name="btnUpload">Upload Data</string>
@@ -149,6 +149,9 @@
     <string name="ra17_d1">Male</string>
     <string name="ra17_b2">Female</string>
     <string name="a17_c2">Female</string>
+    <string name="a17_1">Male</string>
+    <string name="a17_2">Female</string>
+    <string name="a17_3">Transgender</string>
     <string name="ra17_d2">Female</string>
     <string name="ra18">No. of Women aged 14 – 49 years</string>
     <string name="ra19">Household Visit Status</string>
@@ -162,16 +165,13 @@
     <string name="ra19d">Other (specify)</string>
 
     <!-- MWRA-->
-    <string name="rb_uc">Union council </string>
-    <string name="rb_vil">Village</string>
-    <string name="rb_hno">Household Number</string>
-    <string name="rb_sid">Structure ID</string>
-    <string name="rb_ufn">Unique Family Number</string>
+
     <string name="rb01">Unique WRA#</string>
     <string name="rb02">Name of Women</string>
     <string name="rb03">Husband/Father Name</string>
     <string name="rb03h">Husband Name</string>
     <string name="rb03f">Father Name</string>
+    <string name="rb03a">Contact Number</string>
     <string name="rb04">Date of Birth</string>
     <string name="rb04_info">DD/MM/YYYY Use 98/98/9998 if not known</string>
     <string name="rb05">Age in years</string>
@@ -188,6 +188,7 @@
     <string name="rb08_info">DD/MM/YYYY</string>
     <string name="rb09">EDD Date [auto-calculated]</string>
     <string name="rb09_info">DD/MM/YYYY</string>
+    <string name="rb10">Visit Status</string>
     <string name="rb1001">Available</string>
     <string name="rb1002">Temporary Migrated </string>
     <string name="rb1003">Refused </string>
@@ -211,16 +212,25 @@
     <string name="rb15_mis">Date of Miscarriage / Abortion</string>
     <string name="rb16">Pregnancy Outcome</string>
     <string name="rb16_info">DD/MM/YYYY</string>
-    <string name="rc1601" translatable="false">Live Birth</string>
+    <string name="rb1601">Live Birth</string>
     <string name="rb1602">Still Birth</string>
     <string name="rb1603">Abortion / Miscarriage</string>
     <string name="rb1604">False PW</string>
     <string name="rb1605">One Live and one Still Birth</string>
     <string name="rb17">Status of Unreported Pregnancy Outcome </string>
-    <string name="rb18">Have you delivered an alive baby in the past three months? </string>
-    <string name="rb18a">Have you delivered an alive baby during the duration from our last visit and today? </string>
+    <string name="rb1701">Single</string>
+    <string name="rb1702">Twins</string>
+    <string name="rb1703">Triplets</string>
+    <string name="rb18">Have you been pregnant in the past three months? </string>
+    <string name="rb1801">Yes</string>
+    <string name="rb1802">No</string>
+    <string name="rb18a">Have you been pregnant in the past three months? </string>
     <string name="rb19">Status of Unreported Pregnancy Outcome </string>
+    <string name="rb1901">Single</string>
+    <string name="rb1902">Twins</string>
+    <string name="rb1903">Triplets</string>
     <string name="rb20">Gestational Age (in weeks)</string>
+    <string name="rb21">Outcome Date for unreported Pregnancy</string>
     <string name="rb22">Name of Women (In NIC) </string>
     <string name="rb23">Husband/Father Name (In NIC) </string>
     <string name="rb23h">Husband Name (In NIC) </string>
@@ -236,65 +246,23 @@
     <string name="rb2603">Miscarriage </string>
     <string name="rb2605">1 Live birth and still birth </string>
 
-    <string name="rc01">Unique WRA#</string>
-    <string name="rc02">Name of Women</string>
-    <string name="rc03">Husband/Father Name</string>
-    <string name="rc03h">Husband / Father Name </string>
-    <string name="rc03f">Father Name</string>
-    <string name="rc03a">Contact  Number </string>
-    <string name="rb10">Visit Status</string>
-    <!--    <string name="rc0401">Complete</string>-->
 
-
-    <string name="rc06"> Current Marital Status</string>
-    <string name="rc0601">Married</string>
-    <string name="rc0602">Divorce</string>
-    <string name="rc0603">Widow</string>
-    <string name="rc0604">Unmarried</string>
-    <string name="rc0605">Separated </string>
-    <string name="rc07">Previous round Pregnancy Status</string>
-    <string name="rc0701">Pregnant</string>
-    <string name="rc0702">Not Pregnant</string>
-
-
-
-
-
-    <string name="rc1001">ها </string>
-    <string name="rc1002">نه </string>
-    <string name="rc1003">ڪوڙو حمل</string>
-
-    <string name="rc10_info">DD/MM/YYYY Use 98/98/9998 if not known</string>
-    <string name="rc11">Status of Pregnancy Outcome</string>
-    <string name="rc11_info">DD/MM/YYYY </string>
-    <string name="rc1101">Single</string>
-    <string name="rc1102">Twins</string>
-    <string name="rc1103">Triplets</string>
-
-    <string name="rc12">Gender</string>
-    <string name="rc12ln">Line Number</string>
-    <string name="rc12nm">Name</string>
-    <string name="rc12dob">Date of Birth</string>
-    <string name="rc1201">Male</string>
-    <string name="rc1202">Female</string>
-    <string name="rc1203">Transgender</string>
-
-
-    <string name="rc13">Current Child Status</string>
-    <string name="rc1301">Live</string>
-    <string name="rc1302">Death</string>
-    <string name="rc1303">ٽي ٻار</string>
-    <string name="rc14">Date of Death </string>
-    <string name="rc1401">مرد</string>
-    <string name="rc1402">عورت</string>
-    <string name="rc14_info">DD/MM/YYYY</string>
-    <string name="rc15">Current Pregnancy Status</string>
-    <string name="rc1501">Pregnant</string>
-    <string name="rc1502">Not Pregnant</string>
-    <string name="rc16">If pregnant enter LMP Date</string>
-    <string name="rc16_info">DD/MM/YYYY</string>
-    <string name="rc17">EDD Date [auto-calculated]</string>
-    <string name="rc17_info">DD/MM/YYYY</string>
+    <!-- OUTCOME-->
+    <string name="rc01a" translatable="false">Date of Follow-up</string>
+    <string name="rc01">Line Number</string>
+    <string name="rc02">Name</string>
+    <string name="rc03">Date of Birth</string>
+    <string name="rc04">Gender</string>
+    <string name="rc0401">Male</string>
+    <string name="rc0402">Female</string>
+    <string name="rc0403">Transgender</string>
+    <string name="rc05">Current Child Status</string>
+    <string name="rc0501">Live</string>
+    <string name="rc0502">Death</string>
+    <string name="rc06">Date of Death </string>
+    <string name="rc0601">مرد</string>
+    <string name="rc0602">عورت</string>
+    <string name="rc07">Suspected cause of Death </string>
 
     <string name='Q_a17_c' translatable="false">a17_c</string>
     <string name='Q_ra_lat' translatable="false">ra_lat</string>
@@ -406,25 +374,12 @@
     <string name="hlaz" translatable="false">HLAZ</string>
     <string name="waz" translatable="false">WAZ</string>
     <string name="whz" translatable="false">WHZ</string>
-    <string name="a17_1">Male</string>
-    <string name="a17_2">Female</string>
-    <string name="a17_3">Transgender</string>
     <string name="title_wra_dialog_remain" translatable="false">Proceed?</string>
     <string name="title_wra_dialog_complete" translatable="false">Add More?</string>
     <string name="message_wra_dialog_addmore" translatable="false">You have already entered %1$s women between 14 – 49. \n\nWould you like to add more women?</string>
     <string name="message_wra_dialog_proceeed" translatable="false">You have entered only %1$s of %2$s women between 14 – 49 in the household. \n\nAre you sure you want to close this household?</string>
-    <string name="ra16_a">Yes</string>
-    <string name="ra16_b">No</string>
-
-    <!--    <string name="rb03">marital status</string>
-        <string name="rb03_a">married</string>
-        <string name="rb03_b">divorbed</string>
-        <string name="rb03_c">widow</string>
-        <string name="rb03_d">unmarried</string>
-        <string name="rb05_info">don\'t know</string>-->
     <string name="language">Change Language</string>
     <string name="identification_mainheading">Identification Section</string>
-
 
     <string name="Q_ra22" translatable="false">RA22</string>
     <string name="rb09hint">Press button to calculate EDD &gt;&gt;&gt;</string>
@@ -432,7 +387,6 @@
     <string name="rb01a">Date of Enrollment</string>
     <string name="Q_rb01a" translatable="false">RB01A</string>
     <string name="Q_rc01a" translatable="false">RC01A</string>
-    <string name="rc01a">Date of Follow-up</string>
 
     <string name="signin">Sign In</string>
     <string name="btnLogin">Login</string>
@@ -446,12 +400,12 @@
     <string name="app_name_short">DSS Matiari</string>
     <string name="round_2">ROUND 6</string>
     <string name="select_team_leader">Select your team leader</string>
-    <string name="data_sync_activity">DATA SYNC ACTIVITY</string>
+    <string name="data_sync_activity" translatable="false">DATA SYNC ACTIVITY</string>
     <string name="go_back">Go Back</string>
     <string name="identification">Identification</string>
     <string name="section">Section</string>
     <string name="file_not_found">File not found</string>
-    <string name="updateFMData">Please Click Here to Update Family Members data</string>
+    <string name="updateFMData" translatable="false">Please Click Here to Update Family Members data</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="cancel">Cancel</string>
     <string name="ok">OK</string>

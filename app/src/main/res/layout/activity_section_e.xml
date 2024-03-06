@@ -66,7 +66,7 @@
                                 android:layout_width="0dp"
                                 android:layout_height="match_parent"
                                 android:layout_weight="1"
-                                android:text="@string/rc12ln" />
+                                android:text="@string/rc01" />
 
                             <TextView
                                 style="@style/quesNum"
@@ -85,7 +85,7 @@
                             android:layout_margin="8dp"
                             android:enabled="false"
                             android:gravity="center_vertical|center_horizontal"
-                            android:hint="@string/rc12ln"
+                            android:hint="@string/rc01"
                             android:inputType="number"
                             android:maxLength="1"
                             android:text="@={outcome.rc01}"
@@ -116,7 +116,7 @@
                                 android:layout_width="0dp"
                                 android:layout_height="match_parent"
                                 android:layout_weight="1"
-                                android:text="@string/rc12nm" />
+                                android:text="@string/rc02" />
 
 
                             <TextView
@@ -163,7 +163,7 @@
                                 android:layout_width="0dp"
                                 android:layout_height="match_parent"
                                 android:layout_weight="1"
-                                android:text="@string/rc12dob" />
+                                android:text="@string/rc03" />
 
 
                             <TextView
@@ -227,7 +227,7 @@
                                 android:layout_width="0dp"
                                 android:layout_height="match_parent"
                                 android:layout_weight="1"
-                                android:text="@string/rc12" />
+                                android:text="@string/rc04" />
 
                             <TextView
                                 style="@style/quesNum"
@@ -251,7 +251,7 @@
                                 android:layout_weight="1"
                                 android:checked='@{outcome.rc04.equals("1")}'
                                 android:onClick='@{()->outcome.setRc04("1")}'
-                                android:text="@string/rc1201" />
+                                android:text="@string/rc0401" />
 
                             <RadioButton
                                 android:id="@+id/rc0402"
@@ -260,7 +260,7 @@
                                 android:layout_weight="1"
                                 android:checked='@{outcome.rc04.equals("2")}'
                                 android:onClick='@{()->outcome.setRc04("2")}'
-                                android:text="@string/rc1202" />
+                                android:text="@string/rc0402" />
 
 
                             <RadioButton
@@ -270,7 +270,7 @@
                                 android:layout_weight="1"
                                 android:checked='@{outcome.rc04.equals("3")}'
                                 android:onClick='@{()->outcome.setRc04("3")}'
-                                android:text="@string/rc1203" />
+                                android:text="@string/rc0403" />
 
                         </RadioGroup>
 
@@ -299,7 +299,7 @@
                                 android:layout_width="0dp"
                                 android:layout_height="match_parent"
                                 android:layout_weight="1"
-                                android:text="@string/rc13" />
+                                android:text="@string/rc05" />
 
                             <TextView
                                 style="@style/quesNum"
@@ -323,7 +323,7 @@
                                 android:layout_weight="1"
                                 android:checked='@{outcome.rc05.equals("1")}'
                                 android:onClick='@{()->outcome.setRc05("1")}'
-                                android:text="@string/rc1301" />
+                                android:text="@string/rc0501" />
 
                             <RadioButton
                                 android:id="@+id/rc0502"
@@ -332,7 +332,7 @@
                                 android:layout_weight="1"
                                 android:checked='@{outcome.rc05.equals("2")}'
                                 android:onClick='@{()->outcome.setRc05("2")}'
-                                android:text="@string/rc1302" />
+                                android:text="@string/rc0502" />
 
                         </RadioGroup>
 
@@ -362,7 +362,7 @@
                                 android:layout_width="0dp"
                                 android:layout_height="match_parent"
                                 android:layout_weight="1"
-                                android:text="@string/rc14" />
+                                android:text="@string/rc06" />
 
                             <TextView
                                 style="@style/quesNum"
@@ -433,7 +433,7 @@
                                 android:layout_width="0dp"
                                 android:layout_height="match_parent"
                                 android:layout_weight="1"
-                                android:text="@string/rb13" />
+                                android:text="@string/rc07" />
 
                             <TextView
                                 style="@style/quesNum"
@@ -450,7 +450,7 @@
                             android:layout_margin="8dp"
                             android:digits="abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ ,.\/"
                             android:enabled="true"
-                            android:hint="@string/rb13"
+                            android:hint="@string/rc07"
                             android:inputType="text"
                             android:text="@={outcome.rc07}" />
                     </LinearLayout>

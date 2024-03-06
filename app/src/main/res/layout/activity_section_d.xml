@@ -69,7 +69,7 @@
                                 android:layout_width="0dp"
                                 android:layout_height="match_parent"
                                 android:layout_weight="1"
-                                android:text="@string/rc15" />
+                                android:text="@string/rb07" />
 
                             <TextView
                                 style="@style/quesNum"
@@ -93,7 +93,7 @@
                                 android:layout_weight="1"
                                 android:checked='@{followups.rb07.equals("1")}'
                                 android:onClick='@{()->followups.setRb07("1")}'
-                                android:text="@string/rc1501" />
+                                android:text="@string/rb0701" />
 
                             <RadioButton
                                 android:id="@+id/rb0702"
@@ -102,7 +102,7 @@
                                 android:layout_weight="1"
                                 android:checked='@{followups.rb07.equals("2")}'
                                 android:onClick='@{()->followups.setRb07("2") + rb24.clearCheck()}'
-                                android:text="@string/rc1502" />
+                                android:text="@string/rb0702" />
                         </RadioGroup>
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
@@ -129,7 +129,7 @@
                                 android:layout_width="0dp"
                                 android:layout_height="match_parent"
                                 android:layout_weight="1"
-                                android:text="@string/rc16" />
+                                android:text="@string/rb08" />
 
                             <TextView
                                 style="@style/quesNum"
@@ -176,13 +176,13 @@
                                 android:layout_width="0dp"
                                 android:layout_height="match_parent"
                                 android:layout_weight="1"
-                                android:text="@string/rc17" />
+                                android:text="@string/rb09" />
 
                             <TextView
                                 style="@style/quesNum"
                                 android:layout_width="wrap_content"
                                 android:layout_height="match_parent"
-                                android:text="@string/Q_rc09" />
+                                android:text="@string/Q_rb09" />
 
                         </LinearLayout>
 
