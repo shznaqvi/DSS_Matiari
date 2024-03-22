@@ -10,7 +10,6 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
@@ -25,9 +24,10 @@ import java.util.Objects;
 
 import edu.aku.hassannaqvi.dss_matiari.R;
 import edu.aku.hassannaqvi.dss_matiari.core.MainApp;
-import edu.aku.hassannaqvi.dss_matiari.databinding.ActivitySectionDBinding;
-import edu.aku.hassannaqvi.dss_matiari.models.Mwra;
 import edu.aku.hassannaqvi.dss_matiari.database.DssRoomDatabase;
+import edu.aku.hassannaqvi.dss_matiari.databinding.ActivitySectionDBinding;
+import edu.aku.hassannaqvi.dss_matiari.global.AppConstants;
+import edu.aku.hassannaqvi.dss_matiari.models.Mwra;
 
 
 public class SectionDActivity extends AppCompatActivity {
@@ -154,8 +154,12 @@ public class SectionDActivity extends AppCompatActivity {
             }
         }
         Mwra.SD.saveData(sD);
-        setResult(RESULT_OK);
-        finish();
+        if (mwra.getSC().getRb16().equals("3")) {
+            AppConstants.gotoActivity(this, SectionMActivity.class, true);
+        } else {
+            setResult(RESULT_OK);
+            finish();
+        }
     }
 
     public void btnEnd(View view) {

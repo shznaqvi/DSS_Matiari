@@ -354,6 +354,100 @@
     <string name='Q_rc16' translatable="false">rc16</string>
     <string name='Q_rc17' translatable="false">rc17</string>
 
+    <!--Abortion Checklist-->
+    <string name="section_m">Abortion Checklist</string>
+    <string name="m1">Date of visit</string>
+    <string name="m2">DSS ID</string>
+    <string name="m3">WRA Name</string>
+    <string name="m4">Ultrasound Date (if available)</string>
+    <string name="m5">Gestational age in ultrasound</string>
+    <string name="m6">Gestational Age at Abortion</string>
+    <string name="m7">LMP date</string>
+    <string name="m8">EDD date</string>
+    <string name="m9">Abortion Date (if available)</string>
+    <string name="m10">Blood test (Beta HCG)</string>
+    <string name="m1001">Yes</string>
+    <string name="m1002">No</string>
+    <string name="m11">Urine test done</string>
+    <string name="m1101">Yes</string>
+    <string name="m1102">No</string>
+    <string name="m12">Type of Abortion</string>
+    <string name="m1201">Induced</string>
+    <string name="m1202">Spontaneous</string>
+    <string name="m13">Did the mother experience vaginal bleeding?</string>
+    <string name="m1301">Heavy Bleeding with clots</string>
+    <string name="m1302">Light bleeding or spotting</string>
+    <string name="m14">Did the mother experience abdominal cramping or pain?</string>
+    <string name="m1401">Mild cramping</string>
+    <string name="m1402">Severe cramping like labor pains</string>
+    <string name="m15">Were there clots or bleeding passed from the vagina?</string>
+    <string name="m1501">Yes</string>
+    <string name="m1502">No</string>
+    <string name="m16">Did the bleeding and cramping result in the loss of the pregnancy (no fetus or baby was delivered alive)?</string>
+    <string name="m1601">Yes</string>
+    <string name="m1602">No</string>
+    <string name="m17">How long ago did the bleeding and cramping symptoms occur?</string>
+    <string name="m17t">Days</string>
+    <string name="m18">Based on the information provided, does this appear to be a confirmed spontaneous abortion?</string>
+    <string name="m1801">Yes</string>
+    <string name="m1802">No</string>
+    <string name="mt1">Induced Abortion</string>
+    <string name="m19">Indication for Induced Abortion</string>
+    <string name="m1901">Ectopic pregnancy</string>
+    <string name="m1902">Absence of fetal heartbeat</string>
+    <string name="m1996">Other</string>
+    <string name="m20">Was the induced abortion performed in a medical facility or at Home</string>
+    <string name="m2001">Medical facility</string>
+    <string name="m2002">Home</string>
+    <string name="m21">Did You visit any doctor for checkup?</string>
+    <string name="m2101">Yes</string>
+    <string name="m2102">No</string>
+    <string name="m22">Did you consume any medications or tablets as prescribed by a healthcare Professionals?</string>
+    <string name="m2201">Yes</string>
+    <string name="m2202">No</string>
+    <string name="m23">For how many days have you followed the healthcare professional’s prescription for taking medication or tablets?</string>
+    <string name="m23t">Days</string>
+    <string name="m24">Did you experience any complications or side effects from abortion?</string>
+    <string name="m2401">Yes</string>
+    <string name="m2402">No</string>
+    <string name="m25">Total number of Previous pregnancies outcomes excluding this abortion?</string>
+    <string name="m2501">Abortion</string>
+    <string name="m2502">Stillbirth</string>
+    <string name="m2503">Livebirth</string>
+    <string name="m26">Need further information or clinical exam</string>
+    <string name="m27">Filled By </string>
+    <string name="m28">Comments</string>
+
+
+    <string name='Q_m1' translatable="false">m1</string>
+    <string name='Q_m2' translatable="false">m2</string>
+    <string name='Q_m3' translatable="false">m3</string>
+    <string name='Q_m4' translatable="false">m4</string>
+    <string name='Q_m5' translatable="false">m5</string>
+    <string name='Q_m6' translatable="false">m6</string>
+    <string name='Q_m7' translatable="false">m7</string>
+    <string name='Q_m8' translatable="false">m8</string>
+    <string name='Q_m9' translatable="false">m9</string>
+    <string name='Q_m10' translatable="false">m10</string>
+    <string name='Q_m11' translatable="false">m11</string>
+    <string name='Q_m12' translatable="false">m12</string>
+    <string name='Q_m13' translatable="false">m13</string>
+    <string name='Q_m14' translatable="false">m14</string>
+    <string name='Q_m15' translatable="false">m15</string>
+    <string name='Q_m16' translatable="false">m16</string>
+    <string name='Q_m17' translatable="false">m17</string>
+    <string name='Q_m18' translatable="false">m18</string>
+    <string name='Q_m19' translatable="false">m19</string>
+    <string name='Q_m20' translatable="false">m20</string>
+    <string name='Q_m21' translatable="false">m21</string>
+    <string name='Q_m22' translatable="false">m22</string>
+    <string name='Q_m23' translatable="false">m23</string>
+    <string name='Q_m24' translatable="false">m24</string>
+    <string name='Q_m25' translatable="false">m25</string>
+    <string name='Q_m26' translatable="false">m26</string>
+    <string name='Q_m27' translatable="false">m27</string>
+    <string name='Q_m28' translatable="false">m28</string>
+
     <!--
     This string is used for square devices and overridden by hello_world in
     values-fRound/strings.xml for fRound devices.

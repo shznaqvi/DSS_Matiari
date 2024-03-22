@@ -12,7 +12,6 @@ import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import edu.aku.hassannaqvi.dss_matiari.database.dao.*
 import edu.aku.hassannaqvi.dss_matiari.models.*
-import edu.aku.hassannaqvi.dss_matiari.models.SyncModelNew
 import net.sqlcipher.database.SQLiteDatabase
 import net.sqlcipher.database.SupportFactory
 import java.lang.reflect.Type
@@ -23,43 +22,52 @@ import java.lang.reflect.Type
     exportSchema = false,
     entities = [
         edu.aku.hassannaqvi.dss_matiari.models.Households::class,
-        Mwra :: class,
+        Mwra::class,
         Users::class,
-        Villages ::class,
-        FollowUpsSche ::class,
-        MaxHhno ::class,
-        Outcome ::class,
-        Hhs ::class,
-        EntryLog ::class
+        Villages::class,
+        FollowUpsSche::class,
+        MaxHhno::class,
+        Outcome::class,
+        Hhs::class,
+        EntryLog::class,
+        AbortionCL::class
     ]
 )
 /* NEW STRUCT */
 @TypeConverters(
     SyncModelNew.ResponseDate.DataConverter::class,
-    Households.SA.DataConverter::class, Mwra.SB.DataConverter::class, Mwra.SC.DataConverter::class, Mwra.SD.DataConverter::class, Outcome.SE.DataConverter::class)
+    Households.SA.DataConverter::class,
+    Mwra.SB.DataConverter::class,
+    Mwra.SC.DataConverter::class,
+    Mwra.SD.DataConverter::class,
+    Outcome.SE.DataConverter::class,
+    AbortionCL.SM.DataConverter::class
+)
 
 abstract class DssRoomDatabase : RoomDatabase() {
 
     abstract fun householdsDao(): HouseholdsDao
-    abstract fun mwraDao() : MwraDao
+    abstract fun mwraDao(): MwraDao
     abstract fun usersDao(): UsersDao
     abstract fun VillagesDao(): VillagesDao
     abstract fun FollowUpsScheDao(): FollowUpsScheDao
-    abstract fun MaxHHNoDao() : MaxHHNoDao
-    abstract fun OutcomeDao() : OutcomeDao
-    abstract fun syncFunctionsDao() : SyncFunctionsDao
-    abstract fun HhsDao() : HhsDao
-    abstract fun EntryLogDao() : EntryLogDao
+    abstract fun MaxHHNoDao(): MaxHHNoDao
+    abstract fun OutcomeDao(): OutcomeDao
+    abstract fun syncFunctionsDao(): SyncFunctionsDao
+    abstract fun HhsDao(): HhsDao
+    abstract fun EntryLogDao(): EntryLogDao
+    abstract fun abortionCLDao(): AbortionCLDao
 
     /* NEW STRUCT *//*
     abstract fun GeneralDao() : GeneralDao
 */
     companion object {
-        const val DATABASE_VERSION = 12
+        const val DATABASE_VERSION = 13
         const val DATABASE_NAME = "HDSS_MATIARI1.db"
         const val DATABASE_COPY = "HDSS_MATIARI1_copy.db"
 
-        @Volatile @JvmStatic
+        @Volatile
+        @JvmStatic
         var dbInstance: DssRoomDatabase? = null
 
         @JvmStatic
@@ -77,6 +85,7 @@ abstract class DssRoomDatabase : RoomDatabase() {
                     .addMigrations(MIGRATION_5_6)
                     .addMigrations(MIGRATION_6_7)
                     .addMigrations(MIGRATION_7_12)
+                    .addMigrations(MIGRATION_12_13)
 //                    .fallbackToDestructiveMigration()
                     .allowMainThreadQueries()
                     .build()
@@ -147,6 +156,13 @@ abstract class DssRoomDatabase : RoomDatabase() {
                 database.execSQL("CREATE TABLE IF NOT EXISTS `users` (`_id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL DEFAULT 0, `username` TEXT DEFAULT '' NOT NULL, `password` TEXT NOT NULL, `passwordEnc` TEXT NOT NULL, `fullname` TEXT NOT NULL, `enabled` TEXT NOT NULL, `newUser` TEXT NOT NULL, `designation` TEXT NOT NULL)")
                 database.execSQL("CREATE TABLE IF NOT EXISTS `EntryLog` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `uid` TEXT, `projectName` TEXT, `uuid` TEXT, `userName` TEXT, `sysDate` TEXT, `entryDate` TEXT, `hhid` TEXT, `appver` TEXT, `iStatus` TEXT, `entryType` TEXT, `deviceId` TEXT, `synced` TEXT, `syncDate` TEXT, `isError` INTEGER NOT NULL DEFAULT 0)")
 
+            }
+        }
+
+
+        private val MIGRATION_12_13 = object : Migration(12, 13) {
+            override fun migrate(database: SupportSQLiteDatabase) {
+                database.execSQL("CREATE TABLE IF NOT EXISTS `abortionCL` (`round` TEXT, `isError` INTEGER NOT NULL DEFAULT 0, `regRound` TEXT, `projectName` TEXT, `id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `uid` TEXT, `wid` TEXT, `sNo` TEXT, `userName` TEXT, `sysDate` TEXT, `hdssId` TEXT, `ucCode` TEXT, `villageCode` TEXT, `hhNo` TEXT, `visitNo` TEXT, `deviceId` TEXT, `appver` TEXT, `iStatus` TEXT, `synced` TEXT, `sM` TEXT)")
             }
         }
     }

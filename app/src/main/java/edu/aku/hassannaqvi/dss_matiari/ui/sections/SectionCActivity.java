@@ -31,10 +31,11 @@ import java.util.Objects;
 
 import edu.aku.hassannaqvi.dss_matiari.R;
 import edu.aku.hassannaqvi.dss_matiari.core.MainApp;
+import edu.aku.hassannaqvi.dss_matiari.database.DssRoomDatabase;
 import edu.aku.hassannaqvi.dss_matiari.databinding.ActivitySectionCBinding;
+import edu.aku.hassannaqvi.dss_matiari.global.AppConstants;
 import edu.aku.hassannaqvi.dss_matiari.global.DateUtils;
 import edu.aku.hassannaqvi.dss_matiari.models.Mwra;
-import edu.aku.hassannaqvi.dss_matiari.database.DssRoomDatabase;
 
 public class SectionCActivity extends AppCompatActivity {
 
@@ -254,20 +255,18 @@ public class SectionCActivity extends AppCompatActivity {
             }
         });
 
-        bi.rb2605.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (isChecked) {
-                    bi.rb1901.setEnabled(false);
-                    bi.rb1901.setChecked(false);
-                    bi.rb1903.setEnabled(false);
-                    bi.rb1903.setChecked(false);
-                    bi.rb1902.setEnabled(true);
-                } else {
-                    bi.rb1901.setEnabled(true);
-                    bi.rb1903.setEnabled(true);
-                    bi.rb1902.setEnabled(true);
-                }
+        bi.rb26.setOnCheckedChangeListener((radioGroup, checkedId) -> {
+            bi.rb1901.setEnabled(true);
+            bi.rb1903.setEnabled(true);
+            bi.rb1902.setEnabled(true);
+            if (checkedId == bi.rb2605.getId()) {
+                bi.rb1901.setEnabled(false);
+                bi.rb1901.setChecked(false);
+                bi.rb1903.setEnabled(false);
+                bi.rb1903.setChecked(false);
+                bi.rb1902.setEnabled(true);
+            } else if (checkedId == bi.rb2603.getId()) {
+                bi.rb20.setMaxvalue(27);
             }
         });
     }
@@ -366,11 +365,22 @@ public class SectionCActivity extends AppCompatActivity {
                         } else {
                             MainApp.prevChildCount = 0;
                         }
-                        Intent forwardIntent = new Intent(this, SectionEActivity.class).putExtra("complete", true);
+                        /*Intent forwardIntent = new Intent(this, SectionEActivity.class).putExtra("complete", true);
                         forwardIntent.setFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT);
                         setResult(RESULT_OK, forwardIntent);
-                        startActivity(forwardIntent);
-
+                        startActivity(forwardIntent);*/
+                        if (bi.rb2601.isChecked() || bi.rb2605.isChecked()) {
+                            Intent forwardIntent = new Intent(this, SectionEActivity.class).putExtra("complete", true);
+                            forwardIntent.setFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT);
+                            setResult(RESULT_OK, forwardIntent);
+                            finish();
+                            startActivity(forwardIntent);
+                        } else if (bi.rb2603.isChecked()) {
+                            AppConstants.gotoActivity(this, SectionMActivity.class, true);
+                        } else {
+                            setResult(RESULT_OK);
+                            finish();
+                        }
                     } else if (fpMwra.getRb07().equals("2") && bi.rb1802.isChecked()) {
                         Intent forwardIntent = new Intent(this, SectionDActivity.class).putExtra("complete", true);
                         forwardIntent.setFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT);

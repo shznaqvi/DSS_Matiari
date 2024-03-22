@@ -3,17 +3,18 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Android Projects/DSS_Matiari/app/src/main/res/layout/activity_ending.xml" value="0.2734375" />
-        <entry key="..\:/Android Projects/DSS_Matiari/app/src/main/res/layout/activity_section_a.xml" value="0.2325" />
-        <entry key="..\:/Android Projects/DSS_Matiari/app/src/main/res/layout/activity_section_b.xml" value="0.2734375" />
-        <entry key="..\:/Android Projects/DSS_Matiari/app/src/main/res/layout/activity_section_c.xml" value="0.2734375" />
-        <entry key="..\:/Android Projects/DSS_Matiari/app/src/main/res/layout/activity_section_d.xml" value="0.2825" />
-        <entry key="..\:/Android Projects/DSS_Matiari/app/src/main/res/layout/activity_section_e.xml" value="0.2825" />
-        <entry key="..\:/Android Projects/DSS_Matiari/app/src/main/res/layout/activity_section_f.xml" value="0.2825" />
+        <entry key="..\:/Android Office Work/DSS_Matiari/app/src/main/res/layout/activity_mwra.xml" value="0.371875" />
+        <entry key="..\:/Android Office Work/DSS_Matiari/app/src/main/res/layout/activity_section_a.xml" value="0.371875" />
+        <entry key="..\:/Android Office Work/DSS_Matiari/app/src/main/res/layout/activity_section_b.xml" value="0.16083333333333333" />
+        <entry key="..\:/Android Office Work/DSS_Matiari/app/src/main/res/layout/activity_section_c.xml" value="0.2" />
+        <entry key="..\:/Android Office Work/DSS_Matiari/app/src/main/res/layout/activity_section_d.xml" value="0.16083333333333333" />
+        <entry key="..\:/Android Office Work/DSS_Matiari/app/src/main/res/layout/activity_section_e.xml" value="0.16083333333333333" />
+        <entry key="..\:/Android Office Work/DSS_Matiari/app/src/main/res/layout/activity_section_f.xml" value="0.2" />
+        <entry key="..\:/Android Office Work/DSS_Matiari/app/src/main/res/layout/activity_section_m.xml" value="0.16083333333333333" />
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_16" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">

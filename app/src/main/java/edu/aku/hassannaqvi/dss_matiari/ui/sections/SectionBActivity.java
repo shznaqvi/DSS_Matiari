@@ -31,10 +31,11 @@ import java.util.concurrent.TimeUnit;
 
 import edu.aku.hassannaqvi.dss_matiari.R;
 import edu.aku.hassannaqvi.dss_matiari.core.MainApp;
+import edu.aku.hassannaqvi.dss_matiari.database.DssRoomDatabase;
 import edu.aku.hassannaqvi.dss_matiari.databinding.ActivitySectionBBinding;
+import edu.aku.hassannaqvi.dss_matiari.global.AppConstants;
 import edu.aku.hassannaqvi.dss_matiari.global.DateUtils;
 import edu.aku.hassannaqvi.dss_matiari.models.Mwra;
-import edu.aku.hassannaqvi.dss_matiari.database.DssRoomDatabase;
 
 public class SectionBActivity extends AppCompatActivity {
 
@@ -65,7 +66,7 @@ public class SectionBActivity extends AppCompatActivity {
 
     }
 
-    public void initUI(){
+    public void initUI() {
 
         String date = DateUtils.changeDateFormat("2023-01-01");
         bi.rb01a.setMinDate(date);
@@ -281,11 +282,18 @@ public class SectionBActivity extends AppCompatActivity {
         }
 
         if (bi.rb1801.isChecked()) {
-            Intent forwardIntent = new Intent(this, SectionEActivity.class).putExtra("complete", true);
-            forwardIntent.setFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT);
-            setResult(RESULT_OK, forwardIntent);
-            finish();
-            startActivity(forwardIntent);
+            if (bi.rb2601.isChecked() || bi.rb2605.isChecked()) {
+                Intent forwardIntent = new Intent(this, SectionEActivity.class).putExtra("complete", true);
+                forwardIntent.setFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT);
+                setResult(RESULT_OK, forwardIntent);
+                finish();
+                startActivity(forwardIntent);
+            } else if (bi.rb2603.isChecked()) {
+                AppConstants.gotoActivity(this, SectionMActivity.class, true);
+            } else {
+                setResult(RESULT_OK);
+                finish();
+            }
         } else {
             setResult(RESULT_OK);
             finish();
@@ -305,7 +313,7 @@ public class SectionBActivity extends AppCompatActivity {
         return Validator.emptyCheckingContainer(this, bi.GrpName);
 
     }
-    
+
     @Override
     protected void onResume() {
         super.onResume();

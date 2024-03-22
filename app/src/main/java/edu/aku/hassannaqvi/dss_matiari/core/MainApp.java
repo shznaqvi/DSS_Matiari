@@ -34,15 +34,16 @@ import java.util.List;
 
 import edu.aku.hassannaqvi.dss_matiari.BuildConfig;
 import edu.aku.hassannaqvi.dss_matiari.R;
+import edu.aku.hassannaqvi.dss_matiari.database.DssRoomDatabase;
+import edu.aku.hassannaqvi.dss_matiari.global.AppConstants;
+import edu.aku.hassannaqvi.dss_matiari.models.AbortionCL;
+import edu.aku.hassannaqvi.dss_matiari.models.AppInfoNew;
 import edu.aku.hassannaqvi.dss_matiari.models.FollowUpsSche;
 import edu.aku.hassannaqvi.dss_matiari.models.Hhs;
 import edu.aku.hassannaqvi.dss_matiari.models.Households;
 import edu.aku.hassannaqvi.dss_matiari.models.Mwra;
 import edu.aku.hassannaqvi.dss_matiari.models.Outcome;
 import edu.aku.hassannaqvi.dss_matiari.models.Users;
-import edu.aku.hassannaqvi.dss_matiari.global.AppConstants;
-import edu.aku.hassannaqvi.dss_matiari.models.AppInfoNew;
-import edu.aku.hassannaqvi.dss_matiari.database.DssRoomDatabase;
 import edu.aku.hassannaqvi.dss_matiari.ui.LockActivity;
 
 
@@ -77,6 +78,7 @@ public class MainApp extends Application {
     public static File sdDir;
     public static String[] downloadData;
     public static Households households;
+    public static AbortionCL abortionCL;
     public static Mwra mwra;
     public static String DeviceURL = "devices.php";
     public static AppInfo appInfo;

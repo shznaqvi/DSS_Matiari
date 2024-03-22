@@ -50,10 +50,13 @@
             android:theme="@style/AppThemeEnglish1"
             android:windowSoftInputMode="adjustResize|stateHidden" />
         <activity
+            android:name=".ui.sections.SectionMActivity"
+            android:theme="@style/AppThemeEnglish1"
+            android:windowSoftInputMode="adjustResize|stateHidden" />
+        <activity
             android:name=".ui.lists.FPMwraActivity"
             android:exported="true" />
-        <activity
-            android:name=".ui.lists.FPHouseholdActivity" />
+        <activity android:name=".ui.lists.FPHouseholdActivity" />
         <activity android:name=".ui.lists.MwraActivity" />
         <activity android:name=".ui.lists.HouseholdActivity" />
         <activity android:name=".ui.lists.FormsReportCluster" />
@@ -77,22 +80,20 @@
             android:name=".ui.LoginActivity"
             android:theme="@style/AppThemeEnglish1"
             android:windowSoftInputMode="adjustResize|stateHidden">
-            <!--            <intent-filter>-->
-            <!--                <action android:name="android.intent.action.MAIN" />-->
 
-            <!--                <category android:name="android.intent.category.LAUNCHER" />-->
-            <!--            </intent-filter>-->
-        </activity>
+            <!-- <intent-filter> -->
+            <!-- <action android:name="android.intent.action.MAIN" /> -->
 
-        <!-- NEW STRUCT -->
+
+            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
+            <!-- </intent-filter> -->
+        </activity> <!-- NEW STRUCT -->
         <activity
             android:name=".ui.SyncNewAC"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
-
         <activity
             android:name=".ui.LockActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
-
         <activity
             android:name=".ui.ChangePassNewAC"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
