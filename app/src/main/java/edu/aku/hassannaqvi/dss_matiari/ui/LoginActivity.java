@@ -66,11 +66,11 @@ import edu.aku.hassannaqvi.dss_matiari.R;
 import edu.aku.hassannaqvi.dss_matiari.core.AlertPopup;
 import edu.aku.hassannaqvi.dss_matiari.core.AppInfo;
 import edu.aku.hassannaqvi.dss_matiari.core.MainApp;
+import edu.aku.hassannaqvi.dss_matiari.database.DssRoomDatabase;
 import edu.aku.hassannaqvi.dss_matiari.databinding.ActivityLoginBinding;
+import edu.aku.hassannaqvi.dss_matiari.global.AppConstants;
 import edu.aku.hassannaqvi.dss_matiari.models.EntryLog;
 import edu.aku.hassannaqvi.dss_matiari.models.Users;
-import edu.aku.hassannaqvi.dss_matiari.global.AppConstants;
-import edu.aku.hassannaqvi.dss_matiari.database.DssRoomDatabase;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -254,6 +254,17 @@ public class LoginActivity extends AppCompatActivity {
         dbBackup(this);
         //   populateSpinner();
 
+        initUI();
+
+    }
+
+    private void initUI() {
+
+        // For Admin
+        if (AppConstants.IS_ADMIN) {
+            bi.username.setText(AppConstants.TEST_USERNAME);
+            bi.password.setText(AppConstants.TEST_PASSWORD);
+        }
     }
 
     public void onShowPasswordClick(View view) {

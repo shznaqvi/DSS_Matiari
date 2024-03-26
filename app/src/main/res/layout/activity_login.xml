@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
@@ -75,7 +74,6 @@
                 android:background="@drawable/bg_rounded_app_color_bordered">
 
                 <EditText
-                    android:text="test0002"
                     android:id="@+id/username"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/_30sdp"
@@ -126,7 +124,6 @@
                     android:paddingStart="@dimen/_12sdp"
                     android:paddingEnd="@dimen/_12sdp"
                     android:singleLine="true"
-                    android:text="Test0002"
                     android:textColor="@color/black"
                     android:textSize="@dimen/_9ssp" />
 

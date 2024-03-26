@@ -12,7 +12,6 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
-import android.widget.CompoundButton;
 import android.widget.RadioGroup;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -33,7 +32,6 @@ import edu.aku.hassannaqvi.dss_matiari.R;
 import edu.aku.hassannaqvi.dss_matiari.core.MainApp;
 import edu.aku.hassannaqvi.dss_matiari.database.DssRoomDatabase;
 import edu.aku.hassannaqvi.dss_matiari.databinding.ActivitySectionBBinding;
-import edu.aku.hassannaqvi.dss_matiari.global.AppConstants;
 import edu.aku.hassannaqvi.dss_matiari.global.DateUtils;
 import edu.aku.hassannaqvi.dss_matiari.models.Mwra;
 
@@ -148,20 +146,21 @@ public class SectionBActivity extends AppCompatActivity {
             }
         });
 
-        bi.rb2605.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (isChecked) {
-                    bi.rb1901.setEnabled(false);
-                    bi.rb1901.setChecked(false);
-                    bi.rb1903.setEnabled(false);
-                    bi.rb1903.setChecked(false);
-                    bi.rb1902.setEnabled(true);
-                } else {
-                    bi.rb1901.setEnabled(true);
-                    bi.rb1903.setEnabled(true);
-                    bi.rb1902.setEnabled(true);
-                }
+        bi.rb26.setOnCheckedChangeListener((radioGroup, checkedId) -> {
+            bi.rb21a.setText(R.string.rb15);
+            bi.rb1901.setEnabled(true);
+            bi.rb1903.setEnabled(true);
+            bi.rb1902.setEnabled(true);
+            if (checkedId == bi.rb2605.getId()) {
+                bi.rb1901.setEnabled(false);
+                bi.rb1901.setChecked(false);
+                bi.rb1903.setEnabled(false);
+                bi.rb1903.setChecked(false);
+                bi.rb1902.setEnabled(true);
+            } else if (checkedId == bi.rb2603.getId()) {
+                bi.rb20.setMaxvalue(27);
+                bi.rb20.setMinvalue(3);
+                bi.rb21a.setText(R.string.rb15_mis);
             }
         });
 
@@ -289,7 +288,9 @@ public class SectionBActivity extends AppCompatActivity {
                 finish();
                 startActivity(forwardIntent);
             } else if (bi.rb2603.isChecked()) {
-                AppConstants.gotoActivity(this, SectionMActivity.class, true);
+                finish();
+                startActivity(new Intent(this, SectionMActivity.class).putExtra("isSB", true));
+//                AppConstants.gotoActivity(this, SectionMActivity.class, true);
             } else {
                 setResult(RESULT_OK);
                 finish();

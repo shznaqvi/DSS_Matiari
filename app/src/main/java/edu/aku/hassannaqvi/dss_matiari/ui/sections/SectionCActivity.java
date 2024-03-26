@@ -256,6 +256,7 @@ public class SectionCActivity extends AppCompatActivity {
         });
 
         bi.rb26.setOnCheckedChangeListener((radioGroup, checkedId) -> {
+            bi.rb21a.setText(R.string.rb15);
             bi.rb1901.setEnabled(true);
             bi.rb1903.setEnabled(true);
             bi.rb1902.setEnabled(true);
@@ -267,6 +268,8 @@ public class SectionCActivity extends AppCompatActivity {
                 bi.rb1902.setEnabled(true);
             } else if (checkedId == bi.rb2603.getId()) {
                 bi.rb20.setMaxvalue(27);
+                bi.rb20.setMinvalue(3);
+                bi.rb21a.setText(R.string.rb15_mis);
             }
         });
     }

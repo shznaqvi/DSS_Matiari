@@ -51,8 +51,15 @@ public class SectionMActivity extends AppCompatActivity {
     private void initUI() {
         bi.m2.setText(mwra.getHdssId());
         sM.setM2(mwra.getHdssId());
-        bi.m3.setText(mwra.getSC().getRb02());
-        sM.setM3(mwra.getSC().getRb02());
+
+        boolean isSB = getIntent().getBooleanExtra("isSB", false);
+        if (isSB) {
+            bi.m3.setText(mwra.getSB().getRb02());
+            sM.setM3(mwra.getSB().getRb02());
+        } else {
+            bi.m3.setText(mwra.getSC().getRb02());
+            sM.setM3(mwra.getSC().getRb02());
+        }
     }
 
     public void m1OnTextChanged(CharSequence s, int start, int before, int count) {
