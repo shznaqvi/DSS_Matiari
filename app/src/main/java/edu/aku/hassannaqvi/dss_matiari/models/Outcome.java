@@ -1,10 +1,6 @@
 package edu.aku.hassannaqvi.dss_matiari.models;
 
-import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.childCount;
-import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.mwra;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.outcome;
-
-import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.databinding.BaseObservable;
@@ -21,7 +17,6 @@ import com.google.gson.reflect.TypeToken;
 
 import org.apache.commons.lang3.StringUtils;
 import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.time.LocalDate;
 import java.util.Objects;
@@ -30,7 +25,6 @@ import edu.aku.hassannaqvi.dss_matiari.BR;
 import edu.aku.hassannaqvi.dss_matiari.contracts.TableContracts;
 import edu.aku.hassannaqvi.dss_matiari.core.MainApp;
 import edu.aku.hassannaqvi.dss_matiari.database.DssRoomDatabase;
-import edu.aku.hassannaqvi.dss_matiari.database.dao.MwraDao;
 import edu.aku.hassannaqvi.dss_matiari.database.dao.OutcomeDao;
 import edu.aku.hassannaqvi.dss_matiari.global.AppConstants;
 
@@ -44,7 +38,7 @@ public class Outcome extends BaseObservable implements Observable {
     @Ignore
     private transient final LocalDate localDate = null;
     @Ignore
-    private transient PropertyChangeRegistry propertyChangeRegistry = new PropertyChangeRegistry();
+    private final transient PropertyChangeRegistry propertyChangeRegistry = new PropertyChangeRegistry();
     @Ignore
     private transient boolean exist = false;
     @Ignore
@@ -147,7 +141,7 @@ public class Outcome extends BaseObservable implements Observable {
     public static void populateMeta() {
         MainApp.outcome.setUuid(MainApp.mwra.getUid());
         MainApp.outcome.setMuid(MainApp.mwra.getUid().split("_")[0]);
-        MainApp.outcome.setMsno(MainApp.mwra.getSC().getRb01());
+        MainApp.outcome.setMsno(MainApp.idType == 1 ? MainApp.mwra.getSB().getRb01() : MainApp.mwra.getSC().getRb01());
         MainApp.outcome.setSysDate(MainApp.mwra.getSysDate());
 
         MainApp.outcome.setRound(MainApp.mwra.getRound());
@@ -444,7 +438,7 @@ public class Outcome extends BaseObservable implements Observable {
     }
 
 
-    public static class SE extends BaseObservable{
+    public static class SE extends BaseObservable {
 
         private String rb02 = StringUtils.EMPTY;
         @SerializedName("rc01a")
@@ -477,12 +471,12 @@ public class Outcome extends BaseObservable implements Observable {
             }
         }
 
-        public void populateMeta(){
-            setRb02(MainApp.mwra.getSC().getRb02());
-            setRb01a(MainApp.mwra.getSC().getRb01a());
+        public void populateMeta() {
+            setRb02(MainApp.idType == 1 ? MainApp.mwra.getSB().getRb02() : MainApp.mwra.getSC().getRb02());
+            setRb01a(MainApp.idType == 1 ? MainApp.mwra.getSB().getRb01a() : MainApp.mwra.getSC().getRb01a());
         }
 
-        public void populateMetaFollowups(){
+        public void populateMetaFollowups() {
             setRc01(MainApp.fpMwra.getRb01());  // Line number of child
             setRc02(MainApp.fpMwra.getRb02());  // Name of child
             setRb02(MainApp.fpMwra.getRb03());  // Name of mother
@@ -702,9 +696,4 @@ public class Outcome extends BaseObservable implements Observable {
     }*/
 
 
-
-
-
-
-
- }
+}

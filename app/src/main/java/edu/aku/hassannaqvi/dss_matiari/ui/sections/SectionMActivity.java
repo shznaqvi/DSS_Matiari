@@ -56,9 +56,13 @@ public class SectionMActivity extends AppCompatActivity {
         if (isSB) {
             bi.m3.setText(mwra.getSB().getRb02());
             sM.setM3(mwra.getSB().getRb02());
+            bi.m9.setText(mwra.getSB().getRb21());
+            sM.setM9(mwra.getSB().getRb21());
         } else {
             bi.m3.setText(mwra.getSC().getRb02());
             sM.setM3(mwra.getSC().getRb02());
+            bi.m9.setText(mwra.getSC().getRb15());
+            sM.setM9(mwra.getSC().getRb15());
         }
     }
 

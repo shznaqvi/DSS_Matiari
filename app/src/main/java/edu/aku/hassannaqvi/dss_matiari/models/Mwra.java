@@ -2,7 +2,6 @@ package edu.aku.hassannaqvi.dss_matiari.models;
 
 import static java.util.concurrent.TimeUnit.MILLISECONDS;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.PROJECT_NAME;
-import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.fpMwra;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.households;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.mwra;
 
@@ -31,9 +30,9 @@ import java.util.Objects;
 import edu.aku.hassannaqvi.dss_matiari.BR;
 import edu.aku.hassannaqvi.dss_matiari.contracts.TableContracts.MWRATable;
 import edu.aku.hassannaqvi.dss_matiari.core.MainApp;
-import edu.aku.hassannaqvi.dss_matiari.global.AppConstants;
 import edu.aku.hassannaqvi.dss_matiari.database.DssRoomDatabase;
 import edu.aku.hassannaqvi.dss_matiari.database.dao.MwraDao;
+import edu.aku.hassannaqvi.dss_matiari.global.AppConstants;
 
 @Entity(tableName = MWRATable.TABLE_NAME)
 public class Mwra extends BaseObservable implements Observable {
@@ -491,7 +490,7 @@ public class Mwra extends BaseObservable implements Observable {
         private String rb24 = StringUtils.EMPTY;
         private String rb25 = StringUtils.EMPTY;
         private String rb26 = StringUtils.EMPTY;
-        private String pregnum = StringUtils.EMPTY;
+        private final String pregnum = StringUtils.EMPTY;
 
         private transient long ageInMonths;
 
@@ -749,7 +748,7 @@ public class Mwra extends BaseObservable implements Observable {
 
         public void setRb26(String rb26) {
             this.rb26 = rb26;
-            setRb19(rb26.equals("1") || rb26.equals("5") ? this.rb19 : "");
+            setRb19(rb26.equals("1") || rb26.equals("2") || rb26.equals("5") ? this.rb19 : "");
             notifyPropertyChanged(BR.rb26);
         }
 
@@ -837,6 +836,9 @@ public class Mwra extends BaseObservable implements Observable {
         private String rb20 = StringUtils.EMPTY;
         private String rb21 = StringUtils.EMPTY;
         private String rb26 = StringUtils.EMPTY;
+        private String rb27 = StringUtils.EMPTY;
+        private String rb28 = StringUtils.EMPTY;
+        private String rb29 = StringUtils.EMPTY;
         private transient long ageInMonths;
 
         // Save section object as json object in db
@@ -1039,6 +1041,7 @@ public class Mwra extends BaseObservable implements Observable {
             this.rb11 = rb11;
             setRb12(rb11.equals("1") ? this.rb12 : "");
             setRb13(rb11.equals("1") ? this.rb13 : "");
+            setRb27(rb11.equals("1") ? this.rb27 : "");
 
             notifyPropertyChanged(BR.rb11);
         }
@@ -1118,6 +1121,7 @@ public class Mwra extends BaseObservable implements Observable {
             setRb20(rb18.equals("1") ? this.rb20 : "");
             setRb21(rb18.equals("1") ? this.rb21 : "");
             setRb26(rb18.equals("1") ? this.rb26 : "");
+            setRb29(rb18.equals("1") ? this.rb29 : "");
             notifyPropertyChanged(BR.rb18);
         }
 
@@ -1160,6 +1164,36 @@ public class Mwra extends BaseObservable implements Observable {
             this.rb26 = rb26;
             setRb19(rb26.equals("1") || rb26.equals("5") ? this.rb19 : "");
             notifyPropertyChanged(BR.rb26);
+        }
+
+        @Bindable
+        public String getRb27() {
+            return rb27;
+        }
+
+        public void setRb27(String rb27) {
+            this.rb27 = rb27;
+            notifyPropertyChanged(BR.rb27);
+        }
+
+        @Bindable
+        public String getRb28() {
+            return rb28;
+        }
+
+        public void setRb28(String rb28) {
+            this.rb28 = rb28;
+            notifyPropertyChanged(BR.rb28);
+        }
+
+        @Bindable
+        public String getRb29() {
+            return rb29;
+        }
+
+        public void setRb29(String rb29) {
+            this.rb29 = rb29;
+            notifyPropertyChanged(BR.rb29);
         }
 
         private void CaluculateAge() {

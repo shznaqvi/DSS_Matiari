@@ -367,6 +367,7 @@ public class AbortionCL {
         private String m2 = StringUtils.EMPTY;
         private String m3 = StringUtils.EMPTY;
         private String m4 = StringUtils.EMPTY;
+        private String m497 = StringUtils.EMPTY;
         private String m5 = StringUtils.EMPTY;
         private String m6 = StringUtils.EMPTY;
         private String m7 = StringUtils.EMPTY;
@@ -380,6 +381,7 @@ public class AbortionCL {
         private String m15 = StringUtils.EMPTY;
         private String m16 = StringUtils.EMPTY;
         private String m17 = StringUtils.EMPTY;
+        private String m29 = StringUtils.EMPTY;
         private String m18 = StringUtils.EMPTY;
         private String m1901 = StringUtils.EMPTY;
         private String m1902 = StringUtils.EMPTY;
@@ -396,6 +398,8 @@ public class AbortionCL {
         private String m26 = StringUtils.EMPTY;
         private String m27 = StringUtils.EMPTY;
         private String m28 = StringUtils.EMPTY;
+        private String m30 = StringUtils.EMPTY;
+        private String m31 = StringUtils.EMPTY;
 
         // This class is used to parse the object to save in room db
         public static class DataConverter extends DssRoomDatabase.BaseConverter<SM> {
@@ -457,6 +461,16 @@ public class AbortionCL {
         public void setM4(String m4) {
             this.m4 = m4;
             notifyPropertyChanged(BR.m4);
+        }
+
+        @Bindable
+        public String getM497() {
+            return m497;
+        }
+
+        public void setM497(String m497) {
+            this.m497 = m497;
+            notifyPropertyChanged(BR.m497);
         }
 
         @Bindable
@@ -535,6 +549,27 @@ public class AbortionCL {
         }
 
         @Bindable
+        public String getM30() {
+            return m30;
+        }
+
+        public void setM30(String m30) {
+            this.m30 = m30;
+            setM31(m30.equals("1") ? m31 : _EMPTY_);
+            notifyPropertyChanged(BR.m30);
+        }
+
+        @Bindable
+        public String getM31() {
+            return m31;
+        }
+
+        public void setM31(String m31) {
+            this.m31 = m31;
+            notifyPropertyChanged(BR.m31);
+        }
+
+        @Bindable
         public String getM12() {
             return m12;
         }
@@ -592,6 +627,16 @@ public class AbortionCL {
         public void setM17(String m17) {
             this.m17 = m17;
             notifyPropertyChanged(BR.m17);
+        }
+
+        @Bindable
+        public String getM29() {
+            return m29;
+        }
+
+        public void setM29(String m29) {
+            this.m29 = m29;
+            notifyPropertyChanged(BR.m29);
         }
 
         @Bindable

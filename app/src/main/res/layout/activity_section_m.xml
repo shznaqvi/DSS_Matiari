@@ -216,18 +216,37 @@
 
                         </LinearLayout>
 
-                        <io.blackbox_vision.datetimepickeredittext.view.DatePickerEditText
-                            android:id="@+id/m4"
-                            style="@style/textInput"
+                        <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginBottom="0dp"
-                            android:gravity="center"
-                            android:hint="YYYY-MM-DD"
-                            android:text="@={abortionCL.m4}"
-                            app:dateFormat="yyyy-MM-dd"
-                            app:maxDate="CR_DATE"
-                            app:theme="@style/MaterialCalendarTheme" />
+                            android:orientation="horizontal">
+
+                            <io.blackbox_vision.datetimepickeredittext.view.DatePickerEditText
+                                android:id="@+id/m4"
+                                style="@style/textInput"
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_marginBottom="0dp"
+                                android:layout_weight="1"
+                                android:gravity="center"
+                                android:hint="YYYY-MM-DD"
+                                android:enabled="@{!abortionCL.m4.equals(`97`)}"
+                                android:text="@={abortionCL.m4}"
+                                app:dateFormat="yyyy-MM-dd"
+                                app:maxDate="CR_DATE"
+                                app:theme="@style/MaterialCalendarTheme" />
+
+                            <CheckBox
+                                android:id="@+id/m4check"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:backgroundTint="@color/lightPink"
+                                android:checked='@{abortionCL.m4.equals("97")}'
+                                android:onClick="@{()->abortionCL.setM4(abortionCL.m4.equals(`97`)?``:`97`)}"
+                                android:tag="-1"
+                                android:text="@string/nap"
+                                android:textColor="@color/redDark" />
+                        </LinearLayout>
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
 
@@ -262,18 +281,37 @@
 
                         </LinearLayout>
 
-                        <com.edittextpicker.aliazaz.EditTextPicker
-                            android:id="@+id/m5"
+                        <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                        <com.edittextpicker.aliazaz.EditTextPicker
+                            android:id="@+id/m5"
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:layout_height="match_parent"
                             android:gravity="center"
                             android:hint="##"
+                            android:enabled="@{!abortionCL.m5.equals(`97`)}"
                             android:inputType="number"
                             android:maxLength="2"
                             android:text="@={abortionCL.m5}"
                             app:maxValue="27"
                             app:minValue="1"
                             app:type="range" />
+
+                        <CheckBox
+                            android:id="@+id/m5check"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:backgroundTint="@color/lightPink"
+                            android:checked='@{abortionCL.m5.equals("97")}'
+                            android:onClick="@{()->abortionCL.setM5(abortionCL.m5.equals(`97`)?``:`97`)}"
+                            android:tag="-1"
+                            android:text="@string/nap"
+                            android:textColor="@color/redDark" />
+                    </LinearLayout>
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
 
@@ -450,10 +488,11 @@
 
                         <io.blackbox_vision.datetimepickeredittext.view.DatePickerEditText
                             android:id="@+id/m9"
-                            style="@style/textInput"
+                            style="@style/labelsHead"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginBottom="0dp"
+                            android:enabled="false"
                             android:gravity="center"
                             android:hint="YYYY-MM-DD"
                             android:text="@={abortionCL.m9}"
@@ -573,6 +612,121 @@
                                 android:checked='@{abortionCL.m11.equals("2")}'
                                 android:onClick='@{()->abortionCL.setM11("2")}'
                                 android:text="@string/m1102" />
+                        </RadioGroup>
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+
+                <!-- m30 -->
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/fldGrpCVm30"
+                    style="@style/cardView">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/bottom"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                style="@style/labels"
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:text="@string/m30" />
+
+                            <TextView
+                                style="@style/quesNum"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:text="@string/Q_m30" />
+                        </LinearLayout>
+
+                        <RadioGroup
+                            android:id="@+id/m30"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <RadioButton
+                                android:id="@+id/m3001"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:checked='@{abortionCL.m30.equals("1")}'
+                                android:onClick='@{()->abortionCL.setM30("1")}'
+                                android:text="@string/m3001" />
+
+                            <RadioButton
+                                android:id="@+id/m3002"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:checked='@{abortionCL.m30.equals("2")}'
+                                android:onClick='@{()->abortionCL.setM30("2") + m31.clearCheck()}'
+                                android:text="@string/m3002" />
+                        </RadioGroup>
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+
+                <!-- m31 -->
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/fldGrpCVm31"
+                    style="@style/cardView"
+                    android:visibility="@{abortionCL.m30.equals(`1`) ? View.VISIBLE : View.GONE}">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/bottom"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                style="@style/labels"
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:text="@string/m31" />
+
+                            <TextView
+                                style="@style/quesNum"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:text="@string/Q_m31" />
+                        </LinearLayout>
+
+                        <RadioGroup
+                            android:id="@+id/m31"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <RadioButton
+                                android:id="@+id/m3101"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:checked='@{abortionCL.m31.equals("1")}'
+                                android:onClick='@{()->abortionCL.setM31("1")}'
+                                android:text="@string/m3101" />
+
+                            <RadioButton
+                                android:id="@+id/m3102"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:checked='@{abortionCL.m31.equals("2")}'
+                                android:onClick='@{()->abortionCL.setM31("2")}'
+                                android:text="@string/m3102" />
                         </RadioGroup>
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
@@ -976,6 +1130,63 @@
                                 android:checked='@{abortionCL.m18.equals("2")}'
                                 android:onClick='@{()->abortionCL.setM18("2")}'
                                 android:text="@string/m1802" />
+                        </RadioGroup>
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+
+                <!-- m29 -->
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/fldGrpCVm29"
+                    style="@style/cardView">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/bottom"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                style="@style/labels"
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:text="@string/m29" />
+
+                            <TextView
+                                style="@style/quesNum"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:text="@string/Q_m29" />
+                        </LinearLayout>
+
+                        <RadioGroup
+                            android:id="@+id/m29"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <RadioButton
+                                android:id="@+id/m2901"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:checked='@{abortionCL.m29.equals("1")}'
+                                android:onClick='@{()->abortionCL.setM29("1") + m20.clearCheck()}'
+                                android:text="@string/m2901" />
+
+                            <RadioButton
+                                android:id="@+id/m2902"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:checked='@{abortionCL.m29.equals("2")}'
+                                android:onClick='@{()->abortionCL.setM29("2")}'
+                                android:text="@string/m2902" />
                         </RadioGroup>
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>

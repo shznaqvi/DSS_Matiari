@@ -263,6 +263,18 @@
     <string name="rc0601">مرد</string>
     <string name="rc0602">عورت</string>
     <string name="rc07">Suspected cause of Death </string>
+    <string name="rb27">Place of death</string>
+    <string name="rb2701">Hospital</string>
+    <string name="rb2702">Home</string>
+    <string name="rb2703">Enroute to hospital</string>
+    <string name="rb28">Place of pregnancy outcome </string>
+    <string name="rb2801">Hospital</string>
+    <string name="rb2802">Home</string>
+    <string name="rb2803">Enroute to hospital</string>
+    <string name="rb29">Place of pregnancy outcome </string>
+    <string name="rb2901">Hospital</string>
+    <string name="rb2902">Home</string>
+    <string name="rb2903">Enroute to hospital</string>
 
     <string name='Q_a17_c' translatable="false">a17_c</string>
     <string name='Q_ra_lat' translatable="false">ra_lat</string>
@@ -327,6 +339,9 @@
     <string name='Q_rb24' translatable="false">rb24</string>
     <string name='Q_rb25' translatable="false">rb25</string>
     <string name='Q_rb26' translatable="false">rb26</string>
+    <string name='Q_rb27' translatable="false">rb27</string>
+    <string name='Q_rb28' translatable="false">rb28</string>
+    <string name='Q_rb29' translatable="false">rb29</string>
 
     <string name='Q_rc01' translatable="false">rc01</string>
     <string name='Q_rc02' translatable="false">rc02</string>
@@ -371,6 +386,15 @@
     <string name="m11">Urine test done</string>
     <string name="m1101">Yes</string>
     <string name="m1102">No</string>
+    <string name="m29">Were clots removed through D and C at hospital or clinic setting?</string>
+    <string name="m2901">Yes</string>
+    <string name="m2902">No</string>
+    <string name="m30">PT Test done</string>
+    <string name="m3001">Yes</string>
+    <string name="m3002">No</string>
+    <string name="m31">Result of the PT Test</string>
+    <string name="m3101">Positive</string>
+    <string name="m3102">Negative</string>
     <string name="m12">Type of Abortion</string>
     <string name="m1201">Induced</string>
     <string name="m1202">Spontaneous</string>
@@ -430,6 +454,9 @@
     <string name='Q_m9' translatable="false">m9</string>
     <string name='Q_m10' translatable="false">m10</string>
     <string name='Q_m11' translatable="false">m11</string>
+    <string name='Q_m29' translatable="false">m29</string>
+    <string name='Q_m30' translatable="false">m30</string>
+    <string name='Q_m31' translatable="false">m31</string>
     <string name='Q_m12' translatable="false">m12</string>
     <string name='Q_m13' translatable="false">m13</string>
     <string name='Q_m14' translatable="false">m14</string>
