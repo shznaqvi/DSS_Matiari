@@ -1246,6 +1246,30 @@
                                 android:text="@string/m1902" />
 
                             <CheckBox
+                                android:id="@+id/m1903"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:checked="@{abortionCL.m1903.equals(`3`)}"
+                                android:onClick="@{()->abortionCL.setM1903(abortionCL.m1903.equals(`3`)?``:`3`)}"
+                                android:text="@string/m1903" />
+
+                            <CheckBox
+                                android:id="@+id/m1904"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:checked="@{abortionCL.m1904.equals(`4`)}"
+                                android:onClick="@{()->abortionCL.setM1904(abortionCL.m1904.equals(`4`)?``:`4`)}"
+                                android:text="@string/m1904" />
+
+                            <CheckBox
+                                android:id="@+id/m1905"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:checked="@{abortionCL.m1905.equals(`5`)}"
+                                android:onClick="@{()->abortionCL.setM1905(abortionCL.m1905.equals(`5`)?``:`5`)}"
+                                android:text="@string/m1905" />
+
+                            <CheckBox
                                 android:id="@+id/m1996"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"

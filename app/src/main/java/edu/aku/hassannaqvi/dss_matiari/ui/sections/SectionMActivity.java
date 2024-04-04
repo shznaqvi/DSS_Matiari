@@ -52,8 +52,7 @@ public class SectionMActivity extends AppCompatActivity {
         bi.m2.setText(mwra.getHdssId());
         sM.setM2(mwra.getHdssId());
 
-        boolean isSB = getIntent().getBooleanExtra("isSB", false);
-        if (isSB) {
+        if (MainApp.idType == 1) {
             bi.m3.setText(mwra.getSB().getRb02());
             sM.setM3(mwra.getSB().getRb02());
             bi.m9.setText(mwra.getSB().getRb21());

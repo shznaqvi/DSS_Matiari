@@ -385,6 +385,9 @@ public class AbortionCL {
         private String m18 = StringUtils.EMPTY;
         private String m1901 = StringUtils.EMPTY;
         private String m1902 = StringUtils.EMPTY;
+        private String m1903 = StringUtils.EMPTY;
+        private String m1904 = StringUtils.EMPTY;
+        private String m1905 = StringUtils.EMPTY;
         private String m1996 = StringUtils.EMPTY;
         private String m1996x = StringUtils.EMPTY;
         private String m20 = StringUtils.EMPTY;
@@ -648,6 +651,9 @@ public class AbortionCL {
             this.m18 = m18;
             setM1901(m18.equals("2") ? this.m1901 : _EMPTY_);
             setM1902(m18.equals("2") ? this.m1902 : _EMPTY_);
+            setM1903(m18.equals("2") ? this.m1903 : _EMPTY_);
+            setM1904(m18.equals("2") ? this.m1904 : _EMPTY_);
+            setM1905(m18.equals("2") ? this.m1905 : _EMPTY_);
             setM1996(m18.equals("2") ? this.m1996 : _EMPTY_);
             setM20(m18.equals("2") ? this.m20 : _EMPTY_);
             notifyPropertyChanged(BR.m18);
@@ -671,6 +677,36 @@ public class AbortionCL {
         public void setM1902(String m1902) {
             this.m1902 = m1902;
             notifyPropertyChanged(BR.m1902);
+        }
+
+        @Bindable
+        public String getM1903() {
+            return m1903;
+        }
+
+        public void setM1903(String m1903) {
+            this.m1903 = m1903;
+            notifyPropertyChanged(BR.m1903);
+        }
+
+        @Bindable
+        public String getM1904() {
+            return m1904;
+        }
+
+        public void setM1904(String m1904) {
+            this.m1904 = m1904;
+            notifyPropertyChanged(BR.m1904);
+        }
+
+        @Bindable
+        public String getM1905() {
+            return m1905;
+        }
+
+        public void setM1905(String m1905) {
+            this.m1905 = m1905;
+            notifyPropertyChanged(BR.m1905);
         }
 
         @Bindable

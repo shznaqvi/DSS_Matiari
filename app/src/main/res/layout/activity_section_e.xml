@@ -266,6 +266,7 @@
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
+                                android:visibility="gone"
                                 android:checked='@{outcome.rc04.equals("3")}'
                                 android:onClick='@{()->outcome.setRc04("3")}'
                                 android:text="@string/rc0403" />

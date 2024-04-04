@@ -3,10 +3,14 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Android Office Work/DSS_Matiari/app/src/main/res/layout/activity_change_pass_new.xml" value="0.18375" />
+        <entry key="..\:/Android Office Work/DSS_Matiari/app/src/main/res/layout/activity_change_password.xml" value="0.1859375" />
+        <entry key="..\:/Android Office Work/DSS_Matiari/app/src/main/res/layout/activity_fphousehold.xml" value="0.12682291666666667" />
         <entry key="..\:/Android Office Work/DSS_Matiari/app/src/main/res/layout/activity_fpmwra.xml" value="0.12682291666666667" />
+        <entry key="..\:/Android Office Work/DSS_Matiari/app/src/main/res/layout/activity_household.xml" value="0.12682291666666667" />
         <entry key="..\:/Android Office Work/DSS_Matiari/app/src/main/res/layout/activity_login.xml" value="0.16083333333333333" />
         <entry key="..\:/Android Office Work/DSS_Matiari/app/src/main/res/layout/activity_main.xml" value="0.1859375" />
-        <entry key="..\:/Android Office Work/DSS_Matiari/app/src/main/res/layout/activity_mwra.xml" value="0.371875" />
+        <entry key="..\:/Android Office Work/DSS_Matiari/app/src/main/res/layout/activity_mwra.xml" value="0.18375" />
         <entry key="..\:/Android Office Work/DSS_Matiari/app/src/main/res/layout/activity_section_a.xml" value="0.16083333333333333" />
         <entry key="..\:/Android Office Work/DSS_Matiari/app/src/main/res/layout/activity_section_a_fup.xml" value="0.1859375" />
         <entry key="..\:/Android Office Work/DSS_Matiari/app/src/main/res/layout/activity_section_b.xml" value="0.18375" />

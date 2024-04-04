@@ -288,9 +288,11 @@ public class SectionBActivity extends AppCompatActivity {
                 finish();
                 startActivity(forwardIntent);
             } else if (bi.rb2603.isChecked()) {
+                Intent forwardIntent = new Intent(this, SectionMActivity.class).putExtra("complete", true);
+                forwardIntent.setFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT);
+                setResult(RESULT_OK, forwardIntent);
                 finish();
-                startActivity(new Intent(this, SectionMActivity.class).putExtra("isSB", true));
-//                AppConstants.gotoActivity(this, SectionMActivity.class, true);
+                startActivity(forwardIntent);
             } else {
                 setResult(RESULT_OK);
                 finish();

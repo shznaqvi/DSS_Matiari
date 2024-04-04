@@ -1,7 +1,6 @@
 package edu.aku.hassannaqvi.dss_matiari.models;
 
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.PROJECT_NAME;
-import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.fpMwra;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.households;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.selectedUC;
 
@@ -29,9 +28,9 @@ import java.util.Objects;
 import edu.aku.hassannaqvi.dss_matiari.BR;
 import edu.aku.hassannaqvi.dss_matiari.contracts.TableContracts.HouseholdTable;
 import edu.aku.hassannaqvi.dss_matiari.core.MainApp;
-import edu.aku.hassannaqvi.dss_matiari.global.AppConstants;
 import edu.aku.hassannaqvi.dss_matiari.database.DssRoomDatabase;
 import edu.aku.hassannaqvi.dss_matiari.database.dao.HouseholdsDao;
+import edu.aku.hassannaqvi.dss_matiari.global.AppConstants;
 
 @Entity(tableName = HouseholdTable.TABLE_NAME)
 public class Households extends BaseObservable implements Observable {
@@ -475,10 +474,10 @@ public class Households extends BaseObservable implements Observable {
             setRa05(MainApp.leaderCode);
             setRa06(MainApp.selectedUC);
             setRa07(MainApp.selectedVillage);
-            setRa08(MainApp.fpMwra.getRa08());
+            /*setRa08(MainApp.fpMwra.getRa08());
             setRa09(fpMwra.getHhNo());
             setRa10(fpMwra.getHdssid());
-            setRa12(fpMwra.getRa12());
+            setRa12(fpMwra.getRa12());*/
 
         }
 

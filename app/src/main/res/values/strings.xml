@@ -419,6 +419,9 @@
     <string name="m19">Indication for Induced Abortion</string>
     <string name="m1901">Ectopic pregnancy</string>
     <string name="m1902">Absence of fetal heartbeat</string>
+    <string name="m1903">Baby Not growing</string>
+    <string name="m1904">Premature rupture of membrane</string>
+    <string name="m1905">Congenital genital anomalies</string>
     <string name="m1996">Other</string>
     <string name="m20">Was the induced abortion performed in a medical facility or at Home</string>
     <string name="m2001">Medical facility</string>

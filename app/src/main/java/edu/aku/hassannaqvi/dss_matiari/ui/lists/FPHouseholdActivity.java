@@ -1,8 +1,6 @@
 package edu.aku.hassannaqvi.dss_matiari.ui.lists;
 
-import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.hdssid;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.households;
-import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.idType;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.position;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.selectedFpHousehold;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.selectedUC;
@@ -37,9 +35,9 @@ import java.util.ArrayList;
 import edu.aku.hassannaqvi.dss_matiari.R;
 import edu.aku.hassannaqvi.dss_matiari.adapters.FPHouseholdAdapter;
 import edu.aku.hassannaqvi.dss_matiari.core.MainApp;
+import edu.aku.hassannaqvi.dss_matiari.database.DssRoomDatabase;
 import edu.aku.hassannaqvi.dss_matiari.databinding.ActivityFphouseholdBinding;
 import edu.aku.hassannaqvi.dss_matiari.models.Households;
-import edu.aku.hassannaqvi.dss_matiari.database.DssRoomDatabase;
 import edu.aku.hassannaqvi.dss_matiari.ui.MainActivity;
 import edu.aku.hassannaqvi.dss_matiari.ui.sections.SectionAActivity;
 
@@ -104,18 +102,15 @@ public class FPHouseholdActivity extends AppCompatActivity {
 
 
         FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+        fab.setOnClickListener(view -> {
 
-                //TODO: Add new Household
-                try {
-                    addHousehold();
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-
+            //TODO: Add new Household
+            try {
+                addHousehold();
+            } catch (JSONException e) {
+                e.printStackTrace();
             }
+
         });
 
     }
@@ -151,13 +146,17 @@ public class FPHouseholdActivity extends AppCompatActivity {
     }
 
     public void addHousehold() throws JSONException {
-        MainApp.households = new Households();
-        int maxHH = db.householdsDao().getMaxHouseholdNo(selectedUC, selectedVillage, "");     // From Households table on device
+        Households.initMeta();
+        int maxHH = db.householdsDao().getMaxHouseholdNo(selectedUC, selectedVillage, "1");     // From Households table on device
         int maxHHNo = db.MaxHHNoDao().getMaxHHNoByVillage(selectedUC, selectedVillage);     // From Max Household numbers fetched from server
         int maxHHFinal = Math.max(maxHH, maxHHNo);
+        households.setRound(MainApp.ROUND);
         households.setHhNo(String.valueOf(maxHHFinal + 1));
         households.setHdssId(selectedUC + "-" + selectedVillage + "-" + (maxHHFinal + 1));
-        MainApp.households.getSA().setRa09(String.valueOf(maxHHFinal + 1));
+        if (MainApp.households.getSA() == null) MainApp.households.setSA(new Households.SA());
+//        MainApp.households.getSA().setRa09(String.valueOf(maxHHFinal + 1));
+        sA.setRa09(String.valueOf(maxHHFinal + 1));
+        sA.setRa10(households.getHdssId());
 
         sA.populateMetaFollowups();
 
@@ -171,16 +170,13 @@ public class FPHouseholdActivity extends AppCompatActivity {
 
     public void btnContinue(View view) {
         finish();
-
         startActivity(new Intent(this, MainActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK));
-
     }
 
     public void BtnEnd(View view) {
-
         finish();
-
     }
+
     @SuppressLint("NotifyDataSetChanged")
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -203,7 +199,6 @@ public class FPHouseholdActivity extends AppCompatActivity {
     public void onBackPressed() {
         super.onBackPressed();
         finish();
-
     }
 
     private void initSearchFilter(){
