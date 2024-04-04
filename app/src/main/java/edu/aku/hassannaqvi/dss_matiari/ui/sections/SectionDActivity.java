@@ -154,7 +154,7 @@ public class SectionDActivity extends AppCompatActivity {
             }
         }
         Mwra.SD.saveData(sD);
-        if (mwra.getSC().getRb16().equals("3")) {
+        if (idType == 2 && mwra.getSC().getRb16().equals("3")) {
             AppConstants.gotoActivity(this, SectionMActivity.class, true);
         } else {
             setResult(RESULT_OK);

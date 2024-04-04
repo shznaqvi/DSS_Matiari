@@ -70,7 +70,6 @@ public class SectionEActivity extends AppCompatActivity {
     }
 
     private void initUI() {
-        boolean isSB = getIntent().getBooleanExtra("isSB", false);
 
         setDateRanges();
 

@@ -282,6 +282,7 @@ public class SectionBActivity extends AppCompatActivity {
 
         if (bi.rb1801.isChecked()) {
             if (bi.rb2601.isChecked() || bi.rb2605.isChecked()) {
+                MainApp.prevChildCount = 0;
                 Intent forwardIntent = new Intent(this, SectionEActivity.class).putExtra("complete", true);
                 forwardIntent.setFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT);
                 setResult(RESULT_OK, forwardIntent);
