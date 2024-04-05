@@ -1060,28 +1060,32 @@
                             <RadioGroup
                                 android:id="@+id/rb29"
                                 android:layout_width="match_parent"
-                                android:layout_height="wrap_content">
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
 
                                 <RadioButton
                                     android:id="@+id/rb2901"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
+                                    android:layout_width="0dp"
+                                    android:layout_weight="1"
+                                    android:layout_height="match_parent"
                                     android:checked='@{mwra.rb29.equals("1")}'
                                     android:onClick='@{()->mwra.setRb29("1")}'
                                     android:text="@string/rb2901" />
 
                                 <RadioButton
                                     android:id="@+id/rb2902"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
+                                    android:layout_width="0dp"
+                                    android:layout_weight="1"
+                                    android:layout_height="match_parent"
                                     android:checked='@{mwra.rb29.equals("2")}'
                                     android:onClick='@{()->mwra.setRb29("2")}'
                                     android:text="@string/rb2902" />
 
                                 <RadioButton
                                     android:id="@+id/rb2903"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
+                                    android:layout_width="0dp"
+                                    android:layout_weight="1"
+                                    android:layout_height="match_parent"
                                     android:checked='@{mwra.rb29.equals("3")}'
                                     android:onClick='@{()->mwra.setRb29("3")}'
                                     android:text="@string/rb2903" />
@@ -1199,6 +1203,7 @@
                                 android:enabled="true"
                                 android:gravity="center"
                                 android:hint="##"
+                                android:inputType="number"
                                 android:text="@={mwra.rb20}"
                                 app:dateFormat="yyyy-MM-dd"
                                 app:maxValue="41"

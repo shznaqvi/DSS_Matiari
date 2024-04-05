@@ -824,28 +824,32 @@
                             <RadioGroup
                                 android:id="@+id/rb27"
                                 android:layout_width="match_parent"
-                                android:layout_height="wrap_content">
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
 
                                 <RadioButton
                                     android:id="@+id/rb2701"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
+                                    android:layout_width="0dp"
+                                    android:layout_weight="1"
+                                    android:layout_height="match_parent"
                                     android:checked='@{followups.rb27.equals("1")}'
                                     android:onClick='@{()->followups.setRb27("1")}'
                                     android:text="@string/rb2701" />
 
                                 <RadioButton
                                     android:id="@+id/rb2702"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
+                                    android:layout_width="0dp"
+                                    android:layout_weight="1"
+                                    android:layout_height="match_parent"
                                     android:checked='@{followups.rb27.equals("2")}'
                                     android:onClick='@{()->followups.setRb27("2")}'
                                     android:text="@string/rb2702" />
 
                                 <RadioButton
                                     android:id="@+id/rb2703"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
+                                    android:layout_width="0dp"
+                                    android:layout_weight="1"
+                                    android:layout_height="match_parent"
                                     android:checked='@{followups.rb27.equals("3")}'
                                     android:onClick='@{()->followups.setRb27("3")}'
                                     android:text="@string/rb2703" />
@@ -1212,28 +1216,32 @@
                                             <RadioGroup
                                                 android:id="@+id/rb28"
                                                 android:layout_width="match_parent"
-                                                android:layout_height="wrap_content">
+                                                android:layout_height="wrap_content"
+                                                android:orientation="horizontal">
 
                                                 <RadioButton
                                                     android:id="@+id/rb2801"
-                                                    android:layout_width="match_parent"
-                                                    android:layout_height="wrap_content"
+                                                    android:layout_width="0dp"
+                                                    android:layout_weight="1"
+                                                    android:layout_height="match_parent"
                                                     android:checked='@{followups.rb28.equals("1")}'
                                                     android:onClick='@{()->followups.setRb28("1")}'
                                                     android:text="@string/rb2801" />
 
                                                 <RadioButton
                                                     android:id="@+id/rb2802"
-                                                    android:layout_width="match_parent"
-                                                    android:layout_height="wrap_content"
+                                                    android:layout_width="0dp"
+                                                    android:layout_weight="1"
+                                                    android:layout_height="match_parent"
                                                     android:checked='@{followups.rb28.equals("2")}'
                                                     android:onClick='@{()->followups.setRb28("2")}'
                                                     android:text="@string/rb2802" />
 
                                                 <RadioButton
                                                     android:id="@+id/rb2803"
-                                                    android:layout_width="match_parent"
-                                                    android:layout_height="wrap_content"
+                                                    android:layout_width="0dp"
+                                                    android:layout_weight="1"
+                                                    android:layout_height="match_parent"
                                                     android:checked='@{followups.rb28.equals("3")}'
                                                     android:onClick='@{()->followups.setRb28("3")}'
                                                     android:text="@string/rb2803" />

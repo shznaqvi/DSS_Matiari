@@ -210,32 +210,24 @@ public class SectionCActivity extends AppCompatActivity {
         });
 
 
-        bi.rb19.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(RadioGroup radioGroup, int i) {
-                if (bi.rb1901.isChecked()) {
-                    MainApp.totalChildCount = 1;
-                } else if (bi.rb1902.isChecked()) {
-                    MainApp.totalChildCount = 2;
-                } else if (bi.rb1903.isChecked()) {
-                    MainApp.totalChildCount = 3;
-                }
+        bi.rb19.setOnCheckedChangeListener((radioGroup, i) -> {
+            if (bi.rb1901.isChecked() || bi.rb2605.isChecked()) {
+                MainApp.totalChildCount = 1;
+            } else if (bi.rb1902.isChecked()) {
+                MainApp.totalChildCount = 2;
+            } else if (bi.rb1903.isChecked()) {
+                MainApp.totalChildCount = 3;
             }
         });
 
-        bi.rb17.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(RadioGroup group, int checkedId) {
-                if (bi.rb1701.isChecked() || bi.rb1605.isChecked()) {
-                    MainApp.totalChildCount = 1;
-                } else if (bi.rb1702.isChecked() && !bi.rb1605.isChecked()) {
-                    MainApp.totalChildCount = 2;
-                } else if (bi.rb1703.isChecked()) {
-                    MainApp.totalChildCount = 3;
-                }
-
+        bi.rb17.setOnCheckedChangeListener((group, checkedId) -> {
+            if (bi.rb1701.isChecked() || bi.rb1605.isChecked()) {
+                MainApp.totalChildCount = 1;
+            } else if (bi.rb1702.isChecked() && !bi.rb1605.isChecked()) {
+                MainApp.totalChildCount = 2;
+            } else if (bi.rb1703.isChecked()) {
+                MainApp.totalChildCount = 3;
             }
-
         });
 
         bi.rb1605.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -260,12 +252,14 @@ public class SectionCActivity extends AppCompatActivity {
             bi.rb1901.setEnabled(true);
             bi.rb1903.setEnabled(true);
             bi.rb1902.setEnabled(true);
+            bi.rb1902.setChecked(false);
             if (checkedId == bi.rb2605.getId()) {
                 bi.rb1901.setEnabled(false);
                 bi.rb1901.setChecked(false);
                 bi.rb1903.setEnabled(false);
                 bi.rb1903.setChecked(false);
                 bi.rb1902.setEnabled(true);
+                bi.rb1902.setChecked(true);
             } else if (checkedId == bi.rb2603.getId()) {
                 bi.rb20.setMaxvalue(27);
                 bi.rb20.setMinvalue(3);
