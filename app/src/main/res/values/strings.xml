@@ -189,6 +189,9 @@
     <string name="rb09">EDD Date [auto-calculated]</string>
     <string name="rb09_info">DD/MM/YYYY</string>
     <string name="rb10">Visit Status</string>
+    <string name="rc09">Does the child have any congenital anomalies?</string>
+    <string name="rc0901">Yes</string>
+    <string name="rc0902">No</string>
     <string name="rb1001">Available</string>
     <string name="rb1002">Temporary Migrated </string>
     <string name="rb1003">Refused </string>

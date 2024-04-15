@@ -79,8 +79,10 @@ public class SectionEActivity extends AppCompatActivity {
                 // New outcome registration
                 if (outcome.getUid().equals("")) {
                     MainApp.ROUND = mwra.getRound();
-                    bi.rc03dob.setText(MainApp.idType == 1 ? mwra.getSB().getRb21() : mwra.getSC().getRb21());
-                    sE.setRc03(MainApp.idType == 1 ? mwra.getSB().getRb21() : mwra.getSC().getRb21());
+                    bi.rc03dob.setText(MainApp.mwra.getSC() == null ? mwra.getSB().getRb21() :
+                            MainApp.idType == 1 ? mwra.getSB().getRb21() : mwra.getSC().getRb21());
+                    sE.setRc03(MainApp.mwra.getSC() == null ? mwra.getSB().getRb21() :
+                            MainApp.idType == 1 ? mwra.getSB().getRb21() : mwra.getSC().getRb21());
                     String date = DateUtils.changeDateFormat(mwra.getSB().getRb21());
                     bi.rc06.setMinDate(date);
                 } else {
@@ -90,12 +92,14 @@ public class SectionEActivity extends AppCompatActivity {
                 // Followup
             case "":
                 //for unreported outcome in followup
-                if (MainApp.idType == 1 ? mwra.getSB().getRb21().equals("") : mwra.getSC().getRb15().equals("")) {
+                if (MainApp.mwra.getSC() == null ? mwra.getSB().getRb21().equals("") :
+                        MainApp.idType == 1 ? mwra.getSB().getRb21().equals("") : mwra.getSC().getRb15().equals("")) {
                     // new Registration
                     if (outcome.getUid().equals("")) {
                         MainApp.ROUND = mwra.getRound();
                         sE.setRc03(mwra.getSC().getRb21());
-                        String date = DateUtils.changeDateFormat(MainApp.idType == 1 ? mwra.getSB().getRb21() : mwra.getSC().getRb21());
+                        String date = DateUtils.changeDateFormat(MainApp.mwra.getSC() == null ? mwra.getSB().getRb21() :
+                                MainApp.idType == 1 ? mwra.getSB().getRb21() : mwra.getSC().getRb21());
                         bi.rc06.setMinDate(date);
                     } else {
                         MainApp.ROUND = mwra.getRound();
@@ -104,9 +108,12 @@ public class SectionEActivity extends AppCompatActivity {
 
                 } else {
                     if (outcome.getUid().equals("")) {
-                        MainApp.ROUND = MainApp.idType == 1 ? mwra.getRegRound() : MainApp.fpMwra.getFRound();
-                        sE.setRc03(MainApp.idType == 1 ? mwra.getSB().getRb21() : mwra.getSC().getRb15());
-                        String date = DateUtils.changeDateFormat(MainApp.idType == 1 ? mwra.getSB().getRb21() : mwra.getSC().getRb15());
+                        MainApp.ROUND = MainApp.mwra.getSC() == null ? mwra.getRegRound() :
+                                 MainApp.idType == 1 ? mwra.getRegRound() : MainApp.fpMwra.getFRound();
+                        sE.setRc03(MainApp.mwra.getSC() == null ? mwra.getSB().getRb21() :
+                                MainApp.idType == 1 ? mwra.getSB().getRb21() : mwra.getSC().getRb15());
+                        String date = DateUtils.changeDateFormat(MainApp.mwra.getSC() == null ? mwra.getSB().getRb21() :
+                                MainApp.idType == 1 ? mwra.getSB().getRb21() : mwra.getSC().getRb15());
                         bi.rc06.setMinDate(date);
                         bi.rc03dob.setEnabled(false);
                     } else {
@@ -188,7 +195,8 @@ public class SectionEActivity extends AppCompatActivity {
             Calendar cal = Calendar.getInstance();
 
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
-            cal.setTime(Objects.requireNonNull(sdf.parse(MainApp.idType == 1 ? mwra.getSB().getRb01a() : mwra.getSC().getRb01a())));// all done
+            cal.setTime(Objects.requireNonNull(sdf.parse(MainApp.mwra.getSC() == null ? mwra.getSB().getRb01a() :
+                    MainApp.idType == 1 ? mwra.getSB().getRb01a() : mwra.getSC().getRb01a())));// all done
 
             sdf = new SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH);
 

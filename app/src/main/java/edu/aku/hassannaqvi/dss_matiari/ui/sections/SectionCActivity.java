@@ -253,6 +253,8 @@ public class SectionCActivity extends AppCompatActivity {
             bi.rb1903.setEnabled(true);
             bi.rb1902.setEnabled(true);
             bi.rb1902.setChecked(false);
+            bi.rb20.setMaxvalue(41);
+            bi.rb20.setMinvalue(28);
             if (checkedId == bi.rb2605.getId()) {
                 bi.rb1901.setEnabled(false);
                 bi.rb1901.setChecked(false);
@@ -373,7 +375,7 @@ public class SectionCActivity extends AppCompatActivity {
                             finish();
                             startActivity(forwardIntent);
                         } else if (bi.rb2603.isChecked()) {
-                            AppConstants.gotoActivity(this, SectionMActivity.class, true);
+                            AppConstants.gotoActivity(this, SectionDActivity.class, true);
                         } else {
                             setResult(RESULT_OK);
                             finish();
@@ -533,14 +535,25 @@ public class SectionCActivity extends AppCompatActivity {
                         forwardIntent.setFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT);
                         setResult(RESULT_OK, forwardIntent);
                         startActivity(forwardIntent);
-
                         // Delivered baby within last 3 months / Unreported pregnancy
                     } else if (!bi.rb0604.isChecked() && bi.rb1801.isChecked()) {
-                        MainApp.prevChildCount = 0;
-                        Intent forwardIntent = new Intent(this, SectionEActivity.class).putExtra("complete", true);
-                        forwardIntent.setFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT);
-                        setResult(RESULT_OK, forwardIntent);
-                        startActivity(forwardIntent);
+                        if (bi.rb2601.isChecked() || bi.rb2605.isChecked()) {
+                            MainApp.prevChildCount = 0;
+                            Intent forwardIntent = new Intent(this, SectionEActivity.class).putExtra("complete", true);
+                            forwardIntent.setFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT);
+                            setResult(RESULT_OK, forwardIntent);
+                            startActivity(forwardIntent);
+                        } else if (bi.rb2603.isChecked()) {
+                            Intent forwardIntent = new Intent(this, SectionDActivity.class).putExtra("complete", true);
+                            forwardIntent.setFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT);
+                            setResult(RESULT_OK, forwardIntent);
+                            startActivity(forwardIntent);
+                        } else {
+                            Intent forwardIntent = new Intent(this, SectionEActivity.class).putExtra("complete", true);
+                            forwardIntent.setFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT);
+                            setResult(RESULT_OK, forwardIntent);
+                            finish();
+                        }
                     }
 
                     // if still unmarried

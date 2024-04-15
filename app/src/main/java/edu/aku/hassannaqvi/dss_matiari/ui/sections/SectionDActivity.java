@@ -5,6 +5,7 @@ import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.idType;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.mwra;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.sharedPref;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -26,7 +27,6 @@ import edu.aku.hassannaqvi.dss_matiari.R;
 import edu.aku.hassannaqvi.dss_matiari.core.MainApp;
 import edu.aku.hassannaqvi.dss_matiari.database.DssRoomDatabase;
 import edu.aku.hassannaqvi.dss_matiari.databinding.ActivitySectionDBinding;
-import edu.aku.hassannaqvi.dss_matiari.global.AppConstants;
 import edu.aku.hassannaqvi.dss_matiari.models.Mwra;
 
 
@@ -87,7 +87,7 @@ public class SectionDActivity extends AppCompatActivity {
             Calendar cal = Calendar.getInstance();
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
 
-            if (MainApp.idType == 1) {
+            if (MainApp.mwra.getSC() == null) {
                 cal.setTime(Objects.requireNonNull(sdf.parse(mwra.getSB().getRb01a())));// all done
             } else {
                 cal.setTime(Objects.requireNonNull(sdf.parse(mwra.getSC().getRb01a())));// all done
@@ -130,7 +130,9 @@ public class SectionDActivity extends AppCompatActivity {
             SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
             if (idType == 1) {
                 lmpCal.setTime(Objects.requireNonNull(simpleDateFormat.parse(mwra.getSB().getRb08())));
-            }
+            } else
+                lmpCal.setTime(Objects.requireNonNull(simpleDateFormat.parse(bi.rb08.getText().toString())));
+
             sdf = new SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH);
             String dov = sdf.format(cal.getTime());
             String lmp = sdf.format(lmpCal.getTime());
@@ -154,8 +156,12 @@ public class SectionDActivity extends AppCompatActivity {
             }
         }
         Mwra.SD.saveData(sD);
-        if (idType == 2 && mwra.getSC().getRb16().equals("3")) {
-            AppConstants.gotoActivity(this, SectionMActivity.class, true);
+        if (idType == 2 && (mwra.getSC().getRb16().equals("3") || mwra.getSC().getRb26().equals("3"))) {
+            Intent forwardIntent = new Intent(this, SectionMActivity.class).putExtra("complete", true);
+            forwardIntent.setFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT);
+            setResult(RESULT_OK, forwardIntent);
+            finish();
+            startActivity(forwardIntent);
         } else {
             setResult(RESULT_OK);
             finish();

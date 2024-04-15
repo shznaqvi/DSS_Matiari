@@ -1,5 +1,6 @@
 package edu.aku.hassannaqvi.dss_matiari.models;
 
+import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.mwra;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.outcome;
 
 import androidx.annotation.NonNull;
@@ -141,7 +142,7 @@ public class Outcome extends BaseObservable implements Observable {
     public static void populateMeta() {
         MainApp.outcome.setUuid(MainApp.mwra.getUid());
         MainApp.outcome.setMuid(MainApp.mwra.getUid().split("_")[0]);
-        MainApp.outcome.setMsno(MainApp.idType == 1 ? MainApp.mwra.getSB().getRb01() : MainApp.mwra.getSC().getRb01());
+        MainApp.outcome.setMsno(MainApp.mwra.getSC() == null ? MainApp.mwra.getSB().getRb01() : MainApp.mwra.getSC().getRb01());
         MainApp.outcome.setSysDate(MainApp.mwra.getSysDate());
 
         MainApp.outcome.setRound(MainApp.mwra.getRound());
@@ -451,6 +452,8 @@ public class Outcome extends BaseObservable implements Observable {
         private String rc06 = StringUtils.EMPTY;
         private String rc07 = StringUtils.EMPTY;
         private String rc08 = StringUtils.EMPTY;
+        private String rc09 = StringUtils.EMPTY;
+        private String rc09x = StringUtils.EMPTY;
 
         // Save section object as json object in db
         public static void saveData(Outcome.SE data) {
@@ -472,8 +475,8 @@ public class Outcome extends BaseObservable implements Observable {
         }
 
         public void populateMeta() {
-            setRb02(MainApp.idType == 1 ? MainApp.mwra.getSB().getRb02() : MainApp.mwra.getSC().getRb02());
-            setRb01a(MainApp.idType == 1 ? MainApp.mwra.getSB().getRb01a() : MainApp.mwra.getSC().getRb01a());
+            setRb02(mwra.getSC() == null ? MainApp.mwra.getSB().getRb02() : MainApp.idType == 1 ? MainApp.mwra.getSB().getRb02() : MainApp.mwra.getSC().getRb02());
+            setRb01a(mwra.getSC() == null ? MainApp.mwra.getSB().getRb01a() : MainApp.idType == 1 ? MainApp.mwra.getSB().getRb01a() : MainApp.mwra.getSC().getRb01a());
         }
 
         public void populateMetaFollowups() {
@@ -555,6 +558,7 @@ public class Outcome extends BaseObservable implements Observable {
         public void setRc05(String rc05) {
             this.rc05 = rc05;
             setRc06(rc05.equals("1") ? this.rc06 : "");
+            setRc09(rc05.equals("1") ? this.rc09 : "");
             notifyPropertyChanged(BR.rc05);
         }
 
@@ -588,9 +592,30 @@ public class Outcome extends BaseObservable implements Observable {
             setRc05(rc08.equals("1") ? this.rc05 : "");
             setRc06(rc08.equals("1") ? this.rc06 : "");
             setRc07(rc08.equals("1") ? this.rc07 : "");
+            setRc09(rc08.equals("1") ? this.rc09 : "");
             notifyPropertyChanged(BR.rc08);
         }
 
+        @Bindable
+        public String getRc09() {
+            return rc09;
+        }
+
+        public void setRc09(String rc09) {
+            this.rc09 = rc09;
+            setRc09x(rc09.equals("1") ? this.rc09x : "");
+            notifyPropertyChanged(BR.rc09);
+        }
+
+        @Bindable
+        public String getRc09x() {
+            return rc09x;
+        }
+
+        public void setRc09x(String rc09x) {
+            this.rc09x = rc09x;
+            notifyPropertyChanged(BR.rc09x);
+        }
     }
 
    /* public Outcome Hydrate(Outcome outcome) throws JSONException {
