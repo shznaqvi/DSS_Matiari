@@ -51,6 +51,21 @@ interface SyncFunctionsDao {
         }
         return toSyncOutcomes
     }
+    /**************** AbortionCL ********************/
+
+    @Query("SELECT * FROM abortionCL WHERE synced is '' OR synced is NULL ORDER BY id ASC")
+    fun getUnsyncedAbortion_internal() : List<AbortionCL>
+
+    fun getUnsycedAbortion() : List<AbortionCL> {
+        val mwras = getUnsyncedMWRAS_internal()
+        val allAbortionCL = getUnsyncedAbortion_internal()
+        val toSyncAbortionCL = arrayListOf<AbortionCL>()
+        mwras.forEach { abortion  ->
+            val abortionCL = allAbortionCL.filter { it.hdssId == abortion.hdssId}
+            toSyncAbortionCL.addAll(abortionCL)
+        }
+        return toSyncAbortionCL
+    }
 
     /**************** EntryLog ********************/
 

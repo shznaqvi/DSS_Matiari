@@ -17,21 +17,22 @@ import java.util.List;
 import java.util.Objects;
 
 import edu.aku.hassannaqvi.dss_matiari.R;
+import edu.aku.hassannaqvi.dss_matiari.adapters.SyncAdapter;
 import edu.aku.hassannaqvi.dss_matiari.contracts.TableContracts;
 import edu.aku.hassannaqvi.dss_matiari.core.MainApp;
+import edu.aku.hassannaqvi.dss_matiari.database.DssRoomDatabase;
+import edu.aku.hassannaqvi.dss_matiari.global.AppConstants;
+import edu.aku.hassannaqvi.dss_matiari.models.AbortionCL;
 import edu.aku.hassannaqvi.dss_matiari.models.EntryLog;
 import edu.aku.hassannaqvi.dss_matiari.models.Households;
 import edu.aku.hassannaqvi.dss_matiari.models.Mwra;
 import edu.aku.hassannaqvi.dss_matiari.models.Outcome;
-import edu.aku.hassannaqvi.dss_matiari.ui.SyncNewAC;
-import edu.aku.hassannaqvi.dss_matiari.adapters.SyncAdapter;
-import edu.aku.hassannaqvi.dss_matiari.global.AppConstants;
 import edu.aku.hassannaqvi.dss_matiari.models.SyncModelNew;
+import edu.aku.hassannaqvi.dss_matiari.ui.SyncNewAC;
 import edu.aku.hassannaqvi.dss_matiari.webcall.web_client.CryptoUtil;
 import edu.aku.hassannaqvi.dss_matiari.webcall.web_client.WebAPI;
 import edu.aku.hassannaqvi.dss_matiari.webcall.web_client.WebCall;
 import edu.aku.hassannaqvi.dss_matiari.webcall.web_client.WebClient;
-import edu.aku.hassannaqvi.dss_matiari.database.DssRoomDatabase;
 
 public class UploadData {
     private final SyncNewAC activity;
@@ -56,6 +57,7 @@ public class UploadData {
         put(new SyncModelNew(TableContracts.HouseholdTable.TABLE_NAME, ""), true);
         put(new SyncModelNew(TableContracts.MWRATable.TABLE_NAME, ""), false);
         put(new SyncModelNew(TableContracts.OutcomeTable.TABLE_NAME, ""), false);
+        put(new SyncModelNew(AbortionCL.TABLE_NAME, ""), false);
     }};
 
     /**
@@ -184,6 +186,16 @@ public class UploadData {
             for (int i = 0; i < list3.size(); i++) iFormCompletedUIds.add(list3.get(i).getUid());
             postData = prepareUploadData(tableName, gson.toJson(list3));
             webCall.call(webAPI.uploadEncData(postData), AppConstants.UPLOAD_DATA, tableName, ++index, list3.size(), iFormCompletedUIds, IS_CALL_ENCRYPTED);
+        } else
+            iWebCallback.onFailure(tableName, activity.getString(R.string.no_new_records_to_upload), ++index, 0, null);
+
+        tableName = AbortionCL.TABLE_NAME;
+
+        List<AbortionCL> list4 = appDatabase.syncFunctionsDao().getUnsycedAbortion();
+        if (list4 != null && list4.size() > 0) {
+            for (int i = 0; i < list4.size(); i++) iFormCompletedUIds.add(list4.get(i).getUid());
+            postData = prepareUploadData(tableName, gson.toJson(list4));
+            webCall.call(webAPI.uploadEncData(postData), AppConstants.UPLOAD_DATA, tableName, ++index, list4.size(), iFormCompletedUIds, IS_CALL_ENCRYPTED);
         } else
             iWebCallback.onFailure(tableName, activity.getString(R.string.no_new_records_to_upload), ++index, 0, null);
 

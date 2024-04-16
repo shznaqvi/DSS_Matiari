@@ -558,7 +558,6 @@ public class Outcome extends BaseObservable implements Observable {
         public void setRc05(String rc05) {
             this.rc05 = rc05;
             setRc06(rc05.equals("1") ? this.rc06 : "");
-            setRc09(rc05.equals("1") ? this.rc09 : "");
             notifyPropertyChanged(BR.rc05);
         }
 

@@ -2,8 +2,6 @@ package edu.aku.hassannaqvi.dss_matiari.models;
 
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.PROJECT_NAME;
 
-import android.database.Cursor;
-
 import androidx.annotation.NonNull;
 import androidx.databinding.BaseObservable;
 import androidx.databinding.Bindable;
@@ -24,8 +22,8 @@ import java.util.Date;
 import java.util.Locale;
 
 import edu.aku.hassannaqvi.dss_matiari.BR;
-import edu.aku.hassannaqvi.dss_matiari.core.MainApp;
 import edu.aku.hassannaqvi.dss_matiari.contracts.TableContracts.EntryLogTable;
+import edu.aku.hassannaqvi.dss_matiari.core.MainApp;
 
 @Entity(tableName = EntryLogTable.TABLE_NAME)
 public class EntryLog extends BaseObservable implements Observable {
@@ -70,6 +68,8 @@ public class EntryLog extends BaseObservable implements Observable {
     private String deviceId = StringUtils.EMPTY;
 
     private String synced = StringUtils.EMPTY;
+
+    @SerializedName("sync_date")
     private String syncDate = StringUtils.EMPTY;
 
     // For local use

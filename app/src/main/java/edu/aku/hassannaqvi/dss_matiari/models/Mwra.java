@@ -850,6 +850,7 @@ public class Mwra extends BaseObservable implements Observable {
         private String rb26 = StringUtils.EMPTY;
         private String rb27 = StringUtils.EMPTY;
         private String rb28 = StringUtils.EMPTY;
+        private String rb29 = StringUtils.EMPTY;
         private transient long ageInMonths;
 
         // Save section object as json object in db
@@ -1133,6 +1134,7 @@ public class Mwra extends BaseObservable implements Observable {
             setRb20(rb18.equals("1") ? this.rb20 : "");
             setRb21(rb18.equals("1") ? this.rb21 : "");
             setRb26(rb18.equals("1") ? this.rb26 : "");
+            setRb29(rb18.equals("1") ? this.rb29 : "");
             notifyPropertyChanged(BR.rb18);
         }
 
@@ -1195,6 +1197,16 @@ public class Mwra extends BaseObservable implements Observable {
         public void setRb28(String rb28) {
             this.rb28 = rb28;
             notifyPropertyChanged(BR.rb28);
+        }
+
+        @Bindable
+        public String getRb29() {
+            return rb29;
+        }
+
+        public void setRb29(String rb29) {
+            this.rb29 = rb29;
+            notifyPropertyChanged(BR.rb29);
         }
 
         private void CaluculateAge() {
