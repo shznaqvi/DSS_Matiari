@@ -34,9 +34,9 @@ import org.json.JSONException;
 import edu.aku.hassannaqvi.dss_matiari.R;
 import edu.aku.hassannaqvi.dss_matiari.adapters.FpMwraAdapter;
 import edu.aku.hassannaqvi.dss_matiari.core.MainApp;
+import edu.aku.hassannaqvi.dss_matiari.database.DssRoomDatabase;
 import edu.aku.hassannaqvi.dss_matiari.databinding.ActivityFpmwraBinding;
 import edu.aku.hassannaqvi.dss_matiari.models.Mwra;
-import edu.aku.hassannaqvi.dss_matiari.database.DssRoomDatabase;
 import edu.aku.hassannaqvi.dss_matiari.ui.EndingActivity;
 import edu.aku.hassannaqvi.dss_matiari.ui.sections.SectionBActivity;
 
@@ -124,6 +124,24 @@ public class FPMwraActivity extends AppCompatActivity {
 
         mwra = new Mwra();
         MainApp.prevChildCount = 0;
+
+        // Updated status in FollowupsSche for existing followups done
+        for (int i = 0; i < followUpsScheMWRAList.size(); i++) {
+
+            String fupStatus = "";
+            try {
+                if (followUpsScheMWRAList.get(i).getRb01() != null) {
+                    Mwra tempMwra = db.mwraDao().getFollowupsBySno(MainApp.households.getUid(), followUpsScheMWRAList.get(i).getRb01(), followUpsScheMWRAList.get(i).getFRound());
+                    fupStatus = tempMwra.getSysDate();
+                    followUpsScheMWRAList.get(i).setfpDoneDt(fupStatus);
+                    if (!fupStatus.equals("")) {
+                        mwraDone++;
+                    }
+                }
+            } catch (JSONException e) {
+                Toast.makeText(this, "JSONException(Followups): " + e.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        }
 
         if (mwraDone >= followUpsScheMWRAList.size()) {
             bi.btnContinue.setVisibility(View.VISIBLE);

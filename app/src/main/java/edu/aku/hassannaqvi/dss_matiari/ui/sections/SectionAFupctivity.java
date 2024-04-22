@@ -20,10 +20,11 @@ import org.json.JSONException;
 
 import edu.aku.hassannaqvi.dss_matiari.R;
 import edu.aku.hassannaqvi.dss_matiari.core.MainApp;
+import edu.aku.hassannaqvi.dss_matiari.database.DssRoomDatabase;
 import edu.aku.hassannaqvi.dss_matiari.databinding.ActivitySectionAFupBinding;
 import edu.aku.hassannaqvi.dss_matiari.global.DateUtils;
 import edu.aku.hassannaqvi.dss_matiari.models.Households;
-import edu.aku.hassannaqvi.dss_matiari.database.DssRoomDatabase;
+import edu.aku.hassannaqvi.dss_matiari.ui.EndingActivity;
 import edu.aku.hassannaqvi.dss_matiari.ui.lists.FPMwraActivity;
 
 public class SectionAFupctivity extends AppCompatActivity {
@@ -132,16 +133,23 @@ public class SectionAFupctivity extends AppCompatActivity {
         // New form
         // If 'Edit form' option is selected
         // Check data in db
+        Households.saveMainData(households.getHdssId(), households.getRound(), sA);
         Households form = db.householdsDao().getHouseholdByHDSSIDASC(sA.getRa10(), households.getRound());
         if (form != null) {
             // wraId found
             households = form;
             setResult(RESULT_OK);
             finish();
-            Households.saveMainData(sA.getRa10(), households.getRound(), sA);
+            Households.SA.saveData(sA);
+//            Households.saveMainData(sA.getRa10(), households.getRound(), sA);
             Intent intent = new Intent(this, FPMwraActivity.class);
             ((Activity) this).startActivityForResult(intent, 2);
-
+        } else {
+            finish();
+            Households.SA.saveData(sA);
+            startActivity(new Intent(this, EndingActivity.class)
+                    .setFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT)
+                    .putExtra("noWRA", true));
         }
 
     }
