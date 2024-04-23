@@ -305,5 +305,8 @@ dependencies {
     // For Loading
     implementation 'com.github.ybq:Android-SpinKit:1.4.0'
 
+    // Android Database Browser
+    implementation 'com.github.amitshekhariitbhu.Android-Debug-Database:debug-db:v1.0.6'
+
 }
 

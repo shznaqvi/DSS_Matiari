@@ -18,9 +18,9 @@ import java.util.Calendar;
 
 import edu.aku.hassannaqvi.dss_matiari.R;
 import edu.aku.hassannaqvi.dss_matiari.core.MainApp;
+import edu.aku.hassannaqvi.dss_matiari.database.DssRoomDatabase;
 import edu.aku.hassannaqvi.dss_matiari.databinding.ActivityEndingBinding;
 import edu.aku.hassannaqvi.dss_matiari.models.Households;
-import edu.aku.hassannaqvi.dss_matiari.database.DssRoomDatabase;
 import edu.aku.hassannaqvi.dss_matiari.ui.lists.FPHouseholdActivity;
 import edu.aku.hassannaqvi.dss_matiari.ui.lists.HouseholdActivity;
 
@@ -73,14 +73,12 @@ public class EndingActivity extends AppCompatActivity {
 
         String now = new SimpleDateFormat("yyyy-MM-dd").format(cal.getTime());
 
-
-        if (visitCount == 1) {
+        if (visitCount == 0)
+            sA.setRa01(now);
+        else if (visitCount == 1) {
             sA.setRa01v2(now);
-
         } else if (visitCount > 1) {
             sA.setRa01v3(now);
-
-
         }
     }
 

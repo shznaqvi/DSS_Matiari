@@ -71,7 +71,7 @@ public class FPMwraActivity extends AppCompatActivity {
             Log.d(TAG, "onCreate (JSONException): " + e.getMessage());
         }
 
-        // Updated status in FollowupsSche for existing followups done
+        /*// Updated status in FollowupsSche for existing followups done
         for (int i = 0; i < followUpsScheMWRAList.size(); i++) {
 
             String fupStatus = "";
@@ -80,17 +80,21 @@ public class FPMwraActivity extends AppCompatActivity {
                 if (followUpsScheMWRAList.get(i).getRb01() != null) {
 
                     Mwra tempMwra = db.mwraDao().getFollowupsBySno(MainApp.households.getUid(), followUpsScheMWRAList.get(i).getRb01(), followUpsScheMWRAList.get(i).getFRound());
-                    fupStatus = tempMwra.getSysDate();
-                    followUpsScheMWRAList.get(i).setfpDoneDt(fupStatus);
-                    if (!fupStatus.equals("")) {
-                        mwraDone++;
+                    if (tempMwra != null && !tempMwra.getSysDate().equals("") && tempMwra.getSysDate() != null) {
+                        fupStatus = tempMwra.getSysDate();
+                        followUpsScheMWRAList.get(i).setfpDoneDt(fupStatus);
+                        if ((!tempMwra.getSC().getRb10().equals("") && tempMwra.getSC().getRb10() != null)
+                                || (!tempMwra.getSC().getRb11().equals("") && tempMwra.getSC().getRb11() != null))
+                            allMwraRefusedOrMigrated.put(new String[]{followUpsScheMWRAList.get(i).getMuid(), followUpsScheMWRAList.get(i).getHdssid()}, false);
+                        if (!fupStatus.equals(""))
+                            mwraDone++;
                     }
                 }
             } catch (JSONException e) {
 
                 Toast.makeText(this, "JSONException(Followups): " + e.getMessage(), Toast.LENGTH_SHORT).show();
             }
-        }
+        }*/
 
         fmAdapter = new FpMwraAdapter(this, followUpsScheMWRAList);
         bi.rvMembers.setAdapter(fmAdapter);
@@ -122,20 +126,45 @@ public class FPMwraActivity extends AppCompatActivity {
         MainApp.lockScreen(this);
         Toast.makeText(this, "Activity Resumed!", Toast.LENGTH_SHORT).show();
 
+        /*Households.SA sA = null;
+        if (households.getSA() == null) {
+            sA = new Households.SA();
+        }
+        sA.setRa01(DateUtils.getFormattedDateTime(households.getSysDate(),
+                AppConstants.APP_DATE_TIME_FORMAT, AppConstants.APP_DATE_FORMAT));
+        Households.SA.saveData(sA);*/
+
         mwra = new Mwra();
         MainApp.prevChildCount = 0;
+        mwraDone = 0;
+        allMwraRefusedOrMigrated.clear();
+
+        try {
+            followUpsScheMWRAList = db.FollowUpsScheDao().getAllfollowupsScheByHH(households.getVillageCode(), households.getUcCode(), households.getHhNo());
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            Toast.makeText(this, "JSONException: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+            Log.d(TAG, "onCreate (JSONException): " + e.getMessage());
+        }
 
         // Updated status in FollowupsSche for existing followups done
         for (int i = 0; i < followUpsScheMWRAList.size(); i++) {
 
             String fupStatus = "";
             try {
+
                 if (followUpsScheMWRAList.get(i).getRb01() != null) {
+
                     Mwra tempMwra = db.mwraDao().getFollowupsBySno(MainApp.households.getUid(), followUpsScheMWRAList.get(i).getRb01(), followUpsScheMWRAList.get(i).getFRound());
-                    fupStatus = tempMwra.getSysDate();
-                    followUpsScheMWRAList.get(i).setfpDoneDt(fupStatus);
-                    if (!fupStatus.equals("")) {
-                        mwraDone++;
+                    if (tempMwra != null && !tempMwra.getSysDate().equals("") && tempMwra.getSysDate() != null) {
+                        fupStatus = tempMwra.getSysDate();
+                        followUpsScheMWRAList.get(i).setfpDoneDt(fupStatus);
+                        if ((tempMwra.getSC() != null && (tempMwra.getSC().getRb10().equals("2")
+                                || tempMwra.getSC().getRb10().equals("3"))))
+                            allMwraRefusedOrMigrated.put(new String[]{followUpsScheMWRAList.get(i).getMuid(), followUpsScheMWRAList.get(i).getHdssid()}, false);
+                        if (!fupStatus.equals(""))
+                            mwraDone++;
                     }
                 }
             } catch (JSONException e) {
@@ -185,19 +214,15 @@ public class FPMwraActivity extends AppCompatActivity {
             Toast.makeText(this, "btnContinue(uid)", Toast.LENGTH_SHORT).show();
             setResult(RESULT_OK);
             finish();
-
         } else {
             proceedSelect();
         }
-
     }
 
     public void BtnEnd(View view) {
         setResult(RESULT_CANCELED);
         finish();
         startActivity(new Intent(this, FPHouseholdActivity.class));
-
-
     }
 
     @Override

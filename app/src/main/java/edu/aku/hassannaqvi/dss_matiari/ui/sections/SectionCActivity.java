@@ -44,6 +44,7 @@ public class SectionCActivity extends AppCompatActivity {
     private DssRoomDatabase db;
 
     private Mwra.SC sC;
+    private Mwra.SD sD;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,14 +77,17 @@ public class SectionCActivity extends AppCompatActivity {
 
     public void initUI() {
 
-        String date = DateUtils.changeDateFormat("2023-01-01");
+//        String date = DateUtils.addSubDays(DateUtils.getCurrentDateTime(AppConstants.APP_DATE_FORMAT), -7);
+        String date = DateUtils.changeDateFormat("2024-01-01");
         bi.rb01a.setMinDate(date);
 
         // Set Round Number from followups data
         MainApp.ROUND = MainApp.fpMwra.getFRound();
 
         // Calculate age of woman according to registration date
-        long daysdiff = Mwra.CalculateAge(fpMwra.getReg_date());
+//        long daysdiff = Mwra.CalculateAge(fpMwra.getReg_date());
+        long daysdiff = Mwra.CalculateAge(DateUtils.getFormattedDateTime(
+                fpMwra.getRa01().getDate(), AppConstants.CUSTOM_SERVER_DATE_TIME_FORMAT, AppConstants.APP_DATE_FORMAT));
         long years = daysdiff / 365;
         long actualAge = 0;
 
@@ -93,7 +97,7 @@ public class SectionCActivity extends AppCompatActivity {
         }
 
         // Enable Overage option in VISIT status according to woman age
-        if (actualAge <= 49) {
+        if (actualAge < 50) {
             if (Integer.parseInt(households.getVisitNo()) < 2) {
                 bi.rb1001.setEnabled(true);
                 bi.rb1002.setEnabled(true);
@@ -165,11 +169,11 @@ public class SectionCActivity extends AppCompatActivity {
                     if (!isAvailable) {
                         mwraStatus.put(new String[]{fpMwra.getMuid(), fpMwra.getHdssid()}, false);
                     }
-                    sC.setRb07(fpMwra.getRb07());
+                    //sC.setRb07(fpMwra.getRb07());
                     sC.setRb06(fpMwra.getRb06());
                     sC.setRb04(fpMwra.getRb04());
                 } else {
-                    sC.setRb07("");
+                    //sC.setRb07("");
                     sC.setRb06(sC.getRb06());
                     sC.setRb04(fpMwra.getRb04());
                     if (!mwraStatus.isEmpty()) {
@@ -194,7 +198,7 @@ public class SectionCActivity extends AppCompatActivity {
                         allMwraRefusedOrMigrated.put(new String[]{fpMwra.getMuid(), fpMwra.getHdssid()}, false);
                     }
                 } else {
-                    sC.setRb07("");
+//                    sC.setRb07("");
                     sC.setRb06(sC.getRb06());
                     sC.setRb04(fpMwra.getRb04());
                     if (!allMwraRefusedOrMigrated.isEmpty()) {
@@ -313,7 +317,8 @@ public class SectionCActivity extends AppCompatActivity {
 
         if (!mwra.getUid().contains("_")) {
             mwra.setPregnum("0");
-            if (sC.getRb07().equals("1")) {
+            /*if (sC.getRb07().equals("1")) {*/
+            if (fpMwra.getRb07().equals("1")) {
                 mwra.setPregnum(String.valueOf(Integer.parseInt(mwra.getPregnum()) + 1));
             }
 
@@ -321,12 +326,22 @@ public class SectionCActivity extends AppCompatActivity {
                 mwra.setPregnum(String.valueOf(Integer.parseInt(mwra.getPregnum()) + 1));
             }
 
-            if (sC.getRb07().equals("2") && sC.getRb18().equals("2")) {
+            /*if (sC.getRb07().equals("2") && sC.getRb18().equals("2")) {*/
+            if (fpMwra.getRb07().equals("2") && sC.getRb18().equals("2")) {
                 mwra.setPregnum("0");
             }
         }
+        if (!bi.rb1001.isChecked()) {
+            if (mwra.getSD() == null) {
+                sD = new Mwra.SD();
+                sD.setRb07(fpMwra.getRb07());
+            }
+            Mwra.SD.saveData(sD);
+        }
 
         Mwra.SC.saveData(sC);
+//        if (sD != null)
+//            Mwra.SD.saveData(sD);
 
         if (bi.rb1001.isChecked()) {
 
@@ -393,7 +408,7 @@ public class SectionCActivity extends AppCompatActivity {
                 // Divorced
                 case "2":
                     // Pregnant
-                    if (mwra.getPrePreg().equals("1")) {
+                    if (fpMwra.getRb07().equals("1")) {
 
                         if (bi.rb1401.isChecked()) {  // If Pregnancy Continued
                             setResult(RESULT_OK);
@@ -419,10 +434,22 @@ public class SectionCActivity extends AppCompatActivity {
                             } else {
                                 MainApp.prevChildCount = 0;
                             }
-                            Intent forwardIntent = new Intent(this, SectionEActivity.class).putExtra("complete", true);
+                            /*Intent forwardIntent = new Intent(this, SectionEActivity.class).putExtra("complete", true);
                             forwardIntent.setFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT);
                             setResult(RESULT_OK, forwardIntent);
-                            startActivity(forwardIntent);
+                            startActivity(forwardIntent);*/
+                            if (bi.rb2601.isChecked() || bi.rb2605.isChecked()) {
+                                Intent forwardIntent = new Intent(this, SectionEActivity.class).putExtra("complete", true);
+                                forwardIntent.setFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT);
+                                setResult(RESULT_OK, forwardIntent);
+                                finish();
+                                startActivity(forwardIntent);
+                            } else if (bi.rb2603.isChecked()) {
+                                AppConstants.gotoActivity(this, SectionDActivity.class, true);
+                            } else {
+                                setResult(RESULT_OK);
+                                finish();
+                            }
                             // Marital status changed
                         } else if (bi.rb0601.isChecked() || bi.rb1802.isChecked() && !mwra.getPrePreg().equals("2")) {
                             Intent forwardIntent = new Intent(this, SectionDActivity.class).putExtra("complete", true);
@@ -438,7 +465,7 @@ public class SectionCActivity extends AppCompatActivity {
                 // Widow
                 case "3":
                     // Pregnant
-                    if (mwra.getPrePreg().equals("1")) {
+                    if (fpMwra.getRb07().equals("1")) {
                         if (bi.rb1401.isChecked()) {  // If Pregnancy Continued
                             setResult(RESULT_OK);
                         } else {     // If Pregnancy ended
@@ -458,7 +485,12 @@ public class SectionCActivity extends AppCompatActivity {
                         }
                     } else {      // Not Pregnant
                         // Marital status changed
-                        if (bi.rb0601.isChecked() || bi.rb1802.isChecked() && !mwra.getPrePreg().equals("2")) {
+                        /*
+                         * rb0601 = Marital Status is Married
+                         * rb1802 = Have you been pregnant in the past three months? is No
+                         * rb0701 = Pregnancy Status is Pregnant
+                         * */
+                        if (bi.rb0601.isChecked() || bi.rb1802.isChecked() && !fpMwra.getRb07().equals("2")) {
                             Intent forwardIntent = new Intent(this, SectionDActivity.class).putExtra("complete", true);
                             forwardIntent.setFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT);
                             setResult(RESULT_OK, forwardIntent);
@@ -470,10 +502,22 @@ public class SectionCActivity extends AppCompatActivity {
                             } else {
                                 MainApp.prevChildCount = 0;
                             }
-                            Intent forwardIntent = new Intent(this, SectionEActivity.class).putExtra("complete", true);
+                            /*Intent forwardIntent = new Intent(this, SectionEActivity.class).putExtra("complete", true);
                             forwardIntent.setFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT);
                             setResult(RESULT_OK, forwardIntent);
-                            startActivity(forwardIntent);
+                            startActivity(forwardIntent);*/
+                            if (bi.rb2601.isChecked() || bi.rb2605.isChecked()) {
+                                Intent forwardIntent = new Intent(this, SectionEActivity.class).putExtra("complete", true);
+                                forwardIntent.setFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT);
+                                setResult(RESULT_OK, forwardIntent);
+                                finish();
+                                startActivity(forwardIntent);
+                            } else if (bi.rb2603.isChecked()) {
+                                AppConstants.gotoActivity(this, SectionDActivity.class, true);
+                            } else {
+                                setResult(RESULT_OK);
+                                finish();
+                            }
                         } else {
                             setResult(RESULT_OK);
                         }
@@ -483,7 +527,7 @@ public class SectionCActivity extends AppCompatActivity {
                 // Separated
                 case "5":
                     // Pregnant
-                    if (mwra.getPrePreg().equals("1")) {
+                    if (fpMwra.getRb07().equals("1")) {
 
                         if (bi.rb1401.isChecked()) {  // If Pregnancy Continued
                             setResult(RESULT_OK);

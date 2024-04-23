@@ -123,11 +123,11 @@ public class Mwra extends BaseObservable implements Observable {
     @SerializedName("s4")
     private SD sD;
 
-    @Ignore
+    //@Ignore
     private String pregnum = StringUtils.EMPTY;
 
 
-    @Ignore
+    //@Ignore
     private String prePreg = StringUtils.EMPTY;
 
     @Ignore
@@ -834,7 +834,7 @@ public class Mwra extends BaseObservable implements Observable {
         private String rb04 = StringUtils.EMPTY;
         private String rb05 = StringUtils.EMPTY;
         private String rb06 = StringUtils.EMPTY;
-        private String rb07 = StringUtils.EMPTY;
+//        private String rb07 = StringUtils.EMPTY;
         private String rb10 = StringUtils.EMPTY;
         private String rb11 = StringUtils.EMPTY;
         private String rb12 = StringUtils.EMPTY;
@@ -1016,7 +1016,7 @@ public class Mwra extends BaseObservable implements Observable {
         }
 
 
-        @Bindable
+        /*@Bindable
         public String getRb07() {
             return rb07;
         }
@@ -1024,7 +1024,7 @@ public class Mwra extends BaseObservable implements Observable {
         public void setRb07(String rb07) {
             this.rb07 = rb07;
             notifyPropertyChanged(BR.rb07);
-        }
+        }*/
 
 
         @Bindable
