@@ -538,11 +538,23 @@ public class SectionCActivity extends AppCompatActivity {
                                 } else {
                                     MainApp.prevChildCount = 0;
                                 }
-                                Intent forwardIntent = new Intent(this, SectionEActivity.class).putExtra("complete", true);
+                                /*Intent forwardIntent = new Intent(this, SectionEActivity.class).putExtra("complete", true);
                                 forwardIntent.setFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT);
                                 setResult(RESULT_OK, forwardIntent);
                                 startActivity(forwardIntent);
-                                finish();
+                                finish();*/
+                                if (bi.rb2601.isChecked() || bi.rb2605.isChecked()) {
+                                    Intent forwardIntent = new Intent(this, SectionEActivity.class).putExtra("complete", true);
+                                    forwardIntent.setFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT);
+                                    setResult(RESULT_OK, forwardIntent);
+                                    finish();
+                                    startActivity(forwardIntent);
+                                } else if (bi.rb2603.isChecked()) {
+                                    AppConstants.gotoActivity(this, SectionDActivity.class, true);
+                                } else {
+                                    setResult(RESULT_OK);
+                                    finish();
+                                }
                             } else {
                                 setResult(RESULT_OK);
                             }
