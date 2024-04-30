@@ -62,7 +62,7 @@ abstract class DssRoomDatabase : RoomDatabase() {
     abstract fun GeneralDao() : GeneralDao
 */
     companion object {
-        const val DATABASE_VERSION = 13
+        const val DATABASE_VERSION = 14
         const val DATABASE_NAME = "HDSS_MATIARI1.db"
         const val DATABASE_COPY = "HDSS_MATIARI1_copy.db"
 
@@ -86,6 +86,7 @@ abstract class DssRoomDatabase : RoomDatabase() {
                     .addMigrations(MIGRATION_6_7)
                     .addMigrations(MIGRATION_7_12)
                     .addMigrations(MIGRATION_12_13)
+                    .addMigrations(MIGRATION_13_14)
 //                    .fallbackToDestructiveMigration()
                     .allowMainThreadQueries()
                     .build()
@@ -163,6 +164,14 @@ abstract class DssRoomDatabase : RoomDatabase() {
         private val MIGRATION_12_13 = object : Migration(12, 13) {
             override fun migrate(database: SupportSQLiteDatabase) {
                 database.execSQL("CREATE TABLE IF NOT EXISTS `abortionCL` (`round` TEXT, `isError` INTEGER NOT NULL DEFAULT 0, `regRound` TEXT, `projectName` TEXT, `id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `uid` TEXT, `wid` TEXT, `sNo` TEXT, `userName` TEXT, `sysDate` TEXT, `hdssId` TEXT, `ucCode` TEXT, `villageCode` TEXT, `hhNo` TEXT, `visitNo` TEXT, `deviceId` TEXT, `appver` TEXT, `iStatus` TEXT, `synced` TEXT, `sM` TEXT)")
+            }
+        }
+
+
+        private val MIGRATION_13_14 = object : Migration(13, 14) {
+            override fun migrate(database: SupportSQLiteDatabase) {
+                database.execSQL("ALTER TABLE 'MWRAs' ADD COLUMN 'ageM' TEXT")
+                database.execSQL("ALTER TABLE 'hhfuplist_view' ADD COLUMN 'ageM' TEXT")
             }
         }
     }

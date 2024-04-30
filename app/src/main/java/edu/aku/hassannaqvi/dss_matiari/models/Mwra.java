@@ -79,6 +79,9 @@ public class Mwra extends BaseObservable implements Observable {
     @ColumnInfo(name = MWRATable.COLUMN_STRUCTURE_NO)
     private transient String structureNo = StringUtils.EMPTY;
 
+    @ColumnInfo(name = MWRATable.COLUMN_AGE_M)
+    private String ageM = StringUtils.EMPTY;
+
     @ColumnInfo(name = MWRATable.COLUMN_SNO)
     private String sNo = StringUtils.EMPTY;
 
@@ -353,6 +356,14 @@ public class Mwra extends BaseObservable implements Observable {
 
     public void setStructureNo(String structureNo) {
         this.structureNo = structureNo;
+    }
+
+    public String getAgeM() {
+        return ageM;
+    }
+
+    public void setAgeM(String ageM) {
+        this.ageM = ageM;
     }
 
     public String getSNo() {

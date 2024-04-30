@@ -88,13 +88,37 @@ public class SectionCActivity extends AppCompatActivity {
 //        long daysdiff = Mwra.CalculateAge(fpMwra.getReg_date());
         long daysdiff = Mwra.CalculateAge(DateUtils.getFormattedDateTime(
                 fpMwra.getRa01().getDate(), AppConstants.CUSTOM_SERVER_DATE_TIME_FORMAT, AppConstants.APP_DATE_FORMAT));
-        long years = daysdiff / 365;
+        long months, years;
+        /*if (!AppConstants.isEmpty(fpMwra.getAgeM())) {
+            int monthsInDays = Integer.parseInt(fpMwra.getAgeM()) * 30;
+            long cummulativeDays = monthsInDays + daysdiff;
+            months = cummulativeDays / 30;
+            years = months / 12;
+        } else {
+            int ageInYears = Integer.parseInt(fpMwra.getRb05());
+            int ageInMonths = ageInYears * 12;
+            int days = ageInMonths * 30;
+            long cummulativeDays = days + daysdiff;
+            months = cummulativeDays / 30;
+            years = months / 12;
+        }*/
+        int ageMonths = !AppConstants.isEmpty(fpMwra.getAgeM()) ? Integer.parseInt(fpMwra.getAgeM()) * 30 : Integer.parseInt(fpMwra.getRb05()) * 12 * 30;
+        long cumulativeDays = ageMonths + daysdiff;
+        months = cumulativeDays / 30;
+        years = months / 12;
+
+//        long years = daysdiff / 365;
         long actualAge = 0;
 
-        if (!fpMwra.getRb05().equals("")) {
+        actualAge = years;
+        bi.rb05.setText(String.valueOf(actualAge));
+        mwra.setAgeM(Long.toString(months));
+
+
+       /* if (!fpMwra.getRb05().equals("")) {
             actualAge = Long.parseLong(fpMwra.getRb05()) + years;
             bi.rb05.setText(String.valueOf(actualAge));
-        }
+        }*/
 
         // Enable Overage option in VISIT status according to woman age
         if (actualAge < 50) {
@@ -331,7 +355,7 @@ public class SectionCActivity extends AppCompatActivity {
                 mwra.setPregnum("0");
             }
         }
-        if (!bi.rb1001.isChecked()) {
+        if (!bi.rb1001.isChecked() || bi.rb1401.isChecked()) {
             if (mwra.getSD() == null) {
                 sD = new Mwra.SD();
                 sD.setRb07(fpMwra.getRb07());

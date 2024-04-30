@@ -39,6 +39,9 @@ public class FollowUpsSche implements Observable {
     @ColumnInfo(name = TableFollowUpsSche.COLUMN_HOUSEHOLD_NO)
     private String hhNo = StringUtils.EMPTY;
 
+    @ColumnInfo(name = TableFollowUpsSche.COLUMN_AGE_M)
+    private String ageM = StringUtils.EMPTY;
+
     @ColumnInfo(name = TableFollowUpsSche.COLUMN_HDSSID)
     private String hdssid = StringUtils.EMPTY;
 
@@ -162,6 +165,14 @@ public class FollowUpsSche implements Observable {
 
     public void setHhNo(String hhNo) {
         this.hhNo = hhNo;
+    }
+
+    public String getAgeM() {
+        return ageM;
+    }
+
+    public void setAgeM(String ageM) {
+        this.ageM = ageM;
     }
 
     public String getHdssid() {
@@ -372,6 +383,7 @@ public class FollowUpsSche implements Observable {
         this.villageCode = jsonObject.getString(TableFollowUpsSche.COLUMN_VILLAGE_CODE);
         this.muid = jsonObject.getString(TableFollowUpsSche.COLUMN_MUID);
         this.hhNo = jsonObject.getString(TableFollowUpsSche.COLUMN_HOUSEHOLD_NO);
+        this.ageM = jsonObject.getString(TableFollowUpsSche.COLUMN_AGE_M);
         this.hdssid = jsonObject.getString(TableFollowUpsSche.COLUMN_HDSSID);
         //this.ra01 = jsonObject.getJSONObject(TableFollowUpsSche.COLUMN_RA01);
         this.ra08 = jsonObject.getString(TableFollowUpsSche.COLUMN_RA08);
@@ -404,6 +416,7 @@ public class FollowUpsSche implements Observable {
         this.villageCode = cursor.getString(cursor.getColumnIndexOrThrow(TableFollowUpsSche.COLUMN_VILLAGE_CODE));
         this.muid = cursor.getString(cursor.getColumnIndexOrThrow(TableFollowUpsSche.COLUMN_MUID));
         this.hhNo = cursor.getString(cursor.getColumnIndexOrThrow(TableFollowUpsSche.COLUMN_HOUSEHOLD_NO));
+        this.ageM = cursor.getString(cursor.getColumnIndexOrThrow(TableFollowUpsSche.COLUMN_AGE_M));
         this.hdssid = cursor.getString(cursor.getColumnIndexOrThrow(TableFollowUpsSche.COLUMN_HDSSID));
         //this.ra01 = cursor.get(cursor.getColumnIndexOrThrow(TableFollowUpsSche.COLUMN_RA01));
         this.ra08 = cursor.getString(cursor.getColumnIndexOrThrow(TableFollowUpsSche.COLUMN_RA08));

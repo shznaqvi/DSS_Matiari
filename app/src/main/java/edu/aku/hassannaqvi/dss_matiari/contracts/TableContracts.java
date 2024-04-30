@@ -51,6 +51,7 @@ public class TableContracts {
         public static final String COLUMN_CHILD_COUNT = "child_count";
         //public static final String COLUMN_FROUND = "fRound";
         public static final String COLUMN_SNO = "sNo";
+        public static final String COLUMN_AGE_M = "ageM";    // Age in months
         public static final String COLUMN_SB = "s2";
         public static final String COLUMN_SC = "s3";
         public static final String COLUMN_SD = "s4";
@@ -311,6 +312,7 @@ public class TableContracts {
         public static final String COLUMN_UC_CODE = "ucCode";
         public static final String COLUMN_MUID = "_muid";
         public static final String COLUMN_HOUSEHOLD_NO = "hhno";
+        public static final String COLUMN_AGE_M = "ageM";
         public static final String COLUMN_HDSSID = "hdssid";
         public static final String COLUMN_RA01 = "ra01"; // Date of First Visit
         public static final String COLUMN_RA08 = "ra08"; // Para
