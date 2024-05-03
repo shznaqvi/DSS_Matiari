@@ -1,8 +1,8 @@
 package edu.aku.hassannaqvi.dss_matiari.database.dao
 
 import androidx.room.*
-import edu.aku.hassannaqvi.dss_matiari.models.Outcome
 import edu.aku.hassannaqvi.dss_matiari.global.DateUtils
+import edu.aku.hassannaqvi.dss_matiari.models.Outcome
 import edu.aku.hassannaqvi.dss_matiari.models.SyncModelNew
 import org.json.JSONException
 
@@ -46,6 +46,15 @@ interface OutcomeDao {
         regRound: String
     ): Outcome?
 
+    @Query("SELECT * FROM outcomes where _uuid like :uuid and sno like :rb01 and round like :fround and regRound like :regRound and msno like :msno order by _id ASC ")
+    fun getOutcomeFollowupsBySnoAndMsno_internal(
+        uuid: String,
+        rb01: String,
+        fround: String,
+        regRound: String,
+        msno: String
+    ): Outcome?
+
 
     @Throws(JSONException::class)
     fun getOutcomeFollowupsBySno(
@@ -62,10 +71,25 @@ interface OutcomeDao {
         return outcome
     }
 
+    @Throws(JSONException::class)
+    fun getOutcomeFollowupsBySnoAndMsno(
+        uuid: String,
+        rb01: String,
+        fround: String,
+        msno: String
+    ): Outcome? {
+        val outcome = getOutcomeFollowupsBySnoAndMsno_internal(uuid, rb01, fround, "", msno)
+        if (outcome == null) {
+            val tempOutcome = Outcome()
+            return tempOutcome
+        }
+        return outcome
+    }
+
     /* NEW STRUCT */
 
     @Query("SELECT * FROM outcomes WHERE _uuid IN (:uIds)")
-    abstract fun getAllUnSyncedDataByUIds(uIds: List<String>): List<Outcome>
+    fun getAllUnSyncedDataByUIds(uIds: List<String>): List<Outcome>
 
     // This query is only used for updating sync list
     // id = rowId

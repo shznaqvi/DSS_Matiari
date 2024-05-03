@@ -161,6 +161,7 @@ public class SectionMActivity extends AppCompatActivity {
 
     public void btnContinue(View view) {
         if (!formValidation()) return;
+        MainApp.abortionCL.setIStatus("1");
         AbortionCL.saveMainData(mwra.getHdssId(), mwra.getUid(), mwra.getRound(), sM);
         MainApp.abortionCL.setWid(mwra.getUid());
         AbortionCL.SM.saveData(sM);

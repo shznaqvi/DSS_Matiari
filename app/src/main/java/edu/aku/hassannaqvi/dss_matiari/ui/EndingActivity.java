@@ -57,9 +57,11 @@ public class EndingActivity extends AppCompatActivity {
         bi.istatusc.setEnabled(!complete);
         if (!complete && refusedOrMigrated) {
             bi.istatusf.setEnabled(true);
+            bi.istatusg.setEnabled(true);
             bi.istatush.setEnabled(true);
         } else {
             bi.istatusf.setEnabled(false);
+            bi.istatusg.setEnabled(false);
             bi.istatush.setEnabled(false);
         }
         bi.istatusg.setEnabled(!complete);

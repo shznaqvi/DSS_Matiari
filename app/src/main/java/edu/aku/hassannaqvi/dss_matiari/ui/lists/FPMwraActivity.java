@@ -37,6 +37,7 @@ import edu.aku.hassannaqvi.dss_matiari.core.MainApp;
 import edu.aku.hassannaqvi.dss_matiari.database.DssRoomDatabase;
 import edu.aku.hassannaqvi.dss_matiari.databinding.ActivityFpmwraBinding;
 import edu.aku.hassannaqvi.dss_matiari.models.Mwra;
+import edu.aku.hassannaqvi.dss_matiari.models.Outcome;
 import edu.aku.hassannaqvi.dss_matiari.ui.EndingActivity;
 import edu.aku.hassannaqvi.dss_matiari.ui.sections.SectionBActivity;
 
@@ -150,18 +151,20 @@ public class FPMwraActivity extends AppCompatActivity {
 
         // Updated status in FollowupsSche for existing followups done
         for (int i = 0; i < followUpsScheMWRAList.size(); i++) {
+            if (followUpsScheMWRAList.get(i).getMemberType().equals("2"))
+                continue;
 
             String fupStatus = "";
             try {
 
                 if (followUpsScheMWRAList.get(i).getRb01() != null) {
-
                     Mwra tempMwra = db.mwraDao().getFollowupsBySno(MainApp.households.getUid(), followUpsScheMWRAList.get(i).getRb01(), followUpsScheMWRAList.get(i).getFRound());
                     if (tempMwra != null && !tempMwra.getSysDate().equals("") && tempMwra.getSysDate() != null) {
                         fupStatus = tempMwra.getSysDate();
                         followUpsScheMWRAList.get(i).setfpDoneDt(fupStatus);
-                        if ((tempMwra.getSC() != null && (tempMwra.getSC().getRb10().equals("2")
-                                || tempMwra.getSC().getRb10().equals("3"))))
+                        if (tempMwra.getSC() != null && (tempMwra.getSC().getRb10().equals("2")
+                                || tempMwra.getSC().getRb10().equals("3") || tempMwra.getSC().getRb10().equals("5")
+                                || tempMwra.getSC().getRb10().equals("6")))
                             allMwraRefusedOrMigrated.put(new String[]{followUpsScheMWRAList.get(i).getMuid(), followUpsScheMWRAList.get(i).getHdssid()}, false);
                         if (!fupStatus.equals(""))
                             mwraDone++;
@@ -169,6 +172,23 @@ public class FPMwraActivity extends AppCompatActivity {
                 }
             } catch (JSONException e) {
                 Toast.makeText(this, "JSONException(Followups): " + e.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        }
+
+        for (int i = 0; i < followUpsScheMWRAList.size(); i++) {
+            if (followUpsScheMWRAList.get(i).getMemberType().equals("2")) {
+                String fupStatus = "";
+                try {
+                    Outcome outcome = db.OutcomeDao().getOutcomeFollowupsBySnoAndMsno(MainApp.households.getUid(), followUpsScheMWRAList.get(i).getRb01(), followUpsScheMWRAList.get(i).getFRound(), followUpsScheMWRAList.get(i).getMsno());
+                    if (outcome != null && !outcome.getSysDate().equals("") && outcome.getSysDate() != null) {
+                        fupStatus = outcome.getSysDate();
+                        followUpsScheMWRAList.get(i).setfpDoneDt(fupStatus);
+                        if (!fupStatus.equals(""))
+                            mwraDone++;
+                    }
+                } catch (JSONException e) {
+                    Toast.makeText(this, "JSONException(Followups): " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                }
             }
         }
 
@@ -316,18 +336,16 @@ public class FPMwraActivity extends AppCompatActivity {
                 } else
                     flag = true;
             }
-        } else if(allMwraRefusedOrMigrated.size() == mwraDone) {
+        } else if (allMwraRefusedOrMigrated.size() == mwraDone) {
             refusedOrMigrated = true;
         }
 
-        if(!refusedOrMigrated && mwraStatus.size() > 0)
-        {
+        if (!refusedOrMigrated && mwraStatus.size() > 0) {
             i.putExtra("complete", flag);
-        }else if(refusedOrMigrated){
+        } else if (refusedOrMigrated) {
             i.putExtra("refused", refusedOrMigrated);
             i.putExtra("complete", false);
-        }else if(!refusedOrMigrated && mwraStatus.size() == 0)
-        {
+        } else if (!refusedOrMigrated && mwraStatus.size() == 0) {
             i.putExtra("complete", true);
         }
 
