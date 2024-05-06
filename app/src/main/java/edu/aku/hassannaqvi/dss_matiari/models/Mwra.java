@@ -1051,7 +1051,7 @@ public class Mwra extends BaseObservable implements Observable {
             setRb16(rb10.equals("1") ? this.rb16 : "");
             setRb17(rb10.equals("1") ? this.rb17 : "");
 
-            mwra.setIstatus(rb10);
+//            mwra.setIstatus(rb10);
             notifyPropertyChanged(BR.rb10);
         }
 

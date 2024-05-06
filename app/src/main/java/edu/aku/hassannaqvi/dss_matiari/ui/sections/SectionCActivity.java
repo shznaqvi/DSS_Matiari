@@ -338,7 +338,7 @@ public class SectionCActivity extends AppCompatActivity {
         if (!formValidation()) return;
         Mwra.saveMainDataFup(households.getUid(), sC.getRb01(), fpMwra.getFRound(), sC);
         mwra.setSNo(sC.getRb01());
-
+        mwra.setIstatus(sC.getRb10());
         if (!mwra.getUid().contains("_")) {
             mwra.setPregnum("0");
             /*if (sC.getRb07().equals("1")) {*/

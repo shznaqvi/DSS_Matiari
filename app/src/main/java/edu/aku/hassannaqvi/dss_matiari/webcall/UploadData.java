@@ -180,7 +180,6 @@ public class UploadData {
             iWebCallback.onFailure(tableName, activity.getString(R.string.no_new_records_to_upload), ++index, 0, null);
 
         tableName = TableContracts.OutcomeTable.TABLE_NAME;
-
         List<Outcome> list3 = appDatabase.syncFunctionsDao().getUnsycedOutcomes();
         if (list3 != null && list3.size() > 0) {
             for (int i = 0; i < list3.size(); i++) iFormCompletedUIds.add(list3.get(i).getUid());
@@ -190,7 +189,6 @@ public class UploadData {
             iWebCallback.onFailure(tableName, activity.getString(R.string.no_new_records_to_upload), ++index, 0, null);
 
         tableName = AbortionCL.TABLE_NAME;
-
         List<AbortionCL> list4 = appDatabase.syncFunctionsDao().getUnsycedAbortion();
         if (list4 != null && list4.size() > 0) {
             for (int i = 0; i < list4.size(); i++) iFormCompletedUIds.add(list4.get(i).getUid());
