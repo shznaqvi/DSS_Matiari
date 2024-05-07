@@ -103,13 +103,11 @@ public class SectionEActivity extends AppCompatActivity {
                         bi.rc06.setMinDate(date);
                     } else {
                         MainApp.ROUND = mwra.getRound();
-
                     }
-
                 } else {
                     if (outcome.getUid().equals("")) {
                         MainApp.ROUND = MainApp.mwra.getSC() == null ? mwra.getRegRound() :
-                                 MainApp.idType == 1 ? mwra.getRegRound() : MainApp.fpMwra.getFRound();
+                                MainApp.idType == 1 ? mwra.getRegRound() : MainApp.fpMwra.getFRound();
                         sE.setRc03(MainApp.mwra.getSC() == null ? mwra.getSB().getRb21() :
                                 MainApp.idType == 1 ? mwra.getSB().getRb21() : mwra.getSC().getRb15());
                         String date = DateUtils.changeDateFormat(MainApp.mwra.getSC() == null ? mwra.getSB().getRb21() :
@@ -128,20 +126,16 @@ public class SectionEActivity extends AppCompatActivity {
         bi.rc03dob.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
             }
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-
             }
 
             @Override
             public void afterTextChanged(Editable s) {
-
                 String date = DateUtils.changeDateFormat(bi.rc03dob.getText().toString());
                 bi.rc06.setMinDate(date);
-
             }
         });
 
@@ -165,13 +159,11 @@ public class SectionEActivity extends AppCompatActivity {
             setResult(RESULT_OK);
             finish();
             startActivity(new Intent(this, SectionDActivity.class).addFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT).putExtra("complete", true));
-
         } else {
             MainApp.childCount = 1;
             MainApp.totalChildCount = 0;
             setResult(RESULT_OK);
             finish();
-
         }
     }
 
@@ -181,7 +173,6 @@ public class SectionEActivity extends AppCompatActivity {
         MainApp.prevChildCount--;
         setResult(RESULT_CANCELED);
         finish();
-
     }
 
     private boolean formValidation() {
@@ -205,8 +196,6 @@ public class SectionEActivity extends AppCompatActivity {
             String minDob = sdf.format(cal.getTime());
             cal.add(Calendar.MONTH, +3); // Calender reset to DOV
             Log.d(TAG, "onCreate: " + minDob);
-
-
         } catch (ParseException e) {
             e.printStackTrace();
         }

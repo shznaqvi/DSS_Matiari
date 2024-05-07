@@ -31,7 +31,8 @@ public class EntryLog extends BaseObservable implements Observable {
     //private final String TAG = "Form";
     private final transient PropertyChangeRegistry propertyChangeRegistry = new PropertyChangeRegistry();
 
-    @PrimaryKey(autoGenerate = true) @NonNull
+    @PrimaryKey(autoGenerate = true)
+    @NonNull
     @SerializedName("_id")
     private long id;
 
@@ -54,12 +55,12 @@ public class EntryLog extends BaseObservable implements Observable {
     private String hhid = StringUtils.EMPTY;
 
     @SerializedName("appversion")
-    private String appver = StringUtils.EMPTY;            //
+    private String appver = StringUtils.EMPTY;
 
     @SerializedName("istatus")
     private String iStatus = StringUtils.EMPTY;
 
-    private transient String iStatus96x = StringUtils.EMPTY;        //
+    private transient String iStatus96x = StringUtils.EMPTY;
 
     @SerializedName("entry_type")
     private String entryType = StringUtils.EMPTY;
@@ -78,8 +79,6 @@ public class EntryLog extends BaseObservable implements Observable {
     private transient boolean isError;
 
     public EntryLog() {
-
-
     }
 
 
@@ -265,7 +264,6 @@ public class EntryLog extends BaseObservable implements Observable {
 
     public JSONObject toJSONObject() throws JSONException {
         JSONObject json = new JSONObject();
-
         json.put(EntryLogTable.COLUMN_ID, this.id);
         json.put(EntryLogTable.COLUMN_UID, this.uid);
         json.put(EntryLogTable.COLUMN_UUID, this.uuid);
@@ -283,6 +281,4 @@ public class EntryLog extends BaseObservable implements Observable {
         json.put(EntryLogTable.COLUMN_APPVERSION, this.appver);
         return json;
     }
-
-
 }

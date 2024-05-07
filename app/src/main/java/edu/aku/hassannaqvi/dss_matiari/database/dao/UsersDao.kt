@@ -14,16 +14,15 @@ import edu.aku.hassannaqvi.dss_matiari.models.Users
 interface UsersDao {
 
     @Query("SELECT * FROM users WHERE " + TableContracts.UsersTable.COLUMN_DESIGNATION + " like '%Team Leader%' ")
-    fun getTeamLeaders() : List<Users>
+    fun getTeamLeaders(): List<Users>
 
     @Query("SELECT * FROM users WHERE username = :username")
     fun getUserByUsername(username: String?): Users?
 
     @Query("SELECT * FROM users where username like :username and password like :password order by _id asc ")
-    fun getUserByUsername_internal(username: String, password: String) : Users?
+    fun getUserByUsername_internal(username: String, password: String): Users?
 
-    fun doLogin(username: String, password: String) : Boolean
-    {
+    fun doLogin(username: String, password: String): Boolean {
         val db: DssRoomDatabase = MainApp.appInfo.dbHelper
         val user: Users? = db.usersDao().getUserByUsername(username)
         if (user != null) {
@@ -33,7 +32,6 @@ interface UsersDao {
             }
         }
         return false
-
     }
 
     /* NEW STRUCT */
@@ -49,7 +47,4 @@ interface UsersDao {
         deleteAll()
         addAllData(list)
     }
-
-
-
 }

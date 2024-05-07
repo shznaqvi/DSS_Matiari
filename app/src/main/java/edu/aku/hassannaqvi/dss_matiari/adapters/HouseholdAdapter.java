@@ -25,8 +25,8 @@ import java.util.List;
 
 import edu.aku.hassannaqvi.dss_matiari.R;
 import edu.aku.hassannaqvi.dss_matiari.core.MainApp;
-import edu.aku.hassannaqvi.dss_matiari.models.Households;
 import edu.aku.hassannaqvi.dss_matiari.database.DssRoomDatabase;
+import edu.aku.hassannaqvi.dss_matiari.models.Households;
 import edu.aku.hassannaqvi.dss_matiari.ui.sections.SectionAActivity;
 
 
@@ -59,7 +59,6 @@ public class HouseholdAdapter extends RecyclerView.Adapter<HouseholdAdapter.View
                 return o1.getHdssId().compareTo(o2.getHdssId());
             }
         });
-
     }
 
     // Add filter
@@ -72,7 +71,7 @@ public class HouseholdAdapter extends RecyclerView.Adapter<HouseholdAdapter.View
             notifyDataSetChanged();
         } else {
             households.clear();
-            for (Households household: backupItems) {
+            for (Households household : backupItems) {
                 if (household.getHdssId().contains(query)) {
                     households.add(household);
                 }
@@ -131,16 +130,11 @@ public class HouseholdAdapter extends RecyclerView.Adapter<HouseholdAdapter.View
 
             MainApp.households = MainApp.householdList.get(viewHolder.getLayoutPosition());
             if (!MainApp.households.getIStatus().equals("1") && Integer.parseInt(MainApp.households.getVisitNo()) < 3) {
-
                 editHousehold(viewHolder.getLayoutPosition());
-
             } else {
                 Toast.makeText(mContext, "This households has been locked. You cannot edit household for locked households", Toast.LENGTH_LONG).show();
             }
-
-
         });
-
     }
 
     private void editHousehold(int position) {
@@ -149,16 +143,13 @@ public class HouseholdAdapter extends RecyclerView.Adapter<HouseholdAdapter.View
         MainApp.selectedHousehold = position;
         MainApp.selectedHhNO = MainApp.householdList.get(position).getHhNo();
         intent.putExtra("position", position);
-
         ((Activity) mContext).startActivityForResult(intent, 2);
     }
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
-
         View v = LayoutInflater.from(viewGroup.getContext())
                 .inflate(R.layout.household_row, viewGroup, false);
-
         return new ViewHolder(v);
     }
 
@@ -185,7 +176,6 @@ public class HouseholdAdapter extends RecyclerView.Adapter<HouseholdAdapter.View
             mwraCount = v.findViewById(R.id.mwraCount);
             secStatus = v.findViewById(R.id.secStatus);
             imgStatus = v.findViewById(R.id.imgStatus);
-
         }
 
         public TextView getTextView() {
@@ -195,15 +185,10 @@ public class HouseholdAdapter extends RecyclerView.Adapter<HouseholdAdapter.View
 
     public String getStringFromJson(String jsonStr, String parseString) throws JSONException {
         String string = jsonStr;
-
         JSONObject jsonObject = new JSONObject(jsonStr);
         String outputString = jsonObject.getString(parseString);
         String[] stringParts = outputString.split(" ");
         string = stringParts[0];
-
         return string;
     }
-
-
-
 }

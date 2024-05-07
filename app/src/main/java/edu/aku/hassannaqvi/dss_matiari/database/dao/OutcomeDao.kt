@@ -18,18 +18,15 @@ interface OutcomeDao {
     @Insert
     fun addOutcome(outcome: Outcome): Long
 
-
     @Update(onConflict = OnConflictStrategy.REPLACE)
     fun updateOutcome(outcome: Outcome): Int
 
-
     @Query("SELECT * FROM outcomes where hdssid like :hdssid and msno like :msno and sno like :sno order by _id ASC ")
-    fun getOutcomeByID_internal(hdssid : String, msno: String, sno: String): Outcome?
-
+    fun getOutcomeByID_internal(hdssid: String, msno: String, sno: String): Outcome?
 
     @Throws(JSONException::class)
-    fun getOutcomeBYID(hdssid: String,  msno: String, sno: String): Outcome? {
-        val outcome = getOutcomeByID_internal(hdssid,  msno, sno)
+    fun getOutcomeBYID(hdssid: String, msno: String, sno: String): Outcome? {
+        val outcome = getOutcomeByID_internal(hdssid, msno, sno)
         if (outcome == null) {
             val tempOutcome = Outcome()
             return tempOutcome
@@ -54,7 +51,6 @@ interface OutcomeDao {
         regRound: String,
         msno: String
     ): Outcome?
-
 
     @Throws(JSONException::class)
     fun getOutcomeFollowupsBySno(
@@ -119,5 +115,4 @@ interface OutcomeDao {
             updateOutcome(obj)
         }
     }
-
 }

@@ -58,16 +58,12 @@ public class FPHouseholdActivity extends AppCompatActivity {
                     if (result.getResultCode() == Activity.RESULT_OK) {
                         // There are no request codes
                         Intent data = result.getData();
-
                         hhAdapter.notifyItemChanged(position);
                         hhAdapter.notifyDataSetChanged();
-
                     }
                     if (result.getResultCode() == Activity.RESULT_CANCELED) {
                         Toast.makeText(FPHouseholdActivity.this, "No household added.", Toast.LENGTH_SHORT).show();
-
                     }
-
                 }
             });
 
@@ -83,7 +79,7 @@ public class FPHouseholdActivity extends AppCompatActivity {
 
         Households.initMeta();
         sA = new Households.SA();
-        
+
         MainApp.hhsList = new ArrayList<>();
 
         Log.d(TAG, "onCreate: followUpsScheHHList " + MainApp.followUpsScheHHList.size());
@@ -95,22 +91,17 @@ public class FPHouseholdActivity extends AppCompatActivity {
 
         bi.villageCode.setText("List of " + selectedUC + "-" + selectedVillage);
 
-
         hhAdapter = new FPHouseholdAdapter(this, MainApp.followUpsScheHHList);
         bi.rvHouseholds.setAdapter(hhAdapter);
         bi.rvHouseholds.setLayoutManager(new LinearLayoutManager(this));
 
-
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(view -> {
-
-            //TODO: Add new Household
             try {
                 addHousehold();
             } catch (JSONException e) {
                 e.printStackTrace();
             }
-
         });
 
     }
@@ -118,13 +109,11 @@ public class FPHouseholdActivity extends AppCompatActivity {
     @SuppressLint("NotifyDataSetChanged")
     public void filterForms(View view) {
         Toast.makeText(this, "updated", Toast.LENGTH_SHORT).show();
-
         MainApp.followUpsScheHHList = db.FollowUpsScheDao().getFollowUpsScheHHBYVillage(selectedUC, selectedVillage, bi.hhead.getText().toString());
         MainApp.hhsList = db.HhsDao().getHhsBYVillage(selectedUC, selectedVillage, bi.hhead.getText().toString());
         hhAdapter = new FPHouseholdAdapter(this, MainApp.followUpsScheHHList);
         hhAdapter.notifyDataSetChanged();
         bi.rvHouseholds.setAdapter(hhAdapter);
-
     }
 
     @SuppressLint("NotifyDataSetChanged")
@@ -134,15 +123,12 @@ public class FPHouseholdActivity extends AppCompatActivity {
         MainApp.lockScreen(this);
         hhAdapter.notifyDataSetChanged();
         Toast.makeText(this, "Activity Resumed!", Toast.LENGTH_SHORT).show();
-
     }
 
     private void checkCompleteFm() {
         int compCount = MainApp.followUpsScheHHList.size();
-
         MainApp.householdCountComplete = compCount;
         bi.btnContinue.setVisibility(MainApp.householdCount > 0 ? View.VISIBLE : View.GONE);
-
     }
 
     public void addHousehold() throws JSONException {
@@ -165,7 +151,6 @@ public class FPHouseholdActivity extends AppCompatActivity {
         // Launch activity for results.
         Intent intent = new Intent(this, SectionAActivity.class);
         MemberInfoLauncher.launch(intent);
-
     }
 
     public void btnContinue(View view) {
@@ -201,7 +186,7 @@ public class FPHouseholdActivity extends AppCompatActivity {
         finish();
     }
 
-    private void initSearchFilter(){
+    private void initSearchFilter() {
         bi.hhead.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {

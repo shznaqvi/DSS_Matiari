@@ -11,7 +11,6 @@ import org.apache.commons.lang3.StringUtils;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import edu.aku.hassannaqvi.dss_matiari.contracts.TableContracts;
 import edu.aku.hassannaqvi.dss_matiari.contracts.TableContracts.TableVillage;
 
 @Entity(tableName = TableVillage.TABLE_NAME)
@@ -24,26 +23,24 @@ public class Villages {
     Long id;
 
     @ColumnInfo(name = TableVillage.COLUMN_UCNAME, defaultValue = StringUtils.EMPTY)
-    String ucname= StringUtils.EMPTY;
+    String ucname = StringUtils.EMPTY;
 
     @ColumnInfo(name = TableVillage.COLUMN_VILLAGE_NAME, defaultValue = StringUtils.EMPTY)
-    String villagename= StringUtils.EMPTY;
+    String villagename = StringUtils.EMPTY;
 
     @ColumnInfo(name = TableVillage.COLUMN_VILLAGE_CODE, defaultValue = StringUtils.EMPTY)
-    String villagecode= StringUtils.EMPTY;
+    String villagecode = StringUtils.EMPTY;
 
     @ColumnInfo(name = TableVillage.COLUMN_UC_CODE, defaultValue = StringUtils.EMPTY)
-    String uccode= StringUtils.EMPTY;
+    String uccode = StringUtils.EMPTY;
 
     public Villages() {
         // Default Constructor
     }
 
-    public Villages(String villageName, String villageCode)
-    {
+    public Villages(String villageName, String villageCode) {
         villageName = this.villagename;
         villageCode = this.villagecode;
-
     }
 
 
@@ -55,7 +52,6 @@ public class Villages {
         this.id = id;
     }
 
-
     public String getUcname() {
         return ucname;
     }
@@ -63,7 +59,6 @@ public class Villages {
     public void setUcname(String ucname) {
         this.ucname = ucname;
     }
-
 
     public String getVillagename() {
         return villagename;
@@ -73,7 +68,6 @@ public class Villages {
         this.villagename = villagename;
     }
 
-
     public String getVillagecode() {
         return villagecode;
     }
@@ -81,7 +75,6 @@ public class Villages {
     public void setVillagecode(String villagecode) {
         this.villagecode = villagecode;
     }
-
 
     public String getUccode() {
         return uccode;
@@ -91,11 +84,7 @@ public class Villages {
         this.uccode = uccode;
     }
 
-
-
-
     public JSONObject toJSONObject() throws JSONException {
-
         JSONObject json = new JSONObject();
         json.put(TableVillage._ID, this.id == null ? JSONObject.NULL : this.id);
         json.put(TableVillage.COLUMN_UCNAME, this.ucname == null ? JSONObject.NULL : this.ucname);
@@ -103,7 +92,6 @@ public class Villages {
         json.put(TableVillage.COLUMN_VILLAGE_CODE, this.villagecode == null ? JSONObject.NULL : this.villagecode);
         json.put(TableVillage.COLUMN_UC_CODE, this.villagecode == null ? JSONObject.NULL : this.villagecode);
         return json;
-
     }
 
     public Villages Sync(JSONObject jsonObject) throws JSONException {

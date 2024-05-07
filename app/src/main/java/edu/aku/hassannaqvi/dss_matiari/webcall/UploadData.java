@@ -154,7 +154,7 @@ public class UploadData {
 
         // Now access only those forms whose uIds are in iFormCompletedUIDs list
 
-            List<String> iFormCompletedUIds = new ArrayList<>();
+        List<String> iFormCompletedUIds = new ArrayList<>();
 
 //        iFormCompletedUIds = uIdsHM.get(TableContracts.HouseholdTable.TABLE_NAME);
 //        tableName = ((SyncModelNew) UPLOAD_TABLES.keySet().toArray()[1]).getTable();
@@ -197,9 +197,7 @@ public class UploadData {
         } else
             iWebCallback.onFailure(tableName, activity.getString(R.string.no_new_records_to_upload), ++index, 0, null);
 
-
         /* ADD MORE TABLE HERE TO UPLOAD IF NECESSARY */
-
     }
 
     /**

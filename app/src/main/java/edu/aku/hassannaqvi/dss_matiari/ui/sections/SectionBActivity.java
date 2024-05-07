@@ -60,14 +60,12 @@ public class SectionBActivity extends AppCompatActivity {
         bi.setMwra(sB);
 
         initUI();
-
     }
 
     public void initUI() {
 
         String date = DateUtils.changeDateFormat("2023-01-01");
         bi.rb01a.setMinDate(date);
-
         setTitle(R.string.marriedwomenregistration_mainheading);
         setImmersive(true);
 
@@ -93,13 +91,10 @@ public class SectionBActivity extends AppCompatActivity {
         bi.rb04.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-
             }
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-
             }
 
             @Override
@@ -125,23 +120,6 @@ public class SectionBActivity extends AppCompatActivity {
                         e.printStackTrace();
                     }
                 }
-            }
-        });
-
-        bi.rb08.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-                setDateRanges();
             }
         });
 
@@ -242,7 +220,6 @@ public class SectionBActivity extends AppCompatActivity {
             bi.rb21.setMaxDate(maxDD);
             bi.rb21.setMinDate(DD);
 
-
             Calendar lmpCal = Calendar.getInstance();
             SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
             lmpCal.setTime(simpleDateFormat.parse(sB.getRb08()));
@@ -252,7 +229,6 @@ public class SectionBActivity extends AppCompatActivity {
 
             bi.rb25.setMinDate(lmp);
             bi.rb25.setMaxDate(dov);
-
 
         } catch (ParseException e) {
             e.printStackTrace();
@@ -304,18 +280,15 @@ public class SectionBActivity extends AppCompatActivity {
         }
 
         Mwra.SB.saveData(sB);
-
     }
 
     public void btnEnd(View view) {
         setResult(Activity.RESULT_CANCELED);
         finish();
-
     }
 
     private boolean formValidation() {
         return Validator.emptyCheckingContainer(this, bi.GrpName);
-
     }
 
     @Override
@@ -323,6 +296,4 @@ public class SectionBActivity extends AppCompatActivity {
         super.onResume();
         MainApp.lockScreen(this);
     }
-
-
 }

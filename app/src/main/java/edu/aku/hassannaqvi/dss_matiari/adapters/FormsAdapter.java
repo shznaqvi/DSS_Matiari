@@ -20,8 +20,8 @@ import java.util.List;
 
 import edu.aku.hassannaqvi.dss_matiari.R;
 import edu.aku.hassannaqvi.dss_matiari.core.MainApp;
-import edu.aku.hassannaqvi.dss_matiari.models.Households;
 import edu.aku.hassannaqvi.dss_matiari.database.DssRoomDatabase;
+import edu.aku.hassannaqvi.dss_matiari.models.Households;
 import edu.aku.hassannaqvi.dss_matiari.ui.sections.SectionAActivity;
 
 
@@ -121,7 +121,7 @@ public class FormsAdapter extends RecyclerView.Adapter<FormsAdapter.ViewHolder> 
         holder.fathername.setText(fc.get(holder.getAdapterPosition()).getVisitNo() + " visits");
 
         //int totalMWRA = db.getMWRACountBYUUID(fc.get(holder.getAdapterPosition()).getUid());
-        int totalMWRA = db.mwraDao().getMWRACountBYUUID(fc.get(holder.getAdapterPosition()).getUid(),"1");
+        int totalMWRA = db.mwraDao().getMWRACountBYUUID(fc.get(holder.getAdapterPosition()).getUid(), "1");
         holder.hhno.setText(totalMWRA + " MWRA(s)");
 
         holder.itemView.setOnClickListener(v -> {
@@ -143,13 +143,8 @@ public class FormsAdapter extends RecyclerView.Adapter<FormsAdapter.ViewHolder> 
             } catch (JSONException e) {
                 e.printStackTrace();
                 Toast.makeText(c, "JSONException(Households): " + e.getMessage(), Toast.LENGTH_LONG).show();
-
             }
-
-
         });
-
-
     }
 
 
@@ -163,7 +158,7 @@ public class FormsAdapter extends RecyclerView.Adapter<FormsAdapter.ViewHolder> 
         Intent intent = new Intent(c, SectionAActivity.class);
         intent.putExtra("position", position);
         MainApp.selectedHousehold = position;
-       // MainApp.households = MainApp.householdList.get(MainApp.selectedHousehold);
+        // MainApp.households = MainApp.householdList.get(MainApp.selectedHousehold);
         intent.putExtra("position", position);
 
         ((Activity) c).startActivityForResult(intent, 2);
@@ -191,7 +186,5 @@ public class FormsAdapter extends RecyclerView.Adapter<FormsAdapter.ViewHolder> 
             fathername = v.findViewById(R.id.fathername);
 
         }
-
-
     }
 }

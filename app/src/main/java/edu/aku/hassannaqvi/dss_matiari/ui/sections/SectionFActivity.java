@@ -7,17 +7,16 @@ import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.households;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.outcome;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.sharedPref;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.databinding.DataBindingUtil;
-
-import com.validatorcrawler.aliazaz.Validator;
-
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.databinding.DataBindingUtil;
+
+import com.validatorcrawler.aliazaz.Validator;
 
 import org.json.JSONException;
 
@@ -29,10 +28,10 @@ import java.util.Objects;
 
 import edu.aku.hassannaqvi.dss_matiari.R;
 import edu.aku.hassannaqvi.dss_matiari.core.MainApp;
+import edu.aku.hassannaqvi.dss_matiari.database.DssRoomDatabase;
 import edu.aku.hassannaqvi.dss_matiari.databinding.ActivitySectionFBinding;
 import edu.aku.hassannaqvi.dss_matiari.global.DateUtils;
 import edu.aku.hassannaqvi.dss_matiari.models.Outcome;
-import edu.aku.hassannaqvi.dss_matiari.database.DssRoomDatabase;
 
 public class SectionFActivity extends AppCompatActivity {
 
@@ -61,9 +60,7 @@ public class SectionFActivity extends AppCompatActivity {
             sE = new Outcome.SE();
             sE.populateMetaFollowups();
         }
-
         bi.setOutcome(sE);
-
     }
 
     private void initUI() {
@@ -72,7 +69,6 @@ public class SectionFActivity extends AppCompatActivity {
 
         MainApp.ROUND = MainApp.fpMwra.getFRound();
         setDateRanges();
-
         setImmersive(true);
 
         bi.btnContinue.setText(outcome.getUid().equals("") ? "Save" : "Update");
@@ -112,11 +108,9 @@ public class SectionFActivity extends AppCompatActivity {
                             }
                         }
                     }
-
                 }
             }
         });
-
     }
 
     private void setDateRanges() {
@@ -155,8 +149,6 @@ public class SectionFActivity extends AppCompatActivity {
             //cal.setTime(Objects.requireNonNull(sdf.parse(sE.getRc06())));// all done
             sdf = new SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH);
             String minDOD = sdf.format(cal.getTime());
-
-
         } catch (ParseException e) {
             e.printStackTrace();
         }
@@ -167,19 +159,16 @@ public class SectionFActivity extends AppCompatActivity {
         Outcome.saveMainDataFup(households.getUid(), fpMwra.getRb01(), fpMwra.getMuid(), fpMwra.getFRound(), sE);
         setResult(RESULT_OK);
         finish();
-
     }
 
     public void btnEnd(View view) {
         setResult(RESULT_CANCELED);
         finish();
-
     }
 
     private boolean formValidation() {
         setDateRanges();
         return Validator.emptyCheckingContainer(this, bi.GrpName);
-
     }
 
 

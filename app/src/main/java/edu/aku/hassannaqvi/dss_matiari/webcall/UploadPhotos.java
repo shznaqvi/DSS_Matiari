@@ -36,8 +36,14 @@ public class UploadPhotos {
 
     */
 /**
-     * INIT
-     *//*
+ * INIT
+ * <p>
+ * POST PHOTOS TO SERVER
+ * <p>
+ * CALLBACK FOR UPLOAD PHOTOS
+ * <p>
+ * UPDATE SYNC ITEM ON ADAPTER
+ *//*
 
 
     public UploadPhotos(SyncAC activity, SyncAdapter syncAdapter, List<SyncModel> syncTablesList) {
@@ -54,8 +60,8 @@ public class UploadPhotos {
 
     */
 /**
-     * POST PHOTOS TO SERVER
-     *//*
+ * POST PHOTOS TO SERVER
+ *//*
 
 
     // Post Photos
@@ -79,8 +85,8 @@ public class UploadPhotos {
 
     */
 /**
-     * CALLBACK FOR UPLOAD PHOTOS
-     *//*
+ * CALLBACK FOR UPLOAD PHOTOS
+ *//*
 
 
     WebCall.IWebCallback iWebCallback = new WebCall.IWebCallback() {
@@ -119,11 +125,11 @@ public class UploadPhotos {
 
     */
 /**
-     * UPDATE SYNC ITEM ON ADAPTER
-     *//*
+ * UPDATE SYNC ITEM ON ADAPTER
+ *//*
 
 
-    */
+ */
 /*This function is used to update list item after UPLOAD*//*
 
     // The reason to make this function instance-wise is because if we make it static then there

@@ -424,16 +424,13 @@ public class SectionCActivity extends AppCompatActivity {
                         forwardIntent.setFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT);
                         setResult(RESULT_OK, forwardIntent);
                         startActivity(forwardIntent);
-
                     }
-
                     break;
 
                 // Divorced
                 case "2":
                     // Pregnant
                     if (fpMwra.getRb07().equals("1")) {
-
                         if (bi.rb1401.isChecked()) {  // If Pregnancy Continued
                             setResult(RESULT_OK);
                         } else {     // If Pregnancy ended
@@ -635,12 +632,10 @@ public class SectionCActivity extends AppCompatActivity {
                             finish();
                         }
                     }
-
                     // if still unmarried
                     else if (bi.rb0604.isChecked()) {
                         setResult(RESULT_OK);
                     }
-
                     break;
             }
             finish();
@@ -648,20 +643,17 @@ public class SectionCActivity extends AppCompatActivity {
             setResult(RESULT_OK);
             finish();
         }
-
     }
 
 
     public void btnEnd(View view) {
         setResult(RESULT_CANCELED);
         finish();
-
     }
 
     private boolean formValidation() {
         setDateRanges();
         return Validator.emptyCheckingContainer(this, bi.GrpName);
-
     }
 
     @Override
@@ -669,5 +661,4 @@ public class SectionCActivity extends AppCompatActivity {
         super.onResume();
         MainApp.lockScreen(this);
     }
-
 }

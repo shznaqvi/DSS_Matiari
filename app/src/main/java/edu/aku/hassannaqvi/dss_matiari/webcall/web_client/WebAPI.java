@@ -39,5 +39,4 @@ public interface WebAPI {
     @POST(AppConstants.API_NAME + "/api2/uploads.php")
     Call<String> uploadPhotos(@Part("tagname") RequestBody requestBody,
                               @Part MultipartBody.Part image);
-
 }

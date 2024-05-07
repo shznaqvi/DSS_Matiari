@@ -63,12 +63,10 @@ public class ConnectionDetector {
     // Show simple no internet alert
     public void showNoInternetDialog() {
         Toast.makeText(activity, activity.getString(R.string.network_error), Toast.LENGTH_LONG).show();
-
     }
 
     // Show no internet alert and allows the app to exit
     public void showNoInternetDialogExit() {
-
         Toast.makeText(activity, activity.getString(R.string.network_error), Toast.LENGTH_LONG).show();
     }
 

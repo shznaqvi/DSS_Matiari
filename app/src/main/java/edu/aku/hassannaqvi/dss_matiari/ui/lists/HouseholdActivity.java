@@ -31,9 +31,9 @@ import java.util.ArrayList;
 import edu.aku.hassannaqvi.dss_matiari.R;
 import edu.aku.hassannaqvi.dss_matiari.adapters.HouseholdAdapter;
 import edu.aku.hassannaqvi.dss_matiari.core.MainApp;
+import edu.aku.hassannaqvi.dss_matiari.database.DssRoomDatabase;
 import edu.aku.hassannaqvi.dss_matiari.databinding.ActivityHouseholdBinding;
 import edu.aku.hassannaqvi.dss_matiari.models.Households;
-import edu.aku.hassannaqvi.dss_matiari.database.DssRoomDatabase;
 import edu.aku.hassannaqvi.dss_matiari.ui.MainActivity;
 import edu.aku.hassannaqvi.dss_matiari.ui.sections.SectionAActivity;
 
@@ -60,11 +60,9 @@ public class HouseholdActivity extends AppCompatActivity {
 
                         hhAdapter.notifyItemInserted(MainApp.householdList.size() - 1);
                         checkCompleteFm();
-                    }else if (result.getResultCode() == Activity.RESULT_CANCELED) {
-                            Toast.makeText(HouseholdActivity.this, "No household added.", Toast.LENGTH_SHORT).show();
-
-                        }
-
+                    } else if (result.getResultCode() == Activity.RESULT_CANCELED) {
+                        Toast.makeText(HouseholdActivity.this, "No household added.", Toast.LENGTH_SHORT).show();
+                    }
                 }
             });
 
@@ -77,12 +75,10 @@ public class HouseholdActivity extends AppCompatActivity {
         db = MainApp.appInfo.dbHelper;
         MainApp.householdList = new ArrayList<>();
 
-
         Log.d(TAG, "onCreate: householdlist " + MainApp.householdList.size());
 //        try {
-
 //            MainApp.householdList = db.getHouseholdBYVillage(selectedUC, MainApp.selectedVillage);
-            MainApp.householdList = db.householdsDao().getHouseholdBYVillage(selectedUC, selectedVillage, "1");
+        MainApp.householdList = db.householdsDao().getHouseholdBYVillage(selectedUC, selectedVillage, "1");
 //        } catch (JSONException e) {
 //            e.printStackTrace();
 //            Toast.makeText(this, "JSONException: " + e.getMessage(), Toast.LENGTH_SHORT).show();
@@ -101,7 +97,6 @@ public class HouseholdActivity extends AppCompatActivity {
                 e.printStackTrace();
             }
         });
-
     }
 
     @Override
@@ -109,24 +104,18 @@ public class HouseholdActivity extends AppCompatActivity {
         super.onResume();
         MainApp.lockScreen(this);
         Toast.makeText(this, "Activity Resumed!", Toast.LENGTH_SHORT).show();
-
         MainApp.householdCount = Math.round(MainApp.householdList.size());
-
         MainApp.households = new Households();
-
         if (MainApp.householdList.size() > 0) {
             hhAdapter.notifyItemChanged(Integer.parseInt(String.valueOf(selectedHousehold)));
         }
-
         checkCompleteFm();
     }
 
     private void checkCompleteFm() {
         int compCount = MainApp.householdList.size();
-
         MainApp.householdCountComplete = compCount;
         bi.btnContinue.setVisibility(MainApp.householdCount > 0 ? View.VISIBLE : View.GONE);
-
     }
 
     public void addHousehold() throws JSONException {
@@ -159,7 +148,6 @@ public class HouseholdActivity extends AppCompatActivity {
         finish();
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
-
     }
 
     public void BtnEnd(View view) {
@@ -183,7 +171,6 @@ public class HouseholdActivity extends AppCompatActivity {
     }
 
     private boolean hhExists() {
-
         switch (idType) {
             case 1:
                 MainApp.households = new Households();
@@ -195,10 +182,8 @@ public class HouseholdActivity extends AppCompatActivity {
                     Log.d(TAG, "ProcessStart (JSONException): " + e.getMessage());
                 }
                 return MainApp.households != null;
-
             default:
                 return false;
-
         }
     }
 }

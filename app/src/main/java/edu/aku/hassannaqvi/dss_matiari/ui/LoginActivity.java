@@ -192,9 +192,6 @@ public class LoginActivity extends AppCompatActivity {
         leaderCodes.add("...");
         leaderCodes.add("testteamleader");
 
-
-        //Collection<Users> teamleaders = db.getTeamleaders();
-
         Collection<Users> teamleaders = db.usersDao().getTeamLeaders();
         for (Users u : teamleaders) {
             leaderNames.add(u.getFullname());
@@ -208,12 +205,10 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 MainApp.leaderCode = leaderCodes.get(position);
-
             }
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
-
             }
         });
     }
@@ -243,7 +238,6 @@ public class LoginActivity extends AppCompatActivity {
                 }).check();
         bi = DataBindingUtil.setContentView(this, R.layout.activity_login);
 
-
         bi.setCallback(this);
         MainApp.appInfo = new AppInfo(this);
         db = MainApp.appInfo.getDbHelper();
@@ -255,11 +249,9 @@ public class LoginActivity extends AppCompatActivity {
         //   populateSpinner();
 
         initUI();
-
     }
 
     private void initUI() {
-
         // For Admin
         if (AppConstants.IS_ADMIN) {
             bi.username.setText(AppConstants.TEST_USERNAME);
@@ -310,7 +302,6 @@ public class LoginActivity extends AppCompatActivity {
         if (attemptCounter > 5) {
             bi.username.setError("This user has been blocked.");
             Toast.makeText(this, "This user has been blocked.", Toast.LENGTH_LONG).show();
-
         } else {
             // Store values at the time of the login attempt.
             username = bi.username.getText().toString();
@@ -341,18 +332,11 @@ public class LoginActivity extends AppCompatActivity {
                 return;
             }
 
-            //if(!Validator.emptySpinner(this, bi.countrySwitch)) return;
-            /*if (bi.countrySwitch.getSelectedItemPosition() == 0) {
-                bi.as1q01.setError(getString(R.string.as1q01));
-                return;
-            }*/
-
             try {
                 if ((username.equals("dmu@aku") && password.equals("aku?dmu"))
                         || (username.equals("test1234") && password.equals("test1234"))
                         || db.usersDao().doLogin(username, password)
                 ) {
-
                     MainApp.user.setUsername(username);
                     MainApp.admin = username.contains("@") || username.contains("test1234");
                     //MainApp.superuser = MainApp.user.getDesignation().equals("Supervisor");
@@ -390,9 +374,7 @@ public class LoginActivity extends AppCompatActivity {
             } catch (IllegalArgumentException e) {
                 e.printStackTrace();
                 Toast.makeText(this, "IllegalArgumentException(UserAuth):" + e.getMessage(), Toast.LENGTH_SHORT).show();
-
             }
-
         }
     }
 
@@ -490,10 +472,8 @@ public class LoginActivity extends AppCompatActivity {
 
                 startActivity(new Intent(LoginActivity.this, LoginActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
                 overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
-
             }
         });
-
     }
 
     /*
@@ -519,7 +499,6 @@ public class LoginActivity extends AppCompatActivity {
         entryLog.setDeviceId(MainApp.deviceid);
         Long rowId = null;
         try {
-
             rowId = db.EntryLogDao().addEntryLog(entryLog);
         } catch (SQLiteException | JSONException e) {
             Toast.makeText(this, "SQLiteException(EntryLog)" + entryLog, Toast.LENGTH_SHORT).show();
@@ -532,7 +511,6 @@ public class LoginActivity extends AppCompatActivity {
             Toast.makeText(this, R.string.upd_db_error, Toast.LENGTH_SHORT).show();
 
         }
-
     }
 }
 

@@ -4,8 +4,8 @@ import static android.content.Intent.FLAG_ACTIVITY_CLEAR_TOP;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.mwra;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.mwraCount;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.mwraList;
-import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.selectedMember;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.selectedHhNO;
+import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.selectedMember;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.selectedUC;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.selectedVillage;
 
@@ -33,9 +33,9 @@ import java.util.ArrayList;
 import edu.aku.hassannaqvi.dss_matiari.R;
 import edu.aku.hassannaqvi.dss_matiari.adapters.MwraAdapter;
 import edu.aku.hassannaqvi.dss_matiari.core.MainApp;
+import edu.aku.hassannaqvi.dss_matiari.database.DssRoomDatabase;
 import edu.aku.hassannaqvi.dss_matiari.databinding.ActivityMwraBinding;
 import edu.aku.hassannaqvi.dss_matiari.models.Mwra;
-import edu.aku.hassannaqvi.dss_matiari.database.DssRoomDatabase;
 import edu.aku.hassannaqvi.dss_matiari.ui.EndingActivity;
 import edu.aku.hassannaqvi.dss_matiari.ui.sections.SectionBActivity;
 
@@ -64,24 +64,18 @@ public class MwraActivity extends AppCompatActivity {
                                         ||
                                         // MWRA: Married females between 14 to 49
                                         (age >= 14 && age < 50 && !notMarried && isFemale )
-
                         ) {*/
                         mwraList.add(mwra);
-
                         mwraCount++;
-
                         fmAdapter.notifyItemInserted(mwraList.size() - 1);
                         //  Collections.sort(MainApp.fm, new SortByStatus());
                         //fmAdapter.notifyDataSetChanged();
-
                         //        }
-
                         checkCompleteFm();
                     }
                     if (result.getResultCode() == Activity.RESULT_CANCELED) {
                         Toast.makeText(MwraActivity.this, "No family member added.", Toast.LENGTH_SHORT).show();
                     }
-
                 }
             });
 
@@ -102,18 +96,15 @@ public class MwraActivity extends AppCompatActivity {
         bi.rvMembers.setAdapter(fmAdapter);
         bi.rvMembers.setLayoutManager(new LinearLayoutManager(this));
 
-
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 if (!MainApp.households.getIStatus().equals("1")) {
                     addFemale();
                 } else {
                     Toast.makeText(MwraActivity.this, "This households has been locked. You cannot add new members to locked forms", Toast.LENGTH_LONG).show();
                 }
-
             }
         });
 
@@ -134,32 +125,22 @@ public class MwraActivity extends AppCompatActivity {
         if (MainApp.mwraList.size() > 0) {
             fmAdapter.notifyItemChanged(Integer.parseInt(String.valueOf(selectedMember)));
         }
-
-
         checkCompleteFm();
-
     }
 
     private void checkCompleteFm() {
-
         int compCount = mwraList.size();
-
         MainApp.mwraCountComplete = compCount;
         bi.btnContinue.setVisibility(mwraCount > 0 ? View.VISIBLE : View.GONE);
-
     }
 
     public void addFemale() {
-
         Mwra.init();
         if (MainApp.mwraList.size() >= Integer.parseInt(MainApp.households.getSA().getRa18())) {
             displayAddMoreDialog();
         } else {
             addMoreFemale();
-
         }
-
-
     }
 
     private void addMoreFemale() {
@@ -168,7 +149,6 @@ public class MwraActivity extends AppCompatActivity {
         int maxMWRA = db.mwraDao().getMaxMWRSNoBYHH(selectedUC, selectedVillage, selectedHhNO);
         int maxFpMWRA = db.FollowUpsScheDao().getMaxMWRANoBYHHFromFolloupsSche(selectedUC, selectedVillage, selectedHhNO);
         mwraCount = Math.max(maxMWRA, maxFpMWRA);
-
         Intent intent = new Intent(this, SectionBActivity.class);
         MemberInfoLauncher.launch(intent);
     }
@@ -179,13 +159,10 @@ public class MwraActivity extends AppCompatActivity {
         } else {
             proceedSelect();
         }
-
-
     }
 
     public void BtnEnd(View view) {
         if (!MainApp.households.getSA().getRa18().equals("999")) {
-
             Intent i = new Intent(this, EndingActivity.class);
             i.setFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT);
             i.putExtra("complete", false);
@@ -218,11 +195,9 @@ public class MwraActivity extends AppCompatActivity {
     }
 
     private void displayAddMoreDialog() {
-        if(mwraList.size() < Integer.parseInt(MainApp.households.getSA().getRa17_c2()))
-        {
+        if (mwraList.size() < Integer.parseInt(MainApp.households.getSA().getRa17_c2())) {
             addMoreFemale();
-
-        }else {
+        } else {
             new AlertDialog.Builder(this)
                     .setTitle(R.string.title_wra_dialog_complete)
                     .setMessage(String.format(getString(R.string.message_wra_dialog_addmore), MainApp.households.getSA().getRa18()))
@@ -280,5 +255,4 @@ public class MwraActivity extends AppCompatActivity {
         setResult(RESULT_OK);
         finish();
     }
-
 }

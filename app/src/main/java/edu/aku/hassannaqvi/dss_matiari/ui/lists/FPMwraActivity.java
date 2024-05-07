@@ -142,7 +142,6 @@ public class FPMwraActivity extends AppCompatActivity {
 
         try {
             followUpsScheMWRAList = db.FollowUpsScheDao().getAllfollowupsScheByHH(households.getVillageCode(), households.getUcCode(), households.getHhNo());
-
         } catch (Exception e) {
             e.printStackTrace();
             Toast.makeText(this, "JSONException: " + e.getMessage(), Toast.LENGTH_SHORT).show();
@@ -156,7 +155,6 @@ public class FPMwraActivity extends AppCompatActivity {
 
             String fupStatus = "";
             try {
-
                 if (followUpsScheMWRAList.get(i).getRb01() != null) {
                     Mwra tempMwra = db.mwraDao().getFollowupsBySno(MainApp.households.getUid(), followUpsScheMWRAList.get(i).getRb01(), followUpsScheMWRAList.get(i).getFRound());
                     if (tempMwra != null && !tempMwra.getSysDate().equals("") && tempMwra.getSysDate() != null) {
@@ -208,10 +206,8 @@ public class FPMwraActivity extends AppCompatActivity {
             bi.newMwra.setText(newMwra + " new women added to this household");
             bi.newMwra.setVisibility(View.VISIBLE);
             bi.newMwraList.setVisibility(View.VISIBLE);
-
         }
         households.getSA().setRa18(String.valueOf(mwraCount));
-
     }
 
     private void addMoreFemale() {
@@ -293,7 +289,6 @@ public class FPMwraActivity extends AppCompatActivity {
                 .setNegativeButton(R.string.ra15b, null)
                 .setIcon(R.drawable.ic_warning_24)
                 .show();
-
     }
 
     private void displayProceedDialog() {
@@ -314,7 +309,6 @@ public class FPMwraActivity extends AppCompatActivity {
                 .setNegativeButton(R.string.ra15b, null)
                 .setIcon(R.drawable.ic_alert_24)
                 .show();
-
     }
 
     private void proceedSelect() {
@@ -348,10 +342,8 @@ public class FPMwraActivity extends AppCompatActivity {
         } else if (!refusedOrMigrated && mwraStatus.size() == 0) {
             i.putExtra("complete", true);
         }
-
         finish();
         startActivity(i);
-
     }
 
     @Override

@@ -21,6 +21,7 @@ class Users {
         defaultValue = "0"
     )
     var userID: Long = 0
+
     @ColumnInfo(
         name = UsersTable.COLUMN_USERNAME,
         defaultValue = ""
@@ -28,9 +29,11 @@ class Users {
     var username: String = StringUtils.EMPTY
     var password: String = StringUtils.EMPTY
     var passwordEnc: String = StringUtils.EMPTY
+
     @SerializedName("full_name")
     var fullname: String = StringUtils.EMPTY
     var enabled: String = StringUtils.EMPTY
+
     //var pwdExpiry: String = StringUtils.EMPTY
 //    var pwdExpiry: SyncModelNew.ResponseDate? = null
     @SerializedName("isNewUser")
@@ -72,6 +75,4 @@ class Users {
         newUser = cursor.getString(cursor.getColumnIndexOrThrow(UsersTable.COLUMN_ISNEW_USER))
         return this
     }
-
-
 }

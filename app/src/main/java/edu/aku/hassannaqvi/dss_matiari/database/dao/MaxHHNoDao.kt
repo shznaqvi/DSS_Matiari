@@ -12,10 +12,9 @@ import edu.aku.hassannaqvi.dss_matiari.models.MaxHhno
 interface MaxHHNoDao {
 
     @Query("SELECT MAX( CAST(maxhhno AS INT)) AS mmaxhhno from maxhhno where ucCode like :ucCode and villageCode like :vCode order by _id ASC  ")
-    fun getMaxHHNoByVillage(ucCode : String, vCode : String) : Int
+    fun getMaxHHNoByVillage(ucCode: String, vCode: String): Int
 
     /* NEW STRUCT */
-
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     fun addAllData(list: Array<MaxHhno>)
 
@@ -27,5 +26,4 @@ interface MaxHHNoDao {
         deleteAll()
         addAllData(list)
     }
-
 }

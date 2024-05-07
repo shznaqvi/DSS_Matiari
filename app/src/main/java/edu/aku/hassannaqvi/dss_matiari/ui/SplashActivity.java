@@ -1,9 +1,9 @@
 package edu.aku.hassannaqvi.dss_matiari.ui;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import edu.aku.hassannaqvi.dss_matiari.R;
 

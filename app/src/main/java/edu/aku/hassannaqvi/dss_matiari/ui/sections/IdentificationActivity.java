@@ -19,11 +19,11 @@ import java.util.Collection;
 
 import edu.aku.hassannaqvi.dss_matiari.R;
 import edu.aku.hassannaqvi.dss_matiari.core.MainApp;
+import edu.aku.hassannaqvi.dss_matiari.database.DssRoomDatabase;
 import edu.aku.hassannaqvi.dss_matiari.databinding.ActivityIdentificationBinding;
 import edu.aku.hassannaqvi.dss_matiari.models.Households;
 import edu.aku.hassannaqvi.dss_matiari.models.Outcome;
 import edu.aku.hassannaqvi.dss_matiari.models.Villages;
-import edu.aku.hassannaqvi.dss_matiari.database.DssRoomDatabase;
 import edu.aku.hassannaqvi.dss_matiari.ui.EndingActivity;
 import edu.aku.hassannaqvi.dss_matiari.ui.lists.FPHouseholdActivity;
 import edu.aku.hassannaqvi.dss_matiari.ui.lists.HouseholdActivity;
@@ -54,13 +54,12 @@ public class IdentificationActivity extends AppCompatActivity {
 
         openIntent = new Intent();
 
-
         switch (MainApp.idType) {
             case 1:
                 bi.btnContinue.setText("Open Household List");
                 MainApp.households = new Households();
                 MainApp.outcome = new Outcome();
-                openIntent = new Intent(this,  HouseholdActivity.class);
+                openIntent = new Intent(this, HouseholdActivity.class);
                 break;
             case 2:
                 bi.btnContinue.setText("Open Followups List");
@@ -69,10 +68,7 @@ public class IdentificationActivity extends AppCompatActivity {
                 MainApp.outcome = new Outcome();
                 openIntent = new Intent(this, FPHouseholdActivity.class);
                 break;
-
-
         }
-
     }
 
     private void populateSpinner() {
@@ -133,13 +129,11 @@ public class IdentificationActivity extends AppCompatActivity {
                 }
                 // Apply the adapter to the spinner
                 bi.ra07.setAdapter(new ArrayAdapter(IdentificationActivity.this, R.layout.custom_spinner, villageNames));
-
             }
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
             }
-
         });
 
         bi.ra07.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -151,66 +145,46 @@ public class IdentificationActivity extends AppCompatActivity {
                     String vCode = villageCodes.get(bi.ra07.getSelectedItemPosition());
 
                     //int maxHHno = db.getMaxStructure(selectedUC, vCode) + 1;
-
                     //int maxHHno = db.householdsDao().getMaxStructure(selectedUC, vCode) +1;
-
 //                    bi.btnContinue.setBackgroundTintList(ContextCompat.getColorStateList(IdentificationActivity.this, R.color.colorAccent));
                     bi.btnContinue.setBackgroundTintList(ContextCompat.getColorStateList(IdentificationActivity.this, R.color.colorPrimary));
                     bi.btnContinue.setEnabled(true);
-
                     //bi.ra10.setText(String.valueOf(maxHHno));
                     if (position == 0) return;
                     //bi.ra10.setEnabled(true);
-
                 }
-
-
             }
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
             }
-
         });
-
     }
 
     public void btnContinue(View view) {
-
-
         if (!formValidation()) return;
-
         MainApp.selectedUC = ucCodes.get(bi.ra06.getSelectedItemPosition());
         MainApp.selectedVillage = villageCodes.get(bi.ra07.getSelectedItemPosition());
-                //MainApp.selectedVillage = MainApp.selectedVillage.substring(1,4);
-
-
+        //MainApp.selectedVillage = MainApp.selectedVillage.substring(1,4);
         finish();
         startActivity(openIntent);
-
     }
 
     public void btnEnd(View view) {
         finish();
-
         switch (MainApp.idType) {
             case 1:
                 openIntent = new Intent(this, EndingActivity.class).putExtra("complete", false);
                 break;
             case 2:
                 openIntent = new Intent(this, EndingActivity.class).putExtra("complete", false);
-
-
-
         }
-
     }
 
     private boolean formValidation() {
         return Validator.emptyCheckingContainer(this, bi.GrpName);
     }
-
-
+    
     @Override
     protected void onResume() {
         super.onResume();

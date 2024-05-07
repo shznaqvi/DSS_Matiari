@@ -73,7 +73,6 @@ public class SectionDActivity extends AppCompatActivity {
 
             @Override
             public void afterTextChanged(Editable s) {
-
                 setDateRanges();
             }
         });
@@ -82,7 +81,6 @@ public class SectionDActivity extends AppCompatActivity {
 
     private void setDateRanges() {
         try {
-
             // Set time from RC01a
             Calendar cal = Calendar.getInstance();
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
@@ -185,5 +183,4 @@ public class SectionDActivity extends AppCompatActivity {
         super.onResume();
         MainApp.lockScreen(this);
     }
-
 }

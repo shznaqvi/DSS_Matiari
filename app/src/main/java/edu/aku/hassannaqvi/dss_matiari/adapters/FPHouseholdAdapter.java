@@ -32,9 +32,9 @@ import java.util.List;
 
 import edu.aku.hassannaqvi.dss_matiari.R;
 import edu.aku.hassannaqvi.dss_matiari.core.MainApp;
+import edu.aku.hassannaqvi.dss_matiari.database.DssRoomDatabase;
 import edu.aku.hassannaqvi.dss_matiari.models.FollowUpsSche;
 import edu.aku.hassannaqvi.dss_matiari.models.Households;
-import edu.aku.hassannaqvi.dss_matiari.database.DssRoomDatabase;
 import edu.aku.hassannaqvi.dss_matiari.ui.lists.FPHouseholdActivity;
 import edu.aku.hassannaqvi.dss_matiari.ui.lists.FPMwraActivity;
 import edu.aku.hassannaqvi.dss_matiari.ui.sections.SectionAActivity;
@@ -49,7 +49,7 @@ public class FPHouseholdAdapter extends RecyclerView.Adapter<FPHouseholdAdapter.
     private final int mExpandedPosition = -1;
     private final int completeCount;
     private final DssRoomDatabase db;
-    private Households.SA sA;
+    private final Households.SA sA;
     private Households fpHouseholds;
     HashMap<Integer, Integer> totalMwraMap = new HashMap<>();
     HashMap<Integer, Integer> totalChildMap = new HashMap<>();
@@ -374,12 +374,10 @@ public class FPHouseholdAdapter extends RecyclerView.Adapter<FPHouseholdAdapter.
             secStatus = v.findViewById(R.id.secStatus);
             prvStatus = v.findViewById(R.id.prvStatus);
             imgStatus = v.findViewById(R.id.imgStatus);
-
         }
 
         public TextView getTextView() {
             return hhHead;
         }
     }
-
 }

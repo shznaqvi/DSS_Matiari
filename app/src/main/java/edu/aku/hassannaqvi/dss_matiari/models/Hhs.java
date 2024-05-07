@@ -93,7 +93,6 @@ public class Hhs implements Observable {
     private String ra05 = StringUtils.EMPTY;
 
 
-
     @Override
     public void addOnPropertyChangedCallback(OnPropertyChangedCallback callback) {
     }
@@ -101,7 +100,6 @@ public class Hhs implements Observable {
     @Override
     public void removeOnPropertyChangedCallback(OnPropertyChangedCallback callback) {
     }
-
 
     public long getId() {
         return id;
@@ -310,8 +308,6 @@ public class Hhs implements Observable {
         this.ra17_d1 = jsonObject.getString(TableHHS.COLUMN_RA17_D1);
         this.ra17_d2 = jsonObject.getString(TableHHS.COLUMN_RA17_D2);
         this.ra17_d3 = jsonObject.getString(TableHHS.COLUMN_RA17_D3);
-
-
         return this;
     }
 
@@ -338,7 +334,6 @@ public class Hhs implements Observable {
         this.ra17_d1 = cursor.getString(cursor.getColumnIndexOrThrow(TableHHS.COLUMN_RA17_D1));
         this.ra17_d2 = cursor.getString(cursor.getColumnIndexOrThrow(TableHHS.COLUMN_RA17_D2));
         this.ra17_d3 = cursor.getString(cursor.getColumnIndexOrThrow(TableHHS.COLUMN_RA17_D3));
-
         return this;
     }
 }

@@ -144,7 +144,6 @@ public class Outcome extends BaseObservable implements Observable {
         MainApp.outcome.setMuid(MainApp.mwra.getUid().split("_")[0]);
         MainApp.outcome.setMsno(MainApp.mwra.getSC() == null ? MainApp.mwra.getSB().getRb01() : MainApp.mwra.getSC().getRb01());
         MainApp.outcome.setSysDate(MainApp.mwra.getSysDate());
-
         MainApp.outcome.setRound(MainApp.mwra.getRound());
         MainApp.outcome.setUcCode(MainApp.households.getUcCode());
         MainApp.outcome.setVillageCode(MainApp.households.getVillageCode());
@@ -177,7 +176,6 @@ public class Outcome extends BaseObservable implements Observable {
         MainApp.outcome.setMuid(MainApp.fpMwra.getMuid().split("_")[0]);
         MainApp.outcome.setMsno(MainApp.fpMwra.getMsno());
         MainApp.outcome.setRegRound("");
-
     }
 
     public static void saveMainDataReg(String hdssId, String mSno, String childSno, SE sE) throws JSONException {
@@ -216,8 +214,6 @@ public class Outcome extends BaseObservable implements Observable {
             outcome.setUid(AppConstants.generateUid());
             outcome.setId(outcomeDao.addOutcome(outcome));
             Outcome.SE.saveData(sE);
-
-
         }
     }
 
@@ -616,108 +612,4 @@ public class Outcome extends BaseObservable implements Observable {
             notifyPropertyChanged(BR.rc09x);
         }
     }
-
-   /* public Outcome Hydrate(Outcome outcome) throws JSONException {
-        this.id = outcome.id;
-        this.uid = outcome.uid;
-        this.uuid = outcome.uuid;
-        this.muid = outcome.muid;
-        this.msno = outcome.msno;
-        this.userName = outcome.userName;
-        this.sysDate = outcome.sysDate;
-        this.hdssId = outcome.hdssId;
-        this.ucCode = outcome.ucCode;
-        this.villageCode = outcome.villageCode;
-        this.regRound = outcome.regRound;
-        this.round = outcome.round;
-        this.sno = outcome.sno;
-        this.hhNo = outcome.hhNo;
-        this.deviceId = outcome.deviceId;
-        this.deviceTag = outcome.deviceTag;
-        this.appver = outcome.appver;
-        //this.iStatus = outcome.msno;
-        this.synced = outcome.synced;
-        this.syncDate = outcome.syncDate;
-
-        sEHydrate(outcome.sE);
-        return this;
-    }*/
-
-    /*public void sEHydrate(String string) throws JSONException {
-        Log.d(TAG, "s5Hydrate: " + string);
-        if (string != null && !string.equals("")) {
-
-            JSONObject json = null;
-            json = new JSONObject(string);
-            this.rb02 = json.getString("rb02");
-            this.rb01a = json.getString("rc01a");
-            this.rc01 = json.getString("rc01");
-            this.rc02 = json.getString("rc02");
-            this.rc03 = json.has("rc03") ? json.getString("rc03") : "";
-            this.rc04 = json.getString("rc04");
-            this.rc05 = json.getString("rc05");
-            this.rc06 = json.getString("rc06");
-            this.rc07 = json.getString("rc07");
-            this.rc08 = json.has("rc08") ? json.getString("rc08") : "";
-
-
-        }
-    }*/
-
-
-    /*public String sEtoString() throws JSONException {
-        JSONObject json = new JSONObject();
-
-        json
-                .put("rb02", rb02)
-                .put("rc01a", rb01a)
-                .put("rc01", rc01)
-                .put("rc02", rc02)
-                .put("rc03", rc03)
-                .put("rc04", rc04)
-                .put("rc05", rc05)
-                .put("rc06", rc06)
-                .put("rc07", rc07)
-                .put("rc08", rc08)
-        ;
-
-
-        return json.toString();
-    }*/
-
-
-    /*public JSONObject toJSONObject() throws JSONException {
-
-        JSONObject json = new JSONObject();
-
-
-        json.put(TableContracts.OutcomeTable.COLUMN_ID, this.id);
-        json.put(TableContracts.OutcomeTable.COLUMN_PROJECT_NAME, this.projectName);
-        json.put(TableContracts.OutcomeTable.COLUMN_UID, this.uid);
-        json.put(TableContracts.OutcomeTable.COLUMN_UUID, this.uuid);
-        json.put(TableContracts.OutcomeTable.COLUMN_MUID, this.muid);
-        json.put(TableContracts.OutcomeTable.COLUMN_MSNO, this.msno);
-        json.put(TableContracts.OutcomeTable.COLUMN_USERNAME, this.userName);
-        json.put(TableContracts.OutcomeTable.COLUMN_SYSDATE, this.sysDate);
-        json.put(TableContracts.OutcomeTable.COLUMN_HDSSID, this.hdssId);
-        json.put(TableContracts.OutcomeTable.COLUMN_UC_CODE, this.ucCode);
-        json.put(TableContracts.OutcomeTable.COLUMN_REGROUND, this.regRound);
-        //json.put(TableContracts.OutcomeTable.COLUMN_FROUND, this.fRound);
-        json.put(TableContracts.OutcomeTable.COLUMN_ROUND, this.round);
-        json.put(TableContracts.OutcomeTable.COLUMN_VILLAGE_CODE, this.villageCode);
-        json.put(TableContracts.OutcomeTable.COLUMN_SNO, this.sno);
-        json.put(TableContracts.OutcomeTable.COLUMN_HOUSEHOLD_NO, this.hhNo);
-        json.put(TableContracts.OutcomeTable.COLUMN_DEVICEID, this.deviceId);
-        //json.put(TableContracts.OutcomeTable.COLUMN_DEVICETAGID, this.deviceTag);
-        //json.put(TableContracts.OutcomeTable.COLUMN_ISTATUS, this.iStatus);
-        json.put(TableContracts.OutcomeTable.COLUMN_APPVERSION, this.appver);
-        //  json.put(MWRATable.COLUMN_SYNCED, this.synced);
-        //  json.put(MWRATable.COLUMN_SYNCED_DATE, this.syncDate);
-
-        json.put(TableContracts.OutcomeTable.COLUMN_SE, new JSONObject(sEtoString()));
-        return json;
-
-    }*/
-
-
 }

@@ -54,7 +54,6 @@ public class FormsReportCluster extends AppCompatActivity {
         recyclerView.setAdapter(formsAdapter);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
     }
 
 
@@ -66,7 +65,6 @@ public class FormsReportCluster extends AppCompatActivity {
         recyclerView.setAdapter(formsAdapter);
         /* formsAdapter.notifyDataSetChanged();*/
         Toast.makeText(this, "Activity Resumed", Toast.LENGTH_SHORT).show();
-
     }
 
     public void filterForms(View view) {
@@ -76,7 +74,6 @@ public class FormsReportCluster extends AppCompatActivity {
         formsAdapter = new FormsAdapter(MainApp.householdList, this);
         formsAdapter.notifyDataSetChanged();
         recyclerView.setAdapter(formsAdapter);
-
     }
 
     @Override

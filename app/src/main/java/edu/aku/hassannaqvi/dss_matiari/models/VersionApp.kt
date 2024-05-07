@@ -27,6 +27,4 @@ class VersionApp {
             cursor.getString(cursor.getColumnIndexOrThrow(VersionTable.COLUMN_VERSION_NAME))
         return this
     }
-
-
 }

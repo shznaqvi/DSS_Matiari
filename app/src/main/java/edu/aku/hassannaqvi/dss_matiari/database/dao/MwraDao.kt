@@ -14,61 +14,67 @@ import org.json.JSONException
 @Dao
 interface MwraDao {
 
-    @Throws(JSONException ::class)
+    @Throws(JSONException::class)
     @Insert
-    fun addMwra(mwra: Mwra) : Long
+    fun addMwra(mwra: Mwra): Long
 
-    @Update(onConflict =  OnConflictStrategy.REPLACE)
-    fun updateMwra(mwra: Mwra) : Int
+    @Update(onConflict = OnConflictStrategy.REPLACE)
+    fun updateMwra(mwra: Mwra): Int
 
     @Query("SELECT MAX( CAST(sNo AS INT)) SNO from mwras where ucCode like :ucCode and villageCode like :vCode and hhNo like :hhNo group by hhNo")
-    fun getMaxMWRSNoBYHH(ucCode : String, vCode : String, hhNo : String) : Int
-
+    fun getMaxMWRSNoBYHH(ucCode: String, vCode: String, hhNo: String): Int
 
     @Query("SELECT * FROM mwras where ucCode like :uc and villageCode like :village and structureNo like :structure and hhNo like :hhNo and regRound like :regRound")
-    fun getAllMWRAByHH_internal(uc : String, village : String, structure : String, hhNo: String, regRound : String) : List<Mwra>
+    fun getAllMWRAByHH_internal(
+        uc: String,
+        village: String,
+        structure: String,
+        hhNo: String,
+        regRound: String
+    ): List<Mwra>
 
-
-    fun getAllMWRAByHH(uc: String, village: String, structure: String, hhNo: String, regRound: String) : List<Mwra>
-    {
+    fun getAllMWRAByHH(
+        uc: String,
+        village: String,
+        structure: String,
+        hhNo: String,
+        regRound: String
+    ): List<Mwra> {
         val mwra = getAllMWRAByHH_internal(uc, village, structure, hhNo, regRound)
         mwra.forEach {
         }
         return mwra
     }
+
     @Query("SELECT * FROM mwras where _uuid = :uuid AND hdssid = :hdssid AND sNo = :sNo AND regRound = :regRound ORDER BY _id ASC")
-    fun getMwraByUUId(uuid : String, hdssid : String, sNo : String, regRound: String) : Mwra
-
-
+    fun getMwraByUUId(uuid: String, hdssid: String, sNo: String, regRound: String): Mwra
 
     @Query("SELECT Count(*) AS mwraCount from mwras where _uuid like :uid and regRound like :regRound")
-    fun getMWRACountBYUUID(uid: String, regRound: String) : Int
-
+    fun getMWRACountBYUUID(uid: String, regRound: String): Int
 
     @Query("SELECT * FROM mwras where _uuid like :uuid and sNo like :rb01 and sNo != 'null' and round like :fround and regRound like :regRound order by _id ASC ")
-    fun getFollowupsBySno_internal(uuid: String, rb01: String, fround: String, regRound: String) : Mwra?
+    fun getFollowupsBySno_internal(
+        uuid: String,
+        rb01: String,
+        fround: String,
+        regRound: String
+    ): Mwra?
 
-
-    @Throws(JSONException ::class)
-    fun getFollowupsBySno(uuid: String, rb01: String, fround: String) : Mwra?
-    {
+    @Throws(JSONException::class)
+    fun getFollowupsBySno(uuid: String, rb01: String, fround: String): Mwra? {
         val mwra = getFollowupsBySno_internal(uuid, rb01, fround, "")
-        if(mwra == null)
-        {
+        if (mwra == null) {
             val tempMwra = Mwra()
             return tempMwra
-        }else{
+        } else {
             return mwra
         }
-
     }
 
-    @Throws(JSONException ::class)
-    fun getFollowupsBySnoEmpty(uuid: String, rb01: String, fround: String) : Mwra?
-    {
+    @Throws(JSONException::class)
+    fun getFollowupsBySnoEmpty(uuid: String, rb01: String, fround: String): Mwra? {
         val mwra = getFollowupsBySno_internal(uuid, rb01, fround, "null")
-        if(mwra == null)
-        {
+        if (mwra == null) {
             val tempMwra = Mwra()
             return tempMwra
         }
@@ -76,10 +82,8 @@ interface MwraDao {
     }
 
     /* NEW STRUCT */
-
     @Query("SELECT * FROM MWRAs WHERE _uuid IN (:uIds)")
     fun getAllUnSyncedDataByUIds(uIds: List<String>): List<Mwra>
-
 
     // This query is only used for updating sync list
     // id = rowId
@@ -92,7 +96,7 @@ interface MwraDao {
             val syncedDate: String = DateUtils.getCurrentDateTime()
             val synced = "1"
             for (i in responses.indices) {
-                val forms: Mwra = getDataById(responses[i].getId())
+                val forms: Mwra = getDataById(responses[i].id)
                 forms.syncDate = syncedDate
                 forms.synced = synced
                 forms.isError = false
@@ -109,5 +113,4 @@ interface MwraDao {
             updateMwra(obj)
         }
     }
-
 }

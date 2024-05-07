@@ -1,4 +1,3 @@
-
 /**
  * Created by gul.sanober on 10/06/2022.
  */
@@ -6,8 +5,8 @@
 package edu.aku.hassannaqvi.dss_matiari.database.dao
 
 import androidx.room.*
-import edu.aku.hassannaqvi.dss_matiari.models.EntryLog
 import edu.aku.hassannaqvi.dss_matiari.global.DateUtils
+import edu.aku.hassannaqvi.dss_matiari.models.EntryLog
 import edu.aku.hassannaqvi.dss_matiari.models.SyncModelNew
 import org.json.JSONException
 
@@ -17,7 +16,6 @@ interface EntryLogDao {
     @kotlin.jvm.Throws(JSONException::class)
     @Insert
     fun addEntryLog(entryLog: EntryLog): Long
-
 
     @Update(onConflict = OnConflictStrategy.REPLACE)
     fun updateEntryLog(entryLog: EntryLog): Int
@@ -36,7 +34,7 @@ interface EntryLogDao {
             val syncedDate: String = DateUtils.getCurrentDateTime()
             val synced = "1"
             for (i in responses.indices) {
-                val forms: EntryLog = getDataById(responses[i].getId())
+                val forms: EntryLog = getDataById(responses[i].id)
                 forms.syncDate = syncedDate
                 forms.synced = synced
                 forms.isError = false
@@ -53,6 +51,4 @@ interface EntryLogDao {
             updateEntryLog(obj)
         }
     }
-
-
 }

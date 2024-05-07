@@ -19,10 +19,10 @@ import org.json.JSONException;
 
 import edu.aku.hassannaqvi.dss_matiari.R;
 import edu.aku.hassannaqvi.dss_matiari.core.MainApp;
+import edu.aku.hassannaqvi.dss_matiari.database.DssRoomDatabase;
 import edu.aku.hassannaqvi.dss_matiari.databinding.ActivitySectionABinding;
 import edu.aku.hassannaqvi.dss_matiari.global.DateUtils;
 import edu.aku.hassannaqvi.dss_matiari.models.Households;
-import edu.aku.hassannaqvi.dss_matiari.database.DssRoomDatabase;
 import edu.aku.hassannaqvi.dss_matiari.ui.EndingActivity;
 import edu.aku.hassannaqvi.dss_matiari.ui.lists.MwraActivity;
 
@@ -47,7 +47,6 @@ public class SectionAActivity extends AppCompatActivity {
         bi.setSA(sA);
 
         initUI();
-
     }
 
     public void initUI() {
@@ -77,7 +76,6 @@ public class SectionAActivity extends AppCompatActivity {
                     bi.ra17C2.setMaxvalue(0);
                 }
             }
-
         });
 
         bi.rb08check.setOnCheckedChangeListener(new OnCheckedChangeListener() {
@@ -87,11 +85,9 @@ public class SectionAActivity extends AppCompatActivity {
                     bi.ra08.setText(MainApp.previousAddress);
                 } else {
                     bi.ra08.setText("");
-
                 }
             }
         });
-
     }
 
     public void btnContinue(View view) throws JSONException {
@@ -118,13 +114,11 @@ public class SectionAActivity extends AppCompatActivity {
                         .putExtra("noWRA", true));
             }
         }
-
     }
 
     public void btnEnd(View view) {
         setResult(RESULT_CANCELED);
         finish();
-
     }
 
     private boolean formValidation() {
@@ -136,5 +130,4 @@ public class SectionAActivity extends AppCompatActivity {
         super.onResume();
         MainApp.lockScreen(this);
     }
-
 }

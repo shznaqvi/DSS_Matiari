@@ -5,12 +5,15 @@
 package edu.aku.hassannaqvi.dss_matiari.database.dao
 
 import android.os.Build
-import androidx.room.*
+import androidx.room.Dao
+import androidx.room.Insert
 import androidx.room.OnConflictStrategy.IGNORE
 import androidx.room.OnConflictStrategy.REPLACE
+import androidx.room.Query
+import androidx.room.Update
 import edu.aku.hassannaqvi.dss_matiari.contracts.TableContracts.HouseholdTable
-import edu.aku.hassannaqvi.dss_matiari.models.Households
 import edu.aku.hassannaqvi.dss_matiari.global.DateUtils
+import edu.aku.hassannaqvi.dss_matiari.models.Households
 import edu.aku.hassannaqvi.dss_matiari.models.SyncModelNew
 import org.json.JSONException
 
@@ -50,12 +53,17 @@ interface HouseholdsDao {
         return householdsList
     }
 
-    @Query("SELECT MAX( CAST(hhNo AS INT)) AS hhNO FROM hhs WHERE ucCode LIKE :ucCode AND villageCode LIKE :vCode AND regRound LIKE :regRound GROUP BY villageCode"
+    @Query(
+        "SELECT MAX( CAST(hhNo AS INT)) AS hhNO FROM hhs WHERE ucCode LIKE :ucCode AND villageCode LIKE :vCode AND regRound LIKE :regRound GROUP BY villageCode"
     )
     fun getMaxHouseholdNo(ucCode: String, vCode: String, regRound: String): Int
 
     @Query("SELECT * FROM hhs WHERE (hdssid LIKE :hdssid OR hdssid LIKE :newHDSSID) AND round like :fround ORDER BY _id ASC")
-    fun getHouseholdByHDSSIDASC_internal(hdssid: String, newHDSSID: String, fround: String): Households?
+    fun getHouseholdByHDSSIDASC_internal(
+        hdssid: String,
+        newHDSSID: String,
+        fround: String
+    ): Households?
 
     @Throws(JSONException::class)
     fun getHouseholdByHDSSIDASC(hdssid: String, fround: String): Households? {
@@ -63,7 +71,8 @@ interface HouseholdsDao {
         val hdssidSplit = hdssid.split("-").toTypedArray()
         val newHDSSID = hdssidSplit[0] + "-" + hdssidSplit[1] + "-" + String.format(
             "%04d",
-            hdssidSplit[2].toInt())
+            hdssidSplit[2].toInt()
+        )
 
         val household = getHouseholdByHDSSIDASC_internal(hdssid, newHDSSID, fround)
         return household
@@ -78,7 +87,8 @@ interface HouseholdsDao {
         val hdssidSplit = hdssid.split("-").toTypedArray()
         val newHDSSID = hdssidSplit[0] + "-" + hdssidSplit[1] + "-" + String.format(
             "%04d",
-            hdssidSplit[2].toInt())
+            hdssidSplit[2].toInt()
+        )
 
         val household = getHouseholdByHDSSIDDSC_internal(hdssid, newHDSSID)
         if (household == null) {
@@ -102,12 +112,11 @@ interface HouseholdsDao {
             val tempHousehold = Households()
             tempHousehold.populateMeta(position)
             return tempHousehold
-        }else{
+        } else {
             return household
         }
 
     }
-
 
     @Query("SELECT * FROM hhs ORDER BY _id DESC ")
     fun getAllHouseholds(): List<Households>
@@ -116,13 +125,11 @@ interface HouseholdsDao {
     @Query("SELECT * FROM hhs WHERE _uid LIKE :uid ORDER BY _id ASC")
     fun getHouseholdByUID_internal(uid: String): Households?
 
-
     @kotlin.jvm.Throws(JSONException::class)
     fun getHouseholdByUID(uid: String): Households? {
         val newHousehols = getHouseholdByUID_internal(uid)
         return newHousehols
     }
-
 
     @Query("SELECT _id, _uid, sysDate, username, istatus, synced, visitNo, structureNo, villageCode, ucCode, hhNo, isError FROM hhs WHERE istatus = '1' AND visitNo < 3 ORDER By _id ASC ")
     fun getUnclosedHouseholds(): List<Households>
@@ -130,8 +137,7 @@ interface HouseholdsDao {
     /* NEW STRUCT */
 
     @Query("SELECT * FROM hhs WHERE _uid IN (:uIds)")
-    abstract fun getAllUnSyncedDataByUIds(uIds: List<String>): List<Households>
-
+    fun getAllUnSyncedDataByUIds(uIds: List<String>): List<Households>
 
     // This query is only used for updating sync list
     // id = rowId
@@ -144,7 +150,7 @@ interface HouseholdsDao {
             val syncedDate: String = DateUtils.getCurrentDateTime()
             val synced = "1"
             for (i in responses.indices) {
-                val forms: Households = getDataById(responses[i].getId())
+                val forms: Households = getDataById(responses[i].id)
                 forms.syncDate = syncedDate
                 forms.synced = synced
                 forms.isError = false
@@ -161,5 +167,4 @@ interface HouseholdsDao {
             updateHousehold(obj)
         }
     }
-
 }

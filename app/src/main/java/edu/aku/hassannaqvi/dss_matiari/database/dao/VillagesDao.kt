@@ -22,7 +22,6 @@ interface VillagesDao {
     @Query("SELECT villagename, villageCode from villages where uccode like :ucCode order by villagename asc ")
     fun getVillageByUc(ucCode: String): List<Villages>
 
-
     @Query("SELECT DISTINCT ucname, uccode, villagename, villagecode from villages group by ucname order by ucname asc ")
     fun getVillageUc(): List<Villages>
 
@@ -39,5 +38,4 @@ interface VillagesDao {
         deleteAll()
         addAllData(list)
     }
-
 }

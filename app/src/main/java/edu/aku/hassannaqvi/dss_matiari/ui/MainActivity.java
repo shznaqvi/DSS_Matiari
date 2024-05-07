@@ -22,10 +22,10 @@ import java.io.File;
 
 import edu.aku.hassannaqvi.dss_matiari.R;
 import edu.aku.hassannaqvi.dss_matiari.core.MainApp;
-import edu.aku.hassannaqvi.dss_matiari.databinding.ActivityMainBinding;
-import edu.aku.hassannaqvi.dss_matiari.models.Households;
-import edu.aku.hassannaqvi.dss_matiari.global.AppConstants;
 import edu.aku.hassannaqvi.dss_matiari.database.DssRoomDatabase;
+import edu.aku.hassannaqvi.dss_matiari.databinding.ActivityMainBinding;
+import edu.aku.hassannaqvi.dss_matiari.global.AppConstants;
+import edu.aku.hassannaqvi.dss_matiari.models.Households;
 import edu.aku.hassannaqvi.dss_matiari.ui.lists.FormsReportCluster;
 import edu.aku.hassannaqvi.dss_matiari.ui.sections.IdentificationActivity;
 import edu.aku.hassannaqvi.dss_matiari.ui.sections.SectionAActivity;
@@ -45,7 +45,8 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(bi.toolbar);
         getSupportActionBar().setDisplayUseLogoEnabled(true);
         //getSupportActionBar().setIcon(R.drawable.app_icon);
-        bi.adminView.setVisibility(MainApp.admin ? View.VISIBLE : View.GONE);bi.username.setText("Welcome, " + MainApp.user.getFullname() + (MainApp.admin ? " (Admin)" : "") + "!");
+        bi.adminView.setVisibility(MainApp.admin ? View.VISIBLE : View.GONE);
+        bi.username.setText("Welcome, " + MainApp.user.getFullname() + (MainApp.admin ? " (Admin)" : "") + "!");
     }
 
     @Override
@@ -58,7 +59,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void sectionPress(View view) {
-
         switch (view.getId()) {
             case R.id.openForm:
                 MainApp.idType = 1;
@@ -66,7 +66,6 @@ public class MainActivity extends AppCompatActivity {
             case R.id.openFollowup:
                 MainApp.idType = 2;
                 break;
-
         }
 
 
@@ -79,7 +78,6 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(new Intent(this, IdentificationActivity.class));
                 break;
 
-
             case R.id.seca:
                 MainApp.households = new Households();
                 startActivity(new Intent(this, SectionAActivity.class));
@@ -91,7 +89,6 @@ public class MainActivity extends AppCompatActivity {
             case R.id.openFollowup:
                 MainApp.idType = 2;
                 startActivity(new Intent(this, IdentificationActivity.class));
-
                 break;
             case R.id.dbm:
                 RoomExplorer.show(this, DssRoomDatabase.class, DssRoomDatabase.DATABASE_NAME);
@@ -110,7 +107,7 @@ public class MainActivity extends AppCompatActivity {
             // For after login sync data download
             AppConstants.IS_LOGIN = true;
             AppConstants.gotoActivity(this, SyncNewAC.class, false);
-       } else if (menuItemId == R.id.checkOpenForms) {
+        } else if (menuItemId == R.id.checkOpenForms) {
             AppConstants.gotoActivity(this, FormsReportCluster.class, false);
         } else if (menuItemId == R.id.sendDB) {
             sendEmail();

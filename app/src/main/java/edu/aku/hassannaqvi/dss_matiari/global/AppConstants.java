@@ -117,7 +117,7 @@ public class AppConstants {
 
     // Date formats
     public static String APP_DATE_FORMAT = "yyyy-MM-dd";
-//    public static String APP_DATE_PICKER_FORMAT = "dd/MM/yyyy";
+    //    public static String APP_DATE_PICKER_FORMAT = "dd/MM/yyyy";
     public static String APP_DATE_TIME_FORMAT = "yyyy-MM-dd HH:mm:ss";
     public static String ISO_DATE_TIME_FORMAT = "yyyy-MM-dd'T'HH:mm:ssZ";
     public static String SERVER_DATE_TIME_FORMAT = "EEE, dd MMM yyyy HH:mm:ss z";
@@ -396,41 +396,6 @@ public class AppConstants {
         }
     }
 
-    /*For Activity Screen Lock*/
-   /* public static void lockScreen(Activity activity) {
-        if (MainApp.timer != null) MainApp.timer.cancel();
-        MainApp.timer = new CountDownTimer(15 * 60 * 1000, 1000) {
-            public void onTick(long millisUntilFinished) {
-                if ((millisUntilFinished / 1000) < 14) {
-                    MainApp.toneGen.startTone(ToneGenerator.TONE_CDMA_PIP, 150);
-                }
-            }
-
-            public void onFinish() {
-                gotoActivity(activity, LockAC.class, false);
-                MainApp.timer.cancel();
-            }
-        };
-        MainApp.timer.start();
-    }*/
-
-    /*For Double Back Pressed*/
-   /* private static boolean isDoubleBackPressed = false;
-
-    public static void checkDoubleBackPress(Activity activity, Class<? extends Activity> nextActivity) {
-        if (isDoubleBackPressed) {
-            if (nextActivity != null)
-                gotoActivity(activity, nextActivity, true);
-            else
-                activity.onBackPressed();
-            activity.finish();
-            return;
-        }
-        isDoubleBackPressed = true;
-        showSimpleSnackBar(activity, activity.getString(R.string.double_back_press), MSG_DURATION, TYPE_INFO);
-        new Handler().postDelayed(() -> isDoubleBackPressed = false, 2000);
-    }*/
-
     // Check if device is rooted
     public static void checkIfDeviceRooted(Activity activity) {
 //        if (CommonUtils.isRooted()) {
@@ -452,5 +417,4 @@ public class AppConstants {
         view.setVisibility(View.VISIBLE);
         view.postDelayed(() -> view.setVisibility(View.GONE), duration);
     }
-
 }

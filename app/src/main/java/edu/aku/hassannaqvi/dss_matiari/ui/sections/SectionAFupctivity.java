@@ -51,7 +51,6 @@ public class SectionAFupctivity extends AppCompatActivity {
         bi.setHousehold(sA);
 
         initUI();
-
     }
 
     private void initUI() {
@@ -84,7 +83,6 @@ public class SectionAFupctivity extends AppCompatActivity {
                 updateFMClicked = true;
                 bi.lockedLayout.setVisibility(View.GONE);
                 bi.btnUpdate.setText("Update");
-
                 setOnTouchListener(bi.ra17A1);
                 setOnTouchListener(bi.ra17B1);
                 setOnTouchListener(bi.ra17C1);
@@ -97,11 +95,8 @@ public class SectionAFupctivity extends AppCompatActivity {
                 setOnTouchListener(bi.ra17B3);
                 setOnTouchListener(bi.ra17C3);
                 setOnTouchListener(bi.ra17D3);
-
-
             }
         });
-
     }
 
     public void btnUpdateHH(View view) throws JSONException {
@@ -121,10 +116,8 @@ public class SectionAFupctivity extends AppCompatActivity {
                 Households.saveMainData(sA.getRa10(), households.getRound(), sA);
                 Intent intent = new Intent(this, FPMwraActivity.class);
                 ((Activity) this).startActivityForResult(intent, 2);
-
             }
         }
-
     }
 
     public void btnContinue(View view) throws JSONException {
@@ -151,13 +144,11 @@ public class SectionAFupctivity extends AppCompatActivity {
                     .setFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT)
                     .putExtra("noWRA", true));
         }
-
     }
 
     public void btnEnd(View view) {
         setResult(RESULT_CANCELED);
         finish();
-
     }
 
     private boolean formValidation() {
@@ -180,9 +171,7 @@ public class SectionAFupctivity extends AppCompatActivity {
                 if (event.getAction() == MotionEvent.ACTION_UP) {
                     if (event.getRawX() >= (editText.getRight() - editText.getCompoundDrawables()[DRAWABLE_RIGHT].getBounds().width())) {
                         editText.setText(String.valueOf(Integer.parseInt(editText.getText().toString()) + 1));
-
                         return true;
-
                     }
 
                     if (event.getRawX() >= (editText.getLeft() - editText.getCompoundDrawables()[DRAWABLE_LEFT].getBounds().width())) {
@@ -191,19 +180,12 @@ public class SectionAFupctivity extends AppCompatActivity {
                         } else {
                             editText.setText(editText.getText().toString());
                         }
-
                         return true;
-
                     }
-
                 }
-
-
                 return false;
             }
         });
-
-
     }
 
     @Override

@@ -23,7 +23,6 @@ public class TableContracts {
         public static final String COLUMN_REGROUND = "regRound";
         public static final String IS_ERROR = "isError";
         //public static final String COLUMN_FROUND = "fRound";
-
         public static final String COLUMN_DEVICEID = "deviceid";
         public static final String COLUMN_DEVICETAGID = "devicetagid";
         public static final String COLUMN_SYNCED = "synced";
@@ -82,11 +81,8 @@ public class TableContracts {
         public static final String COLUMN_HOUSEHOLD_NO = "hhNo";
         public static final String COLUMN_VISIT_NO = "visitNo";
         public static final String COLUMN_SNO = "sNo";
-
         public static final String COLUMN_SC = "s3";
         public static final String COLUMN_SD = "s4";
-
-
         public static final String COLUMN_DEVICEID = "deviceid";
         public static final String COLUMN_DEVICETAGID = "devicetagid";
         public static final String COLUMN_SYNCED = "synced";
@@ -110,7 +106,6 @@ public class TableContracts {
         public static final String COLUMN_HOUSEHOLD_NO = "hhNo";
         public static final String COLUMN_STRUCTURE_NO = "structureNo";
         public static final String COLUMN_SD = "s4";
-
         public static final String COLUMN_DEVICEID = "deviceid";
         public static final String COLUMN_DEVICETAGID = "devicetagid";
         public static final String COLUMN_SYNCED = "synced";
@@ -139,7 +134,6 @@ public class TableContracts {
         //public static final String COLUMN_FROUND = "fRound";
         public static final String COLUMN_ROUND = "round";
         public static final String COLUMN_SE = "s5";
-
         public static final String COLUMN_DEVICEID = "deviceid";
         public static final String COLUMN_DEVICETAGID = "devicetagid";
         public static final String COLUMN_SYNCED = "synced";
@@ -169,7 +163,6 @@ public class TableContracts {
         public static final String COLUMN_FP_ROUND = "fRound";
         public static final String COLUMN_SE = "s5";
         public static final String COLUMN_VISIT_NO = "visitNo";
-
         public static final String COLUMN_DEVICEID = "deviceid";
         public static final String COLUMN_DEVICETAGID = "devicetagid";
         public static final String COLUMN_SYNCED = "synced";
@@ -177,8 +170,8 @@ public class TableContracts {
         public static final String COLUMN_APPVERSION = "appversion";
         public static final String COLUMN_ISTATUS = "istatus";
     }
-    public static abstract class UsersTable implements BaseColumns {
 
+    public static abstract class UsersTable implements BaseColumns {
         public static final String TABLE_NAME = "users";
         public static final String COLUMN_ID = "_id";
         public static final String COLUMN_USERNAME = "username";
@@ -193,10 +186,7 @@ public class TableContracts {
     }
 
     public static abstract class VersionTable implements BaseColumns {
-
-
         public static final String COLUMN_NAME_NULLABLE = "NULLHACK";
-
         public static final String TABLE_NAME = "version";
         public static final String COLUMN_ID = "_id";
         public static final String COLUMN_VERSION_PATH = "elements";
@@ -204,13 +194,10 @@ public class TableContracts {
         public static final String COLUMN_VERSION_NAME = "versionName";
         public static final String COLUMN_PATH_NAME = "outputFile";
         public static final String SERVER_URI = "output-metadata.json";
-
     }
 
     public static abstract class ZScoreTable implements BaseColumns {
-
         public static final String TABLE_NAME = "zstandards";
-
         public static final String _ID = "_id";
         public static final String COLUMN_SEX = "sex";
         public static final String COLUMN_AGE = "age";
@@ -235,28 +222,21 @@ public class TableContracts {
     }
 
     public static abstract class TableVillage implements BaseColumns {
-
         public static final String TABLE_NAME = "villages";
         public static final String ID = "id";
         public static final String COLUMN_UCNAME = "ucname";
         public static final String COLUMN_VILLAGE_NAME = "villagename";
         public static final String COLUMN_VILLAGE_CODE = "villagecode";
         public static final String COLUMN_UC_CODE = "uccode";
-
-
         //public static final String SERVER_URI = "villages.php";
-
 /*        public static String PATH = "villages";
-
         public static final String CONTENT_TYPE = ContentResolver.CURSOR_DIR_BASE_TYPE + "/" + CONTENT_AUTHORITY + "/" + PATH;
         public static final String CONTENT_ITEM_TYPE = ContentResolver.CURSOR_ITEM_BASE_TYPE + "/" + CONTENT_AUTHORITY + "/" + PATH;
         public static Uri CONTENT_URI = Uri.parse("content://" + CONTENT_AUTHORITY)
                 .buildUpon().appendPath(PATH).build();
-
         public static String getMovieKeyFromUri(Uri uri) {
             return uri.getPathSegments().get(1);
         }
-
         public static Uri buildUriWithId(long id) {
             return ContentUris.withAppendedId(CONTENT_URI, id);
         }*/
@@ -272,9 +252,7 @@ public class TableContracts {
     }
 
     public static abstract class TableHHS implements BaseColumns {
-
         public static final String TABLE_NAME = "hhs_view";
-
         public static final String COLUMN_ID = "id";
         public static final String COLUMN_VILLAGE_CODE = "villageCode";
         public static final String COLUMN_UC_CODE = "ucCode";
@@ -299,14 +277,10 @@ public class TableContracts {
         public static final String COLUMN_RA17_D3 = "ra17_d3";
         public static final String COLUMN_RA05 = "ra05";
         public static final String COLUMN_RA18 = "ra18"; // No. of MWRA in the household
-
-
     }
 
     public static abstract class TableFollowUpsSche implements BaseColumns {
-
         public static final String TABLE_NAME = "hhfuplist_view";
-
         public static final String COLUMN_ID = "id";
         public static final String COLUMN_VILLAGE_CODE = "villageCode";
         public static final String COLUMN_UC_CODE = "ucCode";
@@ -357,8 +331,6 @@ public class TableContracts {
         public static final String COLUMN_STRUCTURE_NO = "structureNo";
         public static final String COLUMN_VISIT_NO = "visitNo";
         public static final String COLUMN_SA = "s1";
-
-
         public static final String COLUMN_DEVICEID = "deviceid";
         public static final String COLUMN_DEVICETAGID = "devicetagid";
         public static final String COLUMN_SYNCED = "synced";

@@ -13,24 +13,24 @@ import java.util.ArrayList;
 import java.util.List;
 
 import edu.aku.hassannaqvi.dss_matiari.R;
+import edu.aku.hassannaqvi.dss_matiari.adapters.SyncAdapter;
 import edu.aku.hassannaqvi.dss_matiari.contracts.TableContracts;
 import edu.aku.hassannaqvi.dss_matiari.core.MainApp;
-import edu.aku.hassannaqvi.dss_matiari.models.FollowUpsSche;
-import edu.aku.hassannaqvi.dss_matiari.models.Hhs;
-import edu.aku.hassannaqvi.dss_matiari.models.MaxHhno;
-import edu.aku.hassannaqvi.dss_matiari.models.Users;
-import edu.aku.hassannaqvi.dss_matiari.models.Villages;
-import edu.aku.hassannaqvi.dss_matiari.ui.SyncNewAC;
-import edu.aku.hassannaqvi.dss_matiari.adapters.SyncAdapter;
+import edu.aku.hassannaqvi.dss_matiari.database.DssRoomDatabase;
 import edu.aku.hassannaqvi.dss_matiari.global.AppConstants;
 import edu.aku.hassannaqvi.dss_matiari.global.DateUtils;
 import edu.aku.hassannaqvi.dss_matiari.models.AppInfoNew;
+import edu.aku.hassannaqvi.dss_matiari.models.FollowUpsSche;
+import edu.aku.hassannaqvi.dss_matiari.models.Hhs;
+import edu.aku.hassannaqvi.dss_matiari.models.MaxHhno;
 import edu.aku.hassannaqvi.dss_matiari.models.SyncModelNew;
+import edu.aku.hassannaqvi.dss_matiari.models.Users;
+import edu.aku.hassannaqvi.dss_matiari.models.Villages;
+import edu.aku.hassannaqvi.dss_matiari.ui.SyncNewAC;
 import edu.aku.hassannaqvi.dss_matiari.webcall.web_client.CryptoUtil;
 import edu.aku.hassannaqvi.dss_matiari.webcall.web_client.WebAPI;
 import edu.aku.hassannaqvi.dss_matiari.webcall.web_client.WebCall;
 import edu.aku.hassannaqvi.dss_matiari.webcall.web_client.WebClient;
-import edu.aku.hassannaqvi.dss_matiari.database.DssRoomDatabase;
 
 public class DownloadData {
     private final SyncNewAC activity;
@@ -63,8 +63,6 @@ public class DownloadData {
         add(TableContracts.TableHHS.TABLE_NAME);
         add(TableContracts.TableFollowUpsSche.TABLE_NAME);
         add(TableContracts.MaxHhnoTable.TABLE_NAME);
-
-
     }};
 
     /**

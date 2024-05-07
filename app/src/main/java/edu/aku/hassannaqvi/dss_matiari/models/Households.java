@@ -83,7 +83,6 @@ public class Households extends BaseObservable implements Observable {
     @ColumnInfo(name = HouseholdTable.COLUMN_HOUSEHOLD_NO)
     private String hhNo = StringUtils.EMPTY;
 
-
     @ColumnInfo(name = HouseholdTable.COLUMN_STRUCTURE_NO)
     private transient String structureNo = StringUtils.EMPTY;
 
@@ -177,7 +176,6 @@ public class Households extends BaseObservable implements Observable {
         this.projectName = projectName;
     }
 
-
     public long getId() {
         return id;
     }
@@ -231,7 +229,6 @@ public class Households extends BaseObservable implements Observable {
     }
 
     public void setUcCode(String ucCode) {
-
         this.ucCode = ucCode;
     }
 
@@ -342,7 +339,6 @@ public class Households extends BaseObservable implements Observable {
         this.sA = sA;
     }
 
-
     public boolean isError() {
         return isError;
     }
@@ -370,7 +366,6 @@ public class Households extends BaseObservable implements Observable {
         // Household number in DSSID was changed to 4-digits to capture more than 999 households
         String[] hdssidSplit = hdssId.split("-");
         String newHDSSID = hdssidSplit[0] + "-" + hdssidSplit[1] + "-" + String.format("%04d", Integer.parseInt(hdssidSplit[2]));
-
         this.hdssId = newHDSSID;
     }
 
@@ -903,6 +898,4 @@ public class Households extends BaseObservable implements Observable {
             notifyPropertyChanged(BR.ra21);
         }
     }
-
-
 }

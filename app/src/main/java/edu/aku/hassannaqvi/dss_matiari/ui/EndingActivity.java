@@ -124,7 +124,6 @@ public class EndingActivity extends AppCompatActivity {
                 sA.setRa01v2(bi.ra01v2.getText().toString());
                 households.setIStatus(sA.getRa19b());
                 households.setIStatus96x(sA.getRa19bx());
-
                 break;
             case 3:
                 sA.setRa19c(
@@ -143,11 +142,8 @@ public class EndingActivity extends AppCompatActivity {
                 sA.setRa01v3(bi.ra01v3.getText().toString());
                 households.setIStatus(sA.getRa19c());
                 households.setIStatus96x(sA.getRa19cx());
-
                 break;
-
         }
-
         // households.setEndTime(new SimpleDateFormat("dd-MM-yy HH:mm", Locale.ENGLISH).format(new Date().getTime()));
     }
 
@@ -167,8 +163,6 @@ public class EndingActivity extends AppCompatActivity {
             startActivity(i);
         }
         Toast.makeText(this, "Entry Complete", Toast.LENGTH_SHORT).show();
-
-
     }
 
     private boolean formValidation() {
@@ -185,5 +179,4 @@ public class EndingActivity extends AppCompatActivity {
         super.onResume();
         MainApp.lockScreen(this);
     }
-
 }

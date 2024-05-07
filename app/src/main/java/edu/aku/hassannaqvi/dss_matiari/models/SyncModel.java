@@ -1,7 +1,5 @@
 package edu.aku.hassannaqvi.dss_matiari.models;
 
-import androidx.room.Entity;
-
 import org.apache.commons.lang3.StringUtils;
 
 public class SyncModel {
@@ -21,8 +19,6 @@ public class SyncModel {
         this.status = StringUtils.EMPTY;
         this.statusID = 0;
         this.message = StringUtils.EMPTY;
-
-
     }
 
     public SyncModel(String tableName, String select) {
@@ -36,7 +32,6 @@ public class SyncModel {
     }
 
     public SyncModel(String tableName, String select, String filter) {
-
         this.tableName = tableName;
         this.tableTitle = tableName.replaceAll("\\d+", "").replaceAll("(.)([A-Z])", "$1 $2");
         this.status = StringUtils.EMPTY;
@@ -44,7 +39,6 @@ public class SyncModel {
         this.message = StringUtils.EMPTY;
         this.select = select;
         this.filter = filter;
-
     }
 
     public String getTableTitle() {
@@ -54,7 +48,6 @@ public class SyncModel {
     public void setTableTitle(String tableTitle) {
         this.tableTitle = tableTitle;
     }
-
 
     public String gettableName() {
         return tableName;
@@ -97,7 +90,6 @@ public class SyncModel {
     }
 
     public String getFilter() {
-
         return filter;
     }
 

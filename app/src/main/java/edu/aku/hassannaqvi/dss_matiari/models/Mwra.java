@@ -97,7 +97,6 @@ public class Mwra extends BaseObservable implements Observable {
     @ColumnInfo(name = MWRATable.COLUMN_APPVERSION)
     private String appver = StringUtils.EMPTY;
 
-
     @ColumnInfo(name = MWRATable.COLUMN_SYNCED)
     private String synced = StringUtils.EMPTY;
 
@@ -129,7 +128,6 @@ public class Mwra extends BaseObservable implements Observable {
     //@Ignore
     private String pregnum = StringUtils.EMPTY;
 
-
     //@Ignore
     private String prePreg = StringUtils.EMPTY;
 
@@ -157,7 +155,6 @@ public class Mwra extends BaseObservable implements Observable {
         }
         MainApp.mwra.setVillageCode(MainApp.selectedVillage);
         MainApp.mwra.setUcCode(MainApp.selectedUC);
-
         MainApp.mwra.setProjectName(PROJECT_NAME);
         MainApp.mwra.setRound(MainApp.ROUND);
         MainApp.mwra.setRegRound("1");
@@ -165,23 +162,18 @@ public class Mwra extends BaseObservable implements Observable {
         MainApp.mwra.setHhNo(households.getHhNo());
         MainApp.mwra.setDeviceId(MainApp.deviceid);
         MainApp.mwra.setHdssId(households.getHdssId());
-
     }
 
 
     public static void populateMetaFollowups() {
-
         MainApp.mwra.setUserName(MainApp.user.getUsername());
         MainApp.mwra.setDeviceId(MainApp.deviceid);
         MainApp.mwra.setAppver(MainApp.appInfo.getAppVersion());
-
         MainApp.mwra.setSysDate(MainApp.households.getSysDate());
         MainApp.mwra.setUuid(MainApp.households.getUid());  // not applicable in Form table
         MainApp.mwra.setProjectName(PROJECT_NAME);
         MainApp.mwra.setRegRound("");
-
         // From FollowupsSche - MWRA
-
         mwra.setHdssId(MainApp.fpMwra.getHdssid());
         mwra.setUcCode(MainApp.fpMwra.getUcCode());
         mwra.setVillageCode(MainApp.fpMwra.getVillageCode());
@@ -190,7 +182,6 @@ public class Mwra extends BaseObservable implements Observable {
         mwra.setSNo(MainApp.fpMwra.getRb01());
         mwra.setChild_count(MainApp.fpMwra.getChild_count());
         mwra.setPrePreg(MainApp.fpMwra.getRb07()); // Previous pregnance status
-
     }
 
 
@@ -210,8 +201,6 @@ public class Mwra extends BaseObservable implements Observable {
             init();
             mwra.setUid(AppConstants.generateUid());
             mwra.setId(mwraDao.addMwra(mwra));
-
-
         }
     }
 
@@ -782,16 +771,12 @@ public class Mwra extends BaseObservable implements Observable {
             try {
                 Calendar cal = Calendar.getInstance();
                 Calendar cur = Calendar.getInstance();
-
-
                 SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
                 cal.setTime(Objects.requireNonNull(sdf.parse(getRb01a())));// all done
-
 
                 //long millis = System.currentTimeMillis() - cal.getTimeInMillis();
                 long millis = cur.getTimeInMillis() - cal.getTimeInMillis();
                 cal.setTimeInMillis(millis);
-
 
                 this.ageInMonths = MILLISECONDS.toDays(millis) / 30;
                 long tYear = MILLISECONDS.toDays(millis) / 365;
@@ -817,14 +802,11 @@ public class Mwra extends BaseObservable implements Observable {
                 // Set EDD by default
                 cal.add(Calendar.DAY_OF_YEAR, 7);
                 cal.add(Calendar.MONTH, 9);
-
                 return sdf.format(cal.getTime());
-
             } catch (ParseException e) {
                 e.printStackTrace();
                 return e.getMessage();
             }
-
         }
     }
 
@@ -845,7 +827,7 @@ public class Mwra extends BaseObservable implements Observable {
         private String rb04 = StringUtils.EMPTY;
         private String rb05 = StringUtils.EMPTY;
         private String rb06 = StringUtils.EMPTY;
-//        private String rb07 = StringUtils.EMPTY;
+        //        private String rb07 = StringUtils.EMPTY;
         private String rb10 = StringUtils.EMPTY;
         private String rb11 = StringUtils.EMPTY;
         private String rb12 = StringUtils.EMPTY;
@@ -875,13 +857,11 @@ public class Mwra extends BaseObservable implements Observable {
             setRb02(MainApp.fpMwra.getRb02());  // Name of MWRA
             setRb03(MainApp.fpMwra.getRb03()); // Husband / Father Name
             setRb04(MainApp.fpMwra.getRb04()); // DOB
-
             setRb06(MainApp.fpMwra.getRb06()); // Marital status
             mwra.setPreMaritalStaus(MainApp.fpMwra.getRb06());
             mwra.setPregnum(MainApp.fpMwra.getPregCount()); // Total number of pregnancies
             setRb22(MainApp.fpMwra.getRb22());              // Woman name in NIC
             setRb23(MainApp.fpMwra.getRb23());              // Husband / Fathers Name in NIC
-
             long daysdiff = CalculateAge(MainApp.fpMwra.getRa01().getDate());
             long years = daysdiff / 365;
             long actualAge = Integer.parseInt(MainApp.fpMwra.getRb05()) + years;
@@ -1231,13 +1211,9 @@ public class Mwra extends BaseObservable implements Observable {
 
                 SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
                 cal.setTime(Objects.requireNonNull(sdf.parse(getRb01a())));// all done
-
-
                 //long millis = System.currentTimeMillis() - cal.getTimeInMillis();
                 long millis = cur.getTimeInMillis() - cal.getTimeInMillis();
                 cal.setTimeInMillis(millis);
-
-
                 this.ageInMonths = MILLISECONDS.toDays(millis) / 30;
                 long tYear = MILLISECONDS.toDays(millis) / 365;
                 long tMonth = (MILLISECONDS.toDays(millis) - (tYear * 365)) / 30;
@@ -1250,7 +1226,6 @@ public class Mwra extends BaseObservable implements Observable {
 
             }
         }
-
     }
 
     /**
@@ -1356,490 +1331,14 @@ public class Mwra extends BaseObservable implements Observable {
                 // Set EDD by default
                 cal.add(Calendar.DAY_OF_YEAR, 7);
                 cal.add(Calendar.MONTH, 9);
-
                 return sdf.format(cal.getTime());
 
             } catch (ParseException e) {
                 e.printStackTrace();
                 return e.getMessage();
             }
-
-        }
-
-
-    }
-
-    /*@Bindable
-    public String getRb24() {
-        return rb24;
-    }
-
-    public void setRb24(String rb24) {
-        this.rb24 = rb24;
-        setRb25(rb24.equals("1") ? this.rb25 : "");
-        notifyChange(BR.rb24);
-    }
-
-    @Bindable
-    public String getRb25() {
-        return rb25;
-    }
-
-    public void setRb25(String rb25) {
-        this.rb25 = rb25;
-        notifyChange(BR.rb25);
-    }
-
-
-
-    @Bindable
-    public String getRb03a() {
-        return rb03a;
-    }
-
-    public void setRb03a(String rb03a) {
-        this.rb03a = rb03a;
-        notifyChange(BR.rb03a);
-    }
-
-    @Bindable
-    public String getRb03b() {
-        return rb03b;
-    }
-
-    public void setRb03b(String rb03b) {
-        this.rb03b = rb03b;
-        notifyChange(BR.rb03b);
-    }
-
-    @Bindable
-    public String getRb10() {
-        return rb10;
-    }
-
-    public void setRb10(String rb10) {
-        this.rb10 = rb10;
-        setRb11(rb10.equals("7") ? "2" : "1");
-        setRb14(rb10.equals("1") ? this.rb14 : "");
-        setRb15(rb10.equals("1") ? this.rb15 : "");
-        setRb16(rb10.equals("1") ? this.rb16 : "");
-        setRb17(rb10.equals("1") ? this.rb17 : "");
-
-        setIstatus(rb10);
-        notifyChange(BR.rb10);
-    }
-
-    @Bindable
-    public String getRb11() {
-        return rb11;
-    }
-
-    public void setRb11(String rb11) {
-        this.rb11 = rb11;
-        setRb12(rb11.equals("1") ? this.rb12 : "");
-        setRb13(rb11.equals("1") ? this.rb13 : "");
-
-        notifyChange(BR.rb11);
-    }
-
-
-    @Bindable
-    public String getRb12() {
-        return rb12;
-    }
-
-    public void setRb12(String rb12) {
-        this.rb12 = rb12;
-        notifyChange(BR.rb12);
-    }
-
-    @Bindable
-    public String getRb13() {
-        return rb13;
-    }
-
-    public void setRb13(String rb13) {
-        this.rb13 = rb13;
-        notifyChange(BR.rb13);
-    }
-
-    @Bindable
-    public String getRb14() {
-        return rb14;
-    }
-
-    public void setRb14(String rb14) {
-        this.rb14 = rb14;
-        notifyChange(BR.rb14);
-    }
-
-    @Bindable
-    public String getRb15() {
-        return rb15;
-    }
-
-    public void setRb15(String rb15) {
-        this.rb15 = rb15;
-        notifyChange(BR.rb15);
-    }
-
-    @Bindable
-    public String getRb16() {
-        return rb16;
-    }
-
-    public void setRb16(String rb16) {
-        this.rb16 = rb16;
-        setRb17(rb16.equals("5") ? "2" : this.rb17);
-        notifyChange(BR.rb16);
-    }
-    @Bindable
-    public String getRb17() {
-        return rb17;
-    }
-
-    public void setRb17(String rb17) {
-        this.rb17 = rb17;
-        notifyChange(BR.rb17);
-    }
-
-
-    @Bindable
-    public String getRb18() {
-        return rb18;
-    }
-
-    public void setRb18(String rb18) {
-        this.rb18 = rb18;
-        setRb19(rb18.equals("1") ? this.rb19 : "");
-        setRb20(rb18.equals("1") ? this.rb20 : "");
-        setRb21(rb18.equals("1") ? this.rb21 : "");
-        setRb26(rb18.equals("1") ? this.rb26 : "");
-        notifyChange(BR.rb18);
-    }
-
-    @Bindable
-    public String getRb19() {
-        return rb19;
-    }
-
-    public void setRb19(String rb19) {
-        this.rb19 = rb19;
-        notifyChange(BR.rb19);
-    }
-
-    @Bindable
-    public String getRb20() {
-        return rb20;
-    }
-
-    public void setRb20(String rb20) {
-        this.rb20 = rb20;
-        notifyChange(BR.rb20);
-    }
-
-    @Bindable
-    public String getRb21() {
-        return rb21;
-    }
-
-    public void setRb21(String rb21) {
-        this.rb21 = rb21;
-        notifyChange(BR.rb21);
-    }
-
-    private synchronized void notifyChange(int propertyId) {
-        if (propertyChangeRegistry == null) {
-            propertyChangeRegistry = new PropertyChangeRegistry();
-        }
-        propertyChangeRegistry.notifyChange(this, propertyId);
-    }
-
-    @Override
-    public synchronized void addOnPropertyChangedCallback(OnPropertyChangedCallback callback) {
-        if (propertyChangeRegistry == null) {
-            propertyChangeRegistry = new PropertyChangeRegistry();
-        }
-        propertyChangeRegistry.add(callback);
-
-    }
-
-    @Override
-    public synchronized void removeOnPropertyChangedCallback(OnPropertyChangedCallback callback) {
-        if (propertyChangeRegistry != null) {
-            propertyChangeRegistry.remove(callback);
-        }
-    }*/
-
-    /*public Mwra Hydrate(Mwra mwra) throws JSONException {
-        this.id = mwra.id;
-        this.uid = mwra.uid;
-        this.uuid = mwra.uuid;
-        this.userName = mwra.userName;
-        this.sysDate = mwra.sysDate;
-        this.hdssId = mwra.hdssId;
-        this.ucCode = mwra.ucCode;
-        this.villageCode = mwra.villageCode;
-        this.structureNo = mwra.structureNo;
-        this.regRound = mwra.regRound;
-        this.sNo = mwra.sNo;
-        this.hhNo = mwra.hhNo;
-        this.child_count = mwra.child_count;
-        this.deviceId = mwra.deviceId;
-        this.deviceTag = mwra.deviceTag;
-        this.appver = mwra.appver;
-        this.istatus = mwra.istatus;
-        this.synced = mwra.synced;
-        this.syncDate = mwra.syncDate;
-
-        //sBHydrate(mwra.sB);
-        sCHydrate(mwra.sC);
-        sDHydrate(mwra.sD);
-
-        return this;
-    }*/
-
-
-    /*public void sBHydrate(String string) throws JSONException {
-        Log.d(TAG, "s2Hydrate: " + string);
-        if (string != null && !string.equals("")) {
-
-            JSONObject json = null;
-            json = new JSONObject(string);
-            this.rb01 = json.getString("rb01");
-            this.rb01a = json.getString("rb01a");
-            this.rb02 = json.getString("rb02");
-            this.rb22 = json.has("rb22") ? json.getString("rb22") : "";
-            this.rb03 = json.getString("rb03");
-            this.rb23 = json.has("rb23") ? json.getString("rb23") : "";
-            this.rb03a = json.getString("rb03a");
-            this.rb03b = json.getString("rb03b");
-            this.rb04 = json.getString("rb04");
-            this.rb05 = json.getString("rb05");
-            this.rb06 = json.getString("rb06");
-            this.rb07 = json.getString("rb07");
-            this.rb08 = json.getString("rb08");
-            this.rb09 = json.getString("rb09");
-            this.rb18 = json.getString("rb18");
-            this.rb19 = json.getString("rb19");
-            this.rb20 = json.getString("rb20");
-            this.rb21 = json.getString("rb21");
-            this.rb24 = json.getString(("rb24"));
-            this.rb25 = json.getString(("rb25"));
-            this.pregnum = json.getString("pregnum");
-        }
-    }*/
-
-    /*public void sCHydrate(String string) throws JSONException {
-        Log.d(TAG, "s3Hydrate: " + string);
-        if (string != null && !string.equals("")) {
-
-            JSONObject json = null;
-            json = new JSONObject(string);
-            this.rb01 = json.getString("rb01");
-            this.rb01a = json.getString("rb01a");
-            this.rb02 = json.getString("rb02");
-            this.rb22 = json.has("rb22") ? json.getString("rb22") : "";
-            this.rb03 = json.getString("rb03");
-            this.rb23 = json.has("rb23") ? json.getString("rb23") : "";
-            this.rb04 = json.getString("rb04");
-            this.rb05 = json.getString("rb05");
-            this.prePreg = json.getString("prePreg");
-            this.rb06 = json.getString("rb06");
-            this.rb07 = json.getString("prePreg");
-            this.rb03a = json.getString("rb03a");
-            this.rb03b = json.getString("rb03b");
-            this.rb10 = json.getString("rb10");
-            this.rb11 = json.getString("rb11");
-            this.rb12 = json.getString("rb12");
-            this.rb13 = json.getString("rb13");
-            this.rb14 = json.getString("rb14");
-            this.rb15 = json.getString("rb15");
-            this.rb16 = json.getString("rb16");
-            this.rb17 = json.getString("rb17");
-            this.rb18 = json.getString("rb18");
-            this.rb19 = json.getString("rb19");
-            this.rb20 = json.getString("rb20");
-            this.rb21 = json.getString("rb21");
-            this.pregnum = json.getString("pregnum");
-        }
-    }*/
-
-
-    /*public String sBtoString() throws JSONException {
-        JSONObject json = new JSONObject();
-
-        json.put("rb01", rb01)
-                .put("rb01a", rb01a)
-//                .put("ROUND", round)
-                .put("rb02", rb02)
-                .put("rb22", rb22)
-                .put("rb03", rb03)
-                .put("rb23", rb23)
-                .put("rb03a", rb03a)
-                .put("rb03b", rb03b)
-                .put("rb04", rb04)
-                .put("rb05", rb05)
-                .put("rb06", rb06)
-                .put("rb07", rb07)
-                .put("rb08", rb08)
-                .put("rb09", rb09)
-                .put("rb18", rb18)
-                .put("rb19", rb19)
-                .put("rb20", rb20)
-                .put("rb21", rb21)
-                .put("rb24", rb24)
-                .put("rb25", rb25)
-                .put("pregnum", pregnum);
-
-        return json.toString();
-    }
-
-    public String sCtoString() throws JSONException {
-        JSONObject json = new JSONObject();
-
-
-        json.put("rb01", rb01)
-                .put("rb01a", rb01a)
-//                .put("ROUND", round)
-                .put("rb02", rb02)
-                .put("rb22", rb22)
-                .put("rb03", rb03)
-                .put("rb23", rb23)
-                .put("rb03a",rb03a)
-                .put("rb03b",rb03b)
-                .put("rb04", rb04)
-                .put("rb05", rb05)
-                .put("rb06", rb06)
-                .put("rb07", prePreg)
-                .put("prePreg", prePreg)
-                //.put("preMaritalStatus", preMaritalStaus)
-                .put("rb10",rb10)
-                .put("rb11",rb11)
-                .put("rb12",rb12)
-                .put("rb13",rb13)
-                .put("rb14",rb14)
-                .put("rb15",rb15)
-                .put("rb16",rb16)
-                .put("rb17",rb17)
-                .put("rb18",rb18)
-                .put("rb19",rb19)
-                .put("rb20",rb20)
-                .put("rb21", rb21)
-                .put("pregnum", pregnum);
-
-        ;
-
-        return json.toString();
-    }
-
-    public String SDtoString() throws JSONException {
-        JSONObject json = new JSONObject();
-
-        json.put("rb07", rb07)
-                .put("rb08", rb08)
-                .put("rb09", rb09)
-                .put("rb24", rb24)
-                .put("rb25", rb25)
-                .put("pregnum", pregnum)
-        ;
-
-        return json.toString();
-    }
-
-    public void sDHydrate(String string) throws JSONException {
-        Log.d(TAG, "s3Hydrate: " + string);
-        if (string != null && !string.equals("")) {
-
-            JSONObject json = null;
-            json = new JSONObject(string);
-            this.rb07 = json.getString("rb07");
-            this.rb08 = json.getString("rb08");
-            this.rb09 = json.getString("rb09");
-            this.rb24 = json.getString("rb24");
-            this.rb25 = json.getString("rb25");
-            this.pregnum = json.getString("pregnum");
-
-
         }
     }
-
-    public JSONObject toJSONObject() throws JSONException {
-        JSONObject json = new JSONObject();
-        json.put(MWRATable.COLUMN_ID, this.id);
-        json.put(MWRATable.COLUMN_PROJECT_NAME, this.projectName);
-        json.put(MWRATable.COLUMN_UID, this.uid);
-        json.put(MWRATable.COLUMN_UUID, this.uuid);
-        json.put(MWRATable.COLUMN_USERNAME, this.userName);
-        json.put(MWRATable.COLUMN_SYSDATE, this.sysDate);
-        json.put(MWRATable.COLUMN_HDSSID, this.hdssId);
-        json.put(MWRATable.COLUMN_UC_CODE, this.ucCode);
-        json.put(MWRATable.COLUMN_ROUND, this.round);
-        json.put(MWRATable.COLUMN_VILLAGE_CODE, this.villageCode);
-        json.put(MWRATable.COLUMN_SNO, this.sNo);
-        //json.put(MWRATable.COLUMN_CHILD_COUNT, this.child_count);
-        json.put(MWRATable.COLUMN_REGROUND, this.regRound);
-        json.put(MWRATable.COLUMN_HOUSEHOLD_NO, this.hhNo);
-        json.put(MWRATable.COLUMN_DEVICEID, this.deviceId);
-        //json.put(MWRATable.COLUMN_DEVICETAGID, this.deviceTag);
-        //json.put(MWRATable.COLUMN_ISTATUS, this.istatus);
-        json.put(MWRATable.COLUMN_APPVERSION, this.appver);
-        json.put(MWRATable.COLUMN_SB, new JSONObject(sBtoString()));
-        json.put(MWRATable.COLUMN_SC, new JSONObject(sCtoString()));
-        json.put(MWRATable.COLUMN_SD, new JSONObject(SDtoString()));
-        return json;
-
-    }
-
-
-    @Bindable
-    public boolean isExpanded() {
-        return expanded;
-    }
-
-    public void setExpanded(boolean expanded) {
-        this.expanded = expanded;
-        notifyChange(BR.expanded);
-    }*/
-
-    /*private void CaluculateAge() {
-
-
-        setRb05("");
-
-
-        try {
-            Calendar cal = Calendar.getInstance();
-            Calendar cur = Calendar.getInstance();
-
-
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
-            cal.setTime(sdf.parse(mwra.getRb01a()));// all done
-
-
-            //long millis = System.currentTimeMillis() - cal.getTimeInMillis();
-            long millis = cur.getTimeInMillis() - cal.getTimeInMillis();
-            cal.setTimeInMillis(millis);
-
-
-            this.ageInMonths = MILLISECONDS.toDays(millis) / 30;
-            long tYear = MILLISECONDS.toDays(millis) / 365;
-            long tMonth = (MILLISECONDS.toDays(millis) - (tYear * 365)) / 30;
-            long tDay = MILLISECONDS.toDays(millis) - ((tYear * 365) + (tMonth * 30));
-
-            //Log.d(TAG, "CaluculateAge: Y-" + tYear + " M-" + tMonth + " D-" + tDay);
-               *//* setH231d(String.valueOf(tDay));
-                setH231m(String.valueOf(tMonth));*//*
-
-            setRb05(String.valueOf(tYear));
-
-
-        } catch (ParseException e) {
-            //Log.d(TAG, "CaluculateAge: " + e.getMessage());
-            e.printStackTrace();
-
-        }
-    }*/
 
     public static long CalculateAge(String dateOfVisit) {
 
@@ -1866,19 +1365,14 @@ public class Mwra extends BaseObservable implements Observable {
             Calendar calendar = Calendar.getInstance();
             calendar.setTime(sdf.parse(dateofReg));
 
-
             // set Date of birth
             long millis = cur.getTimeInMillis() - calendar.getTimeInMillis();
             calendar.setTimeInMillis(millis);
-
-
             Calendar c = Calendar.getInstance();
-
             c.setTimeInMillis(millis);
             long tYear = MILLISECONDS.toDays(millis) / 365;
             long tMonth = (MILLISECONDS.toDays(millis) - (tYear * 365)) / 30;
             long tDay = MILLISECONDS.toDays(millis);
-
             noOfDays = tDay;
 
             //Log.d(TAG, "CaluculateAge: Y-" + tYear + " M-" + tMonth + " D-" + tDay);
@@ -1886,30 +1380,7 @@ public class Mwra extends BaseObservable implements Observable {
         } catch (ParseException e) {
             //Log.d(TAG, "CaluculateAge: " + e.getMessage());
             e.printStackTrace();
-
         }
-
         return noOfDays;
     }
-
-    /*public String calcEDD() {
-
-        Calendar cal = Calendar.getInstance();
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
-
-        try {
-            cal.setTime(sdf.parse(getRb08()));// all done
-
-            // Set EDD by default
-            cal.add(Calendar.DAY_OF_YEAR, 7);
-            cal.add(Calendar.MONTH, 9);
-
-            return sdf.format(cal.getTime());
-
-        } catch (ParseException e) {
-            e.printStackTrace();
-            return e.getMessage();
-        }
-
-    }*/
 }

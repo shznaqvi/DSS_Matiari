@@ -19,7 +19,6 @@ import edu.aku.hassannaqvi.dss_matiari.contracts.TableContracts.TableFollowUpsSc
  * Author: Hassan.naqvi
  * Created by: ModelGenerator on 21-12-2021
  * Edited by: gul.sanober on 06-10-2022
-
  */
 
 @Entity(tableName = TableFollowUpsSche.TABLE_NAME)
@@ -79,7 +78,6 @@ public class FollowUpsSche implements Observable {
     @ColumnInfo(name = TableFollowUpsSche.COLUMN_RC04)
     private String rc04 = StringUtils.EMPTY; // Gender Will be rc04 in new View
 
-
     @ColumnInfo(name = TableFollowUpsSche.COLUMN_MSNO)
     private String msno = StringUtils.EMPTY; // Gender Will be rc04 in new View
 
@@ -102,17 +100,17 @@ public class FollowUpsSche implements Observable {
     private String istatus = StringUtils.EMPTY; // Interview Status
 
     @ColumnInfo(name = TableFollowUpsSche.COLUMN_DONE_DATE)
-    private String fpDoneDt = StringUtils.EMPTY ;  // followup-done date
+    private String fpDoneDt = StringUtils.EMPTY;  // followup-done date
 
     @SerializedName("pregnum")
     @ColumnInfo(name = TableFollowUpsSche.COLUMN_PREG_COUNT)
-    private String pregCount = StringUtils.EMPTY ;  // Pregnancies Count
+    private String pregCount = StringUtils.EMPTY;  // Pregnancies Count
 
     @ColumnInfo(name = TableFollowUpsSche.COLUMN_RB22)
-    private String rb22 = StringUtils.EMPTY ;  // Pregnancies Count
+    private String rb22 = StringUtils.EMPTY;  // Pregnancies Count
 
     @ColumnInfo(name = TableFollowUpsSche.COLUMN_RB23)
-    private String rb23 = StringUtils.EMPTY ;  // Pregnancies Count
+    private String rb23 = StringUtils.EMPTY;  // Pregnancies Count
 
     @SerializedName("reg_date")
     private String reg_date = StringUtils.EMPTY;
@@ -313,7 +311,6 @@ public class FollowUpsSche implements Observable {
         this.child_count = child_count;
     }
 
-
     public String getMemberType() {
         return memberType;
     }
@@ -406,8 +403,6 @@ public class FollowUpsSche implements Observable {
         this.rb22 = jsonObject.getString(TableFollowUpsSche.COLUMN_RB22);
         this.rb23 = jsonObject.getString(TableFollowUpsSche.COLUMN_RB23);
         this.reg_date = jsonObject.getString(TableFollowUpsSche.COLUMN_REG_DATE);
-
-
         return this;
     }
 
@@ -440,7 +435,6 @@ public class FollowUpsSche implements Observable {
         this.rb22 = cursor.getString(cursor.getColumnIndexOrThrow(TableFollowUpsSche.COLUMN_RB22));
         this.rb23 = cursor.getString(cursor.getColumnIndexOrThrow(TableFollowUpsSche.COLUMN_RB23));
         this.reg_date = cursor.getString(cursor.getColumnIndexOrThrow(TableFollowUpsSche.COLUMN_REG_DATE));
-
         return this;
     }
 }

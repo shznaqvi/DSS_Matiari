@@ -21,7 +21,8 @@ class MaxHhno {
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(
         name = MaxHhnoTable.COLUMN_ID,
-        defaultValue = "0")
+        defaultValue = "0"
+    )
     var ID: Long = 0
 
     @SerializedName("ucCode")
@@ -68,10 +69,6 @@ class MaxHhno {
 
         villageCode =
             cursor.getString(cursor.getColumnIndexOrThrow(MaxHhnoTable.COLUMN_VILLAGE_CODE))
-
-
         return this
     }
-
-
 }

@@ -852,16 +852,12 @@ public class AbortionCL {
                 // Set EDD by default
                 cal.add(Calendar.DAY_OF_YEAR, 7);
                 cal.add(Calendar.MONTH, 9);
-
                 return sdf.format(cal.getTime());
 
             } catch (ParseException e) {
                 e.printStackTrace();
                 return e.getMessage();
             }
-
         }
     }
-
-
 }

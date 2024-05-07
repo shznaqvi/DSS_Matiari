@@ -11,24 +11,20 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
-import org.json.JSONException;
-
 import java.util.List;
-import java.util.Objects;
 
 import edu.aku.hassannaqvi.dss_matiari.R;
 import edu.aku.hassannaqvi.dss_matiari.core.MainApp;
+import edu.aku.hassannaqvi.dss_matiari.database.DssRoomDatabase;
+import edu.aku.hassannaqvi.dss_matiari.global.AppConstants;
 import edu.aku.hassannaqvi.dss_matiari.models.FollowUpsSche;
 import edu.aku.hassannaqvi.dss_matiari.models.Mwra;
-import edu.aku.hassannaqvi.dss_matiari.global.AppConstants;
-import edu.aku.hassannaqvi.dss_matiari.database.DssRoomDatabase;
-import edu.aku.hassannaqvi.dss_matiari.ui.sections.SectionFActivity;
 import edu.aku.hassannaqvi.dss_matiari.ui.sections.SectionCActivity;
+import edu.aku.hassannaqvi.dss_matiari.ui.sections.SectionFActivity;
 
 
 public class FpMwraAdapter extends RecyclerView.Adapter<FpMwraAdapter.ViewHolder> {
@@ -74,7 +70,7 @@ public class FpMwraAdapter extends RecyclerView.Adapter<FpMwraAdapter.ViewHolder
         String pregStatus = "";
         sc = new Mwra.SC();
 
-        if(!AppConstants.isEmpty(followUpsSche.getRb07())) {
+        if (!AppConstants.isEmpty(followUpsSche.getRb07())) {
             pregStatus = followUpsSche.getRb07().equals("1") ? "Pregnant" : "Not Pregnant";
         }
 
@@ -101,7 +97,7 @@ public class FpMwraAdapter extends RecyclerView.Adapter<FpMwraAdapter.ViewHolder
         fName.setText(followUpsSche.getRb02());
         String marStatus = "";
         String wifeOrDaughter = "";
-        if(followUpsSche.getRb01() != null) {
+        if (followUpsSche.getRb01() != null) {
             if (followUpsSche.getMemberType().equals("1")) {
                 wifeOrDaughter = followUpsSche.getRb06().equals("4") ? " d/o " : " w/o ";
 
@@ -141,84 +137,72 @@ public class FpMwraAdapter extends RecyclerView.Adapter<FpMwraAdapter.ViewHolder
 
         // Age according to system date
 
-            if (followUpsSche.getMemberType().equals("1")) {
+        if (followUpsSche.getMemberType().equals("1")) {
 
-                // Age
-                long daysdiff = MainApp.mwra.CalculateAge(followUpsSche.getRa01().getDate());
-                long years = daysdiff / 365;
-                long actualAge = 0;
+            // Age
+            long daysdiff = Mwra.CalculateAge(followUpsSche.getRa01().getDate());
+            long years = daysdiff / 365;
+            long actualAge = 0;
 
-                if (!followUpsSche.getRb05().equals("")) {
-                    actualAge = Long.parseLong(followUpsSche.getRb05()) + years;
-                    fAge.setText(marStatus + " | " + actualAge + "y  ");
-                }
-
-                if (actualAge > 49) {
-                    viewHolder.itemView.setBackgroundColor(Color.parseColor("#AF1B12"));
-                    viewHolder.secStatus.setText("OverAge");
-                } else {
-                    viewHolder.itemView.setBackgroundColor(Color.parseColor("#ffffff"));
-                }
-
-                secStatus.setBackgroundColor(followUpsSche.getRb07().equals("1") ? ContextCompat.getColor(mContext, R.color.redLight) : ContextCompat.getColor(mContext, R.color.grayLight));
-                indicator.setImageDrawable(followUpsSche.getRb07().equals("1") ? ContextCompat.getDrawable(mContext, R.drawable.ic_baseline_pregnant_woman_24) : ContextCompat.getDrawable(mContext, R.drawable.ic_girl));
-
-            } else {
-                // Calculate age from DOB of child
-                indicator.setImageDrawable(ContextCompat.getDrawable(mContext, R.drawable.ic_baby));
-
-                if (!followUpsSche.getRb04().equals("")) {
-                    long days = MainApp.mwra.CalculateAge(followUpsSche.getRb04());
-
-                    long months = days / 30;
-
-                    fAge.setText(months + "m");
-                }
-
+            if (!followUpsSche.getRb05().equals("")) {
+                actualAge = Long.parseLong(followUpsSche.getRb05()) + years;
+                fAge.setText(marStatus + " | " + actualAge + "y  ");
             }
-            fMaritalStatus.setText(wifeOrDaughter + followUpsSche.getRb03());
-            secStatus.setText(pregStatus);
-            secDob.setText(followUpsSche.getRb04());
-            secGender.setText(followUpsSche.getRc04().equals("2") ? " Female" : "male");
+
+            if (actualAge > 49) {
+                viewHolder.itemView.setBackgroundColor(Color.parseColor("#AF1B12"));
+                viewHolder.secStatus.setText("OverAge");
+            } else {
+                viewHolder.itemView.setBackgroundColor(Color.parseColor("#ffffff"));
+            }
+
+            secStatus.setBackgroundColor(followUpsSche.getRb07().equals("1") ? ContextCompat.getColor(mContext, R.color.redLight) : ContextCompat.getColor(mContext, R.color.grayLight));
+            indicator.setImageDrawable(followUpsSche.getRb07().equals("1") ? ContextCompat.getDrawable(mContext, R.drawable.ic_baseline_pregnant_woman_24) : ContextCompat.getDrawable(mContext, R.drawable.ic_girl));
+
+        } else {
+            // Calculate age from DOB of child
+            indicator.setImageDrawable(ContextCompat.getDrawable(mContext, R.drawable.ic_baby));
+
+            if (!followUpsSche.getRb04().equals("")) {
+                long days = Mwra.CalculateAge(followUpsSche.getRb04());
+
+                long months = days / 30;
+
+                fAge.setText(months + "m");
+            }
+
+        }
+        fMaritalStatus.setText(wifeOrDaughter + followUpsSche.getRb03());
+        secStatus.setText(pregStatus);
+        secDob.setText(followUpsSche.getRb04());
+        secGender.setText(followUpsSche.getRc04().equals("2") ? " Female" : "male");
 
         viewHolder.itemView.setOnClickListener(v -> {
             // Get the current state of the item
 
 
-                if (followUpsSche.getMemberType().equals("1")) {
-                    MainApp.fpMwra = MainApp.followUpsScheMWRAList.get(viewHolder.getBindingAdapterPosition());
+            if (followUpsSche.getMemberType().equals("1")) {
+                MainApp.fpMwra = MainApp.followUpsScheMWRAList.get(viewHolder.getBindingAdapterPosition());
                     /*Mwra.populateMetaFollowups();
                     sc.populateMeta();
                     Mwra.SC.saveData(sc);*/
 
-                    Intent intent = new Intent(mContext, SectionCActivity.class);
+                Intent intent = new Intent(mContext, SectionCActivity.class);
+                intent.putExtra("position", viewHolder.getBindingAdapterPosition());
+                MainApp.selectedMember = viewHolder.getBindingAdapterPosition();
+                intent.putExtra("position", viewHolder.getBindingAdapterPosition());
+                ((Activity) mContext).startActivityForResult(intent, 2);
+            } else {
+                MainApp.fpMwra = MainApp.followUpsScheMWRAList.get(viewHolder.getBindingAdapterPosition());
+                //MainApp.outcome.populateMetaFollowups();
 
-                    intent.putExtra("position", viewHolder.getBindingAdapterPosition());
-
-                    MainApp.selectedMember = viewHolder.getBindingAdapterPosition();
-
-                    intent.putExtra("position", viewHolder.getBindingAdapterPosition());
-
-
-                    ((Activity) mContext).startActivityForResult(intent, 2);
-                } else {
-                    MainApp.fpMwra = MainApp.followUpsScheMWRAList.get(viewHolder.getBindingAdapterPosition());
-                    //MainApp.outcome.populateMetaFollowups();
-
-                    Intent intent = new Intent(mContext, SectionFActivity.class);
-
-                    intent.putExtra("position", viewHolder.getBindingAdapterPosition());
-
-                    MainApp.selectedMember = viewHolder.getBindingAdapterPosition();
-
-                    intent.putExtra("position", viewHolder.getBindingAdapterPosition());
-
-
-                    ((Activity) mContext).startActivityForResult(intent, 2);
-
-                }
+                Intent intent = new Intent(mContext, SectionFActivity.class);
+                intent.putExtra("position", viewHolder.getBindingAdapterPosition());
+                MainApp.selectedMember = viewHolder.getBindingAdapterPosition();
+                intent.putExtra("position", viewHolder.getBindingAdapterPosition());
+                ((Activity) mContext).startActivityForResult(intent, 2);
+            }
         });
-
     }
 
     @Override
@@ -226,7 +210,6 @@ public class FpMwraAdapter extends RecyclerView.Adapter<FpMwraAdapter.ViewHolder
 
         View v = LayoutInflater.from(viewGroup.getContext())
                 .inflate(R.layout.member_row, viewGroup, false);
-
         return new ViewHolder(v);
     }
 
@@ -261,20 +244,10 @@ public class FpMwraAdapter extends RecyclerView.Adapter<FpMwraAdapter.ViewHolder
             fmRow = v.findViewById(R.id.fmRow);
             indicator = v.findViewById(R.id.indicator);
             mstatus = v.findViewById(R.id.mstatus);
-
         }
 
         public TextView getTextView() {
             return fName;
         }
     }
-
-
-
-
-
-
-
-
-
 }

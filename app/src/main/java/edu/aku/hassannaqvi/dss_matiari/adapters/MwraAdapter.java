@@ -74,19 +74,16 @@ public class MwraAdapter extends RecyclerView.Adapter<MwraAdapter.ViewHolder> {
                 marStatus = "Divorced";
                 indicator.setBackgroundColor(ContextCompat.getColor(mContext, R.color.teal_700));
                 wifeOrDaughter = "w/o ";
-
                 break;
             case "3":
                 marStatus = "Widow";
                 indicator.setBackgroundColor(ContextCompat.getColor(mContext, R.color.teal_200));
                 wifeOrDaughter = "w/o ";
-
                 break;
             case "4":
                 marStatus = "Unmarried";
                 indicator.setBackgroundColor(ContextCompat.getColor(mContext, R.color.lightPink));
                 wifeOrDaughter = "d/o ";
-
                 break;
             default:
                 marStatus = "Value Unknown";
@@ -97,7 +94,7 @@ public class MwraAdapter extends RecyclerView.Adapter<MwraAdapter.ViewHolder> {
             pregStatus = "Pregnant";
             secStatus.setBackgroundColor(ContextCompat.getColor(mContext, R.color.redLight));
             indicator.setImageDrawable(ContextCompat.getDrawable(mContext, R.drawable.ic_baseline_pregnant_woman_24));
-        }else {
+        } else {
             pregStatus = "Not Pregnant";
         }
 
@@ -112,20 +109,13 @@ public class MwraAdapter extends RecyclerView.Adapter<MwraAdapter.ViewHolder> {
         // On Item Click
         viewHolder.itemView.setOnClickListener(v -> {
             // Get the current state of the item
-
             MainApp.mwra = MainApp.mwraList.get(position);
             Intent intent = new Intent(mContext, SectionBActivity.class);
-
             intent.putExtra("position", position);
-
             MainApp.selectedMember = position;
-
             intent.putExtra("position", position);
-
             ((Activity) mContext).startActivityForResult(intent, 2);
-
         });
-
     }
 
     @Override
@@ -164,18 +154,12 @@ public class MwraAdapter extends RecyclerView.Adapter<MwraAdapter.ViewHolder> {
             secStatus = v.findViewById(R.id.secStatus);
             secDob = v.findViewById(R.id.secDob);
             secGender = v.findViewById(R.id.secGender);
-
             fmRow = v.findViewById(R.id.fmRow);
             indicator = v.findViewById(R.id.indicator);
-
         }
 
         public TextView getTextView() {
             return fName;
         }
     }
-
-
-
-
 }

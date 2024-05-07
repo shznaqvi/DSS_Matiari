@@ -23,6 +23,7 @@ import java.util.regex.Pattern;
 import edu.aku.hassannaqvi.dss_matiari.R;
 import edu.aku.hassannaqvi.dss_matiari.core.MainApp;
 import edu.aku.hassannaqvi.dss_matiari.core.UserAuth;
+import edu.aku.hassannaqvi.dss_matiari.database.DssRoomDatabase;
 import edu.aku.hassannaqvi.dss_matiari.databinding.ActivityChangePassNewBinding;
 import edu.aku.hassannaqvi.dss_matiari.global.AppConstants;
 import edu.aku.hassannaqvi.dss_matiari.global.Loading;
@@ -31,7 +32,6 @@ import edu.aku.hassannaqvi.dss_matiari.webcall.web_client.CryptoUtil;
 import edu.aku.hassannaqvi.dss_matiari.webcall.web_client.WebAPI;
 import edu.aku.hassannaqvi.dss_matiari.webcall.web_client.WebCall;
 import edu.aku.hassannaqvi.dss_matiari.webcall.web_client.WebClient;
-import edu.aku.hassannaqvi.dss_matiari.database.DssRoomDatabase;
 
 public class ChangePassNewAC extends AppCompatActivity {
 
@@ -175,5 +175,4 @@ public class ChangePassNewAC extends AppCompatActivity {
             imageView.setBackground(ContextCompat.getDrawable(this, R.drawable.ic_unlocked));
         }
     }
-
 }

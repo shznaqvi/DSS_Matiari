@@ -79,17 +79,18 @@ abstract class DssRoomDatabase : RoomDatabase() {
                 val passphrase: ByteArray = SQLiteDatabase.getBytes(password.toCharArray())
                 val factory = SupportFactory(passphrase)
 
-                dbInstance = Room.databaseBuilder(context, DssRoomDatabase::class.java, DATABASE_NAME)
-                    //.openHelperFactory(factory)
-                    .addMigrations(MIGRATION_4_5)
-                    .addMigrations(MIGRATION_5_6)
-                    .addMigrations(MIGRATION_6_7)
-                    .addMigrations(MIGRATION_7_12)
-                    .addMigrations(MIGRATION_12_13)
-                    .addMigrations(MIGRATION_13_14)
+                dbInstance =
+                    Room.databaseBuilder(context, DssRoomDatabase::class.java, DATABASE_NAME)
+                        //.openHelperFactory(factory)
+                        .addMigrations(MIGRATION_4_5)
+                        .addMigrations(MIGRATION_5_6)
+                        .addMigrations(MIGRATION_6_7)
+                        .addMigrations(MIGRATION_7_12)
+                        .addMigrations(MIGRATION_12_13)
+                        .addMigrations(MIGRATION_13_14)
 //                    .fallbackToDestructiveMigration()
-                    .allowMainThreadQueries()
-                    .build()
+                        .allowMainThreadQueries()
+                        .build()
                 return dbInstance!!
             }
         }
@@ -115,30 +116,32 @@ abstract class DssRoomDatabase : RoomDatabase() {
                 database.execSQL("ALTER TABLE 'hhfuplist_view' ADD COLUMN 'pregnum' TEXT")
                 database.execSQL("ALTER TABLE 'hhfuplist_view' ADD COLUMN 'rb22' TEXT")
                 database.execSQL("ALTER TABLE 'hhfuplist_view' ADD COLUMN 'rb23' TEXT")
-                database.execSQL("CREATE TABLE IF NOT EXISTS 'hhs_view' ('id' LONG, " +
-                        "'ucCode' TEXT, " +
-                        "'villageCode' TEXT, " +
-                        "'hhNo' TEXT, " +
-                        "'hdssid' TEXT, " +
-                        "'round' TEXT, " +
-                        "'ra01' TEXT, " +
-                        "'ra08' TEXT, " +
-                        "'ra12' TEXT, " +
-                        "'ra05' TEXT, " +
-                        "'ra18' TEXT, " +
-                        "'ra17_a1' TEXT, " +
-                        "'ra17_a2' TEXT, " +
-                        "'ra17_a3' TEXT, " +
-                        "'ra17_b1' TEXT, " +
-                        "'ra17_b2' TEXT, " +
-                        "'ra17_b3' TEXT, " +
-                        "'ra17_c1' TEXT, " +
-                        "'ra17_c2' TEXT, " +
-                        "'ra17_c3' TEXT, " +
-                        "'ra17_d1' TEXT, " +
-                        "'ra17_d2' TEXT, " +
-                        "'ra17_d3' TEXT, " +
-                        "PRIMARY KEY('id'))")
+                database.execSQL(
+                    "CREATE TABLE IF NOT EXISTS 'hhs_view' ('id' LONG, " +
+                            "'ucCode' TEXT, " +
+                            "'villageCode' TEXT, " +
+                            "'hhNo' TEXT, " +
+                            "'hdssid' TEXT, " +
+                            "'round' TEXT, " +
+                            "'ra01' TEXT, " +
+                            "'ra08' TEXT, " +
+                            "'ra12' TEXT, " +
+                            "'ra05' TEXT, " +
+                            "'ra18' TEXT, " +
+                            "'ra17_a1' TEXT, " +
+                            "'ra17_a2' TEXT, " +
+                            "'ra17_a3' TEXT, " +
+                            "'ra17_b1' TEXT, " +
+                            "'ra17_b2' TEXT, " +
+                            "'ra17_b3' TEXT, " +
+                            "'ra17_c1' TEXT, " +
+                            "'ra17_c2' TEXT, " +
+                            "'ra17_c3' TEXT, " +
+                            "'ra17_d1' TEXT, " +
+                            "'ra17_d2' TEXT, " +
+                            "'ra17_d3' TEXT, " +
+                            "PRIMARY KEY('id'))"
+                )
             }
         }
 
@@ -167,7 +170,6 @@ abstract class DssRoomDatabase : RoomDatabase() {
             }
         }
 
-
         private val MIGRATION_13_14 = object : Migration(13, 14) {
             override fun migrate(database: SupportSQLiteDatabase) {
                 database.execSQL("ALTER TABLE 'MWRAs' ADD COLUMN 'ageM' TEXT")
@@ -181,6 +183,7 @@ abstract class DssRoomDatabase : RoomDatabase() {
     // Type converter used to save JsonObject in a single column
     open class BaseConverter<T>(private val type: Type) {
         private val gson: Gson
+
         @TypeConverter
         fun fromData(data: T): String {
             return gson.toJson(data, type)

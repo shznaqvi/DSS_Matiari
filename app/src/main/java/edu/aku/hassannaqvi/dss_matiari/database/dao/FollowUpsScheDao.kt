@@ -16,7 +16,6 @@ interface FollowUpsScheDao {
     @Query("SELECT MAX( CAST(rb01 AS INT)) AS rb01 FROM hhfuplist_view WHERE ucCode LIKE :uc AND villageCode LIKE :vCode AND hhno LIKE :hhNo GROUP BY hhno")
     fun getMaxMWRANoBYHHFromFolloupsSche(uc: String, vCode: String, hhNo: String): Int
 
-
     @Query("SELECT MAX( CAST(rb01 AS INT)) AS rb01 FROM hhfuplist_view WHERE ucCode LIKE :uc AND villageCode LIKE :vCode AND hhno LIKE :hhNo AND msno LIKE :msno GROUP BY hhno")
     fun getMaxChildrenNoBYMotherFromFolloupsSche(
         uc: String,
@@ -57,6 +56,4 @@ interface FollowUpsScheDao {
         deleteAll()
         addAllData(list)
     }
-
-
 }

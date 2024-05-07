@@ -1,4 +1,3 @@
-
 /**
  * Created by gul.sanober on 10/06/2022.
  */
@@ -14,12 +13,10 @@ interface HhsDao {
     @Update(onConflict = OnConflictStrategy.REPLACE)
     fun updateHhs(hhs: Hhs): Int
 
-
     @Query("SELECT villageCode, id, hhNo, hdssid, ra01, ra08, ra12, round, ra05, ra17_a1, ra17_a2, ra17_a3, ra17_b1, ra17_b2, ra17_b3, ra17_c1, ra17_c2, ra17_c3, ra17_d1, ra17_d2, ra17_d3 from hhs_view where ucCode like :uc AND villageCode like :village and ra12 like '%' || :hhead || '%' group by hdssid order by id ASC")
-    fun getHhsBYVillage(uc : String, village: String, hhead : String) : List<Hhs>
+    fun getHhsBYVillage(uc: String, village: String, hhead: String): List<Hhs>
 
     /* NEW STRUCT */
-
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     fun addAllData(list: Array<Hhs>)
 
@@ -31,7 +28,4 @@ interface HhsDao {
         deleteAll()
         addAllData(list)
     }
-
-
-
 }
