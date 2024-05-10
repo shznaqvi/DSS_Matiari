@@ -1,6 +1,6 @@
 package edu.aku.hassannaqvi.dss_matiari.ui.sections;
 
-import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.allMwraRefusedOrMigrated;
+import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.allMwraMigrated;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.fpMwra;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.households;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.mwra;
@@ -45,6 +45,7 @@ public class SectionCActivity extends AppCompatActivity {
 
     private Mwra.SC sC;
     private Mwra.SD sD;
+    public static Mwra dbMWRA;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -212,23 +213,23 @@ public class SectionCActivity extends AppCompatActivity {
 
                 // Put status of Migrated or Refused in its HashMap
                 if (bi.rb1002.isChecked() || bi.rb1003.isChecked()) {
-                    for (String[] arr : allMwraRefusedOrMigrated.keySet()) {
+                    for (String[] arr : allMwraMigrated.keySet()) {
                         if (arr[0].equals(fpMwra.getMuid()) && arr[1].equals(fpMwra.getHdssid())) {
                             isMigratedOrRefused = true;
                             break;
                         }
                     }
                     if (!isMigratedOrRefused) {
-                        allMwraRefusedOrMigrated.put(new String[]{fpMwra.getMuid(), fpMwra.getHdssid()}, false);
+                        allMwraMigrated.put(new String[]{fpMwra.getMuid(), fpMwra.getHdssid()}, false);
                     }
                 } else {
 //                    sC.setRb07("");
                     sC.setRb06(sC.getRb06());
                     sC.setRb04(fpMwra.getRb04());
-                    if (!allMwraRefusedOrMigrated.isEmpty()) {
-                        for (String[] arr : allMwraRefusedOrMigrated.keySet()) {
+                    if (!allMwraMigrated.isEmpty()) {
+                        for (String[] arr : allMwraMigrated.keySet()) {
                             if (arr[0].equals(fpMwra.getMuid()) && arr[1].equals(fpMwra.getHdssid())) {
-                                allMwraRefusedOrMigrated.remove(arr);
+                                allMwraMigrated.remove(arr);
                                 break;
                             }
                         }
@@ -276,20 +277,24 @@ public class SectionCActivity extends AppCompatActivity {
         });
 
         bi.rb26.setOnCheckedChangeListener((radioGroup, checkedId) -> {
+            bi.rb19.clearCheck();
             bi.rb21a.setText(R.string.rb15);
             bi.rb1901.setEnabled(true);
-            bi.rb1903.setEnabled(true);
             bi.rb1902.setEnabled(true);
-            bi.rb1902.setChecked(false);
+            bi.rb1903.setEnabled(true);
+            //bi.rb1902.setChecked(false);
+            sC.setRb19("");
             bi.rb20.setMaxvalue(41);
             bi.rb20.setMinvalue(28);
             if (checkedId == bi.rb2605.getId()) {
+                bi.rb19.clearCheck();
                 bi.rb1901.setEnabled(false);
                 bi.rb1901.setChecked(false);
                 bi.rb1903.setEnabled(false);
                 bi.rb1903.setChecked(false);
                 bi.rb1902.setEnabled(true);
-                bi.rb1902.setChecked(true);
+                sC.setRb19("2");
+//                bi.rb1902.setChecked(true);
             } else if (checkedId == bi.rb2603.getId()) {
                 bi.rb20.setMaxvalue(27);
                 bi.rb20.setMinvalue(3);
@@ -340,11 +345,12 @@ public class SectionCActivity extends AppCompatActivity {
         mwra.setSNo(sC.getRb01());
         mwra.setIstatus(sC.getRb10());
         if (!mwra.getUid().contains("_")) {
-            mwra.setPregnum("0");
+            //mwra.setPregnum("0");
             /*if (sC.getRb07().equals("1")) {*/
-            if (fpMwra.getRb07().equals("1")) {
+
+            /*if (fpMwra.getRb07().equals("1")) {
                 mwra.setPregnum(String.valueOf(Integer.parseInt(mwra.getPregnum()) + 1));
-            }
+            }*/
 
             if (sC.getRb18().equals("1")) {
                 mwra.setPregnum(String.valueOf(Integer.parseInt(mwra.getPregnum()) + 1));
@@ -352,7 +358,15 @@ public class SectionCActivity extends AppCompatActivity {
 
             /*if (sC.getRb07().equals("2") && sC.getRb18().equals("2")) {*/
             if (fpMwra.getRb07().equals("2") && sC.getRb18().equals("2")) {
-                mwra.setPregnum("0");
+                mwra.setPregnum(!AppConstants.isEmpty(fpMwra.getPregCount()) ? fpMwra.getPregCount() : "0");
+            }
+        } else {
+            // For Edit Mode
+            dbMWRA = db.mwraDao().getFollowupsBySno(MainApp.households.getUid(), MainApp.fpMwra.getRb01(), MainApp.fpMwra.getFRound());
+            if (dbMWRA.getSC().getRb18().equals("1") && sC.getRb18().equals("2")) {
+                mwra.setPregnum(String.valueOf(Integer.parseInt(mwra.getPregnum()) - 1));
+            } else if (dbMWRA.getSC().getRb18().equals("2") && sC.getRb18().equals("1")) {
+                mwra.setPregnum(String.valueOf(Integer.parseInt(mwra.getPregnum()) + 1));
             }
         }
         if (!bi.rb1001.isChecked() || bi.rb1401.isChecked()) {

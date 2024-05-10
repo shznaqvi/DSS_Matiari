@@ -538,6 +538,7 @@
     <string name="ok">OK</string>
     <string name="login_failed">Login failed!</string>
     <string name="attempt_no">Attempt %d - %s</string>
+    <string name="download_data_desc_2">Please download data before Start Interview</string>
 
     <!--    <string name="rc09_info">DD/MM/YYYY</string>-->
     <!--    <string name="rc1001">ها </string>-->

@@ -101,14 +101,12 @@ public class SectionAActivity extends AppCompatActivity {
         if (form != null) {
             // wraId found
             households = form;
+            finish();
+            Households.SA.saveData(sA);
             if (sA.getRa15().equals("1")) {
-                finish();
-                Households.SA.saveData(sA);
                 startActivity(new Intent(this, MwraActivity.class)
                         .setFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT));
             } else {
-                finish();
-                Households.SA.saveData(sA);
                 startActivity(new Intent(this, EndingActivity.class)
                         .setFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT)
                         .putExtra("noWRA", true));

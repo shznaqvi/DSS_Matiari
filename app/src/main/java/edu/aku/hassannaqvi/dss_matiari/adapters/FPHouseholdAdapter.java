@@ -148,6 +148,10 @@ public class FPHouseholdAdapter extends RecyclerView.Adapter<FPHouseholdAdapter.
                 hhStatus = "No WRA";
                 secStatus.setVisibility(View.VISIBLE);
                 break;
+            case "6":
+                hhStatus = "Temporary Migrated";
+                secStatus.setVisibility(View.VISIBLE);
+                break;
             case "96":
                 hhStatus = "Other";
                 secStatus.setVisibility(View.VISIBLE);
@@ -174,6 +178,9 @@ public class FPHouseholdAdapter extends RecyclerView.Adapter<FPHouseholdAdapter.
                 break;
             case "4":
                 hhPrvStatus = "No WRA";
+                break;
+            case "6":
+                hhPrvStatus = "Temporary Migrated";
                 break;
             case "":
                 hhPrvStatus = "       ";
@@ -220,15 +227,15 @@ public class FPHouseholdAdapter extends RecyclerView.Adapter<FPHouseholdAdapter.
         secStatus.setBackgroundColor(ContextCompat.getColor(mContext, R.color.grayDark));
 
         if (!fpHouseholds.getIStatus().equals("1")) {
-            imgStatus.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    try {
-                        MainApp.households = db.householdsDao().getSelectedHouseholdByHDSSID(MainApp.followUpsScheHHList.get(viewHolder.getBindingAdapterPosition()).getHdssid(), viewHolder.getBindingAdapterPosition());
+            imgStatus.setOnClickListener(v -> {
+                try {
+                    MainApp.households = db.householdsDao().getSelectedHouseholdByHDSSID(MainApp.followUpsScheHHList.get(viewHolder.getBindingAdapterPosition()).getHdssid(), viewHolder.getBindingAdapterPosition());
 
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+                if (!MainApp.households.getIStatus().equals("1") && Integer.parseInt(MainApp.households.getVisitNo()) < 3) {
 
                     for (int i = 0; i <= hhsList.size(); i++) {
                         if (MainApp.households.getHdssId().equals(hhsList.get(i).getHdssid())) {
@@ -249,6 +256,8 @@ public class FPHouseholdAdapter extends RecyclerView.Adapter<FPHouseholdAdapter.
                     intent.putExtra("position", position);
 
                     ((Activity) mContext).startActivityForResult(intent, 2);
+                } else {
+                    Toast.makeText(mContext, "Follow-Up for this household has been locked", Toast.LENGTH_LONG).show();
                 }
             });
         }
@@ -312,7 +321,6 @@ public class FPHouseholdAdapter extends RecyclerView.Adapter<FPHouseholdAdapter.
                                 } else {
                                     Toast.makeText(mContext, "Follow-Up for this household has been locked", Toast.LENGTH_LONG).show();
                                 }
-
                             } catch (JSONException e) {
                                 e.printStackTrace();
                                 Toast.makeText(mContext, "JSONException(households):" + e.getMessage(), Toast.LENGTH_SHORT).show();

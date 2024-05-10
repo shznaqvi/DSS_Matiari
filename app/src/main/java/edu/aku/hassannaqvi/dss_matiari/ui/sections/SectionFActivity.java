@@ -1,7 +1,7 @@
 package edu.aku.hassannaqvi.dss_matiari.ui.sections;
 
 
-import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.allMwraRefusedOrMigrated;
+import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.allMwraMigrated;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.fpMwra;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.households;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.outcome;
@@ -90,20 +90,20 @@ public class SectionFActivity extends AppCompatActivity {
                 // Put status of Migrated or Refused in its HashMap
 
                 if (bi.rc0802.isChecked() || bi.rc0803.isChecked()) {
-                    for (String[] arr : allMwraRefusedOrMigrated.keySet()) {
+                    for (String[] arr : allMwraMigrated.keySet()) {
                         if (arr[0].equals(fpMwra.getMuid()) && arr[1].equals(fpMwra.getHdssid())) {
                             isMigratedOrRefused = true;
                             break;
                         }
                     }
                     if (!isMigratedOrRefused) {
-                        allMwraRefusedOrMigrated.put(new String[]{fpMwra.getMuid(), fpMwra.getHdssid()}, false);
+                        allMwraMigrated.put(new String[]{fpMwra.getMuid(), fpMwra.getHdssid()}, false);
                     }
                 } else {
-                    if (!allMwraRefusedOrMigrated.isEmpty()) {
-                        for (String[] arr : allMwraRefusedOrMigrated.keySet()) {
+                    if (!allMwraMigrated.isEmpty()) {
+                        for (String[] arr : allMwraMigrated.keySet()) {
                             if (arr[0].equals(fpMwra.getMuid()) && arr[1].equals(fpMwra.getHdssid())) {
-                                allMwraRefusedOrMigrated.remove(arr);
+                                allMwraMigrated.remove(arr);
                                 break;
                             }
                         }

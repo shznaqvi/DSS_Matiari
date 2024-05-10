@@ -174,6 +174,7 @@ abstract class DssRoomDatabase : RoomDatabase() {
             override fun migrate(database: SupportSQLiteDatabase) {
                 database.execSQL("ALTER TABLE 'MWRAs' ADD COLUMN 'ageM' TEXT")
                 database.execSQL("ALTER TABLE 'hhfuplist_view' ADD COLUMN 'ageM' TEXT")
+                database.execSQL("ALTER TABLE 'users' ADD COLUMN 'ucCode' TEXT not null default ''")
             }
         }
     }

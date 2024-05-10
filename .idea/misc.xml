@@ -5,7 +5,7 @@
       <map>
         <entry key="..\:/Android Office Work/DSS_Matiari/app/src/main/res/layout/activity_change_pass_new.xml" value="0.18375" />
         <entry key="..\:/Android Office Work/DSS_Matiari/app/src/main/res/layout/activity_change_password.xml" value="0.1859375" />
-        <entry key="..\:/Android Office Work/DSS_Matiari/app/src/main/res/layout/activity_ending.xml" value="0.25" />
+        <entry key="..\:/Android Office Work/DSS_Matiari/app/src/main/res/layout/activity_ending.xml" value="0.33" />
         <entry key="..\:/Android Office Work/DSS_Matiari/app/src/main/res/layout/activity_fphousehold.xml" value="0.12682291666666667" />
         <entry key="..\:/Android Office Work/DSS_Matiari/app/src/main/res/layout/activity_fpmwra.xml" value="0.12682291666666667" />
         <entry key="..\:/Android Office Work/DSS_Matiari/app/src/main/res/layout/activity_household.xml" value="0.12682291666666667" />
@@ -19,7 +19,8 @@
         <entry key="..\:/Android Office Work/DSS_Matiari/app/src/main/res/layout/activity_section_d.xml" value="0.2" />
         <entry key="..\:/Android Office Work/DSS_Matiari/app/src/main/res/layout/activity_section_e.xml" value="0.16083333333333333" />
         <entry key="..\:/Android Office Work/DSS_Matiari/app/src/main/res/layout/activity_section_f.xml" value="0.18375" />
-        <entry key="..\:/Android Office Work/DSS_Matiari/app/src/main/res/layout/activity_section_m.xml" value="0.16083333333333333" />
+        <entry key="..\:/Android Office Work/DSS_Matiari/app/src/main/res/layout/activity_section_m.xml" value="0.2" />
+        <entry key="..\:/Android Office Work/DSS_Matiari/app/src/main/res/layout/household_row.xml" value="0.21" />
       </map>
     </option>
   </component>

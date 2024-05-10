@@ -114,6 +114,7 @@ public class SectionAFupctivity extends AppCompatActivity {
                 setResult(RESULT_OK);
                 finish();
                 Households.saveMainData(sA.getRa10(), households.getRound(), sA);
+                Households.SA.saveData(sA);
                 Intent intent = new Intent(this, FPMwraActivity.class);
                 ((Activity) this).startActivityForResult(intent, 2);
             }

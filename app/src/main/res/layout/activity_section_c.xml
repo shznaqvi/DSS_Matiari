@@ -1510,7 +1510,7 @@
                                                 android:layout_width="match_parent"
                                                 android:layout_height="wrap_content"
                                                 android:checked='@{followups.rb26.equals("1")}'
-                                                android:onClick='@{()->followups.setRb26("1") + rb19.clearCheck()}'
+                                                android:onClick='@{()->followups.setRb26("1")}'
                                                 android:text="@string/rb2601" />
 
                                             <RadioButton
@@ -1518,7 +1518,7 @@
                                                 android:layout_width="match_parent"
                                                 android:layout_height="wrap_content"
                                                 android:checked='@{followups.rb26.equals("2")}'
-                                                android:onClick='@{()->followups.setRb26("2")}'
+                                                android:onClick='@{()->followups.setRb26("2") + rb19.clearCheck()}'
                                                 android:text="@string/rb2602" />
 
                                             <RadioButton
@@ -1526,7 +1526,7 @@
                                                 android:layout_width="match_parent"
                                                 android:layout_height="wrap_content"
                                                 android:checked='@{followups.rb26.equals("3")}'
-                                                android:onClick='@{()->followups.setRb26("3")}'
+                                                android:onClick='@{()->followups.setRb26("3") + rb19.clearCheck()}'
                                                 android:text="@string/rb2603" />
 
                                             <RadioButton

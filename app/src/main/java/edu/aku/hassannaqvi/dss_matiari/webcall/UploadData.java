@@ -260,6 +260,8 @@ public class UploadData {
                 appDatabase.mwraDao().updateSyncSuccess(responses);
             } else if (tag.equals(TableContracts.OutcomeTable.TABLE_NAME)) {
                 appDatabase.OutcomeDao().updateSyncSuccess(responses);
+            } else if (tag.equals(AbortionCL.TABLE_NAME)) {
+                appDatabase.abortionCLDao().updateSyncSuccess(responses);
             }
         } else {
             // Update sync error status to db
@@ -271,6 +273,8 @@ public class UploadData {
                 appDatabase.mwraDao().updateSyncError(Objects.requireNonNull(appDatabase.mwraDao().getAllUnSyncedDataByUIds(list)));
             } else if (tag.equals(TableContracts.OutcomeTable.TABLE_NAME)) {
                 appDatabase.OutcomeDao().updateSyncError(Objects.requireNonNull(appDatabase.OutcomeDao().getAllUnSyncedDataByUIds(list)));
+            } else if (tag.equals(AbortionCL.TABLE_NAME)) {
+                appDatabase.abortionCLDao().updateSyncError(Objects.requireNonNull(appDatabase.abortionCLDao().getAllUnSyncedDataByUIds(list)));
             }
         }
     }

@@ -562,7 +562,8 @@
                 <!-- m11 -->
                 <androidx.cardview.widget.CardView
                     android:id="@+id/fldGrpCVm11"
-                    style="@style/cardView">
+                    style="@style/cardView"
+                    android:visibility="gone">
 
                     <LinearLayout
                         android:layout_width="match_parent"

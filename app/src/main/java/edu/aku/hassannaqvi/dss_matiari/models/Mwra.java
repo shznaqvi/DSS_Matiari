@@ -182,6 +182,7 @@ public class Mwra extends BaseObservable implements Observable {
         mwra.setSNo(MainApp.fpMwra.getRb01());
         mwra.setChild_count(MainApp.fpMwra.getChild_count());
         mwra.setPrePreg(MainApp.fpMwra.getRb07()); // Previous pregnance status
+        mwra.setPreMaritalStaus(MainApp.fpMwra.getRb06()); // Previous marital status
     }
 
 
@@ -859,7 +860,7 @@ public class Mwra extends BaseObservable implements Observable {
             setRb04(MainApp.fpMwra.getRb04()); // DOB
             setRb06(MainApp.fpMwra.getRb06()); // Marital status
             mwra.setPreMaritalStaus(MainApp.fpMwra.getRb06());
-            mwra.setPregnum(MainApp.fpMwra.getPregCount()); // Total number of pregnancies
+            mwra.setPregnum(!AppConstants.isEmpty(MainApp.fpMwra.getPregCount()) ? MainApp.fpMwra.getPregCount() : "0"); // Total number of pregnancies
             setRb22(MainApp.fpMwra.getRb22());              // Woman name in NIC
             setRb23(MainApp.fpMwra.getRb23());              // Husband / Fathers Name in NIC
             long daysdiff = CalculateAge(MainApp.fpMwra.getRa01().getDate());

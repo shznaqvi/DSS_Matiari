@@ -1,6 +1,7 @@
 package edu.aku.hassannaqvi.dss_matiari.ui;
 
-import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.allMwraRefusedOrMigrated;
+import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.allMwraLocked;
+import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.allMwraMigrated;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.households;
 
 import android.content.Intent;
@@ -49,23 +50,28 @@ public class EndingActivity extends AppCompatActivity {
         db = MainApp.appInfo.dbHelper;
         visitCount = Integer.parseInt(MainApp.households.getVisitNo());
         boolean complete = getIntent().getBooleanExtra("complete", false);
-        boolean refusedOrMigrated = getIntent().getBooleanExtra("refused", false);
+        boolean migrated = getIntent().getBooleanExtra("migrated", false);
+        boolean refused = getIntent().getBooleanExtra("refused", false);
+        boolean locked = getIntent().getBooleanExtra("locked", false);
         boolean noWRA = getIntent().getBooleanExtra("noWRA", false);
 
         bi.istatusa.setEnabled(complete);
-        bi.istatusb.setEnabled(!complete);
-        bi.istatusc.setEnabled(!complete);
-        if (!complete && refusedOrMigrated) {
-            bi.istatusf.setEnabled(true);
-            bi.istatusg.setEnabled(true);
-            bi.istatush.setEnabled(true);
-        } else {
-            bi.istatusf.setEnabled(false);
-            bi.istatusg.setEnabled(false);
-            bi.istatush.setEnabled(false);
+        bi.istatusb.setEnabled(false);
+        bi.istatusc.setEnabled(false);
+        bi.istatusg.setEnabled(false);
+//        bi.istatusb.setEnabled(!complete);
+//        bi.istatusc.setEnabled(!complete);
+        if (locked) {
+            bi.istatusb.setEnabled(true);
         }
-        bi.istatusg.setEnabled(!complete);
-
+        if (refused) {
+            bi.istatusc.setEnabled(true);
+        }
+        if (migrated) {
+            bi.istatusg.setEnabled(true);
+        }
+//        bi.istatusb.setEnabled(!complete);
+//        bi.istatusg.setEnabled(!complete);
         bi.istatuse.setEnabled(noWRA);
         bi.istatusd.setEnabled(true); // Always TRUE
 
@@ -154,7 +160,8 @@ public class EndingActivity extends AppCompatActivity {
         Households.SA.saveData(sA);
         setResult(RESULT_OK);
         finish();
-        allMwraRefusedOrMigrated.clear();
+        allMwraMigrated.clear();
+        allMwraLocked.clear();
         if (MainApp.idType == 1) {
             Intent i = new Intent(this, HouseholdActivity.class);
             startActivity(i);

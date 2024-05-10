@@ -1,6 +1,8 @@
 package edu.aku.hassannaqvi.dss_matiari.ui.lists;
 
-import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.allMwraRefusedOrMigrated;
+import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.allMwraLocked;
+import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.allMwraMigrated;
+import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.allMwraRefused;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.followUpsScheMWRAList;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.fpMwra;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.households;
@@ -138,7 +140,9 @@ public class FPMwraActivity extends AppCompatActivity {
         mwra = new Mwra();
         MainApp.prevChildCount = 0;
         mwraDone = 0;
-        allMwraRefusedOrMigrated.clear();
+        allMwraMigrated.clear();
+        allMwraRefused.clear();
+        allMwraLocked.clear();
 
         try {
             followUpsScheMWRAList = db.FollowUpsScheDao().getAllfollowupsScheByHH(households.getVillageCode(), households.getUcCode(), households.getHhNo());
@@ -160,12 +164,29 @@ public class FPMwraActivity extends AppCompatActivity {
                     if (tempMwra != null && !tempMwra.getSysDate().equals("") && tempMwra.getSysDate() != null) {
                         fupStatus = tempMwra.getSysDate();
                         followUpsScheMWRAList.get(i).setfpDoneDt(fupStatus);
-                        if (tempMwra.getSC() != null && (tempMwra.getSC().getRb10().equals("2")
-                                || tempMwra.getSC().getRb10().equals("3") || tempMwra.getSC().getRb10().equals("5")
-                                || tempMwra.getSC().getRb10().equals("6")))
-                            allMwraRefusedOrMigrated.put(new String[]{followUpsScheMWRAList.get(i).getMuid(), followUpsScheMWRAList.get(i).getHdssid()}, false);
-                        if (!fupStatus.equals(""))
-                            mwraDone++;
+                        if (tempMwra.getSC() != null) {
+                            /*
+                             * 2 = Migration Out
+                             * 5 = Married and moved to another HH in this village
+                             * 6 = Married and moved to another village
+                             * */
+                            if (tempMwra.getSC().getRb10().equals("2") || tempMwra.getSC().getRb10().equals("5") || tempMwra.getSC().getRb10().equals("6"))
+                                allMwraMigrated.put(new String[]{followUpsScheMWRAList.get(i).getMuid(), followUpsScheMWRAList.get(i).getHdssid()}, false);
+                            /*
+                             * 3 = Refused
+                             * */
+                            if (tempMwra.getSC().getRb10().equals("3"))
+                                allMwraRefused.put(new String[]{followUpsScheMWRAList.get(i).getMuid(), followUpsScheMWRAList.get(i).getHdssid()}, false);
+                            /*
+                             * 4 = Not Available/Lock
+                             * 8 = Interview Not done after 3 visits
+                             * */
+                            if (tempMwra.getSC().getRb10().equals("4") || tempMwra.getSC().getRb10().equals("8"))
+                                allMwraLocked.put(new String[]{followUpsScheMWRAList.get(i).getMuid(), followUpsScheMWRAList.get(i).getHdssid()}, false);
+
+                            if (!fupStatus.equals(""))
+                                mwraDone++;
+                        }
                     }
                 }
             } catch (JSONException e) {
@@ -316,10 +337,14 @@ public class FPMwraActivity extends AppCompatActivity {
         Intent i = new Intent(this, EndingActivity.class);
         i.setFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT);
         Boolean flag = false;
-        Boolean refusedOrMigrated = false;
-        if ((mwraStatus.size() == 0 || mwraStatus.isEmpty()) && (allMwraRefusedOrMigrated.size() == 0 || allMwraRefusedOrMigrated.isEmpty())) {
+        Boolean mwraMigrated = false;
+        Boolean mwraRefused = false;
+        Boolean mwraLocked = false;
+        if (mwraStatus.size() == 0 && allMwraMigrated.size() == 0 && allMwraRefused.size() == 0 && allMwraLocked.size() == 0) {
             flag = true;
-            refusedOrMigrated = false;
+            mwraMigrated = false;
+            mwraRefused = false;
+            mwraLocked = false;
         } else if (mwraStatus.size() > 0) {
             mwraStatus.size();
             String houseId = MainApp.followUpsScheHHList.get(selectedFpHousehold).getHdssid();
@@ -330,18 +355,55 @@ public class FPMwraActivity extends AppCompatActivity {
                 } else
                     flag = true;
             }
-        } else if (allMwraRefusedOrMigrated.size() == mwraDone) {
-            refusedOrMigrated = true;
         }
 
-        if (!refusedOrMigrated && mwraStatus.size() > 0) {
+        if (allMwraMigrated.size() > 0) {
+            mwraMigrated = true;
+        }
+
+        if (allMwraRefused.size() > 0) {
+            mwraRefused = true;
+        }
+
+        if (allMwraLocked.size() > 0) {
+            mwraLocked = true;
+        }
+
+        if (!mwraMigrated && mwraStatus.size() > 0) {
             i.putExtra("complete", flag);
-        } else if (refusedOrMigrated) {
-            i.putExtra("refused", refusedOrMigrated);
+        } else if (mwraMigrated) {
+            i.putExtra("migrated", mwraMigrated);
             i.putExtra("complete", false);
-        } else if (!refusedOrMigrated && mwraStatus.size() == 0) {
+        }
+
+        if (mwraRefused) {
+            i.putExtra("refused", mwraRefused);
+            i.putExtra("complete", false);
+        }
+
+        if (mwraLocked) {
+            i.putExtra("locked", mwraLocked);
+            i.putExtra("complete", false);
+        }
+
+        //Checking MWRA status with Visit no
+        if (Integer.parseInt(households.getVisitNo()) >= 2 && allMwraMigrated.size() == mwraDone) {
+            i.putExtra("migrated", mwraMigrated);
+            i.putExtra("complete", false);
+        } else if (Integer.parseInt(households.getVisitNo()) >= 2 && allMwraRefused.size() == mwraDone) {
+            i.putExtra("refused", mwraRefused);
+            i.putExtra("complete", false);
+        } else if (Integer.parseInt(households.getVisitNo()) >= 2 && allMwraLocked.size() == mwraDone) {
+            i.putExtra("locked", mwraLocked);
+            i.putExtra("complete", false);
+        } else if (Integer.parseInt(households.getVisitNo()) >= 2) {
             i.putExtra("complete", true);
         }
+
+        // if all above conditions will false the Complete button will be enable
+        if (!mwraMigrated && !mwraRefused && !mwraLocked)
+            i.putExtra("complete", true);
+
         finish();
         startActivity(i);
     }
