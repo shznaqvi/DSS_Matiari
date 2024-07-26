@@ -25,7 +25,7 @@ public class WebClient {
         String BASE_URL;
         if (AppConstants.IS_PRODUCTION_SERVER) {
             // Production Base Url
-            HOST_NAME = "pedres2.aku.edu";
+            HOST_NAME = "pedres3.aku.edu";
             BASE_URL = "https://" + HOST_NAME + "/";
         } else {
             // Testing Base Url

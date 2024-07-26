@@ -4,6 +4,7 @@ package edu.aku.hassannaqvi.dss_matiari.ui.sections;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.idType;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.mwra;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.sharedPref;
+import static edu.aku.hassannaqvi.dss_matiari.ui.sections.SectionCActivity.dbMWRA;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -150,12 +151,22 @@ public class SectionDActivity extends AppCompatActivity {
             /*if (mwra.getSC().getRb07().equals("1")) {*/
             if (sD.getRb07().equals("1")) {
                 mwra.setPregnum(String.valueOf(Integer.parseInt(mwra.getPregnum()) + 1));
-            } else {
-                mwra.setPregnum(String.valueOf(MainApp.pregcount));
+            }
+        } else {
+            // Edit Mode
+            if (dbMWRA.getSD() != null) {
+                if (dbMWRA.getSD().getRb07().equals("1") && sD.getRb07().equals("2")) {
+                    mwra.setPregnum(String.valueOf(Integer.parseInt(mwra.getPregnum()) - 1));
+                } else if (dbMWRA.getSD().getRb07().equals("2") && sD.getRb07().equals("1")) {
+                    mwra.setPregnum(String.valueOf(Integer.parseInt(mwra.getPregnum()) + 1));
+                }
+            } else if (sD.getRb07().equals("1")) {
+                mwra.setPregnum(String.valueOf(Integer.parseInt(mwra.getPregnum()) + 1));
             }
         }
+
         Mwra.SD.saveData(sD);
-        //db.mwraDao().updateMwra(mwra);
+
         if (idType == 2 && (mwra.getSC().getRb16().equals("3") || mwra.getSC().getRb26().equals("3"))) {
             Intent forwardIntent = new Intent(this, SectionMActivity.class).putExtra("complete", true);
             forwardIntent.setFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT);

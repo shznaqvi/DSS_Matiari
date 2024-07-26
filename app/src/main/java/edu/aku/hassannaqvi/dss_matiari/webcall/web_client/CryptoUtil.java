@@ -129,7 +129,7 @@ public class CryptoUtil {
     public static Certificate getValidCertificate(Activity activity) {
         try {
             CertificateFactory cf = CertificateFactory.getInstance("X.509");
-            InputStream caInput = activity.getResources().openRawResource(R.raw.pedres2_aku_edu);
+            InputStream caInput = activity.getResources().openRawResource(R.raw.pedres3_aku_edu);
             Certificate ca;
             try {
                 ca = cf.generateCertificate(caInput);
