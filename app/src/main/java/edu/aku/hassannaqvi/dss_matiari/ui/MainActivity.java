@@ -127,7 +127,7 @@ public class MainActivity extends AppCompatActivity {
     private void sendEmail() {
         Intent emailIntent = new Intent(Intent.ACTION_SEND);
         emailIntent.setType("text/plain");
-        emailIntent.putExtra(Intent.EXTRA_CC, new String[]{"omar.shoaib@aku.edu", "hussain.siddiqui@aku.edu", "gul.sanober@aku.edu"});
+        emailIntent.putExtra(Intent.EXTRA_CC, new String[]{"omar.shoaib@aku.edu", "hussain.siddiqui@aku.edu"});
         emailIntent.putExtra(Intent.EXTRA_EMAIL, new String[]{"kiran.sajid@aku.edu"});
         emailIntent.putExtra(Intent.EXTRA_SUBJECT, "DSS Matiari Database - For Issue Monitoring");
         emailIntent.putExtra(Intent.EXTRA_TEXT, "DSS Matiari database upload from the device which has issues while uploading the data." +

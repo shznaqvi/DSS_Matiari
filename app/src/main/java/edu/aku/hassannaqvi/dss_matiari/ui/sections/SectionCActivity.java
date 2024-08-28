@@ -301,6 +301,10 @@ public class SectionCActivity extends AppCompatActivity {
                 bi.rb21a.setText(R.string.rb15_mis);
             }
         });
+
+        // If previously not pregnant save the last result
+        if (fpMwra.getRb07().equals("2"))
+            sC.setRb16(fpMwra.getRb07());
     }
 
     private void setDateRanges() {
