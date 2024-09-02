@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">DSS Matiari ROUND 7</string>
+    <string name="app_name">DSS Matiari ROUND 8</string>
 
     <string name="open_surveillance_form">OPEN SURVEILLANCE FORM</string>
     <string name="open_mwra_registration_form">OPEN MWRA REGISTRATION FORM</string>
@@ -220,7 +220,7 @@
     <string name="rb1603">Abortion / Miscarriage</string>
     <string name="rb1604">False PW</string>
     <string name="rb1605">One Live and one Still Birth</string>
-    <string name="rb17">Status of Unreported Pregnancy Outcome </string>
+    <string name="rb17">Status of Pregnancy Outcome </string>
     <string name="rb1701">Single</string>
     <string name="rb1702">Twins</string>
     <string name="rb1703">Triplets</string>

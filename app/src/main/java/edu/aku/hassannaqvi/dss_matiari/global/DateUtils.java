@@ -32,7 +32,7 @@ public class DateUtils {
     // Get formatted Current Date Time
     public static String getCurrentDateTime() {
         SimpleDateFormat dateFormat = new SimpleDateFormat(AppConstants.APP_DATE_TIME_FORMAT,
-                Locale.getDefault());
+                Locale.ENGLISH);
         Date date = new Date();
         return dateFormat.format(date);
     }
@@ -40,30 +40,30 @@ public class DateUtils {
     // Get Current Date Time in specified format
     public static String getCurrentDateTime(String format) {
         SimpleDateFormat dateFormat = new SimpleDateFormat(format,
-                Locale.getDefault());
+                Locale.ENGLISH);
         Date date = new Date();
         return dateFormat.format(date);
     }
 
     // DateTime formatter with Date Object
     public static String getFormattedDateTime(Date dateTime, String outputFormat) {
-        SimpleDateFormat cFormat = new SimpleDateFormat(outputFormat, Locale.getDefault());
+        SimpleDateFormat cFormat = new SimpleDateFormat(outputFormat, Locale.ENGLISH);
         return cFormat.format(dateTime);
     }
 
     // DateTime formatter with String
     public static String getFormattedDateTime(String dateTime, String outputFormat) {
-        SimpleDateFormat cFormat = new SimpleDateFormat(outputFormat, Locale.getDefault());
+        SimpleDateFormat cFormat = new SimpleDateFormat(outputFormat, Locale.ENGLISH);
         return cFormat.format(dateTime);
     }
 
     // DateTime formatter with String
     public static String getFormattedDateTime(String dateTime, String inputFormat, String outputFormat) {
         try {
-            SimpleDateFormat format = new SimpleDateFormat(inputFormat, Locale.getDefault());
+            SimpleDateFormat format = new SimpleDateFormat(inputFormat, Locale.ENGLISH);
             Date newDate = format.parse(dateTime);
 
-            format = new SimpleDateFormat(outputFormat, Locale.getDefault());
+            format = new SimpleDateFormat(outputFormat, Locale.ENGLISH);
             assert newDate != null;
             return format.format(newDate);
         } catch (ParseException e) {
@@ -76,9 +76,9 @@ public class DateUtils {
     public static List<String> checkServerAndDeviceDate(String date, String format) {
         List<String> list = new ArrayList<>();
         try {
-            SimpleDateFormat sdf = new SimpleDateFormat(format, Locale.getDefault());
+            SimpleDateFormat sdf = new SimpleDateFormat(format, Locale.ENGLISH);
             Date strDate = sdf.parse(date);
-            SimpleDateFormat sdf1 = new SimpleDateFormat(AppConstants.APP_DATE_FORMAT, Locale.getDefault());
+            SimpleDateFormat sdf1 = new SimpleDateFormat(AppConstants.APP_DATE_FORMAT, Locale.ENGLISH);
             String serverDate = sdf1.format(Objects.requireNonNull(strDate));
             String systemDate = sdf1.format(new Date());
             if (!serverDate.equals(systemDate)) {
@@ -179,7 +179,7 @@ public class DateUtils {
     public static String calculateDiffInDates(String forwardDate, String backwardDate, int diffType) {
         try {
             SimpleDateFormat sdf = new SimpleDateFormat(AppConstants.APP_DATE_FORMAT,
-                    Locale.getDefault());
+                    Locale.ENGLISH);
             Date date1 = sdf.parse(forwardDate);
             Date date2 = sdf.parse(backwardDate);
             int diff;
