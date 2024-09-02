@@ -1,7 +1,5 @@
 package edu.aku.hassannaqvi.dss_matiari.database.dao;
 
-import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.abortionCL;
-
 import androidx.room.Dao;
 import androidx.room.Query;
 
@@ -68,7 +66,7 @@ public abstract class AbortionCLDao implements BaseDao<AbortionCL> {
             String syncedDate = DateUtils.getCurrentDateTime();
             String synced = "1";
             for (int i = 0; i < responses.size(); i++) {
-                AbortionCL AbortionCLs = getDataById(responses.get(i).getId());
+                AbortionCL abortionCL = getDataById(responses.get(i).getId());
                 abortionCL.setSyncDate(syncedDate);
                 abortionCL.setSynced(synced);
                 abortionCL.setError(false);

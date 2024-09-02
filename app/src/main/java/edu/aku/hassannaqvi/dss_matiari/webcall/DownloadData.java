@@ -88,7 +88,7 @@ public class DownloadData {
     public void getData(boolean isLogin) {
         // Default filters
         String select = " * ";
-        String filter = " (colflag is null or colflag = 0) ";
+        String filter = " (colflag = '' or colflag is null or colflag = 0) ";
         String check = "";
 
         isDateError = false;
@@ -106,10 +106,10 @@ public class DownloadData {
             webCall.call(webAPI.downloadEncData(CryptoUtil.encrypt(gson.toJson(s1))), AppConstants.DOWNLOAD_DATA, DT_BEFORE_LOGIN.get(1), ++index, 0, IS_CALL_ENCRYPTED);
         } else {
             // After Login tables download
-            SyncModelNew s0 = new SyncModelNew(DT_AFTER_LOGIN.get(0), select, "DATEADD(MONTH,2,ra01) between ra01 AND GETDATE() AND ucCode = " + MainApp.user.getUcCode(), check);
+            SyncModelNew s0 = new SyncModelNew(DT_AFTER_LOGIN.get(0), select,  "DATEADD(MONTH,2,ra01) between ra01 AND GETDATE() AND ucCode = " + MainApp.user.getUcCode(), check);
             webCall.call(webAPI.downloadEncData(CryptoUtil.encrypt(gson.toJson(s0))), AppConstants.DOWNLOAD_DATA, DT_AFTER_LOGIN.get(0), ++index, 0, IS_CALL_ENCRYPTED);
 
-            SyncModelNew s1 = new SyncModelNew(DT_AFTER_LOGIN.get(1), select, "DATEADD(MONTH,2,ra01) between ra01 AND GETDATE() AND ucCode = " + MainApp.user.getUcCode(), check);
+            SyncModelNew s1 = new SyncModelNew(DT_AFTER_LOGIN.get(1), select, "flag = '' AND DATEADD(MONTH,2,ra01) between ra01 AND GETDATE() AND ucCode = " + MainApp.user.getUcCode(), check);
             webCall.call(webAPI.downloadEncData(CryptoUtil.encrypt(gson.toJson(s1))), AppConstants.DOWNLOAD_DATA, DT_AFTER_LOGIN.get(1), ++index, 0, IS_CALL_ENCRYPTED);
 
             SyncModelNew s2 = new SyncModelNew(DT_AFTER_LOGIN.get(2), select);
