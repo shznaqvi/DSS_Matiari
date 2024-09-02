@@ -303,7 +303,7 @@ public class SectionCActivity extends AppCompatActivity {
         });
 
         // If previously not pregnant save the last result
-        if (fpMwra.getRb07().equals("2"))
+        if (!AppConstants.isEmpty(fpMwra.getRb07()) && fpMwra.getRb07().equals("2"))
             sC.setRb16(fpMwra.getRb07());
     }
 
@@ -361,7 +361,7 @@ public class SectionCActivity extends AppCompatActivity {
             }
 
             /*if (sC.getRb07().equals("2") && sC.getRb18().equals("2")) {*/
-            if (fpMwra.getRb07().equals("2") && sC.getRb18().equals("2")) {
+            if (!AppConstants.isEmpty(fpMwra.getRb07()) && fpMwra.getRb07().equals("2") && sC.getRb18().equals("2")) {
                 mwra.setPregnum(!AppConstants.isEmpty(fpMwra.getPregCount()) ? fpMwra.getPregCount() : "0");
             }
         } else {

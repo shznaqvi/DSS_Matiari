@@ -36,6 +36,7 @@ import edu.aku.hassannaqvi.dss_matiari.BuildConfig;
 import edu.aku.hassannaqvi.dss_matiari.R;
 import edu.aku.hassannaqvi.dss_matiari.database.DssRoomDatabase;
 import edu.aku.hassannaqvi.dss_matiari.global.AppConstants;
+import edu.aku.hassannaqvi.dss_matiari.global.ImageUtils;
 import edu.aku.hassannaqvi.dss_matiari.models.AbortionCL;
 import edu.aku.hassannaqvi.dss_matiari.models.AppInfoNew;
 import edu.aku.hassannaqvi.dss_matiari.models.FollowUpsSche;
@@ -268,6 +269,9 @@ public class MainApp extends Application {
         } catch (PackageManager.NameNotFoundException e) {
             e.printStackTrace();
         }
+
+        // Set gallery path in static variable on app start for later use
+        AppConstants.GALLERY_DIR = ImageUtils.getGalleryDir(this);
     }
 
     private void initSecure() {

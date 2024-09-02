@@ -11,6 +11,11 @@
         android:name="android.permission.WRITE_EXTERNAL_STORAGE"
         tools:ignore="ScopedStorage" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.CAMERA" />
+
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="false" />
 
     <application
         android:name=".core.MainApp"
@@ -36,7 +41,13 @@
         <activity
             android:name=".ui.sections.SectionFActivity"
             android:theme="@style/AppThemeEnglish1"
-            android:windowSoftInputMode="adjustResize|stateHidden" />
+            android:windowSoftInputMode="adjustResize|stateHidden" /><!-- IMAGE VIEWER ACTIVITY -->
+        <activity
+            android:name=".ui.ImageViewerAC"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppThemeEnglish1"
+            tools:ignore="LockedOrientationActivity" />
         <activity
             android:name=".ui.sections.SectionEActivity"
             android:theme="@style/AppThemeEnglish1"
