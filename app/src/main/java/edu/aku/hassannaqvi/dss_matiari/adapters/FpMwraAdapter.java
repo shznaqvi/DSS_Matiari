@@ -156,8 +156,8 @@ public class FpMwraAdapter extends RecyclerView.Adapter<FpMwraAdapter.ViewHolder
                 viewHolder.itemView.setBackgroundColor(Color.parseColor("#ffffff"));
             }
 
-            secStatus.setBackgroundColor(followUpsSche.getRb07().equals("1") ? ContextCompat.getColor(mContext, R.color.redLight) : ContextCompat.getColor(mContext, R.color.grayLight));
-            indicator.setImageDrawable(followUpsSche.getRb07().equals("1") ? ContextCompat.getDrawable(mContext, R.drawable.ic_baseline_pregnant_woman_24) : ContextCompat.getDrawable(mContext, R.drawable.ic_girl));
+            secStatus.setBackgroundColor(!AppConstants.isEmpty(followUpsSche.getRb07()) && followUpsSche.getRb07().equals("1") ? ContextCompat.getColor(mContext, R.color.redLight) : ContextCompat.getColor(mContext, R.color.grayLight));
+            indicator.setImageDrawable(!AppConstants.isEmpty(followUpsSche.getRb07()) && followUpsSche.getRb07().equals("1") ? ContextCompat.getDrawable(mContext, R.drawable.ic_baseline_pregnant_woman_24) : ContextCompat.getDrawable(mContext, R.drawable.ic_girl));
 
         } else {
             // Calculate age from DOB of child
