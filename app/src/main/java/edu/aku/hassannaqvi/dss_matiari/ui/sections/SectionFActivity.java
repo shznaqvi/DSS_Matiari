@@ -7,21 +7,28 @@ import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.households;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.outcome;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.sharedPref;
 
+import android.app.Activity;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 
+import com.github.dhaval2404.imagepicker.ImagePicker;
 import com.validatorcrawler.aliazaz.Validator;
 
 import org.json.JSONException;
 
+import java.io.File;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Locale;
 import java.util.Objects;
@@ -30,12 +37,17 @@ import edu.aku.hassannaqvi.dss_matiari.R;
 import edu.aku.hassannaqvi.dss_matiari.core.MainApp;
 import edu.aku.hassannaqvi.dss_matiari.database.DssRoomDatabase;
 import edu.aku.hassannaqvi.dss_matiari.databinding.ActivitySectionFBinding;
+import edu.aku.hassannaqvi.dss_matiari.global.AppConstants;
+import edu.aku.hassannaqvi.dss_matiari.global.AppTextWatcher;
 import edu.aku.hassannaqvi.dss_matiari.global.DateUtils;
+import edu.aku.hassannaqvi.dss_matiari.global.ImageUtils;
 import edu.aku.hassannaqvi.dss_matiari.models.Outcome;
+import edu.aku.hassannaqvi.dss_matiari.ui.ImageViewerAC;
 
 public class SectionFActivity extends AppCompatActivity {
 
     private static final String TAG = "OutcomeFollowupActivity";
+    private final Activity activity = SectionFActivity.this;
     ActivitySectionFBinding bi;
     private DssRoomDatabase db;
     private Outcome.SE sE;
@@ -61,6 +73,11 @@ public class SectionFActivity extends AppCompatActivity {
             sE.populateMetaFollowups();
         }
         bi.setOutcome(sE);
+
+        MainApp.imageNames = (!AppConstants.isEmpty(sE.getRc09a()) ? String.format("%s\n", sE.getRc09a()) : AppConstants._EMPTY_);
+
+        // Set Text watcher on image names string to show/hide 'view' button
+        bi.rc09a.addTextChangedListener(new AppTextWatcher(bi.rc09a.getId(), iAppTextWatcher));
     }
 
     private void initUI() {
@@ -168,7 +185,13 @@ public class SectionFActivity extends AppCompatActivity {
 
     private boolean formValidation() {
         setDateRanges();
-        return Validator.emptyCheckingContainer(this, bi.GrpName);
+        if (!Validator.emptyCheckingContainer(this, bi.GrpName))
+            return false;
+
+        if (sE.getRc09().equals("1") && AppConstants.isEmpty(sE.getRc09a()))
+            return Validator.emptyCustomTextBox(this, bi.rc09a, getString(R.string.image_not_taken));
+
+        return true;
     }
 
 
@@ -176,5 +199,58 @@ public class SectionFActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         MainApp.lockScreen(this);
+        bi.rc09a.setText(MainApp.imageNames);
+    }
+
+    public void takePhoto(View view) {
+        ImagePicker.with(activity).maxResultSize(512, 512).saveDir(AppConstants.GALLERY_DIR).start();
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == RESULT_OK) {
+            String imageName = ImageUtils.generateImageName("SectionD", outcome.getHdssId());
+            MainApp.imageNames = MainApp.imageNames.length() > 0 ? String.format("%s\n%s", MainApp.imageNames, imageName) : imageName;
+            bi.rc09a.setText(MainApp.imageNames);
+
+            // This code is used to rename a captured image as per our need
+            // because it was saving with default name
+            Uri uri = Objects.requireNonNull(data).getData();
+            File file = new File(uri.getPath());
+            ImageUtils.renameTo(activity, file.getName(), imageName);
+
+        } else if (resultCode == ImagePicker.RESULT_ERROR) {
+            AppConstants.showSimpleSnackBar(activity, ImagePicker.getError(data), AppConstants.MSG_DURATION, AppConstants.TYPE_ERROR);
+        } else {
+            AppConstants.showSimpleSnackBar(activity, getString(R.string.image_not_taken), AppConstants.MSG_DURATION, AppConstants.TYPE_ERROR);
+        }
+    }
+
+    /*
+     * VIEW IMAGE CODE
+     * */
+
+    AppTextWatcher.IAppTextWatcher iAppTextWatcher = new AppTextWatcher.IAppTextWatcher() {
+        @Override
+        public void afterTextChanged(int viewId, String text) {
+            bi.viewImageTV.setVisibility(text.length() > 0 ? View.VISIBLE : View.GONE);
+        }
+    };
+
+    public void viewPhoto(View view) {
+        // Call the function with the array of image names
+        ArrayList<File> matchingImages = ImageUtils.getImageFilesByNames(activity, MainApp.imageNames.split("\n"));
+        if (matchingImages == null) {
+            AppConstants.showSimpleSnackBar(activity, getString(R.string.no_image_found),
+                    AppConstants.MSG_DURATION, AppConstants.TYPE_ERROR);
+            return;
+        }
+        // Create an intent to start the ImageViewerActivity
+        Intent intent = new Intent(SectionFActivity.this, ImageViewerAC.class);
+        // Pass the list of file paths to ImageViewerActivity
+        intent.putExtra("image_files", matchingImages);
+        intent.putExtra("image_names", MainApp.imageNames.split("\n"));
+        startActivity(intent);
     }
 }

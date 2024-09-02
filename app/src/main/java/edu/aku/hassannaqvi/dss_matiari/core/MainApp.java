@@ -146,6 +146,7 @@ public class MainApp extends Application {
     public static int position;
     public static CountDownTimer timer;
     static ToneGenerator toneGen1;
+    public static String imageNames = AppConstants._EMPTY_;
 
     public static void hideSystemUI(View decorView) {
         // Enables regular immersive mode.

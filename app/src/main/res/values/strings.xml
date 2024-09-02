@@ -117,6 +117,11 @@
     <string name="newHHheadname"> Name of new head of the household </string>
     <string name="ra_lon">Longitude</string>
     <string name="ra_lat">Latitude</string>
+    <string name="image_not_taken" translatable="false">Image not taken</string>
+    <string name="no_photos_taken" translatable="false">No photos were taken</string>
+    <string name="no_photos_to_upload" translatable="false">No photos to upload</string>
+    <string name="no_image_found" translatable="false">No image found</string>
+    <string name="dir_not_created" translatable="false">Directory not created</string>
 
     <!--HOUSEHOLED-->
     <string name="ra01">Date of visit </string>
@@ -188,10 +193,11 @@
     <string name="rb08_info">DD/MM/YYYY</string>
     <string name="rb09">EDD Date [auto-calculated]</string>
     <string name="rb09_info">DD/MM/YYYY</string>
-    <string name="rb10">Visit Status</string>
     <string name="rc09">Does the child have any congenital anomalies?</string>
     <string name="rc0901">Yes</string>
     <string name="rc0902">No</string>
+    <string name="rc09a">If yes, Add snap shot of anomalies </string>
+    <string name="rb10">Visit Status</string>
     <string name="rb1001">Available</string>
     <string name="rb1002">Temporary Migrated </string>
     <string name="rb1003">Refused </string>

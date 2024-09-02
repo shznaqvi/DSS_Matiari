@@ -312,5 +312,8 @@ dependencies {
     // Android Database Browser
     implementation 'com.github.amitshekhariitbhu.Android-Debug-Database:debug-db:v1.0.6'
 
+    // For Capturing and Selecting Image - Camera
+    implementation 'com.github.dhaval2404:imagepicker:2.1'
+
 }
 

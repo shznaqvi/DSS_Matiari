@@ -1,5 +1,6 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
@@ -694,6 +695,46 @@
                                 android:tag="rc0901"
                                 android:text="@={outcome.rc09x}"
                                 android:visibility="@{outcome.rc09.equals(`1`) ? View.VISIBLE : View.GONE}" />
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:background="@drawable/bottom"
+                                android:orientation="horizontal"
+                                android:visibility="@{outcome.rc09.equals(`1`) ? View.VISIBLE : View.GONE}">
+
+                                <TextView
+                                    android:id="@+id/rc09a"
+                                    style="@style/Theme.AppStructure.RegularText"
+                                    android:layout_width="0dp"
+                                    android:layout_weight="1"
+                                    android:layout_height="wrap_content"
+                                    android:background="@null"
+                                    android:text="@={outcome.rc09a}"
+                                    android:textColor="@color/red_color" />
+
+                                <ImageView
+                                    android:id="@+id/d1Photo"
+                                    android:layout_width="@dimen/_35sdp"
+                                    android:layout_height="@dimen/_30sdp"
+                                    android:layout_gravity="center"
+                                    android:onClick="takePhoto"
+                                    android:src="@drawable/ic_camera" />
+
+                                <TextView
+                                    android:id="@+id/viewImageTV"
+                                    style="@style/Theme.AppStructure.BoldText"
+                                    android:layout_width="@dimen/_35sdp"
+                                    android:layout_height="@dimen/_30sdp"
+                                    android:layout_marginStart="@dimen/_8sdp"
+                                    android:gravity="center"
+                                    android:background="@null"
+                                    android:onClick="viewPhoto"
+                                    android:text="View"
+                                    android:textColor="@color/primary_color"
+                                    android:visibility="gone"
+                                    tools:visibility="visible" />
+                            </LinearLayout>
 
 
                         </LinearLayout>

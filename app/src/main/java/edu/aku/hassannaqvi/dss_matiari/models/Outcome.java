@@ -449,6 +449,7 @@ public class Outcome extends BaseObservable implements Observable {
         private String rc07 = StringUtils.EMPTY;
         private String rc08 = StringUtils.EMPTY;
         private String rc09 = StringUtils.EMPTY;
+        private String rc09a = StringUtils.EMPTY;
         private String rc09x = StringUtils.EMPTY;
 
         // Save section object as json object in db
@@ -599,7 +600,18 @@ public class Outcome extends BaseObservable implements Observable {
         public void setRc09(String rc09) {
             this.rc09 = rc09;
             setRc09x(rc09.equals("1") ? this.rc09x : "");
+            setRc09a(rc09.equals("1") ? this.rc09a : "");
             notifyPropertyChanged(BR.rc09);
+        }
+
+        @Bindable
+        public String getRc09a() {
+            return rc09a;
+        }
+
+        public void setRc09a(String rc09a) {
+            this.rc09a = rc09a;
+            notifyPropertyChanged(BR.rc09a);
         }
 
         @Bindable

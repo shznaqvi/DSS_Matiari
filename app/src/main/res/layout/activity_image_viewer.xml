@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/black"
+        android:paddingVertical="@dimen/_10sdp">
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:scaleX="1.5"
+            android:scaleY="1.5"
+            tools:ignore="ContentDescription" />
+
+        <Button
+            android:id="@+id/btnPrevious"
+            android:layout_width="@dimen/_50sdp"
+            android:layout_height="@dimen/_50sdp"
+            android:layout_alignParentBottom="true"
+            android:layout_toStartOf="@+id/btnOk"
+            android:background="@drawable/ic_arrow_down"
+            android:rotation="90"
+            android:visibility="invisible"
+            app:backgroundTint="@color/white"
+            tools:visibility="visible" />
+
+        <Button
+            android:id="@+id/btnOk"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerInParent="true"
+            android:layout_marginHorizontal="@dimen/_50sdp"
+            android:layout_marginBottom="@dimen/_5sdp"
+            android:text="Back"
+            android:textStyle="bold"
+            android:textSize="@dimen/text_size_title"
+            app:backgroundTint="@null" />
+
+        <Button
+            android:id="@+id/btnDelete"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerInParent="true"
+            android:layout_marginHorizontal="@dimen/_50sdp"
+            android:layout_marginBottom="@dimen/_30sdp"
+            android:text="Delete"
+            android:textSize="@dimen/text_size_title"
+            android:textStyle="bold"
+            app:backgroundTint="@null" />
+
+        <Button
+            android:id="@+id/btnNext"
+            android:layout_width="@dimen/_50sdp"
+            android:layout_height="@dimen/_50sdp"
+            android:layout_alignParentBottom="true"
+            android:layout_toEndOf="@+id/btnOk"
+            android:background="@drawable/ic_arrow_down"
+            android:rotation="270"
+            android:visibility="invisible"
+            app:backgroundTint="@color/white"
+            tools:visibility="visible" />
+
+    </RelativeLayout>
+</layout>
