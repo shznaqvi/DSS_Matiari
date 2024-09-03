@@ -545,6 +545,14 @@
     <string name="login_failed">Login failed!</string>
     <string name="attempt_no">Attempt %d - %s</string>
     <string name="download_data_desc_2">Please download data before Start Interview</string>
+    <string name="section_a" translatable="false">Section A</string>
+    <string name="section_a_fup" translatable="false">Section A Fup</string>
+    <string name="section_b" translatable="false">Section B</string>
+    <string name="section_c" translatable="false">Section C</string>
+    <string name="section_d" translatable="false">Section D</string>
+    <string name="section_e" translatable="false">Section E</string>
+    <string name="section_f" translatable="false">Section F</string>
+    <string name="sectionm" translatable="false">Section M</string>
 
     <!--    <string name="rc09_info">DD/MM/YYYY</string>-->
     <!--    <string name="rc1001">ها </string>-->

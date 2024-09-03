@@ -6,6 +6,7 @@ import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.households;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.mwra;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.mwraStatus;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.sharedPref;
+import static edu.aku.hassannaqvi.dss_matiari.global.AppConstants._EMPTY_;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -376,7 +377,7 @@ public class SectionCActivity extends AppCompatActivity {
         if (!bi.rb1001.isChecked() || bi.rb1401.isChecked()) {
             if (mwra.getSD() == null) {
                 sD = new Mwra.SD();
-                sD.setRb07(fpMwra.getRb07());
+                sD.setRb07(fpMwra.getRb07() != null ? fpMwra.getRb07() : _EMPTY_);
             }
             Mwra.SD.saveData(sD);
         }
@@ -670,8 +671,12 @@ public class SectionCActivity extends AppCompatActivity {
     }
 
     private boolean formValidation() {
+        if (!Validator.emptyCheckingContainer(this, bi.GrpName))
+            return false;
+
         setDateRanges();
-        return Validator.emptyCheckingContainer(this, bi.GrpName);
+
+        return true;
     }
 
     @Override

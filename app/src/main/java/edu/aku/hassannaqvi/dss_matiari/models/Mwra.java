@@ -4,6 +4,7 @@ import static java.util.concurrent.TimeUnit.MILLISECONDS;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.PROJECT_NAME;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.households;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.mwra;
+import static edu.aku.hassannaqvi.dss_matiari.global.AppConstants._EMPTY_;
 
 import androidx.annotation.NonNull;
 import androidx.databinding.BaseObservable;
@@ -181,7 +182,7 @@ public class Mwra extends BaseObservable implements Observable {
         mwra.setRound(MainApp.fpMwra.getFRound());
         mwra.setSNo(MainApp.fpMwra.getRb01());
         mwra.setChild_count(MainApp.fpMwra.getChild_count());
-        mwra.setPrePreg(MainApp.fpMwra.getRb07()); // Previous pregnance status
+        mwra.setPrePreg(AppConstants.isEmpty(MainApp.fpMwra.getRb07()) ? _EMPTY_ : MainApp.fpMwra.getRb07()); // Previous pregnance status
         mwra.setPreMaritalStaus(MainApp.fpMwra.getRb06()); // Previous marital status
     }
 

@@ -1,6 +1,7 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".ui.sections.SectionCActivity">
 
     <data>
 
@@ -33,7 +34,7 @@
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
+            android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/_minus12sdp"
             android:layout_marginEnd="@dimen/_minus12sdp"
             android:background="@drawable/capsule"
@@ -45,6 +46,7 @@
             app:layout_scrollFlags="scroll|enterAlways"
             app:popupTheme="@style/AppTheme.PopupOverlay"
             app:title="@string/marriedwomenfollowup_mainheading"
+            app:subtitle="@string/section_c"
             app:titleTextColor="@color/white" />
 
         <View
@@ -866,7 +868,7 @@
                     android:orientation="vertical"
                     android:visibility="@{followups.rb10.equals(`1`) ? View.VISIBLE : View.GONE}">
 
-                    <!-- rb14  Radio   -->
+                    <!-- rb07 Radio   -->
                     <androidx.cardview.widget.CardView
                         android:id="@+id/fldGrpCVrb07"
                         style="@style/cardView"

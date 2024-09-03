@@ -1,6 +1,7 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".ui.sections.SectionFActivity">
 
     <data>
 
@@ -25,7 +26,7 @@
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
+            android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/_minus12sdp"
             android:layout_marginEnd="@dimen/_minus12sdp"
             android:background="@drawable/capsule"
@@ -37,6 +38,7 @@
             app:layout_scrollFlags="scroll|enterAlways"
             app:popupTheme="@style/AppTheme.PopupOverlay"
             app:title="@string/outcomefup_mainheading"
+            app:subtitle="@string/section_f"
             app:titleTextColor="@color/white" />
 
         <ScrollView
