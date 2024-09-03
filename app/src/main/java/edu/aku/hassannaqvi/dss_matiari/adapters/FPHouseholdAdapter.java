@@ -272,7 +272,7 @@ public class FPHouseholdAdapter extends RecyclerView.Adapter<FPHouseholdAdapter.
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
-                    for (int i = 0; i <= hhsList.size(); i++) {
+                    for (int i = 0; i < hhsList.size(); i++) {
                         assert MainApp.households != null;
                         if (MainApp.households.getHdssId().equals(hhsList.get(i).getHdssid())) {
                             MainApp.selectHHsHousehold = i;

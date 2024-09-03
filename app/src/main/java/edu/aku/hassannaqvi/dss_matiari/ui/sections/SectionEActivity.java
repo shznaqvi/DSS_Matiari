@@ -4,6 +4,7 @@ package edu.aku.hassannaqvi.dss_matiari.ui.sections;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.mwra;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.outcome;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.sharedPref;
+import static edu.aku.hassannaqvi.dss_matiari.global.AppConstants._EMPTY_;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -150,10 +151,12 @@ public class SectionEActivity extends AppCompatActivity {
             }
         });
 
-        MainApp.imageNames = (!AppConstants.isEmpty(sE.getRc09a()) ? String.format("%s\n", sE.getRc09a()) : AppConstants._EMPTY_);
+        MainApp.imageNames = (!AppConstants.isEmpty(sE.getRc09a()) ? String.format("%s\n", sE.getRc09a()) : _EMPTY_);
 
         // Set Text watcher on image names string to show/hide 'view' button
         bi.rc09a.addTextChangedListener(new AppTextWatcher(bi.rc09a.getId(), iAppTextWatcher));
+
+        bi.rc09.setOnCheckedChangeListener((radioGroup, i) -> MainApp.imageNames = _EMPTY_);
 
     }
 

@@ -6,6 +6,7 @@ import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.fpMwra;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.households;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.outcome;
 import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.sharedPref;
+import static edu.aku.hassannaqvi.dss_matiari.global.AppConstants._EMPTY_;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -78,6 +79,8 @@ public class SectionFActivity extends AppCompatActivity {
 
         // Set Text watcher on image names string to show/hide 'view' button
         bi.rc09a.addTextChangedListener(new AppTextWatcher(bi.rc09a.getId(), iAppTextWatcher));
+
+        bi.rc09.setOnCheckedChangeListener((radioGroup, i) -> MainApp.imageNames = _EMPTY_);
     }
 
     private void initUI() {
