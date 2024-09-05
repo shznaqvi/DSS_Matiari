@@ -65,7 +65,6 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
-
                 <!-- ra01  Input   -->
                 <androidx.cardview.widget.CardView
                     android:id="@+id/fldGrpCVra01"
@@ -114,7 +113,7 @@
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
 
-                <!-- rc01  Input-Numeric   -->
+                <!-- rb01  Input-Numeric   -->
                 <androidx.cardview.widget.CardView
                     android:id="@+id/fldGrpCVrb01"
                     style="@style/cardView">
@@ -164,6 +163,7 @@
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
 
+                <!-- rb01a  Input-Numeric   -->
                 <androidx.cardview.widget.CardView
                     android:id="@+id/fldGrpCVrc01a"
                     style="@style/cardView">
@@ -210,7 +210,8 @@
                             app:theme="@style/MaterialCalendarTheme" />
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
-                <!-- rc02  Input   -->
+
+                <!-- rb02  Input   -->
                 <androidx.cardview.widget.CardView
                     android:id="@+id/fldGrpCVrb02"
                     style="@style/cardView">
@@ -256,6 +257,7 @@
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
 
+                <!-- rb22  Input-Numeric   -->
                 <androidx.cardview.widget.CardView
                     android:id="@+id/fldGrpCVrb22"
                     style="@style/cardView">
@@ -302,7 +304,7 @@
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
 
-                <!-- rc03  Input   -->
+                <!-- rb03  Input   -->
                 <androidx.cardview.widget.CardView
                     android:id="@+id/fldGrpCVrb03"
                     style="@style/cardView">
@@ -356,6 +358,7 @@
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
 
+                <!-- rb23  Input-Numeric   -->
                 <androidx.cardview.widget.CardView
                     android:id="@+id/fldGrpCVrb23"
                     style="@style/cardView">
@@ -408,6 +411,7 @@
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
 
+                <!-- rb05  Input-Numeric   -->
                 <androidx.cardview.widget.CardView
                     android:id="@+id/fldGrpCVrbAge"
                     style="@style/cardView">
@@ -455,7 +459,7 @@
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
 
-                <!-- rc03  Input   -->
+                <!-- rc03a  Input   -->
                 <androidx.cardview.widget.CardView
                     android:id="@+id/fldGrpCVrb03a"
                     style="@style/cardView">
@@ -513,7 +517,7 @@
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
 
-                <!-- rc04 Radio-->
+                <!-- rb10 Radio-->
                 <androidx.cardview.widget.CardView
                     android:id="@+id/fldGrpCVstatus"
                     style="@style/cardView"
@@ -699,6 +703,7 @@
                         </LinearLayout>
                     </androidx.cardview.widget.CardView>
 
+                    <!-- rb12  Input-Numeric   -->
                     <androidx.cardview.widget.CardView
                         android:id="@+id/fldGrpCVrc05a"
                         style="@style/cardView"
@@ -746,7 +751,7 @@
                         </LinearLayout>
                     </androidx.cardview.widget.CardView>
 
-
+                    <!-- rc13  Input-Numeric   -->
                     <androidx.cardview.widget.CardView
                         android:id="@+id/fldGrpCVrc05b"
                         style="@style/cardView"
@@ -1260,6 +1265,7 @@
                                         android:orientation="vertical"
                                         android:visibility="@{followups.rb16.equals(`4`) ? View.GONE : View.VISIBLE}">
 
+                                        <!-- rb15  Input-Numeric   -->
                                         <androidx.cardview.widget.CardView
                                             android:id="@+id/fldGrpCVrc10"
                                             style="@style/cardView">
@@ -1327,7 +1333,7 @@
                                             </LinearLayout>
                                         </androidx.cardview.widget.CardView>
 
-                                        <!-- RB 17-->
+                                        <!-- rb17-->
                                         <androidx.cardview.widget.CardView
                                             android:id="@+id/fldGrpCVrc11"
                                             style="@style/cardView"

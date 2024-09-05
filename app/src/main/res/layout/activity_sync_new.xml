@@ -58,6 +58,17 @@
                     android:textSize="@dimen/_8ssp"
                     android:textStyle="bold" />
 
+                <Button
+                    android:id="@+id/uploadPhotosBtn"
+                    style="@style/button"
+                    android:layout_width="0dp"
+                    android:layout_marginStart="@dimen/_5sdp"
+                    android:layout_weight="1"
+                    android:onClick="uploadPhotos"
+                    android:text="@string/upload_photos"
+                    android:textSize="@dimen/_8ssp"
+                    android:textStyle="bold" />
+
                 <!--<Button
                     android:id="@+id/uploadPhotosBtn"
                     style="@style/button"

@@ -147,7 +147,8 @@ public class MwraActivity extends AppCompatActivity {
         Mwra.init();
 
         int maxMWRA = db.mwraDao().getMaxMWRSNoBYHH(selectedUC, selectedVillage, selectedHhNO);
-        int maxFpMWRA = db.FollowUpsScheDao().getMaxMWRANoBYHHFromFolloupsSche(selectedUC, selectedVillage, selectedHhNO);
+//        int maxFpMWRA = db.FollowUpsScheDao().getMaxMWRANoBYHHFromFolloupsSche(selectedUC, selectedVillage, selectedHhNO);
+        int maxFpMWRA = db.FollowUpsScheDao().getMaxMWRANoBYHHFromFolloupsScheView(selectedUC, selectedVillage, selectedHhNO);
         mwraCount = Math.max(maxMWRA, maxFpMWRA);
         Intent intent = new Intent(this, SectionBActivity.class);
         MemberInfoLauncher.launch(intent);

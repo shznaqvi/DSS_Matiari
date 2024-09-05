@@ -645,10 +645,11 @@ public class SectionCActivity extends AppCompatActivity {
                             setResult(RESULT_OK, forwardIntent);
                             startActivity(forwardIntent);
                         } else {
-                            Intent forwardIntent = new Intent(this, SectionEActivity.class).putExtra("complete", true);
+                            Intent forwardIntent = new Intent(this, SectionDActivity.class).putExtra("complete", true);
                             forwardIntent.setFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT);
                             setResult(RESULT_OK, forwardIntent);
-                            finish();
+                            startActivity(forwardIntent);
+//                            finish();
                         }
                     }
                     // if still unmarried
@@ -663,7 +664,6 @@ public class SectionCActivity extends AppCompatActivity {
             finish();
         }
     }
-
 
     public void btnEnd(View view) {
         setResult(RESULT_CANCELED);

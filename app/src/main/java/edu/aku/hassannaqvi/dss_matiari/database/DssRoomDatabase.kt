@@ -62,7 +62,7 @@ abstract class DssRoomDatabase : RoomDatabase() {
     abstract fun GeneralDao() : GeneralDao
 */
     companion object {
-        const val DATABASE_VERSION = 14
+        const val DATABASE_VERSION = 15
         const val DATABASE_NAME = "HDSS_MATIARI1.db"
         const val DATABASE_COPY = "HDSS_MATIARI1_copy.db"
 
@@ -88,6 +88,7 @@ abstract class DssRoomDatabase : RoomDatabase() {
                         .addMigrations(MIGRATION_7_12)
                         .addMigrations(MIGRATION_12_13)
                         .addMigrations(MIGRATION_13_14)
+                        .addMigrations(MIGRATION_14_15)
 //                    .fallbackToDestructiveMigration()
                         .allowMainThreadQueries()
                         .build()
@@ -175,6 +176,12 @@ abstract class DssRoomDatabase : RoomDatabase() {
                 database.execSQL("ALTER TABLE 'MWRAs' ADD COLUMN 'ageM' TEXT")
                 database.execSQL("ALTER TABLE 'hhfuplist_view' ADD COLUMN 'ageM' TEXT")
                 database.execSQL("ALTER TABLE 'users' ADD COLUMN 'ucCode' TEXT not null default ''")
+            }
+        }
+
+        private val MIGRATION_14_15 = object : Migration(14, 15) {
+            override fun migrate(database: SupportSQLiteDatabase) {
+                database.execSQL("ALTER TABLE 'hhfuplist_view' ADD COLUMN 'mwraCount' TEXT")
             }
         }
     }

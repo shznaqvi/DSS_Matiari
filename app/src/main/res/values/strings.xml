@@ -39,6 +39,7 @@
     <string name="download_data" translatable="false">Download Data</string>
     <string name="upload_data" translatable="false">Upload Data</string>
     <string name="upload_photos" translatable="false">Upload Photos</string>
+    <string name="sync_upload_photo_success" translatable="false">Photo uploaded successfully</string>
     <string name="sync_upload_duplicate" translatable="false">Duplicate photo</string>
     <string name="sync_upload_success" translatable="false">Total: %d | Synced: %d | Duplicates: %d \n\nMessage: %s</string>
     <string name="successful" translatable="false">Successful</string>

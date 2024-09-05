@@ -23,9 +23,11 @@ import edu.aku.hassannaqvi.dss_matiari.core.MainApp;
 import edu.aku.hassannaqvi.dss_matiari.database.DssRoomDatabase;
 import edu.aku.hassannaqvi.dss_matiari.databinding.ActivitySyncNewBinding;
 import edu.aku.hassannaqvi.dss_matiari.global.AppConstants;
+import edu.aku.hassannaqvi.dss_matiari.global.ImageUtils;
 import edu.aku.hassannaqvi.dss_matiari.models.SyncModelNew;
 import edu.aku.hassannaqvi.dss_matiari.webcall.DownloadData;
 import edu.aku.hassannaqvi.dss_matiari.webcall.UploadData;
+import edu.aku.hassannaqvi.dss_matiari.webcall.UploadPhotos;
 
 public class SyncNewAC extends AppCompatActivity {
 
@@ -93,7 +95,7 @@ public class SyncNewAC extends AppCompatActivity {
         uploadData.postData();
     }
 
-    /*// Upload Photos
+    // Upload Photos
     @SuppressLint("NotifyDataSetChanged")
     public void uploadPhotos(View view) {
         syncTablesList.clear();
@@ -109,7 +111,7 @@ public class SyncNewAC extends AppCompatActivity {
         syncAdapter.notifyDataSetChanged();
         UploadPhotos uploadPhotos = new UploadPhotos(this, syncAdapter, syncTablesList);
         uploadPhotos.postPhotos();
-    }*/
+    }
 
     // For disabling other sync buttons if one task is performing
     private void DisableOtherViews(int syncType) {

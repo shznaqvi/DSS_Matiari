@@ -61,6 +61,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
+
                     <!-- ra01  Input   -->
                     <!--                <com.google.android.material.card.MaterialCardView-->
                     <androidx.cardview.widget.CardView
@@ -154,7 +155,6 @@
                         </LinearLayout>
                     </androidx.cardview.widget.CardView>
 
-
                     <!-- ra05  Input   -->
                     <androidx.cardview.widget.CardView
                         android:id="@+id/fldGrpCVra05"
@@ -194,7 +194,6 @@
                                 android:text="@={household.ra05}" />
                         </LinearLayout>
                     </androidx.cardview.widget.CardView>
-
 
                     <!--&lt;!&ndash; ra08  Input   &ndash;&gt;
                     <androidx.cardview.widget.CardView
@@ -298,7 +297,6 @@
                                 android:textStyle="bold" />
                         </LinearLayout>
                     </androidx.cardview.widget.CardView>
-
 
                     <!-- ra10  Input   -->
                     <androidx.cardview.widget.CardView
@@ -473,7 +471,7 @@
                         </LinearLayout>
                     </androidx.cardview.widget.CardView>-->
 
-                    <!-- ra15  Input   -->
+                    <!-- ra14  Input   -->
                     <androidx.cardview.widget.CardView
                         android:id="@+id/fldGrpCVra15"
                         style="@style/cardView">
@@ -516,7 +514,7 @@
                         </LinearLayout>
                     </androidx.cardview.widget.CardView>
 
-                    <!-- ra20  Radio   -->
+                    <!-- ra15  Radio   -->
                     <androidx.cardview.widget.CardView
                         android:id="@+id/fldGrpCVra20"
                         style="@style/cardView">
@@ -1010,7 +1008,6 @@
                 tools:visibility="gone"
                 android:visibility="visible">
 
-
                 <TextView
                     android:id="@+id/lockedTitleTV"
                     android:layout_width="match_parent"
@@ -1022,7 +1019,6 @@
                     android:textSize="@dimen/_18ssp"
                     tools:visibility="visible"
                     android:focusable="true" />
-
 
             </RelativeLayout>
 

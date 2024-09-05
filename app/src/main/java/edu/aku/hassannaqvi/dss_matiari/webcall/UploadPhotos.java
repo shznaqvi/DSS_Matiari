@@ -1,4 +1,3 @@
-/*
 package edu.aku.hassannaqvi.dss_matiari.webcall;
 
 import android.app.Activity;
@@ -8,45 +7,37 @@ import com.google.gson.Gson;
 import java.io.File;
 import java.util.List;
 
-import edu.aku.omarshoaib.appstructure.R;
-import edu.aku.omarshoaib.appstructure.activity.SyncAC;
-import edu.aku.omarshoaib.appstructure.adapter.SyncAdapter;
-import edu.aku.omarshoaib.appstructure.database.AppDatabase;
-import edu.aku.omarshoaib.appstructure.global.AppConstants;
-import edu.aku.omarshoaib.appstructure.global.ImageUtils;
-import edu.aku.omarshoaib.appstructure.model.SyncModel;
-import edu.aku.omarshoaib.appstructure.webcall.web_client.WebAPI;
-import edu.aku.omarshoaib.appstructure.webcall.web_client.WebCall;
-import edu.aku.omarshoaib.appstructure.webcall.web_client.WebClient;
+import edu.aku.hassannaqvi.dss_matiari.R;
+import edu.aku.hassannaqvi.dss_matiari.adapters.SyncAdapter;
+import edu.aku.hassannaqvi.dss_matiari.database.DssRoomDatabase;
+import edu.aku.hassannaqvi.dss_matiari.global.AppConstants;
+import edu.aku.hassannaqvi.dss_matiari.global.ImageUtils;
+import edu.aku.hassannaqvi.dss_matiari.models.SyncModelNew;
+import edu.aku.hassannaqvi.dss_matiari.ui.SyncNewAC;
+import edu.aku.hassannaqvi.dss_matiari.webcall.web_client.WebAPI;
+import edu.aku.hassannaqvi.dss_matiari.webcall.web_client.WebCall;
+import edu.aku.hassannaqvi.dss_matiari.webcall.web_client.WebClient;
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
 
 public class UploadPhotos {
-    private final SyncAC activity;
+    private final SyncNewAC activity;
     private final WebAPI webAPI;
     private final WebCall webCall;
     private final SyncAdapter syncAdapter;
-    private final List<SyncModel> syncTablesList;
-    private List<File> uploadPhotosList;
-    private final AppDatabase appDatabase;
+    private final List<SyncModelNew> syncTablesList;
+    private final List<File> uploadPhotosList;
+    private final DssRoomDatabase appDatabase;
     private final Gson gson;
 
     private int index;
 
-    */
-/**
- * INIT
- * <p>
- * POST PHOTOS TO SERVER
- * <p>
- * CALLBACK FOR UPLOAD PHOTOS
- * <p>
- * UPDATE SYNC ITEM ON ADAPTER
- *//*
+    /**
+     * INIT
+     */
 
-
-    public UploadPhotos(SyncAC activity, SyncAdapter syncAdapter, List<SyncModel> syncTablesList) {
+    public UploadPhotos(SyncNewAC activity, SyncAdapter syncAdapter, List<SyncModelNew> syncTablesList) {
         this.activity = activity;
         webAPI = WebClient.getInstance(activity).getWebAPI();
         webCall = new WebCall(activity, iWebCallback);
@@ -54,15 +45,13 @@ public class UploadPhotos {
         this.syncTablesList = syncTablesList;
         // For deletion after upload
         uploadPhotosList = ImageUtils.getAllImagesFiles(activity);
-        appDatabase = AppDatabase.getDBInstance();
+        appDatabase = DssRoomDatabase.getDbInstance();
         gson = new Gson();
     }
 
-    */
-/**
- * POST PHOTOS TO SERVER
- *//*
-
+    /**
+     * POST PHOTOS TO SERVER
+     */
 
     // Post Photos
     public void postPhotos() {
@@ -83,11 +72,9 @@ public class UploadPhotos {
         }
     }
 
-    */
-/**
- * CALLBACK FOR UPLOAD PHOTOS
- *//*
-
+    /**
+     * CALLBACK FOR UPLOAD PHOTOS
+     */
 
     WebCall.IWebCallback iWebCallback = new WebCall.IWebCallback() {
 
@@ -98,13 +85,13 @@ public class UploadPhotos {
             activity.checkIfAllSynced(syncTablesList.size(), AppConstants.UPLOAD_PHOTOS);
 
             // Update sync list view
-            SyncModel.WebResponse response;
+            SyncModelNew.WebResponse response;
             try {
-                response = gson.fromJson(jsonResponse, SyncModel.WebResponse.class);
+                response = gson.fromJson(jsonResponse, SyncModelNew.WebResponse.class);
             } catch (Exception e) {
                 response = null;
             }
-            SyncModel syncModel = getUpdatedSyncUploadPhotoItem(activity, response, uploadPhotosList.get(index),
+            SyncModelNew syncModel = getUpdatedSyncUploadPhotoItem(activity, response, uploadPhotosList.get(index),
                     syncTablesList.get(index), AppConstants.RESPONSE_SUCCESS, null);
             syncTablesList.set(index, syncModel);
             syncAdapter.notifyItemChanged(index);
@@ -113,7 +100,7 @@ public class UploadPhotos {
         @Override
         public void onFailure(String tag, String errorMessage, int index, int total, List<String> list) {
             // Update sync list view
-            SyncModel syncModel = getUpdatedSyncUploadPhotoItem(activity, null, null,
+            SyncModelNew syncModel = getUpdatedSyncUploadPhotoItem(activity, null, null,
                     syncTablesList.get(index), AppConstants.RESPONSE_ERROR, errorMessage);
             syncTablesList.set(index, syncModel);
             syncAdapter.notifyItemChanged(index);
@@ -123,18 +110,14 @@ public class UploadPhotos {
         }
     };
 
-    */
-/**
- * UPDATE SYNC ITEM ON ADAPTER
- *//*
+    /**
+     * UPDATE SYNC ITEM ON ADAPTER
+     */
 
-
- */
-/*This function is used to update list item after UPLOAD*//*
-
+    /*This function is used to update list item after UPLOAD*/
     // The reason to make this function instance-wise is because if we make it static then there
     // will be a probability of data messing as we call this method after parallel calls
-    public SyncModel getUpdatedSyncUploadPhotoItem(Activity activity, SyncModel.WebResponse response, File photo, SyncModel syncModel, int callStatus, String error) {
+    public SyncModelNew getUpdatedSyncUploadPhotoItem(Activity activity, SyncModelNew.WebResponse response, File photo, SyncModelNew syncModel, int callStatus, String error) {
         String message = "";
         if (response != null) {
             // Success
@@ -160,4 +143,3 @@ public class UploadPhotos {
     }
 
 }
-*/

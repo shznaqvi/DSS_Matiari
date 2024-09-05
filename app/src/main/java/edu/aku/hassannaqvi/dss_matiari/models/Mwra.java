@@ -1002,8 +1002,11 @@ public class Mwra extends BaseObservable implements Observable {
         public void setRb06(String rb06) {
             this.rb06 = rb06;
             setRb15(this.rb06.equals("4") ? "" : this.rb15);
+            setRb18(this.rb06.equals("4") ? "" : this.rb18);
             setRb20(this.rb06.equals("4") ? "" : this.rb20);
             setRb21(this.rb06.equals("4") ? "" : this.rb21);
+            setRb26(this.rb06.equals("4") ? "" : this.rb26);
+            setRb29(this.rb06.equals("4") ? "" : this.rb29);
 
             notifyPropertyChanged(BR.rb06);
         }

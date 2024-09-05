@@ -59,8 +59,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
-                <!-- ra01  Input   -->
 
+                <!-- ra01  Input   -->
                 <androidx.cardview.widget.CardView
                     android:id="@+id/fldGrpCVra01"
                     style="@style/cardView"
@@ -152,7 +152,6 @@
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
 
-
                 <!-- ra05  Input   -->
                 <androidx.cardview.widget.CardView
                     android:id="@+id/fldGrpCVra05"
@@ -192,7 +191,6 @@
                             android:text="@={sA.ra05}" />
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
-
 
                 <!-- ra08  Input   -->
                 <androidx.cardview.widget.CardView
@@ -297,7 +295,6 @@
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
 
-
                 <!-- ra10  Input   -->
                 <androidx.cardview.widget.CardView
                     android:id="@+id/fldGrpCVra10"
@@ -342,7 +339,7 @@
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
 
-                <!-- ra21  Input   -->
+                <!-- ra11  Input   -->
                 <androidx.cardview.widget.CardView
                     android:id="@+id/fldGrpCVra21"
                     style="@style/cardView">
@@ -428,7 +425,7 @@
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
 
-                <!-- ra19  Input   -->
+                <!-- ra13  Input   -->
                 <androidx.cardview.widget.CardView
                     android:id="@+id/fldGrpCVra19"
                     style="@style/cardView">
@@ -471,7 +468,7 @@
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
 
-                <!-- ra15  Input   -->
+                <!-- ra14  Input   -->
                 <androidx.cardview.widget.CardView
                     android:id="@+id/fldGrpCVra15"
                     style="@style/cardView">
@@ -514,7 +511,7 @@
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
 
-                <!-- ra20  Radio   -->
+                <!-- ra15  Radio   -->
                 <androidx.cardview.widget.CardView
                     android:id="@+id/fldGrpCVra20"
                     style="@style/cardView">

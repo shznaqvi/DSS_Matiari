@@ -47,7 +47,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
-
+                <!-- rc01  -->
                 <androidx.cardview.widget.CardView
                     android:id="@+id/fldGrpCVrb01"
                     style="@style/cardView">
@@ -97,7 +97,7 @@
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
 
-
+                <!-- rc02  -->
                 <androidx.cardview.widget.CardView
                     android:id="@+id/fldGrpCVrc12nm"
                     style="@style/cardView">
@@ -144,6 +144,7 @@
 
                 </androidx.cardview.widget.CardView>
 
+                <!-- rc03  -->
                 <androidx.cardview.widget.CardView
                     android:id="@+id/fldGrpCVrc12dob"
                     style="@style/cardView">
@@ -207,7 +208,7 @@
 
                 </androidx.cardview.widget.CardView>
 
-
+                <!-- rc04  -->
                 <androidx.cardview.widget.CardView
                     android:id="@+id/fldGrpCVrc1201"
                     style="@style/cardView">
@@ -280,7 +281,7 @@
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
 
-
+                <!-- rc05  -->
                 <androidx.cardview.widget.CardView
                     android:id="@+id/fldGrpCVrc1301"
                     style="@style/cardView">
@@ -342,7 +343,7 @@
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
 
-
+                <!-- rc06  -->
                 <androidx.cardview.widget.CardView
                     android:id="@+id/fldGrpCVrc14"
                     style="@style/cardView"
@@ -413,7 +414,7 @@
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
 
-
+                <!-- rc07  -->
                 <androidx.cardview.widget.CardView
                     android:id="@+id/fldGrpCVrc05b"
                     style="@style/cardView"
@@ -458,6 +459,7 @@
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
 
+                <!-- rc09  -->
                 <androidx.cardview.widget.CardView
                     android:id="@+id/fldGrpCVrc09"
                     style="@style/cardView">
@@ -567,7 +569,6 @@
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
 
-
                 <!--EndButton LinearLayout-->
                 <LinearLayout
                     android:id="@+id/buttonsLayout"
@@ -612,37 +613,6 @@
                         android:textStyle="bold" />
 
                 </LinearLayout>
-
-
-                <!--                &lt;!&ndash;EndButton LinearLayout&ndash;&gt;-->
-                <!--                <LinearLayout-->
-                <!--                    android:layout_width="match_parent"-->
-                <!--                    android:layout_height="wrap_content"-->
-                <!--                    android:layout_margin="24dp"-->
-                <!--                    android:gravity="end"-->
-                <!--                    android:orientation="horizontal">-->
-
-                <!--                    <androidx.appcompat.widget.AppCompatButton-->
-                <!--                        android:id="@+id/btn_End"-->
-                <!--                        android:layout_width="wrap_content"-->
-                <!--                        android:layout_height="wrap_content"-->
-                <!--                        android:layout_marginStart="12dp"-->
-                <!--                        android:backgroundTint="@color/colorAccent"-->
-                <!--                        android:onClick="btnEnd"-->
-                <!--                        android:text="Cancel"-->
-                <!--                        android:textColor="@color/white" />-->
-
-                <!--                    <androidx.appcompat.widget.AppCompatButton-->
-                <!--                        android:id="@+id/btn_Continue"-->
-                <!--                        android:layout_width="wrap_content"-->
-                <!--                        android:layout_height="wrap_content"-->
-                <!--                        android:layout_marginStart="12dp"-->
-                <!--                        android:backgroundTint="@color/colorPrimary"-->
-                <!--                        android:onClick="btnContinue"-->
-                <!--                        android:text="Save"-->
-                <!--                        android:textColor="@color/white" />-->
-                <!--                </LinearLayout>-->
-
 
             </LinearLayout>
         </ScrollView>

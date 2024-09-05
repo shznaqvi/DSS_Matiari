@@ -302,6 +302,7 @@ public class TableContracts {
         public static final String COLUMN_RB04 = "rb04"; // DOB
         public static final String COLUMN_RC04 = "rc04"; // Gender
         public static final String COLUMN_MSNO = "msno";
+        public static final String COLUMN_MWRA_COUNT = "mwra_count";
         public static final String COLUMN_CHILD_COUNT = "child_count";
         public static final String COLUMN_PREG_COUNT = "pregnum";
         public static final String COLUMN_RB22 = "rb22";
