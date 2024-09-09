@@ -177,6 +177,7 @@ public class SectionFActivity extends AppCompatActivity {
     public void btnContinue(View view) throws JSONException {
         if (!formValidation()) return;
         Outcome.saveMainDataFup(households.getUid(), fpMwra.getRb01(), fpMwra.getMuid(), fpMwra.getFRound(), sE);
+        Outcome.SE.saveData(sE);
         setResult(RESULT_OK);
         finish();
     }
@@ -213,7 +214,7 @@ public class SectionFActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == RESULT_OK) {
-            String imageName = ImageUtils.generateImageName("SectionD", outcome.getHdssId());
+            String imageName = ImageUtils.generateImageName("SectionF", outcome.getHdssId(), outcome.getSE().getRc01(), outcome.getMsno());
             MainApp.imageNames = MainApp.imageNames.length() > 0 ? String.format("%s\n%s", MainApp.imageNames, imageName) : imageName;
             bi.rc09a.setText(MainApp.imageNames);
 

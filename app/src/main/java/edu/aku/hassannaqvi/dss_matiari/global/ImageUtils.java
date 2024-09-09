@@ -35,9 +35,9 @@ public class ImageUtils {
     }
 
     // Image name scheme
-    public static String generateImageName(String sectionName, String formId) {
-        return String.format(Locale.getDefault(), "%s_%s_%s_%s.jpg", AppConstants.PROJECT_NAME, sectionName,
-                System.currentTimeMillis(), formId);
+    public static String generateImageName(String sectionName, String formId, String childId, String motherId) {
+        return String.format(Locale.getDefault(), "%s_%s_%s_%s_%s_%s.jpg", AppConstants.PROJECT_NAME, sectionName,
+                System.currentTimeMillis(), formId, childId, motherId);
     }
 
     // Rename Image

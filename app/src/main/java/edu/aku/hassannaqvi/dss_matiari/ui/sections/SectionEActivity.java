@@ -242,7 +242,7 @@ public class SectionEActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == RESULT_OK) {
-            String imageName = ImageUtils.generateImageName("SectionD", outcome.getHdssId());
+            String imageName = ImageUtils.generateImageName("SectionE", outcome.getHdssId(), outcome.getSE().getRc01(), outcome.getMsno());
             MainApp.imageNames = MainApp.imageNames.length() > 0 ? String.format("%s\n%s", MainApp.imageNames, imageName) : imageName;
             bi.rc09a.setText(MainApp.imageNames);
 
