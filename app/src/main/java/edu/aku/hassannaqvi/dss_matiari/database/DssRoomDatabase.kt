@@ -181,7 +181,7 @@ abstract class DssRoomDatabase : RoomDatabase() {
 
         private val MIGRATION_14_15 = object : Migration(14, 15) {
             override fun migrate(database: SupportSQLiteDatabase) {
-                database.execSQL("ALTER TABLE 'hhfuplist_view' ADD COLUMN 'mwraCount' TEXT")
+                database.execSQL("ALTER TABLE 'hhfuplist_view' ADD COLUMN 'mwra_count' TEXT")
             }
         }
     }

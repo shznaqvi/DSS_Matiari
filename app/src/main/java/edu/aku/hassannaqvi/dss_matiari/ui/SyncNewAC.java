@@ -119,7 +119,9 @@ public class SyncNewAC extends AppCompatActivity {
         if (syncType == DOWNLOAD_DATA) {
             // Download Data - Disable Upload and Upload Photos buttons
             bi.uploadBtn.setEnabled(false);
+            bi.uploadPhotosBtn.setEnabled(false);
             bi.uploadBtn.setBackgroundTintList(ColorStateList.valueOf(disabledColor));
+            bi.uploadPhotosBtn.setBackgroundTintList(ColorStateList.valueOf(disabledColor));
 //            bi.uploadPhotosBtn.setEnabled(false);
 //            bi.uploadPhotosBtn.setBackgroundTintList(ColorStateList.valueOf(disabledColor));
         } else if (syncType == UPLOAD_DATA) {
@@ -134,6 +136,8 @@ public class SyncNewAC extends AppCompatActivity {
             bi.downloadBtn.setBackgroundTintList(ColorStateList.valueOf(disabledColor));
             bi.uploadBtn.setEnabled(false);
             bi.uploadBtn.setBackgroundTintList(ColorStateList.valueOf(disabledColor));
+            bi.uploadPhotosBtn.setEnabled(false);
+            bi.uploadPhotosBtn.setBackgroundTintList(ColorStateList.valueOf(disabledColor));
         }
     }
 
@@ -147,6 +151,8 @@ public class SyncNewAC extends AppCompatActivity {
             // Download Data - Disable Upload and Upload Photos buttons
             bi.uploadBtn.setEnabled(true);
             bi.uploadBtn.setBackgroundTintList(ColorStateList.valueOf(enabledColor));
+            bi.uploadPhotosBtn.setEnabled(true);
+            bi.uploadPhotosBtn.setBackgroundTintList(ColorStateList.valueOf(enabledColor));
 //            bi.uploadPhotosBtn.setEnabled(true);
 //            bi.uploadPhotosBtn.setBackgroundTintList(ColorStateList.valueOf(enabledPhotosColor));
         } else if (syncType == UPLOAD_DATA) {
@@ -161,6 +167,8 @@ public class SyncNewAC extends AppCompatActivity {
             bi.downloadBtn.setBackgroundTintList(ColorStateList.valueOf(enabledColor));
             bi.uploadBtn.setEnabled(true);
             bi.uploadBtn.setBackgroundTintList(ColorStateList.valueOf(enabledColor));
+            bi.uploadPhotosBtn.setEnabled(true);
+            bi.uploadPhotosBtn.setBackgroundTintList(ColorStateList.valueOf(enabledColor));
         }
     }
 

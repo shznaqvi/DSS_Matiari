@@ -31,7 +31,6 @@ import edu.aku.hassannaqvi.dss_matiari.core.MainApp;
 import edu.aku.hassannaqvi.dss_matiari.database.DssRoomDatabase;
 import edu.aku.hassannaqvi.dss_matiari.database.dao.HouseholdsDao;
 import edu.aku.hassannaqvi.dss_matiari.global.AppConstants;
-import edu.aku.hassannaqvi.dss_matiari.global.DateUtils;
 
 @Entity(tableName = HouseholdTable.TABLE_NAME)
 public class Households extends BaseObservable implements Observable {
@@ -457,7 +456,7 @@ public class Households extends BaseObservable implements Observable {
         }
 
         public void populateMeta() {
-            setRa01(DateUtils.getCurrentDateTime(AppConstants.APP_DATE_FORMAT));
+            setRa01(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.ENGLISH).format(new Date().getTime()));
             setRa04(MainApp.leaderCode);
             setRa05(MainApp.leaderCode);
             setRa06(MainApp.selectedUC);
@@ -465,7 +464,7 @@ public class Households extends BaseObservable implements Observable {
         }
 
         public void populateMetaFollowups() {
-            setRa01(DateUtils.getCurrentDateTime(AppConstants.APP_DATE_FORMAT));
+            setRa01(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.ENGLISH).format(new Date().getTime()));
             setRa04(MainApp.leaderCode);
             setRa05(MainApp.leaderCode);
             setRa06(MainApp.selectedUC);
