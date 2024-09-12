@@ -66,7 +66,7 @@ public class FPMwraActivity extends AppCompatActivity {
         bi.hdssid.setText(households.getHdssId());
 
         try {
-            followUpsScheMWRAList = db.FollowUpsScheDao().getAllfollowupsScheByHH(households.getVillageCode(), households.getUcCode(), households.getHhNo());
+            followUpsScheMWRAList = db.FollowUpsScheDao().getAllfollowupsScheByHH(households.getVillageCode(), households.getUcCode(), households.getHhNo(), MainApp.ROUND);
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -145,7 +145,7 @@ public class FPMwraActivity extends AppCompatActivity {
         allMwraLocked.clear();
 
         try {
-            followUpsScheMWRAList = db.FollowUpsScheDao().getAllfollowupsScheByHH(households.getVillageCode(), households.getUcCode(), households.getHhNo());
+            followUpsScheMWRAList = db.FollowUpsScheDao().getAllfollowupsScheByHH(households.getVillageCode(), households.getUcCode(), households.getHhNo(), MainApp.ROUND);
         } catch (Exception e) {
             e.printStackTrace();
             Toast.makeText(this, "JSONException: " + e.getMessage(), Toast.LENGTH_SHORT).show();

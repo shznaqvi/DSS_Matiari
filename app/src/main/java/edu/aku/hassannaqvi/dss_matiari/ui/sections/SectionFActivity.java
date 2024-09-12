@@ -214,7 +214,7 @@ public class SectionFActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == RESULT_OK) {
-            String imageName = ImageUtils.generateImageName("SectionF", outcome.getHdssId(), outcome.getSE().getRc01(), outcome.getMsno());
+            String imageName = ImageUtils.generateImageName("SectionF", fpMwra.getHdssid(), sE.getRc01(), fpMwra.getRb01());
             MainApp.imageNames = MainApp.imageNames.length() > 0 ? String.format("%s\n%s", MainApp.imageNames, imageName) : imageName;
             bi.rc09a.setText(MainApp.imageNames);
 

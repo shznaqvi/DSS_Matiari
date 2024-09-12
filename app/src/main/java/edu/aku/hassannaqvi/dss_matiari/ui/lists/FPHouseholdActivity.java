@@ -87,7 +87,7 @@ public class FPHouseholdActivity extends AppCompatActivity {
         initSearchFilter();
 
         MainApp.followUpsScheHHList = db.FollowUpsScheDao().getFollowUpsScheHHBYVillage(selectedUC, selectedVillage, "");
-        MainApp.hhsList = db.HhsDao().getHhsBYVillage(selectedUC, selectedVillage, "");
+        MainApp.hhsList = db.HhsDao().getHhsBYVillage(selectedUC, selectedVillage, "", MainApp.ROUND);
 
         bi.villageCode.setText("List of " + selectedUC + "-" + selectedVillage);
 
@@ -110,7 +110,7 @@ public class FPHouseholdActivity extends AppCompatActivity {
     public void filterForms(View view) {
         Toast.makeText(this, "updated", Toast.LENGTH_SHORT).show();
         MainApp.followUpsScheHHList = db.FollowUpsScheDao().getFollowUpsScheHHBYVillage(selectedUC, selectedVillage, bi.hhead.getText().toString());
-        MainApp.hhsList = db.HhsDao().getHhsBYVillage(selectedUC, selectedVillage, bi.hhead.getText().toString());
+        MainApp.hhsList = db.HhsDao().getHhsBYVillage(selectedUC, selectedVillage, bi.hhead.getText().toString(), MainApp.ROUND);
         hhAdapter = new FPHouseholdAdapter(this, MainApp.followUpsScheHHList);
         hhAdapter.notifyDataSetChanged();
         bi.rvHouseholds.setAdapter(hhAdapter);

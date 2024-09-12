@@ -31,8 +31,8 @@ interface FollowUpsScheDao {
     fun getFollowUpsScheHHBYVillage(uc: String, village: String, hhead: String): List<FollowUpsSche>
 
 
-    @Query("SELECT * FROM hhfuplist_view WHERE villageCode LIKE :village AND ucCode LIKE :ucCode AND rb01 != 'null' AND hhno LIKE :hhNo ORDER By id ASC")
-    fun getAllfollowupsScheByHH(village: String, ucCode: String, hhNo: String): List<FollowUpsSche>
+    @Query("SELECT * FROM hhfuplist_view WHERE villageCode LIKE :village AND ucCode LIKE :ucCode AND rb01 != 'null' AND hhno LIKE :hhNo AND fRound LIKE :round ORDER By id ASC")
+    fun getAllfollowupsScheByHH(village: String, ucCode: String, hhNo: String, round: String): List<FollowUpsSche>
 
 
     @Query("SELECT Count(*) AS mwraCount FROM hhfuplist_view WHERE rb01 != 'null' AND ucCode LIKE :uc AND villageCode like :vCode AND memberType like :memberType AND hhno like :hhNo GROUP BY hhno ")
