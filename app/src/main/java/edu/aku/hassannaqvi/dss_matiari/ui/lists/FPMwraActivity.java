@@ -74,47 +74,18 @@ public class FPMwraActivity extends AppCompatActivity {
             Log.d(TAG, "onCreate (JSONException): " + e.getMessage());
         }
 
-        /*// Updated status in FollowupsSche for existing followups done
-        for (int i = 0; i < followUpsScheMWRAList.size(); i++) {
-
-            String fupStatus = "";
-            try {
-
-                if (followUpsScheMWRAList.get(i).getRb01() != null) {
-
-                    Mwra tempMwra = db.mwraDao().getFollowupsBySno(MainApp.households.getUid(), followUpsScheMWRAList.get(i).getRb01(), followUpsScheMWRAList.get(i).getFRound());
-                    if (tempMwra != null && !tempMwra.getSysDate().equals("") && tempMwra.getSysDate() != null) {
-                        fupStatus = tempMwra.getSysDate();
-                        followUpsScheMWRAList.get(i).setfpDoneDt(fupStatus);
-                        if ((!tempMwra.getSC().getRb10().equals("") && tempMwra.getSC().getRb10() != null)
-                                || (!tempMwra.getSC().getRb11().equals("") && tempMwra.getSC().getRb11() != null))
-                            allMwraRefusedOrMigrated.put(new String[]{followUpsScheMWRAList.get(i).getMuid(), followUpsScheMWRAList.get(i).getHdssid()}, false);
-                        if (!fupStatus.equals(""))
-                            mwraDone++;
-                    }
-                }
-            } catch (JSONException e) {
-
-                Toast.makeText(this, "JSONException(Followups): " + e.getMessage(), Toast.LENGTH_SHORT).show();
-            }
-        }*/
-
         fmAdapter = new FpMwraAdapter(this, followUpsScheMWRAList);
         bi.rvMembers.setAdapter(fmAdapter);
         bi.rvMembers.setLayoutManager(new LinearLayoutManager(this));
 
 
         FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+        fab.setOnClickListener(view -> {
 
-                if (!households.getIStatus().equals("1")) {
-                    addMoreFemale();
-                } else {
-                    Toast.makeText(FPMwraActivity.this, "This households has been locked. You cannot add new members to locked forms", Toast.LENGTH_LONG).show();
-                }
-
+            if (!households.getIStatus().equals("1")) {
+                addMoreFemale();
+            } else {
+                Toast.makeText(FPMwraActivity.this, "This households has been locked. You cannot add new members to locked forms", Toast.LENGTH_LONG).show();
             }
         });
 
@@ -128,14 +99,6 @@ public class FPMwraActivity extends AppCompatActivity {
         super.onResume();
         MainApp.lockScreen(this);
         Toast.makeText(this, "Activity Resumed!", Toast.LENGTH_SHORT).show();
-
-        /*Households.SA sA = null;
-        if (households.getSA() == null) {
-            sA = new Households.SA();
-        }
-        sA.setRa01(DateUtils.getFormattedDateTime(households.getSysDate(),
-                AppConstants.APP_DATE_TIME_FORMAT, AppConstants.APP_DATE_FORMAT));
-        Households.SA.saveData(sA);*/
 
         mwra = new Mwra();
         MainApp.prevChildCount = 0;
@@ -219,7 +182,6 @@ public class FPMwraActivity extends AppCompatActivity {
 
         int newMwra = db.mwraDao().getMWRACountBYUUID(households.getUid(), "1");
         int maxMWRA = db.mwraDao().getMaxMWRSNoBYHH(selectedUC, selectedVillage, selectedHhNO);
-//        int maxFpMWRA = db.FollowUpsScheDao().getMaxMWRANoBYHHFromFolloupsSche(selectedUC, selectedVillage, selectedHhNO);
         int maxFpMWRA = db.FollowUpsScheDao().getMaxMWRANoBYHHFromFolloupsScheView(selectedUC, selectedVillage, selectedHhNO);
         mwraCount = Math.max(maxMWRA, maxFpMWRA);
 
@@ -239,7 +201,6 @@ public class FPMwraActivity extends AppCompatActivity {
             return;
         }
         int maxMWRA = db.mwraDao().getMaxMWRSNoBYHH(selectedUC, selectedVillage, selectedHhNO);
-//        int maxFpMWRA = db.FollowUpsScheDao().getMaxMWRANoBYHHFromFolloupsSche(selectedUC, selectedVillage, selectedHhNO);
         int maxFpMWRA = db.FollowUpsScheDao().getMaxMWRANoBYHHFromFolloupsScheView(selectedUC, selectedVillage, selectedHhNO);
         mwraCount = Math.max(maxMWRA, maxFpMWRA);
         MainApp.households.getSA().setRa18(String.valueOf(mwraCount));

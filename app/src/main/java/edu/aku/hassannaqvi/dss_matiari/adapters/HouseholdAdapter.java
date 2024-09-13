@@ -93,7 +93,6 @@ public class HouseholdAdapter extends RecyclerView.Adapter<HouseholdAdapter.View
         TextView secStatus = viewHolder.secStatus;
         ImageView imgStatus = viewHolder.imgStatus;
 
-
         String hhStatus = "";
         switch (households.getIStatus()) {
             case "1":
@@ -114,7 +113,6 @@ public class HouseholdAdapter extends RecyclerView.Adapter<HouseholdAdapter.View
         }
 
         DssRoomDatabase db = MainApp.appInfo.dbHelper;
-        //int totalMWRA = db.getMWRACountBYUUID(households.getUid());
         int totalMWRA = db.mwraDao().getMWRACountBYUUID(households.getUid(), "1");
 
         hhNo.setText(households.getVillageCode() + "-" + households.getHhNo());
@@ -124,10 +122,8 @@ public class HouseholdAdapter extends RecyclerView.Adapter<HouseholdAdapter.View
         imgStatus.setVisibility(households.getIStatus().equals("1") || Integer.parseInt(households.getVisitNo()) > 2 ? View.VISIBLE : View.GONE);
         secStatus.setBackgroundColor(ContextCompat.getColor(mContext, R.color.grayDark));
 
-
         viewHolder.itemView.setOnClickListener(v -> {
             // Get the current state of the item
-
             MainApp.households = MainApp.householdList.get(viewHolder.getLayoutPosition());
             if (!MainApp.households.getIStatus().equals("1") && Integer.parseInt(MainApp.households.getVisitNo()) < 3) {
                 editHousehold(viewHolder.getLayoutPosition());
@@ -167,7 +163,6 @@ public class HouseholdAdapter extends RecyclerView.Adapter<HouseholdAdapter.View
         private final TextView mwraCount;
         private final TextView secStatus;
         private final ImageView imgStatus;
-
 
         public ViewHolder(View v) {
             super(v);

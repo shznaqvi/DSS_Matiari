@@ -72,8 +72,6 @@ public class IdentificationActivity extends AppCompatActivity {
     }
 
     private void populateSpinner() {
-
-//        Collection<Villages> uc = db.getVillageUc();
         Collection<Villages> uc = db.VillagesDao().getVillageUc();
         ucNames = new ArrayList<>();
         ucCodes = new ArrayList<>();
@@ -101,13 +99,10 @@ public class IdentificationActivity extends AppCompatActivity {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
                 bi.ra07.setAdapter(null);
-                /*bi.ra10.setText(null);
-                bi.ra10.setEnabled(false);*/
                 bi.btnContinue.setBackgroundTintList(ContextCompat.getColorStateList(IdentificationActivity.this, R.color.gray));
                 bi.btnContinue.setEnabled(false);
 
                 if (position == 0) return;
-                //Collection<Villages> village = db.getVillageByUc(ucCodes.get(position));
                 Collection<Villages> village = db.VillagesDao().getVillageByUc(ucCodes.get(position));
                 villageNames = new ArrayList<>();
                 villageCodes = new ArrayList<>();
@@ -119,7 +114,6 @@ public class IdentificationActivity extends AppCompatActivity {
                     villageCodes.add(v.getVillagecode());
                 }
                 if (MainApp.user.getUsername().contains("test") || MainApp.user.getUsername().contains("dmu")) {
-
                     villageNames.add("Test Village 1 " + ucNames.get(position));
                     villageNames.add("Test Village 1 " + ucNames.get(position));
                     villageNames.add("Test Village 1 " + ucNames.get(position));
@@ -140,18 +134,11 @@ public class IdentificationActivity extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
-                //bi.ra10.setText(null);
                 if (position != 0) {
                     String vCode = villageCodes.get(bi.ra07.getSelectedItemPosition());
-
-                    //int maxHHno = db.getMaxStructure(selectedUC, vCode) + 1;
-                    //int maxHHno = db.householdsDao().getMaxStructure(selectedUC, vCode) +1;
-//                    bi.btnContinue.setBackgroundTintList(ContextCompat.getColorStateList(IdentificationActivity.this, R.color.colorAccent));
                     bi.btnContinue.setBackgroundTintList(ContextCompat.getColorStateList(IdentificationActivity.this, R.color.colorPrimary));
                     bi.btnContinue.setEnabled(true);
-                    //bi.ra10.setText(String.valueOf(maxHHno));
                     if (position == 0) return;
-                    //bi.ra10.setEnabled(true);
                 }
             }
 
@@ -165,7 +152,6 @@ public class IdentificationActivity extends AppCompatActivity {
         if (!formValidation()) return;
         MainApp.selectedUC = ucCodes.get(bi.ra06.getSelectedItemPosition());
         MainApp.selectedVillage = villageCodes.get(bi.ra07.getSelectedItemPosition());
-        //MainApp.selectedVillage = MainApp.selectedVillage.substring(1,4);
         finish();
         startActivity(openIntent);
     }

@@ -103,29 +103,26 @@ public class SectionFActivity extends AppCompatActivity {
             }
         });
 
-        bi.rc08.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(RadioGroup radioGroup, int i) {
-                boolean isMigratedOrRefused = false;
-                // Put status of Migrated or Refused in its HashMap
+        bi.rc08.setOnCheckedChangeListener((radioGroup, i) -> {
+            boolean isMigratedOrRefused = false;
+            // Put status of Migrated or Refused in its HashMap
 
-                if (bi.rc0802.isChecked() || bi.rc0803.isChecked()) {
+            if (bi.rc0802.isChecked() || bi.rc0803.isChecked()) {
+                for (String[] arr : allMwraMigrated.keySet()) {
+                    if (arr[0].equals(fpMwra.getMuid()) && arr[1].equals(fpMwra.getHdssid())) {
+                        isMigratedOrRefused = true;
+                        break;
+                    }
+                }
+                if (!isMigratedOrRefused) {
+                    allMwraMigrated.put(new String[]{fpMwra.getMuid(), fpMwra.getHdssid()}, false);
+                }
+            } else {
+                if (!allMwraMigrated.isEmpty()) {
                     for (String[] arr : allMwraMigrated.keySet()) {
                         if (arr[0].equals(fpMwra.getMuid()) && arr[1].equals(fpMwra.getHdssid())) {
-                            isMigratedOrRefused = true;
+                            allMwraMigrated.remove(arr);
                             break;
-                        }
-                    }
-                    if (!isMigratedOrRefused) {
-                        allMwraMigrated.put(new String[]{fpMwra.getMuid(), fpMwra.getHdssid()}, false);
-                    }
-                } else {
-                    if (!allMwraMigrated.isEmpty()) {
-                        for (String[] arr : allMwraMigrated.keySet()) {
-                            if (arr[0].equals(fpMwra.getMuid()) && arr[1].equals(fpMwra.getHdssid())) {
-                                allMwraMigrated.remove(arr);
-                                break;
-                            }
                         }
                     }
                 }
@@ -194,7 +191,6 @@ public class SectionFActivity extends AppCompatActivity {
 
         if (sE.getRc09().equals("1") && AppConstants.isEmpty(sE.getRc09a()))
             return Validator.emptyCustomTextBox(this, bi.rc09a, getString(R.string.image_not_taken));
-
         return true;
     }
 

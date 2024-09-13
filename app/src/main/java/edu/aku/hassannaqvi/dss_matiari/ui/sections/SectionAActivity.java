@@ -6,9 +6,6 @@ import static edu.aku.hassannaqvi.dss_matiari.core.MainApp.sharedPref;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.CompoundButton;
-import android.widget.CompoundButton.OnCheckedChangeListener;
-import android.widget.RadioGroup;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
@@ -65,27 +62,21 @@ public class SectionAActivity extends AppCompatActivity {
             bi.rb08check.setVisibility(View.GONE);
 
 
-        bi.ra15.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(RadioGroup group, int checkedId) {
-                if (bi.ra1501.isChecked()) {
-                    bi.ra17C2.setMinvalue(1);
-                    bi.ra17C2.setMaxvalue(20);
-                } else if (bi.ra1502.isChecked()) {
-                    bi.ra17C2.setMinvalue(0);
-                    bi.ra17C2.setMaxvalue(0);
-                }
+        bi.ra15.setOnCheckedChangeListener((group, checkedId) -> {
+            if (bi.ra1501.isChecked()) {
+                bi.ra17C2.setMinvalue(1);
+                bi.ra17C2.setMaxvalue(20);
+            } else if (bi.ra1502.isChecked()) {
+                bi.ra17C2.setMinvalue(0);
+                bi.ra17C2.setMaxvalue(0);
             }
         });
 
-        bi.rb08check.setOnCheckedChangeListener(new OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (isChecked) {
-                    bi.ra08.setText(MainApp.previousAddress);
-                } else {
-                    bi.ra08.setText("");
-                }
+        bi.rb08check.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            if (isChecked) {
+                bi.ra08.setText(MainApp.previousAddress);
+            } else {
+                bi.ra08.setText("");
             }
         });
     }

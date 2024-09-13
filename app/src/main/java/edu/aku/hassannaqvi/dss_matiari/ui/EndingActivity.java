@@ -59,8 +59,6 @@ public class EndingActivity extends AppCompatActivity {
         bi.istatusb.setEnabled(false);
         bi.istatusc.setEnabled(false);
         bi.istatusg.setEnabled(false);
-//        bi.istatusb.setEnabled(!complete);
-//        bi.istatusc.setEnabled(!complete);
         if (locked) {
             bi.istatusb.setEnabled(true);
         }
@@ -71,11 +69,8 @@ public class EndingActivity extends AppCompatActivity {
             bi.istatusa.setEnabled(true);
             bi.istatusg.setEnabled(true);
         }
-//        bi.istatusb.setEnabled(!complete);
-//        bi.istatusg.setEnabled(!complete);
         bi.istatuse.setEnabled(noWRA);
         bi.istatusd.setEnabled(true); // Always TRUE
-
 
         //visit date
         Calendar cal = Calendar.getInstance();
@@ -151,7 +146,6 @@ public class EndingActivity extends AppCompatActivity {
                 households.setIStatus96x(sA.getRa19cx());
                 break;
         }
-        // households.setEndTime(new SimpleDateFormat("dd-MM-yy HH:mm", Locale.ENGLISH).format(new Date().getTime()));
     }
 
 

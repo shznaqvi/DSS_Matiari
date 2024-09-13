@@ -554,6 +554,8 @@
     <string name="section_e" translatable="false">Section E</string>
     <string name="section_f" translatable="false">Section F</string>
     <string name="sectionm" translatable="false">Section M</string>
+    <string name="fup_locked" translatable="false">Follow-Up for this household has been locked</string>
+    <string name="hh_locked" translatable="false">This households has been locked. You cannot edit household for locked forms</string>
 
     <!--    <string name="rc09_info">DD/MM/YYYY</string>-->
     <!--    <string name="rc1001">ها </string>-->

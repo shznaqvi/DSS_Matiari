@@ -279,10 +279,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="match_parent"
                                 android:text="@string/Q_rc03" />
-
-
                         </LinearLayout>
-
 
                         <EditText
                             android:id="@+id/rc03"
@@ -296,9 +293,7 @@
                             android:text="@={outcome.rc03}"
                             android:textColor="@color/colorPrimary" />
 
-
                     </LinearLayout>
-
                 </androidx.cardview.widget.CardView>
 
                 <!-- rc04  -->

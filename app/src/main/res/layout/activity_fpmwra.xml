@@ -211,44 +211,6 @@
                     android:visibility="gone" />
 
             </LinearLayout>
-
-            <!--            <LinearLayout-->
-            <!--                android:id="@+id/navigation"-->
-            <!--                android:layout_width="match_parent"-->
-            <!--                android:layout_height="wrap_content"-->
-            <!--                android:layout_alignParentBottom="true"-->
-            <!--                android:layout_marginBottom="56dp"-->
-            <!--                android:background="@color/whiteOverlay"-->
-            <!--                android:elevation="10dp"-->
-            <!--                android:gravity="center"-->
-            <!--                android:orientation="horizontal"-->
-            <!--                app:elevation="50dp">-->
-
-            <!--                <androidx.appcompat.widget.AppCompatButton-->
-            <!--                    android:id="@+id/btn_End"-->
-            <!--                    android:layout_width="wrap_content"-->
-            <!--                    android:layout_height="wrap_content"-->
-            <!--                    android:layout_margin="12dp"-->
-            <!--                    android:backgroundTint="@color/colorAccent"-->
-            <!--                    android:onClick="BtnEnd"-->
-            <!--                    android:text="Cancel"-->
-            <!--                    android:textColor="@color/white" />-->
-
-            <!--                <androidx.appcompat.widget.AppCompatButton-->
-            <!--                    android:id="@+id/btn_Continue"-->
-            <!--                    android:layout_width="wrap_content"-->
-            <!--                    android:layout_height="wrap_content"-->
-            <!--                    android:layout_margin="12dp"-->
-            <!--                    android:backgroundTint="@color/green"-->
-            <!--                    android:onClick="btnContinue"-->
-            <!--                    android:text="Save"-->
-            <!--                    android:textColor="@color/white"-->
-            <!--                    android:visibility="visible" />-->
-
-            <!--            </LinearLayout>-->
         </RelativeLayout>
-
     </LinearLayout>
-
-
 </layout>

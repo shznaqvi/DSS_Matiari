@@ -76,14 +76,7 @@ public class HouseholdActivity extends AppCompatActivity {
         MainApp.householdList = new ArrayList<>();
 
         Log.d(TAG, "onCreate: householdlist " + MainApp.householdList.size());
-//        try {
-//            MainApp.householdList = db.getHouseholdBYVillage(selectedUC, MainApp.selectedVillage);
         MainApp.householdList = db.householdsDao().getHouseholdBYVillage(selectedUC, selectedVillage, "1");
-//        } catch (JSONException e) {
-//            e.printStackTrace();
-//            Toast.makeText(this, "JSONException: " + e.getMessage(), Toast.LENGTH_SHORT).show();
-//            Log.d(TAG, "onCreate (JSONException): " + e.getMessage());
-//        }
 
         hhAdapter = new HouseholdAdapter(this, MainApp.householdList);
         bi.rvHouseholds.setAdapter(hhAdapter);
@@ -135,8 +128,6 @@ public class HouseholdActivity extends AppCompatActivity {
 
         MainApp.selectedHhNO = households.getHhNo();
         Households.SA.saveData(sA);
-
-        //Households.saveMainData(households.getHdssId(), sA);
 
         // Launch activity for results.
         Intent intent = new Intent(this, SectionAActivity.class);

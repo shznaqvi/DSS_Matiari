@@ -66,56 +66,6 @@
                 app:tint="@color/white"
                 tools:ignore="ContentDescription,RelativeOverlap" />
 
-            <!--            <RelativeLayout-->
-            <!--                android:id="@+id/toolbarLayout"-->
-            <!--                android:layout_width="wrap_content"-->
-            <!--                android:layout_height="wrap_content">-->
-
-            <!--                <TextView-->
-            <!--                    android:id="@+id/fmHeading"-->
-            <!--                    android:layout_width="match_parent"-->
-            <!--                    android:layout_height="wrap_content"-->
-            <!--                    android:layout_gravity="center_horizontal"-->
-            <!--                    android:layout_marginStart="@dimen/_minus12sdp"-->
-            <!--                    android:layout_marginTop="@dimen/_minus1sdp"-->
-            <!--                    android:layout_marginEnd="@dimen/_minus12sdp"-->
-            <!--                    android:background="@drawable/capsule"-->
-            <!--                    android:backgroundTint="@color/colorPrimaryDark"-->
-            <!--                    android:gravity="center_horizontal"-->
-            <!--                    android:paddingTop="@dimen/_8sdp"-->
-            <!--                    android:paddingBottom="@dimen/_8sdp"-->
-            <!--                    android:shadowColor="@color/grayOverlay"-->
-            <!--                    android:text="Households Follow-ups"-->
-            <!--                    android:textColor="@color/white"-->
-            <!--                    android:textSize="@dimen/_13ssp"-->
-            <!--                    android:textStyle="bold" />-->
-
-            <!--                <com.google.android.material.floatingactionbutton.FloatingActionButton-->
-            <!--                    android:id="@+id/fab"-->
-            <!--                    android:layout_width="wrap_content"-->
-            <!--                    android:layout_height="wrap_content"-->
-            <!--                    android:layout_alignParentEnd="true"-->
-            <!--                    android:layout_gravity="center_vertical|center_horizontal"-->
-            <!--                    android:layout_marginTop="@dimen/_2sdp"-->
-            <!--                    android:layout_marginEnd="@dimen/_15sdp"-->
-            <!--                    android:backgroundTint="@color/green"-->
-            <!--                    android:elevation="6dp"-->
-            <!--                    android:src="@drawable/ic_home_add"-->
-            <!--                    app:backgroundTint="@color/white"-->
-            <!--                    app:borderWidth="1dp"-->
-            <!--                    app:elevation="6dp"-->
-            <!--                    app:fabCustomSize="@dimen/_26sdp"-->
-            <!--                    app:maxImageSize="@dimen/_15sdp"-->
-            <!--                    app:tint="@color/white"-->
-            <!--                    tools:ignore="ContentDescription,RelativeOverlap" />-->
-
-            <!--                <View-->
-            <!--                    android:layout_width="match_parent"-->
-            <!--                    android:layout_height="@dimen/_1sdp"-->
-            <!--                    android:layout_alignBottom="@+id/fmHeading"-->
-            <!--                    android:background="@color/grayLight" />-->
-            <!--            </RelativeLayout>-->
-
             <androidx.cardview.widget.CardView
                 android:id="@+id/searchLayout"
                 style="@style/cardView"
@@ -197,23 +147,6 @@
                         android:textAppearance="@style/TextAppearance.AppCompat.Widget.ActionBar.Subtitle"
                         android:visibility="gone"
                         tools:visibility="visible" />
-
-                    <!--                <View-->
-                    <!--                    android:layout_width="match_parent"-->
-                    <!--                    android:layout_height="2dp"-->
-                    <!--                    android:background="@color/grayLight"-->
-                    <!--                    android:padding="8dp" />-->
-
-                    <!--                <androidx.recyclerview.widget.RecyclerView-->
-                    <!--                    android:id="@+id/rvHouseholds"-->
-                    <!--                    android:layout_width="match_parent"-->
-                    <!--                    android:layout_height="match_parent"-->
-                    <!--                    android:layout_marginStart="110dp"-->
-                    <!--                    android:layout_marginEnd="110dp"-->
-                    <!--                    android:layout_marginBottom="56dp"-->
-                    <!--                    tools:listitem="@layout/household_row" />-->
-
-
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
 

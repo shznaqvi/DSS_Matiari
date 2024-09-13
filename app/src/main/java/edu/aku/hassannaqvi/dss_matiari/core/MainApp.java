@@ -128,11 +128,7 @@ public class MainApp extends Application {
     public static String selectedHhNO = "0000";
     public static String leaderCode;
     public static String selectedUC = "00";
-    //public static boolean updateFMClicked = false;
-    //public static Followups followups;
-    //public static OutcomeFollowups outcomeFollowups;
     public static Outcome outcome;
-    //public static FPHouseholds fpHouseholds;
     public static FollowUpsSche fpMwra;
     public static int totalOutcomes;
     public static int outcomeCounter = 0;
@@ -176,31 +172,21 @@ public class MainApp extends Application {
 
 
         timer = new CountDownTimer(15 * 60 * 1000, 1000) {
-            //timer = new CountDownTimer(30 * 1000, 1000) {
 
             public void onTick(long millisUntilFinished) {
-                //Some code
-                //bi.timeLeft.setText((millisUntilFinished / 1000) + " secs left");
                 if ((millisUntilFinished / 1000) < 14) {
                     toneGen1.startTone(ToneGenerator.TONE_CDMA_PIP, 150);
                 }
-
             }
 
             public void onFinish() {
-                //Logout
-                //
-                //   finish();
-                // lockScreen();
                 Intent intent = new Intent();
                 intent.setClass(c, LockActivity.class);
                 c.startActivity(intent);
                 timer.cancel();
-                //  startActivity(new Intent(((Activity) c).getLocalClassName(), LockActivity.class));
             }
         };
         timer.start();
-
     }
 
     public static String getDeviceId(Context context) {
@@ -209,15 +195,6 @@ public class MainApp extends Application {
             deviceId = Settings.Secure.getString(
                     context.getContentResolver(),
                     Settings.Secure.ANDROID_ID);
-        } else {
-           /* final TelephonyManager mTelephony = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
-            if (mTelephony.getDeviceId() != null) {
-                deviceId = mTelephony.getDeviceId();
-            } else {
-                deviceId = Settings.Secure.getString(
-                        context.getContentResolver(),
-                        Settings.Secure.ANDROID_ID);
-            }*/
         }
         return "deviceId";
     }
@@ -226,12 +203,6 @@ public class MainApp extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-
-/*        RootBeer rootBeer = new RootBeer(this);
-        if (rootBeer.isRooted()) {
-            android.os.Process.killProcess(android.os.Process.myPid());
-            System.exit(1);
-        }*/
 
         //Initiate DateTime
         //Initializ App info
@@ -244,11 +215,8 @@ public class MainApp extends Application {
         deviceid = Settings.Secure.getString(getContentResolver(), Settings.Secure.ANDROID_ID);
 
         AppConstants.DEVICE_ID = Settings.Secure.getString(getContentResolver(), Settings.Secure.ANDROID_ID);
-
         initSecure();
-
         toneGen1 = new ToneGenerator(AudioManager.STREAM_MUSIC, 100);
-
         SoLoader.init(this, false);
 
         if (BuildConfig.DEBUG && FlipperUtils.shouldEnableFlipper(this)) {
@@ -269,7 +237,6 @@ public class MainApp extends Application {
         } catch (PackageManager.NameNotFoundException e) {
             e.printStackTrace();
         }
-
         // Set gallery path in static variable on app start for later use
         AppConstants.GALLERY_DIR = ImageUtils.getGalleryDir(this);
     }
@@ -294,6 +261,4 @@ public class MainApp extends Application {
             e.printStackTrace();
         }
     }
-
-
 }

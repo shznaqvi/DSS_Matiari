@@ -46,11 +46,8 @@ public class FpMwraAdapter extends RecyclerView.Adapter<FpMwraAdapter.ViewHolder
         this.mContext = mContext;
         completeCount = 0;
         MainApp.fmComplete = false;
-
         db = MainApp.appInfo.dbHelper;
-
     }
-
 
     @Override
     public void onBindViewHolder(ViewHolder viewHolder, int positio) {
@@ -64,7 +61,6 @@ public class FpMwraAdapter extends RecyclerView.Adapter<FpMwraAdapter.ViewHolder
         ImageView indicator = viewHolder.indicator;
         TextView secStatus = viewHolder.secStatus;
         LinearLayout mStatus = viewHolder.mstatus;
-
         TextView secDob = viewHolder.secDob;
         TextView secGender = viewHolder.secGender;
         String pregStatus = "";
@@ -73,22 +69,6 @@ public class FpMwraAdapter extends RecyclerView.Adapter<FpMwraAdapter.ViewHolder
         if (!AppConstants.isEmpty(followUpsSche.getRb07())) {
             pregStatus = followUpsSche.getRb07().equals("1") ? "Pregnant" : "Not Pregnant";
         }
-
-        /*try {
-            //String curPregStatus = db.getFollowupsBySno(followUpsSche.getRb01(), followUpsSche.getFRound()).getRc07();
-            Mwra mwra = db.mwraDao().getFollowupsBySno(followUpsSche.getRb01(), followUpsSche.getFRound());
-            assert mwra != null;
-            mwra.getSB();
-                String curPregStatus = Objects.requireNonNull(db.mwraDao().getFollowupsBySno(followUpsSche.getRb01(), followUpsSche.getFRound())).getSC().getRb07();
-                if (!curPregStatus.equals("")) {
-                    pregStatus = curPregStatus.equals("1") ? "Pregnant" : " Not Pregnant ";
-                }
-
-        } catch (JSONException e) {
-            e.printStackTrace();
-            Toast.makeText(mContext, "JSONException(Followups): " + e.getMessage(), Toast.LENGTH_SHORT).show();
-        }
-*/
 
         // MWRA Count
         MainApp.fmComplete = completeCount == MainApp.mwraCount;
@@ -100,7 +80,6 @@ public class FpMwraAdapter extends RecyclerView.Adapter<FpMwraAdapter.ViewHolder
         if (followUpsSche.getRb01() != null) {
             if (followUpsSche.getMemberType().equals("1")) {
                 wifeOrDaughter = followUpsSche.getRb06().equals("4") ? " d/o " : " w/o ";
-
             } else {
                 wifeOrDaughter = " c/o ";
             }
@@ -116,17 +95,14 @@ public class FpMwraAdapter extends RecyclerView.Adapter<FpMwraAdapter.ViewHolder
                 case "2":
                     marStatus = "Divorced";
                     indicator.setBackgroundColor(ContextCompat.getColor(mContext, R.color.teal_700));
-
                     break;
                 case "3":
                     marStatus = "Widow";
                     indicator.setBackgroundColor(ContextCompat.getColor(mContext, R.color.teal_200));
-
                     break;
                 case "4":
                     marStatus = "Unmarried";
                     indicator.setBackgroundColor(ContextCompat.getColor(mContext, R.color.lightPink));
-
                     break;
                 default:
                     marStatus = "Value Unknown";
@@ -165,28 +141,19 @@ public class FpMwraAdapter extends RecyclerView.Adapter<FpMwraAdapter.ViewHolder
 
             if (!followUpsSche.getRb04().equals("")) {
                 long days = Mwra.CalculateAge(followUpsSche.getRb04());
-
                 long months = days / 30;
-
                 fAge.setText(months + "m");
             }
-
         }
-        fMaritalStatus.setText(wifeOrDaughter + followUpsSche.getRb03());
+        fMaritalStatus.setText(String.format("%s%s", wifeOrDaughter, followUpsSche.getRb03()));
         secStatus.setText(pregStatus);
         secDob.setText(followUpsSche.getRb04());
         secGender.setText(followUpsSche.getRc04().equals("2") ? " Female" : "male");
 
         viewHolder.itemView.setOnClickListener(v -> {
             // Get the current state of the item
-
-
             if (followUpsSche.getMemberType().equals("1")) {
                 MainApp.fpMwra = MainApp.followUpsScheMWRAList.get(viewHolder.getBindingAdapterPosition());
-                    /*Mwra.populateMetaFollowups();
-                    sc.populateMeta();
-                    Mwra.SC.saveData(sc);*/
-
                 Intent intent = new Intent(mContext, SectionCActivity.class);
                 intent.putExtra("position", viewHolder.getBindingAdapterPosition());
                 MainApp.selectedMember = viewHolder.getBindingAdapterPosition();
@@ -194,8 +161,6 @@ public class FpMwraAdapter extends RecyclerView.Adapter<FpMwraAdapter.ViewHolder
                 ((Activity) mContext).startActivityForResult(intent, 2);
             } else {
                 MainApp.fpMwra = MainApp.followUpsScheMWRAList.get(viewHolder.getBindingAdapterPosition());
-                //MainApp.outcome.populateMetaFollowups();
-
                 Intent intent = new Intent(mContext, SectionFActivity.class);
                 intent.putExtra("position", viewHolder.getBindingAdapterPosition());
                 MainApp.selectedMember = viewHolder.getBindingAdapterPosition();
@@ -207,7 +172,6 @@ public class FpMwraAdapter extends RecyclerView.Adapter<FpMwraAdapter.ViewHolder
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
-
         View v = LayoutInflater.from(viewGroup.getContext())
                 .inflate(R.layout.member_row, viewGroup, false);
         return new ViewHolder(v);
@@ -231,7 +195,6 @@ public class FpMwraAdapter extends RecyclerView.Adapter<FpMwraAdapter.ViewHolder
         private final ImageView fmRow;
         private final ImageView indicator;
         private final LinearLayout mstatus;
-
 
         public ViewHolder(View v) {
             super(v);

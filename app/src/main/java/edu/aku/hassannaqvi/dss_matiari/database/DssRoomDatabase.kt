@@ -153,14 +153,9 @@ abstract class DssRoomDatabase : RoomDatabase() {
                 database.execSQL("ALTER TABLE 'MWRAs' ADD COLUMN 'isError' INTEGER DEFAULT 0 NOT NULL")
                 database.execSQL("ALTER TABLE 'hhfuplist_view' ADD COLUMN 'reg_date' TEXT")
                 database.execSQL("ALTER TABLE 'outcomes' ADD COLUMN 'istatus' TEXT")
-                /*database.execSQL("ALTER TABLE 'users' ADD COLUMN 'passwordEnc' TEXT ")
-                database.execSQL("ALTER TABLE 'users' ADD COLUMN 'newUser' TEXT")
-                database.execSQL("ALTER TABLE 'users' ADD COLUMN 'fullname' TEXT")
-                database.execSQL("ALTER TABLE 'users' ADD COLUMN 'enabled' TEXT")*/
                 database.execSQL("DROP TABLE users")
                 database.execSQL("CREATE TABLE IF NOT EXISTS `users` (`_id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL DEFAULT 0, `username` TEXT DEFAULT '' NOT NULL, `password` TEXT NOT NULL, `passwordEnc` TEXT NOT NULL, `fullname` TEXT NOT NULL, `enabled` TEXT NOT NULL, `newUser` TEXT NOT NULL, `designation` TEXT NOT NULL)")
                 database.execSQL("CREATE TABLE IF NOT EXISTS `EntryLog` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `uid` TEXT, `projectName` TEXT, `uuid` TEXT, `userName` TEXT, `sysDate` TEXT, `entryDate` TEXT, `hhid` TEXT, `appver` TEXT, `iStatus` TEXT, `entryType` TEXT, `deviceId` TEXT, `synced` TEXT, `syncDate` TEXT, `isError` INTEGER NOT NULL DEFAULT 0)")
-
             }
         }
 

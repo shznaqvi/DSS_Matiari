@@ -78,19 +78,18 @@ interface HouseholdsDao {
         return household
     }
 
-    @Query("SELECT * FROM hhs WHERE hdssid LIKe :hdssid OR hdssid LIKE :newHDSSID ORDER BY _id DESC")
-    fun getHouseholdByHDSSIDDSC_internal(hdssid: String, newHDSSID: String): Households?
+    @Query("SELECT * FROM hhs WHERE round = :round AND (hdssid LIKe :hdssid OR hdssid LIKE :newHDSSID) ORDER BY _id DESC")
+    fun getHouseholdByHDSSIDDSC_internal(round: String, hdssid: String, newHDSSID: String): Households?
 
     @Throws(JSONException::class)
-    fun getHouseholdByHDSSIDDSC(hdssid: String, position: Int = 0): Households? {
+    fun getHouseholdByHDSSIDDSC(round: String, hdssid: String,position: Int = 0): Households? {
         // Household number in DSSID was changed to 4-digits to capture more than 999 households
         val hdssidSplit = hdssid.split("-").toTypedArray()
         val newHDSSID = hdssidSplit[0] + "-" + hdssidSplit[1] + "-" + String.format(
             "%04d",
             hdssidSplit[2].toInt()
         )
-
-        val household = getHouseholdByHDSSIDDSC_internal(hdssid, newHDSSID)
+        val household = getHouseholdByHDSSIDDSC_internal(round, hdssid, newHDSSID)
         if (household == null) {
             val tempHouseholds = Households()
             return tempHouseholds
@@ -100,14 +99,14 @@ interface HouseholdsDao {
     }
 
     @Throws(JSONException::class)
-    fun getSelectedHouseholdByHDSSID(hdssid: String, position: Int = 0): Households? {
+    fun getSelectedHouseholdByHDSSID(round: String, hdssid: String, position: Int = 0): Households? {
         // Household number in DSSID was changed to 4-digits to capture more than 999 households
         val hdssidSplit = hdssid.split("-").toTypedArray()
         val newHDSSID = hdssidSplit[0] + "-" + hdssidSplit[1] + "-" + String.format(
             "%04d",
             hdssidSplit[2].toInt()
         )
-        val household = getHouseholdByHDSSIDDSC_internal(hdssid, newHDSSID)
+        val household = getHouseholdByHDSSIDDSC_internal(round, hdssid, newHDSSID)
         if (household == null) {
             val tempHousehold = Households()
             tempHousehold.populateMeta(position)

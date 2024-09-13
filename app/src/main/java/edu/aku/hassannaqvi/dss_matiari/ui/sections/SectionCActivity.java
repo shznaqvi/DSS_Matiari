@@ -13,8 +13,6 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
-import android.widget.CompoundButton;
-import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -91,36 +89,17 @@ public class SectionCActivity extends AppCompatActivity {
         long daysdiff = Mwra.CalculateAge(DateUtils.getFormattedDateTime(
                 fpMwra.getRa01().getDate(), AppConstants.CUSTOM_SERVER_DATE_TIME_FORMAT, AppConstants.APP_DATE_FORMAT));
         long months, years;
-        /*if (!AppConstants.isEmpty(fpMwra.getAgeM())) {
-            int monthsInDays = Integer.parseInt(fpMwra.getAgeM()) * 30;
-            long cummulativeDays = monthsInDays + daysdiff;
-            months = cummulativeDays / 30;
-            years = months / 12;
-        } else {
-            int ageInYears = Integer.parseInt(fpMwra.getRb05());
-            int ageInMonths = ageInYears * 12;
-            int days = ageInMonths * 30;
-            long cummulativeDays = days + daysdiff;
-            months = cummulativeDays / 30;
-            years = months / 12;
-        }*/
+
         int ageMonths = !AppConstants.isEmpty(fpMwra.getAgeM()) ? Integer.parseInt(fpMwra.getAgeM()) * 30 : Integer.parseInt(fpMwra.getRb05()) * 12 * 30;
         long cumulativeDays = ageMonths + daysdiff;
         months = cumulativeDays / 30;
         years = months / 12;
 
-//        long years = daysdiff / 365;
         long actualAge = 0;
 
         actualAge = years;
         bi.rb05.setText(String.valueOf(actualAge));
         mwra.setAgeM(Long.toString(months));
-
-
-       /* if (!fpMwra.getRb05().equals("")) {
-            actualAge = Long.parseLong(fpMwra.getRb05()) + years;
-            bi.rb05.setText(String.valueOf(actualAge));
-        }*/
 
         // Enable Overage option in VISIT status according to woman age
         if (actualAge < 50) {
@@ -165,74 +144,65 @@ public class SectionCActivity extends AppCompatActivity {
         bi.rb01a.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
             }
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
             }
 
             @Override
             public void afterTextChanged(Editable editable) {
                 setDateRanges();
-
             }
         });
 
-        bi.rb10.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(RadioGroup radioGroup, int i) {
-                boolean isAvailable = false;
-                boolean isMigratedOrRefused = false;
-                if (bi.rb1004.isChecked()) {
+        bi.rb10.setOnCheckedChangeListener((radioGroup, i) -> {
+            boolean isAvailable = false;
+            boolean isMigratedOrRefused = false;
+            if (bi.rb1004.isChecked()) {
+                for (String[] arr : mwraStatus.keySet()) {
+                    if (arr[0].equals(fpMwra.getMuid()) && arr[1].equals(fpMwra.getHdssid())) {
+                        isAvailable = true;
+                        break;
+                    }
+                }
+                if (!isAvailable) {
+                    mwraStatus.put(new String[]{fpMwra.getMuid(), fpMwra.getHdssid()}, false);
+                }
+                sC.setRb06(fpMwra.getRb06());
+                sC.setRb04(fpMwra.getRb04());
+            } else {
+                sC.setRb06(sC.getRb06());
+                sC.setRb04(fpMwra.getRb04());
+                if (!mwraStatus.isEmpty()) {
                     for (String[] arr : mwraStatus.keySet()) {
                         if (arr[0].equals(fpMwra.getMuid()) && arr[1].equals(fpMwra.getHdssid())) {
-                            isAvailable = true;
+                            mwraStatus.remove(arr);
                             break;
-                        }
-                    }
-                    if (!isAvailable) {
-                        mwraStatus.put(new String[]{fpMwra.getMuid(), fpMwra.getHdssid()}, false);
-                    }
-                    //sC.setRb07(fpMwra.getRb07());
-                    sC.setRb06(fpMwra.getRb06());
-                    sC.setRb04(fpMwra.getRb04());
-                } else {
-                    //sC.setRb07("");
-                    sC.setRb06(sC.getRb06());
-                    sC.setRb04(fpMwra.getRb04());
-                    if (!mwraStatus.isEmpty()) {
-                        for (String[] arr : mwraStatus.keySet()) {
-                            if (arr[0].equals(fpMwra.getMuid()) && arr[1].equals(fpMwra.getHdssid())) {
-                                mwraStatus.remove(arr);
-                                break;
-                            }
                         }
                     }
                 }
+            }
 
-                // Put status of Migrated or Refused in its HashMap
-                if (bi.rb1002.isChecked() || bi.rb1003.isChecked()) {
+            // Put status of Migrated or Refused in its HashMap
+            if (bi.rb1002.isChecked() || bi.rb1003.isChecked()) {
+                for (String[] arr : allMwraMigrated.keySet()) {
+                    if (arr[0].equals(fpMwra.getMuid()) && arr[1].equals(fpMwra.getHdssid())) {
+                        isMigratedOrRefused = true;
+                        break;
+                    }
+                }
+                if (!isMigratedOrRefused) {
+                    allMwraMigrated.put(new String[]{fpMwra.getMuid(), fpMwra.getHdssid()}, false);
+                }
+            } else {
+                sC.setRb06(sC.getRb06());
+                sC.setRb04(fpMwra.getRb04());
+                if (!allMwraMigrated.isEmpty()) {
                     for (String[] arr : allMwraMigrated.keySet()) {
                         if (arr[0].equals(fpMwra.getMuid()) && arr[1].equals(fpMwra.getHdssid())) {
-                            isMigratedOrRefused = true;
+                            allMwraMigrated.remove(arr);
                             break;
-                        }
-                    }
-                    if (!isMigratedOrRefused) {
-                        allMwraMigrated.put(new String[]{fpMwra.getMuid(), fpMwra.getHdssid()}, false);
-                    }
-                } else {
-//                    sC.setRb07("");
-                    sC.setRb06(sC.getRb06());
-                    sC.setRb04(fpMwra.getRb04());
-                    if (!allMwraMigrated.isEmpty()) {
-                        for (String[] arr : allMwraMigrated.keySet()) {
-                            if (arr[0].equals(fpMwra.getMuid()) && arr[1].equals(fpMwra.getHdssid())) {
-                                allMwraMigrated.remove(arr);
-                                break;
-                            }
                         }
                     }
                 }
@@ -260,20 +230,17 @@ public class SectionCActivity extends AppCompatActivity {
             }
         });
 
-        bi.rb1605.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (isChecked) {
-                    bi.rb1701.setEnabled(false);
-                    bi.rb1701.setChecked(false);
-                    bi.rb1703.setEnabled(false);
-                    bi.rb1703.setChecked(false);
-                    bi.rb1702.setEnabled(true);
-                } else {
-                    bi.rb1701.setEnabled(true);
-                    bi.rb1703.setEnabled(true);
-                    bi.rb1702.setEnabled(true);
-                }
+        bi.rb1605.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            if (isChecked) {
+                bi.rb1701.setEnabled(false);
+                bi.rb1701.setChecked(false);
+                bi.rb1703.setEnabled(false);
+                bi.rb1703.setChecked(false);
+                bi.rb1702.setEnabled(true);
+            } else {
+                bi.rb1701.setEnabled(true);
+                bi.rb1703.setEnabled(true);
+                bi.rb1702.setEnabled(true);
             }
         });
 
@@ -283,7 +250,6 @@ public class SectionCActivity extends AppCompatActivity {
             bi.rb1901.setEnabled(true);
             bi.rb1902.setEnabled(true);
             bi.rb1903.setEnabled(true);
-            //bi.rb1902.setChecked(false);
             sC.setRb19("");
             bi.rb20.setMaxvalue(41);
             bi.rb20.setMinvalue(28);
@@ -295,7 +261,6 @@ public class SectionCActivity extends AppCompatActivity {
                 bi.rb1903.setChecked(false);
                 bi.rb1902.setEnabled(true);
                 sC.setRb19("2");
-//                bi.rb1902.setChecked(true);
             } else if (checkedId == bi.rb2603.getId()) {
                 bi.rb20.setMaxvalue(27);
                 bi.rb20.setMinvalue(3);
@@ -313,16 +278,12 @@ public class SectionCActivity extends AppCompatActivity {
 
             // Set time from RC01a
             Calendar cal = Calendar.getInstance();
-
             Calendar cal2 = Calendar.getInstance();
-
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
-
             cal.setTime(Objects.requireNonNull(sdf.parse(sC.getRb01a())));// all done
 
             //cal2.setTime(sdf.parse(fpMwra.getRa01().substring(9, 19)));
             cal2.setTime(Objects.requireNonNull(sdf.parse(fpMwra.getRa01().getDate())));
-
             sdf = new SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH);
 
             // Set MinEDD to 9 months from DOV
@@ -335,10 +296,8 @@ public class SectionCActivity extends AppCompatActivity {
             cal.add(Calendar.MONTH, -3);
             String DD = sdf.format(cal2.getTime());
 
-
             bi.rb15.setMinDate(minEDD);
             bi.rb21.setMinDate(DD);
-
         } catch (ParseException e) {
             e.printStackTrace();
         }
@@ -350,18 +309,9 @@ public class SectionCActivity extends AppCompatActivity {
         mwra.setSNo(sC.getRb01());
         mwra.setIstatus(sC.getRb10());
         if (!mwra.getUid().contains("_")) {
-            //mwra.setPregnum("0");
-            /*if (sC.getRb07().equals("1")) {*/
-
-            /*if (fpMwra.getRb07().equals("1")) {
-                mwra.setPregnum(String.valueOf(Integer.parseInt(mwra.getPregnum()) + 1));
-            }*/
-
             if (sC.getRb18().equals("1")) {
                 mwra.setPregnum(String.valueOf(Integer.parseInt(mwra.getPregnum()) + 1));
             }
-
-            /*if (sC.getRb07().equals("2") && sC.getRb18().equals("2")) {*/
             if (!AppConstants.isEmpty(fpMwra.getRb07()) && fpMwra.getRb07().equals("2") && sC.getRb18().equals("2")) {
                 mwra.setPregnum(!AppConstants.isEmpty(fpMwra.getPregCount()) ? fpMwra.getPregCount() : "0");
             }
@@ -381,13 +331,9 @@ public class SectionCActivity extends AppCompatActivity {
             }
             Mwra.SD.saveData(sD);
         }
-
         Mwra.SC.saveData(sC);
-//        if (sD != null)
-//            Mwra.SD.saveData(sD);
 
         if (bi.rb1001.isChecked()) {
-
             switch (fpMwra.getRb06()) {
                 // Married in Previous Round
                 case "1":
@@ -422,10 +368,6 @@ public class SectionCActivity extends AppCompatActivity {
                         } else {
                             MainApp.prevChildCount = 0;
                         }
-                        /*Intent forwardIntent = new Intent(this, SectionEActivity.class).putExtra("complete", true);
-                        forwardIntent.setFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT);
-                        setResult(RESULT_OK, forwardIntent);
-                        startActivity(forwardIntent);*/
                         if (bi.rb2601.isChecked() || bi.rb2605.isChecked()) {
                             Intent forwardIntent = new Intent(this, SectionEActivity.class).putExtra("complete", true);
                             forwardIntent.setFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT);
@@ -474,10 +416,6 @@ public class SectionCActivity extends AppCompatActivity {
                             } else {
                                 MainApp.prevChildCount = 0;
                             }
-                            /*Intent forwardIntent = new Intent(this, SectionEActivity.class).putExtra("complete", true);
-                            forwardIntent.setFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT);
-                            setResult(RESULT_OK, forwardIntent);
-                            startActivity(forwardIntent);*/
                             if (bi.rb2601.isChecked() || bi.rb2605.isChecked()) {
                                 Intent forwardIntent = new Intent(this, SectionEActivity.class).putExtra("complete", true);
                                 forwardIntent.setFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT);
@@ -525,11 +463,6 @@ public class SectionCActivity extends AppCompatActivity {
                         }
                     } else {      // Not Pregnant
                         // Marital status changed
-                        /*
-                         * rb0601 = Marital Status is Married
-                         * rb1802 = Have you been pregnant in the past three months? is No
-                         * rb0701 = Pregnancy Status is Pregnant
-                         * */
                         if (bi.rb0601.isChecked() || bi.rb1802.isChecked() && !fpMwra.getRb07().equals("2")) {
                             Intent forwardIntent = new Intent(this, SectionDActivity.class).putExtra("complete", true);
                             forwardIntent.setFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT);
@@ -542,10 +475,6 @@ public class SectionCActivity extends AppCompatActivity {
                             } else {
                                 MainApp.prevChildCount = 0;
                             }
-                            /*Intent forwardIntent = new Intent(this, SectionEActivity.class).putExtra("complete", true);
-                            forwardIntent.setFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT);
-                            setResult(RESULT_OK, forwardIntent);
-                            startActivity(forwardIntent);*/
                             if (bi.rb2601.isChecked() || bi.rb2605.isChecked()) {
                                 Intent forwardIntent = new Intent(this, SectionEActivity.class).putExtra("complete", true);
                                 forwardIntent.setFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT);
@@ -578,11 +507,6 @@ public class SectionCActivity extends AppCompatActivity {
                                 } else {
                                     MainApp.prevChildCount = 0;
                                 }
-                                /*Intent forwardIntent = new Intent(this, SectionEActivity.class).putExtra("complete", true);
-                                forwardIntent.setFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT);
-                                setResult(RESULT_OK, forwardIntent);
-                                startActivity(forwardIntent);
-                                finish();*/
                                 if (bi.rb2601.isChecked() || bi.rb2605.isChecked()) {
                                     Intent forwardIntent = new Intent(this, SectionEActivity.class).putExtra("complete", true);
                                     forwardIntent.setFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT);
@@ -649,7 +573,6 @@ public class SectionCActivity extends AppCompatActivity {
                             forwardIntent.setFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT);
                             setResult(RESULT_OK, forwardIntent);
                             startActivity(forwardIntent);
-//                            finish();
                         }
                     }
                     // if still unmarried
@@ -673,9 +596,7 @@ public class SectionCActivity extends AppCompatActivity {
     private boolean formValidation() {
         if (!Validator.emptyCheckingContainer(this, bi.GrpName))
             return false;
-
         setDateRanges();
-
         return true;
     }
 

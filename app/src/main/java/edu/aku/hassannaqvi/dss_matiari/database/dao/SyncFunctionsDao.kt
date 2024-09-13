@@ -169,7 +169,7 @@ interface SyncFunctionsDao {
     fun insertFollowupsSche(followUpsSche: FollowUpsSche): Long
 
 
-    @Query("DELETE FROM " + TableContracts.TableFollowUpsSche.TABLE_NAME)
+    @Query("DELETE FROM " + FollowUpsSche.TABLE_NAME)
     fun deleteFollowupsScheTable()
 
     // Sync Max Household

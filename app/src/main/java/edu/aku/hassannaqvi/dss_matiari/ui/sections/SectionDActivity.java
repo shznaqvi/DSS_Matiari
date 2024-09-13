@@ -148,7 +148,6 @@ public class SectionDActivity extends AppCompatActivity {
         if (!formValidation()) return;
 
         if (!mwra.getUid().contains("_")) {
-            /*if (mwra.getSC().getRb07().equals("1")) {*/
             if (sD.getRb07().equals("1")) {
                 mwra.setPregnum(String.valueOf(Integer.parseInt(mwra.getPregnum()) + 1));
             }

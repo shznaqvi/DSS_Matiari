@@ -263,11 +263,9 @@ public class LoginActivity extends AppCompatActivity {
         //TODO implement
         if (bi.password.getTransformationMethod() == null) {
             bi.password.setTransformationMethod(new PasswordTransformationMethod());
-//            bi.password.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_lock_close, 0, 0, 0);
             bi.showPassword.setBackground(ContextCompat.getDrawable(this, R.drawable.ic_locked));
         } else {
             bi.password.setTransformationMethod(null);
-//            bi.password.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_lock_open, 0, 0, 0);
             bi.showPassword.setBackground(ContextCompat.getDrawable(this, R.drawable.ic_unlocked));
         }
     }
@@ -279,7 +277,6 @@ public class LoginActivity extends AppCompatActivity {
                 getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
         if (networkInfo != null && networkInfo.isConnected()) {
-//            startActivity(new Intent(this, edu.aku.hassannaqvi.dss_matiari.ui.SyncActivity.class).putExtra("login", true));
             // IS_LOGIN = To differentiate before and after login download
             // For before login sync data download
             AppConstants.IS_LOGIN = false;
@@ -297,8 +294,6 @@ public class LoginActivity extends AppCompatActivity {
         // Reset errors.
         bi.username.setError(null);
         bi.password.setError(null);
-        //bi.as1q01.setError(null);
-        // Toast.makeText(this, String.valueOf(attemptCounter), Toast.LENGTH_SHORT).show();
         if (attemptCounter > 5) {
             bi.username.setError("This user has been blocked.");
             Toast.makeText(this, "This user has been blocked.", Toast.LENGTH_LONG).show();
@@ -339,7 +334,6 @@ public class LoginActivity extends AppCompatActivity {
                 ) {
                     MainApp.user.setUsername(username);
                     MainApp.admin = username.contains("@") || username.contains("test1234");
-                    //MainApp.superuser = MainApp.user.getDesignation().equals("Supervisor");
                     Intent iLogin = null;
                     if (MainApp.admin) {
                         recordEntry("Successful Login (Admin)");
@@ -352,8 +346,6 @@ public class LoginActivity extends AppCompatActivity {
                             startActivity(iLogin);
                         } else if (MainApp.user.getNewUser().equals("1")) {
                             recordEntry("First Login");
-//                            iLogin = new Intent(LoginActivity.this, ChangePasswordActivity.class);
-//                            startActivity(iLogin);
                             AppConstants.gotoActivity(this, ChangePassNewAC.class, false);
                         }
                     } else {
@@ -362,13 +354,10 @@ public class LoginActivity extends AppCompatActivity {
                     }
                 } else {
                     recordEntry("Failed Login: Incorrect username or password");
-                    /*bi.password.setError(getString(R.string.incorrect_username_or_password));
-                    bi.password.requestFocus();*/
                     AlertPopup.alert(this, getString(R.string.login_failed),
                             String.format(getString(R.string.attempt_no),
                                     ++attemptCounter, getString(R.string.incorrect_username_or_password)),
                             AppConstants.TYPE_ERROR);
-                    //  Toast.makeText(LoginActivity.this, username + " " + password, Toast.LENGTH_SHORT).show();
                 }
 
             } catch (IllegalArgumentException e) {

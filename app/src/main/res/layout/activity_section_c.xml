@@ -308,7 +308,7 @@
                 <androidx.cardview.widget.CardView
                     android:id="@+id/fldGrpCVrb03"
                     style="@style/cardView">
-                    <!--android:visibility='@{followups.rc06.equals("4")? View.GONE : View.VISIBLE}'-->
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -362,7 +362,7 @@
                 <androidx.cardview.widget.CardView
                     android:id="@+id/fldGrpCVrb23"
                     style="@style/cardView">
-                    <!--android:visibility='@{mwra.Rb06.equals("4")? View.GONE : View.VISIBLE}'-->
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -463,7 +463,7 @@
                 <androidx.cardview.widget.CardView
                     android:id="@+id/fldGrpCVrb03a"
                     style="@style/cardView">
-                    <!--android:visibility='@{followups.rc06.equals("4")? View.GONE : View.VISIBLE}'-->
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -1135,8 +1135,6 @@
                                                     android:layout_width="wrap_content"
                                                     android:layout_height="match_parent"
                                                     android:text="@string/Q_rb16" />
-
-
                                             </LinearLayout>
 
                                             <RadioGroup
@@ -1184,8 +1182,6 @@
                                                     android:checked='@{followups.rb16.equals("5")}'
                                                     android:onClick='@{()->followups.setRb16("5")}'
                                                     android:text="@string/rb1605" />
-
-
                                             </RadioGroup>
                                         </LinearLayout>
                                     </androidx.cardview.widget.CardView>
@@ -1402,11 +1398,8 @@
 
                                             </LinearLayout>
                                         </androidx.cardview.widget.CardView>
-
                                     </LinearLayout>
-
                                 </LinearLayout>
-
                             </LinearLayout>
 
                             <LinearLayout
@@ -1544,8 +1537,6 @@
                                                 android:checked='@{followups.rb26.equals("5")}'
                                                 android:onClick='@{()->followups.setRb26("5")}'
                                                 android:text="@string/rb2605" />
-
-
                                         </RadioGroup>
                                     </LinearLayout>
                                 </androidx.cardview.widget.CardView>
@@ -1580,8 +1571,6 @@
                                                 android:layout_width="wrap_content"
                                                 android:layout_height="match_parent"
                                                 android:text="@string/Q_rb19" />
-
-
                                         </LinearLayout>
 
                                         <RadioGroup
@@ -1701,7 +1690,6 @@
                                                 android:layout_width="wrap_content"
                                                 android:layout_height="match_parent"
                                                 android:text="@string/Q_rb21" />
-
                                         </LinearLayout>
 
                                         <io.blackbox_vision.datetimepickeredittext.view.DatePickerEditText
@@ -1716,7 +1704,6 @@
                                             app:dateFormat="yyyy-MM-dd"
                                             app:maxDate="CR_DATE"
                                             app:theme="@style/MaterialCalendarTheme" />
-
                                     </LinearLayout>
                                 </androidx.cardview.widget.CardView>
 
@@ -1835,10 +1822,7 @@
                         android:textColor="@color/white"
                         android:textSize="@dimen/_9ssp"
                         android:textStyle="bold" />
-
                 </LinearLayout>
-
-
             </LinearLayout>
         </ScrollView>
     </LinearLayout>

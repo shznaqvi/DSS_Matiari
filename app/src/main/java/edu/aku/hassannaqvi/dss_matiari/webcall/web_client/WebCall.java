@@ -112,11 +112,11 @@ public class WebCall {
                         return response.getMessage();
                 }
             } catch (Exception e) {
-                return /*activity.getString(R.string.somethings_not_right);*/rawResponse;
+                return rawResponse;
             }
         } else
             // Response is NOT a success
-            return /*activity.getString(R.string.somethings_not_right);*/rawResponse;
+            return rawResponse;
         // Response is a success
         return null;
     }

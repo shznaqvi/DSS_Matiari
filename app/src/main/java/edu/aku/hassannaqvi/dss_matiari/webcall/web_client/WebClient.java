@@ -38,9 +38,6 @@ public class WebClient {
         loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
 
         OkHttpClient.Builder httpBuilder = new OkHttpClient.Builder();
-        /*// For SSL
-        httpBuilder.sslSocketFactory(Objects.requireNonNull(CryptoUtil.getSSLContext(activity)).getSocketFactory(),
-                CryptoUtil.getX509TrustManager());*/
 
         // For certificate pinning
         CertificatePinner certificatePinner = new CertificatePinner.Builder()
@@ -64,7 +61,6 @@ public class WebClient {
                 .client(okHttpClient)
                 .baseUrl(BASE_URL)
                 .addConverterFactory(ScalarsConverterFactory.create())
-//                .addConverterFactory(GsonConverterFactory.create())
                 .build();
         webAPI = retrofit.create(WebAPI.class);
     }

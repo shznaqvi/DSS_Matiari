@@ -59,14 +59,6 @@ public class FormsAdapter extends RecyclerView.Adapter<FormsAdapter.ViewHolder> 
         // - get element from your dataset at this position
         // - replace the contents of the view with that element
 
-/*        int childCount = 0;
-        childCount = db.getChildrenByUUID(fc.get(position).get_UID());
-        int photoChild = 0;
-        photoChild = db.getChildrenPhotoCheck(fc.get(position).get_UID());
-        int cardChild = 0;
-        cardChild = db.getChildrenCardCheck(fc.get(position).get_UID());*/
-
-
         String iStatus = "Status  Unknown";
         int iColor = 0;
         switch (fc.get(holder.getAdapterPosition()).getIStatus()) {
@@ -95,22 +87,8 @@ public class FormsAdapter extends RecyclerView.Adapter<FormsAdapter.ViewHolder> 
                 iStatus = "Open Households";
                 iColor = Color.RED;
                 break;
-
         }
 
-        /*
-                TableContracts.HouseholdTable.COLUMN_ID,
-                TableContracts.HouseholdTable.COLUMN_UID,
-                TableContracts.HouseholdTable.COLUMN_SYSDATE,
-                TableContracts.HouseholdTable.COLUMN_USERNAME,
-                TableContracts.HouseholdTable.COLUMN_ISTATUS,
-                TableContracts.HouseholdTable.COLUMN_SYNCED,
-                TableContracts.HouseholdTable.COLUMN_VISIT_NO,
-                TableContracts.HouseholdTable.COLUMN_SNO,
-                TableContracts.HouseholdTable.COLUMN_VILLAGE_CODE,
-                TableContracts.HouseholdTable.COLUMN_UC_CODE,
-                TableContracts.HouseholdTable.COLUMN_HOUSEHOLD_NO,
-*/
         String cluster = fc.get(holder.getAdapterPosition()).getUcCode() + "-" + fc.get(holder.getAdapterPosition()).getVillageCode() + "-" + fc.get(holder.getAdapterPosition()).getStructureNo() + "-" + fc.get(holder.getAdapterPosition()).getHhNo();
 
         holder.sysdate.setText(fc.get(holder.getAdapterPosition()).getSysDate());
@@ -128,17 +106,12 @@ public class FormsAdapter extends RecyclerView.Adapter<FormsAdapter.ViewHolder> 
             // Get the current state of the item
 
             try {
-                //MainApp.households = db.getHouseholdByUID(MainApp.householdList.get(holder.getAdapterPosition()).getUid());
-
                 MainApp.households = db.householdsDao().getHouseholdByUID(MainApp.householdList.get(holder.getAbsoluteAdapterPosition()).getUid());
 
-                //MainApp.households.setVisitNo(String.valueOf(Integer.parseInt(MainApp.households.getVisitNo())+1));
                 if (!MainApp.households.getIStatus().equals("1") && Integer.parseInt(MainApp.households.getVisitNo()) < 3) {
-
                     editHousehold(holder.getAdapterPosition());
-
                 } else {
-                    Toast.makeText(c, "This households has been locked. You cannot edit household for locked forms", Toast.LENGTH_LONG).show();
+                    Toast.makeText(c, R.string.hh_locked, Toast.LENGTH_LONG).show();
                 }
             } catch (JSONException e) {
                 e.printStackTrace();
@@ -146,7 +119,6 @@ public class FormsAdapter extends RecyclerView.Adapter<FormsAdapter.ViewHolder> 
             }
         });
     }
-
 
     // Return the size of your dataset (invoked by the layout manager)
     @Override
@@ -158,9 +130,7 @@ public class FormsAdapter extends RecyclerView.Adapter<FormsAdapter.ViewHolder> 
         Intent intent = new Intent(c, SectionAActivity.class);
         intent.putExtra("position", position);
         MainApp.selectedHousehold = position;
-        // MainApp.households = MainApp.householdList.get(MainApp.selectedHousehold);
         intent.putExtra("position", position);
-
         ((Activity) c).startActivityForResult(intent, 2);
     }
 
@@ -178,13 +148,11 @@ public class FormsAdapter extends RecyclerView.Adapter<FormsAdapter.ViewHolder> 
 
         public ViewHolder(View v) {
             super(v);
-//            rv = v.findViewById(R.id.FormsList);
             sysdate = v.findViewById(R.id.sysdate);
             cluster = v.findViewById(R.id.cluster);
             hhno = v.findViewById(R.id.hhno);
             istatus = v.findViewById(R.id.istatus);
             fathername = v.findViewById(R.id.fathername);
-
         }
     }
 }

@@ -83,48 +83,6 @@ public class CryptoUtil {
                 AppConstants.TRATS + 32);
     }
 
-    /* WEB CALL CIPHERING - END */
-
-    /* WEB CALL SSL/TLS VERIFICATION - START */
-
-   /* public static SSLContext getSSLContext(Activity activity) {
-        SSLContext sslContext = null;
-        try {
-            sslContext = createCertificate(activity);
-        } catch (CertificateException | IOException | KeyStoreException | KeyManagementException | NoSuchAlgorithmException e) {
-            e.printStackTrace();
-        }
-        return sslContext;
-    }
-
-    private static SSLContext createCertificate(Activity activity)
-            throws CertificateException, IOException, KeyStoreException, KeyManagementException, NoSuchAlgorithmException {
-
-        Certificate ca = getValidCertificate(activity);
-
-        // creating a KeyStore containing our trusted CAs
-        String keyStoreType = KeyStore.getDefaultType();
-        KeyStore keyStore = KeyStore.getInstance(keyStoreType);
-        keyStore.load(null, null);
-        keyStore.setCertificateEntry("ca", ca);
-
-        // creating a TrustManager that trusts the CAs in our KeyStore
-        String tmfAlgorithm = TrustManagerFactory.getDefaultAlgorithm();
-        TrustManagerFactory tmf = TrustManagerFactory.getInstance(tmfAlgorithm);
-        tmf.init(keyStore);
-
-        // creating an SSLSocketFactory that uses our TrustManager
-        SSLContext sslContext = SSLContext.getInstance("TLSv1.2");
-        sslContext.init(null, tmf.getTrustManagers(), null);
-        x509 = (X509TrustManager) tmf.getTrustManagers()[0];
-
-        return sslContext;
-    }
-
-    public static X509TrustManager getX509TrustManager() {
-        return x509;
-    }*/
-
     // Get valid certificate from assets folder
     public static Certificate getValidCertificate(Activity activity) {
         try {
@@ -166,7 +124,4 @@ public class CryptoUtil {
         }
         return false;
     }
-
-    /* WEB CALL SSL/TLS VERIFICATION - END */
-
 }

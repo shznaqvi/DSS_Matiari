@@ -44,7 +44,6 @@ public class MainActivity extends AppCompatActivity {
         bi.setCallback(this);
         setSupportActionBar(bi.toolbar);
         getSupportActionBar().setDisplayUseLogoEnabled(true);
-        //getSupportActionBar().setIcon(R.drawable.app_icon);
         bi.adminView.setVisibility(MainApp.admin ? View.VISIBLE : View.GONE);
         bi.username.setText("Welcome, " + MainApp.user.getFullname() + (MainApp.admin ? " (Admin)" : "") + "!");
     }
@@ -67,7 +66,6 @@ public class MainActivity extends AppCompatActivity {
                 MainApp.idType = 2;
                 break;
         }
-
 
         switch (view.getId()) {
 
@@ -92,7 +90,6 @@ public class MainActivity extends AppCompatActivity {
                 break;
             case R.id.dbm:
                 RoomExplorer.show(this, DssRoomDatabase.class, DssRoomDatabase.DATABASE_NAME);
-//                startActivity(new Intent(this, AndroidManager.class));
                 break;
             default:
                 MainApp.idType = 0;

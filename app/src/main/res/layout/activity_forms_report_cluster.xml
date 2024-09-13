@@ -58,30 +58,6 @@
 
                     android:textStyle="normal" />
             </LinearLayout>
-
-            <!--            <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_margin="12dp"
-                            android:orientation="horizontal">
-
-                            <EditText
-                                android:id="@+id/dtFilter"
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_marginEnd="0dp"
-                                android:layout_weight="1"
-                                android:inputType="number"
-                                android:maxLength="9" />
-
-                            <Button
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginStart="0dp"
-                                android:drawableStart="@drawable/search"
-                                android:onClick="filterForms"
-                                android:text="Search" />
-                        </LinearLayout>-->
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 

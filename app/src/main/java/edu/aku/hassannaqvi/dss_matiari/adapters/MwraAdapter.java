@@ -34,7 +34,6 @@ public class MwraAdapter extends RecyclerView.Adapter<MwraAdapter.ViewHolder> {
      * @param mwras List<FemaleMembersModel> containing the data to populate views to be used by RecyclerView.
      */
     public MwraAdapter(Context mContext, List<Mwra> mwras) {
-
         this.mwras = mwras;
         this.mContext = mContext;
         completeCount = 0;
@@ -120,10 +119,8 @@ public class MwraAdapter extends RecyclerView.Adapter<MwraAdapter.ViewHolder> {
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
-
         View v = LayoutInflater.from(viewGroup.getContext())
                 .inflate(R.layout.member_row, viewGroup, false);
-
         return new ViewHolder(v);
     }
 

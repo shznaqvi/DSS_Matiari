@@ -55,22 +55,9 @@ public class MwraActivity extends AppCompatActivity {
                         // There are no request codes
                         //Intent data = result.getData();
                         Intent data = result.getData();
-                      /*  int age = Integer.parseInt(femalemembers.getHh05y());
-                        boolean isFemale = femalemembers.getHh03().equals("2");
-                        boolean notMarried = femalemembers.getHh06().equals("2");
-                        if (
-                            // Adolescent: Male + Female - 10 to 19
-                                (age >= 10 && age < 20 && notMarried)
-                                        ||
-                                        // MWRA: Married females between 14 to 49
-                                        (age >= 14 && age < 50 && !notMarried && isFemale )
-                        ) {*/
                         mwraList.add(mwra);
                         mwraCount++;
                         fmAdapter.notifyItemInserted(mwraList.size() - 1);
-                        //  Collections.sort(MainApp.fm, new SortByStatus());
-                        //fmAdapter.notifyDataSetChanged();
-                        //        }
                         checkCompleteFm();
                     }
                     if (result.getResultCode() == Activity.RESULT_CANCELED) {
@@ -82,7 +69,6 @@ public class MwraActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //setContentView(R.layout.activity_mwra);
         bi = DataBindingUtil.setContentView(this, R.layout.activity_mwra);
         bi.setCallback(this);
 
@@ -97,14 +83,11 @@ public class MwraActivity extends AppCompatActivity {
         bi.rvMembers.setLayoutManager(new LinearLayoutManager(this));
 
         FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (!MainApp.households.getIStatus().equals("1")) {
-                    addFemale();
-                } else {
-                    Toast.makeText(MwraActivity.this, "This households has been locked. You cannot add new members to locked forms", Toast.LENGTH_LONG).show();
-                }
+        fab.setOnClickListener(view -> {
+            if (!MainApp.households.getIStatus().equals("1")) {
+                addFemale();
+            } else {
+                Toast.makeText(MwraActivity.this, "This households has been locked. You cannot add new members to locked forms", Toast.LENGTH_LONG).show();
             }
         });
 
@@ -120,8 +103,6 @@ public class MwraActivity extends AppCompatActivity {
         Toast.makeText(this, "Activity Resumed!", Toast.LENGTH_SHORT).show();
         mwraCount = Math.round(MainApp.mwraList.size());
 
-        /*MainApp.mwra = new Mwra();
-        Mwra.init();*/
         if (MainApp.mwraList.size() > 0) {
             fmAdapter.notifyItemChanged(Integer.parseInt(String.valueOf(selectedMember)));
         }
@@ -147,7 +128,6 @@ public class MwraActivity extends AppCompatActivity {
         Mwra.init();
 
         int maxMWRA = db.mwraDao().getMaxMWRSNoBYHH(selectedUC, selectedVillage, selectedHhNO);
-//        int maxFpMWRA = db.FollowUpsScheDao().getMaxMWRANoBYHHFromFolloupsSche(selectedUC, selectedVillage, selectedHhNO);
         int maxFpMWRA = db.FollowUpsScheDao().getMaxMWRANoBYHHFromFolloupsScheView(selectedUC, selectedVillage, selectedHhNO);
         mwraCount = Math.max(maxMWRA, maxFpMWRA);
         Intent intent = new Intent(this, SectionBActivity.class);
@@ -184,7 +164,6 @@ public class MwraActivity extends AppCompatActivity {
 
         if (requestCode == 2) {
             if (resultCode == Activity.RESULT_OK) {
-                //   mwraList.get(selectedFemale).setExpanded(false);
                 checkCompleteFm();
                 fmAdapter.notifyItemChanged(selectedMember);
             }

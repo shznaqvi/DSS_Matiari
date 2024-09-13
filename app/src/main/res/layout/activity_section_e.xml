@@ -33,8 +33,8 @@
             android:textStyle="bold"
             app:layout_scrollFlags="scroll|enterAlways"
             app:popupTheme="@style/AppTheme.PopupOverlay"
-            app:title="@string/outcome_mainheading"
             app:subtitle="@string/section_e"
+            app:title="@string/outcome_mainheading"
             app:titleTextColor="@color/white" />
 
         <ScrollView
@@ -184,25 +184,10 @@
                             android:layout_height="wrap_content"
                             android:layout_marginBottom="0dp"
                             android:layout_weight="1"
+                            android:enabled="false"
                             android:gravity="center"
-                            android:enabled="false"
                             android:hint="YYYY-MM-DD"
-                            android:text="@={outcome.rc03}"
-                            />
-
-
-                       <!-- <EditText
-                            android:id="@+id/rc03"
-                            style="@style/labelsHead"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_margin="8dp"
-                            android:enabled="false"
-                            android:gravity="center_horizontal|center_vertical"
-                            android:inputType="textPersonName|textCapWords"
-                            android:text="@={outcome.rc03}"
-                            android:textColor="@color/colorPrimary" />-->
-
+                            android:text="@={outcome.rc03}" />
 
                     </LinearLayout>
 
@@ -236,8 +221,6 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="match_parent"
                                 android:text="@string/Q_rc04" />
-
-
                         </LinearLayout>
 
                         <RadioGroup
@@ -270,10 +253,10 @@
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
-                                android:visibility="gone"
                                 android:checked='@{outcome.rc04.equals("3")}'
                                 android:onClick='@{()->outcome.setRc04("3")}'
-                                android:text="@string/rc0403" />
+                                android:text="@string/rc0403"
+                                android:visibility="gone" />
 
                         </RadioGroup>
 
@@ -526,45 +509,45 @@
                             android:text="@={outcome.rc09x}"
                             android:visibility="@{outcome.rc09.equals(`1`) ? View.VISIBLE : View.GONE}" />
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:background="@drawable/bottom"
-                        android:orientation="horizontal"
-                        android:visibility="@{outcome.rc09.equals(`1`) ? View.VISIBLE : View.GONE}">
-
-                        <TextView
-                            android:id="@+id/rc09a"
-                            style="@style/Theme.AppStructure.RegularText"
-                            android:layout_width="0dp"
-                            android:layout_weight="1"
+                        <LinearLayout
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:background="@null"
-                            android:text="@={outcome.rc09a}"
-                            android:textColor="@color/red_color" />
+                            android:background="@drawable/bottom"
+                            android:orientation="horizontal"
+                            android:visibility="@{outcome.rc09.equals(`1`) ? View.VISIBLE : View.GONE}">
 
-                        <ImageButton
-                            android:id="@+id/d1Photo"
-                            android:layout_width="@dimen/_35sdp"
-                            android:layout_height="@dimen/_30sdp"
-                            android:layout_gravity="center"
-                            android:onClick="takePhoto"
-                            android:src="@drawable/ic_camera" />
+                            <TextView
+                                android:id="@+id/rc09a"
+                                style="@style/Theme.AppStructure.RegularText"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:background="@null"
+                                android:text="@={outcome.rc09a}"
+                                android:textColor="@color/red_color" />
 
-                        <TextView
-                            android:id="@+id/viewImageTV"
-                            style="@style/Theme.AppStructure.BoldText"
-                            android:layout_width="@dimen/_35sdp"
-                            android:layout_height="@dimen/_30sdp"
-                            android:layout_marginStart="@dimen/_8sdp"
-                            android:gravity="center"
-                            android:background="@null"
-                            android:onClick="viewPhoto"
-                            android:text="View"
-                            android:textColor="@color/primary_color"
-                            android:visibility="gone"
-                            tools:visibility="visible" />
-                    </LinearLayout>
+                            <ImageButton
+                                android:id="@+id/d1Photo"
+                                android:layout_width="@dimen/_35sdp"
+                                android:layout_height="@dimen/_30sdp"
+                                android:layout_gravity="center"
+                                android:onClick="takePhoto"
+                                android:src="@drawable/ic_camera" />
+
+                            <TextView
+                                android:id="@+id/viewImageTV"
+                                style="@style/Theme.AppStructure.BoldText"
+                                android:layout_width="@dimen/_35sdp"
+                                android:layout_height="@dimen/_30sdp"
+                                android:layout_marginStart="@dimen/_8sdp"
+                                android:background="@null"
+                                android:gravity="center"
+                                android:onClick="viewPhoto"
+                                android:text="View"
+                                android:textColor="@color/primary_color"
+                                android:visibility="gone"
+                                tools:visibility="visible" />
+                        </LinearLayout>
 
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>

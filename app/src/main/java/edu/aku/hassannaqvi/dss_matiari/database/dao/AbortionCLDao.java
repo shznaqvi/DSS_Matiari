@@ -83,5 +83,4 @@ public abstract class AbortionCLDao implements BaseDao<AbortionCL> {
             update(obj);
         }
     }
-
 }

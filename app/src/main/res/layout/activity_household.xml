@@ -91,54 +91,6 @@
 
             </LinearLayout>
 
-            <!--            <RelativeLayout-->
-            <!--                android:layout_width="wrap_content"-->
-            <!--                android:layout_height="72dp"-->
-            <!--                android:elevation="5dp">-->
-
-            <!--                <ImageView-->
-            <!--                    android:layout_width="86dp"-->
-            <!--                    android:layout_height="86dp"-->
-            <!--                    android:layout_alignStart="@+id/fmHeading"-->
-            <!--                    android:layout_centerInParent="true"-->
-            <!--                    android:layout_marginTop="-16dp"-->
-            <!--                    android:elevation="8dp"-->
-            <!--                    android:src="@drawable/app_icon" />-->
-
-            <!--                <TextView-->
-            <!--                    android:id="@+id/fmHeading"-->
-            <!--                    android:layout_width="match_parent"-->
-            <!--                    android:layout_height="wrap_content"-->
-            <!--                    android:layout_centerInParent="true"-->
-            <!--                    android:layout_marginStart="64dp"-->
-            <!--                    android:layout_marginEnd="64dp"-->
-            <!--                    android:background="@drawable/capsule"-->
-            <!--                    android:elevation="1dp"-->
-            <!--                    android:fontFamily="@font/roboto"-->
-            <!--                    android:gravity="center_horizontal|center_vertical"-->
-            <!--                    android:minHeight="56dp"-->
-            <!--                    android:radius="10dp"-->
-            <!--                    android:text="LIST OF HOUSEHOLDS"-->
-            <!--                    android:textAppearance="@style/TextAppearance.AppCompat.Headline"-->
-            <!--                    android:textColor="@color/white" />-->
-
-            <!--                <com.google.android.material.floatingactionbutton.FloatingActionButton-->
-            <!--                    android:id="@+id/fab"-->
-            <!--                    android:layout_width="wrap_content"-->
-            <!--                    android:layout_height="wrap_content"-->
-            <!--                    android:layout_alignEnd="@id/fmHeading"-->
-            <!--                    android:layout_centerInParent="true"-->
-            <!--                    android:layout_gravity="center_vertical|center_horizontal"-->
-            <!--                    android:background="@drawable/ic_home"-->
-            <!--                    android:backgroundTint="@color/colorPrimaryDark"-->
-            <!--                    android:elevation="6dp"-->
-            <!--                    android:src="@drawable/ic_home_add"-->
-            <!--                    app:backgroundTint="@color/white"-->
-            <!--                    app:borderWidth="1dp"-->
-            <!--                    app:elevation="6dp"-->
-            <!--                    app:tint="@color/white" />-->
-            <!--            </RelativeLayout>-->
-
             <LinearLayout
                 android:id="@+id/navigation"
                 android:layout_width="match_parent"
@@ -150,32 +102,6 @@
                 android:orientation="horizontal"
                 android:weightSum="1"
                 app:elevation="5dp">
-
-                <!--                <Button-->
-                <!--                    android:id="@+id/btn_End"-->
-                <!--                    android:layout_width="wrap_content"-->
-                <!--                    android:layout_height="wrap_content"-->
-                <!--                    android:layout_margin="5dp"-->
-                <!--                    android:background="@drawable/button_shape_red"-->
-                <!--                    android:drawableTint="#ea0000"-->
-                <!--                    android:onClick="BtnEnd"-->
-                <!--                    android:paddingStart="12dp"-->
-                <!--                    android:paddingEnd="12dp"-->
-                <!--                    android:text="Refused/Locked"-->
-                <!--                    android:textColor="@color/white"-->
-                <!--                    android:visibility="gone" />-->
-
-                <!--                <androidx.appcompat.widget.AppCompatButton-->
-                <!--                    android:id="@+id/btn_Continue"-->
-                <!--                    android:layout_width="wrap_content"-->
-                <!--                    android:layout_height="wrap_content"-->
-                <!--                    android:layout_margin="5dp"-->
-                <!--                    android:backgroundTint="@color/green"-->
-                <!--                    android:onClick="btnContinue"-->
-                <!--                    android:paddingStart="12dp"-->
-                <!--                    android:paddingEnd="12dp"-->
-                <!--                    android:text="Close"-->
-                <!--                    android:textColor="@color/white" />-->
 
                 <Button
                     android:id="@+id/btn_Continue"

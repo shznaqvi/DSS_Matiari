@@ -13,9 +13,7 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
-import android.view.KeyEvent;
 import android.view.View;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.result.ActivityResult;
@@ -87,10 +85,9 @@ public class FPHouseholdActivity extends AppCompatActivity {
         initSearchFilter();
 
         MainApp.followUpsScheHHList = db.FollowUpsScheDao().getFollowUpsScheHHBYVillage(selectedUC, selectedVillage, "");
-        MainApp.hhsList = db.HhsDao().getHhsBYVillage(selectedUC, selectedVillage, "", MainApp.ROUND);
+        MainApp.hhsList = db.HhsDao().getHhsBYVillage(selectedUC, selectedVillage, "");
 
-        bi.villageCode.setText("List of " + selectedUC + "-" + selectedVillage);
-
+        bi.villageCode.setText(String.format("List of %s-%s", selectedUC, selectedVillage));
         hhAdapter = new FPHouseholdAdapter(this, MainApp.followUpsScheHHList);
         bi.rvHouseholds.setAdapter(hhAdapter);
         bi.rvHouseholds.setLayoutManager(new LinearLayoutManager(this));
@@ -103,14 +100,13 @@ public class FPHouseholdActivity extends AppCompatActivity {
                 e.printStackTrace();
             }
         });
-
     }
 
     @SuppressLint("NotifyDataSetChanged")
     public void filterForms(View view) {
         Toast.makeText(this, "updated", Toast.LENGTH_SHORT).show();
         MainApp.followUpsScheHHList = db.FollowUpsScheDao().getFollowUpsScheHHBYVillage(selectedUC, selectedVillage, bi.hhead.getText().toString());
-        MainApp.hhsList = db.HhsDao().getHhsBYVillage(selectedUC, selectedVillage, bi.hhead.getText().toString(), MainApp.ROUND);
+        MainApp.hhsList = db.HhsDao().getHhsBYVillage(selectedUC, selectedVillage, bi.hhead.getText().toString());
         hhAdapter = new FPHouseholdAdapter(this, MainApp.followUpsScheHHList);
         hhAdapter.notifyDataSetChanged();
         bi.rvHouseholds.setAdapter(hhAdapter);
@@ -190,12 +186,10 @@ public class FPHouseholdActivity extends AppCompatActivity {
         bi.hhead.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
             }
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-
             }
 
             @Override
@@ -204,13 +198,9 @@ public class FPHouseholdActivity extends AppCompatActivity {
             }
         });
 
-        bi.hhead.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-            @Override
-            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-                hhAdapter.filter(v.getText().toString());
-                return true;
-            }
+        bi.hhead.setOnEditorActionListener((v, actionId, event) -> {
+            hhAdapter.filter(v.getText().toString());
+            return true;
         });
     }
-
 }

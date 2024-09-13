@@ -119,17 +119,15 @@ public class SyncNewAC extends AppCompatActivity {
         if (syncType == DOWNLOAD_DATA) {
             // Download Data - Disable Upload and Upload Photos buttons
             bi.uploadBtn.setEnabled(false);
-            bi.uploadPhotosBtn.setEnabled(false);
             bi.uploadBtn.setBackgroundTintList(ColorStateList.valueOf(disabledColor));
+            bi.uploadPhotosBtn.setEnabled(false);
             bi.uploadPhotosBtn.setBackgroundTintList(ColorStateList.valueOf(disabledColor));
-//            bi.uploadPhotosBtn.setEnabled(false);
-//            bi.uploadPhotosBtn.setBackgroundTintList(ColorStateList.valueOf(disabledColor));
         } else if (syncType == UPLOAD_DATA) {
             // Upload Data - Disable Download and Upload Photos buttons
             bi.downloadBtn.setEnabled(false);
             bi.downloadBtn.setBackgroundTintList(ColorStateList.valueOf(disabledColor));
-//            bi.uploadPhotosBtn.setEnabled(false);
-//            bi.uploadPhotosBtn.setBackgroundTintList(ColorStateList.valueOf(disabledColor));
+            bi.uploadPhotosBtn.setEnabled(false);
+            bi.uploadPhotosBtn.setBackgroundTintList(ColorStateList.valueOf(disabledColor));
         } else {
             // Upload Photos - Disable Download and Upload buttons
             bi.downloadBtn.setEnabled(false);
@@ -147,26 +145,25 @@ public class SyncNewAC extends AppCompatActivity {
         syncRecordsCount = 0;
         int enabledColor = ContextCompat.getColor(activity, R.color.primary_color_dark);
         int enabledPhotosColor = ContextCompat.getColor(activity, R.color.secondary_color_dark);
+        int disabledColor = ContextCompat.getColor(activity, R.color.disabled_text_color);
         if (syncType == DOWNLOAD_DATA) {
             // Download Data - Disable Upload and Upload Photos buttons
-            bi.uploadBtn.setEnabled(true);
-            bi.uploadBtn.setBackgroundTintList(ColorStateList.valueOf(enabledColor));
-            bi.uploadPhotosBtn.setEnabled(true);
-            bi.uploadPhotosBtn.setBackgroundTintList(ColorStateList.valueOf(enabledColor));
-//            bi.uploadPhotosBtn.setEnabled(true);
-//            bi.uploadPhotosBtn.setBackgroundTintList(ColorStateList.valueOf(enabledPhotosColor));
+            bi.uploadBtn.setEnabled(false);
+            bi.uploadBtn.setBackgroundTintList(ColorStateList.valueOf(disabledColor));
+            bi.uploadPhotosBtn.setEnabled(false);
+            bi.uploadPhotosBtn.setBackgroundTintList(ColorStateList.valueOf(disabledColor));
         } else if (syncType == UPLOAD_DATA) {
             // Upload Data - Disable Download and Upload Photos buttons
-            bi.downloadBtn.setEnabled(true);
-            bi.downloadBtn.setBackgroundTintList(ColorStateList.valueOf(enabledColor));
-//            bi.uploadPhotosBtn.setEnabled(true);
-//            bi.uploadPhotosBtn.setBackgroundTintList(ColorStateList.valueOf(enabledPhotosColor));
+            bi.downloadBtn.setEnabled(false);
+            bi.downloadBtn.setBackgroundTintList(ColorStateList.valueOf(disabledColor));
+            bi.uploadPhotosBtn.setEnabled(false);
+            bi.uploadPhotosBtn.setBackgroundTintList(ColorStateList.valueOf(disabledColor));
         } else {
             // Upload Photos - Disable Download and Upload buttons
-            bi.downloadBtn.setEnabled(true);
-            bi.downloadBtn.setBackgroundTintList(ColorStateList.valueOf(enabledColor));
-            bi.uploadBtn.setEnabled(true);
-            bi.uploadBtn.setBackgroundTintList(ColorStateList.valueOf(enabledColor));
+            bi.downloadBtn.setEnabled(false);
+            bi.downloadBtn.setBackgroundTintList(ColorStateList.valueOf(disabledColor));
+            bi.uploadBtn.setEnabled(false);
+            bi.uploadBtn.setBackgroundTintList(ColorStateList.valueOf(disabledColor));
             bi.uploadPhotosBtn.setEnabled(true);
             bi.uploadPhotosBtn.setBackgroundTintList(ColorStateList.valueOf(enabledColor));
         }
