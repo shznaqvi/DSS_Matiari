@@ -27,7 +27,10 @@ interface SyncFunctionsDao {
     fun getUnsyncedMWRAS_internal(): List<Mwra>
 
     @Query("SELECT child.* FROM MWRAs child LEFT JOIN hhs parent ON child._uuid = parent._uid WHERE ((child._uuid IN (:uuid)) OR (child.synced = '' AND parent.synced != '')) AND child.istatus = 1 OR parent.visitNo > 2 OR child.isError IS 1 ORDER BY _id ASC")
-    fun getAllUnSyncedDataByUIds(uuid: List<String?>?): List<Mwra?>?
+    fun getAllUnSyncedMWRAsByUIds(uuid: List<String?>?): List<Mwra?>?
+
+    @Query("SELECT child.* FROM outcomes child LEFT JOIN hhs parent ON child._uuid = parent._uid WHERE ((child._uuid IN (:uuid)) OR (child.synced = '' AND parent.synced != '')) AND child.istatus = 1 OR parent.visitNo > 2 OR child.isError IS 1 ORDER BY _id ASC")
+    fun getAllUnSyncedOutcomesByUIds(uuid: List<String?>?): List<Mwra?>?
 
     fun getUnsycedMWRAS(): List<Mwra> {
         val hhsSync = getUnsyncedHousehols()
@@ -45,13 +48,25 @@ interface SyncFunctionsDao {
     @Query("SELECT * FROM outcomes WHERE synced is '' OR synced is NULL ORDER BY _id ASC")
     fun getUnsyncedOutcome_internal(): List<Outcome>
 
-    fun getUnsycedOutcomes(): List<Outcome> {
+   /* fun getUnsycedOutcomes(): List<Outcome> {
         val mwras = getUnsyncedMWRAS_internal()
         val allOutcomes = getUnsyncedOutcome_internal()
         val toSyncOutcomes = arrayListOf<Outcome>()
         mwras.forEach { mwra ->
             val mwraOutcomes =
                 allOutcomes.filter { it.hdssId == mwra.hdssId && it.msno == mwra.sNo }
+            toSyncOutcomes.addAll(mwraOutcomes)
+        }
+        return toSyncOutcomes
+    }*/
+
+    fun getUnsycedOutcomes(): List<Outcome> {
+        val hhsSync = getUnsyncedHousehols()
+        val allOutcomes = getUnsyncedOutcome_internal()
+        val toSyncOutcomes = arrayListOf<Outcome>()
+        hhsSync.forEach { hhSync ->
+            val mwraOutcomes =
+                allOutcomes.filter { it.hdssId == hhSync.hdssId}
             toSyncOutcomes.addAll(mwraOutcomes)
         }
         return toSyncOutcomes
@@ -169,7 +184,7 @@ interface SyncFunctionsDao {
     fun insertFollowupsSche(followUpsSche: FollowUpsSche): Long
 
 
-    @Query("DELETE FROM " + FollowUpsSche.TABLE_NAME)
+    @Query("DELETE FROM " + TableContracts.TableFollowUpsSche.TABLE_NAME)
     fun deleteFollowupsScheTable()
 
     // Sync Max Household
