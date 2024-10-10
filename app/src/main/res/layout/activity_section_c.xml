@@ -45,8 +45,8 @@
             android:textStyle="bold"
             app:layout_scrollFlags="scroll|enterAlways"
             app:popupTheme="@style/AppTheme.PopupOverlay"
-            app:title="@string/marriedwomenfollowup_mainheading"
             app:subtitle="@string/section_c"
+            app:title="@string/marriedwomenfollowup_mainheading"
             app:titleTextColor="@color/white" />
 
         <View
@@ -294,10 +294,10 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_margin="8dp"
-                            android:tag="-1"
                             android:digits="abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ"
                             android:hint="@string/rb22"
                             android:inputType="textPersonName|textCapWords"
+                            android:tag="-1"
                             android:text="@={followups.rb22}" />
 
 
@@ -403,9 +403,9 @@
                             android:id="@+id/rb23"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:tag="-1"
                             android:digits="abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ"
                             android:inputType="textPersonName|textCapWords"
+                            android:tag="-1"
                             android:text="@={followups.rb23}" />
 
                     </LinearLayout>
@@ -508,8 +508,8 @@
                             android:layout_height="wrap_content"
                             android:layout_margin="8dp"
                             android:digits="0123456789"
-                            android:hint="@string/rb03a"
                             android:enabled="true"
+                            android:hint="@string/rb03a"
                             android:inputType="phone"
                             android:maxLength="11"
                             android:tag="-1"
@@ -568,7 +568,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:checked='@{followups.rb10.equals("2")}'
-                                android:onClick='@{()->followups.setRb10("2") + rb11.clearCheck() + rb14.clearCheck() + rb16.clearCheck() + rb17.clearCheck() + rb18.clearCheck() + rb19.clearCheck()}'
+                                android:onClick='@{()->followups.setRb10("2") + rb11.clearCheck() + rb14.clearCheck() + rb16.clearCheck() + rb17.clearCheck() + rb18.clearCheck() + rb19.clearCheck() + rb30.clearCheck() + rb31.clearCheck() + rb32.clearCheck()}'
                                 android:text="@string/rb1002" />
 
                             <RadioButton
@@ -576,7 +576,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:checked='@{followups.rb10.equals("3")}'
-                                android:onClick='@{()->followups.setRb10("3") + rb14.clearCheck() + rb16.clearCheck() + rb17.clearCheck() + rb18.clearCheck() + rb19.clearCheck()}'
+                                android:onClick='@{()->followups.setRb10("3") + rb14.clearCheck() + rb16.clearCheck() + rb17.clearCheck() + rb18.clearCheck() + rb19.clearCheck() + rb30.clearCheck() + rb31.clearCheck() + rb32.clearCheck()}'
                                 android:text="@string/rb1003" />
 
 
@@ -585,7 +585,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:checked='@{followups.rb10.equals("4")}'
-                                android:onClick='@{()->followups.setRb10("4") + rb14.clearCheck() + rb16.clearCheck() + rb17.clearCheck() + rb18.clearCheck() + rb19.clearCheck()}'
+                                android:onClick='@{()->followups.setRb10("4") + rb14.clearCheck() + rb16.clearCheck() + rb17.clearCheck() + rb18.clearCheck() + rb19.clearCheck() + rb30.clearCheck() + rb31.clearCheck() + rb32.clearCheck()}'
                                 android:text="@string/rb1004" />
 
                             <RadioButton
@@ -593,7 +593,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:checked='@{followups.rb10.equals("5")}'
-                                android:onClick='@{()->followups.setRb10("5")+ rb14.clearCheck() + rb16.clearCheck() + rb17.clearCheck() + rb18.clearCheck() + rb19.clearCheck()}'
+                                android:onClick='@{()->followups.setRb10("5")+ rb14.clearCheck() + rb16.clearCheck() + rb17.clearCheck() + rb18.clearCheck() + rb19.clearCheck() + rb30.clearCheck() + rb31.clearCheck() + rb32.clearCheck()}'
                                 android:text="@string/rb1005" />
 
                             <RadioButton
@@ -601,7 +601,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:checked='@{followups.rb10.equals("6")}'
-                                android:onClick='@{()->followups.setRb10("6") + rb06.clearCheck() + rb14.clearCheck() + rb16.clearCheck() + rb17.clearCheck() + rb16.clearCheck() + rb18.clearCheck() + rb19.clearCheck()}'
+                                android:onClick='@{()->followups.setRb10("6") + rb06.clearCheck() + rb14.clearCheck() + rb16.clearCheck() + rb17.clearCheck() + rb16.clearCheck() + rb18.clearCheck() + rb19.clearCheck() + rb30.clearCheck() + rb31.clearCheck() + rb32.clearCheck()}'
                                 android:text="@string/rb1006" />
 
                             <RadioButton
@@ -609,7 +609,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:checked='@{followups.rb10.equals("7")}'
-                                android:onClick='@{()->followups.setRb10("7") + rb16.clearCheck() + rb17.clearCheck() + rb18.clearCheck() + rb19.clearCheck()}'
+                                android:onClick='@{()->followups.setRb10("7") + rb16.clearCheck() + rb17.clearCheck() + rb18.clearCheck() + rb19.clearCheck() + rb30.clearCheck() + rb31.clearCheck() + rb32.clearCheck()}'
                                 android:text="@string/rb1007" />
 
 
@@ -617,7 +617,7 @@
                                 android:id="@+id/rb1008"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:onClick='@{()->followups.setRb10("8") + rb14.clearCheck() + rb16.clearCheck() + rb17.clearCheck() + rb18.clearCheck() + rb19.clearCheck()}'
+                                android:onClick='@{()->followups.setRb10("8") + rb14.clearCheck() + rb16.clearCheck() + rb17.clearCheck() + rb18.clearCheck() + rb19.clearCheck() + rb30.clearCheck() + rb31.clearCheck() + rb32.clearCheck()}'
                                 android:text="@string/rb1008" />
 
 
@@ -626,7 +626,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:checked='@{followups.rb10.equals("9")}'
-                                android:onClick='@{()->followups.setRb10("9")  + rb14.clearCheck() + rb16.clearCheck() + rb17.clearCheck() + rb18.clearCheck() + rb19.clearCheck()}'
+                                android:onClick='@{()->followups.setRb10("9")  + rb14.clearCheck() + rb16.clearCheck() + rb17.clearCheck() + rb18.clearCheck() + rb19.clearCheck() + rb30.clearCheck() + rb31.clearCheck() + rb32.clearCheck()}'
                                 android:text="@string/rb1009" />
 
                         </RadioGroup>
@@ -683,8 +683,8 @@
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:layout_weight="1"
-                                    android:enabled="false"
                                     android:checked='@{followups.rb11.equals("1")}'
+                                    android:enabled="false"
                                     android:onClick='@{()->followups.setRb11("1")}'
                                     android:text="@string/rb1101" />
 
@@ -692,9 +692,9 @@
                                     android:id="@+id/rb1102"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:enabled="false"
                                     android:layout_weight="1"
                                     android:checked='@{followups.rb11.equals("2")}'
+                                    android:enabled="false"
                                     android:onClick='@{()->followups.setRb11("2") + rb14.clearCheck() + rb16.clearCheck() + rb17.clearCheck() + rb18.clearCheck() + rb19.clearCheck()}'
                                     android:text="@string/rb1102" />
 
@@ -837,8 +837,8 @@
                                 <RadioButton
                                     android:id="@+id/rb2701"
                                     android:layout_width="0dp"
-                                    android:layout_weight="1"
                                     android:layout_height="match_parent"
+                                    android:layout_weight="1"
                                     android:checked='@{followups.rb27.equals("1")}'
                                     android:onClick='@{()->followups.setRb27("1")}'
                                     android:text="@string/rb2701" />
@@ -846,8 +846,8 @@
                                 <RadioButton
                                     android:id="@+id/rb2702"
                                     android:layout_width="0dp"
-                                    android:layout_weight="1"
                                     android:layout_height="match_parent"
+                                    android:layout_weight="1"
                                     android:checked='@{followups.rb27.equals("2")}'
                                     android:onClick='@{()->followups.setRb27("2")}'
                                     android:text="@string/rb2702" />
@@ -855,8 +855,8 @@
                                 <RadioButton
                                     android:id="@+id/rb2703"
                                     android:layout_width="0dp"
-                                    android:layout_weight="1"
                                     android:layout_height="match_parent"
+                                    android:layout_weight="1"
                                     android:checked='@{followups.rb27.equals("3")}'
                                     android:onClick='@{()->followups.setRb27("3")}'
                                     android:text="@string/rb2703" />
@@ -872,6 +872,215 @@
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
                     android:visibility="@{followups.rb10.equals(`1`) ? View.VISIBLE : View.GONE}">
+
+                    <!-- rb30 Radio   -->
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/fldGrpCVrc30"
+                        style="@style/cardView">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:background="@drawable/bottom"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    style="@style/labels"
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="1"
+                                    android:text="@string/rb30" />
+
+                                <TextView
+                                    style="@style/quesNum"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="match_parent"
+                                    android:text="@string/Q_rb30" />
+
+                            </LinearLayout>
+
+                            <RadioGroup
+                                android:id="@+id/rb30"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical">
+
+                                <RadioButton
+                                    android:id="@+id/rb3001"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:checked='@{followups.rb30.equals("1")}'
+                                    android:onClick='@{()->followups.setRb30("1")}'
+                                    android:text="@string/rb3001" />
+
+                                <RadioButton
+                                    android:id="@+id/rb3002"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:checked='@{followups.rb30.equals("2")}'
+                                    android:onClick='@{()->followups.setRb30("2")}'
+                                    android:text="@string/rb3002" />
+
+                                <RadioButton
+                                    android:id="@+id/rb3003"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:checked='@{followups.rb30.equals("3")}'
+                                    android:onClick='@{()->followups.setRb30("3")}'
+                                    android:text="@string/rb3003" />
+
+                                <RadioButton
+                                    android:id="@+id/rb3004"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:checked='@{followups.rb30.equals("4")}'
+                                    android:onClick='@{()->followups.setRb30("4") + rb31.clearCheck()}'
+                                    android:text="@string/rb3004" />
+
+                                <RadioButton
+                                    android:id="@+id/rb3098"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:checked='@{followups.rb30.equals("98")}'
+                                    android:onClick='@{()->followups.setRb30("98") + rb31.clearCheck()}'
+                                    android:text="@string/rb3098" />
+
+                            </RadioGroup>
+                        </LinearLayout>
+                    </androidx.cardview.widget.CardView>
+
+                    <!-- rb31 Radio   -->
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/fldGrpCVrc31"
+                        style="@style/cardView"
+                        android:visibility="@{followups.rb30.equals(`4`) || followups.rb30.equals(`98`) ? View.GONE : View.VISIBLE}">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:background="@drawable/bottom"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    style="@style/labels"
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="1"
+                                    android:text="@string/rb31" />
+
+                                <TextView
+                                    style="@style/quesNum"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="match_parent"
+                                    android:text="@string/Q_rb31" />
+
+                            </LinearLayout>
+
+                            <RadioGroup
+                                android:id="@+id/rb31"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+
+                                <RadioButton
+                                    android:id="@+id/rb3101"
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="1"
+                                    android:checked='@{followups.rb31.equals("1")}'
+                                    android:onClick='@{()->followups.setRb31("1")}'
+                                    android:text="@string/rb3101" />
+
+                                <RadioButton
+                                    android:id="@+id/rb3102"
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="1"
+                                    android:checked='@{followups.rb31.equals("2")}'
+                                    android:onClick='@{()->followups.setRb31("2")}'
+                                    android:text="@string/rb3102" />
+
+                            </RadioGroup>
+                        </LinearLayout>
+                    </androidx.cardview.widget.CardView>
+
+                    <!-- rb32 Radio   -->
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/fldGrpCVrc32"
+                        style="@style/cardView">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:background="@drawable/bottom"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    style="@style/labels"
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="1"
+                                    android:text="@string/rb32" />
+
+                                <TextView
+                                    style="@style/quesNum"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="match_parent"
+                                    android:text="@string/Q_rb32" />
+
+                            </LinearLayout>
+
+                            <RadioGroup
+                                android:id="@+id/rb32"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+
+                                <RadioButton
+                                    android:id="@+id/rb3201"
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="1"
+                                    android:checked='@{followups.rb32.equals("1")}'
+                                    android:onClick='@{()->followups.setRb32("1")}'
+                                    android:text="@string/rb3201" />
+
+                                <RadioButton
+                                    android:id="@+id/rb3202"
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="1"
+                                    android:checked='@{followups.rb32.equals("2")}'
+                                    android:onClick='@{()->followups.setRb32("2")}'
+                                    android:text="@string/rb3202" />
+
+                                <RadioButton
+                                    android:id="@+id/rb3298"
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="1"
+                                    android:checked='@{followups.rb32.equals("98")}'
+                                    android:onClick='@{()->followups.setRb32("98")}'
+                                    android:text="@string/rb3298" />
+
+                            </RadioGroup>
+                        </LinearLayout>
+                    </androidx.cardview.widget.CardView>
 
                     <!-- rb07 Radio   -->
                     <androidx.cardview.widget.CardView
@@ -1226,8 +1435,8 @@
                                                 <RadioButton
                                                     android:id="@+id/rb2801"
                                                     android:layout_width="0dp"
-                                                    android:layout_weight="1"
                                                     android:layout_height="match_parent"
+                                                    android:layout_weight="1"
                                                     android:checked='@{followups.rb28.equals("1")}'
                                                     android:onClick='@{()->followups.setRb28("1")}'
                                                     android:text="@string/rb2801" />
@@ -1235,8 +1444,8 @@
                                                 <RadioButton
                                                     android:id="@+id/rb2802"
                                                     android:layout_width="0dp"
-                                                    android:layout_weight="1"
                                                     android:layout_height="match_parent"
+                                                    android:layout_weight="1"
                                                     android:checked='@{followups.rb28.equals("2")}'
                                                     android:onClick='@{()->followups.setRb28("2")}'
                                                     android:text="@string/rb2802" />
@@ -1244,8 +1453,8 @@
                                                 <RadioButton
                                                     android:id="@+id/rb2803"
                                                     android:layout_width="0dp"
-                                                    android:layout_weight="1"
                                                     android:layout_height="match_parent"
+                                                    android:layout_weight="1"
                                                     android:checked='@{followups.rb28.equals("3")}'
                                                     android:onClick='@{()->followups.setRb28("3")}'
                                                     android:text="@string/rb2803" />
@@ -1371,8 +1580,8 @@
                                                     <RadioButton
                                                         android:id="@+id/rb1701"
                                                         android:layout_width="0dp"
-                                                        android:layout_weight="1"
                                                         android:layout_height="match_parent"
+                                                        android:layout_weight="1"
                                                         android:checked='@{followups.rb17.equals("1")}'
                                                         android:onClick='@{()->followups.setRb17("1") }'
                                                         android:text="@string/rb1701" />
@@ -1380,8 +1589,8 @@
                                                     <RadioButton
                                                         android:id="@+id/rb1702"
                                                         android:layout_width="0dp"
-                                                        android:layout_weight="1"
                                                         android:layout_height="match_parent"
+                                                        android:layout_weight="1"
                                                         android:checked='@{followups.rb17.equals("2")}'
                                                         android:onClick='@{()->followups.setRb17("2")}'
                                                         android:text="@string/rb1702" />
@@ -1389,8 +1598,8 @@
                                                     <RadioButton
                                                         android:id="@+id/rb1703"
                                                         android:layout_width="0dp"
-                                                        android:layout_weight="1"
                                                         android:layout_height="match_parent"
+                                                        android:layout_weight="1"
                                                         android:checked='@{followups.rb17.equals("3")}'
                                                         android:onClick='@{()->followups.setRb17("3")}'
                                                         android:text="@string/rb1703" />
@@ -1403,9 +1612,9 @@
                             </LinearLayout>
 
                             <LinearLayout
+                                android:id="@+id/fldGrpUnreportedPreg"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:id="@+id/fldGrpUnreportedPreg"
                                 android:orientation="vertical"
                                 android:visibility='@{!followups.rb06.equals(`4`) &amp;&amp; (followupsMain.prePreg.equals(`2`) || followupsMain.prePreg.equals(``)) ? View.VISIBLE : View.GONE}'>
 
@@ -1545,8 +1754,8 @@
                                 <androidx.cardview.widget.CardView
                                     android:id="@+id/fldGrpCVrb19"
                                     style="@style/cardView"
-                                    tools:visibility="visible"
-                                    android:visibility="@{followups.rb26.equals(`1`) || followups.rb26.equals(`5`) ? View.VISIBLE : View.GONE}">
+                                    android:visibility="@{followups.rb26.equals(`1`) || followups.rb26.equals(`5`) ? View.VISIBLE : View.GONE}"
+                                    tools:visibility="visible">
 
                                     <LinearLayout
                                         android:layout_width="match_parent"
@@ -1582,8 +1791,8 @@
                                             <RadioButton
                                                 android:id="@+id/rb1901"
                                                 android:layout_width="0dp"
-                                                android:layout_weight="1"
                                                 android:layout_height="match_parent"
+                                                android:layout_weight="1"
                                                 android:checked='@{followups.rb19.equals("1")}'
                                                 android:onClick='@{()->followups.setRb19("1") }'
                                                 android:text="@string/rb1901" />
@@ -1591,8 +1800,8 @@
                                             <RadioButton
                                                 android:id="@+id/rb1902"
                                                 android:layout_width="0dp"
-                                                android:layout_weight="1"
                                                 android:layout_height="match_parent"
+                                                android:layout_weight="1"
                                                 android:checked='@{followups.rb19.equals("2")}'
                                                 android:onClick='@{()->followups.setRb19("2")}'
                                                 android:text="@string/rb1902" />
@@ -1600,8 +1809,8 @@
                                             <RadioButton
                                                 android:id="@+id/rb1903"
                                                 android:layout_width="0dp"
-                                                android:layout_weight="1"
                                                 android:layout_height="match_parent"
+                                                android:layout_weight="1"
                                                 android:checked='@{followups.rb19.equals("3")}'
                                                 android:onClick='@{()->followups.setRb19("3")}'
                                                 android:text="@string/rb1903" />
@@ -1648,13 +1857,13 @@
                                             android:layout_height="wrap_content"
                                             android:enabled="true"
                                             android:gravity="center"
+                                            android:hint="##"
                                             android:inputType="number"
                                             android:maxLength="2"
+                                            android:text="@={followups.rb20}"
                                             app:maxValue="41"
                                             app:minValue="28"
-                                            app:type="range"
-                                            android:hint="##"
-                                            android:text="@={followups.rb20}" />
+                                            app:type="range" />
 
 
                                     </LinearLayout>
@@ -1750,8 +1959,8 @@
                                     <RadioButton
                                         android:id="@+id/rb2901"
                                         android:layout_width="0dp"
-                                        android:layout_weight="1"
                                         android:layout_height="match_parent"
+                                        android:layout_weight="1"
                                         android:checked='@{followups.rb29.equals("1")}'
                                         android:onClick='@{()->followups.setRb29("1")}'
                                         android:text="@string/rb2901" />
@@ -1759,8 +1968,8 @@
                                     <RadioButton
                                         android:id="@+id/rb2902"
                                         android:layout_width="0dp"
-                                        android:layout_weight="1"
                                         android:layout_height="match_parent"
+                                        android:layout_weight="1"
                                         android:checked='@{followups.rb29.equals("2")}'
                                         android:onClick='@{()->followups.setRb29("2")}'
                                         android:text="@string/rb2902" />
@@ -1768,8 +1977,8 @@
                                     <RadioButton
                                         android:id="@+id/rb2903"
                                         android:layout_width="0dp"
-                                        android:layout_weight="1"
                                         android:layout_height="match_parent"
+                                        android:layout_weight="1"
                                         android:checked='@{followups.rb29.equals("3")}'
                                         android:onClick='@{()->followups.setRb29("3")}'
                                         android:text="@string/rb2903" />

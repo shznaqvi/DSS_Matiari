@@ -36,8 +36,8 @@
             android:textStyle="bold"
             app:layout_scrollFlags="scroll|enterAlways"
             app:popupTheme="@style/AppTheme.PopupOverlay"
-            app:title="@string/demographicinformation_mainheading"
             app:subtitle="@string/section_b"
+            app:title="@string/demographicinformation_mainheading"
             app:titleTextColor="@color/white" />
 
         <View
@@ -413,6 +413,215 @@
                             app:maxValue="49"
                             app:minValue="14"
                             app:type="range" />
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+
+                <!-- rb30 Radio   -->
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/fldGrpCVrc30"
+                    style="@style/cardView">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/bottom"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                style="@style/labels"
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:text="@string/rb30" />
+
+                            <TextView
+                                style="@style/quesNum"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:text="@string/Q_rb30" />
+
+                        </LinearLayout>
+
+                        <RadioGroup
+                            android:id="@+id/rb30"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <RadioButton
+                                android:id="@+id/rb3001"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:checked='@{mwra.rb30.equals("1")}'
+                                android:onClick='@{()->mwra.setRb30("1")}'
+                                android:text="@string/rb3001" />
+
+                            <RadioButton
+                                android:id="@+id/rb3002"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:checked='@{mwra.rb30.equals("2")}'
+                                android:onClick='@{()->mwra.setRb30("2")}'
+                                android:text="@string/rb3002" />
+
+                            <RadioButton
+                                android:id="@+id/rb3003"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:checked='@{mwra.rb30.equals("3")}'
+                                android:onClick='@{()->mwra.setRb30("3")}'
+                                android:text="@string/rb3003" />
+
+                            <RadioButton
+                                android:id="@+id/rb3004"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:checked='@{mwra.rb30.equals("4")}'
+                                android:onClick='@{()->mwra.setRb30("4") + rb31.clearCheck()}'
+                                android:text="@string/rb3004" />
+
+                            <RadioButton
+                                android:id="@+id/rb3098"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:checked='@{mwra.rb30.equals("98")}'
+                                android:onClick='@{()->mwra.setRb30("98") + rb31.clearCheck()}'
+                                android:text="@string/rb3098" />
+
+                        </RadioGroup>
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+
+                <!-- rb31 Radio   -->
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/fldGrpCVrc31"
+                    style="@style/cardView"
+                    android:visibility="@{mwra.rb30.equals(`4`) || mwra.rb30.equals(`98`) ? View.GONE : View.VISIBLE}">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/bottom"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                style="@style/labels"
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:text="@string/rb31" />
+
+                            <TextView
+                                style="@style/quesNum"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:text="@string/Q_rb31" />
+
+                        </LinearLayout>
+
+                        <RadioGroup
+                            android:id="@+id/rb31"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <RadioButton
+                                android:id="@+id/rb3101"
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:checked='@{mwra.rb31.equals("1")}'
+                                android:onClick='@{()->mwra.setRb31("1")}'
+                                android:text="@string/rb3101" />
+
+                            <RadioButton
+                                android:id="@+id/rb3102"
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:checked='@{mwra.rb31.equals("2")}'
+                                android:onClick='@{()->mwra.setRb31("2")}'
+                                android:text="@string/rb3102" />
+
+                        </RadioGroup>
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+
+                <!-- rb32 Radio   -->
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/fldGrpCVrc32"
+                    style="@style/cardView">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/bottom"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                style="@style/labels"
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:text="@string/rb32" />
+
+                            <TextView
+                                style="@style/quesNum"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:text="@string/Q_rb32" />
+
+                        </LinearLayout>
+
+                        <RadioGroup
+                            android:id="@+id/rb32"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <RadioButton
+                                android:id="@+id/rb3201"
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:checked='@{mwra.rb32.equals("1")}'
+                                android:onClick='@{()->mwra.setRb32("1")}'
+                                android:text="@string/rb3201" />
+
+                            <RadioButton
+                                android:id="@+id/rb3202"
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:checked='@{mwra.rb32.equals("2")}'
+                                android:onClick='@{()->mwra.setRb32("2")}'
+                                android:text="@string/rb3202" />
+
+                            <RadioButton
+                                android:id="@+id/rb3298"
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:checked='@{mwra.rb32.equals("98")}'
+                                android:onClick='@{()->mwra.setRb32("98")}'
+                                android:text="@string/rb3298" />
+
+                        </RadioGroup>
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
 
@@ -1057,8 +1266,8 @@
                                 <RadioButton
                                     android:id="@+id/rb2901"
                                     android:layout_width="0dp"
-                                    android:layout_weight="1"
                                     android:layout_height="match_parent"
+                                    android:layout_weight="1"
                                     android:checked='@{mwra.rb29.equals("1")}'
                                     android:onClick='@{()->mwra.setRb29("1")}'
                                     android:text="@string/rb2901" />
@@ -1066,8 +1275,8 @@
                                 <RadioButton
                                     android:id="@+id/rb2902"
                                     android:layout_width="0dp"
-                                    android:layout_weight="1"
                                     android:layout_height="match_parent"
+                                    android:layout_weight="1"
                                     android:checked='@{mwra.rb29.equals("2")}'
                                     android:onClick='@{()->mwra.setRb29("2")}'
                                     android:text="@string/rb2902" />
@@ -1075,8 +1284,8 @@
                                 <RadioButton
                                     android:id="@+id/rb2903"
                                     android:layout_width="0dp"
-                                    android:layout_weight="1"
                                     android:layout_height="match_parent"
+                                    android:layout_weight="1"
                                     android:checked='@{mwra.rb29.equals("3")}'
                                     android:onClick='@{()->mwra.setRb29("3")}'
                                     android:text="@string/rb2903" />

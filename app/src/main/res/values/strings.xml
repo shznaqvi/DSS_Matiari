@@ -285,6 +285,19 @@
     <string name="rb2901">Hospital</string>
     <string name="rb2902">Home</string>
     <string name="rb2903">Enroute to hospital</string>
+    <string name="rb30">Have you ever been diagnosed with following condition/ disease?</string>
+    <string name="rb3001">Hepatitis B</string>
+    <string name="rb3002">Hepatitis C</string>
+    <string name="rb3003">Both</string>
+    <string name="rb3004">None of the above</string>
+    <string name="rb3098">Don’t Know</string>
+    <string name="rb31">If yes, did you seek treatment?</string>
+    <string name="rb3101">Yes</string>
+    <string name="rb3102">No</string>
+    <string name="rb32">Have you ever been vaccinated for hepatitis B?</string>
+    <string name="rb3201">Yes</string>
+    <string name="rb3202">No</string>
+    <string name="rb3298">Don\'t Know</string>
 
     <string name='Q_a17_c' translatable="false">a17_c</string>
     <string name='Q_ra_lat' translatable="false">ra_lat</string>
@@ -352,6 +365,9 @@
     <string name='Q_rb27' translatable="false">rb27</string>
     <string name='Q_rb28' translatable="false">rb28</string>
     <string name='Q_rb29' translatable="false">rb29</string>
+    <string name='Q_rb30' translatable="false">rb30</string>
+    <string name='Q_rb31' translatable="false">rb31</string>
+    <string name='Q_rb32' translatable="false">rb32</string>
 
     <string name='Q_rc01' translatable="false">rc01</string>
     <string name='Q_rc02' translatable="false">rc02</string>
