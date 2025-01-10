@@ -181,7 +181,8 @@ public class FPMwraActivity extends AppCompatActivity {
         households.setRegRound("");
 
         int newMwra = db.mwraDao().getMWRACountBYUUID(households.getUid(), "1");
-        int maxMWRA = db.mwraDao().getMaxMWRSNoBYHH(selectedUC, selectedVillage, selectedHhNO);
+//        int maxMWRA = db.mwraDao().getMaxMWRSNoBYHH(selectedUC, selectedVillage, selectedHhNO);
+        int maxMWRA = db.mwraDao().getMaxMWRSNoBYHHOldMembers(selectedUC, selectedVillage, selectedHhNO);
         int maxFpMWRA = db.FollowUpsScheDao().getMaxMWRANoBYHHFromFolloupsScheView(selectedUC, selectedVillage, selectedHhNO);
         mwraCount = Math.max(maxMWRA, maxFpMWRA);
 

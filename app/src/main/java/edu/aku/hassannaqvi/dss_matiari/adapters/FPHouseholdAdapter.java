@@ -233,23 +233,26 @@ public class FPHouseholdAdapter extends RecyclerView.Adapter<FPHouseholdAdapter.
                     e.printStackTrace();
                 }
 
+//                MainApp.selectedFpHousehold = Integer.parseInt(MainApp.followUpsScheHHList.get(viewHolder.getBindingAdapterPosition()).getRa18());
+
                 if (!MainApp.households.getIStatus().equals("1") && Integer.parseInt(MainApp.households.getVisitNo()) < 3) {
 
-                    for (int i = 0; i <= hhsList.size(); i++) {
+                    for (int i = 0; i < hhsList.size(); i++) {
                         if (MainApp.households.getHdssId().equals(hhsList.get(i).getHdssid())) {
                             MainApp.selectHHsHousehold = i;
                             break;
                         }
                     }
                     MainApp.households.populateMeta(viewHolder.getBindingAdapterPosition());
-                    sA.updateFMData(MainApp.selectHHsHousehold);
+                    MainApp.selectedFpHousehold = viewHolder.getBindingAdapterPosition();
+                    sA.updateFMData(MainApp.selectHHsHousehold, tempMWRA);
                     MainApp.households.setSA(sA);
 
                     Intent intent = new Intent(mContext, SectionAFupctivity.class);
-                    intent.putExtra("position", position);
-                    MainApp.selectedFpHousehold = position;
-                    MainApp.selectedHhNO = MainApp.followUpsScheHHList.get(position).getHhNo();
-                    intent.putExtra("position", position);
+                    intent.putExtra("position", MainApp.selectedFpHousehold);
+//                    MainApp.selectedFpHousehold = position;
+                    MainApp.selectedHhNO = MainApp.followUpsScheHHList.get(MainApp.selectedFpHousehold).getHhNo();
+                    intent.putExtra("mwraCount", tempMWRA);
                     ((Activity) mContext).startActivityForResult(intent, 2);
                 } else {
                     Toast.makeText(mContext, R.string.fup_locked, Toast.LENGTH_LONG).show();
@@ -275,7 +278,7 @@ public class FPHouseholdAdapter extends RecyclerView.Adapter<FPHouseholdAdapter.
                 }
                 //if (MainApp.households.getUid().equals("")) {
                 MainApp.households.populateMeta(viewHolder.getBindingAdapterPosition());
-                sA.updateFMData(MainApp.selectHHsHousehold);
+                sA.updateFMData(MainApp.selectHHsHousehold, tempMWRA);
                 MainApp.households.setSA(sA);
                 try {
                     Households.saveMainData(households.getHdssId(), households.getRound(), sA);

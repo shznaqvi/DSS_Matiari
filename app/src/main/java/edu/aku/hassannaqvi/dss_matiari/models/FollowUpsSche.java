@@ -78,6 +78,12 @@ public class FollowUpsSche implements Observable {
     @ColumnInfo(name = TableFollowUpsSche.COLUMN_RC04)
     private String rc04 = StringUtils.EMPTY; // Gender Will be rc04 in new View
 
+    @ColumnInfo(name = TableFollowUpsSche.COLUMN_RC09)
+    private String rc09 = StringUtils.EMPTY; // Anomalies Will be rc09 in new View
+
+    @ColumnInfo(name = TableFollowUpsSche.COLUMN_RC09X)
+    private String rc09x = StringUtils.EMPTY; // Anomalies Other
+
     @ColumnInfo(name = TableFollowUpsSche.COLUMN_MSNO)
     private String msno = StringUtils.EMPTY; // Gender Will be rc04 in new View
 
@@ -294,6 +300,22 @@ public class FollowUpsSche implements Observable {
         return rc04;
     }
 
+    public String getRc09() {
+        return rc09;
+    }
+
+    public void setRc09(String rc09) {
+        this.rc09 = rc09;
+    }
+
+    public String getRc09x() {
+        return rc09x;
+    }
+
+    public void setRc09x(String rc09x) {
+        this.rc09x = rc09x;
+    }
+
     public void setRc04(String rc04) {
         this.rc04 = rc04;
     }
@@ -404,6 +426,8 @@ public class FollowUpsSche implements Observable {
         this.rb03 = jsonObject.getString(TableFollowUpsSche.COLUMN_RB03);
         this.rb04 = jsonObject.getString(TableFollowUpsSche.COLUMN_RB04);
         this.rc04 = jsonObject.getString(TableFollowUpsSche.COLUMN_RC04);
+        this.rc09 = jsonObject.getString(TableFollowUpsSche.COLUMN_RC09);
+        this.rc09x = jsonObject.getString(TableFollowUpsSche.COLUMN_RC09X);
         this.msno = jsonObject.getString(TableFollowUpsSche.COLUMN_MSNO);
         this.child_count = jsonObject.getString(TableFollowUpsSche.COLUMN_CHILD_COUNT);
         this.mwra_count = jsonObject.getString(TableFollowUpsSche.COLUMN_MWRA_COUNT);
@@ -437,6 +461,8 @@ public class FollowUpsSche implements Observable {
         this.rb03 = cursor.getString(cursor.getColumnIndexOrThrow(TableFollowUpsSche.COLUMN_RB03));
         this.rb04 = cursor.getString(cursor.getColumnIndexOrThrow(TableFollowUpsSche.COLUMN_RB04));
         this.rc04 = cursor.getString(cursor.getColumnIndexOrThrow(TableFollowUpsSche.COLUMN_RC04));
+        this.rc09 = cursor.getString(cursor.getColumnIndexOrThrow(TableFollowUpsSche.COLUMN_RC09));
+        this.rc09x = cursor.getString(cursor.getColumnIndexOrThrow(TableFollowUpsSche.COLUMN_RC09X));
         this.msno = cursor.getString(cursor.getColumnIndexOrThrow(TableFollowUpsSche.COLUMN_MSNO));
         this.child_count = cursor.getString(cursor.getColumnIndexOrThrow(TableFollowUpsSche.COLUMN_CHILD_COUNT));
         this.mwra_count = cursor.getString(cursor.getColumnIndexOrThrow(TableFollowUpsSche.COLUMN_MWRA_COUNT));

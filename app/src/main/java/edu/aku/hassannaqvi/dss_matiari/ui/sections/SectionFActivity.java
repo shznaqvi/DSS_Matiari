@@ -30,6 +30,7 @@ import java.io.File;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Locale;
 import java.util.Objects;
@@ -81,6 +82,24 @@ public class SectionFActivity extends AppCompatActivity {
         bi.rc09a.addTextChangedListener(new AppTextWatcher(bi.rc09a.getId(), iAppTextWatcher));
 
         bi.rc09.setOnCheckedChangeListener((radioGroup, i) -> MainApp.imageNames = _EMPTY_);
+
+        if (!AppConstants.isEmpty(MainApp.fpMwra.getRc09()) &&
+                MainApp.fpMwra.getRc09().equals("1")) {
+            sE.setRc09(fpMwra.getRc09());
+            sE.setRc09x(fpMwra.getRc09x());
+            AppConstants.disableViews(Arrays.asList(bi.rc0901, bi.rc0902, bi.rc0996x, bi.d1Photo));
+        }
+
+        setupSkips();
+    }
+
+    private void setupSkips() {
+        bi.rc08.setOnCheckedChangeListener((radioGroup, i) -> {
+            if (bi.rc0806.isChecked()) {
+                sE.setRc05("2");
+                AppConstants.disableViews(Arrays.asList(bi.rc0501, bi.rc0502));
+            }
+        });
     }
 
     private void initUI() {
@@ -189,7 +208,8 @@ public class SectionFActivity extends AppCompatActivity {
         if (!Validator.emptyCheckingContainer(this, bi.GrpName))
             return false;
 
-        if (sE.getRc09().equals("1") && AppConstants.isEmpty(sE.getRc09a()))
+        if ((!AppConstants.isEmpty(MainApp.fpMwra.getRc09()) && !MainApp.fpMwra.getRc09().equals("1"))
+                && sE.getRc09().equals("1") && AppConstants.isEmpty(sE.getRc09a()))
             return Validator.emptyCustomTextBox(this, bi.rc09a, getString(R.string.image_not_taken));
         return true;
     }

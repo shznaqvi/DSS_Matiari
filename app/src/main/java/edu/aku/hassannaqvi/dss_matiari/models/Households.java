@@ -476,10 +476,11 @@ public class Households extends BaseObservable implements Observable {
 
         }
 
-        public void updateFMData(int position){
+        public void updateFMData(int position, int mwraCount) {
             setRa08(MainApp.hhsList.get(position).getRa08());
             setRa09(households.getHhNo());
             setRa10(households.getHdssId());
+            setRa11(MainApp.hhsList.get(position).getRa11());
             setRa12(MainApp.hhsList.get(position).getRa12());
             setRa17_a1(MainApp.hhsList.get(position).getRa17_a1().equals("null") ? "0" : MainApp.hhsList.get(position).getRa17_a1());
             setRa17_b1(MainApp.hhsList.get(position).getRa17_b1().equals("null") ? "0" : MainApp.hhsList.get(position).getRa17_b1());
@@ -493,7 +494,9 @@ public class Households extends BaseObservable implements Observable {
             setRa17_b3(MainApp.hhsList.get(position).getRa17_b3().equals("null") ? "0" : MainApp.hhsList.get(position).getRa17_b3());
             setRa17_c3(MainApp.hhsList.get(position).getRa17_c3().equals("null") ? "0" : MainApp.hhsList.get(position).getRa17_c3());
             setRa17_d3(MainApp.hhsList.get(position).getRa17_d3().equals("null") ? "0" : MainApp.hhsList.get(position).getRa17_d3());
-            setRa18(MainApp.followUpsScheHHList.get(MainApp.selectedFpHousehold).getRa18());
+//            setRa18(MainApp.followUpsScheHHList.get(position).getRa18());
+            setRa18(Integer.toString(mwraCount));
+//            setRa18(String.valueOf(MainApp.selectedFpHousehold));
 
             if (Integer.parseInt(getRa18()) > 0) {
                 setRa15("1");

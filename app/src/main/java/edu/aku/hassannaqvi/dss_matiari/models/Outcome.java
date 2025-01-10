@@ -481,7 +481,7 @@ public class Outcome extends BaseObservable implements Observable {
             setRc02(MainApp.fpMwra.getRb02());  // Name of child
             setRb02(MainApp.fpMwra.getRb03());  // Name of mother
             setRc03(MainApp.fpMwra.getRb04());  // Date of Birth of child
-            setRc04(MainApp.fpMwra.getRc04());
+            setRc04(MainApp.fpMwra.getRc04());  // Gender
         }
 
         // Getters & Setters
@@ -554,7 +554,7 @@ public class Outcome extends BaseObservable implements Observable {
 
         public void setRc05(String rc05) {
             this.rc05 = rc05;
-            setRc06(rc05.equals("1") ? this.rc06 : "");
+            setRc06(rc05.equals("2") ? this.rc06 : "");
             notifyPropertyChanged(BR.rc05);
         }
 
@@ -585,8 +585,7 @@ public class Outcome extends BaseObservable implements Observable {
 
         public void setRc08(String rc08) {
             this.rc08 = rc08;
-            setRc05(rc08.equals("1") ? this.rc05 : "");
-            setRc06(rc08.equals("1") ? this.rc06 : "");
+            setRc05(rc08.equals("1") || rc08.equals("6") ? this.rc05 : "1");
             setRc07(rc08.equals("1") ? this.rc07 : "");
             setRc09(rc08.equals("1") ? this.rc09 : "");
             notifyPropertyChanged(BR.rc08);

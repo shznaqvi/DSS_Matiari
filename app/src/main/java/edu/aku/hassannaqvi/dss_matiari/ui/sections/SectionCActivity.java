@@ -102,7 +102,7 @@ public class SectionCActivity extends AppCompatActivity {
         mwra.setAgeM(Long.toString(months));
 
         // Enable Overage option in VISIT status according to woman age
-        if (actualAge < 50) {
+        if (months < 590) {
             if (Integer.parseInt(households.getVisitNo()) < 2) {
                 bi.rb1001.setEnabled(true);
                 bi.rb1002.setEnabled(true);
@@ -209,7 +209,6 @@ public class SectionCActivity extends AppCompatActivity {
             }
         });
 
-
         bi.rb19.setOnCheckedChangeListener((radioGroup, i) -> {
             if (bi.rb1901.isChecked() || bi.rb2605.isChecked()) {
                 MainApp.totalChildCount = 1;
@@ -269,8 +268,8 @@ public class SectionCActivity extends AppCompatActivity {
         });
 
         // If previously not pregnant save the last result
-        if (!AppConstants.isEmpty(fpMwra.getRb07()) && fpMwra.getRb07().equals("2"))
-            sC.setRb16(fpMwra.getRb07());
+//        if (!AppConstants.isEmpty(fpMwra.getRb07()) && fpMwra.getRb07().equals("2"))
+//            sC.setRb16(fpMwra.getRb07());
     }
 
     private void setDateRanges() {
@@ -324,6 +323,8 @@ public class SectionCActivity extends AppCompatActivity {
                 mwra.setPregnum(String.valueOf(Integer.parseInt(mwra.getPregnum()) + 1));
             }
         }
+
+        // If mwra not available or last preg continue
         if (!bi.rb1001.isChecked() || bi.rb1401.isChecked()) {
             if (mwra.getSD() == null) {
                 sD = new Mwra.SD();

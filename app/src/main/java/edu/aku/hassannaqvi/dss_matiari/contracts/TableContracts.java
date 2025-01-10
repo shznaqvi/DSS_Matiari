@@ -160,6 +160,7 @@ public class TableContracts {
         public static final String COLUMN_VISITNO = "visitNo";
         public static final String COLUMN_RA01 = "ra01"; // Date of First Visit
         public static final String COLUMN_RA08 = "ra08"; // Para
+        public static final String COLUMN_RA11 = "ra11";
         public static final String COLUMN_RA12 = "ra12";
         public static final String COLUMN_ROUND = "round";
         public static final String COLUMN_RA17_A1 = "ra17_a1";
@@ -199,6 +200,8 @@ public class TableContracts {
         public static final String COLUMN_RB03 = "rb03"; // Age
         public static final String COLUMN_RB04 = "rb04"; // DOB
         public static final String COLUMN_RC04 = "rc04"; // Gender
+        public static final String COLUMN_RC09 = "rc09"; // Anomalies
+        public static final String COLUMN_RC09X = "rc09x"; // Anomalies Other
         public static final String COLUMN_MSNO = "msno";
         public static final String COLUMN_MWRA_COUNT = "mwra_count";
         public static final String COLUMN_CHILD_COUNT = "child_count";

@@ -44,6 +44,9 @@ public class Hhs implements Observable {
     @ColumnInfo(name = TableHHS.COLUMN_RA08)
     private String ra08 = StringUtils.EMPTY; // Mohalla
 
+    @ColumnInfo(name = TableHHS.COLUMN_RA11)
+    private String ra11 = StringUtils.EMPTY; // Head of Household
+
     @ColumnInfo(name = TableHHS.COLUMN_RA12)
     private String ra12 = StringUtils.EMPTY; // Head of Household
 
@@ -155,6 +158,14 @@ public class Hhs implements Observable {
 
     public void setRa08(String ra08) {
         this.ra08 = ra08;
+    }
+
+    public String getRa11() {
+        return ra11;
+    }
+
+    public void setRa11(String ra11) {
+        this.ra11 = ra11;
     }
 
     public String getRa12() {
@@ -292,6 +303,7 @@ public class Hhs implements Observable {
         this.hdssid = jsonObject.getString(TableHHS.COLUMN_HDSSID);
         //this.ra01 = jsonObject.getString(TableHHS.COLUMN_RA01);
         this.ra08 = jsonObject.getString(TableHHS.COLUMN_RA08);
+        this.ra11 = jsonObject.getString(TableHHS.COLUMN_RA11);
         this.ra12 = jsonObject.getString(TableHHS.COLUMN_RA12);
         this.ra18 = jsonObject.getString(TableHHS.COLUMN_RA18);
         this.ra05 = jsonObject.getString(TableHHS.COLUMN_RA05);
@@ -318,6 +330,7 @@ public class Hhs implements Observable {
         this.hdssid = cursor.getString(cursor.getColumnIndexOrThrow(TableHHS.COLUMN_HDSSID));
         //this.ra01 = cursor.getString(cursor.getColumnIndexOrThrow(TableHHS.COLUMN_RA01));
         this.ra08 = cursor.getString(cursor.getColumnIndexOrThrow(TableHHS.COLUMN_RA08));
+        this.ra11 = cursor.getString(cursor.getColumnIndexOrThrow(TableHHS.COLUMN_RA11));
         this.ra12 = cursor.getString(cursor.getColumnIndexOrThrow(TableHHS.COLUMN_RA12));
         this.ra18 = cursor.getString(cursor.getColumnIndexOrThrow(TableHHS.COLUMN_RA18));
         this.ra05 = cursor.getString(cursor.getColumnIndexOrThrow(TableHHS.COLUMN_RA05));

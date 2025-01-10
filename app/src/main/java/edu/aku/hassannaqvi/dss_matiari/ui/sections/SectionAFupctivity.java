@@ -35,6 +35,7 @@ public class SectionAFupctivity extends AppCompatActivity {
     private boolean updateFMClicked = false;
 
     private Households.SA sA;
+    private int mwraCount = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +55,8 @@ public class SectionAFupctivity extends AppCompatActivity {
     }
 
     private void initUI() {
+        // getting mwra count from FPHouseholdAdapter
+        mwraCount = getIntent().getIntExtra("mwraCount", 0);
 
         String date = DateUtils.changeDateFormat("2023-01-01");
         bi.ra01.setMinDate(date);
@@ -69,7 +72,7 @@ public class SectionAFupctivity extends AppCompatActivity {
                 households.populateMeta(MainApp.selectedFpHousehold);
                 bi.btnContinue.setVisibility(View.GONE);
                 bi.btnUpdate.setVisibility(View.VISIBLE);
-                sA.updateFMData(MainApp.selectHHsHousehold);
+                sA.updateFMData(MainApp.selectHHsHousehold, mwraCount);
             }
         }
 

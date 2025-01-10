@@ -325,6 +325,100 @@
                         </LinearLayout>
                     </androidx.cardview.widget.CardView>
 
+                    <!-- ra08  Input   -->
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/fldGrpCVra08"
+                        style="@style/cardView">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:background="@drawable/bottom"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    style="@style/labels"
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="1"
+                                    android:text="@string/ra08" />
+
+                                <TextView
+                                    style="@style/quesNum"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="match_parent"
+                                    android:text="@string/Q_ra08" />
+
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:background="@drawable/bottom"
+                                android:orientation="horizontal">
+
+                                <EditText
+                                    android:id="@+id/ra08"
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_margin="8dp"
+                                    android:layout_weight="1"
+                                    android:hint="@string/ra08"
+                                    android:inputType="textPostalAddress|textCapWords"
+                                    android:text="@={household.ra08}" />
+                            </LinearLayout>
+                        </LinearLayout>
+                    </androidx.cardview.widget.CardView>
+
+                    <!-- ra11  Input   -->
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/fldGrpCVra21"
+                        style="@style/cardView">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:background="@drawable/bottom"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    style="@style/labels"
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="1"
+                                    android:text="@string/ra11" />
+
+                                <TextView
+                                    style="@style/quesNum"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="match_parent"
+                                    android:text="@string/Q_ra11" />
+
+
+                            </LinearLayout>
+
+                            <EditText
+                                android:id="@+id/ra11"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="8dp"
+                                android:hint="@string/ra11"
+                                android:inputType="textPostalAddress|textCapWords"
+                                android:text="@={household.ra11}" />
+                        </LinearLayout>
+                    </androidx.cardview.widget.CardView>
+
                     <!-- ra15  Radio   -->
                     <androidx.cardview.widget.CardView
                         android:id="@+id/fldGrpCVra20"

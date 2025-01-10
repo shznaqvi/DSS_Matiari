@@ -17,7 +17,7 @@
     <string name="pregnancy_mainheading">حمل جي معلومات</string>
     <string name="outcome_mainheading">ٻار جي معلومات</string>
     <string name="outcomefup_mainheading">Outcome Followup Information </string>
-    <string name="app_name">DSS مٹیاری</string>
+    <string name="app_name">DSS Matiari ROUND 9</string>
     <string name="btnSync">ڊائون لوڊ ڊيٽا</string>
     <string name="btnUpload">اپلوڊ ڊيٽا</string>
     <string name="prompt_email">Email</string>
@@ -230,7 +230,7 @@
     <string name="password">پاسورڊ</string>
     <string name="username">يوزر نالو</string>
     <string name="app_name_short">مٽياري DSS</string>
-    <string name="round_2">مرحلو 8</string>
+    <string name="round_2">مرحلو 9</string>
     <string name="select_team_leader">نھنجي ٽيم جي اڳواڻ کي چونڊيو</string>
     <string name="go_back">واپس وڃو</string>
     <string name="identification">سڃاڻپ</string>

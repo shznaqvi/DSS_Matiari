@@ -240,7 +240,7 @@ public class SectionBActivity extends AppCompatActivity {
         if (!formValidation()) return;
         Mwra.saveMainDataReg(households.getUid(), households.getHdssId(), sB.getRb01(), households.getRegRound());
         mwra.setSNo(sB.getRb01());
-
+        mwra.setIstatus("1");
         if (!mwra.getUid().contains("_")) {
             mwra.setPregnum("0");
             if (sB.getRb07().equals("1")) {

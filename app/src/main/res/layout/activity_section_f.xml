@@ -443,6 +443,15 @@
                                 android:text="@string/rb1004" />
 
 
+                            <RadioButton
+                                android:id="@+id/rc0806"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:checked='@{outcome.rc08.equals("6")}'
+                                android:onClick='@{()->outcome.setRc08("6") + rc05.clearCheck() + rc09.clearCheck()}'
+                                android:text="@string/rb1007" />
+
+
                         </RadioGroup>
 
                     </LinearLayout>
@@ -454,7 +463,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:visibility="@{outcome.rc08.equals(`1`) ? View.VISIBLE : View.GONE}">
+                    android:visibility="@{outcome.rc08.equals(`1`) || outcome.rc08.equals(`6`) ? View.VISIBLE : View.GONE}">
 
                     <!-- rc05  -->
                     <androidx.cardview.widget.CardView
@@ -520,7 +529,7 @@
                     <androidx.cardview.widget.CardView
                         android:id="@+id/fldGrpCVrc14"
                         style="@style/cardView"
-                        android:visibility="@{outcome.rc05.equals(`1`) ? View.GONE : View.VISIBLE}">
+                        android:visibility="@{outcome.rc05.equals(`2`) ? View.VISIBLE : View.GONE}">
 
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -631,118 +640,119 @@
                         </LinearLayout>
                     </androidx.cardview.widget.CardView>
 
-                    <!-- rc09  -->
-                    <androidx.cardview.widget.CardView
-                        android:id="@+id/fldGrpCVrc09"
-                        style="@style/cardView">
+                </LinearLayout>
+
+                <!-- rc09  -->
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/fldGrpCVrc09"
+                    style="@style/cardView"
+                    android:visibility="@{outcome.rc08.equals(`1`) ? View.VISIBLE : View.GONE}">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
 
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:orientation="vertical">
+                            android:background="@drawable/bottom"
+                            android:orientation="horizontal">
 
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:background="@drawable/bottom"
-                                android:orientation="horizontal">
+                            <TextView
+                                style="@style/labels"
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:text="@string/rc09" />
 
-                                <TextView
-                                    style="@style/labels"
-                                    android:layout_width="0dp"
-                                    android:layout_height="match_parent"
-                                    android:layout_weight="1"
-                                    android:text="@string/rc09" />
-
-                                <TextView
-                                    style="@style/quesNum"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="match_parent"
-                                    android:text="@string/Q_rc09" />
-
-
-                            </LinearLayout>
-
-                            <RadioGroup
-                                android:id="@+id/rc09"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:orientation="horizontal">
-
-                                <RadioButton
-                                    android:id="@+id/rc0901"
-                                    android:layout_width="0dp"
-                                    android:layout_height="wrap_content"
-                                    android:layout_weight="1"
-                                    android:checked='@{outcome.rc09.equals("1")}'
-                                    android:onClick='@{()->outcome.setRc09("1")}'
-                                    android:text="@string/rc0901" />
-
-                                <RadioButton
-                                    android:id="@+id/rc0902"
-                                    android:layout_width="0dp"
-                                    android:layout_height="wrap_content"
-                                    android:layout_weight="1"
-                                    android:checked='@{outcome.rc09.equals("2")}'
-                                    android:onClick='@{()->outcome.setRc09("2")}'
-                                    android:text="@string/rc0902" />
-
-                            </RadioGroup>
-
-                            <EditText
-                                android:id="@+id/m1996x"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:hint="@string/other"
-                                android:tag="rc0901"
-                                android:text="@={outcome.rc09x}"
-                                android:visibility="@{outcome.rc09.equals(`1`) ? View.VISIBLE : View.GONE}" />
-
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:background="@drawable/bottom"
-                                android:orientation="horizontal"
-                                android:visibility="@{outcome.rc09.equals(`1`) ? View.VISIBLE : View.GONE}">
-
-                                <TextView
-                                    android:id="@+id/rc09a"
-                                    style="@style/Theme.AppStructure.RegularText"
-                                    android:layout_width="0dp"
-                                    android:layout_weight="1"
-                                    android:layout_height="wrap_content"
-                                    android:background="@null"
-                                    android:text="@={outcome.rc09a}"
-                                    android:textColor="@color/red_color" />
-
-                                <ImageView
-                                    android:id="@+id/d1Photo"
-                                    android:layout_width="@dimen/_35sdp"
-                                    android:layout_height="@dimen/_30sdp"
-                                    android:layout_gravity="center"
-                                    android:onClick="takePhoto"
-                                    android:src="@drawable/ic_camera" />
-
-                                <TextView
-                                    android:id="@+id/viewImageTV"
-                                    style="@style/Theme.AppStructure.BoldText"
-                                    android:layout_width="@dimen/_35sdp"
-                                    android:layout_height="@dimen/_30sdp"
-                                    android:layout_marginStart="@dimen/_8sdp"
-                                    android:gravity="center"
-                                    android:background="@null"
-                                    android:onClick="viewPhoto"
-                                    android:text="View"
-                                    android:textColor="@color/primary_color"
-                                    android:visibility="gone"
-                                    tools:visibility="visible" />
-                            </LinearLayout>
+                            <TextView
+                                style="@style/quesNum"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:text="@string/Q_rc09" />
 
 
                         </LinearLayout>
-                    </androidx.cardview.widget.CardView>
 
-                </LinearLayout>
+                        <RadioGroup
+                            android:id="@+id/rc09"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <RadioButton
+                                android:id="@+id/rc0901"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:checked='@{outcome.rc09.equals("1")}'
+                                android:onClick='@{()->outcome.setRc09("1")}'
+                                android:text="@string/rc0901" />
+
+                            <RadioButton
+                                android:id="@+id/rc0902"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:checked='@{outcome.rc09.equals("2")}'
+                                android:onClick='@{()->outcome.setRc09("2")}'
+                                android:text="@string/rc0902" />
+
+                        </RadioGroup>
+
+                        <EditText
+                            android:id="@+id/rc0996x"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="@string/other"
+                            android:tag="rc0901"
+                            android:text="@={outcome.rc09x}"
+                            android:visibility="@{outcome.rc09.equals(`1`) ? View.VISIBLE : View.GONE}" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/bottom"
+                            android:orientation="horizontal"
+                            android:visibility="@{outcome.rc09.equals(`1`) ? View.VISIBLE : View.GONE}">
+
+                            <TextView
+                                android:id="@+id/rc09a"
+                                style="@style/Theme.AppStructure.RegularText"
+                                android:layout_width="0dp"
+                                android:layout_weight="1"
+                                android:layout_height="wrap_content"
+                                android:background="@null"
+                                android:text="@={outcome.rc09a}"
+                                android:textColor="@color/red_color" />
+
+                            <ImageView
+                                android:id="@+id/d1Photo"
+                                android:layout_width="@dimen/_35sdp"
+                                android:layout_height="@dimen/_30sdp"
+                                android:layout_gravity="center"
+                                android:onClick="takePhoto"
+                                android:src="@drawable/ic_camera" />
+
+                            <TextView
+                                android:id="@+id/viewImageTV"
+                                style="@style/Theme.AppStructure.BoldText"
+                                android:layout_width="@dimen/_35sdp"
+                                android:layout_height="@dimen/_30sdp"
+                                android:layout_marginStart="@dimen/_8sdp"
+                                android:gravity="center"
+                                android:background="@null"
+                                android:onClick="viewPhoto"
+                                android:text="View"
+                                android:textColor="@color/primary_color"
+                                android:visibility="gone"
+                                tools:visibility="visible" />
+                        </LinearLayout>
+
+
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
 
                 <!--EndButton LinearLayout-->
                 <LinearLayout

@@ -24,6 +24,9 @@ interface MwraDao {
     @Query("SELECT MAX( CAST(sNo AS INT)) SNO from mwras where ucCode like :ucCode and villageCode like :vCode and hhNo like :hhNo group by hhNo")
     fun getMaxMWRSNoBYHH(ucCode: String, vCode: String, hhNo: String): Int
 
+    @Query("SELECT MAX( CAST(sNo AS INT)) SNO from mwras where ucCode like :ucCode and villageCode like :vCode and hhNo like :hhNo and regRound = '' group by hhNo")
+    fun getMaxMWRSNoBYHHOldMembers(ucCode: String, vCode: String, hhNo: String): Int
+
     @Query("SELECT * FROM mwras where ucCode like :uc and villageCode like :village and structureNo like :structure and hhNo like :hhNo and regRound like :regRound")
     fun getAllMWRAByHH_internal(
         uc: String,
