@@ -257,6 +257,9 @@ public class LoginActivity extends AppCompatActivity {
             bi.username.setText(AppConstants.TEST_USERNAME);
             bi.password.setText(AppConstants.TEST_PASSWORD);
         }
+//        db.getOpenHelper().getWritableDatabase().execSQL("UPDATE MWRAs SET synced = 1 WHERE round in (7,8)");
+//        db.getOpenHelper().getWritableDatabase().execSQL("UPDATE MWRAs SET synced_date = '2025-01-16 00:00:00' WHERE round in (7,8)");
+//        db.getOpenHelper().getWritableDatabase().execSQL("UPDATE MWRAs SET isError = 0 WHERE round in (7,8)");
     }
 
     public void onShowPasswordClick(View view) {

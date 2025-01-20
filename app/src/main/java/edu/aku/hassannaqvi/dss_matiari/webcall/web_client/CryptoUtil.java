@@ -1,31 +1,33 @@
 package edu.aku.hassannaqvi.dss_matiari.webcall.web_client;
 
-import android.app.Activity;
+import android.content.Context;
 import android.util.Base64;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
+import java.security.KeyManagementException;
+import java.security.KeyStore;
+import java.security.KeyStoreException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 import java.security.cert.Certificate;
 import java.security.cert.CertificateException;
-import java.security.cert.CertificateExpiredException;
 import java.security.cert.CertificateFactory;
-import java.security.cert.CertificateNotYetValidException;
-import java.security.cert.X509Certificate;
 import java.util.Arrays;
 
 import javax.crypto.Cipher;
 import javax.crypto.spec.GCMParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
-import javax.net.ssl.SSLException;
-import javax.net.ssl.SSLSession;
+import javax.net.ssl.SSLContext;
+import javax.net.ssl.TrustManagerFactory;
 import javax.net.ssl.X509TrustManager;
 
 import edu.aku.hassannaqvi.dss_matiari.R;
 import edu.aku.hassannaqvi.dss_matiari.global.AppConstants;
+import okhttp3.OkHttpClient;
+import okhttp3.logging.HttpLoggingInterceptor;
 
 public class CryptoUtil {
 
@@ -81,7 +83,49 @@ public class CryptoUtil {
         byte[] shaByteArr = mDigest.digest(input.getBytes(StandardCharsets.UTF_8));
         return Base64.encodeToString(shaByteArr, Base64.NO_WRAP).substring(AppConstants.TRATS,
                 AppConstants.TRATS + 32);
+    }/*
+
+     *//* WEB CALL CIPHERING - END *//*
+
+     *//* WEB CALL SSL/TLS VERIFICATION - START *//*
+
+     *//* public static SSLContext getSSLContext(Activity activity) {
+        SSLContext sslContext = null;
+        try {
+            sslContext = createCertificate(activity);
+        } catch (CertificateException | IOException | KeyStoreException | KeyManagementException | NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        }
+        return sslContext;
     }
+
+    private static SSLContext createCertificate(Activity activity)
+            throws CertificateException, IOException, KeyStoreException, KeyManagementException, NoSuchAlgorithmException {
+
+        Certificate ca = getValidCertificate(activity);
+
+        // creating a KeyStore containing our trusted CAs
+        String keyStoreType = KeyStore.getDefaultType();
+        KeyStore keyStore = KeyStore.getInstance(keyStoreType);
+        keyStore.load(null, null);
+        keyStore.setCertificateEntry("ca", ca);
+
+        // creating a TrustManager that trusts the CAs in our KeyStore
+        String tmfAlgorithm = TrustManagerFactory.getDefaultAlgorithm();
+        TrustManagerFactory tmf = TrustManagerFactory.getInstance(tmfAlgorithm);
+        tmf.init(keyStore);
+
+        // creating an SSLSocketFactory that uses our TrustManager
+        SSLContext sslContext = SSLContext.getInstance("TLSv1.2");
+        sslContext.init(null, tmf.getTrustManagers(), null);
+        x509 = (X509TrustManager) tmf.getTrustManagers()[0];
+
+        return sslContext;
+    }
+
+    public static X509TrustManager getX509TrustManager() {
+        return x509;
+    }*//*
 
     // Get valid certificate from assets folder
     public static Certificate getValidCertificate(Activity activity) {
@@ -124,4 +168,44 @@ public class CryptoUtil {
         }
         return false;
     }
+
+    *//* WEB CALL SSL/TLS VERIFICATION - END *//*
+     */
+
+    public static OkHttpClient generateSecureOkHttpClient(Context context) {
+        try {
+            // For logging
+            HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor();
+            loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BASIC);
+
+            // Load the custom PEM certificate from resources
+            InputStream inputStream = context.getResources().openRawResource(R.raw.pedres3_aku_edu);
+            CertificateFactory certificateFactory = CertificateFactory.getInstance("X.509");
+
+            // Create KeyStore and load certificate
+            KeyStore keyStore = KeyStore.getInstance(KeyStore.getDefaultType());
+            keyStore.load(null, null);
+            Certificate certificate = certificateFactory.generateCertificate(inputStream);
+            keyStore.setCertificateEntry("ca", certificate);
+            inputStream.close();
+
+            // Initialize TrustManagerFactory
+            TrustManagerFactory trustManagerFactory = TrustManagerFactory.getInstance(TrustManagerFactory.getDefaultAlgorithm());
+            trustManagerFactory.init(keyStore);
+
+            // Set up SSLContext
+            SSLContext sslContext = SSLContext.getInstance("TLS");
+            sslContext.init(null, trustManagerFactory.getTrustManagers(), null);
+
+            // Build OkHttpClient with the SSLContext
+            return new OkHttpClient.Builder()
+                    .sslSocketFactory(sslContext.getSocketFactory(), (X509TrustManager) trustManagerFactory.getTrustManagers()[0])
+                    .addInterceptor(loggingInterceptor)
+                    .build();
+        } catch (KeyStoreException | CertificateException | IOException | NoSuchAlgorithmException | KeyManagementException e) {
+            e.printStackTrace();
+            throw new RuntimeException("Failed to create a secure OkHttpClient", e);
+        }
+    }
+
 }
