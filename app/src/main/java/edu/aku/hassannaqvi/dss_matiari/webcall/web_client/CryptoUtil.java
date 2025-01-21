@@ -16,6 +16,7 @@ import java.security.cert.Certificate;
 import java.security.cert.CertificateException;
 import java.security.cert.CertificateFactory;
 import java.util.Arrays;
+import java.util.concurrent.TimeUnit;
 
 import javax.crypto.Cipher;
 import javax.crypto.spec.GCMParameterSpec;
@@ -201,6 +202,8 @@ public class CryptoUtil {
             return new OkHttpClient.Builder()
                     .sslSocketFactory(sslContext.getSocketFactory(), (X509TrustManager) trustManagerFactory.getTrustManagers()[0])
                     .addInterceptor(loggingInterceptor)
+                    .connectTimeout(AppConstants.CONNECTION_TIMEOUT, TimeUnit.SECONDS)
+                    .readTimeout(AppConstants.READ_TIMEOUT, TimeUnit.SECONDS)
                     .build();
         } catch (KeyStoreException | CertificateException | IOException | NoSuchAlgorithmException | KeyManagementException e) {
             e.printStackTrace();
