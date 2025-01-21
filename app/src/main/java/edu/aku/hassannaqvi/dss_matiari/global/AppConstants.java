@@ -89,8 +89,8 @@ public class AppConstants {
 
     public static final String _EMPTY_ = "";
 
-    // Connection timeout in seconds - 15 seconds
-    public static int CONNECTION_TIMEOUT = 15 * 1000;
+    // Connection timeout in seconds - 60 seconds
+    public static int CONNECTION_TIMEOUT = 60;
 
     // Connection timeout in seconds - 2 minutes
     public static int READ_TIMEOUT = 2 * 60 * 1000;
