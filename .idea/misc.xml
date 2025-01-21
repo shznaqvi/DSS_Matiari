@@ -3,18 +3,12 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Android Office Work/DSS_Matiari/app/src/main/res/drawable/ic_arrow_down.xml" value="0.254" />
-        <entry key="..\:/Android Office Work/DSS_Matiari/app/src/main/res/drawable/ic_camera.xml" value="0.254" />
         <entry key="..\:/Android Office Work/DSS_Matiari/app/src/main/res/layout/activity_change_pass_new.xml" value="0.18375" />
         <entry key="..\:/Android Office Work/DSS_Matiari/app/src/main/res/layout/activity_change_password.xml" value="0.1859375" />
         <entry key="..\:/Android Office Work/DSS_Matiari/app/src/main/res/layout/activity_ending.xml" value="0.33" />
-        <entry key="..\:/Android Office Work/DSS_Matiari/app/src/main/res/layout/activity_forms_report_cluster.xml" value="0.19192708333333333" />
         <entry key="..\:/Android Office Work/DSS_Matiari/app/src/main/res/layout/activity_fphousehold.xml" value="0.12682291666666667" />
         <entry key="..\:/Android Office Work/DSS_Matiari/app/src/main/res/layout/activity_fpmwra.xml" value="0.12682291666666667" />
         <entry key="..\:/Android Office Work/DSS_Matiari/app/src/main/res/layout/activity_household.xml" value="0.12682291666666667" />
-        <entry key="..\:/Android Office Work/DSS_Matiari/app/src/main/res/layout/activity_identification.xml" value="0.19192708333333333" />
-        <entry key="..\:/Android Office Work/DSS_Matiari/app/src/main/res/layout/activity_image_viewer.xml" value="0.19192708333333333" />
-        <entry key="..\:/Android Office Work/DSS_Matiari/app/src/main/res/layout/activity_lock.xml" value="0.19192708333333333" />
         <entry key="..\:/Android Office Work/DSS_Matiari/app/src/main/res/layout/activity_login.xml" value="0.16083333333333333" />
         <entry key="..\:/Android Office Work/DSS_Matiari/app/src/main/res/layout/activity_main.xml" value="0.1859375" />
         <entry key="..\:/Android Office Work/DSS_Matiari/app/src/main/res/layout/activity_mwra.xml" value="0.18375" />
@@ -25,10 +19,27 @@
         <entry key="..\:/Android Office Work/DSS_Matiari/app/src/main/res/layout/activity_section_d.xml" value="0.21" />
         <entry key="..\:/Android Office Work/DSS_Matiari/app/src/main/res/layout/activity_section_e.xml" value="0.17" />
         <entry key="..\:/Android Office Work/DSS_Matiari/app/src/main/res/layout/activity_section_f.xml" value="0.22" />
+        <entry key="..\:/Android Office Work/DSS_Matiari/app/src/main/res/layout/activity_section_a.xml" value="0.16083333333333333" />
+        <entry key="..\:/Android Office Work/DSS_Matiari/app/src/main/res/layout/activity_section_a_fup.xml" value="0.1859375" />
+        <entry key="..\:/Android Office Work/DSS_Matiari/app/src/main/res/layout/activity_section_b.xml" value="0.17" />
+        <entry key="..\:/Android Office Work/DSS_Matiari/app/src/main/res/layout/activity_section_c.xml" value="0.17" />
+        <entry key="..\:/Android Office Work/DSS_Matiari/app/src/main/res/layout/activity_section_d.xml" value="0.2" />
+        <entry key="..\:/Android Office Work/DSS_Matiari/app/src/main/res/layout/activity_section_e.xml" value="0.16083333333333333" />
+        <entry key="..\:/Android Office Work/DSS_Matiari/app/src/main/res/layout/activity_section_f.xml" value="0.18375" />
         <entry key="..\:/Android Office Work/DSS_Matiari/app/src/main/res/layout/activity_section_m.xml" value="0.2" />
         <entry key="..\:/Android Office Work/DSS_Matiari/app/src/main/res/layout/activity_splash.xml" value="0.19192708333333333" />
         <entry key="..\:/Android Office Work/DSS_Matiari/app/src/main/res/layout/activity_sync_new.xml" value="0.19192708333333333" />
         <entry key="..\:/Android Office Work/DSS_Matiari/app/src/main/res/layout/household_row.xml" value="0.17333333333333334" />
+        <entry key="..\:/Android Office Work/DSS_Matiari/app/src/main/res/layout/household_row.xml" value="0.21" />
+        <entry key="..\:/OmarShoaib/Android_Projects/DSS_Matiari/app/src/main/res/layout/activity_forms_report_cluster.xml" value="0.3046875" />
+        <entry key="..\:/OmarShoaib/Android_Projects/DSS_Matiari/app/src/main/res/layout/activity_household.xml" value="0.33" />
+        <entry key="..\:/OmarShoaib/Android_Projects/DSS_Matiari/app/src/main/res/layout/activity_identification.xml" value="0.29635416666666664" />
+        <entry key="..\:/OmarShoaib/Android_Projects/DSS_Matiari/app/src/main/res/layout/activity_login.xml" value="0.25" />
+        <entry key="..\:/OmarShoaib/Android_Projects/DSS_Matiari/app/src/main/res/layout/activity_main.xml" value="0.290625" />
+        <entry key="..\:/OmarShoaib/Android_Projects/DSS_Matiari/app/src/main/res/layout/activity_section_a.xml" value="0.29635416666666664" />
+        <entry key="..\:/OmarShoaib/Android_Projects/DSS_Matiari/app/src/main/res/layout/activity_splash.xml" value="0.29635416666666664" />
+        <entry key="..\:/OmarShoaib/Android_Projects/DSS_Matiari/app/src/main/res/layout/household_row.xml" value="0.5" />
+        <entry key="..\:/OmarShoaib/Android_Projects/DSS_Matiari/app/src/main/res/layout/member_row.xml" value="0.3046875" />
       </map>
     </option>
   </component>
